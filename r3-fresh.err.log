@@ -1,0 +1,5 @@
+[WebServer] [browser] [locator-js] React instance (react-server-dom-turbopack v19.3.0-canary-cbb046ab-20260731) is not supported (chrome-extension://npbfdllefekhdplbkdigpncggmojpefi/hook.bundle.js:1:27759)
+[WebServer] [browser] [locator-js] React instance (react-server-dom-turbopack v19.3.0-canary-cbb046ab-20260731) is not supported (chrome-extension://npbfdllefekhdplbkdigpncggmojpefi/hook.bundle.js:1:27759)
+[WebServer] [browser] [locator-js] React instance (react-dom v19.3.0-canary-cbb046ab-20260731) is not supported (chrome-extension://npbfdllefekhdplbkdigpncggmojpefi/hook.bundle.js:1:27759)
+[WebServer] [browser] [locator-js] React instance (react-dom v19.3.0-canary-cbb046ab-20260731) is not supported (chrome-extension://npbfdllefekhdplbkdigpncggmojpefi/hook.bundle.js:1:27759)
+[WebServer] [browser] [locatorjs]: ok (chrome-extension://npbfdllefekhdplbkdigpncggmojpefi/hook.bundle.js:1:36200)

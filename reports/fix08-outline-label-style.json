@@ -1,0 +1,12 @@
+{
+  "subtask": "8A",
+  "status": "configured",
+  "implementation": {
+    "singleSymbolInstance": true,
+    "textColor": "rgba(0,0,0,0)",
+    "haloColor": "#263439",
+    "territoryHaloWidth": 1.5,
+    "pointHaloWidth": 1.4
+  },
+  "pixelTransparencyEvidence": "requires screenshot pixel audit"
+}

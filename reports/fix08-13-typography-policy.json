@@ -1,0 +1,107 @@
+{
+  "stage": "8-13",
+  "status": "pass",
+  "inputHashes": {
+    "reports/fix08-9-representative-glyphs.json": "276d1c1c7f803fc05b8c0127e14de1a39ae92f014d5586c0f4459a6b9a9f71a7",
+    "reports/fix08-12-representative-typography.json": "37e32edea33f0534c84c43dd0a4837836e11e18e0715e2f0270c7c410d837d88"
+  },
+  "policy": {
+    "path": "src/data/country-label-typography-policy-v1.json",
+    "version": "country-label-typography-v1",
+    "sha256": "6e895062cabb3aeb5973897a204b3ed6d692d756953b7ae4a1b97ff11074be4c",
+    "defaults": {
+      "glyphHeightRatio": 0.3,
+      "trackingEmRange": [0, 3.5],
+      "maxAbsoluteGlyphAngle": 35,
+      "maxAdjacentAngleDelta": 12,
+      "baselineSampleCount": 25,
+      "baselineSmoothingPasses": 2,
+      "minimumLabelSpan": "naturalGlyphSpan"
+    },
+    "overrides": {
+      "CHL": {
+        "glyphHeightRatio": 0.72,
+        "reason": "narrow vertical territory readability"
+      }
+    }
+  },
+  "comparisonTo8_9": {
+    "viewport": [1440, 900],
+    "RUS": {
+      "beforeScreenshot": "screenshots/fix08-7-russia-z2.png",
+      "afterScreenshot": "screenshots/fix08-13-rus.png",
+      "beforeInsideRatio": 0.668373,
+      "afterInsideRatio": 0.98268,
+      "beforeScreenWidthRatio": 0.891854117,
+      "afterScreenWidthRatio": 0.900924281,
+      "finding": "oversized, near-vertical glyphs were replaced by stable 0.30-thickness glyphs distributed across the territory without clipping"
+    },
+    "AUS": {
+      "beforeScreenshot": "screenshots/fix08-7-australia-z2.png",
+      "afterScreenshot": "screenshots/fix08-13-aus.png",
+      "beforeInsideRatio": 0.950894,
+      "afterInsideRatio": 0.80254,
+      "beforeScreenWidthRatio": 0.983,
+      "afterScreenWidthRatio": 1.456862758,
+      "finding": "the formerly undersized long name is clearly legible; natural glyph span and all interior holes remain visible, with controlled extension beyond the label corridor"
+    },
+    "CHN_USA": "8-9 raw glyph artifacts existed but had no country-specific fixed-camera screenshots; final screenshots show 2.095280em and 2.032199em tracking instead of central clustering",
+    "CHL_IDN": "8-9 had no glyph artifacts for these countries; final comparison uses the fixed-camera common-policy and final-policy pairs produced in 8-12"
+  },
+  "visualAudit": [
+    {"countryId":"RUS","oversized":false,"undersized":false,"excessiveTracking":false,"irregularRotation":false,"clipping":false,"territoryDeparture":"acceptable","normalMapCollision":false,"finding":"large territory occupancy without top clipping; neighboring labels and borders remain distinguishable"},
+    {"countryId":"CHN","oversized":false,"undersized":false,"excessiveTracking":false,"irregularRotation":false,"clipping":false,"territoryDeparture":"none","normalMapCollision":false,"finding":"two glyphs are separated across central China and do not collapse at the anchor"},
+    {"countryId":"AUS","oversized":false,"undersized":false,"excessiveTracking":false,"irregularRotation":false,"clipping":false,"territoryDeparture":"controlled long-name extension","normalMapCollision":false,"finding":"seven glyphs and three interior holes are readable; rotation changes smoothly"},
+    {"countryId":"USA","oversized":false,"undersized":false,"excessiveTracking":false,"irregularRotation":false,"clipping":false,"territoryDeparture":"none","normalMapCollision":false,"finding":"two glyphs span the contiguous territory without central clustering"},
+    {"countryId":"CHL","oversized":false,"undersized":false,"excessiveTracking":false,"irregularRotation":false,"clipping":false,"territoryDeparture":"none","normalMapCollision":false,"finding":"0.72 override doubles zoom-4 screen width from 25.68 to 51.80 px while retaining 0.940519 insideRatio"},
+    {"countryId":"IDN","oversized":false,"undersized":false,"excessiveTracking":false,"irregularRotation":false,"clipping":false,"territoryDeparture":"archipelago corridor extension","normalMapCollision":false,"finding":"five glyphs follow the archipelago at smooth 0.916283-degree maximum adjacent delta"}
+  ],
+  "normalMapAudit": {
+    "countryLayersVisible": true,
+    "countryBordersVisible": true,
+    "admin1BehaviorUnchanged": true,
+    "pointFallbackVisibleAndUnchanged": true,
+    "labelLayerCollisionsObserved": 0,
+    "externalExampleAssetsIncluded": false,
+    "fonts": [
+      "Noto Sans CJK KR Regular",
+      "Open Sans Regular"
+    ]
+  },
+  "screenshots": {
+    "screenshots/fix08-13-rus.png": "5ca36f05c5a3ef4c2d36f829d471984cec80551965745d3c06bc177e178c14c9",
+    "screenshots/fix08-13-chn.png": "9a121605393802785471fb82f6816904fb5b1dba8328a17400e2ba042701f73d",
+    "screenshots/fix08-13-aus.png": "a37ee0f5dd239325b18f33ee8cec696dd2ed27a1a11fd8e070443cb77888eb4a",
+    "screenshots/fix08-13-usa.png": "02ef3c15896e26a706117757ecac58e858b64e44399caaedad43f6f8e3d31e76",
+    "screenshots/fix08-13-chl.png": "a164d8003cc7abca2039b6e321ab0308ce31c48dcf0f0d246a596c2a6ab74c7b",
+    "screenshots/fix08-13-idn.png": "58f904b021bf3cade16dea1075978e5623371c5331a3210ae76847e2e1bae72c"
+  },
+  "outputHashes": {
+    "src/data/country-label-typography-policy-v1.json": "6e895062cabb3aeb5973897a204b3ed6d692d756953b7ae4a1b97ff11074be4c",
+    "src/lib/map/country-label-glyph-geometry.ts": "c534c792e0ce61fe89cff92c926eda50a35bebb6ddbc3c03391541dcdc66f92a",
+    "e2e/fix08-12.spec.ts": "ccf052598b7577056c00aea220919fae1ade37c26889ecdfeb569d1252bf527d"
+  },
+  "commands": [
+    {"command":"fixed-camera final representative capture","exitCode":0,"result":"1 test passed; six screenshots and bounds recorded"},
+    {"command":"focused geometry/export/artifact unit suite","exitCode":0,"result":"3 files, 33 tests passed"},
+    {"command":"npm.cmd run lint","exitCode":0,"result":"0 errors, 2 pre-existing warnings"},
+    {"command":"npx.cmd tsc --noEmit --pretty false","exitCode":0},
+    {"command":"8-7 boundary zoom E2E rerun","exitCode":0,"result":"1 test passed; two deterministic runs, zero width-ratio drift"},
+    {"command":"npm.cmd run build","exitCode":0,"result":"production compile, type checking, static generation passed"}
+  ],
+  "gates": {
+    "rusNotOversizedOrClipped": true,
+    "ausClearlyReadableAndInteriorShapesPreserved": true,
+    "chnUsaUseAppropriateTracking": true,
+    "chlIdnRotationContinuousAndReadable": true,
+    "allSixAutomaticAndVisualAuditsPass": true,
+    "normalMapLayersAndFallbacksDoNotConflict": true,
+    "noExternalExampleAssetOrCopyrightFontAdded": true,
+    "versionedPolicySavedAndHashed": true,
+    "boundaryZoomContinuityPreserved": true
+  },
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "8-14",
+  "requiresUserConfirmationBeforeNextStage": true
+}

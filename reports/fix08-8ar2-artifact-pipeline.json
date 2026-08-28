@@ -1,0 +1,103 @@
+{
+  "subtask": "8A-R2",
+  "status": "pass",
+  "inputs": {
+    "logicalSource": "CountryEntity",
+    "layoutSource": "CountryLabelLayout",
+    "renderPolicy": "CountryArtifactPolicy",
+    "fixedCountryAllowlistInBuilder": false
+  },
+  "pipeline": [
+    "CountryEntity",
+    "CountryLabelLayout",
+    "buildCountryMapArtifacts",
+    "buildCountryMapArtifactCollections",
+    "updateCountryMapSources"
+  ],
+  "artifactsPerCountry": [
+    "countryFeature",
+    "borderFeature",
+    "exclusive curvedLabelFeature or pointLabelFeature",
+    "optional capitalFeature",
+    "layout"
+  ],
+  "initialEquivalence": {
+    "worldStateCountryIds": 256,
+    "derivedCountryIds": 256,
+    "staticCountryIdSetEqual": true,
+    "curvedLabels": 182,
+    "pointFallbackLabels": 74,
+    "curvedPointIntersection": 0,
+    "curvedPointUnion": 256,
+    "staticCurvedIdSetEqual": true,
+    "staticPointFallbackIdSetEqual": true
+  },
+  "changeScenarios": {
+    "nameChange": {
+      "countryGeometryReferenceStable": true,
+      "labelTextUpdated": true,
+      "fontMetricAndLayoutRecomputed": true
+    },
+    "geometryChange": {
+      "countryPolygonUpdated": true,
+      "geometryHashUpdated": true,
+      "labelLayoutUpdated": true
+    },
+    "upsert": {
+      "serializablePatch": true,
+      "existingCountryReplacement": true
+    },
+    "remove": {
+      "countryFeatureRemoved": true,
+      "borderFeatureRemoved": true,
+      "curvedLabelRemoved": true,
+      "pointLabelRemoved": true,
+      "capitalRemoved": true
+    }
+  },
+  "sourceBoundary": {
+    "productApi": "updateCountryMapSources",
+    "setDataSources": [
+      "countries",
+      "borders",
+      "curvedLabels",
+      "pointLabels",
+      "capitals"
+    ],
+    "setDataCallCount": 5,
+    "debugSetEvidenceSourceDataUsed": false,
+    "mapLibreObjectsInArtifacts": false
+  },
+  "verification": {
+    "tests": {
+      "command": "npx.cmd vitest run src/lib/world/world-state.test.ts src/lib/world/country-map-artifacts.test.ts src/lib/country/country-index.test.ts --reporter=verbose",
+      "exitCode": 0,
+      "files": "3/3",
+      "tests": "16/16"
+    },
+    "lint": {
+      "command": "npx.cmd eslint src/lib/world/country-map-artifacts.ts src/lib/world/country-map-artifacts.test.ts src/lib/world/world-state.ts src/lib/world/world-state.test.ts",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "notImplemented": [
+    "territory union or difference",
+    "war or treaty events",
+    "country creation UI",
+    "runtime persistence",
+    "automatic MapLibre subscription",
+    "8A-R3 zoom policy"
+  ],
+  "gate": {
+    "initialIdsEquivalent": true,
+    "exclusive182Plus74": true,
+    "nameChangeArtifactsUpdated": true,
+    "geometryChangeArtifactsUpdated": true,
+    "removeAllArtifactsRepresentable": true,
+    "productSetDataBoundaryDistinctFromDebug": true,
+    "status": "pass"
+  },
+  "nextStep": "Stop after 8A-R2. 8A-R3 requires explicit user confirmation."
+}

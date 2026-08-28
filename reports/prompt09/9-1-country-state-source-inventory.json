@@ -1,0 +1,170 @@
+{
+  "stage": "9-1",
+  "status": "pass",
+  "objective": "Inventory country-state sources, owners, paths, loading methods, and rename/delete/31-way-split freshness without product-code changes.",
+  "inputHashes": {
+    "AGENTS.md": "63f2c50380ed6303237cce215ce27af1d620d094c215e28d1b1538a3c070e3bb",
+    "prompts/PROMPT_09_DYNAMIC_WORLD_COMMAND_RUNTIME.txt": "e50f461f00a66ec6341a3b8fa8e90aea9e5e03aa217eb5c7cba27c2c2ea3d99c",
+    "package.json": "fd2258c1f8f73a9eddda91465e1a5f309e9e087a4b88157e5439545cc9f333d4",
+    "package-lock.json": "fc7842b373ceeed78eb75bc3f640c1e262d08b3ff185ef9d88035336d426f8dd"
+  },
+  "outputHashes": {
+    "countries-2020": "8698470b2dbfb0e33a6b0b1ff55cc4e49a40d1a67307f3ed73ba70122456381a",
+    "country-index": "1008c8968706b134cbb452b8523d573825d928bd86b78e0720bc8aa01df95f01",
+    "game-setup-store": "cdd2e7df8d2614910e5123d8ebdf14987f4f2429c34697833346a8ed4b54ce74",
+    "WorldMap": "218917b6d792dbbc7b9715470045e0d615e77a056ed19010b8d9ad50e90659bb",
+    "label-metrics": "0ea660759758d042e70a3cd33c292c22fde97f1aa7a7805fbf24c60c844e3dc1",
+    "world-state": "157da7013c68a0d2b6d0f019339e62aecd4d2cec4077da38901ce1315bdba489",
+    "country-map-artifacts": "7ddaf9294a973e9d79cc7e387c4e32d8bbe268762e741ce4b4ff0a80bfa53fde"
+  },
+  "changedFiles": ["reports/prompt09/9-1-country-state-source-inventory.json"],
+  "commands": [
+    {"command": "Read Prompt 09, AGENTS.md, package metadata, file inventory, and installed Next.js 16.3 docs", "exitCode": 0, "durationMs": 1600},
+    {"command": "Search country imports, URL loads, stores, source IDs, tests, and snapshots with rg", "exitCode": 0, "durationMs": 1800},
+    {"command": "npm test -- --run relevant files", "exitCode": 1, "durationMs": 84},
+    {"command": "npm.cmd test -- --run src/lib/world/world-state.test.ts src/lib/world/country-map-artifacts.test.ts src/lib/country/country-index.test.ts", "exitCode": 0, "durationMs": 4060}
+  ],
+  "measurements": {
+    "inventoryEntries": 15,
+    "confirmedOwners": 15,
+    "unconfirmedOwners": 0,
+    "staticCountryMetadataImportingFiles": 10,
+    "staticLabelMetricsImportingFiles": 14,
+    "snapshotFiles": 0,
+    "relevantTestFilesPassed": 3,
+    "relevantTestsPassed": 20,
+    "productRuntimeWorldStateStoreCount": 0,
+    "productRuntimeDynamicCountryIndexCount": 0,
+    "gitRepositoryAvailable": false
+  },
+  "inventory": [
+    {
+      "source": "Static country metadata",
+      "path": "src/data/countries-2020.json",
+      "owner": "src/lib/country/country-index.ts",
+      "load": "compile-time JSON import into module-scoped countries and countryById",
+      "consumers": ["MapSearch", "CountryPanel", "WorldMap camera", "game-setup-store", "game-setup-storage", "tests/scripts"],
+      "rename": "stale", "delete": "stale", "split31": "stale"
+    },
+    {
+      "source": "countryById and search index",
+      "path": "src/lib/country/country-index.ts",
+      "owner": "country-index module",
+      "load": "module initialization from static metadata",
+      "rename": "stale", "delete": "returns deleted seed entity", "split31": "new province IDs absent"
+    },
+    {
+      "source": "Zustand interaction state",
+      "path": "src/stores/game-setup-store.ts",
+      "owner": "useGameSetupStore",
+      "load": "client singleton; validation uses static countryById",
+      "rename": "ID survives but presentation is stale", "delete": "no dangling-ID cleanup", "split31": "new IDs rejected"
+    },
+    {
+      "source": "WorldState model",
+      "path": "src/lib/world/world-state.ts; src/lib/world/initial-world-state.ts",
+      "owner": "pure helpers; initial file is only a re-export",
+      "load": "explicit metadata plus geometry plus capitals; no runtime singleton/store",
+      "rename": "fresh in returned state", "delete": "fresh in returned state", "split31": "fresh with exact rollback; test-only"
+    },
+    {
+      "source": "Derived map artifact pipeline",
+      "path": "src/lib/world/country-map-artifacts.ts",
+      "owner": "pure builder and seven-source setData adapter",
+      "load": "explicit CountryEntity/layout input; used only by unit tests",
+      "rename": "fresh when rebuilt", "delete": "fresh when patched", "split31": "capable but not connected to WorldMap"
+    },
+    {
+      "source": "Country polygons",
+      "path": "public/data/maps/countries-50m.geojson; public/data/maps/countries-10m.geojson",
+      "owner": "WorldMap baseStyle/loadDetails",
+      "load": "public URL plus browser fetch",
+      "rename": "metadata stale", "delete": "stale outside debug scenario", "split31": "updated only by test/debug China scenario"
+    },
+    {
+      "source": "Country borders",
+      "path": "public/data/maps/country-borders-50m.geojson; public/data/maps/country-borders-10m.geojson",
+      "owner": "WorldMap baseStyle/loadDetails",
+      "load": "public URL plus browser fetch",
+      "rename": "not geometry-derived", "delete": "stale outside debug scenario", "split31": "updated only by test/debug China scenario"
+    },
+    {
+      "source": "Point/baseline labels",
+      "path": "public/data/maps/country-labels-2020.geojson; public/data/maps/country-label-baselines-2020.geojson",
+      "owner": "WorldMap for points; generators/tests for baselines",
+      "load": "public URL/fetch and filesystem reads",
+      "rename": "stale", "delete": "stale outside debug scenario", "split31": "debug scenario synthesizes province point labels only"
+    },
+    {
+      "source": "Label metrics",
+      "path": "src/data/country-label-metrics-2020.json",
+      "owner": "WorldMap debug API and label tests/scripts",
+      "load": "compile-time JSON import",
+      "rename": "stale", "delete": "stale", "split31": "stale"
+    },
+    {
+      "source": "Glyph GeoJSON",
+      "path": "public/data/maps/country-label-glyph-fills-2020.geojson; public/data/maps/country-label-glyph-outlines-2020.geojson",
+      "owner": "WorldMap baseStyle and evidence loader",
+      "load": "public URLs plus second fetch for debug bounds",
+      "rename": "stale", "delete": "stale outside debug scenario", "split31": "CHN removed in debug scenario; province glyphs absent and point fallback used"
+    },
+    {
+      "source": "Capitals",
+      "path": "public/data/maps/capitals-2020.geojson",
+      "owner": "WorldMap baseStyle; WorldState seed tests",
+      "load": "public URL in product; filesystem read in tests",
+      "rename": "stale country presentation", "delete": "stale", "split31": "stale; debug split does not update capitals"
+    },
+    {
+      "source": "Small-country markers",
+      "path": "public/data/maps/small-country-points-2020.geojson",
+      "owner": "WorldMap baseStyle",
+      "load": "public URL",
+      "rename": "stale", "delete": "stale", "split31": "stale"
+    },
+    {
+      "source": "China 31-province fixture",
+      "path": "public/data/maps/china-province-countries-test.geojson",
+      "owner": "WorldMap debug API and WorldState test",
+      "load": "browser fetch and filesystem read",
+      "rename": "n/a", "delete": "removes CHN only in isolated debug/snapshot state", "split31": "partial product-source reflection; not metadata/store/search/panel/capitals"
+    },
+    {
+      "source": "Persisted player country",
+      "path": "src/lib/storage/game-setup-storage.ts",
+      "owner": "storage adapter",
+      "load": "localStorage parsed with Zod then checked against static countryById",
+      "rename": "ID survives but static metadata remains", "delete": "seed ID remains valid; dynamic ID rejected", "split31": "province IDs rejected"
+    },
+    {
+      "source": "Tests and snapshots",
+      "path": "src/**/*.test.ts(x); e2e/**/*.spec.ts",
+      "owner": "Vitest and Playwright",
+      "load": "imports, filesystem reads, browser debug API",
+      "rename": "pure-state/artifact propagation covered; product UI not covered",
+      "delete": "artifact removal covered; product UI not covered",
+      "split31": "WorldState rollback and debug map scenario covered separately",
+      "snapshotFiles": "none"
+    }
+  ],
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "previousPrompt09ReportHashesVerified": true,
+    "runningReportCreatedBeforeAudit": true,
+    "allRequiredSourceCategoriesInventoried": true,
+    "allSourceOwnersConfirmed": true,
+    "renameDeleteSplitFreshnessRecorded": true,
+    "productCodeUnmodified": true,
+    "relevantTestsPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "No discoverable .git repository; git status and change-base verification are unavailable.",
+    "npm.ps1 was blocked by PowerShell execution policy; the required single retry via npm.cmd passed."
+  ],
+  "rollbackVerified": false,
+  "nextStage": "9-2"
+}

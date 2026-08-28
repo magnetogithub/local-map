@@ -1,0 +1,520 @@
+{
+  "subtask": "7K",
+  "status": "passed",
+  "generatedAt": "2026-08-14T00:06:33.227Z",
+  "renderSettledMethod": "MapLibre loaded + not moving + detailed source ready at zoom >= 2.2",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captureCount": 9,
+  "borderChange": {
+    "scenario": "7H east-territory-removed",
+    "sameCamera": true,
+    "beforeGeometryHash": "1a595793",
+    "afterGeometryHash": "6bef495c",
+    "afterLayout": {
+      "geometryHash": "6bef495c",
+      "polygonCount": 209,
+      "anchor": [
+        -110.048435,
+        38.506153
+      ],
+      "angle": -57.443349,
+      "fontSizeWorldUnits": 12.974377,
+      "insideRatio": 0.90798,
+      "anchorInside": true,
+      "anchorMovement": 10.951068,
+      "angleChange": 63.844427
+    }
+  },
+  "evidence": [
+    {
+      "file": "screenshots/fix07-russia-z1.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          94,
+          52.405945236661466
+        ],
+        "zoom": 1.25,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "RUS",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          94.300599,
+          61.661028
+        ],
+        "angle": 6.462657,
+        "fontSizeWorldUnits": 26.67658,
+        "targetTextWidthWorld": 76.828552,
+        "availableWidthWorld": 96.666657,
+        "insideRatio": 0.8989,
+        "minZoom": 1,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "RUS",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            94.306640625,
+            61.65859517426435
+          ],
+          "angle": 6.462657,
+          "fontSize": 63.44795747987858,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            526.53725287253,
+            342.1200305314226
+          ],
+          "estimatedWidth": 182.73012134751306
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-russia-z2.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          94,
+          62
+        ],
+        "zoom": 2.1,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "RUS",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          94.300599,
+          61.661028
+        ],
+        "angle": 6.462657,
+        "fontSizeWorldUnits": 26.67658,
+        "targetTextWidthWorld": 76.828552,
+        "availableWidthWorld": 96.666657,
+        "insideRatio": 0.8989,
+        "minZoom": 1,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "RUS",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            94.295654296875,
+            61.65859517426435
+          ],
+          "angle": 6.462657,
+          "fontSize": 114.36500206090571,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            527.302663421016,
+            404.40931550854935
+          ],
+          "estimatedWidth": 329.3712127947586
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-russia-z3.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          94,
+          62
+        ],
+        "zoom": 4,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "RUS",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          94.300599,
+          61.661028
+        ],
+        "angle": 6.462657,
+        "fontSizeWorldUnits": 26.67658,
+        "targetTextWidthWorld": 76.828552,
+        "availableWidthWorld": 96.666657,
+        "insideRatio": 0.8989,
+        "minZoom": 1,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "RUS",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            94.3011474609375,
+            61.66120280305205
+          ],
+          "angle": 6.462657,
+          "fontSize": 180,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            532.3527777777775,
+            416.3311473582852
+          ],
+          "estimatedWidth": 518.4000107959865
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-usa.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          -99,
+          39
+        ],
+        "zoom": 2.1,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "USA",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          -99.145071,
+          39.527716
+        ],
+        "angle": 6.448672,
+        "fontSizeWorldUnits": 20.405541,
+        "targetTextWidthWorld": 38.770527,
+        "availableWidthWorld": 50.206649,
+        "insideRatio": 0.944573,
+        "minZoom": 1,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "USA",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            -99.140625,
+            39.52946653645165
+          ],
+          "angle": 6.448672,
+          "fontSize": 87.48046932998517,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            524.6425812299709,
+            395.83032095756295
+          ],
+          "estimatedWidth": 166.2128878685874
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-china.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          104,
+          35
+        ],
+        "zoom": 2.1,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "CHN",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          104.18742,
+          31.348817
+        ],
+        "angle": -6.563063,
+        "fontSizeWorldUnits": 20.008407,
+        "targetTextWidthWorld": 38.015974,
+        "availableWidthWorld": 52.491192,
+        "insideRatio": 0.916765,
+        "minZoom": 1,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "CHN",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            104.183349609375,
+            31.34425445566805
+          ],
+          "angle": -6.563063,
+          "fontSize": 85.77791860090161,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            526.6179192643954,
+            426.6380092772281
+          ],
+          "estimatedWidth": 162.9780483426788
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-chile.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          -70,
+          -30
+        ],
+        "zoom": 3,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "CHL",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          -69.18833,
+          -23.569825
+        ],
+        "angle": 86,
+        "fontSizeWorldUnits": 2.358779,
+        "targetTextWidthWorld": 4.48168,
+        "availableWidthWorld": 13.411459,
+        "insideRatio": 0.946645,
+        "minZoom": 3,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "CHL",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            -69.1864013671875,
+            -23.569022144054955
+          ],
+          "angle": 86,
+          "fontSize": 18.870232,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            534.7569444444442,
+            317.9705677723547
+          ],
+          "estimatedWidth": 35.85344
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-indonesia.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          114,
+          -1
+        ],
+        "zoom": 3,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "IDN",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          114.018504,
+          -0.859635
+        ],
+        "angle": 29.575455,
+        "fontSizeWorldUnits": 1.876142,
+        "targetTextWidthWorld": 9.080525,
+        "availableWidthWorld": 13.07766,
+        "insideRatio": 0.999069,
+        "minZoom": 1,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "IDN",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            114.01611328125,
+            -0.8569016474398126
+          ],
+          "angle": 29.575455,
+          "fontSize": 15.009136,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            525.6833333333329,
+            398.37164453334293
+          ],
+          "estimatedWidth": 72.6442
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-border-change-before.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          -110,
+          40
+        ],
+        "zoom": 3.2,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "USA",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          -99.145071,
+          39.527716
+        ],
+        "angle": 6.448672,
+        "fontSizeWorldUnits": 20.405541,
+        "targetTextWidthWorld": 38.770527,
+        "availableWidthWorld": 50.206649,
+        "insideRatio": 0.944573,
+        "minZoom": 1,
+        "placementMode": "territory-point"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "USA",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            -99.1461181640625,
+            39.52946653645165
+          ],
+          "angle": 6.448672,
+          "fontSize": 180,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            667.3562697702241,
+            408.00041971848503
+          ],
+          "estimatedWidth": 341.99999206097993
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    },
+    {
+      "file": "screenshots/fix07-border-change-after.png",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "camera": {
+        "center": [
+          -110,
+          40
+        ],
+        "zoom": 3.2,
+        "bearing": 0,
+        "pitch": 0
+      },
+      "targetCountryId": "USA",
+      "targetVisible": true,
+      "layout": {
+        "anchor": [
+          -110.048435,
+          38.506153
+        ],
+        "angle": -57.443349,
+        "fontSizeWorldUnits": 12.974377,
+        "targetTextWidthWorld": 38.770527,
+        "availableWidthWorld": 50.206649,
+        "insideRatio": 0.90798,
+        "minZoom": 1,
+        "placementMode": "territory-point",
+        "geometryHash": "6bef495c"
+      },
+      "rawLabelCount": 1,
+      "rawLabels": [
+        {
+          "countryId": "USA",
+          "layerId": "country-labels-prototype",
+          "anchor": [
+            -110.050048828125,
+            38.50519140240354
+          ],
+          "angle": -57.443349,
+          "fontSize": 119.22916413609094,
+          "letterSpacing": 0.06,
+          "worldCopy": 0,
+          "screenAnchor": [
+            524.8458801034043,
+            425.2308950434408
+          ],
+          "estimatedWidth": 356.28512469814507
+        }
+      ],
+      "rawPerWorldCopy": {
+        "0": 1
+      }
+    }
+  ]
+}

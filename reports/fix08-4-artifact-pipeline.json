@@ -1,0 +1,155 @@
+{
+  "stage": "8-4",
+  "status": "pass",
+  "inputHashes": {
+    "reports/fix08-3-world-geometry-unit.json": "b198e7f98397d11a5a116bb21ffdb4ef325447f0cbbe25e4aaf3af324cbc5b49"
+  },
+  "outputHashes": {
+    "src/lib/map/country-label-glyph-geometry.ts": "190701fb6e6945d8b4876f2a08ca63dc5d57a95a6ca3f23203619666a29652e6",
+    "src/lib/world/country-map-artifacts.ts": "7ddaf9294a973e9d79cc7e387c4e32d8bbe268762e741ce4b4ff0a80bfa53fde",
+    "src/lib/world/country-map-artifacts.test.ts": "cf75c6b0ecd643aedcd5691c44c2e09b905cb6df9044c49de076fd65e971c3c7"
+  },
+  "prerequisite": {
+    "stage": "8-3",
+    "status": "pass",
+    "allRecordedHashesMatchedBeforeImplementation": true,
+    "reportHash": "b198e7f98397d11a5a116bb21ffdb4ef325447f0cbbe25e4aaf3af324cbc5b49"
+  },
+  "pipeline": {
+    "flow": [
+      "CountryEntity",
+      "CountryLabelLayout",
+      "shapeFontOutlines",
+      "buildCountryLabelGlyphArtifact",
+      "buildCountryMapArtifacts",
+      "buildCountryMapArtifactCollections",
+      "updateCountryMapSources.setData"
+    ],
+    "legacyCollectionsPreserved": ["countries", "borders", "curvedLabels", "pointLabels", "capitals"],
+    "newCollections": ["glyphLabelFills", "glyphLabelOutlines"],
+    "legacySourceSetDataCalls": 5,
+    "newSourceSetDataCalls": 2,
+    "totalSourceSetDataCalls": 7,
+    "mapLibreImportsInPureModules": 0
+  },
+  "artifactContract": {
+    "CountryMapArtifactsAddedField": "glyphLabelArtifact?: CountryLabelGlyphArtifact",
+    "glyphOutlineGeometryOptional": true,
+    "featureGeometry": "Polygon or MultiPolygon",
+    "requiredProperties": ["countryId", "labelInstanceId", "glyphIndex", "codePoint", "role", "geometryHash", "fontHash", "layoutVersion"],
+    "roles": ["fill", "outline"],
+    "canonicalOrder": "countryId binary comparison, then labelInstanceId binary comparison, then glyphIndex numeric",
+    "localeDependentSort": false,
+    "currentOutlineCollection": "empty until an outlineGeometry is supplied; no fill geometry is falsely duplicated as an outline"
+  },
+  "representativeInitialCollections": {
+    "countries": ["AUS", "RUS"],
+    "glyphFillFeatures": 10,
+    "glyphOutlineFeatures": 0,
+    "glyphKeys": ["AUS:0", "AUS:1", "AUS:2", "AUS:3", "AUS:4", "AUS:5", "AUS:6", "RUS:0", "RUS:1", "RUS:2"],
+    "staticInputVsWorldStateDerivedDeepEqual": true,
+    "reverseInputOrderDeepEqual": true
+  },
+  "changePropagation": {
+    "nameChange": {
+      "country": "AUS",
+      "syntheticName": "새호주",
+      "territoryGeometryReferenceStable": true,
+      "glyphTextChanged": true,
+      "glyphFontHashStable": true,
+      "labelLayoutRegenerated": true
+    },
+    "geometryChange": {
+      "country": "AUS",
+      "syntheticGeometry": "30 by 10 rectangle",
+      "countryGeometryChanged": true,
+      "geometryHashChanged": true,
+      "baselineChanged": true,
+      "glyphGeometryRegenerated": true
+    },
+    "addition": {
+      "country": "AUS",
+      "upsertAddedAllSevenGlyphFeatures": true,
+      "canonicalPropertiesPresent": true
+    },
+    "removal": {
+      "country": "AUS",
+      "removedFromAllSevenCollections": true,
+      "orphanGlyphFeatures": 0
+    }
+  },
+  "tests": {
+    "focused": {
+      "command": "npx.cmd vitest run src/lib/world/country-map-artifacts.test.ts src/lib/map/country-label-glyph-geometry.test.ts src/lib/world/world-state.test.ts --reporter=verbose",
+      "exitCode": 0,
+      "files": "3/3",
+      "tests": "18/18",
+      "durationMs": 10400
+    },
+    "lint": {
+      "command": "npx.cmd eslint src/lib/world/country-map-artifacts.ts src/lib/world/country-map-artifacts.test.ts src/lib/map/country-label-glyph-geometry.ts",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "pureImportAudit": {
+      "command": "rg -n maplibre src/lib/world/country-map-artifacts.ts src/lib/map/country-label-glyph-geometry.ts src/lib/map/font-outline.ts",
+      "exitCode": 1,
+      "meaning": "No MapLibre references found"
+    },
+    "wholeProjectTypecheck": {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 1,
+      "newProductionModuleErrors": 0,
+      "existingErrors": [
+        "e2e/fix08-8a3.spec.ts screenshotZoom union errors",
+        "src/components/map/WorldMap.tsx existing curved layer id and JSON tuple-cast errors",
+        "src/lib/world/country-map-artifacts.test.ts existing country-label-metrics JSON tuple cast"
+      ]
+    }
+  },
+  "changedFiles": [
+    "src/lib/map/country-label-glyph-geometry.ts",
+    "src/lib/world/country-map-artifacts.ts",
+    "src/lib/world/country-map-artifacts.test.ts",
+    "reports/fix08-4-artifact-pipeline.json"
+  ],
+  "commands": [
+    {"command": "verify 8-3 pass and all input/output hashes", "exitCode": 0, "durationMs": 500},
+    {"command": "initialize 8-4 report as running", "exitCode": 0, "durationMs": 800},
+    {"command": "extend glyph artifact type, map artifacts, collections, and seven-source updater", "exitCode": 0, "durationMs": 4800},
+    {"command": "add pipeline and propagation tests", "exitCode": 0, "durationMs": 22100},
+    {"command": "first focused pipeline suite", "exitCode": 1, "durationMs": 12400, "note": "Name plus geometry propagation test exceeded the default 5-second timeout."},
+    {"command": "reuse previous AUS layout for name-only recomputation without raising timeout", "exitCode": 0, "durationMs": 4200},
+    {"command": "focused pipeline suite after optimization", "exitCode": 0, "durationMs": 10400, "tests": "18/18"},
+    {"command": "lint plus attempted ad-hoc scoped tsc", "exitCode": 1, "durationMs": 3500, "note": "Lint passed; tsc rejected command-line paths option because it must come from tsconfig."},
+    {"command": "whole-project tsc --noEmit", "exitCode": 1, "durationMs": 2900, "note": "No new production-module errors; existing project errors recorded separately."},
+    {"command": "final focused tests, lint, pure-import audit, and output hashes", "exitCode": 0, "durationMs": 10400},
+    {"command": "finalize 8-4 report", "exitCode": 0, "durationMs": 0}
+  ],
+  "gates": {
+    "priorStagePassAndHashesMatch": true,
+    "glyphArtifactAddedExplicitly": true,
+    "fillCollectionGenerated": true,
+    "outlineCollectionGenerated": true,
+    "requiredFeaturePropertiesPresent": true,
+    "nameChangePropagates": true,
+    "geometryChangePropagates": true,
+    "countryAdditionPropagates": true,
+    "countryRemovalPropagates": true,
+    "fiveLegacySourcesPreserved": true,
+    "twoGlyphSourcesAdded": true,
+    "initialStaticAndWorldStateGlyphCollectionsEqual": true,
+    "reverseInputOrderDeterministic": true,
+    "pureModulesHaveNoMapLibreImport": true,
+    "focusedTestsPass": true,
+    "scopedLintPass": true,
+    "stageStatus": "pass"
+  },
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-fatal Vite native config-loader warning.",
+    "Whole-project TypeScript validation remains non-zero because of existing WorldMap, prior E2E, and JSON tuple-cast diagnostics; the 8-4 production module is absent from those diagnostics."
+  ],
+  "nextStage": "8-5"
+}

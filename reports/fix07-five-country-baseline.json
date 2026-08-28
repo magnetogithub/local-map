@@ -1,0 +1,27 @@
+{
+  "subtask":"7B",
+  "generatedAt":"2026-08-13T14:51:00+09:00",
+  "sourceGeometry":"public/data/maps/countries-10m.geojson",
+  "labelSource":"public/data/maps/country-labels-2020.geojson",
+  "algorithmModified":false,
+  "qualityThresholds":{"mainlandInsideRatio":0.85,"narrowOrArchipelagoInsideRatio":0.75},
+  "countries":[
+    {"countryId":"RUS","geometryType":"MultiPolygon","coordinatePairs":36657,"geometryHash":"98d6e782","anchor":[98.672081,61.493732],"anchorContained":true,"angle":2.24157,"baseline":[[39.34392061277981,60.46493895651571],[158.00024069084753,62.522525363745515]],"baselineEndpointsContained":[true,true],"insideRatio":0.895425,"coverageRatio":0.796251,"confidence":0.798349,"componentIds":["component-8"],"availableWidthWorld":93.962931,"quality":"pass","diagnostics":["canonical anchor longitude is within [-180,180]","available width is below one 512-unit world"]},
+    {"countryId":"USA","geometryType":"MultiPolygon","coordinatePairs":35635,"geometryHash":"1a595793","anchor":[-91.800713,39.27852],"anchorContained":true,"angle":14.163099,"baseline":[[-110.92321068507158,36.056822561666365],[-72.67821502921414,42.500217438333635]],"baselineEndpointsContained":[true,true],"insideRatio":0.810458,"coverageRatio":0.771561,"confidence":0.803374,"componentIds":["component-186"],"availableWidthWorld":48.54095,"quality":"fail","failure":"insideRatio is below mainland threshold 0.85"},
+    {"countryId":"CHN","geometryType":"MultiPolygon","coordinatePairs":14052,"geometryHash":"87eb9497","anchor":[99.776917,33.51558],"anchorContained":true,"angle":31.3942,"baseline":[[83.75411680357604,25.205256928738393],[115.79971748213823,41.82590307126161]],"baselineEndpointsContained":[false,true],"insideRatio":0.699346,"coverageRatio":0.783431,"confidence":0.792163,"componentIds":["component-0"],"availableWidthWorld":57.921673,"quality":"fail","failure":"insideRatio is below mainland threshold 0.85 and one baseline endpoint is outside territory"},
+    {"countryId":"CHL","geometryType":"MultiPolygon","coordinatePairs":17184,"geometryHash":"fbbe79fe","anchor":[-72.303761,-46.532912],"anchorContained":true,"angle":90,"baseline":[[-72.30376142857143,-48.37948960555012],[-72.30376142857143,-44.68633439444989]],"baselineEndpointsContained":[false,true],"insideRatio":0.522876,"coverageRatio":0.295803,"confidence":0.605424,"componentIds":["component-6"],"availableWidthWorld":17.756718,"quality":"fail","failure":"insideRatio is below narrow-country threshold 0.75 and one baseline endpoint is outside territory"},
+    {"countryId":"IDN","geometryType":"MultiPolygon","coordinatePairs":19532,"geometryHash":"46fdc2e2","anchor":[114.005869,-0.191763],"anchorContained":true,"angle":16.772766,"baseline":[[110.98923105478043,-1.0998677973088573],[117.02250706084644,0.7163408211452856]],"baselineEndpointsContained":[true,true],"insideRatio":1,"coverageRatio":0.69424,"confidence":0.930195,"componentIds":["component-73","component-2","component-222","component-102","component-56","component-180","component-192","component-92","component-107","component-139","component-55","component-103","component-161"],"availableWidthWorld":12.893242,"quality":"pass","diagnostics":["archipelago policy selected 13 components rather than only the largest island"]}
+  ],
+  "verification":{
+    "targeted":{"command":"npx.cmd vitest run src/lib/map/country-label-real-geometry.test.ts --reporter=verbose","exitCode":0,"tests":"5/5"},
+    "fullUnit":{"command":"npm.cmd test","exitCode":0,"files":"6/6","tests":"32/32"},
+    "lint":{"command":"npm.cmd run lint","exitCode":0,"warnings":3,"newWarnings":0}
+  },
+  "gate":{
+    "actualGeometryEvidence":true,
+    "failuresPreserved":true,
+    "syntheticFixturesUsedAsSubstitute":false,
+    "status":"pass"
+  },
+  "nextRecommendedSubtask":"7C"
+}

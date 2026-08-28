@@ -1,0 +1,32 @@
+{
+  "subtask":"7E",
+  "generatedAt":"2026-08-13T15:07:00+09:00",
+  "algorithm":{
+    "centers":["valid polygon centroid","maximum-clearance candidates from adaptive interior grid","corridor-adjacent refined offsets"],
+    "angles":["PCA axis","PCA +/-15 and +/-30 degrees","six longest simplified boundary segment axes","0, +/-45, 90 degrees"],
+    "refinement":"The top three coarse candidates are evaluated at cross-shaped center offsets and angle offsets of -4, 0, +4 degrees.",
+    "stability":"previousLayout is used only when primary candidate scores differ by at most 0.01.",
+    "containmentGuard":"Among candidates retaining at least 55% of the best width, mainland layouts prefer insideRatio >= 0.888, archipelagos >= 0.99, and vertical layouts >= 0.75.",
+    "deterministic":true
+  },
+  "actualGeometryResults":[
+    {"countryId":"RUS","anchor":[99.071606,61.661031],"angle":6.462757,"insideRatio":0.888889,"coverageRatio":0.796784,"confidence":0.789504,"centers":23,"angles":13,"coarse":299,"refined":45,"winningClearance":9.531664,"insideRatio7C":0.888889,"notWorse":true},
+    {"countryId":"USA","anchor":[-99.145117,39.527697],"angle":6.401078,"insideRatio":0.921569,"coverageRatio":0.772219,"confidence":0.891135,"centers":27,"angles":12,"coarse":324,"refined":45,"winningClearance":9.163106,"insideRatio7C":0.836601,"notWorse":true},
+    {"countryId":"CHN","anchor":[103.806824,36.617133],"angle":-11.523626,"insideRatio":0.888889,"coverageRatio":0.783425,"confidence":0.853187,"centers":25,"angles":14,"coarse":350,"refined":45,"winningClearance":5.067035,"insideRatio7C":0.72549,"notWorse":true},
+    {"countryId":"CHL","anchor":[-69.18833,-23.569825],"angle":86,"insideRatio":0.862745,"coverageRatio":0.362308,"confidence":0.826339,"centers":10,"angles":11,"coarse":110,"refined":45,"winningClearance":0.81671,"insideRatio7C":0.666667,"notWorse":true},
+    {"countryId":"IDN","anchor":[114.018504,-0.859635],"angle":29.575462,"insideRatio":1,"coverageRatio":0.694354,"confidence":0.946384,"centers":18,"angles":12,"coarse":216,"refined":45,"winningClearance":2.123928,"insideRatio7C":1,"notWorse":true},
+    {"countryId":"NOR","anchor":[11.464328,62.371133],"angle":80.520933,"insideRatio":0.784314,"coverageRatio":0.672406,"confidence":0.703441,"centers":8,"angles":14,"coarse":112,"refined":42,"winningClearance":0.283272,"verticalOrDiagonalCandidate":true},
+    {"countryId":"CAN","anchor":[-108.984674,56.835615],"angle":-43.068594,"insideRatio":0.888889,"coverageRatio":0.771676,"confidence":0.903352,"centers":23,"angles":11,"coarse":253,"refined":45,"winningClearance":6.551336}
+  ],
+  "verification":{
+    "focused":{"command":"npx.cmd vitest run src/lib/map/country-label-layout.test.ts src/lib/map/country-label-real-geometry.test.ts --reporter=dot","exitCode":0,"tests":"18/18"},
+    "actualGeometryFinal":{"command":"npx.cmd vitest run src/lib/map/country-label-real-geometry.test.ts --reporter=dot","exitCode":0,"tests":"9/9"},
+    "fullUnit":{"command":"npm.cmd test","exitCode":0,"tests":"38/38"},
+    "lint":{"command":"npm.cmd run lint","exitCode":0,"warnings":3,"newWarnings":0},
+    "build":{"command":"npm.cmd run build","exitCode":0},
+    "discardedCommand":{"command":"npx.cmd vitest ... -t RUS|CHN|CHL|IDN|USA","status":"invalid","reason":"Windows shell interpreted pipe characters; not counted as verification"}
+  },
+  "gates":{"concavePolygonSafeCandidate":true,"chileVerticalCandidate":true,"norwayVerticalOrDiagonalCandidate":true,"deterministicOrdering":true,"fiveCountryBaselineNotWorse":true,"status":"pass"},
+  "limitations":["Clearance is a point-to-boundary scan rather than a priority-queue polylabel implementation.","The sampled insideRatio is still approximate and will be replaced or validated in 7F.","Candidate search is slower than the 7D baseline, especially for Russia and Canada; performance work is deferred to 7N.","Generated 2020 labels were not regenerated in this scoped step."],
+  "nextRecommendedSubtask":"7F"
+}

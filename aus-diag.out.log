@@ -1,0 +1,53 @@
+
+> pax-local@0.1.0 test:e2e
+> playwright test e2e/fix08-aus-diag.spec.ts --workers=1
+
+
+Running 1 test using 1 worker
+
+AUS_ZOOM 1 []
+AUS_ZOOM 2 [
+  {
+    countryId: 'AUS',
+    layerId: 'country-labels-prototype',
+    anchor: [ 129.638671875, -24.64701716263035 ],
+    angle: -8.579252,
+    fontSize: 23.913648,
+    letterSpacing: 0.06,
+    worldCopy: -0,
+    screenAnchor: [ 525.7234133333333, 398.3126029016087 ],
+    estimatedWidth: 162.612808
+  }
+]
+AUS_ZOOM 3 [
+  {
+    countryId: 'AUS',
+    layerId: 'country-labels-prototype',
+    anchor: [ 129.638671875, -24.64701716263035 ],
+    angle: -8.579252,
+    fontSize: 24,
+    letterSpacing: 0.06,
+    worldCopy: -0,
+    screenAnchor: [ 525.9468266666665, 396.62520580321745 ],
+    estimatedWidth: 163.2000016057776
+  }
+]
+  x  1 e2e\fix08-aus-diag.spec.ts:2:5 › AUS zoom diagnostics (35.0s)
+
+
+  1) e2e\fix08-aus-diag.spec.ts:2:5 › AUS zoom diagnostics ─────────────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.evaluate: Test timeout of 30000ms exceeded.
+
+      1 | import {test} from "@playwright/test";
+    > 2 | test("AUS zoom diagnostics",async({page})=>{await page.setViewportSize({width:1440,height:900});await page.goto("/");await page.waitForTimeout(3000);const aus=await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getCountryLabelPlacement("AUS")) as {anchor:[number,number]};for(const zoom of [1,2,3,4,5]){await page.evaluate(({anchor,zoom})=>window.__PAX_MAP_DEBUG__!.jumpTo(anchor,zoom),{anchor:aus.anchor,zoom});await page.waitForTimeout(1000);console.log("AUS_ZOOM",zoom,await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getRawRenderedCountryLabels().filter(x=>x.countryId==="AUS")))} });
+        |                                                                                                                                                                                                                                                                                                                         ^
+      3 |
+        at D:\SSAFY\WORKSPACE\pax-local\e2e\fix08-aus-diag.spec.ts:2:313
+
+    Error Context: test-results\fix08-aus-diag-AUS-zoom-diagnostics\error-context.md
+
+  1 failed
+    e2e\fix08-aus-diag.spec.ts:2:5 › AUS zoom diagnostics ──────────────────────────────────────────

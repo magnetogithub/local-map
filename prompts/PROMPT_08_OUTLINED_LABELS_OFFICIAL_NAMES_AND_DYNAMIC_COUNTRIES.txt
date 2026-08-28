@@ -1,0 +1,952 @@
+# Prompt 08 — 국가 폴리곤 기반 world-space 국가명 글자
+
+당신은 `D:\SSAFY\WORKSPACE\pax-local` 프로젝트의 구현 에이전트다. 사용자에게는 한국어로 보고한다.
+
+이 문서는 Prompt 08의 새로운 권위 문서다. 과거 Prompt 08의 데이터 소유권 경계는 필요한 범위에서 재사용할 수 있지만, 과거 단계 번호와 실패한 MapLibre symbol 줌 밴드 접근은 계승하지 않는다.
+
+이 프롬프트의 범위는 오직 지도 위 국가명 글자의 생성, 배치, 렌더링, 스타일, 검증이다. 공식 국호 변경, 국가 데이터 정리, 국경 topology, Admin 1, 국가 생성·소멸, 게임 이벤트, 저장·복원, 검색 alias, UI 재설계는 구현하지 않는다.
+
+---
+
+## 1. 실행 원칙과 순서
+
+1. 시작 전에 `AGENTS.md`와 설치된 Next.js 버전의 관련 문서를 읽는다.
+2. 과거 PASS 로그를 신뢰하지 말고 현재 코드, 데이터, 실제 renderer로 재검증한다.
+3. 기존 사용자 변경과 `CountryEntity → WorldState → map artifacts → setData()` 경계를 보존한다.
+4. 국가별 글자 좌표를 하드코딩하지 않는다. 예외는 `fontScale`, `curvature`, `letterSpacing`, `insideRatioTarget`, `fallbackMode` 같은 정책 값으로만 표현하고 근거를 기록한다.
+5. 실패를 숨기거나 validator 허용 기준을 임의로 낮추지 않는다.
+6. `8-1`부터 `8-31`까지 각각이 독립 승인 단계다. 한 단계의 구현과 독립 검증을 끝낸 뒤 보고하고 반드시 종료한다. 사용자 확인 없이 다음 번호로 넘어가지 않는다.
+7. 한 단계가 실패하면 후속 단계는 실행하지 않는다.
+
+### 전체 승인 단계
+
+```text
+기반 조사
+8-1  현재 구현과 데이터 경계 감사
+8-2  폰트·glyph outline 기술 검증
+
+순수 geometry
+8-3  world-space glyph 변환 함수
+8-4  artifact 파이프라인 확장
+
+대표 국가 통합
+8-5  MapLibre 병행 renderer 통합
+8-6  실제 geometry bounds/debug API
+8-7  AUS/RUS 확대·축소와 경계 검증
+8-8  기존 curved symbol 경로 제거
+8-9  대표 구현 보고서 확정
+
+타이포그래피 정책
+8-10 glyph 크기와 tracking 분리
+8-11 baseline 곡률과 glyph 회전 안정화
+8-12 대표 국가 타이포그래피 정책 조정
+8-13 예시 스타일 시각 검증과 정책 확정
+
+전체 국가 확대
+8-14 전체 국가 입력 집합 고정
+8-15 전체 glyph artifact 생성
+8-16 자동 geometry·타이포그래피 품질 판정
+8-17 정책 조정과 Point fallback 확정
+8-18 난형 국가 실제 렌더 검증
+8-19 전체 국가 validator와 보고서 확정
+
+스타일
+8-20 흰색 글자 스타일 구조 설계
+8-21 world-space 외곽선 geometry 생성
+8-22 스타일 layer 통합
+8-23 land/Admin 1/coast 픽셀 감사
+8-24 스타일 보고서 확정
+
+최종 감사
+8-25 실행 환경 사전 점검
+8-26 clean regeneration과 결정성
+8-27 validator 비퇴행성
+8-28 unit/lint/type/build
+8-29 제한 E2E 연속 실행
+8-30 성능과 필수 산출물 검사
+8-31 최종 완료 판정
+```
+
+각 번호는 별도 작업 세션이다. 예를 들어 `8-2`가 끝났다는 이유로 같은 세션에서 `8-3`을 시작하지 않는다.
+
+### 모든 번호에 적용하는 단계 완료 프로토콜
+
+각 `8-N` 단계는 다음 절차를 반드시 자체적으로 수행한다.
+
+1. 선행 단계 보고서가 `pass`이고 현재 입력 hash와 일치하는지 확인한다.
+2. 해당 단계 전용 보고서 `reports/fix08-N-<slug>.json`을 `running`으로 원자 초기화한다.
+3. 그 단계에 명시된 범위만 구현한다. 후속 단계의 제품 코드, 테스트, 보고서를 미리 작성하지 않는다.
+4. 정적 검증과 필요한 최소 실행 검증을 수행한다.
+5. 실행 명령, 종료 코드, 입력·출력 hash, 변경 파일, 원시 수치, 실패 게이트를 보고서에 쓴다.
+6. 모든 게이트가 통과하면 `pass`, 구현 오류면 `fail`, 환경 때문에 완료할 수 없으면 `blocked`로 판정한다.
+7. 사용자에게 결과와 산출물 경로를 보고하고 반드시 종료한다.
+
+각 단계 보고서는 최소한 다음 필드를 가진다.
+
+```json
+{
+  "stage": "8-N",
+  "status": "running | pass | fail | blocked",
+  "inputHashes": {},
+  "outputHashes": {},
+  "changedFiles": [],
+  "commands": [{"command": "", "exitCode": 0, "durationMs": 0}],
+  "gates": {},
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "8-(N+1)"
+}
+```
+
+`nextStage`는 안내 정보일 뿐 자동 실행 권한이 아니다.
+
+---
+
+## 2. 권위 있는 렌더링 모델
+
+curved 국가명은 MapLibre `symbol`의 `text-field`, `text-size`, `symbol-placement: line`, collision placement로 렌더링하지 않는다. 폰트 glyph outline을 지도상의 world-space geometry로 변환하여 국가 polygon과 같은 지도 좌표계에서 렌더링한다.
+
+```text
+CountryEntity geometry + mapLabelKo
+  → shape-aware baseline
+  → font glyph outline
+  → glyph advance와 kerning
+  → baseline 위 glyph 배치
+  → 접선 방향 회전과 곡률 적용
+  → 지도 좌표의 glyph polygon
+  → fill/outline artifact
+  → 전용 source/layer 렌더링
+```
+
+국가 polygon과 글자 polygon은 같은 좌표계에서 움직이지만 boolean union하지 않는다. 글자는 국가로부터 결정적으로 파생되는 별도 artifact다. 국가 면적, 클릭 판정, 국경 topology와 territory fill이 글자 때문에 변해서는 안 된다.
+
+### 반드시 제거할 curved 렌더링 의존성
+
+- 줌 이벤트의 `setLayoutProperty("text-size", ...)`
+- quarter-zoom 또는 기타 zoom-band layer 전환
+- MapLibre `textMaxSize`
+- symbol collision box
+- fixed pixel size 또는 pixel cap
+- symbol 존재 여부를 이용한 curved 라벨 성공 판정
+
+Point fallback에는 기존 symbol을 제한적으로 유지할 수 있지만 curved 대상에는 적용하지 않는다.
+
+### 구현 우선순위
+
+1차안은 glyph outline을 Polygon/MultiPolygon artifact로 만들어 MapLibre fill 계열 layer로 그리는 방식이다. 다음 중 하나가 수치로 입증될 때만 국가명 전용 WebGL custom layer를 허용한다.
+
+- 한글 glyph의 contour와 hole을 GeoJSON polygon으로 정확히 표현할 수 없음
+- geometry 크기 또는 렌더 비용이 성능 예산을 명백히 초과함
+- fill과 outline을 모두 world-space로 유지할 수 없음
+
+WebGL을 선택해도 이 문서의 world-space 비율, 결정성, artifact 변경 전파, 인스턴스 수, 픽셀 스타일 게이트는 그대로 지킨다.
+
+---
+
+## 3. 공통 데이터 계약
+
+### 입력
+
+- `countryId`
+- 현재 `CountryEntity.geometry`
+- 현재 `mapLabelKo`
+- 프로젝트에 포함된 실제 폰트 bytes와 font hash
+- geometry에서 계산한 baseline
+- 명시적인 정책 값
+
+브라우저 또는 OS 폰트 fallback과 정적 GeoJSON의 과거 계산값을 진실 원본으로 사용하지 않는다.
+
+### 출력
+
+각 curved 국가는 다음 정보를 잃지 않는 artifact를 생성한다.
+
+```ts
+type CountryLabelGlyphArtifact = {
+  countryId: string;
+  labelInstanceId: string;
+  text: string;
+  geometryHash: string;
+  fontHash: string;
+  layoutVersion: string;
+  baseline: LineString;
+  glyphs: Array<{
+    glyphIndex: number;
+    codePoint: number;
+    advanceWorld: number;
+    baselineDistanceWorld: number;
+    tangentAngle: number;
+    fillGeometry: Polygon | MultiPolygon;
+    outlineGeometry?: Polygon | MultiPolygon;
+  }>;
+  boundsWorld: [number, number, number, number];
+  effectiveTerritoryWidthWorld: number;
+  labelWidthWorld: number;
+  widthRatio: number;
+  insideRatio: number;
+};
+```
+
+실제 타입명은 프로젝트에 맞춰도 된다.
+
+### 결정성과 변경 전파
+
+- 같은 geometry, 이름, 폰트, 정책은 실행 순서와 시각에 관계없이 같은 결과를 만든다.
+- 난수와 OS locale에 의존하지 않는다.
+- 좌표 precision과 collection 정렬 순서를 고정한다.
+- 국가 artifact는 `countryId`, glyph는 `glyphIndex`, contour는 결정적인 기준으로 정렬한다.
+- 이름만 바뀌면 territory는 유지되고 label artifact만 재생성된다.
+- geometry가 바뀌면 baseline과 glyph artifact가 함께 재생성된다.
+- 국가 추가·삭제가 모든 label collection과 source에 반영된다.
+- 순수 artifact 함수에 MapLibre 객체를 전달하지 않는다.
+
+---
+
+## 4. 기반 조사·순수 geometry·대표 국가 통합
+
+### 목적과 대상
+
+대표 curved 국가명을 실제 glyph polygon으로 렌더링하여 국토와 글자가 같은 비율로 확대·축소되고 모든 연속 줌에서 사라지거나 중복되지 않음을 증명한다.
+
+- 필수 대표 국가: `AUS`, `RUS`
+- 초기 세계 화면 확인: `USA`, `RUS`, `CHN`
+- 대표 국가는 Point fallback을 허용하지 않는다.
+
+### 단계 운영 규칙
+
+다음 순서를 바꾸지 않는다. 각 번호가 끝날 때 해당 번호 전용 보고서를 작성하고 사용자에게 보고한 뒤 종료한다. 실패 시 다음 번호로 진행하지 않는다.
+
+#### 8-1. 현재 구현과 기존 데이터 경계 감사
+
+1. `CountryEntity`, `WorldState`, `buildCountryMapArtifacts()`, `buildCountryMapArtifactCollections()`, source 갱신 함수의 실제 위치와 타입을 찾는다.
+2. 기존 curved baseline 생성 함수, font metrics 계산 함수, MapLibre curved symbol layer, zoom-band 관련 상수와 이벤트 handler를 목록화한다.
+3. 과거 데이터 경계 보고서의 주장과 현재 unit test를 대조한다.
+4. 재사용할 코드, 교체할 코드, 8-7 PASS 후 제거할 코드를 표로 기록한다.
+5. 이 단계에서는 제품 코드를 수정하지 않는다.
+
+완료 증거: `reports/fix08-1-current-boundary-audit.json`, 파일·함수·source·layer 의존성 목록과 보존 계약.
+
+#### 8-2. glyph outline 기술 탐색
+
+1. 저장소의 실제 한국어 폰트 파일과 라이선스, font format, hash를 확인한다.
+2. 현재 dependency로 glyph contour, advance, kerning을 읽을 수 있는지 확인한다.
+3. 불가능하면 최소 의존성을 비교하되 설치 전에 기존 lockfile과 호환성을 확인한다.
+4. 제품 통합 전에 테스트 코드에서 `호주`, `러시아`의 모든 glyph outline을 추출한다.
+5. contour 수, hole 수, vertex 수, 누락 glyph를 JSON으로 기록한다.
+6. curve flatten tolerance 후보를 최소 2개 비교하여 vertex 수와 시각 오차를 기록한다.
+
+완료 게이트: 대표 문자열 누락 glyph 0, hole 보존, deterministic outline hash 동일.
+
+완료 증거: `reports/fix08-2-font-outline-probe.json`과 대표 glyph 진단 이미지.
+
+#### 8-3. 순수 world-space 변환 함수 구현
+
+1. font unit의 glyph outline을 원점 기준 정규화한다.
+2. 문자열의 advance와 kerning을 합산한다.
+3. 국가 geometry로부터 baseline과 effective territory width를 계산한다.
+4. 목표 width ratio로 단일 world-space scale을 계산한다.
+5. 각 glyph의 누적 중심 거리를 baseline 거리로 변환한다.
+6. baseline 위치와 접선을 계산하여 glyph를 지도 좌표로 변환한다.
+7. contour winding과 hole 관계를 유지한 Polygon/MultiPolygon을 만든다.
+8. dateline 국가에는 unwrap 상태에서 계산한 뒤 안전하게 split/wrap한다.
+9. 결과를 canonical 순서와 고정 precision으로 직렬화한다.
+
+완료 게이트: AUS/RUS artifact 생성, 유효 polygon, glyphIndex 연속, 동일 입력 hash 동일.
+
+완료 증거: `reports/fix08-3-world-geometry-unit.json`과 순수 단위 테스트.
+
+#### 8-4. 기존 artifact 파이프라인 확장
+
+1. 기존 country artifact 타입에 glyph label artifact를 명시적으로 추가한다.
+2. collection builder가 fill/outline feature collection을 생성하게 한다.
+3. feature마다 `countryId`, `labelInstanceId`, `glyphIndex`, `role`, `geometryHash`를 넣는다.
+4. 이름 변경, geometry 변경, 추가, 삭제 patch가 glyph collection까지 전파되게 한다.
+5. 기존 다섯 source 갱신 계약을 깨지 말고 새 label source 갱신을 명시적으로 추가한다.
+6. 정적 초기 데이터와 WorldState에서 파생한 초기 glyph collection의 동등성을 검사한다.
+
+완료 게이트: 순수 unit test 통과, MapLibre import 없는 artifact 모듈, 변경 전파 테스트 통과.
+
+완료 증거: `reports/fix08-4-artifact-pipeline.json`.
+
+#### 8-5. MapLibre 임시 병행 통합
+
+1. glyph fill과 진단용 outline source/layer를 추가한다.
+2. layer 순서를 territory fill·국경·Admin 1·highlight와 비교해 명시한다.
+3. feature flag 또는 debug toggle로 기존 symbol과 새 geometry renderer를 서로 배타적으로 전환한다.
+4. 새 renderer 활성 시 기존 curved symbol layer를 숨긴다.
+5. Point fallback layer에는 영향을 주지 않는다.
+6. hover, 선택, 플레이 국가 상태가 glyph geometry 수를 바꾸지 않는지 확인한다.
+
+완료 게이트: 정상 지도에서 AUS/RUS/USA/CHN이 새 geometry renderer로 보이고 기존 curved symbol 중복 0.
+
+완료 증거: `reports/fix08-5-map-integration.json`과 초기 화면 스크린샷.
+
+#### 8-6. renderer bounds와 debug API 구현
+
+1. glyph feature 수와 논리적 label instance 수를 분리해 반환한다.
+2. 실제 투영된 glyph polygon vertex로 renderer bounds를 계산한다.
+3. baseline 또는 territory geometry의 실제 투영 bounds를 계산한다.
+4. 각 결과에 renderer 종류, layer ID, worldCopy, glyphIndex 집합을 포함한다.
+5. `isRenderSettled()`는 카메라 이동 종료뿐 아니라 source data와 style render 완료를 확인하게 한다.
+6. 추정 문자열 폭은 진단 필드로만 남기고 PASS 계산에서 제외한다.
+
+완료 게이트: E2E가 내부 MapLibre collision index 없이 실제 polygon bounds를 취득.
+
+완료 증거: `reports/fix08-6-renderer-bounds.json`과 bounds 계약 테스트.
+
+#### 8-7. 대표 국가 수치 검증
+
+1. 고정 viewport와 초기 center를 설정한다.
+2. 정상 지도에서 초기 `USA`, `RUS`, `CHN` 가시성을 기록한다.
+3. AUS를 줌 1, 2, 3에서 측정하고 스크린샷을 저장한다.
+4. RUS를 줌 1, 2, 3에서 같은 방식으로 측정한다.
+5. 각 연속 줌의 label 성장률, territory 성장률, width ratio drift를 계산한다.
+6. `1.2499/1.25/1.2501`, `1.4999/1.5/1.5001`을 순서대로 왕복 측정한다.
+7. 각 경계에서 최소 2개의 안정 render frame을 관찰하고 0개·2개 인스턴스가 없는지 확인한다.
+8. 같은 E2E를 새 브라우저 context에서 한 번 더 실행한다.
+
+완료 게이트: 아래 대표 국가 브라우저 검증 기준 전부 충족.
+
+완료 증거: `reports/fix08-7-representative-zoom.json`과 AUS/RUS 스크린샷.
+
+#### 8-8. 기존 curved symbol 경로 제거와 회귀
+
+1. 8-7이 PASS한 뒤에만 curved zoom-band 상수, 동적 `text-size` 변경, 사용하지 않는 curved symbol layer를 제거한다.
+2. Point fallback symbol과 관련 size 함수는 필요한 범위만 보존한다.
+3. debug API, 테스트, 타입에서 제거된 layer ID 참조를 정리한다.
+4. unit test, lint, TypeScript 검사를 실행한다.
+5. production build 오류가 있으면 구현 오류와 환경 오류를 분리한다.
+
+완료 게이트: curved renderer에 zoom-band/textMaxSize 의존성 0, 기본 정적 검사 성공.
+
+완료 증거: `reports/fix08-8-legacy-renderer-removal.json`.
+
+#### 8-9. 대표 구현 보고서 확정
+
+1. 8-9 시작 시 보고서를 `running`으로 원자적으로 초기화한다.
+2. 각 명령, 종료 코드, 원시 측정치, 파일 hash, 스크린샷을 기록한다.
+3. 모든 게이트가 통과한 경우에만 `pass`로 바꾼다.
+4. 실패 또는 환경 차단이면 `fail|blocked`와 최초 실패 게이트를 기록한다.
+5. 사용자에게 결과를 보고하고 종료한다. 8-10 파일을 만들거나 수정하지 않는다.
+
+### 폰트 outline 추출
+
+- 저장소의 실제 한국어 폰트 파일을 사용한다.
+- glyph advance, kerning, contour, hole을 보존한다.
+- 복합 glyph는 변환을 적용해 최종 outline을 만든다.
+- quadratic/cubic curve는 명시적인 고정 tolerance로 평탄화한다.
+- tolerance는 줌에 따라 변하지 않는다.
+- contour winding, hole 관계, self-intersection을 검사한다.
+- 누락 glyph를 조용히 대체하지 말고 명시적으로 실패 또는 fallback 처리한다.
+
+### baseline 배치
+
+- 기존 geometry 기반 baseline 계산을 우선 재사용한다.
+- 문자열 전체 advance와 baseline 유효 길이로 단일 world-space scale을 계산한다.
+- 각 glyph를 누적 advance 거리로 baseline에 배치하고 해당 지점 접선으로 회전한다.
+- rigid glyph 회전만 사용할지 outline 점을 곡선에 따라 변형할지 수치와 스크린샷으로 비교한다.
+- 글자 순서가 baseline 진행 방향에서 역전되지 않아야 한다.
+- 한글 내부 hole을 유지한다.
+- dateline에서 polygon이 지구 반대편을 가로지르지 않도록 longitude unwrap/wrap 규칙을 구현하고 테스트한다.
+
+### 크기 계약
+
+```text
+labelWidthWorld / effectiveTerritoryWidthWorld = targetWidthRatio
+```
+
+- artifact는 줌마다 다시 생성하지 않는다.
+- 같은 artifact를 줌 1, 2, 3에서 렌더링한다.
+- 화면의 `labelWidthPx / territoryWidthPx`가 일정해야 한다.
+- curved 라벨에 fixed pixel cap을 적용하지 않는다.
+
+### MapLibre 통합
+
+- glyph fill과 outline에 전용 source/layer를 둔다.
+- feature에는 `countryId`, `labelInstanceId`, `glyphIndex`, `role`을 보존한다.
+- source는 `buildCountryMapArtifactCollections()` 또는 그 하위의 명시적 파생 경계에서 생성한다.
+- WorldState patch가 기존 source 갱신 경계를 통해 `setData()`까지 전파된다.
+- curved layer에는 `text-field`가 없어야 한다.
+- 같은 국가의 기존 curved symbol이 동시에 보이면 실패다.
+- 새 renderer가 PASS하기 전에는 기존 코드를 비교 가능한 상태로 보존하고, PASS 이후에만 기존 줌 밴드 코드를 제거한다.
+
+### 논리적 인스턴스 정의
+
+여러 polygon feature를 라벨 중복으로 세지 않는다.
+
+```text
+logical instance = countryId + labelInstanceId + worldCopy
+```
+
+- 한 국가·한 world copy에는 논리적 인스턴스가 정확히 1개다.
+- 인스턴스 안의 glyphIndex 집합이 문자열과 일치한다.
+- fill과 outline은 동일한 논리적 인스턴스로 집계한다.
+- 두 renderer가 같은 국가명을 동시에 그리면 실패다.
+
+### 8-3~8-4 필수 단위 테스트
+
+- 동일 입력 artifact deep equality와 hash 동일성
+- glyphIndex 연속성과 code point mapping
+- contour와 hole 보존
+- 이름 변경 시 label artifact만 변경
+- geometry 변경 시 baseline과 glyph geometry 변경
+- 국가 추가·삭제 전파
+- dateline unwrap
+- 빈 문자열, 누락 glyph, zero-length baseline 처리
+
+### 8-7 필수 브라우저 검증
+
+정상 지도 모드에서 측정한다.
+
+- AUS: 줌 `1`, `2`, `3`
+- RUS: 줌 `1`, `2`, `3`
+- 경계 회귀: `1.2499`, `1.25`, `1.2501`, `1.4999`, `1.5`, `1.5001`
+- 초기 화면: `USA`, `RUS`, `CHN`
+
+각 샘플에 실제 geometry renderer bounds, territory effective bounds, label width px, territory width px, width ratio, logical instance 수, glyphIndex 집합, layer ID, center, zoom, viewport를 기록한다.
+
+완료 게이트:
+
+- 연속 정수 줌에서 label과 territory 폭 성장률 각각 `1.90~2.10`
+- width ratio의 최대·최소 차이 `<= 0.03`
+- 모든 샘플에서 국가·world copy당 논리적 인스턴스 정확히 1개
+- 경계 전후 어떤 안정 프레임에서도 0개 또는 2개가 되지 않음
+- 추정 문자열 폭이 아니라 실제 geometry bounds 사용
+- 테스트 격리 모드가 아니라 정상 지도에서 필수 국가 가시성 확인
+
+### 8-9 대표 구현 최종 산출물
+
+- `reports/fix08-9-representative-glyphs.json`
+- `screenshots/fix08-7-world-default.png`
+- `screenshots/fix08-7-australia-z1.png`
+- `screenshots/fix08-7-australia-z2.png`
+- `screenshots/fix08-7-australia-z3.png`
+- `screenshots/fix08-7-russia-z1.png`
+- `screenshots/fix08-7-russia-z2.png`
+- `screenshots/fix08-7-russia-z3.png`
+
+보고서에는 8-1~8-8 보고서 hash, renderer 선택 근거, font hash, curve tolerance, vertex/byte 수, 대표 국가 원시 수치, 대안 비교, 실행 명령별 종료 코드를 포함한다. 8-9 판정 후 반드시 종료한다.
+
+---
+
+## 5. 타이포그래피 정책
+
+8-9까지 확정한 world-space glyph geometry renderer는 보존한다. 이 절은 renderer를 교체하지 않고, 글자 크기·자간·곡률·배치 폭을 예시와 같은 전략 지도 국가명에 맞게 개선한다.
+
+현재처럼 문자열 전체 advance를 목표 폭에 맞추는 단일 scale 방식은 폐기한다. 짧은 국가명은 지나치게 커지고 긴 국가명은 지나치게 작아지기 때문이다.
+
+### 권위 있는 타이포그래피 계약
+
+다음 값을 서로 독립적으로 계산한다.
+
+```text
+glyphScale
+  = 국토의 유효 짧은 축 또는 baseline 주변 가용 두께로 결정
+
+naturalGlyphSpan
+  = shaped glyph advance 합계 × glyphScale
+
+targetLabelSpan
+  = 실제 label corridor 길이 × targetSpanRatio
+
+trackingWorld
+  = (targetLabelSpan - naturalGlyphSpan) / max(glyphCount - 1, 1)
+```
+
+- `glyphScale`은 글자 자체의 크기만 결정한다.
+- `trackingWorld`는 글자 사이 간격만 결정한다.
+- 짧은 이름을 국토 폭에 맞추려고 glyph 자체를 거대하게 만들지 않는다.
+- 긴 이름을 맞추려고 가독성 하한 아래로 축소하지 않는다.
+- tracking이 허용 범위를 넘으면 target span을 줄이거나 fallback 정책을 적용한다.
+- 한 글자 이름은 tracking을 사용하지 않고 corridor 중앙에 둔다.
+- scale과 tracking은 world-space 값이며 줌에 따라 다시 계산하지 않는다.
+- 국가별 좌표나 glyph별 위치를 하드코딩하지 않는다.
+
+필수 정책 값:
+
+- `glyphHeightRatio`
+- `minGlyphHeightRatio`
+- `maxGlyphHeightRatio`
+- `targetSpanRatio`
+- `minTrackingEm`
+- `maxTrackingEm`
+- `maxAbsoluteGlyphAngle`
+- `maxAdjacentAngleDelta`
+- `curvatureSmoothing`
+
+정책 값은 공통 기본값을 우선 사용한다. 국가별 override가 필요하면 위 정책 값으로만 허용하고 전후 수치와 근거를 보고한다.
+
+#### 8-10. glyph 크기와 tracking 분리
+
+1. 기존 `targetWidth / totalAdvance` 단일 scale 계산의 호출부와 파생 필드를 목록화한다.
+2. baseline 주변의 가용 두께 또는 territory minor-axis를 결정적으로 계산한다.
+3. 그 두께에서 `glyphScale`과 glyph 높이를 계산한다.
+4. shaped advance 합계로 `naturalGlyphSpan`을 계산한다.
+5. corridor 길이와 `targetSpanRatio`로 `targetLabelSpan`을 계산한다.
+6. 남는 길이를 glyph 사이에 `trackingWorld`로 균등 분배한다.
+7. `glyphScale`, `naturalGlyphSpan`, `targetLabelSpan`, `trackingWorld`, tracking의 em 환산값을 artifact에 기록한다.
+8. 1글자, 2~3글자, 4~6글자, 7글자 이상 synthetic 사례를 단위 테스트한다.
+9. 동일 입력의 geometry와 hash가 결정적인지 검증한다.
+
+완료 게이트:
+
+- glyph 크기와 label span이 서로 다른 변수로 계산된다.
+- RUS의 짧은 이름 때문에 glyph 높이가 국토 두께를 초과하지 않는다.
+- AUS의 긴 이름이 가독성 하한보다 작아지지 않는다.
+- glyph 순서와 hole, dateline 계약이 유지된다.
+- 줌 밴드 또는 pixel cap을 다시 도입하지 않는다.
+
+산출물:
+
+- `reports/fix08-10-scale-tracking.json`
+- scale/tracking 단위 테스트
+- RUS/AUS 변경 전후 geometry 수치
+
+8-10 판정 후 보고하고 반드시 종료한다.
+
+#### 8-11. baseline 곡률과 glyph 회전 안정화
+
+1. baseline을 누적 길이 기준으로 재표본화한다.
+2. 국토 geometry에서 나온 전체 진행 방향은 유지하면서 국소 노이즈를 smoothing한다.
+3. 각 glyph 중심의 접선 각도를 계산한다.
+4. `maxAbsoluteGlyphAngle`로 전체 회전 상한을 적용한다.
+5. 인접 glyph 각도 차이를 `maxAdjacentAngleDelta` 이하로 제한한다.
+6. 제한 후 glyph 중심 위치가 역전되지 않는지 확인한다.
+7. glyph outline은 비균일 stretch나 shear 없이 rigid transform과 uniform scale만 적용한다.
+8. CHL/IDN처럼 곡률이 큰 국가를 synthetic 또는 실제 baseline으로 회귀 테스트한다.
+
+완료 게이트:
+
+- 인접 glyph 각도 차이가 정책 상한 이하이다.
+- baseline 진행 거리와 glyphIndex가 단조 증가한다.
+- 글자가 뒤집히거나 세로로 서거나 서로 교차하지 않는다.
+- smoothing 전후 label corridor 이탈과 insideRatio가 악화되지 않는다.
+
+산출물:
+
+- `reports/fix08-11-angle-curvature.json`
+- 각도·곡률 단위 테스트
+- RUS/AUS/CHL/IDN 접선 각도 표
+
+8-11 판정 후 보고하고 반드시 종료한다.
+
+#### 8-12. 대표 국가 타이포그래피 정책 조정
+
+대표 국가는 최소 `RUS`, `CHN`, `AUS`, `USA`, `CHL`, `IDN`이다.
+
+1. 동일 viewport와 고정 카메라에서 각 국가의 변경 전 스크린샷과 원시 수치를 보존한다.
+2. 공통 기본 정책만으로 먼저 렌더링한다.
+3. glyph 높이/territory thickness 비율, label span/corridor 비율, tracking em, 최대 절대 각도, 최대 인접 각도 차이, insideRatio를 기록한다.
+4. 짧은 이름인 RUS/CHN/USA가 거대한 glyph 대신 적절한 크기와 넓은 tracking을 사용하는지 확인한다.
+5. 긴 이름인 AUS가 지나치게 작거나 뭉개지지 않는지 확인한다.
+6. CHL/IDN의 곡선이 판독성을 해치지 않는지 확인한다.
+7. 공통 정책으로 해결되지 않는 경우에만 정책 override를 추가한다.
+8. override 전후 수치와 이유를 국가별로 기록한다.
+
+대표 품질 게이트:
+
+- glyph 높이가 해당 label corridor 두께의 `0.30~0.72` 범위에 있다.
+- tracking은 기본적으로 `0~3.5em` 범위다. 이를 넘으면 이유를 기록하고 실패 후보로 남긴다.
+- `abs(tangentAngle) <= 35°`를 기본값으로 한다.
+- 인접 glyph 각도 차이는 기본 `<= 12°`다.
+- glyph bounds가 viewport 밖으로 잘리지 않는다.
+- 논리적 인스턴스 수는 국가·world copy당 1개다.
+- RUS/AUS의 줌 1·2·3 width ratio drift는 기존 8-7 기준을 유지한다.
+
+산출물:
+
+- `reports/fix08-12-representative-typography.json`
+- 대표 6개국 변경 전후 스크린샷
+- 대표 6개국 typography 수치 표
+
+8-12 판정 후 보고하고 반드시 종료한다.
+
+#### 8-13. 예시 스타일 시각 검증과 정책 확정
+
+이 단계는 사용자가 제시한 전략 지도 예시의 원리를 검증한다. 특정 게임의 폰트나 이미지를 복제하지 않고 다음 시각 특성을 구현한다.
+
+- 국토의 장축을 따라 완만하게 펼쳐진 국가명
+- glyph 자체는 안정적이고 일정한 크기
+- 짧은 이름은 넓은 tracking으로 영토를 점유
+- 긴 이름은 읽을 수 있는 크기를 유지
+- 글자별 회전 변화가 부드럽고 과장되지 않음
+- 줌 시 국토와 같은 비율로 연속 확대·축소
+
+검증 절차:
+
+1. 8-9 결과와 8-12 결과를 같은 viewport·camera에서 나란히 비교한다.
+2. 자동 수치만으로 통과시키지 않고 대표 6개국 스크린샷을 시각 감사한다.
+3. 글자 크기 과대, 과소, 과도한 자간, 불규칙 회전, clipping, 국토 이탈을 국가별로 판정한다.
+4. 정상 지도에서 다른 국가·국경·Admin 1·Point fallback과의 시각적 충돌을 확인한다.
+5. 최종 공통 정책과 최소한의 국가별 policy override를 고정한다.
+6. 결정된 정책을 versioned typography policy로 저장하고 hash를 기록한다.
+7. 기존 8-7 경계 줌 E2E를 다시 실행해 geometry renderer 연속성이 유지되는지 확인한다.
+
+완료 게이트:
+
+- RUS의 glyph가 현재처럼 화면 상단을 과도하게 점유하거나 잘리지 않는다.
+- AUS가 현재보다 명확히 읽히며 glyph 내부 형태가 보존된다.
+- CHN/USA가 중앙에 뭉치지 않고 적절한 tracking으로 펼쳐진다.
+- CHL/IDN의 글자 회전이 연속적이고 판독 가능하다.
+- 대표 6개국 모두 자동 typography 게이트와 시각 감사에 통과한다.
+- 사용자 예시를 복제한 외부 asset이나 저작권 폰트를 제품에 포함하지 않는다.
+
+산출물:
+
+- `reports/fix08-13-typography-policy.json`
+- `screenshots/fix08-13-rus.png`
+- `screenshots/fix08-13-chn.png`
+- `screenshots/fix08-13-aus.png`
+- `screenshots/fix08-13-usa.png`
+- `screenshots/fix08-13-chl.png`
+- `screenshots/fix08-13-idn.png`
+- 최종 typography policy hash
+
+8-13이 PASS하면 사용자에게 변경 전후 비교와 정책 수치를 보고하고 반드시 종료한다. 사용자 확인 없이 전체 국가 단계로 넘어가지 않는다.
+
+---
+
+## 6. 전체 국가 품질과 fallback
+
+### 단계 운영 규칙
+
+8-13 보고서가 현재 코드 기준 `pass`인지 먼저 확인한다. 아니면 아무것도 구현하지 않고 차단 사유만 보고한다.
+
+#### 8-14. 전체 입력 집합 고정
+
+1. WorldState의 전체 국가 ID 집합을 읽는다.
+2. curved 후보와 기존 Point fallback 집합을 계산한다.
+3. 누락·중복·고아 artifact를 먼저 검사한다.
+4. 기존 `182/74`와 차이가 있으면 국가 목록과 원인을 기록한다.
+
+#### 8-15. 전체 glyph artifact 생성
+
+1. 모든 curved 후보를 동일한 순수 함수로 생성한다.
+2. 실패 국가도 결과 목록에서 제거하지 않고 failure record로 남긴다.
+3. 국가별 glyph/contour/vertex/insideRatio/overlap/angle 지표를 기록한다.
+4. 생성 순서를 뒤집어 hash 결정성을 표본 검사한다.
+
+#### 8-16. 자동 geometry·타이포그래피 품질 판정
+
+1. invalid polygon과 self-intersection을 검사한다.
+2. glyphIndex, code point, 진행 방향을 검사한다.
+3. glyph 간 겹침과 polygon 내부 비율을 계산한다.
+4. dateline 비정상 횡단과 world-sized bounds를 검사한다.
+5. glyph 높이/corridor 두께 비율, tracking em, label span/corridor 비율을 검사한다.
+6. 절대 glyph 각도와 인접 glyph 각도 차이를 검사한다.
+7. 기준 미달 국가를 curved PASS, 정책 조정 후보, Point fallback 후보로 분류한다.
+
+#### 8-17. 정책 조정과 fallback 확정
+
+1. 좌표가 아닌 허용된 정책 값만 조정한다.
+2. 조정 전후 지표를 모두 보존한다.
+3. 정책으로 해결할 수 없는 국가만 Point fallback으로 이동한다.
+4. fallback 사유를 국가별로 기록한다.
+5. curved와 Point 집합의 배타성과 전체 포괄성을 다시 검사한다.
+
+#### 8-18. 난형 국가 실제 렌더 검증
+
+1. `RUS`, `CAN`, `USA`, `CHL`, `IDN`, `AUS`, `JPN`을 정상 지도에서 연다.
+2. 글자 순서, hole, 곡률, 국토 내부 비율, 중복을 육안 및 수치로 확인한다.
+3. 각 국가의 스크린샷과 raw artifact 요약을 저장한다.
+4. world wrap이 보이는 카메라에서도 국가·world copy당 인스턴스 1개를 확인한다.
+
+#### 8-19. 전체 validator와 보고
+
+1. 전체 국가 validator를 두 번 실행한다.
+2. 결과 hash와 상태가 동일한지 확인한다.
+3. failure count가 0일 때만 8-19를 `pass`로 기록한다.
+4. 보고 후 종료하며 8-20을 실행하지 않는다.
+
+### 분류 계약
+
+```text
+전체 국가 ID = curved glyph 국가 ID ∪ Point fallback 국가 ID
+curved glyph 국가 ID ∩ Point fallback 국가 ID = 빈 집합
+```
+
+기존 `182/74`는 참고값일 뿐 성공 조건으로 하드코딩하지 않는다. 분류 변화와 근거를 보고한다.
+
+### 전체 품질 게이트
+
+각 curved 국가에 대해 다음을 계산한다.
+
+- 문자열 code point 수, glyph 수, 누락 glyph 수
+- baseline 길이, label width, territory width, width ratio
+- glyph height, corridor thickness, glyph height ratio
+- natural glyph span, target label span, trackingWorld, trackingEm
+- invalid polygon과 self-intersection 수
+- glyphIndex 누락·중복
+- glyph 진행 방향 단조성
+- 인접 glyph 중첩률과 접선 각도 변화
+- 국가 polygon 내부 면적 비율 `insideRatio`
+- dateline 비정상 횡단 여부
+
+기본 기준:
+
+- 누락 glyph 0
+- invalid polygon 0
+- glyphIndex 누락·중복 0
+- 진행 방향 역전 0
+- `insideRatio >= 0.90`
+- glyph height/corridor thickness 비율 `0.30~0.72`
+- tracking 기본 범위 `0~3.5em`
+- 절대 glyph 각도 기본 `<= 35°`
+- 인접 glyph 각도 차이 기본 `<= 12°`
+- 판독 불가능한 glyph 겹침 0
+
+실패 국가는 숨기지 않는다. geometry 기반 정책을 조정하거나 근거와 함께 Point fallback으로 분류한다.
+
+### 필수 난형 국가
+
+`RUS`, `CAN`, `USA`, `CHL`, `IDN`, `AUS`, `JPN`을 별도 표와 스크린샷으로 검증한다.
+
+### Point fallback 계약
+
+- curved가 실제로 부적합한 국가에만 허용한다.
+- 국가별 사유를 기록한다.
+- curved와 Point source 동시 존재는 실패다.
+- Point 결과를 curved world-space 성공 근거로 사용하지 않는다.
+
+### 8-19 최종 산출물
+
+- `reports/fix08-19-all-country-glyph-quality.json`
+- `reports/fix08-19-render-instance-audit.json`
+- 필수 난형 국가 스크린샷 7개 이상
+- 실패 국가가 있으면 전체 failure 목록과 재현 데이터
+
+8-19 판정 후 반드시 종료한다.
+
+---
+
+## 7. 흰색 내용과 흰색 주 외곽선
+
+### 단계 운영 규칙
+
+8-19가 현재 코드 기준 `pass`가 아니면 실행하지 않는다.
+
+#### 8-20. 스타일 구조 설계
+
+1. inner fill, white primary outline, optional separator의 역할과 layer 순서를 정의한다.
+2. outline 폭을 glyph world-space 크기의 비율로 정의한다.
+3. curved와 Point fallback의 시각적 동등성 기준을 정한다.
+4. 어두운 separator가 흰색 주 외곽선을 대체하지 않음을 구조적으로 보장한다.
+
+#### 8-21. world-space outline geometry 생성
+
+1. glyph contour에서 expanded outer contour를 계산한다.
+2. convex/concave corner와 좁은 획의 join 정책을 명시한다.
+3. hole 축소·소멸과 self-intersection을 검사한다.
+4. 실패 시 outline 비율을 전체 정책으로 조정하고 국가별 좌표 예외는 만들지 않는다.
+5. fill과 outline artifact에 동일한 instance/glyph 식별자를 보존한다.
+
+#### 8-22. layer 통합
+
+1. separator, white outer, white inner 순서로 layer를 배치한다.
+2. territory, Admin 1, coast, highlight와의 상대 순서를 확인한다.
+3. 선택·hover·플레이 상태가 흰색 글자 계약을 변경하지 않게 한다.
+4. 기존 curved symbol 또는 dark halo가 동시에 렌더링되지 않게 한다.
+
+#### 8-23. 세 환경 픽셀 감사
+
+1. land, Admin 1, coast 대표 위치와 고정 카메라를 선택한다.
+2. 라벨 표시 화면과 동일 카메라의 라벨 숨김 배경을 촬영한다.
+3. differential mask에서 glyph 중심과 가장자리 표본을 분리한다.
+4. 흰색 허용 RGB 범위, separator 범위, 배경 범위를 보고서에 명시한다.
+5. 각 환경에서 흰색 inner와 white primary outline을 독립적으로 검출한다.
+6. 스타일 전후 logical instance 수가 동일한지 확인한다.
+
+#### 8-24. 보고와 중단
+
+1. 픽셀 원시 수치, 스크린샷, layer/source 구조를 기록한다.
+2. 세 환경이 모두 통과할 때만 `pass`로 판정한다.
+3. 보고 후 종료하며 8-25를 실행하지 않는다.
+
+### 시각 계약
+
+- glyph 내부는 흰색이다.
+- glyph의 주 외곽선도 흰색이다.
+- 기존 어두운 halo를 주 외곽선으로 간주하지 않는다.
+- 배경 분리용 매우 얇은 shadow/separator는 허용하지만 흰색 내용과 외곽선을 대체할 수 없다.
+- curved와 Point fallback에 같은 시각 원칙을 적용한다.
+
+### world-space outline
+
+단순 pixel `line-width`만으로 통과시키지 않는다.
+
+```text
+glyph outline
+  → world-space expanded outer geometry
+  → 흰색 outer geometry
+  → 흰색 inner glyph geometry
+```
+
+outline 폭은 glyph 크기에 대한 비율이며 줌과 무관하게 유지한다. hole을 막거나 글자를 훼손하지 않아야 한다.
+
+### 픽셀 감사
+
+균일 land 내부, Admin 1 경계 위, 해안/국경 인접 환경을 각각 검증한다. 동일 카메라의 라벨 표시 화면과 숨김 배경을 비교한다.
+
+- glyph 중심에 흰색 픽셀 존재
+- glyph 가장자리에 흰색 주 외곽 geometry 존재
+- 보조 그림자를 흰색 내용/외곽선으로 오인하지 않음
+- 기존 symbol 중첩 없음
+- 스타일 적용 전후 logical instance 수 동일
+
+### 8-24 최종 산출물
+
+- `reports/fix08-24-white-glyph-style.json`
+- `screenshots/fix08-24-white-land.png`
+- `screenshots/fix08-24-white-admin1.png`
+- `screenshots/fix08-24-white-coast.png`
+- 픽셀 sample 또는 differential evidence
+
+8-24 판정 후 반드시 종료한다.
+
+---
+
+## 8. 결정성·성능·통합 감사
+
+### 단계 운영 규칙
+
+8-9, 8-13, 8-19, 8-24 보고서가 모두 현재 artifact hash와 일치하는 `pass`인지 확인한다. 하나라도 아니면 최종 감사를 시작하지 않는다.
+
+#### 8-25. 작업 환경 사전 점검
+
+1. 실행 중인 개발 서버와 Playwright worker를 식별한다.
+2. 포트, `.next` lock, cache 쓰기 권한을 읽기 전용으로 점검한다.
+3. 사용자 프로세스를 임의로 종료하지 않는다. 충돌 시 정확한 PID·포트·영향을 보고한다.
+4. 최종 보고서를 `running`으로 원자 초기화한다.
+
+#### 8-26. clean regeneration과 결정성
+
+1. 제품 생성 명령으로 지도와 glyph artifact를 생성한다.
+2. canonical hash를 저장한다.
+3. 같은 명령을 다시 실행해 hash를 비교한다.
+4. 국가 처리 순서를 뒤집는 전용 결정성 테스트를 실행한다.
+5. 단일 이름/geometry 변경과 추가/삭제 synthetic patch 테스트를 실행한다.
+
+#### 8-27. validator 비퇴행성
+
+1. 8-9 → 8-13 → 8-19 → 8-24 validator를 실행한다.
+2. 세 보고서의 상태와 hash를 저장한다.
+3. 같은 순서를 다시 실행한다.
+4. PASS가 pending/configured로 바뀌거나 E2E 증거가 덮어써지면 즉시 실패한다.
+
+#### 8-28. 정적 품질 게이트
+
+1. 전체 unit test를 실행한다.
+2. lint를 실행하고 error와 warning을 분리한다.
+3. TypeScript 검사를 실행한다.
+4. production build를 실행한다.
+5. 명령별 stdout/stderr, 종료 코드, 실행 시간을 기록한다.
+6. EPERM과 실제 코드 오류가 동시에 있으면 둘 다 기록하고 하나로 뭉개지 않는다.
+
+#### 8-29. 제한 E2E 연속 실행
+
+1. 고정 포트와 `workers=1`로 8-7, 8-13, 8-18, 8-23 E2E를 순서대로 실행한다.
+2. 동일 suite를 새 browser context에서 한 번 더 실행한다.
+3. 첫 실행과 두 번째 실행의 bounds, instance 수, pixel 결과를 비교한다.
+4. flaky retry로 PASS를 만들지 않는다. 최초 실패와 재현 여부를 기록한다.
+
+#### 8-30. 성능과 산출물 검사
+
+1. 전체 glyph/contour/vertex/byte 수와 생성 시간을 수집한다.
+2. 증분 이름/geometry 변경 시간을 수집한다.
+3. 초기 렌더 안정화와 줌 long task를 측정한다.
+4. 필수 JSON/스크린샷 존재, non-zero 크기, 현재 hash 연결을 확인한다.
+5. 임시 서버와 worker가 정상 종료됐는지 확인한다.
+
+#### 8-31. 최종 판정
+
+1. 모든 게이트 결과를 하나의 표로 작성한다.
+2. 필수 게이트 하나라도 실패하면 `fail`, 환경 때문에 완료할 수 없으면 `blocked`다.
+3. 모든 명령과 산출물이 통과한 경우에만 `pass`로 기록한다.
+4. 최종 보고서를 원자적으로 교체한다.
+5. 사용자에게 Prompt 08 완료 여부를 보고하고 종료한다. 다음 프롬프트를 시작하지 않는다.
+
+### 보고서 소유권
+
+- 8-1~8-31 보고서는 해당 단계 writer만 수정한다.
+- 정적 validator가 PASS를 `pending`, `configured`, `requires screenshot`으로 덮어쓰지 않는다.
+- 8-31은 이전 단계 보고서를 읽고 별도 최종 보고서만 쓴다.
+- 시작 시 원자적으로 `running`, 실패 시 실패 게이트와 환경/구현 오류를 분리 기록한다.
+
+### 결정성 감사
+
+- 동일 입력을 두 번 생성하여 canonical JSON/hash 비교
+- 국가 처리 순서를 뒤집어 결과 비교
+- 한 국가 이름 변경이 다른 국가 artifact를 바꾸지 않음
+- 한 국가 geometry 변경이 다른 국가 artifact를 바꾸지 않음
+- 국가 제거 후 잔여 glyph feature 없음
+
+### 성능 감사
+
+최소 다음 실제 수치를 기록한다.
+
+- 전체 glyph, contour, vertex 수
+- GeoJSON 또는 GPU buffer byte 크기
+- cold 전체 생성 시간
+- 이름 1개와 geometry 1개의 증분 생성 시간
+- 초기 지도 안정화 시간
+- 줌 중 long task 또는 frame 관찰 결과
+
+성능 때문에 품질 기준을 몰래 낮추지 않는다. tolerance를 바꾸면 전후 품질과 크기를 함께 기록한다.
+
+### 최종 실행 순서
+
+1. 전체 지도 데이터와 glyph artifact 재생성
+2. 8-9, 8-13, 8-19, 8-24 validator 순서 실행
+3. 같은 순서를 다시 실행하여 보고서 상태 불변 확인
+4. 전체 unit test
+5. lint
+6. TypeScript 검사
+7. production build
+8. 8-7, 8-13, 8-18, 8-23 제한 Playwright를 `workers=1`로 연속 2회
+9. 필수 JSON·스크린샷 존재와 내용 검사
+10. 개발 서버와 Playwright worker 종료 확인
+
+### 최종 완료 게이트
+
+- 모든 필수 명령 종료 코드 0
+- TypeScript 및 build 성공
+- EPERM, lock, cache 쓰기 실패는 PASS가 아니라 BLOCKED
+- 8-1~8-31 필수 보고서가 모두 `pass`; pending/configured/running 상태 없음
+- curved 국가는 실제 world-space glyph geometry로 렌더링됨
+- zoom-band와 `textMaxSize` 의존성 제거
+- glyph 크기와 tracking이 독립적으로 계산됨
+- 대표 및 전체 curved 국가가 확정된 typography policy를 사용함
+- 짧은 이름의 과대 glyph와 긴 이름의 과소 glyph가 없음
+- 모든 국가가 curved 또는 Point 중 정확히 하나
+- 초기 세계 화면 필수 국가명 가시성
+- 흰색 내용과 흰색 주 외곽선 픽셀 감사 PASS
+- WorldState 변경이 glyph artifact와 source까지 전파됨
+- 동일 입력 결과 결정적
+- 필수 산출물이 현재 실행 결과와 일치
+
+### 8-31 산출물
+
+- `reports/fix08-final-glyph-audit.json`
+
+명령, 종료 코드, 실행 시간, 단계 보고서 hash, 파일 검사, 성능 수치, 최종 `pass|fail|blocked`를 기록한다. 모두 통과한 경우에만 Prompt 08 완료를 보고하고 종료한다.
+
+---
+
+## 9. 명시적 비범위
+
+- 공식 국호와 표시 문자열 변경
+- 검색 alias, 국가 ID, flagCode, playable 변경
+- 국경선, Admin 1, 국가 topology 수정
+- 런타임 영토 이전과 신생국 이벤트
+- 저장·복원, 지도 외 UI, 모바일, AI/API
+
+테스트에서 synthetic 이름이나 geometry를 사용할 수 있지만 제품 데이터에 저장하지 않는다.
+
+---
+
+## 10. 현재 다음 실행 지시
+
+8-1~8-9는 현재 승인된 선행 단계다. 각 보고서 hash와 현재 renderer 상태가 일치하는지 확인한 뒤 **8-10만 수행한다**.
+
+8-10에서는 기존 world-space glyph geometry renderer와 확대·축소 계약을 보존하면서 glyph 크기와 tracking 계산을 분리한다. MapLibre symbol, zoom-band, pixel cap을 다시 도입하지 않는다.
+
+8-10 종료 시 RUS/AUS 변경 전후 glyphScale, glyph 높이, corridor 두께, natural span, target span, trackingWorld/trackingEm, insideRatio, artifact hash, 실행 명령별 종료 코드와 `reports/fix08-10-scale-tracking.json` 판정을 보고한다. 그 뒤 반드시 종료하며 사용자 확인 없이 8-11 이후로 넘어가지 않는다.

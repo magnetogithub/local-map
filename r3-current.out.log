@@ -1,0 +1,4 @@
+
+> pax-local@0.1.0 test:e2e
+> playwright test e2e/fix08-8ar3.spec.ts --workers=1
+

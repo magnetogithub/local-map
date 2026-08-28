@@ -1,0 +1,8 @@
+⚠ Port 3000 is in use by process 29504, using available port 3002 instead.
+Error: An IO error occurred while attempting to create and acquire the lockfile
+    at ignore-listed frames {
+  [cause]: Error: 액세스가 거부되었습니다. (os error 5)
+      at ignore-listed frames {
+    code: 'GenericFailure'
+  }
+}

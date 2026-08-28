@@ -1,0 +1,3 @@
+"use client";
+import { useEffect } from "react";import { AppHeader } from "./AppHeader";import { WorldMap } from "@/components/map/WorldMap";import { CountryPanel } from "@/components/country/CountryPanel";import { useGameSetupStore } from "@/stores/game-setup-store";
+export function GameSetupShell(){const restore=useGameSetupStore(s=>s.restorePersistedState);useEffect(()=>restore(),[restore]);return <><div className="unsupported"><div><h1>지원하지 않는 화면 크기입니다</h1><p>Pax Local은 1280×720 이상의 PC 화면을 지원합니다.</p></div></div><div className="app-shell"><AppHeader/><main className="main"><WorldMap/><CountryPanel/></main><footer className="footer"><time dateTime="2020-01-01">2020년 1월 1일</time><span>Map data: Natural Earth · 1:50m / 1:10m</span></footer></div></>}

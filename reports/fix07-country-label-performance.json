@@ -1,0 +1,269 @@
+{
+  "subtask": "7N",
+  "status": "pass",
+  "generatedAt": "2026-08-14T01:30:23.115Z",
+  "environment": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
+    "logicalCpuCount": 16,
+    "totalMemoryBytes": 34065707008
+  },
+  "method": {
+    "warmup": "first complete trial retained; three identical cache-miss trials recorded",
+    "fullTrials": 3,
+    "cacheHitTrials": 20,
+    "singleCountryTrials": 5,
+    "clock": "node:perf_hooks performance.now",
+    "input": "persisted Natural Earth 1:10m geometry and MapLibre font metrics"
+  },
+  "performance": {
+    "fullPrecomputation": {
+      "trialMilliseconds": [
+        54340.3029,
+        60684.1086,
+        63157.2234
+      ],
+      "count": 3,
+      "totalMilliseconds": 178181.6349,
+      "averageMilliseconds": 59393.8783,
+      "medianMilliseconds": 60684.1086,
+      "p95Milliseconds": 60684.1086,
+      "maxMilliseconds": 63157.2234,
+      "reproducibilitySpreadMilliseconds": 8816.9205
+    },
+    "perCountryCacheMiss": {
+      "count": 768,
+      "totalMilliseconds": 178179.6033,
+      "averageMilliseconds": 232.0047,
+      "medianMilliseconds": 106.759,
+      "p95Milliseconds": 698.2231,
+      "maxMilliseconds": 5172.2673
+    },
+    "fullCacheHit": {
+      "count": 20,
+      "totalMilliseconds": 0.3968,
+      "averageMilliseconds": 0.0198,
+      "medianMilliseconds": 0.0177,
+      "p95Milliseconds": 0.0268,
+      "maxMilliseconds": 0.0353
+    },
+    "singleCountry": {
+      "summary": {
+        "count": 15,
+        "totalMilliseconds": 21764.209,
+        "averageMilliseconds": 1450.9473,
+        "medianMilliseconds": 872.9978,
+        "p95Milliseconds": 2903.4522,
+        "maxMilliseconds": 4665.2869
+      },
+      "countries": [
+        {
+          "countryId": "RUS",
+          "count": 5,
+          "totalMilliseconds": 23326.4345,
+          "averageMilliseconds": 4665.2869,
+          "medianMilliseconds": 4579.056,
+          "p95Milliseconds": 4806.0616,
+          "maxMilliseconds": 5559.4337
+        },
+        {
+          "countryId": "CAN",
+          "count": 5,
+          "totalMilliseconds": 14517.2612,
+          "averageMilliseconds": 2903.4522,
+          "medianMilliseconds": 2839.0551,
+          "p95Milliseconds": 2863.6766,
+          "maxMilliseconds": 3420.1655
+        },
+        {
+          "countryId": "USA",
+          "count": 5,
+          "totalMilliseconds": 10419.4623,
+          "averageMilliseconds": 2083.8925,
+          "medianMilliseconds": 2135.3968,
+          "p95Milliseconds": 2140.3827,
+          "maxMilliseconds": 2173.1151
+        },
+        {
+          "countryId": "CHN",
+          "count": 5,
+          "totalMilliseconds": 12144.3246,
+          "averageMilliseconds": 2428.8649,
+          "medianMilliseconds": 2392.9819,
+          "p95Milliseconds": 2509.3201,
+          "maxMilliseconds": 2572.663
+        },
+        {
+          "countryId": "BRA",
+          "count": 5,
+          "totalMilliseconds": 5933.1928,
+          "averageMilliseconds": 1186.6386,
+          "medianMilliseconds": 1173.633,
+          "p95Milliseconds": 1242.7488,
+          "maxMilliseconds": 1253.6177
+        },
+        {
+          "countryId": "AUS",
+          "count": 5,
+          "totalMilliseconds": 11145.5854,
+          "averageMilliseconds": 2229.1171,
+          "medianMilliseconds": 2206.3587,
+          "p95Milliseconds": 2229.5665,
+          "maxMilliseconds": 2444.8605
+        },
+        {
+          "countryId": "IND",
+          "count": 5,
+          "totalMilliseconds": 5261.7447,
+          "averageMilliseconds": 1052.3489,
+          "medianMilliseconds": 1043.7097,
+          "p95Milliseconds": 1067.8656,
+          "maxMilliseconds": 1120.9614
+        },
+        {
+          "countryId": "KAZ",
+          "count": 5,
+          "totalMilliseconds": 4084.1759,
+          "averageMilliseconds": 816.8352,
+          "medianMilliseconds": 783.8257,
+          "p95Milliseconds": 870.3064,
+          "maxMilliseconds": 973.0058
+        },
+        {
+          "countryId": "ARG",
+          "count": 5,
+          "totalMilliseconds": 3540.6633,
+          "averageMilliseconds": 708.1327,
+          "medianMilliseconds": 726.7443,
+          "p95Milliseconds": 738.9361,
+          "maxMilliseconds": 739.1879
+        },
+        {
+          "countryId": "CHL",
+          "count": 5,
+          "totalMilliseconds": 3109.5974,
+          "averageMilliseconds": 621.9195,
+          "medianMilliseconds": 615.0621,
+          "p95Milliseconds": 615.8055,
+          "maxMilliseconds": 685.6237
+        },
+        {
+          "countryId": "NOR",
+          "count": 5,
+          "totalMilliseconds": 3241.4982,
+          "averageMilliseconds": 648.2996,
+          "medianMilliseconds": 639.1901,
+          "p95Milliseconds": 710.1967,
+          "maxMilliseconds": 726.9662
+        },
+        {
+          "countryId": "GBR",
+          "count": 5,
+          "totalMilliseconds": 2569.2974,
+          "averageMilliseconds": 513.8595,
+          "medianMilliseconds": 518.6229,
+          "p95Milliseconds": 524.8241,
+          "maxMilliseconds": 556.3572
+        },
+        {
+          "countryId": "FRA",
+          "count": 5,
+          "totalMilliseconds": 3609.4147,
+          "averageMilliseconds": 721.8829,
+          "medianMilliseconds": 745.014,
+          "p95Milliseconds": 764.8811,
+          "maxMilliseconds": 812.3792
+        },
+        {
+          "countryId": "JPN",
+          "count": 5,
+          "totalMilliseconds": 1553.4036,
+          "averageMilliseconds": 310.6807,
+          "medianMilliseconds": 312.1173,
+          "p95Milliseconds": 325.2502,
+          "maxMilliseconds": 335.9326
+        },
+        {
+          "countryId": "IDN",
+          "count": 5,
+          "totalMilliseconds": 4364.9889,
+          "averageMilliseconds": 872.9978,
+          "medianMilliseconds": 872.0406,
+          "p95Milliseconds": 903.3222,
+          "maxMilliseconds": 915.4153
+        }
+      ]
+    }
+  },
+  "serialization": {
+    "inputBytes": 12884932,
+    "outputBytes": 1182524,
+    "inputRoundTrip": true,
+    "outputRoundTrip": true
+  },
+  "workerReadiness": {
+    "protocol": "src/lib/map/country-label-worker-protocol.ts",
+    "dependencyScan": [
+      {
+        "file": "src/lib/map/country-label-layout.ts",
+        "matches": [],
+        "pass": true
+      },
+      {
+        "file": "src/lib/map/font-metrics.ts",
+        "matches": [],
+        "pass": true
+      },
+      {
+        "file": "src/lib/map/country-label-worker-protocol.ts",
+        "matches": [],
+        "pass": true
+      }
+    ],
+    "domReactMapLibreIndependent": true,
+    "workerImplementationCreated": false,
+    "reason": "The serializable protocol is sufficient for preparation; moving execution to a Worker is deferred until UI-thread profiling shows it is necessary."
+  },
+  "cache": {
+    "key": "geometryHash",
+    "miss": {
+      "count": 256,
+      "performance": "performance.fullPrecomputation"
+    },
+    "hit": {
+      "count": 256,
+      "performance": "performance.fullCacheHit"
+    }
+  },
+  "quality": {
+    "beforeCache": {
+      "minimumInsideRatio": 0.768405,
+      "minimumBaselineInsideRatio": 0.923077,
+      "minimumConfidence": 0.696749,
+      "anchorCount": 256
+    },
+    "afterCache": {
+      "minimumInsideRatio": 0.768405,
+      "minimumBaselineInsideRatio": 0.923077,
+      "minimumConfidence": 0.696749,
+      "anchorCount": 256
+    },
+    "identical": true,
+    "accuracyTradeoff": false,
+    "note": "Cache optimization returns byte-identical layouts; no search or precision setting is reduced."
+  },
+  "gates": {
+    "countryCount": true,
+    "threeFullTrials": true,
+    "serializableInput": true,
+    "serializableOutput": true,
+    "dependencyFree": true,
+    "cacheHitCount": true,
+    "changedOnlyApi": true,
+    "qualityPreserved": true,
+    "reproducible": true,
+    "status": "pass"
+  }
+}

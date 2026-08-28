@@ -1,0 +1,373 @@
+# Pax Local 5차 개선 작업: HOI4식 국가명 시스템 재설계 및 검증 신뢰성 복구
+
+당신은 기존 `pax-local` 프로젝트를 수정하는 GIS·MapLibre·WebGL·프런트엔드 개발자다.
+
+이 작업은 새 프로젝트를 만드는 작업이 아니다. 현재 정상 동작하는 2020 OTL 세계 지도, 국가 검색·선택·플레이 국가 확정, 국가 채색, 고해상도 전환, Admin 1 경계, 날짜변경선 월드 래핑을 보존하면서 아래 문제를 실제 브라우저 렌더링 기준으로 해결해야 한다.
+
+이번 작업의 최우선 주제는 **HOI4(Hearts of Iron IV)처럼 국토의 방향과 크기를 따라 넓게 펼쳐지는 국가명 표기**다. 단순히 기존 `text-size` 상한을 높이는 것으로 끝내지 말고, 현재 라벨 생성 및 렌더링 구조를 재설계하라.
+
+모바일은 지원하지 않는다. 1280×720 이상의 PC 환경만 대상으로 한다.
+
+---
+
+## 1. 작업 전 필수 확인
+
+다음 파일과 현재 테스트를 먼저 읽고 데이터 및 렌더링 흐름을 파악하라.
+
+- `prompts/PROMPT_04_BORDER_SEAMS_AND_HOI4_LABELS.txt`
+- `scripts/prepare-map-data.mjs`
+- `scripts/capture-fix04-before.mjs`
+- `scripts/capture-fix04-after.mjs`
+- `src/components/map/WorldMap.tsx`
+- `src/lib/map/map-config.ts`
+- `src/lib/map/map-data.test.ts`
+- `src/types/map-debug.ts`
+- `src/data/country-label-overrides-2020.json`
+- `src/data/country-label-metrics-2020.json`
+- `public/data/maps/country-label-baselines-2020.geojson`
+- `public/data/maps/country-labels-2020.geojson`
+- `public/data/maps/admin1-boundaries-10m.geojson`
+- `public/data/maps/admin1-validation-2020.json`
+- `e2e/game-setup.spec.ts`
+- `playwright.config.ts`
+- 관련 스크린샷과 캡처 스크립트
+
+기존 변경사항을 되돌리지 말고, 원인을 확인한 뒤 최소 범위로 수정하라. 작업 시작 전에 현재 테스트 결과와 Git 변경 상태를 기록하라.
+
+---
+
+## 2. 현재 확인된 국가명 중복의 실제 원인
+
+현재 러시아 같은 대형 국가는 확대 시 이름이 하나에서 두 개, 세 개 이상으로 늘어난다.
+
+현재 코드는 국가별 기준선 `LineString`을 GeoJSON source로 제공하고 MapLibre에서 다음 방식으로 표시한다.
+
+```ts
+"symbol-placement": "line-center"
+```
+
+GeoJSON source는 내부적으로 타일링되며, 러시아처럼 긴 선은 여러 타일 조각으로 나뉠 수 있다. MapLibre가 각 선 조각에 같은 텍스트를 배치하면 하나의 국가 피처만 존재해도 화면에는 동일 국가명이 여러 번 나타날 수 있다. 확대할수록 타일 조각이 달라져 중복 개수와 위치도 변할 수 있다.
+
+주요국 레이어와 일반국 레이어의 필터가 상호 배타적인지도 반드시 다시 검증하라. 그러나 레이어 필터만 고쳐 놓고 중복이 해결됐다고 판단하지 마라. source feature, style layer, world copy, 내부 타일 조각 각각의 중복 가능성을 구분해 진단해야 한다.
+
+완료 조건:
+
+- 한 화면의 한 월드 복사본에서 동일 `countryId`의 국가명은 정확히 하나만 렌더링된다.
+- 확대·축소 중에도 이름이 둘이나 셋으로 증식하지 않는다.
+- 러시아, 캐나다, 미국, 중국, 브라질, 호주, 인도를 각각 검증한다.
+- 날짜변경선을 넘은 다음 월드 복사본에서도 각 국가명이 월드 복사본당 하나만 나타난다.
+
+---
+
+## 3. 라벨 렌더링 구조 변경
+
+`territory-line` 국가명을 긴 LineString 위에 직접 렌더링하는 현재 방식을 폐기하라. 기준선은 **배치 메타데이터 계산용**으로 유지할 수 있지만, 최종 텍스트 렌더링은 국가당 하나의 Point anchor를 사용하는 것을 기본으로 한다.
+
+권장 데이터 구조:
+
+```ts
+type CountryLabelPlacement = {
+  countryId: string;
+  mapLabelKo: string;
+  anchor: [number, number];
+  angle: number;
+  baselineLengthDegrees: number;
+  minZoom: number;
+  maxZoom: number;
+  fontSizeWorld: number;
+  fontSizeMid: number;
+  fontSizeClose: number;
+  letterSpacingWorld: number;
+  letterSpacingMid: number;
+  letterSpacingClose: number;
+  maxWidthUsage: number;
+  placementMode: "territory-point" | "small-country-point";
+  priority: number;
+};
+```
+
+필수 원칙:
+
+1. 국가당 최종 라벨 Point 피처는 하나만 생성한다.
+2. 기존 기준선의 중앙점 또는 국토 내부의 안전한 대표점을 anchor로 사용한다.
+3. 단순 bounding-box 중앙이 바다나 타국에 놓이지 않도록 point-on-surface 검증을 한다.
+4. 국가 장축 기준으로 `angle`을 계산해 `text-rotate`에 적용한다.
+5. 세로로 긴 국가는 가독성을 해치지 않는 범위에서 회전한다.
+6. `text-keep-upright`와 각도 정규화를 적용해 글자가 거꾸로 표시되지 않게 한다.
+7. 주요국·일반국·소국가 레이어 필터는 상호 배타적이어야 한다.
+8. 동일 국가가 line source와 point source 양쪽에서 동시에 렌더링되면 실패다.
+9. `text-allow-overlap: true`를 대형국 전체에 무조건 적용하지 않는다.
+10. 월드 래핑은 유지하되 같은 월드 안의 중복은 허용하지 않는다.
+
+MapLibre의 line symbol을 계속 사용해야 한다면, 국가당 단일 렌더링이 실제 브라우저에서 보장된다는 재현 가능한 증거를 제시해야 한다. 단순히 `symbol-spacing`을 크게 설정하는 임시방편은 허용하지 않는다.
+
+---
+
+## 4. HOI4식 국토 점유형 국가명
+
+국가명이 국토 중앙에 작은 글자로 놓이는 현재 방식은 목표가 아니다. 이름은 국토의 장축 방향을 따라 넓게 펼쳐져야 한다.
+
+목표:
+
+- 러시아 이름은 유럽 러시아 일부에 작게 놓이지 않고 러시아 본토의 상당 부분을 가로질러야 한다.
+- 캐나다와 미국은 각각 본토 너비의 상당 부분을 사용한다.
+- 중국, 브라질, 호주는 국토 크기에 비례해 명확히 커야 한다.
+- 인도, 카자흐스탄, 아르헨티나, 영국, 프랑스도 형상에 맞는 방향과 크기를 사용한다.
+- 작은 국가는 세계 지도에서 억지로 표시하지 않고 확대 시 등장한다.
+
+화면상 목표 라벨 폭은 다음 개념으로 계산하라.
+
+```ts
+const desiredTextWidthPx = projectedBaselineLengthPx * widthUsage;
+```
+
+권장 `widthUsage` 범위:
+
+- 초대형·넓은 국가: 0.70~0.88
+- 일반 대형국: 0.60~0.80
+- 중형국: 0.48~0.70
+- 길고 좁은 국가: 0.35~0.60
+
+실제 사용 폰트로 텍스트 폭을 측정하거나 신뢰할 수 있는 glyph advance 근사를 사용해 `text-size`와 `text-letter-spacing`을 함께 계산하라. 이름 길이가 짧은 국가는 자간을 늘리고, 이름이 긴 국가는 자간과 글자 크기를 균형 있게 조정한다.
+
+다음 조건을 지켜라.
+
+- 기존 56px·64px 고정 상한 때문에 러시아가 작아지지 않게 한다.
+- 반대로 확대할 때 글자가 화면 전체를 덮는 무제한 증가도 금지한다.
+- 줌 증가에 따른 글자 크기는 단조 증가 또는 시각적으로 안정적인 유지여야 한다. 확대 중 먼저 작아졌다가 다시 커지면 안 된다.
+- `fontSizeWorld > fontSizeMid > fontSizeClose` 같은 역전이 발생하지 않도록 생성 시 검증한다.
+- 확대할수록 화면상 국가 자체도 커지므로, 글자가 매번 같은 비율로 폭증할 필요는 없다. 국토 점유 비율이 안정적으로 유지되게 설계한다.
+- 라벨이 국경 밖으로 과도하게 튀어나오지 않도록 기준선 길이와 실제 측정 텍스트 폭을 비교한다.
+- 한글 국가명을 기준으로 튜닝한다.
+
+국가별 override는 예외 보정에만 사용한다. 러시아 하나를 하드코딩하고 나머지 국가를 방치하지 마라.
+
+---
+
+## 5. 라벨 충돌과 표시 우선순위
+
+라벨 우선순위를 명확히 구성하라.
+
+1. 현재 플레이 국가 또는 선택 국가
+2. 초대형 주요국
+3. 일반 주권국
+4. 소국가
+5. 수도 및 보조 표기
+
+요구사항:
+
+- 주요국 라벨이 수도명이나 작은 국가명 때문에 사라지지 않게 한다.
+- 여러 주요국 라벨이 서로 겹치면 무조건 모두 겹쳐 그리지 말고 우선순위와 충돌 규칙을 적용한다.
+- 소국가 Point 라벨은 `forceVisible`만으로 무조건 중첩시키지 않는다.
+- 국가명과 수도명이 겹칠 경우 국가명을 우선한다.
+- 선택·hover 스타일이 라벨을 복제하지 않는다. 강조는 기존 텍스트의 paint 속성 또는 별도의 비복제 방식으로 처리한다.
+
+---
+
+## 6. 줌 및 소국가 표시
+
+feature별 `minZoom`을 실제 필터에 계속 적용하라.
+
+- 세계 지도에서는 국토가 충분히 큰 국가만 표시한다.
+- 확대하면 화면상 크기가 충분해진 작은 국가가 나타난다.
+- 바티칸, 모나코, 산마리노, 리히텐슈타인을 minZoom 전후로 검증한다.
+- 같은 국가가 `territory-point`와 `small-country-point`에 동시에 들어가지 않게 한다.
+- 라벨이 등장하는 순간 지나치게 큰 크기로 튀어나오지 않도록 entry size를 계산한다.
+
+---
+
+## 7. Admin 1 검증 보고서 오류 수정
+
+4차 작업의 보고서에는 Admin 1이 4,594개라고 기록됐지만 최종 `admin1-boundaries-10m.geojson`에는 4,199개 피처가 있었다. 141개 국가에서 보고 수치와 최종 파일 수치가 달랐다.
+
+현재 `prepare-map-data.mjs`는 경계 카운트를 먼저 증가시키고, 이후 경계 추출 실패 또는 필터링된 피처를 제거한다. 이 때문에 validation report와 `window.__PAX_MAP_DEBUG__.getAdmin1Count()`가 실제 최종 source를 반영하지 않는다.
+
+수정 요구사항:
+
+- 최종 write 직전의 `admin1.features`를 기준으로 실제 렌더 피처 수를 계산한다.
+- 원본 행정구역 레코드 수, 유효 geometry 수, 최종 boundary feature 수, 제거 수를 서로 다른 이름으로 보고한다.
+- 공유 경계 deduplication 때문에 행정구역 수와 boundary feature 수가 다를 수 있음을 데이터 모델에 반영한다.
+- 디버그 API는 함수 이름이 의미하는 실제 수치를 반환한다.
+- 최종 GeoJSON을 다시 읽어 국가별 실제 피처 수와 validation report가 일치하는 테스트를 추가한다.
+- `CHN`, `USA`, `FIN`, `KAZ`, `GBR`, `FRA`, `KOR`, `JPN`, `IND` 샘플을 반드시 검증한다.
+- `unresolved 0`, `invalid geometry 0`만 출력하고 실제 누락을 숨기지 않는다.
+
+---
+
+## 8. 기존 경계 수정 회귀 검증
+
+다음 기존 수정사항을 보존한다.
+
+- `KAS → IND` 실제 union/dissolve
+- `KAB → KAZ` 실제 union/dissolve
+- KAS/KAB 독립 메타데이터·검색·라벨·국경·Admin 1 레코드 제거
+- 시아첸의 불필요한 굵은 선 제거
+- 바이코누르의 불필요한 굵은 선 제거
+- 추코트카 날짜변경선 폐합선 제거
+- PSX, SDS, SOL 플레이 가능 상태 유지
+- 국가 채색·선택·검색·플레이 국가 확정 기능 유지
+
+문제 좌표 한 점만 `queryRenderedFeatures`로 검사해서 완료 처리하지 마라. 과거 문제 선의 경로를 따라 여러 샘플 지점을 검사하고, 해당 viewport 전체의 해당 레이어 피처도 조사하라.
+
+---
+
+## 9. 월드 래핑 E2E 안정화
+
+현재 Playwright의 실제 마우스 드래그 월드 복사 테스트는 150초 타임아웃으로 실패할 수 있다. 보고서에 8/8 통과라고 적기 전에 깨끗한 환경에서 전체 suite를 다시 실행하라.
+
+요구사항:
+
+- 실제 마우스 드래그는 유지한다.
+- 지나치게 많은 작은 `mouse.move` 호출이나 불필요한 장시간 애니메이션을 제거한다.
+- `map.loaded()`, `map.isMoving()`, `idle` 이벤트 및 앱의 상세 source 준비 상태를 조합해 명시적인 render-settled 신호를 제공한다.
+- 고정 800ms 대기만으로 완료를 가정하지 않는다.
+- 테스트 전용 API로 카메라를 순간 이동시키는 것만으로 실제 드래그 요구사항을 대체하지 않는다.
+- 1280×720, 1920×1080, 2560×1440에서 각각 안정적으로 완료되는지 확인한다.
+- 한 번의 우연한 통과가 아니라 전체 Playwright suite를 최소 2회 연속 통과시킨다.
+
+---
+
+## 10. 라벨 디버그 API
+
+다음과 동등한 디버그 기능을 추가하라.
+
+```ts
+window.__PAX_MAP_DEBUG__.getRenderedCountryLabels()
+window.__PAX_MAP_DEBUG__.getRenderedCountryLabelCount(countryId)
+window.__PAX_MAP_DEBUG__.getCountryLabelPlacement(countryId)
+window.__PAX_MAP_DEBUG__.isRenderSettled()
+```
+
+반환값에는 최소한 다음 정보가 있어야 한다.
+
+```ts
+{
+  countryId: string;
+  layerId: string;
+  anchor: [number, number];
+  angle: number;
+  fontSize: number;
+  letterSpacing: number;
+  worldCopy?: number;
+}
+```
+
+동일 심벌을 여러 화면 픽셀에서 query해서 피처 수를 부풀리지 않도록 고유 렌더 라벨 인스턴스를 식별하는 방식을 문서화하라.
+
+---
+
+## 11. 필수 자동 테스트
+
+### 데이터·단위 테스트
+
+- 국가별 최종 라벨 피처 정확히 하나
+- 주요국·일반국·소국가 source 또는 layer 집합 상호 배타성
+- angle 유효 범위 및 upright 정규화
+- anchor가 해당 국가 본토 또는 허용된 label 영역 안에 존재
+- 줌별 font size가 역전되지 않음
+- 계산된 텍스트 폭이 목표 국토 폭 범위에 들어감
+- 러시아·캐나다·미국·중국·브라질·호주·인도의 라벨 점유율 검증
+- Admin 1 최종 파일과 validation report 일치
+- KAS/KAB 완전 제거와 IND/KAZ dissolve 유지
+- PSX/SDS/SOL playable 유지
+
+### Playwright E2E
+
+1. 러시아를 동일 중심에서 여러 줌으로 확대해 각 단계에서 라벨이 하나인지 확인
+2. 캐나다·미국·중국도 각각 라벨 하나인지 확인
+3. 러시아 라벨이 본토 장축의 목표 비율을 차지하는지 화면 bounding box로 검증
+4. 줌 증가 중 라벨 개수가 증가하지 않는지 확인
+5. 일반 레이어와 주요국 레이어가 같은 국가를 동시에 렌더링하지 않는지 확인
+6. 소국가 minZoom 전후 표시 확인
+7. 실제 드래그로 날짜변경선을 통과한 다음 월드 복사본에서 라벨과 국가가 유지되는지 확인
+8. 이동 후 한 월드 복사본에서 같은 국가명이 중복되지 않는지 확인
+9. 시아첸·바이코누르·추코트카 회귀 확인
+10. 검색·선택·플레이 국가 확정 회귀 확인
+
+텍스트 내용만 DOM에서 검사하지 말고 MapLibre rendered feature와 실제 화면 좌표·bounding box를 함께 검증하라.
+
+---
+
+## 12. 필수 스크린샷
+
+새 캡처 스크립트를 만들고 모든 캡처에서 다음을 보장하라.
+
+- 동일한 viewport, center, zoom, bearing, pitch
+- 상세 source 준비 완료
+- MapLibre `idle` 또는 신뢰할 수 있는 render-settled 이후 캡처
+- 고정 시간 대기만 사용하지 않음
+- 대상 지역이 실제 화면에 표시되는지 캡처 전에 assertion
+
+필수 파일:
+
+```text
+screenshots/fix05-russia-world.png
+screenshots/fix05-russia-mid.png
+screenshots/fix05-russia-close.png
+screenshots/fix05-canada-usa.png
+screenshots/fix05-china.png
+screenshots/fix05-brazil-australia-india.png
+screenshots/fix05-europe-label-density.png
+screenshots/fix05-small-label-before-minzoom.png
+screenshots/fix05-small-label-after-minzoom.png
+screenshots/fix05-world-copy-before-drag.png
+screenshots/fix05-world-copy-after-drag.png
+screenshots/fix05-siachen.png
+screenshots/fix05-baykonur.png
+screenshots/fix05-chukotka.png
+```
+
+러시아 world/mid/close 이미지에서 각 화면에 `러시아`가 정확히 한 번만 보여야 한다. 글자는 국토를 넓게 덮어야 하며 화면 가장자리에 잘린 거대한 글자 하나로 문제를 숨기면 안 된다.
+
+---
+
+## 13. 실행 및 완료 조건
+
+다음을 모두 실행하라.
+
+```text
+npm.cmd run data:prepare
+npm.cmd run lint
+npm.cmd test
+npm.cmd run build
+npx.cmd playwright test
+npx.cmd playwright test
+```
+
+완료 조건:
+
+1. 확대·축소 중 동일 국가명이 두 개나 세 개로 증식하지 않는다.
+2. 국가당 라벨 하나라는 조건이 데이터와 실제 렌더링 모두에서 검증된다.
+3. 러시아·캐나다·미국·중국 등 대형국 이름이 HOI4처럼 국토 장축을 따라 충분히 크게 펼쳐진다.
+4. 라벨 크기와 자간이 국토 폭에 맞게 계산되며 줌 변화가 안정적이다.
+5. 작은 국가는 확대 전 숨고 적절한 줌에서 나타난다.
+6. Admin 1 보고서와 최종 GeoJSON 실제 수치가 일치한다.
+7. 월드 래핑 실제 드래그 E2E가 타임아웃 없이 2회 연속 통과한다.
+8. 시아첸·바이코누르·추코트카의 굵은 선이 다시 나타나지 않는다.
+9. PSX, SDS, SOL이 계속 플레이 가능하다.
+10. 데이터 생성, lint, unit test, production build, 전체 Playwright가 모두 통과한다.
+11. 요구된 스크린샷이 실제 렌더 완료 상태로 모두 생성된다.
+
+일부 테스트가 실패하거나 스크린샷이 생성되지 않았다면 “전체 완료”라고 보고하지 마라. 실패 항목, 재현 방법, 추정 원인을 그대로 기록하라.
+
+---
+
+## 14. 최종 보고 형식
+
+다음 순서로 보고하라.
+
+1. 변경한 파일 목록
+2. 국가명 중복의 재현 조건과 실제 원인
+3. 기존 line-center 구조를 어떻게 교체했는지
+4. 국가별 anchor·angle·크기·자간 계산 방식
+5. 러시아·캐나다·미국·중국 등 주요국의 화면상 라벨 점유율 결과
+6. 주요국·일반국·소국가 충돌 및 중복 방지 방식
+7. Admin 1 기존 보고 수치와 수정 후 실제 수치
+8. 월드 래핑 E2E 안정화 내용과 2회 연속 실행 결과
+9. 경계 회귀 검증 결과
+10. PSX/SDS/SOL 검증 결과
+11. 실행한 모든 명령과 각각의 성공·실패 결과
+12. 생성한 스크린샷 경로
+13. 남아 있는 제한사항
+
+최종 보고에서 “국가당 한 피처”와 “화면에 국가명 하나”를 혼동하지 마라. 둘을 각각 증명해야 한다.

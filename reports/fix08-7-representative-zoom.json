@@ -1,0 +1,43 @@
+{
+  "stage":"8-7",
+  "status":"pass",
+  "inputHashes":{"reports/fix08-6-renderer-bounds.json":"3ec4e7f83d74ef70fe82b740068d7dadbf3ff89f7fb6b182b8880e563b746f8b"},
+  "outputHashes":{
+    "src/components/map/WorldMap.tsx":"909626b10eeebbc8e8d0c77366a3616c246d2490c0e9d7a263b71bf9ae3a85a4",
+    "e2e/fix08-7.spec.ts":"561fa88f349663c4541d9b9da4651234e88a523b539006a84259d36950ff56d3",
+    "screenshots/fix08-7-aus-z1.png":"6afd2e09e62d4ee24fb7e9b53473a23e13c34d6ca2a08809a064b3e43c93a4ab",
+    "screenshots/fix08-7-aus-z2.png":"243201a4a7489b980bc1d4f98cc883ddc950828bdba0277411e9cb46284ee242",
+    "screenshots/fix08-7-aus-z3.png":"3d5258114d921a68be20fc74b787f85fe060ca490299da20d1d45c0d61749081",
+    "screenshots/fix08-7-rus-z1.png":"cd9dfe99d393e35e737e8214c0fb821309dc1ff940c4362e71423d0c29d3d3f6",
+    "screenshots/fix08-7-rus-z2.png":"1c6dc476eaee612b4fe09d1b38481345686a2c8714ed0b385fc6b98c0a647a97",
+    "screenshots/fix08-7-rus-z3.png":"a161facfc0e8064fac9f8e225a1dff713cdd52b9a111d3f1ea32b1f5b8ba2612"
+  },
+  "changedFiles":["src/components/map/WorldMap.tsx","e2e/fix08-7.spec.ts","screenshots/fix08-7-aus-z1.png","screenshots/fix08-7-aus-z2.png","screenshots/fix08-7-aus-z3.png","screenshots/fix08-7-rus-z1.png","screenshots/fix08-7-rus-z2.png","screenshots/fix08-7-rus-z3.png","reports/fix08-7-representative-zoom.json"],
+  "commands":[
+    {"command":"npx playwright test e2e/fix08-7.spec.ts --workers=1 --timeout=180000","status":"pass","result":"1 test passed; 30 measurements in one browser context, including two complete boundary runs"},
+    {"command":"npx playwright test e2e/fix08-5.spec.ts e2e/fix08-6.spec.ts --workers=1 --timeout=60000","status":"pass","result":"2 regression tests passed"},
+    {"command":"npm test -- src/lib/map/country-label-glyph-export.test.ts src/lib/world/country-map-artifacts.test.ts","status":"pass","result":"2 files, 9 tests passed"},
+    {"command":"npx eslint src/components/map/WorldMap.tsx e2e/fix08-5.spec.ts e2e/fix08-6.spec.ts e2e/fix08-7.spec.ts","status":"pass","result":"no diagnostics"},
+    {"command":"npx tsc --noEmit --pretty false","status":"fail-pre-existing","result":"existing screenshotZoom union errors in e2e/fix08-8a3.spec.ts and JSON tuple cast in country-map-artifacts.test.ts; no 8-7 diagnostic"}
+  ],
+  "gates":{
+    "viewport":{"width":1440,"height":900},
+    "initialCamera":{"center":[45,25],"zoom":1},
+    "initialVisibleGeometryLabels":["USA","RUS","CHN"],
+    "zoomMeasurements":{
+      "AUS":[{"zoom":1,"labelWidth":88.489,"territoryWidth":90.020,"widthRatio":0.983000},{"zoom":2,"labelWidth":176.979,"territoryWidth":180.039,"widthRatio":0.983000},{"zoom":3,"labelWidth":353.957,"territoryWidth":360.079,"widthRatio":0.983000}],
+      "RUS":[{"zoom":1,"labelWidth":319.452,"territoryWidth":358.188,"widthRatio":0.891854},{"zoom":2,"labelWidth":638.903,"territoryWidth":716.376,"widthRatio":0.891854},{"zoom":3,"labelWidth":1277.806,"territoryWidth":1432.752,"widthRatio":0.891854}]
+    },
+    "maximumWidthRatioDrift":{"AUS":0.000001,"RUS":0.000001,"threshold":0.002},
+    "boundaryZooms":[1.2499,1.25,1.2501,1.4999,1.5,1.5001],
+    "boundaryRunsInSameContext":2,
+    "stableFramesPerMeasurement":2,
+    "zeroInstanceObservations":0,
+    "multipleInstanceObservations":0,
+    "boundaryRunsIdentical":true,
+    "screenshots":["screenshots/fix08-7-aus-z1.png","screenshots/fix08-7-aus-z2.png","screenshots/fix08-7-aus-z3.png","screenshots/fix08-7-rus-z1.png","screenshots/fix08-7-rus-z2.png","screenshots/fix08-7-rus-z3.png"]
+  },
+  "implementationErrors":[],
+  "environmentErrors":["In-app Browser runtime remains unavailable because its trusted RPC dependency is not configured; project Playwright is used for browser evidence."],
+  "nextStage":"8-8"
+}

@@ -1,0 +1,423 @@
+# Pax Local 차기 총괄 에이전트 인수인계 프롬프트
+
+당신은 `D:\SSAFY\WORKSPACE\pax-local` 프로젝트의 차기 총괄 에이전트다.
+
+이 문서는 이전 대화 컨텍스트 없이 프로젝트를 안전하게 이어가기 위한 단일 인수인계 문서다. 먼저 이 문서를 끝까지 읽고, 이후 실제 파일을 검사하여 문서 내용과 현재 구현이 일치하는지 확인하라. 과거 작업자의 완료 보고를 사실로 가정하지 말고 코드·생성 데이터·실제 브라우저 화면·테스트 결과로 독립 검증하라.
+
+사용자에게는 한국어로 답한다. 사용자는 긴 설명보다 결론과 실제 진행 상황을 빠르게 받는 것을 선호한다. 도구 작업이 오래 걸릴 때 60초 이상 침묵하지 말고 짧게 상태를 알린다. 무한 대기하지 말고, 오래 걸리는 명령은 어떤 명령이 왜 실행 중인지 보고한다.
+
+---
+
+## 1. 프로젝트의 최종 방향
+
+이 프로젝트는 Pax Historia와 유사한 PC 전용 역사 전략 시뮬레이션을 로컬에서 개발하기 위한 것이다.
+
+장기 목표:
+
+- 세계 지도 위에서 국가를 선택하고 역사·외교·정치 시뮬레이션을 진행한다.
+- 최초 시나리오는 `2020 OTL`만 지원한다.
+- 이후 다른 시대와 대체역사를 추가할 수 있는 구조로 만든다.
+- 사용자는 대한민국으로 고정되지 않으며, 여러 국가 중 원하는 **한 국가**를 플레이 국가로 선택한다.
+- 동시에 여러 국가를 플레이하는 기능을 의미하지 않는다.
+- AI는 향후 OpenAI API를 연결한다.
+- 내부 프롬프트와 모델 입출력은 영어로 처리하고 마지막 사용자 표시 단계에서 한국어로 번역하는 방향이다.
+- 시대별 AI 반응은 해당 시점까지 실제로 존재했던 사건·인물·정세에 기반해야 한다.
+
+현재 작업 범위는 AI가 아니라 **지도 기반 시스템**이다. 사용자가 별도로 요청하기 전에는 OpenAI API나 게임 시뮬레이션을 구현하지 마라.
+
+모바일은 지원하지 않는다. 1280×720 이상의 PC 환경만 대상으로 한다.
+
+---
+
+## 2. 현재 기술 구성
+
+- Next.js 16
+- React 19
+- TypeScript
+- MapLibre GL JS
+- Zustand
+- Natural Earth 1:10m / 1:50m GeoJSON
+- `polygon-clipping`
+- Vitest
+- Playwright
+
+중요: 프로젝트의 `AGENTS.md`를 먼저 읽어라. Next.js 버전의 변경사항 때문에 Next.js 코드를 수정할 때는 `node_modules/next/dist/docs/`의 관련 문서를 확인해야 한다.
+
+이 프로젝트 폴더는 현재 Git 저장소가 아닐 수 있다. `git status` 실패를 코드 오류로 취급하지 마라. 그렇다고 기존 파일을 함부로 덮어쓰거나 원복해서도 안 된다.
+
+---
+
+## 3. 중요 파일
+
+먼저 다음 파일을 확인한다.
+
+- `AGENTS.md`
+- `package.json`
+- `scripts/prepare-map-data.mjs`
+- `src/components/map/WorldMap.tsx`
+- `src/components/map/MapSearch.tsx`
+- `src/lib/map/map-config.ts`
+- `src/lib/map/map-data.test.ts`
+- `src/types/map-debug.ts`
+- `src/data/countries-2020.json`
+- `src/data/playable-country-ids-2020.json`
+- `src/data/country-label-overrides-2020.json`
+- `src/data/country-label-metrics-2020.json`
+- `public/data/maps/countries-50m.geojson`
+- `public/data/maps/countries-10m.geojson`
+- `public/data/maps/country-borders-50m.geojson`
+- `public/data/maps/country-borders-10m.geojson`
+- `public/data/maps/admin1-boundaries-10m.geojson`
+- `public/data/maps/country-labels-2020.geojson`
+- `public/data/maps/admin1-validation-2020.json`
+- `e2e/game-setup.spec.ts`
+- `playwright.config.ts`
+- `scripts/capture-fix05.mjs`
+- `prompts/PROMPT_05_HOI4_COUNTRY_LABEL_SYSTEM_AND_VALIDATION.txt`
+- `prompts/PROMPT_06_SHAPE_AWARE_DYNAMIC_COUNTRY_LABELS.txt`
+
+프롬프트 1~5는 과거 작업 기록이다. 최신 설계 목표는 6번 프롬프트와 이 인수인계 문서를 우선한다. 다만 6번 전체를 한 번에 실행하지 말고 아래 단계적 절차를 따른다.
+
+---
+
+## 4. 지금까지 구현된 것으로 확인된 내용
+
+다음은 이전 총괄 에이전트가 실제 파일을 빠르게 검사해 확인한 상태다. 다시 독립 확인하라.
+
+- 세계 지도와 국가 채색이 존재한다.
+- 국가 검색·선택·플레이 국가 확정 UI가 존재한다.
+- 저해상도 1:50m와 고해상도 1:10m 데이터 전환 구조가 있다.
+- Admin 1 경계가 있다.
+- MapLibre `renderWorldCopies: true`를 사용한다.
+- KAS는 IND, KAB는 KAZ로 union/dissolve하도록 데이터 생성 코드가 들어갔다.
+- KAS/KAB 독립 메타데이터·검색·라벨 제거 로직이 있다.
+- 시아첸·바이코누르·추코트카의 잘못된 굵은 선을 제거하려는 경계 정제 로직이 있다.
+- PSX, SDS, SOL을 플레이 가능 국가로 유지하는 데이터가 있다.
+- 국가별 라벨을 긴 `LineString + line-center`가 아닌 하나의 Point로 생성하는 5차 변경이 들어갔다.
+- 이 Point 방식은 확대 시 동일 국가명이 2개·3개로 증식하는 문제를 피하기 위한 것이다.
+- Admin 1 보고서에서 최종 boundary 피처 수를 별도로 계산하는 개선이 일부 들어갔다.
+- `fix05` 스크린샷 일부가 존재한다.
+
+국가당 Point 피처 하나라는 사실과 실제 화면에 라벨 하나가 보인다는 사실은 다르다. 둘을 각각 검증해야 한다.
+
+---
+
+## 5. 과거에 발견된 오류와 검증상의 함정
+
+### 5.1 라벨 중복
+
+과거에는 러시아 이름이 확대 시 2개, 3개 이상 표시됐다. 긴 LineString이 내부 타일로 분할되어 MapLibre가 각 조각에 이름을 배치한 것이 핵심 원인이었다.
+
+현재 Point 방식이 들어갔지만 다음을 확인해야 한다.
+
+- 실제 raw rendered feature 기준으로 국가명이 하나인가
+- 일반국·주요국·소국가 레이어가 서로 중복되지 않는가
+- world copy 하나마다 한 개이며 같은 world 안에서 여러 개가 아닌가
+
+현재 또는 과거의 `getRenderedCountryLabels()`는 `Map`으로 같은 `countryId`를 먼저 제거해 중복을 숨길 수 있다. raw 결과와 deduplicated 결과를 분리해야 한다.
+
+### 5.2 잘못된 고정 크기
+
+현재 5차 라벨은 대략 다음 방식이다.
+
+- `fontSizeWorld`
+- `fontSizeMid`
+- `fontSizeClose`
+- 줌 1·3·6 사이 MapLibre 보간
+- 주요국도 대략 56~60px 근처 상한
+
+사용자가 원하는 방식이 아니다. 확대하면 국토는 커지는데 이름은 거의 같은 화면 픽셀 크기로 유지된다.
+
+목표는 라벨 크기를 국토의 world-space 크기에 연결하는 것이다.
+
+```ts
+screenFontSizePx = fontSizeWorldUnits * pixelsPerWorldUnit(currentZoom, latitude)
+```
+
+또는 기준 줌 방식이라면 지수적으로 확대되어야 한다.
+
+```ts
+screenFontSizePx = baseFontSizePx * 2 ** (zoom - referenceZoom)
+```
+
+라벨 화면 폭과 유효 국토 화면 폭의 비율이 줌 변화에도 대체로 유지되어야 한다.
+
+### 5.3 잘못된 배치 알고리즘
+
+현재 데이터 생성 코드는 대략 다음에 의존한다.
+
+- 가장 큰 Polygon 선택
+- Natural Earth의 선호 label 좌표
+- 한 번의 PCA 장축 계산
+- 장축을 따라 내부 선분 하나 탐색
+
+이것은 중국처럼 단순한 국가에는 어느 정도 맞지만 러시아·노르웨이·칠레·일본·인도네시아·분리 영토 국가에는 일반적으로 충분하지 않다. 향후 국경 변경에도 안정적이지 않다.
+
+### 5.4 Admin 1 보고서 오류
+
+과거 보고서는 Admin 1을 4,594개라고 했지만 실제 최종 `admin1-boundaries-10m.geojson`은 4,199개 피처였다. 141개 국가의 보고 수치와 최종 수치가 달랐다.
+
+원인은 필터링 전에 count를 증가시킨 것이었다. 현재 코드에 `finalBoundaryCounts`가 추가된 것으로 보이나 다음을 다시 확인한다.
+
+- 원본 행정구역 레코드 수
+- 유효 geometry 수
+- 최종 boundary feature 수
+- 제거 수
+- 최종 파일을 다시 읽은 수치
+
+각 개념을 구분하고 보고서·디버그 API·테스트가 실제 최종 파일과 일치해야 한다.
+
+### 5.5 잘못된 스크린샷 증거
+
+4차 before 이미지는 지도가 렌더링되기 전에 찍힌 빈 화면에 가까웠다. before는 고정 800ms만 기다렸고 after는 render-settled를 기다렸다. 이를 동일 조건 비교라고 부르면 안 된다.
+
+캡처는 다음을 만족해야 한다.
+
+- 동일 viewport, center, zoom, bearing, pitch
+- 상세 source 준비 완료
+- MapLibre idle 또는 신뢰할 수 있는 render-settled
+- 대상 국가가 실제 화면에 보이는지 assertion
+- 단순 고정 시간 대기만 사용하지 않음
+
+### 5.6 Playwright 타임아웃
+
+과거 전체 Playwright 재실행에서 8개 중 1개가 실패했다. 실제 마우스 드래그 world-copy 테스트가 150초에 타임아웃됐다. 보고서의 8/8 통과 주장과 달랐다.
+
+긴 마우스 이동 반복, 상세 데이터 로딩, 서버 종료 대기 등을 확인한다. 전체 suite 한 번의 우연한 통과로 완료 처리하지 않는다.
+
+---
+
+## 6. 사용자가 최종적으로 원하는 국가명 시스템
+
+사용자가 원하는 것은 국가별 고정 좌표를 저장하는 방식이 아니다.
+
+**현재 국가 Polygon을 입력하면 국가 모양을 분석해 이름 위치·각도·크기·자간을 자동 계산하는 shape-aware 알고리즘**이 필요하다.
+
+이유:
+
+- 향후 전쟁과 조약으로 국경이 바뀔 수 있다.
+- 국가가 분할·합병될 수 있다.
+- 영토 일부를 잃거나 얻을 수 있다.
+- 고정 anchor와 고정 angle은 새 국경에서 잘못된 위치를 가리킨다.
+
+필요한 계산 흐름:
+
+```text
+현재 국가 Polygon/MultiPolygon
+→ 날짜변경선 unwrap 및 적합한 평면 좌표계 투영
+→ 유효 라벨 영토/성분 선택
+→ 내부 후보 중심점 생성
+→ 후보 각도 생성
+→ 국가명 종횡비를 수용하는 회전 사각형 또는 내부 corridor 탐색
+→ 실제 한글 텍스트 폭 측정
+→ anchor·angle·world-space 크기·자간 결정
+→ 내부 포함률과 국토 점유율 검증
+→ 하나의 Point 라벨 인스턴스로 렌더링
+```
+
+단일 표준 라이브러리 호출로 끝나는 문제는 아니다. 다음 기법을 조합하는 것이 현실적이다.
+
+- polylabel 또는 동등한 내부 안전점 탐색
+- PCA와 minimum rotated rectangle을 후보 각도 생성에 사용
+- adaptive grid 또는 후보 탐색
+- 회전 사각형/텍스트 footprint와 Polygon containment/intersection
+- signed distance 또는 국경까지 가용 폭 측정
+- 필요한 경우 medial-axis/skeleton 개념
+- 이전 layout과의 안정성 점수
+
+중요: PCA는 후보 생성 도구일 뿐 최종 해법이 아니다.
+
+---
+
+## 7. 권장 계산 모듈 인터페이스
+
+MapLibre·React와 분리된 순수 함수를 구현한다.
+
+```ts
+type CountryLabelLayoutInput = {
+  countryId: string;
+  geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon;
+  label: string;
+  previousLayout?: CountryLabelLayout;
+  policy?: CountryLabelPolicy;
+};
+
+type CountryLabelLayout = {
+  countryId: string;
+  anchor: [number, number];
+  angle: number;
+  baseline: GeoJSON.LineString;
+  availableWidthWorld: number;
+  availableHeightWorld: number;
+  targetTextWidthWorld: number;
+  fontSizeWorldUnits: number;
+  letterSpacing: number;
+  coverageRatio: number;
+  insideRatio: number;
+  confidence: number;
+  componentIds: string[];
+};
+
+function computeCountryLabelLayout(
+  input: CountryLabelLayoutInput
+): CountryLabelLayout;
+```
+
+요구사항:
+
+- 입력 geometry만 바꾸면 재계산 가능
+- DOM/React/MapLibre 비의존
+- 결정적 결과
+- 직렬화 가능
+- Web Worker로 옮길 수 있음
+- 변경된 국가만 재계산 가능
+- geometry hash와 함께 캐시 가능
+
+---
+
+## 8. 다음 작업은 반드시 단계적으로 수행
+
+6번 프롬프트 전체를 한 번에 실행하면 작업이 지나치게 길어지고 종료되지 않을 수 있다. 이전 실행은 강제 종료됐으며, 확인 당시 `fix06` 스크린샷이나 새 shape-aware 모듈은 없었다. 핵심 소스는 5차 상태였다.
+
+### 1단계: 프로토타입만
+
+이번에 가장 먼저 할 일:
+
+1. 현재 파일 상태 감사
+2. 순수 shape-aware 계산 모듈 설계
+3. 러시아·미국·중국·칠레·인도네시아 5개국만 프로토타입
+4. 후보 중심·후보 각도·회전 라벨 영역 탐색
+5. anchor, angle, insideRatio, coverageRatio, confidence 산출
+6. 가상 국경 변경 단위 테스트
+7. 관련 unit test, lint, build만 실행
+8. 결과를 보고하고 반드시 종료
+
+1단계에서는 하지 말 것:
+
+- 전체 256개 국가 적용
+- 전체 Playwright suite 2회 실행
+- 전체 스크린샷 생성
+- 장시간 실행되는 개발 서버 방치
+- 국가별 고정 좌표 override 대량 추가
+
+### 2단계: 렌더링 프로토타입
+
+사용자가 1단계 결과를 확인한 뒤 지시하면 진행한다.
+
+- 5개국 결과를 실제 지도에 적용
+- world-space 기반 줌 확대
+- raw 렌더 중복 검사
+- 대표 스크린샷
+- 제한된 Playwright 시나리오
+
+### 3단계: 전체 국가 확장
+
+5개국 알고리즘과 렌더링이 통과한 뒤에만 진행한다.
+
+- 전체 국가 적용
+- 특이 형상 국가 정책
+- 소국가 minZoom
+- 성능 최적화 및 Worker 구조
+- 전체 회귀 테스트와 스크린샷
+
+---
+
+## 9. 1단계 프로토타입 검증 국가
+
+- 러시아: 날짜변경선 unwrap, 넓고 오목한 본토
+- 미국: 연속 본토 우선, 알래스카·하와이 분리
+- 중국: 넓은 단일 본토
+- 칠레: 매우 길고 좁은 세로형
+- 인도네시아: 군도형 MultiPolygon
+
+각 국가에서 확인할 것:
+
+- anchor가 유효 라벨 영토 내부인가
+- 기준선과 텍스트 footprint 대부분이 자국 영토 내부인가
+- angle이 형상에 맞는가
+- `insideRatio`가 충분한가
+- `coverageRatio`가 목표 범위인가
+- 국가별 고정 좌표 없이 계산됐는가
+
+가상 국경 변경 테스트:
+
+- 동쪽 일부 제거
+- 인접 영토 일부 합병
+- 두 영역으로 분할
+- 두 Polygon 합병
+- 가늘고 긴 corridor 추가 또는 제거
+
+변경 후 별도 좌표 수정 없이 레이아웃이 새 geometry에 맞아야 한다.
+
+---
+
+## 10. 구현 원칙
+
+- 최종 텍스트 렌더링은 국가당 하나의 Point 인스턴스를 기본으로 한다.
+- 긴 LineString 위에 직접 symbol을 배치해 타일별 중복을 재발시키지 않는다.
+- 기준선은 계산과 방향 정보로 사용할 수 있다.
+- MultiPolygon 전체 bounding box를 사용하지 않는다.
+- 무조건 가장 큰 Polygon만 선택하지 않는다.
+- Natural Earth의 LABEL_X/LABEL_Y는 참고값일 수 있지만 최종 anchor를 고정해서는 안 된다.
+- 실제 한글 텍스트 폭을 측정하거나 재현 가능한 glyph metric을 사용한다.
+- 국가 ID별 override는 좌표 지정이 아니라 일반화된 정책 보정에만 사용한다.
+- 확대 시 라벨은 국토와 함께 커지고 축소 시 함께 작아진다.
+- 최소 크기 미만이면 억지로 크게 만들지 말고 숨긴다.
+- 최대 크기는 폭주 방지 안전장치일 뿐 기본 계산 기준이 아니다.
+- 이전 layout이 있으면 비슷한 후보 중 급격한 이동이 적은 결과를 선택한다.
+
+---
+
+## 11. 보존해야 할 기존 기능
+
+- 2020 OTL 국가 데이터
+- 모든 플레이 가능 국가 중 한 국가 선택
+- 검색·지도 클릭·국가 선택
+- 플레이 국가 확정
+- 지도 채색
+- 저해상도/고해상도 지도 전환
+- Admin 1 경계
+- 월드 래핑
+- KAS→IND, KAB→KAZ 병합
+- 시아첸·바이코누르·추코트카 경계 수정
+- PSX, SDS, SOL 플레이 가능
+
+라벨 작업을 이유로 이 기능을 제거하거나 데이터 생성 구조를 전면 재작성하지 마라.
+
+---
+
+## 12. 총괄 에이전트의 행동 원칙
+
+- 처음부터 전체 구현에 돌입하지 말고 실제 상태를 먼저 검사한다.
+- 코드 변경 요청이면 구현하고 검증한다. 검토 요청이면 사용자 허가 없이 수정하지 않는다.
+- 보고서의 통과 주장을 그대로 믿지 않고 직접 명령을 실행한다.
+- 실제 실패한 테스트가 있으면 전체 완료라고 말하지 않는다.
+- 프로세스가 종료되지 않으면 무한 대기하지 않는다.
+- 개발 서버나 Playwright worker를 남겨 두지 않는다.
+- IntelliJ ACP agent의 Node 프로세스는 프로젝트 서버가 아니므로 임의 종료하지 않는다.
+- 기존 사용자 변경을 보존한다.
+- 파일 수정에는 가능한 한 patch 방식의 안전한 편집을 사용한다.
+- 긴 작업은 프로토타입, 렌더링, 전체 적용으로 분리한다.
+- 사용자가 “바로 답해”라고 했으므로 핵심 결과를 먼저 짧게 전달한다.
+
+---
+
+## 13. 차기 총괄 에이전트의 첫 응답과 첫 작업
+
+이 문서를 읽은 후 사용자에게 다음 취지로 간단히 답한다.
+
+```text
+인수인계 문서를 읽었고 현재 핵심 목표를 이해했다. 먼저 5차 상태를 감사한 뒤, 전체 적용이 아니라 러시아·미국·중국·칠레·인도네시아 5개국 shape-aware 라벨 알고리즘 프로토타입부터 진행하겠다. 프로토타입 테스트와 결과를 보고한 뒤 작업을 종료하고, 전체 적용은 사용자 확인 후 진행하겠다.
+```
+
+그 후 실제 파일 상태를 확인하고 1단계만 수행한다. `PROMPT_06_SHAPE_AWARE_DYNAMIC_COUNTRY_LABELS.txt`는 상세 요구사항 참고용으로 읽되 전체 단계를 한 번에 실행하지 않는다.
+
+---
+
+## 14. 현재 시점의 정확한 다음 목표
+
+가장 가까운 완료 목표는 다음 한 문장이다.
+
+**현재 국가 Polygon만을 입력으로 받아 러시아·미국·중국·칠레·인도네시아의 라벨 위치·방향·world-space 크기를 자동 계산하고, 가상 국경 변경 후에도 재계산되는 순수 알고리즘 프로토타입을 완성한다.**
+
+이 목표가 검증되기 전에는 전체 국가 적용이나 AI 기능으로 넘어가지 마라.

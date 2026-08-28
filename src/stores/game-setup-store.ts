@@ -1,0 +1,7 @@
+"use client";
+import { create } from "zustand";
+import { countryById } from "@/lib/country/country-index";
+import { persistPlayerCountry, readPersisted, STORAGE_KEY } from "@/lib/storage/game-setup-storage";
+type State={scenarioId:"2020-otl";scenarioDate:"2020-01-01";hoveredCountryId:string|null;selectedCountryId:string|null;playerCountryId:string|null;searchQuery:string;isCountryPanelOpen:boolean;setHoveredCountry:(id:string|null)=>void;selectCountry:(id:string)=>void;clearSelectedCountry:()=>void;confirmPlayerCountry:(id:string)=>void;setSearchQuery:(q:string)=>void;restorePersistedState:()=>void;resetGameSetup:()=>void};
+const initial={scenarioId:"2020-otl" as const,scenarioDate:"2020-01-01" as const,hoveredCountryId:null,selectedCountryId:null,playerCountryId:null,searchQuery:"",isCountryPanelOpen:false};
+export const useGameSetupStore=create<State>((set)=>({...initial,setHoveredCountry:id=>set({hoveredCountryId:id}),selectCountry:id=>{if(countryById.has(id))set({selectedCountryId:id,isCountryPanelOpen:true})},clearSelectedCountry:()=>set({selectedCountryId:null,isCountryPanelOpen:false}),confirmPlayerCountry:id=>{if(!countryById.get(id)?.playable)return;persistPlayerCountry(id);set({playerCountryId:id})},setSearchQuery:searchQuery=>set({searchQuery}),restorePersistedState:()=>{const v=readPersisted(localStorage.getItem(STORAGE_KEY));if(v)set({playerCountryId:v.playerCountryId})},resetGameSetup:()=>set(initial)}));

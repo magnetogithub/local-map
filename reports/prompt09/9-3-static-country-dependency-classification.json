@@ -1,0 +1,157 @@
+{
+  "stage": "9-3",
+  "status": "pass",
+  "objective": "Classify every countries-2020.json source reference and fixed country-index consumer as seed-only, runtime-read, or test-only without modifying product code.",
+  "inputHashes": {
+    "reports/prompt09/9-2-current-dynamic-baseline.json": "98ff42b4a3f77e0a2c18255b8aa55c72e0d768830c8514cb5aab6a7156eae3ed",
+    "reports/prompt09/9-2-benchmark.test.ts": "1ff6bf35f5195157b12add4d81c2e2f8e86a0930d80249530f8f842b16afc94b",
+    "src/data/countries-2020.json": "8698470b2dbfb0e33a6b0b1ff55cc4e49a40d1a67307f3ed73ba70122456381a",
+    "src/lib/country/country-index.ts": "1008c8968706b134cbb452b8523d573825d928bd86b78e0720bc8aa01df95f01"
+  },
+  "outputHashes": {
+    "canonicalSortedSourceScan": "a06c90d124ac949570ebf03f0d4e4990ec34570c269a3201b0c2654d29a71777"
+  },
+  "changedFiles": ["reports/prompt09/9-3-static-country-dependency-classification.json"],
+  "commands": [
+    {"command": "Verify 9-2 status, rollback, report hash, source hashes, and read installed Next.js server/client guide", "exitCode": 0, "durationMs": 600},
+    {"command": "rg countries-2020.json and country-index over product, scripts, E2E, and report-local test sources", "exitCode": 0, "durationMs": 2600},
+    {"command": "Compare discovered paths against explicit classification sets", "exitCode": 0, "durationMs": 500}
+  ],
+  "measurements": {
+    "metadataReferenceFiles": 11,
+    "metadataReferenceClassifications": {"seed-only": 1, "runtime-read": 1, "test-only": 9},
+    "fixedCountryIndexConsumerFiles": 7,
+    "fixedCountryIndexConsumerClassifications": {"seed-only": 0, "runtime-read": 5, "test-only": 2},
+    "classificationEdges": 18,
+    "uniqueFilesClassified": 17,
+    "unclassifiedMetadataReferences": 0,
+    "unclassifiedCountryIndexConsumers": 0,
+    "runtimeProductFilesDependingOnStaticCountryIndex": 5,
+    "runtimeProductFilesCallingFixedCountryByIdDirectly": 4
+  },
+  "classifications": [
+    {
+      "path": "scripts/prepare-map-data.mjs",
+      "classification": "seed-only",
+      "dependency": "src/data/countries-2020.json output owner",
+      "reason": "Generates and writes the canonical metadata seed; it does not read the existing seed as runtime state."
+    },
+    {
+      "path": "src/lib/country/country-index.ts",
+      "classification": "runtime-read",
+      "dependency": "direct compile-time import of src/data/countries-2020.json",
+      "reason": "Creates the module-scoped countries array, fixed countryById Map, and static search function used by the client runtime."
+    },
+    {
+      "path": "src/stores/game-setup-store.ts",
+      "classification": "runtime-read",
+      "dependency": "fixed countryById",
+      "reason": "Selection and playable-country validation query the static Map."
+    },
+    {
+      "path": "src/components/map/MapSearch.tsx",
+      "classification": "runtime-read",
+      "dependency": "static searchCountries over the fixed countries array",
+      "reason": "Interactive client search only sees seed countries."
+    },
+    {
+      "path": "src/components/map/WorldMap.tsx",
+      "classification": "runtime-read",
+      "dependency": "fixed countryById",
+      "reason": "The focus event resolves camera center and zoom from static metadata."
+    },
+    {
+      "path": "src/components/country/CountryPanel.tsx",
+      "classification": "runtime-read",
+      "dependency": "fixed countryById",
+      "reason": "Panel and player badge render names, capital, region, and playability from the static Map."
+    },
+    {
+      "path": "src/lib/storage/game-setup-storage.ts",
+      "classification": "runtime-read",
+      "dependency": "fixed countryById",
+      "reason": "Persisted player IDs are validated against the static Map."
+    },
+    {
+      "path": "reports/prompt09/9-2-benchmark.test.ts",
+      "classification": "test-only",
+      "dependency": "direct metadata import",
+      "reason": "Report-local baseline harness seeds a pure WorldState."
+    },
+    {
+      "path": "scripts/benchmark-fix07-country-label-performance.mjs",
+      "classification": "test-only",
+      "dependency": "filesystem read of static metadata",
+      "reason": "Offline performance benchmark input."
+    },
+    {
+      "path": "scripts/validate-fix07-all-country-quality.mjs",
+      "classification": "test-only",
+      "dependency": "filesystem read of static metadata",
+      "reason": "Offline generated-label quality validation."
+    },
+    {
+      "path": "scripts/validate-fix07-final-audit.mjs",
+      "classification": "test-only",
+      "dependency": "filesystem read of static metadata",
+      "reason": "Offline audit validation."
+    },
+    {
+      "path": "src/lib/map/country-label-glyph-export.test.ts",
+      "classification": "test-only",
+      "dependency": "direct metadata import and test-local countryById",
+      "reason": "Vitest export fixture generation and assertions."
+    },
+    {
+      "path": "src/lib/map/country-label-glyph-geometry.test.ts",
+      "classification": "test-only",
+      "dependency": "direct metadata import and test-local countryById",
+      "reason": "Vitest glyph geometry fixture lookup."
+    },
+    {
+      "path": "src/lib/map/map-data.test.ts",
+      "classification": "test-only",
+      "dependency": "direct metadata import",
+      "reason": "Vitest generated-map consistency assertions."
+    },
+    {
+      "path": "src/lib/world/country-map-artifacts.test.ts",
+      "classification": "test-only",
+      "dependency": "direct metadata import",
+      "reason": "Vitest WorldState and artifact fixture seed."
+    },
+    {
+      "path": "src/lib/world/world-state.test.ts",
+      "classification": "test-only",
+      "dependency": "direct metadata import plus fixed countryById/search imports",
+      "reason": "Vitest compares the seed-derived WorldState with the legacy static index."
+    },
+    {
+      "path": "src/lib/country/country-index.test.ts",
+      "classification": "test-only",
+      "dependency": "fixed countryById and searchCountries",
+      "reason": "Vitest validates the legacy static index."
+    }
+  ],
+  "notes": {
+    "testLocalMaps": "country-label glyph tests also create local variables named countryById from their already-classified static test fixtures; these are test-only and are not imports of the fixed product export.",
+    "migrationImplication": "The five runtime-read consumers are the production migration surface that later Prompt 09 stages must redirect to revision-scoped WorldState selectors/indexes.",
+    "scope": "Generated caches such as tsconfig.tsbuildinfo, prompt text, JSON reports, and node_modules are not executable dependency sites and were excluded."
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "previousStageStatusPass": true,
+    "previousStageHashesMatchCurrentInputs": true,
+    "runningReportCreatedBeforeAudit": true,
+    "allMetadataReferencesClassified": true,
+    "allFixedCountryIndexConsumersClassified": true,
+    "unclassifiedDirectImportsZero": true,
+    "productCodeUnmodified": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": ["No discoverable .git repository is available, so git-based change verification remains unavailable."],
+  "rollbackVerified": false,
+  "nextStage": "9-4"
+}

@@ -1,0 +1,10 @@
+
+> pax-local@0.1.0 test:e2e
+> playwright test e2e/fix08-8ar3-complete.spec.ts --workers=1
+
+
+Running 1 test using 1 worker
+
+  ok 1 e2e\fix08-8ar3-complete.spec.ts:3:5 › 8A-R3 complete evidence (3.3m)
+
+  1 passed (3.3m)

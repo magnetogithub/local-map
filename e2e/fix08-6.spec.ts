@@ -1,0 +1,9 @@
+import {test,expect} from "@playwright/test";
+
+const expected={AUS:7,RUS:3,USA:4,CHN:7} as const;
+
+test("8-6 reports projected polygon bounds and settled render state",async({page})=>{
+  await page.setViewportSize({width:1440,height:900});await page.goto("/");await expect(page.getByRole("status").first()).toBeHidden({timeout:30_000});await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__?.isRenderSettled()??false),{timeout:30_000}).toBe(true);
+  for(const [countryId,glyphCount] of Object.entries(expected)){expect(await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getGlyphLabelFeatureCount?.(id),countryId)).toBe(glyphCount);expect(await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getGlyphLabelInstanceCount?.(id),countryId)).toBe(1);const placement=await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getCountryLabelPlacement(id),countryId) as {anchor:[number,number]};await page.evaluate(anchor=>window.__PAX_MAP_DEBUG__!.jumpTo(anchor,2),placement.anchor);await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.isRenderSettled()),{timeout:30_000}).toBe(true);const bounds=await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getCountryLabelRendererBounds?.(id)??[],countryId);expect(bounds).toHaveLength(1);expect(bounds[0]).toMatchObject({countryId,renderer:"glyph-geometry",layerId:"country-label-glyph-fills",source:"projected-glyph-polygons",labelInstanceId:`${countryId}:primary`,primitiveCount:glyphCount,diagnostic:false});expect(bounds[0].glyphIndices).toEqual(Array.from({length:glyphCount},(_,index)=>index));expect(bounds[0].vertexCount).toBeGreaterThan(glyphCount*3);expect(bounds[0].width).toBeGreaterThan(0);expect(bounds[0].height).toBeGreaterThan(0);expect(Number.isFinite(bounds[0].worldCopy)).toBe(true)}
+  expect(await page.evaluate(()=>!window.__PAX_MAP_DEBUG__!.hasLayer("country-labels-prototype")&&!window.__PAX_MAP_DEBUG__!.hasLayer("country-labels-territory"))).toBe(true);
+});

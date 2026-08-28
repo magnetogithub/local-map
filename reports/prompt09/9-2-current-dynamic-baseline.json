@@ -1,0 +1,79 @@
+{
+  "stage": "9-2",
+  "status": "pass",
+  "objective": "Measure the current rename, create, delete, China 31-way split, and rollback paths for latency, allocation behavior, setData count, determinism, and rollback equality without modifying product code.",
+  "inputHashes": {
+    "reports/prompt09/9-1-country-state-source-inventory.json": "ffe06264db201b2abf6b8354955c8f5fef75e3394f1a03e28fd233e0cd2048d3",
+    "src/lib/world/world-state.ts": "157da7013c68a0d2b6d0f019339e62aecd4d2cec4077da38901ce1315bdba489",
+    "src/lib/world/country-map-artifacts.ts": "7ddaf9294a973e9d79cc7e387c4e32d8bbe268762e741ce4b4ff0a80bfa53fde",
+    "src/data/countries-2020.json": "8698470b2dbfb0e33a6b0b1ff55cc4e49a40d1a67307f3ed73ba70122456381a",
+    "public/data/maps/china-province-countries-test.geojson": "b778a652bdf2ff8335df777d7f960c859f7b20574f3176d28b1c5480fe942bec"
+  },
+  "outputHashes": {
+    "reports/prompt09/9-2-benchmark.test.ts": "1ff6bf35f5195157b12add4d81c2e2f8e86a0930d80249530f8f842b16afc94b",
+    "seedWorldState": "ab905cef2dbf8fb5dcfa3e393b4b936f33be2001c87df7619cdf1283eccf15f4",
+    "renameWorldState": "49c44aa761621ed385dde40bc31e84df840bd99c0bae8c7156df61c4d7f4de24",
+    "createWorldState": "b362eb8812b63c8b62d236da6b56f2f8a0158abc56e82f1045ebeb98f5121948",
+    "deleteWorldState": "575e7549e30d9ce3d33a359e4a65104b800d74884a33d129aae323d60eb0d558",
+    "split31WorldState": "bdc9d84ac4975240a129d3dbbcbb68fe90bf49852f12c51b70389d709ba9b741",
+    "rollbackWorldState": "ab905cef2dbf8fb5dcfa3e393b4b936f33be2001c87df7619cdf1283eccf15f4"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-2-current-dynamic-baseline.json",
+    "reports/prompt09/9-2-benchmark.test.ts"
+  ],
+  "commands": [
+    {"command": "Verify 9-1 report and current input hashes; read installed Next.js guides", "exitCode": 0, "durationMs": 600},
+    {"command": "npm.cmd test -- --run reports/prompt09/9-2-benchmark.test.ts (initial parse validation)", "exitCode": 1, "durationMs": 1772},
+    {"command": "npm.cmd test -- --run reports/prompt09/9-2-benchmark.test.ts (measurement completed but default timeout)", "exitCode": 1, "durationMs": 11847},
+    {"command": "npm.cmd test -- --run reports/prompt09/9-2-benchmark.test.ts", "exitCode": 0, "durationMs": 11953},
+    {"command": "npm.cmd exec vitest -- run reports/prompt09/9-2-benchmark.test.ts --disableConsoleIntercept", "exitCode": 0, "durationMs": 12075}
+  ],
+  "measurements": {
+    "environment": "Windows developer machine; warm in-process seed and fixture cache; performance.now synchronous transition window",
+    "seedCountryCount": 247,
+    "warmupRunsPerOperation": 5,
+    "measuredRunsPerOperation": 20,
+    "rename": {"p50Ms": 0.0620, "p95Ms": 0.1398, "maxMs": 0.1464, "retainedEntityReferences": 246, "estimatedTransitionAllocations": 4, "uniqueOutputHashes": 1},
+    "create": {"p50Ms": 0.0795, "p95Ms": 0.1236, "maxMs": 0.1300, "retainedEntityReferences": 247, "estimatedTransitionAllocations": 2, "uniqueOutputHashes": 1},
+    "delete": {"p50Ms": 0.0732, "p95Ms": 0.1319, "maxMs": 0.1716, "retainedEntityReferences": 246, "estimatedTransitionAllocations": 2, "uniqueOutputHashes": 1},
+    "split31": {"p50Ms": 0.0849, "p95Ms": 0.1118, "maxMs": 0.1210, "retainedEntityReferences": 246, "estimatedTransitionAllocations": 2, "uniqueOutputHashes": 1},
+    "rollback": {"p50Ms": 0.0814, "p95Ms": 0.1351, "maxMs": 0.1799, "retainedEntityReferences": 247, "estimatedApplyAllocationsBeforeExactReferenceRestore": 2, "uniqueOutputHashes": 1},
+    "mainThreadTasksOver100MsInMeasuredTransitionWindows": 0,
+    "pureWorldStateTransitionSetDataCalls": 0,
+    "artifactAdapterSetDataCallsPerFullPublish": 7,
+    "worldMapDebugSplitSetDataCallsByCodeInspection": 8,
+    "worldMapDebugRollbackSetDataCallsByCodeInspection": 8,
+    "wholeStateDeepCloneObserved": false,
+    "unchangedEntityRetentionRatioRename": 0.995951,
+    "unchangedEntityRetentionRatioSplit31": 0.995951,
+    "rollbackHashMatchesSeed": true,
+    "timingScopeCaveat": "These are pure WorldState transition baselines. Current product WorldMap is not wired to WorldState, so MapLibre rendering, layout/glyph generation, browser frame latency, and source serialization are intentionally not represented as commit latency."
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "previousStageStatusPass": true,
+    "previousStageInputAndOutputHashesMatchCurrentFiles": true,
+    "runningReportCreatedBeforeMeasurement": true,
+    "twentyRunsPerOperation": true,
+    "p50AndP95Reported": true,
+    "objectRetentionAndAllocationReported": true,
+    "setDataCountsReported": true,
+    "deterministicOutputHashes": true,
+    "rollbackHashEqualsSeedHash": true,
+    "measurementHarnessPasses": true,
+    "productCodeUnmodified": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [
+    "The first harness run exposed an unmatched generic type delimiter; only the report-local benchmark harness was corrected.",
+    "The first complete measurement exceeded Vitest's default 5 second test timeout because full-state SHA-256 verification runs outside the timed operation window; the report-local test timeout was raised to 20 seconds."
+  ],
+  "environmentErrors": [
+    "No discoverable .git repository is available, so git-based product-change verification cannot be performed.",
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": true,
+  "nextStage": "9-3"
+}

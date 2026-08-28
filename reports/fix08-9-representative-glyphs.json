@@ -1,0 +1,107 @@
+{
+  "stage":"8-9",
+  "status":"pass",
+  "inputHashes":{"reports/fix08-8-legacy-renderer-removal.json":"dc0bdb7edec42f3608bf2e421cc6f7e19aebabb3e20755f4b0e82366ca88b7a4"},
+  "priorReportHashes":{
+    "reports/fix08-1-current-boundary-audit.json":"b06155c502223545f1f6de47d810dd3bfee65914616620891d5180b4a41523db",
+    "reports/fix08-2-font-outline-probe.json":"d4d66392a47776ea6124c5f2f1ab9e9384547b03f795a11ab1afff60276e90b3",
+    "reports/fix08-3-world-geometry-unit.json":"b198e7f98397d11a5a116bb21ffdb4ef325447f0cbbe25e4aaf3af324cbc5b49",
+    "reports/fix08-4-artifact-pipeline.json":"f567f9c183979aac6dbe9ba6ff71fe76e29b5f5f8438ad0ce7ad454a00a42bdb",
+    "reports/fix08-5-map-integration.json":"7066acb5b9e9ae14c809de138bca8c7f506860b6f225a8d749f33d62bb2e4003",
+    "reports/fix08-6-renderer-bounds.json":"3ec4e7f83d74ef70fe82b740068d7dadbf3ff89f7fb6b182b8880e563b746f8b",
+    "reports/fix08-7-representative-zoom.json":"9d2145c65d37c859e837d36d0ab32e8c9cb2d7143e2ba736576b1510271d7089",
+    "reports/fix08-8-legacy-renderer-removal.json":"dc0bdb7edec42f3608bf2e421cc6f7e19aebabb3e20755f4b0e82366ca88b7a4"
+  },
+  "outputHashes":{
+    "public/fonts/Noto Sans KR/NotoSansCJKkr-Regular.otf":"6bcb2a0703aa137e874fc2dffa85f6c21ba9a67fa329e81b8c801663af7e992a",
+    "public/data/maps/country-label-glyph-fills-2020.geojson":"4bedeec819d4c2162384e9c3e230e9d9e6c835c8604cb52528c1641c460f0ab5",
+    "src/lib/map/font-outline.ts":"a02ffd5ed15ff8dddf1eb7170e771a5d49d61090607cc395ae37c4b0a81d4ce4",
+    "src/lib/map/country-label-glyph-geometry.ts":"190701fb6e6945d8b4876f2a08ca63dc5d57a95a6ca3f23203619666a29652e6",
+    "src/components/map/WorldMap.tsx":"68716202c67d6c67441e7b26509b9218f68c02e3ea6a080a4b91865aa3cd57c3",
+    "screenshots/fix08-7-world-default.png":"fee7946f60bf33c39d1af40a6fe89cff1e95342ccc1729b24542b01a6f60b010",
+    "screenshots/fix08-7-australia-z1.png":"6afd2e09e62d4ee24fb7e9b53473a23e13c34d6ca2a08809a064b3e43c93a4ab",
+    "screenshots/fix08-7-australia-z2.png":"243201a4a7489b980bc1d4f98cc883ddc950828bdba0277411e9cb46284ee242",
+    "screenshots/fix08-7-australia-z3.png":"3d5258114d921a68be20fc74b787f85fe060ca490299da20d1d45c0d61749081",
+    "screenshots/fix08-7-russia-z1.png":"cd9dfe99d393e35e737e8214c0fb821309dc1ff940c4362e71423d0c29d3d3f6",
+    "screenshots/fix08-7-russia-z2.png":"1c6dc476eaee612b4fe09d1b38481345686a2c8714ed0b385fc6b98c0a647a97",
+    "screenshots/fix08-7-russia-z3.png":"a161facfc0e8064fac9f8e225a1dff713cdd52b9a111d3f1ea32b1f5b8ba2612"
+  },
+  "changedFiles":["reports/fix08-9-representative-glyphs.json","screenshots/fix08-7-world-default.png","screenshots/fix08-7-australia-z1.png","screenshots/fix08-7-australia-z2.png","screenshots/fix08-7-australia-z3.png","screenshots/fix08-7-russia-z1.png","screenshots/fix08-7-russia-z2.png","screenshots/fix08-7-russia-z3.png"],
+  "rendererDecision":{
+    "selected":"MapLibre GeoJSON fill layer containing deterministic world-space glyph Polygon/MultiPolygon features",
+    "reasons":["shares map projection, world-copy behavior, and layer ordering with territory data","bounds derive from actual projected vertices without collision-index estimates","source setData remains compatible with later dynamic country/name/geometry updates","world-space geometry scales continuously without zoom-band text shaping"],
+    "alternatives":[
+      {"name":"MapLibre curved symbol-placement line","result":"removed","reason":"required zoom-band shaping, collision-index inspection, and could duplicate symbol instances"},
+      {"name":"HTML/SVG overlay","result":"rejected","reason":"would require a second camera projection, world-copy, hit-test, and z-order synchronization path"},
+      {"name":"canvas/raster labels","result":"rejected","reason":"loses canonical polygon vertices and complicates deterministic bounds, holes, and dynamic source updates"}
+    ],
+    "pointFallback":"MapLibre symbol layers remain only for small-country Point placement"
+  },
+  "fontAndGeometry":{
+    "font":"Noto Sans CJK KR Regular",
+    "fontSha256":"6bcb2a0703aa137e874fc2dffa85f6c21ba9a67fa329e81b8c801663af7e992a",
+    "fontBytes":16433112,
+    "unitsPerEm":1000,
+    "outlineParser":"fontkit 2.0.4 public create/layout/glyph path APIs",
+    "curveFlattenToleranceFontUnits":1,
+    "comparisonToleranceFontUnits":4,
+    "selectedNormalizedErrorBoundEm":0.001,
+    "zoomDependentTolerance":false,
+    "letterSpacingEm":0.06,
+    "coordinatePrecisionDecimals":6,
+    "fillRule":"evenodd",
+    "glyphFillGeoJSONBytes":27798,
+    "glyphFillGeoJSONSha256":"4bedeec819d4c2162384e9c3e230e9d9e6c835c8604cb52528c1641c460f0ab5"
+  },
+  "representativeRawMeasurements":{
+    "AUS":{"text":"오스트레일리아","glyphs":7,"vertices":540,"serializedFeatureCollectionBytes":15170,"holes":3,"invalidOrSelfIntersectingRings":0,"geometryArtifactSha256":"cccd9d48754c572fafda2d4f325cf97ebb01c5cbe0195b09f46e566ec0cf5a01","labelWidthWorld":40.653202,"effectiveTerritoryWidthWorld":52.402282,"artifactWidthRatio":0.775791,"insideRatio":0.950894,"screenWidthRatios":{"z1":0.9829999737793762,"z2":0.9829999737793755,"z3":0.9829999737793758}},
+    "RUS":{"text":"러시아","glyphs":3,"vertices":221,"serializedFeatureCollectionBytes":5972,"holes":1,"invalidOrSelfIntersectingRings":0,"geometryArtifactSha256":"7908a355c794ed0b0e1f95e0512f641053fd54ec641faf23458b37f2e2c342ba","labelWidthWorld":76.828552,"effectiveTerritoryWidthWorld":96.666657,"artifactWidthRatio":0.794778,"insideRatio":0.668373,"screenWidthRatios":{"z1":0.8918541165494264,"z2":0.8918541165494264,"z3":0.8918541165494264}},
+    "USA":{"text":"미국","glyphs":2,"vertices":45,"serializedFeatureCollectionBytes":1727},
+    "CHN":{"text":"중국","glyphs":2,"vertices":198,"serializedFeatureCollectionBytes":5052}
+  },
+  "browserEvidence":{
+    "viewport":[1440,900],
+    "initialCamera":{"center":[45,25],"zoom":1},
+    "initialVisible":["USA","RUS","CHN"],
+    "boundaryZooms":[1.2499,1.25,1.2501,1.4999,1.5,1.5001],
+    "runsInSameContext":2,
+    "stableFramesPerMeasurement":2,
+    "zeroInstanceObservations":0,
+    "multipleInstanceObservations":0,
+    "maximumWidthRatioDrift":{"AUS":0.000001,"RUS":0.000001,"threshold":0.002},
+    "screenshots":["screenshots/fix08-7-world-default.png","screenshots/fix08-7-australia-z1.png","screenshots/fix08-7-australia-z2.png","screenshots/fix08-7-australia-z3.png","screenshots/fix08-7-russia-z1.png","screenshots/fix08-7-russia-z2.png","screenshots/fix08-7-russia-z3.png"]
+  },
+  "commands":[
+    {"command":"verify reports/fix08-8-legacy-renderer-removal.json status, nextStage, and output hashes","exitCode":0,"result":"pass, nextStage 8-9, 0 mismatches"},
+    {"command":"initialize reports/fix08-9-representative-glyphs.json as running","exitCode":0},
+    {"command":"copy verified screenshots to exact 8-9 final artifact names","exitCode":0},
+    {"command":"hash 8-1 through 8-8 reports, final screenshots, font, GeoJSON, renderer sources","exitCode":0},
+    {"command":"compute representative glyph, vertex, and serialized byte counts from fill GeoJSON","exitCode":0},
+    {"command":"Node JSON validation of 8 prior reports, pass status, sequential input hash chain, and 7 non-empty screenshots","exitCode":0,"result":"8/8 reports valid pass; hash chain true; 7/7 screenshots non-empty"},
+    {"command":"8-8 npm test focused suite","exitCode":0,"result":"3 files, 14 tests passed"},
+    {"command":"8-8 npm run lint","exitCode":0,"result":"0 errors, 2 non-blocking existing warnings"},
+    {"command":"8-8 npx tsc --noEmit --pretty false","exitCode":0},
+    {"command":"8-8 npm run build approved rerun","exitCode":0,"result":"production compilation, TypeScript, static generation passed"},
+    {"command":"8-8 representative regression Playwright suite","exitCode":0,"result":"3 tests passed"},
+    {"command":"8-8 geometry plus Point fallback Playwright test","exitCode":0,"result":"1 test passed"}
+  ],
+  "gates":{
+    "priorReportsValidJson":true,
+    "priorReportsPass":true,
+    "priorReportSequentialHashChain":true,
+    "rendererDecisionRecorded":true,
+    "fontHashAndToleranceRecorded":true,
+    "vertexAndByteCountsRecorded":true,
+    "representativeRawMeasurementsRecorded":true,
+    "alternativesCompared":true,
+    "commandsAndExitCodesRecorded":true,
+    "requiredScreenshotsPresentAndHashed":true,
+    "legacyCurvedRendererDependencies":0,
+    "unitLintTypeBuildPass":true,
+    "representativeBrowserGatesPass":true
+  },
+  "firstFailedGate":null,
+  "implementationErrors":[],
+  "environmentErrors":[],
+  "nextStage":"8-10"
+}

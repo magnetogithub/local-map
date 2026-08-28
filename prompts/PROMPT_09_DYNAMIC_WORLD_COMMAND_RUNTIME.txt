@@ -1,0 +1,672 @@
+# Prompt 09 — 동적 국가 생성·삭제·분할·병합 런타임
+
+## 0. 목표
+
+`D:\SSAFY\WORKSPACE\pax-local`에 국가가 빠르게 생성·삭제·분할·병합·이름 변경·영토 이전되어도 검색, 선택, 국가 패널, 지도 폴리곤, 국경, 라벨, 저장, undo/redo가 동일한 상태를 유지하는 동적 월드 런타임을 구현한다.
+
+이 Prompt 09의 최종 산출물은 자연어 프롬프트 해석기가 아니다. 자연어 해석기가 안전하게 호출할 수 있는 결정적이고 원자적인 `MapCommand -> WorldState -> WorldPatch -> MapArtifacts` 실행 기반이다. 프롬프트 UI와 LLM 연결은 후속 Prompt에서 수행한다.
+
+Prompt 08은 취소된 구상이다. Prompt 08 보고서나 단계 상태를 Prompt 09의 선행 PASS 근거로 사용하지 않는다. 기존 world-space glyph 코드와 중국 31개 성 분할 테스트는 재사용 가능한 현재 코드일 뿐, 완료 증거로 간주하지 않는다.
+
+## 1. 절대 원칙
+
+1. `WorldState`를 런타임 국가 정보의 유일한 원본으로 만든다.
+2. 정적 JSON과 GeoJSON은 초기 seed와 원본 복구 자료로만 사용한다.
+3. 검색, 선택, 플레이 국가, 패널, 지도 source, 라벨은 모두 같은 `WorldState.revision`에서 파생한다.
+4. LLM, UI, MapLibre가 `WorldState`를 직접 수정하지 못하게 한다.
+5. 모든 변경은 구조화된 `MapCommand`와 단일 command executor를 통과한다.
+6. 명령은 검증과 파생 artifact 준비가 모두 성공한 뒤 한 번만 commit한다.
+7. 실패한 명령은 국가 하나, source 하나도 부분 반영하지 않는다.
+8. 전체 세계 복사나 전체 라벨 재계산으로 간단히 우회하지 않는다.
+9. 변경된 국가와 실제 영향 이웃만 다시 계산한다.
+10. 빠른 임시 라벨과 정밀 glyph 라벨을 분리한다.
+11. 정밀 라벨 계산은 UI 스레드를 막지 않는다.
+12. 국가별 수동 좌표와 수동 폰트 크기 예외를 추가하지 않는다.
+13. 동일 입력, 동일 seed, 동일 policy version은 동일한 결과와 hash를 만든다.
+14. 삭제된 국가 ID를 선택·검색·라벨·캐시·국경에 남기지 않는다.
+15. rollback과 undo는 원본 좌표를 손실 없이 복구해야 한다.
+
+## 2. 실행 규칙
+
+각 `9-N`은 하나의 독립 작업 세션이다. 한 세션에서는 해당 번호의 범위만 구현한다. 다음 번호의 제품 코드, 테스트, 보고서를 미리 만들지 않는다.
+
+각 단계 시작 시:
+
+1. `AGENTS.md`를 읽는다.
+2. 설치된 Next.js의 관련 문서를 `node_modules/next/dist/docs/`에서 읽는다.
+3. 이전 단계 보고서의 `status`와 입력 hash를 현재 파일과 비교한다.
+4. `reports/prompt09/9-N-<slug>.json`을 `running`으로 생성한다.
+5. 현재 실패 재현 또는 기준 수치를 기록한다.
+
+각 단계 종료 시 보고서에 다음을 기록한다.
+
+```json
+{
+  "stage": "9-N",
+  "status": "running | pass | fail | blocked",
+  "objective": "",
+  "inputHashes": {},
+  "outputHashes": {},
+  "changedFiles": [],
+  "commands": [{"command": "", "exitCode": 0, "durationMs": 0}],
+  "measurements": {},
+  "gates": {},
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": false,
+  "nextStage": "9-(N+1)"
+}
+```
+
+### 공통 검증 분기
+
+- 모든 gate 통과: `pass`로 기록하고 중단한다. 다음 단계는 자동 실행하지 않는다.
+- 구현 또는 테스트 실패: `fail`로 기록하고 중단한다. 다음 단계 산출물을 만들지 않는다.
+- 환경 권한·브라우저·빌드 캐시 문제: 안전한 재시도를 한 번 수행한다. 재시도도 실패하면 `blocked`로 기록한다.
+- 이전 보고서 hash 불일치: 이전 단계를 현재 입력으로 재검증한다. 일치가 복구되지 않으면 현재 단계를 시작하지 않는다.
+- 테스트 기대값만 낡은 경우: 현재 제품 계약과 데이터 근거를 먼저 제시한다. 제품 코드가 맞다는 증거가 있을 때만 테스트를 수정한다.
+- 성능 gate 실패: 기능 PASS로 축소하지 않는다. 해당 단계는 `fail`이다.
+- rollback 불일치: 생성 화면이 정상이어도 해당 단계는 `fail`이다.
+- 화면과 도메인 상태 불일치: 화면이 정상이어도 해당 단계는 `fail`이다.
+
+## 3. 성능 기준
+
+개발 머신에서 warm cache 기준으로 측정하며 최소 20회, p50과 p95를 보고한다.
+
+- 단일 국가 이름 변경 commit: p95 50ms 이하
+- 단일 국가 생성 또는 삭제 commit: p95 100ms 이하
+- 31개 국가 분할의 즉시 commit: p95 250ms 이하
+- 즉시 polygon·임시 label 화면 반영: 명령 commit 후 p95 300ms 이하
+- 31개 정밀 glyph label 준비: worker에서 p95 2초 이하
+- 명령 수행 중 100ms를 넘는 main-thread long task: 0개
+- 영향 없는 국가 artifact 재생성: 0개
+- rollback 즉시 commit: p95 150ms 이하
+
+환경 편차로 절대 시간이 불안정하면 동일 머신의 전체 재생성 대비 비율도 기록한다. 증분 경로는 전체 재생성보다 유의하게 빨라야 하며, 최소 3배 개선되지 않으면 원인을 분석하고 `fail` 처리한다.
+
+## 4. 단계 목록
+
+### 기반 감사
+
+#### 9-1. 런타임 상태 원본 목록 작성
+
+동작: 국가 정보를 보유하는 정적 JSON, `countryById`, Zustand store, MapLibre source, label metrics, glyph GeoJSON, capital 데이터와 테스트 snapshot의 경로·소유자·갱신 방식을 목록화한다. 제품 코드는 수정하지 않는다.
+
+검증: 국가 이름 변경, 국가 삭제, 중국 31개 분할 각각이 어느 저장소에 반영되고 누락되는지 표로 기록한다.
+
+분기: 소유자를 확인하지 못한 source가 하나라도 있으면 `fail`. 모두 확인하면 `pass`.
+
+#### 9-2. 현재 동적 변경 기준 성능 측정
+
+동작: 이름 변경 1개, 생성 1개, 삭제 1개, 중국 31개 분할과 rollback의 현재 시간·재계산 수·`setData()` 수를 계측한다. 제품 코드는 수정하지 않는다.
+
+검증: 동일 seed로 20회 실행하고 p50/p95, main-thread long task, 변경 source를 보고한다.
+
+분기: 측정 자체가 비결정적이거나 rollback 후 hash가 다르면 `fail`. 측정 가능하면 성능이 느려도 `pass`하고 기준선으로 보존한다.
+
+#### 9-3. 정적 국가 의존성 차단 목록 확정
+
+동작: 런타임에서 제거해야 할 `countries-2020.json` 직접 import와 고정 `countryById` 사용 지점을 분류한다.
+
+검증: 각 사용 지점을 seed-only, runtime-read, test-only로 분류한다.
+
+분기: 분류되지 않은 직접 import가 남으면 `fail`.
+
+### WorldState 저장소
+
+#### 9-4. WorldState 불변식 타입 정의
+
+동작: revision, countriesById, countryOrder, schemaVersion을 가진 런타임 타입과 불변식을 정의한다.
+
+검증: 빈 ID, 중복 ID, entity.id와 key 불일치, 잘못된 geometry를 거부하는 단위 테스트를 작성한다.
+
+분기: 잘못된 상태가 생성 가능하면 `fail`.
+
+#### 9-5. seed에서 WorldState 생성
+
+동작: 정적 metadata·geometry·capital을 오직 초기화 함수에서 결합한다.
+
+검증: 현재 사용자가 확정한 국가 집합과 순서가 손실 없이 생성되고 `미합중국`, `중화인민공화국`이 보존되는지 확인한다.
+
+분기: 고정 국가 수를 테스트에 다시 쓰면 `fail`; seed 자체 개수를 기준으로 검증하면 `pass`.
+
+#### 9-6. WorldState 런타임 store 생성
+
+동작: Zustand에 WorldState와 읽기 전용 selector를 추가한다. 기존 선택 UI를 아직 전환하지 않는다.
+
+검증: 구독자는 revision 변경 시 한 번만 통지되고 무관한 UI selector는 재렌더되지 않아야 한다.
+
+분기: 국가 변경 한 번에 중복 commit이 발생하면 `fail`.
+
+#### 9-7. 동적 `getCountryById` selector 구현
+
+동작: 정적 `countryById` 대체 selector를 구현한다.
+
+검증: 런타임 추가 국가를 즉시 조회하고 삭제 직후 null을 반환한다.
+
+분기: 정적 index fallback으로 삭제 국가가 반환되면 `fail`.
+
+#### 9-8. 동적 국가 iteration selector 구현
+
+동작: 결정적 `countryOrder`에 따라 국가 목록을 반환한다.
+
+검증: 생성·삭제·rollback 전후 순서 hash가 결정적인지 확인한다.
+
+분기: Object insertion order에 암묵적으로 의존하면 `fail`.
+
+### 명령 스키마
+
+#### 9-9. MapCommand 공통 envelope 정의
+
+동작: commandId, type, expectedRevision, payload, issuedAt, source를 정의한다.
+
+검증: 알 수 없는 필드, 빈 ID, 잘못된 revision을 schema validator가 거부한다.
+
+분기: TypeScript cast만으로 명령을 신뢰하면 `fail`.
+
+#### 9-10. `country.create` 스키마 정의
+
+동작: 새 CountryEntity 전체와 선택적 초기 presentation을 payload로 정의한다.
+
+검증: 기존 ID 충돌, 잘못된 polygon, 빈 이름, 허용되지 않은 unitType을 거부한다.
+
+분기: 기존 국가를 묵시적으로 overwrite하면 `fail`.
+
+#### 9-11. `country.delete` 스키마 정의
+
+동작: countryId와 삭제 정책을 정의한다.
+
+검증: 없는 국가 삭제와 마지막 유효 국가 삭제 정책을 명시적으로 처리한다.
+
+분기: 없는 국가 삭제를 조용히 성공 처리하면 `fail`.
+
+#### 9-12. `country.rename` 스키마 정의
+
+동작: shortKo, officialKo, mapKo, english, aliases 중 명시된 필드만 변경하도록 정의한다.
+
+검증: geometry hash는 유지되고 label cache key만 필요한 경우 바뀌어야 한다.
+
+분기: 이름 변경이 polygon artifact를 재생성하면 `fail`.
+
+#### 9-13. `territory.replace` 스키마 정의
+
+동작: 단일 국가 geometry 전체 교체 명령을 정의한다.
+
+검증: self-intersection, 빈 polygon, 비유한 좌표, 비정상 winding 입력을 정규화 또는 거부한다.
+
+분기: 정규화 결과가 결정적이지 않으면 `fail`.
+
+#### 9-14. `territory.transfer` 스키마 정의
+
+동작: from, to, transferGeometry와 boolean-operation policy를 정의한다.
+
+검증: 전달 면적이 from과 겹치지 않거나 to와 충돌하는 경우를 거부한다.
+
+분기: 면적 손실 또는 중복이 tolerance를 넘으면 `fail`.
+
+#### 9-15. `country.split` 스키마 정의
+
+동작: sourceCountryId, result countries, partition geometries를 정의한다.
+
+검증: 결과 union이 원본과 일치하고 결과끼리 중첩되지 않아야 한다.
+
+분기: gap/overlap이 tolerance를 넘거나 원본이 결과에도 남으면 `fail`.
+
+#### 9-16. `country.merge` 스키마 정의
+
+동작: source IDs와 단일 result entity를 정의한다.
+
+검증: result geometry가 source union과 일치하고 source IDs가 제거되는지 확인한다.
+
+분기: source metadata가 어느 규칙으로 승계되는지 불명확하면 `fail`.
+
+#### 9-17. command batch 스키마 정의
+
+동작: 여러 명령을 순서가 있는 하나의 transaction으로 묶는다.
+
+검증: batch 내부에서 생성한 ID를 다음 명령이 참조할 수 있고, 실패 시 전부 취소되어야 한다.
+
+분기: 부분 commit 가능성이 있으면 `fail`.
+
+### 실행 계획과 원자성
+
+#### 9-18. dry-run planner 구현
+
+동작: 현재 상태를 변경하지 않고 명령 결과의 생성·수정·삭제 ID를 계산한다.
+
+검증: dry-run 전후 WorldState object identity와 hash가 동일해야 한다.
+
+분기: dry-run이 캐시나 store를 변경하면 `fail`.
+
+#### 9-19. expectedRevision 충돌 검사
+
+동작: stale command가 최신 WorldState를 덮어쓰지 못하게 한다.
+
+검증: revision N 명령을 N+1 상태에 적용하면 명시적 conflict를 반환한다.
+
+분기: 자동 재시도나 묵시적 merge를 수행하면 `fail`.
+
+#### 9-20. 영향 국가 집합 계산
+
+동작: created, updated, deleted, direct neighbors를 계산한다.
+
+검증: 중국 분할에서 중국 인접국은 포함하고 남미 국가는 포함하지 않는다.
+
+분기: 매번 모든 국가를 affected로 반환하면 `fail`.
+
+#### 9-21. 임시 next state 생성
+
+동작: 현재 state를 보존한 채 변경된 map entry만 복사해 next state를 만든다.
+
+검증: 영향 없는 CountryEntity는 참조 동일성을 유지한다.
+
+분기: 전체 entity deep clone이면 성능 측정과 함께 `fail`.
+
+#### 9-22. commit 함수 구현
+
+동작: 검증된 next state를 revision 한 번 증가시켜 store에 반영한다.
+
+검증: batch 크기와 관계없이 subscriber 통지가 한 번인지 확인한다.
+
+분기: 31개 생성에서 31번 commit하면 `fail`.
+
+#### 9-23. 실패 원자성 검증
+
+동작: batch 중간에 의도적 오류를 삽입한다.
+
+검증: state revision, 국가 hash, selection, artifact index가 모두 이전과 같아야 한다.
+
+분기: 하나라도 변하면 `fail`.
+
+### WorldPatch
+
+#### 9-24. WorldPatch 타입 정의
+
+동작: created, updated, deleted, affectedNeighbors, beforeRevision, afterRevision을 정의한다.
+
+검증: 집합이 중복·교차하지 않고 정렬이 결정적인지 확인한다.
+
+분기: 동일 ID가 created와 deleted에 동시에 남으면 `fail`.
+
+#### 9-25. 이름 변경 patch 생성
+
+동작: rename이 updated 한 개만 반환하도록 한다.
+
+검증: affectedNeighbors와 geometryChanged가 비어 있어야 한다.
+
+분기: 전체 국가가 updated로 표시되면 `fail`.
+
+#### 9-26. 생성·삭제 patch 생성
+
+동작: create/delete에 대한 정확한 집합을 생성한다.
+
+검증: 삭제 ID는 이후 selector에서 즉시 사라져야 한다.
+
+분기: tombstone이 일반 국가 목록에 노출되면 `fail`.
+
+#### 9-27. 중국 31개 분할 patch 생성
+
+동작: CHN 삭제와 31개 생성 및 인접국 집합을 계산한다.
+
+검증: created 31, deleted 1, 중복 0, 결정적 hash를 확인한다.
+
+분기: 테스트용 고정 source를 제품 executor가 특별 취급하면 `fail`.
+
+### 검색·선택·패널
+
+#### 9-28. 검색 인덱스 patch API 구현
+
+동작: 전체 재빌드 없이 created/updated/deleted만 검색 index에 반영한다.
+
+검증: 생성 직후 ID·한글·영문 검색이 되고 삭제 직후 결과가 0이어야 한다.
+
+분기: 검색 결과와 WorldState revision이 다르면 `fail`.
+
+#### 9-29. 기존 검색 UI를 동적 index로 전환
+
+동작: 정적 `countryById` import를 제거한다.
+
+검증: 기존 국가 검색 회귀와 새 국가 검색을 모두 E2E로 확인한다.
+
+분기: seed 국가만 검색되면 `fail`.
+
+#### 9-30. 선택 store를 동적 WorldState로 전환
+
+동작: `selectCountry`가 현재 revision의 존재 여부를 검사하도록 한다.
+
+검증: 새 국가 클릭 선택, 삭제 국가 선택 거부를 확인한다.
+
+분기: 정적 allowlist가 남으면 `fail`.
+
+#### 9-31. 삭제 시 selection 정리
+
+동작: hovered, selected, player ID가 삭제 대상이면 정책에 따라 null 또는 대체 국가로 변경한다.
+
+검증: 삭제된 ID가 UI나 localStorage에 남지 않는다.
+
+분기: dangling ID가 하나라도 남으면 `fail`.
+
+#### 9-32. 국가 패널 동적 entity 전환
+
+동작: 패널이 현재 WorldState selector로 entity를 읽는다.
+
+검증: 새 국가 이름·색상·메타데이터가 표시되고 rollback 후 원본 중국이 표시된다.
+
+분기: 패널이 정적 JSON을 fallback으로 사용하면 `fail`.
+
+#### 9-33. 플레이 국가 정책 적용
+
+동작: 새 국가의 playable 정책과 삭제 시 player 처리 규칙을 구현한다.
+
+검증: 생성 국가 지정, 삭제, undo 순서를 테스트한다.
+
+분기: 삭제 국가가 플레이 국가로 유지되면 `fail`.
+
+### 지도 artifact index
+
+#### 9-34. source별 Map index 생성
+
+동작: countries, borders, pointLabels, glyphLabels, capitals를 countryId 기반 Map으로 보관한다.
+
+검증: seed collection과 재직렬화 collection이 의미상 동일해야 한다.
+
+분기: feature 순서 hash가 실행마다 달라지면 `fail`.
+
+#### 9-35. country polygon patch 적용
+
+동작: created/update/delete ID만 polygon index에 반영한다.
+
+검증: 31개 분할에서 다른 국가 feature 참조가 유지되어야 한다.
+
+분기: 모든 feature를 재생성하면 `fail`.
+
+#### 9-36. 임시 border patch 적용
+
+동작: 첫 버전에서는 변경 polygon outline을 border artifact로 사용한다.
+
+검증: 삭제 중국 외곽선이 사라지고 31개 성 외곽선이 나타나는지 확인한다.
+
+분기: 중국 polygon과 성 polygon이 동시에 존재하면 `fail`.
+
+#### 9-37. capital patch 적용
+
+동작: 생성·삭제 국가의 수도 feature를 추가·제거한다.
+
+검증: 수도가 없는 새 국가는 dot을 생성하지 않아야 한다.
+
+분기: 부모 국가 수도가 자식 국가에 무단 복제되면 `fail`.
+
+#### 9-38. 임시 point label 생성
+
+동작: commit 직후 사용할 저비용 point label을 자동 생성한다.
+
+검증: 새 국가 모두 이름을 가지며, 수동 국가별 좌표가 없어야 한다.
+
+분기: label 생성 실패가 polygon commit 전체를 막으면 fallback 정책을 검토하되, 이름 없는 국가는 허용하지 않는다.
+
+#### 9-39. MapLibre source batch 갱신
+
+동작: 같은 revision의 collection을 모든 관련 source에 연속 적용하고 appliedRevision을 기록한다.
+
+검증: source별 revision이 서로 다르게 관측되는 프레임이 최종 settled 상태에 남지 않아야 한다.
+
+분기: settled 후 revision 불일치가 있으면 `fail`.
+
+#### 9-40. 저해상도·고해상도 source 동기화
+
+동작: 현재 zoom과 무관하게 low/high source가 같은 국가 ID 집합을 갖게 한다.
+
+검증: 분할 상태에서 zoom 2.8 경계를 왕복해도 CHN이 재등장하지 않아야 한다.
+
+분기: zoom에 따라 과거 국가가 보이면 `fail`.
+
+### 정밀 라벨 비동기화
+
+#### 9-41. label job 타입 정의
+
+동작: countryId, revision, geometryHash, text cache key, priority를 정의한다.
+
+검증: stale revision job 결과를 식별할 수 있어야 한다.
+
+분기: countryId만으로 결과를 적용하면 `fail`.
+
+#### 9-42. label Worker 부트스트랩
+
+동작: 기존 순수 glyph geometry 함수를 Web Worker에서 실행한다.
+
+검증: Worker가 MapLibre와 DOM을 import하지 않아야 한다.
+
+분기: main thread에서 동일 계산을 병행하면 `fail`.
+
+#### 9-43. label artifact 캐시 구현
+
+동작: geometryHash, mapLabelKo, fontHash, policyVersion으로 캐시한다.
+
+검증: 동일 국가 재생성 시 cache hit, 이름 변경 시 해당 국가 miss를 확인한다.
+
+분기: OS locale이나 실행 순서에 따라 key가 달라지면 `fail`.
+
+#### 9-44. label job 우선순위 구현
+
+동작: 현재 viewport와 선택 국가를 먼저 계산한다.
+
+검증: 중국 분할 직후 화면 안의 성 라벨이 화면 밖 성보다 먼저 완료되는지 기록한다.
+
+분기: 우선순위가 결과 결정성에 영향을 주면 `fail`.
+
+#### 9-45. stale label 결과 폐기
+
+동작: 계산 중 국가가 삭제·재변경되면 이전 revision 결과를 적용하지 않는다.
+
+검증: 빠른 split→rollback에서 성 glyph가 rollback 후 나타나지 않아야 한다.
+
+분기: ghost label이 한 프레임 이상 settled 상태에 남으면 `fail`.
+
+#### 9-46. 임시 label에서 glyph label로 교체
+
+동작: 정밀 artifact 준비 후 같은 국가의 point fallback을 제거하고 glyph를 적용한다.
+
+검증: 이름 중복 0, 무라벨 시간 0, 교체 후 instance 1을 확인한다.
+
+분기: 중복 또는 깜빡임이 관측되면 `fail`.
+
+### 국경 topology 확장
+
+#### 9-47. 인접 국가 index 구현
+
+동작: bbox 후보와 실제 공유 경계를 사용해 neighbor set을 만든다.
+
+검증: 중국 이웃과 비이웃 표본을 검사한다.
+
+분기: bbox만 겹친 국가를 확정 이웃으로 처리하면 `fail`.
+
+#### 9-48. 영향 국경만 재계산
+
+동작: changed 국가와 neighbors의 국경 artifact만 재생성한다.
+
+검증: 중국 분할이 남미 국경 hash를 바꾸지 않아야 한다.
+
+분기: 전체 국경 재생성이 발생하면 `fail`.
+
+#### 9-49. 공유 경계 중복 제거
+
+동작: 두 국가가 공유하는 선을 canonical edge로 한 번만 저장한다.
+
+검증: 성 간 경계가 이중 stroke로 렌더링되지 않아야 한다.
+
+분기: 틈, 중복, world-spanning edge가 있으면 `fail`.
+
+#### 9-50. 해안선과 내부 국경 분리
+
+동작: 한쪽 countryId가 없는 edge를 coast로 분류한다.
+
+검증: 중국 분할 전후 외부 해안선 hash와 내부 경계 변화가 구분되어야 한다.
+
+분기: 내부 성 경계가 해안선 스타일로 표시되면 `fail`.
+
+### undo·redo·저장
+
+#### 9-51. 변경 국가 before-image 기록
+
+동작: 전체 세계가 아니라 영향 국가의 원본 entity와 artifact만 기록한다.
+
+검증: 중국 분할 record에 원본 CHN과 생성 31개 제거 정보가 포함되어야 한다.
+
+분기: boolean geometry를 역연산으로만 복원하면 `fail`.
+
+#### 9-52. undo 구현
+
+동작: 마지막 committed command의 before-image를 원자적으로 적용한다.
+
+검증: state, source, search, selection, label cache 참조 상태를 확인한다.
+
+분기: 화면만 복원되거나 revision이 감소하면 `fail`.
+
+#### 9-53. redo 구현
+
+동작: undo된 명령을 동일 결과 hash로 다시 적용한다.
+
+검증: 최초 apply와 redo의 국가·artifact hash가 같아야 한다.
+
+분기: 새 ID나 색상이 달라지면 `fail`.
+
+#### 9-54. 연속 명령 history 구현
+
+동작: rename→split→delete→undo→undo→redo 순서를 지원한다.
+
+검증: 각 revision의 예상 국가 집합을 확인한다.
+
+분기: history pointer와 store revision이 어긋나면 `fail`.
+
+#### 9-55. 동적 WorldState 직렬화
+
+동작: schemaVersion, seedVersion, command history 또는 snapshot을 저장한다.
+
+검증: 저장→새 세션 load 후 의미상 동일한 state hash를 확인한다.
+
+분기: MapLibre 객체, Worker 객체, 함수가 직렬화되면 `fail`.
+
+#### 9-56. 오래된 저장 데이터 migration
+
+동작: 기존 플레이 국가 저장 형식과 새 WorldState 형식의 migration을 정의한다.
+
+검증: 삭제된 국가 ID가 있는 저장 데이터를 안전하게 복구한다.
+
+분기: 앱 시작이 실패하거나 데이터를 묵시적으로 잘못 연결하면 `fail`.
+
+### 성능·경합·장애
+
+#### 9-57. 31개 분할 성능 gate
+
+동작: 중국 성 분할을 20회 측정한다.
+
+검증: 3절 기준과 전체 재생성 대비 속도를 보고한다.
+
+분기: 기준 초과 시 병목 profile을 첨부하고 `fail`.
+
+#### 9-58. 빠른 생성·삭제 반복 gate
+
+동작: 100개 synthetic 국가 create/delete를 연속 실행한다.
+
+검증: 메모리 증가, dangling index, ghost feature, unhandled rejection을 확인한다.
+
+분기: 최종 seed hash가 원본과 다르면 `fail`.
+
+#### 9-59. split 중 rollback 경합 gate
+
+동작: Worker label 계산이 진행 중일 때 즉시 rollback한다.
+
+검증: stale 결과 폐기와 원본 중국 label 복원을 확인한다.
+
+분기: 성 label이나 ID가 남으면 `fail`.
+
+#### 9-60. source 갱신 실패 주입
+
+동작: 한 MapLibre source의 `setData()` 실패를 주입한다.
+
+검증: 오류 상태를 보고하고 다음 성공 갱신에서 모든 source를 같은 revision으로 회복한다.
+
+분기: 영구적인 반쪽 상태가 남으면 `fail`.
+
+#### 9-61. Worker 실패 주입
+
+동작: glyph 계산 실패와 timeout을 주입한다.
+
+검증: polygon과 임시 label은 유지되고 재시도 또는 오류 표지가 동작한다.
+
+분기: 지도 전체가 error 상태가 되면 `fail`.
+
+### 최종 통합
+
+#### 9-62. 구조화 명령 테스트 UI
+
+동작: 개발 환경에서 JSON MapCommand를 입력하고 dry-run/apply/undo할 수 있는 최소 UI를 만든다. 자연어 입력은 추가하지 않는다.
+
+검증: 잘못된 명령은 미리보기에서 거부되고 유효 명령만 apply 가능해야 한다.
+
+분기: UI가 executor를 우회하면 `fail`.
+
+#### 9-63. 중국 분할 전체 사용자 흐름 E2E
+
+동작: 구조화 명령 입력→dry-run→apply→31개 국가 렌더→검색→선택→패널→정밀 label→undo→중국 복원을 실행한다.
+
+검증: 각 단계의 WorldState revision, source revision, 검색 결과, 화면 ID, label instance를 기록한다.
+
+분기: 어느 계층에서든 ID 집합이 다르면 `fail`.
+
+#### 9-64. 최종 품질·완료 판정
+
+동작: clean seed에서 unit, lint, typecheck, production build, 전체 E2E, 성능, 저장·복원, 장애 주입을 순서대로 실행한다.
+
+완료 gate:
+
+- 모든 Prompt 09 보고서가 현재 hash 기준 `pass`
+- unit 전체 통과
+- lint error 0
+- typecheck 통과
+- production build 통과
+- 전체 E2E 통과
+- 중국 31개 분할·검색·선택·label·undo 통과
+- 100개 빠른 생성·삭제 후 seed hash 복원
+- main-thread long task 0
+- stale label 0
+- dangling country ID 0
+- 정적 `countryById` 런타임 의존 0
+- Prompt 08 보고서를 완료 근거로 사용한 항목 0
+
+분기: 하나라도 실패하면 Prompt 09는 `fail`이며 일부 완료로 축소하지 않는다. 모두 통과했을 때만 `reports/prompt09/9-64-final.json`을 `pass`로 기록한다.
+
+## 5. 금지 구현
+
+- LLM이 GeoJSON source나 Zustand를 직접 수정하는 코드
+- 국가별 하드코딩된 생성·삭제 분기
+- 중국 전용 제품 command executor
+- 국가 변경마다 전체 세계 label 재계산
+- 국가 변경마다 전체 검색 index 재생성
+- 정적 `countryById`와 동적 WorldState 동시 사용
+- 실패한 batch의 부분 commit
+- rollback을 위한 boolean 역연산만 저장
+- stale Worker 결과 적용
+- 국가별 수동 label anchor·font size·tracking 추가
+- 테스트 통과를 위한 국가 수 고정값 복원
+- MapLibre 화면만 바꾸고 WorldState는 그대로 두는 구현
+- 전체 source snapshot을 장기 undo history로 무제한 저장
+- Prompt 08 단계나 보고서를 Prompt 09 PASS 증거로 재사용
+
+## 6. Prompt 09 이후 연결 계약
+
+후속 자연어 프롬프트 시스템은 다음 인터페이스만 사용할 수 있다.
+
+```text
+사용자 자연어
+→ 해석된 MapCommand batch
+→ schema validation
+→ dry-run preview
+→ 사용자 승인
+→ atomic executor
+→ WorldPatch
+→ WorldState 및 파생 artifact 반영
+```
+
+후속 시스템은 country ID를 임의로 추측하지 않고 현재 WorldState 검색 결과로 대상을 resolve해야 한다. 모호한 대상, 충돌하는 명령, 큰 영토 변화는 apply 전에 사용자 확인을 요구한다.

@@ -1,0 +1,14 @@
+{
+  "RUS":{"angleOffset":3,"fontScale":0.9,"letterSpacing":0.18},
+  "CHN":{"fontScale":0.9,"minimumCurvatureRatio":0.05},
+  "CHL":{"angleOffset":-6,"fontScale":0.9,"letterSpacing":0.04,"minZoom":3},
+  "NOR":{"angleOffset":-5,"fontScale":0.9},
+  "JPN":{"angleOffset":-4,"fontScale":0.9},
+  "NZL":{"angleOffset":-5,"fontScale":0.9},
+  "IDN":{"fontScale":0.86,"letterSpacing":0.06},
+  "VAT":{"minZoom":7,"placementMode":"small-country-point"},
+  "MCO":{"minZoom":7,"placementMode":"small-country-point"},
+  "SMR":{"minZoom":6.5,"placementMode":"small-country-point"},
+  "LIE":{"minZoom":6.5,"placementMode":"small-country-point"},
+  "SGP":{"minZoom":6,"placementMode":"small-country-point"}
+}

@@ -1,0 +1,42 @@
+{
+  "subtask": "8A-1",
+  "status": "pass",
+  "scope": "render filter and data contract recovery",
+  "dataContract": {
+    "countryCount": 256,
+    "curvedLineCount": 182,
+    "pointFallbackCount": 74,
+    "intersection": [],
+    "unionCount": 256,
+    "exclusiveAndComplete": true
+  },
+  "filterContract": {
+    "baselinePlacementMode": "curved-line",
+    "pointPlacementMode": "small-country-point",
+    "sharedConstantsAdded": true,
+    "zoomFilterUsesCurvedMode": true,
+    "showOnlyFilterUsesCurvedMode": true
+  },
+  "commands": {
+    "relatedUnitTests": {"exitCode": 0, "testFiles": 3, "tests": 28},
+    "productionBuild": {"exitCode": 0},
+    "browserSmoke": {"exitCode": 0, "passed": 1, "failed": 0}
+  },
+  "browserEvidence": {
+    "mapLoaded": true,
+    "initialRawCounts": {"USA": 1, "RUS": 1, "CHN": 1},
+    "generalCurvedShowOnly": {"DEU": "country-labels-territory"},
+    "pointFallbackLayers": {"VAT": "country-labels-ultra-small", "MCO": "country-labels-ultra-small"},
+    "diagnosis": ["GeoJSON maxzoom 18 split 182 logical baselines into 515 tile fragments", "the ten-stop composite text-size expression produced zero Korean line placements", "maxzoom 0 overscaling and an equivalent two-stop exponential expression restored placement"]
+  },
+  "gates": {
+    "dynamicSetPartition": true,
+    "relatedUnitTests": true,
+    "productionBuild": true,
+    "initialCurvedLabelsRendered": true,
+    "showOnlyGeneralCurvedLabel": true,
+    "pointFallbackSmoke": true,
+    "status": "pass"
+  },
+  "nextStep": "8A-2 full curved-country quality recovery; outline transparency remains intentionally deferred to 8A-4."
+}

@@ -1,0 +1,684 @@
+# Pax Local 지도 시스템 3차 개선 작업
+
+당신은 기존 `pax-local` 프로젝트의 지도 시스템을 개선하는 시니어 GIS/WebGL 프론트엔드 개발자다.
+
+이번 작업은 새 프로젝트를 만드는 것이 아니다. 기존 구조와 정상 동작하는 국가 검색·선택·플레이 국가 저장 기능을 유지하면서 다음 문제를 수정한다.
+
+핵심 목표는 다음 세 가지다.
+
+1. 전 세계 Admin 1 행정구역 누락 문제를 데이터 단계에서 완전히 해결한다.
+2. 국가명을 Hearts of Iron IV 스타일로 영토 위에 배치한다.
+3. 국가가 화면에서 충분히 크게 보일 때만 이름을 표시하고, 확대하면 작은 국가 이름도 나타나게 한다.
+
+모바일은 지원하지 않는다. 1280×720 이상의 PC 환경만 대상으로 한다.
+
+---
+
+# 1. 작업 전 필수 확인
+
+코드를 수정하기 전에 다음 파일과 현재 구조를 반드시 읽어라.
+
+- `scripts/prepare-map-data.mjs`
+- `src/components/map/WorldMap.tsx`
+- `src/lib/map/map-config.ts`
+- `src/data/countries-2020.json`
+- `public/data/maps/countries-50m.geojson`
+- `public/data/maps/countries-10m.geojson`
+- `public/data/maps/admin1-boundaries-10m.geojson`
+- `public/data/maps/country-labels-2020.geojson`
+- `data/raw/ne_10m_admin_0_countries.geojson`
+- `data/raw/ne_50m_admin_0_countries.geojson`
+- `data/raw/ne_10m_admin_0_label_points.geojson`
+- `data/raw/ne_10m_admin_1_states_provinces.geojson`
+- `data/raw/ne_10m_populated_places_simple.geojson`
+- 현재 단위 테스트와 Playwright 테스트
+- `README.md`
+- `data/ATTRIBUTION.md`
+
+기존 기능을 제거하거나 프로젝트를 처음부터 다시 만들지 마라. 현재 구현을 분석하고 필요한 부분만 구조적으로 개선하라.
+
+---
+
+# 2. 확인된 Admin 1 누락 문제
+
+현재 Admin 1 데이터를 국가에 연결할 때 사실상 `sov_a3`만 사용하고 있다.
+
+Natural Earth Admin 1 데이터에서는 일부 국가가 다음과 같이 별도 주권 코드로 저장된다.
+
+- 미국: `adm0_a3 = USA`, `sov_a3 = US1`
+- 중국: `adm0_a3 = CHN`, `sov_a3 = CH1`
+- 핀란드: `adm0_a3 = FIN`, `sov_a3 = FI1`
+- 카자흐스탄: `adm0_a3 = KAZ`, `sov_a3 = KA1`
+- 영국: `adm0_a3 = GBR`, `sov_a3 = GB1`
+- 프랑스: `adm0_a3 = FRA`, `sov_a3 = FR1`
+
+현재 생성 결과는 다음과 같다.
+
+| 국가 | 원본 Admin 1 | 생성된 Admin 1 |
+|---|---:|---:|
+| 중국 | 32 | 0 |
+| 미국 | 51 | 0 |
+| 핀란드 | 18 | 0 |
+| 카자흐스탄 | 16 | 0 |
+| 영국 | 232 | 0 |
+| 프랑스 | 101 | 0 |
+
+이 6개만의 문제가 아니다. 원본 데이터에는 Admin 1이 있는데 생성 결과가 0개인 `adm0_a3` 코드가 현재 62개 존재한다. 따라서 이 문제를 국가별 하드코딩 몇 개로 처리해서는 안 된다.
+
+---
+
+# 3. Admin 1 국가 ID 정규화 수정
+
+Admin 1의 부모 국가를 결정하는 전용 함수를 만들어라.
+
+예시:
+
+```ts
+function resolveAdmin1CountryId(properties): string | null
+```
+
+다음 원칙을 적용한다.
+
+1. `adm0_a3`가 유효하고 현재 국가 또는 지도 단위 ID에 존재하면 가장 먼저 사용한다.
+2. 그렇지 않으면 `sov_a3`를 검사한다.
+3. 그다음 `gu_a3`, `iso_a2`, `iso_3166_2` 등 사용 가능한 필드를 검토한다.
+4. Natural Earth의 특수 코드에는 명시적인 정규화 테이블을 적용한다.
+5. 기존 코드 정규화를 Admin 0과 Admin 1에서 공통으로 사용한다.
+6. `KOS → XKX`, `SAH → ESH` 같은 기존 예외를 보존한다.
+7. `US1`, `CH1`, `FI1`, `KA1`, `GB1`, `FR1`처럼 Natural Earth 내부에서만 사용되는 코드를 최종 국가 ID로 저장하지 않는다.
+8. 연결 실패한 피처를 조용히 제거하지 않는다.
+
+Admin 1 결과의 `countryId`는 반드시 `countries-2020.json`의 실제 ID와 일치해야 한다.
+
+---
+
+# 4. 전 세계 Admin 1 누락 자동 검증
+
+특정 국가만 눈으로 확인하는 방식으로 끝내지 마라. 데이터 생성 스크립트에 자동 검증을 추가한다.
+
+국가별로 다음 값을 집계하라.
+
+```ts
+{
+  countryId: "USA",
+  rawAdmin1Count: 51,
+  generatedAdmin1Count: 51,
+  unresolvedCount: 0
+}
+```
+
+검증 기준:
+
+- 원본에서 유효한 `adm0_a3`를 가진 Admin 1 피처는 정당한 이유 없이 누락되면 안 된다.
+- 모든 생성 Admin 1 피처는 유효한 부모 국가 또는 지도 단위를 가져야 한다.
+- `countryId`가 비어 있으면 안 된다.
+- `admin1Id`가 비어 있으면 안 된다.
+- 동일 국가 안에서 `admin1Id`가 중복되면 안 된다.
+- geometry가 비어 있거나 잘못된 피처를 탐지한다.
+- 좌표 배열이 깨졌거나 최소 점 개수를 충족하지 않는 Polygon을 탐지한다.
+- 처리하지 못한 피처는 별도 목록으로 출력한다.
+- 예상치 못한 누락이 있으면 데이터 생성 명령을 실패시킨다.
+
+다음 6개 국가는 회귀 테스트의 필수 대상으로 지정한다.
+
+- `USA`
+- `CHN`
+- `FIN`
+- `KAZ`
+- `GBR`
+- `FRA`
+
+추가로 다음 국가도 표본 검증한다.
+
+- `KOR`, `PRK`, `JPN`, `CAN`, `RUS`, `IND`, `BRA`, `AUS`, `DEU`, `ESP`, `ITA`, `NLD`, `NZL`
+
+테스트는 특정 개수를 무조건 하드코딩하기보다 다음을 비교해야 한다.
+
+```ts
+generated count === valid raw features resolved to that country
+```
+
+데이터 정제 과정에서 중복 또는 명백히 잘못된 geometry를 제외한다면 그 이유와 개수를 보고서에 남겨라.
+
+---
+
+# 5. Admin 1 표시 규칙
+
+행정구역 경계는 다음 규칙으로 표시한다.
+
+- 낮은 줌에서는 숨기거나 매우 약하게 표시
+- 중간 줌부터 점진적으로 표시
+- 높은 줌에서는 명확하게 표시
+- 국경선보다 행정구역 경계가 더 강해 보여서는 안 됨
+- 국가 선택 테두리보다 약하게 표시
+- 해안선 및 국경선과 시각적으로 구분
+- 확대·축소 시 갑자기 깜빡이지 않도록 opacity를 보간
+
+권장 기준:
+
+```text
+zoom < 2.2: 숨김
+zoom 2.2~3.0: 매우 약하게 표시
+zoom 3.0~5.0: 점진적으로 선명해짐
+zoom >= 5.0: 일반 Admin 1 경계 강도
+```
+
+국가별 경계 데이터가 실제로 로드됐는지 확인할 수 있는 개발용 진단 기능도 제공하라.
+
+```ts
+window.__PAX_MAP_DEBUG__.getAdmin1Count("USA")
+window.__PAX_MAP_DEBUG__.getAdmin1Count("CHN")
+window.__PAX_MAP_DEBUG__.getUnresolvedAdmin1()
+```
+
+개발 환경에서 실제 브라우저 콘솔을 통해 호출 가능해야 한다.
+
+---
+
+# 6. HOI4식 국가명 표기
+
+현재 국가명은 하나의 Point 좌표에 일반 지도 라벨처럼 표시된다. 이 방식을 제거하거나 소국가용 보조 라벨로 제한한다.
+
+목표는 Hearts of Iron IV의 정치 지도처럼 국가 이름이 영토의 크기와 방향에 맞춰 펼쳐지는 방식이다.
+
+필수 특성:
+
+- 국가명은 수도 위치가 아니라 영토를 기준으로 배치
+- 넓은 국가에서는 영토 전체를 가로지르도록 표시
+- 영토가 가로로 길면 가로 방향으로 표시
+- 영토가 기울어져 있으면 그 방향에 맞춰 회전
+- 필요한 경우 완만한 곡선을 따라 표시
+- 국가 크기에 따라 글자 크기와 자간을 조절
+- 지도 회전이 없더라도 텍스트는 지도 좌표계에 고정
+- 글자가 위아래로 뒤집히지 않도록 유지
+- 국가 경계 밖으로 텍스트가 과도하게 튀어나오지 않아야 함
+- 수도명과 국가명이 중복되어 겹치지 않도록 충돌 처리
+- 한국어 국가명을 기본으로 표시
+- 영문 이름은 국가 정보 패널에서 유지하되 지도 기본 라벨에는 사용하지 않음
+
+단순히 `LABEL_X`, `LABEL_Y`를 사용하는 것으로 완료 처리하지 마라.
+
+---
+
+# 7. 국가명 기준선 데이터 생성
+
+새로운 파일을 생성한다.
+
+```text
+public/data/maps/country-label-baselines-2020.geojson
+```
+
+각 피처는 Point가 아니라 국가명 배치를 위한 `LineString`이어야 한다.
+
+```json
+{
+  "type": "Feature",
+  "properties": {
+    "countryId": "USA",
+    "nameKo": "미국",
+    "nameEn": "United States of America",
+    "labelRank": 1,
+    "fontSizeLow": 18,
+    "fontSizeHigh": 28,
+    "letterSpacing": 0.3,
+    "minZoom": 1.2,
+    "maxZoom": 9,
+    "placementMode": "territory-line",
+    "sourcePart": "mainland"
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [[-122, 39], [-101, 39], [-80, 38]]
+  }
+}
+```
+
+실제 좌표를 위 예시처럼 하드코딩하지 말고 국가 geometry로부터 계산한다.
+
+---
+
+# 8. 국가 라벨 기준선 계산 알고리즘
+
+## 8.1 본토 선택
+
+- Polygon이면 해당 Polygon 사용
+- MultiPolygon이면 각 구성요소의 면적 계산
+- 기본 라벨은 가장 큰 연결 영토에 배치
+- 해외 영토와 작은 섬이 본토 라벨 방향을 왜곡하면 안 됨
+- 프랑스 라벨이 프랑스령 기아나와 유럽 본토 사이에 배치되면 안 됨
+- 미국 라벨이 알래스카와 본토 사이 태평양에 배치되면 안 됨
+- 영국 라벨이 해외 영토 때문에 대서양에 배치되면 안 됨
+
+## 8.2 내부 중심점
+
+기하학적 centroid만 사용하지 마라. centroid는 오목한 국가나 섬 국가에서 바다 또는 국경 밖으로 나갈 수 있다.
+
+다음 중 적절한 방법을 사용한다.
+
+- `polylabel`
+- pole of inaccessibility
+- 최대 내접점
+- 유효한 공식 Natural Earth label point와 geometry 기반 검증의 조합
+
+기존 `ne_10m_admin_0_label_points.geojson`도 참고할 수 있지만 최종 위치가 국가 geometry 내부인지 검증해야 한다.
+
+## 8.3 국가 주축 계산
+
+다음 중 하나를 사용해 국가 형태의 주축을 계산한다.
+
+- PCA
+- minimum rotated rectangle
+- oriented bounding box
+
+주축이 국가의 긴 방향을 따르도록 한다.
+
+## 8.4 기준선 생성
+
+주축 방향으로 국가 내부를 통과하는 선을 만들고 Polygon과 교차시킨다.
+
+- 가장 긴 유효 내부 선분 선택
+- 선 전체가 가능한 한 국가 내부에 있도록 처리
+- 지나치게 짧거나 조각난 선은 사용하지 않음
+- 필요하면 3~7개 점의 완만한 곡선으로 변환
+- 텍스트가 지나치게 휘지 않도록 최대 각도 제한
+
+## 8.5 수동 보정 지원
+
+자동 알고리즘만으로 모든 국가가 완벽하지 않을 수 있으므로 다음 수동 보정 파일을 지원한다.
+
+```text
+src/data/country-label-overrides-2020.json
+```
+
+```json
+{
+  "RUS": {
+    "angleOffset": 3,
+    "fontScale": 0.9,
+    "letterSpacing": 0.25
+  },
+  "CHL": {
+    "placementMode": "point",
+    "angle": -78
+  }
+}
+```
+
+수동 보정은 자동 계산 결과 위에 최소한으로 적용한다.
+
+우선 시각 검증 대상:
+
+- 러시아, 미국, 캐나다, 중국, 브라질, 인도, 호주, 카자흐스탄
+- 프랑스, 영국, 인도네시아, 일본, 칠레, 노르웨이
+- 필리핀, 뉴질랜드, 대한민국
+
+---
+
+# 9. 국가 크기에 따른 동적 라벨 노출
+
+모든 국가 이름을 세계 지도 축척에서 한꺼번에 표시하지 마라.
+
+국가 이름은 실제 면적만으로 판단하지 말고 현재 화면에서 국가가 차지하는 크기를 기준으로 표시해야 한다. 같은 국가도 축소 상태에서는 이름이 숨겨질 수 있고 확대하면 나타나야 한다.
+
+필수 동작:
+
+- 러시아·캐나다·미국·중국·브라질·호주 등 대형 국가는 낮은 줌에서도 표시
+- 대한민국·포르투갈·네덜란드 등 중소 국가는 중간 줌에서 표시
+- 싱가포르·바레인·몰타·안도라·리히텐슈타인·모나코·산마리노·바티칸 등은 높은 줌에서 표시
+- 작은 국가도 충분히 확대하면 반드시 이름이 표시
+- 작은 국가 라벨이 화면 밖이나 바다 한가운데 표시되지 않아야 함
+- 소국가 점 마커와 이름이 충돌하면 적절한 offset 사용
+- 현재 선택한 국가와 플레이 국가 라벨에 우선순위를 부여할 수 있음
+
+---
+
+# 10. 라벨 가시성 계산 기준
+
+각 국가에 대해 다음 값을 계산한다.
+
+```ts
+type CountryLabelMetrics = {
+  countryId: string;
+  area: number;
+  mainPartArea: number;
+  baselineLength: number;
+  labelRank: number;
+  minZoom: number;
+  preferredFontSize: number;
+  preferredLetterSpacing: number;
+};
+```
+
+`minZoom`은 단순한 수동 국가 목록이 아니라 다음 요소를 조합해 계산한다.
+
+- 본토 면적
+- 기준선 길이
+- 한글 국가명 글자 수
+- 국가의 가로·세로 비율
+- 섬 국가 여부
+- 라벨을 넣을 수 있는 내부 폭
+- MapLibre 화면상 예상 픽셀 길이
+
+대략 다음 조건을 만족할 때 라벨을 표시한다.
+
+```text
+화면상 기준선 길이 >= 라벨 필요 폭 + 여백
+```
+
+가능하면 줌별 예상 화면 픽셀 길이를 계산해 `minZoom`을 생성 시점에 결정한다. MapLibre 충돌 방지도 함께 사용하되 충돌 방지만으로 노출 여부를 전부 결정하지 마라.
+
+---
+
+# 11. MapLibre 라벨 레이어
+
+기본 구현은 `LineString`과 MapLibre Symbol 레이어를 사용한다.
+
+```ts
+{
+  id: "country-labels-hoi4",
+  type: "symbol",
+  source: "country-label-baselines",
+  minzoom: 1,
+  layout: {
+    "symbol-placement": "line-center",
+    "text-field": ["get", "mapLabelKo"],
+    "text-font": ["Noto Sans KR Local"],
+    "text-size": [
+      "interpolate",
+      ["linear"],
+      ["zoom"],
+      1,
+      ["get", "fontSizeLow"],
+      6,
+      ["get", "fontSizeHigh"]
+    ],
+    "text-letter-spacing": ["get", "letterSpacing"],
+    "text-rotation-alignment": "map",
+    "text-keep-upright": true,
+    "text-max-angle": 20,
+    "text-allow-overlap": false,
+    "text-ignore-placement": false,
+    "symbol-sort-key": ["get", "labelRank"]
+  }
+}
+```
+
+MapLibre 표현식에서 피처별 `minZoom`을 직접 처리하기 어렵다면 다음 중 적절한 방법을 사용한다.
+
+- 줌 구간별 라벨 레이어 분리
+- `step` 또는 `interpolate` 표현식
+- 줌 이벤트에서 filter 갱신
+
+줌 이벤트마다 전체 GeoJSON을 재생성하면 안 된다.
+
+---
+
+# 12. 한글 HOI4형 타이포그래피
+
+한국어는 영문 대문자와 다르게 글자 수가 짧고 자간을 지나치게 벌리면 부자연스럽다.
+
+- 국가 크기가 커지면 글자 크기와 자간을 함께 증가
+- 자간에 상한 설정
+- `미         국`처럼 지나치게 벌어지지 않게 처리
+- 두 글자 국가명은 글자 크기를 더 키우고 자간 증가는 제한
+- 긴 국가명은 글자 크기를 줄이거나 적절한 약칭 사용 가능
+- 국가명 약칭은 별도 데이터 필드로 관리
+- 임의로 번역을 잘라내지 않음
+- 밝은 halo 또는 그림자를 사용해 국경선 위에서도 읽히게 함
+- 선택 테두리와 색상이 충돌하지 않도록 처리
+
+예시:
+
+```ts
+{
+  nameKo: "중화인민공화국",
+  mapLabelKo: "중국"
+}
+```
+
+지도에는 `mapLabelKo`, 정보 패널에는 정식 `nameKo`를 사용한다. 2020년 OTL 기준의 일반적인 한국어 국명을 사용한다.
+
+---
+
+# 13. 고해상도 레이어 상호작용 수정
+
+현재 확대하면 1:10m 국가 레이어가 보이지만 클릭·호버·선택 테두리는 1:50m 레이어를 사용한다. 이를 수정한다.
+
+- 낮은 줌에서는 1:50m 레이어로 상호작용
+- 높은 줌에서는 1:10m 레이어로 상호작용
+- 전환 구간에서 중복 이벤트 방지
+- 선택·호버·플레이 국가 테두리도 현재 표시 중인 해상도 geometry 사용
+- 고해상도에만 있는 지도 단위도 정책상 선택 가능하다면 클릭 가능하게 처리
+- 선택 테두리와 고해상도 해안선이 어긋나지 않게 처리
+
+---
+
+# 14. 플레이 가능 국가와 지도 단위 분리
+
+현재 모든 지도 단위가 `playable: true`인 문제를 수정한다.
+
+```ts
+type MapUnit = {
+  id: string;
+  unitType:
+    | "sovereign-country"
+    | "dependent-territory"
+    | "disputed-territory"
+    | "military-base"
+    | "buffer-zone"
+    | "uninhabited-territory";
+  playable: boolean;
+};
+```
+
+다음 항목이 자동으로 독립 플레이 국가가 되면 안 된다.
+
+- 군사기지
+- 완충지대
+- 무인도
+- 해상 암초
+- 남극
+- 단순 해외 영토
+- Natural Earth의 기술적 지도 단위
+
+2020년 OTL에서 플레이 가능한 국가 목록을 별도 파일로 관리한다. 지도에는 필요한 영토를 표시할 수 있지만 국가 선택 목록과 플레이 가능 여부는 별개다.
+
+---
+
+# 15. 상세 지도 로딩 상태
+
+1:10m 국가 데이터와 Admin 1 데이터 로딩에 별도 상태를 추가한다.
+
+```ts
+type DetailedMapStatus = "idle" | "loading" | "ready" | "error";
+```
+
+- 저해상도 지도 로딩 완료와 상세 지도 로딩 완료 구분
+- 상세 지도 로딩 실패 시 작은 재시도 UI 제공
+- 실패했다고 전체 지도를 막지 않음
+- 중복 fetch 방지
+- 컴포넌트 제거 후 레이어 추가 방지
+- 에러 내용을 개발 콘솔과 디버그 API에서 확인 가능하게 처리
+- 확대할 때 약 23MB를 불러온다는 점을 고려해 불필요한 재요청 방지
+
+---
+
+# 16. 연속 세계지도 검증
+
+현재 `renderWorldCopies: true` 설정을 유지한다.
+
+Playwright에서 다음 동작을 실제 검증한다.
+
+1. 태평양이 보이도록 이동
+2. 지도를 동쪽으로 계속 드래그
+3. 날짜변경선을 통과
+4. 미국이 다시 나타나는지 확인
+5. 반대 방향으로 이동해 아시아가 다시 나타나는지 확인
+6. 검색 후 국가 이동이 현재 보고 있는 world copy 중 가장 가까운 쪽으로 이동하는지 확인
+
+단순히 설정값이 `true`인지 확인하는 테스트로 끝내지 마라.
+
+---
+
+# 17. 데이터 단순화 안정성
+
+현재의 단순 거리 기반 좌표 제거 방식은 폴리곤 위상을 깨뜨릴 가능성이 있다. 다음을 검토하고 개선한다.
+
+- topology-preserving simplification 사용
+- Polygon ring 폐쇄 유지
+- 최소 유효 좌표 개수 유지
+- self-intersection 검사
+- 빈 Polygon 검사
+- MultiPolygon 구성요소 유실 검사
+- 국가 경계와 Admin 1 경계의 과도한 불일치 방지
+
+가능하면 검증된 라이브러리를 사용하되 라이선스와 번들 영향을 기록한다. 데이터 변환은 브라우저 런타임이 아니라 빌드 전 스크립트에서 수행한다.
+
+---
+
+# 18. 출처와 UI 표기 수정
+
+실제 사용 데이터에 맞춰 다음 문서를 수정한다.
+
+- `README.md`
+- `data/ATTRIBUTION.md`
+- 화면 하단 지도 출처
+
+더 이상 `1:110m`만 사용한다고 표시하면 안 된다. 최소한 다음 자료를 명시한다.
+
+- Natural Earth Admin 0 Countries 1:50m
+- Natural Earth Admin 0 Countries 1:10m
+- Natural Earth Admin 0 Label Points 1:10m
+- Natural Earth Admin 1 States and Provinces 1:10m
+- Natural Earth Populated Places 1:10m
+- 사용한 로컬 폰트와 라이선스
+
+---
+
+# 19. 필수 자동 테스트
+
+## 19.1 데이터 테스트
+
+- 필수 국가가 모두 존재
+- 필수 국가의 한국어 이름 존재
+- 모든 playable ID가 국가 메타데이터에 존재
+- 모든 Admin 1의 부모 ID가 존재
+- 원본과 생성 결과의 Admin 1 개수 비교
+- 미국·중국·핀란드·카자흐스탄·영국·프랑스 Admin 1이 0이 아님
+- 국가 라벨 기준선 geometry가 유효한 LineString
+- 기준선이 해당 국가의 본토 또는 유효한 라벨 영역과 교차
+- 모든 라벨에 `minZoom` 존재
+- 작은 국가의 `minZoom`이 대형 국가보다 일반적으로 높음
+- 수도 좌표와 국가 라벨 좌표가 무조건 동일하지 않음
+- 지도 단위와 플레이 가능 국가가 구분됨
+- 중복 ID 없음
+- 깨진 geometry 없음
+
+## 19.2 브라우저 테스트
+
+- 낮은 줌에서 러시아·미국·중국 등 대형 국가명 표시
+- 낮은 줌에서 바티칸·모나코 등 작은 국가명 숨김
+- 확대하면 작은 국가명 표시
+- 미국 확대 후 주 경계 표시
+- 중국 확대 후 성급 경계 표시
+- 핀란드 확대 후 행정구역 경계 표시
+- 카자흐스탄 확대 후 행정구역 경계 표시
+- 영국 확대 후 행정구역 경계 표시
+- 프랑스 확대 후 행정구역 경계 표시
+- 국가명과 수도명이 같은 위치에 중복되지 않음
+- 고해상도 지도에서 국가 클릭 가능
+- 고해상도 해안선과 선택 테두리 정렬
+- 날짜변경선 연속 이동
+- 검색·선택·플레이 국가 확정 기능 유지
+- 새로고침 후 플레이 국가 복원 유지
+- 1280×720 이상 PC 레이아웃 유지
+
+테스트에서 단순히 DOM 요소 존재 여부만 확인하지 마라. MapLibre 디버그 API, 렌더링 피처 쿼리, 지도 줌과 중심 좌표를 함께 검증한다.
+
+---
+
+# 20. 시각 검증 스크린샷
+
+작업 완료 후 다음 스크린샷을 생성한다.
+
+```text
+screenshots/world-hoi4-labels.png
+screenshots/usa-admin1.png
+screenshots/china-admin1.png
+screenshots/finland-admin1.png
+screenshots/kazakhstan-admin1.png
+screenshots/uk-admin1.png
+screenshots/france-admin1.png
+screenshots/europe-medium-zoom-labels.png
+screenshots/small-countries-high-zoom.png
+screenshots/dateline-world-wrap.png
+screenshots/selected-country-high-resolution.png
+```
+
+각 스크린샷에서 확인할 사항을 결과 보고서에 설명한다.
+
+---
+
+# 21. 성능 요구사항
+
+대상 환경:
+
+- PC 전용
+- NVIDIA RTX 5060 Ti
+- RAM 32GB
+- 최신 Chrome 또는 Edge
+
+그렇더라도 비효율적인 전체 재계산은 금지한다.
+
+- Polygon 분석과 라벨 기준선 생성은 빌드 전 수행
+- 지도 이동마다 전체 국가 geometry 재분석 금지
+- 줌 이벤트마다 GeoJSON 전체 재생성 금지
+- 상세 데이터 fetch 중복 금지
+- 이벤트 리스너 누수 금지
+- MapLibre source와 layer 중복 추가 금지
+- world copy가 늘어나도 상태 데이터 자체를 복제하지 않음
+- 필요하다면 데이터 파일을 지역 또는 줌 단계별로 분할
+- 성능 최적화를 위해 라벨 품질을 과도하게 희생하지 않음
+
+---
+
+# 22. 작업 완료 기준
+
+다음 조건을 모두 만족해야 완료다.
+
+1. 미국, 중국, 핀란드, 카자흐스탄, 영국, 프랑스의 Admin 1 경계가 실제 화면에 표시된다.
+2. 전 세계 Admin 1 누락을 자동 검출하는 검사 결과가 제공된다.
+3. 원본에 경계가 있는데 생성 결과가 0인 국가가 정당한 설명 없이 남아 있지 않는다.
+4. 국가명이 수도가 아니라 영토를 기준으로 배치된다.
+5. 대형 국가명은 HOI4처럼 영토의 긴 방향을 따라 표시된다.
+6. 축소 상태에서는 작은 국가명이 숨겨진다.
+7. 확대하면 작은 국가명이 나타난다.
+8. 국가명 기준선은 가능한 한 해당 국가 영토 안에 있다.
+9. 고해상도 지도에서도 클릭·호버·선택 테두리가 정확하다.
+10. 플레이 가능 국가와 단순 지도 단위가 구분된다.
+11. 날짜변경선을 넘어 계속 이동할 수 있다.
+12. lint, unit test, production build, Playwright 테스트가 모두 통과한다.
+13. 출처 문서와 화면 하단 축척 표기가 실제 데이터와 일치한다.
+14. 기존 국가 검색·선택·확정·새로고침 복원 기능이 깨지지 않는다.
+
+---
+
+# 23. 최종 보고 형식
+
+작업이 끝나면 다음 순서로 보고하라.
+
+1. 변경한 파일 목록
+2. Admin 1 누락의 근본 원인
+3. 국가 ID 정규화 방식
+4. 수정 전후 국가별 Admin 1 개수 표
+5. 여전히 제외된 Admin 1 피처와 제외 이유
+6. HOI4식 라벨 배치 알고리즘
+7. 줌별 라벨 노출 기준
+8. 수동 라벨 보정이 적용된 국가
+9. 플레이 가능 국가 분리 기준
+10. 성능 최적화 내용
+11. 실행한 명령과 테스트 결과
+12. 생성한 검증 스크린샷
+13. 남아 있는 제한사항
+
+오류를 숨기거나 “대체로 작동한다”는 식으로 완료 처리하지 마라. 원본 데이터와 생성 데이터의 수치를 비교하고 실제 브라우저에서 확인한 결과를 제시하라.
