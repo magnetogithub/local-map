@@ -1,0 +1,17 @@
+{
+  "stage": "10-59",
+  "status": "pass",
+  "objective": "Return an idempotency conflict when commandId is already committed.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {"reports/prompt10/10-58-expected-revision-gate.json": "76fed55cf28fe549f1a2525944fd636d7aa702188d892da647f140cd1e032d31"},
+  "outputHashes": {
+    "src/lib/planning/planner-boundary.ts": "495458622dfec0ede63b1f43ccc779afc1bc7a44c207a5a388af76087495b00b",
+    "src/lib/planning/planner-boundary.test.ts": "fa4358e11da1251238e84d49f7424121a8759191c5710d048cfc0663a6cc25b8"
+  },
+  "measurements": {"duplicateCommandIdsAccepted": 0, "plannerCallsAfterDuplicateGate": 0},
+  "gates": {"committedCommandLookup": true, "typedIdempotencyConflict": true, "targetedTestsPass": true, "lintPass": true, "typecheckPass": true},
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "10-60"
+}

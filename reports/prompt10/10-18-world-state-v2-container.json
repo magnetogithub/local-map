@@ -1,0 +1,67 @@
+{
+  "stage": "10-18",
+  "status": "pass",
+  "objective": "Combine version, country, territory, topology, deterministic order, retirement registry, and hash-root domains in a responsibility-separated WorldState v2 container.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-17-topology-state.json": "3d3865d54b2fa16ffe0326f680a21fcd27c3d1a523c64b880e41024d3697bc4e"
+  },
+  "outputHashes": {
+    "src/lib/world/world-state-v2.ts": "b3f394576772d4c5afac42f96dccdb161daf1af34b635307b6e5d54a0807444e",
+    "src/lib/world/world-state-v2.test.ts": "26c24a6487a6ee34a32c32cf1f293bdeecc1e8a2520877e2fa67cc6d3c157341"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-18-world-state-v2-container.json",
+    "src/lib/world/world-state-v2.test.ts",
+    "src/lib/world/world-state-v2.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-17 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add WorldState v2 container targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/world-state-v2.test.ts", "exitCode": 1, "note": "Expected red test: world-state-v2 module did not exist."},
+    {"command": "Implement the responsibility-separated WorldState v2 container and cross-domain reference checks", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/world-state-v2.test.ts src/lib/world/topology-state.test.ts src/lib/world/territory-owner-invariants.test.ts src/lib/world/country-order.test.ts src/lib/world/territory-order.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/world-state-v2.ts src/lib/world/world-state-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "worldStateV2Fields": 11,
+    "countryTerritoryResponsibilityOverlaps": 0,
+    "territoryTopologyResponsibilityOverlaps": 0,
+    "recordOrderSetMismatchesAccepted": 0,
+    "danglingOwnerReferencesAccepted": 0,
+    "danglingTopologyReferencesAccepted": 0,
+    "targetedTestFilesPassed": 5,
+    "targetedTestsPassed": 24,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "versionDomainPresent": true,
+    "countryDomainPresent": true,
+    "territoryDomainPresent": true,
+    "topologyDomainPresent": true,
+    "deterministicOrdersPresent": true,
+    "retiredRegistryPresent": true,
+    "hashRootsPresent": true,
+    "domainResponsibilitiesNonOverlapping": true,
+    "crossDomainReferencesValidated": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-19"
+}

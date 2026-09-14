@@ -1,0 +1,58 @@
+{
+  "stage": "10-22",
+  "status": "pass",
+  "objective": "Build a deterministic SHA-256 countryCore leaf hash from country identity, names, political status, and module versions while excluding presentation and territory state.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-21-canonical-geometry-serializer.json": "2d303140af06711a7523731cd57aa657e53522d84fcf2d423f004a97902838a7",
+    "src/lib/world/canonical-serializer.ts": "35516101e2e86fe2750175c4eae35accb49837d257e3a778b958753be379c5df",
+    "src/lib/world/country-entity.ts": "c7417c968f5913de9417771d6f4ca69182c01c99ff36118d51b111ddfc87fdb9"
+  },
+  "outputHashes": {
+    "src/lib/world/sha256.ts": "d21ad4ad6ab297d4518d0066485fe2b88ec1adc623ddde8a3d1e242fdf8744c8",
+    "src/lib/world/country-core-hash.ts": "d83fea2922533e1fce2555f843ca6cab378da32b595a5729057cc4a751798bc6",
+    "src/lib/world/country-core-hash.test.ts": "640e7f15154723f41c227674ee956666ca6c878897ed3dab29d2f415b9bf5974"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-22-country-core-leaf-hash.json",
+    "src/lib/world/country-core-hash.test.ts",
+    "src/lib/world/country-core-hash.ts",
+    "src/lib/world/sha256.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-21 status and every recorded output hash", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-core-hash.test.ts", "exitCode": 1, "note": "Expected red test: country-core-hash module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/country-core-hash.test.ts src/lib/world/canonical-serializer.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/sha256.ts src/lib/world/country-core-hash.ts src/lib/world/country-core-hash.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 2,
+    "targetedTestsPassed": 15,
+    "sha256KnownVectorMismatches": 0,
+    "presentationChangeHashMismatches": 0,
+    "territoryChangeHashMismatches": 0,
+    "distinctCoreMutationHashes": 4,
+    "hashHexLength": 64,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "sha256KnownVectorsPass": true,
+    "presentationChangeIgnored": true,
+    "territoryChangeIgnored": true,
+    "coreChangesDetected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-23"
+}

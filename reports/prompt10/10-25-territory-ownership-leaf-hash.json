@@ -1,0 +1,52 @@
+{
+  "stage": "10-25",
+  "status": "pass",
+  "objective": "Build a Territory ownership leaf hash from only Territory ID and nullable ownerCountryId.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-24-territory-geometry-leaf-hash.json": "ad8ed1cea40a44866afb50d9c4f3de4f7bb23293fe7c6ede671565360f34081b",
+    "src/lib/world/canonical-serializer.ts": "35516101e2e86fe2750175c4eae35accb49837d257e3a778b958753be379c5df",
+    "src/lib/world/sha256.ts": "d21ad4ad6ab297d4518d0066485fe2b88ec1adc623ddde8a3d1e242fdf8744c8"
+  },
+  "outputHashes": {
+    "src/lib/world/territory-ownership-hash.ts": "a54a1a2db15861a5ee497a4333f59b0e20b86b6dae85486fa4a1887357304cda",
+    "src/lib/world/territory-ownership-hash.test.ts": "3b3bf5973bf1fb137ffce8ae17d0f86f3843371b532ba07f27c4638db009e949"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-25-territory-ownership-leaf-hash.json",
+    "src/lib/world/territory-ownership-hash.test.ts",
+    "src/lib/world/territory-ownership-hash.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-24 status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-ownership-hash.test.ts", "exitCode": 1, "note": "Expected red test: territory-ownership-hash module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-ownership-hash.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/territory-ownership-hash.ts src/lib/world/territory-ownership-hash.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 3,
+    "geometryOrPropertyHashMismatches": 0,
+    "distinctOwnerHashes": 3,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "geometryChangeIgnored": true,
+    "ownerChangeDetected": true,
+    "territoryIdIncluded": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-26"
+}

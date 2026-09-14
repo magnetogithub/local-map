@@ -1,0 +1,95 @@
+{
+  "stage": "9-9",
+  "status": "pass",
+  "objective": "Define the strict runtime-validated MapCommand envelope with commandId, type, expectedRevision, payload, issuedAt, and source.",
+  "inputHashes": {
+    "prompts/PROMPT_09_DYNAMIC_WORLD_COMMAND_RUNTIME.txt": "42c8696ea8cbb2b555de6575913f10e43e0822746758d404e87ee7405a06abe5",
+    "reports/prompt09/9-8-deterministic-country-iteration-selector.json": "10f7507710d7de443aa226aa586ac9b62f7b1fbdb968f9607c01a874dbd3ce88",
+    "package-lock.json": "fc7842b373ceeed78eb75bc3f640c1e262d08b3ff185ef9d88035336d426f8dd",
+    "src/lib/world/world-state.ts": "3083e848d5453117061cb7643b796e12216cf5fe284c8cc7066a219948d251ad"
+  },
+  "outputHashes": {
+    "src/lib/commands/map-command.ts": "41eb874fea39c60586a3f54e43295fe6bbf2dd53cc19f7869878016aeab19aec",
+    "src/lib/commands/map-command.test.ts": "118543f7de7f9b1990b17696fb5c41906e14b5b93d0c8491c3d442c0d0103512"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-9-map-command-envelope.json",
+    "src/lib/commands/map-command.test.ts",
+    "src/lib/commands/map-command.ts"
+  ],
+  "commands": [
+    {
+      "command": "Read AGENTS.md, installed Next.js client guide, current on-disk 9-9 prompt, and verify 9-8 status plus LF-normalized output hashes; create running report",
+      "exitCode": 0,
+      "durationMs": 1000
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/commands/map-command.test.ts",
+      "exitCode": 0,
+      "durationMs": 12935
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 9060
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/commands/map-command.ts src/lib/commands/map-command.test.ts",
+      "exitCode": 0,
+      "durationMs": 19981
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 27626
+    },
+    {
+      "command": "Verify strict runtime parsing and cast-only rejection references; compute LF-normalized output hashes; restore test-generated fix07 timestamps",
+      "exitCode": 0,
+      "durationMs": 1300
+    }
+  ],
+  "measurements": {
+    "envelopeFields": 6,
+    "unknownFieldCasesRejected": 1,
+    "missingFieldCasesRejected": 6,
+    "emptyCommandIdCasesRejected": 2,
+    "invalidRevisionCasesRejected": 5,
+    "invalidPayloadTimestampTypeSourceCasesRejected": 4,
+    "castOnlyInputsRejectedAtRuntime": 1,
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 17,
+    "fullTestFilesPassed": 19,
+    "fullTestsPassed": 125,
+    "typecheckErrors": 0,
+    "lintErrors": 0
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "currentPromptNineNineReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageHashesMatchCurrentOutputs": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "strictEnvelopeDefined": true,
+    "allRequiredEnvelopeFieldsDefined": true,
+    "runtimeSchemaValidatorUsed": true,
+    "unknownFieldsRejected": true,
+    "missingFieldsRejected": true,
+    "emptyCommandIdRejected": true,
+    "invalidRevisionRejected": true,
+    "invalidPayloadTimestampTypeSourceRejected": true,
+    "castOnlyInputRejected": true,
+    "targetedUnitTestsPass": true,
+    "fullUnitSuitePass": true,
+    "typecheckPass": true,
+    "lintPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": true,
+  "nextStage": "9-10"
+}

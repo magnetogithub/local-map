@@ -1,0 +1,103 @@
+{
+  "stage": "10-54-partial-coast-transition-hardening",
+  "status": "pass",
+  "objective": "Atomically split partial coast/internal transitions while preserving direct-candidate access boundaries and unaffected edge hashes.",
+  "defect": {
+    "summary": "Exact topologySegmentKey subtraction could not remove a shared subsegment from a longer pre-existing coast edge.",
+    "before": "The shared atomic interval was emitted as internal while the unsplit long coast still contained the same interval.",
+    "after": "Source and excluded segments are atomized on common collinear break points; only source-only atoms remain coast and shared atoms remain internal."
+  },
+  "implementation": {
+    "productionFullRebuildFallback": false,
+    "changes": [
+      "Added canonical-segment atomization that reuses topology precision and dateline normalization.",
+      "Partitioned prior coast/internal segments against newly shared segments at common break points.",
+      "Rebuilt candidate coast paths only for actual overlap or partial internal exposure; wholly unaffected coast edges retain IDs and leaf hashes.",
+      "Kept the direct previous/next bbox candidate boundary and did not access non-direct Territory geometry."
+    ]
+  },
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "src/lib/world/incremental-topology.ts": "a4f4b2b7d8cd627a44eff13c09569bc072252c9fbcdf7f6e219fbcfc64d64c63",
+    "src/lib/world/shared-segment.ts": "2050121d92b543495454b6e760cc788fa86190e5a667f6656036b0d2826edc5a",
+    "reports/prompt10/10-54-direct-candidate-access-hardening.json": "b0fc57303d9c0f9ba47cd90af7257ac36f1a33d111f229f4b53b96a6fc1b7e7f",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf"
+  },
+  "outputHashes": {
+    "src/lib/world/incremental-topology.ts": "42c98eca3eca41fcf87958ee43fd60d1ff3fab15a60ac470b5f364a2b0ae281c",
+    "src/lib/world/shared-segment.ts": "b6ec002b467a675ffedbe01b2b1a6ddec85a724e3a98308d2ebe11e2831e6fc4",
+    "src/lib/world/incremental-topology-partial-transition.test.ts": "7c6ac76ad32f9b9300cc6fd090ed07f9289ba3250aac225a1b7c6030f38931bb"
+  },
+  "protectedHashes": {
+    "reports/prompt10/10-54-direct-candidate-access-hardening.json": "b0fc57303d9c0f9ba47cd90af7257ac36f1a33d111f229f4b53b96a6fc1b7e7f",
+    "reports/prompt10/10-48-55-topology-correctness-hardening.json": "89d5624c526d054973b0cbd98c252e6c6cc45292d03502adedaf72ba62d96aa8",
+    "reports/prompt10/10-54-incremental-topology-recalculation.json": "aea50d43749961dc0cf9edcfbf46d544ccc71ee9c1f1fd6196943ee109a4657a"
+  },
+  "redTests": [{
+    "command": "npm.cmd test -- --run src/lib/world/incremental-topology-partial-transition.test.ts",
+    "result": "1 file; 7 tests; 6 failed, 1 passed before implementation",
+    "failures": "Front, middle, shrink, expansion, unequal split-point, and dateline cases differed from the full build; isolation/hash guard passed."
+  }],
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/world/incremental-topology-partial-transition.test.ts src/lib/world/topology-correctness-hardening.test.ts src/lib/world/incremental-topology-direct-access.test.ts src/lib/world/incremental-topology.test.ts",
+      "result": "4 files passed; 22 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run <12 topology and 10-54 related test files>",
+      "result": "12 files passed; 44 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- <6 related source and test files>",
+      "result": "passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "result": "passed"
+    },
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "result": "76 files passed; 749 tests passed"
+    },
+    {
+      "command": "Check report names for 10-56 or later and search modified runtime sources for forbidden dependencies",
+      "result": "no 10-56-or-later report; no forbidden runtime dependency"
+    }
+  ],
+  "measurements": {
+    "frontPartialTransitionMatchesFullBuild": true,
+    "middlePartialTransitionMatchesFullBuild": true,
+    "oldInternalPartialExposureMatchesFullBuild": true,
+    "sharedIntervalExpansionMatchesFullBuild": true,
+    "differentSplitPointsMatchFullBuild": true,
+    "datelinePartialTransitionMatchesFullBuild": true,
+    "coastInternalDuplicateAtomicSegmentCount": 0,
+    "nonDirectCandidateGeometryAccessCount": 0,
+    "unaffectedRemoteEdgeHashChanges": 0,
+    "inputTopologyMutationCount": 0,
+    "inputTerritoryMutationCount": 0,
+    "seedTopologyEdgeCount": 7688,
+    "seedInternalEdgeCount": 794,
+    "seedCoastEdgeCount": 6894,
+    "seedTopologyHash": "544f3152d28295f78717853582e061c655ab23082074aaa5ca2f2facdefd2d3c"
+  },
+  "gates": {
+    "runningReportCreatedBeforeRedTests": true,
+    "redReproductionConfirmed": true,
+    "partialTransitionRegressionTests": true,
+    "incrementalEqualsFullBuild": true,
+    "directCandidateAccessBoundary": true,
+    "unaffectedHashesPreserved": true,
+    "inputsUnchanged": true,
+    "relatedTests": true,
+    "eslint": true,
+    "typescript": true,
+    "fullUnitTests": true,
+    "promptAndExistingReportsUnchanged": true,
+    "noStage10_56Artifacts": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "10-56"
+}

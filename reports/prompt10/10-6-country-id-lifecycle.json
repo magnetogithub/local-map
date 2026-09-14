@@ -1,0 +1,76 @@
+{
+  "stage": "10-6",
+  "status": "pass",
+  "objective": "Define active and retired CountryId types and reject empty, surrounding-whitespace, active, or retired IDs without silently normalizing input.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-5-existing-command-audit.json": "0cae80c26104c95c285d5461652d3f2f8cebdb876fb1e903a176757b2ec5ebcf"
+  },
+  "outputHashes": {
+    "src/lib/world/country-id.ts": "b0f0de441fe905af73232ce09076a79ec5e46cda45991865c15424ad2c8b654f",
+    "src/lib/world/country-id.test.ts": "b8653106e0440af7e881d694c69ff904b3b3355044f5b4a036f4b01ec7c88c95"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-6-country-id-lifecycle.json",
+    "src/lib/world/country-id.test.ts",
+    "src/lib/world/country-id.ts"
+  ],
+  "commands": [
+    {"command": "Reopen the existing 10-6 report with status running and nextStage null", "exitCode": 0},
+    {"command": "Add surrounding-whitespace issuance and registry regression tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-id.test.ts", "exitCode": 1, "durationMs": 2266, "note": "Expected red test: 7 whitespace-bypass cases failed while 10 existing tests passed."},
+    {"command": "Reject surrounding whitespace in readCountryId without normalization, Unicode normalization, case conversion, or format regex", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-id.test.ts", "exitCode": 0, "durationMs": 2192},
+    {"command": "npm.cmd run lint -- src/lib/world/country-id.ts src/lib/world/country-id.test.ts", "exitCode": 0, "durationMs": 3050},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0, "durationMs": 3048},
+    {"command": "Compute current output hashes and verify that no 10-1 through 10-5 report or Prompt 10 file was modified", "exitCode": 0, "durationMs": 70}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 17,
+    "invalidOrEmptyIdCasesRejected": 5,
+    "surroundingWhitespaceBypassCasesRejected": 7,
+    "whitespaceBypassCasesRemaining": 0,
+    "canonicalIdValuePreservedCases": 1,
+    "activeIdReissuanceCasesRejected": 1,
+    "retiredIdReissuanceCasesRejected": 1,
+    "lifecycleConflictCasesRejected": 1,
+    "activeToRetiredTypeTransitions": 1,
+    "activeAndRetiredTypesDistinct": true,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 2,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "currentPromptTenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "countryIdTypeBoundaryDefined": true,
+    "activeAndRetiredTypesSeparated": true,
+    "emptyCountryIdRejected": true,
+    "surroundingWhitespaceCountryIdRejected": true,
+    "canonicalCountryIdReturnedUnchanged": true,
+    "silentTrimNormalizationAbsent": true,
+    "unicodeCaseAndRegexPolicyUnchanged": true,
+    "activeCountryIdReissuanceRejected": true,
+    "retiredCountryIdReissuanceRejected": true,
+    "activeRetiredRegistryConflictRejected": true,
+    "runtimeIssuanceHelperDefined": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": null
+}

@@ -1,0 +1,50 @@
+{
+  "stage": "10-60",
+  "status": "pass",
+  "objective": "Plan country.create against active and retired IDs and return an immutable territory-free next state.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {"reports/prompt10/10-59-command-id-duplicate-gate.json": "60730d75a97f76123c30d78a8e08ad133a91cc17755fd7142e6f62c953e32264"},
+  "outputHashes": {
+    "src/lib/planning/country-create-planner.ts": "e199e8dac886804a68dcf20d544a69e446dc7d87dcd9a0dee18477602b6e311a",
+    "src/lib/planning/country-create-planner.test.ts": "2752cb319204466fce9f3505fd7040b62bb7701e97f07e7affe795a56972230b",
+    "src/lib/planning/planner-test-fixture.ts": "6cac626213cda1f2fb7de742b1aead04b24542efb306d9a64c014a5807f4289f"
+  },
+  "commands": [
+    {"command": "npm.cmd test -- src/lib/planning/plan-result.test.ts src/lib/planning/planner-boundary.test.ts src/lib/planning/country-create-planner.test.ts", "result": "3 files passed; 9 tests passed"},
+    {"command": "related planning ESLint", "result": "passed"},
+    {"command": "npm.cmd exec tsc -- --noEmit", "result": "passed"},
+    {"command": "npm.cmd test -- --maxWorkers=1", "result": "80 files passed; 766 tests passed"}
+  ],
+  "measurements": {
+    "activeIdCollisionsAccepted": 0,
+    "retiredIdCollisionsAccepted": 0,
+    "newCountryOwnedTerritories": 0,
+    "countryOrderDeterminismFailures": 0,
+    "inputStateMutations": 0,
+    "unchangedTerritoryReferenceChanges": 0,
+    "unchangedTopologyReferenceChanges": 0,
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 9,
+    "fullUnitTestFilesPassed": 80,
+    "fullUnitTestsPassed": 766,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "activeIdRejected": true,
+    "retiredIdRejected": true,
+    "territoryFreeCountryCreated": true,
+    "deterministicCountryOrder": true,
+    "immutableNextState": true,
+    "relatedHashRootsUpdated": true,
+    "unrelatedDomainsShared": true,
+    "targetedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true,
+    "fullUnitSuitePass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": ["Vitest emits a non-failing future native config-loader warning."],
+  "nextStage": "10-61"
+}

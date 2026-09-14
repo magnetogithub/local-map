@@ -1,0 +1,29 @@
+{
+  "stage": "10-55-reaudit",
+  "status": "pass",
+  "summary": "Current 10-55 seed topology implementation passed revalidation. The original 10-55 report is retained as historical evidence.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "sourceHashes": {
+    "src/lib/world/canonical-topology.ts": "730f8d977496f2684df07ec59b741c6eb2ddea4a40eefc68d1e434b1e70d5a26",
+    "src/lib/world/topology-edge-hash.ts": "a36eb0b7dc0bfbbe3b6603b855507392fc35775679c17bfd196ed6e0c3c9bc70",
+    "src/lib/world/seed-topology-audit.ts": "77905774d2cf1d8f8179a77e66ea0b7d540355d4ae4ebe6fe6048fc556941d58",
+    "src/lib/world/seed-topology-audit.test.ts": "6d3ba9dab4a45eaaf4de9b6af922d73523e467af539da979eda9264767cc506d"
+  },
+  "measurements": {
+    "seedTerritories": 247,
+    "edgeCount": 7688,
+    "internalEdgeCount": 794,
+    "coastEdgeCount": 6894,
+    "duplicateEdgeCount": 0,
+    "worldSpanningEdgeCount": 0,
+    "topologyHash": "544f3152d28295f78717853582e061c655ab23082074aaa5ca2f2facdefd2d3c"
+  },
+  "verification": {
+    "relatedTests": "13 files passed; 52 tests passed",
+    "eslint": "passed",
+    "typescript": "passed",
+    "fullUnitTests": "77 files passed; 757 tests passed"
+  },
+  "firstFailedGate": null,
+  "nextStage": "10-56"
+}

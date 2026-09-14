@@ -1,0 +1,55 @@
+{
+  "stage": "10-23",
+  "status": "pass",
+  "objective": "Build a deterministic countryPresentation leaf hash from only the automatic presentation policy version and the optional reviewed override.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-22-country-core-leaf-hash.json": "42fad066d89f65c671817d72b096db99a9c57a65ebab3fe5bafc4ed161a12ec4",
+    "src/lib/world/canonical-serializer.ts": "35516101e2e86fe2750175c4eae35accb49837d257e3a778b958753be379c5df",
+    "src/lib/world/sha256.ts": "d21ad4ad6ab297d4518d0066485fe2b88ec1adc623ddde8a3d1e242fdf8744c8"
+  },
+  "outputHashes": {
+    "src/lib/world/country-presentation-hash.ts": "a3451dcaced66b454e71e7a210d681e53e3f01ee1206ab4990f48a1492dca9c3",
+    "src/lib/world/country-presentation-hash.test.ts": "ca0d496fbfe8b606bad2c2dfaf9f13ab70b68dbd7e17bbe62a7412febc3455c0"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-23-country-presentation-leaf-hash.json",
+    "src/lib/world/country-presentation-hash.test.ts",
+    "src/lib/world/country-presentation-hash.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-22 status and every recorded output hash", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-presentation-hash.test.ts", "exitCode": 1, "note": "Expected red test: country-presentation-hash module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/canonical-serializer.test.ts src/lib/world/canonical-geometry-serializer.test.ts src/lib/world/country-core-hash.test.ts src/lib/world/country-presentation-hash.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- <all 10-20 through 10-23 TypeScript files>", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 4,
+    "targetedTestsPassed": 29,
+    "nameChangeHashMismatches": 0,
+    "ownershipChangeHashMismatches": 0,
+    "distinctPresentationMutationHashes": 4,
+    "invalidAutomaticPolicyVersionsRejected": 3,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "automaticPolicyVersionIncluded": true,
+    "overrideIncluded": true,
+    "countryNamesIgnored": true,
+    "territoryOwnershipIgnored": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-24"
+}

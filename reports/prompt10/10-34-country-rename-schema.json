@@ -1,0 +1,52 @@
+{
+  "stage": "10-34",
+  "status": "pass",
+  "objective": "Define a strict non-empty country.rename v2 patch containing only explicit CountryNames fields.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-33-country-establish-schema.json": "4a7443829e729cf94469d8830aaf9e1b9d5fd645d4404583b6d5bbe1a83396af",
+    "src/lib/commands/country-create-v2.ts": "656db3b8a3b8cd0ede58e53fbf53cc35e374eee496374ee90db66a0d53770e42"
+  },
+  "outputHashes": {
+    "src/lib/commands/country-rename-v2.ts": "a7f9997050e5cdb4a652156d3ca4fedcb3c3862300b3490bfc5ad73519cf7c09",
+    "src/lib/commands/country-rename-v2.test.ts": "3d910b82d73a45f6c77932b8adbd1835f91bfb6f9a119eef4caa5ed3f1a86178"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-34-country-rename-schema.json",
+    "src/lib/commands/country-rename-v2.test.ts",
+    "src/lib/commands/country-rename-v2.ts"
+  ],
+  "commands": [
+    {"command": "Verify reports/prompt10/10-33-country-establish-schema.json status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/commands/country-rename-v2.test.ts", "exitCode": 1, "note": "Expected red test: country-rename-v2 module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/commands/country-rename-v2.test.ts src/lib/commands/country-create-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/commands/country-rename-v2.ts src/lib/commands/country-rename-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 2,
+    "targetedTestsPassed": 28,
+    "explicitNameFields": 5,
+    "emptyPatchCasesRejected": 2,
+    "unknownNameFieldCasesRejected": 6,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "explicitNameFieldsOnly": true,
+    "emptyPatchRejected": true,
+    "unknownNameFieldsRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-35"
+}

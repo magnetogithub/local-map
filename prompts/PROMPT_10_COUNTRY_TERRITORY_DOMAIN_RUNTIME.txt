@@ -1,0 +1,1145 @@
+# Prompt 10 — 국가·영토 분리형 동적 월드 런타임
+
+## 0. 위치와 목적
+
+이 문서는 저장소 루트를 기준으로 실행한다. 특정 개발 머신의 절대 경로를 전제로 하지 않는다.
+
+Prompt 09의 9-1부터 9-14까지는 현재 구현과 감사 이력으로 보존한다. Prompt 09의 9-15부터 9-64까지는 이 Prompt 10이 대체한다. Prompt 10을 시작한 뒤에는 대체된 Prompt 09 단계를 실행하거나 완료 보고서로 만들지 않는다.
+
+Prompt 10의 목표는 국가 정체성과 영토를 분리하고, 국가 생성·독립·소멸·분할·병합·영토 이전을 결정적이고 원자적으로 처리하는 런타임을 만드는 것이다.
+
+최종 실행 흐름은 다음과 같다.
+
+```text
+MapCommand
+→ structural schema validation
+→ semantic planner
+→ topology validation
+→ immutable next domain state
+→ atomic domain commit
+→ WorldPatch
+→ revision 기반 projection
+→ search / selection / panel / map / border / label
+```
+
+자연어 해석기, LLM 연결, 외교·경제·국가 중점의 실제 게임 규칙은 이 Prompt의 범위가 아니다. 다만 이후 모듈을 `countryId`에 거대한 단일 객체로 합치지 않고 독립적으로 추가할 수 있는 구조를 제공해야 한다.
+
+## 1. 확정된 설계 결정
+
+### 1.1 국가와 영토 분리
+
+`CountryEntity`는 국가 정체성과 핵심 metadata만 가진다. geometry를 소유하지 않는다.
+
+영토 geometry와 실효 지배자는 `TerritoryEntity`가 가진다.
+
+```text
+CountryEntity
+- id
+- names
+- politicalStatus
+- presentationOverride
+- moduleVersions
+
+TerritoryEntity
+- id
+- ownerCountryId: string | null
+- geometry
+- properties
+```
+
+외교 관계, 경제, 국가 중점, 정치, 군사와 같은 후속 데이터는 별도 module store에 둔다. `CountryEntity` 내부에 모든 데이터를 중첩한 거대 객체를 만들지 않는다.
+
+### 1.2 단일 실효 지배자
+
+각 Territory는 현재 한 국가만 실효 지배할 수 있다. `ownerCountryId === null`은 미점유 영토를 뜻한다.
+
+복수 국가의 영유권 주장과 분쟁 claim은 후속 module로 추가한다. 현재 단계에서는 겹치는 국가 polygon으로 claim을 표현하지 않는다.
+
+### 1.3 국가 ID 수명
+
+삭제된 `countryId`는 `retiredCountryIds`에 기록하고 재사용하지 않는다. undo는 같은 ID를 복원할 수 있지만, 삭제가 확정된 뒤 새로운 국가가 같은 ID를 다시 발급받아서는 안 된다.
+
+### 1.4 geometry policy
+
+좌표 정밀도, winding 정규화, boolean operation tolerance, 최소 면적과 topology 규칙은 versioned executor policy가 결정한다. 일반 command payload나 LLM이 이 정책을 선택하거나 임의로 완화할 수 없다.
+
+모든 plan과 commit은 사용한 `policyVersion`을 기록한다.
+
+### 1.5 domain commit과 projection
+
+`WorldState` domain commit만 원자 transaction으로 취급한다. MapLibre, 검색 index, UI state와 Worker 결과를 하나의 브라우저 transaction으로 가장하지 않는다.
+
+각 projection은 다음 계약을 따른다.
+
+- committed revision만 읽는다.
+- 자신이 반영한 `appliedRevision`을 기록한다.
+- 갱신 실패 시 마지막 정상 projection을 유지하고 오류를 보고한다.
+- 다음 성공 갱신에서 최신 committed revision으로 수렴한다.
+- stale revision 결과를 적용하지 않는다.
+
+### 1.6 presentation
+
+center, defaultZoom, label anchor와 기본 typography는 geometry와 공통 policy에서 자동 계산한다.
+
+수동 조정이 반드시 필요한 경우 하나의 `presentationOverride`에만 저장하며 근거와 policy version을 기록한다. `presentation`과 `initialPresentation`처럼 같은 의미의 필드를 중복 정의하지 않는다.
+
+### 1.7 topology 구현 순서
+
+인접국 index, canonical shared edge와 coast/internal-border 분류를 영토 split·merge executor보다 먼저 구현한다. polygon outline을 장기적인 제품 국경으로 사용하지 않는다.
+
+## 2. 국가 생성과 소멸 계약
+
+### 2.1 저수준 명령과 편의 명령 분리
+
+저수준 명령은 한 가지 책임만 가진다.
+
+- `country.create`: 영토 없는 국가 정체성을 생성한다.
+- `territory.partition`: Territory를 결정적인 여러 Territory로 분할한다.
+- `territory.assign`: 미점유 Territory의 owner를 지정한다.
+- `territory.transfer`: 한 국가의 Territory 전부 또는 분할된 Territory를 다른 국가로 이전한다.
+- `territory.unclaim`: owner를 null로 변경한다.
+- `country.delete`: 소유 Territory가 0인 국가 정체성만 삭제한다.
+
+편의 명령은 내부에서 저수준 명령 batch로 plan되며 한 revision으로 commit한다.
+
+- `country.establish`: 국가 생성과 미점유 Territory 할당을 한 transaction으로 실행한다.
+- `country.dissolve`: 모든 소유 Territory의 처리와 국가 삭제를 한 transaction으로 실행한다.
+- `country.split`: source 영토 partition, 결과 국가 생성, 소유권 재할당과 source 삭제를 한 transaction으로 실행한다.
+- `country.merge`: source 영토 이전, result 국가 생성 또는 갱신과 source 삭제를 한 transaction으로 실행한다.
+
+### 2.2 중간 무주지 상태
+
+planner 내부 임시 상태에서는 영토가 잠시 미점유일 수 있다. 그러나 establish, split, merge처럼 최종 소유자가 정해진 transaction은 중간 무주지 revision을 UI에 노출하지 않는다.
+
+영토를 실제 미점유 상태로 남기는 것은 명시적인 `territory.unclaim` 또는 `country.dissolve` disposition으로만 허용한다.
+
+### 2.3 국가 소멸 disposition
+
+영토가 남은 국가를 `country.delete`로 직접 삭제할 수 없다.
+
+`country.dissolve`는 모든 소유 Territory에 대해 다음 중 하나를 명시해야 한다.
+
+```text
+unclaim
+transfer(targetCountryId)
+merge(targetCountryId)
+```
+
+처리되지 않은 Territory가 하나라도 남으면 plan은 실패한다. geometry를 지도에서 묵시적으로 제거하는 disposition은 제공하지 않는다.
+
+### 2.4 빈 세계
+
+일반 `country.delete`와 `country.dissolve`는 마지막 유효 국가 삭제를 허용하지 않는다.
+
+빈 세계가 필요한 테스트·seed 교체·관리 작업은 일반 MapCommand가 아닌 내부 helper 또는 별도의 privileged `world.reset` 경계를 사용한다.
+
+## 3. 검증 책임
+
+### 3.1 schema validator
+
+schema validator는 다음만 책임진다.
+
+- 필수 필드와 strict unknown-field 정책
+- 문자열, ID, enum, 숫자와 배열 형식
+- 유한 좌표와 기본 GeoJSON 구조
+- command type과 payload의 구조적 대응
+- batch 크기와 중첩 깊이 제한
+
+schema validator는 현재 WorldState를 변경하거나 MapLibre artifact를 계산하지 않는다.
+
+### 3.2 semantic planner
+
+planner는 다음 핵심 불변식을 책임진다.
+
+- 국가·영토 ID 존재 여부와 충돌
+- retired ID 재사용 금지
+- expectedRevision 일치
+- ownerCountryId 참조 무결성
+- 단일 실효 지배자
+- 미점유 Territory만 establish에 사용
+- 영토 보존과 허용 tolerance 이내의 gap/overlap
+- split 결과 union과 source geometry의 동등성
+- transfer 전후 전체 면적 보존
+- dissolve 이후 dangling owner 0
+- topology와 geometry의 일치
+- 마지막 국가 삭제 금지
+
+프롬프트 품질을 runtime 안전성의 근거로 사용하지 않는다. 대신 반복적인 보고서 hash, schema 단계의 artifact 검증과 적용 불가능한 rollback gate는 제거한다.
+
+### 3.3 executor
+
+executor는 이미 검증된 plan만 commit한다. executor가 명령 의미를 다시 해석하거나 임의의 fallback을 선택하지 않는다.
+
+## 4. 영역별 계층 hash
+
+하나의 거대한 국가 객체 또는 WorldState 전체 직렬화를 유일한 hash로 사용하지 않는다.
+
+### 4.1 module leaf hash
+
+현재 Prompt에서 최소 다음 hash를 정의한다.
+
+```text
+countryCoreHash[countryId]
+countryPresentationHash[countryId]
+territoryGeometryHash[territoryId]
+territoryOwnershipHash[territoryId]
+topologyEdgeHash[edgeId]
+```
+
+후속 module은 다음과 같이 독립 hash namespace를 추가한다.
+
+```text
+relationHash[canonicalCountryPair]
+economyHash[countryId]
+focusTreeHash[countryId]
+politicsHash[countryId]
+```
+
+국가 관계 pair key는 정렬된 두 ID로 만든다.
+
+```text
+min(countryA, countryB) + ":" + max(countryA, countryB)
+```
+
+### 4.2 aggregate root
+
+정렬된 leaf hash로 영역별 root를 만든다.
+
+```text
+countriesRootHash
+territoriesRootHash
+topologyRootHash
+presentationRootHash
+```
+
+`worldContentHash`는 영역 root와 schemaVersion, seedVersion, policyVersion으로 계산한다. `revision`, issuedAt, commandId와 UI 상태는 `worldContentHash`에 포함하지 않는다.
+
+### 4.3 목적별 hash
+
+- `worldContentHash`: 의미상 국가·영토·topology 내용
+- `commitHash`: revision, worldContentHash, policyVersion과 직전 commitHash
+- `artifactHash`: 특정 revision의 projection 산출물
+- `historyHash`: command history와 undo/redo pointer
+
+undo 후 `worldContentHash`는 이전 내용과 같아질 수 있지만 revision과 commitHash는 감소하거나 과거 값으로 되돌아가지 않는다.
+
+### 4.4 결정성
+
+hash 입력은 canonical serialization을 사용한다.
+
+- object key 정렬
+- ID 목록 정렬 또는 명시적 domain order 사용
+- policy가 정한 좌표 정밀도
+- locale 비의존 숫자와 문자열 처리
+- `undefined`, 함수, MapLibre·Worker 객체 제외
+
+작은 module 변경이 무관한 module leaf hash를 변경하면 `fail`이다.
+
+## 5. WorldState와 WorldPatch
+
+새 WorldState는 최소 다음 영역을 가진다.
+
+```text
+schemaVersion
+seedVersion
+policyVersion
+revision
+countriesById
+countryOrder
+retiredCountryIds
+territoriesById
+territoryOrder
+topology
+hashRoots
+```
+
+WorldPatch는 단순한 국가 ID 집합만 가지지 않는다.
+
+```text
+beforeRevision / afterRevision
+beforeContentHash / afterContentHash
+countryCreated / countryUpdated / countryDeleted
+territoryCreated / territoryUpdated / territoryDeleted
+ownershipChanged
+geometryChanged
+topologyEdgesChanged
+affectedCountryIds
+affectedTerritoryIds
+moduleHashChanges
+```
+
+각 집합은 중복과 모순이 없고 결정적인 순서를 가져야 한다.
+
+## 6. 원자 단계 실행·보고 규칙
+
+각 10-N은 하나의 독립 작업 세션이며 제품 책임 하나만 구현한다. 한 단계에서 서로 다른 command, projection, persistence 기능을 함께 구현하지 않는다.
+
+각 단계의 기본 절차:
+
+1. AGENTS.md와 현재 Prompt 10을 읽는다.
+2. 실제로 수정하는 기술의 설치 문서만 읽는다.
+3. 직전 단계 보고서의 status와 직접 output hash를 확인한다.
+4. reports/prompt10/10-N-<slug>.json을 running으로 만든다.
+5. 현재 실패 또는 미구현 상태를 targeted test로 고정한다.
+6. 해당 번호의 제품 코드와 targeted test만 구현한다.
+7. gate를 기록하고 pass 또는 fail에서 중단한다.
+8. 다음 번호를 자동 실행하지 않는다.
+
+보고서 형식:
+
+~~~json
+{
+  "stage": "10-N",
+  "status": "running | pass | fail | blocked",
+  "objective": "",
+  "promptHash": "",
+  "directInputHashes": {},
+  "outputHashes": {},
+  "changedFiles": [],
+  "commands": [],
+  "measurements": {},
+  "gates": {},
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-(N+1) | null"
+}
+~~~
+
+rollbackVerified는 실제 state 변경과 rollback을 다루는 단계에서만 boolean을 사용한다. 타입·schema·감사 단계에서는 null이다.
+
+과거 단계 output이 후속 단계에서 의도적으로 변경되면 최종 파일과 과거 hash가 같을 것을 요구하지 않는다. 직전 보고서 chain, 현재 Prompt hash와 최종 동작을 검증한다.
+
+모든 단계에서 targeted test, 대상 lint와 typecheck를 실행한다. 전체 unit suite는 다음 checkpoint에서만 실행한다.
+
+- 10-19: domain seed 전환
+- 10-30: hash 기반
+- 10-45: command schema
+- 10-55: topology 기반
+- 10-77: planner 완성
+- 10-85: atomic executor
+- 10-91: application projection
+- 10-99: map projection
+- 10-106: label projection
+- 10-112: history·저장
+- 10-124: 최종 판정
+
+production build와 전체 E2E는 10-119 이후 통합 단계에서 실행한다.
+
+## 7. 원자 소단계 목록
+
+### A. 전환 감사
+
+#### 10-1. Prompt 09 보고서 chain 확인
+
+동작: Prompt 09의 9-1~9-14 status와 직접 hash chain만 감사한다.
+
+검증: 누락·fail·hash 단절을 표로 기록한다. 제품 코드는 수정하지 않는다.
+
+#### 10-2. 대체 단계 동결
+
+동작: Prompt 09의 9-15~9-64가 Prompt 10으로 대체됐음을 보고서에 기록한다.
+
+검증: 대체된 단계를 이후 실행 대상으로 해석하는 경로가 없어야 한다.
+
+#### 10-3. runtime 국가 소유자 감사
+
+동작: CountryEntity, 정적 countryById, Zustand와 선택 store의 국가 데이터 소유권을 목록화한다.
+
+검증: runtime-read, seed-only, test-only 분류 누락 0.
+
+#### 10-4. runtime geometry 소유자 감사
+
+동작: 국가 polygon, low/high source, border, capital과 label geometry의 소유자를 목록화한다.
+
+검증: geometry write 경로와 파생 경로의 미확인 항목 0.
+
+#### 10-5. 기존 command 감사
+
+동작: Prompt 09에서 만든 command envelope와 9-10~9-14 schema의 구조·semantic 책임을 분류한다.
+
+검증: v2에서 유지·이동·폐기할 책임이 모든 필드에 지정되어야 한다.
+
+### B. 국가·영토 domain type
+
+#### 10-6. CountryId 수명 타입
+
+동작: active와 retired 상태를 구분할 CountryId 계약을 정의한다.
+
+검증: 빈 ID와 retired ID의 신규 발급을 타입 경계와 runtime helper가 거부한다.
+
+#### 10-7. CountryNames module
+
+동작: 국가 이름과 검색 alias를 독립 module 타입으로 분리한다.
+
+검증: core identity나 geometry 없이 이름 module만 갱신할 수 있어야 한다.
+
+#### 10-8. CountryEntity core
+
+동작: geometry 없는 최소 CountryEntity를 정의한다.
+
+검증: CountryEntity에 territory geometry, 경제, 외교, 국가 중점 필드가 없어야 한다.
+
+#### 10-9. CountryPresentationOverride
+
+동작: 자동 presentation과 구분되는 단일 override 타입을 정의한다.
+
+검증: presentation과 initialPresentation 같은 중복 입력 경로 0.
+
+#### 10-10. TerritoryId 계약
+
+동작: 결정적으로 생성되는 TerritoryId 타입과 충돌 규칙을 정의한다.
+
+검증: 동일 seed와 partition 입력이 같은 TerritoryId를 만든다.
+
+#### 10-11. TerritoryEntity 타입
+
+동작: id, nullable ownerCountryId, geometry와 properties를 가진 TerritoryEntity를 정의한다.
+
+검증: 국가 metadata를 TerritoryEntity에 중복 저장하지 않는다.
+
+#### 10-12. Territory owner 참조 불변식
+
+동작: ownerCountryId가 active country 또는 null만 가리키도록 validator를 구현한다.
+
+검증: unknown·retired owner 참조를 거부한다.
+
+#### 10-13. 단일 실효 지배 불변식
+
+동작: 하나의 Territory가 owner를 하나만 가지도록 표현과 validator를 확정한다.
+
+검증: 복수 owner 입력과 겹치는 control 표현을 거부한다.
+
+#### 10-14. 결정적 countryOrder
+
+동작: active 국가 iteration order의 생성·삭제 규칙을 정의한다.
+
+검증: record insertion order에 영향받지 않는다.
+
+#### 10-15. 결정적 territoryOrder
+
+동작: Territory iteration order의 생성·partition·merge 규칙을 정의한다.
+
+검증: geometry feature 입력 순서에 영향받지 않는다.
+
+#### 10-16. retiredCountryIds registry
+
+동작: 삭제 확정 ID를 기록하는 registry를 구현한다.
+
+검증: undo 복원은 허용하고 신규 재사용은 거부한다.
+
+#### 10-17. TopologyState 타입
+
+동작: canonical edge, neighbor와 coast/internal 분류를 담을 최소 타입을 정의한다.
+
+검증: 동일 edge를 양쪽 국가에 중복 소유시키지 않는다.
+
+#### 10-18. WorldState v2 container
+
+동작: country, territory, topology, order, version과 hash root를 결합한 WorldState v2를 정의한다.
+
+검증: 각 domain collection의 책임이 겹치지 않아야 한다.
+
+#### 10-19. seed v1→v2 변환
+
+동작: 기존 seed 국가와 geometry를 v2 Country·Territory로 변환한다.
+
+검증: 국가, geometry, 수도, 이름 손실 0과 전체 unit suite 통과.
+
+### C. 영역별 계층 hash
+
+#### 10-20. canonical primitive serializer
+
+동작: 문자열, boolean, null과 숫자의 locale 비의존 serializer를 구현한다.
+
+검증: locale과 object insertion order에 무관한 byte sequence를 만든다.
+
+#### 10-21. canonical geometry serializer
+
+동작: policy precision과 winding을 적용한 geometry serializer를 구현한다.
+
+검증: 의미상 같은 정규화 geometry가 같은 byte sequence를 만든다.
+
+#### 10-22. countryCore leaf hash
+
+동작: CountryEntity core만 입력으로 하는 leaf hash를 구현한다.
+
+검증: presentation·territory 변경이 이 hash를 바꾸지 않는다.
+
+#### 10-23. countryPresentation leaf hash
+
+동작: 자동 policy version과 override만 입력으로 하는 presentation hash를 구현한다.
+
+검증: 국가 이름·소유권 변경이 이 hash를 바꾸지 않는다.
+
+#### 10-24. territoryGeometry leaf hash
+
+동작: Territory geometry 전용 leaf hash를 구현한다.
+
+검증: owner 변경이 geometry hash를 바꾸지 않는다.
+
+#### 10-25. territoryOwnership leaf hash
+
+동작: Territory ID와 owner 전용 leaf hash를 구현한다.
+
+검증: geometry 좌표 변경이 ownership hash를 바꾸지 않는다.
+
+#### 10-26. topologyEdge leaf hash
+
+동작: canonical edge ID와 geometry·분류의 leaf hash를 구현한다.
+
+검증: 양쪽 owner 입력 순서에 무관한 hash를 만든다.
+
+#### 10-27. domain root builder
+
+동작: 정렬된 leaf hash로 countries, presentation, territories와 topology root를 만드는 공통 builder를 구현한다.
+
+검증: 한 leaf 변경이 해당 root만 변경한다.
+
+#### 10-28. worldContentHash
+
+동작: domain root와 schema·seed·policy version으로 content hash를 구현한다.
+
+검증: revision, issuedAt, commandId와 UI 상태는 content hash를 바꾸지 않는다.
+
+#### 10-29. commit·artifact·history hash 계약
+
+동작: commitHash, artifactHash와 historyHash 입력을 각각 정의한다.
+
+검증: 서로 다른 목적의 hash가 같은 입력 집합을 묵시적으로 공유하지 않는다.
+
+#### 10-30. 증분 hash root 갱신
+
+동작: 변경 leaf에서 필요한 root 경로만 다시 계산한다.
+
+검증: 전체 deep serialization 0, 결정성 테스트와 전체 unit suite 통과.
+
+### D. MapCommand v2 structural schema
+
+#### 10-31. command envelope v2
+
+동작: commandId, type, expectedRevision와 payload를 structural envelope로 정의한다.
+
+검증: audit metadata와 geometry policy를 일반 payload에서 분리한다.
+
+#### 10-32. country.create schema
+
+동작: 영토 없는 국가 identity 생성 payload만 정의한다.
+
+검증: geometry와 initialPresentation 입력을 거부한다.
+
+#### 10-33. country.establish schema
+
+동작: 새 국가와 미점유 Territory ID 목록을 받는 편의 command 구조를 정의한다.
+
+검증: schema는 실제 미점유 여부를 조회하지 않는다.
+
+#### 10-34. country.rename schema
+
+동작: 명시된 name field만 변경하는 구조를 정의한다.
+
+검증: 빈 patch와 unknown name field를 거부한다.
+
+#### 10-35. country.delete schema
+
+동작: territory disposition이 없는 저수준 identity 삭제 구조를 정의한다.
+
+검증: allow-empty-world와 silent missing policy 필드를 허용하지 않는다.
+
+#### 10-36. country.dissolve schema
+
+동작: source country와 Territory별 disposition 목록 구조를 정의한다.
+
+검증: unclaim, transfer와 merge 이외 disposition을 거부한다.
+
+#### 10-37. territory.partition schema
+
+동작: source Territory와 결과 partition 정의 구조를 만든다.
+
+검증: union 동등성은 planner 책임으로 남긴다.
+
+#### 10-38. territory.assign schema
+
+동작: Territory ID와 targetCountryId 구조를 정의한다.
+
+검증: 현재 owner와 target 존재 여부는 planner 책임으로 남긴다.
+
+#### 10-39. territory.unclaim schema
+
+동작: Territory ID 목록의 owner 제거 구조를 정의한다.
+
+검증: 빈 목록과 unknown field를 거부한다.
+
+#### 10-40. territory.replace schema
+
+동작: 한 Territory geometry 전체 교체 구조를 정의한다.
+
+검증: 기본 GeoJSON 구조와 유한 좌표만 schema에서 검사한다.
+
+#### 10-41. territory.transfer schema
+
+동작: Territory ID 또는 partition 결과를 target country로 이전하는 구조를 정의한다.
+
+검증: boolean tolerance 선택 필드를 허용하지 않는다.
+
+#### 10-42. country.split schema
+
+동작: source country, 결과 country 정의와 Territory partition reference 구조를 정의한다.
+
+검증: 면적 보존과 source 제거는 planner 책임으로 남긴다.
+
+#### 10-43. country.merge schema
+
+동작: source country IDs와 result country reference 구조를 정의한다.
+
+검증: metadata 승계 규칙을 명시하지 않은 payload를 거부한다.
+
+#### 10-44. command batch schema
+
+동작: 순서가 있는 command 목록과 local reference 형식을 정의한다.
+
+검증: batch 크기·중첩 제한과 빈 batch 거부.
+
+#### 10-45. schema 순수성 검증
+
+동작: 모든 v2 schema에 대한 non-mutation과 unknown-field 공통 테스트를 추가한다.
+
+검증: schema의 WorldState·cache·artifact 접근 0과 전체 unit suite 통과.
+
+### E. canonical topology 기반
+
+#### 10-46. geometry policy normalization
+
+동작: versioned precision, winding과 최소 면적 정규화 함수를 구현한다.
+
+검증: 동일 policy 입력의 정규화 결과와 hash가 결정적이다.
+
+#### 10-47. Territory bbox index
+
+동작: Territory별 bbox와 후보 조회 index를 구현한다.
+
+검증: 변경 Territory만 index를 갱신한다.
+
+#### 10-48. shared segment 추출
+
+동작: 두 Territory geometry에서 실제 공유 segment를 추출한다.
+
+검증: bbox만 겹치는 geometry는 공유 segment를 만들지 않는다.
+
+#### 10-49. neighbor 판정
+
+동작: 실제 공유 segment 기반 neighbor set을 구현한다.
+
+검증: point 접촉과 bbox 접촉을 정책대로 구분한다.
+
+#### 10-50. canonical edge ID
+
+동작: 양쪽 Territory와 정규화 segment로 edge ID를 생성한다.
+
+검증: owner·입력 순서를 뒤집어도 같은 ID를 만든다.
+
+#### 10-51. shared edge 중복 제거
+
+동작: 동일 canonical edge를 topology에 한 번만 저장한다.
+
+검증: 양방향 중복과 이중 stroke 원인 0.
+
+#### 10-52. coast 분류
+
+동작: 한쪽에 land owner가 없는 외곽 edge를 coast로 분류한다.
+
+검증: internal border가 coast로 분류되지 않는다.
+
+#### 10-53. dateline topology
+
+동작: ±180도 경계를 넘는 segment를 world-spanning edge 없이 처리한다.
+
+검증: dateline 표본의 길이와 이웃이 정상 범위다.
+
+#### 10-54. 증분 topology 재계산
+
+동작: changed Territory와 bbox 후보의 edge만 다시 계산한다.
+
+검증: 무관한 대륙 edge hash가 유지된다.
+
+#### 10-55. seed topology 감사
+
+동작: 전체 seed topology를 생성하고 결정성·중복·분류를 감사한다.
+
+검증: 중복 edge와 world-spanning edge 0, 전체 unit suite 통과.
+
+### F. semantic planner
+
+#### 10-56. PlanResult와 PlanningError
+
+동작: 성공 plan과 typed semantic error 계약을 정의한다.
+
+검증: string 예외만으로 conflict 종류를 표현하지 않는다.
+
+#### 10-57. dry-run purity
+
+동작: planner가 입력 state를 수정하지 않는 실행 경계를 구현한다.
+
+검증: dry-run 전후 object identity, content hash와 cache 상태가 같다.
+
+#### 10-58. expectedRevision planner gate
+
+동작: stale command를 plan 시작 전에 거부한다.
+
+검증: 자동 retry나 묵시적 merge 0.
+
+#### 10-59. commandId 중복 gate
+
+동작: 이미 committed commandId를 plan 단계에서 식별한다.
+
+검증: 같은 command의 두 번째 plan이 idempotency conflict를 반환한다.
+
+#### 10-60. country.create planner
+
+동작: active·retired ID를 검사하고 영토 없는 country next state를 만든다.
+
+검증: 기존·retired ID 충돌과 마지막 order 비결정성 0.
+
+#### 10-61. country.rename planner
+
+동작: name module만 변경하는 plan을 만든다.
+
+검증: geometry·ownership·topology hash 변화 0.
+
+#### 10-62. country.establish planner
+
+동작: country 생성과 미점유 Territory assign을 한 plan으로 만든다.
+
+검증: occupied Territory 포함 시 전체 plan 실패.
+
+#### 10-63. country.delete planner
+
+동작: 소유 Territory가 0인 active country 삭제 plan을 만든다.
+
+검증: 소유 Territory가 하나라도 있거나 마지막 국가이면 거부한다.
+
+#### 10-64. dissolve-unclaim planner
+
+동작: 모든 source Territory를 unclaim한 뒤 country를 삭제하는 plan을 만든다.
+
+검증: 중간 무주지 state는 별도 revision으로 노출되지 않는다.
+
+#### 10-65. dissolve-transfer planner
+
+동작: source Territory를 target country로 이전한 뒤 source를 삭제한다.
+
+검증: target unknown·retired·self reference를 거부한다.
+
+#### 10-66. dissolve-merge planner
+
+동작: source metadata 승계 규칙과 Territory 이동을 적용한 merge형 dissolve plan을 만든다.
+
+검증: 승계 필드 누락과 dangling source reference 0.
+
+#### 10-67. territory.partition planner
+
+동작: source Territory를 결과 Territory 집합으로 교체하는 plan을 만든다.
+
+검증: union, gap, overlap과 면적 tolerance를 검사한다.
+
+#### 10-68. territory.assign planner
+
+동작: 미점유 Territory에 owner를 지정하는 plan을 만든다.
+
+검증: occupied Territory와 unknown target을 거부한다.
+
+#### 10-69. territory.unclaim planner
+
+동작: Territory owner를 null로 변경하는 plan을 만든다.
+
+검증: 이미 unclaimed인 입력의 no-op 또는 reject 정책을 명시한다.
+
+#### 10-70. territory.replace planner
+
+동작: 정규화된 새 geometry로 Territory를 교체하는 plan을 만든다.
+
+검증: 이웃과의 overlap·gap 및 topology 재계산 범위를 검사한다.
+
+#### 10-71. territory.transfer planner
+
+동작: Territory owner를 source에서 target으로 이전한다.
+
+검증: 전체 면적과 geometry hash가 유지되고 ownership hash만 바뀐다.
+
+#### 10-72. country.split planner
+
+동작: source partition, 결과 country 생성과 ownership 재할당을 한 plan으로 만든다.
+
+검증: source Territory·country 잔존, gap과 overlap 0.
+
+#### 10-73. country.merge planner
+
+동작: source countries와 Territory를 result로 결합하는 plan을 만든다.
+
+검증: source ID 제거와 result ownership 완전성.
+
+#### 10-74. batch local reference 해석
+
+동작: 앞 command가 만든 ID를 뒤 command가 참조하도록 local symbol table을 구현한다.
+
+검증: forward unknown reference를 명시적으로 거부한다.
+
+#### 10-75. batch 실패 전파
+
+동작: command 하나의 실패가 batch plan 전체를 실패시키도록 한다.
+
+검증: 부분 next state와 부분 patch 반환 0.
+
+#### 10-76. affected set 계산
+
+동작: country, Territory와 topology edge별 직접·이웃 영향 집합을 계산한다.
+
+검증: 무관한 대륙 ID 포함 0.
+
+#### 10-77. next state 구조 공유
+
+동작: 변경 collection entry와 hash 경로만 복사해 immutable next state를 완성한다.
+
+검증: 영향 없는 entity 참조 유지, deep clone 0, 전체 unit suite 통과.
+
+### G. WorldPatch와 atomic executor
+
+#### 10-78. WorldPatch v2 타입
+
+동작: country, Territory, ownership, geometry, topology와 module hash delta를 분리한 타입을 정의한다.
+
+검증: before/after revision과 content hash를 포함한다.
+
+#### 10-79. WorldPatch 집합 불변식
+
+동작: created, updated, deleted 집합의 중복·교차 validator를 구현한다.
+
+검증: 동일 ID의 모순된 상태를 거부한다.
+
+#### 10-80. module hash delta 생성
+
+동작: before/after leaf와 root 차이만 patch에 기록한다.
+
+검증: 변경되지 않은 module delta 0.
+
+#### 10-81. atomic commit 함수
+
+동작: 검증된 next state를 store에 한 번 적용한다.
+
+검증: executor가 command 의미를 다시 해석하지 않는다.
+
+#### 10-82. revision과 commitHash 갱신
+
+동작: commit마다 revision과 commitHash를 한 번 전진시킨다.
+
+검증: worldContentHash와 commitHash 역할이 섞이지 않는다.
+
+#### 10-83. subscriber 통지
+
+동작: batch 크기와 무관하게 domain subscriber를 한 번 통지한다.
+
+검증: 31개 split에서 통지 1회.
+
+#### 10-84. conflict와 idempotency commit 차단
+
+동작: stale plan과 duplicate commandId의 commit을 차단한다.
+
+검증: store와 history 변화 0.
+
+#### 10-85. executor 실패 원자성
+
+동작: commit 전 오류를 주입하고 state·patch·history 불변을 검증한다.
+
+검증: 부분 commit 0과 전체 unit suite 통과.
+
+### H. 검색·선택·패널 projection
+
+#### 10-86. 검색 index patch API
+
+동작: country module delta로 검색 entry를 추가·수정·삭제한다.
+
+검증: 전체 index 재생성 0.
+
+#### 10-87. 검색 UI 전환
+
+동작: 검색 UI가 committed projection만 조회하도록 전환한다.
+
+검증: 정적 countryById runtime fallback 0.
+
+#### 10-88. 선택 존재 검증
+
+동작: selectCountry가 projection revision의 active country만 허용한다.
+
+검증: 신규 국가 선택과 retired 국가 거부.
+
+#### 10-89. 삭제 selection 정리
+
+동작: selected, hovered와 persisted ID를 country deletion patch로 정리한다.
+
+검증: dangling countryId 0.
+
+#### 10-90. 국가 패널 전환
+
+동작: 패널이 Country core와 독립 module projection을 조합해 표시한다.
+
+검증: 거대 CountryEntity fallback 0.
+
+#### 10-91. 플레이 국가 정책 projection
+
+동작: playable module과 삭제 정책을 projection adapter에 적용한다.
+
+검증: 소멸 국가가 플레이 국가로 남지 않고 전체 unit suite 통과.
+
+### I. 지도 projection
+
+#### 10-92. Territory polygon index
+
+동작: TerritoryId 기반 polygon feature bucket을 만든다.
+
+검증: 한 국가가 여러 Territory를 소유할 수 있다.
+
+#### 10-93. polygon patch 적용
+
+동작: changed Territory feature만 추가·교체·삭제한다.
+
+검증: 영향 없는 feature 참조 유지.
+
+#### 10-94. topology border artifact
+
+동작: canonical edge에서 border와 coast feature를 생성한다.
+
+검증: polygon outline을 최종 border로 사용하지 않는다.
+
+#### 10-95. capital projection
+
+동작: 국가 capital을 현재 소유 Territory와 함께 projection한다.
+
+검증: 무수도 국가 dot 0과 소유권 변경 후 dangling capital 0.
+
+#### 10-96. low/high source 동기화
+
+동작: 해상도별 source가 같은 Territory·owner 집합을 갖게 한다.
+
+검증: zoom 전환에서 retired 국가 재등장 0.
+
+#### 10-97. projection coordinator
+
+동작: WorldPatch를 검색·UI·map projection에 전달하는 coordinator를 구현한다.
+
+검증: domain store를 projection이 직접 수정하지 않는다.
+
+#### 10-98. appliedRevision 추적
+
+동작: 각 projection이 반영한 revision과 artifactHash를 기록한다.
+
+검증: stale patch 적용 0.
+
+#### 10-99. projection 실패 회복
+
+동작: 한 projection 실패 시 마지막 정상 결과를 유지하고 최신 revision으로 재시도한다.
+
+검증: domain rollback 없이 최종 수렴하고 전체 unit suite 통과.
+
+### J. label projection
+
+#### 10-100. 자동 point label
+
+동작: Territory geometry에서 즉시 representative point label을 생성한다.
+
+검증: 국가별 수동 좌표 추가 0.
+
+#### 10-101. label job protocol
+
+동작: revision, countryId, Territory hash, text hash와 priority를 가진 job 타입을 정의한다.
+
+검증: stale job 판별에 countryId만 사용하지 않는다.
+
+#### 10-102. glyph Worker 부트스트랩
+
+동작: 순수 glyph 계산을 Worker에서 실행한다.
+
+검증: Worker의 DOM·MapLibre import 0.
+
+#### 10-103. module hash label cache
+
+동작: geometry, name, font와 policy hash로 cache를 구현한다.
+
+검증: 실제 변경 module만 miss.
+
+#### 10-104. viewport priority
+
+동작: viewport와 selection으로 job 우선순위를 계산한다.
+
+검증: 완료 순서가 artifact 결정성을 바꾸지 않는다.
+
+#### 10-105. stale label 폐기
+
+동작: revision 또는 module hash가 달라진 Worker 결과를 폐기한다.
+
+검증: 빠른 split→undo에서 ghost label 0.
+
+#### 10-106. point→glyph 교체
+
+동작: 정밀 glyph 적용과 point fallback 제거를 한 projection update로 처리한다.
+
+검증: 중복·무라벨 settled 상태 0과 전체 unit suite 통과.
+
+### K. undo·redo·저장
+
+#### 10-107. domain before-image
+
+동작: 영향받은 Country·Territory·topology 원본만 기록한다.
+
+검증: 전체 artifact snapshot과 boolean 역연산만 저장하는 경로 0.
+
+#### 10-108. undo commit
+
+동작: before-image를 새 revision으로 적용한다.
+
+검증: 이전 worldContentHash 복원과 revision 감소 0.
+
+#### 10-109. redo commit
+
+동작: undo된 command plan을 새 revision으로 재적용한다.
+
+검증: 최초 apply와 redo worldContentHash 동일.
+
+#### 10-110. 연속 history pointer
+
+동작: apply·undo·redo 연속 sequence의 pointer를 구현한다.
+
+검증: historyHash와 store revision 불일치 0.
+
+#### 10-111. WorldState v2 직렬화
+
+동작: domain module과 version·hash root를 직렬화한다.
+
+검증: MapLibre, Worker, 함수와 transient cache 직렬화 0.
+
+#### 10-112. Prompt 09 저장 migration
+
+동작: 기존 저장 형식을 WorldState v2로 변환한다.
+
+검증: 삭제·unknown 국가 ID를 안전하게 처리하고 전체 unit suite 통과.
+
+### L. 성능·장애·통합
+
+#### 10-113. 증분 hash 성능 gate
+
+동작: 단일 module 변경과 전체 hash 재계산을 비교한다.
+
+검증: 무관한 leaf 재계산 0과 trace 기록.
+
+#### 10-114. 31개 split 성능 gate
+
+동작: split plan, commit과 projection을 최소 50회 측정한다.
+
+검증: p50/p95, long task와 영향 artifact 수 기록.
+
+#### 10-115. 100개 establish/dissolve gate
+
+동작: 100개 국가 생성·소멸 sequence를 실행한다.
+
+검증: 원본 worldContentHash 복원, retired ID·revision·commitHash 정상.
+
+#### 10-116. split 중 undo 경합
+
+동작: Worker 계산 중 즉시 undo한다.
+
+검증: stale label·Territory·owner 잔존 0.
+
+#### 10-117. projection 실패 주입
+
+동작: map projection 갱신 실패를 주입한다.
+
+검증: 마지막 정상 화면 유지와 최신 revision 회복.
+
+#### 10-118. Worker 실패 주입
+
+동작: glyph 오류와 timeout을 주입한다.
+
+검증: domain·polygon 유지와 point label fallback.
+
+#### 10-119. 구조화 command 개발 UI
+
+동작: JSON command의 dry-run, patch preview, apply, undo와 redo UI를 만든다.
+
+검증: UI의 planner·executor 우회 0과 production build 통과.
+
+#### 10-120. establish 전체 E2E
+
+동작: 미점유 Territory에 국가를 establish하고 검색·선택·지도·label을 확인한다.
+
+검증: 모든 projection revision과 ID 집합 일치.
+
+#### 10-121. dissolve 전체 E2E
+
+동작: unclaim, transfer와 merge disposition별 소멸 흐름을 실행한다.
+
+검증: dangling owner·selection·artifact 0.
+
+#### 10-122. split·merge 전체 E2E
+
+동작: 기존 국가 독립, 분할, 병합과 undo·redo를 실행한다.
+
+검증: 면적·topology·content hash와 화면 일치.
+
+#### 10-123. 저장·migration 전체 E2E
+
+동작: 동적 변경 저장, 새 세션 load와 Prompt 09 migration을 실행한다.
+
+검증: worldContentHash와 의미상 projection 동일.
+
+#### 10-124. 최종 완료 판정
+
+동작: clean seed에서 전체 unit, lint, typecheck, production build, 전체 E2E, 성능과 장애 주입을 실행한다.
+
+최종 gate:
+
+- 모든 Prompt 10 보고서 chain pass
+- CountryEntity geometry 소유 0
+- dangling ownerCountryId 0
+- 겹치는 실효 지배 Territory 0
+- retired countryId 신규 재사용 0
+- 부분 domain commit 0
+- 정적 countryById runtime 의존 0
+- projection 최종 revision 불일치 0
+- stale label 0
+- 전체 세계 deep clone 경로 0
+- 일반 command를 통한 빈 세계 생성 0
+- undo/redo worldContentHash 불일치 0
+
+모든 gate가 통과한 경우에만 reports/prompt10/10-124-final.json을 pass로 기록한다.
+
+## 8. 금지 구현
+
+- CountryEntity에 geometry, 경제, 외교, 국가 중점 데이터를 모두 중첩한 거대 객체
+- 여러 국가 polygon의 중첩으로 claim을 표현하는 구현
+- 일반 command가 geometry tolerance나 winding policy를 선택하는 구현
+- 소유 Territory가 남은 국가의 묵시적 삭제
+- 국가 삭제 시 geometry를 지도에서 묵시적으로 제거
+- 삭제된 countryId의 신규 국가 재사용
+- command payload의 `allow-empty-world`
+- prompt가 올바르다는 이유로 runtime planner 검증 생략
+- schema parser에서 store·cache·MapLibre 수정
+- MapLibre·Worker와 domain store를 완전한 단일 transaction으로 가장
+- polygon outline을 최종 shared-border topology로 사용
+- projection 실패를 domain state rollback으로 숨기는 구현
+- revision, issuedAt, commandId를 worldContentHash에 포함
+- 국가 변경마다 전체 module·label·search index 재계산
+- 전체 artifact snapshot을 무제한 undo history에 저장
+- LLM·UI·MapLibre의 WorldState 직접 수정
+
+## 9. 후속 확장 계약
+
+외교, 경제, 국가 중점과 claim module은 다음 규칙으로 추가한다.
+
+- countryId를 참조하되 CountryEntity 내부에 대규모 데이터를 중첩하지 않는다.
+- 독립 schemaVersion과 module hash를 가진다.
+- WorldPatch에 module hash delta를 추가한다.
+- 삭제 국가 참조 정리 정책을 module별로 정의한다.
+- 관계 데이터는 canonical country pair key를 사용한다.
+- claim은 실효 지배 owner와 분리하며 현재 Territory geometry를 중복 소유하지 않는다.
+
+후속 자연어 시스템은 schema validator를 우회하지 않고 현재 WorldState 검색 결과로 countryId와 territoryId를 resolve해야 한다. 큰 영토 변경, 모호한 대상과 국가 소멸은 dry-run preview와 사용자 승인을 요구한다.

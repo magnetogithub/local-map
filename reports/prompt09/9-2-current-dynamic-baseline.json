@@ -3,7 +3,7 @@
   "status": "pass",
   "objective": "Measure the current rename, create, delete, China 31-way split, and rollback paths for latency, allocation behavior, setData count, determinism, and rollback equality without modifying product code.",
   "inputHashes": {
-    "reports/prompt09/9-1-country-state-source-inventory.json": "ffe06264db201b2abf6b8354955c8f5fef75e3394f1a03e28fd233e0cd2048d3",
+    "reports/prompt09/9-1-country-state-source-inventory.json": "9a14175f59fa841e4c2fecebf5dafa737dc4ff8a38a8c556bfc11e63f55abb49",
     "src/lib/world/world-state.ts": "157da7013c68a0d2b6d0f019339e62aecd4d2cec4077da38901ce1315bdba489",
     "src/lib/world/country-map-artifacts.ts": "7ddaf9294a973e9d79cc7e387c4e32d8bbe268762e741ce4b4ff0a80bfa53fde",
     "src/data/countries-2020.json": "8698470b2dbfb0e33a6b0b1ff55cc4e49a40d1a67307f3ed73ba70122456381a",

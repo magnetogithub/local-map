@@ -1,0 +1,57 @@
+{
+  "stage": "10-38",
+  "status": "pass",
+  "objective": "Define a strict territory.assign v2 payload containing one Territory ID and one target Country ID while deferring ownership and existence checks to the planner.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-37-territory-partition-schema.json": "9afe27046e1b7821f23ade08486332e5ab5da1c690a1fa24110a83b5c37b72ab",
+    "src/lib/commands/map-command-v2.ts": "9cfabb30e0dfde7742b4806c0d31081be6b92baaacc8562bc63716676bea766f",
+    "src/lib/commands/country-establish-v2.ts": "54a711027bf41467253510fc744cd74bb8a7f5a0c8bdbffdd38e4d506a58684e"
+  },
+  "outputHashes": {
+    "src/lib/commands/territory-assign-v2.ts": "6e2abbe90a3bca1802419267101e86f89d8df7b16c752e0fd7fb6e4a23c7aa6d",
+    "src/lib/commands/territory-assign-v2.test.ts": "9ffdfecddcc2a62147d677ce2d229832ff7317bd26cdc7807d75d161c2d0cdbf"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-38-territory-assign-schema.json",
+    "src/lib/commands/territory-assign-v2.test.ts",
+    "src/lib/commands/territory-assign-v2.ts"
+  ],
+  "commands": [
+    {"command": "Verify reports/prompt10/10-37-territory-partition-schema.json status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/commands/territory-assign-v2.test.ts", "exitCode": 1, "note": "Expected red test: territory-assign-v2 module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/commands/territory-assign-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/commands/territory-assign-v2.ts src/lib/commands/territory-assign-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 12,
+    "assignPayloadFields": 2,
+    "plannerOwnedFieldsRejected": 6,
+    "worldStateReads": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-45"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "territoryAndTargetCountryOnlyPayload": true,
+    "territoryIdStructurallyValidated": true,
+    "currentOwnerCheckDeferredToPlanner": true,
+    "targetExistenceCheckDeferredToPlanner": true,
+    "plannerOwnedFieldsRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-39"
+}

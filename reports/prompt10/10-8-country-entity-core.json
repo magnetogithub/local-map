@@ -1,0 +1,59 @@
+{
+  "stage": "10-8",
+  "status": "pass",
+  "objective": "Define the authoritative v2 CountryEntity core without territory geometry, economy, diplomacy, or national-focus fields.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-7-country-names-module.json": "aaed7eceaa2818e57cf98c8d28a61232657dbd915e44bc970d4984cd427ed6d2"
+  },
+  "outputHashes": {
+    "src/lib/world/country-entity.ts": "494a0be7170b74ea4e8518961d55506c4a25400a8ba34ef33bdf99d67af11708",
+    "src/lib/world/country-entity.test.ts": "26620895a504f20883f2c03618206c1058fb21ce38442bc9c2ac8b9995893e1f"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-8-country-entity-core.json",
+    "src/lib/world/country-entity.test.ts",
+    "src/lib/world/country-entity.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-7 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add CountryEntity targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-entity.test.ts", "exitCode": 1, "note": "Expected red test: country-entity module did not exist."},
+    {"command": "Implement the geometry-free authoritative v2 CountryEntity core", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-entity.test.ts src/lib/world/country-names.test.ts src/lib/world/country-id.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/country-entity.ts src/lib/world/country-entity.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "countryEntityCoreFields": 4,
+    "forbiddenDomainFieldsRejected": 5,
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 35,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "countryEntityGeometryFree": true,
+    "economyExcluded": true,
+    "diplomacyExcluded": true,
+    "nationalFocusExcluded": true,
+    "namesRemainModular": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-9"
+}

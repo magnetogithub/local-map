@@ -1,0 +1,63 @@
+{
+  "stage": "10-16",
+  "status": "pass",
+  "objective": "Record confirmed country deletions in retiredCountryIds while allowing explicit undo restoration without permitting new ID reuse.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-15-deterministic-territory-order.json": "57784615f8f691e876272f0eaffe5f40e2174cdd32f3b2cce5b37a82d0d5891e"
+  },
+  "outputHashes": {
+    "src/lib/world/retired-country-id-registry.ts": "0616ca2e28887bcd8796e35603fa26c36d1108c231c42da134c2289408504d48",
+    "src/lib/world/retired-country-id-registry.test.ts": "63f8c906087eabe9ceaa592b4af7507234e3f39e17e03f339d0d4022e70768e1"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-16-retired-country-id-registry.json",
+    "src/lib/world/retired-country-id-registry.test.ts",
+    "src/lib/world/retired-country-id-registry.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-15 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add retiredCountryIds lifecycle targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/retired-country-id-registry.test.ts", "exitCode": 1, "note": "Expected red test: retired-country-id-registry module did not exist."},
+    {"command": "Implement confirmed deletion and explicit undo restoration registry transitions", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/retired-country-id-registry.test.ts src/lib/world/country-id.test.ts src/lib/world/country-order.test.ts src/lib/world/territory-owner-invariants.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/retired-country-id-registry.ts src/lib/world/retired-country-id-registry.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "confirmedDeletionsNotRetired": 0,
+    "newRetiredIdReissuesAccepted": 0,
+    "explicitUndoRestorationFailures": 0,
+    "genericIssuanceAfterUndoAccepted": 0,
+    "inputRegistryMutations": 0,
+    "targetedTestFilesPassed": 4,
+    "targetedTestsPassed": 32,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "confirmedDeletionMovesIdToRetired": true,
+    "newRetiredIdReuseRejected": true,
+    "explicitUndoRestoresSameId": true,
+    "restoredIdMarkedActive": true,
+    "invalidLifecycleTransitionsRejected": true,
+    "registryTransitionsImmutable": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-17"
+}

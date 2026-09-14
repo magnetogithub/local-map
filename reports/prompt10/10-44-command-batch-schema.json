@@ -1,0 +1,70 @@
+{
+  "stage": "10-44",
+  "status": "pass",
+  "objective": "Define an ordered command.batch v2 schema, formalize partition-result local references, and enforce non-empty, size, and nesting limits.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-43-country-merge-schema.json": "765ae38c833f4e57c9aa6628f89c62594d60cf45f872f9e83d8a1fd41a990af6",
+    "src/lib/commands/map-command-v2.ts": "9cfabb30e0dfde7742b4806c0d31081be6b92baaacc8562bc63716676bea766f",
+    "src/lib/commands/country-create-v2.ts": "656db3b8a3b8cd0ede58e53fbf53cc35e374eee496374ee90db66a0d53770e42",
+    "src/lib/commands/country-establish-v2.ts": "54a711027bf41467253510fc744cd74bb8a7f5a0c8bdbffdd38e4d506a58684e",
+    "src/lib/commands/country-rename-v2.ts": "a7f9997050e5cdb4a652156d3ca4fedcb3c3862300b3490bfc5ad73519cf7c09",
+    "src/lib/commands/country-delete-v2.ts": "cfd365e3cc46baf91ad43922e33a008919409373332bf60b2ba5a72ee5d0aa5c",
+    "src/lib/commands/country-dissolve-v2.ts": "4d0681ad12e0b4299a3faa47db66f2488d836fd83082f3bb723e7a115b5d7f51",
+    "src/lib/commands/territory-partition-v2.ts": "5de2e4de3982679d06892ba65f7320d0ccc4846eb4c4fe42e84713f931f127ae",
+    "src/lib/commands/territory-assign-v2.ts": "6e2abbe90a3bca1802419267101e86f89d8df7b16c752e0fd7fb6e4a23c7aa6d",
+    "src/lib/commands/territory-unclaim-v2.ts": "0b4d2fa294fd61f7ba82aa4b68bc5b27bcdab25413234965f29b9df263e4fa91",
+    "src/lib/commands/territory-replace-v2.ts": "84f2a7233095dad6cfad9900337e4d6ed38b06e1629250ccb99b1dec1787b34e",
+    "src/lib/commands/territory-transfer-v2.ts": "8c8d020bf3b6ea3625f8d7127101ecf2c3a038d51b58456cd833e7ca55bede87",
+    "src/lib/commands/country-split-v2.ts": "cf6fdc47124026302f3fa9cc59c462dc63feb271d6a2ddab09d0412fbcc78649",
+    "src/lib/commands/country-merge-v2.ts": "d643494ea937a21f04fd7a4bba510cf6998eef657a7c8b95fdb6d88c7a02232d"
+  },
+  "outputHashes": {
+    "src/lib/commands/command-batch-v2.ts": "f152e5419846b2c0070ea2562a86a8c3cf5bd90a51e6e5032e091d0bbcdd7e37",
+    "src/lib/commands/command-batch-v2.test.ts": "8e29c81162777f75cf580428e170ed44d40996446f45e8c6f4898b4b77c78a6f"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-44-command-batch-schema.json",
+    "src/lib/commands/command-batch-v2.test.ts",
+    "src/lib/commands/command-batch-v2.ts"
+  ],
+  "commands": [
+    {"command": "Verify reports/prompt10/10-43-country-merge-schema.json status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/commands/command-batch-v2.test.ts", "exitCode": 1, "note": "Expected red test: command-batch-v2 module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/commands/command-batch-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/commands/command-batch-v2.ts src/lib/commands/command-batch-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 6,
+    "leafCommandTypes": 12,
+    "maximumCommandsPerBatch": 64,
+    "maximumBatchDepth": 4,
+    "localReferenceFormats": 1,
+    "worldStateReads": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-45"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "commandOrderPreserved": true,
+    "partitionResultLocalReferenceDefined": true,
+    "emptyBatchRejected": true,
+    "batchSizeLimitEnforced": true,
+    "batchDepthLimitEnforced": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-45"
+}

@@ -1,0 +1,52 @@
+{
+  "stage": "10-24",
+  "status": "pass",
+  "objective": "Build a Territory geometry-only leaf hash from policy-normalized geometry while excluding owner, ID, and properties.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-23-country-presentation-leaf-hash.json": "8467bd0bcf5dc1ea104bb35552306bd3562935e08537806195129d4c5c92a728",
+    "src/lib/world/canonical-geometry-serializer.ts": "59cee52603ea216e266e04ccd9dbbdfa694ae8aa2e9aed65a7cbf5211aa0695d",
+    "src/lib/world/sha256.ts": "d21ad4ad6ab297d4518d0066485fe2b88ec1adc623ddde8a3d1e242fdf8744c8"
+  },
+  "outputHashes": {
+    "src/lib/world/territory-geometry-hash.ts": "739cb78a6fbdf3a5227f4bd2eced1a0ddaa3c2fef294abbd28f07e1e9f2db72e",
+    "src/lib/world/territory-geometry-hash.test.ts": "f9358421930eb03ea36ab22cd43e9a16f4b048ad90587d8842b11bc13c2eb26f"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-24-territory-geometry-leaf-hash.json",
+    "src/lib/world/territory-geometry-hash.test.ts",
+    "src/lib/world/territory-geometry-hash.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-23 status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-geometry-hash.test.ts", "exitCode": 1, "note": "Expected red test: territory-geometry-hash module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-geometry-hash.test.ts src/lib/world/canonical-geometry-serializer.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/territory-geometry-hash.ts src/lib/world/territory-geometry-hash.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 2,
+    "targetedTestsPassed": 11,
+    "ownerOrIdentityHashMismatches": 0,
+    "equivalentGeometryHashMismatches": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "ownerChangeIgnored": true,
+    "equivalentGeometryHashesEqual": true,
+    "geometryChangeDetected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-25"
+}

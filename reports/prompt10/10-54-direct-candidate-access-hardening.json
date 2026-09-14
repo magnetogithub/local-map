@@ -1,0 +1,121 @@
+{
+  "stage": "10-54-direct-candidate-access-hardening",
+  "status": "pass",
+  "objective": "Restrict incremental topology geometry access and edge recalculation to changed Territories plus their direct previous/next bbox candidates.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-54-incremental-topology-recalculation.json": "aea50d43749961dc0cf9edcfbf46d544ccc71ee9c1f1fd6196943ee109a4657a",
+    "reports/prompt10/10-48-55-topology-correctness-hardening.json": "89d5624c526d054973b0cbd98c252e6c6cc45292d03502adedaf72ba62d96aa8",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf"
+  },
+  "defect": {
+    "summary": "The reported recomputed set stopped at direct candidates, but a hidden context set queried those candidates again and passed non-direct Territories to buildCanonicalTopology.",
+    "reproduction": {
+      "reportedRecomputedCount": 2,
+      "reportedC": false,
+      "nonDirectCGeometryReads": 1
+    }
+  },
+  "implementation": {
+    "affectedIds": "sorted unique changedIds union direct candidates of changedIds from the previous and updated bbox indexes",
+    "geometryBoundary": "Only affectedIds are materialized for buildCanonicalTopology; candidate-of-candidate queries and hidden context inputs were removed.",
+    "edgeUpdate": "Existing edges unrelated to changedIds are preserved. New changed-to-direct-candidate internal edges and changed coasts are added; only candidate coast atomic segments that overlap a changed relationship are removed, exposed, or rebuilt.",
+    "emptyChange": "Returns the original topology and bbox index references without reading Territory geometry.",
+    "fullRebuild": false
+  },
+  "changedFiles": [
+    "reports/prompt10/10-54-direct-candidate-access-hardening.json",
+    "src/lib/world/incremental-topology.ts",
+    "src/lib/world/incremental-topology-direct-access.test.ts",
+    "src/lib/world/topology-correctness-hardening.test.ts",
+    "src/lib/world/canonical-topology.ts"
+  ],
+  "outputHashes": {
+    "src/lib/world/incremental-topology.ts": "a4f4b2b7d8cd627a44eff13c09569bc072252c9fbcdf7f6e219fbcfc64d64c63",
+    "src/lib/world/incremental-topology.test.ts": "fdf5e347853d3f613b9434fe23752da0880e54f7ebaa64e32f4be82665e31165",
+    "src/lib/world/incremental-topology-direct-access.test.ts": "8ebd3fece39f5469e482163165c595b7f80b88f38120eac5cfb863f348cba0e9",
+    "src/lib/world/topology-correctness-hardening.test.ts": "d9759dbaf1604c340e91dc4af65b5ea4beb629d4b5891c92e69b83e322763fe1",
+    "src/lib/world/canonical-topology.ts": "730f8d977496f2684df07ec59b741c6eb2ddea4a40eefc68d1e434b1e70d5a26"
+  },
+  "commands": [
+    {
+      "command": "Independent pre-fix A-B-C geometry getter reproduction",
+      "exitCode": 1,
+      "note": "RED supplied with the defect report: C was absent from recomputedTerritoryIds but C.geometry was read once."
+    },
+    {
+      "command": "npm.cmd test -- --run incremental direct-access and correctness suites",
+      "exitCode": 0,
+      "note": "3 files and 14 tests passed."
+    },
+    {
+      "command": "10-46 through 10-55 topology-related test invocation",
+      "exitCode": 0,
+      "note": "11 files and 36 tests passed."
+    },
+    {"command": "Related source and test ESLint", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0},
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "note": "75 files and 741 tests passed."
+    },
+    {
+      "command": "Verify Prompt 10 and protected report hashes; check 10-56-or-later outputs",
+      "exitCode": 0
+    }
+  ],
+  "measurements": {
+    "reportedRecomputedCountABC": 2,
+    "actualGeometryAccessIdsABC": ["A", "B"],
+    "nonDirectCGeometryReads": 0,
+    "throwingNonDirectGetterExecutions": 0,
+    "largeChainNonDirectGeometryReads": 0,
+    "hiddenContextTerritoryCount": 0,
+    "recursiveCandidateQueries": 0,
+    "fullTopologyRebuilds": 0,
+    "unrelatedInternalEdgeIdChanges": 0,
+    "unrelatedInternalEdgeHashChanges": 0,
+    "unaffectedCandidateCoastHashChanges": 0,
+    "emptyChangeGeometryReads": 0,
+    "emptyChangeTopologyReferenceChanges": 0,
+    "emptyChangeBBoxIndexReferenceChanges": 0,
+    "seedTopologyRegressions": 0,
+    "relatedTestFilesPassed": 11,
+    "relatedTestsPassed": 36,
+    "fullUnitTestFilesPassed": 75,
+    "fullUnitTestsPassed": 741,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "protectedReportHashMismatches": 0,
+    "stage10_56OrLaterOutputs": 0
+  },
+  "gates": {
+    "directCandidatesOnly": true,
+    "actualAccessSetMatchesReportedSet": true,
+    "nonDirectGeometryAccessZero": true,
+    "nonDirectExceptionIsolated": true,
+    "candidateOfCandidateQueriesZero": true,
+    "fullRebuildAbsent": true,
+    "unrelatedEdgesPreserved": true,
+    "candidateCoastTransitionsCorrect": true,
+    "creationMovementDeletionCovered": true,
+    "changedInputDeterministic": true,
+    "emptyChangeNoOp": true,
+    "splitPointTopologyPreserved": true,
+    "seedTopologyDeterminismPreserved": true,
+    "relatedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true,
+    "fullUnitSuitePass": true,
+    "promptUnmodified": true,
+    "protectedReportsUnmodified": true,
+    "stage10_56OrLaterOutputsZero": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "nextStage": "10-56"
+}

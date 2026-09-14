@@ -1,0 +1,89 @@
+{
+  "stage": "10-4",
+  "status": "pass",
+  "objective": "Inventory owners and write or regeneration paths for country polygons, low/high sources, borders, capitals, and label geometry.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-3-runtime-country-owner-audit.json": "3a5d83883e419c5bcdefa7372c99cf12dc7eff5c6507e582905f7e0cd5348771"
+  },
+  "outputHashes": {
+    "runtimeGeometryOwnerAudit": "8d2c98d29b697fb630f524f1b375046f2d0e2425450a9f717e49f44d89510769",
+    "geometryWritePathAudit": "27fdd74419426365c3620c349e9762ae651afe01f9d346a0fd9c6b835c11ef8b"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-4-runtime-geometry-owner-audit.json"
+  ],
+  "commands": [
+    {"command": "Verify 10-3 status and direct output hash", "exitCode": 0, "durationMs": 60},
+    {"command": "Scan persistent map artifacts, WorldMap sources, seed regeneration scripts, domain transitions, projection builders, and test exporters", "exitCode": 0, "durationMs": 60},
+    {"command": "Run targeted geometry-owner and persistent-artifact coverage audit", "exitCode": 0, "durationMs": 33},
+    {"command": "Run first precise write-path evidence command", "exitCode": 1, "durationMs": 120, "note": "A shell quoting error corrupted one JavaScript evidence string."},
+    {"command": "Rerun precise write-path evidence audit with shell-safe search strings", "exitCode": 0, "durationMs": 49},
+    {"command": "npm.cmd run lint -- reports/prompt10/10-4-runtime-geometry-owner-audit.json", "exitCode": 0, "durationMs": 2525, "note": "ESLint emitted one ignored-JSON warning and zero errors."},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0, "durationMs": 2694}
+  ],
+  "measurements": {
+    "geometryOwnerSurfaceCount": 10,
+    "persistentArtifactCount": 12,
+    "writePathCount": 10,
+    "uncoveredPersistentArtifacts": 0,
+    "unclassifiedWritePaths": 0,
+    "runtimeDomainWritePaths": 5,
+    "persistentRegenerationPaths": 3,
+    "transientOrDerivedWritePaths": 2,
+    "lintErrors": 0,
+    "lintWarnings": 1,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 0,
+    "auditTable": [
+      {"surface": "public/data/maps/countries-50m.geojson", "owner": "persistent generated artifact", "writes": "scripts/prepare-map-data.mjs", "regeneration": "full seed pipeline", "runtime": "WorldMap countriesLow URL source"},
+      {"surface": "public/data/maps/countries-10m.geojson", "owner": "persistent generated artifact and WorldState seed input", "writes": "scripts/prepare-map-data.mjs", "regeneration": "full seed pipeline", "runtime": "WorldMap countriesHigh lazy source"},
+      {"surface": "public/data/maps/country-borders-50m.geojson; public/data/maps/country-borders-10m.geojson", "owner": "persistent generated border artifacts", "writes": "scripts/prepare-map-data.mjs", "regeneration": "derived from polygon features", "runtime": "WorldMap low/high border URL sources"},
+      {"surface": "public/data/maps/capitals-2020.geojson", "owner": "persistent generated capital artifact", "writes": "scripts/prepare-map-data.mjs", "regeneration": "full seed pipeline", "runtime": "WorldMap capital source and WorldState seed copy"},
+      {"surface": "public/data/maps/country-labels-2020.geojson; public/data/maps/country-label-baselines-2020.geojson; public/data/maps/small-country-points-2020.geojson", "owner": "persistent generated point/baseline artifacts", "writes": "scripts/prepare-map-data.mjs", "regeneration": "label layout seed pipeline", "runtime": "WorldMap label and small-country sources"},
+      {"surface": "public/data/maps/country-label-glyph-fills-2020.geojson; public/data/maps/country-label-glyph-outlines-2020.geojson", "owner": "persistent generated glyph artifacts", "writes": "src/lib/map/country-label-glyph-export.test.ts with PAX_FIX08_5_EXPORT=1", "regeneration": "explicit test-export mode", "runtime": "WorldMap glyph sources"},
+      {"surface": "src/data/country-label-metrics-2020.json; public/data/maps/country-label-layout-report-2020.json", "owner": "persistent generated layout metadata", "writes": "scripts/prepare-map-data.mjs", "regeneration": "geometry-hash label layout pipeline", "runtime": "WorldMap metrics import and offline validators"},
+      {"surface": "WorldState CountryEntity.geometry and capital", "owner": "caller-owned domain snapshot", "writes": "country.create, territory.replace, territory.transfer, WorldState replacement helpers", "regeneration": "pure next-state transitions", "runtime": "not yet connected to product WorldMap store"},
+      {"surface": "src/lib/world/country-map-artifacts.ts collections", "owner": "ephemeral derived projection", "writes": "pure builders and seven setData calls", "regeneration": "per supplied CountryEntity/layout", "runtime": "test-covered but not wired to WorldMap"},
+      {"surface": "WorldMap debug setData and China fixture", "owner": "transient/test-only projection", "writes": "WorldMap debug API; scripts/prepare-china-province-test.mjs for fixture", "regeneration": "debug scenario only", "runtime": "does not persist canonical geometry"}
+    ],
+    "writePathTable": [
+      {"path": "scripts/prepare-map-data.mjs", "classification": "persistent-regenerator", "writtenArtifacts": ["countries-50m", "countries-10m", "country-borders-50m", "country-borders-10m", "capitals", "point-labels", "label-baselines", "small-country-points", "label-metrics", "label-layout-report"]},
+      {"path": "src/lib/map/country-label-glyph-export.test.ts", "classification": "conditional-persistent-export", "writtenArtifacts": ["glyph-fills", "glyph-outlines"]},
+      {"path": "scripts/prepare-china-province-test.mjs", "classification": "test-fixture-regenerator", "writtenArtifacts": ["china-province-countries-test"]},
+      {"path": "src/lib/world/world-state.ts", "classification": "runtime-domain-transition", "writtenArtifacts": ["CountryEntity.geometry", "CountryEntity.names", "countriesById membership"]},
+      {"path": "src/lib/commands/country-create.ts", "classification": "runtime-domain-transition", "writtenArtifacts": ["countriesById membership"]},
+      {"path": "src/lib/commands/country-delete.ts", "classification": "runtime-domain-transition", "writtenArtifacts": ["countriesById membership"]},
+      {"path": "src/lib/commands/territory-replace.ts", "classification": "runtime-domain-transition", "writtenArtifacts": ["CountryEntity.geometry"]},
+      {"path": "src/lib/commands/territory-transfer.ts", "classification": "runtime-domain-transition", "writtenArtifacts": ["source and target CountryEntity.geometry"]},
+      {"path": "src/lib/world/country-map-artifacts.ts", "classification": "derived-projection-builder", "writtenArtifacts": ["seven derived GeoJSON collections"]},
+      {"path": "src/components/map/WorldMap.tsx", "classification": "transient-projection-write", "writtenArtifacts": ["MapLibre source data via setData"]}
+    ]
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "currentPromptTenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeAudit": true,
+    "allGeometryOwnersInventoried": true,
+    "allGeometryWritePathsClassified": true,
+    "allRegenerationPathsClassified": true,
+    "uncoveredPersistentArtifactsZero": true,
+    "unclassifiedWritePathsZero": true,
+    "persistentDomainAndTransientOwnershipSeparated": true,
+    "productCodeUnmodified": true,
+    "targetedAuditPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [
+    "The first precise write-path command contained a shell quoting error in one evidence marker; it was replaced with shell-safe markers before final validation."
+  ],
+  "environmentErrors": [
+    "The repository ESLint configuration does not include JSON files, so the target-lint command completed with one ignored-file warning."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-5"
+}

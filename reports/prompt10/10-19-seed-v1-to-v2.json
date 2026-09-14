@@ -1,0 +1,78 @@
+{
+  "stage": "10-19",
+  "status": "pass",
+  "objective": "Convert the existing v1 seed into v2 Country and Territory domains while preserving every country, geometry, capital, and name, then pass the full unit checkpoint.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-18-world-state-v2-container.json": "cfd8794041776f2e643686bb6e4cb27fc899558f574afe6b04901150878e4e19",
+    "src/data/countries-2020.json": "8698470b2dbfb0e33a6b0b1ff55cc4e49a40d1a67307f3ed73ba70122456381a",
+    "public/data/maps/countries-10m.geojson": "f4a75f261499d997709f456844177a9fd7511778d131ca3162b73a577e22227b",
+    "public/data/maps/capitals-2020.geojson": "7bb8da7208cabfd22e4b23b19c556df059cee12a63b4f8398894ebaf4cc9d556"
+  },
+  "outputHashes": {
+    "src/lib/world/seed-v1-to-v2.ts": "a86aae31e7b6595ab1a3be57b6dc92e902e2c222702fada5210be970122c3199",
+    "src/lib/world/seed-v1-to-v2.test.ts": "238e4d0ce3a6341e1cfb628d22e3065e53d5a7e15f32d6a687a91c827f0b5e3e"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-19-seed-v1-to-v2.json",
+    "src/lib/world/seed-v1-to-v2.test.ts",
+    "src/lib/world/seed-v1-to-v2.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-18 status and all direct output hashes", "exitCode": 0},
+    {"command": "Inspect actual v1 country, geometry, and capital seed sets", "exitCode": 0},
+    {"command": "Add real-seed v1-to-v2 migration tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/seed-v1-to-v2.test.ts", "exitCode": 1, "note": "Expected red test: seed-v1-to-v2 module did not exist."},
+    {"command": "Implement deterministic v1-to-v2 Country/Territory migration and independent capital module preservation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/seed-v1-to-v2.test.ts src/lib/world/world-state-v2.test.ts src/lib/world/territory-entity.test.ts src/lib/world/country-entity.test.ts src/lib/world/topology-state.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/seed-v1-to-v2.ts src/lib/world/seed-v1-to-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0},
+    {"command": "npm.cmd test -- --run", "exitCode": 0, "durationMs": 40130}
+  ],
+  "measurements": {
+    "seedCountries": 247,
+    "migratedCountries": 247,
+    "countryLossCount": 0,
+    "seedGeometryFeatures": 247,
+    "migratedTerritories": 247,
+    "geometryLossCount": 0,
+    "seedCapitalFeatures": 196,
+    "migratedCapitalModules": 196,
+    "capitalLossCount": 0,
+    "nameLossCount": 0,
+    "collectionReversalHashMismatches": 0,
+    "targetedTestFilesPassed": 5,
+    "targetedTestsPassed": 42,
+    "fullUnitTestFilesPassed": 38,
+    "fullUnitTestsPassed": 316,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": true,
+    "fullUnitSuiteCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "seedInputHashesRecorded": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "allCountriesPreserved": true,
+    "allNamesPreserved": true,
+    "allGeometryPreserved": true,
+    "allCapitalsPreserved": true,
+    "capitalsStoredAsIndependentCountryModule": true,
+    "migrationInputOrderIndependent": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true,
+    "fullUnitSuitePass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-20"
+}

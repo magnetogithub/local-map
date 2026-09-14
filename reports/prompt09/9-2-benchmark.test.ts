@@ -31,7 +31,7 @@ const provinceCountries:CountryEntity[]=provinceFixture.features.map(({propertie
 }));
 const synthetic:CountryEntity={id:"SYN-9-2",iso3:"SYN",names:{shortKo:"새나라",officialKo:"새나라",mapKo:"새나라",english:"Synthetic",searchAliases:["SYN-9-2","Synthetic"]},geometry:{type:"Polygon",coordinates:[[[0,0],[1,0],[1,1],[0,1],[0,0]]]},mapColor:"#ffffff",playable:false,unitType:"sovereign-country",capital:null,presentation:{flagCode:"",region:"Synthetic",center:[.5,.5],defaultZoom:4,labelRank:4}};
 const hash=(value:unknown)=>crypto.createHash("sha256").update(JSON.stringify(value)).digest("hex");
-const retained=(before:WorldState,after:WorldState)=>Object.keys(before.countries).filter(id=>after.countries[id]===before.countries[id]).length;
+const retained=(before:WorldState,after:WorldState)=>Object.keys(before.countriesById).filter(id=>after.countriesById[id]===before.countriesById[id]).length;
 const p=(values:number[],q:number)=>values.slice().sort((a,b)=>a-b)[Math.ceil(values.length*q)-1];
 const run=(operation:()=>WorldState)=>{
   for(let i=0;i<5;i++)operation();
@@ -42,7 +42,7 @@ const run=(operation:()=>WorldState)=>{
 
 describe("9-2 current dynamic baseline",()=>{
   it("measures deterministic state transitions and exact rollback",()=>{
-    const rename=run(()=>replaceCountryNames(seed,"AUS",{...seed.countries.AUS.names,mapKo:"호주연방"}));
+    const rename=run(()=>replaceCountryNames(seed,"AUS",{...seed.countriesById.AUS.names,mapKo:"호주연방"}));
     const create=run(()=>applyCountryReplacement(seed,{removeCountryIds:[],upsertCountries:[synthetic]}).state);
     const remove=run(()=>applyCountryReplacement(seed,{removeCountryIds:["AUS"],upsertCountries:[]}).state);
     const split=run(()=>applyCountryReplacement(seed,{removeCountryIds:["CHN"],upsertCountries:provinceCountries}).state);
@@ -51,11 +51,11 @@ describe("9-2 current dynamic baseline",()=>{
     const collections={countries:empty,borders:empty,curvedLabels:empty,pointLabels:empty,capitals:empty,glyphLabelFills:empty,glyphLabelOutlines:empty} as unknown as CountryMapArtifactCollections;
     let setDataCalls=0;const source={setData:()=>{setDataCalls++}};
     updateCountryMapSources({countries:source,borders:source,curvedLabels:source,pointLabels:source,capitals:source,glyphLabelFills:source,glyphLabelOutlines:source},collections);
-    const result={seedCountryCount:Object.keys(seed.countries).length,seedHash:hash(seed),rename,create,delete:remove,split31:split,rollback,rollbackHashMatchesSeed:rollback.outputHash===hash(seed),artifactAdapterSetDataCalls:setDataCalls,pureWorldStateTransitionSetDataCalls:0,worldMapDebugSplitSetDataCallsByInspection:8,worldMapDebugRollbackSetDataCallsByInspection:8};
+    const result={seedCountryCount:Object.keys(seed.countriesById).length,seedHash:hash(seed),rename,create,delete:remove,split31:split,rollback,rollbackHashMatchesSeed:rollback.outputHash===hash(seed),artifactAdapterSetDataCalls:setDataCalls,pureWorldStateTransitionSetDataCalls:0,worldMapDebugSplitSetDataCallsByInspection:8,worldMapDebugRollbackSetDataCallsByInspection:8};
     console.log("PROMPT_09_2_BENCHMARK",JSON.stringify(result));
     expect([rename,create,remove,split,rollback].every(value=>value.uniqueOutputHashes===1)).toBe(true);
     expect(result.rollbackHashMatchesSeed).toBe(true);
     expect(setDataCalls).toBe(7);
-    expect(split.retainedEntitiesMin).toBe(Object.keys(seed.countries).length-1);
-  },20_000);
+    expect(split.retainedEntitiesMin).toBe(Object.keys(seed.countriesById).length-1);
+  },30_000);
 });

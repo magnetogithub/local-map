@@ -1,0 +1,68 @@
+{
+  "stage": "10-45",
+  "status": "pass",
+  "objective": "Verify common non-mutation and unknown-field behavior across all v2 command schemas, confirm zero WorldState/cache/artifact dependencies, and run the full unit suite.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-44-command-batch-schema.json": "3cfe590c14cebe7e87a1567afbf579bc72333851509325aa4781e201b3880373",
+    "src/lib/commands/command-batch-v2.ts": "f152e5419846b2c0070ea2562a86a8c3cf5bd90a51e6e5032e091d0bbcdd7e37"
+  },
+  "outputHashes": {
+    "src/lib/commands/schema-purity-v2.test.ts": "5bf997940c394abbf90a789b2d8e97213c3dd877065828878facfc51062d2d67"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-45-schema-purity-validation.json",
+    "src/lib/commands/schema-purity-v2.test.ts"
+  ],
+  "commands": [
+    {"command": "Verify reports/prompt10/10-44-command-batch-schema.json status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/commands/schema-purity-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/commands/*-v2.test.ts", "exitCode": 1, "note": "Environment command-selection error: Vitest treated the wildcard as a literal filter and found no test files."},
+    {"command": "PowerShell file-list invocation: npm.cmd test -- --run <all *-v2.test.ts files>", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/commands/**/*-v2.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0},
+    {"command": "rg forbidden runtime dependencies in src/lib/commands/*-v2.ts", "exitCode": 1, "note": "Expected ripgrep no-match exit: zero WorldState, cache, artifact, MapLibre, component, or store dependencies."},
+    {"command": "npm.cmd test -- --run", "exitCode": 1, "note": "Parallel full-suite run: existing Prompt 9 benchmark exceeded its explicit 30-second timeout by 1.6 seconds; all other 607 tests passed."},
+    {"command": "npm.cmd test -- --run reports/prompt09/9-2-benchmark.test.ts", "exitCode": 0, "note": "Benchmark passed in isolation in 12.09 seconds, confirming parallel-load timeout."},
+    {"command": "npm.cmd test -- --run --testTimeout=60000", "exitCode": 1, "note": "The test's explicit 30-second timeout correctly took precedence over the CLI default."},
+    {"command": "npm.cmd test -- --run --maxWorkers=1", "exitCode": 0, "note": "Full checkpoint passed without changing the benchmark or its timeout."}
+  ],
+  "measurements": {
+    "v2CommandSchemasCovered": 13,
+    "purityTestsPassed": 39,
+    "targetedV2TestFilesPassed": 15,
+    "targetedV2TestsPassed": 192,
+    "forbiddenRuntimeDependencies": 0,
+    "worldStateReads": 0,
+    "cacheReads": 0,
+    "artifactReads": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": true,
+    "fullUnitTestFilesPassed": 65,
+    "fullUnitTestsPassed": 608,
+    "fullUnitSuiteWorkers": 1
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "allV2CommandSchemasCovered": true,
+    "validInputNonMutation": true,
+    "invalidInputNonMutation": true,
+    "topLevelUnknownFieldsRejected": true,
+    "payloadUnknownFieldsRejected": true,
+    "worldStateCacheArtifactAccessZero": true,
+    "targetedV2UnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true,
+    "fullUnitSuitePass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Parallel full-suite load caused the existing Prompt 9 benchmark to exceed its explicit 30-second timeout; it passed in isolation and the complete suite passed with one worker."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-46"
+}

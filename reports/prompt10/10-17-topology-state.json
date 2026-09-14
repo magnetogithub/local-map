@@ -1,0 +1,65 @@
+{
+  "stage": "10-17",
+  "status": "pass",
+  "objective": "Define a minimal TopologyState with canonical edges, derived neighbors, and coast/internal classification without per-country edge ownership.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-16-retired-country-id-registry.json": "d9a9d33ed12487097db2909db5c4f50778c6b6e34754a67352e56b8698826612"
+  },
+  "outputHashes": {
+    "src/lib/world/topology-state.ts": "094c3f98ad773aad02551897421b546564a2ae9f9c2d5fc4250c3f02f71ecc3d",
+    "src/lib/world/topology-state.test.ts": "86a5f6bf2f8c4ef3c7522698df78da08a76330818750d58cf6b6e7e21bf47f2f"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-17-topology-state.json",
+    "src/lib/world/topology-state.test.ts",
+    "src/lib/world/topology-state.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-16 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add TopologyState targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/topology-state.test.ts", "exitCode": 1, "note": "Expected red test: topology-state module did not exist."},
+    {"command": "Implement canonical edge storage, derived neighbors, and coast/internal classification", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/topology-state.test.ts src/lib/world/territory-id.test.ts src/lib/world/territory-order.test.ts", "exitCode": 1, "note": "Fixture assumed source-name order equaled length-prefixed TerritoryId order; corrected to use canonical ID order."},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 1, "note": "Frozen territoryIds widened to a readonly array; corrected with an explicit readonly tuple type."},
+    {"command": "npm.cmd test -- --run src/lib/world/topology-state.test.ts src/lib/world/territory-id.test.ts src/lib/world/territory-order.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/topology-state.ts src/lib/world/topology-state.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "topologyStateFields": 2,
+    "duplicateCanonicalEdgesAccepted": 0,
+    "reverseOwnedEdgesAccepted": 0,
+    "countryOwnershipFieldsOnEdges": 0,
+    "neighborAsymmetryCases": 0,
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 20,
+    "resolvedImplementationCorrections": 2,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "canonicalEdgesStoredOnce": true,
+    "neighborsDerivedFromEdges": true,
+    "coastInternalClassificationEnforced": true,
+    "countryEdgeOwnershipDuplicated": false,
+    "reverseEdgeOwnershipRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-18"
+}

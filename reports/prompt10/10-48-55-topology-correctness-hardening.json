@@ -1,0 +1,127 @@
+{
+  "stage": "10-48~10-55-topology-correctness-hardening",
+  "status": "pass",
+  "objective": "Recognize collinear shared boundaries with different split points and constrain incremental topology recalculation to changed Territories plus direct previous/next bbox candidates.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+    "reports/prompt10/10-46-geometry-policy-normalization.json": "245490430695eea7c56ee1e3b10f45d19503976ddb50aec1f77328628baac797",
+    "reports/prompt10/10-47-territory-bbox-index.json": "d803ebf4480902c279390cc58ba848c1027cfdee21b69f4d6b7f4cd94c657e15",
+    "reports/prompt10/10-48-shared-segment-extraction.json": "9d371a1527010f050ca0b179081574391d837e6ee6cf6d5eda75b34237e4c71c",
+    "reports/prompt10/10-49-neighbor-detection.json": "73653e6e9e1543b12d332feacb6a8a69e9cdf64a90691b3e460eda8df561d4da",
+    "reports/prompt10/10-50-canonical-edge-id.json": "69726e70ee0b0cf567476797a7963d317223f949c6aab0c01cee6708fae217ff",
+    "reports/prompt10/10-51-shared-edge-deduplication.json": "5cc9d1c62956080f247cb25fa38e4f5e428073cd3f264eb837c2e2da2053da56",
+    "reports/prompt10/10-52-coast-classification.json": "b1d8a2e2c9eb9d8f4b2f7f735bd270cfa95aafbd04a4ae874bc4abd5703716b8",
+    "reports/prompt10/10-53-dateline-topology.json": "c08d70c368976ffa14d02da3462aed0dfa57e0da6f8c722a3826493470817b9c",
+    "reports/prompt10/10-54-incremental-topology-recalculation.json": "aea50d43749961dc0cf9edcfbf46d544ccc71ee9c1f1fd6196943ee109a4657a",
+    "reports/prompt10/10-55-seed-topology-audit.json": "be60e641605900dad0e525989643439bc27c3db4d82cafa31033e0185775be11"
+  },
+  "outputHashes": {
+    "src/lib/world/shared-segment.ts": "2050121d92b543495454b6e760cc788fa86190e5a667f6656036b0d2826edc5a",
+    "src/lib/world/canonical-topology.ts": "b0acc6817f073eb15c5e9f1004ab0f256c133febfc28d1c57e57ca3412ddf453",
+    "src/lib/world/incremental-topology.ts": "e69c14e9b4d0ec3e413d1dcf5252559c36ef7bc46870833f42e9c421e1f21b73",
+    "src/lib/world/seed-topology-audit.ts": "77905774d2cf1d8f8179a77e66ea0b7d540355d4ae4ebe6fe6048fc556941d58",
+    "src/lib/world/topology-correctness-hardening.test.ts": "3213304fc582cf0a5edda6aafcb60afca520d5b284659217741aac0cc3018bc1",
+    "src/lib/world/seed-topology-audit.test.ts": "6d3ba9dab4a45eaaf4de9b6af922d73523e467af539da979eda9264767cc506d"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/world/topology-correctness-hardening.test.ts",
+      "exitCode": 1,
+      "note": "Expected RED: 8 failed and 1 passed. Split-point, partial-overlap, dateline, neighbor/coast, direct-candidate, lifecycle, and empty-change regressions were reproduced."
+    },
+    {
+      "command": "focused shared-segment/canonical-topology/incremental topology GREEN tests",
+      "exitCode": 0,
+      "note": "4 files and 16 tests passed."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/world/seed-topology-audit.test.ts",
+      "exitCode": 0,
+      "note": "Enhanced full-seed geometry/topology cross-audit passed."
+    },
+    {
+      "command": "10-46 through 10-55 related topology test invocation",
+      "exitCode": 0,
+      "note": "10 files and 32 tests passed."
+    },
+    {"command": "related topology source/test ESLint", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0},
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "note": "74 files and 737 tests passed."
+    },
+    {
+      "command": "Verify Prompt 10 and protected 10-46 through 10-55 report hashes; check for 10-56-or-later reports",
+      "exitCode": 0
+    }
+  ],
+  "redTests": [
+    {"case": "one segment versus two collinear segments", "sharedCountBefore": 0, "sharedCountAfter": 2},
+    {"case": "both boundaries have different break points", "sharedCountBefore": 0, "sharedCountAfter": 3},
+    {"case": "partial overlap", "sharedCountBefore": 0, "sharedCountAfter": 1},
+    {"case": "split-point dateline boundary", "neighborBefore": false, "neighborAfter": true},
+    {"case": "A-B-C direct incremental candidates", "recomputedBefore": 3, "recomputedAfter": 2, "cIncludedAfter": false}
+  ],
+  "measurements": {
+    "zeroLengthAtomicSegments": 0,
+    "duplicateAtomicSegments": 0,
+    "bboxOnlyFalseNeighbors": 0,
+    "pointOnlyFalseNeighbors": 0,
+    "disjointCollinearFalseNeighbors": 0,
+    "internalBordersClassifiedAsCoast": 0,
+    "incrementalCandidateRecursiveExpansions": 0,
+    "unrelatedInternalEdgeHashChanges": 0,
+    "emptyChangedIdsSemanticChanges": 0,
+    "seedTerritories": 247,
+    "seedRawSegments": 539299,
+    "seedCanonicalEdges": 7688,
+    "seedInternalEdges": 794,
+    "seedCoastEdges": 6894,
+    "seedDuplicateEdges": 0,
+    "seedWorldSpanningEdges": 0,
+    "seedTopologyHash": "544f3152d28295f78717853582e061c655ab23082074aaa5ca2f2facdefd2d3c",
+    "previousSeedCanonicalEdges": 5924,
+    "previousSeedInternalEdges": 793,
+    "previousSeedCoastEdges": 5131,
+    "seedCountChangeExplanation": "Common-break-point atomization found one formerly missed internal border and introduced deterministic atomic break points before connected-path merging, changing coast path segmentation without preserving obsolete counts.",
+    "relatedTestFilesPassed": 10,
+    "relatedTestsPassed": 32,
+    "fullUnitTestFilesPassed": 74,
+    "fullUnitTestsPassed": 737,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "protectedReportHashMismatches": 0,
+    "stage10_56OrLaterReports": 0
+  },
+  "gates": {
+    "runningReportCreatedBeforeRedTests": true,
+    "redReproductionConfirmed": true,
+    "commonBreakpointAtomization": true,
+    "partialOverlapOnly": true,
+    "directionAndInputOrderIndependent": true,
+    "datelinePolicyPreserved": true,
+    "symmetricNeighbors": true,
+    "sharedBordersAreInternal": true,
+    "directCandidatesOnly": true,
+    "createMoveDeleteHandled": true,
+    "unrelatedInternalEdgesPreserved": true,
+    "emptyChangesPreserveIdentity": true,
+    "seedSharedBorderAudit": true,
+    "seedNeighborIndexExact": true,
+    "seedClassificationSidesExact": true,
+    "seedDeterministic": true,
+    "relatedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true,
+    "fullUnitSuitePass": true,
+    "promptUnmodified": true,
+    "protectedReportsUnmodified": true,
+    "stage10_56OrLaterChangesZero": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "10-56"
+}

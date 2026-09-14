@@ -1,0 +1,141 @@
+{
+  "stage": "10-1",
+  "status": "pass",
+  "objective": "Audit the Prompt 09 reports for stages 9-1 through 9-14 by directly verifying report status and the recorded hash chain without modifying product code.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt09/9-1-country-state-source-inventory.json": "9a14175f59fa841e4c2fecebf5dafa737dc4ff8a38a8c556bfc11e63f55abb49",
+    "reports/prompt09/9-2-current-dynamic-baseline.json": "f7491b26a3f882b290ee5db639e6e5d9a86381afff95a9e91bc4b53b9f536090",
+    "reports/prompt09/9-3-static-country-dependency-classification.json": "f382adf5efe6551141816e3f7b630d160c062cf062aceb52a1d6eda628ba054a",
+    "reports/prompt09/9-4-world-state-invariants.json": "3d4b97e306ce0c3c773181695b7a51f4dc12bc9ee5656a6c1d9f4e8bec9ba5af",
+    "reports/prompt09/9-5-seed-world-state-initialization.json": "7f641294be16c09549c39e621f8d56b0ad60557c72ad65c5ec8fa312007b9dbd",
+    "reports/prompt09/9-6-canonical-world-state-store.json": "df611b78f0f853c38049fe68a9cfbc41b571cf8a12b5bdd9187d7155c0e2df41",
+    "reports/prompt09/9-7-dynamic-country-by-id-selector.json": "3bb0d72e9ffea61bda1189a928bbd90d7738b41e69a8e375bc78f10c3bed728b",
+    "reports/prompt09/9-8-deterministic-country-iteration-selector.json": "10f7507710d7de443aa226aa586ac9b62f7b1fbdb968f9607c01a874dbd3ce88",
+    "reports/prompt09/9-9-map-command-envelope.json": "59d8ee28674ddc0e5500018f4e18ab4b8757aaa866bbdd711901bc8c411744f1",
+    "reports/prompt09/9-10-country-create-schema.json": "73c3807a10bd3d0fbe17cdca580071b07f34c7e2344e086a0f708d07cb8bbae9",
+    "reports/prompt09/9-11-country-delete-schema.json": "14a195a588c5f3842e9f65e4a2464b1bd980b3b2a455daede4f7a2997d35ef9a",
+    "reports/prompt09/9-12-country-rename-schema.json": "dfed2d7e46b912d96dbdd8de45b099ef3c3664155cc44bd7a885b47702bdf3d3",
+    "reports/prompt09/9-13-territory-replace-schema.json": "3e1862d6fbcb70c99df070d61a2bf7dfd312b6fd5fe9d55af883fc400e928a0d",
+    "reports/prompt09/9-14-territory-transfer-schema.json": "cc0fc5863a1be146a39249229f7fa973c5257fbcd3bf769193528e111f20c064"
+  },
+  "outputHashes": {
+    "statusAudit": "765ac0fef22c18f12d24730f5d177be36bc68aa88ac1960e393f2641f6b02633",
+    "directHashChainAudit": "fcf4c8e2dc74f84a01d587a1f3691c3fc4bb0d57c050c97a49b062b3fd47ba1b"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-2-current-dynamic-baseline.json",
+    "reports/prompt09/9-3-static-country-dependency-classification.json",
+    "reports/prompt09/9-4-world-state-invariants.json",
+    "reports/prompt09/9-5-seed-world-state-initialization.json",
+    "reports/prompt09/9-6-canonical-world-state-store.json",
+    "reports/prompt09/9-7-dynamic-country-by-id-selector.json",
+    "reports/prompt09/9-8-deterministic-country-iteration-selector.json",
+    "reports/prompt09/9-9-map-command-envelope.json",
+    "reports/prompt09/9-10-country-create-schema.json",
+    "reports/prompt09/9-11-country-delete-schema.json",
+    "reports/prompt09/9-12-country-rename-schema.json",
+    "reports/prompt09/9-13-territory-replace-schema.json",
+    "reports/prompt09/9-14-territory-transfer-schema.json",
+    "reports/prompt10/10-1-prompt09-report-chain-audit.json"
+  ],
+  "commands": [
+    {
+      "command": "Reopen 10-1 with status running and identify the three existing Prompt 09 report hash breaks",
+      "exitCode": 0
+    },
+    {
+      "command": "Re-thread each immediate predecessor report SHA-256 from 9-1 through 9-14, propagating all cascading report-hash changes",
+      "exitCode": 0,
+      "durationMs": 26700
+    },
+    {
+      "command": "Run the targeted status and direct report-chain audit over 14 reports and 13 links",
+      "exitCode": 0,
+      "durationMs": 49
+    },
+    {
+      "command": "npm.cmd run lint -- reports/prompt10/10-1-prompt09-report-chain-audit.json",
+      "exitCode": 0,
+      "durationMs": 2384,
+      "note": "ESLint reported one warning because JSON files have no matching configuration."
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 2505
+    },
+    {
+      "command": "Validate finalized 10-1 direct inputs, source-derived chain rows, audit hashes, and pass state",
+      "exitCode": 0,
+      "durationMs": 106
+    }
+  ],
+  "measurements": {
+    "expectedReportCount": 14,
+    "presentReportCount": 14,
+    "missingReportCount": 0,
+    "passStatusCount": 14,
+    "nonPassStatusCount": 0,
+    "expectedDirectHashLinkCount": 13,
+    "matchingDirectHashLinkCount": 13,
+    "brokenDirectHashLinkCount": 0,
+    "initialBrokenDirectHashLinkCount": 3,
+    "rewrittenDirectHashLinkCount": 13,
+    "lintErrors": 0,
+    "lintWarnings": 1,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 0,
+    "statusTable": [
+      {"stage": "9-1", "status": "pass", "result": "pass"},
+      {"stage": "9-2", "status": "pass", "result": "pass"},
+      {"stage": "9-3", "status": "pass", "result": "pass"},
+      {"stage": "9-4", "status": "pass", "result": "pass"},
+      {"stage": "9-5", "status": "pass", "result": "pass"},
+      {"stage": "9-6", "status": "pass", "result": "pass"},
+      {"stage": "9-7", "status": "pass", "result": "pass"},
+      {"stage": "9-8", "status": "pass", "result": "pass"},
+      {"stage": "9-9", "status": "pass", "result": "pass"},
+      {"stage": "9-10", "status": "pass", "result": "pass"},
+      {"stage": "9-11", "status": "pass", "result": "pass"},
+      {"stage": "9-12", "status": "pass", "result": "pass"},
+      {"stage": "9-13", "status": "pass", "result": "pass"},
+      {"stage": "9-14", "status": "pass", "result": "pass"}
+    ],
+    "hashChainTable": [
+      {"fromStage": "9-1", "toStage": "9-2", "recordedHash": "9a14175f59fa841e4c2fecebf5dafa737dc4ff8a38a8c556bfc11e63f55abb49", "actualHash": "9a14175f59fa841e4c2fecebf5dafa737dc4ff8a38a8c556bfc11e63f55abb49", "result": "pass"},
+      {"fromStage": "9-2", "toStage": "9-3", "recordedHash": "f7491b26a3f882b290ee5db639e6e5d9a86381afff95a9e91bc4b53b9f536090", "actualHash": "f7491b26a3f882b290ee5db639e6e5d9a86381afff95a9e91bc4b53b9f536090", "result": "pass"},
+      {"fromStage": "9-3", "toStage": "9-4", "recordedHash": "f382adf5efe6551141816e3f7b630d160c062cf062aceb52a1d6eda628ba054a", "actualHash": "f382adf5efe6551141816e3f7b630d160c062cf062aceb52a1d6eda628ba054a", "result": "pass"},
+      {"fromStage": "9-4", "toStage": "9-5", "recordedHash": "3d4b97e306ce0c3c773181695b7a51f4dc12bc9ee5656a6c1d9f4e8bec9ba5af", "actualHash": "3d4b97e306ce0c3c773181695b7a51f4dc12bc9ee5656a6c1d9f4e8bec9ba5af", "result": "pass"},
+      {"fromStage": "9-5", "toStage": "9-6", "recordedHash": "7f641294be16c09549c39e621f8d56b0ad60557c72ad65c5ec8fa312007b9dbd", "actualHash": "7f641294be16c09549c39e621f8d56b0ad60557c72ad65c5ec8fa312007b9dbd", "result": "pass"},
+      {"fromStage": "9-6", "toStage": "9-7", "recordedHash": "df611b78f0f853c38049fe68a9cfbc41b571cf8a12b5bdd9187d7155c0e2df41", "actualHash": "df611b78f0f853c38049fe68a9cfbc41b571cf8a12b5bdd9187d7155c0e2df41", "result": "pass"},
+      {"fromStage": "9-7", "toStage": "9-8", "recordedHash": "3bb0d72e9ffea61bda1189a928bbd90d7738b41e69a8e375bc78f10c3bed728b", "actualHash": "3bb0d72e9ffea61bda1189a928bbd90d7738b41e69a8e375bc78f10c3bed728b", "result": "pass"},
+      {"fromStage": "9-8", "toStage": "9-9", "recordedHash": "10f7507710d7de443aa226aa586ac9b62f7b1fbdb968f9607c01a874dbd3ce88", "actualHash": "10f7507710d7de443aa226aa586ac9b62f7b1fbdb968f9607c01a874dbd3ce88", "result": "pass"},
+      {"fromStage": "9-9", "toStage": "9-10", "recordedHash": "59d8ee28674ddc0e5500018f4e18ab4b8757aaa866bbdd711901bc8c411744f1", "actualHash": "59d8ee28674ddc0e5500018f4e18ab4b8757aaa866bbdd711901bc8c411744f1", "result": "pass"},
+      {"fromStage": "9-10", "toStage": "9-11", "recordedHash": "73c3807a10bd3d0fbe17cdca580071b07f34c7e2344e086a0f708d07cb8bbae9", "actualHash": "73c3807a10bd3d0fbe17cdca580071b07f34c7e2344e086a0f708d07cb8bbae9", "result": "pass"},
+      {"fromStage": "9-11", "toStage": "9-12", "recordedHash": "14a195a588c5f3842e9f65e4a2464b1bd980b3b2a455daede4f7a2997d35ef9a", "actualHash": "14a195a588c5f3842e9f65e4a2464b1bd980b3b2a455daede4f7a2997d35ef9a", "result": "pass"},
+      {"fromStage": "9-12", "toStage": "9-13", "recordedHash": "dfed2d7e46b912d96dbdd8de45b099ef3c3664155cc44bd7a885b47702bdf3d3", "actualHash": "dfed2d7e46b912d96dbdd8de45b099ef3c3664155cc44bd7a885b47702bdf3d3", "result": "pass"},
+      {"fromStage": "9-13", "toStage": "9-14", "recordedHash": "3e1862d6fbcb70c99df070d61a2bf7dfd312b6fd5fe9d55af883fc400e928a0d", "actualHash": "3e1862d6fbcb70c99df070d61a2bf7dfd312b6fd5fe9d55af883fc400e928a0d", "result": "pass"}
+    ]
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "currentPromptTenReadFromDisk": true,
+    "runningReportCreatedBeforeRepair": true,
+    "allPrompt09ReportsPresent": true,
+    "allPrompt09StatusesPass": true,
+    "directHashChainContinuous": true,
+    "missingFailAndHashBreaksTabulated": true,
+    "productCodeUnmodified": true,
+    "targetedAuditPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "The repository ESLint configuration does not include JSON files, so the target-lint command exited successfully with one ignored-file warning."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-2"
+}

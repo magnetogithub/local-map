@@ -3,7 +3,7 @@
   "status": "pass",
   "objective": "Classify every countries-2020.json source reference and fixed country-index consumer as seed-only, runtime-read, or test-only without modifying product code.",
   "inputHashes": {
-    "reports/prompt09/9-2-current-dynamic-baseline.json": "98ff42b4a3f77e0a2c18255b8aa55c72e0d768830c8514cb5aab6a7156eae3ed",
+    "reports/prompt09/9-2-current-dynamic-baseline.json": "f7491b26a3f882b290ee5db639e6e5d9a86381afff95a9e91bc4b53b9f536090",
     "reports/prompt09/9-2-benchmark.test.ts": "1ff6bf35f5195157b12add4d81c2e2f8e86a0930d80249530f8f842b16afc94b",
     "src/data/countries-2020.json": "8698470b2dbfb0e33a6b0b1ff55cc4e49a40d1a67307f3ed73ba70122456381a",
     "src/lib/country/country-index.ts": "1008c8968706b134cbb452b8523d573825d928bd86b78e0720bc8aa01df95f01"
