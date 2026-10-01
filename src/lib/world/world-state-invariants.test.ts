@@ -4,7 +4,7 @@ import {
   assertWorldState,
   type CountryEntity,
   type WorldState,
-} from "./world-state";
+} from "../test-only/legacy-v1/world-state";
 
 const country = (id: string): CountryEntity => ({
   id,

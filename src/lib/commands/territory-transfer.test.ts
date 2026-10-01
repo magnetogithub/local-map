@@ -5,7 +5,7 @@ import {
   WORLD_STATE_SCHEMA_VERSION,
   type CountryEntity,
   type WorldState,
-} from "@/lib/world/world-state";
+} from "@/lib/test-only/legacy-v1/world-state";
 
 import {
   MAX_TRANSFER_AREA_TOLERANCE,
@@ -15,7 +15,7 @@ import {
   safeParseTerritoryTransferCommand,
   territoryTransferCommandSchema,
   type TerritoryTransferCommand,
-} from "./territory-transfer";
+} from "@/lib/test-only/legacy-v1/territory-transfer";
 
 const rectangle = (left: number, bottom: number, right: number, top: number): PolygonGeometry => ({
   type: "Polygon",

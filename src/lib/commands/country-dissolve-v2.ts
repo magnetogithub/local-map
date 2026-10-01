@@ -1,7 +1,8 @@
 import {z} from "zod";
 
 import {territoryIdV2Schema} from "./country-establish-v2";
-import {canonicalCommandTextSchema, createMapCommandV2Schema} from "./map-command-v2";
+import {createMapCommandV2Schema} from "./map-command-v2";
+import {countryIdV2Schema} from "./country-id-v2";
 import {wrapCommandSchemaWithPlainDataBoundary} from "./plain-command-data-v2";
 
 const unclaimDispositionV2Schema = z.strictObject({
@@ -10,12 +11,12 @@ const unclaimDispositionV2Schema = z.strictObject({
 
 const transferDispositionV2Schema = z.strictObject({
   type: z.literal("transfer"),
-  targetCountryId: canonicalCommandTextSchema,
+  targetCountryId: countryIdV2Schema,
 });
 
 const mergeDispositionV2Schema = z.strictObject({
   type: z.literal("merge"),
-  targetCountryId: canonicalCommandTextSchema,
+  targetCountryId: countryIdV2Schema,
 });
 
 const countryDissolveDispositionV2ObjectSchema = z.discriminatedUnion("type", [
@@ -38,7 +39,7 @@ export const countryDissolveTerritoryDispositionV2Schema =
 
 export const countryDissolveV2PayloadSchema = wrapCommandSchemaWithPlainDataBoundary(
   z.strictObject({
-    sourceCountryId: canonicalCommandTextSchema,
+    sourceCountryId: countryIdV2Schema,
     territoryDispositions: z.array(countryDissolveTerritoryDispositionV2Schema).min(1),
   }),
 );

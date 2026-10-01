@@ -1,0 +1,83 @@
+{
+  "stage": "11-5",
+  "status": "pass",
+  "objective": "Make selection and player-country validation use active WorldStateV2 country ids from committed search projections, and clear or reject deleted or retired ids without static fallbacks.",
+  "filesRead": [
+    "reports/prompt11/11-4-search-projection-runtime.json",
+    "src/stores/game-setup-store.ts",
+    "src/lib/projection/country-search-index-patch.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/stores/game-setup-selection-projection.test.ts",
+    "src/stores/game-setup-player-policy-projection.test.ts"
+  ],
+  "changedFiles": [
+    "src/stores/game-setup-store.ts",
+    "src/stores/game-setup-selection-projection.test.ts",
+    "src/stores/game-setup-player-policy-projection.test.ts",
+    "reports/prompt11/11-5-selection-projection-runtime.json"
+  ],
+  "commands": [
+    "Get-Content -LiteralPath 'reports\\prompt11\\11-4-search-projection-runtime.json'",
+    "Get-Content -LiteralPath 'src\\stores\\game-setup-store.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\projection\\country-search-index-patch.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\world\\world-state-v2.ts'",
+    "npm.cmd test -- --run src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.test.tsx",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "$i=1; Get-Content -LiteralPath 'src\\stores\\game-setup-selection-projection.test.ts' | ForEach-Object { '{0,4}: {1}' -f $i, $_; $i++ }",
+    "$i=1; Get-Content -LiteralPath 'src\\stores\\game-setup-player-policy-projection.test.ts' | ForEach-Object { '{0,4}: {1}' -f $i, $_; $i++ }",
+    "npm.cmd run lint -- src/stores/game-setup-store.ts src/lib/projection/country-search-index-patch.ts src/lib/world/world-state-v2.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts",
+    "rg -n \"countryById|country-index|countries-2020\\.json|searchCountries\\(\" src/stores/game-setup-store.ts src/lib/projection/country-search-index-patch.ts",
+    "git diff -- src/stores/game-setup-store.ts src/lib/projection/country-search-index-patch.ts src/lib/world/world-state-v2.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts",
+    "git status --short -- src/stores/game-setup-store.ts src/lib/projection/country-search-index-patch.ts src/lib/world/world-state-v2.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts reports/prompt11"
+  ],
+  "gates": {
+    "selectedCountryIdType": "ActiveCountryId | null",
+    "hoveredCountryIdType": "ActiveCountryId | null",
+    "playerCountryIdType": "ActiveCountryId | null",
+    "selectCountryRequiresSearchProjectionEntry": true,
+    "setHoveredCountryRequiresSearchProjectionEntry": true,
+    "confirmPlayerCountryRequiresSearchProjectionEntry": true,
+    "confirmPlayerCountryRequiresPanelPlayable": true,
+    "restorePersistedStateRequiresSearchProjectionEntry": true,
+    "restorePersistedStateRequiresPanelPlayable": true,
+    "deletedSelectedCountryCleared": true,
+    "deletedHoveredCountryCleared": true,
+    "deletedPlayerCountryCleared": true,
+    "deletedPersistedCountryCleared": true,
+    "retiredPlayerCountryRejectedWithStalePanelProjection": true,
+    "survivingSelectedProjectionRevisionUpdated": true,
+    "staticSelectionFallbackCount": 0,
+    "targetedTests": "pass",
+    "typecheck": "pass",
+    "scopedLint": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "game-setup-store now stores selected, hovered, and player country ids as ActiveCountryId | null.",
+    "All incoming string ids pass through the current countrySearchProjection before entering selected, hovered, or player state.",
+    "confirmPlayerCountry and restorePersistedState now require both an active search projection entry and playable panel projection entry.",
+    "setCountrySearchProjection clears selected, hovered, player, and persisted ids removed from the active projection, and updates selectedCountryProjectionRevision for surviving selected ids.",
+    "A regression test proves retired AAA is rejected as player country even while the static panel projection still contains AAA."
+  ],
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.test.tsx",
+      "status": "pass",
+      "result": "4 test files passed, 13 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit --incremental false",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/stores/game-setup-store.ts src/lib/projection/country-search-index-patch.ts src/lib/world/world-state-v2.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts",
+      "status": "pass"
+    },
+    {
+      "command": "rg -n \"countryById|country-index|countries-2020\\.json|searchCountries\\(\" src/stores/game-setup-store.ts src/lib/projection/country-search-index-patch.ts",
+      "status": "pass",
+      "result": "No matches"
+    }
+  ],
+  "nextStage": "11-6"
+}

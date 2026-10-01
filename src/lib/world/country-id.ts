@@ -26,7 +26,10 @@ export type CountryIdErrorCode =
   | "duplicate-country-id"
   | "country-id-lifecycle-conflict"
   | "country-id-active"
-  | "country-id-retired";
+  | "country-id-retired"
+  | "country-id-exhausted";
+
+export const COUNTRY_ID_PATTERN = /^[A-Z][A-Z0-9]{2}$/;
 
 export class CountryIdError extends Error {
   readonly code: CountryIdErrorCode;
@@ -50,6 +53,12 @@ function readCountryId(value: unknown, context: string): string {
     throw new CountryIdError(
       "invalid-country-id",
       `${context} must not contain surrounding whitespace`,
+    );
+  }
+  if (!COUNTRY_ID_PATTERN.test(value)) {
+    throw new CountryIdError(
+      "invalid-country-id",
+      `${context} must be exactly 3 uppercase alphanumeric characters and start with a letter`,
     );
   }
   return value;
@@ -109,6 +118,32 @@ export function issueCountryId(
   }
 
   return countryId as ActiveCountryId;
+}
+
+/**
+ * Allocates a stable three-character tag for a country without a predefined tag.
+ * D01..DZZ is reserved for generated countries; active, retired, and caller-reserved
+ * values are all skipped so a historical tag is never silently reused.
+ */
+export function allocateDynamicCountryId(
+  registry: CountryIdRegistry,
+  reservedCountryIds: Iterable<string> = [],
+): ActiveCountryId {
+  const unavailable = new Set<string>([
+    ...registry.activeCountryIds,
+    ...registry.retiredCountryIds,
+    ...reservedCountryIds,
+  ]);
+
+  for (let sequence = 1; sequence < 36 ** 2; sequence += 1) {
+    const candidate = `D${sequence.toString(36).toUpperCase().padStart(2, "0")}`;
+    if (!unavailable.has(candidate)) return issueCountryId(candidate, registry);
+  }
+
+  throw new CountryIdError(
+    "country-id-exhausted",
+    "No generated CountryId remains in the D01-DZZ namespace",
+  );
 }
 
 export function retireCountryId(countryId: ActiveCountryId): RetiredCountryId {

@@ -1,0 +1,38 @@
+{
+  "stage": "12-8",
+  "status": "pass",
+  "objective": "Implement the bounded strict TurnResolutionV1 root contract and function parameter JSON Schema.",
+  "filesRead": [
+    "src/lib/simulation/simulation-clock.ts",
+    "src/lib/simulation/queued-player-action.ts",
+    "src/lib/simulation/narrative-state.ts",
+    "src/lib/simulation/simulation-event.ts",
+    "src/lib/simulation/world-effect.ts",
+    "https://developers.openai.com/api/docs/guides/structured-outputs"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/turn-resolution.ts",
+    "src/lib/simulation/simulation-contract.test.ts",
+    "reports/prompt12/12-8-turn-resolution-contract.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts",
+    "npx tsc --noEmit"
+  ],
+  "gates": {
+    "validNoMapTurnParsed": "pass",
+    "validMapTurnParsed": "pass",
+    "explicitArrayAndStringLimits": "pass",
+    "strictRootObject": "pass",
+    "rootAnyOfAbsent": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "All root fields are required and unknown root properties are rejected.",
+    "The host parser revalidates the same contract version."
+  ],
+  "notes": [
+    "Contract version is turn-resolution.v1."
+  ],
+  "nextStage": "12-9"
+}

@@ -1,10 +1,17 @@
 export type DetailedMapStatus="idle"|"loading"|"ready"|"error";
+import type {MapSourceSyncSnapshot,RuntimeMapSourceId} from "@/lib/map/map-source-incremental-adapter";
 export type RenderedCountryLabel={countryId:string;layerId:string;anchor:[number,number];angle:number;fontSize:number;letterSpacing:number;worldCopy?:number;screenAnchor:[number,number];estimatedWidth:number};
 export type RenderedCountryLabelBounds={countryId:string;layerId:string;worldCopy:number;source:"projected-glyph-polygons";renderer:"glyph-geometry";left:number;top:number;right:number;bottom:number;width:number;height:number;primitiveCount:number;labelInstanceId:string;glyphIndices:number[];vertexCount:number;diagnostic:false};
 export type PaxMapDebug={
   getCenter:()=>[number,number];getZoom:()=>number;hasLayer:(id:string)=>boolean;
+  getWorldRevision?:()=>number;
+  getMapProjectionRevision?:()=>number;
+  getMapSourceSyncSnapshot?:()=>MapSourceSyncSnapshot;
+  getMapSourceIdentity?:(sourceId:RuntimeMapSourceId)=>number|null;
+  getMapSourceFeatures?:(sourceId:RuntimeMapSourceId)=>Promise<Array<{id:string;countryId:string|null;ownerCountryId:string|null;displayName:string|null;projectionRevision:number|null;mapColor:string|null;classification:string|null}>>;
+  resynchronizeMapSources?:()=>void;
   queryRenderedCountryIds:()=>string[];queryRenderedLabelIds:()=>string[];
-  getRawRenderedCountryLabels:()=>RenderedCountryLabel[];getRenderedCountryLabels:()=>RenderedCountryLabel[];getRenderedCountryLabelCount:(countryId:string,options?:{raw?:boolean})=>number;getCountryLabelPlacement:(countryId:string)=>Record<string,unknown>|null;
+  getRawRenderedCountryLabels:()=>RenderedCountryLabel[];getRenderedCountryLabels:()=>RenderedCountryLabel[];getRenderedCountryLabelCount:(countryId:string,options?:{raw?:boolean})=>number;getCountryLabelPlacement:(countryId:string)=>Record<string,unknown>|null;getCountryFocus?:(countryId:string)=>{center:readonly [number,number];zoom:number}|null;
   getCountryLabelRendererBounds?:(countryId:string)=>RenderedCountryLabelBounds[];
   getCountryEffectiveScreenWidth?:(countryId:string)=>number|null;
   getCountryLabelFontConfiguration?:()=>{textFont:unknown;glyphSource:string|undefined;localIdeographFontFamily:string};
@@ -14,10 +21,14 @@ export type PaxMapDebug={
   getRenderedGlyphLabelIds?:()=>string[];
   getCountryLabelLayerOrder?:()=>string[];
   setCountryInteractionState?:(state:{hoveredCountryId?:string|null;selectedCountryId?:string|null;playerCountryId?:string|null})=>void;
-  setEvidenceSourceData?:(sourceId:string,data:unknown)=>boolean;
-  splitChinaIntoProvinceCountries?:()=>Promise<{active:true;provinceCountryIds:string[]}>;
+  splitChinaIntoProvinceCountries?:()=>Promise<{active:true;provinceCountryIds:string[];countryIdBySourceId:Record<string,string>}>;
+  mergeChinaProvinceCountries?:()=>Promise<{active:true;mergedCountryId:string;sourceCountryIds:string[]}>;
   rollbackChinaProvinceCountries?:()=>Promise<{active:false;restoredCountryId:"CHN"}>;
-  getChinaProvinceScenario?:()=>{active:boolean;provinceCountryIds:string[]};
+  getChinaProvinceScenario?:()=>{active:boolean;provinceCountryIds:string[];countryIdBySourceId:Record<string,string>;mergedCountryId:string|null};
+  splitUnitedStatesIntoStateCountries?:()=>Promise<{active:true;stateCountryIds:string[];countryIdBySourceId:Record<string,string>}>;
+  mergeUnitedStatesStateCountries?:()=>Promise<{active:true;mergedCountryId:string;sourceCountryIds:string[]}>;
+  rollbackUnitedStatesStateCountries?:()=>Promise<{active:false;restoredCountryId:"USA"}>;
+  getUnitedStatesStateScenario?:()=>{active:boolean;stateCountryIds:string[];countryIdBySourceId:Record<string,string>;mergedCountryId:string|null};
   getSelectedFilter:()=>unknown;getPlayerFilter:()=>unknown;
   getAdmin1Count:(countryId:string)=>number;getUnresolvedAdmin1:()=>unknown[];
   getDetailedStatus:()=>DetailedMapStatus;getDetailedError:()=>string|null;

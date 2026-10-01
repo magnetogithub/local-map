@@ -1,0 +1,102 @@
+{
+  "stage": "10-69",
+  "status": "pass",
+  "objective": "Plan atomic removal of Territory owners and explicitly reject already-unclaimed inputs.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-68-territory-assign-planner.json": "61e30aec183cb9e85071ff4e49e9d141e73aeaffdf84fe5c7212ba2c045d5207",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/plan-result.test.ts": "75452858fbb52a334c35174ecc1b88fe8bf96572fc661a5298aca4e91840693a",
+    "src/lib/planning/plan-result.ts": "b90e8959e6ce2af14a86a02be7ce1a7deca9caea83858122c50905fb4d0607da",
+    "src/lib/planning/territory-unclaim-planner.test.ts": "fc527c506283c94736f990014a443e5c70255d39c41806a7497103b87bf42825",
+    "src/lib/planning/territory-unclaim-planner.ts": "1837e97cb0e319fdf85ab9c303f90e12bda12e0f50d9a629090e3e964623c152"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-69-territory-unclaim-planner.json",
+    "src/lib/planning/plan-result.test.ts",
+    "src/lib/planning/plan-result.ts",
+    "src/lib/planning/territory-unclaim-planner.test.ts",
+    "src/lib/planning/territory-unclaim-planner.ts"
+  ],
+  "commands": [
+    {
+      "command": "Verify 10-68 status and every recorded output hash",
+      "exitCode": 0
+    },
+    {
+      "command": "Read the local Next.js 16.3 Vitest guide and inspect the unclaim schema plus ownership/hash contracts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/territory-unclaim-planner.test.ts",
+      "exitCode": 1,
+      "note": "Expected red test: the territory-unclaim planner module did not exist."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/territory-unclaim-planner.test.ts src/lib/planning/plan-result.test.ts src/lib/planning/planner-boundary.test.ts",
+      "exitCode": 0,
+      "result": "3 files passed; 10 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run unclaim schema/planner/previous planners/ownership/hash/world-state targeted files",
+      "exitCode": 0,
+      "result": "14 files passed; 87 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/territory-unclaim-planner.ts src/lib/planning/territory-unclaim-planner.test.ts src/lib/planning/plan-result.ts src/lib/planning/plan-result.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "measurements": {
+    "successfulOwnershipChanges": 2,
+    "geometryHashChanges": 0,
+    "topologyHashChanges": 0,
+    "countryDomainChanges": 0,
+    "alreadyUnclaimedTerritoriesAccepted": 0,
+    "unknownTerritoriesAccepted": 0,
+    "duplicateTerritoryIdsAccepted": 0,
+    "targetedTestFilesPassed": 14,
+    "targetedTestsPassed": 87,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-77"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "alreadyUnclaimedPolicyExplicitReject": true,
+    "multipleTerritoriesUnclaimedAtomically": true,
+    "alreadyUnclaimedTerritoryRejected": true,
+    "unknownTerritoryRejected": true,
+    "duplicateTerritoryRejected": true,
+    "geometryAndPropertiesShared": true,
+    "topologyShared": true,
+    "countryDomainsShared": true,
+    "ownershipHashesChanged": true,
+    "geometryHashesStable": true,
+    "territoriesRootUpdated": true,
+    "singleRevisionNextState": true,
+    "inputStateUnchanged": true,
+    "targetedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-70"
+}

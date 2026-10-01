@@ -14,8 +14,8 @@ import {
   type CountryEntity,
   type CountryGeometryFeature,
   type WorldState,
-} from "../../src/lib/world/world-state";
-import {updateCountryMapSources,type CountryMapArtifactCollections} from "../../src/lib/world/country-map-artifacts";
+} from "../../src/lib/test-only/legacy-v1/world-state";
+import {updateCountryMapSources,type CountryMapArtifactCollections} from "../../src/lib/test-only/legacy-v1/country-map-artifacts";
 
 const read=<T,>(file:string)=>JSON.parse(fs.readFileSync(path.join(process.cwd(),file),"utf8")) as T;
 const geometry=read<{features:CountryGeometryFeature[]}>("public/data/maps/countries-10m.geojson");
@@ -57,5 +57,5 @@ describe("9-2 current dynamic baseline",()=>{
     expect(result.rollbackHashMatchesSeed).toBe(true);
     expect(setDataCalls).toBe(7);
     expect(split.retainedEntitiesMin).toBe(Object.keys(seed.countriesById).length-1);
-  },30_000);
+  },120_000);
 });

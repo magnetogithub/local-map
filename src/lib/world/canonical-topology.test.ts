@@ -21,6 +21,12 @@ const square = (name: string, minX: number, minY: number) => territory(name, [
   [minX, minY + 1], [minX, minY],
 ]);
 
+const ownedSquare = (name: string, minX: number, minY: number, ownerCountryId: string) =>
+  createTerritoryEntity({
+    ...square(name, minX, minY),
+    ownerCountryId: ownerCountryId as never,
+  });
+
 describe("10-49~10-53 canonical topology", () => {
   it("distinguishes shared segments from point contact and derives symmetric neighbors", () => {
     const alpha = square("alpha", 0, 0);
@@ -64,5 +70,27 @@ describe("10-49~10-53 canonical topology", () => {
 
     expect(topology.neighborTerritoryIdsById[north.id]).toEqual([south.id]);
     expect(topologyHasWorldSpanningEdge(topology)).toBe(false);
+  });
+
+  it("resolves coincident same-country boundary slivers to one territory side", () => {
+    const large = createTerritoryEntity({
+      ...ownedSquare("large", 0, 0, "AAA"),
+      geometry: {type: "Polygon", coordinates: [[
+        [0, 0], [1, 0], [1, 2], [0, 2], [0, 0],
+      ]]},
+    });
+    const small = ownedSquare("small", 0, 0, "AAA");
+    const neighbor = ownedSquare("neighbor", 1, 0, "BBB");
+    const topology = buildCanonicalTopology({
+      [large.id]: large,
+      [small.id]: small,
+      [neighbor.id]: neighbor,
+    });
+    const shared = Object.values(topology.edgesById).find((edge) =>
+      edge.territoryIds.includes(neighbor.id)
+      && edge.coordinates.some(([longitude]) => longitude === 1));
+
+    expect(shared?.territoryIds).toContain(small.id);
+    expect(shared?.territoryIds).not.toContain(large.id);
   });
 });

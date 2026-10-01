@@ -79,40 +79,6 @@ function dissolveCollection(collection,tolerance){
   return dissolved;
 }
 const ringArea=ring=>Math.abs(ring.reduce((sum,p,i)=>{const q=ring[(i+1)%ring.length];return sum+p[0]*q[1]-q[0]*p[1]},0)/2);
-function largestPolygon(geometry){
-  const polygons=geometry.type==="Polygon"?[geometry.coordinates]:geometry.coordinates;
-  return polygons.reduce((best,p)=>ringArea(p[0])>ringArea(best[0])?p:best,polygons[0]);
-}
-function pointInRing(point,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if(((a[1]>point[1])!==(b[1]>point[1]))&&(point[0]<(b[0]-a[0])*(point[1]-a[1])/(b[1]-a[1])+a[0]))inside=!inside}return inside}
-const pointInPolygon=(point,polygon)=>pointInRing(point,polygon[0])&&!polygon.slice(1).some(h=>pointInRing(point,h));
-function interiorPoint(polygon,preferred){
-  if(preferred&&pointInPolygon(preferred,polygon))return preferred;
-  const ring=polygon[0],xs=ring.map(p=>p[0]),ys=ring.map(p=>p[1]),box=[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];
-  let best=null,bestDistance=-1;
-  for(let y=1;y<24;y++)for(let x=1;x<24;x++){const point=[box[0]+(box[2]-box[0])*x/24,box[1]+(box[3]-box[1])*y/24];if(!pointInPolygon(point,polygon))continue;const distance=Math.min(...ring.map(p=>(p[0]-point[0])**2+(p[1]-point[1])**2));if(distance>bestDistance){best=point;bestDistance=distance}}
-  return best??ring[0];
-}
-function baselineFor(geometry,preferred,override={}){
-  const polygon=largestPolygon(geometry),ring=polygon[0],center=interiorPoint(polygon,preferred);
-  let xx=0,xy=0,yy=0;for(const p of ring){const dx=(p[0]-center[0])*Math.cos(center[1]*Math.PI/180),dy=p[1]-center[1];xx+=dx*dx;xy+=dx*dy;yy+=dy*dy}
-  let angle=.5*Math.atan2(2*xy,xx-yy)+(override.angleOffset??0)*Math.PI/180;
-  if(Math.cos(angle)<0)angle+=Math.PI;
-  const dx=Math.cos(angle)/Math.max(.2,Math.cos(center[1]*Math.PI/180)),dy=Math.sin(angle),span=Math.max(...ring.map(p=>Math.hypot(p[0]-center[0],p[1]-center[1])))*1.5;
-  const samples=[];for(let i=-160;i<=160;i++){const t=span*i/160,point=[center[0]+dx*t,center[1]+dy*t];samples.push({point,t,inside:pointInPolygon(point,polygon)})}
-  let best=[],run=[];for(const sample of samples){if(sample.inside)run.push(sample);else{if(run.length>best.length)best=run;run=[]}}if(run.length>best.length)best=run;
-  const uprightDegrees=()=>{let degrees=angle*180/Math.PI;while(degrees>90)degrees-=180;while(degrees<-90)degrees+=180;return round(degrees)};
-  if(best.length<3)return {coordinates:[center,center],anchor:center.map(round),angle:uprightDegrees(),length:0,area:ringArea(ring),mainPartArea:ringArea(ring),island:true};
-  const indexes=[0,.25,.5,.75,1].map(v=>Math.round((best.length-1)*v));const coordinates=indexes.map(i=>best[i].point.map(round));
-  const length=Math.hypot((coordinates.at(-1)[0]-coordinates[0][0])*Math.cos(center[1]*Math.PI/180),coordinates.at(-1)[1]-coordinates[0][1]);
-  return {coordinates,anchor:coordinates[Math.floor(coordinates.length/2)],angle:uprightDegrees(),length,area:(geometry.type==="Polygon"?[geometry.coordinates]:geometry.coordinates).reduce((s,p)=>s+ringArea(p[0]),0),mainPartArea:ringArea(ring),island:(geometry.type==="MultiPolygon"&&geometry.coordinates.length>2)};
-}
-function labelMetrics(id,name,shape,rank,override={}){
-  const labelLength=Math.max(2,name.length),projectedWorld=shape.length/360*512*2**1.25,widthUsage=shape.mainPartArea>250?.78:shape.mainPartArea>40?.68:shape.island?.4:.56,letterSpacingWorld=override.letterSpacing??(labelLength<=2?.04:shape.mainPartArea>250?.12:.045),estimatedTextUnits=labelLength*.92+Math.max(0,labelLength-1)*letterSpacingWorld;
-  const fitted=projectedWorld*widthUsage/estimatedTextUnits,areaFloor=(12+11.5*Math.log10(shape.mainPartArea+1))*Math.min(1,(3/labelLength)**.16),sizeScale=override.fontScale??1,fontSizeWorld=Math.max(13,Math.min(56,Math.max(fitted,areaFloor)*sizeScale)),fontSizeMid=Math.min(58,Math.max(fontSizeWorld,fontSizeWorld*1.04)),fontSizeClose=Math.min(60,Math.max(fontSizeMid,fontSizeWorld*1.08));
-  const needed=labelLength*fontSizeWorld*1.02,pixelsAtZero=shape.length/360*512,computedMinZoom=Math.max(1,Math.min(8.5,Math.log2(needed/Math.max(1,pixelsAtZero)))),minZoom=override.minZoom??(MAJOR_LABELS.has(id)?1:computedMinZoom),letterSpacingMid=Math.max(.025,letterSpacingWorld*.88),letterSpacingClose=Math.max(.02,letterSpacingWorld*.72),desiredTextWidthWorld=projectedWorld*widthUsage,estimatedTextWidthWorld=fontSizeWorld*estimatedTextUnits;
-  return {countryId:id,area:round(shape.area),mainPartArea:round(shape.mainPartArea),anchor:shape.anchor,angle:shape.angle,baselineLengthDegrees:round(shape.length),baselineLength:round(shape.length),labelRank:rank,minZoom:round(minZoom),maxZoom:9,labelLength,fontSizeAtEntry:round(fontSizeMid),fontSizeWorld:round(fontSizeWorld),fontSizeMid:round(fontSizeMid),fontSizeClose:round(fontSizeClose),letterSpacing:letterSpacingWorld,letterSpacingWorld,letterSpacingMid,letterSpacingClose,maxWidthUsage:widthUsage,desiredTextWidthWorld:round(desiredTextWidthWorld),estimatedTextWidthWorld:round(estimatedTextWidthWorld),priority:MAJOR_LABELS.has(id)?1:Math.min(90,10+rank*10),preferredFontSize:round(fontSizeMid),preferredLetterSpacing:letterSpacingWorld};
-}
-
 const countries10=readRaw("ne_10m_admin_0_countries.geojson"),countries50=readRaw("ne_50m_admin_0_countries.geojson"),admin1Raw=readRaw("ne_10m_admin_1_states_provinces.geojson"),places=readRaw("ne_10m_populated_places_simple.geojson");
 const overrides=readProject("src/data/country-label-overrides-2020.json"),playableIds=new Set(readProject("src/data/playable-country-ids-2020.json"));
 const sourceById=dissolveCollection(countries10,0);
@@ -151,7 +117,7 @@ const adminReport=[...new Set([...rawCounts.keys(),...generatedCounts.keys(),...
 
 const fontFile=fs.readFileSync(path.join(root,"public/fonts/Noto Sans KR/NotoSansCJKkr-Regular.otf")),glyphPbfFiles=["0-255.pbf","256-511.pbf"].map(file=>fs.readFileSync(path.join(root,"public/fonts/Open Sans Regular",file))),fontMetrics=createMapLibreCountryLabelMetrics(fontFile.buffer.slice(fontFile.byteOffset,fontFile.byteOffset+fontFile.byteLength),glyphPbfFiles,metadata.map(country=>country.mapLabelKo)),computeCountryLabelLayout=input=>{try{return computeLayout({...input,policy:{fontMetrics,...input.policy}})}catch(error){throw new Error(`Country label layout failed for ${input.countryId}: ${error instanceof Error?error.message:String(error)}`,{cause:error})}};
 function classifyLabelShape(geometry){
-  const polygons=geometry.type==="Polygon"?[geometry.coordinates]:geometry.coordinates,areas=polygons.map(p=>ringArea(p[0])),largestIndex=areas.indexOf(Math.max(...areas)),largest=polygons[largestIndex][0],total=areas.reduce((a,b)=>a+b,0),significantIndexes=areas.map((area,index)=>({area,index})).filter(item=>item.area/Math.max(1e-12,total)>=.012).map(item=>item.index),meanLat=largest.reduce((sum,p)=>sum+p[1],0)/largest.length,scale=Math.max(.15,Math.cos(meanLat*Math.PI/180)),xs=largest.map(p=>p[0]*scale),ys=largest.map(p=>p[1]),width=Math.max(...xs)-Math.min(...xs),height=Math.max(...ys)-Math.min(...ys),aspect=height/Math.max(1e-9,width),center=ring=>[ring.reduce((sum,p)=>sum+p[0]*scale,0)/ring.length,ring.reduce((sum,p)=>sum+p[1],0)/ring.length],largestCenter=center(largest),significantDistances=significantIndexes.filter(index=>index!==largestIndex).map(index=>Math.hypot(...center(polygons[index][0]).map((value,axis)=>value-largestCenter[axis]))),dispersion=Math.sqrt(areas[largestIndex])*.8,dispersedCount=significantDistances.filter(distance=>distance>=dispersion).length,maxDispersion=Math.max(0,...significantDistances);
+  const polygons=geometry.type==="Polygon"?[geometry.coordinates]:geometry.coordinates,areas=polygons.map(p=>ringArea(p[0])),largestIndex=areas.indexOf(Math.max(...areas)),largest=polygons[largestIndex][0],total=areas.reduce((a,b)=>a+b,0),significantIndexes=areas.map((area,index)=>({area,index})).filter(item=>item.area/Math.max(1e-12,total)>=.012).map(item=>item.index),meanLat=largest.reduce((sum,p)=>sum+p[1],0)/largest.length,scale=Math.max(.15,Math.cos(meanLat*Math.PI/180)),xs=largest.map(p=>p[0]*scale),ys=largest.map(p=>p[1]),width=Math.max(...xs)-Math.min(...xs),height=Math.max(...ys)-Math.min(...ys),aspect=height/Math.max(1e-9,width),center=ring=>[ring.reduce((sum,p)=>sum+p[0]*scale,0)/ring.length,ring.reduce((sum,p)=>sum+p[1],0)/ring.length],largestCenter=center(largest),significantDistances=significantIndexes.filter(index=>index!==largestIndex).map(index=>Math.hypot(...center(polygons[index][0]).map((value,axis)=>value-largestCenter[axis]))),dispersion=Math.sqrt(areas[largestIndex])*.8,dispersedCount=significantDistances.filter(distance=>distance>=dispersion).length;
   if(aspect>=1.65||(Math.abs(meanLat)>=55&&significantIndexes.length>=3&&dispersedCount>=2))return {className:"vertical",policy:{minComponentAreaRatio:.035}};
   if(polygons.length>1)return {className:"separated-territory",policy:{minComponentAreaRatio:.035}};
   return {className:"mainland",policy:{minComponentAreaRatio:.035}};

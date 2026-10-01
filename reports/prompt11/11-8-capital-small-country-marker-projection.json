@@ -1,0 +1,46 @@
+{
+  "stage": "11-8",
+  "status": "pass",
+  "objective": "Feed capital dots, capital labels, and small-country markers from revision-bound WorldStateV2 projections rather than static runtime GeoJSON sources.",
+  "filesRead": [
+    "reports/prompt11/11-6-country-panel-projection-runtime.json",
+    "src/components/map/WorldMap.tsx",
+    "src/lib/projection/country-capital-projection.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/lib/world/initial-world-state-v2.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx"
+  ],
+  "changedFiles": [
+    "src/lib/projection/country-map-marker-projection.ts",
+    "src/lib/projection/country-map-marker-projection.test.ts",
+    "src/components/map/WorldMap.tsx",
+    "reports/prompt11/11-8-capital-small-country-marker-projection.json"
+  ],
+  "commands": [
+    "npm.cmd test -- --run src/lib/projection/country-map-marker-projection.test.ts src/lib/projection/country-capital-projection.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint -- src/components/map/WorldMap.tsx src/lib/projection/country-map-marker-projection.ts src/lib/projection/country-map-marker-projection.test.ts src/app/page.tsx src/components/layout/GameSetupShell.tsx",
+    "git diff --check"
+  ],
+  "gates": {
+    "staticCapitalAndSmallCountryRuntimeSources": 0,
+    "markerAppliedRevision": true,
+    "staleMarkerProjectionRejected": true,
+    "dissolvedCapitalAndMarkerRemoved": true,
+    "danglingCapitalTerritoryReferences": 0,
+    "smallMarkerNameAndPolicyFromWorldStateV2": true,
+    "targetedTests": "pass: 2 files, 5 tests",
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "diffCheck": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "The existing server entry and shell supply the initial revision-bound marker projection to WorldMap. MapLibre sources now start empty and receive its capital and small-country feature collections.",
+    "WorldMap accepts a newer marker projection without recreating the map, ignores stale or duplicate revisions, and uses the latest accepted artifact if the map is still loading.",
+    "Small-country marker names and playable flags now reflect the active WorldStateV2 country entity; seed marker data supplies coordinates only.",
+    "No 11-7 report is present. The map polygon/border adapter and ongoing committed-state subscription remain separate later integration work; this stage validates the marker projection and its map consumer only."
+  ],
+  "nextStage": "11-9"
+}

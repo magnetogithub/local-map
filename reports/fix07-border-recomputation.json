@@ -1,10 +1,10 @@
 {
   "subtask": "7H",
   "status": "passed",
-  "validationStartedAt": "2026-09-11T08:40:28.317Z",
+  "validationStartedAt": "2026-10-01T06:08:28.818Z",
   "inputGeometry": {
     "path": "public/data/maps/countries-10m.geojson",
-    "modifiedAt": "2026-08-31T04:10:13.310Z",
+    "modifiedAt": "2026-09-15T06:12:39.702Z",
     "baseGeometryHashes": {
       "USA": "3138d5b",
       "RUS": "98d6e782",

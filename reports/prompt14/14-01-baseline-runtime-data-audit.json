@@ -1,0 +1,4671 @@
+{
+  "stage": "14-1",
+  "status": "pass",
+  "startedAt": "2026-10-01T06:54:57.873Z",
+  "completedAt": "2026-10-01T06:55:08.773Z",
+  "startHead": "7c667b7611dacb106f2528fa57459f1808bf4f17",
+  "baseline": {
+    "policy": "All entries below existed before Prompt 14 execution. Prompt 14 files are excluded and listed under filesChanged.",
+    "trackedModifiedOrDeletedCount": 163,
+    "untrackedCount": 366,
+    "trackedModifiedOrDeleted": [
+      {
+        "status": " M",
+        "path": ".gitignore",
+        "workingTreeSha256": "4f7781f3a2e4afb95a8145c15aa3ad0fe02406fc9f257d862811540965c23c5b",
+        "headSha256": "207e265ff4901f9ad9f96d8ce08530e04f9fc600815472a66d0a446096d654cd",
+        "byteLength": 564
+      },
+      {
+        "status": " D",
+        "path": "aus-diag.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "aus-diag.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "2dcbac7d9f30adb120bae5bc5c05fa27c3bb209adc20903b0fe5da132ffc18cd",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "debug.log",
+        "workingTreeSha256": null,
+        "headSha256": "7f0c11c65b3b26dfdbc715a1174be8758c07676c92fd5ffc12147ff589f26862",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "e2e/fix08-12.spec.ts",
+        "workingTreeSha256": "6629fb220ebe86409da82ee8e308987fbe0270d80fa232b3b313eac7f9a9702f",
+        "headSha256": "3e796bc21013305f9713cfa89c66bf0017b8aa658927083e5a5d376b26e6c2c4",
+        "byteLength": 2354
+      },
+      {
+        "status": " M",
+        "path": "e2e/fix08-5.spec.ts",
+        "workingTreeSha256": "5e9ce9521c66d6ca7f788e80b3af354e4a0f2df5044db78a988eb63c1552fce8",
+        "headSha256": "6678393957dc38959815b22bdb9ad69c171591a47bba797c3a8f6f40ae2034c8",
+        "byteLength": 2342
+      },
+      {
+        "status": " M",
+        "path": "e2e/fix08-6.spec.ts",
+        "workingTreeSha256": "eb34cf4997343abcc6e2d534ccf51130f250460b30b4c95b33ee9b4fdd04d30c",
+        "headSha256": "d36bbecef018cc75ab0653272e4493b95d118809d2e3c712d65ae05d460d7357",
+        "byteLength": 1936
+      },
+      {
+        "status": " M",
+        "path": "e2e/fix08-7.spec.ts",
+        "workingTreeSha256": "4e2bfa63543a779e8da05d07a2e01c72df410c6c20c620e508be0dd091aeaf10",
+        "headSha256": "3c0f521b96d211f43b6fa8fbecd036948736ebbe283936073b08f28b95648941",
+        "byteLength": 4125
+      },
+      {
+        "status": " M",
+        "path": "e2e/fix08-aus-diag.spec.ts",
+        "workingTreeSha256": "3da8b898b5aaeb75d5f39a1226f8877791ffb40c4f1e7a6059e1de2718bbd13e",
+        "headSha256": "5331b54a335cc9686e373221e3b609601e8342808948b15e55df3b140b154511",
+        "byteLength": 670
+      },
+      {
+        "status": " M",
+        "path": "e2e/game-setup.spec.ts",
+        "workingTreeSha256": "281ae5218104418691401add33a045f147fcabefad5f0b27903c66c60c5b1327",
+        "headSha256": "50e60c9072f1112372e19e85ae4a889d92ec10b5cb78fd74361b89392022b09c",
+        "byteLength": 24748
+      },
+      {
+        "status": " M",
+        "path": "eslint.config.mjs",
+        "workingTreeSha256": "4a580728d7c61193919a3f79d9cdf3adac74d86e14a538aea200dbfda7563711",
+        "headSha256": "d968c4c24a76828aafffd5429fdb01e86cd52efce0a4a5e952215fb4ced6b476",
+        "byteLength": 739
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-final.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-final.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "e276e6022f3f9949be736d581e4896e7a274d789f25ce5fe2c85ef6f571f5f28",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-pass.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-pass.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "a0c4675c55ccec374b8bdfb9441db42c7ed8ba27dac285571e9f862cd58a2181",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-rerun.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-rerun.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "d5981c8b9605f71dc532f23f9ade3e0264000254ee16e572fefebb5173c4738b",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-server.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a1-server.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "b61d072eecced977553d6c24e650d2b3e6555de6fe64d894ab9af93a2899463b",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a3.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-8a3.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "755722a247d85912692dac8d4d28183f90132859f9d5bca7eb86a9d400f7f258",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-diag-3015.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-diag-3015.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "1f1f70a7288090ca4c75827e669e6ac7cd88c2e9799484a7c20a4ffec3d7725e",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-diagnose.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-diagnose.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "fdc61e4e2e53694840f73951ac307d3432b77e30bca58dedaf1fb62e966dcae2",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-server-3010.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-server-3010.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "fccfed2908a4abf323fbce8e317a0da23bbf063b40e65ab9ada94e18defa7193",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-server-3011.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-server-3011.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "f27788801ae249aa1135079cd97763296362259101cbc7882d150d3872463439",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-server.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "dc7018e426fcde20502eda025cc2ab8418144997e1948aa6592f0fa6dfffb5ac",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "fix08-server.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "d10a2bd96e2131981938a9dd4f382cea6ae30777c7d05eda287955cb59c92f2b",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "next.config.ts",
+        "workingTreeSha256": "04dffe1d055a4d50ffab1b8e18bcbc67679563f79ff7395df0ac6292c44c8ee7",
+        "headSha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc",
+        "byteLength": 416
+      },
+      {
+        "status": " M",
+        "path": "package.json",
+        "workingTreeSha256": "9b3a0a48e3d897a6daa8db585d15d77aaa9b6aa587e4f8fb3626eeca1c1f76e3",
+        "headSha256": "fd2258c1f8f73a9eddda91465e1a5f309e9e087a4b88157e5439545cc9f333d4",
+        "byteLength": 1301
+      },
+      {
+        "status": " M",
+        "path": "playwright.config.ts",
+        "workingTreeSha256": "b08ac8ad4d4bf232dd042fb53e367d3d10c2d4749b0b54d8e01cc9bacc672b74",
+        "headSha256": "d6788b9a267e44dedd4c149f05f3211672f1ad340774c2795e025a52e86917e0",
+        "byteLength": 526
+      },
+      {
+        "status": " D",
+        "path": "r3-angle-pass.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-angle-pass.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "15e0dcd5e0da5efe5dc8f43ef87afa7a4bc95ded7d59f732f69b2f6ceebe6676",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-angle90.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-angle90.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "dae93ce4e3512fe24aabb764e5b4f1bfc578d6de89138447d3fb935829c4badb",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-buffer.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-buffer.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "503274a6834d98776013db1484707988c5f4c978285d83f0795da4160167383f",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-complete.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-complete.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "cd81cc53034565e1c8c6c1c2df7eaa4e8c1004bbc44c5e4635eaae5a604bddb5",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-current.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-current.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "9d9e5b4f66861355e6cd7a18c4833f298b9027c1caac40fd53b05282a5d1f750",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-diag.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "32e0844f7d23746903f6def1bced84373620bcd82eddb538d5b041ac7415ebca",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-diag.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "526eb3aba96da2c57f95df2b268f35fbaa37657dbf74b0540741a83634142295",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-diag2.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-diag2.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "85d2a51b8817e482eeed49f6ba901b84931350220243656c5bf90f19dd3cfeef",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-final.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "32e0844f7d23746903f6def1bced84373620bcd82eddb538d5b041ac7415ebca",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-final.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "ae3163720bc6b49c45a20c7a32b544d246804e525e39d1617e3699ec1945e7c8",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-fresh.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "3ed4cf091a356821d6033f634ab99c7376d129c3d4e4e97ceb7a1fc568f6dbcc",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-fresh.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "e319f6bc7abd47e16d07a5fe2d37c69fba2b34b4df13b3f493b1a60ee9231dee",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-latin.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-latin.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "d54a59e92dbbfe5686bd2002637b285447fd38585a78b319b3fa301002ecec78",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-pass.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "32e0844f7d23746903f6def1bced84373620bcd82eddb538d5b041ac7415ebca",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-pass.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "2566877e6c1378d2e6583fd0c0d5046b306d3226334a46b2ce2942bf8c05b341",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-pass2.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "32e0844f7d23746903f6def1bced84373620bcd82eddb538d5b041ac7415ebca",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-pass2.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "cf3783cc5c89f52886528461f7571504270c9a4ce488105e9be4b67bd2033240",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-retry.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "32e0844f7d23746903f6def1bced84373620bcd82eddb538d5b041ac7415ebca",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-retry.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "b0986b1a8d3e90734d20a227cce9a3d86441a1cf6b4592237070e91c90b419c7",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-retry2.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "6f0f0f88197bb1ab6c5d83a61186d14b8cf179cfefafb4cd406c448b662a468b",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-retry2.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "ff79fec0eaaadda5383cc3142d96a7fd8dd964b40a783d6f5cf0cbd2e039c183",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-run.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-run.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "9d9e5b4f66861355e6cd7a18c4833f298b9027c1caac40fd53b05282a5d1f750",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-size16.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-size16.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "d7c083b8344960a4db6c4bce3350586f8776923a8390afb495cbb437829d0a56",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-spacing.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-spacing.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "d54a59e92dbbfe5686bd2002637b285447fd38585a78b319b3fa301002ecec78",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-success.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-success.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "1a57fc4440218ae6999e5be77fa16bc5025146cfb415215eb748aba7918aaad6",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-z1.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "r3-z1.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "f1bb257acc912b422b7f8c8f1eec3ed52cbb9d35d00f4b1722a5cc8e582acb17",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "reports/fix07-7l-server.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "reports/fix07-7l-server.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "e88ad014ec4eeb8dbeea90fdf751a8abd7ad259bb57edd853d8ab789e3a204bd",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "reports/fix07-7o-server.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "reports/fix07-7o-server.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "79bfb97f0942f961f4085223eeef1d42dd87edf0530a3047059ac63031715546",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "reports/fix07-border-recomputation.json",
+        "workingTreeSha256": "ba0e3ba4d82a11331f6e84760e6345031266b72c330aab8141f20869b8da9b22",
+        "headSha256": "80064ca833f6b93cd4077bb56d46c29cd10aa2c4c190b90284834f6e68f44442",
+        "byteLength": 7352
+      },
+      {
+        "status": " M",
+        "path": "reports/prompt09/9-2-benchmark.test.ts",
+        "workingTreeSha256": "4dc0dbb1c52bf744ea56705518d3e3101b01cd552572a3da65b24e1fca2535a9",
+        "headSha256": "5d0f68eb48ce1c37549afa590bbefc7ed525152f06f688e2872f370c7832fda7",
+        "byteLength": 5418
+      },
+      {
+        "status": " D",
+        "path": "review-dev.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "19ec30a2f8e9422b7c0a91f79275bf2475376fbf76f24116e177a51a264c56f9",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "review-dev.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "549a9aab412ecefc14dc64433fec203b2c4df647aa76414ebe17b66c3a780457",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "review2-dev.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "040cb44171b952469f839ba512cd57ab833caa081c9cea80a5fa63be0a26c9d7",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "review2-dev.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "03c225d2810afed3f9de9bf617aee351818470807c995c60f0d113fa81da6fa7",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "review3-dev.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "040cb44171b952469f839ba512cd57ab833caa081c9cea80a5fa63be0a26c9d7",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "review3-dev.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "36ce48e712fea47a1830f8cfa13eddfa1524db2e54cb3a0cd41aa55308170070",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "review8a-dev.err.log",
+        "workingTreeSha256": null,
+        "headSha256": "1bb8fb25d1a0414fa3a02ad542abc16cbab334d8e460bd946ecfd7787355b117",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "review8a-dev.out.log",
+        "workingTreeSha256": null,
+        "headSha256": "8951a8abf9e7c7c8839e25f096757c08a95d495f31045dbc3ad0353878f7c611",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-12-aus-after.png",
+        "workingTreeSha256": "362b161dd2011d18a34ed47859a1ae64a9d1832c773cf52a5dc8f044aa478e82",
+        "headSha256": "44c10a3ebb68709e93b367401578ee8e6683585af869581f2556f0dd28890041",
+        "byteLength": 146287
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-12-chl-after.png",
+        "workingTreeSha256": "eb4adb474a8cfa4416f340c97351f6d7144a2a01720328aa180fcc238908bcd7",
+        "headSha256": "91870eaf3eb8b7129c90132bdae8257e0f5c09372dfc64cb3a783c9b0e35c459",
+        "byteLength": 146706
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-12-chn-after.png",
+        "workingTreeSha256": "090b3cfd273cf7d5d0fd5029898593846d0d00718148b81618f113e7b22331e8",
+        "headSha256": "5ce35a845dc61f622ece8fbde4f17e4c4e2ae0581d946ae5614ddf63eb9ad986",
+        "byteLength": 278769
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-12-idn-after.png",
+        "workingTreeSha256": "7285a39c6fa642c06e32cfa28c61688b5fdb0d9f3ae7c57becf2bd49759e4831",
+        "headSha256": "58f904b021bf3cade16dea1075978e5623371c5331a3210ae76847e2e1bae72c",
+        "byteLength": 226920
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-12-rus-after.png",
+        "workingTreeSha256": "f1827b150571fb802365976168b9a9aaf7c435b5405d42661ed63a5263aa3ad8",
+        "headSha256": "044d3a948414d92c81a2d97f190e3b9e22101c023713f063da4c931ce491d9d2",
+        "byteLength": 256841
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-12-usa-after.png",
+        "workingTreeSha256": "c9b9c5d47bf8edf497e3314c3eec7928832249c8a9ce5eb1d0b8c022f957f1ee",
+        "headSha256": "0c9460e4e13de9fa81800cfa402dc8eb6110fac4c1f1c9d3598385288744a74b",
+        "byteLength": 202300
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-5-world-default.png",
+        "workingTreeSha256": "074bc637e98b8608f477f52132fb11a0cceae22b66fcd01e055b4aad19cb3c7e",
+        "headSha256": "88ec3eec771bd4d4014e007e804ea22dd0c8d57d4288e2c25061bdaa09997777",
+        "byteLength": 231119
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-7-aus-z1.png",
+        "workingTreeSha256": "cbc0f024679863aae2371530442d632dde32289d89ae5b019fc7f6ecebc245f6",
+        "headSha256": "d6c5627f88c253882b96ec6bae0c54b0ba9a7d4a90dd5ce66336104c9d03af03",
+        "byteLength": 255919
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-7-aus-z2.png",
+        "workingTreeSha256": "362b161dd2011d18a34ed47859a1ae64a9d1832c773cf52a5dc8f044aa478e82",
+        "headSha256": "44c10a3ebb68709e93b367401578ee8e6683585af869581f2556f0dd28890041",
+        "byteLength": 146287
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-7-aus-z3.png",
+        "workingTreeSha256": "58616eaf4d302fff2ca2ec8be76df836cfc892b512e7330033aa54cdf9420787",
+        "headSha256": "f83c554dc45ad6b0ff3c16a8da1caa9358b45ad52926d47b806ca093fb714b56",
+        "byteLength": 148359
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-7-rus-z1.png",
+        "workingTreeSha256": "8d718e045b5eea7b0b9dda87e475207173b05a1a216112e82087c21a91187c78",
+        "headSha256": "e0fd39b93117f7547b17a50da4bb893abd496587abacfbb76ccf9dbd29f99382",
+        "byteLength": 271646
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-7-rus-z2.png",
+        "workingTreeSha256": "b7336b3a886a16fcc87b117d40f0db5624d149113e3b4d7881922d8a318c5b94",
+        "headSha256": "0acc11d0e7bb2c30846cd421cca29c383a896a58db1937b576d8040a43a0b89b",
+        "byteLength": 256841
+      },
+      {
+        "status": " M",
+        "path": "screenshots/fix08-7-rus-z3.png",
+        "workingTreeSha256": "266700fca00a404c31d193d733775399aa6ec3d91c273eb5f9a77d677ae9cf7e",
+        "headSha256": "19922f1e91fc10be92de29b98e7d5ad121921b3555a314ae06cac239e48e5022",
+        "byteLength": 205275
+      },
+      {
+        "status": " M",
+        "path": "scripts/prepare-map-data.mjs",
+        "workingTreeSha256": "8a5e8c5313b058bd51d7dd88df5efa63f589a155bebc31bf5103fe19bde58ae3",
+        "headSha256": "707f81fbcb5b1e5c9fb6c0dd50459c2f6a0e0d84f32ace61dbde1c41ba995114",
+        "byteLength": 25531
+      },
+      {
+        "status": " M",
+        "path": "src/app/globals.css",
+        "workingTreeSha256": "f36ac55b3764f6561cda52f21d51801c09bf2a820548fb2308b59c7d2be9e4d8",
+        "headSha256": "fb410b9eb604112ecb2a8c3e91d1731a8bf29ac73c44aacbd1ec7748d1e13477",
+        "byteLength": 33838
+      },
+      {
+        "status": " M",
+        "path": "src/app/page.tsx",
+        "workingTreeSha256": "cf0d2750c8a250463f2bd54428d8d709c293f1fcd2c924b19318cb61937f08ae",
+        "headSha256": "92588fd0cad32184656c5f758dcb70bbf4532253a32fce6b231def8ff19cc741",
+        "byteLength": 139
+      },
+      {
+        "status": " M",
+        "path": "src/components/country/CountryPanel.test.tsx",
+        "workingTreeSha256": "f4aa69a45eb2763a270f0d849ce6166810e1d050038c04fa515ff90e76d315e0",
+        "headSha256": "71af5d8883b34fc297c13ce43397e8acae41abafabf5a6780c17b99c99f144ac",
+        "byteLength": 3635
+      },
+      {
+        "status": " M",
+        "path": "src/components/country/CountryPanel.tsx",
+        "workingTreeSha256": "d81d5022eecfb4a9a68da4e1c54b26f70101a6232bead3e6667aaff649cf75d4",
+        "headSha256": "729ab8c6de3a630e5e040f6a34c11171657f799890ada67ad4537064b4f802b3",
+        "byteLength": 2810
+      },
+      {
+        "status": " M",
+        "path": "src/components/layout/GameSetupShell.tsx",
+        "workingTreeSha256": "270f2f418bfe565a7a8a7a55f538057d3944c14d2bf6f5ad129460fe6483cc6a",
+        "headSha256": "38bde694cc2953b06094ba8a62cd1973ec5dec12c63d12e22eb40c7c72c50d2d",
+        "byteLength": 7456
+      },
+      {
+        "status": " M",
+        "path": "src/components/map/MapSearch.tsx",
+        "workingTreeSha256": "367ca356ad036c5612acb6d90a9eea516fe15dd7b8e08c842c0388a9fccbcd2d",
+        "headSha256": "46e7883d4fa2d352c79f74dd286272d42488dd65b4b9af26c5ab7c67f9ea3334",
+        "byteLength": 2988
+      },
+      {
+        "status": " M",
+        "path": "src/components/map/WorldMap.tsx",
+        "workingTreeSha256": "ccbbee45de533616f89929482bfb0eb8eebae309b2378aa01e5212323e5c5daa",
+        "headSha256": "218917b6d792dbbc7b9715470045e0d615e77a056ed19010b8d9ad50e90659bb",
+        "byteLength": 36376
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/command-batch-v2.test.ts",
+        "workingTreeSha256": "e06b76c737f8244741e184574dc4f20022484a11731305d8629899d943db3df1",
+        "headSha256": "8e29c81162777f75cf580428e170ed44d40996446f45e8c6f4898b4b77c78a6f",
+        "byteLength": 3667
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-create-v2.test.ts",
+        "workingTreeSha256": "db792ef4e44bf10f72e4b50e937102be93d1106c7090f63418455d23d6188151",
+        "headSha256": "c245087e3893cb9dbb522280992e87898447f1cb865ee1fcb6eb2f0c28a94188",
+        "byteLength": 4232
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-create-v2.ts",
+        "workingTreeSha256": "db0af2c5fcf339563b90fecc22603416a2cecb68cec0ba7cb5b27cdbb07ab821",
+        "headSha256": "1a77c7c7eb1d5ee6375d4301aa96db29ff5eb530ed738ae2fe30a7bc23bfc2e7",
+        "byteLength": 2828
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-create.test.ts",
+        "workingTreeSha256": "99b36cc5dd237376dc51e0baf92fb6c307b94980a2110748a163d68ec4dce004",
+        "headSha256": "4eeefa9c59421e9b2a660992b367393e92d00b2ffc3c23b140940fcf0575551f",
+        "byteLength": 5217
+      },
+      {
+        "status": " D",
+        "path": "src/lib/commands/country-create.ts",
+        "workingTreeSha256": null,
+        "headSha256": "ba1dfc40d31988fd218bed207c06b426207f16c153030595dc78f355fd105b3f",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-delete-v2.ts",
+        "workingTreeSha256": "163beb63fecaa327ffbbf97c4c70892e9e499cb26cfdb34973d2a471d682daa2",
+        "headSha256": "578c005ebf0f9a0052f929d8685d95e7e0a3ba2a29c2aa377b0e4e54c51d4222",
+        "byteLength": 929
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-delete.test.ts",
+        "workingTreeSha256": "6136cfd3a4a51d219454c18d3c7efc81cd0ec2e6bf0add7cecde6cb4320c3206",
+        "headSha256": "170593ef2237154d61be4029355a78f8a76b3bdc4c37abb3191191fd234df354",
+        "byteLength": 4538
+      },
+      {
+        "status": " D",
+        "path": "src/lib/commands/country-delete.ts",
+        "workingTreeSha256": null,
+        "headSha256": "a6dfd68ad586dd3ff83c4cbc256fd2d94d777ca8f7daf6c87f2eeff65159b1c9",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-dissolve-v2.test.ts",
+        "workingTreeSha256": "9d822cf3270d55120a43c5652f1ae2e099c8c5d408cdb610c2d9d723a82e975c",
+        "headSha256": "037be78c7bebae93dc0a9f280be751d65324d6e3f6ee3dbfe89794ff0bdab7d1",
+        "byteLength": 3519
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-dissolve-v2.ts",
+        "workingTreeSha256": "fee5b197109509b70186d6a35de8e04cf14aeca6c3b064009970b9b3020e2533",
+        "headSha256": "e3cc63b23ee9f3d29f3fdb24a66c940f0df3afc4aba7b873f584248b5653eb44",
+        "byteLength": 2123
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-merge-v2.ts",
+        "workingTreeSha256": "3d34c00535127f0ff3449da7d96376646b9a543755ca952c9a15da45e53beabf",
+        "headSha256": "d014e22bacf31b20b2d879af6951b1d61e93010f1a1d45bb9799063cb6109949",
+        "byteLength": 2554
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-rename-v2.ts",
+        "workingTreeSha256": "7e4f00157d4246893ce0afce22e47ee1c2d190c2ea98686a6170130cd66eeb58",
+        "headSha256": "72a09847b0be1e1ceafd9903c631b28c2e30f3a94cf3c5160968163b6ba0acc9",
+        "byteLength": 1513
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-rename.test.ts",
+        "workingTreeSha256": "c9093a535e2baa1312b65cac3a30a6742a656ef92a897f9936530d4f60447fb5",
+        "headSha256": "2e2b2600c188f41c4f4c91a88c29229832845e0866578547319dd8e69c8c7cf6",
+        "byteLength": 5387
+      },
+      {
+        "status": " D",
+        "path": "src/lib/commands/country-rename.ts",
+        "workingTreeSha256": null,
+        "headSha256": "5b880c50b30b00a00698f729023a954d9b22ba4aa1dd1ad1b9d3d232f8b72a1f",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-split-v2.test.ts",
+        "workingTreeSha256": "d640709dd99bd62b8a9b8b1b335c01b52e9546be6fcc5ab6911f512dc335905d",
+        "headSha256": "5dd6080924f0711fe15f1b6ebb9da661947e6a8360e46c57bc25088bdb4bd277",
+        "byteLength": 3850
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/country-split-v2.ts",
+        "workingTreeSha256": "ce9276084b4426a1423e1cf867a80582c25ca5a210e41840b4c54b40973d9285",
+        "headSha256": "2d5c365143e1fc9d4d39b11033fb012c95105565b8578dca53884d0828175c7b",
+        "byteLength": 1433
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/territory-assign-v2.ts",
+        "workingTreeSha256": "8aae76a98a228827c4d028d674cb522ca06863ea4d47a1002ace7de60ddbe079",
+        "headSha256": "31bb08d0b8616197250ab3d34954ebf53eddcf023e9e002f5cf5401d2a81d0cd",
+        "byteLength": 1061
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/territory-replace.test.ts",
+        "workingTreeSha256": "93ee1139c83d94e9b4ce1221645e72264300415e009cfecb39d02a8244ba58cb",
+        "headSha256": "f55db903b0710bc339ca810176e5fcfaae3d4f57045a31fc22c6445095837e8d",
+        "byteLength": 7114
+      },
+      {
+        "status": " D",
+        "path": "src/lib/commands/territory-replace.ts",
+        "workingTreeSha256": null,
+        "headSha256": "5fd63b71c3ebaef579dfa653694fc2d3d479d0d2c081e8832fe79aa4a4a85cd6",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/territory-transfer-v2.ts",
+        "workingTreeSha256": "1035a4d5b8e1bd243ead992e52daae6d2fa857f279d14bd5bc0dbac2188f3c2f",
+        "headSha256": "40a1b08780c48b665b1fb55dd5a26dd474363c9f44c3298c3241804d9f13ea7d",
+        "byteLength": 2087
+      },
+      {
+        "status": " M",
+        "path": "src/lib/commands/territory-transfer.test.ts",
+        "workingTreeSha256": "d0cf907dbc5f8ccf12181c9029b45c9b007591c29484b37406cd67514a22df00",
+        "headSha256": "1937e911149b35bd1b8be933e596d194ebbdb915fd81cc1074a822a0b25cc66f",
+        "byteLength": 7459
+      },
+      {
+        "status": " D",
+        "path": "src/lib/commands/territory-transfer.ts",
+        "workingTreeSha256": null,
+        "headSha256": "da6e8bf004d65a6efc42ec61c1abbb659a689c03bf4c20eb0ecc43c9002dad9c",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/map/map-config.ts",
+        "workingTreeSha256": "5bbe100b56939f4e1e2464858501cb85b146290d35381c90330158fe4890c3dc",
+        "headSha256": "a62582f1240c9f43021d9efaffc17ab6f87d2c547e77b6c5148acc088b2e5bd4",
+        "byteLength": 1349
+      },
+      {
+        "status": " M",
+        "path": "src/lib/planning/country-create-planner.test.ts",
+        "workingTreeSha256": "7821f47533d4ae3267d969c975b95b01d670592b0468e86b3175ed6033cd5c24",
+        "headSha256": "2752cb319204466fce9f3505fd7040b62bb7701e97f07e7affe795a56972230b",
+        "byteLength": 4016
+      },
+      {
+        "status": " M",
+        "path": "src/lib/planning/country-create-planner.ts",
+        "workingTreeSha256": "b9fffecadc36856237128076e647082b7bf6bb1698734c674bbb03273b52d685",
+        "headSha256": "e199e8dac886804a68dcf20d544a69e446dc7d87dcd9a0dee18477602b6e311a",
+        "byteLength": 3349
+      },
+      {
+        "status": " M",
+        "path": "src/lib/planning/plan-result.test.ts",
+        "workingTreeSha256": "75452858fbb52a334c35174ecc1b88fe8bf96572fc661a5298aca4e91840693a",
+        "headSha256": "d1672ea889199bf4f3ea5c3ef653f0864227a238d2fccf3799ff81aec05e41ae",
+        "byteLength": 2376
+      },
+      {
+        "status": " M",
+        "path": "src/lib/planning/plan-result.ts",
+        "workingTreeSha256": "b90e8959e6ce2af14a86a02be7ce1a7deca9caea83858122c50905fb4d0607da",
+        "headSha256": "cc2f0e7d246f0a4f0d6ef950739aa518f7b26edfa3d23f7bd23126e6e58c3730",
+        "byteLength": 2075
+      },
+      {
+        "status": " D",
+        "path": "src/lib/storage/game-setup-storage.test.ts",
+        "workingTreeSha256": null,
+        "headSha256": "0e5e6dacad9e42343085a0c59c5acdf4802999571beb581c515ec75fd95f70b2",
+        "byteLength": null
+      },
+      {
+        "status": " D",
+        "path": "src/lib/storage/game-setup-storage.ts",
+        "workingTreeSha256": null,
+        "headSha256": "69c7b41c6139c0608396ba5d330ef4292b8bab30f06268c8dd5d25b5c4d171c1",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/canonical-topology.test.ts",
+        "workingTreeSha256": "ca206fc720857491fca1ff98a299a13192f85a041c27057edafdebb8d7095173",
+        "headSha256": "358f650957ad36fc296469c2fe509bb635f7fc439ba5b2d4f4b2e6860d64d22d",
+        "byteLength": 4385
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/canonical-topology.ts",
+        "workingTreeSha256": "56385f2c67fe97a93427a9f3764a8e7422553a56c8ec7bc96b76916579d37955",
+        "headSha256": "730f8d977496f2684df07ec59b741c6eb2ddea4a40eefc68d1e434b1e70d5a26",
+        "byteLength": 7542
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/country-entity.ts",
+        "workingTreeSha256": "fb21bf32c3e11acc0164915c5f0a500e31635b2c3554740e70cab7d07f54fcf3",
+        "headSha256": "c7417c968f5913de9417771d6f4ca69182c01c99ff36118d51b111ddfc87fdb9",
+        "byteLength": 3135
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/country-id.test.ts",
+        "workingTreeSha256": "e02d6b4a1a14d60491f16c5cfd7b20fead1179a927a23853f1cb1c25de2a0125",
+        "headSha256": "8a5343a5174fa7a8aa683db3d9187b55540d636b3d98dffb5d6aed91586c6126",
+        "byteLength": 5718
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/country-id.ts",
+        "workingTreeSha256": "713c89fd047bdc44b7d9ca4b09b5a175bbf0bc813930321d001bbaa4427f7777",
+        "headSha256": "280f7da6dff004f4e9a35f5273eb2f1c55080ca76d80e76f260ee9a957281b14",
+        "byteLength": 4925
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/country-map-artifacts.test.ts",
+        "workingTreeSha256": "75d28e4007f68516af1cf37f1057a90008b56d8f9a339147b4a67874c1bce30f",
+        "headSha256": "8fc3d4189b0794030ddf0a3afa0d28cf6d8daf97cbd93eee834f1d85515d4f81",
+        "byteLength": 10476
+      },
+      {
+        "status": " D",
+        "path": "src/lib/world/country-map-artifacts.ts",
+        "workingTreeSha256": null,
+        "headSha256": "7ddaf9294a973e9d79cc7e387c4e32d8bbe268762e741ce4b4ff0a80bfa53fde",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/initial-world-state-v2.test.ts",
+        "workingTreeSha256": "1e3efd0a18c9581701257d022a542bd79d90b6aefa3b9907e2f9ed266d3e8cea",
+        "headSha256": "be3f345e615456d0e0786ec239f0568276c6988d4c67546433f31c7f96fb732d",
+        "byteLength": 3505
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/initial-world-state-v2.ts",
+        "workingTreeSha256": "18b9e90111c9dd121f2afeabfd7ad990cf2fa55a7119b0f567764a474db5f945",
+        "headSha256": "013e536d62caae0e08de7ac6e4d9ddd638836702ffa38506ab3f73f04ae6bf13",
+        "byteLength": 5313
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/initial-world-state.test.ts",
+        "workingTreeSha256": "73b1b8f3a116204012fb7e81d309faccff16439583ad995a8befe2f9660c25c4",
+        "headSha256": "eb0a5834b9ecf26a7b0f12ce999e31f11ad578d893325c0e0021c72954b84b39",
+        "byteLength": 3803
+      },
+      {
+        "status": " D",
+        "path": "src/lib/world/initial-world-state.ts",
+        "workingTreeSha256": null,
+        "headSha256": "a6f98ef3ae8883e6fba4a480683157c25b564375bc2691a8fa0e339a68f4179d",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/seed-topology-audit.test.ts",
+        "workingTreeSha256": "41aa274d2ead4f7550496ece547314a14fdf6870e66ff580f10651320423936d",
+        "headSha256": "6d3ba9dab4a45eaaf4de9b6af922d73523e467af539da979eda9264767cc506d",
+        "byteLength": 2045
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/territory-geometry-hash.ts",
+        "workingTreeSha256": "855d4e4dca09c80bb41c01ea39291e25075cd64e6facc47804e7403f8fb687af",
+        "headSha256": "739cb78a6fbdf3a5227f4bd2eced1a0ddaa3c2fef294abbd28f07e1e9f2db72e",
+        "byteLength": 1251
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/topology-edge-hash.ts",
+        "workingTreeSha256": "bd610b63278fe61733d2c84c944cc31f2eacc151488301a2a9719e719de374c8",
+        "headSha256": "a36eb0b7dc0bfbbe3b6603b855507392fc35775679c17bfd196ed6e0c3c9bc70",
+        "byteLength": 2726
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/world-state-invariants.test.ts",
+        "workingTreeSha256": "ed7a677d432de914b97544121c4178e068551c20646c6e9942822e6fc919b32d",
+        "headSha256": "1d324364486ae06664f0acae2c30dbe03777954f66b862e180c8e1baa5bbed24",
+        "byteLength": 2734
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/world-state-v2.ts",
+        "workingTreeSha256": "842143115dce802f264a9eef216f73f3f0da095850ddb74178d278641ed1ed02",
+        "headSha256": "af0a22c5b5e690beeac72910e33ad8a8424a8d0d692b29f3087df55f39d439ed",
+        "byteLength": 9160
+      },
+      {
+        "status": " M",
+        "path": "src/lib/world/world-state.test.ts",
+        "workingTreeSha256": "7ad7057ce58c879fcc3eebab63f751e8ce897a9ba1bbe656d422f9a14efd6fa8",
+        "headSha256": "25f869d24ac6966d8d094b1bdecd3ab7ededafe2eb98150b339d6cb5fbcf9c42",
+        "byteLength": 6659
+      },
+      {
+        "status": " D",
+        "path": "src/lib/world/world-state.ts",
+        "workingTreeSha256": null,
+        "headSha256": "a9ef3604cb60f00679aea98d0fdc5aace51bf96481402b545dabab814deca066",
+        "byteLength": null
+      },
+      {
+        "status": " M",
+        "path": "src/stores/game-setup-store.ts",
+        "workingTreeSha256": "08a94e5e29dbdcf3e09ba2b151b8d46416b6c716d8c4f0e7f5a542c1eadb191c",
+        "headSha256": "cdd2e7df8d2614910e5123d8ebdf14987f4f2429c34697833346a8ed4b54ce74",
+        "byteLength": 5935
+      },
+      {
+        "status": " M",
+        "path": "src/stores/world-state-country-selector.test.ts",
+        "workingTreeSha256": "8a2c8a4d06571763049f28d93041e81fcffb207ae426b3aa85c19c1cac7f1861",
+        "headSha256": "9de0c20e97cead109afb9c888069d720a2b10cea37a0ce84056513501695d180",
+        "byteLength": 1589
+      },
+      {
+        "status": " M",
+        "path": "src/stores/world-state-iteration-selector.test.ts",
+        "workingTreeSha256": "e7b1e948256a7064b1f4ab0bf84bc08ec19092d6f68ebbb000af9bed1edd5cc1",
+        "headSha256": "45020792eae39e24b2ff0df273bf73cb5b2784f570bce2bde4f335c5209c189c",
+        "byteLength": 4384
+      },
+      {
+        "status": " M",
+        "path": "src/stores/world-state-store.test.tsx",
+        "workingTreeSha256": "e8c53d1605052d69d14c52906758d6bf16d58e0b7c4231967abf2daf2f4387a3",
+        "headSha256": "97d4cd52bc158a0858bc7f8e59a903f1daec5c172eaa7b922f982332cc7d8eca",
+        "byteLength": 3174
+      },
+      {
+        "status": " M",
+        "path": "src/stores/world-state-store.ts",
+        "workingTreeSha256": "ade3b92b15085f2ef49a5d75450a71694830361b50cdfeb1a08452b5e05e5991",
+        "headSha256": "00cc1ba17af68ffc618fd3d48a8f263a31dee57de2731fa74b0dce4f7b0bf8a1",
+        "byteLength": 9795
+      },
+      {
+        "status": " M",
+        "path": "src/types/map-debug.ts",
+        "workingTreeSha256": "54903e6ad5e30e288d7771041e15f4e613f7d058071bcfeeb6a43df72c4d33ec",
+        "headSha256": "63713bda93b3adc77c084713946fed6f00a227b7704d070ec8a50fd68516de66",
+        "byteLength": 4030
+      },
+      {
+        "status": " M",
+        "path": "test-results/.last-run.json",
+        "workingTreeSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "headSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "byteLength": 45
+      },
+      {
+        "status": " M",
+        "path": "tsconfig.json",
+        "workingTreeSha256": "53d5c517099edfe52a3427e88786ca0ad8dc52b40d43455a8d01a2c27bd0d33c",
+        "headSha256": "f399e24188640b031f844ec7c0285e65450e697b2daa5790e1cb801818fcc955",
+        "byteLength": 777
+      },
+      {
+        "status": " M",
+        "path": "vitest.config.ts",
+        "workingTreeSha256": "829defacf0616eef18239ff0e4ee89659a993c14e7d30da626603c9d5e70509e",
+        "headSha256": "399a06edd34570da924d9d08ffbd179e4cb62337726b08fb408dca2a56b48b28",
+        "byteLength": 303
+      }
+    ],
+    "untracked": [
+      {
+        "status": "??",
+        "path": ".env.example",
+        "workingTreeSha256": "714f889cf50cc0ee7e276de6870a2919e398c765e4db911c40364e770d780119",
+        "headSha256": null,
+        "byteLength": 349
+      },
+      {
+        "status": "??",
+        "path": "docs/game-ui/backend-port-plan.md",
+        "workingTreeSha256": "3181f31a706da5fd8fd9883838f5f41b52335e712154d34ba295bb43e89f9812",
+        "headSha256": null,
+        "byteLength": 5545
+      },
+      {
+        "status": "??",
+        "path": "docs/game-ui/internal-game-interface-v1.md",
+        "workingTreeSha256": "fe79419e5ffaddd7402c729d020c78c64e97f56b1098c9b2fa4d55d374030f98",
+        "headSha256": null,
+        "byteLength": 6191
+      },
+      {
+        "status": "??",
+        "path": "docs/game-ui/internal-game-interface-visual-spec.md",
+        "workingTreeSha256": "a0a65a9bc77ff45302ae14c97b2aa9ac91a22d7ef88969ff49758b96836bdf3d",
+        "headSha256": null,
+        "byteLength": 5226
+      },
+      {
+        "status": "??",
+        "path": "docs/game-ui/prompt13-runtime-audit.md",
+        "workingTreeSha256": "c041ecc98d90ec99ee7c3b1e485f807ffb8249f747f1cf8fa286d4c906f666cb",
+        "headSha256": null,
+        "byteLength": 7084
+      },
+      {
+        "status": "??",
+        "path": "docs/simulation/gpt-turn-runtime-v1.md",
+        "workingTreeSha256": "71b3747cbd83e1ec7caac32c9ae188a6b7d92f3f2c25c3d5a82e0e7a4f1e589a",
+        "headSha256": null,
+        "byteLength": 4050
+      },
+      {
+        "status": "??",
+        "path": "docs/simulation/prompt10-11-runtime-audit.md",
+        "workingTreeSha256": "29dc162180c3262c5a8cbc5c4d5815517b7f66f920a0ee306950a95667bbefa0",
+        "headSha256": null,
+        "byteLength": 2557
+      },
+      {
+        "status": "??",
+        "path": "e2e/prompt11-10.spec.ts",
+        "workingTreeSha256": "8e709c7c3b1b74a0bd191695861f24b877b91dbfb71ea9da59c5bd46b7942def",
+        "headSha256": null,
+        "byteLength": 1892
+      },
+      {
+        "status": "??",
+        "path": "e2e/prompt12-simulation.spec.ts",
+        "workingTreeSha256": "3940d50ec4ee9ca442fe464989790b6cb3be24564e3d9228f364c721f971ba85",
+        "headSha256": null,
+        "byteLength": 13237
+      },
+      {
+        "status": "??",
+        "path": "e2e/prompt13-integration.spec.ts",
+        "workingTreeSha256": "228a6f8c8a5d7525aa9c2b8324129bd65a1f5b65984572be1155f23ddd413e6e",
+        "headSha256": null,
+        "byteLength": 13067
+      },
+      {
+        "status": "??",
+        "path": "e2e/prompt13-shell.spec.ts",
+        "workingTreeSha256": "1ec9ef033af39aa409e08db520cea0db37f5417f52034fc86baec257ec1a0799",
+        "headSha256": null,
+        "byteLength": 5998
+      },
+      {
+        "status": "??",
+        "path": "prompts/PROMPT_11_REMOVE_STATIC_DATA_DEPENDENCY.txt",
+        "workingTreeSha256": "c8cc381b910537cdf7a4b01d56cd6677d8d84b31e881087342cccb8e21a29371",
+        "headSha256": null,
+        "byteLength": 15361
+      },
+      {
+        "status": "??",
+        "path": "prompts/PROMPT_12_GPT_API_ALTERNATE_HISTORY_SIMULATION.txt",
+        "workingTreeSha256": "64a5a4bb7950cdf361e9d1272e8af7aa047f1fda3e6482e14a2400d260c90d5a",
+        "headSha256": null,
+        "byteLength": 53341
+      },
+      {
+        "status": "??",
+        "path": "prompts/PROMPT_13_INTERNAL_GAME_INTERFACE.txt",
+        "workingTreeSha256": "f9cb2421fb567e290066c17fce5c7f842290d355004cbf115958eaa4e9d31b0a",
+        "headSha256": null,
+        "byteLength": 38250
+      },
+      {
+        "status": "??",
+        "path": "prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt",
+        "workingTreeSha256": "51369d1e2ba2dc63f360efdb83f9764715f21d4337779b2aa26105104db15b81",
+        "headSha256": null,
+        "byteLength": 45490
+      },
+      {
+        "status": "??",
+        "path": "public/data/maps/usa-state-countries-test.geojson",
+        "workingTreeSha256": "0077248d1b8fe2618ab300939689d052a3081b83bd9796d7e12d513d80df12f7",
+        "headSha256": null,
+        "byteLength": 1256680
+      },
+      {
+        "status": "??",
+        "path": "public/data/simulation/china-admin1-v1.geojson",
+        "workingTreeSha256": "71375d18e2cdd7a99aeb56355ff30db21a9750f16d2abe39f4081da5efda532e",
+        "headSha256": null,
+        "byteLength": 1215126
+      },
+      {
+        "status": "??",
+        "path": "public/data/simulation/usa-admin1-v1.geojson",
+        "workingTreeSha256": "25777566cb7a7ef2dcd09fba760e98eac3900130c5e97d6bafcd243f89913120",
+        "headSha256": null,
+        "byteLength": 1256672
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-106-label-projection-checkpoint.json",
+        "workingTreeSha256": "882808dca052f91b8dac28959cbe994dfc2d73e53921081c6d9c8473e5260fb4",
+        "headSha256": null,
+        "byteLength": 4521
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-112-history-persistence-checkpoint.json",
+        "workingTreeSha256": "cb554b987ca7b45a6ebec76885f97bef3a676f985ca9664f023d74184ac81a98",
+        "headSha256": null,
+        "byteLength": 3784
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-118-performance-resilience-checkpoint.json",
+        "workingTreeSha256": "3e65ceccd1c1d5056242a9ae060994fb390057a5425ac0b9db79f5ad9afdcc38",
+        "headSha256": null,
+        "byteLength": 4053
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-124-final.json",
+        "workingTreeSha256": "8b10ab2c2c0b285069055af63f62cca9111a3fedbc960fd018a2f75eb6399c00",
+        "headSha256": null,
+        "byteLength": 5285
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-61-country-rename-planner.json",
+        "workingTreeSha256": "6bea35fc3617d36e4837add9e507d440691bd683a457a0b57531edb84d35c3e7",
+        "headSha256": null,
+        "byteLength": 2071
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-62-country-establish-planner.json",
+        "workingTreeSha256": "b65e439a804b78cb94e8b34a9c534b4d5b7e68f2d65ea36a7d42aee1712c6ea3",
+        "headSha256": null,
+        "byteLength": 1766
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-63-country-delete-planner.json",
+        "workingTreeSha256": "caa58d4a3da0e132d4d2d2f125d3fc626ee25e64db2d8d74eaf78424b870f5ea",
+        "headSha256": null,
+        "byteLength": 1758
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-64-dissolve-unclaim-planner.json",
+        "workingTreeSha256": "6f344cd4b53c56b07936f66dd5b5f03dd524640129570183c61871c8c2432346",
+        "headSha256": null,
+        "byteLength": 1389
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-65-dissolve-transfer-planner.json",
+        "workingTreeSha256": "d58b0f8524715200942f05189d23562b7e1599571f0beb2c879e73ac49496b92",
+        "headSha256": null,
+        "byteLength": 1648
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-66-dissolve-merge-planner.json",
+        "workingTreeSha256": "4d5835992beffd99b6c902e21b3a6a99c8e8cd754a0426a1bf01a13217eb8fd8",
+        "headSha256": null,
+        "byteLength": 4153
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-67-territory-partition-planner.json",
+        "workingTreeSha256": "cd35a8a068e7e2d64f00c579fa6399defadb7cd1ec8e56223782582eb0fa36be",
+        "headSha256": null,
+        "byteLength": 4318
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-68-territory-assign-planner.json",
+        "workingTreeSha256": "61e30aec183cb9e85071ff4e49e9d141e73aeaffdf84fe5c7212ba2c045d5207",
+        "headSha256": null,
+        "byteLength": 3973
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-69-territory-unclaim-planner.json",
+        "workingTreeSha256": "d17e4ecafdcd565ae5c15bb22d020032ff831993dbd90b5dca6858febbe9e55e",
+        "headSha256": null,
+        "byteLength": 3999
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-70-territory-replace-planner.json",
+        "workingTreeSha256": "6008bc9761a9ac66c1367cd524e4fb4c2aeccf289821e17e45ac3ae7d17b4480",
+        "headSha256": null,
+        "byteLength": 4093
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-71-territory-transfer-planner.json",
+        "workingTreeSha256": "798128b39f90a7c4202fe6ac71d70fb2bcc973c1602f553347e59737066c8326",
+        "headSha256": null,
+        "byteLength": 4062
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-72-country-split-planner.json",
+        "workingTreeSha256": "25f21008ff9b0fe9fe907c2a4ab3d310af51ca33bf0f580ab4555fe769e47b9d",
+        "headSha256": null,
+        "byteLength": 4150
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-73-country-merge-planner.json",
+        "workingTreeSha256": "c9e761ee71471339ef37e46491a8933ad5d903f3b445ad738f7ea978ffebac40",
+        "headSha256": null,
+        "byteLength": 4232
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-74-batch-local-reference-resolver.json",
+        "workingTreeSha256": "acbc67d4390bd0426ddf5d144ee46586ffe2d30038ea894b14dd49e21716fb04",
+        "headSha256": null,
+        "byteLength": 4118
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-75-command-batch-failure-propagation.json",
+        "workingTreeSha256": "a59e16f8f139bed419bbb34acb5adb9fb87aa551239f64a1dd7d0d8faf102e8e",
+        "headSha256": null,
+        "byteLength": 4452
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-76-affected-set-calculation.json",
+        "workingTreeSha256": "cc4e452132e984c8d4cffee38beb663d4fcbf6c336caa28f84fb10086a6a911b",
+        "headSha256": null,
+        "byteLength": 3622
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-77-next-state-structural-sharing.json",
+        "workingTreeSha256": "b5bb59faa3b591ce01f643056deeab5c585e0552d0703f4d2032b7f5fc6f8b94",
+        "headSha256": null,
+        "byteLength": 5124
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-78-world-patch-v2-type.json",
+        "workingTreeSha256": "23014bfaf2d66b59f4aa854bd0cadf3db0e2852b18c6788839786c7955654662",
+        "headSha256": null,
+        "byteLength": 3408
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-79-world-patch-set-invariants.json",
+        "workingTreeSha256": "dc952882d04bef97848d99ffde991a4e994103e3f2d65f10f28e97c17382e18a",
+        "headSha256": null,
+        "byteLength": 3395
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-80-module-hash-delta-generation.json",
+        "workingTreeSha256": "de63c36973867783ebf58db18a659459a074e03c3f39256eaf09df90b14414e6",
+        "headSha256": null,
+        "byteLength": 3375
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-81-atomic-world-commit.json",
+        "workingTreeSha256": "645e678b56199b565a4420c62a7af953449292d5aba23b076430956eb477bcf3",
+        "headSha256": null,
+        "byteLength": 3427
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-82-revision-commit-hash-advance.json",
+        "workingTreeSha256": "91b56803723ce436e139aac1cdb29cbaff95ce61f764ef1ecd0b4b57dfb29ca0",
+        "headSha256": null,
+        "byteLength": 3425
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-83-domain-subscriber-notification.json",
+        "workingTreeSha256": "cd3a959a621bfc10725aa7e46d7f5be1c3d0ddd2b3c64e7a9f3554af34a5979d",
+        "headSha256": null,
+        "byteLength": 3419
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-84-conflict-idempotency-commit-block.json",
+        "workingTreeSha256": "1c670db414b4e8e4e2b9df6bff72afcea2e0dfc25ccad36742088a2883ec77ae",
+        "headSha256": null,
+        "byteLength": 3409
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-85-executor-failure-atomicity.json",
+        "workingTreeSha256": "04bad61cb631364d540412de3e41f3ca1c6d7481576364f5af8f888743d561d0",
+        "headSha256": null,
+        "byteLength": 3619
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-86-country-search-index-patch-api.json",
+        "workingTreeSha256": "00e34589361e422d7e9e709214d901d45d603101c7b3119f70b4ac9b4f2278a4",
+        "headSha256": null,
+        "byteLength": 7253
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-87-search-ui-committed-projection.json",
+        "workingTreeSha256": "10c2d9eb1be31bd98f9251d33c1c85c0ec0b75f897659ab93f9db6bd4f60e6e5",
+        "headSha256": null,
+        "byteLength": 8109
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-88-selection-existence-projection.json",
+        "workingTreeSha256": "1a7e7ed52842c1d688ee2792ddf24d58162238a06a12ce8087c82a694d3ad3ab",
+        "headSha256": null,
+        "byteLength": 7213
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-89-deletion-selection-cleanup.json",
+        "workingTreeSha256": "da4073b349c218cbd68369e872dbe5c2eef4471d40b3e0ef399429283aef4dcf",
+        "headSha256": null,
+        "byteLength": 7091
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-90-country-panel-projection.json",
+        "workingTreeSha256": "a8ad04b82e8f91437e4ba89ceffbd0f372c8453a9ddbdb0f997fc4aa3a1bdc0b",
+        "headSha256": null,
+        "byteLength": 7059
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-91-player-country-policy-projection.json",
+        "workingTreeSha256": "9c5f34993c5da16e23d7441e5672725ef1ae6ac85ee15ae07ab511d9995d7fac",
+        "headSha256": null,
+        "byteLength": 7461
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-92-territory-polygon-index.json",
+        "workingTreeSha256": "a4e602fdf156908998638eaa2fe560bf3ef5f2ed6fb0aec5b6ebc4cc25978227",
+        "headSha256": null,
+        "byteLength": 3251
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-93-polygon-patch-application.json",
+        "workingTreeSha256": "ef7622715dfda16a1af383d1573de51ba1f86a520a4fa9782ada8564ab2adb69",
+        "headSha256": null,
+        "byteLength": 3227
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-94-topology-border-artifact.json",
+        "workingTreeSha256": "da2788b32acdd5580b767415036256a04b7c7190c19517c33710981baee8f64c",
+        "headSha256": null,
+        "byteLength": 3573
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-95-capital-projection.json",
+        "workingTreeSha256": "6d62fa8bbb68c0c361b5370cbd58cc8db9d471657a9e0b8c2efbf2d217705331",
+        "headSha256": null,
+        "byteLength": 3615
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt10/10-99-map-projection-checkpoint.json",
+        "workingTreeSha256": "04d6f69e0939105898aee99d427c5f67d259cf1e0f33b345d4f96a45c9174a3d",
+        "headSha256": null,
+        "byteLength": 4376
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-1-static-data-dependency-audit.json",
+        "workingTreeSha256": "198044c4b781b12f8c11dada55d94573dd269f0ea7471bd41d73d95cd8675914",
+        "headSha256": null,
+        "byteLength": 14026
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-10-world-map-runtime-connection.json",
+        "workingTreeSha256": "77b8414e32ea39fe2044c6ac30147193bfa77cc0206897d6dcc7aaab79afbfd3",
+        "headSha256": null,
+        "byteLength": 4293
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-11-china-debug-scenario-replacement.json",
+        "workingTreeSha256": "a50b3fade34cce1e77eb08ff28c45fe42c8015212267a7fceda140ddd70d5c87",
+        "headSha256": null,
+        "byteLength": 3048
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-12-v1-runtime-store-removal.json",
+        "workingTreeSha256": "c2fe5887a6110d7106c9fb60f6a200263f72318c0aa4349203dd8de43044d78a",
+        "headSha256": null,
+        "byteLength": 2808
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-13-static-runtime-data-guardrail.json",
+        "workingTreeSha256": "dcd59fafd64f385e6abbda9d823d2aa22ac42db026fe6067b5f5d1c4f2f7a845",
+        "headSha256": null,
+        "byteLength": 2241
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-14-integration-checkpoint.json",
+        "workingTreeSha256": "995faf345c058249d2e0e8245704c59cd935b284caca25c6b15bc93baf983745",
+        "headSha256": null,
+        "byteLength": 3279
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-15-final.json",
+        "workingTreeSha256": "d1c7da0fd8a1a15b3a5b8cc89ad6bf6e520b4ba9419545155ab93d851760539d",
+        "headSha256": null,
+        "byteLength": 4466
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-2-seed-to-v2-runtime-entry.json",
+        "workingTreeSha256": "b37e62d5b4fd3a8b9a040ede738f47a704265939d49a6dc7e2ccb2a4003d44b9",
+        "headSha256": null,
+        "byteLength": 6334
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-3-v2-store-boundary.json",
+        "workingTreeSha256": "20dcdbd12f6e13d8c56e53a1936fe488ba22b18484e92e44ecf9cf0a1c55d316",
+        "headSha256": null,
+        "byteLength": 5646
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-4-search-projection-runtime.json",
+        "workingTreeSha256": "7dcd573db9413f5b1c69dad3391957327842de115a691f5edcdf1f131dffe31c",
+        "headSha256": null,
+        "byteLength": 7556
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-5-selection-projection-runtime.json",
+        "workingTreeSha256": "9e9bc90c6cc11676a976cf6f16ffafacb21f43c3a310ce27ca5e34b90555287f",
+        "headSha256": null,
+        "byteLength": 5358
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-6-country-panel-projection-runtime.json",
+        "workingTreeSha256": "48f69e306433b1428dfbcac134ca5dae5beb4a10bf5405a2d5992ffd4eb972bf",
+        "headSha256": null,
+        "byteLength": 6586
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-7-map-source-projection-adapter.json",
+        "workingTreeSha256": "a1b484c0fe8aee538d58d275dd54defac26c3b93b85c162344c88b7c6a75742c",
+        "headSha256": null,
+        "byteLength": 3256
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-8-capital-small-country-marker-projection.json",
+        "workingTreeSha256": "a9ee90d6d41bbc7e4bc589e920f0e2284783affda58b175a7c813fb2c1225ab6",
+        "headSha256": null,
+        "byteLength": 2512
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt11/11-9-label-projection-runtime.json",
+        "workingTreeSha256": "72030d6cb3aa44cbfb42690a07548b54a58cb0e5193a5ad75ddeffb1b443d9f7",
+        "headSha256": null,
+        "byteLength": 2799
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R1-compact-context.json",
+        "workingTreeSha256": "5fe37b314367964a7a590817e4aabd5a03dbe7ceb19c63bc4dddbdd6059812aa",
+        "headSha256": null,
+        "byteLength": 1413
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R10-foreign-subdivision-resolution.json",
+        "workingTreeSha256": "9558cea6e62f0ac53e72f54586331b9b99ad7afbb1a68781e26e2bdde5d6eb31",
+        "headSha256": null,
+        "byteLength": 2579
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R11-e2e-process-lifecycle.json",
+        "workingTreeSha256": "a45fe300fc47e35cfb18debc1c3d8b920d11cb0ef23b8ca5ba54b5a387dad29b",
+        "headSha256": null,
+        "byteLength": 1565
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R12-final-verification.json",
+        "workingTreeSha256": "e64e881bba17f46314f03d5011dc5a95ad1175bfd73531def3c68d7a1d8ef215",
+        "headSha256": null,
+        "byteLength": 2020
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R13-e2e-render-stability.json",
+        "workingTreeSha256": "0ed476d9b62ef84fadbe8d04961e3c1cbcc5adc31273010710062fd2da1cf5cc",
+        "headSha256": null,
+        "byteLength": 1825
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R14-next-cache-warning.json",
+        "workingTreeSha256": "f767a1eb0720867155d41953285143150449153d107f279d69cb7f199244a2bf",
+        "headSha256": null,
+        "byteLength": 1322
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R15-final-repeat-verification.json",
+        "workingTreeSha256": "ddf068c792e83a2715a2df18e2038d8d16417ec5eb3f22d3de268d24fc33b332",
+        "headSha256": null,
+        "byteLength": 1201
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R2-strict-request-validation.json",
+        "workingTreeSha256": "3770a3c9e4d66cc6868f22aef7c983bc4e144441272b21e29da48afc0d4b6bd1",
+        "headSha256": null,
+        "byteLength": 1137
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R3-production-subdivision-catalog.json",
+        "workingTreeSha256": "6e9614112bf98fc4892758b9d4807284f43f6b5e1a8a51a72de41bf6210e228c",
+        "headSha256": null,
+        "byteLength": 1748
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R4-runtime-persistence.json",
+        "workingTreeSha256": "8a7f3e097125c6d2155f7c631ed51caf5ee9145e24d04c5089ea52d80a9fca26",
+        "headSha256": null,
+        "byteLength": 1568
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R5-application-atomicity.json",
+        "workingTreeSha256": "6bf03e68adc55c0a58464107d63977b4b1e0afeb7259929bdbe40f4862a320b5",
+        "headSha256": null,
+        "byteLength": 1096
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R6-validator-parity.json",
+        "workingTreeSha256": "55f05df42f3663eee3671620bfaa2b1a450af3fbd94d302de13fffa01e7de300",
+        "headSha256": null,
+        "byteLength": 637
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R7-gameplay-lifecycle.json",
+        "workingTreeSha256": "7cf14f7a01a8fc3597d6ae9e788740754b821232cef709f0b9bd40fc31744e83",
+        "headSha256": null,
+        "byteLength": 1043
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R8-final-integration.json",
+        "workingTreeSha256": "b4569520cc69ec49bcee973bcdde47b971d09274769021feab233ce1ddbd0775",
+        "headSha256": null,
+        "byteLength": 1208
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12-repair/12-R9-atomic-subscriber-contract.json",
+        "workingTreeSha256": "4a58bed0fe9d4892ac88d3da30726b7291e043abafd3c722cb0df70b772bc014",
+        "headSha256": null,
+        "byteLength": 1838
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-1-runtime-audit.json",
+        "workingTreeSha256": "f53cd13b36a088284530c328f1749cfbac7991af49ca8677912ef9d0fd0f0c01",
+        "headSha256": null,
+        "byteLength": 1425
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-10-contract-checkpoint.json",
+        "workingTreeSha256": "f18f04d666d655a8bdb6361e5cda132b2b345391650174848410f3e2bdad0a07",
+        "headSha256": null,
+        "byteLength": 2389
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-11-simulation-state-container.json",
+        "workingTreeSha256": "c96528faced47c74e1c72adbf15c9d671869f1c98785cc4b6e15e490f9f500db",
+        "headSha256": null,
+        "byteLength": 1286
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-12-initial-simulation-seed.json",
+        "workingTreeSha256": "4673504555e64ccac9146fbf283e8dd2db790bc1da6915a3f99bfeffd0e03f85",
+        "headSha256": null,
+        "byteLength": 911
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-13-simulation-context.json",
+        "workingTreeSha256": "aa2340cace5a383b4ff34b3e425652d1ee68f8c7f23265f5d8a45ca0d3ddd927",
+        "headSha256": null,
+        "byteLength": 1116
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-14-subdivision-catalog.json",
+        "workingTreeSha256": "df16623896373ff3eefbd24b856604da020893874e2a7906fe2205f4536a3e13",
+        "headSha256": null,
+        "byteLength": 1194
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-15-simple-effect-compiler.json",
+        "workingTreeSha256": "03b6537b6d05682a79ce5cacafcc5fb4cfcb481282b7607cd960741d6b9eb2fb",
+        "headSha256": null,
+        "byteLength": 1200
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-16-complex-effect-compiler.json",
+        "workingTreeSha256": "d7171bcfdfff747530b1391708fe58de32233ef4598a5416133f7fdc58c140e5",
+        "headSha256": null,
+        "byteLength": 1208
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-17-subdivision-effect-compiler.json",
+        "workingTreeSha256": "b7ab229531f7cbaddc6597acfb527c483241b84bfbfe277811be20bbe461ad37",
+        "headSha256": null,
+        "byteLength": 1310
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-18-resolved-turn-plan.json",
+        "workingTreeSha256": "b5f9cf2f6f243e8dde868108463a5dab08f26aa76414d30dd6628ed30247c91b",
+        "headSha256": null,
+        "byteLength": 1072
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-19-atomic-turn-commit.json",
+        "workingTreeSha256": "fe1ae8dff4d30307ba8a9830e7ecac1418367b79bd514eb3003afb1e7cc26b67",
+        "headSha256": null,
+        "byteLength": 1133
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-2-architecture-adr.json",
+        "workingTreeSha256": "3eb05959389030569a61134e4d795a323959f2c4a22a3c5970c94b091775e02e",
+        "headSha256": null,
+        "byteLength": 1522
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-20-turn-undo-redo.json",
+        "workingTreeSha256": "7c857265f83e74c56580b01236d45dc1efd3a201e00106991cea0e3c94a406d6",
+        "headSha256": null,
+        "byteLength": 932
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-21-simulation-persistence.json",
+        "workingTreeSha256": "9cd3547baf5f0950485776cd0ad81a0d5825d610b5ec47fad03006d3bd50b8ff",
+        "headSha256": null,
+        "byteLength": 1139
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-22-turn-runtime-checkpoint.json",
+        "workingTreeSha256": "6cb744e113cf0bf4fd6db443f5468aaa0f149aa009d5268b94251be724092e28",
+        "headSha256": null,
+        "byteLength": 1699
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-23-server-provider.json",
+        "workingTreeSha256": "d953c067f71cf342e97402416d481ad9dfc599fdfe8757bcf79b7a0b9746b8d5",
+        "headSha256": null,
+        "byteLength": 389
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-24-read-only-tools.json",
+        "workingTreeSha256": "5cbaa6146597c5c8115b03298a2801a9f3f8406d15281d696585fd18106d25cd",
+        "headSha256": null,
+        "byteLength": 227
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-25-submit-resolution.json",
+        "workingTreeSha256": "504361ae5042a21b1d5019865b5a4701ebf9fe772bc13a0cb0e1ff5ba30af4bd",
+        "headSha256": null,
+        "byteLength": 228
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-26-server-instruction.json",
+        "workingTreeSha256": "77683c82f8ec1be5b882371e296cd5f6ad281e9716146db7b957d957857ada41",
+        "headSha256": null,
+        "byteLength": 287
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-27-responses-adapter.json",
+        "workingTreeSha256": "a78032772a712c5c600fa1faf0d73cbb6298a79dc2eb1918e01ea16142ee9e3a",
+        "headSha256": null,
+        "byteLength": 352
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-28-read-only-tool-loop.json",
+        "workingTreeSha256": "e2aaaa2474577e02710ce2f024b2160a41e72004b87d67f60601b88ba47e3a81",
+        "headSha256": null,
+        "byteLength": 303
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-29-resolution-repair.json",
+        "workingTreeSha256": "418803ff3d3e77f907dbb28b0575b4f207260de9e0c9f9e012105b4993e6b141",
+        "headSha256": null,
+        "byteLength": 416
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-3-clock-revision-pair.json",
+        "workingTreeSha256": "d46625e25de5d10f003e4f8370241039e0f9159ce34d3611d51783d77b4cbec9",
+        "headSha256": null,
+        "byteLength": 1102
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-30-event-normalizer.json",
+        "workingTreeSha256": "91c708622d6678608624d75a31495537e12ddd65b04061032408b3ed847d1407",
+        "headSha256": null,
+        "byteLength": 307
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-31-route-handler.json",
+        "workingTreeSha256": "f24a62c31a8e63cc527a525dd8deabcbc5046dbbef3daa64e9c427cabde85273",
+        "headSha256": null,
+        "byteLength": 334
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-32-abort-timeout-retry.json",
+        "workingTreeSha256": "2551d4516709de651ed9a61a4e4e844938b4303a2ef99c62af945f1068a62356",
+        "headSha256": null,
+        "byteLength": 324
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-33-server-checkpoint.json",
+        "workingTreeSha256": "3f18f19d032fd0bbb4d22a069f7f53c52e2d2922be8758aa6bab882978f31f70",
+        "headSha256": null,
+        "byteLength": 631
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-34-player-action-composer.json",
+        "workingTreeSha256": "5c9a882de86ad785a6bb9a05d03061eba303364d86a9f637c0c67b462a73d3bb",
+        "headSha256": null,
+        "byteLength": 811
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-35-time-advance-control.json",
+        "workingTreeSha256": "fa918bc2c5bb9813efbcb66a8ccea2936d72d865b7f60e6cf0ed9cccd669ed85",
+        "headSha256": null,
+        "byteLength": 629
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-36-streaming-stop-ui.json",
+        "workingTreeSha256": "4c0d8dd375391589b7b6980ca2631a64e48b511d7e6a56c7a791eb7714346cd6",
+        "headSha256": null,
+        "byteLength": 808
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-37-local-atomic-commit.json",
+        "workingTreeSha256": "d90a595df72ae849ad91d8ff55ebf36018c24b2b5f1b682996e99c0cae073bef",
+        "headSha256": null,
+        "byteLength": 744
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-38-final-turn-report.json",
+        "workingTreeSha256": "09f3f80021b5f1fd2d782ffb7c01d1736422c9010b5de0fee3379fed1d38834d",
+        "headSha256": null,
+        "byteLength": 682
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-39-event-map-linkage.json",
+        "workingTreeSha256": "8be8af5aa399010404279cbe08557977ef0b4edc68d0edfaf62c80bfb20c6246",
+        "headSha256": null,
+        "byteLength": 637
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-4-queued-player-action.json",
+        "workingTreeSha256": "c5caa872ecb0773d635154ebf389e1d4a7027983bf7f9532ac3ff8d2ba4e63a4",
+        "headSha256": null,
+        "byteLength": 1021
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-40-failure-retry-no-action.json",
+        "workingTreeSha256": "c063b169568629ac6f29f969eedea61e119872e522b5878b76470752b3528236",
+        "headSha256": null,
+        "byteLength": 824
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-41-gameplay-behavior-tests.json",
+        "workingTreeSha256": "aed7664ab40c8bb2524fb66b07e26b7a883652c2a881641a8bb16f11da7791ec",
+        "headSha256": null,
+        "byteLength": 834
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-42-api-opt-in-smoke.json",
+        "workingTreeSha256": "6fa2b4d7d960445c0b1e364d501ef02e3a117d21c0faa62a3d279d0eb29e59e6",
+        "headSha256": null,
+        "byteLength": 751
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-43-security-bundle-authority-audit.json",
+        "workingTreeSha256": "9e585cac78a33fb66953077d8f4e4ea08b30eba0169dab80e13529657dba5e8a",
+        "headSha256": null,
+        "byteLength": 940
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-44-final-checkpoint.json",
+        "workingTreeSha256": "8410c9532dfb2f6ba9ae9dcf7e1f7df842db71427000281c1d9b29fa7afa9dd8",
+        "headSha256": null,
+        "byteLength": 1078
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-45-final.json",
+        "workingTreeSha256": "99a412dedf421e442a14f7d1f2da63339c4af819c3d40dc8b005472b94f5ff0e",
+        "headSha256": null,
+        "byteLength": 1255
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-5-narrative-state-contracts.json",
+        "workingTreeSha256": "23fb3976141dbdc6956e3c42e0886ee8a5e88ddafc6f4efb744be2cda2fe5043",
+        "headSha256": null,
+        "byteLength": 1207
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-6-event-action-outcome.json",
+        "workingTreeSha256": "ddd6ba09b9b145310e28474f964e027dab7d16a321722160f31688e53154ddd7",
+        "headSha256": null,
+        "byteLength": 886
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-7-semantic-world-effect.json",
+        "workingTreeSha256": "859592f1a3b9ecd5d1a2896e9ec76a7cdf3a172a4a911ee8162e60f5bf61b53b",
+        "headSha256": null,
+        "byteLength": 1231
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-8-turn-resolution-contract.json",
+        "workingTreeSha256": "77c6f9d6687a326565052f1afeb81ffbb487e70304ba38215b008af0fe26a150",
+        "headSha256": null,
+        "byteLength": 1247
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-9-semantic-validator.json",
+        "workingTreeSha256": "893e20f448d68d6d8890847ccf4b31f6f9e93e9535ca338cbbb56bf1850f5b8b",
+        "headSha256": null,
+        "byteLength": 1339
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt12/12-post-completion-audit.json",
+        "workingTreeSha256": "8f9685aa07814804119451fe75f3ebe1ad95ce4a9d61cebf674274dd53c65e97",
+        "headSha256": null,
+        "byteLength": 1747
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-1-runtime-audit.json",
+        "workingTreeSha256": "97354cba243e616ca6702c225341115336c1d8c307f01f88a116c1d302d5a287",
+        "headSha256": null,
+        "byteLength": 862
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-10-design-tokens-common-panel.json",
+        "workingTreeSha256": "6d789f575a2da21698f2cd4e46364e6429334c19fde5e8322ffb83a3cccce7ad",
+        "headSha256": null,
+        "byteLength": 3098
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-11-hud-player-badge.json",
+        "workingTreeSha256": "478896a1ddf85da0273bc884c7d136a976f5d8e7dd33104293922ff341a3d462",
+        "headSha256": null,
+        "byteLength": 1295
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-12-edge-navigation.json",
+        "workingTreeSha256": "493d6c850be6affb7f60106d18418ac9d1c71ab479774de6743b30e657b4532b",
+        "headSha256": null,
+        "byteLength": 1134
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-13-shell-checkpoint-repair.json",
+        "workingTreeSha256": "dde6d60ce11cc7e4e8d094d73d76043cbe5ad988e41720d0e4a9390864f71d49",
+        "headSha256": null,
+        "byteLength": 1005
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-13-shell-checkpoint.json",
+        "workingTreeSha256": "074314a4f3e819031e2d78173057dc86aa6a9a9d51fafb02523823d7615b9493",
+        "headSha256": null,
+        "byteLength": 4193
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-14-politics-overlay.json",
+        "workingTreeSha256": "368a87ad3a132ac0c9e168c99492cd4403397fe3dabd67529da784cb5c012c4c",
+        "headSha256": null,
+        "byteLength": 1815
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-15-economy-overlay.json",
+        "workingTreeSha256": "d6fcfa02c637d730738596045514f7ebc0077214925d10505940bcf6e5610f57",
+        "headSha256": null,
+        "byteLength": 1936
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-16-country-relationship.json",
+        "workingTreeSha256": "d1b76384d0e88ec9c55f0bdb4fbf5e851d32d5c19f3b0a6139ecf9edf5c21d23",
+        "headSha256": null,
+        "byteLength": 1829
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-17-diplomacy-channel-shell.json",
+        "workingTreeSha256": "167667d5d305c9bf0e87b1f1b78368737a9827bf222bc91290e25af84778f914",
+        "headSha256": null,
+        "byteLength": 2291
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-18-wars-overlay.json",
+        "workingTreeSha256": "21b5dc2fcc5c227fee65cc601b5ba59736438dcfe0286ae7be35fa19ec5a5d0b",
+        "headSha256": null,
+        "byteLength": 1623
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-19-save-settings-overlays.json",
+        "workingTreeSha256": "73b0c2b52bf6ed9dfef22caca84a946687dfeb3d7d3c790d601a37da513acd3a",
+        "headSha256": null,
+        "byteLength": 2150
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-2-information-architecture.json",
+        "workingTreeSha256": "591acd4794b3a0f27cb9a6e328a821fb4cac7c70623176033e80d31411e5dfa1",
+        "headSha256": null,
+        "byteLength": 947
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-20-management-overlays-checkpoint-repair.json",
+        "workingTreeSha256": "809ecf39eb4cd3cc1d5ad8daba442fb9e79e21e7898e4504e01412bddca0d015",
+        "headSha256": null,
+        "byteLength": 710
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-20-management-overlays-checkpoint.json",
+        "workingTreeSha256": "06422dabf628fb9a3129e49c94162eba4f4e8ed2c19e06f1bab0f291a8429ab0",
+        "headSha256": null,
+        "byteLength": 4201
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-21-action-overlay.json",
+        "workingTreeSha256": "47c12e0e3b6f5b6e06440a4f3f4e5c694e77eb0560fbe37b3adc2b2ea059837a",
+        "headSha256": null,
+        "byteLength": 2945
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-22-custom-date-ux.json",
+        "workingTreeSha256": "a53d520813b0e2addd81b0931e300e2d667545e09b896f673ce9a18cd6a7818b",
+        "headSha256": null,
+        "byteLength": 1453
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-23-streaming-recovery.json",
+        "workingTreeSha256": "2dd9cbd5174bf323b5440e6c26579cef67eeb41954893ecf5943e82c6c55fc37",
+        "headSha256": null,
+        "byteLength": 2296
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-24-news-projection-list.json",
+        "workingTreeSha256": "b082740e591d935dfe1069303f5be725cf95db09ee18a09c8812d1106074c8cd",
+        "headSha256": null,
+        "byteLength": 836
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-25-major-event-queue.json",
+        "workingTreeSha256": "7be6fbf51135fb00cc833b7b49242eefa69e7c6e6b103f2c241853d0633e2bb3",
+        "headSha256": null,
+        "byteLength": 711
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-26-major-event-modal.json",
+        "workingTreeSha256": "d49c716dc49535adff71c5f6ec1fc09dcde16c6b070ad73cac3a8601991758e7",
+        "headSha256": null,
+        "byteLength": 986
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-27-turn-result-integration.json",
+        "workingTreeSha256": "26f35154a6fc641bd3b2a03b5dc44d880e00dfdcdb55cb5a36a512479eb1eb49",
+        "headSha256": null,
+        "byteLength": 793
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-28-action-news-checkpoint.json",
+        "workingTreeSha256": "c8c4fb3d1bbf657de35f60f634742693f2b7342a5c71f16ab56f2eacf33c3b5e",
+        "headSha256": null,
+        "byteLength": 799
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-29-map-selection-overlay.json",
+        "workingTreeSha256": "0dbf329cce106bc3329e267d54f66c4e51ccf6879be5b895ea9ac0b5b98ddca9",
+        "headSha256": null,
+        "byteLength": 818
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-3-visual-specification.json",
+        "workingTreeSha256": "6709ba9191ba6453642a941a7f342739dfe46b1d1393da461bba896746a1f534",
+        "headSha256": null,
+        "byteLength": 836
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-30-map-settings-war-slot.json",
+        "workingTreeSha256": "4c8b93947be300372a19ba8440e3c225b1268c1755356718f8553247ddcf56bf",
+        "headSha256": null,
+        "byteLength": 1273
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-31-accessibility-audit.json",
+        "workingTreeSha256": "9c0086c08f5344d152b13550c776e8912427b3efc6e30c45e7df4312bc908e7b",
+        "headSha256": null,
+        "byteLength": 1095
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-32-viewport-visual-regression.json",
+        "workingTreeSha256": "a17663ec7a0579cbcc644f9401a9342e224c802e3aaa656355c93c2d9ab559d8",
+        "headSha256": null,
+        "byteLength": 1458
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-33-deterministic-integration-e2e.json",
+        "workingTreeSha256": "d2704e2e2f5eb1a7c8565e9f2a277d996364c5b3b21490b864046cf06dbb66fd",
+        "headSha256": null,
+        "byteLength": 1556
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-34-integration-checkpoint-repair.json",
+        "workingTreeSha256": "7cee0ade1341b1ae11595599197b0dada33f93a4f060d83758ac16460da0b2a6",
+        "headSha256": null,
+        "byteLength": 3517
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-34-integration-checkpoint.json",
+        "workingTreeSha256": "0f2dfeb8469016d8ad66f8bb98e66fde3e7f7ffd83b87ce085e3e4627f282a77",
+        "headSha256": null,
+        "byteLength": 2000
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-35-dead-ui-cleanup.json",
+        "workingTreeSha256": "3aaa96fa1d43c200cf0221b411a7e457e20ff8c37dcecf12e09c30aaa2831864",
+        "headSha256": null,
+        "byteLength": 2464
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-36-backend-port-handoff.json",
+        "workingTreeSha256": "56574bd06a58c82bf180388e7a071f168bbc992106783ce32e3c05809ff12f18",
+        "headSha256": null,
+        "byteLength": 2251
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-37-final.json",
+        "workingTreeSha256": "c673db306ab45b7885127b045c6cd3a9be80203aebaca0dc5391f117bca1e4f5",
+        "headSha256": null,
+        "byteLength": 19913
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-4-ui-contracts.json",
+        "workingTreeSha256": "ec77d5ac61b5ece0397779f0400f63f63425055bf23e437e2a18404716040c0a",
+        "headSha256": null,
+        "byteLength": 1138
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-5-design-checkpoint.json",
+        "workingTreeSha256": "7ff86f42fd8965482e6c2aee2949b170a8b3245e59dc13adb522be3eb4cad7cf",
+        "headSha256": null,
+        "byteLength": 2039
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-6-turn-controller.json",
+        "workingTreeSha256": "cfaf56dbf8bc92464479864f37092826458aead3ecbb030c9e3e73416513be97",
+        "headSha256": null,
+        "byteLength": 2044
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-7-custom-target-date.json",
+        "workingTreeSha256": "574bdcd12dae0e3f0985bb05843df09b929051da4e5d7261dc6c51820f168fa8",
+        "headSha256": null,
+        "byteLength": 2030
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-8-game-overlay-reducer.json",
+        "workingTreeSha256": "f818ab8c7544cdeb881738e04ebce67b9c8c149a3a4e7d309dfa159d72482be1",
+        "headSha256": null,
+        "byteLength": 828
+      },
+      {
+        "status": "??",
+        "path": "reports/prompt13/13-9-full-screen-game-screen.json",
+        "workingTreeSha256": "69b41113108ccd196b6e52cd38576b27f9a8bfc81e05e23cf7f59359d7718550",
+        "headSha256": null,
+        "byteLength": 1153
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-hud-tooltip-1280x720.png",
+        "workingTreeSha256": "3431759f31bc0733e48a9d2e50d9a5f4115411a961f815bd02124b1cfaf7c610",
+        "headSha256": null,
+        "byteLength": 306862
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-hud-tooltip-1920x1080.png",
+        "workingTreeSha256": "bb3f46c9d4b69832ef1c93c8f2a587afc6ed4557d0022bc3375fdd6865043fa8",
+        "headSha256": null,
+        "byteLength": 460572
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-shell-1280x720.png",
+        "workingTreeSha256": "5cfb8269ba275c3799adcd01d4cbd5181b6207dfd34bdde1c0bda559f3487076",
+        "headSha256": null,
+        "byteLength": 280250
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-shell-1920x1080.png",
+        "workingTreeSha256": "129c98cc13b4dbc7703fa7495de4aa25b5245d30de3d30ca0f4c05f22a8e099b",
+        "headSha256": null,
+        "byteLength": 417785
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-shell-entry-1280x720.png",
+        "workingTreeSha256": "c7e3bb18d9a654dd63a4cb9ce42478b30e9f898425c89e495c3402d7d55ab037",
+        "headSha256": null,
+        "byteLength": 307822
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-shell-entry-1920x1080.png",
+        "workingTreeSha256": "aa56f0ca2a5f92b0cef4c8661d40561a43003bf24e89158c87998d487db0c74d",
+        "headSha256": null,
+        "byteLength": 408924
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-shell-repair-1280x720.png",
+        "workingTreeSha256": "ac10f2ad6a65c219ab098c163b17d4ff829d555599bcab70d0f6c00fafa70ce3",
+        "headSha256": null,
+        "byteLength": 308109
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-shell-repair-1920x1080.png",
+        "workingTreeSha256": "af9a963ae3452dc7656f43551281d285eb9a4467d7b8110108541b30018186ea",
+        "headSha256": null,
+        "byteLength": 458007
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-tooltip-1280x720.png",
+        "workingTreeSha256": "5844becdab9388006afe42b414c09f58a4646a0b3fe6b64dde5fbfad209db31c",
+        "headSha256": null,
+        "byteLength": 307461
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-13-tooltip-1920x1080.png",
+        "workingTreeSha256": "cb3d1c815afd00c65450d03a00d10b8e1fa938ca1e73378d9fe0c949162f1c5f",
+        "headSha256": null,
+        "byteLength": 458046
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-23-action-1280x720.png",
+        "workingTreeSha256": "ba4f2fe265c2734fe129df320d5fb4b21367f9bb2b38caeb372fafe4bc5367c8",
+        "headSha256": null,
+        "byteLength": 317651
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-23-action-1920x1080.png",
+        "workingTreeSha256": "e43bea0eab861dbad9533956edaff42d837f1f27fe53781fd47332acc726013b",
+        "headSha256": null,
+        "byteLength": 464352
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-32-hud-map-1280x720.png",
+        "workingTreeSha256": "34afe9e0ef4c7d952642a9f6eacd36dc8ca88e34379231809354a106054b0214",
+        "headSha256": null,
+        "byteLength": 268347
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-32-hud-map-1920x1080.png",
+        "workingTreeSha256": "f052282d709c727ec1a7dba2b949643e8e9d07671a9fe78c2233261c38ef39d4",
+        "headSha256": null,
+        "byteLength": 637069
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-32-modal-1280x720.png",
+        "workingTreeSha256": "70aa7189035f8c3ce0951525b17845cfd004413637f8ceffa5df8256962ef2cb",
+        "headSha256": null,
+        "byteLength": 223217
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-32-modal-1920x1080.png",
+        "workingTreeSha256": "cf5dfcee921d378eb6df959a719513e87f7feec99908287db78de4ba1ed3827d",
+        "headSha256": null,
+        "byteLength": 522162
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-32-overlay-1280x720.png",
+        "workingTreeSha256": "f2caaaecf7d479f86e2509dfc325ecd9d912016647161456068b39de5295d586",
+        "headSha256": null,
+        "byteLength": 279774
+      },
+      {
+        "status": "??",
+        "path": "screenshots/prompt13-32-overlay-1920x1080.png",
+        "workingTreeSha256": "7acfaf40bd12a97a62f6a2fc5503e5719082d1151b91dfea5458c6eed0d85000",
+        "headSha256": null,
+        "byteLength": 655971
+      },
+      {
+        "status": "??",
+        "path": "scripts/prepare-production-subdivision-catalog.mjs",
+        "workingTreeSha256": "6638aa7e01a046af7607e7657054b96d72d48c07c966f391bd02aeb4d18750fe",
+        "headSha256": null,
+        "byteLength": 986
+      },
+      {
+        "status": "??",
+        "path": "scripts/prepare-usa-state-test.mjs",
+        "workingTreeSha256": "76c93d354965dfac34b2a1455b248427fa58620fc6c9d6b370732e2527854332",
+        "headSha256": null,
+        "byteLength": 2077
+      },
+      {
+        "status": "??",
+        "path": "scripts/run-playwright-e2e.mjs",
+        "workingTreeSha256": "08d204e3ae6e6d315779cdf1cc29d8fd81485a6f3c9bd3c64947ca379ee48a65",
+        "headSha256": null,
+        "byteLength": 2140
+      },
+      {
+        "status": "??",
+        "path": "scripts/smoke-simulation-api.mjs",
+        "workingTreeSha256": "032d0120cab5fbb34bea34dbe5e4c06b03268632c02ca33611e870d5a0240c3e",
+        "headSha256": null,
+        "byteLength": 2211
+      },
+      {
+        "status": "??",
+        "path": "src/app/api/simulation/turn/route.ts",
+        "workingTreeSha256": "65f8cba9fcf701d23b5fd9c28f621b5391becd4df696a5114b407249023ccf8a",
+        "headSha256": null,
+        "byteLength": 4527
+      },
+      {
+        "status": "??",
+        "path": "src/app/game/page.tsx",
+        "workingTreeSha256": "89c055260448ba4f6dfc53027907c09cd7f31827e2b38761a532b4a91161f963",
+        "headSha256": null,
+        "byteLength": 142
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/CountryManagementOverlays.test.tsx",
+        "workingTreeSha256": "0f8c28c076c802e357729df1be1fbff7d4c791d3020ba515b17671a910af353c",
+        "headSha256": null,
+        "byteLength": 4447
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/CountryManagementOverlays.tsx",
+        "workingTreeSha256": "a5f3298be4b7e8c4187032a8e3e0018dedd01545f9d08db7a09e0d9687fa201a",
+        "headSha256": null,
+        "byteLength": 4811
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/DiplomacyOverlays.test.tsx",
+        "workingTreeSha256": "03e50da19f0ceaf6c552965749daca3e126d619f9e3fe56daa264e27791c9238",
+        "headSha256": null,
+        "byteLength": 10498
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/DiplomacyOverlays.tsx",
+        "workingTreeSha256": "1194d07deefd1a82105c6f157f1f7cf5e453c87b882059ad2c67f144807f2cc1",
+        "headSha256": null,
+        "byteLength": 9120
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GameActionOverlay.test.tsx",
+        "workingTreeSha256": "0215c69cf474c9cc771377c75b6e75077f6aace91feca9c69d0f0e2b324d3e96",
+        "headSha256": null,
+        "byteLength": 8257
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GameActionOverlay.tsx",
+        "workingTreeSha256": "ab33164c44dfcabe5120f41ae9fc1fa52642d225b47d993a1f430774f6c9f6b0",
+        "headSha256": null,
+        "byteLength": 8219
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GameChrome.test.tsx",
+        "workingTreeSha256": "4f997a30b3961813addad93d273c3cc2b2e204ae26e59dc52743ce0f546051d1",
+        "headSha256": null,
+        "byteLength": 9890
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GameEdgeNavigation.tsx",
+        "workingTreeSha256": "1dcb03fac66ad3f4d9930222861db7402b7636c12ab3e26cc5ccb82bb9b5b338",
+        "headSha256": null,
+        "byteLength": 1640
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GameHud.tsx",
+        "workingTreeSha256": "5b7ca7bd2fb6368eda0c2d9c60756f11c55487e0e80d5e1b333fd2fdde4afa2f",
+        "headSha256": null,
+        "byteLength": 3309
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GameOverlayEscapeHandler.tsx",
+        "workingTreeSha256": "4424a9bb8adcd47d1d32e25093392d6f4ea10f314632252e8f3766530bfb1bc7",
+        "headSha256": null,
+        "byteLength": 445
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GamePanel.tsx",
+        "workingTreeSha256": "4b050d8a43128f13a66caa7406d9270261fcbdaa8f02026730a3eca7c5917ebc",
+        "headSha256": null,
+        "byteLength": 6353
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/GameScreen.tsx",
+        "workingTreeSha256": "34368d8daf8b992c319baa973bda899fe1ba38415c1109c7946514805b88a53c",
+        "headSha256": null,
+        "byteLength": 13344
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/MajorEventModal.tsx",
+        "workingTreeSha256": "22a99201c5b4cc1707a60d6af3d0ccd823e8ed4ffbbbdfcd84a7513b83830f5b",
+        "headSha256": null,
+        "byteLength": 3340
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/MapCountryPicker.test.tsx",
+        "workingTreeSha256": "af87b537797f69fe62b734a6b6f385a44378347bdd7d5d03dca0b19f7a95ab9f",
+        "headSha256": null,
+        "byteLength": 1352
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/MapCountryPicker.tsx",
+        "workingTreeSha256": "7f9e1c7e937b99f009ca666a36a096af0598db79ca5f6b23ca68ec42c423cdf1",
+        "headSha256": null,
+        "byteLength": 1085
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/NewsAndMajorEvents.test.tsx",
+        "workingTreeSha256": "46de2620d6345e062f5d216c7bc7f8c2887ff8d5f1c1ab85bcf9ced6e87a381d",
+        "headSha256": null,
+        "byteLength": 4905
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/NewsOverlay.tsx",
+        "workingTreeSha256": "35522be6845290cf093cbc703a1b30d82a555abce6f340c1c497d142130b70e1",
+        "headSha256": null,
+        "byteLength": 4841
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/WarAndSystemOverlays.test.tsx",
+        "workingTreeSha256": "18713eed400a66ad1263e2d28957fb42ac2b86c68a1809457f4a36f85c177691",
+        "headSha256": null,
+        "byteLength": 3659
+      },
+      {
+        "status": "??",
+        "path": "src/components/game/WarAndSystemOverlays.tsx",
+        "workingTreeSha256": "d0b1e347b92fbe8cfdcce8583230d6a87e60d13faeb6696622cb8df05eecd874",
+        "headSha256": null,
+        "byteLength": 5644
+      },
+      {
+        "status": "??",
+        "path": "src/components/layout/WorldAppPage.tsx",
+        "workingTreeSha256": "fe298003e91e53688d1ae2fa9397b8c9d4fd3403451ccf0dee182ac46621330f",
+        "headSha256": null,
+        "byteLength": 2388
+      },
+      {
+        "status": "??",
+        "path": "src/components/map/map-search-projection.test.ts",
+        "workingTreeSha256": "e0d8adaaf2c4323eefae08d46e00d443e029889e9e2725b0a02a4d65ea43a935",
+        "headSha256": null,
+        "byteLength": 1884
+      },
+      {
+        "status": "??",
+        "path": "src/lib/commands/country-id-v2.ts",
+        "workingTreeSha256": "40f80ff860a8ca9b3e7b8fbd4fb8809eab337730b239c4cc51040cf62bbea88a",
+        "headSha256": null,
+        "byteLength": 251
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/contracts.test.ts",
+        "workingTreeSha256": "a32d7746cec97f67e1c5d6b580f658a98d97964cf44f6699a8ea99799220b333",
+        "headSha256": null,
+        "byteLength": 3255
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/contracts.ts",
+        "workingTreeSha256": "5528f674ef5cfdfa08054e143f0f26b817607a79f8497766d964858e264f4047",
+        "headSha256": null,
+        "byteLength": 6172
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/country-management-projection.test.ts",
+        "workingTreeSha256": "5bc02852be9ee26e98152ce1a849705ca92152de32c8a1b18dfc2cc2eb5e8438",
+        "headSha256": null,
+        "byteLength": 3292
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/country-management-projection.ts",
+        "workingTreeSha256": "590609a64aa43ee3d183f2f37740b5dcd1fe5ff1f5760cdb9609812938605f3f",
+        "headSha256": null,
+        "byteLength": 3711
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/country-view-projection.test.ts",
+        "workingTreeSha256": "b225e04d13dc97153b0428efea7e5e9f16d045d14b43aafb10bd5fb0cc1f9eae",
+        "headSha256": null,
+        "byteLength": 6332
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/country-view-projection.ts",
+        "workingTreeSha256": "d93dcf87e41353508ce6edef3ace21e5b386cbf25fc7342be7c9b466d0d234fa",
+        "headSha256": null,
+        "byteLength": 4927
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/game-hud-projection.test.ts",
+        "workingTreeSha256": "caa593795241fb52f40b7ef4dff284428d7ca93c29d22e8673c34506a55313ec",
+        "headSha256": null,
+        "byteLength": 2806
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/game-hud-projection.ts",
+        "workingTreeSha256": "12934a66fc29d444a0d8d02abeb9e84e6474465d281b8cbfa132e79548d29828",
+        "headSha256": null,
+        "byteLength": 2383
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/major-event-queue.test.ts",
+        "workingTreeSha256": "68a97947c63c0d6090004390c3debed2e286d93184705b9720c82040a2a896a4",
+        "headSha256": null,
+        "byteLength": 2766
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/major-event-queue.ts",
+        "workingTreeSha256": "78cd1a358fc6e5ee6c2bf65c590ad6ab102d3e19eb4767a2e32290d6b37b0ff9",
+        "headSha256": null,
+        "byteLength": 2213
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/map-integration-checkpoint.test.ts",
+        "workingTreeSha256": "a7e8678490c35633d73716a858f4a237450380eb65e79b4b91d42a61f85f763d",
+        "headSha256": null,
+        "byteLength": 1268
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/map-ui-settings-adapter.test.ts",
+        "workingTreeSha256": "3a27a4647717c7cf629f7845a2fcaae846dce10d0e2a862cbdbf851ef730ad29",
+        "headSha256": null,
+        "byteLength": 1845
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/map-ui-settings-adapter.ts",
+        "workingTreeSha256": "44bef09797efe142ebadc10f4c6bb4f6f4cf670c266de996d2beaa685a89ee0e",
+        "headSha256": null,
+        "byteLength": 1617
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/news-projection.test.ts",
+        "workingTreeSha256": "4ed95730180f65369e10bdbe996a1f35d852df31396ea9cbc6dd23c49f0fac5d",
+        "headSha256": null,
+        "byteLength": 2691
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/news-projection.ts",
+        "workingTreeSha256": "ff51de2ca9c278a4a6b810220f1646949c30314d82a37f2beb612801dc24b27e",
+        "headSha256": null,
+        "byteLength": 3259
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/overlay-reducer.test.ts",
+        "workingTreeSha256": "d445835de2ad963284bac976019f078efe97fc99db56e8d044bf90fb52a7eb46",
+        "headSha256": null,
+        "byteLength": 2107
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/overlay-reducer.ts",
+        "workingTreeSha256": "b762f3c62d2067507e49bacf082f4b09ef9c0676b21b3ce337629fc42e721305",
+        "headSha256": null,
+        "byteLength": 1617
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/ui-settings.ts",
+        "workingTreeSha256": "23483137865581d9c414cb82c52c9413cffba0d3789ff5e0033869da4ff73f63",
+        "headSha256": null,
+        "byteLength": 460
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/war-view-projection.test.ts",
+        "workingTreeSha256": "2a48d95da29a144a8e2544990f34585b152f9484abe1217faa67d0f16e59e5b2",
+        "headSha256": null,
+        "byteLength": 397
+      },
+      {
+        "status": "??",
+        "path": "src/lib/game-ui/war-view-projection.ts",
+        "workingTreeSha256": "c259c700dce6f73b507ebdadeba0e6418dfdbba116eebb81a621dfb949b8e2dd",
+        "headSha256": null,
+        "byteLength": 250
+      },
+      {
+        "status": "??",
+        "path": "src/lib/map/map-source-incremental-adapter.test.ts",
+        "workingTreeSha256": "2c592b85f9c5a1262674918c4b201bc85f40a19f94d33699ac930ad4b9ea3409",
+        "headSha256": null,
+        "byteLength": 18244
+      },
+      {
+        "status": "??",
+        "path": "src/lib/map/map-source-incremental-adapter.ts",
+        "workingTreeSha256": "dcc7a45edb9008d322077750f0cbeea5247bd49b89c3477f4fdb9229e4ee8a19",
+        "headSha256": null,
+        "byteLength": 11930
+      },
+      {
+        "status": "??",
+        "path": "src/lib/map/scenario-debug-bridge.ts",
+        "workingTreeSha256": "079d64632ec1370f49f6a064e3c6194f5c71efa30e721be35cc163b58af07946",
+        "headSha256": null,
+        "byteLength": 380
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/affected-set.test.ts",
+        "workingTreeSha256": "5bf832456a6006d2c4adafb325bcd4e7753645e4545b4c6aa3362a517e94cddd",
+        "headSha256": null,
+        "byteLength": 6393
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/affected-set.ts",
+        "workingTreeSha256": "607cce0960ba4f2bfde3713a89822ac9d894c410b98e6f4374bd74acf22ee19f",
+        "headSha256": null,
+        "byteLength": 6455
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/atomic-world-commit-subscriber.test.ts",
+        "workingTreeSha256": "732d6be692abd6044c8d6799f08c1e4c0e5578466f0903996252b16e15da20c3",
+        "headSha256": null,
+        "byteLength": 6192
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/atomic-world-commit.test.ts",
+        "workingTreeSha256": "5e7c78782b82a83631fdafedb2c171e995d94069bc32e6952c8ba72ca6cb1083",
+        "headSha256": null,
+        "byteLength": 8582
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/atomic-world-commit.ts",
+        "workingTreeSha256": "599d8ed8ed736bebd8e2f6cb0ba7904b2c8f2e85977dd0361ca8fa070521395b",
+        "headSha256": null,
+        "byteLength": 6762
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/batch-local-reference-resolver.test.ts",
+        "workingTreeSha256": "549b69d479ae17f39f006fb3f2d287d17c59ceb5a5154a2ee8310fb162f9239d",
+        "headSha256": null,
+        "byteLength": 5556
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/batch-local-reference-resolver.ts",
+        "workingTreeSha256": "26d62f6c54afa6e8db900ef3e6acc17c708051d8e7581b2f426f75c28b0684a7",
+        "headSha256": null,
+        "byteLength": 5103
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/command-batch-planner.test.ts",
+        "workingTreeSha256": "c725fb44632a6cbee8c70ab69007134c9ef4b889ffa5f7e3d1ac9829077b9de7",
+        "headSha256": null,
+        "byteLength": 3594
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/command-batch-planner.ts",
+        "workingTreeSha256": "ee016c589b098468ce3b739d21ce6a07c12645cc1b08df7d629a696e989b0baa",
+        "headSha256": null,
+        "byteLength": 4592
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/command-ui-runtime.test.ts",
+        "workingTreeSha256": "b90aa83a49a64f3f8f1854b02456572a917f669281a9a4ffa29271c9cd5e81bb",
+        "headSha256": null,
+        "byteLength": 7255
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/command-ui-runtime.ts",
+        "workingTreeSha256": "08174f791bfc88b8c4912fb8af722adca752e58d88f922ccb55d3e7ef707bd1d",
+        "headSha256": null,
+        "byteLength": 12667
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-delete-planner.test.ts",
+        "workingTreeSha256": "f510ab449d7f099622f83e04b926416129f6b05b7a8aae5b7af6c7862c66535a",
+        "headSha256": null,
+        "byteLength": 2965
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-delete-planner.ts",
+        "workingTreeSha256": "7a219ab0f7f9940ca2b25ebfa4b7dc23a19b621f11bbd73099a0a14d42b00fb8",
+        "headSha256": null,
+        "byteLength": 2563
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-dissolve-planner.test.ts",
+        "workingTreeSha256": "669bfd791ce40a48edb822d23d4525b4b785266eae656ba31587b039b33442c2",
+        "headSha256": null,
+        "byteLength": 12711
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-dissolve-planner.ts",
+        "workingTreeSha256": "75ed5f2e9ba42e8c94fbb9682f69ce52384ae11819d134d9c108fd412ca87747",
+        "headSha256": null,
+        "byteLength": 10997
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-establish-planner.test.ts",
+        "workingTreeSha256": "fb0bad074fc6acac7e29f15defb4a94d6eb7a1e7a9c807837f499fc6e4d5773b",
+        "headSha256": null,
+        "byteLength": 3059
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-establish-planner.ts",
+        "workingTreeSha256": "dbc8fac8fe39b23635424f970e2680070c3d5fc1c9bb71170d33937bf44c59b5",
+        "headSha256": null,
+        "byteLength": 4496
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-merge-planner.test.ts",
+        "workingTreeSha256": "5d6b686da62a9a142e3928eee18a9060ab77c0014b50bf971083e8afe2436808",
+        "headSha256": null,
+        "byteLength": 10772
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-merge-planner.ts",
+        "workingTreeSha256": "c062a480af8acdc3d4eed8cd83c74666b5b51358cffa0ce4b6a46d24ccad81bf",
+        "headSha256": null,
+        "byteLength": 9832
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-rename-planner.test.ts",
+        "workingTreeSha256": "cd6eba076c7e491613175517f62fe7d6a2761480b8cab5d49f22b860f20989b4",
+        "headSha256": null,
+        "byteLength": 2432
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-rename-planner.ts",
+        "workingTreeSha256": "317c9cc811e3b35233bcae1a19470b8a06a6dc334d8aa0c62acec60f1b123a52",
+        "headSha256": null,
+        "byteLength": 2223
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-split-planner.test.ts",
+        "workingTreeSha256": "8a41536024b0b818c571217c344d29d16d3b0940b2ef63a9763e2ef061d997c9",
+        "headSha256": null,
+        "byteLength": 10418
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/country-split-planner.ts",
+        "workingTreeSha256": "1a94aa724be504f24bbf5252e13fd4e5a0b6112caa355f40bdde7115ba805360",
+        "headSha256": null,
+        "byteLength": 11291
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/history-persistence-checkpoint.test.ts",
+        "workingTreeSha256": "cb3ad24abbaf829ec8df4c81f3d4df850e4e78df4ed13191147ca9116cf745d7",
+        "headSha256": null,
+        "byteLength": 7504
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/history-persistence-checkpoint.ts",
+        "workingTreeSha256": "ace6d788a3e90599b2da480c030e738914e5f4e4fb3d1e6c67bed96690002966",
+        "headSha256": null,
+        "byteLength": 11754
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/next-state-structural-sharing.test.ts",
+        "workingTreeSha256": "4b490046d72b3667f07e476facf66269cfea2ec3217231a9fd1120c8ae293695",
+        "headSha256": null,
+        "byteLength": 6119
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/next-state-structural-sharing.ts",
+        "workingTreeSha256": "44325dfe2a565ec89df39ccbde0007de451f08f67a4734ce33846590640df510",
+        "headSha256": null,
+        "byteLength": 2532
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/performance-resilience-checkpoint.test.ts",
+        "workingTreeSha256": "d2c0eb20c1a14aaf6d9c3961c0cd8501e3d55f7e254a81f08eacfbcbb58b5f29",
+        "headSha256": null,
+        "byteLength": 10691
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/performance-resilience-checkpoint.ts",
+        "workingTreeSha256": "cd18e21ed870cf525faabc931ea2b01e015690f8ba7a0f7936f8ef6b0a008d5f",
+        "headSha256": null,
+        "byteLength": 6219
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-assign-planner.test.ts",
+        "workingTreeSha256": "17b5dccae388503e718614ea86218a5193a54367714773710767e1b7698c0d9f",
+        "headSha256": null,
+        "byteLength": 7345
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-assign-planner.ts",
+        "workingTreeSha256": "1c820dcf726dd102e39da482302247bebdc4cd8fa5faa747f05a8ade23a4c127",
+        "headSha256": null,
+        "byteLength": 3801
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-partition-planner.test.ts",
+        "workingTreeSha256": "0e2c990595c0719a3d529eb462b8e55f0966eb1444d6950ac20de0b25faf53ad",
+        "headSha256": null,
+        "byteLength": 8943
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-partition-planner.ts",
+        "workingTreeSha256": "15a780c00a522ba484ab4c13d3ea049161c1e2b1649e27e0becac72c97c87139",
+        "headSha256": null,
+        "byteLength": 12869
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-replace-planner.test.ts",
+        "workingTreeSha256": "263cfa1956c5cff06e6daa8b0f98aa61189d9b6646e046227e2cc08f6d2c90c8",
+        "headSha256": null,
+        "byteLength": 8082
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-replace-planner.ts",
+        "workingTreeSha256": "ab0249d78c576753f1b707037d15f2ea852959f7ebb901cfcf4ecbed2d0005b0",
+        "headSha256": null,
+        "byteLength": 10623
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-transfer-planner.test.ts",
+        "workingTreeSha256": "8d0962702a68f161873657acfe2562b2acdac3fac0186aedefc5c517b1b1771e",
+        "headSha256": null,
+        "byteLength": 8097
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-transfer-planner.ts",
+        "workingTreeSha256": "c3e72542a0de0e4e1589a517a7a544a397c5953968c22a75a15f048a5bc0f4f7",
+        "headSha256": null,
+        "byteLength": 5913
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-unclaim-planner.test.ts",
+        "workingTreeSha256": "fc527c506283c94736f990014a443e5c70255d39c41806a7497103b87bf42825",
+        "headSha256": null,
+        "byteLength": 8226
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/territory-unclaim-planner.ts",
+        "workingTreeSha256": "1837e97cb0e319fdf85ab9c303f90e12bda12e0f50d9a629090e3e964623c152",
+        "headSha256": null,
+        "byteLength": 4152
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/world-patch-v2.test.ts",
+        "workingTreeSha256": "6b454653dbe61db78676ab9636f4d5a781172d54b763db685d276d14b11237f4",
+        "headSha256": null,
+        "byteLength": 8142
+      },
+      {
+        "status": "??",
+        "path": "src/lib/planning/world-patch-v2.ts",
+        "workingTreeSha256": "aff63b199b021a59a077c32a2f72ae0b762bd6f0f2cd918d2641fb5d73e90cad",
+        "headSha256": null,
+        "byteLength": 12328
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/committed-country-search-projection.ts",
+        "workingTreeSha256": "747bb39938eb9aa64af3bdf229f2b663b73a441d6915f3a260a6b75371af9565",
+        "headSha256": null,
+        "byteLength": 1343
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-capital-projection.test.ts",
+        "workingTreeSha256": "bd360061e742cbf846f5d54e068922e20440b5ea2e234562678fcb504a2318e7",
+        "headSha256": null,
+        "byteLength": 4678
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-capital-projection.ts",
+        "workingTreeSha256": "cf9dd7ba30f9d8e3751cd395fc895b482d5408e6b6b38cb247f3eefec020fb4a",
+        "headSha256": null,
+        "byteLength": 5323
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-label-runtime-projection.ts",
+        "workingTreeSha256": "3f85a84267b2bb45f6c092caa2155524301e63a01eb973781c1e11308afb2a41",
+        "headSha256": null,
+        "byteLength": 8586
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-map-marker-projection.test.ts",
+        "workingTreeSha256": "29a9442836d3de5ce138c703a3a05099f5bc4b13b54ae9d98eb9a602dcb9b18a",
+        "headSha256": null,
+        "byteLength": 6820
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-map-marker-projection.ts",
+        "workingTreeSha256": "6076457b1ba4bd07727fba3697f788c8ceab6132934b316d0aae938ad0f522d4",
+        "headSha256": null,
+        "byteLength": 4680
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-panel-projection.test.ts",
+        "workingTreeSha256": "3b43a7ce2680e52bccf722e1e13744664538211fc375cf4ba14c6d01b4a8e7b7",
+        "headSha256": null,
+        "byteLength": 5210
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-panel-projection.ts",
+        "workingTreeSha256": "ffe222d1fab153ce2366abd66e782a77fa521d2246dfa3f803a50975daa112e9",
+        "headSha256": null,
+        "byteLength": 5669
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-search-index-patch.test.ts",
+        "workingTreeSha256": "31e53f124cad7ffcafafa8eecd4840c115531496c7006c1da59a2bad33b231dd",
+        "headSha256": null,
+        "byteLength": 5385
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/country-search-index-patch.ts",
+        "workingTreeSha256": "25682784af61d188f492323c4731ebaa2c4ed7585bdc3bcdf385a776ec8c709d",
+        "headSha256": null,
+        "byteLength": 6841
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/label-projection-checkpoint.test.ts",
+        "workingTreeSha256": "2b0ef88da4f0178518d19b2fc8741f980b9e3be380171b3db0c7d6262a3ddeb5",
+        "headSha256": null,
+        "byteLength": 12698
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/label-projection-checkpoint.ts",
+        "workingTreeSha256": "971effa10615f1e28c1499b8bd21c21c29a596c6226e50e26275d2eaa0224f08",
+        "headSha256": null,
+        "byteLength": 11349
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/map-projection-checkpoint.test.ts",
+        "workingTreeSha256": "92abcc3d69339295ebd25cdb1a73d3d725b056b2d750c84bdd77a0fa9f0a3b60",
+        "headSha256": null,
+        "byteLength": 8326
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/map-projection-checkpoint.ts",
+        "workingTreeSha256": "a142ca00030f68bb58f5a40e8d02a1fb19ad026c3708f6eab26864f69bad2780",
+        "headSha256": null,
+        "byteLength": 11939
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/territory-polygon-index.test.ts",
+        "workingTreeSha256": "a5d11b2a183a3565f621ae7ff0f7553995af6b8547e2cbc1db902de21c64a3f2",
+        "headSha256": null,
+        "byteLength": 7440
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/territory-polygon-index.ts",
+        "workingTreeSha256": "d39034ff70564c16725f7c91409d2421548d7fe497c2043d629627ec054f35ff",
+        "headSha256": null,
+        "byteLength": 6100
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/topology-border-artifact.test.ts",
+        "workingTreeSha256": "c826daf0d143b07b70844af7827763d2a4ea3d2197c3efb3dd1c81fa4a98e8a8",
+        "headSha256": null,
+        "byteLength": 2787
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/topology-border-artifact.ts",
+        "workingTreeSha256": "1f8c90e56498e74ffab9da54d4a29d64290d08cc0d33b9c634c682b92861742e",
+        "headSha256": null,
+        "byteLength": 2593
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/world-map-runtime-projection.test.ts",
+        "workingTreeSha256": "7482503ab79c8775d76c3a6f21f7976a12e9a319e9d82ba3b0393a9e53434d1d",
+        "headSha256": null,
+        "byteLength": 9094
+      },
+      {
+        "status": "??",
+        "path": "src/lib/projection/world-map-runtime-projection.ts",
+        "workingTreeSha256": "360aefb9a8a6a1fb8c92dfc5453c833ab45ad316381ce0b7d3e4cfcf57c3f594",
+        "headSha256": null,
+        "byteLength": 6066
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/atomic-turn-runtime.ts",
+        "workingTreeSha256": "926002d657ffc73eb321c37bbf7b4978187b907525a2d472e6a69ffc35e8febb",
+        "headSha256": null,
+        "byteLength": 7352
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/application-turn-runtime.test.ts",
+        "workingTreeSha256": "957be66216000f0c41c33c5352fffafb80c79ebb2236535dc26fc726b4528f66",
+        "headSha256": null,
+        "byteLength": 10571
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/application-turn-runtime.ts",
+        "workingTreeSha256": "d791a99f787ae6fd251bf8a89752f69f23feea69f85939204da9417317cdfbef",
+        "headSha256": null,
+        "byteLength": 6538
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/gameplay-behavior.test.ts",
+        "workingTreeSha256": "e88eca60b8642b45203a572c298665df2caa46ecdb176182623bde56041ab369",
+        "headSha256": null,
+        "byteLength": 3473
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/ndjson-turn-client.ts",
+        "workingTreeSha256": "ca80cd678c5e941da4f115ab30778736675fde30278868b5af0468edc27502f8",
+        "headSha256": null,
+        "byteLength": 3088
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/turn-client.test.tsx",
+        "workingTreeSha256": "404eb9ecf9ec053bb9a1fe212306c5c4e5efcafa5e511beca659a412db593c4b",
+        "headSha256": null,
+        "byteLength": 5288
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/turn-report.ts",
+        "workingTreeSha256": "5cf1becf1efb67071298bd4ffa70029d7c48903ba69044dfa43e079eacf50f5f",
+        "headSha256": null,
+        "byteLength": 3243
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/turn-request.test.ts",
+        "workingTreeSha256": "67e83b7db3a05d7417f6fc9fcecab9a67b2ed4f3d16fb82dd1762ff9ccf187dc",
+        "headSha256": null,
+        "byteLength": 1543
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/turn-request.ts",
+        "workingTreeSha256": "53c1c0202e03490d19d24d8ed26ca1aa1c4f5ac3265b96d40016b6c7a2372deb",
+        "headSha256": null,
+        "byteLength": 2525
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/turn-state-machine.ts",
+        "workingTreeSha256": "4448d9ffe7c5a4d828d579d4260259d8ea470bb6097767b640c1955697e97fa2",
+        "headSha256": null,
+        "byteLength": 1930
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/use-simulation-turn-controller.test.tsx",
+        "workingTreeSha256": "e473aa26e955fa7d7b01ac60d1dae28085c7774d3e86da0e5e5441bdc0cabfdf",
+        "headSha256": null,
+        "byteLength": 9162
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/client/use-simulation-turn-controller.ts",
+        "workingTreeSha256": "fe0e4578b9b248cf5be3f6b87279b3f07dd0716adbf5f1a9fedd591b3374d6ff",
+        "headSha256": null,
+        "byteLength": 10510
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/debug-world-effect.ts",
+        "workingTreeSha256": "6fe4c04af2be0b365fa011530a13a3d339363a0c8dbff0bb806499cb110ad5f5",
+        "headSha256": null,
+        "byteLength": 66
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/game-runtime-persistence.test.ts",
+        "workingTreeSha256": "ddde32f9d1152abbba36f17926b92284ca51cdc53465e34dac3950c9e3d5c3db",
+        "headSha256": null,
+        "byteLength": 5394
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/initial-simulation-state.ts",
+        "workingTreeSha256": "1f317d742ab70db43547072401f5f0d6e8fbb30e7fd2081c65b03db931015571",
+        "headSha256": null,
+        "byteLength": 1134
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/narrative-state.ts",
+        "workingTreeSha256": "6e3d08ab49ca3170d11ce8ac60a088d9169628a7f91e31fad392950759065242",
+        "headSha256": null,
+        "byteLength": 7223
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/production-subdivision-catalog.server.ts",
+        "workingTreeSha256": "c2206ffdf9a3b2517f09ec81b8e1784779b99cee6f70dadb557f136d7c965ccf",
+        "headSha256": null,
+        "byteLength": 814
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/production-subdivision-catalog.test.ts",
+        "workingTreeSha256": "860aaaf0945abf889047a91b997355c6ff14a8797ecb2a37c9d4dcfbbd7a04e3",
+        "headSha256": null,
+        "byteLength": 5851
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/queued-player-action.ts",
+        "workingTreeSha256": "a6efe7017665c64852ab4d02a7e55522df48a451da1c6232e7b1ac2625766d35",
+        "headSha256": null,
+        "byteLength": 2624
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/resolved-turn-plan.ts",
+        "workingTreeSha256": "d6ab2ce3cf991c76791c7f75d5f28e51682124569b6f1d1921a4f6c0d43ca191",
+        "headSha256": null,
+        "byteLength": 10253
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/semantic-validator.ts",
+        "workingTreeSha256": "5b4d6d51dbacf2763ef84f3f4e31d7f5b3dfb215b5a21658b84af62422d0c99b",
+        "headSha256": null,
+        "byteLength": 14169
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/context-resolution-validator.ts",
+        "workingTreeSha256": "ec056a243b10becea3d9c523b7b9a13aacc3d767cb5de03b9bb3c9f5ce4429a2",
+        "headSha256": null,
+        "byteLength": 15521
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/openai-response-events.ts",
+        "workingTreeSha256": "0ec98f35179d01925633933abb7406014655c23e9540db5dcbeac248c532ef72",
+        "headSha256": null,
+        "byteLength": 3867
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/openai-responses-provider.ts",
+        "workingTreeSha256": "2fbcf94ec0b73a6f9a0e465b27f72a4182b0af7272cc9d842c7a3d9722330ef3",
+        "headSha256": null,
+        "byteLength": 9022
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/openai-responses-transport.ts",
+        "workingTreeSha256": "d0f29b4f8174a0bc09bd10aedd0fc4346879f4481469e7295b30d8e0642583c4",
+        "headSha256": null,
+        "byteLength": 2266
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/provider-config.ts",
+        "workingTreeSha256": "c9c9ac512d550b8dcfaf97d255114edf8f3c80db41b990f6dfdca982a9141af1",
+        "headSha256": null,
+        "byteLength": 902
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/provider-event-normalizer.ts",
+        "workingTreeSha256": "8fb9c27a0339d438db78b5364d6787d1f120876c4cb6524c27d5513588b6d246",
+        "headSha256": null,
+        "byteLength": 1870
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/provider-route.test.ts",
+        "workingTreeSha256": "d17a5920e362ecd2bbad556980dadd0ef19ce0b1ca61f4a067c3043af27f964e",
+        "headSha256": null,
+        "byteLength": 25193
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/simulation-instruction.ts",
+        "workingTreeSha256": "9261c0b83e6ead30e7d5225a4216ebe07c1de6aaf2f4f6690cf222f69e1ed9bc",
+        "headSha256": null,
+        "byteLength": 3336
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/simulation-provider.ts",
+        "workingTreeSha256": "16005ea1782d52e28357c31d7dbf27cbbee0964e447e7347dc74296d7c644ed5",
+        "headSha256": null,
+        "byteLength": 1478
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/server/simulation-tools.ts",
+        "workingTreeSha256": "16e332f355e538d92d2634758547e290ce84988c1f2a914dc5953f43f7e724c2",
+        "headSha256": null,
+        "byteLength": 4282
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-clock.ts",
+        "workingTreeSha256": "cb53002e7312368b5eacf0cccbbece0791c6785735282c886f3f95cd746cdcb1",
+        "headSha256": null,
+        "byteLength": 2340
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-context-production.test.ts",
+        "workingTreeSha256": "d8f81b69e1a11e577381b6f3e04eac8073f6684f76e6c66d4dcbfcbb6d267e54",
+        "headSha256": null,
+        "byteLength": 10630
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-context.ts",
+        "workingTreeSha256": "bf6b7b710bdf4363580baed660329945c7ec5b3d2246e0918fa0ade67928042a",
+        "headSha256": null,
+        "byteLength": 15195
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-contract-primitives.ts",
+        "workingTreeSha256": "3b40d3ffbbe232498cb5546b781390e83414e18219d5cdbadafd73163361ab4a",
+        "headSha256": null,
+        "byteLength": 4268
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-contract.test.ts",
+        "workingTreeSha256": "2bc4e238055d1b07a885f3513b541c0ef0352b73a86445828c78ace4bdaf1527",
+        "headSha256": null,
+        "byteLength": 20390
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-event.ts",
+        "workingTreeSha256": "9e8392b695ee0f3f574c94517ceb03c67ab3a9fb7b62aa3138a92a9cd6ac31a2",
+        "headSha256": null,
+        "byteLength": 1697
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-persistence.ts",
+        "workingTreeSha256": "9004dacffb14743b078eebf93f1e061ad28351984e3d9b382edeb19273d8a379",
+        "headSha256": null,
+        "byteLength": 10260
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/simulation-state.ts",
+        "workingTreeSha256": "5b2e4183448304527d54fd1440a941c1e34f6b210c4578a7beed18756f16bde7",
+        "headSha256": null,
+        "byteLength": 7723
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/subdivision-catalog.ts",
+        "workingTreeSha256": "39e8075a7bf2deebacc7a11dadfba85c3645d8d289c4ef93aa7338b6f864e320",
+        "headSha256": null,
+        "byteLength": 5830
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/turn-resolution.ts",
+        "workingTreeSha256": "854181b1a889abdaea202b0b9fde5b81bb4edb3d945efaf3cc4797b206298617",
+        "headSha256": null,
+        "byteLength": 3059
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/turn-runtime.test.ts",
+        "workingTreeSha256": "803877617b58b810c4b77226f4f1ad92e5fe61a7b37888fe564589c9430e69a1",
+        "headSha256": null,
+        "byteLength": 28797
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/world-effect-compiler.ts",
+        "workingTreeSha256": "f55c95e6b2dcc0c9bf441e9fcb6a9a3b161717eff4fc79e5d564a07c35931ebb",
+        "headSha256": null,
+        "byteLength": 30522
+      },
+      {
+        "status": "??",
+        "path": "src/lib/simulation/world-effect.ts",
+        "workingTreeSha256": "6131ec51bbe9d405b1613e567da5d8e21235ff959f1a24419eb3a7105bd5cfac",
+        "headSha256": null,
+        "byteLength": 2958
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/china-province-debug-scenario.test.ts",
+        "workingTreeSha256": "60fb928848781ca48100ec11bb2dccd6ddafdd817595aafc40677fdb83fe263b",
+        "headSha256": null,
+        "byteLength": 5056
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/china-province-debug-scenario.ts",
+        "workingTreeSha256": "4b9a082cdd2bb37462306701d4e8824c6e770335c17dc7ccfae538a7103557fd",
+        "headSha256": null,
+        "byteLength": 10115
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1-isolation.test.ts",
+        "workingTreeSha256": "4740430d676a57a61c0b4c1bca6303dadd72b2026a6638d1796713a87fb2b382",
+        "headSha256": null,
+        "byteLength": 1413
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/country-create.ts",
+        "workingTreeSha256": "4db67fc465b0cd381329eda1c06a44367230651dc45ad14f76968408e5627884",
+        "headSha256": null,
+        "byteLength": 3272
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/country-delete.ts",
+        "workingTreeSha256": "934fae59bb1cd568981e5fe3cca99a1a0bcaec17559115a1cd9f7ce6bda176a6",
+        "headSha256": null,
+        "byteLength": 2266
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/country-map-artifacts.ts",
+        "workingTreeSha256": "146d54cf62b087df65475a0bca45c75249227756c60ecfd5810d26f5e45a6437",
+        "headSha256": null,
+        "byteLength": 7851
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/country-rename.ts",
+        "workingTreeSha256": "62c5b823f93ae3301d7adea1a4b3387842d21595a1175407b5376398ba1834dc",
+        "headSha256": null,
+        "byteLength": 2872
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/initial-world-state.ts",
+        "workingTreeSha256": "a5ad7f639d2f9ce6a6627c7e7246262f1a6d5ee486e835b4edcd0586c8bae1d7",
+        "headSha256": null,
+        "byteLength": 2209
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/territory-replace.ts",
+        "workingTreeSha256": "56352e7ab03dc68d5ac8d67cf5a0991213f8165fd1450686af33bf2f805f39d8",
+        "headSha256": null,
+        "byteLength": 10744
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/territory-transfer.ts",
+        "workingTreeSha256": "19a923f24f0fc0bc8f50123efa532dd58caf13e34cf8e5c2b327670331099cdc",
+        "headSha256": null,
+        "byteLength": 8759
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/legacy-v1/world-state.ts",
+        "workingTreeSha256": "5f698037f1e109f8fbd3ff399cb9122b6f500c4976b8f42daa85a860c9db648a",
+        "headSha256": null,
+        "byteLength": 13445
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/map-scenario-debug-bridge.ts",
+        "workingTreeSha256": "ebf070e22441e082d8b65c3844bd642417c72f9cb735665322b2b3338765c010",
+        "headSha256": null,
+        "byteLength": 1690
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/static-runtime-source-guard.test.ts",
+        "workingTreeSha256": "87ccae6ae89fb991c72b794d7a538ffbec878c8ddc9be0445f45f7a9317a5724",
+        "headSha256": null,
+        "byteLength": 4225
+      },
+      {
+        "status": "??",
+        "path": "src/lib/test-only/usa-state-debug-scenario.ts",
+        "workingTreeSha256": "509003e1dfc06af058d0dec03c9ae55e36ac2912df8d0e075fef65a2695540ae",
+        "headSha256": null,
+        "byteLength": 11589
+      },
+      {
+        "status": "??",
+        "path": "src/stores/game-setup-player-policy-projection.test.ts",
+        "workingTreeSha256": "626c9e32b6ed22306ad429de20ae4371f23224429aeea7807d03d9ed1615b4d8",
+        "headSha256": null,
+        "byteLength": 4099
+      },
+      {
+        "status": "??",
+        "path": "src/stores/game-setup-selection-projection.test.ts",
+        "workingTreeSha256": "b5793d40a3cc2bbc511722c6674fd83e17ffec347b66ae132c53eaafb6bd73b7",
+        "headSha256": null,
+        "byteLength": 8109
+      },
+      {
+        "status": "??",
+        "path": "src/stores/world-state-store-v2-fixture.ts",
+        "workingTreeSha256": "744143bfb82bfa2dda94f8937b6604aa36af65fe91e5c6f24808b0570dfdd978",
+        "headSha256": null,
+        "byteLength": 4417
+      },
+      {
+        "status": "??",
+        "path": "src/stores/world-state-store-v2.test.ts",
+        "workingTreeSha256": "08fc01b0ab7a98b7a0206fd88d41642124ff120931f5f6087bc64b370cf5ddca",
+        "headSha256": null,
+        "byteLength": 3152
+      }
+    ]
+  },
+  "performedStages": [
+    "Recorded HEAD and dirty working-tree hashes without restoring or deleting existing work.",
+    "Audited world, simulation, command, atomic commit, projection, incremental map, and persistence contracts.",
+    "Measured seed country/color data and checked current boundary/polygon geometry and coverage."
+  ],
+  "commands": [
+    {
+      "command": "git rev-parse HEAD",
+      "exitCode": 0
+    },
+    {
+      "command": "git status --porcelain=v1 -z --untracked-files=all",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/audit-prompt14-stage-1-2.mjs",
+      "exitCode": 0
+    }
+  ],
+  "repositoryContracts": {
+    "world": {
+      "schema": "WorldStateV2",
+      "paths": [
+        "src/lib/world/world-state-v2.ts",
+        "src/lib/world/territory-entity.ts",
+        "src/lib/world/country-entity.ts"
+      ],
+      "findings": [
+        "Mutable TerritoryEntity still owns Polygon/MultiPolygon geometry and ownerCountryId.",
+        "TerritoryEntity has no sourceCountryId or controllerCountryId.",
+        "CountryEntity has no authoritative mapColor field; seed color remains metadata-sidecar data.",
+        "WorldStateV2 has no immutable catalog reference."
+      ]
+    },
+    "simulation": {
+      "schema": "SimulationStateV1",
+      "path": "src/lib/simulation/simulation-state.ts",
+      "caps": {
+        "queuedActions": 128,
+        "facts": 512,
+        "situations": 256,
+        "scheduledConsequences": 256,
+        "eventLog": 2048
+      },
+      "finding": "No territorial-control or country-presentation authority collections exist yet."
+    },
+    "command": {
+      "path": "src/lib/commands/command-batch-v2.ts",
+      "maxCommandsPerBatch": 64,
+      "maxBatchDepth": 4,
+      "finding": "Existing V2 territory commands can carry geometry; Prompt 14 must not expand one requested operation into one command per territory."
+    },
+    "atomicCommit": {
+      "paths": [
+        "src/lib/planning/atomic-world-commit.ts",
+        "src/lib/simulation/atomic-turn-runtime.ts"
+      ],
+      "finding": "World patches and paired world/simulation turn snapshots already provide stale checks, rollback on publication failure, history, undo, and redo seams."
+    },
+    "mapIncrementalAdapter": {
+      "path": "src/lib/map/map-source-incremental-adapter.ts",
+      "finding": "Normal revisions use GeoJSONSource.updateData for changed IDs; setData is limited to initial source attachment and explicit resynchronization."
+    },
+    "projection": {
+      "paths": [
+        "src/lib/projection/world-map-runtime-projection.ts",
+        "src/lib/projection/territory-polygon-index.ts",
+        "src/lib/projection/topology-border-artifact.ts",
+        "src/lib/projection/country-label-runtime-projection.ts"
+      ],
+      "finding": "Projection is WorldStateV2-based and will require catalog-backed geometry without bypassing the incremental adapter."
+    },
+    "persistence": {
+      "paths": [
+        "src/lib/simulation/simulation-persistence.ts",
+        "src/lib/simulation/client/application-turn-runtime.ts"
+      ],
+      "maxSaveBytes": 67108864,
+      "maxPersistedTurnHistory": 50,
+      "finding": "Canonical serialization/restore helpers exist, but production UI has no localStorage/sessionStorage persistence path; refresh still boots the canonical seed."
+    }
+  },
+  "measurements": {
+    "seedCountries": 247,
+    "uniqueSeedColors": 181,
+    "canonicalUppercaseColorCount": 20,
+    "lowercaseHexColorCount": 227,
+    "nonHexColorCount": 0,
+    "polygonAssets": [
+      {
+        "path": "data/raw/ne_10m_admin_0_countries.geojson",
+        "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+        "byteLength": 13287235,
+        "featureCount": 258,
+        "geometryTypes": {
+          "MultiPolygon": 151,
+          "Polygon": 107
+        },
+        "vertexCount": 548471,
+        "ringCount": 4293,
+        "invalidFeatureCount": 0,
+        "invalidFeatureSamples": [],
+        "coveredCountryIds": [
+          "ABW",
+          "AFG",
+          "AGO",
+          "AIA",
+          "ALB",
+          "ALD",
+          "AND",
+          "ARE",
+          "ARG",
+          "ARM",
+          "ASM",
+          "ATA",
+          "ATC",
+          "ATF",
+          "ATG",
+          "AUS",
+          "AUT",
+          "AZE",
+          "BDI",
+          "BEL",
+          "BEN",
+          "BFA",
+          "BGD",
+          "BGR",
+          "BHR",
+          "BHS",
+          "BIH",
+          "BJN",
+          "BLM",
+          "BLR",
+          "BLZ",
+          "BMU",
+          "BOL",
+          "BRA",
+          "BRB",
+          "BRI",
+          "BRN",
+          "BRT",
+          "BTN",
+          "BWA",
+          "CAF",
+          "CAN",
+          "CHE",
+          "CHL",
+          "CHN",
+          "CIV",
+          "CLP",
+          "CMR",
+          "CNM",
+          "COD",
+          "COG",
+          "COK",
+          "COL",
+          "COM",
+          "CPV",
+          "CRI",
+          "CSI",
+          "CUB",
+          "CUW",
+          "CYM",
+          "CYN",
+          "CYP",
+          "CZE",
+          "DEU",
+          "DJI",
+          "DMA",
+          "DNK",
+          "DOM",
+          "DZA",
+          "ECU",
+          "EGY",
+          "ERI",
+          "ESB",
+          "ESP",
+          "EST",
+          "ETH",
+          "FIN",
+          "FJI",
+          "FLK",
+          "FRA",
+          "FRO",
+          "FSM",
+          "GAB",
+          "GBR",
+          "GEO",
+          "GGY",
+          "GHA",
+          "GIB",
+          "GIN",
+          "GMB",
+          "GNB",
+          "GNQ",
+          "GRC",
+          "GRD",
+          "GRL",
+          "GTM",
+          "GUM",
+          "GUY",
+          "HKG",
+          "HMD",
+          "HND",
+          "HRV",
+          "HTI",
+          "HUN",
+          "IDN",
+          "IMN",
+          "IND",
+          "IOA",
+          "IOT",
+          "IRL",
+          "IRN",
+          "IRQ",
+          "ISL",
+          "ISR",
+          "ITA",
+          "JAM",
+          "JEY",
+          "JOR",
+          "JPN",
+          "KAB",
+          "KAS",
+          "KAZ",
+          "KEN",
+          "KGZ",
+          "KHM",
+          "KIR",
+          "KNA",
+          "KOR",
+          "KOS",
+          "KWT",
+          "LAO",
+          "LBN",
+          "LBR",
+          "LBY",
+          "LCA",
+          "LIE",
+          "LKA",
+          "LSO",
+          "LTU",
+          "LUX",
+          "LVA",
+          "MAC",
+          "MAF",
+          "MAR",
+          "MCO",
+          "MDA",
+          "MDG",
+          "MDV",
+          "MEX",
+          "MHL",
+          "MKD",
+          "MLI",
+          "MLT",
+          "MMR",
+          "MNE",
+          "MNG",
+          "MNP",
+          "MOZ",
+          "MRT",
+          "MSR",
+          "MUS",
+          "MWI",
+          "MYS",
+          "NAM",
+          "NCL",
+          "NER",
+          "NFK",
+          "NGA",
+          "NIC",
+          "NIU",
+          "NLD",
+          "NOR",
+          "NPL",
+          "NRU",
+          "NZL",
+          "OMN",
+          "PAK",
+          "PAN",
+          "PCN",
+          "PER",
+          "PGA",
+          "PHL",
+          "PLW",
+          "PNG",
+          "POL",
+          "PRI",
+          "PRK",
+          "PRT",
+          "PRY",
+          "PSX",
+          "PYF",
+          "QAT",
+          "ROU",
+          "RUS",
+          "RWA",
+          "SAH",
+          "SAU",
+          "SCR",
+          "SDN",
+          "SDS",
+          "SEN",
+          "SER",
+          "SGP",
+          "SGS",
+          "SHN",
+          "SLB",
+          "SLE",
+          "SLV",
+          "SMR",
+          "SOL",
+          "SOM",
+          "SPI",
+          "SPM",
+          "SRB",
+          "STP",
+          "SUR",
+          "SVK",
+          "SVN",
+          "SWE",
+          "SWZ",
+          "SXM",
+          "SYC",
+          "SYR",
+          "TCA",
+          "TCD",
+          "TGO",
+          "THA",
+          "TJK",
+          "TKM",
+          "TLS",
+          "TON",
+          "TTO",
+          "TUN",
+          "TUR",
+          "TUV",
+          "TWN",
+          "TZA",
+          "UGA",
+          "UKR",
+          "UMI",
+          "URY",
+          "USA",
+          "USG",
+          "UZB",
+          "VAT",
+          "VCT",
+          "VEN",
+          "VGB",
+          "VIR",
+          "VNM",
+          "VUT",
+          "WLF",
+          "WSB",
+          "WSM",
+          "YEM",
+          "ZAF",
+          "ZMB",
+          "ZWE"
+        ]
+      },
+      {
+        "path": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+        "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+        "byteLength": 40726852,
+        "featureCount": 4596,
+        "geometryTypes": {
+          "Polygon": 3945,
+          "MultiPolygon": 651
+        },
+        "vertexCount": 1295319,
+        "ringCount": 8646,
+        "invalidFeatureCount": 0,
+        "invalidFeatureSamples": [],
+        "coveredCountryIds": [
+          "ABW",
+          "AFG",
+          "AGO",
+          "AIA",
+          "ALB",
+          "ALD",
+          "AND",
+          "ARE",
+          "ARG",
+          "ARM",
+          "ASM",
+          "ATA",
+          "ATC",
+          "ATF",
+          "ATG",
+          "AUS",
+          "AUT",
+          "AZE",
+          "BDI",
+          "BEL",
+          "BEN",
+          "BFA",
+          "BGD",
+          "BGR",
+          "BHR",
+          "BHS",
+          "BIH",
+          "BLM",
+          "BLR",
+          "BLZ",
+          "BMU",
+          "BOL",
+          "BRA",
+          "BRB",
+          "BRN",
+          "BTN",
+          "BWA",
+          "CAF",
+          "CAN",
+          "CHE",
+          "CHL",
+          "CHN",
+          "CIV",
+          "CLP",
+          "CMR",
+          "COD",
+          "COG",
+          "COK",
+          "COL",
+          "COM",
+          "CPV",
+          "CRI",
+          "CSI",
+          "CUB",
+          "CUW",
+          "CYM",
+          "CYN",
+          "CYP",
+          "CZE",
+          "DEU",
+          "DJI",
+          "DMA",
+          "DNK",
+          "DOM",
+          "DZA",
+          "ECU",
+          "EGY",
+          "ERI",
+          "ESB",
+          "ESP",
+          "EST",
+          "ETH",
+          "FIN",
+          "FJI",
+          "FLK",
+          "FRA",
+          "FRO",
+          "FSM",
+          "GAB",
+          "GBR",
+          "GEO",
+          "GGY",
+          "GHA",
+          "GIB",
+          "GIN",
+          "GMB",
+          "GNB",
+          "GNQ",
+          "GRC",
+          "GRD",
+          "GRL",
+          "GTM",
+          "GUM",
+          "GUY",
+          "HKG",
+          "HMD",
+          "HND",
+          "HRV",
+          "HTI",
+          "HUN",
+          "IDN",
+          "IMN",
+          "IND",
+          "IOA",
+          "IOT",
+          "IRL",
+          "IRN",
+          "IRQ",
+          "ISL",
+          "ISR",
+          "ITA",
+          "JAM",
+          "JEY",
+          "JOR",
+          "JPN",
+          "KAB",
+          "KAS",
+          "KAZ",
+          "KEN",
+          "KGZ",
+          "KHM",
+          "KIR",
+          "KNA",
+          "KOR",
+          "KOS",
+          "KWT",
+          "LAO",
+          "LBN",
+          "LBR",
+          "LBY",
+          "LCA",
+          "LIE",
+          "LKA",
+          "LSO",
+          "LTU",
+          "LUX",
+          "LVA",
+          "MAC",
+          "MAF",
+          "MAR",
+          "MCO",
+          "MDA",
+          "MDG",
+          "MDV",
+          "MEX",
+          "MHL",
+          "MKD",
+          "MLI",
+          "MLT",
+          "MMR",
+          "MNE",
+          "MNG",
+          "MNP",
+          "MOZ",
+          "MRT",
+          "MSR",
+          "MUS",
+          "MWI",
+          "MYS",
+          "NAM",
+          "NCL",
+          "NER",
+          "NFK",
+          "NGA",
+          "NIC",
+          "NIU",
+          "NLD",
+          "NOR",
+          "NPL",
+          "NRU",
+          "NZL",
+          "OMN",
+          "PAK",
+          "PAN",
+          "PCN",
+          "PER",
+          "PGA",
+          "PHL",
+          "PLW",
+          "PNG",
+          "POL",
+          "PRI",
+          "PRK",
+          "PRT",
+          "PRY",
+          "PSX",
+          "PYF",
+          "QAT",
+          "ROU",
+          "RUS",
+          "RWA",
+          "SAH",
+          "SAU",
+          "SDN",
+          "SDS",
+          "SEN",
+          "SGP",
+          "SGS",
+          "SHN",
+          "SLB",
+          "SLE",
+          "SLV",
+          "SMR",
+          "SOL",
+          "SOM",
+          "SPM",
+          "SRB",
+          "STP",
+          "SUR",
+          "SVK",
+          "SVN",
+          "SWE",
+          "SWZ",
+          "SXM",
+          "SYC",
+          "SYR",
+          "TCA",
+          "TCD",
+          "TGO",
+          "THA",
+          "TJK",
+          "TKM",
+          "TLS",
+          "TON",
+          "TTO",
+          "TUN",
+          "TUR",
+          "TUV",
+          "TWN",
+          "TZA",
+          "UGA",
+          "UKR",
+          "UMI",
+          "URY",
+          "USA",
+          "USG",
+          "UZB",
+          "VAT",
+          "VCT",
+          "VEN",
+          "VGB",
+          "VIR",
+          "VNM",
+          "VUT",
+          "WLF",
+          "WSB",
+          "WSM",
+          "YEM",
+          "ZAF",
+          "ZMB",
+          "ZWE"
+        ]
+      },
+      {
+        "path": "public/data/maps/countries-10m.geojson",
+        "sha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
+        "byteLength": 11241685,
+        "featureCount": 247,
+        "geometryTypes": {
+          "MultiPolygon": 150,
+          "Polygon": 97
+        },
+        "vertexCount": 543585,
+        "ringCount": 4286,
+        "invalidFeatureCount": 0,
+        "invalidFeatureSamples": [],
+        "coveredCountryIds": [
+          "ABW",
+          "AFG",
+          "AGO",
+          "AIA",
+          "ALB",
+          "ALD",
+          "AND",
+          "ARE",
+          "ARG",
+          "ARM",
+          "ASM",
+          "ATA",
+          "ATC",
+          "ATF",
+          "ATG",
+          "AUS",
+          "AUT",
+          "AZE",
+          "BDI",
+          "BEL",
+          "BEN",
+          "BFA",
+          "BGD",
+          "BGR",
+          "BHR",
+          "BHS",
+          "BIH",
+          "BLM",
+          "BLR",
+          "BLZ",
+          "BMU",
+          "BOL",
+          "BRA",
+          "BRB",
+          "BRN",
+          "BTN",
+          "BWA",
+          "CAF",
+          "CAN",
+          "CHE",
+          "CHL",
+          "CHN",
+          "CIV",
+          "CLP",
+          "CMR",
+          "CNM",
+          "COD",
+          "COG",
+          "COK",
+          "COL",
+          "COM",
+          "CPV",
+          "CRI",
+          "CSI",
+          "CUB",
+          "CUW",
+          "CYM",
+          "CYN",
+          "CYP",
+          "CZE",
+          "DEU",
+          "DJI",
+          "DMA",
+          "DNK",
+          "DOM",
+          "DZA",
+          "ECU",
+          "EGY",
+          "ERI",
+          "ESH",
+          "ESP",
+          "EST",
+          "ETH",
+          "FIN",
+          "FJI",
+          "FLK",
+          "FRA",
+          "FRO",
+          "FSM",
+          "GAB",
+          "GBR",
+          "GEO",
+          "GGY",
+          "GHA",
+          "GIB",
+          "GIN",
+          "GMB",
+          "GNB",
+          "GNQ",
+          "GRC",
+          "GRD",
+          "GRL",
+          "GTM",
+          "GUM",
+          "GUY",
+          "HKG",
+          "HMD",
+          "HND",
+          "HRV",
+          "HTI",
+          "HUN",
+          "IDN",
+          "IMN",
+          "IND",
+          "IOA",
+          "IOT",
+          "IRL",
+          "IRN",
+          "IRQ",
+          "ISL",
+          "ISR",
+          "ITA",
+          "JAM",
+          "JEY",
+          "JOR",
+          "JPN",
+          "KAZ",
+          "KEN",
+          "KGZ",
+          "KHM",
+          "KIR",
+          "KNA",
+          "KOR",
+          "KWT",
+          "LAO",
+          "LBN",
+          "LBR",
+          "LBY",
+          "LCA",
+          "LIE",
+          "LKA",
+          "LSO",
+          "LTU",
+          "LUX",
+          "LVA",
+          "MAC",
+          "MAF",
+          "MAR",
+          "MCO",
+          "MDA",
+          "MDG",
+          "MDV",
+          "MEX",
+          "MHL",
+          "MKD",
+          "MLI",
+          "MLT",
+          "MMR",
+          "MNE",
+          "MNG",
+          "MNP",
+          "MOZ",
+          "MRT",
+          "MSR",
+          "MUS",
+          "MWI",
+          "MYS",
+          "NAM",
+          "NCL",
+          "NER",
+          "NFK",
+          "NGA",
+          "NIC",
+          "NIU",
+          "NLD",
+          "NOR",
+          "NPL",
+          "NRU",
+          "NZL",
+          "OMN",
+          "PAK",
+          "PAN",
+          "PCN",
+          "PER",
+          "PGA",
+          "PHL",
+          "PLW",
+          "PNG",
+          "POL",
+          "PRI",
+          "PRK",
+          "PRT",
+          "PRY",
+          "PSX",
+          "PYF",
+          "QAT",
+          "ROU",
+          "RUS",
+          "RWA",
+          "SAU",
+          "SDN",
+          "SDS",
+          "SEN",
+          "SGP",
+          "SGS",
+          "SHN",
+          "SLB",
+          "SLE",
+          "SLV",
+          "SMR",
+          "SOL",
+          "SOM",
+          "SPM",
+          "SRB",
+          "STP",
+          "SUR",
+          "SVK",
+          "SVN",
+          "SWE",
+          "SWZ",
+          "SXM",
+          "SYC",
+          "SYR",
+          "TCA",
+          "TCD",
+          "TGO",
+          "THA",
+          "TJK",
+          "TKM",
+          "TLS",
+          "TON",
+          "TTO",
+          "TUN",
+          "TUR",
+          "TUV",
+          "TWN",
+          "TZA",
+          "UGA",
+          "UKR",
+          "UMI",
+          "URY",
+          "USA",
+          "UZB",
+          "VAT",
+          "VCT",
+          "VEN",
+          "VGB",
+          "VIR",
+          "VNM",
+          "VUT",
+          "WLF",
+          "WSM",
+          "XKX",
+          "YEM",
+          "ZAF",
+          "ZMB",
+          "ZWE"
+        ]
+      },
+      {
+        "path": "public/data/simulation/china-admin1-v1.geojson",
+        "sha256": "71375d18e2cdd7a99aeb56355ff30db21a9750f16d2abe39f4081da5efda532e",
+        "byteLength": 1215126,
+        "featureCount": 31,
+        "geometryTypes": {
+          "Polygon": 22,
+          "MultiPolygon": 9
+        },
+        "vertexCount": 53214,
+        "ringCount": 93,
+        "invalidFeatureCount": 0,
+        "invalidFeatureSamples": [],
+        "coveredCountryIds": [
+          "CHN"
+        ]
+      },
+      {
+        "path": "public/data/simulation/usa-admin1-v1.geojson",
+        "sha256": "25777566cb7a7ef2dcd09fba760e98eac3900130c5e97d6bafcd243f89913120",
+        "byteLength": 1256672,
+        "featureCount": 50,
+        "geometryTypes": {
+          "MultiPolygon": 21,
+          "Polygon": 29
+        },
+        "vertexCount": 53331,
+        "ringCount": 403,
+        "invalidFeatureCount": 0,
+        "invalidFeatureSamples": [],
+        "coveredCountryIds": [
+          "USA"
+        ]
+      }
+    ],
+    "currentAdmin1BoundaryLineAsset": {
+      "path": "public/data/maps/admin1-boundaries-10m.geojson",
+      "sha256": "5ca60e2276d61146d5cf06829a1267f4e3ebe037949de0da056f47d2eaf34771",
+      "byteLength": 18352493,
+      "featureCount": 4196,
+      "geometryTypes": {
+        "MultiLineString": 4196
+      },
+      "authoritativePolygonEligible": false
+    }
+  },
+  "documentDifferences": [
+    "The repository does contain a worldwide raw Admin-1 polygon input, not only CHN/USA fixtures.",
+    "The browser-facing Admin-1 boundary asset is MultiLineString-only and cannot serve as authoritative territory geometry.",
+    "The raw source attribution names Natural Earth and its public-domain terms but does not pin an upstream release or commit.",
+    "Seed map colors are lowercase #rrggbb metadata values, not canonical uppercase WorldState values."
+  ],
+  "filesChanged": [
+    "scripts/audit-prompt14-stage-1-2.mjs",
+    "reports/prompt14/14-01-baseline-runtime-data-audit.json",
+    "reports/prompt14/14-02-source-generation-delivery-decision.json"
+  ],
+  "unresolvedIssues": [],
+  "nextStage": "14-2 source, generation, and delivery hard gate"
+}

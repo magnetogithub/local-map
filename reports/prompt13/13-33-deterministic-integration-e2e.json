@@ -1,0 +1,13 @@
+{
+  "stage": "13-33",
+  "status": "pass",
+  "summary": "외부 API 없이 fixture NDJSON로 initial, commit, acknowledgments, related-country navigation, undo, redo의 실제 MapLibre source 건강 상태를 검증한다.",
+  "filesChanged": ["e2e/prompt13-integration.spec.ts", "src/components/map/WorldMap.tsx", "src/types/map-debug.ts"],
+  "commands": [{"command": "npm run test:e2e -- e2e/prompt13-integration.spec.ts", "exitCode": 0, "evidence": "2/2 passed at 1280x720 and 1920x1080"}],
+  "revisionEvidence": {"initial": 0, "commit": 1, "undo": 2, "redo": 3},
+  "sourceVerification": {"countries-low": "pass", "countries-high": "pass", "borders-low": "pass", "borders-high": "pass", "resyncRequired": false, "error": null},
+  "assertions": ["map-status hidden and error copy absent at six checkpoints", "world/projection/controller/source revisions agree", "all four sources contain features", "FRA displayName changes to French Republic 2020, restores on undo, and returns on redo", "settings preserve snapshot and source identities", "runtime MapLibre/source console errors fail the test", "GPU ReadPixels and NO_COLOR/FORCE_COLOR warnings are excluded from runtime-source classification"],
+  "screenshots": ["screenshots/prompt13-32-modal-1280x720.png", "screenshots/prompt13-32-overlay-1280x720.png", "screenshots/prompt13-32-hud-map-1280x720.png", "screenshots/prompt13-32-modal-1920x1080.png", "screenshots/prompt13-32-overlay-1920x1080.png", "screenshots/prompt13-32-hud-map-1920x1080.png"],
+  "knownLimitations": [],
+  "nextStage": "13-34"
+}

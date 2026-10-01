@@ -1,4 +1,4 @@
-import type {ActiveCountryId} from "./country-id";
+import {COUNTRY_ID_PATTERN, type ActiveCountryId} from "./country-id";
 import {createCountryNames, type CountryNames} from "./country-names";
 import {
   createCountryPresentationOverride,
@@ -41,8 +41,10 @@ const assertExactKeys = (value: object, expectedKeys: readonly string[], context
 };
 
 const readActiveCountryId = (value: unknown): ActiveCountryId => {
-  if (typeof value !== "string" || value.trim().length === 0 || value !== value.trim()) {
-    throw new Error("CountryEntity.id must be a canonical active CountryId");
+  if (typeof value !== "string" || !COUNTRY_ID_PATTERN.test(value)) {
+    throw new Error(
+      "CountryEntity.id must be exactly 3 uppercase alphanumeric characters and start with a letter",
+    );
   }
   return value as ActiveCountryId;
 };

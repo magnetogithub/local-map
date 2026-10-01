@@ -1,0 +1,12 @@
+{
+  "stage": "10-61", "status": "pass",
+  "objective": "Plan country.rename for active countries with deterministic names-version advancement and isolated country-core hashing.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {"reports/prompt10/10-60-country-create-planner.json": "e0ba35936f5a1f78b2b1e7d86841c3d46f2c810c866aa72624360678a03b0ea4"},
+  "outputHashes": {"src/lib/planning/country-rename-planner.ts": "317c9cc811e3b35233bcae1a19470b8a06a6dc334d8aa0c62acec60f1b123a52", "src/lib/planning/country-rename-planner.test.ts": "cd6eba076c7e491613175517f62fe7d6a2761480b8cab5d49f22b860f20989b4"},
+  "changedFiles": ["src/lib/planning/country-rename-planner.ts", "src/lib/planning/country-rename-planner.test.ts", "src/lib/planning/command-batch-planner.ts", "src/lib/planning/command-batch-planner.test.ts", "reports/prompt10/10-61-country-rename-planner.json"],
+  "commands": [{"command": "npm.cmd test -- --run <10-61..10-63 tests>", "exitCode": 1, "result": "RED: three missing planner imports"}, {"command": "npm.cmd test -- --run <10-61..10-65 targeted tests>", "exitCode": 0, "result": "6 files; 38 tests passed"}, {"command": "npm.cmd test -- --run src/lib/planning", "exitCode": 0, "result": "18 files; 103 tests passed"}, {"command": "related ESLint", "exitCode": 0}, {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}, {"command": "npm.cmd test -- --maxWorkers=1", "exitCode": 0, "result": "95 files; 860 tests passed"}],
+  "measurements": {"renamedFieldsOutsideRequest": 0, "namesVersionIncrements": 1, "inputStateMutations": 0, "targetedTestsPassed": 38, "planningTestsPassed": 103, "fullTestFilesPassed": 95, "fullTestsPassed": 860},
+  "gates": {"activeOnly": true, "retiredAndUnknownTyped": true, "requestedFieldsOnly": true, "namesVersionDeterministic": true, "unrelatedDomainsShared": true, "batchRouted": true, "targetedTestsPass": true, "planningTestsPass": true, "lintPass": true, "typecheckPass": true, "fullSuitePass": true},
+  "firstFailedGate": null, "nextStage": "10-62"
+}

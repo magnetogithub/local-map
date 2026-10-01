@@ -20,6 +20,41 @@ import {
 
 const compareText = (left: string, right: string) => left < right ? -1 : left > right ? 1 : 0;
 
+const ringArea = (ring: readonly (readonly [number, number])[]) => Math.abs(
+  ring.slice(0, -1).reduce((area, position, index) => {
+    const next = ring[index + 1];
+    return area + position[0] * next[1] - next[0] * position[1];
+  }, 0) / 2,
+);
+
+const territoryArea = (territory: TerritoryEntity) => {
+  const polygons = territory.geometry.type === "Polygon"
+    ? [territory.geometry.coordinates]
+    : territory.geometry.coordinates;
+  return polygons.reduce((total, polygon) => total + Math.max(
+    0,
+    ringArea(polygon[0]) - polygon.slice(1).reduce((sum, hole) => sum + ringArea(hole), 0),
+  ), 0);
+};
+
+function resolveCoincidentTerritoryOwners(
+  territoryIds: readonly TerritoryId[],
+  territoriesById: Readonly<Record<string, TerritoryEntity>>,
+): TerritoryId[] {
+  if (territoryIds.length <= 2) return [...territoryIds];
+  const byCountry = new Map<string, TerritoryId[]>();
+  for (const territoryId of territoryIds) {
+    const ownerKey = territoriesById[territoryId].ownerCountryId ?? "__unclaimed__";
+    byCountry.set(ownerKey, [...(byCountry.get(ownerKey) ?? []), territoryId]);
+  }
+  if (byCountry.size > 2) {
+    throw new Error(`A canonical topology segment cannot belong to more than two country owners: ${[...byCountry.keys()].join(",")}`);
+  }
+  return [...byCountry.values()].map((candidates) => [...candidates].sort((left, right) =>
+    territoryArea(territoriesById[left]) - territoryArea(territoriesById[right])
+    || compareText(left, right))[0]).sort(compareText);
+}
+
 export function deriveCanonicalTopologyEdgeId(
   territoryIds: readonly [TerritoryId, TerritoryId | null],
   coordinates: readonly (readonly [number, number])[],
@@ -112,10 +147,10 @@ export function buildCanonicalTopology(
     geometry: territoriesById[territoryId].geometry,
   })), policy);
   for (const occurrence of occurrences) {
-    const territoryIds = occurrence.ownerKeys as TerritoryId[];
-    if (territoryIds.length > 2) {
-      throw new Error("A canonical topology segment cannot belong to more than two Territories");
-    }
+    const territoryIds = resolveCoincidentTerritoryOwners(
+      occurrence.ownerKeys as TerritoryId[],
+      territoriesById,
+    );
     const sides = Object.freeze([
       territoryIds[0],
       territoryIds[1] ?? null,

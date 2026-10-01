@@ -1,0 +1,36 @@
+{
+  "stage": "12-5",
+  "status": "pass",
+  "objective": "Implement strict fact, situation, and scheduled consequence contracts with deterministic ordering.",
+  "filesRead": [
+    "src/lib/world/canonical-serializer.ts",
+    "src/lib/commands/plain-command-data-v2.ts",
+    "src/lib/world/country-id.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/narrative-state.ts",
+    "src/lib/simulation/simulation-contract-primitives.ts",
+    "src/lib/simulation/simulation-contract.test.ts",
+    "reports/prompt12/12-5-narrative-state-contracts.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts",
+    "npx tsc --noEmit"
+  ],
+  "gates": {
+    "danglingCountryRejected": "pass",
+    "danglingEventRejected": "pass",
+    "invalidDateWindowRejected": "pass",
+    "extraFieldRejected": "pass",
+    "prototypeKeyRejected": "pass",
+    "canonicalSerializationDeterministic": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Prototype keys, accessors, symbols, cycles, and non-plain objects fail before parsing."
+  ],
+  "notes": [
+    "Facts and situations use stable sorted ID orders; consequences sort by earliest date and ID."
+  ],
+  "nextStage": "12-6"
+}

@@ -1,0 +1,18 @@
+{
+  "stage": "13-25",
+  "status": "pass",
+  "summary": "새로 commit된 major/transformative 사건만 acknowledgment queue에 넣는다.",
+  "guarantees": [
+    "minor/notable 사건은 진행을 막지 않는다.",
+    "여러 중요 사건은 날짜 오름차순과 동일 날짜 report 순서로 처리한다.",
+    "turnId:eventId 키로 동일 report 재관찰 시 중복 enqueue하지 않는다.",
+    "확인한 사건은 현재 세션에서 다시 enqueue되지 않는다."
+  ],
+  "files": [
+    "src/lib/game-ui/major-event-queue.ts",
+    "src/lib/game-ui/major-event-queue.test.ts",
+    "src/components/game/GameScreen.tsx"
+  ],
+  "verification": {"targetedTests": "pass"},
+  "nextStage": "13-26"
+}

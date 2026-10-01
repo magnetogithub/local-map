@@ -1,0 +1,37 @@
+{
+  "stage": "12-R1",
+  "status": "pass",
+  "objective": "Expose every active country and authoritative territory ownership through a compact provider context.",
+  "filesRead": [
+    "src/lib/simulation/simulation-context.ts",
+    "src/lib/simulation/server/simulation-tools.ts",
+    "src/lib/simulation/server/context-resolution-validator.ts",
+    "src/lib/projection/country-search-index-patch.ts",
+    "src/lib/world/initial-world-state-v2.ts",
+    "reports/prompt12/12-post-completion-audit.json"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-context.ts",
+    "src/lib/simulation/server/simulation-tools.ts",
+    "src/lib/simulation/server/context-resolution-validator.ts",
+    "src/lib/simulation/server/provider-route.test.ts",
+    "src/lib/simulation/simulation-context-production.test.ts"
+  ],
+  "commands": [
+    "npx.cmd tsc --noEmit",
+    "npx.cmd vitest run src/lib/simulation/simulation-context-production.test.ts src/lib/simulation/server/provider-route.test.ts"
+  ],
+  "gates": {
+    "firstTurnGermanLookupFromAustria": "pass",
+    "firstTurnUnitedStatesLookup": "pass",
+    "committedRenameAndRetirement": "pass",
+    "completeActiveDirectory": "pass",
+    "rawGeometryExcluded": true,
+    "requestByteBudget": "pass",
+    "oversizeFailureCode": "SIMULATION_CONTEXT_TOO_LARGE",
+    "targetedTests": "11 passed"
+  },
+  "firstFailedGate": null,
+  "notes": [],
+  "nextStage": "12-R2"
+}

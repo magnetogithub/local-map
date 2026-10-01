@@ -1,0 +1,63 @@
+{
+  "stage": "11-14",
+  "status": "pass",
+  "objective": "Run the full integration checkpoint for the Prompt 11 V2 runtime transition.",
+  "filesRead": [
+    "reports/prompt11/11-1-static-data-dependency-audit.json",
+    "reports/prompt11/11-2-seed-to-v2-runtime-entry.json",
+    "reports/prompt11/11-3-v2-store-boundary.json",
+    "reports/prompt11/11-4-search-projection-runtime.json",
+    "reports/prompt11/11-5-selection-projection-runtime.json",
+    "reports/prompt11/11-6-country-panel-projection-runtime.json",
+    "reports/prompt11/11-7-map-source-projection-adapter.json",
+    "reports/prompt11/11-8-capital-small-country-marker-projection.json",
+    "reports/prompt11/11-9-label-projection-runtime.json",
+    "reports/prompt11/11-10-world-map-runtime-connection.json",
+    "reports/prompt11/11-11-china-debug-scenario-replacement.json",
+    "reports/prompt11/11-12-v1-runtime-store-removal.json",
+    "reports/prompt11/11-13-static-runtime-data-guardrail.json",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/components/map/WorldMap.tsx",
+    "src/lib/map/map-source-incremental-adapter.ts",
+    "src/lib/map/map-source-incremental-adapter.test.ts",
+    "src/lib/projection/world-map-runtime-projection.test.ts",
+    "src/lib/test-only/static-runtime-source-guard.test.ts",
+    "src/stores/world-state-store-v2-fixture.test.ts",
+    "src/stores/world-state-store.test.tsx",
+    "src/stores/world-state-country-selector.test.ts",
+    "src/stores/world-state-iteration-selector.test.ts"
+  ],
+  "changedFiles": [
+    "src/lib/map/map-source-incremental-adapter.ts",
+    "src/lib/map/map-source-incremental-adapter.test.ts",
+    "src/lib/projection/world-map-runtime-projection.ts",
+    "src/components/map/WorldMap.tsx",
+    "src/types/map-debug.ts",
+    "e2e/game-setup.spec.ts",
+    "e2e/prompt11-10.spec.ts",
+    "reports/prompt11/11-14-integration-checkpoint.json"
+  ],
+  "commands": [
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint",
+    "npm.cmd test -- --run",
+    "npm.cmd run build",
+    "git diff --check -- <changed tracked source and test files>"
+  ],
+  "gates": {
+    "typecheck": "pass: exit 0",
+    "lint": "pass: exit 0, 3 existing unused-variable warnings in scripts/prepare-map-data.mjs",
+    "fullUnitSuite": "pass: 118 files, 952 tests, 128.79 seconds, exit 0",
+    "productionBuild": "pass: Next.js 16.3.0 static build, exit 0",
+    "diffCheck": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "All four required integration commands were rerun against the incremental MapLibre source implementation and exited 0.",
+    "The 11-7 report exists and its stable feature references feed the 11-10 updateData adapter. Unit tests cover created, transferred, reshaped and deleted territories, affected borders, source recreation, rapid commits, stale revisions and explicit failure recovery.",
+    "The production build emitted a Turbopack warning that dynamic seed filesystem access in initial-world-state-v2.ts may trace the whole project; compilation, TypeScript, static generation, and build exit all succeeded.",
+    "The full E2E suite is recorded separately in 11-15. E2E-generated screenshots and debug.log were restored to their pre-run hashes."
+  ],
+  "nextStage": "11-15"
+}

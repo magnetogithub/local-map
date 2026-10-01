@@ -4,14 +4,14 @@ import {
   WORLD_STATE_SCHEMA_VERSION,
   type CountryEntity,
   type WorldState,
-} from "@/lib/world/world-state";
+} from "@/lib/test-only/legacy-v1/world-state";
 
 import {
   countryDeleteCommandSchema,
   parseCountryDeleteCommand,
   safeParseCountryDeleteCommand,
   type CountryDeleteCommand,
-} from "./country-delete";
+} from "@/lib/test-only/legacy-v1/country-delete";
 
 const country = (id: string): CountryEntity => ({
   id,

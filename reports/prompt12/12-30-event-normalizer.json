@@ -1,0 +1,1 @@
+{"stage":"12-30","status":"pass","changedFiles":["src/lib/simulation/server/openai-response-events.ts","src/lib/simulation/server/provider-event-normalizer.ts"],"gates":{"deterministicReplay":"pass","monotonicSequence":"pass","exactlyOneTerminal":"pass","rawPayloadExposed":false,"reasoningExposed":false}}

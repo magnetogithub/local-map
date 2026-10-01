@@ -1,0 +1,34 @@
+{
+  "stage": "12-R14",
+  "status": "pass",
+  "objective": "Eliminate the Next E2E cache warning without filtering output or shrinking production data.",
+  "filesRead": [
+    "next.config.ts",
+    "node_modules/next/dist/docs/01-app/03-api-reference/05-config/01-next-config-js/incrementalCacheHandlerPath.md",
+    "node_modules/next/dist/docs/01-app/02-guides/self-hosting.md",
+    "node_modules/next/dist/server/lib/lru-cache.js"
+  ],
+  "changedFiles": ["next.config.ts"],
+  "rootCause": {
+    "defaultMaxBytes": 52428800,
+    "prerenderedHtmlBytes": 30225288,
+    "prerenderedRscBytes": 30036139,
+    "combinedCacheItemBytes": 60261427,
+    "explanation": "The combined prerendered root-page cache item exceeds Next's default 50 MiB in-memory cache limit. Large embedded world-map data drives the page size."
+  },
+  "resolution": {
+    "configuration": "cacheMaxMemorySize: 0",
+    "scope": "PAX_E2E_BUILD === 1 only",
+    "effect": "Disable Next's default in-memory incremental cache for the isolated self-hosted E2E build.",
+    "standardProductionBuildChanged": false,
+    "consoleFiltering": false,
+    "dataShrinking": false
+  },
+  "verification": {
+    "targetRepeatWarningOccurrences": 0,
+    "fullE2ERuns": 3,
+    "fullE2EWarningOccurrences": 0,
+    "allExitCodes": [0, 0, 0, 0]
+  },
+  "firstFailedGate": null
+}

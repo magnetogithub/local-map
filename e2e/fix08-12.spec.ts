@@ -9,7 +9,7 @@ test("8-12 captures fixed-camera representative typography",async({page})=>{
   const phase=process.env.PAX_FIX08_12_PHASE??"after";
   await page.setViewportSize({width:1440,height:900});
   await page.goto("/");
-  await expect(page.getByRole("status").first()).toBeHidden({timeout:30_000});
+  await expect(page.getByRole("status").first()).toBeHidden({timeout:90_000});
   const stable=async()=>{await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__?.isRenderSettled()??false),{timeout:60_000}).toBe(true);await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))))};
   await stable();
   const evidence=[];

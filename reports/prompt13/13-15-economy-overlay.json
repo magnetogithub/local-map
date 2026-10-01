@@ -1,0 +1,50 @@
+{
+  "stage": "13-15",
+  "status": "pass",
+  "summary": "HUD와 같은 권위 경계를 사용하는 경제 오버레이를 구현하고, 인구·생산·재정·무역의 미연결 값을 0이 아닌 null/대시로 표시하며 실제 경제 사건만 투영했다.",
+  "filesChanged": [
+    "src/components/game/CountryManagementOverlays.tsx",
+    "src/components/game/CountryManagementOverlays.test.tsx",
+    "src/components/game/GameScreen.tsx",
+    "src/lib/game-ui/country-management-projection.ts",
+    "src/lib/game-ui/country-management-projection.test.ts",
+    "src/lib/game-ui/game-hud-projection.ts",
+    "src/lib/game-ui/game-hud-projection.test.ts",
+    "src/app/globals.css"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "evidence": "TypeScript completed without diagnostics."
+    },
+    {
+      "command": "npx.cmd eslint <13-14~13-15 changed TypeScript files>",
+      "exitCode": 0,
+      "evidence": "ESLint completed without diagnostics."
+    },
+    {
+      "command": "npx.cmd vitest run <country management and shell targeted tests>",
+      "exitCode": 0,
+      "evidence": "5 test files and 19 tests passed."
+    },
+    {
+      "command": "npm.cmd run build",
+      "exitCode": 0,
+      "evidence": "Next.js production build completed; /game was statically prerendered."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "population remains null when unavailable",
+    "HUD population reads from the same economy view model as the overlay",
+    "production, finance, and trade metrics render unavailable instead of zero",
+    "economic event category and country filtering",
+    "populated economic event rendering",
+    "existing HUD and single-overlay behavior regression"
+  ],
+  "knownLimitations": [
+    "인구, 생산, 재정, 무역의 authoritative domain은 아직 연결되지 않아 null과 미연결 안내로 표시된다."
+  ],
+  "nextStage": "13-16"
+}

@@ -1,2 +1,0 @@
-import { describe,expect,it } from "vitest";import { readPersisted } from "./game-setup-storage";
-describe("persisted state",()=>{it("accepts valid country",()=>expect(readPersisted('{"scenarioId":"2020-otl","scenarioDate":"2020-01-01","playerCountryId":"FRA"}')?.playerCountryId).toBe("FRA"));it("rejects corrupt data",()=>expect(readPersisted("nope")).toBeNull());it("rejects unknown country",()=>expect(readPersisted('{"scenarioId":"2020-otl","scenarioDate":"2020-01-01","playerCountryId":"ZZZ"}')).toBeNull())});

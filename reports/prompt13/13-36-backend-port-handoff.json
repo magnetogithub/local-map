@@ -1,0 +1,39 @@
+{
+  "stage": "13-36",
+  "status": "pass",
+  "summary": "Finalized the runtime audit as an explicitly historical record plus the completed GameScreen topology, and corrected persistence documentation to match the current memory-only runtime. The backend handoff covers every required domain with typed read/command ports, honest unavailable states, and a wiring sequence that replaces providers without redesigning the UI.",
+  "filesChanged": [
+    "docs/game-ui/prompt13-runtime-audit.md",
+    "reports/prompt13/13-36-backend-port-handoff.json"
+  ],
+  "commands": [
+    {
+      "command": "backend-port-plan domain matrix audit",
+      "exitCode": 0,
+      "evidence": "PoliticsViewPort, EconomyViewPort with shared population, ordered-pair RelationshipViewPort with -100..100 validation, WarsViewPort plus separate geometry, DiplomacyViewPort plus nullable DiplomacyChannelPort, and nullable GameSavePort are all specified."
+    },
+    {
+      "command": "prompt13-runtime-audit lifecycle wording audit",
+      "exitCode": 0,
+      "evidence": "Pre-refactor ownership/lifecycle/coupling is labeled historical; the final section names one GameScreen turn controller, one overlay reducer, and one major-event acknowledgement queue. Persistence now states that player/runtime state is browser-memory-only, reload returns to setup, production has no browser storage path, and Save remains backend-pending."
+    },
+    {
+      "command": "contracts.ts port declaration audit",
+      "exitCode": 0,
+      "evidence": "All handoff port names and nullable diplomacy/save command ports exist in src/lib/game-ui/contracts.ts."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "src/lib/game-ui/contracts.test.ts",
+    "src/lib/game-ui/game-hud-projection.test.ts",
+    "src/lib/game-ui/country-management-projection.test.ts",
+    "src/lib/game-ui/country-view-projection.test.ts",
+    "src/lib/game-ui/war-view-projection.test.ts"
+  ],
+  "knownLimitations": [
+    "Politics, economy/population, bilateral relationships, wars/front geometry, diplomacy service, and server save remain intentionally unconnected authoritative domains.",
+    "No durable save or reload resume exists until the authoritative GameSavePort is connected."
+  ],
+  "nextStage": "13-37"
+}

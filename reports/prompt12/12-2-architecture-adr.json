@@ -1,0 +1,40 @@
+{
+  "stage": "12-2",
+  "status": "pass",
+  "objective": "Freeze the simulation turn architecture and trust boundary.",
+  "filesRead": [
+    "AGENTS.md",
+    "prompts/PROMPT_12_GPT_API_ALTERNATE_HISTORY_SIMULATION.txt",
+    "node_modules/next/dist/docs/01-app/01-getting-started/15-route-handlers.md",
+    "node_modules/next/dist/docs/01-app/02-guides/environment-variables.md",
+    "https://www.paxhistoria.co/docs/workflows",
+    "https://www.paxhistoria.co/docs/workflows/compression",
+    "https://www.paxhistoria.co/docs/bundles",
+    "https://developers.openai.com/api/docs/guides/structured-outputs"
+  ],
+  "changedFiles": [
+    "docs/simulation/gpt-turn-runtime-v1.md",
+    "reports/prompt12/12-2-architecture-adr.json"
+  ],
+  "commands": [
+    "Read installed Next.js Route Handler and environment documentation",
+    "Open official Pax Historia and OpenAI documentation"
+  ],
+  "gates": {
+    "directGameplayMapCommandsForbidden": "pass",
+    "actionSubmissionAuthorityDefined": "pass",
+    "noSeparateApprovalDefined": "pass",
+    "atomicTurnCommitDefined": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Provider credentials remain host-owned.",
+    "Player and model text are explicitly untrusted data.",
+    "Host validation remains mandatory after strict structured output parsing."
+  ],
+  "notes": [
+    "The ADR references only public Creator Docs and official OpenAI documentation.",
+    "No provider or route implementation was added in this stage range."
+  ],
+  "nextStage": "12-3"
+}

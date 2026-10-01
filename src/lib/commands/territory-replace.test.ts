@@ -5,7 +5,7 @@ import {
   WORLD_STATE_SCHEMA_VERSION,
   type CountryEntity,
   type WorldState,
-} from "@/lib/world/world-state";
+} from "@/lib/test-only/legacy-v1/world-state";
 
 import {
   applyTerritoryReplaceCommand,
@@ -13,7 +13,7 @@ import {
   safeParseTerritoryReplaceCommand,
   territoryReplaceCommandSchema,
   type TerritoryReplaceCommand,
-} from "./territory-replace";
+} from "@/lib/test-only/legacy-v1/territory-replace";
 
 const polygon = (coordinates: unknown): unknown => ({type: "Polygon", coordinates});
 

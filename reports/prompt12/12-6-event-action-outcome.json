@@ -1,0 +1,31 @@
+{
+  "stage": "12-6",
+  "status": "pass",
+  "objective": "Implement strict dated events and player action outcomes.",
+  "filesRead": [
+    "src/lib/simulation/queued-player-action.ts",
+    "src/lib/simulation/narrative-state.ts",
+    "src/lib/world/country-id.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-event.ts",
+    "src/lib/simulation/simulation-contract.test.ts",
+    "reports/prompt12/12-6-event-action-outcome.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts"
+  ],
+  "gates": {
+    "oneOutcomePerQueuedAction": "pass",
+    "evidenceEventRequired": "pass",
+    "invalidDateRejected": "pass",
+    "unknownActorRejected": "pass",
+    "futureCauseRejected": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Event and narrative strings have explicit bounds."
+  ],
+  "notes": [],
+  "nextStage": "12-7"
+}

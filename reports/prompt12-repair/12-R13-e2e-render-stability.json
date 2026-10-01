@@ -1,0 +1,34 @@
+{
+  "stage": "12-R13",
+  "status": "pass",
+  "objective": "Remove timing flakiness from the dissolved-seam E2E without sleeps, retries, or skips.",
+  "filesRead": ["e2e/game-setup.spec.ts", "src/components/map/WorldMap.tsx", "src/types/map-debug.ts"],
+  "changedFiles": ["e2e/game-setup.spec.ts"],
+  "rootCause": "After the date-line jump, the test polled only isRenderSettled with Playwright's default 5-second expect.poll timeout. Under whole-suite contention, render readiness could legitimately complete later even though the scenario passed standalone.",
+  "resolution": {
+    "strategy": "Poll the complete observable map readiness contract for up to 60 seconds.",
+    "requiredState": {
+      "detailedStatus": "ready",
+      "renderSettled": true,
+      "highResolutionLayer": true,
+      "sourceSync": {"resyncRequired": false, "error": null}
+    },
+    "failureDiagnostics": ["detailedStatus", "renderSettled", "center", "zoom", "highResolutionLayer", "sourceSync"],
+    "fixedSleep": false,
+    "retry": false,
+    "skip": false,
+    "preservedAssertions": ["IND exact parent selection", "KAZ exact parent selection", "country-borders-high absent", "admin1-boundaries absent"]
+  },
+  "commands": [
+    {
+      "command": "npm.cmd run test:e2e -- e2e/game-setup.spec.ts --grep \"dissolved seams\" --repeat-each=5",
+      "exitCode": 0,
+      "result": "5/5 passed",
+      "durationsSeconds": [19.6, 19.6, 20.1, 20.1, 14.1]
+    },
+    {"command": "npm.cmd run test:e2e", "run": "quality-gate", "exitCode": 0, "result": "19/19 passed; seam 19.7s"},
+    {"command": "npm.cmd run test:e2e", "run": "consecutive-1", "exitCode": 0, "result": "19/19 passed; seam 22.3s"},
+    {"command": "npm.cmd run test:e2e", "run": "consecutive-2", "exitCode": 0, "result": "19/19 passed; seam 18.7s"}
+  ],
+  "firstFailedGate": null
+}

@@ -19,11 +19,11 @@ const command = () => ({
       {territoryId: territory("north"), disposition: {type: "unclaim"}},
       {
         territoryId: territory("south"),
-        disposition: {type: "transfer", targetCountryId: "NEW"},
+        disposition: {type: "transfer", targetCountryId: "N01"},
       },
       {
         territoryId: territory("island"),
-        disposition: {type: "merge", targetCountryId: "ALLY"},
+        disposition: {type: "merge", targetCountryId: "ALY"},
       },
     ],
   },
@@ -57,7 +57,7 @@ describe("10-36 country.dissolve v2 schema", () => {
     for (const disposition of [
       {type: "transfer"},
       {type: "merge"},
-      {type: "unclaim", targetCountryId: "NEW"},
+      {type: "unclaim", targetCountryId: "N01"},
     ]) {
       expect(
         safeParseCountryDissolveV2Command({

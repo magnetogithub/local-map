@@ -2,7 +2,12 @@ import type {CountryCreateV2Command} from "../commands/country-create-v2";
 import {buildDomainRootHash} from "../world/domain-hash-root";
 import {countryCoreLeafHash} from "../world/country-core-hash";
 import {createCountryEntity} from "../world/country-entity";
-import {issueCountryId, type ActiveCountryId, type RetiredCountryId} from "../world/country-id";
+import {
+  allocateDynamicCountryId,
+  issueCountryId,
+  type ActiveCountryId,
+  type RetiredCountryId,
+} from "../world/country-id";
 import {addCountryToOrder} from "../world/country-order";
 import {countryPresentationLeafHash} from "../world/country-presentation-hash";
 import type {WorldStateV2} from "../world/world-state-v2";
@@ -29,14 +34,14 @@ export function planCountryCreate(
 ): PlanResult<CountryCreatePatch> {
   return dryRunPlanner(state, command, context, () => {
     const requestedId = command.payload.country.id;
-    if (Object.hasOwn(state.countriesById, requestedId)) {
+    if (requestedId !== undefined && Object.hasOwn(state.countriesById, requestedId)) {
       return planningError(
         "country-id-active",
         command.commandId,
         `CountryId is already active: ${requestedId}`,
       );
     }
-    if (state.retiredCountryIds.has(requestedId as RetiredCountryId)) {
+    if (requestedId !== undefined && state.retiredCountryIds.has(requestedId as RetiredCountryId)) {
       return planningError(
         "country-id-retired",
         command.commandId,
@@ -44,10 +49,13 @@ export function planCountryCreate(
       );
     }
 
-    const countryId = issueCountryId(requestedId, {
+    const registry = {
       activeCountryIds: new Set(Object.keys(state.countriesById) as ActiveCountryId[]),
       retiredCountryIds: state.retiredCountryIds,
-    });
+    };
+    const countryId = requestedId === undefined
+      ? allocateDynamicCountryId(registry)
+      : issueCountryId(requestedId, registry);
     const country = createCountryEntity({...command.payload.country, id: countryId});
     const countriesById = Object.freeze({...state.countriesById, [countryId]: country});
     const countryOrder = addCountryToOrder(state.countryOrder, countryId);

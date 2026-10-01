@@ -1,0 +1,23 @@
+{
+  "stage": "13-3",
+  "status": "pass",
+  "summary": "Specified 1920x1080 and 1280x720 wireframes, layout and z-index tokens, overlay dimensions, scroll ownership, focus order, reduced motion, and content sizing.",
+  "filesChanged": [
+    "docs/game-ui/internal-game-interface-visual-spec.md",
+    "reports/prompt13/13-3-visual-specification.json"
+  ],
+  "commands": [
+    {
+      "command": "Manual visual-spec review against Prompt 13 sections 3 and 13-3",
+      "exitCode": 0,
+      "evidence": "The spec supplies both target viewport wireframes and fixed implementation tokens without external assets or arbitrary ratios."
+    }
+  ],
+  "screenshots": [],
+  "tests": [],
+  "knownLimitations": [
+    "Screenshots begin in later implementation stages; this stage provides implementable wireframes only."
+  ],
+  "nextStage": "13-4"
+}
+

@@ -1,0 +1,101 @@
+{
+  "stage": "10-76",
+  "status": "pass",
+  "objective": "Calculate direct and neighbor affected sets for Countries, Territories, and topology edges without including unrelated IDs.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-75-command-batch-failure-propagation.json": "a59e16f8f139bed419bbb34acb5adb9fb87aa551239f64a1dd7d0d8faf102e8e",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/affected-set.test.ts": "5bf832456a6006d2c4adafb325bcd4e7753645e4545b4c6aa3362a517e94cddd",
+    "src/lib/planning/affected-set.ts": "a594b4b86b81d7452e21a593d3eae1930b6fe2774efcf35007995efa36340ad2"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-76-affected-set-calculation.json",
+    "src/lib/planning/affected-set.test.ts",
+    "src/lib/planning/affected-set.ts"
+  ],
+  "commands": [
+    {
+      "command": "Read AGENTS.md, the local Next.js 16.3 Vitest guide, and inspect 10-76 prompt plus topology and patch contracts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/affected-set.test.ts",
+      "exitCode": 1,
+      "note": "Expected red test: the affected-set test file did not exist."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/affected-set.test.ts",
+      "exitCode": 0,
+      "result": "1 file passed; 2 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run affected set, batch planner, and selected patch-producing planner files",
+      "exitCode": 0,
+      "result": "8 files passed; 51 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/affected-set.ts src/lib/planning/affected-set.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "note": "Only existing LF-to-CRLF working-copy warnings were reported."
+    }
+  ],
+  "measurements": {
+    "directTerritoryCaseDirectCount": 1,
+    "directTerritoryCaseNeighborExpandedCount": 3,
+    "directTerritoryCaseRemoteTerritoryIncluded": false,
+    "directTerritoryCaseRemoteTopologyEdgeIncluded": false,
+    "batchPatchChildPatchCount": 2,
+    "batchPatchCountryAffectedCount": 3,
+    "batchPatchRemoteTerritoryIncluded": false,
+    "patchKindsHandled": [
+      "command.batch",
+      "country.create",
+      "country.dissolve",
+      "country.merge",
+      "country.split",
+      "territory.partition",
+      "territory.assign",
+      "territory.unclaim",
+      "territory.replace",
+      "territory.transfer"
+    ],
+    "targetedTestFilesPassed": 8,
+    "targetedTestsPassed": 51,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-77"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "directCountryAffectedSetCalculated": true,
+    "directTerritoryAffectedSetCalculated": true,
+    "neighborTerritoryAffectedSetCalculated": true,
+    "topologyEdgeAffectedSetCalculated": true,
+    "batchPatchRecursionSupported": true,
+    "unrelatedTerritoryIdsExcluded": true,
+    "unrelatedTopologyEdgeIdsExcluded": true,
+    "setsSortedAndUnique": true,
+    "targetedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-77"
+}

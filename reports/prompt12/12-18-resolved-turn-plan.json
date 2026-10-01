@@ -1,0 +1,35 @@
+{
+  "stage": "12-18",
+  "status": "pass",
+  "objective": "Compile, dry-run, and pure-plan the complete resolution as one ResolvedTurnPlan.",
+  "filesRead": [
+    "src/lib/simulation/semantic-validator.ts",
+    "src/lib/simulation/world-effect-compiler.ts",
+    "src/lib/planning/command-ui-runtime.ts",
+    "src/lib/planning/affected-set.ts",
+    "src/lib/planning/world-patch-v2.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/resolved-turn-plan.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-18-resolved-turn-plan.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "allEffectsSingleBatch": "pass",
+    "existingPlannerDryRun": "pass",
+    "liveIdentityPreserved": "pass",
+    "liveHashesPreserved": "pass",
+    "nextSimulationStatePresent": "pass",
+    "nextWorldStatePresent": "pass",
+    "boundedChangeSummaryPresent": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Dry-run has no store or commit capability."
+  ],
+  "notes": [],
+  "nextStage": "12-19"
+}

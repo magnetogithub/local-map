@@ -1,0 +1,2 @@
+export const DEBUG_WORLD_EFFECT_PREFIX = "[DEBUG_WORLD_EFFECT]";
+

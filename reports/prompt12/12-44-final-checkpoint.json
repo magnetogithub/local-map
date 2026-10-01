@@ -1,0 +1,27 @@
+{
+  "stage": "12-44",
+  "status": "pass",
+  "objective": "Run the repaired type, lint, unit, build, repeated E2E lifecycle, and smoke checkpoint.",
+  "commands": [
+    {"command": "npx.cmd tsc --noEmit", "exitCode": 0},
+    {"command": "npm.cmd run lint", "exitCode": 0, "warnings": 0},
+    {"command": "npm.cmd test", "exitCode": 0, "result": "127 files, 1035 tests"},
+    {"command": "npm.cmd run build", "exitCode": 0, "warnings": 0},
+    {"command": "npm.cmd run test:e2e", "runs": 3, "exitCodes": [0, 0, 0], "result": "19 passed per run; self-terminated"},
+    {"command": "npm.cmd run smoke:simulation", "exitCode": 0, "result": "SKIPPED_NO_API_KEY"}
+  ],
+  "measurements": {
+    "CHN": 31,
+    "USA": 50,
+    "subdivisionLimit": 128,
+    "syntheticOmittedAt130": 2,
+    "serializedContextBytes": 74353,
+    "seamTargetRepeatsPassed": 5,
+    "cacheWarningOccurrences": 0,
+    "projectProcessesAfterE2E": 0,
+    "port3000ListenersAfterE2E": 0
+  },
+  "remainingLimitations": ["Live smoke requires provider credentials."],
+  "firstFailedGate": null,
+  "nextStage": "12-45"
+}

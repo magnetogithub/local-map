@@ -34,6 +34,18 @@ export type WorldStateV2 = Readonly<{
   hashRoots: WorldStateV2HashRoots;
 }>;
 
+export type SerializedWorldStateV2 = Omit<WorldStateV2, "retiredCountryIds"> & Readonly<{
+  retiredCountryIds: readonly RetiredCountryId[];
+}>;
+
+export function serializeWorldStateV2(state: WorldStateV2): SerializedWorldStateV2 {
+  return {...state, retiredCountryIds: [...state.retiredCountryIds]};
+}
+
+export function deserializeWorldStateV2(serialized: SerializedWorldStateV2): WorldStateV2 {
+  return createWorldStateV2(serialized);
+}
+
 export type WorldStateV2Input = Readonly<{
   schemaVersion: unknown;
   seedVersion: unknown;
@@ -224,4 +236,8 @@ export function createWorldStateV2(input: WorldStateV2Input): WorldStateV2 {
     topology,
     hashRoots: readHashRoots(input.hashRoots),
   });
+}
+
+export function assertWorldStateV2(value: unknown): asserts value is WorldStateV2 {
+  createWorldStateV2(value as WorldStateV2Input);
 }

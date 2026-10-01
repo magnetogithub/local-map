@@ -1,7 +1,8 @@
 import {z} from "zod";
 
 import {countryNamesV2Shape} from "./country-create-v2";
-import {canonicalCommandTextSchema, createMapCommandV2Schema} from "./map-command-v2";
+import {createMapCommandV2Schema} from "./map-command-v2";
+import {countryIdV2Schema} from "./country-id-v2";
 import {wrapCommandSchemaWithPlainDataBoundary} from "./plain-command-data-v2";
 
 const countryRenameV2ChangesObjectSchema = z
@@ -17,7 +18,7 @@ export const countryRenameV2ChangesSchema = wrapCommandSchemaWithPlainDataBounda
 
 export const countryRenameV2PayloadSchema = wrapCommandSchemaWithPlainDataBoundary(
   z.strictObject({
-    countryId: canonicalCommandTextSchema,
+    countryId: countryIdV2Schema,
     changes: countryRenameV2ChangesSchema,
   }),
 );

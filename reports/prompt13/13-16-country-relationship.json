@@ -1,0 +1,33 @@
+{
+  "stage": "13-16",
+  "status": "pass",
+  "summary": "국가 정보 오버레이가 현재 revision의 authoritative CountryPanelProjection에서 수도 한국어명, 수도 영어명과 지역을 읽으며 플레이 국가와 외국에 동일한 경로를 사용한다.",
+  "projectionPath": [
+    "GameSetupShell creates CountryCapitalProjection and CountryPanelProjection for the current WorldState revision",
+    "useGameSetupStore stores the current countryPanelProjection",
+    "GameScreen passes it to createCountryViewProjection",
+    "CountryOverlay renders CountryViewModel.capitalKo, capitalEn and region"
+  ],
+  "unavailableHandling": "빈 문자열, 공백과 ?? sentinel은 null로 정규화되고 UI에서는 데이터 연결 예정으로 표시된다. unknown 또는 retired country는 placeholder로 만들지 않고 projection boundary에서 거부하거나 overlay reconciliation으로 닫힌다.",
+  "relationshipEvidence": [
+    "player → foreign 및 foreign → player label 방향을 독립적으로 검증",
+    "-100, 0, 100은 meter aria-valuenow에 그대로 반영",
+    "null은 meter로 렌더링하지 않음",
+    "-101, 101, 소수와 NaN은 assertRelationshipScore에서 거부"
+  ],
+  "filesChanged": [
+    "src/lib/game-ui/country-view-projection.test.ts",
+    "reports/prompt13/13-16-country-relationship.json"
+  ],
+  "verification": {
+    "typescriptExitCode": 0,
+    "eslintExitCode": 0,
+    "vitest": {"exitCode": 0, "files": 10, "tests": 60},
+    "productionBuildExitCode": 0
+  },
+  "knownLimitations": [
+    "production 관계 domain이 아직 없어 실제 관계 점수는 null과 관계 데이터 연결 예정으로 표시된다.",
+    "authoritative 수도 또는 지역 원본이 없는 국가는 명시적인 unavailable 상태를 유지한다."
+  ],
+  "nextStage": "13-17"
+}

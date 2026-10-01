@@ -1,54 +1,21 @@
 import {act, render, screen} from "@testing-library/react";
 import {describe, expect, it} from "vitest";
 import {
-  replaceCountryNames,
-  type CountryEntity,
-  type WorldState,
-} from "@/lib/world/world-state";
-import {
   createWorldStateStore,
   selectWorldCountryOrder,
   selectWorldRevision,
   useWorldStateSelector,
 } from "./world-state-store";
-
-const country = (id: string): CountryEntity => ({
-  id,
-  iso3: id,
-  names: {
-    shortKo: id,
-    officialKo: id,
-    mapKo: id,
-    english: id,
-    searchAliases: [id],
-  },
-  geometry: {
-    type: "Polygon",
-    coordinates: [[[0, 0], [2, 0], [2, 2], [0, 0]]],
-  },
-  mapColor: "#ffffff",
-  playable: true,
-  unitType: "sovereign-country",
-  capital: null,
-  presentation: {
-    flagCode: id,
-    region: "Test",
-    center: [1, 1],
-    defaultZoom: 4,
-    labelRank: 1,
-  },
-});
-
-const initialWorldState = (): WorldState => ({
-  schemaVersion: 1,
-  revision: 0,
-  countriesById: {AAA: country("AAA"), BBB: country("BBB")},
-  countryOrder: ["AAA", "BBB"],
-});
+import {
+  replaceCountry,
+  testCommit,
+  testCountry,
+  testWorldState,
+} from "./world-state-store-v2-fixture";
 
 describe("9-6 canonical WorldState store", () => {
   it("exposes a read-only store surface and canonical selectors", () => {
-    const controller = createWorldStateStore(initialWorldState());
+    const controller = createWorldStateStore(testWorldState(["AAA", "BBB"]));
 
     expect(Object.keys(controller.store).sort()).toEqual([
       "getInitialState",
@@ -60,18 +27,15 @@ describe("9-6 canonical WorldState store", () => {
   });
 
   it("publishes one subscriber notification for one country revision", () => {
-    const controller = createWorldStateStore(initialWorldState());
+    const controller = createWorldStateStore(testWorldState(["AAA", "BBB"]));
     const notifications: Array<[number, number]> = [];
     const unsubscribe = controller.store.subscribe((state, previous) => {
       notifications.push([previous.revision, state.revision]);
     });
-    const next = replaceCountryNames(controller.store.getState(), "AAA", {
-      ...controller.store.getState().countriesById.AAA.names,
-      mapKo: "Renamed AAA",
-    });
+    const next = replaceCountry(controller.store.getState(), testCountry("AAA", "Renamed AAA"));
 
-    controller.replaceWorldState(next);
-    controller.replaceWorldState(next);
+    controller.replaceWorldState(next, testCommit(next));
+    controller.replaceWorldState(next, testCommit(next));
     unsubscribe();
 
     expect(notifications).toEqual([[0, 1]]);
@@ -79,7 +43,7 @@ describe("9-6 canonical WorldState store", () => {
   });
 
   it("does not rerender an unrelated UI selector after a country rename", () => {
-    const controller = createWorldStateStore(initialWorldState());
+    const controller = createWorldStateStore(testWorldState(["AAA", "BBB"]));
     let orderRenders = 0;
     let revisionRenders = 0;
 
@@ -102,12 +66,8 @@ describe("9-6 canonical WorldState store", () => {
       </>,
     );
     act(() => {
-      controller.replaceWorldState(
-        replaceCountryNames(controller.store.getState(), "AAA", {
-          ...controller.store.getState().countriesById.AAA.names,
-          mapKo: "Renamed AAA",
-        }),
-      );
+      const next = replaceCountry(controller.store.getState(), testCountry("AAA", "Renamed AAA"));
+      controller.replaceWorldState(next, testCommit(next));
     });
 
     expect(screen.getByTestId("order")).toHaveTextContent("AAA,BBB");
@@ -117,13 +77,15 @@ describe("9-6 canonical WorldState store", () => {
   });
 
   it("rejects a distinct state that reuses the current revision", () => {
-    const controller = createWorldStateStore(initialWorldState());
+    const controller = createWorldStateStore(testWorldState(["AAA", "BBB"]));
     const invalid = {
       ...controller.store.getState(),
       countriesById: {...controller.store.getState().countriesById},
     };
 
-    expect(() => controller.replaceWorldState(invalid)).toThrow(/requires the next revision/);
+    expect(() =>
+      controller.replaceWorldState(invalid, testCommit(invalid)),
+    ).toThrow(/requires the next revision/);
     expect(controller.store.getState().revision).toBe(0);
   });
 });

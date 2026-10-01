@@ -1,0 +1,34 @@
+{
+  "stage": "12-21",
+  "status": "pass",
+  "objective": "Implement versioned simulation serialization, bounded history, and corrupt-save fallback.",
+  "filesRead": [
+    "src/lib/storage/game-setup-storage.ts",
+    "src/lib/planning/history-persistence-checkpoint.ts",
+    "src/lib/simulation/simulation-state.ts",
+    "src/lib/simulation/atomic-turn-runtime.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-persistence.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-21-simulation-persistence.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "versionedSerialization": "pass",
+    "historyRetentionLimit": 50,
+    "clockRestored": "pass",
+    "actionsEventsFactsSituationsRestored": "pass",
+    "worldLinkageVerified": "pass",
+    "corruptSavePreservesWorldSeed": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Simulation restoration never replaces or mutates the supplied WorldStateV2.",
+    "World seed, revision, and content hash must all match before restoration."
+  ],
+  "notes": [],
+  "nextStage": "12-22"
+}

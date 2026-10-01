@@ -41,6 +41,28 @@ describe("10-32 country.create v2 schema", () => {
     ]);
   });
 
+  it("allows a new Country to omit its ID for generated tag allocation", () => {
+    const input = countryCreateV2Input();
+    const countryWithoutId: Partial<typeof input.payload.country> = {...input.payload.country};
+    delete countryWithoutId.id;
+
+    expect(safeParseCountryCreateV2Command({
+      ...input,
+      payload: {country: countryWithoutId},
+    }).success).toBe(true);
+  });
+
+  it.each(["AA", "AAAA", "aaa", "1AA", "A-A"])(
+    "rejects a noncanonical explicit CountryId: %s",
+    (id) => {
+      const input = countryCreateV2Input();
+      expect(safeParseCountryCreateV2Command({
+        ...input,
+        payload: {country: {...input.payload.country, id}},
+      }).success).toBe(false);
+    },
+  );
+
   it.each(["geometry", "territoryGeometry"])(
     "rejects geometry inside the Country identity: %s",
     (field) => {

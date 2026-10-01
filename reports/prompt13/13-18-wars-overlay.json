@@ -1,0 +1,32 @@
+{
+  "stage": "13-18",
+  "status": "pass",
+  "summary": "전쟁 목록·상세·교전국·시작일·최근 사건·지도 표시 토글·범례 슬롯을 view-model 기반으로 구현했다. production에는 전쟁 권위 데이터가 없어 명시적 empty state만 표시한다.",
+  "filesChanged": [
+    "src/components/game/GameScreen.tsx",
+    "src/components/game/WarAndSystemOverlays.tsx",
+    "src/components/game/WarAndSystemOverlays.test.tsx",
+    "src/lib/game-ui/contracts.ts",
+    "src/lib/game-ui/war-view-projection.ts",
+    "src/lib/game-ui/war-view-projection.test.ts",
+    "src/app/globals.css"
+  ],
+  "commands": [
+    {"command": "npx.cmd tsc --noEmit", "exitCode": 0, "evidence": "TypeScript completed without diagnostics."},
+    {"command": "npx.cmd eslint <13-18~13-20 changed TypeScript files>", "exitCode": 0, "evidence": "ESLint completed without diagnostics."},
+    {"command": "npx.cmd vitest run <management overlay targeted tests>", "exitCode": 0, "evidence": "9 test files and 45 tests passed."},
+    {"command": "npm.cmd run build", "exitCode": 0, "evidence": "Next.js production build passed and /game was statically prerendered."}
+  ],
+  "screenshots": [],
+  "tests": [
+    "loading war state",
+    "production-equivalent empty war state",
+    "injected populated war list and detail",
+    "view-only map layer toggle",
+    "reserved front, occupation and belligerent legend"
+  ],
+  "knownLimitations": [
+    "권위 있는 전쟁 도메인과 전쟁 지리 데이터가 없어 production 지도에는 전선이나 점령 레이어를 그리지 않는다."
+  ],
+  "nextStage": "13-19"
+}

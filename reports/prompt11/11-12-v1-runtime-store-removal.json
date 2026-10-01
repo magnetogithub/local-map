@@ -1,0 +1,62 @@
+{
+  "stage": "11-12",
+  "status": "pass",
+  "objective": "Remove the V1 WorldState import surface from production source and retain obsolete behavior only as test fixtures.",
+  "filesRead": [
+    "reports/prompt11/11-11-china-debug-scenario-replacement.json",
+    "src/lib/world/world-state.ts",
+    "src/stores/world-state-store.ts",
+    "src/lib/world/initial-world-state.ts",
+    "src/lib/world/country-map-artifacts.ts",
+    "src/lib/commands/country-create.ts",
+    "src/lib/commands/country-delete.ts",
+    "src/lib/commands/country-rename.ts",
+    "src/lib/commands/territory-replace.ts",
+    "src/lib/commands/territory-transfer.ts"
+  ],
+  "changedFiles": [
+    "src/lib/test-only/legacy-v1/world-state.ts",
+    "src/lib/test-only/legacy-v1/initial-world-state.ts",
+    "src/lib/test-only/legacy-v1/country-map-artifacts.ts",
+    "src/lib/test-only/legacy-v1/country-create.ts",
+    "src/lib/test-only/legacy-v1/country-delete.ts",
+    "src/lib/test-only/legacy-v1/country-rename.ts",
+    "src/lib/test-only/legacy-v1/territory-replace.ts",
+    "src/lib/test-only/legacy-v1/territory-transfer.ts",
+    "src/lib/test-only/legacy-v1-isolation.test.ts",
+    "src/lib/commands/country-create.test.ts",
+    "src/lib/commands/country-delete.test.ts",
+    "src/lib/commands/country-rename.test.ts",
+    "src/lib/commands/territory-replace.test.ts",
+    "src/lib/commands/territory-transfer.test.ts",
+    "src/lib/world/world-state.test.ts",
+    "src/lib/world/world-state-invariants.test.ts",
+    "src/lib/world/initial-world-state.test.ts",
+    "src/lib/world/country-map-artifacts.test.ts",
+    "reports/prompt09/9-2-benchmark.test.ts",
+    "reports/prompt11/11-12-v1-runtime-store-removal.json"
+  ],
+  "commands": [
+    "rg -n 'world-state' src",
+    "npm.cmd test -- --run <10 targeted legacy and isolation test files>",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint -- <changed TypeScript files>",
+    "git diff --check -- src/lib reports/prompt09/9-2-benchmark.test.ts"
+  ],
+  "gates": {
+    "productionV1WorldStateImports": 0,
+    "originalV1WorldStatePathExists": false,
+    "v1FixtureIsolatedUnderTestOnly": true,
+    "targetedTests": "pass: 10 files, 102 tests",
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "diffCheck": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "The active Zustand world-state-store.ts already holds WorldStateV2 and had no V1 import. No production state-store behavior changed.",
+    "Eight obsolete V1 implementation files were relocated to test-only/legacy-v1. Their existing tests and the Prompt 09 benchmark now explicitly import the isolated fixtures.",
+    "The new targeted isolation test scans non-test production source imports and rejects any V1 WorldState or legacy-v1 reference."
+  ],
+  "nextStage": "11-13"
+}

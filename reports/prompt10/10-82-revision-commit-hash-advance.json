@@ -1,0 +1,86 @@
+{
+  "stage": "10-82",
+  "status": "pass",
+  "objective": "Advance revision and commitHash once per successful commit while keeping worldContentHash distinct from commitHash.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-81-atomic-world-commit.json": "645e678b56199b565a4420c62a7af953449292d5aba23b076430956eb477bcf3",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/atomic-world-commit.test.ts": "5e7c78782b82a83631fdafedb2c171e995d94069bc32e6952c8ba72ca6cb1083",
+    "src/lib/planning/atomic-world-commit.ts": "599d8ed8ed736bebd8e2f6cb0ba7904b2c8f2e85977dd0361ca8fa070521395b"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-82-revision-commit-hash-advance.json",
+    "src/lib/planning/atomic-world-commit.test.ts",
+    "src/lib/planning/atomic-world-commit.ts"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/world-patch-v2.test.ts src/lib/planning/atomic-world-commit.test.ts src/lib/planning/atomic-world-commit-subscriber.test.ts",
+      "exitCode": 0,
+      "result": "3 files passed; 11 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning",
+      "exitCode": 0,
+      "result": "21 files passed; 115 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/command-batch-planner.test.ts",
+      "exitCode": 0,
+      "result": "1 file passed; 4 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/world-patch-v2.ts src/lib/planning/world-patch-v2.test.ts src/lib/planning/atomic-world-commit.ts src/lib/planning/atomic-world-commit.test.ts src/lib/planning/atomic-world-commit-subscriber.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "result": "98 files passed; 872 tests passed"
+    },
+    {
+      "command": "Get-FileHash -Algorithm SHA256 prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+      "exitCode": 0,
+      "result": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+    }
+  ],
+  "measurements": {
+    "targetedWorldPatchAndExecutorTestFilesPassed": 3,
+    "targetedWorldPatchAndExecutorTestsPassed": 11,
+    "planningTestFilesPassed": 21,
+    "planningTestsPassed": 115,
+    "commandBatchPlannerTestFilesPassed": 1,
+    "commandBatchPlannerTestsPassed": 4,
+    "fullUnitSuiteFilesPassed": 98,
+    "fullUnitSuiteTestsPassed": 872,
+    "promptHashVerified": true,
+    "worldPatchV2IncludesBeforeAfterRevisionAndContentHash": true,
+    "moduleHashDeltasRecordChangedModulesOnly": true,
+    "atomicCommitMutationCount": 1,
+    "subscriberNotificationsFor31WaySplit": 1,
+    "stalePlanMutations": 0,
+    "duplicateCommandIdMutations": 0,
+    "injectedFailurePartialCommits": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageHashRecorded": true,
+    "targetedTestsPass": true,
+    "planningTestsPass": true,
+    "commandBatchPlannerTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true,
+    "fullUnitSuitePass": true,
+    "promptHashMatchesExpected": true,
+    "reportChainContinuous": true
+  },
+  "firstFailedGate": null,
+  "nextStage": "10-83"
+}

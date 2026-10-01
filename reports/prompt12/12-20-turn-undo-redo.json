@@ -1,0 +1,30 @@
+{
+  "stage": "12-20",
+  "status": "pass",
+  "objective": "Undo and redo complete committed turns rather than individual internal commands.",
+  "filesRead": [
+    "src/lib/simulation/atomic-turn-runtime.ts",
+    "src/lib/planning/history-persistence-checkpoint.ts",
+    "src/lib/simulation/simulation-persistence.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/atomic-turn-runtime.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-20-turn-undo-redo.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "unificationUndoRestoresCountries": "pass",
+    "undoRestoresDateEventsAndFacts": "pass",
+    "redoRestoresSameContent": "pass",
+    "redoUsesNewRevision": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Undo/redo history remains internal and cannot execute arbitrary commands."
+  ],
+  "notes": [],
+  "nextStage": "12-21"
+}

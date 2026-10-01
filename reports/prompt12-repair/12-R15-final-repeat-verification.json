@@ -1,0 +1,23 @@
+{
+  "stage": "12-R15",
+  "status": "pass",
+  "objective": "Prove Prompt 12 remains stable across repeated target and complete E2E runs.",
+  "changedFiles": ["reports/prompt12-repair/12-R15-final-repeat-verification.json"],
+  "targeted": {
+    "seamRepeat": {"runs": 5, "passed": 5, "failed": 0, "exitCode": 0},
+    "prompt12Unit": {"files": 3, "tests": 25, "passed": 25, "exitCode": 0}
+  },
+  "fullQuality": {
+    "typecheck": {"exitCode": 0},
+    "lint": {"exitCode": 0, "warnings": 0},
+    "unit": {"exitCode": 0, "files": 127, "tests": 1035},
+    "build": {"exitCode": 0, "newWarnings": 0},
+    "smoke": {"exitCode": 0, "result": "SKIPPED_NO_API_KEY"}
+  },
+  "fullE2E": [
+    {"run": "quality-gate", "tests": 19, "passed": 19, "exitCode": 0, "duration": "5.0m", "cacheWarning": false, "processesAfter": 0, "port3000ListenersAfter": 0},
+    {"run": "consecutive-1", "tests": 19, "passed": 19, "exitCode": 0, "duration": "5.1m", "cacheWarning": false, "processesAfter": 0, "port3000ListenersAfter": 0},
+    {"run": "consecutive-2", "tests": 19, "passed": 19, "exitCode": 0, "duration": "4.9m", "cacheWarning": false, "processesAfter": 0, "port3000ListenersAfter": 0}
+  ],
+  "firstFailedGate": null
+}

@@ -1,0 +1,115 @@
+{
+  "checkpoint": "10-100~10-106",
+  "title": "label projection checkpoint",
+  "status": "pass",
+  "createdAt": "2026-09-21T09:27:00+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousCheckpointInput": {
+    "checkpoint": "10-96~10-99",
+    "reportPath": "reports/prompt10/10-99-map-projection-checkpoint.json",
+    "reportSha256": "04d6f69e0939105898aee99d427c5f67d259cf1e0f33b345d4f96a45c9174a3d",
+    "status": "pass"
+  },
+  "coveredStages": {
+    "10-100": "Territory geometry produces immediate representative point fallback labels without manual per-country coordinates.",
+    "10-101": "LabelJob includes revision, countryId, Territory hash, text hash, font hash, policy hash, and priority.",
+    "10-102": "Pure glyph worker function has no DOM or MapLibre dependency.",
+    "10-103": "Label cache keys include geometry, text, font, and policy hashes.",
+    "10-104": "Viewport and selection affect job priority while settled artifact identity remains deterministic.",
+    "10-105": "Worker results with stale revision or module hashes are discarded.",
+    "10-106": "Accepted glyph result replaces its point fallback in one projection update; settled state has no duplicate or missing labels."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/label-projection-checkpoint.ts",
+        "sha256": "d0765834d907cadff1d4a7d189c907ba15dd69cb71cbee23cbadcb21e90253ee"
+      },
+      {
+        "path": "src/lib/projection/label-projection-checkpoint.test.ts",
+        "sha256": "c9540873f20ed5492f818172d8668d645af7d2f0a9b4049b40b5fffddf17a4d9"
+      }
+    ],
+    "notes": [
+      "The worker is modeled as a pure glyph computation function so the projection protocol can be tested without importing DOM or MapLibre.",
+      "Staleness is decided by revision and module hashes, not countryId alone.",
+      "Point fallback and glyph results share a stable label job id based on countryId and TerritoryId.",
+      "Applying an accepted glyph removes the matching point fallback and inserts the glyph in the same immutable projection update."
+    ]
+  },
+  "measurements": {
+    "representativePoint": {
+      "manualCountryCoordinateAdditions": 0,
+      "sampleRectangleAnchor": [1, 1]
+    },
+    "staleJobGuard": {
+      "countryIdOnlyStaleCheckUsed": false,
+      "revisionChecked": true,
+      "territoryGeometryHashChecked": true,
+      "textHashChecked": true,
+      "fontHashChecked": true,
+      "policyHashChecked": true,
+      "ghostLabelCountInSplitUndoScenario": 0
+    },
+    "cache": {
+      "cacheKeyIncludesGeometryTextFontPolicy": true,
+      "unchangedJobHitCount": 1,
+      "changedModuleMissCount": 2
+    },
+    "settledReplacement": {
+      "duplicateLabelCount": 0,
+      "missingLabelCount": 0,
+      "pointFallbackRemovedForAcceptedGlyph": true
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/label-projection-checkpoint.test.ts src/lib/projection/map-projection-checkpoint.test.ts",
+        "status": "pass",
+        "testFiles": 2,
+        "tests": 9
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/lib/projection/label-projection-checkpoint.ts src/lib/projection/label-projection-checkpoint.test.ts",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd test -- --run",
+        "status": "pass",
+        "testFiles": 107,
+        "tests": 901
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "territoryGeometryRepresentativePointLabels": true,
+      "manualCoordinateAdditionCount": 0,
+      "jobProtocolUsesRevisionAndModuleHashes": true,
+      "workerDomImportCount": 0,
+      "workerMapLibreImportCount": 0,
+      "cacheMissOnlyForChangedModules": true,
+      "priorityDoesNotChangeSettledArtifactIdentity": true,
+      "staleWorkerResultDiscarded": true,
+      "ghostLabelCount": 0,
+      "settledDuplicateOrMissingLabelCount": 0,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "fullUnitSuitePass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextCheckpoint": "10-107~10-112 history and persistence checkpoint"
+}

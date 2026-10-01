@@ -1,12 +1,13 @@
 import {z} from "zod";
 
 import {countryIdentityV2Schema} from "./country-create-v2";
-import {canonicalCommandTextSchema, createMapCommandV2Schema} from "./map-command-v2";
+import {createMapCommandV2Schema} from "./map-command-v2";
+import {countryIdV2Schema} from "./country-id-v2";
 import {wrapCommandSchemaWithPlainDataBoundary} from "./plain-command-data-v2";
 
 const existingResultCountryV2Schema = z.strictObject({
   kind: z.literal("existing-country"),
-  countryId: canonicalCommandTextSchema,
+  countryId: countryIdV2Schema,
 });
 
 const newResultCountryV2Schema = z.strictObject({
@@ -36,7 +37,7 @@ const preserveResultMetadataV2Schema = z.strictObject({
 
 const inheritSourceMetadataV2Schema = z.strictObject({
   mode: z.literal("inherit-source"),
-  sourceCountryId: canonicalCommandTextSchema,
+  sourceCountryId: countryIdV2Schema,
   fields: z.array(mergeMetadataFieldV2Schema).min(1),
 });
 
@@ -51,7 +52,7 @@ export const mergeMetadataInheritanceV2Schema = wrapCommandSchemaWithPlainDataBo
 
 export const countryMergeV2PayloadSchema = wrapCommandSchemaWithPlainDataBoundary(
   z.strictObject({
-    sourceCountryIds: z.array(canonicalCommandTextSchema).min(2),
+    sourceCountryIds: z.array(countryIdV2Schema).min(2),
     resultCountry: mergeResultCountryV2Schema,
     metadataInheritance: mergeMetadataInheritanceV2Schema,
   }),

@@ -1,0 +1,1 @@
+{"stage":"12-27","status":"pass","changedFiles":["src/lib/simulation/server/openai-responses-transport.ts","src/lib/simulation/server/openai-responses-provider.ts"],"gates":{"streamingResponses":"pass","modelFromEnvironment":true,"store":false,"compactContextOnly":true,"apiKeyInRequestBody":false,"geoJsonInRequest":false,"undoImageInRequest":false}}

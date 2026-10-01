@@ -1,7 +1,8 @@
 import {z} from "zod";
 
 import {countryIdentityV2Schema} from "./country-create-v2";
-import {canonicalCommandTextSchema, createMapCommandV2Schema} from "./map-command-v2";
+import {createMapCommandV2Schema} from "./map-command-v2";
+import {countryIdV2Schema} from "./country-id-v2";
 import {wrapCommandSchemaWithPlainDataBoundary} from "./plain-command-data-v2";
 import {territorySourceReferenceV2Schema} from "./territory-transfer-v2";
 
@@ -14,7 +15,7 @@ export const countrySplitResultV2Schema = wrapCommandSchemaWithPlainDataBoundary
 
 export const countrySplitV2PayloadSchema = wrapCommandSchemaWithPlainDataBoundary(
   z.strictObject({
-    sourceCountryId: canonicalCommandTextSchema,
+    sourceCountryId: countryIdV2Schema,
     resultCountries: z.array(countrySplitResultV2Schema).min(2),
   }),
 );

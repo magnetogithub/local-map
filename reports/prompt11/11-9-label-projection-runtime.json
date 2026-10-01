@@ -1,0 +1,49 @@
+{
+  "stage": "11-9",
+  "status": "pass",
+  "objective": "Render country labels from revision-bound WorldStateV2 label jobs, using static placement and glyph GeoJSON only as validated seed caches.",
+  "filesRead": [
+    "reports/prompt11/11-8-capital-small-country-marker-projection.json",
+    "src/components/map/WorldMap.tsx",
+    "src/lib/projection/label-projection-checkpoint.ts",
+    "src/lib/map/country-label-layout.ts",
+    "src/lib/map/country-label-glyph-geometry.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx"
+  ],
+  "changedFiles": [
+    "src/lib/projection/label-projection-checkpoint.ts",
+    "src/lib/projection/label-projection-checkpoint.test.ts",
+    "src/lib/projection/country-label-runtime-projection.ts",
+    "src/components/map/WorldMap.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/app/page.tsx",
+    "reports/prompt11/11-9-label-projection-runtime.json"
+  ],
+  "commands": [
+    "npm.cmd test -- --run src/lib/projection/label-projection-checkpoint.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint -- src/lib/projection/label-projection-checkpoint.ts src/lib/projection/label-projection-checkpoint.test.ts src/lib/projection/country-label-runtime-projection.ts src/components/map/WorldMap.tsx src/components/layout/GameSetupShell.tsx src/app/page.tsx",
+    "git diff --check -- src/app/page.tsx src/components/layout/GameSetupShell.tsx src/components/map/WorldMap.tsx src/lib/projection/label-projection-checkpoint.ts src/lib/projection/label-projection-checkpoint.test.ts"
+  ],
+  "gates": {
+    "staticLabelGeoJsonDirectMapSources": 0,
+    "renderedLabelSourceAppliedRevision": true,
+    "renameInvalidatesTextButNotGeometryCache": true,
+    "territoryGeometryChangeInvalidatesGeometryButNotTextCache": true,
+    "staleWorkerResultRejected": true,
+    "staleRenderedRevisionRejected": true,
+    "targetedTests": "pass: 1 file, 9 tests",
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "diffCheck": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "The server builds initial label jobs from WorldStateV2 and serializes them through GameSetupShell to WorldMap.",
+    "WorldMap initializes label sources empty. Static placement and glyph files are fetched as cache input and projected through current label jobs before source application.",
+    "A matching seed placement can be reused for text-only changes, but stale glyph polygons are removed. Geometry changes use the current job anchor as a point fallback. New polygon glyph generation is not wired in this stage.",
+    "The existing China debug scenario still mutates map sources directly; its removal or replacement belongs to 11-11. Ongoing committed-state subscription belongs to 11-10."
+  ],
+  "nextStage": "11-10"
+}

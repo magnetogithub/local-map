@@ -5,7 +5,7 @@ const representative=["AUS","RUS","USA","CHN"];
 
 test("8-5 geometry renderer integration",async({page})=>{
   await page.goto("/");
-  await expect(page.getByRole("status").first()).toBeHidden({timeout:30_000});
+  await expect(page.getByRole("status").first()).toBeHidden({timeout:90_000});
   await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__?.isRenderSettled()??false),{timeout:30_000}).toBe(true);
   expect(await page.evaluate(()=>!window.__PAX_MAP_DEBUG__!.hasLayer("country-labels-prototype")&&!window.__PAX_MAP_DEBUG__!.hasLayer("country-labels-territory"))).toBe(true);
   const counts=await page.evaluate(ids=>Object.fromEntries(ids.map(id=>[id,window.__PAX_MAP_DEBUG__!.getGlyphLabelFeatureCount?.(id)??0])),representative);

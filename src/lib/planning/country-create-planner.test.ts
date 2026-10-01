@@ -40,6 +40,21 @@ describe("10-57/60 country.create planner", () => {
     expect(contentHash(state)).toBe(beforeHash);
   });
 
+  it("assigns the first available generated tag when the command omits an ID", () => {
+    const state = plannerStateFixture();
+    const fixture = countryCreateCommandFixture("BBB");
+    const command = {
+      ...fixture,
+      payload: {country: {...fixture.payload.country, id: undefined}},
+    };
+    const result = planCountryCreate(state, command, {committedCommandIds: new Set()});
+
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.plan.patch.countryId).toBe("D01");
+    expect(result.plan.nextState.countriesById.D01.id).toBe("D01");
+  });
+
   it.each([
     ["AAA", "country-id-active"],
     ["OLD", "country-id-retired"],

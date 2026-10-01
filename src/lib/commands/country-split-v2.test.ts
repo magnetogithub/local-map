@@ -30,13 +30,13 @@ const command = () => ({
     sourceCountryId: "OLD",
     resultCountries: [
       {
-        country: country("WEST"),
+        country: country("WST"),
         territorySources: [
           {kind: "partition-result", commandId: "partition-main", partitionKey: "west"},
         ],
       },
       {
-        country: country("EAST"),
+        country: country("EST"),
         territorySources: [
           {kind: "partition-result", commandId: "partition-main", partitionKey: "east"},
           {kind: "territory-id", territoryId},

@@ -8,12 +8,12 @@ import {
   createInitialWorldState,
   type InitialWorldStateSeed,
   type SeedFeatureCollection,
-} from "./initial-world-state";
+} from "../test-only/legacy-v1/initial-world-state";
 import {
   countryEntityToCountry,
   type CapitalFeature,
   type CountryGeometryFeature,
-} from "./world-state";
+} from "../test-only/legacy-v1/world-state";
 
 const read = <T,>(file: string) =>
   JSON.parse(fs.readFileSync(path.join(process.cwd(), file), "utf8")) as T;

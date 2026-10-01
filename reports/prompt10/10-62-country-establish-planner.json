@@ -1,0 +1,11 @@
+{
+  "stage": "10-62", "status": "pass", "objective": "Atomically establish a country and assign an explicit set of unclaimed Territories.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {"reports/prompt10/10-61-country-rename-planner.json": "6bea35fc3617d36e4837add9e507d440691bd683a457a0b57531edb84d35c3e7"},
+  "outputHashes": {"src/lib/planning/country-establish-planner.ts": "4e9f4bd73d35e31bb7575788553caabdd16ca138d6dcddfb27b36f8fed040eb2", "src/lib/planning/country-establish-planner.test.ts": "fb0bad074fc6acac7e29f15defb4a94d6eb7a1e7a9c807837f499fc6e4d5773b"},
+  "changedFiles": ["src/lib/planning/country-establish-planner.ts", "src/lib/planning/country-establish-planner.test.ts", "src/lib/planning/command-batch-planner.ts", "src/lib/planning/command-batch-planner.test.ts", "reports/prompt10/10-62-country-establish-planner.json"],
+  "commands": [{"command": "targeted RED", "exitCode": 1, "result": "planner module absent"}, {"command": "targeted GREEN", "exitCode": 0, "result": "6 files; 38 tests passed"}, {"command": "npm.cmd test -- --run src/lib/planning", "exitCode": 0, "result": "18 files; 103 tests passed"}, {"command": "related ESLint and tsc", "exitCode": 0}, {"command": "npm.cmd test -- --maxWorkers=1", "exitCode": 0, "result": "95 files; 860 tests passed"}],
+  "measurements": {"atomicRevisionIncrements": 1, "invalidCasesRejected": 5, "partialPlansReturned": 0, "inputStateMutations": 0, "fullTestsPassed": 860},
+  "gates": {"idCollisionsRejected": true, "unknownDuplicateOwnedTerritoriesRejected": true, "atomicPlan": true, "hashRootsCorrect": true, "topologyShared": true, "batchRouted": true, "allValidationPass": true},
+  "firstFailedGate": null, "nextStage": "10-63"
+}

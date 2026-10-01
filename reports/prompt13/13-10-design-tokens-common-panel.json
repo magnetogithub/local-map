@@ -1,0 +1,78 @@
+{
+  "stage": "13-10",
+  "status": "pass",
+  "summary": "게임 scope의 semantic color, surface, shadow, transition token을 완성하고 공용 panel, status badge, empty state, tooltip이 실제 token을 사용하도록 보완했다.",
+  "semanticTokens": [
+    "--game-surface",
+    "--game-surface-secondary",
+    "--game-surface-hover",
+    "--game-surface-selected",
+    "--game-text",
+    "--game-text-muted",
+    "--game-border",
+    "--game-accent",
+    "--game-accent-foreground",
+    "--game-danger",
+    "--game-danger-surface",
+    "--game-danger-foreground",
+    "--game-success",
+    "--game-success-surface",
+    "--game-success-foreground",
+    "--game-warning",
+    "--game-warning-surface",
+    "--game-warning-foreground",
+    "--game-tooltip-surface",
+    "--game-tooltip-foreground",
+    "--game-shadow",
+    "--game-transition-fast",
+    "--game-transition-panel"
+  ],
+  "replacedCssLocations": [
+    ".game-player-badge and .game-player-badge__color",
+    ".game-hud__metrics button:hover",
+    ".game-hud__stop and .game-hud__stop:hover",
+    ".game-status-badge neutral, active, warning, error tones",
+    ".game-edge-nav__button:hover and [data-active]",
+    ".game-panel__titlebar and .game-panel__close:hover",
+    ".game-empty-state__mark",
+    ".game-tooltip-popup",
+    ".game-panel entrance animation duration",
+    ".game-tooltip-popup transition and animation duration"
+  ],
+  "tokenScope": ".app-shell[data-page-mode=\"game\"]",
+  "reducedMotion": "prefers-reduced-motion: reduce에서 panel/tooltip animation과 tooltip transition을 제거한다.",
+  "filesChanged": [
+    "src/app/globals.css",
+    "src/components/game/GamePanel.tsx",
+    "src/components/game/GameChrome.test.tsx",
+    "reports/prompt13/13-10-design-tokens-common-panel.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "npx.cmd eslint src/components/game src/components/layout/GameSetupShell.tsx src/components/simulation/SimulationPanel.tsx src/lib/game-ui src/lib/simulation/client/use-simulation-turn-controller.ts src/lib/simulation/client/turn-request.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npx.cmd vitest run src/components/game/GameChrome.test.tsx src/lib/game-ui/overlay-reducer.test.ts src/lib/game-ui/game-hud-projection.test.ts src/lib/game-ui/contracts.test.ts src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.test.ts",
+      "exitCode": 0,
+      "testFiles": 6,
+      "tests": 39
+    }
+  ],
+  "screenshots": [
+    "screenshots/prompt13-13-shell-repair-1280x720.png",
+    "screenshots/prompt13-13-shell-repair-1920x1080.png",
+    "screenshots/prompt13-13-hud-tooltip-1280x720.png",
+    "screenshots/prompt13-13-hud-tooltip-1920x1080.png",
+    "screenshots/prompt13-13-tooltip-1280x720.png",
+    "screenshots/prompt13-13-tooltip-1920x1080.png"
+  ],
+  "knownLimitations": [
+    "Vite는 기존 CommonJS configLoader 마이그레이션 경고를 출력하지만 테스트 결과에는 영향이 없다."
+  ],
+  "nextStage": "13-14"
+}

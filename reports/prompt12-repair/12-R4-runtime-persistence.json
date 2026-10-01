@@ -1,0 +1,40 @@
+{
+  "stage": "12-R4",
+  "status": "pass",
+  "objective": "Persist and restore a validated WorldState/SimulationState pair through the production gameplay path.",
+  "filesRead": [
+    "src/lib/simulation/simulation-persistence.ts",
+    "src/lib/simulation/atomic-turn-runtime.ts",
+    "src/components/simulation/SimulationPanel.tsx",
+    "src/lib/storage/game-setup-storage.ts",
+    "src/lib/world/world-state-v2.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-persistence.ts",
+    "src/lib/simulation/client/game-runtime-storage.ts",
+    "src/components/simulation/SimulationPanel.tsx",
+    "src/stores/world-state-store.ts",
+    "src/lib/simulation/game-runtime-persistence.test.ts"
+  ],
+  "commands": [
+    "npx.cmd tsc --noEmit",
+    "npx.cmd vitest run src/lib/simulation/game-runtime-persistence.test.ts src/lib/simulation/client/turn-client.test.tsx"
+  ],
+  "gates": {
+    "versionedWorldAndSimulationEnvelope": "pass",
+    "committedDateAndEventsRestore": "pass",
+    "factsSituationsConsequencesRestore": "pass",
+    "queuedActionRestore": "pass",
+    "corruptSaveFallsBackAsPair": "pass",
+    "revisionPairMismatchRejected": "pass",
+    "worldContentHashMismatchRejected": "pass",
+    "productionPersistenceUsage": "SimulationPanel",
+    "storageBackend": "IndexedDB",
+    "saveByteLimit": 67108864,
+    "draftOrProviderPayloadPersisted": false,
+    "targetedTests": "5 passed"
+  },
+  "firstFailedGate": null,
+  "notes": ["Persistence failure is surfaced without rolling back an already completed canonical commit."],
+  "nextStage": "12-R5"
+}

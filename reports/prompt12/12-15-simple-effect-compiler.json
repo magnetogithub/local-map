@@ -1,0 +1,36 @@
+{
+  "stage": "12-15",
+  "status": "pass",
+  "objective": "Compile rename and territory-transfer semantic effects into internal MapCommand v2 batches.",
+  "filesRead": [
+    "src/lib/simulation/world-effect.ts",
+    "src/lib/commands/country-rename-v2.ts",
+    "src/lib/commands/territory-transfer-v2.ts",
+    "src/lib/commands/territory-assign-v2.ts",
+    "src/lib/commands/territory-unclaim-v2.ts",
+    "src/lib/planning/country-rename-planner.ts",
+    "src/lib/planning/territory-transfer-planner.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/world-effect-compiler.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-15-simple-effect-compiler.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "hostCommandIdInjection": "pass",
+    "hostExpectedRevisionInjection": "pass",
+    "staleRevisionTypedError": "pass",
+    "unknownCountryTypedError": "pass",
+    "unknownTerritoryTypedError": "pass",
+    "ownershipValidation": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Compiler accepts typed semantic effects, not player text or command JSON."
+  ],
+  "notes": [],
+  "nextStage": "12-16"
+}

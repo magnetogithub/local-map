@@ -1,0 +1,88 @@
+{
+  "prompt": "10-93",
+  "title": "polygon patch application",
+  "status": "pass",
+  "createdAt": "2026-09-18T17:25:00+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-92",
+    "reportPath": "reports/prompt10/10-92-territory-polygon-index.json",
+    "reportSha256": "a4e602fdf156908998638eaa2fe560bf3ef5f2ed6fb0aec5b6ebc4cc25978227",
+    "status": "pass"
+  },
+  "objective": {
+    "action": "Apply polygon projection patches by adding, replacing, or deleting only changed Territory features.",
+    "verification": "Unaffected feature and bucket references remain stable."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/territory-polygon-index.ts",
+        "sha256": "d39034ff70564c16725f7c91409d2421548d7fe497c2043d629627ec054f35ff"
+      },
+      {
+        "path": "src/lib/projection/territory-polygon-index.test.ts",
+        "sha256": "a5d11b2a183a3565f621ae7ff0f7553995af6b8547e2cbc1db902de21c64a3f2"
+      }
+    ],
+    "projectionChanges": [
+      "Added applyTerritoryPolygonIndexPatch for WorldPatchV2 territory create/update/delete changes.",
+      "Patch application validates projection beforeRevision and committed state afterRevision.",
+      "Only changed Territory buckets are added, replaced, or deleted.",
+      "Owner reverse index is rebuilt from the resulting TerritoryId buckets."
+    ],
+    "publicApi": [
+      "applyTerritoryPolygonIndexPatch(projection, patch, committedState)"
+    ]
+  },
+  "measurements": {
+    "patchScenario": {
+      "beforeRevision": 12,
+      "afterRevision": 13,
+      "createdTerritories": 1,
+      "replacedTerritories": 1,
+      "deletedTerritories": 1,
+      "unaffectedTerritoryBucketReferencePreserved": true,
+      "unaffectedTerritoryFeatureReferencePreserved": true,
+      "replacedTerritoryBucketReferencePreserved": false,
+      "deletedTerritoryBucketAfterPatch": null
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/territory-polygon-index.test.ts src/lib/projection/topology-border-artifact.test.ts",
+        "status": "pass",
+        "testFiles": 2,
+        "tests": 5
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/lib/projection/territory-polygon-index.ts src/lib/projection/territory-polygon-index.test.ts src/lib/projection/topology-border-artifact.ts src/lib/projection/topology-border-artifact.test.ts",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "previousStageOutputHashRecorded": true,
+      "changedTerritoryFeaturesOnlyPatched": true,
+      "unaffectedFeatureReferencesPreserved": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-94"
+}

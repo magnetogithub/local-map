@@ -1,13 +1,14 @@
 import {z} from "zod";
 
 import {territoryIdV2Schema} from "./country-establish-v2";
-import {canonicalCommandTextSchema, createMapCommandV2Schema} from "./map-command-v2";
+import {createMapCommandV2Schema} from "./map-command-v2";
+import {countryIdV2Schema} from "./country-id-v2";
 import {wrapCommandSchemaWithPlainDataBoundary} from "./plain-command-data-v2";
 
 export const territoryAssignV2PayloadSchema = wrapCommandSchemaWithPlainDataBoundary(
   z.strictObject({
     territoryId: territoryIdV2Schema,
-    targetCountryId: canonicalCommandTextSchema,
+    targetCountryId: countryIdV2Schema,
   }),
 );
 

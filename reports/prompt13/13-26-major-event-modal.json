@@ -1,0 +1,22 @@
+{
+  "stage": "13-26",
+  "status": "pass",
+  "summary": "미확인 중요 사건을 순차적으로 표시하는 blocking modal을 구현했다.",
+  "guarantees": [
+    "진행 번호, 날짜, 중요도, 관련 국가, 지도 변화 여부를 표시한다.",
+    "지도에서 보기와 명시적 확인 동작을 제공한다.",
+    "pending queue가 남아 있는 동안 다음 advance가 비활성화된다.",
+    "초기 포커스, Tab 순환, 제거 시 포커스 복원이 동작한다.",
+    "Escape는 사건을 폐기하거나 modal을 닫지 않는다.",
+    "modal layer가 지도와 다른 overlay보다 위에서 포인터 입력을 차단한다."
+  ],
+  "files": [
+    "src/components/game/MajorEventModal.tsx",
+    "src/components/game/NewsAndMajorEvents.test.tsx",
+    "src/components/game/GameActionOverlay.tsx",
+    "src/components/game/GameOverlayEscapeHandler.tsx",
+    "src/app/globals.css"
+  ],
+  "verification": {"targetedTests": "pass"},
+  "nextStage": "13-27"
+}

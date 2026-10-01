@@ -1,0 +1,92 @@
+{
+  "prompt": "10-92",
+  "title": "Territory polygon index",
+  "status": "pass",
+  "createdAt": "2026-09-18T17:21:00+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-91",
+    "reportPath": "reports/prompt10/10-91-player-country-policy-projection.json",
+    "reportSha256": "9c5f34993c5da16e23d7441e5672725ef1ae6ac85ee15ae07ab511d9995d7fac",
+    "status": "pass"
+  },
+  "objective": {
+    "action": "Create polygon feature buckets keyed by TerritoryId.",
+    "verification": "A single country can own multiple Territory polygon buckets without merging them into one country polygon."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/territory-polygon-index.ts",
+        "sha256": "553b0fbd260fd3df074548b20c109909cf09983f3baee54366b1c41bfea5c6fa"
+      },
+      {
+        "path": "src/lib/projection/territory-polygon-index.test.ts",
+        "sha256": "a8538673803767e5b59b0a4236c66956f93eba0d54c1d7f2b3706437a627e6b5"
+      }
+    ],
+    "projectionShape": [
+      "TerritoryPolygonIndexProjection stores bucketsByTerritoryId keyed by TerritoryId.",
+      "Each TerritoryPolygonFeature carries territoryId, ownerCountryId, sourceFeatureId, and Territory geometry.",
+      "territoryIdsByOwnerCountryId is an owner reverse index only; it does not collapse features into a single country polygon."
+    ],
+    "publicApi": [
+      "createTerritoryPolygonIndexProjection(state)",
+      "getTerritoryPolygonBucket(projection, territoryId)",
+      "getOwnerTerritoryPolygonBuckets(projection, ownerCountryId)"
+    ]
+  },
+  "measurements": {
+    "multiTerritoryOwnerScenario": {
+      "revision": 12,
+      "ownerCountryId": "AAA",
+      "totalTerritoryBuckets": 3,
+      "ownerTerritoryBucketCount": 2,
+      "ownerFeatureIdsUnique": 2,
+      "ownerBucketsMergedIntoSingleCountryPolygon": false
+    },
+    "bucketKeying": {
+      "primaryKey": "TerritoryId",
+      "ownerCountryIdUsedAsPrimaryKey": false,
+      "countryCanOwnMultipleTerritories": true
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/territory-polygon-index.test.ts",
+        "status": "pass",
+        "testFiles": 1,
+        "tests": 2
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/lib/projection/territory-polygon-index.ts src/lib/projection/territory-polygon-index.test.ts",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "previousStageOutputHashRecorded": true,
+      "territoryIdBasedFeatureBuckets": true,
+      "ownerReverseIndexPreservesMultipleTerritories": true,
+      "singleCountryMultipleTerritoriesVerified": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-93"
+}

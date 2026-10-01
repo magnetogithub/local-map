@@ -18,7 +18,7 @@ const deleteCommand = (index: number) => ({
   commandId: `delete-${index}`,
   type: "country.delete",
   expectedRevision: 20,
-  payload: {countryId: `C${index}`},
+  payload: {countryId: `C${index.toString(36).toUpperCase().padStart(2, "0")}`},
 });
 const batch = (commands: unknown[], commandId = "batch-root") => ({
   commandId,

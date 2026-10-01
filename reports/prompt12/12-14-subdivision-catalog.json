@@ -1,0 +1,37 @@
+{
+  "stage": "12-14",
+  "status": "pass",
+  "objective": "Define the versioned SubdivisionCatalog port and deterministic checked-in fixture adapter.",
+  "filesRead": [
+    "src/lib/world/territory-entity.ts",
+    "scripts/prepare-map-data.mjs",
+    "scripts/prepare-china-province-test.mjs",
+    "scripts/prepare-usa-state-test.mjs",
+    "public/data/maps/china-province-countries-test.geojson",
+    "public/data/maps/usa-state-countries-test.geojson"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/subdivision-catalog.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-14-subdivision-catalog.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "stableVersionedRefs": "pass",
+    "localizedNames": "pass",
+    "materializationCapability": "pass",
+    "chinaFixtureCount": 31,
+    "usaFixtureCount": 50,
+    "genericGeoJsonImportApiAbsent": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Only the two named versioned fixtures are accepted by the test adapter."
+  ],
+  "notes": [
+    "Runtime world truth remains WorldStateV2 after materialization and commit."
+  ],
+  "nextStage": "12-15"
+}

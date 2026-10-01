@@ -6,7 +6,7 @@ import {
   countryEntityLabelCacheKey,
   type CountryEntity,
   type WorldState,
-} from "@/lib/world/world-state";
+} from "@/lib/test-only/legacy-v1/world-state";
 
 import {
   applyCountryRenameCommand,
@@ -14,7 +14,7 @@ import {
   safeParseCountryRenameCommand,
   type CountryRenameChanges,
   type CountryRenameCommand,
-} from "./country-rename";
+} from "@/lib/test-only/legacy-v1/country-rename";
 
 const country = (id: string): CountryEntity => ({
   id,

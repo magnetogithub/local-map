@@ -1,6 +1,7 @@
 import {describe, expect, expectTypeOf, it} from "vitest";
 
 import {
+  allocateDynamicCountryId,
   createCountryIdRegistry,
   issueCountryId,
   retireCountryId,
@@ -21,6 +22,23 @@ describe("10-6 CountryId lifecycle", () => {
   it.each([undefined, null, 42, "", "   "])("rejects an empty or non-string ID: %s", (value) => {
     const registry = createCountryIdRegistry({activeCountryIds: [], retiredCountryIds: []});
     expect(() => issueCountryId(value, registry)).toThrow(/non-empty string/);
+  });
+
+  it.each(["AA", "AAAA", "aaa", "1AA", "A-A", "가나다"])(
+    "rejects a CountryId outside the three-character tag format: %s",
+    (value) => {
+      const registry = createCountryIdRegistry({activeCountryIds: [], retiredCountryIds: []});
+      expectInvalidCountryId(() => issueCountryId(value, registry));
+    },
+  );
+
+  it("allocates generated tags deterministically while skipping active, retired, and reserved tags", () => {
+    const registry = createCountryIdRegistry({
+      activeCountryIds: ["D01"],
+      retiredCountryIds: ["D02"],
+    });
+
+    expect(allocateDynamicCountryId(registry, ["D03"])).toBe("D04");
   });
 
   it.each([" AAA ", "AAA ", "\tAAA", "AAA\n"])(

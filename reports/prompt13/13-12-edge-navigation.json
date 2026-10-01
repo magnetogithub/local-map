@@ -1,0 +1,33 @@
+{
+  "stage": "13-12",
+  "status": "pass",
+  "summary": "Implemented all eight fixed edge-menu items with text and glyphs, native keyboard activation, focus-visible styling, active state, tooltips, and single-overlay toggling.",
+  "filesChanged": [
+    "src/components/game/GameEdgeNavigation.tsx",
+    "src/components/game/GameScreen.tsx",
+    "src/components/game/GameChrome.test.tsx",
+    "src/app/globals.css",
+    "reports/prompt13/13-12-edge-navigation.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd vitest run src/components/game/GameChrome.test.tsx src/lib/game-ui/overlay-reducer.test.ts",
+      "exitCode": 0,
+      "evidence": "Eight-menu order, active state, Enter activation, and exclusive overlay behavior passed."
+    }
+  ],
+  "screenshots": [
+    "screenshots/prompt13-13-shell-1280x720.png",
+    "screenshots/prompt13-13-shell-1920x1080.png"
+  ],
+  "tests": [
+    "Eight mouse/keyboard buttons",
+    "aria-pressed active state",
+    "Exclusive overlay toggle"
+  ],
+  "knownLimitations": [
+    "Domain-specific overlay contents are implemented in stages 13-14 through 13-19."
+  ],
+  "nextStage": "13-13"
+}
+

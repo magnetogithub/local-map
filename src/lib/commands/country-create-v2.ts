@@ -3,6 +3,7 @@ import {z} from "zod";
 import {COUNTRY_POLITICAL_STATUSES} from "@/lib/world/country-entity";
 
 import {canonicalCommandTextSchema, createMapCommandV2Schema} from "./map-command-v2";
+import {countryIdV2Schema} from "./country-id-v2";
 import {wrapCommandSchemaWithPlainDataBoundary} from "./plain-command-data-v2";
 
 const finiteNumber = z.number().finite();
@@ -44,7 +45,7 @@ export const countryPresentationOverrideV2Schema = wrapCommandSchemaWithPlainDat
 
 export const countryIdentityV2Schema = wrapCommandSchemaWithPlainDataBoundary(
   z.strictObject({
-    id: canonicalCommandTextSchema,
+    id: countryIdV2Schema.optional(),
     names: countryNamesV2Schema,
     politicalStatus: z.enum(COUNTRY_POLITICAL_STATUSES),
     presentationOverride: countryPresentationOverrideV2Schema.nullable(),

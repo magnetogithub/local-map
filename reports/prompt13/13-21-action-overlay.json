@@ -1,0 +1,41 @@
+{
+  "stage": "13-21",
+  "status": "pass",
+  "summary": "기존 action composer, queue/cancel, 진행 제어, Stop, Retry, undo와 redo를 게임용 GameActionOverlay로 이동했다. production GameScreen은 자신이 소유한 단일 turn controller를 오버레이와 HUD에 공유한다.",
+  "architecture": {
+    "productionOwner": "GameScreen calls useSimulationTurnController exactly once",
+    "presentation": "GameActionOverlay receives the existing SimulationTurnController; it does not instantiate a controller",
+    "legacyCompatibility": "SimulationPanel remains only as a Prompt 12 compatibility shell and delegates all presentation to GameActionOverlay",
+    "overlayClose": "unmounting GameActionOverlay does not call Stop or Retry, so closing the overlay does not destroy an active controller"
+  },
+  "features": [
+    "natural-language action textarea with IME-safe Enter queueing and character count",
+    "queued action list and cancellation",
+    "explicit time-only advance confirmation",
+    "single advance start control",
+    "Stop, Retry, undo and redo",
+    "existing committed report retained until the later news/report stages"
+  ],
+  "filesChanged": [
+    "src/components/game/GameActionOverlay.tsx",
+    "src/components/game/GameActionOverlay.test.tsx",
+    "src/components/game/GameScreen.tsx",
+    "src/components/simulation/SimulationPanel.tsx",
+    "src/app/globals.css",
+    "reports/prompt13/13-21-action-overlay.json"
+  ],
+  "commands": [
+    {"command": "npx.cmd tsc --noEmit", "exitCode": 0},
+    {"command": "npx.cmd eslint src/components/game/GameActionOverlay.tsx src/components/game/GameActionOverlay.test.tsx src/components/game/GameHud.tsx src/components/game/GameChrome.test.tsx src/components/game/GameScreen.tsx src/components/simulation/SimulationPanel.tsx src/lib/simulation/client/use-simulation-turn-controller.ts src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.ts src/lib/simulation/client/turn-request.test.ts", "exitCode": 0},
+    {"command": "npx.cmd vitest run src/components/game/GameActionOverlay.test.tsx src/components/game/GameChrome.test.tsx src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.test.ts src/lib/simulation/client/turn-client.test.tsx src/lib/simulation/client/application-turn-runtime.test.ts src/lib/simulation/client/gameplay-behavior.test.ts", "exitCode": 0, "testFiles": 7, "tests": 42},
+    {"command": "npm.cmd run test:e2e -- e2e/prompt13-shell.spec.ts", "exitCode": 0, "build": "passed", "playwrightTests": 2}
+  ],
+  "screenshots": [
+    "screenshots/prompt13-23-action-1280x720.png",
+    "screenshots/prompt13-23-action-1920x1080.png"
+  ],
+  "knownLimitations": [
+    "실제 provider 요청은 기존 /api/simulation/turn 경계를 그대로 사용하며 이 단계에서 backend contract를 변경하지 않았다."
+  ],
+  "nextStage": "13-22"
+}

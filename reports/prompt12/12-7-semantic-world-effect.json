@@ -1,0 +1,36 @@
+{
+  "stage": "12-7",
+  "status": "pass",
+  "objective": "Implement semantic WorldEffectV1 separately from internal MapCommand v2.",
+  "filesRead": [
+    "src/lib/commands/country-merge-v2.ts",
+    "src/lib/commands/territory-transfer-v2.ts",
+    "src/lib/world/country-id.ts",
+    "src/lib/world/territory-id.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/world-effect.ts",
+    "src/lib/simulation/simulation-contract.test.ts",
+    "reports/prompt12/12-7-semantic-world-effect.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts"
+  ],
+  "gates": {
+    "supportedEffectTypes": "pass",
+    "rawGeometryRejected": "pass",
+    "commandIdRejected": "pass",
+    "expectedRevisionRejected": "pass",
+    "finalCountryIdRejected": "pass",
+    "unknownEffectAndExtraFieldRejected": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "World effects contain references and semantic intent only.",
+    "New countries use resolution-local refs rather than final CountryIds."
+  ],
+  "notes": [
+    "Supported effects: country.renamed, countries.unified, country.established, country.dissolved, territories.transferred, country.partitionedBySubdivisions."
+  ],
+  "nextStage": "12-8"
+}

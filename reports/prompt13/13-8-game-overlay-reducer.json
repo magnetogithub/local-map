@@ -1,0 +1,26 @@
+{
+  "stage": "13-8",
+  "status": "pass",
+  "summary": "Added a pure discriminated-union reducer for one management overlay, menu toggle/close, targeted overlays, and retired-country cleanup.",
+  "filesChanged": [
+    "src/lib/game-ui/overlay-reducer.ts",
+    "src/lib/game-ui/overlay-reducer.test.ts",
+    "reports/prompt13/13-8-game-overlay-reducer.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd vitest run src/lib/game-ui/overlay-reducer.test.ts",
+      "exitCode": 0,
+      "evidence": "Reducer tests passed for replacement, toggle close, explicit close, and retired country/diplomacy targets."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "Only one overlay can be represented",
+    "Same-menu toggle closes",
+    "Retired country targets close safely"
+  ],
+  "knownLimitations": [],
+  "nextStage": "13-9"
+}
+

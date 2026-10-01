@@ -1,0 +1,40 @@
+{
+  "stage": "13-6",
+  "status": "pass",
+  "summary": "Extracted runtime ownership, action draft and queue operations, preset/custom advance, streaming, Stop, Retry, atomic commit, report projection, undo, and redo from SimulationPanel into one reusable controller hook.",
+  "filesChanged": [
+    "src/components/simulation/SimulationPanel.tsx",
+    "src/lib/simulation/client/use-simulation-turn-controller.ts",
+    "src/lib/simulation/client/use-simulation-turn-controller.test.tsx",
+    "reports/prompt13/13-6-turn-controller.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "evidence": "TypeScript completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd eslint src/components/simulation/SimulationPanel.tsx src/lib/simulation/client/use-simulation-turn-controller.ts src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.ts src/lib/simulation/client/turn-request.test.ts",
+      "exitCode": 0,
+      "evidence": "ESLint completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd vitest run src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.test.ts src/lib/simulation/client/turn-client.test.tsx src/lib/simulation/client/application-turn-runtime.test.ts src/lib/simulation/client/gameplay-behavior.test.ts",
+      "exitCode": 0,
+      "evidence": "5 test files and 24 tests passed, including the Prompt 12 client/runtime regressions."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "Controller queue and cancel without rendering SimulationPanel",
+    "Preset advance, Stop, and same-selection Retry",
+    "Atomic custom-date commit followed by undo and redo",
+    "Existing action composer and Prompt 12 runtime tests"
+  ],
+  "knownLimitations": [
+    "Resolved in 13-21: production GameScreen now owns the single controller and renders GameActionOverlay directly; SimulationPanel is only a Prompt 12 compatibility shell."
+  ],
+  "nextStage": "13-7"
+}
+

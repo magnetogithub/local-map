@@ -1,0 +1,148 @@
+{
+  "prompt": "10-89",
+  "title": "country deletion selection cleanup",
+  "status": "pass",
+  "createdAt": "2026-09-18T11:17:23.4786182+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-88",
+    "reportPath": "reports/prompt10/10-88-selection-existence-projection.json",
+    "reportSha256": "1a7e7ed52842c1d688ee2792ddf24d58162238a06a12ce8087c82a694d3ad3ab",
+    "status": "pass"
+  },
+  "objective": {
+    "action": "Clear selected, hovered, and persisted player CountryIds removed by a country deletion patch.",
+    "verification": "Dangling CountryId count is zero after applying the deletion projection."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/stores/game-setup-store.ts",
+        "sha256": "a8a1d0d60057030dddc57a59fc5fb562dd5a6ecc3bc144c9dfc0098b88036866"
+      },
+      {
+        "path": "src/stores/game-setup-selection-projection.test.ts",
+        "sha256": "275de04d220637f7203f283a5284ec396664b2eac3fbcf271879b972024af56a"
+      },
+      {
+        "path": "src/lib/storage/game-setup-storage.ts",
+        "sha256": "804dab23e43fb328ca58b07b5518e381b106f3b351544ad89af5352e7e6cb983"
+      }
+    ],
+    "storeChanges": [
+      "setCountrySearchProjection clears selectedCountryId when absent from the new projection",
+      "setCountrySearchProjection clears hoveredCountryId when absent from the new projection",
+      "setCountrySearchProjection clears playerCountryId when absent from the new projection",
+      "setCountrySearchProjection closes the country panel when selectedCountryId is cleared",
+      "setCountrySearchProjection clears selectedCountryProjectionRevision with the selected country"
+    ],
+    "storageChanges": [
+      "clearPersistedPlayerCountry removes the persisted player country entry",
+      "setCountrySearchProjection calls clearPersistedPlayerCountry when playerCountryId is removed"
+    ]
+  },
+  "measurements": {
+    "countryDeletionScenario": {
+      "deletedCountryId": "AAA",
+      "selectedCountryIdAfterPatch": null,
+      "hoveredCountryIdAfterPatch": null,
+      "playerCountryIdAfterPatch": null,
+      "persistedPlayerCountryAfterPatch": null,
+      "countryPanelOpenAfterPatch": false,
+      "danglingCountryIds": 0
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/stores/game-setup-selection-projection.test.ts src/components/map/map-search-projection.test.ts src/lib/projection/country-search-index-patch.test.ts src/lib/storage/game-setup-storage.test.ts",
+        "status": "pass",
+        "testFiles": 4,
+        "tests": 12
+      },
+      {
+        "command": "npm.cmd test -- --run src/stores/game-setup-selection-projection.test.ts src/components/map/map-search-projection.test.ts src/lib/projection/country-search-index-patch.test.ts src/lib/storage/game-setup-storage.test.ts src/stores/world-state-country-selector.test.ts src/lib/planning/country-delete-planner.test.ts src/lib/planning/country-create-planner.test.ts src/lib/planning/world-patch-v2.test.ts",
+        "status": "pass",
+        "testFiles": 8,
+        "tests": 25
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/lib/storage/game-setup-storage.ts src/components/map/MapSearch.tsx",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "previousStageOutputHashRecorded": true,
+      "selectedCountryIdClearedOnDeletion": true,
+      "hoveredCountryIdClearedOnDeletion": true,
+      "persistedPlayerCountryClearedOnDeletion": true,
+      "danglingCountryIdCountZero": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-90",
+  "stage": "10-89",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-88-selection-existence-projection.json": "1a7e7ed52842c1d688ee2792ddf24d58162238a06a12ce8087c82a694d3ad3ab",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/storage/game-setup-storage.ts": "804dab23e43fb328ca58b07b5518e381b106f3b351544ad89af5352e7e6cb983",
+    "src/stores/game-setup-selection-projection.test.ts": "275de04d220637f7203f283a5284ec396664b2eac3fbcf271879b972024af56a",
+    "src/stores/game-setup-store.ts": "d6b1439444e7c13d35f224c3f041700a37d981c5959f104bc0a6b7cf8ef6bf47"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-89-deletion-selection-cleanup.json",
+    "src/lib/storage/game-setup-storage.ts",
+    "src/stores/game-setup-selection-projection.test.ts",
+    "src/stores/game-setup-store.ts"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/projection/country-search-index-patch.test.ts src/components/map/map-search-projection.test.ts src/stores/game-setup-selection-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-player-policy-projection.test.ts",
+      "exitCode": 0,
+      "result": "5 files passed; 14 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/projection src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.test.ts",
+      "exitCode": 0,
+      "result": "6 files passed; 17 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/projection/country-search-index-patch.ts src/lib/projection/country-search-index-patch.test.ts src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-panel-projection.ts src/components/map/MapSearch.tsx src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.tsx src/components/country/CountryPanel.test.tsx src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "result": "102 files passed; 885 tests passed"
+    },
+    {
+      "command": "Get-FileHash -Algorithm SHA256 prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+      "exitCode": 0,
+      "result": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+    }
+  ],
+  "firstFailedGate": null
+}

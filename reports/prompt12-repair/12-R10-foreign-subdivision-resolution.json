@@ -1,0 +1,65 @@
+{
+  "stage": "12-R10",
+  "status": "pass",
+  "objective": "Resolve trusted CHN and USA subdivisions from an AUT first turn without exposing geometry, and document the actual bounded contract.",
+  "filesRead": [
+    "src/lib/simulation/simulation-context.ts",
+    "src/lib/simulation/subdivision-catalog.ts",
+    "src/lib/simulation/world-effect-compiler.ts",
+    "src/lib/simulation/server/context-resolution-validator.ts",
+    "public/data/simulation/china-admin1-v1.geojson",
+    "public/data/simulation/usa-admin1-v1.geojson"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-context-production.test.ts",
+    "reports/prompt12-repair/12-R10-foreign-subdivision-resolution.json"
+  ],
+  "selectedContract": {
+    "name": "bounded geometry-free subdivision directory",
+    "limit": 128,
+    "requestByteLimit": 245760,
+    "oversizeBehavior": "bounded deterministic clipping with explicit metadata; no silent truncation",
+    "clippingMetadata": {
+      "section": "subdivisions",
+      "reason": "bounded to 128 canonical items"
+    }
+  },
+  "measurements": {
+    "playerCountryId": "AUT",
+    "CHN": 31,
+    "USA": 50,
+    "productionSubdivisionSummaries": 81,
+    "serializedContextBytes": 74353,
+    "serialization": "byte-equivalent",
+    "syntheticBoundary": {
+      "input128": {"output": 128, "clippingMetadata": null},
+      "input130": {"output": 128, "omittedCount": 2, "canonicalIds": "AAA-001..AAA-128"}
+    },
+    "forbiddenPayloadTermsAbsent": ["geometry", "coordinates", "FeatureCollection", "topology"]
+  },
+  "commands": [
+    {
+      "command": "npx.cmd vitest run src/lib/simulation/simulation-context-production.test.ts",
+      "exitCode": 0,
+      "result": "1 file, 5 tests"
+    },
+    {
+      "command": "npx.cmd vitest run src/lib/simulation/client/application-turn-runtime.test.ts src/lib/simulation/simulation-context-production.test.ts src/lib/simulation/server/provider-route.test.ts",
+      "exitCode": 0,
+      "result": "3 files, 25 tests"
+    },
+    {
+      "command": "npm.cmd test",
+      "exitCode": 0,
+      "result": "127 files, 1035 tests"
+    }
+  ],
+  "integration": {
+    "foreignDiscovery": "AUT -> CHN 31 and AUT -> USA 50",
+    "serverValidation": "valid reference passed; missing reference and version mismatch rejected",
+    "localPlanning": "valid reference produced a dry-run plan; missing reference rejected",
+    "payload": "deterministic, request-budget bounded, and geometry-free"
+  },
+  "remainingLimitations": ["Production subdivision catalogs intentionally support CHN and USA only."],
+  "firstFailedGate": null
+}

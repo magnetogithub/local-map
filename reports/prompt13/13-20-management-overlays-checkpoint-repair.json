@@ -1,0 +1,21 @@
+{
+  "stage": "13-20-repair",
+  "status": "pass",
+  "repaired": [
+    "authoritative capital/region projection and unavailable normalization evidence",
+    "all diplomacy connection states and non-duplicated state presentation",
+    "test-only populated transcript and optional send request boundary",
+    "internal reduce-motion CSS consumption",
+    "layer-only map settings verification without setData"
+  ],
+  "verification": {
+    "typescript": 0,
+    "eslint": 0,
+    "vitest": "10 files, 60 tests passed",
+    "productionBuild": 0
+  },
+  "remainingLimitations": [
+    "실제 외교 API, 정치·경제·관계·전쟁 backend 및 서버 저장은 구현 범위 밖이다."
+  ],
+  "nextStage": "13-21"
+}

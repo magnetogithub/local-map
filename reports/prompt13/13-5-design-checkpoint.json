@@ -1,0 +1,52 @@
+{
+  "stage": "13-5",
+  "status": "pass",
+  "summary": "Prompt 13 design checkpoint passed: audit, ADR, visual specification, strict UI contracts, type checking, lint, and targeted tests are complete.",
+  "filesChanged": [
+    "docs/game-ui/prompt13-runtime-audit.md",
+    "docs/game-ui/internal-game-interface-v1.md",
+    "docs/game-ui/internal-game-interface-visual-spec.md",
+    "src/lib/game-ui/contracts.ts",
+    "src/lib/game-ui/contracts.test.ts",
+    "reports/prompt13/13-1-runtime-audit.json",
+    "reports/prompt13/13-2-information-architecture.json",
+    "reports/prompt13/13-3-visual-specification.json",
+    "reports/prompt13/13-4-ui-contracts.json",
+    "reports/prompt13/13-5-design-checkpoint.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "evidence": "TypeScript completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd eslint src/lib/game-ui/contracts.ts src/lib/game-ui/contracts.test.ts",
+      "exitCode": 0,
+      "evidence": "ESLint completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd vitest run src/lib/game-ui/contracts.test.ts",
+      "exitCode": 0,
+      "evidence": "1 test file passed; 14 tests passed."
+    },
+    {
+      "command": "npx.cmd vitest run src/lib/simulation/client/application-turn-runtime.test.ts src/lib/simulation/client/turn-client.test.tsx src/lib/simulation/client/gameplay-behavior.test.ts",
+      "exitCode": 0,
+      "evidence": "Prompt 12 client/runtime regression suite passed: 3 test files and 12 tests."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "UI contract null-state fixtures",
+    "Relationship score boundaries and directionality",
+    "Major/transformative acknowledgement classification",
+    "Prompt 12 turn client and application runtime regression suite"
+  ],
+  "knownLimitations": [
+    "Vite emitted its pre-existing configLoader=native migration warning; tests still exited 0.",
+    "No game-screen implementation is included before stage 13-6."
+  ],
+  "nextStage": "13-6"
+}
+

@@ -1,0 +1,308 @@
+{
+  "stage": "11-1",
+  "status": "pass",
+  "objective": "Classify static data dependencies in the specified runtime and domain files as seed-only, test-only, runtime-read, or runtime-mutation before removing static runtime truth sources.",
+  "filesRead": [
+    "AGENTS.md",
+    "prompts/PROMPT_11_REMOVE_STATIC_DATA_DEPENDENCY.txt",
+    "src/components/map/WorldMap.tsx",
+    "src/lib/country/country-index.ts",
+    "src/lib/projection/committed-country-search-projection.ts",
+    "src/lib/projection/country-panel-projection.ts",
+    "src/stores/game-setup-store.ts",
+    "src/stores/world-state-store.ts",
+    "src/lib/world/world-state.ts",
+    "src/lib/world/world-state-v2.ts"
+  ],
+  "changedFiles": [
+    "reports/prompt11/11-1-static-data-dependency-audit.json"
+  ],
+  "commands": [
+    "Get-Content -LiteralPath 'C:\\Users\\SSAFY\\Desktop\\local-map\\prompts\\PROMPT_11_REMOVE_STATIC_DATA_DEPENDENCY.txt'",
+    "Get-ChildItem -LiteralPath 'C:\\Users\\SSAFY\\Desktop\\local-map' -Force",
+    "git status --short",
+    "Get-Content -LiteralPath 'src/components/map/WorldMap.tsx'",
+    "Get-Content -LiteralPath 'src/lib/country/country-index.ts'",
+    "Get-Content -LiteralPath 'src/lib/projection/committed-country-search-projection.ts'",
+    "Get-Content -LiteralPath 'src/lib/projection/country-panel-projection.ts'",
+    "Get-Content -LiteralPath 'src/stores/game-setup-store.ts'",
+    "Get-Content -LiteralPath 'src/stores/world-state-store.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/world-state.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/world-state-v2.ts'",
+    "rg -n \"countries-2020|countryById|/data/maps|fetch\\(|WorldState|world-state|committedCountry|countrySearchProjection|countryPanelProjection\" src/components/map/WorldMap.tsx src/lib/country/country-index.ts src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-panel-projection.ts src/stores/game-setup-store.ts src/stores/world-state-store.ts src/lib/world/world-state.ts src/lib/world/world-state-v2.ts",
+    "Get-ChildItem -LiteralPath 'reports\\prompt11' -Force",
+    "New-Item -ItemType Directory -Force -Path 'reports\\prompt11'",
+    "Get-Content -LiteralPath 'reports\\prompt10\\10-124-final.json'"
+  ],
+  "gates": {
+    "auditCompleted": true,
+    "specifiedSourceFileCount": 8,
+    "sourceFilesReadCount": 8,
+    "countries2020ImportRuntimeReadCount": 3,
+    "countryByIdRuntimeReadCount": 3,
+    "publicMapGeoJsonRuntimeReadSites": 16,
+    "publicMapGeoJsonRuntimeMutationSites": 2,
+    "v1WorldStateProductionImportCount": 1,
+    "v1WorldStateMutationApiCount": 4,
+    "worldStateV2StaticDataDependencyCount": 0,
+    "testsExecuted": false
+  },
+  "dependencyClassification": [
+    {
+      "file": "src/components/map/WorldMap.tsx",
+      "classification": "runtime-read",
+      "dependencies": [
+        {
+          "line": 5,
+          "source": "@/lib/country/country-index",
+          "symbol": "countryById",
+          "usage": "Focus-country event reads static country center/defaultZoom through countryById."
+        },
+        {
+          "line": 8,
+          "source": "@/data/country-label-metrics-2020.json",
+          "symbol": "labelMetrics",
+          "usage": "Runtime debug and label bounds helpers read static label metrics."
+        },
+        {
+          "lines": "31-37",
+          "source": "/data/maps/*.geojson",
+          "symbol": "MapLibre style source data URLs",
+          "usage": "Initial map fill, borders, labels, glyphs, capitals, and small-country markers are loaded from public static map artifacts as runtime truth."
+        },
+        {
+          "line": 65,
+          "source": "/data/maps/country-label-glyph-fills-2020.geojson",
+          "symbol": "fetch",
+          "usage": "Runtime fetch of glyph fill features for rendered-label evidence/debug state."
+        },
+        {
+          "lines": "79-81",
+          "source": "/data/maps/countries-10m.geojson, /data/maps/admin1-boundaries-10m.geojson, /data/maps/admin1-validation-2020.json",
+          "symbol": "fetch",
+          "usage": "Runtime detail loading reads high-resolution country geometry, admin boundaries, and validation artifacts."
+        },
+        {
+          "line": 85,
+          "source": "/data/maps/country-borders-10m.geojson",
+          "symbol": "map.addSource",
+          "usage": "Runtime adds high-resolution border source directly from public static GeoJSON."
+        },
+        {
+          "lines": "117,125",
+          "source": "@/lib/country/country-index",
+          "symbol": "countryById",
+          "usage": "Runtime focus and debug label filtering read static country records."
+        }
+      ]
+    },
+    {
+      "file": "src/components/map/WorldMap.tsx",
+      "classification": "runtime-mutation",
+      "dependencies": [
+        {
+          "lines": "101-102",
+          "source": "/data/maps/countries-50m.geojson, /data/maps/countries-10m.geojson, /data/maps/country-borders-50m.geojson, /data/maps/country-borders-10m.geojson, /data/maps/admin1-boundaries-10m.geojson, /data/maps/country-labels-2020.geojson, /data/maps/country-label-glyph-fills-2020.geojson, /data/maps/country-label-glyph-outlines-2020.geojson, /data/maps/china-province-countries-test.geojson",
+          "symbol": "splitChinaIntoProvinceCountries",
+          "usage": "Debug scenario fetches public static map artifacts, constructs altered FeatureCollections, and applies them via setSourceData."
+        },
+        {
+          "lines": "104-113",
+          "source": "MapLibre GeoJSON sources",
+          "symbol": "setSourceData",
+          "usage": "Debug split/rollback mutates MapLibre source data directly instead of going through v2 commands and projections."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/country/country-index.ts",
+      "classification": "runtime-read",
+      "dependencies": [
+        {
+          "line": 1,
+          "source": "@/data/countries-2020.json",
+          "symbol": "data",
+          "usage": "Production-importable module reads static country records at module load."
+        },
+        {
+          "lines": "4-6",
+          "source": "@/data/countries-2020.json",
+          "symbol": "countries, countryById, searchCountries",
+          "usage": "Exports static country list, static id index, and static search routine for runtime consumers."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/projection/committed-country-search-projection.ts",
+      "classification": "runtime-read",
+      "dependencies": [
+        {
+          "line": 1,
+          "source": "@/data/countries-2020.json",
+          "symbol": "data",
+          "usage": "Committed search projection is seeded directly from static countries at module load."
+        },
+        {
+          "lines": "16-41",
+          "source": "@/data/countries-2020.json",
+          "symbol": "seedCountries, committedCountrySearchProjection",
+          "usage": "Runtime search projection revision 0 is built from static country records rather than committed WorldStateV2 projection output."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/projection/country-panel-projection.ts",
+      "classification": "runtime-read",
+      "dependencies": [
+        {
+          "line": 1,
+          "source": "@/data/countries-2020.json",
+          "symbol": "data",
+          "usage": "Committed panel projection is seeded directly from static countries at module load."
+        },
+        {
+          "lines": "31-58",
+          "source": "@/data/countries-2020.json",
+          "symbol": "seedCountries, committedCountryPanelProjection",
+          "usage": "Runtime panel core/input/playable maps at revision 0 are built from static country records."
+        }
+      ]
+    },
+    {
+      "file": "src/stores/game-setup-store.ts",
+      "classification": "runtime-read",
+      "dependencies": [
+        {
+          "lines": "3-10",
+          "source": "@/lib/projection/committed-country-search-projection, @/lib/projection/country-panel-projection",
+          "symbol": "committedCountrySearchProjection, committedCountryPanelProjection",
+          "usage": "Store initial state consumes projections that are currently seeded from static countries-2020 data."
+        },
+        {
+          "lines": "51-52",
+          "source": "static-seeded committed projections",
+          "symbol": "countrySearchProjection, countryPanelProjection",
+          "usage": "Runtime selection and player validation start from static-seeded projections."
+        },
+        {
+          "lines": "72-88,104-135",
+          "source": "store projection state",
+          "symbol": "selectCountry, confirmPlayerCountry, setCountrySearchProjection, restorePersistedState",
+          "usage": "Selection, player-country validation, persisted player restore, and cleanup are projection-driven but inherit static truth until projections are produced from WorldStateV2."
+        }
+      ]
+    },
+    {
+      "file": "src/stores/world-state-store.ts",
+      "classification": "runtime-mutation",
+      "dependencies": [
+        {
+          "lines": "4-9",
+          "source": "@/lib/world/world-state",
+          "symbol": "assertWorldState, CountryEntity, WorldState",
+          "usage": "Production store imports v1 WorldState instead of WorldStateV2."
+        },
+        {
+          "lines": "18-31,73-94",
+          "source": "@/lib/world/world-state",
+          "symbol": "WorldStateStoreController, createWorldStateStore, replaceWorldState",
+          "usage": "Store controller validates and replaces mutable v1 world state snapshots."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/world/world-state.ts",
+      "classification": "runtime-mutation",
+      "dependencies": [
+        {
+          "lines": "38-55",
+          "source": "v1 WorldState model",
+          "symbol": "WorldState, CountryReplacement, WorldStateRollback",
+          "usage": "Defines v1 country-centric mutable world state and rollback shape."
+        },
+        {
+          "lines": "210-281",
+          "source": "seed metadata and GeoJSON feature inputs",
+          "symbol": "createWorldState",
+          "usage": "Creates v1 world state from static metadata, geometry features, and capital features."
+        },
+        {
+          "lines": "292-369",
+          "source": "v1 WorldState",
+          "symbol": "replaceCountryNames, replaceCountryGeometry, applyCountryReplacement, rollbackCountryReplacement",
+          "usage": "Provides v1 mutation APIs that can advance revision outside the v2 command/projection pipeline."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/world/world-state-v2.ts",
+      "classification": "seed-only",
+      "dependencies": [
+        {
+          "lines": "1-221",
+          "source": "domain entity constructors and topology validators",
+          "symbol": "createWorldStateV2",
+          "usage": "No direct countries-2020, countryById, public map GeoJSON, or v1 WorldState runtime dependency was found in this file."
+        }
+      ]
+    }
+  ],
+  "staticSourceInventory": {
+    "countries2020JsonImports": [
+      "src/lib/country/country-index.ts:1",
+      "src/lib/projection/committed-country-search-projection.ts:1",
+      "src/lib/projection/country-panel-projection.ts:1"
+    ],
+    "countryByIdRuntimeImports": [
+      "src/components/map/WorldMap.tsx:5"
+    ],
+    "countryByIdRuntimeReads": [
+      "src/components/map/WorldMap.tsx:117",
+      "src/components/map/WorldMap.tsx:125"
+    ],
+    "publicMapRuntimeReads": [
+      "src/components/map/WorldMap.tsx:31",
+      "src/components/map/WorldMap.tsx:32",
+      "src/components/map/WorldMap.tsx:33",
+      "src/components/map/WorldMap.tsx:34",
+      "src/components/map/WorldMap.tsx:35",
+      "src/components/map/WorldMap.tsx:36",
+      "src/components/map/WorldMap.tsx:37",
+      "src/components/map/WorldMap.tsx:65",
+      "src/components/map/WorldMap.tsx:79",
+      "src/components/map/WorldMap.tsx:80",
+      "src/components/map/WorldMap.tsx:81",
+      "src/components/map/WorldMap.tsx:85",
+      "src/components/map/WorldMap.tsx:101",
+      "src/components/map/WorldMap.tsx:102"
+    ],
+    "publicMapRuntimeMutations": [
+      "src/components/map/WorldMap.tsx:104",
+      "src/components/map/WorldMap.tsx:110"
+    ],
+    "v1WorldStateProductionUsages": [
+      "src/stores/world-state-store.ts:4",
+      "src/stores/world-state-store.ts:73",
+      "src/lib/world/world-state.ts:210",
+      "src/lib/world/world-state.ts:292",
+      "src/lib/world/world-state.ts:306",
+      "src/lib/world/world-state.ts:321",
+      "src/lib/world/world-state.ts:363"
+    ],
+    "testOnlyStaticDependencies": [
+      "No test-only static dependency was identified inside the 8 files audited for 11-1."
+    ]
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "No production source code was changed in this stage; this is an audit-only report.",
+    "WorldMap.tsx is the largest runtime static dependency surface: it reads public map artifacts as MapLibre source truth, fetches detail artifacts, imports countryById, and contains a debug split/rollback path that directly mutates map source data.",
+    "country-index.ts is a direct static runtime source because it imports countries-2020.json and exports countries, countryById, and searchCountries.",
+    "committed-country-search-projection.ts and country-panel-projection.ts currently look like projection modules, but their revision 0 state is still built from countries-2020.json at production module load.",
+    "game-setup-store.ts is indirect: it consumes static-seeded committed projections for selection, player validation, and persisted player restore.",
+    "world-state-store.ts is still v1 runtime infrastructure because it imports and validates src/lib/world/world-state.ts instead of WorldStateV2.",
+    "world-state-v2.ts has no direct static data dependency in the audited file set.",
+    "Tests were intentionally not executed because 11-1 is an audit stage and the prompt says checkpoint stages should run wider suites."
+  ],
+  "nextStage": "11-2"
+}

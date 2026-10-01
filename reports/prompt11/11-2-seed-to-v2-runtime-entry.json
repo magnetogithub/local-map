@@ -1,0 +1,105 @@
+{
+  "stage": "11-2",
+  "status": "pass",
+  "objective": "Expose a single production runtime entrypoint that builds the initial WorldStateV2 from seed inputs and ensure app startup calls it without creating v1 WorldState.",
+  "filesRead": [
+    "reports/prompt11/11-1-static-data-dependency-audit.json",
+    "node_modules/next/dist/docs/01-app/01-getting-started/05-server-and-client-components.md",
+    "src/lib/world/initial-world-state-v2.ts",
+    "src/lib/world/seed-v1-to-v2.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/lib/world/initial-world-state-v2.test.ts",
+    "src/lib/world/seed-topology-audit.test.ts",
+    "src/lib/world/initial-world-state.ts",
+    "src/lib/world/world-content-hash.ts",
+    "src/lib/world/domain-hash-root.ts",
+    "src/lib/world/incremental-domain-hash.ts",
+    "src/lib/world/topology-edge-hash.ts",
+    "src/lib/world/country-core-hash.ts",
+    "src/lib/world/territory-geometry-hash.ts",
+    "src/lib/world/territory-ownership-hash.ts",
+    "src/lib/world/country-presentation-hash.ts",
+    "src/lib/world/canonical-geometry-serializer.ts",
+    "tsconfig.json",
+    "package.json"
+  ],
+  "changedFiles": [
+    "src/lib/world/initial-world-state-v2.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/lib/world/initial-world-state-v2.test.ts",
+    "reports/prompt11/11-2-seed-to-v2-runtime-entry.json"
+  ],
+  "commands": [
+    "Get-Content -LiteralPath 'reports\\prompt11\\11-1-static-data-dependency-audit.json'",
+    "Get-Content -LiteralPath 'src/lib/world/initial-world-state-v2.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/seed-v1-to-v2.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/world-state-v2.ts'",
+    "Get-Content -LiteralPath 'src/app/page.tsx'",
+    "Get-Content -LiteralPath 'src/components/layout/GameSetupShell.tsx'",
+    "rg -n \"createInitialWorldStateV2|migrateWorldSeedV1ToV2|createWorldState\\(|WorldStateV2|initialWorld|worldState\" src/app/page.tsx src/components/layout/GameSetupShell.tsx src/lib src/stores",
+    "Get-Content -LiteralPath 'node_modules\\next\\dist\\docs\\01-app\\01-getting-started\\05-server-and-client-components.md'",
+    "Get-Content -LiteralPath 'src/lib/world/initial-world-state-v2.test.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/seed-topology-audit.test.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/initial-world-state.ts'",
+    "rg -n \"countries-2020|countries-10m|capitals-2020|createInitialWorldState|initial-world-state|createWorldStateStore|GameSetupShell\" src data public package.json",
+    "Get-Content -LiteralPath 'tsconfig.json'",
+    "Get-Content -LiteralPath 'package.json'",
+    "Get-Content -LiteralPath 'src/lib/world/world-content-hash.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/domain-hash-root.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/incremental-domain-hash.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/topology-edge-hash.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/country-core-hash.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/territory-geometry-hash.ts'; Get-Content -LiteralPath 'src/lib/world/territory-ownership-hash.ts'; Get-Content -LiteralPath 'src/lib/world/country-presentation-hash.ts'",
+    "Get-Content -LiteralPath 'src/lib/world/canonical-geometry-serializer.ts'",
+    "rg -n \"CanonicalGeometryPolicy|territoryGeometryLeafHash\\(|countryPresentationLeafHash\\(|createIncrementalDomainHashState\\(\" src/lib src/stores",
+    "npm.cmd test -- --run src/lib/world/initial-world-state-v2.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "git diff -- src/lib/world/initial-world-state-v2.ts src/lib/world/initial-world-state-v2.test.ts src/app/page.tsx src/components/layout/GameSetupShell.tsx",
+    "npm.cmd run lint -- src/lib/world/initial-world-state-v2.ts src/lib/world/initial-world-state-v2.test.ts src/app/page.tsx src/components/layout/GameSetupShell.tsx",
+    "git status --short -- src/lib/world/initial-world-state-v2.ts src/lib/world/initial-world-state-v2.test.ts src/app/page.tsx src/components/layout/GameSetupShell.tsx reports/prompt11"
+  ],
+  "gates": {
+    "singleProductionInitialWorldStateV2Entrypoint": true,
+    "appPageCallsV2Entrypoint": true,
+    "gameSetupShellCreatesV1State": false,
+    "runtimeV1CreateWorldStateCallCountInStageFiles": 0,
+    "initialWorldStateSchemaVersion": 2,
+    "initialWorldStateRevision": 0,
+    "initialCountryCount": 247,
+    "initialTerritoryCount": 247,
+    "territoryOwnerReferencesAllActiveCountries": true,
+    "topologyEdgeCountGreaterThanZero": true,
+    "hashRootsAreSha256": true,
+    "targetedTest": "pass",
+    "typecheck": "pass",
+    "scopedLint": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "Added createProductionInitialWorldStateV2() as the single production seed-to-v2 entrypoint in src/lib/world/initial-world-state-v2.ts.",
+    "The production entrypoint reads seed metadata and public seed GeoJSON on the server side, migrates to WorldStateV2, builds canonical topology, and writes non-null domain hash roots.",
+    "src/app/page.tsx now calls the v2 production entrypoint and passes a serializable InitialWorldStateV2Bootstrap to the client shell.",
+    "GameSetupShell no longer starts without initial v2 bootstrap metadata; it does not create or import v1 WorldState.",
+    "Full WorldStateV2 is not passed to the client component yet because retiredCountryIds is a Set and Next client props must be serializable. Stage 11-3 can install the v2 store boundary with an explicit serialized snapshot shape.",
+    "The first targeted test run failed because Vite did not parse .geojson imports as JSON modules; the production seed wrapper was changed to server-side fs reads."
+  ],
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/lib/world/initial-world-state-v2.test.ts",
+      "status": "pass",
+      "result": "1 test file passed, 2 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit --incremental false",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/world/initial-world-state-v2.ts src/lib/world/initial-world-state-v2.test.ts src/app/page.tsx src/components/layout/GameSetupShell.tsx",
+      "status": "pass"
+    }
+  ],
+  "nextStage": "11-3"
+}

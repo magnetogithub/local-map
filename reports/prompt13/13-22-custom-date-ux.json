@@ -1,0 +1,32 @@
+{
+  "stage": "13-22",
+  "status": "pass",
+  "summary": "1일, 1주, 1개월 preset과 ISO 목표 날짜 직접 입력을 하나의 진행 선택 UI와 진행 시작 버튼으로 통합했다.",
+  "validation": {
+    "format": "native date input plus targetDateForCustomInput canonical ISO validation",
+    "range": "current date보다 뒤이고 최대 366일",
+    "invalidBehavior": "진행 시작을 비활성화하고 controller/API를 호출하지 않음",
+    "validBehavior": "사용자가 입력한 YYYY-MM-DD 문자열을 advanceToDate에 변경 없이 전달",
+    "requestEvidence": "controller regression verifies the same date becomes request.context.period.endDate"
+  },
+  "tests": [
+    "preset 선택은 즉시 요청하지 않고 단일 진행 시작 버튼에서 실행",
+    "행동이 없으면 명시적인 시간만 진행 checkbox 필요",
+    "현재 날짜와 invalid ISO 입력은 controller 전에 차단",
+    "2020-02-29 입력이 그대로 advanceToDate 및 frozen request에 전달",
+    "locale 기반 날짜 parsing 없음"
+  ],
+  "verification": {
+    "typescriptExitCode": 0,
+    "eslintExitCode": 0,
+    "vitest": {"exitCode": 0, "files": 7, "tests": 42},
+    "productionBuildExitCode": 0,
+    "playwright": {"exitCode": 0, "tests": 2}
+  },
+  "screenshots": [
+    "screenshots/prompt13-23-action-1280x720.png",
+    "screenshots/prompt13-23-action-1920x1080.png"
+  ],
+  "knownLimitations": [],
+  "nextStage": "13-23"
+}

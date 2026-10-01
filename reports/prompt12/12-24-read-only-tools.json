@@ -1,0 +1,1 @@
+{"stage":"12-24","status":"pass","changedFiles":["src/lib/simulation/server/simulation-tools.ts"],"gates":{"readOnlyToolCount":5,"strictSchemas":"pass","allObjectsRejectAdditionalProperties":true,"effectExecutorAccess":false}}

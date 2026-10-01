@@ -1,2 +1,5 @@
-import { GameSetupShell } from "@/components/layout/GameSetupShell";
-export default function Home(){return <GameSetupShell/>}
+import {WorldAppPage} from "@/components/layout/WorldAppPage";
+
+export default function Home() {
+  return <WorldAppPage mode="setup" />;
+}

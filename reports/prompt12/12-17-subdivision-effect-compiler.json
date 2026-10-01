@@ -1,0 +1,37 @@
+{
+  "stage": "12-17",
+  "status": "pass",
+  "objective": "Materialize stable subdivision refs and compile atomic partition/establishment or partition/split batches.",
+  "filesRead": [
+    "src/lib/simulation/subdivision-catalog.ts",
+    "src/lib/commands/territory-partition-v2.ts",
+    "src/lib/commands/country-split-v2.ts",
+    "src/lib/commands/country-establish-v2.ts",
+    "src/lib/planning/batch-local-reference-resolver.ts",
+    "src/lib/planning/territory-partition-planner.ts",
+    "src/lib/planning/country-split-planner.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/world-effect-compiler.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-17-subdivision-effect-compiler.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "stableRefsMaterialized": "pass",
+    "sourceVersionMismatchFailsClosed": "pass",
+    "missingBoundaryFailsClosed": "pass",
+    "noPartialBatchOnFailure": "pass",
+    "usaResultCountryCount": 50
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Geometry enters only from the trusted versioned catalog, never from the resolution."
+  ],
+  "notes": [
+    "Subdivision establishment compiles partition, unclaim, and establish as one internal batch."
+  ],
+  "nextStage": "12-18"
+}

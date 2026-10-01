@@ -1,0 +1,45 @@
+{
+  "stage": "12-22",
+  "status": "pass",
+  "objective": "Run the deterministic provider-free turn runtime checkpoint.",
+  "filesRead": [
+    "src/lib/simulation/simulation-state.ts",
+    "src/lib/simulation/initial-simulation-state.ts",
+    "src/lib/simulation/simulation-context.ts",
+    "src/lib/simulation/subdivision-catalog.ts",
+    "src/lib/simulation/world-effect-compiler.ts",
+    "src/lib/simulation/resolved-turn-plan.ts",
+    "src/lib/simulation/atomic-turn-runtime.ts",
+    "src/lib/simulation/simulation-persistence.ts",
+    "src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "changedFiles": [
+    "reports/prompt12/12-22-turn-runtime-checkpoint.json"
+  ],
+  "commands": [
+    "npx tsc --noEmit",
+    "npx eslint <12-11 through 12-21 simulation files>",
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts src/lib/simulation/turn-runtime.test.ts",
+    "rg direct map editing imports under gameplay UI"
+  ],
+  "gates": {
+    "diplomaticFailureNoMapEffect": "pass",
+    "unificationNegotiationDelayed": "pass",
+    "ratificationThenUnification": "pass",
+    "subdivisionIndependence": "pass",
+    "compilerFailureRollback": "pass",
+    "turnUndoRedo": "pass",
+    "typecheck": "pass",
+    "targetedTests": "29 passed",
+    "directGameplayMapEditingPathAdded": false
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "No provider, network, API key, route, or gameplay command-input path is present.",
+    "All map changes originate in causally validated semantic effects and trusted catalog geometry."
+  ],
+  "notes": [
+    "The targeted test run may emit the pre-existing Vite configLoader migration warning; exit status remains zero."
+  ],
+  "nextStage": "12-23"
+}

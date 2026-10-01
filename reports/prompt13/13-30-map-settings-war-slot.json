@@ -1,0 +1,13 @@
+{
+  "stage": "13-30",
+  "status": "pass",
+  "summary": "지도 설정은 layer layout/paint property만 변경하며 네 world GeoJSON source의 controller snapshot과 source identity를 보존한다. 빈 전쟁 source와 hidden war layer slot도 유지된다.",
+  "filesChanged": ["src/components/map/WorldMap.tsx", "src/types/map-debug.ts", "e2e/prompt13-integration.spec.ts", "src/lib/game-ui/map-ui-settings-adapter.test.ts"],
+  "commands": [
+    {"command": "npx vitest run src/lib/map/map-source-incremental-adapter.test.ts src/lib/projection/world-map-runtime-projection.test.ts src/lib/game-ui/map-ui-settings-adapter.test.ts", "exitCode": 0, "evidence": "3 files, 21 tests passed"},
+    {"command": "npm run test:e2e -- e2e/prompt13-integration.spec.ts", "exitCode": 0, "evidence": "2 viewport flows passed; snapshot and source identity were equal before/after settings toggles"}
+  ],
+  "tests": ["layer visibility/paint mutation only", "setData/updateData not called by settings adapter", "controller snapshot unchanged", "all four source identities unchanged", "empty war source and hidden layers retained"],
+  "knownLimitations": ["Authoritative war data port is not connected; the reserved production source is intentionally empty."],
+  "nextStage": "13-31"
+}

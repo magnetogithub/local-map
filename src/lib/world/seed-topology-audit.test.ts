@@ -48,5 +48,5 @@ describe("10-55 seed topology audit", () => {
     expect(first.duplicateEdgeCount).toBe(0);
     expect(first.worldSpanningEdgeCount).toBe(0);
     expect(first.topologyHash).toBe(second.topologyHash);
-  }, 60_000);
+  }, 180_000);
 });

@@ -6,7 +6,7 @@ import type {Country} from "@/types/country";
 import {computeCountryLabelLayout,type PolygonGeometry} from "@/lib/map/country-label-layout";
 import {createMapLibreCountryLabelMetrics} from "@/lib/map/font-metrics";
 import {countryById,countries as searchCountriesSource,searchCountries} from "@/lib/country/country-index";
-import {applyCountryReplacement,countryEntityGeometryHash,countryEntityLabelCacheKey,countryEntityToCountry,countryEntityToLabelInput,createWorldState,replaceCountryGeometry,replaceCountryNames,rollbackCountryReplacement,type CapitalFeature,type CountryEntity,type CountryGeometryFeature} from "./world-state";
+import {applyCountryReplacement,countryEntityGeometryHash,countryEntityLabelCacheKey,countryEntityToCountry,countryEntityToLabelInput,createWorldState,replaceCountryGeometry,replaceCountryNames,rollbackCountryReplacement,type CapitalFeature,type CountryEntity,type CountryGeometryFeature} from "../test-only/legacy-v1/world-state";
 const read=<T,>(file:string)=>JSON.parse(fs.readFileSync(path.join(process.cwd(),file),"utf8")) as T;
 const geometry=read<{features:CountryGeometryFeature[]}>("public/data/maps/countries-10m.geojson"),capitals=read<{features:CapitalFeature[]}>("public/data/maps/capitals-2020.geojson");
 const state=createWorldState(metadata as Country[],geometry.features,capitals.features);

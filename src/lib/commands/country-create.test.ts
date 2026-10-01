@@ -4,14 +4,14 @@ import {
   WORLD_STATE_SCHEMA_VERSION,
   type CountryEntity,
   type WorldState,
-} from "@/lib/world/world-state";
+} from "@/lib/test-only/legacy-v1/world-state";
 
 import {
   countryCreateCommandSchema,
   parseCountryCreateCommand,
   safeParseCountryCreateCommand,
   type CountryCreateCommand,
-} from "./country-create";
+} from "@/lib/test-only/legacy-v1/country-create";
 
 const country = (id = "NEW"): CountryEntity => ({
   id,

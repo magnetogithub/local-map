@@ -1,0 +1,33 @@
+{
+  "stage": "12-4",
+  "status": "pass",
+  "objective": "Implement strict queued player actions and pure queue/cancel operations.",
+  "filesRead": [
+    "src/lib/simulation/simulation-clock.ts",
+    "src/stores/game-setup-store.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/queued-player-action.ts",
+    "src/lib/simulation/simulation-contract.test.ts",
+    "reports/prompt12/12-4-queued-player-action.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts",
+    "npx eslint src/lib/simulation/*.ts"
+  ],
+  "gates": {
+    "emptyAndOversizedRejected": "pass",
+    "hostActorInjected": "pass",
+    "duplicateActionRejected": "pass",
+    "actorMismatchRejected": "pass",
+    "resolvingCancelRejected": "pass",
+    "enqueueDoesNotAdvanceState": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Actor country is accepted only from the host player-country argument.",
+    "Player action text is bounded untrusted data."
+  ],
+  "notes": [],
+  "nextStage": "12-5"
+}

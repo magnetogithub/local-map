@@ -1,9 +1,0 @@
-
-> pax-local@0.1.0 start
-> next start -p 3018
-
-▲ Next.js 16.3.0
-- Local:         http://localhost:3018
-- Network:       http://70.12.50.63:3018
-✓ Ready in 168ms
-✓ Running next.config.ts took 36ms

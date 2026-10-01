@@ -1,0 +1,987 @@
+# 프롬프트 13 — 대체역사 게임 내부 UI
+
+## 0. 목적
+
+저장소 루트를 기준으로 작업한다. 특정 개발 머신의 절대 경로를 코드나 보고서에 기록하지 않는다.
+
+Prompt 12까지 구현된 국가 선택, 세계 지도, GPT 턴 판정, 사건 기록, 지도 변경, 턴 단위 undo/redo를 하나의 실제 게임 화면으로 재구성한다.
+
+현재 `/game`은 지도 옆에 기존 `CountryPanel`과 `SimulationPanel`을 배치한 과도기 화면이다. Prompt 13의 목표는 `/game`을 다음 구조를 가진 전체 화면 전략 게임 인터페이스로 완성하는 것이다.
+
+```text
+전체 화면 세계 지도
+├─ 좌측 상단: 플레이 국가 표식
+├─ 상단 중앙: 인구·경제·알림 HUD
+├─ 우측 상단: 현재 날짜와 턴 진행 상태
+├─ 화면 가장자리: 정치·경제·외교·전쟁·국가 행동·뉴스·저장·설정 메뉴
+├─ 지도 위 단일 오버레이 창
+└─ 주요 사건 발생 시 진행을 멈추는 뉴스 모달
+```
+
+이번 프롬프트는 **내부 게임 UI를 완성하는 단계**다. 정치, 경제, 인구, 지도자, 외교 관계, 전쟁을 계산하는 새로운 시뮬레이션 엔진은 만들지 않는다. 존재하지 않는 값을 꾸며내지 않고, 후속 엔진이 연결될 명시적인 view-model/port와 정상적인 빈 상태를 만든다.
+
+기존 Prompt 12의 실제 기능은 그대로 유지한다.
+
+- 자연어 국가 행동을 대기열에 추가
+- 1일, 1주, 1개월 또는 사용자가 직접 입력한 목표 날짜까지 진행
+- 서버 전용 GPT 판정
+- 사건과 지도 효과의 원자적 commit
+- 지도·라벨·검색·선택 상태의 갱신
+- Stop, Retry, undo, redo
+- 새로고침 또는 개발 서버 재시작 시 초기 세계로 시작
+
+## 1. 제품 방향과 참고 범위
+
+### 1.1 참고 대상
+
+다음 두 게임의 공개 화면과 공개 설명에서 정보 구조와 상호작용 원칙을 참고한다.
+
+- Hearts of Iron IV: 지도 중심 전체 화면, 좌측 상단 플레이 국가, 상단 상태 HUD, 우측 상단 날짜, 지도 위 관리 창, 외교 대상 국가 문맥
+- Pax Historia: 자연어 국가 행동, 시간 점프 결과, 사건 뉴스, 외교 채널과 국가 간 대화의 흐름
+
+참고 자료:
+
+- `https://github.com/Jack124473/pax-historia/blob/main/docs/DESIGN.md`
+- `https://www.paxhistoria.co/`
+- Paradox 공식 Hearts of Iron IV 페이지와 공개 스크린샷
+
+참고 대상의 소스 코드, 프롬프트, 이미지, 아이콘, 문구, 상표 표현을 복사하지 않는다. 이 프로젝트의 기존 지도, 색상, 글꼴, 컴포넌트 체계로 독자적인 화면을 만든다.
+
+### 1.2 사용자가 확정한 결정
+
+1. 지도는 게임 화면 전체를 차지한다.
+2. 관리 화면은 지도 위에 창으로 열린다.
+3. 동시에 하나의 오버레이 창만 연다.
+4. 좌측 상단에 플레이 국가를 표시한다.
+5. 현재 날짜는 우측 상단에 표시한다.
+6. 인구는 상단 HUD에 둔다.
+7. 경제는 별도 메뉴와 오버레이를 둔다.
+8. 정치 체제와 지도자는 정치 오버레이에 둔다.
+9. 정확한 군사력 총량 수치는 표시하지 않는다.
+10. 외국을 선택하면 양방향 호감도를 각각 `-100..100` 범위로 표시한다.
+11. 진행 중 전쟁은 전쟁 메뉴에서 목록으로 본다.
+12. 국가 행동 입력은 별도 메뉴에서 한다.
+13. 최근 국제 사건은 뉴스 형식으로 표시한다.
+14. `major` 또는 `transformative` 사건마다 진행을 멈추고 사용자가 확인한다.
+15. 외교 오버레이에는 외국과 API로 대화할 후속 외교 채널 UI를 둔다.
+16. 저장은 이번 단계에서 버튼과 안내 상태만 만든다.
+17. 전쟁과 전선 관련 지도 표시를 위한 UI 레이어 선택기를 포함한다.
+18. 세부 게임 시스템의 실제 계산과 서버 저장은 후속 프롬프트에서 구현한다.
+
+## 2. 절대 원칙
+
+### 2.1 지도와 simulation state는 기존 owner를 유지한다
+
+- `WorldStateV2`를 복제하는 별도 UI world state를 만들지 않는다.
+- `SimulationStateV1`을 복제하는 별도 UI simulation state를 만들지 않는다.
+- `WorldStateStoreController`와 기존 application turn runtime을 재사용한다.
+- 지도 컴포넌트가 UI 패널의 임시 데이터를 authoritative state로 읽지 않게 한다.
+- 화면 재구성을 이유로 Prompt 10~12의 command, planner, validator, commit 경로를 우회하지 않는다.
+
+### 2.2 기존 턴 기능을 presentation과 분리한다
+
+현재 `SimulationPanel.tsx` 안에 결합된 다음 책임을 분리한다.
+
+- application turn runtime 소유와 lifecycle
+- action draft와 queue/cancel
+- time advance 요청
+- streaming phase, Stop, Retry
+- commit, undo, redo
+- turn report projection
+- 패널 렌더링
+
+턴 동작은 hook 또는 controller로 추출하고, 새 HUD·국가 행동 창·뉴스 창이 같은 controller를 사용한다. 기존 `SimulationPanel` JSX를 여러 파일에 복사하지 않는다.
+
+### 2.3 이번 단계에서 없는 데이터는 만들지 않는다
+
+정치 체제, 지도자, 인구, 경제 지표, 양방향 호감도, 전쟁 세부 정보가 현재 authoritative state에 없다면 다음처럼 표현한다.
+
+- 값: `—`
+- 상태 문구: `데이터 연결 예정` 또는 문맥에 맞는 정상적인 빈 상태
+- UI model: `number | null`, `string | null`, `readonly Item[]`
+- tooltip 또는 보조 문구로 데이터가 아직 연결되지 않았음을 알린다.
+
+국가별 하드코딩 표, 임의 난수, 국가 코드 기반 가짜 수치, 테스트 fixture의 production 노출을 금지한다.
+
+### 2.4 외교 채널은 UI와 연결 경계까지만 만든다
+
+이번 단계에서는 전용 외교 대화 API가 없다. 따라서 다음까지만 구현한다.
+
+- 상대국 선택
+- 대화 transcript 영역
+- 입력 composer
+- 제안·경고·협력 등 후속 quick intent를 배치할 수 있는 영역
+- `DiplomacyChannelPort`와 request/response view type
+- 연결 전 정상 상태와 오류/로딩 상태의 UI
+
+production에서는 전용 port가 연결되지 않았을 때 전송 버튼을 비활성화하고 `외교 채널 API 연결 예정`을 표시한다. 일반 국가 행동 API를 외교 대화 API인 것처럼 호출하지 않는다. 가짜 상대국 답변도 만들지 않는다.
+
+### 2.5 저장은 버튼만 만든다
+
+- 저장 메뉴와 저장 버튼을 만든다.
+- 버튼을 누르면 `서버 저장 기능은 백엔드 연결 후 제공됩니다`라는 게임 내 안내를 표시한다.
+- localStorage, IndexedDB, Zustand persist, 파일 다운로드로 임시 저장 기능을 만들지 않는다.
+- 현재의 새로고침 초기화 정책을 바꾸지 않는다.
+
+### 2.6 군사력 숫자를 만들지 않는다
+
+병력 총합, 전투력, 전력 점수, 국가 순위 등 정확한 군사력 수치를 표시하지 않는다. 전쟁 UI는 다음 정보 구조만 준비한다.
+
+- 전쟁 이름
+- 교전국
+- 시작일
+- 상태
+- 최근 사건
+- 지도 레이어 표시 여부
+
+데이터가 없으면 빈 상태를 보여준다.
+
+## 3. 화면 정보 구조
+
+### 3.1 기본 레이어 순서
+
+아래 순서를 CSS z-index token으로 고정한다.
+
+```text
+map canvas
+map controls and map labels
+HUD chrome
+edge navigation
+single management overlay
+toast / transient status
+major-event modal
+fatal or unsupported-screen layer
+```
+
+임의의 큰 z-index를 컴포넌트마다 작성하지 않는다.
+
+### 3.2 플레이 국가 표식
+
+좌측 상단에 항상 표시한다.
+
+- 국기 또는 기존 국가 표식
+- 국가 한국어 이름
+- 3글자 국가 코드
+- 선택된 국가가 현재 player country인지 구분되는 accessible label
+- 클릭 시 정치 오버레이 열기
+
+국가 병합 등으로 player country ID가 유지되거나 교체되면 Prompt 12의 `syncSimulationPlayerCountry` 결과를 즉시 반영한다.
+
+### 3.3 상단 HUD
+
+상단 중앙에는 다음 슬롯을 둔다.
+
+- 인구
+- 경제 요약 바로가기
+- 처리되지 않은 주요 사건 수
+- 대기 중 국가 행동 수
+- 진행 중 전쟁 수
+
+실제 값이 없는 슬롯은 `—`를 표시하되 클릭 가능한 메뉴는 정상 작동해야 한다. 아이콘만으로 의미를 전달하지 말고 tooltip과 screen-reader label을 제공한다.
+
+### 3.4 날짜와 진행 상태
+
+우측 상단에는 다음을 표시한다.
+
+- `SimulationStateV1.currentDate`
+- 현재 turn number
+- `대기`, `국제 정세 분석 중`, `자료 확인 중`, `결과 검증 중`, `세계 반영 중`, `주요 사건 확인 필요`, `실패` 중 하나의 사용자용 상태
+- 실행 중 Stop 버튼
+
+실시간으로 자동 진행하는 HOI4식 속도 버튼을 만들지 않는다. 이 프로젝트는 턴 기반이다. 진행 범위는 국가 행동 오버레이에서 정한다.
+
+### 3.5 가장자리 메뉴
+
+다음 항목을 일관된 위치에 둔다.
+
+1. 정치
+2. 경제
+3. 외교
+4. 전쟁
+5. 국가 행동
+6. 뉴스
+7. 저장
+8. 설정
+
+텍스트와 아이콘을 함께 사용한다. 현재 열린 메뉴, hover, focus-visible, 비활성 상태가 구분되어야 한다.
+
+### 3.6 단일 오버레이 상태
+
+UI 상태는 최소한 다음 union으로 관리한다.
+
+```ts
+type GameOverlay =
+  | {kind: "closed"}
+  | {kind: "politics"}
+  | {kind: "economy"}
+  | {kind: "diplomacy"; countryId?: CountryId}
+  | {kind: "wars"; warId?: string}
+  | {kind: "action"}
+  | {kind: "news"; eventId?: string}
+  | {kind: "save"}
+  | {kind: "settings"}
+  | {kind: "country"; countryId: CountryId};
+```
+
+- 새 메뉴를 열면 이전 오버레이를 닫고 새 오버레이 하나만 연다.
+- 같은 메뉴를 다시 누르면 닫는다.
+- Escape는 현재 오버레이를 닫는다.
+- modal인 주요 사건 확인창은 오버레이보다 위에 있으며, 확인 전에는 다음 턴 진행을 막는다.
+- 브라우저 history에 모든 오버레이 상태를 쌓지 않는다.
+
+## 4. 오버레이별 요구사항
+
+### 4.1 정치
+
+- 플레이 국가 표식
+- 정치 체제
+- 국가 지도자
+- 현재 국내 상황
+- 최근 국내 사건
+- 후속 확장 영역
+
+실제 데이터가 없으면 레이아웃이 무너지지 않는 skeleton/empty state를 사용한다. 지도자 초상화를 임의로 생성하거나 외부에서 가져오지 않는다.
+
+### 4.2 경제
+
+- 경제 개요
+- 인구
+- 생산/재정/무역을 위한 후속 카드 자리
+- 최근 경제 관련 사건
+
+현재 사건 중 `outcomeCategory`가 경제 관련으로 판정 가능한 값만 기존 schema에 따라 필터링한다. 문자열 추측으로 분류하지 않는다.
+
+### 4.3 외국 국가 정보
+
+지도에서 외국을 클릭하면 국가 정보 오버레이를 연다.
+
+- 이름, 3글자 코드, 국기/색상
+- 수도와 지역 등 현재 projection에 실제 존재하는 기본 정보
+- 상대국이 플레이 국가를 보는 호감도 `-100..100 | null`
+- 플레이 국가가 상대국을 보는 호감도 `-100..100 | null`
+- 두 값을 방향이 뒤바뀌지 않도록 명시적인 label과 테스트로 고정
+- 외교 채널 열기 버튼
+- 관련 최근 사건
+- 관련 진행 중 전쟁
+
+플레이 국가 자체를 클릭하면 외국 관계 카드 대신 자국 정보와 정치 바로가기를 보여준다.
+
+### 4.4 외교 채널
+
+3열 또는 화면 크기에 맞는 2단 구조를 사용한다.
+
+- 대화/국가 목록
+- 선택 상대국과 양방향 관계 요약
+- transcript
+- 입력 composer
+- quick intent 자리
+- 연결 상태
+
+전용 API가 없는 현재 production 상태에서 작성 중인 draft는 해당 오버레이의 로컬 UI 상태로만 유지한다. 전송은 비활성화한다. 국가 행동 queue에 자동 등록하지 않는다.
+
+### 4.5 전쟁
+
+- 진행 중 전쟁 목록
+- 선택한 전쟁 상세
+- 교전국과 시작일
+- 최근 관련 사건
+- `전쟁 지도 표시` toggle
+- 전선/점령/교전 레이어의 후속 legend 영역
+
+authoritative 전쟁 모델이 없으면 목록은 빈 상태다. 단위 테스트에서는 주입 가능한 view-model fixture로 목록·상세·toggle 레이아웃을 검증한다.
+
+### 4.6 국가 행동
+
+기존 `SimulationPanel` 기능을 게임용 composer로 재배치한다.
+
+- 자연어 행동 textarea
+- 글자 수
+- 대기열 추가
+- 대기열 목록과 취소
+- 1일, 1주, 1개월 quick choice
+- 목표 날짜 직접 입력
+- 시간만 진행할 수 있는 명시적 선택
+- 진행 시작, Stop, Retry
+- 현재 streaming phase
+- undo, redo
+
+직접 입력은 ISO 날짜로 정규화되는 date input을 사용한다. 목표 날짜는 현재 날짜보다 뒤여야 하고, Prompt 12 contract의 허용 범위를 통과해야 한다. locale에 따른 날짜 해석을 하지 않는다.
+
+진행 버튼을 누르는 순간 action IDs, simulation/world revision, target date가 기존 frozen request로 고정되어야 한다. UI refactor가 stale-state 검증을 약화시키면 안 된다.
+
+### 4.7 뉴스
+
+- 전체 사건의 최신순 목록
+- 날짜, 중요도, 제목, 짧은 본문, 관련 국가
+- 중요도 filter
+- 선택 기사 상세
+- 관련 국가 보기
+- 해당 턴의 지도 변화 요약
+- 참모 요약
+
+`SimulationEventV1`과 committed turn report에서만 만든다. 같은 narrative를 관련 국가 반응과 사건 본문에 중복 표시하지 않는다.
+
+### 4.8 저장
+
+- 현재 국가, 날짜, turn number 요약
+- 저장 버튼
+- 백엔드 미연결 안내
+
+버튼은 사용자가 눌렀음을 명확히 피드백하지만 실제 저장 성공처럼 표현하지 않는다.
+
+### 4.9 설정
+
+이번 단계에서는 UI 설정만 허용한다.
+
+- 지도 라벨 표시
+- 수도 마커 표시
+- 국경선 강조
+- 뉴스 알림 표시
+- reduced motion 반영
+
+설정 값은 session 내 React/Zustand UI state로만 유지하고 새로고침 지속성을 만들지 않는다.
+
+## 5. 주요 사건에서 멈추기
+
+### 5.1 기준
+
+`SimulationEventV1.significance`는 다음 기존 enum을 사용한다.
+
+```text
+minor | notable | major | transformative
+```
+
+- `major`, `transformative`: 확인이 필요한 주요 사건
+- `minor`, `notable`: 뉴스 목록과 알림에 추가하되 blocking modal은 열지 않음
+
+문자열 키워드나 사건 제목으로 중요도를 다시 추측하지 않는다.
+
+### 5.2 처리 순서
+
+turn commit이 완료되면 그 turn에서 새로 commit된 주요 사건만 추린다.
+
+1. 날짜와 stable event order로 정렬한다.
+2. 첫 사건을 modal로 표시한다.
+3. 사용자가 `확인`을 누르면 다음 주요 사건을 표시한다.
+4. 모두 확인한 후 turn 결과 요약 또는 뉴스 오버레이로 이동할 수 있다.
+5. 미확인 주요 사건이 있으면 다음 진행 버튼을 비활성화한다.
+
+새로 렌더링되거나 오버레이를 열고 닫았다는 이유로 이미 확인한 사건을 다시 띄우지 않는다. 확인 상태는 현재 in-memory session과 turn/event ID에 묶는다. 새로고침 후 초기화 정책과 충돌하는 영속화는 하지 않는다.
+
+### 5.3 주요 사건 모달
+
+- 날짜
+- 중요도
+- 헤드라인
+- 사건 본문
+- 관련 국가
+- 지도 변화 유무
+- `지도에서 보기`
+- `확인`
+- 여러 사건이면 `1 / N`
+
+modal은 focus trap, 초기 focus, Escape 정책을 갖는다. 주요 사건 확인이 필수이므로 Escape로 완전히 버리지 말고 현재 modal 안에서 명시적인 확인 동작을 하게 한다.
+
+## 6. 지도 상호작용
+
+- 지도는 모든 메뉴 아래에서도 계속 보인다.
+- 오버레이 바깥 지도를 클릭하면 선택 국가를 바꿀 수 있지만, 주요 사건 modal이 열렸을 때는 막는다.
+- 선택 국가에는 기존 hover/focus/selection 표현을 유지한다.
+- 외국 선택 시 국가 오버레이가 열리고 해당 국가에 맞춰 projection을 읽는다.
+- 지도 변화가 commit되면 새 country/territory ID를 즉시 반영한다.
+- retired country를 가리키는 열린 오버레이는 crash하지 않고 successor/player state에 맞게 정리한다.
+- `전쟁 지도 표시`는 현재 데이터가 없을 때 가짜 전선을 그리지 않는다. layer slot과 legend/empty state만 제공한다.
+- 기존 국가 기본 색상, 국경선, subdivision 경계, 국가 라벨 배치를 훼손하지 않는다.
+
+## 7. 시각 설계
+
+### 7.1 분위기
+
+전략 게임에 어울리는 절제된 command room 인상을 만든다.
+
+- 지도 가독성을 해치지 않는 어두운 청회색/먹색 chrome
+- 선택과 경고에 제한적으로 사용하는 황동색/주황색 accent
+- 뉴스에는 종이 문서의 질감을 연상시키는 밝은 surface를 CSS만으로 표현
+- 현재 프로젝트의 국가 색상과 바다색은 유지
+- 텍스트 정보 계층을 색상만으로 구분하지 않음
+
+Pax Historia나 HOI4 화면을 픽셀 단위로 복제하지 않는다. 외부 게임의 이미지나 아이콘을 asset으로 포함하지 않는다.
+
+### 7.2 design token
+
+`globals.css` 전역에 임의 값을 계속 추가하지 말고 게임 UI token을 정의한다.
+
+- surface/background/border/text/accent/danger/success
+- spacing
+- panel width
+- HUD height
+- shadow
+- radius
+- z-index
+- transition duration
+
+기존 스타일과 충돌하지 않도록 `/game` scope 또는 game shell class 아래에 둔다.
+
+### 7.3 지원 화면
+
+- 기준: 1920×1080
+- 최소: 1280×720
+- 1280×720에서도 핵심 버튼과 날짜가 겹치지 않아야 한다.
+- 높이가 낮으면 오버레이 내부만 스크롤한다.
+- 모바일 전용 UI는 이번 범위가 아니다. 기존 unsupported 화면 안내를 유지한다.
+
+## 8. 접근성과 입력
+
+- 모든 icon button에 accessible name을 제공한다.
+- 메뉴와 overlay 제목을 연결한다.
+- focus-visible을 제거하지 않는다.
+- overlay를 열면 제목 또는 첫 조작 요소로 focus를 이동한다.
+- 닫으면 열었던 메뉴 버튼으로 focus를 복원한다.
+- 키보드만으로 메뉴 열기, 국가 행동 입력, 날짜 선택, 진행, 주요 사건 확인이 가능해야 한다.
+- 색약 사용자가 관계도와 중요도를 구분할 수 있도록 숫자·문자 label을 함께 쓴다.
+- loading draft는 `aria-live`를 과도하게 반복하지 않도록 상태와 초안을 구분한다.
+- `prefers-reduced-motion`에서 panel transition과 강조 animation을 줄인다.
+
+## 9. UI 데이터 경계
+
+production component가 domain state를 제각각 해석하지 않도록 pure projection을 둔다.
+
+예시 이름은 저장소 관례에 맞춰 조정할 수 있다.
+
+```ts
+type GameHudViewModel = Readonly<{
+  playerCountry: CountryIdentityView;
+  currentDate: string;
+  turnNumber: number;
+  population: number | null;
+  queuedActionCount: number;
+  unacknowledgedMajorEventCount: number;
+  activeWarCount: number | null;
+}>;
+
+type BilateralOpinionViewModel = Readonly<{
+  playerToTarget: number | null;
+  targetToPlayer: number | null;
+}>;
+
+type PoliticsViewModel = Readonly<{
+  governmentName: string | null;
+  leaderName: string | null;
+  domesticEvents: readonly EventCardViewModel[];
+}>;
+
+type EconomyViewModel = Readonly<{
+  population: number | null;
+  summary: string | null;
+  recentEvents: readonly EventCardViewModel[];
+}>;
+
+type WarListViewModel = Readonly<{
+  wars: readonly WarCardViewModel[];
+  dataAvailable: boolean;
+}>;
+```
+
+`null`을 0으로 바꾸지 않는다. `unknown` 데이터를 `중립`, `평화`, `0명`이라고 표현하지 않는다.
+
+## 10. 구현 구조 권장안
+
+정확한 파일명은 저장소 관례에 맞게 조정할 수 있지만 책임은 분리한다.
+
+```text
+src/components/game/
+  GameScreen.tsx
+  GameHud.tsx
+  GameNavigation.tsx
+  GameOverlayHost.tsx
+  PlayerCountryBadge.tsx
+  GameStatusCluster.tsx
+  overlays/
+    PoliticsOverlay.tsx
+    EconomyOverlay.tsx
+    CountryOverlay.tsx
+    DiplomacyOverlay.tsx
+    WarsOverlay.tsx
+    ActionOverlay.tsx
+    NewsOverlay.tsx
+    SaveOverlay.tsx
+    SettingsOverlay.tsx
+  news/
+    MajorEventModal.tsx
+    EventCard.tsx
+
+src/lib/game-ui/
+  overlay-state.ts
+  game-hud-projection.ts
+  country-view-projection.ts
+  news-projection.ts
+  major-event-queue.ts
+  diplomacy-channel-port.ts
+  war-view-port.ts
+
+src/lib/simulation/client/
+  use-application-turn-controller.ts
+```
+
+기존 `GameSetupShell`은 `/`와 `/game`의 공통 seed/controller wiring만 담당하게 줄인다. `/`의 국가 선택 화면은 Prompt 13 시각 개편 대상이 아니다.
+
+## 11. 실행 규칙
+
+1. 작업 전 `AGENTS.md`와 설치된 Next.js 문서를 읽는다.
+2. 현재 `/`, `/game`, `GameSetupShell`, `SimulationPanel`, `WorldMap`, store/runtime ownership을 감사한다.
+3. 각 단계 종료 후 `reports/prompt13/13-N-*.json`을 작성한다.
+4. 단계 보고서는 주장보다 명령, 종료 코드, 테스트명, artifact 경로를 기록한다.
+5. production에 dev fixture 또는 debug 전용 UI를 남기지 않는다.
+6. 기존 테스트를 삭제하거나 assertion을 약화해서 통과시키지 않는다.
+7. API key 또는 `.env.local` 내용을 출력하거나 보고서에 기록하지 않는다.
+8. 실제 OpenAI 호출은 필수 UI E2E에 사용하지 않는다. deterministic route fixture를 사용한다.
+9. 새 패키지는 꼭 필요한 경우만 추가하며, CSS/React로 가능한 UI 때문에 대형 UI library를 설치하지 않는다.
+10. 각 checkpoint가 실패하면 다음 group으로 넘어가기 전에 원인을 고친다.
+
+## 12. 단계별 작업
+
+### A. 감사와 설계
+
+### 13-1. 현재 game runtime 감사
+
+읽을 파일:
+
+- `AGENTS.md`
+- 설치된 Next.js App Router 문서
+- `src/app/page.tsx`
+- `src/app/game/page.tsx`
+- `src/components/layout/WorldAppPage.tsx`
+- `src/components/layout/GameSetupShell.tsx`
+- `src/components/simulation/SimulationPanel.tsx`
+- `src/components/map/WorldMap.tsx`
+- 관련 store와 runtime
+
+작업: state owner, server/client boundary, map lifetime, player country lifecycle, turn lifecycle, current responsive constraints를 문서화한다.
+
+통과 조건: `docs/game-ui/prompt13-runtime-audit.md`에 재사용할 owner와 제거할 presentation 결합이 구분되어 있다.
+
+### 13-2. 정보 구조와 interaction ADR
+
+작업: `docs/game-ui/internal-game-interface-v1.md`를 작성한다. HUD, menu, overlay state, major event modal, map interaction, 빈 데이터 정책을 명시한다.
+
+통과 조건: 이 프롬프트의 20개 사용자 결정이 빠짐없이 decision table에 매핑되어 있다.
+
+### 13-3. UI visual specification
+
+작업: 1920×1080과 1280×720 기준 wireframe, token, layer order, panel width, scroll owner, focus order를 문서화한다.
+
+통과 조건: 구현자가 임의로 고정 비율이나 외부 게임 asset을 선택하지 않아도 화면을 만들 수 있다.
+
+### 13-4. UI contract와 port 정의
+
+작업: HUD, 정치, 경제, 양방향 관계, 전쟁, 외교 채널, 뉴스 view-model/port를 strict TypeScript type으로 정의한다.
+
+통과 조건: unavailable data가 `null` 또는 `dataAvailable`로 표현되고 production fake 값 없이 component test fixture를 주입할 수 있다.
+
+### 13-5. 설계 checkpoint
+
+실행:
+
+```text
+npx tsc --noEmit
+npx eslint <13-1~13-4에서 변경한 코드 파일>
+npx vitest run <UI contract targeted tests>
+```
+
+통과 조건: 모두 종료 코드 0이고 `reports/prompt13/13-5-design-checkpoint.json`이 생성된다.
+
+### B. Shell과 공통 UI
+
+### 13-6. turn controller 추출
+
+작업: `SimulationPanel`에서 runtime lifecycle과 action/time/stream/commit/history 동작을 hook/controller로 추출한다. presentation이 없어도 테스트할 수 있게 한다.
+
+통과 조건: 기존 Prompt 12 targeted test가 통과하고 queue, cancel, preset advance, Stop, Retry, undo, redo 의미가 바뀌지 않는다.
+
+### 13-7. custom target date
+
+작업: preset과 별도로 명시적 target date를 기존 frozen turn request에 전달하는 pure validation 경로를 추가한다.
+
+통과 조건: 현재 날짜 이하, invalid ISO date, contract 최대 범위 위반을 거부하고 valid date는 locale과 무관하게 동일해진다.
+
+### 13-8. game overlay reducer
+
+작업: single-overlay union, open/toggle/close, retired target cleanup을 pure reducer로 구현한다.
+
+통과 조건: 동시에 두 관리 창이 열린 상태를 표현할 수 없고 reducer test가 통과한다.
+
+### 13-9. 전체 화면 GameScreen
+
+작업: `/game`에 full-viewport map과 UI layer root를 배치한다. 기존 side-stack과 footer가 지도 영역을 줄이지 않게 한다.
+
+통과 조건: map instance가 overlay 전환마다 remount되지 않고 1280×720과 1920×1080에서 viewport를 채운다.
+
+### 13-10. design tokens와 공통 panel
+
+작업: `/game` scoped token, panel frame, title bar, close button, empty state, status badge, tooltip을 구현한다.
+
+통과 조건: z-index, spacing, color, transition이 token을 사용하고 reduced motion이 적용된다.
+
+### 13-11. HUD와 플레이 국가 표식
+
+작업: 좌측 상단 player badge, 상단 HUD, 우측 상단 date/status를 실제 projection과 연결한다.
+
+통과 조건: player country가 통합 결과로 유지/변경될 때 이름·코드·색상이 현재 world와 일치한다. 없는 수치는 `—`다.
+
+### 13-12. 가장자리 메뉴
+
+작업: 8개 메뉴를 구현하고 overlay reducer에 연결한다.
+
+통과 조건: mouse와 keyboard에서 active/focus/toggle이 동작하고 동시에 한 overlay만 열린다.
+
+### 13-13. shell checkpoint
+
+실행:
+
+```text
+npx tsc --noEmit
+npx eslint <13-6~13-12 변경 파일>
+npx vitest run <turn controller, overlay reducer, HUD targeted tests>
+```
+
+통과 조건: 종료 코드 0이고 screenshot artifact에 1920×1080, 1280×720 화면이 있다.
+
+### C. 관리 오버레이
+
+### 13-14. 정치 오버레이
+
+작업: 정치 체제, 지도자, 국내 상황, 국내 사건 영역을 구현한다.
+
+통과 조건: 실제 데이터와 unavailable 상태를 구분하고 임의의 지도자/체제 값을 만들지 않는다.
+
+### 13-15. 경제 오버레이
+
+작업: 인구, 경제 개요, 후속 카드, 경제 사건 영역을 구현한다.
+
+통과 조건: HUD와 overlay가 같은 view-model을 사용하고 `null`을 0으로 렌더링하지 않는다.
+
+### 13-16. 국가 정보와 양방향 관계
+
+작업: 지도 국가 선택을 country overlay에 연결하고 양방향 관계 meter를 만든다.
+
+통과 조건: `playerToTarget`과 `targetToPlayer`가 뒤바뀌지 않으며 범위 밖 값은 contract에서 거부된다. unknown은 중립으로 보이지 않는다.
+
+### 13-17. 외교 채널 shell
+
+작업: 국가/대화 목록, 상대국 header, transcript, composer, quick intent 영역, future port를 구현한다.
+
+통과 조건: 미연결 production에서는 입력 draft를 작성할 수 있지만 전송은 비활성화되고 가짜 답변이나 국가 행동 queue 등록이 없다.
+
+### 13-18. 전쟁 오버레이
+
+작업: war list/detail/map toggle/legend를 view-model 기반으로 구현한다.
+
+통과 조건: production 데이터가 없으면 명확한 empty state이고 정확한 군사력 수치와 가짜 전선이 없다.
+
+### 13-19. 저장과 설정 오버레이
+
+작업: save placeholder와 session-only UI settings를 구현한다.
+
+통과 조건: 저장 클릭은 백엔드 미연결 안내를 보여주고 영속 저장소를 쓰지 않는다. 설정은 map UI 표시에 즉시 반영된다.
+
+### 13-20. 관리 화면 checkpoint
+
+실행:
+
+```text
+npx tsc --noEmit
+npx eslint <13-14~13-19 변경 파일>
+npx vitest run <overlay component targeted tests>
+```
+
+통과 조건: 종료 코드 0이며 모든 overlay에 loading, empty, populated fixture test가 있다. production bundle에는 populated fixture가 들어가지 않는다.
+
+### D. 국가 행동과 뉴스
+
+### 13-21. 국가 행동 오버레이
+
+작업: 기존 action composer, queue, progress controls, Stop, Retry, undo, redo를 새 UI로 옮긴다.
+
+통과 조건: 기존 `SimulationPanel`의 중복 기능을 제거하고 같은 controller를 통해 한 번만 실행한다.
+
+### 13-22. 날짜 직접 입력 UX
+
+작업: 1일/1주/1개월 preset과 목표 날짜 직접 입력을 하나의 진행 UI로 만든다.
+
+통과 조건: 입력한 날짜와 request targetDate가 일치하며 잘못된 날짜에서는 API 요청이 발생하지 않는다.
+
+### 13-23. streaming과 실패 복구
+
+작업: 현재 phase, draft, Stop, Retry, stale/error 상태를 game HUD와 action overlay에 연결한다.
+
+통과 조건: overlay를 닫아도 실행 중 controller가 유실되지 않고, 중복 advance가 발생하지 않으며, 실패 시 이전 snapshot이 유지된다.
+
+### 13-24. 뉴스 projection과 목록
+
+작업: committed event log와 turn report를 news view-model로 투영한다. filter, event detail, 관련 국가 이동을 구현한다.
+
+통과 조건: stable order, 중요도, 날짜, 관련 국가가 보존되고 narrative 중복이 제거된다.
+
+### 13-25. 주요 사건 queue
+
+작업: 새로 commit된 `major|transformative` 사건만 수집하고 acknowledgment queue를 관리한다.
+
+통과 조건: minor/notable은 blocking하지 않으며 여러 주요 사건을 정확히 한 번씩 순서대로 확인한다.
+
+### 13-26. 주요 사건 modal
+
+작업: blocking modal, progress count, 관련 국가, 지도에서 보기, 확인 동작을 구현한다.
+
+통과 조건: 미확인 사건이 있으면 다음 advance가 막히고 focus trap/restore가 동작한다.
+
+### 13-27. turn 결과 연결
+
+작업: 기존 긴 report를 화면 아래에 계속 붙이지 말고 뉴스 상세와 결과 요약으로 분리한다. 지도 변경은 commit 후 지도에서 확인 가능해야 한다.
+
+통과 조건: action outcome, events, reactions, map changes, continuing situations, advisor summary의 정보 손실이 없다.
+
+### 13-28. 행동·뉴스 checkpoint
+
+실행:
+
+```text
+npx tsc --noEmit
+npx eslint <13-21~13-27 변경 파일>
+npx vitest run <action, custom date, news, major event targeted tests>
+```
+
+통과 조건: 종료 코드 0이고 Prompt 12 turn client/runtime regression test도 통과한다.
+
+### E. 지도·접근성·통합
+
+### 13-29. 지도 선택과 overlay 통합
+
+작업: map click/keyboard selection을 country overlay와 연결하고 player/foreign/retired country 분기를 처리한다.
+
+통과 조건: 통합·독립·영토 변경 후 stale country selection 때문에 crash하지 않는다.
+
+### 13-30. map UI settings와 전쟁 layer slot
+
+작업: label, marker, border 강조 toggle을 기존 map API에 연결한다. war layer slot은 data가 없으면 비어 있어야 한다.
+
+통과 조건: 설정 변경 때문에 GeoJSON 전체 source를 불필요하게 재적재하지 않고 Prompt 11 증분 경로를 유지한다.
+
+### 13-31. 접근성 점검
+
+작업: keyboard navigation, focus trap/restore, accessible names, live region, contrast, reduced motion을 점검한다.
+
+통과 조건: 핵심 flow를 mouse 없이 완료하는 component/E2E test가 있다.
+
+### 13-32. viewport와 시각 회귀
+
+작업: 1280×720과 1920×1080에서 HUD/overlay/modal/map을 캡처하고 겹침, 잘림, 과도한 scroll을 수정한다.
+
+통과 조건: 주요 조작 버튼이 viewport 밖으로 나가지 않고 overlay 내부가 scroll owner다.
+
+### 13-33. deterministic 통합 E2E
+
+E2E 흐름:
+
+1. `/`에서 플레이 국가를 선택하고 `/game`으로 이동한다.
+2. full-screen map, player badge, 날짜, 메뉴를 확인한다.
+3. 정치와 경제를 차례로 열어 동시에 하나만 열리는지 확인한다.
+4. 외국을 클릭하고 양방향 관계 label을 확인한다.
+5. 외교 채널을 열고 미연결 전송 상태를 확인한다.
+6. 국가 행동을 queue한다.
+7. 목표 날짜를 직접 입력해 진행한다.
+8. fixture turn을 commit한다.
+9. major event modal 때문에 다음 진행이 멈추는지 확인한다.
+10. 주요 사건을 모두 확인한다.
+11. 뉴스 상세와 관련 국가 이동을 확인한다.
+12. 지도 변화가 표시되는지 확인한다.
+13. undo/redo가 날짜·사건·지도와 함께 동작하는지 확인한다.
+14. 저장 버튼이 백엔드 미연결 안내만 표시하는지 확인한다.
+15. 새로고침 시 초기화 정책이 유지되는지 확인한다.
+
+통과 조건: 실제 외부 API 호출 없이 deterministic하게 통과한다.
+
+### 13-34. integration checkpoint
+
+실행:
+
+```text
+npx tsc --noEmit
+npm run lint
+npm test
+npm run build
+npm run test:e2e
+```
+
+통과 조건: 모두 종료 코드 0이다. 기존 warning과 새 warning을 구분하며 새 warning은 허용하지 않는다.
+
+### F. 정리와 완료 판정
+
+### 13-35. dead UI와 중복 제거
+
+작업: 사용하지 않는 기존 side-stack, 중복 `SimulationPanel` presentation, orphan CSS, fixture import, 임시 screenshot/debug 파일을 정리한다.
+
+통과 조건: production route에서 기존 패널과 새 game UI가 동시에 존재하지 않고 테스트용 fake data가 bundle 경로에 없다.
+
+### 13-36. 문서와 후속 port 정리
+
+작업: 정치/경제/인구/관계/전쟁/외교/저장 각각에 대해 현재 구현된 UI, 필요한 authoritative backend/domain, 연결 port를 문서화한다.
+
+통과 조건: 후속 프롬프트가 UI를 다시 설계하지 않고 data source만 연결할 수 있다.
+
+### 13-37. 최종 검증과 보고서
+
+실행:
+
+```text
+npx tsc --noEmit
+npm run lint
+npm test
+npm run build
+npm run test:e2e
+```
+
+추가 확인:
+
+- `.env.local`과 API key가 산출물/로그/report에 없음
+- localStorage/IndexedDB persistence 없음
+- 외교 fake response 없음
+- population/economy/opinion/war fake production data 없음
+- 정확한 군사력 수치 없음
+- simultaneous overlay 없음
+- major event acknowledgment 누락 없음
+- Prompt 11 incremental map update 회귀 없음
+- Prompt 12 atomic turn/undo/redo 회귀 없음
+
+통과 조건: `reports/prompt13/13-37-final.json`이 모든 단계에 대해 `pass | fail | blocked`와 증거를 기록한다. 하나라도 fail/blocked면 Prompt 13을 완료로 판정하지 않는다.
+
+## 13. 작업 분기와 의존성
+
+다음 순서로 진행한다.
+
+```text
+13-1 ─┬─> 13-2 ─> 13-3
+      └─> 13-4
+13-2 + 13-4 ─> 13-5
+
+13-5 ─> 13-6 ─> 13-7
+13-5 ─> 13-8 ─> 13-9 ─> 13-10 ─> 13-11 ─> 13-12 ─> 13-13
+
+13-13 ─┬─> 13-14
+       ├─> 13-15
+       ├─> 13-16 ─> 13-17
+       ├─> 13-18
+       └─> 13-19
+13-14..19 ─> 13-20
+
+13-6 + 13-7 + 13-20 ─> 13-21 ─> 13-22 ─> 13-23
+13-20 ─> 13-24 ─> 13-25 ─> 13-26 ─> 13-27 ─> 13-28
+
+13-28 ─> 13-29 ─> 13-30 ─> 13-31 ─> 13-32 ─> 13-33 ─> 13-34
+13-34 ─> 13-35 ─> 13-36 ─> 13-37
+```
+
+병렬 작업이 가능하더라도 다음 파일은 한 owner가 순차적으로 통합한다.
+
+- `GameSetupShell.tsx`
+- `GameScreen.tsx`
+- turn controller
+- overlay reducer
+- `globals.css` 또는 game UI root stylesheet
+- Playwright 공통 fixture
+
+## 14. 보고서 형식
+
+각 `reports/prompt13/13-N-*.json`은 최소 다음 구조를 가진다.
+
+```json
+{
+  "stage": "13-N",
+  "status": "pass | fail | blocked",
+  "summary": "",
+  "filesChanged": [],
+  "commands": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "evidence": ""
+    }
+  ],
+  "screenshots": [],
+  "tests": [],
+  "knownLimitations": [],
+  "nextStage": "13-(N+1) | null"
+}
+```
+
+최종 보고서에는 다음 matrix를 포함한다.
+
+- 사용자 결정 1~20
+- 구현 파일
+- 자동 검증
+- 시각 증거
+- 상태
+- 후속 backend/domain 필요 여부
+
+## 15. 필수 테스트 fixture
+
+production state와 분리된 test fixture로 다음을 검증한다.
+
+1. 모든 optional domain 값이 `null`인 국가
+2. 양방향 호감도가 `-100`, `0`, `100`인 국가 관계
+3. 여러 전쟁이 있는 war view-model
+4. 전쟁 데이터가 없는 production equivalent state
+5. minor/notable만 있는 turn
+6. major 하나가 있는 turn
+7. major와 transformative가 여러 개 있는 turn
+8. 지도 변경이 있는 major event
+9. commit 중 overlay를 닫는 경우
+10. 선택한 외국이 merge로 retired되는 경우
+11. custom target date invalid/valid/boundary
+12. save placeholder 클릭
+13. 외교 API port 미연결 상태
+14. 1280×720 viewport
+
+## 16. 금지 구현
+
+- `/game`을 기존 side panel의 CSS 변경만으로 끝내기
+- Prompt 12 runtime을 새 UI용으로 복제
+- `WorldStateV2` 또는 `SimulationStateV1`의 두 번째 owner 생성
+- 정치·경제·인구·호감도·전쟁 값을 국가 코드 switch로 하드코딩
+- unknown 관계를 0 또는 중립으로 표시
+- 정확한 군사력 수치 표시
+- 가짜 외교 응답 생성
+- 일반 action turn API를 외교 chat API로 위장
+- 저장 버튼이 localStorage/IndexedDB에 쓰게 하기
+- external game asset 복사
+- major event를 title keyword로 판정
+- minor/notable 사건마다 blocking modal 표시
+- 미확인 major event가 있는데 다음 턴 실행
+- overlay마다 독립 boolean을 두어 여러 창이 동시에 열릴 수 있게 하기
+- panel 전환 때 MapLibre map 재생성
+- UI 설정 변경 때 전체 world source `setData` 남용
+- 테스트를 위해 실제 OpenAI API 호출
+- `.env.local` 값 출력
+- 1280×720에서 핵심 UI가 잘리는 상태를 완료 처리
+
+## 17. 완료 정의
+
+Prompt 13은 다음 전체 흐름이 연결될 때 완료다.
+
+```text
+국가 선택
+→ /game 진입
+→ 전체 화면 지도와 전략 게임 HUD
+→ 지도 또는 메뉴로 하나의 관리 오버레이 열기
+→ 국가 행동 입력과 대기열 등록
+→ preset 또는 직접 입력 날짜 선택
+→ GPT turn 진행 상태 확인
+→ atomic commit
+→ major/transformative 사건마다 진행 정지와 확인
+→ 뉴스 상세 확인
+→ 지도 변화 확인
+→ undo/redo
+```
+
+정치, 경제, 인구, 양방향 관계, 전쟁, 외교 채널, 저장은 완성된 화면 구조와 typed connection boundary를 가져야 한다. 실제 domain/backend가 없는 항목은 거짓 데이터 없이 일관된 빈 상태를 보여야 한다.
+
+Prompt 13의 성공은 세부 시뮬레이션을 모두 구현했다는 뜻이 아니다. 사용자가 실제 게임처럼 지도를 중심으로 모든 메뉴를 탐색하고, 현재 구현된 국가 행동과 시간 진행을 끊김 없이 사용할 수 있으며, 후속 시스템을 UI 재작성 없이 연결할 수 있다는 뜻이다.

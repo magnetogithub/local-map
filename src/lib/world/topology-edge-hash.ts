@@ -4,6 +4,7 @@ import type {TerritoryId} from "./territory-id";
 import type {TopologyEdge, TopologyPosition} from "./topology-state";
 
 const TOPOLOGY_EDGE_HASH_SCHEMA_VERSION = 1 as const;
+const topologyEdgeHashCache = new WeakMap<object, string>();
 
 const normalizeNumber = (value: number) => (Object.is(value, -0) ? 0 : value);
 
@@ -57,7 +58,9 @@ function canonicalTerritorySides(
 
 /** Hashes canonical topology identity without deriving any country ownership. */
 export function topologyEdgeLeafHash(edge: TopologyEdge): string {
-  return sha256Hex(
+  const cached = topologyEdgeHashCache.get(edge);
+  if (cached) return cached;
+  const hash = sha256Hex(
     canonicalSerialize({
       namespace: "topologyEdge",
       schemaVersion: TOPOLOGY_EDGE_HASH_SCHEMA_VERSION,
@@ -67,4 +70,6 @@ export function topologyEdgeLeafHash(edge: TopologyEdge): string {
       coordinates: canonicalCoordinates(edge.coordinates),
     }),
   );
+  topologyEdgeHashCache.set(edge, hash);
+  return hash;
 }

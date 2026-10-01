@@ -1,0 +1,1 @@
+{"stage":"12-32","status":"pass","changedFiles":["src/lib/simulation/server/openai-responses-provider.ts","src/app/api/simulation/turn/route.ts","src/lib/simulation/server/provider-route.test.ts"],"gates":{"browserAbortPropagation":"pass","timeoutMs":30000,"preOutputRetries":1,"eventsAfterCancel":0,"stateMutation":false}}

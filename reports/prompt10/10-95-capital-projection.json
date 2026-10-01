@@ -1,0 +1,97 @@
+{
+  "prompt": "10-95",
+  "title": "capital projection",
+  "status": "pass",
+  "createdAt": "2026-09-18T17:27:00+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-94",
+    "reportPath": "reports/prompt10/10-94-topology-border-artifact.json",
+    "reportSha256": "da2788b32acdd5580b767415036256a04b7c7190c19517c33710981baee8f64c",
+    "status": "pass"
+  },
+  "objective": {
+    "action": "Project country capitals together with the currently owned containing Territory.",
+    "verification": "Countries without a capital create zero dots, and ownership changes leave zero dangling capitals."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/country-capital-projection.ts",
+        "sha256": "ff33163ee89d7a9cbadae44dc6d194e1dc8a5f4eb96e4b5a9b7dcbf5c686469c"
+      },
+      {
+        "path": "src/lib/projection/country-capital-projection.test.ts",
+        "sha256": "bd360061e742cbf846f5d54e068922e20440b5ea2e234562678fcb504a2318e7"
+      }
+    ],
+    "projectionShape": [
+      "CountryCapitalProjection stores Point features by countryId.",
+      "Each capital feature includes the containing TerritoryId currently owned by the same country.",
+      "Countries missing a capital module entry are omitted instead of receiving fabricated dots.",
+      "Capital entries whose containing Territory is no longer owned by the country are omitted."
+    ],
+    "publicApi": [
+      "createCountryCapitalProjection(state, countryCapitalsById)",
+      "pointInTerritoryGeometry(point, geometry)",
+      "countDanglingCapitalFeatures(projection, state)"
+    ]
+  },
+  "measurements": {
+    "capitalPresentScenario": {
+      "countryId": "AAA",
+      "capitalFeatureCount": 1,
+      "projectedTerritoryOwnedByCapitalCountry": true,
+      "danglingCapitalCount": 0
+    },
+    "noCapitalCountryScenario": {
+      "countryId": "BBB",
+      "capitalModuleEntryExists": false,
+      "capitalDotCount": 0
+    },
+    "ownershipChangedScenario": {
+      "capitalCountryId": "AAA",
+      "containingTerritoryNewOwner": "BBB",
+      "capitalFeatureCountAfterOwnershipChange": 0,
+      "danglingCapitalCountAfterOwnershipChange": 0
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/country-capital-projection.test.ts src/lib/projection/territory-polygon-index.test.ts src/lib/projection/topology-border-artifact.test.ts",
+        "status": "pass",
+        "testFiles": 3,
+        "tests": 7
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/lib/projection/country-capital-projection.ts src/lib/projection/country-capital-projection.test.ts src/lib/projection/territory-polygon-index.ts src/lib/projection/topology-border-artifact.ts",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "previousStageOutputHashRecorded": true,
+      "capitalProjectedWithCurrentOwnedTerritory": true,
+      "noCapitalCountryDotCountZero": true,
+      "danglingCapitalCountAfterOwnershipChangeZero": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-96"
+}

@@ -1,0 +1,33 @@
+{
+  "stage": "12-R11",
+  "status": "pass",
+  "objective": "Make npm.cmd run test:e2e return naturally without project-owned processes.",
+  "filesRead": [
+    "playwright.config.ts",
+    "package.json",
+    "node_modules/next/dist/docs/01-app/03-api-reference/06-cli/next.md",
+    "node_modules/next/dist/docs/01-app/02-guides/testing/playwright.md",
+    "node_modules/next/dist/docs/01-app/02-guides/custom-server.md"
+  ],
+  "changedFiles": ["scripts/run-playwright-e2e.mjs", "package.json", "playwright.config.ts", "next.config.ts"],
+  "selectedContract": {
+    "name": "owned custom server with isolated production E2E build",
+    "forcedExit": false,
+    "taskkillInFinalPath": false,
+    "shutdown": "await server.close() and app.close()",
+    "externalBaseUrl": "PLAYWRIGHT_BASE_URL bypasses the owned build/server"
+  },
+  "commands": [
+    {"command": "npm.cmd run test:e2e", "run": "quality-gate", "exitCode": 0, "result": "19 passed; returned naturally"},
+    {"command": "npm.cmd run test:e2e", "run": "consecutive-1", "exitCode": 0, "result": "19 passed; returned naturally"},
+    {"command": "npm.cmd run test:e2e", "run": "consecutive-2", "exitCode": 0, "result": "19 passed; returned naturally"}
+  ],
+  "processEvidence": {
+    "port3000Before": [],
+    "port3000AfterEachRun": [[], [], []],
+    "nodeProcessesAtConfiguredPathAfterEachRun": [[], [], []],
+    "nextPlaywrightProcessesRemaining": false
+  },
+  "remainingLimitations": ["Self-hosted E2E performs an isolated production build; external-base-URL runs skip it."],
+  "firstFailedGate": null
+}

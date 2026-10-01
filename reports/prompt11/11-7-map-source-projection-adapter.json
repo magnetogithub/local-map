@@ -1,0 +1,57 @@
+{
+  "stage": "11-7",
+  "status": "pass",
+  "objective": "Build MapLibre fill and border source data from revisioned WorldStateV2 projection artifacts while preserving unaffected territory feature references.",
+  "filesRead": [
+    "prompts/PROMPT_11_REMOVE_STATIC_DATA_DEPENDENCY.txt",
+    "src/components/map/WorldMap.tsx",
+    "src/lib/projection/map-projection-checkpoint.ts",
+    "src/lib/projection/territory-polygon-index.ts",
+    "src/lib/projection/topology-border-artifact.ts",
+    "src/lib/projection/world-map-runtime-projection.ts",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/lib/planning/world-patch-v2.ts",
+    "src/stores/world-state-store.ts"
+  ],
+  "changedFiles": [
+    "src/lib/projection/map-projection-checkpoint.ts",
+    "src/lib/projection/map-projection-checkpoint.test.ts",
+    "src/lib/projection/world-map-runtime-projection.ts",
+    "src/lib/projection/world-map-runtime-projection.test.ts",
+    "src/components/layout/GameSetupShell.tsx",
+    "reports/prompt11/11-7-map-source-projection-adapter.json"
+  ],
+  "commands": [
+    "npm.cmd test -- --run src/lib/projection/map-projection-checkpoint.test.ts src/lib/projection/territory-polygon-index.test.ts src/lib/projection/topology-border-artifact.test.ts src/lib/projection/world-map-runtime-projection.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint",
+    "npm.cmd test -- --run",
+    "npm.cmd run build",
+    "git diff --check -- <changed tracked files>"
+  ],
+  "gates": {
+    "fillSourceFromV2Projection": true,
+    "borderSourceFromCanonicalTopology": true,
+    "mapLibreOutsideDomainProjection": true,
+    "changedTerritoryFeatureReplacedInLowAndHighSources": true,
+    "unaffectedTerritoryFeatureReferenceStable": true,
+    "unaffectedBorderFeatureReferenceStable": true,
+    "staleSourcePatchRejected": true,
+    "sourceRevisionSynchronized": true,
+    "targetedTests": "pass: 4 files, 14 tests",
+    "typecheck": "pass",
+    "lint": "pass: 0 errors, 3 existing warnings",
+    "fullUnitSuite": "pass: 117 files, 944 tests",
+    "productionBuild": "pass",
+    "diffCheck": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "The synchronized map source adapter now applies WorldPatchV2 territory deltas instead of recreating every source feature; it also detects geometry or ownership differences so incomplete delta metadata cannot leave stale source data.",
+    "GameSetupShell passes the previously rendered map artifact to the next WorldStateV2 projection. Both low- and high-resolution fill collections reuse unchanged feature objects, and unchanged canonical border features are reused.",
+    "Source-level appliedRevision advances for every committed state; an unchanged feature retains its original projectionRevision as its feature creation revision so object identity remains stable.",
+    "WorldMap already consumes the resulting projection as GeoJSON and owns the MapLibre objects; no MapLibre instance is introduced into projection/domain code.",
+    "The full browser E2E suite was not rerun for this recovered stage. The full unit suite, typecheck, lint, and production build passed. The build still reports the pre-existing dynamic seed filesystem tracing warning."
+  ],
+  "nextStage": "11-8"
+}

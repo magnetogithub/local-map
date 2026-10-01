@@ -1,0 +1,18 @@
+{
+  "stage": "13-34",
+  "status": "pass",
+  "summary": "Prompt 13 지도 런타임 복구 후 typecheck, lint, 전체 Vitest, production build, 전체 Playwright가 모두 종료 코드 0이다.",
+  "filesChanged": ["src/lib/projection/map-projection-checkpoint.ts", "src/components/map/WorldMap.tsx", "src/types/map-debug.ts", "src/lib/map/map-source-incremental-adapter.test.ts", "src/lib/projection/world-map-runtime-projection.test.ts", "e2e/prompt13-integration.spec.ts", "reports/prompt13/13-30-map-settings-war-slot.json", "reports/prompt13/13-32-viewport-visual-regression.json", "reports/prompt13/13-33-deterministic-integration-e2e.json", "reports/prompt13/13-34-integration-checkpoint.json", "reports/prompt13/13-34-integration-checkpoint-repair.json"],
+  "commands": [
+    {"command": "npx tsc --noEmit", "exitCode": 0, "evidence": "no diagnostics"},
+    {"command": "npm run lint", "exitCode": 0, "evidence": "no lint diagnostics"},
+    {"command": "npm test", "exitCode": 0, "evidence": "146 files, 1149 tests passed"},
+    {"command": "npm run build", "exitCode": 0, "evidence": "Next.js production routes built successfully"},
+    {"command": "npm run test:e2e", "exitCode": 0, "evidence": "23 tests passed"}
+  ],
+  "screenshots": ["screenshots/prompt13-32-modal-1280x720.png", "screenshots/prompt13-32-overlay-1280x720.png", "screenshots/prompt13-32-hud-map-1280x720.png", "screenshots/prompt13-32-modal-1920x1080.png", "screenshots/prompt13-32-overlay-1920x1080.png", "screenshots/prompt13-32-hud-map-1920x1080.png"],
+  "tests": ["1149 Vitest tests", "23 Playwright tests", "property-only incremental updateData", "stale async verification", "commit/undo/redo map health", "settings source immutability"],
+  "warnings": {"existing": ["Vite native config loader warns that vitest.config.ts is ESM syntax loaded as CommonJS.", "Playwright workers report NO_COLOR ignored because FORCE_COLOR is set by the environment."], "new": []},
+  "knownLimitations": [],
+  "nextStage": "13-35"
+}

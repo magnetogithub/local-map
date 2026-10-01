@@ -1,0 +1,59 @@
+{
+  "stage": "12-10",
+  "status": "pass",
+  "objective": "Run the Prompt 12 simulation contract checkpoint and freeze contract metadata.",
+  "filesRead": [
+    "src/lib/simulation/simulation-contract-primitives.ts",
+    "src/lib/simulation/simulation-clock.ts",
+    "src/lib/simulation/queued-player-action.ts",
+    "src/lib/simulation/narrative-state.ts",
+    "src/lib/simulation/simulation-event.ts",
+    "src/lib/simulation/world-effect.ts",
+    "src/lib/simulation/turn-resolution.ts",
+    "src/lib/simulation/simulation-state.ts",
+    "src/lib/simulation/semantic-validator.ts",
+    "src/lib/simulation/simulation-contract.test.ts"
+  ],
+  "changedFiles": [
+    "reports/prompt12/12-10-contract-checkpoint.json"
+  ],
+  "commands": [
+    "npx tsc --noEmit",
+    "npx eslint src/lib/simulation/simulation-contract-primitives.ts src/lib/simulation/simulation-clock.ts src/lib/simulation/queued-player-action.ts src/lib/simulation/narrative-state.ts src/lib/simulation/simulation-event.ts src/lib/simulation/world-effect.ts src/lib/simulation/turn-resolution.ts src/lib/simulation/simulation-state.ts src/lib/simulation/semantic-validator.ts src/lib/simulation/simulation-contract.test.ts",
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts"
+  ],
+  "gates": {
+    "typecheck": "pass",
+    "eslint": "pass",
+    "targetedTests": "15 passed",
+    "contractVersion": "turn-resolution.v1",
+    "limits": {
+      "playerActionOutcomes": 32,
+      "events": 64,
+      "factMutations": 64,
+      "situationMutations": 64,
+      "scheduledConsequences": 64,
+      "worldEffects": 32,
+      "unresolvedQuestions": 32
+    },
+    "supportedEffects": [
+      "country.renamed",
+      "countries.unified",
+      "country.established",
+      "country.dissolved",
+      "territories.transferred",
+      "country.partitionedBySubdivisions"
+    ]
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "No provider SDK, API key, route, direct gameplay command, or geometry generation was added.",
+    "Prototype keys and strict unknown fields are rejected at the simulation boundary.",
+    "Map-changing effects require same-resolution causal events."
+  ],
+  "notes": [
+    "The targeted Vitest run emits one pre-existing Vite configLoader migration warning; it does not affect the zero exit code.",
+    "Checkpoint covers only stages 12-1 through 12-10."
+  ],
+  "nextStage": "12-11"
+}

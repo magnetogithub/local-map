@@ -1,0 +1,94 @@
+{
+  "prompt": "10-94",
+  "title": "topology border artifact",
+  "status": "pass",
+  "createdAt": "2026-09-18T17:26:00+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-93",
+    "reportPath": "reports/prompt10/10-93-polygon-patch-application.json",
+    "reportSha256": "ef7622715dfda16a1af383d1573de51ba1f86a520a4fa9782ada8564ab2adb69",
+    "status": "pass"
+  },
+  "reviewAfter10-93": {
+    "status": "pass",
+    "finding": "10-93 changes only affect Territory polygon index patch application; 10-94 continues to derive border and coast features from canonical topology edges, not polygon outlines.",
+    "regressionCommand": "npm.cmd test -- --run src/lib/projection/territory-polygon-index.test.ts src/lib/projection/topology-border-artifact.test.ts"
+  },
+  "objective": {
+    "action": "Generate border and coast GeoJSON features from canonical topology edges.",
+    "verification": "Final polygon outlines are not used as the border artifact source."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/topology-border-artifact.ts",
+        "sha256": "1f8c90e56498e74ffab9da54d4a29d64290d08cc0d33b9c634c682b92861742e"
+      },
+      {
+        "path": "src/lib/projection/topology-border-artifact.test.ts",
+        "sha256": "c826daf0d143b07b70844af7827763d2a4ea3d2197c3efb3dd1c81fa4a98e8a8"
+      }
+    ],
+    "artifactShape": [
+      "TopologyBorderFeature is a LineString feature keyed by topologyEdgeId.",
+      "classification internal maps to artifactKind border.",
+      "classification coast maps to artifactKind coast.",
+      "Each feature records source as canonical-topology-edge."
+    ],
+    "publicApi": [
+      "createTopologyBorderFeature(edge)",
+      "createTopologyBorderArtifactProjection(topology, revision)"
+    ]
+  },
+  "measurements": {
+    "sharedBorderScenario": {
+      "territoryCount": 2,
+      "borderFeatureCount": 1,
+      "coastFeatureCountGreaterThanZero": true,
+      "borderFeatureSource": "canonical-topology-edge",
+      "internalBorderCoordinates": [[1, 0], [1, 1]],
+      "internalBorderCoordinateCount": 2,
+      "polygonOutlineCoordinateCount": 5,
+      "usesFinalPolygonOutlineAsBorder": false
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/topology-border-artifact.test.ts src/lib/projection/territory-polygon-index.test.ts",
+        "status": "pass",
+        "testFiles": 2,
+        "tests": 5
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/lib/projection/territory-polygon-index.ts src/lib/projection/territory-polygon-index.test.ts src/lib/projection/topology-border-artifact.ts src/lib/projection/topology-border-artifact.test.ts",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "reviewAfter10_93Pass": true,
+      "topologyEdgeProducesBorderAndCoastArtifacts": true,
+      "borderFeatureUsesCanonicalEdgeCoordinates": true,
+      "polygonOutlineFallbackCount": 0,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-95"
+}

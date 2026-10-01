@@ -1,0 +1,99 @@
+{
+  "stage": "11-4",
+  "status": "pass",
+  "objective": "Move search runtime to committed WorldStateV2 search projection and remove static country-index/countries-2020 search fallback from the search UI path.",
+  "filesRead": [
+    "reports/prompt11/11-3-v2-store-boundary.json",
+    "src/components/map/MapSearch.tsx",
+    "src/lib/projection/committed-country-search-projection.ts",
+    "src/lib/country/country-index.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/lib/projection/country-search-index-patch.ts",
+    "src/stores/game-setup-store.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/lib/storage/game-setup-storage.ts",
+    "src/components/map/map-search-projection.test.ts",
+    "src/components/country/CountryPanel.test.tsx"
+  ],
+  "changedFiles": [
+    "src/lib/projection/committed-country-search-projection.ts",
+    "src/lib/projection/country-search-index-patch.ts",
+    "src/stores/game-setup-store.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/lib/storage/game-setup-storage.ts",
+    "src/components/map/map-search-projection.test.ts",
+    "src/lib/storage/game-setup-storage.test.ts",
+    "src/components/country/CountryPanel.test.tsx",
+    "reports/prompt11/11-4-search-projection-runtime.json"
+  ],
+  "commands": [
+    "Get-Content -LiteralPath 'reports\\prompt11\\11-3-v2-store-boundary.json'",
+    "Get-Content -LiteralPath 'src\\components\\map\\MapSearch.tsx'",
+    "Get-Content -LiteralPath 'src\\lib\\projection\\committed-country-search-projection.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\country\\country-index.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\projection\\country-search-index-patch.ts'",
+    "Get-Content -LiteralPath 'src\\components\\map\\map-search-projection.test.ts'",
+    "Get-Content -LiteralPath 'src\\stores\\game-setup-store.ts'",
+    "rg -n \"searchCountries|country-index|searchCommittedCountryProjection|committedCountrySearchProjection|getCommittedCountrySearchEntry|hasCommittedCountrySearchEntry|isCommittedCountryPlayable\" src",
+    "Get-Content -LiteralPath 'src\\app\\page.tsx'",
+    "Get-Content -LiteralPath 'src\\components\\layout\\GameSetupShell.tsx'",
+    "Get-Content -LiteralPath 'src\\lib\\storage\\game-setup-storage.ts'",
+    "npm.cmd test -- --run src/components/map/map-search-projection.test.ts src/lib/storage/game-setup-storage.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "rg -n \"resetGameSetup\\(\\)|selectCountry\\(\" src",
+    "Get-Content -LiteralPath 'src\\stores\\game-setup-selection-projection.test.ts'",
+    "Get-Content -LiteralPath 'src\\stores\\game-setup-player-policy-projection.test.ts'",
+    "npm.cmd test -- --run src/components/country/CountryPanel.test.tsx src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/components/map/map-search-projection.test.ts",
+    "npm.cmd test -- --run src/components/country/CountryPanel.test.tsx src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/components/map/map-search-projection.test.ts src/lib/storage/game-setup-storage.test.ts",
+    "npm.cmd run lint -- src/components/map/MapSearch.tsx src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-search-index-patch.ts src/lib/country/country-index.ts src/lib/world/world-state-v2.ts src/stores/game-setup-store.ts src/components/layout/GameSetupShell.tsx src/app/page.tsx src/components/map/map-search-projection.test.ts src/lib/storage/game-setup-storage.ts src/lib/storage/game-setup-storage.test.ts src/components/country/CountryPanel.test.tsx",
+    "rg -n \"@/data/countries-2020\\.json|countries-2020\\.json|country-index|searchCountries\\(\" src/components/map/MapSearch.tsx src/stores/game-setup-store.ts src/lib/storage/game-setup-storage.ts src/lib/projection/committed-country-search-projection.ts",
+    "git status --short -- src/components/map/MapSearch.tsx src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-search-index-patch.ts src/lib/country/country-index.ts src/lib/world/world-state-v2.ts src/stores/game-setup-store.ts src/components/layout/GameSetupShell.tsx src/app/page.tsx src/components/map/map-search-projection.test.ts src/lib/storage/game-setup-storage.ts src/lib/storage/game-setup-storage.test.ts src/components/country/CountryPanel.test.tsx reports/prompt11"
+  ],
+  "gates": {
+    "mapSearchUsesProjectionStore": true,
+    "mapSearchImportsCountryIndex": false,
+    "committedSearchProjectionImportsCountries2020": false,
+    "committedSearchProjectionBuiltFromWorldStateV2": true,
+    "searchProjectionSerializedAcrossClientBoundary": true,
+    "gameSetupStoreStaticSearchFallback": false,
+    "storageStaticCountryValidation": false,
+    "searchPathForbiddenStaticReferenceCount": 0,
+    "renameChangesSearchProjectionWithoutGeometry": true,
+    "targetedTests": "pass",
+    "typecheck": "pass",
+    "scopedLint": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "MapSearch already consumed countrySearchProjection from game-setup-store; 11-4 keeps that path and removes the remaining static committed projection seed.",
+    "committed-country-search-projection.ts no longer imports countries-2020.json or country-index; it builds from a WorldStateV2 supplied to createCommittedCountrySearchProjection.",
+    "page.tsx creates the production WorldStateV2 once, builds the committed search projection from it, serializes the projection, and passes it to GameSetupShell.",
+    "GameSetupShell deserializes the search projection and hydrates game-setup-store before restoring persisted player state.",
+    "game-setup-store starts with an empty search projection until server-provided projection hydration, preventing client imports of server seed files.",
+    "game-setup-storage now validates only persisted JSON shape; existence/playable validation remains in the current committed store projections.",
+    "CountryPanel.test.tsx was updated to mirror runtime projection hydration before calling selectCountry."
+  ],
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/components/country/CountryPanel.test.tsx src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/components/map/map-search-projection.test.ts src/lib/storage/game-setup-storage.test.ts",
+      "status": "pass",
+      "result": "5 test files passed, 14 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit --incremental false",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/components/map/MapSearch.tsx src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-search-index-patch.ts src/lib/country/country-index.ts src/lib/world/world-state-v2.ts src/stores/game-setup-store.ts src/components/layout/GameSetupShell.tsx src/app/page.tsx src/components/map/map-search-projection.test.ts src/lib/storage/game-setup-storage.ts src/lib/storage/game-setup-storage.test.ts src/components/country/CountryPanel.test.tsx",
+      "status": "pass"
+    },
+    {
+      "command": "rg -n \"@/data/countries-2020\\.json|countries-2020\\.json|country-index|searchCountries\\(\" src/components/map/MapSearch.tsx src/stores/game-setup-store.ts src/lib/storage/game-setup-storage.ts src/lib/projection/committed-country-search-projection.ts",
+      "status": "pass",
+      "result": "No matches"
+    }
+  ],
+  "nextStage": "11-5"
+}
