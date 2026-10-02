@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "absoluteToleranceDegreesSquared": 1e-9,
+  "overlapPairCount": 0,
+  "affectedCountryIds": [],
+  "overlaps": [],
+  "errors": [],
+  "policy": "Finite point touching is allowed; positive intersection area above tolerance blocks unambiguous country ownership. No P0 subtraction or winner-country assignment is authorized by this validator."
+}

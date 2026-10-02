@@ -7,6 +7,7 @@ import {sha256Hex} from "../world/sha256";
 import type {ActiveCountryId} from "../world/country-id";
 import {createWorldStateV2, type WorldStateV2} from "../world/world-state-v2";
 import {createSimulationStateV1, type SimulationStateV1} from "./simulation-state";
+import type {SimulationStateV2} from "./simulation-state-v2";
 import {validateTurnResolution} from "./semantic-validator";
 import {DEBUG_WORLD_EFFECT_PREFIX} from "./debug-world-effect";
 import type {SubdivisionCatalog} from "./subdivision-catalog";
@@ -28,13 +29,16 @@ export type TurnChangeSummary = Readonly<{
   changedTerritoryIds: readonly string[];
 }>;
 
-export type ResolvedTurnPlan = Readonly<{
+export type ResolvedTurnPlan<
+  Simulation extends SimulationStateV1 | SimulationStateV2 = SimulationStateV1,
+  World extends Readonly<{revision: number}> = WorldStateV2,
+> = Readonly<{
   kind: "resolved-turn-plan.v1";
   turnId: string;
-  baseSimulationState: SimulationStateV1;
-  baseWorldState: WorldStateV2;
-  nextSimulationState: SimulationStateV1;
-  nextWorldState: WorldStateV2;
+  baseSimulationState: Simulation;
+  baseWorldState: World;
+  nextSimulationState: Simulation;
+  nextWorldState: World;
   resolution: TurnResolutionV1;
   compiledWorldEffects: CompiledWorldEffects;
   worldPatch: WorldPatchV2 | null;

@@ -100,7 +100,13 @@ export function assertSafeSimulationData(
   }
   ancestors.add(value);
   try {
-    for (const key of Object.keys(value)) {
+    for (const key of Object.getOwnPropertyNames(value)) {
+      if (Array.isArray(value)) {
+        if (key === "length") continue;
+        if (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= value.length) {
+          throw new TypeError(`${path}.${key} is not an array element`);
+        }
+      }
       if (PROTOTYPE_KEYS.has(key)) throw new TypeError(`${path}.${key} is forbidden`);
       const descriptor = Object.getOwnPropertyDescriptor(value, key);
       if (!descriptor || !("value" in descriptor) || !descriptor.enumerable) {

@@ -1,21 +1,45 @@
 {
-  "schemaVersion": "prompt14-production-polygon-source-lock-v1",
+  "schemaVersion": "prompt14-production-polygon-source-lock-v2",
   "canonicalProvenance": {
     "sourceId": "canonical-country-p0-2020",
-    "authorityDate": "2020-01-01",
-    "boundaryClaim": "legal-country-boundaries",
-    "verificationStatus": "unverified",
-    "evidenceFiles": [],
-    "unresolvedReason": "No repository-verifiable fixed source or contemporaneous provenance currently proves that the locked P0 geometry represents legal country boundaries on 2020-01-01."
+    "gameStartDate": "2020-01-01",
+    "boundaryClaim": "project-game-seed-country-boundaries",
+    "legalEvidenceStatus": "not-required",
+    "lineageInputs": [
+      {
+        "role": "code",
+        "repositoryPath": "scripts/prepare-map-data.mjs",
+        "sha256": "8a5e8c5313b058bd51d7dd88df5efa63f589a155bebc31bf5103fe19bde58ae3",
+        "byteLength": 25531
+      },
+      {
+        "role": "current",
+        "repositoryPath": "public/data/maps/countries-10m.geojson",
+        "sha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
+        "byteLength": 11241685
+      },
+      {
+        "role": "metadata",
+        "repositoryPath": "src/data/countries-2020.json",
+        "sha256": "2abf1bf755ea9225e0ff83dfb7a9692bd121dc50c7ea69ab45cc8f6da7bded3f",
+        "byteLength": 78492
+      },
+      {
+        "role": "raw",
+        "repositoryPath": "data/raw/ne_10m_admin_0_countries.geojson",
+        "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+        "byteLength": 13287235
+      }
+    ]
   },
   "sources": [
     {
       "sourceId": "canonical-country-p0-2020",
-      "release": null,
-      "sourceVersion": "natural-earth-2020-v1",
+      "release": "v5.1.2",
+      "sourceVersion": "f1890d9f152c896d250a77557a5751a93d494776",
       "license": "Natural Earth public domain",
-      "attribution": "Natural Earth Cultural Vectors; project-generated country seed",
-      "acquiredFrom": null,
+      "attribution": "Natural Earth Cultural Vectors; derived by scripts/prepare-map-data.mjs (replay evidence in 14-2 report)",
+      "acquiredFrom": "https://github.com/nvkelso/natural-earth-vector/blob/f1890d9f152c896d250a77557a5751a93d494776/geojson/ne_10m_admin_0_countries.geojson",
       "repositoryPath": "public/data/maps/countries-10m.geojson",
       "sha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
       "byteLength": 11241685,
@@ -272,7 +296,7 @@
         "ZMB",
         "ZWE"
       ],
-      "boundaryKind": null,
+      "boundaryKind": "project-game-seed-2020",
       "operationalOnly": false
     },
     {

@@ -73,7 +73,7 @@ export function createCountryPanelPresentationEntries(
 }
 
 export function createCountryPanelProjection(
-  state: WorldStateV2,
+  state: Pick<WorldStateV2, 'revision' | 'countryOrder' | 'countriesById'>,
   capitalProjection: CountryCapitalProjection,
   presentationById: Readonly<Record<string, CountryPanelPresentationEntry>>,
 ): CountryPanelProjection {
