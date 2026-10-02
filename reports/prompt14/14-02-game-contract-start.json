@@ -1,0 +1,147 @@
+{
+  "startedAt": "2026-10-02T01:11:42.220Z",
+  "head": "3d156a4d116d9ddfd71ff8c90e9771588035d3f5",
+  "status": " M data/source-locks/prompt14-production-polygon-sources.json\n M reports/prompt14/14-02-admin1-parent-resolution.json\n M reports/prompt14/14-02-source-generation-delivery-decision.json\n M scripts/audit-prompt14-stage-1-2.mjs\n M scripts/prompt14-source-gate.mjs\n M scripts/prompt14-source-gate.test.mjs\n?? .gitattributes\n?? data/derived/\n?? data/source-locks/prompt14-repair-policy.json\n?? reports/prompt14/14-02-admin0-repair.json\n?? reports/prompt14/14-02-admin1-repair.json\n?? reports/prompt14/14-02-p0-repair.json\n?? reports/prompt14/14-02-revalidation-start.json\n?? reports/prompt14/14-02-source-research.json\n?? reports/prompt14/14-02-topology-diagnosis.json\n?? scripts/prompt14-repair.mjs\n?? scripts/prompt14-topology-diagnosis.mjs\n",
+  "files": [
+    {
+      "repositoryPath": "prompts\\PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt",
+      "sha256": "036daea0289fc7c2e909cffe19910227249fcb4bf5d8e60fe145584c30bce632",
+      "byteLength": 46538
+    },
+    {
+      "repositoryPath": "data/derived/prompt14\\ne_10m_admin_1_states_provinces.geojson",
+      "sha256": "dc5df66aa1e2041c992b1c7a660923a27bb84fd54ebf300f61be71e1eba3c98f",
+      "byteLength": 40725815
+    },
+    {
+      "repositoryPath": "data/derived/prompt14\\ne_10m_admin_0_countries.geojson",
+      "sha256": "78d8ec6ef290aae4cd9a7593934fe95622355ab98535e83aad292e99de97555b",
+      "byteLength": 13287192
+    },
+    {
+      "repositoryPath": "data/derived/prompt14\\countries-10m.geojson",
+      "sha256": "f4a75f261499d997709f456844177a9fd7511778d131ca3162b73a577e22227b",
+      "byteLength": 11241684
+    },
+    {
+      "repositoryPath": "data/source-locks\\prompt14-repair-policy.json",
+      "sha256": "8d1e42ca3c7a982cec176a787e4bb1b1f128a399874fd3939e49853da0c15b50",
+      "byteLength": 838
+    },
+    {
+      "repositoryPath": "data/source-locks\\prompt14-production-polygon-sources.json",
+      "sha256": "7cd2782cde68488f4c64fd9533b39ec2a481a22154c320fbed1d897b5ed9e56b",
+      "byteLength": 9589
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-topology-diagnosis.json",
+      "sha256": "db6f5addf1b15806c25bb812f550155d9604a8a4028baac2598cd25ebf68d2bb",
+      "byteLength": 7474
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-source-research.json",
+      "sha256": "9f201b7ef993b3d0f1a1c801a908e629447dd1d543f1810483a818d72721f646",
+      "byteLength": 2120
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-source-generation-delivery-decision.json",
+      "sha256": "7f715edea7bcbe23af04ddbd99ab0afd6be265db238f08163369d9a67f166e26",
+      "byteLength": 592653
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-revalidation-start.json",
+      "sha256": "d9e386efcd47b4ab4368bf998548c6461049744cb8d87f28add5b8551a049637",
+      "byteLength": 2958
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-p0-repair.json",
+      "sha256": "c73c8701064c3111d3f6790010f5c946fdbfc862260831d6eeb1f113fd798c92",
+      "byteLength": 5316
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-admin1-repair.json",
+      "sha256": "0ffa01008b87e1ebc985f6bff8e6234a022d69cdc4c4cacbe98ddf00d823fe96",
+      "byteLength": 63495
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-admin1-parent-resolution.json",
+      "sha256": "0c088ab45bd6235a096154131d236cb0ae8525d69d34784f8cdd0957ed262e88",
+      "byteLength": 1592870
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-02-admin0-repair.json",
+      "sha256": "4af0faf8d8e3e81f48827e2284122491e054b106af73d2afc21100b5322b366d",
+      "byteLength": 9361
+    },
+    {
+      "repositoryPath": "reports/prompt14\\14-01-baseline-runtime-data-audit.json",
+      "sha256": "19bcd5a01a5a209abfd565c144c47eb90ea75d7125ca18176735831413fe7d2d",
+      "byteLength": 164521
+    },
+    {
+      "repositoryPath": "scripts\\audit-prompt14-stage-1-2.mjs",
+      "sha256": "6b92cfc002a34c9e4b839af78c6cebee9651e6e53fc729988e9ca6d198d4c044",
+      "byteLength": 30418
+    },
+    {
+      "repositoryPath": "scripts\\prompt14-repair.mjs",
+      "sha256": "a78fa890ecb76aaba06fc483e4efde94824f29fa4d8bcf00abaad52446365ed3",
+      "byteLength": 9401
+    },
+    {
+      "repositoryPath": "scripts\\prompt14-source-gate.mjs",
+      "sha256": "b23fa25f0a8c4ca9536756cb79b6386df0d9ac93d71f719ecc71ae15c83f5c80",
+      "byteLength": 40162
+    },
+    {
+      "repositoryPath": "scripts\\prompt14-source-gate.test.mjs",
+      "sha256": "7a76cd41b37811d1c32257193f40d8249251c503bc9cb51c5869fa5c2c371794",
+      "byteLength": 21662
+    },
+    {
+      "repositoryPath": "scripts\\prompt14-topology-diagnosis.mjs",
+      "sha256": "26b2883964036c184880c8ee0169f94378cbb6757c38109eef76d88f7851deca",
+      "byteLength": 2982
+    },
+    {
+      "repositoryPath": "AGENTS.md",
+      "sha256": "ec1b6e023814ae1a510b02ea62229e5eb035d75e39e3335d5ea7f5ce5654d567",
+      "byteLength": 687
+    },
+    {
+      "repositoryPath": "package.json",
+      "sha256": "7a48ecc55f30509a51edd62ff61c2ebfeda88b76fb51d03bb1d69bbd89fdbce8",
+      "byteLength": 1399
+    },
+    {
+      "repositoryPath": "package-lock.json",
+      "sha256": "5aeba8ebe7bae4d2b876dbe5cacac675ef328f62e9cb858c954c9d9ea811cfb5",
+      "byteLength": 344913
+    },
+    {
+      "repositoryPath": ".gitattributes",
+      "sha256": "d8a71d7571368431cd2d60ab9c1acf49f6c6ef427fc14d7711793512b6b1dccb",
+      "byteLength": 126
+    },
+    {
+      "repositoryPath": "public/data/maps/countries-10m.geojson",
+      "sha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
+      "byteLength": 11241685
+    },
+    {
+      "repositoryPath": "src/data/countries-2020.json",
+      "sha256": "2abf1bf755ea9225e0ff83dfb7a9692bd121dc50c7ea69ab45cc8f6da7bded3f",
+      "byteLength": 78492
+    },
+    {
+      "repositoryPath": "data/raw/ne_10m_admin_0_countries.geojson",
+      "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+      "byteLength": 13287235
+    },
+    {
+      "repositoryPath": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+      "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+      "byteLength": 40726852
+    }
+  ]
+}

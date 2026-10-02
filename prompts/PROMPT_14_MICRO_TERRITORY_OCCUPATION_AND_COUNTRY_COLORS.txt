@@ -109,10 +109,13 @@ production bundle에서는 debug directive가 작동하지 않아야 한다. occ
 
 ### 4.1 canonical 기준
 
-- 국가의 법적 경계와 canonical owner는 `2020-01-01` seed가 권위 원본이다.
+- P0는 프로젝트가 고정한 기존 `2020-01-01` 게임 seed의 국가 ID와 canonical owner를 기준으로 한다. 날짜는 게임 시작 기준이며 외부 기관이 증명한 법적 경계 날짜를 뜻하지 않는다. 원본 seed는 보존하고, 새 catalog의 국가 범위 기준은 검증된 별도 게임용 derived P0다.
 - 최신 행정구역을 사용하더라도 미세 점령을 위한 operational partition일 뿐 2020 국가 주권을 바꾸지 않는다.
 - territory의 `sourceCountryId`는 catalog 생성 당시 canonical 2020 owner다. 현재 게임 owner가 아니다.
 - registry/provenance에 `operationalOnly: boolean`을 명시한다.
+- 원본 P0는 `boundaryKind: project-game-seed-2020`, 게임용 derived P0는 `project-game-seed-derived-2020`이다. 둘 모두 `operationalOnly=false`다. P1은 `administrative-operational`, `operationalOnly=true`이며 검증된 derived P0 내부를 분할하는 입력이다.
+- 사용자 결정에 따라 법적 경계 외부 증명은 필요하지 않다(`legalEvidenceStatus: not-required`). 확보하지 않은 증거를 verified로 표시하거나 이 증명을 위해 추가 자료를 확보하지 않는다.
+- 기존 국가 ID, 소유권, 국가 선택, seed 외관을 유지하고 외부 원본→고정 변환 코드·정책→현재 P0 bytes의 재현성을 검증한다.
 
 ### 4.2 source lock
 
@@ -131,7 +134,7 @@ type BoundarySourceLock = {
   byteLength: number;
   geometryTypes: Array<"Polygon" | "MultiPolygon">;
   coveredCountryIds: CountryId[];
-  boundaryKind: "legal-2020" | "administrative-operational";
+  boundaryKind: "project-game-seed-2020" | "administrative-operational";
   operationalOnly: boolean;
 };
 ```
@@ -147,15 +150,24 @@ type BoundarySourceLock = {
 - 중국·미국 외 여러 대륙의 국가를 포함한 coverage가 source lock과 일치한다.
 - release/version, license, attribution, SHA-256, byte length, repository path가 기록된다.
 - 국가 경계와 미세 행정구역의 containment/coverage 정책이 검증 가능하다.
+- metadata 국가 집합, 선택 geometry 유효성 및 안정적 identity, P0 기준 gap·overlap·cross-border, 선택·제외·fallback 및 P0/P1 lock, atom·vertex cap, source lock과 실제 bytes, 원본·derived·도구 재현성, 두 번의 delivery 일치, 보고서 일치를 모두 검증한다.
+- 법적 2020 경계의 외부 증명은 hard gate가 아니다. 이 변경으로 geometry·coverage·재현성·원자성 gate를 우회하지 않는다.
+- 고정 외부 원본의 공유 경계를 양쪽 국가가 함께 사용하도록 별도 derived P0를 생성할 수 있다. 원본 source·production seed·metadata bytes는 보존한다. 독립 단순화, 국가 ID 순서의 겹침 차감, 임의 승자 배정은 허용하지 않는다. 버전 고정 정책에 좌표 정밀도, 연산, 연속 경계 변위 한도, 면적 변화 한도, island/hole 보존, 실패 조건을 명시하고 실제 전체 국가를 검증한다. 원본 소유권 분쟁은 기술 오차와 구분하며 근거 없이 해결하지 않는다.
+- P1은 derived P0에 결정적으로 clipping/정합할 수 있으나 버전 고정 정책의 좌표 정밀도·면적·경계 변화 한도와 사후 coverage/identity 검증을 통과해야 한다. 여러 P1에 닿는 residual은 실제 공유 행정 경계의 제한된 연장과 polygonization으로 분할을 검토한다. 각 조각의 유일한 원본 연결을 증명하지 못하면 미해결로 남긴다. 중심점·최근접·ID 순서 배분, 임의 filler·grid·Voronoi·균등 분할은 허용하지 않는다.
+- 안전한 P1을 사용할 수 없는 국가는 검증된 derived P0 전체를 단일 territory로 사용하는 제한적 fallback을 검토한다. 국가별 원본 P1 수, 선택 territory 수, 유지·제외·정합 identity, 대안 검토, 이유·coverage·cap 영향과 내부 일부 점령 제한을 보고한다. 유효한 분할 원본이 있으면 작은 국가도 활용한다. 국가 누락, 소유권 혼동 또는 인접 국가 침범이 있으면 fallback도 실패한다. cap 회피나 대부분 국가의 단일 fallback으로 완료 처리하지 않는다.
+- 미국·중국·한국·영국·프랑스는 실제 유효한 행정구역 기반 복수 territory와 원본 identity를 유지해야 한다. 이 중 한 국가라도 단일 fallback이거나 임의 두 조각으로 축소되면 14-2는 blocked다.
+- P1에 없는 섬 때문에 국가 전체의 분할을 버리지 않는다. 고정 Admin0 source identity에 연결된 완전한 독립 P0 component이며 P1과 면적 교차나 양의 길이 경계 접촉이 없을 때만 해당 원본 component를 별도 territory로 유지할 수 있다. component 전체와의 equality, 원본 연결·안정적 ID·coverage·cap을 검증한다. 이는 원본 섬을 보존하는 제한이며 해안 residual을 filler 영토로 만드는 허가가 아니다. 해당 component 내부의 일부 점령 제한을 보고하고, 행정구역 소속을 추측하지 않는다.
+- 전체 국가 간 overlap, P0 원본 대비 coverage·연속 경계 변위·island/hole, P0/P1 partition의 gap·overlap·cross-border, 국가·owner·identity, cap을 실제 전체 입력에서 검증한다. fixture 통과만으로 대체하지 않는다. derived P0/P1과 z0~3 delivery를 각각 두 번 독립 생성하여 bytes를 비교하고 원본·정책·generator·artifact의 hash/byte length를 lock한다. 전체 z0~6 delivery와 최종 catalog 검증은 후속 단계의 mandatory gate다.
 
-필수 polygon source가 없으면 14-2를 `blocked`로 기록하고 중단한다. boundary line, 임의 grid, 자동 생성 filler, 국가 polygon의 임의 균등 분할로 성공 처리하지 않는다. geometry generation과 production schema cutover로 진행하지 않는다.
+필수 polygon source가 없으면 14-2를 `blocked`로 기록하고 중단한다. boundary line, 임의 grid, 자동 생성 filler, 국가 polygon의 임의 균등 분할로 성공 처리하지 않는다. 이 단계의 검증용 derived P0/P1 입력은 생성할 수 있으나, 14-6 이후의 최종 catalog atom generation과 production schema cutover로 진행하지 않는다.
 
 ### 4.4 protected boundary와 cap 결정 순서
 
 다음 순서를 바꾸지 않는다.
 
 1. source별 국가·행정 단계·geometry coverage를 계산한다.
-2. 행정 단계와 region scope 조합별 예상 atom 수와 vertex 수를 계산한다.
+2. 행정 단계와 region scope 조합별 예상 atom 수와 vertex 수를 계산한다. source feature 수와 정규화된 component atom 후보 수를 구분한다. `canonicalAtomKey`의 component 기준 상한이 cap을 넘으면 낮은 feature 수만으로 pass 처리하지 않는다. locked P0/P1 내부의 결정적 grouping으로 줄일 수 있다는 정책과 증거가 없으면 blocked로 남긴다. 후속 generation에서 최종 수치를 다시 검증한다.
+   같은 선택 source feature의 완전한 component 집합을 하나의 MultiPolygon 영토로 관리하는 계획은 허용한다. 서로 다른 P1 identity·국가를 합치거나 connector를 만들지 않는다. 각 component의 원본 연결과 membership bijection, 좌표·hole 보존, protected boundary 침범 0, 독립 재생성 일치를 증명하고 raw 후보 수와 projected 수를 모두 보고한다. 이 계획은 14-6/14-7의 실제 canonical key·catalog·최종 cap 검증을 대체하지 않는다.
 3. 전 세계 cap, 국가별 cap, vertex budget 안에 드는 단계와 scope를 선택한다.
 4. 선택·제외된 level, region, source와 이유를 policy에 기록한다.
 5. 선택 후 P0 국가 경계와 P1 선택 행정 경계를 lock한다.
@@ -197,7 +209,7 @@ type BoundaryProvenance = {
   sourceId: string;
   sourceVersion: string;
   sourceFeatureId: string;
-  boundaryKind: "legal-2020" | "administrative-operational";
+  boundaryKind: "project-game-seed-2020" | "project-game-seed-derived-2020" | "administrative-operational";
   operationalOnly: boolean;
 };
 
@@ -468,7 +480,7 @@ planner는 한 command에서 하나의 bounded aggregate effect 또는 기존 ba
 
 - fill color는 기본적으로 `controllerCountryId ?? ownerCountryId` 국가의 `mapColor`를 사용한다.
 - owner와 controller가 다르면 점령 표현을 overlay 또는 pattern으로 구분하되 색상 가독성을 유지한다.
-- 법적 국경, 점령선/front, 낮은 zoom에서 숨길 내부 행정선을 분리한다.
+- 게임 기준 국가 경계(P0), 점령선/front, 낮은 zoom에서 숨길 내부 행정선을 분리한다.
 - command 결과의 affected territory와 인접 edge만 다시 projection한다.
 - 일반 occupation/color update에서 전체 source `setData`, 전체 world serialization, 전체 catalog hash, 전체 projection 재생성을 금지한다.
 - 클릭·hover·focus·country panel은 미세 territory에서 현재 국가 의미를 잃지 않아야 한다.

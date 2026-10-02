@@ -1,0 +1,152 @@
+{
+  "source": {
+    "repositoryPath": "data/raw/ne_10m_admin_0_countries.geojson",
+    "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+    "byteLength": 13287235
+  },
+  "derived": {
+    "repositoryPath": "data/derived/prompt14/ne_10m_admin_0_countries.geojson",
+    "sha256": "78d8ec6ef290aae4cd9a7593934fe95622355ab98535e83aad292e99de97555b",
+    "byteLength": 13287192
+  },
+  "policy": {
+    "version": "prompt14-lossless-ring-normalization-v1",
+    "generatorVersion": "prompt14-derived-input-v1",
+    "operations": [
+      "remove exact consecutive duplicate positions",
+      "reverse ring winding to source-specific policy"
+    ],
+    "coordinatePrecision": "preserve every original IEEE-754 coordinate; no rounding or quantization",
+    "areaAbsoluteToleranceDegreesSquared": 1e-9,
+    "areaRelativeTolerance": 1e-12,
+    "boundaryDisplacementTolerance": 0,
+    "coverageRule": "same ordered features, properties, geometry types, components, holes and undirected nonzero segment multiset per ring",
+    "forbidden": [
+      "union",
+      "buffer",
+      "make-valid",
+      "snap",
+      "simplify",
+      "delete feature/component/hole",
+      "fill gaps",
+      "split countries",
+      "move coordinates"
+    ],
+    "failureConditions": [
+      "source digest mismatch",
+      "non-determinism",
+      "feature/identity/type/ring/segment changes",
+      "area tolerance exceeded",
+      "remaining validator errors"
+    ],
+    "topologyPolicy": "Any remaining defect requires independently justified, versioned topology repair or replacement source; blocked, never silently repaired."
+  },
+  "generator": {
+    "repositoryPath": "scripts/prompt14-repair.mjs",
+    "sha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5"
+  },
+  "status": "blocked",
+  "before": {
+    "pass": false,
+    "counts": {
+      "features": 258,
+      "polygons": 4274,
+      "rings": 4293,
+      "vertices": 548471,
+      "polygon": 107,
+      "multiPolygon": 151
+    },
+    "errors": [
+      "source.features[0].polygon[0].ring[0][1]: consecutive duplicate coordinate",
+      "source.features[1].polygon[0].ring[0][26]: consecutive duplicate coordinate",
+      "source.features[161]: JSTS OGC invalid: Ring Self-intersection at {\"x\":35.621087,\"y\":23.139293,\"z\":null}"
+    ],
+    "diagnostics": [
+      {
+        "featureIndex": 0,
+        "sourceFeatureId": "1159320845",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[0].polygon[0].ring[0][1]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1,
+        "sourceFeatureId": "1159321083",
+        "countryId": "MYS",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1].polygon[0].ring[0][26]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 161,
+        "sourceFeatureId": "1159320575",
+        "countryId": "EGY",
+        "category": "geometry-defect-non-simple-ring",
+        "topologyWitness": {
+          "confirmedNonSimpleRing": true,
+          "cause": "non-adjacent repeated vertex / ring self-touch",
+          "polygonIndex": 0,
+          "ringIndex": 0,
+          "vertexIndices": [
+            765,
+            770
+          ],
+          "coordinate": [
+            35.621087,
+            23.139293
+          ],
+          "repair": "topology alteration requires external justification; blocked"
+        },
+        "message": "source.features[161]: JSTS OGC invalid: Ring Self-intersection at {\"x\":35.621087,\"y\":23.139293,\"z\":null}"
+      }
+    ]
+  },
+  "after": {
+    "pass": false,
+    "invariantsPass": true,
+    "errors": [],
+    "maximumAreaDeltaDegreesSquared": 0,
+    "boundaryDisplacement": 0,
+    "coveragePreserved": true,
+    "validation": {
+      "pass": false,
+      "counts": {
+        "features": 258,
+        "polygons": 4274,
+        "rings": 4293,
+        "vertices": 548469,
+        "polygon": 107,
+        "multiPolygon": 151
+      },
+      "errors": [
+        "derived.features[161]: JSTS OGC invalid: Ring Self-intersection at {\"x\":35.621087,\"y\":23.139293,\"z\":null}"
+      ]
+    },
+    "diagnostics": [
+      {
+        "featureIndex": 161,
+        "sourceFeatureId": "1159320575",
+        "countryId": "EGY",
+        "category": "geometry-defect-non-simple-ring",
+        "topologyWitness": {
+          "confirmedNonSimpleRing": true,
+          "cause": "non-adjacent repeated vertex / ring self-touch",
+          "polygonIndex": 0,
+          "ringIndex": 0,
+          "vertexIndices": [
+            765,
+            770
+          ],
+          "coordinate": [
+            35.621087,
+            23.139293
+          ],
+          "repair": "topology alteration requires external justification; blocked"
+        },
+        "message": "derived.features[161]: JSTS OGC invalid: Ring Self-intersection at {\"x\":35.621087,\"y\":23.139293,\"z\":null}"
+      }
+    ]
+  },
+  "role": "reference-only external lineage input; not selected production geometry"
+}

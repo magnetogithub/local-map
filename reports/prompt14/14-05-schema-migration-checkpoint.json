@@ -1,0 +1,1343 @@
+{
+  "stage": "14-5",
+  "status": "pass",
+  "startedAt": "2026-10-02T05:11:53.4098414Z",
+  "completedAt": "2026-10-02T05:25:29.320Z",
+  "timezone": "Asia/Seoul",
+  "startHead": "3d156a4d116d9ddfd71ff8c90e9771588035d3f5",
+  "endHead": "3d156a4d116d9ddfd71ff8c90e9771588035d3f5",
+  "performedStages": [
+    "14-3 contracts/migration validation",
+    "14-4 authority schema/migration validation",
+    "14-5 synthetic atomic pair integration and checkpoint"
+  ],
+  "scope": "Schema preparation and test-only integration. Synthetic fixtures do not prove or replace production catalog/coverage/delivery gates. No production cutover or occupation/color planner implementation.",
+  "baseline": {
+    "policy": "All listed files existed before this 14-5 execution; only changes listed in filesChanged belong to this stage.",
+    "trackedDirty": [
+      "data/source-locks/prompt14-production-polygon-sources.json",
+      "package-lock.json",
+      "package.json",
+      "prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt",
+      "reports/prompt14/14-02-source-generation-delivery-decision.json",
+      "scripts/audit-prompt14-stage-1-2.mjs",
+      "scripts/prompt14-source-gate.mjs",
+      "scripts/prompt14-source-gate.test.mjs",
+      "src/lib/simulation/atomic-turn-runtime.ts",
+      "src/lib/simulation/resolved-turn-plan.ts",
+      "src/lib/simulation/simulation-contract-primitives.ts",
+      "src/lib/simulation/simulation-state.ts"
+    ],
+    "untracked": [
+      ".gitattributes",
+      "data/derived/prompt14/countries-10m.geojson",
+      "data/derived/prompt14/ne_10m_admin_0_countries.geojson",
+      "data/derived/prompt14/ne_10m_admin_1_states_provinces.geojson",
+      "data/derived/prompt14/selected-game-input.geojson",
+      "data/derived/prompt14/shared-admin1-input.geojson",
+      "data/derived/prompt14/shared-game-p0.geojson",
+      "data/source-locks/prompt14-component-grouping-policy.json",
+      "data/source-locks/prompt14-derived-game-input-lock.json",
+      "data/source-locks/prompt14-game-selection-policy.json",
+      "data/source-locks/prompt14-repair-policy.json",
+      "data/source-locks/prompt14-shared-topology-policy.json",
+      "reports/prompt14/14-02-admin0-repair.json",
+      "reports/prompt14/14-02-admin0-topology-noding.json",
+      "reports/prompt14/14-02-admin1-repair.json",
+      "reports/prompt14/14-02-admin1-topology-noding.json",
+      "reports/prompt14/14-02-component-grouping-plan.json",
+      "reports/prompt14/14-02-derived-p0-comparison.json",
+      "reports/prompt14/14-02-game-contract-start.json",
+      "reports/prompt14/14-02-game-coverage-exploration.json",
+      "reports/prompt14/14-02-game-input-selection.json",
+      "reports/prompt14/14-02-game-selection-exploration.json",
+      "reports/prompt14/14-02-independent-topology.json",
+      "reports/prompt14/14-02-p0-country-overlaps.json",
+      "reports/prompt14/14-02-p0-repair.json",
+      "reports/prompt14/14-02-revalidation-start.json",
+      "reports/prompt14/14-02-shared-boundary-origin.json",
+      "reports/prompt14/14-02-shared-topology-start.json",
+      "reports/prompt14/14-02-source-research.json",
+      "reports/prompt14/14-02-topology-diagnosis.json",
+      "reports/prompt14/14-02-transform-phase-diagnosis.json",
+      "scripts/audit-prompt14-game-inputs.mjs",
+      "scripts/prompt14-game-selection.mjs",
+      "scripts/prompt14-repair.mjs",
+      "scripts/prompt14-shared-topology.mjs",
+      "scripts/prompt14-topology-diagnosis.mjs",
+      "src/lib/simulation/simulation-state-v2.test.ts",
+      "src/lib/simulation/simulation-state-v2.ts",
+      "src/lib/test-only/world-v2-to-v3-migration.test.ts",
+      "src/lib/test-only/world-v2-to-v3-migration.ts",
+      "src/lib/test-only/world-v3-migration.md",
+      "src/lib/test-only/world-v3-synthetic-fixture.ts",
+      "src/lib/world/country-entity-v3.ts",
+      "src/lib/world/territory-entity-v3.ts",
+      "src/lib/world/world-geometry-catalog-ref.ts",
+      "src/lib/world/world-state-v3.test.ts",
+      "src/lib/world/world-state-v3.ts",
+      "src/lib/world/world-v3-validation.ts"
+    ],
+    "preservedFiles": [
+      {
+        "repositoryPath": "scripts/audit-prompt14-stage-1-2.mjs",
+        "start": {
+          "sha256": "e2d76862d0f7f3b77b0e018decdf575a259252f6597076df458d8a70ee31a86c",
+          "byteLength": 121
+        },
+        "end": {
+          "sha256": "e2d76862d0f7f3b77b0e018decdf575a259252f6597076df458d8a70ee31a86c",
+          "byteLength": 121
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/ne_10m_admin_1_states_provinces.geojson",
+        "start": {
+          "sha256": "dc5df66aa1e2041c992b1c7a660923a27bb84fd54ebf300f61be71e1eba3c98f",
+          "byteLength": 40725815
+        },
+        "end": {
+          "sha256": "dc5df66aa1e2041c992b1c7a660923a27bb84fd54ebf300f61be71e1eba3c98f",
+          "byteLength": 40725815
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": ".gitattributes",
+        "start": {
+          "sha256": "74454513bdf34d26aadcf71b5d68c003cea37518fac4f77fe1b4e68276420805",
+          "byteLength": 652
+        },
+        "end": {
+          "sha256": "74454513bdf34d26aadcf71b5d68c003cea37518fac4f77fe1b4e68276420805",
+          "byteLength": 652
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin1-repair.json",
+        "start": {
+          "sha256": "205cf397b20be16a341037c329d1ec72ce73720ae431216bc3ca72a529f9736c",
+          "byteLength": 23372
+        },
+        "end": {
+          "sha256": "205cf397b20be16a341037c329d1ec72ce73720ae431216bc3ca72a529f9736c",
+          "byteLength": 23372
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-selection-exploration.json",
+        "start": {
+          "sha256": "c64249826137b0ce004b9661db70f4179bd08321d216f203f071e39363255740",
+          "byteLength": 358717
+        },
+        "end": {
+          "sha256": "c64249826137b0ce004b9661db70f4179bd08321d216f203f071e39363255740",
+          "byteLength": 358717
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-source-gate.test.mjs",
+        "start": {
+          "sha256": "bc6755dee51e254a8e7ece80e55eda905a6660866435aec771ae9e7f26fa058f",
+          "byteLength": 30855
+        },
+        "end": {
+          "sha256": "bc6755dee51e254a8e7ece80e55eda905a6660866435aec771ae9e7f26fa058f",
+          "byteLength": 30855
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-geometry-catalog-ref.ts",
+        "start": {
+          "sha256": "ccd55311ec1719840d73ecdfd57e34325b46cc066e46ecf53980295251a0b150",
+          "byteLength": 3904
+        },
+        "end": {
+          "sha256": "ccd55311ec1719840d73ecdfd57e34325b46cc066e46ecf53980295251a0b150",
+          "byteLength": 3904
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-production-polygon-sources.json",
+        "start": {
+          "sha256": "b5f5ec99e0f10dc07069c49723e9f7efa6a3942f8bb68f0f7641ea1bcc749669",
+          "byteLength": 10301
+        },
+        "end": {
+          "sha256": "b5f5ec99e0f10dc07069c49723e9f7efa6a3942f8bb68f0f7641ea1bcc749669",
+          "byteLength": 10301
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "package-lock.json",
+        "start": {
+          "sha256": "2fbeb8541b5947e289cd01fdc85f51a4a76cc9eb26e1b7e1f2f038ff2cd5fa18",
+          "byteLength": 336023
+        },
+        "end": {
+          "sha256": "2fbeb8541b5947e289cd01fdc85f51a4a76cc9eb26e1b7e1f2f038ff2cd5fa18",
+          "byteLength": 336023
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-transform-phase-diagnosis.json",
+        "start": {
+          "sha256": "3aca820c3697f003699944e5c194e2f4da75c390d7ce482de3d5b88805ee22bb",
+          "byteLength": 1312
+        },
+        "end": {
+          "sha256": "3aca820c3697f003699944e5c194e2f4da75c390d7ce482de3d5b88805ee22bb",
+          "byteLength": 1312
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-repair-policy.json",
+        "start": {
+          "sha256": "8d1e42ca3c7a982cec176a787e4bb1b1f128a399874fd3939e49853da0c15b50",
+          "byteLength": 838
+        },
+        "end": {
+          "sha256": "8d1e42ca3c7a982cec176a787e4bb1b1f128a399874fd3939e49853da0c15b50",
+          "byteLength": 838
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin0-repair.json",
+        "start": {
+          "sha256": "506d1e0a9b57b9c0990836006f8438ef4c6c60f6f517529d50618ef8a134cda4",
+          "byteLength": 5095
+        },
+        "end": {
+          "sha256": "506d1e0a9b57b9c0990836006f8438ef4c6c60f6f517529d50618ef8a134cda4",
+          "byteLength": 5095
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-shared-topology-policy.json",
+        "start": {
+          "sha256": "f78cddfcccf811122913c8a1dbb33064521d1669c946574b0f675656f1056910",
+          "byteLength": 2460
+        },
+        "end": {
+          "sha256": "f78cddfcccf811122913c8a1dbb33064521d1669c946574b0f675656f1056910",
+          "byteLength": 2460
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/shared-admin1-input.geojson",
+        "start": {
+          "sha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+          "byteLength": 40725848
+        },
+        "end": {
+          "sha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+          "byteLength": 40725848
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v2-to-v3-migration.ts",
+        "start": {
+          "sha256": "36b0fe0166d10ca9ecd2055210984516f7fb67869ed81b9cc1c8e81f5807f97f",
+          "byteLength": 6500
+        },
+        "end": {
+          "sha256": "36b0fe0166d10ca9ecd2055210984516f7fb67869ed81b9cc1c8e81f5807f97f",
+          "byteLength": 6500
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-contract-primitives.ts",
+        "start": {
+          "sha256": "11c7bcbd3765af7790c3c87a98cf27dcf38718a9957395fbbd493bbbb4489a06",
+          "byteLength": 4643
+        },
+        "end": {
+          "sha256": "11c7bcbd3765af7790c3c87a98cf27dcf38718a9957395fbbd493bbbb4489a06",
+          "byteLength": 4643
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/world/territory-entity-v3.ts",
+        "start": {
+          "sha256": "987ced6b187c9d1d6b92bd4b031eb95130c07973b55f715f5f8822d89d1ea6e9",
+          "byteLength": 1375
+        },
+        "end": {
+          "sha256": "987ced6b187c9d1d6b92bd4b031eb95130c07973b55f715f5f8822d89d1ea6e9",
+          "byteLength": 1375
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-repair.mjs",
+        "start": {
+          "sha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5",
+          "byteLength": 9411
+        },
+        "end": {
+          "sha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5",
+          "byteLength": 9411
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-derived-p0-comparison.json",
+        "start": {
+          "sha256": "b8a8ece0f20847c95fe9e003fc93baab026dfc7af0312aeba33127d07dad3c18",
+          "byteLength": 170694
+        },
+        "end": {
+          "sha256": "b8a8ece0f20847c95fe9e003fc93baab026dfc7af0312aeba33127d07dad3c18",
+          "byteLength": 170694
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v2-to-v3-migration.test.ts",
+        "start": {
+          "sha256": "6cb5af3d47b42f9001515be1851ac06663658808191be5370411fa09ff6bc8a4",
+          "byteLength": 11749
+        },
+        "end": {
+          "sha256": "6cb5af3d47b42f9001515be1851ac06663658808191be5370411fa09ff6bc8a4",
+          "byteLength": 11749
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-source-generation-delivery-decision.json",
+        "start": {
+          "sha256": "212f4104a33712fed237e53e200f38703df04df6edab75d85cb458a3404b5eff",
+          "byteLength": 3164528
+        },
+        "end": {
+          "sha256": "212f4104a33712fed237e53e200f38703df04df6edab75d85cb458a3404b5eff",
+          "byteLength": 3164528
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-state-v3.test.ts",
+        "start": {
+          "sha256": "66cc089f3c0455e536828c6749fabfae39f0b78a8a3d62150b1203a831549775",
+          "byteLength": 13133
+        },
+        "end": {
+          "sha256": "66cc089f3c0455e536828c6749fabfae39f0b78a8a3d62150b1203a831549775",
+          "byteLength": 13133
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "scripts/audit-prompt14-game-inputs.mjs",
+        "start": {
+          "sha256": "ae35458f951bce40344026f9b2f0efdfd0b9129fd885aef1b509b236cd2440e6",
+          "byteLength": 30536
+        },
+        "end": {
+          "sha256": "ae35458f951bce40344026f9b2f0efdfd0b9129fd885aef1b509b236cd2440e6",
+          "byteLength": 30536
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/ne_10m_admin_0_countries.geojson",
+        "start": {
+          "sha256": "78d8ec6ef290aae4cd9a7593934fe95622355ab98535e83aad292e99de97555b",
+          "byteLength": 13287192
+        },
+        "end": {
+          "sha256": "78d8ec6ef290aae4cd9a7593934fe95622355ab98535e83aad292e99de97555b",
+          "byteLength": 13287192
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-state-v2.ts",
+        "start": {
+          "sha256": "e5ffc47ff012930291ec399313c8df7145f2fc75633c94f42b113c30759030a5",
+          "byteLength": 11476
+        },
+        "end": {
+          "sha256": "e5ffc47ff012930291ec399313c8df7145f2fc75633c94f42b113c30759030a5",
+          "byteLength": 11476
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-v3-validation.ts",
+        "start": {
+          "sha256": "bc19a6e435b75bb68b22b0f38af2b2e72217c26450f57043d68b3e42ccf157a9",
+          "byteLength": 4410
+        },
+        "end": {
+          "sha256": "bc19a6e435b75bb68b22b0f38af2b2e72217c26450f57043d68b3e42ccf157a9",
+          "byteLength": 4410
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/world/country-entity-v3.ts",
+        "start": {
+          "sha256": "73047e4d198b3eb7e9121aa67781036b55d3798afffa0ca3c21c2ecf68c4ef77",
+          "byteLength": 969
+        },
+        "end": {
+          "sha256": "73047e4d198b3eb7e9121aa67781036b55d3798afffa0ca3c21c2ecf68c4ef77",
+          "byteLength": 969
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt",
+        "start": {
+          "sha256": "808d5ac765bb39e66b78456edb0a2e42c53b025b41b13a6463d046608a36cd67",
+          "byteLength": 51019
+        },
+        "end": {
+          "sha256": "808d5ac765bb39e66b78456edb0a2e42c53b025b41b13a6463d046608a36cd67",
+          "byteLength": 51019
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin0-topology-noding.json",
+        "start": {
+          "sha256": "a4c581d48ad20eabdfe90de7cf71894b451b723f9e09e74844bb568bc2594bf6",
+          "byteLength": 1411
+        },
+        "end": {
+          "sha256": "a4c581d48ad20eabdfe90de7cf71894b451b723f9e09e74844bb568bc2594bf6",
+          "byteLength": 1411
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-topology-diagnosis.json",
+        "start": {
+          "sha256": "cc5aa9e19ef2ffd2c07e8a81223846cfd26e41886dcff6a225b8412ff1c53903",
+          "byteLength": 7767
+        },
+        "end": {
+          "sha256": "cc5aa9e19ef2ffd2c07e8a81223846cfd26e41886dcff6a225b8412ff1c53903",
+          "byteLength": 7767
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/selected-game-input.geojson",
+        "start": {
+          "sha256": "119becb43aef4c417bad77c7e3bf58e2ba74ca26f8b455c28b18ce727546d76e",
+          "byteLength": 29166732
+        },
+        "end": {
+          "sha256": "119becb43aef4c417bad77c7e3bf58e2ba74ca26f8b455c28b18ce727546d76e",
+          "byteLength": 29166732
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-p0-country-overlaps.json",
+        "start": {
+          "sha256": "8bdc2b568be76835f2a34d939b8dab5e78fa0341bd261a7d7df821f5fb92522d",
+          "byteLength": 359
+        },
+        "end": {
+          "sha256": "8bdc2b568be76835f2a34d939b8dab5e78fa0341bd261a7d7df821f5fb92522d",
+          "byteLength": 359
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-derived-game-input-lock.json",
+        "start": {
+          "sha256": "886e605de488fb853456d341d49d552dbae04389c6b1c94552b8a841f0a07ab4",
+          "byteLength": 18962
+        },
+        "end": {
+          "sha256": "886e605de488fb853456d341d49d552dbae04389c6b1c94552b8a841f0a07ab4",
+          "byteLength": 18962
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-component-grouping-plan.json",
+        "start": {
+          "sha256": "e741cce0f18665d10ef083c47d049e46243b125a14d43b0ec249ca666f741e2e",
+          "byteLength": 1993393
+        },
+        "end": {
+          "sha256": "e741cce0f18665d10ef083c47d049e46243b125a14d43b0ec249ca666f741e2e",
+          "byteLength": 1993393
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-source-gate.mjs",
+        "start": {
+          "sha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+          "byteLength": 38582
+        },
+        "end": {
+          "sha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+          "byteLength": 38582
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-coverage-exploration.json",
+        "start": {
+          "sha256": "f878685d20066fda51b5ba6f9b2d13196c14a1bf06f1eb366d59fb2a59e8960d",
+          "byteLength": 81004
+        },
+        "end": {
+          "sha256": "f878685d20066fda51b5ba6f9b2d13196c14a1bf06f1eb366d59fb2a59e8960d",
+          "byteLength": 81004
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "package.json",
+        "start": {
+          "sha256": "948f5c26a6145fed6e394511a23093cb157449bc668d83e4e1796bdab19cceea",
+          "byteLength": 1374
+        },
+        "end": {
+          "sha256": "948f5c26a6145fed6e394511a23093cb157449bc668d83e4e1796bdab19cceea",
+          "byteLength": 1374
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-game-selection-policy.json",
+        "start": {
+          "sha256": "ac3ec638af45a18b9a884156835fa548a957c1bb7bc92f4494168c4c8d454d11",
+          "byteLength": 3570
+        },
+        "end": {
+          "sha256": "ac3ec638af45a18b9a884156835fa548a957c1bb7bc92f4494168c4c8d454d11",
+          "byteLength": 3570
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-shared-topology.mjs",
+        "start": {
+          "sha256": "d75e5566943cf878e0542b11de96896e9c37455df1e7d597ff8afc08fc41e192",
+          "byteLength": 22373
+        },
+        "end": {
+          "sha256": "d75e5566943cf878e0542b11de96896e9c37455df1e7d597ff8afc08fc41e192",
+          "byteLength": 22373
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-game-selection.mjs",
+        "start": {
+          "sha256": "3a29ad719de01064221f1d6b15e275a05e0e5c284c93baa5ec274c15655a3f8b",
+          "byteLength": 23826
+        },
+        "end": {
+          "sha256": "3a29ad719de01064221f1d6b15e275a05e0e5c284c93baa5ec274c15655a3f8b",
+          "byteLength": 23826
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/countries-10m.geojson",
+        "start": {
+          "sha256": "f4a75f261499d997709f456844177a9fd7511778d131ca3162b73a577e22227b",
+          "byteLength": 11241684
+        },
+        "end": {
+          "sha256": "f4a75f261499d997709f456844177a9fd7511778d131ca3162b73a577e22227b",
+          "byteLength": 11241684
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-state-v3.ts",
+        "start": {
+          "sha256": "33b5135acebb3156f59e6475c674b590f933cbaabe0232a3afc5cd2db98e1b67",
+          "byteLength": 6385
+        },
+        "end": {
+          "sha256": "33b5135acebb3156f59e6475c674b590f933cbaabe0232a3afc5cd2db98e1b67",
+          "byteLength": 6385
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-shared-boundary-origin.json",
+        "start": {
+          "sha256": "5361b8436f99d9c5ac0cfc1a41a84cd19a47135210bdd959df8a23ec5ef9ed9b",
+          "byteLength": 279961
+        },
+        "end": {
+          "sha256": "5361b8436f99d9c5ac0cfc1a41a84cd19a47135210bdd959df8a23ec5ef9ed9b",
+          "byteLength": 279961
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-revalidation-start.json",
+        "start": {
+          "sha256": "d9e386efcd47b4ab4368bf998548c6461049744cb8d87f28add5b8551a049637",
+          "byteLength": 2958
+        },
+        "end": {
+          "sha256": "d9e386efcd47b4ab4368bf998548c6461049744cb8d87f28add5b8551a049637",
+          "byteLength": 2958
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-topology-diagnosis.mjs",
+        "start": {
+          "sha256": "26b2883964036c184880c8ee0169f94378cbb6757c38109eef76d88f7851deca",
+          "byteLength": 2982
+        },
+        "end": {
+          "sha256": "26b2883964036c184880c8ee0169f94378cbb6757c38109eef76d88f7851deca",
+          "byteLength": 2982
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-source-research.json",
+        "start": {
+          "sha256": "4614a95afb0372aba0e3e726c0c0c0a85d7c0ef9969bcfbc89ffb53cf5c34786",
+          "byteLength": 2124
+        },
+        "end": {
+          "sha256": "4614a95afb0372aba0e3e726c0c0c0a85d7c0ef9969bcfbc89ffb53cf5c34786",
+          "byteLength": 2124
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v3-synthetic-fixture.ts",
+        "start": {
+          "sha256": "54c0c4db4620374d8c6e57dc0ac26a602a6760665da1160044bdb590371cdd4a",
+          "byteLength": 4055
+        },
+        "end": {
+          "sha256": "54c0c4db4620374d8c6e57dc0ac26a602a6760665da1160044bdb590371cdd4a",
+          "byteLength": 4055
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-contract-start.json",
+        "start": {
+          "sha256": "b3d80d6808398fed2ba2af03d46ea4c0590af3072b9e6dc7dccd69f3d893713d",
+          "byteLength": 6274
+        },
+        "end": {
+          "sha256": "b3d80d6808398fed2ba2af03d46ea4c0590af3072b9e6dc7dccd69f3d893713d",
+          "byteLength": 6274
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin1-topology-noding.json",
+        "start": {
+          "sha256": "b043bef5a25e43d5908c2d15a3c42dbbc38cae9a4b28a8418e9040922bb201b2",
+          "byteLength": 4019
+        },
+        "end": {
+          "sha256": "b043bef5a25e43d5908c2d15a3c42dbbc38cae9a4b28a8418e9040922bb201b2",
+          "byteLength": 4019
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-independent-topology.json",
+        "start": {
+          "sha256": "68a7b3f4a109d6d37fd596a0d619d43bdd42caa49c05b20d56325b77a383c529",
+          "byteLength": 3325
+        },
+        "end": {
+          "sha256": "68a7b3f4a109d6d37fd596a0d619d43bdd42caa49c05b20d56325b77a383c529",
+          "byteLength": 3325
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/shared-game-p0.geojson",
+        "start": {
+          "sha256": "216cb55c553981056cb21d027ad66df6c33f6db20a649ccbb8e752d2cca9b009",
+          "byteLength": 12382975
+        },
+        "end": {
+          "sha256": "216cb55c553981056cb21d027ad66df6c33f6db20a649ccbb8e752d2cca9b009",
+          "byteLength": 12382975
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-component-grouping-policy.json",
+        "start": {
+          "sha256": "fe6e4d461009df83c09fc90402e8fc48ffa120c5772b82b7e127db050134b4bc",
+          "byteLength": 1025
+        },
+        "end": {
+          "sha256": "fe6e4d461009df83c09fc90402e8fc48ffa120c5772b82b7e127db050134b4bc",
+          "byteLength": 1025
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-p0-repair.json",
+        "start": {
+          "sha256": "a19002c5e8148ff61c03e64a6d5c9651a7cb4e231da75d76e145fd69a2aa0aa3",
+          "byteLength": 2589
+        },
+        "end": {
+          "sha256": "a19002c5e8148ff61c03e64a6d5c9651a7cb4e231da75d76e145fd69a2aa0aa3",
+          "byteLength": 2589
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-shared-topology-start.json",
+        "start": {
+          "sha256": "07206af406cd95aa1abf72a2a41356d310ac864386a7c41a08c64d22683e6297",
+          "byteLength": 719479
+        },
+        "end": {
+          "sha256": "07206af406cd95aa1abf72a2a41356d310ac864386a7c41a08c64d22683e6297",
+          "byteLength": 719479
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-state-v2.test.ts",
+        "start": {
+          "sha256": "45550c9c2579f867f4e8aefd6e93b3ffb8f1e0d92b2f5c6a3c8587cef437cd9f",
+          "byteLength": 25777
+        },
+        "end": {
+          "sha256": "45550c9c2579f867f4e8aefd6e93b3ffb8f1e0d92b2f5c6a3c8587cef437cd9f",
+          "byteLength": 25777
+        },
+        "unchanged": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-input-selection.json",
+        "start": {
+          "sha256": "ecf9538575696e1c0947c90aea492aa6291b843ebc77fbde670914669cc6f2b3",
+          "byteLength": 1618143
+        },
+        "end": {
+          "sha256": "ecf9538575696e1c0947c90aea492aa6291b843ebc77fbde670914669cc6f2b3",
+          "byteLength": 1618143
+        },
+        "unchanged": true
+      }
+    ],
+    "modifiedExistingFiles": [
+      {
+        "repositoryPath": "src/lib/simulation/atomic-turn-runtime.ts",
+        "start": {
+          "sha256": "6d0cfea6a0546eb575653f8c852dd65d9d9d3bf0ac2c28f062b53b0301dc3fda",
+          "byteLength": 10670
+        },
+        "end": {
+          "sha256": "6a23be3ac7d2e8b211d404d6b207107c8e4effdecae2e7d8cc0a58a0817d0d29",
+          "byteLength": 12685
+        },
+        "change": "Add a geometry-free world port to the existing engine; preserve default World V2 / Simulation V1 behavior; verify V3 restoration only through the injected test adapter."
+      },
+      {
+        "repositoryPath": "src/lib/simulation/resolved-turn-plan.ts",
+        "start": {
+          "sha256": "bdec7c210712846499b398ae6b746529da62192efcc415deade82844076a9e2d",
+          "byteLength": 10664
+        },
+        "end": {
+          "sha256": "c407a85f55446d1d3d9b38346d4f4ace5d8ef83ce76391ccf4230df1f0fb0c2d",
+          "byteLength": 10719
+        },
+        "change": "Generalize the plan world type without changing the V1 production planner or its command/effect contracts."
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-state.ts",
+        "start": {
+          "sha256": "03d9fa44910da91ee5763844262fe859abf9ede316d631e73ed3a04c63ec4b7a",
+          "byteLength": 8235
+        },
+        "end": {
+          "sha256": "bd3463c44f0f731cf6d99e08840c848251c918d5edd51d3216c52253959a1e27",
+          "byteLength": 8188
+        },
+        "change": "Allow the V1 invariant/constructor reference port to validate the source pair without requiring geometry."
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v3-migration.md",
+        "start": {
+          "sha256": "f5dbe1871ef3226770514533a50bd38d2cfe5727f026a1199c4d37d6f74dc710",
+          "byteLength": 3363
+        },
+        "end": {
+          "sha256": "de7b836e8102c75aa04acbfdf5da7d6ac9dede5abaa550a224b8500fd0cda7c4",
+          "byteLength": 4886
+        },
+        "change": "Document completed 14-5 pairing and remaining production integration ports."
+      }
+    ],
+    "unrelatedBaselinePreserved": true
+  },
+  "previousCheckpoints": [
+    {
+      "repositoryPath": "reports/prompt14/14-01-baseline-runtime-data-audit.json",
+      "sha256": "19bcd5a01a5a209abfd565c144c47eb90ea75d7125ca18176735831413fe7d2d",
+      "byteLength": 164521,
+      "stage": "14-1",
+      "status": "pass",
+      "unchangedSinceStageStart": null
+    },
+    {
+      "repositoryPath": "reports/prompt14/14-02-source-generation-delivery-decision.json",
+      "sha256": "212f4104a33712fed237e53e200f38703df04df6edab75d85cb458a3404b5eff",
+      "byteLength": 3164528,
+      "stage": "14-2",
+      "status": "pass",
+      "unchangedSinceStageStart": true
+    }
+  ],
+  "retainedSourceInputVerification": {
+    "lockPath": "data/source-locks/prompt14-derived-game-input-lock.json",
+    "allMatch": true,
+    "checkedCount": 20,
+    "checked": [
+      {
+        "repositoryPath": "data/raw/ne_10m_admin_0_countries.geojson",
+        "expectedSha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+        "actualSha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+        "expectedByteLength": 13287235,
+        "actualByteLength": 13287235,
+        "matches": true
+      },
+      {
+        "repositoryPath": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+        "expectedSha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+        "actualSha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+        "expectedByteLength": 40726852,
+        "actualByteLength": 40726852,
+        "matches": true
+      },
+      {
+        "repositoryPath": "public/data/maps/countries-10m.geojson",
+        "expectedSha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
+        "actualSha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
+        "expectedByteLength": 11241685,
+        "actualByteLength": 11241685,
+        "matches": true
+      },
+      {
+        "repositoryPath": "src/data/countries-2020.json",
+        "expectedSha256": "2abf1bf755ea9225e0ff83dfb7a9692bd121dc50c7ea69ab45cc8f6da7bded3f",
+        "actualSha256": "2abf1bf755ea9225e0ff83dfb7a9692bd121dc50c7ea69ab45cc8f6da7bded3f",
+        "expectedByteLength": 78492,
+        "actualByteLength": 78492,
+        "matches": true
+      },
+      {
+        "repositoryPath": "scripts/prepare-map-data.mjs",
+        "expectedSha256": "8a5e8c5313b058bd51d7dd88df5efa63f589a155bebc31bf5103fe19bde58ae3",
+        "actualSha256": "8a5e8c5313b058bd51d7dd88df5efa63f589a155bebc31bf5103fe19bde58ae3",
+        "expectedByteLength": 25531,
+        "actualByteLength": 25531,
+        "matches": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-shared-topology.mjs",
+        "expectedSha256": "d75e5566943cf878e0542b11de96896e9c37455df1e7d597ff8afc08fc41e192",
+        "actualSha256": "d75e5566943cf878e0542b11de96896e9c37455df1e7d597ff8afc08fc41e192",
+        "expectedByteLength": 22373,
+        "actualByteLength": 22373,
+        "matches": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-game-selection.mjs",
+        "expectedSha256": "3a29ad719de01064221f1d6b15e275a05e0e5c284c93baa5ec274c15655a3f8b",
+        "actualSha256": "3a29ad719de01064221f1d6b15e275a05e0e5c284c93baa5ec274c15655a3f8b",
+        "expectedByteLength": 23826,
+        "actualByteLength": 23826,
+        "matches": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-repair.mjs",
+        "expectedSha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5",
+        "actualSha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5",
+        "expectedByteLength": 9411,
+        "actualByteLength": 9411,
+        "matches": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-source-gate.mjs",
+        "expectedSha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+        "actualSha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+        "expectedByteLength": 38582,
+        "actualByteLength": 38582,
+        "matches": true
+      },
+      {
+        "repositoryPath": "scripts/audit-prompt14-game-inputs.mjs",
+        "expectedSha256": "ae35458f951bce40344026f9b2f0efdfd0b9129fd885aef1b509b236cd2440e6",
+        "actualSha256": "ae35458f951bce40344026f9b2f0efdfd0b9129fd885aef1b509b236cd2440e6",
+        "expectedByteLength": 30536,
+        "actualByteLength": 30536,
+        "matches": true
+      },
+      {
+        "repositoryPath": "scripts/audit-prompt14-stage-1-2.mjs",
+        "expectedSha256": "e2d76862d0f7f3b77b0e018decdf575a259252f6597076df458d8a70ee31a86c",
+        "actualSha256": "e2d76862d0f7f3b77b0e018decdf575a259252f6597076df458d8a70ee31a86c",
+        "expectedByteLength": 121,
+        "actualByteLength": 121,
+        "matches": true
+      },
+      {
+        "repositoryPath": "package.json",
+        "expectedSha256": "948f5c26a6145fed6e394511a23093cb157449bc668d83e4e1796bdab19cceea",
+        "actualSha256": "948f5c26a6145fed6e394511a23093cb157449bc668d83e4e1796bdab19cceea",
+        "expectedByteLength": 1374,
+        "actualByteLength": 1374,
+        "matches": true
+      },
+      {
+        "repositoryPath": "package-lock.json",
+        "expectedSha256": "2fbeb8541b5947e289cd01fdc85f51a4a76cc9eb26e1b7e1f2f038ff2cd5fa18",
+        "actualSha256": "2fbeb8541b5947e289cd01fdc85f51a4a76cc9eb26e1b7e1f2f038ff2cd5fa18",
+        "expectedByteLength": 336023,
+        "actualByteLength": 336023,
+        "matches": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-shared-topology-policy.json",
+        "expectedSha256": "f78cddfcccf811122913c8a1dbb33064521d1669c946574b0f675656f1056910",
+        "actualSha256": "f78cddfcccf811122913c8a1dbb33064521d1669c946574b0f675656f1056910",
+        "expectedByteLength": 2460,
+        "actualByteLength": 2460,
+        "matches": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-game-selection-policy.json",
+        "expectedSha256": "ac3ec638af45a18b9a884156835fa548a957c1bb7bc92f4494168c4c8d454d11",
+        "actualSha256": "ac3ec638af45a18b9a884156835fa548a957c1bb7bc92f4494168c4c8d454d11",
+        "expectedByteLength": 3570,
+        "actualByteLength": 3570,
+        "matches": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-component-grouping-policy.json",
+        "expectedSha256": "fe6e4d461009df83c09fc90402e8fc48ffa120c5772b82b7e127db050134b4bc",
+        "actualSha256": "fe6e4d461009df83c09fc90402e8fc48ffa120c5772b82b7e127db050134b4bc",
+        "expectedByteLength": 1025,
+        "actualByteLength": 1025,
+        "matches": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/shared-game-p0.geojson",
+        "expectedSha256": "216cb55c553981056cb21d027ad66df6c33f6db20a649ccbb8e752d2cca9b009",
+        "actualSha256": "216cb55c553981056cb21d027ad66df6c33f6db20a649ccbb8e752d2cca9b009",
+        "expectedByteLength": 12382975,
+        "actualByteLength": 12382975,
+        "matches": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/shared-admin1-input.geojson",
+        "expectedSha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+        "actualSha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+        "expectedByteLength": 40725848,
+        "actualByteLength": 40725848,
+        "matches": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/selected-game-input.geojson",
+        "expectedSha256": "119becb43aef4c417bad77c7e3bf58e2ba74ca26f8b455c28b18ce727546d76e",
+        "actualSha256": "119becb43aef4c417bad77c7e3bf58e2ba74ca26f8b455c28b18ce727546d76e",
+        "expectedByteLength": 29166732,
+        "actualByteLength": 29166732,
+        "matches": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-component-grouping-plan.json",
+        "expectedSha256": "e741cce0f18665d10ef083c47d049e46243b125a14d43b0ec249ca666f741e2e",
+        "actualSha256": "e741cce0f18665d10ef083c47d049e46243b125a14d43b0ec249ca666f741e2e",
+        "expectedByteLength": 1993393,
+        "actualByteLength": 1993393,
+        "matches": true
+      }
+    ]
+  },
+  "commands": [
+    {
+      "command": "npx.cmd vitest run src/lib/test-only/world-simulation-schema-checkpoint.test.ts src/lib/test-only/world-v2-to-v3-migration.test.ts src/lib/world/world-state-v3.test.ts src/lib/simulation/simulation-state-v2.test.ts --reporter=default --reporter=json --outputFile=.prompt14-5-schema-tests.tmp.json",
+      "exitCode": 1,
+      "result": "Initial integration test assertion incorrectly matched the allowed topologyRoot reference; corrected to prohibit geometry/topology data fields. Resolved by the final run."
+    },
+    {
+      "command": "npx.cmd vitest run src/lib/test-only/world-simulation-schema-checkpoint.test.ts src/lib/test-only/world-v2-to-v3-migration.test.ts src/lib/world/world-state-v3.test.ts src/lib/simulation/simulation-state-v2.test.ts src/lib/simulation/simulation-contract.test.ts src/lib/simulation/turn-runtime.test.ts src/lib/simulation/game-runtime-persistence.test.ts src/lib/simulation/client/application-turn-runtime.test.ts src/stores/world-state-store-v2.test.ts --reporter=default --reporter=json --outputFile=.prompt14-5-schema-tests.tmp.json",
+      "environment": {
+        "PROMPT14_WRITE_SCHEMA_EVIDENCE": "1"
+      },
+      "exitCode": 0,
+      "testFiles": 9,
+      "passedTests": 136,
+      "failedTests": 0,
+      "results": [
+        {
+          "file": "src/stores/world-state-store-v2.test.ts",
+          "status": "passed",
+          "tests": 3,
+          "durationMs": 6032.833984375
+        },
+        {
+          "file": "src/lib/simulation/game-runtime-persistence.test.ts",
+          "status": "passed",
+          "tests": 2,
+          "durationMs": 41.62060546875
+        },
+        {
+          "file": "src/lib/simulation/simulation-contract.test.ts",
+          "status": "passed",
+          "tests": 17,
+          "durationMs": 64.645751953125
+        },
+        {
+          "file": "src/lib/simulation/simulation-state-v2.test.ts",
+          "status": "passed",
+          "tests": 22,
+          "durationMs": 267.3544921875
+        },
+        {
+          "file": "src/lib/simulation/turn-runtime.test.ts",
+          "status": "passed",
+          "tests": 14,
+          "durationMs": 19803.30029296875
+        },
+        {
+          "file": "src/lib/test-only/world-simulation-schema-checkpoint.test.ts",
+          "status": "passed",
+          "tests": 12,
+          "durationMs": 198.5087890625
+        },
+        {
+          "file": "src/lib/test-only/world-v2-to-v3-migration.test.ts",
+          "status": "passed",
+          "tests": 18,
+          "durationMs": 130.826904296875
+        },
+        {
+          "file": "src/lib/world/world-state-v3.test.ts",
+          "status": "passed",
+          "tests": 41,
+          "durationMs": 94.109619140625
+        },
+        {
+          "file": "src/lib/simulation/client/application-turn-runtime.test.ts",
+          "status": "passed",
+          "tests": 7,
+          "durationMs": 113.17041015625
+        }
+      ]
+    },
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "result": "Entire project type check passed."
+    },
+    {
+      "command": "npx.cmd eslint src/lib/simulation/atomic-turn-runtime.ts src/lib/simulation/resolved-turn-plan.ts src/lib/simulation/simulation-state.ts src/lib/simulation/simulation-state-v2.ts src/lib/simulation/simulation-state-v2.test.ts src/lib/simulation/simulation-contract-primitives.ts src/lib/test-only/world-simulation-schema-checkpoint.ts src/lib/test-only/world-simulation-schema-checkpoint.test.ts src/lib/test-only/world-v2-to-v3-migration.ts src/lib/test-only/world-v2-to-v3-migration.test.ts src/lib/test-only/world-v3-synthetic-fixture.ts src/lib/world/world-state-v3.ts src/lib/world/world-state-v3.test.ts src/lib/world/country-entity-v3.ts src/lib/world/territory-entity-v3.ts src/lib/world/world-geometry-catalog-ref.ts src/lib/world/world-v3-validation.ts",
+      "exitCode": 0,
+      "result": "All 14-3/14-4/14-5 contract, integration and test modules passed."
+    },
+    {
+      "command": "node -",
+      "operation": "SHA-256 and byte-length revalidation of every lineageInput, artifact and planningEvidence in data/source-locks/prompt14-derived-game-input-lock.json",
+      "exitCode": 0,
+      "checkedFiles": 20,
+      "mismatches": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "measurements": {
+    "scope": "test-only synthetic catalog; no production catalog generation/cutover",
+    "schemaVersions": {
+      "sourceWorld": 2,
+      "sourceSimulation": 1,
+      "targetWorld": 3,
+      "targetSimulation": 2
+    },
+    "countryCount": 2,
+    "legacyTerritoryCount": 2,
+    "targetTerritoryCount": 3,
+    "mappingEntryCount": 2,
+    "authorityCountsAfterMigration": {
+      "territorial": 0,
+      "presentation": 0
+    },
+    "catalogRef": {
+      "catalogVersion": "synthetic-v3",
+      "geometryRoot": "1111111111111111111111111111111111111111111111111111111111111111",
+      "topologyRoot": "2222222222222222222222222222222222222222222222222222222222222222",
+      "renderArtifactRoot": "3333333333333333333333333333333333333333333333333333333333333333",
+      "manifestPath": "/data/catalogs/synthetic-v3/manifest.json"
+    },
+    "pairByteLength": 3961,
+    "pairSha256": "2a9d030c237fd4c7a02d2df92719d3636519f8ab1cdd9344fd64f9998d4a9772",
+    "worldContentHash": "63c98322130aec39a6d7adcaad2f7a8371a8a6be4c63779b973d71a7d628f692",
+    "simulationContentHash": "bdc5c3b6d254773f570393798a196111fdf098d8a1cb4da1323e982eaf3c7ddc",
+    "independentRunsByteIdentical": true,
+    "productionFilesVerified": [
+      "src/lib/world/initial-world-state-v2.ts",
+      "src/stores/world-state-store.ts",
+      "src/lib/simulation/client/application-turn-runtime.ts",
+      "src/lib/simulation/initial-simulation-state.ts",
+      "src/lib/simulation/client/use-simulation-turn-controller.ts",
+      "src/lib/simulation/resolved-turn-plan.ts"
+    ]
+  },
+  "gates": {
+    "strictWorldV3AndSimulationV2Schemas": "pass",
+    "oneToManyAndInvalidMappingRejection": "pass",
+    "ownerControllerAndRgbLosslessMigration": "pass",
+    "dateOrderingReferenceAndCollectionCaps": "pass",
+    "emptyAuthorityMigration": "pass",
+    "independentCanonicalPairRoundTrip": "pass",
+    "pairHashAndRevisionTamperRejection": "pass",
+    "sourcePairUnchangedOnFailedPreparation": "pass",
+    "sameAtomicEngineUsed": "pass",
+    "catalogBoundRestoration": "pass",
+    "worldSimulationAuthorityHistoryUndoRedo": "pass",
+    "publicationAndCatalogFailureRollback": "pass",
+    "stalePairAndFinalReferenceValidation": "pass",
+    "productionAuthorityIsStillWorldV2SimulationV1": "pass",
+    "noDualProductionAuthority": "pass",
+    "noBrowserPersistenceAdded": "pass",
+    "prerequisiteCheckpointAndSourceLockRevalidation": "pass",
+    "typecheckLintAndRelatedRegressions": "pass",
+    "unrelatedDirtyBaselinePreserved": "pass"
+  },
+  "productionAuthority": {
+    "worldSchemaVersion": 2,
+    "simulationSchemaVersion": 1,
+    "seedDate": "2020-01-01",
+    "consumerChecks": [
+      {
+        "repositoryPath": "src/lib/world/initial-world-state-v2.ts",
+        "sha256": "91b085358d87b6d1f4521c90017ff42d5034f4fab1d7b050fcd0c0ad7ccf20d4",
+        "byteLength": 5453
+      },
+      {
+        "repositoryPath": "src/stores/world-state-store.ts",
+        "sha256": "df53cb4e4a29250df5fa75f8a12418e14ce38e8540ab068e2fc76c1e8189d245",
+        "byteLength": 9949
+      },
+      {
+        "repositoryPath": "src/lib/simulation/client/application-turn-runtime.ts",
+        "sha256": "9314afa3099ee4f4f3d523572c73e8ea6b7d6baf8a4d803427adeb12ee75cc20",
+        "byteLength": 6687
+      },
+      {
+        "repositoryPath": "src/lib/simulation/initial-simulation-state.ts",
+        "sha256": "85c35485401f0db4b30ada290304a5cf11e01d738ba05c6f030aa47efc5f9e57",
+        "byteLength": 1173
+      },
+      {
+        "repositoryPath": "src/lib/simulation/client/use-simulation-turn-controller.ts",
+        "sha256": "d1d96db0574ef23b882fcf49d0e5603753714918020c30d2ad47076d37a9b366",
+        "byteLength": 10796
+      },
+      {
+        "repositoryPath": "src/lib/simulation/resolved-turn-plan.ts",
+        "sha256": "c407a85f55446d1d3d9b38346d4f4ace5d8ef83ce76391ccf4230df1f0fb0c2d",
+        "byteLength": 10719
+      }
+    ],
+    "bootstrapOrStoreCutover": false,
+    "dualAuthority": false,
+    "browserPersistenceAdded": false,
+    "v3AdapterLocation": "src/lib/test-only/world-simulation-schema-checkpoint.ts"
+  },
+  "remainingPorts": [
+    {
+      "id": "validated-production-catalog",
+      "stages": [
+        "14-6",
+        "14-7",
+        "14-8"
+      ],
+      "requirement": "Generate/validate actual stable IDs, geometry/topology/render roots and versioned manifest; adapt the approved artifacts to WorldGeometryCatalogContract. Synthetic catalog IDs are format fixtures only."
+    },
+    {
+      "id": "source-grounded-legacy-to-catalog-mapping",
+      "stages": [
+        "14-8"
+      ],
+      "requirement": "Create complete production one-to-many TerritoryMigrationEntry mapping and implement CanonicalTerritoryCoverageValidator against locked P0/derived-P0 bytes, catalog roots and source-country coverage. Prove gap/overlap/cross-border rejection on the whole production input."
+    },
+    {
+      "id": "complete-production-country-color-record",
+      "stages": [
+        "14-8",
+        "14-10"
+      ],
+      "requirement": "Supply every actual active country color from existing seed/projection state, including dynamically created countries; preserve RGB values while canonicalizing hex case."
+    },
+    {
+      "id": "v3-command-and-turn-consumers",
+      "stages": [
+        "14-9",
+        "14-10"
+      ],
+      "requirement": "Adapt commands/planners/effect compiler, strict API/context contracts and reference rewrite paths to catalog IDs and the migrated schema pair; avoid geometry in mutable state."
+    },
+    {
+      "id": "catalog-render-and-selection-adapters",
+      "stages": [
+        "14-9"
+      ],
+      "requirement": "Connect chosen delivery to projection, selection, hover, labels, search and panels using RenderFeatureRef and catalog indexes; use affected features only."
+    },
+    {
+      "id": "incremental-production-hashing",
+      "stages": [
+        "14-9",
+        "14-10",
+        "14-19"
+      ],
+      "requirement": "Integrate authoritative V3/V2 content and catalog-ref hashing into affected mutation paths. Offline checkpoint hashes are full validation hashes and must not become ordinary camera/update work."
+    },
+    {
+      "id": "atomic-application-and-store-publication",
+      "stages": [
+        "14-10"
+      ],
+      "requirement": "Connect the validated V3 world port to the real store/application runtime with pair preflight/publication, history and undo/redo; replace legacy snapshot restoration and persistence helper contracts at the single cutover."
+    },
+    {
+      "id": "canonical-production-bootstrap-and-refresh",
+      "stages": [
+        "14-10"
+      ],
+      "requirement": "Atomically switch seed/server/browser authority to World V3 / Simulation V2 only after REVIEW C and consumer readiness; validate catalog mismatch/readiness failures and keep refresh at the canonical 2020-01-01 seed without browser persistence."
+    },
+    {
+      "id": "authority-effect-and-lifecycle-integration",
+      "stages": [
+        "14-11",
+        "14-12",
+        "14-15",
+        "14-16"
+      ],
+      "requirement": "Create validated bounded turn authority, enforce effect authorization and expiry/merge/dissolve lifecycle events, and integrate occupation/color changes and undo/redo. Synthetic checkpoint state transitions do not implement these planners."
+    }
+  ],
+  "filesChanged": [
+    {
+      "repositoryPath": "src/lib/simulation/atomic-turn-runtime.ts",
+      "sha256": "6a23be3ac7d2e8b211d404d6b207107c8e4effdecae2e7d8cc0a58a0817d0d29",
+      "byteLength": 12685,
+      "existedAtStageStart": true,
+      "start": {
+        "sha256": "6d0cfea6a0546eb575653f8c852dd65d9d9d3bf0ac2c28f062b53b0301dc3fda",
+        "byteLength": 10670
+      },
+      "change": "Add a geometry-free world port to the existing engine; preserve default World V2 / Simulation V1 behavior; verify V3 restoration only through the injected test adapter."
+    },
+    {
+      "repositoryPath": "src/lib/simulation/resolved-turn-plan.ts",
+      "sha256": "c407a85f55446d1d3d9b38346d4f4ace5d8ef83ce76391ccf4230df1f0fb0c2d",
+      "byteLength": 10719,
+      "existedAtStageStart": true,
+      "start": {
+        "sha256": "bdec7c210712846499b398ae6b746529da62192efcc415deade82844076a9e2d",
+        "byteLength": 10664
+      },
+      "change": "Generalize the plan world type without changing the V1 production planner or its command/effect contracts."
+    },
+    {
+      "repositoryPath": "src/lib/simulation/simulation-state.ts",
+      "sha256": "bd3463c44f0f731cf6d99e08840c848251c918d5edd51d3216c52253959a1e27",
+      "byteLength": 8188,
+      "existedAtStageStart": true,
+      "start": {
+        "sha256": "03d9fa44910da91ee5763844262fe859abf9ede316d631e73ed3a04c63ec4b7a",
+        "byteLength": 8235
+      },
+      "change": "Allow the V1 invariant/constructor reference port to validate the source pair without requiring geometry."
+    },
+    {
+      "repositoryPath": "src/lib/test-only/world-simulation-schema-checkpoint.ts",
+      "sha256": "7776177535a51c6d6a47a1635085a0c3a8ca252a042e0c9361660378ec6d4e4a",
+      "byteLength": 5146,
+      "existedAtStageStart": false,
+      "start": null,
+      "change": "Prepare both migrated candidates and provide a catalog-bound V3 adapter plus strict offline pair serialization/deserialization."
+    },
+    {
+      "repositoryPath": "src/lib/test-only/world-simulation-schema-checkpoint.test.ts",
+      "sha256": "2d7d98eebce0443b059b11522c7e4bc85eb32f6df70edcbb694546554c2446fc",
+      "byteLength": 19841,
+      "existedAtStageStart": false,
+      "start": null,
+      "change": "Exercise migration, hashes/references, atomic history, rollback, undo/redo, catalog failures, production isolation and deterministic pair evidence."
+    },
+    {
+      "repositoryPath": "src/lib/test-only/world-v3-migration.md",
+      "sha256": "de7b836e8102c75aa04acbfdf5da7d6ac9dede5abaa550a224b8500fd0cda7c4",
+      "byteLength": 4886,
+      "existedAtStageStart": true,
+      "start": {
+        "sha256": "f5dbe1871ef3226770514533a50bd38d2cfe5727f026a1199c4d37d6f74dc710",
+        "byteLength": 3363
+      },
+      "change": "Document completed 14-5 pairing and remaining production integration ports."
+    },
+    {
+      "repositoryPath": "reports/prompt14/14-05-schema-migration-checkpoint.json",
+      "existedAtStageStart": false,
+      "change": "This checkpoint report; its own hash is intentionally not recursively embedded."
+    }
+  ],
+  "validationLimitations": [
+    "Schema/atomic integration uses two synthetic countries and three catalog territories; the actual production catalog and whole-world migration proof are later required gates.",
+    "No UI/map changes were made, so screenshot/E2E/build and structural performance gates remain at their scheduled checkpoints."
+  ],
+  "knownWarnings": [
+    {
+      "source": "Vitest/Vite",
+      "message": "Existing vitest.config.ts CommonJS/ESM native config-loader compatibility warning; tests still exit 0."
+    }
+  ],
+  "unresolvedHardGatesForThisCheckpoint": [],
+  "review": {
+    "checkpoint": "REVIEW B",
+    "state": "awaiting user review",
+    "requestedExecutionComplete": true
+  },
+  "nextStage": "REVIEW B; after approval execute 14-6. Stop here without automatic catalog generation or production cutover."
+}

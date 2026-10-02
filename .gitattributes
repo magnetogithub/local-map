@@ -1,0 +1,25 @@
+data/source-locks/prompt14-*.json text eol=lf
+reports/prompt14/14-02-*.json text eol=lf
+data/derived/prompt14/*.geojson -text
+# Archived evidence and frozen delivery must retain their exact digest bytes.
+data/derived/prompt14/history/** -text
+data/catalogs/prompt14/** -text
+data/catalog-consumers/prompt14/** -text
+public/data/territory-catalog/** -text
+scripts/prepare-prompt14-catalog-consumer.mjs text eol=lf
+scripts/generate-prompt14-*.mjs text eol=lf
+scripts/regenerate-prompt14-*.mjs text eol=lf
+scripts/publish-prompt14-*.mjs text eol=lf
+scripts/verify-prompt14-*.mjs text eol=lf
+scripts/resolve-prompt14-*.mjs text eol=lf
+scripts/prompt14-*.mjs text eol=lf
+scripts/audit-prompt14-*.mjs text eol=lf
+# Preserve the existing source/seed digest identities on Windows and CI.
+scripts/prepare-map-data.mjs text eol=crlf
+src/data/countries-2020.json text eol=crlf
+public/data/maps/countries-10m.geojson text eol=crlf
+data/raw/ne_10m_admin_0_countries.geojson -text
+data/raw/ne_10m_admin_1_states_provinces.geojson -text
+prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt text eol=lf
+package.json text eol=lf
+package-lock.json text eol=lf

@@ -40,6 +40,7 @@
     "eslint-config-next": "16.3.0",
     "geojson-vt": "4.0.3",
     "jsdom": "^30.0.1",
+    "jsts": "2.12.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"
