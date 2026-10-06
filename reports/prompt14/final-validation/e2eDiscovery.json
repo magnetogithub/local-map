@@ -1,0 +1,684 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\gen\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--list",
+      "--reporter=json"
+    ],
+    "configFile": "D:\\gen\\playwright.config.ts",
+    "rootDir": "D:/gen/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/gen/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "",
+        "name": "",
+        "testDir": "D:/gen/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "fix08-12.spec.ts",
+      "file": "fix08-12.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-12 captures fixed-camera representative typography",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19775f4f75869787feb4-8a166c9a10b9366d8cec",
+          "file": "fix08-12.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-5.spec.ts",
+      "file": "fix08-5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-5 geometry renderer integration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f8de5f9904a62dc19260-6511bb79c8789a91d984",
+          "file": "fix08-5.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-6.spec.ts",
+      "file": "fix08-6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-6 reports projected polygon bounds and settled render state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fb20f5dcaf2c24b97dc3-4b808dff9598c95f62f3",
+          "file": "fix08-6.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-7.spec.ts",
+      "file": "fix08-7.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-7 representative zoom continuity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "966dfafb6a644c24c395-bd7c081bc3e59589d2bc",
+          "file": "fix08-7.spec.ts",
+          "line": 7,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-aus-diag.spec.ts",
+      "file": "fix08-aus-diag.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "AUS zoom diagnostics",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fe9eb7bd98f0cead1ab5-eefe91ef4c6190af1056",
+          "file": "fix08-aus-diag.spec.ts",
+          "line": 2,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "game-setup.spec.ts",
+      "file": "game-setup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "searches and resets the player country on reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-a7663f90b09d32f92360",
+          "file": "game-setup.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "renders dynamic labels, global Admin 1, high-resolution interaction, and world copies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-840311f6b052ed3a789f",
+          "file": "game-setup.spec.ts",
+          "line": 57,
+          "column": 5
+        },
+        {
+          "title": "preserves canonical playable countries and removes technical map units",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-9bc105175615e9dd80a9",
+          "file": "game-setup.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "dissolved seams select parents and do not render border layers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-b8faea4487822704893a",
+          "file": "game-setup.spec.ts",
+          "line": 76,
+          "column": 5
+        },
+        {
+          "title": "uses feature minZoom for point labels and crosses world copies by mouse drag",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-e02b25dcfb657cb955ad",
+          "file": "game-setup.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "renders geometry labels and preserves Point fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-3ec8af03add40cc0523d",
+          "file": "game-setup.spec.ts",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "splits China, merges 31 countries, and rolls back atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-7afbc2faf085870fe681",
+          "file": "game-setup.spec.ts",
+          "line": 94,
+          "column": 5
+        },
+        {
+          "title": "splits the USA into 50 state countries, merges them, and rolls back atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-a0f153ca3402040cfb86",
+          "file": "game-setup.spec.ts",
+          "line": 154,
+          "column": 5
+        },
+        {
+          "title": "desktop layout 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-371f659f05319b48fb94",
+          "file": "game-setup.spec.ts",
+          "line": 220,
+          "column": 7
+        },
+        {
+          "title": "desktop layout 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-9419db85a3b6a8c6f958",
+          "file": "game-setup.spec.ts",
+          "line": 220,
+          "column": 7
+        },
+        {
+          "title": "desktop layout 2560x1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-5e047d67c2153f455b28",
+          "file": "game-setup.spec.ts",
+          "line": 220,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt11-10.spec.ts",
+      "file": "prompt11-10.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "v2 map source, selection, focus, and revision agree",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0449f37482d3a3054143-a025bb2e9618e24478a4",
+          "file": "prompt11-10.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt12-simulation.spec.ts",
+      "file": "prompt12-simulation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "queues, adjudicates, unifies, links the report, undoes, and stops atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a96b9029a7076e8620a-7d91e37443847a27abae",
+          "file": "prompt12-simulation.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "sends production CHN and USA subdivision summaries and resets the player lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a96b9029a7076e8620a-d28b5dbacb36fa7fcbfc",
+          "file": "prompt12-simulation.spec.ts",
+          "line": 142,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt13-integration.spec.ts",
+      "file": "prompt13-integration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "13-29 through 13-33 deterministic integration 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2865eb7db012def1526d-96ffb5901e8f6286302b",
+          "file": "prompt13-integration.spec.ts",
+          "line": 96,
+          "column": 7
+        },
+        {
+          "title": "13-29 through 13-33 deterministic integration 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2865eb7db012def1526d-760851ac0b787671d2ef",
+          "file": "prompt13-integration.spec.ts",
+          "line": 96,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt13-shell.spec.ts",
+      "file": "prompt13-shell.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "13-13 full-screen game shell 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f7496f486b4ea16412aa-84431db9fb562ab89af4",
+          "file": "prompt13-shell.spec.ts",
+          "line": 27,
+          "column": 7
+        },
+        {
+          "title": "13-13 full-screen game shell 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f7496f486b4ea16412aa-21d78afc6800381cc62a",
+          "file": "prompt13-shell.spec.ts",
+          "line": 27,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt14-benchmark.spec.ts",
+      "file": "prompt14-benchmark.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "reference machine legacy/catalog camera benchmark and bounded catalog caches",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c7545c5ef5c20bb348f2-1c2fa3905ea608b19a86",
+          "file": "prompt14-benchmark.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt14-catalog.spec.ts",
+      "file": "prompt14-catalog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "catalog production selection, map interaction, turn/news/major event, history and fresh reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "58cb8aa15efda3ff1c7b-cc3afb942df9bcb693a1",
+          "file": "prompt14-catalog.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "catalog rejects GPT coordinates/polygons and production debug without atomic publication",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "58cb8aa15efda3ff1c7b-48b101c39465573a9a6e",
+          "file": "prompt14-catalog.spec.ts",
+          "line": 36,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T03:39:38.950Z",
+    "duration": 75.31699999999995,
+    "expected": 0,
+    "skipped": 26,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

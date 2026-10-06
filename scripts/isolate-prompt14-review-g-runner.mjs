@@ -1,0 +1,1 @@
+import fs from 'node:fs';const p='scripts/verify-prompt14-review-g.mjs';let s=fs.readFileSync(p,'utf8');s=s.replace('env:{...process.env,PLAYWRIGHT_CHROMIUM_CHANNEL:',"env:{...process.env,PAX_REVIEW_G_E2E:'1',PLAYWRIGHT_CHROMIUM_CHANNEL:");fs.writeFileSync(p,s);

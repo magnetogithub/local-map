@@ -1,4 +1,4 @@
-import {test,expect} from "@playwright/test";
+import {test,expect} from "./legacy-fixture";
 
 const expected={AUS:7,RUS:3,USA:4,CHN:7} as const;
 

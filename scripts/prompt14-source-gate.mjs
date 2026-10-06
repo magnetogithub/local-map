@@ -3,24 +3,25 @@ import fs from "node:fs";
 import path from "node:path";
 import {performance} from "node:perf_hooks";
 
-import booleanValid from "@turf/boolean-valid";
+import GeoJSONReader from "jsts/org/locationtech/jts/io/GeoJSONReader.js";
+import IsValidOp from "jsts/org/locationtech/jts/operation/valid/IsValidOp.js";
 import {fromGeojsonVt} from "@maplibre/vt-pbf";
 import geojsonVt from "geojson-vt";
 import polygonClipping from "polygon-clipping";
 
 export const VALIDATOR_POLICY = Object.freeze({
-  version: "prompt14-polygon-validity-v1",
-  coordinatePrecision: 6,
+  version: "prompt14-polygon-validity-jsts-v2",
+  coordinatePrecision: "preserve",
   exteriorWinding: "clockwise",
   interiorWinding: "counterclockwise",
   coverageAbsoluteTolerance: 1e-9,
   coverageRelativeTolerance: 1e-9,
-  validator: {name: "@turf/boolean-valid", version: "7.4.0", license: "MIT"},
+  validator: {name: "jsts/IsValidOp", version: "2.12.1", license: "(EDL-1.0 OR EPL-1.0)", selfTouchingRingFormingHoleValid:false},
   clipping: {name: "polygon-clipping", version: "0.15.7", license: "MIT"},
 });
 export const CANONICAL_P0_VALIDATOR_POLICY = Object.freeze({
   ...VALIDATOR_POLICY,
-  version: "prompt14-canonical-p0-validity-v1",
+  version: "prompt14-canonical-p0-validity-jsts-v2",
   exteriorWinding: "counterclockwise",
   interiorWinding: "clockwise",
 });
@@ -44,6 +45,7 @@ export const DELIVERY_DEPENDENCIES = Object.freeze({
   "geojson-vt": Object.freeze({version: "4.0.3", license: "ISC", section: "devDependencies"}),
   "@maplibre/vt-pbf": Object.freeze({version: "4.3.2", license: "MIT", section: "devDependencies"}),
   "@turf/boolean-valid": Object.freeze({version: "7.4.0", license: "MIT", section: "devDependencies"}),
+  "jsts": Object.freeze({version: "2.12.1", license: "(EDL-1.0 OR EPL-1.0)", section: "devDependencies"}),
   "polygon-clipping": Object.freeze({version: "0.15.7", license: "MIT", section: "dependencies"}),
 });
 
@@ -58,16 +60,20 @@ export const UPSTREAM_RELEASE = Object.freeze({
   admin1Sha256: "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
 });
 
-export const BOUNDARY_KINDS = Object.freeze(["legal-2020", "administrative-operational"]);
-export const SOURCE_LOCK_MANIFEST_SCHEMA_VERSION = "prompt14-production-polygon-source-lock-v1";
+export const BOUNDARY_KINDS = Object.freeze(["project-game-seed-2020", "project-game-seed-derived-2020", "administrative-operational"]);
+export const SOURCE_LOCK_MANIFEST_SCHEMA_VERSION = "prompt14-production-polygon-source-lock-v2";
 export const CANONICAL_PROVENANCE_POLICY = Object.freeze({
-  version: "prompt14-canonical-provenance-v2",
-  requiredAuthorityDate: "2020-01-01",
-  requiredBoundaryClaim: "legal-country-boundaries",
-  requiredEvidenceKind: "authoritative-boundary-source",
-  requiredMediaType: "application/geo+json",
-  trustedAuthorities: Object.freeze([]),
-  trustPolicy: "Fail closed: a local declaration is not authority. A reviewed code change must pin an external authority identity, acquisition URL, release/version, and exact source digest before evidence can verify.",
+  version: "prompt14-game-seed-provenance-v3",
+  gameStartDate: "2020-01-01",
+  boundaryClaim: "project-game-seed-country-boundaries",
+  legalEvidenceStatus:"not-required",
+  definition:"Project-fixed game starting country IDs and owners; date denotes game start, never external legal certification. Original seed bytes remain a reference. A separately locked bounded shared-source derived P0 is the new catalog authority; P1 partitions it. No production cutover in 14-2.",
+  pinnedInputs: Object.freeze([
+    {role:"raw",repositoryPath:"data/raw/ne_10m_admin_0_countries.geojson",sha256:UPSTREAM_RELEASE.admin0Sha256},
+    {role:"code",repositoryPath:"scripts/prepare-map-data.mjs",sha256:"8a5e8c5313b058bd51d7dd88df5efa63f589a155bebc31bf5103fe19bde58ae3"},
+    {role:"metadata",repositoryPath:"src/data/countries-2020.json",sha256:"2abf1bf755ea9225e0ff83dfb7a9692bd121dc50c7ea69ab45cc8f6da7bded3f"},
+    {role:"current",repositoryPath:"public/data/maps/countries-10m.geojson",sha256:"ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8"},
+  ]),
 });
 
 export const ID_OVERRIDES = Object.freeze({
@@ -95,9 +101,13 @@ const polygonArea = (polygon) => Math.abs(signedArea(polygon[0]))
 const multiPolygonArea = (multiPolygon) => multiPolygon.reduce((sum, polygon) => sum + polygonArea(polygon), 0);
 const geometryAsMultiPolygon = (geometry) => geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
 const roundCoordinate = (value, precision) => Number(value.toFixed(precision));
-const quantizeCoordinates = (value, precision) => Array.isArray(value)
+const quantizeCoordinates = (value, precision) => precision === "preserve" ? value : Array.isArray(value)
   ? value.map((entry) => Array.isArray(entry) ? quantizeCoordinates(entry, precision) : roundCoordinate(entry, precision))
   : value;
+// Geometry-only cache within one audit process; bytes are hashed on every call.
+// No disk cache or previously reported pass can bypass current input validation.
+const topologyValidityCache = new Map();
+const ogcReader = new GeoJSONReader();
 
 function inspectRing(ring, expectedWinding, context) {
   const errors = [];
@@ -180,7 +190,14 @@ export function validatePolygonFeatureCollection(collection, label = "asset", po
       }
     });
     try {
-      if (!booleanValid(feature)) errors.push(`${context}: @turf/boolean-valid rejected OGC geometry validity`);
+      const geometryDigest = sha256(JSON.stringify(geometry));
+      if (!topologyValidityCache.has(geometryDigest)) {
+        const op=new IsValidOp(ogcReader.read(geometry));
+        const valid=op.isValid(), error=valid?null:op.getValidationError();
+        topologyValidityCache.set(geometryDigest,{valid,reason:error?.getMessage(),coordinate:error?.getCoordinate()});
+      }
+      const result=topologyValidityCache.get(geometryDigest);
+      if (!result.valid) errors.push(`${context}: JSTS OGC invalid: ${result.reason} at ${JSON.stringify(result.coordinate)}`);
     } catch (error) {
       errors.push(`${context}: validator exception: ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -350,10 +367,10 @@ function projectDeliveryFeatures(collection) {
     type: "FeatureCollection",
     features: collection.features.map((feature, index) => ({
       type: "Feature",
-      id: String(feature.properties?.ne_id ?? index),
+      id: String(feature.properties?.sourceFeatureId ?? feature.properties?.ne_id ?? index),
       properties: {
-        sourceCountryId: feature.properties?.adm0_a3 ?? "UNK",
-        sourceFeatureId: String(feature.properties?.ne_id ?? feature.properties?.adm1_code ?? index),
+        sourceCountryId: feature.properties?.countryId ?? feature.properties?.adm0_a3 ?? "UNK",
+        sourceFeatureId: String(feature.properties?.sourceFeatureId ?? feature.properties?.ne_id ?? feature.properties?.adm1_code ?? feature.properties?.countryId ?? index),
       },
       geometry: feature.geometry,
     })),
@@ -399,8 +416,7 @@ export function benchmarkDeterministicDelivery(collection, maximumMeasuredZoom =
 
 const SOURCE_LOCK_FIELDS = Object.freeze(["sourceId", "release", "sourceVersion", "license", "attribution", "acquiredFrom", "repositoryPath", "sha256", "byteLength", "geometryTypes", "coveredCountryIds", "boundaryKind", "operationalOnly"]);
 const MANIFEST_FIELDS = Object.freeze(["schemaVersion", "canonicalProvenance", "sources"]);
-const PROVENANCE_FIELDS = Object.freeze(["sourceId", "authorityDate", "boundaryClaim", "verificationStatus", "evidenceFiles", "unresolvedReason"]);
-const EVIDENCE_FIELDS = Object.freeze(["evidenceKind", "authorityId", "sourceId", "authorityDate", "boundaryClaim", "release", "sourceVersion", "acquiredFrom", "repositoryPath", "sha256", "byteLength", "mediaType"]);
+const PROVENANCE_FIELDS = Object.freeze(["sourceId", "gameStartDate", "boundaryClaim", "legalEvidenceStatus", "lineageInputs"]);
 const FLOATING_IDENTIFIER_PATTERN = /(?:^|[\/@?&=._:-])(latest|current|head|main|master|trunk|develop|development|nightly|snapshot)(?:$|[\/@?&=._:-])/i;
 const RANGE_IDENTIFIER_PATTERN = /(?:\^|~|\*|\|\||\s(?:<|>|<=|>=)|(?:^|[._-])[xX](?:$|[._-]))/;
 const geometryTypeOrder = new Map([["Polygon", 0], ["MultiPolygon", 1]]);
@@ -430,21 +446,20 @@ export function validateSourceLockManifestSchema(manifest) {
   else {
     const provenanceUnknownFields = Object.keys(manifest.canonicalProvenance).filter((field) => !PROVENANCE_FIELDS.includes(field));
     if (provenanceUnknownFields.length) errors.push(`unknown canonicalProvenance fields: ${provenanceUnknownFields.join(", ")}`);
-    for (const field of ["sourceId", "authorityDate", "boundaryClaim", "verificationStatus"]) {
+    for (const field of ["sourceId", "gameStartDate", "boundaryClaim", "legalEvidenceStatus"]) {
       if (typeof manifest.canonicalProvenance[field] !== "string" || manifest.canonicalProvenance[field].trim() === "") errors.push(`canonicalProvenance.${field} must be a non-empty string`);
     }
-    if (!['verified', 'unverified'].includes(manifest.canonicalProvenance.verificationStatus)) errors.push("canonicalProvenance.verificationStatus must be verified or unverified");
-    if (!Array.isArray(manifest.canonicalProvenance.evidenceFiles)) errors.push("canonicalProvenance.evidenceFiles must be an array");
+    if (manifest.canonicalProvenance.legalEvidenceStatus !== "not-required") errors.push("legalEvidenceStatus must be not-required; no fabricated verified evidence");
+    if (!Array.isArray(manifest.canonicalProvenance.lineageInputs) || !manifest.canonicalProvenance.lineageInputs.length) errors.push("lineageInputs must be a non-empty array");
     else {
-      const keys = manifest.canonicalProvenance.evidenceFiles.map((evidence) => `${evidence?.authorityId ?? ""}\0${evidence?.sourceId ?? ""}\0${evidence?.repositoryPath ?? ""}\0${evidence?.sha256 ?? ""}`);
-      if (!isBytewiseSorted(keys)) errors.push("canonicalProvenance.evidenceFiles must be canonically sorted");
-      for (const [index, evidence] of manifest.canonicalProvenance.evidenceFiles.entries()) {
-        if (!evidence || typeof evidence !== "object" || Array.isArray(evidence)) errors.push(`canonicalProvenance.evidenceFiles[${index}] must be an object`);
+      const keys = manifest.canonicalProvenance.lineageInputs.map(e=>e?.role ?? "");
+      if (!isBytewiseSorted(keys) || new Set(keys).size !== keys.length) errors.push("lineageInputs must have unique bytewise sorted roles");
+      for (const [index, evidence] of manifest.canonicalProvenance.lineageInputs.entries()) {
+        if (!evidence || typeof evidence !== "object" || Array.isArray(evidence)) errors.push(`lineageInputs[${index}] must be an object`);
         else {
-          const unknown = Object.keys(evidence).filter((field) => !EVIDENCE_FIELDS.includes(field));
-          if (unknown.length) errors.push(`canonicalProvenance.evidenceFiles[${index}] has unknown fields: ${unknown.join(", ")}`);
-          const missing = EVIDENCE_FIELDS.filter((field) => evidence[field] === null || evidence[field] === undefined || evidence[field] === "");
-          if (missing.length) errors.push(`canonicalProvenance.evidenceFiles[${index}] is missing fields: ${missing.join(", ")}`);
+          const unknown = Object.keys(evidence).filter(field=>!["role","repositoryPath","sha256","byteLength"].includes(field));
+          if (unknown.length) errors.push(`lineageInputs[${index}] has unknown fields: ${unknown.join(", ")}`);
+          if (!["role","repositoryPath","sha256","byteLength"].every(field=>evidence[field] !== undefined)) errors.push(`lineageInputs[${index}] is incomplete`);
         }
       }
     }
@@ -479,7 +494,7 @@ export function validateBoundarySourceLockSchema(lock, root) {
   else if (!isBytewiseSorted(lock.coveredCountryIds)) errors.push("coveredCountryIds must be bytewise sorted");
   if (!BOUNDARY_KINDS.includes(lock.boundaryKind)) errors.push(`boundaryKind must be one of: ${BOUNDARY_KINDS.join(", ")}`);
   if (typeof lock.operationalOnly !== "boolean") errors.push("operationalOnly must be boolean");
-  if (lock.boundaryKind === "legal-2020" && lock.operationalOnly !== false) errors.push("legal-2020 sources must set operationalOnly=false");
+  if (["project-game-seed-2020","project-game-seed-derived-2020"].includes(lock.boundaryKind) && lock.operationalOnly !== false) errors.push("game P0 sources must set operationalOnly=false");
   if (lock.boundaryKind === "administrative-operational" && lock.operationalOnly !== true) errors.push("administrative-operational sources must set operationalOnly=true");
   if (typeof lock.repositoryPath === "string") {
     const resolvedRoot = path.resolve(root);
@@ -507,50 +522,28 @@ export function validateSourceLock(lock, root, actualSource = null) {
   };
 }
 
-export function validateCanonicalProvenance(provenance, sourceLocks, root, policy = CANONICAL_PROVENANCE_POLICY) {
-  const requiredFields = ["sourceId", "authorityDate", "boundaryClaim", "verificationStatus", "evidenceFiles"];
-  const missingFields = requiredFields.filter((field) => provenance?.[field] === null || provenance?.[field] === undefined || provenance?.[field] === "");
-  const sourceLock = sourceLocks.find((lock) => lock.sourceId === provenance?.sourceId) ?? null;
-  const sourceLockResult = sourceLock ? validateSourceLock(sourceLock, root) : {pass: false, error: "canonical provenance sourceId has no source lock"};
-  const evidenceResults = Array.isArray(provenance?.evidenceFiles) ? provenance.evidenceFiles.map((evidence) => {
-    const missing = EVIDENCE_FIELDS.filter((field) => evidence?.[field] === null || evidence?.[field] === undefined || evidence?.[field] === "");
-    const trustAnchor = policy.trustedAuthorities.find((authority) => authority.authorityId === evidence?.authorityId) ?? null;
-    const target = typeof evidence?.repositoryPath === "string" && !path.isAbsolute(evidence.repositoryPath) ? path.resolve(root, evidence.repositoryPath) : null;
-    if (!target || !fs.existsSync(target)) return {pass: false, missingFields: missing, fileExists: false, error: "provenance evidence file is missing"};
-    const bytes = fs.readFileSync(target);
-    const actual = {sha256: sha256(bytes), byteLength: bytes.length};
-    const bytesMatch = actual.sha256 === evidence.sha256 && actual.byteLength === evidence.byteLength;
-    let geoJsonSource = false;
-    try {
-      const parsed = JSON.parse(bytes.toString("utf8"));
-      geoJsonSource = parsed?.type === "FeatureCollection" && Array.isArray(parsed.features) && parsed.features.length > 0;
-    } catch {}
-    const sourceBindingMatches = Boolean(sourceLock)
-      && evidence.sourceId === sourceLock.sourceId && evidence.repositoryPath === sourceLock.repositoryPath
-      && evidence.sha256 === sourceLock.sha256 && evidence.byteLength === sourceLock.byteLength
-      && evidence.release === sourceLock.release && evidence.sourceVersion === sourceLock.sourceVersion
-      && evidence.acquiredFrom === sourceLock.acquiredFrom;
-    const trustAnchorMatches = Boolean(trustAnchor)
-      && trustAnchor.sourceId === evidence.sourceId && trustAnchor.authorityDate === evidence.authorityDate
-      && trustAnchor.boundaryClaim === evidence.boundaryClaim && trustAnchor.release === evidence.release
-      && trustAnchor.sourceVersion === evidence.sourceVersion && trustAnchor.acquiredFrom === evidence.acquiredFrom
-      && trustAnchor.sha256 === evidence.sha256 && trustAnchor.byteLength === evidence.byteLength;
-    const semanticContractMatches = evidence.evidenceKind === policy.requiredEvidenceKind
-      && evidence.mediaType === policy.requiredMediaType && evidence.authorityDate === policy.requiredAuthorityDate
-      && evidence.boundaryClaim === policy.requiredBoundaryClaim;
-    const pass = missing.length === 0 && bytesMatch && geoJsonSource && sourceBindingMatches && trustAnchorMatches && semanticContractMatches;
-    return {pass, missingFields: missing, fileExists: true, bytesMatch, geoJsonSource, sourceBindingMatches, trustAnchorMatches, semanticContractMatches, trustAnchorFound: Boolean(trustAnchor), expected: {sha256: evidence.sha256, byteLength: evidence.byteLength}, actual, ...(pass ? {} : {error: "evidence is not a trusted, source-bound authoritative GeoJSON artifact"})};
-  }) : [];
-  const pass = missingFields.length === 0
-    && provenance.authorityDate === policy.requiredAuthorityDate
-    && provenance.boundaryClaim === policy.requiredBoundaryClaim
-    && provenance.verificationStatus === "verified"
-    && evidenceResults.length > 0
-    && evidenceResults.every((result) => result.pass)
-    && sourceLockResult.pass
-    && sourceLock?.boundaryKind === "legal-2020"
-    && sourceLock?.operationalOnly === false;
-  return {pass, policy, missingFields, sourceLockResult, evidenceResults, provenance, ...(pass ? {} : {error: provenance?.unresolvedReason ?? "canonical legal-boundary provenance is incomplete or unverifiable"})};
+export function validateCanonicalProvenance(provenance, sourceLocks, root, policy = CANONICAL_PROVENANCE_POLICY, replay = null) {
+  const errors=[];
+  const sourceLock=sourceLocks.find(s=>s.sourceId===provenance?.sourceId);
+  const sourceLockResult=sourceLock?validateSourceLock(sourceLock,root):{pass:false};
+  if (!sourceLockResult.pass || sourceLock?.boundaryKind!=="project-game-seed-2020" || sourceLock?.operationalOnly!==false) errors.push("game P0 lock invalid");
+  if (provenance?.gameStartDate!==policy.gameStartDate || provenance?.boundaryClaim!==policy.boundaryClaim || provenance?.legalEvidenceStatus!=="not-required") errors.push("game seed contract mismatch; legal evidence must be explicitly not-required");
+  const declared=Array.isArray(provenance?.lineageInputs)?provenance.lineageInputs:[];
+  if (declared.length!==policy.pinnedInputs.length || new Set(declared.map(e=>e.role)).size!==declared.length) errors.push("lineage input set incomplete or duplicated");
+  const inputs=policy.pinnedInputs.map(pin=>{
+    const evidence=declared.find(e=>e.role===pin.role);
+    const target=path.resolve(root,pin.repositoryPath);
+    const bytes=fs.existsSync(target)?fs.readFileSync(target):null;
+    const actual=bytes?{sha256:sha256(bytes),byteLength:bytes.length}:null;
+    const replayInput=replay?.[pin.role];
+    const pass=Boolean(actual && evidence && evidence.repositoryPath===pin.repositoryPath && evidence.sha256===pin.sha256 && evidence.sha256===actual.sha256 && evidence.byteLength===actual.byteLength && replayInput?.sha256===actual.sha256 && replayInput?.byteLength===actual.byteLength);
+    return {role:pin.role,pass,expected:pin,declared:evidence,actual};
+  });
+  if (!inputs.every(i=>i.pass)) errors.push("raw, transform code, metadata or seed bytes do not match pinned lineage");
+  if (replay?.pass!==true) errors.push("actual transform replay missing or failed");
+  const current=inputs.find(i=>i.role==="current");
+  if (current?.actual?.sha256!==sourceLock?.sha256 || current?.actual?.byteLength!==sourceLock?.byteLength) errors.push("P0 lock is not bound to replayed seed");
+  return {pass:errors.length===0,policy,legalEvidenceStatus:"not-required",sourceLockResult,inputs,replay,errors,...(errors.length?{error:errors.join("; ")}:{})};
 }
 
 export function evaluateHardGate(gates) {

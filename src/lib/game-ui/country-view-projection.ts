@@ -1,3 +1,4 @@
+import type {GameWorldView as WorldStateV2, SimulationPresentation as SimulationStateV1, MapPresentation as WorldMapRuntimeProjection} from './runtime-view';
 import type {
   BilateralRelationshipViewModel,
   CountryViewModel,
@@ -7,12 +8,9 @@ import {
   createCountrySummaryProjection,
   projectCountryEvents,
 } from "./country-management-projection";
-import type {WorldMapRuntimeProjection} from "@/lib/projection/world-map-runtime-projection";
 import {getCountryPanelView, type CountryPanelProjection} from "@/lib/projection/country-panel-projection";
-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
 import type {ActiveCountryId} from "@/lib/world/country-id";
 import type {CountryPoliticalStatus} from "@/lib/world/country-entity";
-import type {WorldStateV2} from "@/lib/world/world-state-v2";
 
 const politicalStatusLabel: Record<CountryPoliticalStatus, string> = {
   sovereign: "주권 국가",

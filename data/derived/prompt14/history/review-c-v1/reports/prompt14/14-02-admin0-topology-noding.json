@@ -1,0 +1,29 @@
+{
+  "sourceFeatureId": "1159320575",
+  "countryId": "EGY",
+  "source": {
+    "repositoryPath": "data/raw/ne_10m_admin_0_countries.geojson",
+    "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+    "byteLength": 13287235
+  },
+  "derived": {
+    "repositoryPath": "data/derived/prompt14/shared-game-p0.geojson",
+    "sha256": "216cb55c553981056cb21d027ad66df6c33f6db20a649ccbb8e752d2cca9b009",
+    "byteLength": 12382975
+  },
+  "operation": "Same-country union nodes the existing exact ring self-touch; no rounding/simplification or new ownership assignment.",
+  "boundary": {
+    "sampledMaximumBoundaryDisplacementDegrees": 3.972480777568421e-15,
+    "certifiedMaximumBoundaryDisplacementUpperBoundDegrees": null,
+    "seedPerimeterDegrees": 63.72837001308363,
+    "continuousMaximumCertified": false
+  },
+  "areaDeltaDegreesSquared": -4.405364961712621e-13,
+  "pass": true,
+  "independentBoundarySetEquality": {
+    "validator": "JSTS 2.12.1 UnaryUnionOp + OverlayOp.difference on complete boundary LINEWORK (not area)",
+    "sourceMinusDerivedLengthDegrees": 0,
+    "derivedMinusSourceLengthDegrees": 0
+  },
+  "certificateDiagnosis": "Nearest-single-segment adaptive certificate is incomplete for a merged collinear segment across multiple source segments. Complete independently noded boundary set equality resolves that verifier limitation; no geometry or tolerance changes."
+}

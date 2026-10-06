@@ -8,5 +8,7 @@ export default defineConfig({
   // budget on Windows. Keep the canonical suite serial to prevent cross-test GPU/OOM
   // contention while preserving every viewport and integration scenario.
   workers:1,
-  use:{baseURL:process.env.PLAYWRIGHT_BASE_URL??"http://localhost:3000",...devices["Desktop Chrome"]},
+  use:{baseURL:process.env.PLAYWRIGHT_BASE_URL??"http://localhost:3000",...devices["Desktop Chrome"],
+    channel:process.env.PLAYWRIGHT_CHROMIUM_CHANNEL,
+    launchOptions:{args:['--enable-unsafe-swiftshader']}},
 });

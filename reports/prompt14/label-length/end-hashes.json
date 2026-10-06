@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-10-06T06:11:26.464Z",
+  "hashes": {
+    "src/app/api/world/labels/route.ts": "3394547f60884488cb69b2f0f95f044d4e68a8b6e6c03ec148055299cd86619d",
+    "src/lib/map/catalog-labels.server.ts": "ec65dacc9de6ff391fbc9f2db62828cc2fab76f71606801a1ec2f9b984df75f7",
+    "src/lib/map/catalog-label-renderer.ts": "98d6aa1fcb511beddac007f0eaf0f0708bed15353394d549c25867fc237e9f14",
+    "src/lib/map/catalog-labels.server.test.ts": "1e161046d3e278eea400d225940847a137c0365a809bf26f9ddf93c83f0a5897",
+    "src/lib/map/catalog-label-renderer.test.ts": "504e48c41b9751439c0455157835c3171d779b4fa0995de45fc2a9b0740f0302",
+    "src/lib/map/catalog-label-length.test.ts": "3ff0f85defe5f94618129ca34e8760762eed95ecb55baef3e6374a270345862b",
+    "e2e/prompt14-label-length.spec.ts": "b7be78576561654859cb5742546545ff9fda8ddf234480785d93d039e4881a13",
+    "e2e/game-setup.spec.ts": "e0ea8c1fa9e6a2efe63c206cdcd53a980d4f144cea32168536ac457a20fc8f1f",
+    "scripts/start-prompt14-label-length.mjs": "e8fe3edc0dced889c9bfb9620bda61fa6dbd78c7bb6e7cbce990c9cb8c4d85e0",
+    "scripts/verify-prompt14-label-length.mjs": "8d911965ffba0cdd40e3cc985458010c4c65a28c7a8ebf820a64ad0f85dd6a3a",
+    "scripts/report-prompt14-label-length.mjs": "63a5ea5784cc06bf47f40dbfe3d0ce2daca4ff4b38fd9e68141c88881f5238e9",
+    "scripts/smoke-prompt14-label-length.mjs": "ee696dedee9ff27e4ca9786be9341941f69ab0771f9b2fdb40b5ff2eb704cdf1",
+    "reports/prompt14/14-20-final-integration.json": "f099d4987a332ba318c535aec252296c34b514b984f4c7137b5edd9ba4085b93"
+  },
+  "finalCheckpointRefreshedAt": "2026-10-06T06:50:04.608Z"
+}

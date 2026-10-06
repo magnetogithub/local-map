@@ -1,0 +1,12 @@
+{
+  "version": "prompt14-lossless-ring-normalization-v1",
+  "generatorVersion": "prompt14-derived-input-v1",
+  "allowedOperations": ["remove exact consecutive duplicate positions", "reverse ring winding"],
+  "coordinatePrecision": "original IEEE-754 doubles preserved without rounding",
+  "areaAbsoluteToleranceDegreesSquared": 1e-9,
+  "areaRelativeTolerance": 1e-12,
+  "boundaryDisplacementTolerance": 0,
+  "coverageRequirement": "Per-ring undirected nonzero segment multiset equality; preserve features, properties, geometry types, components and holes",
+  "failureConditions": ["source hash mismatch", "non-determinism", "identity or coverage changes", "area tolerance exceeded", "unresolved geometry validity"],
+  "topologyChanges": "blocked; no union/buffer/make-valid/snap/simplification/deletion/filler/splitting in this repair"
+}

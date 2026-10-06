@@ -1,0 +1,33 @@
+{
+  "role": "diagnostic only; never selected production/derived input",
+  "rawSource": {
+    "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+    "byteLength": 13287235
+  },
+  "maximumSourceDecimalPlaces": 6,
+  "method": "Apply the existing 5-place rounding to every raw coordinate without independent ring thinning; same pinned IDs/exclusions/masks and same-country union; inspect all possible country pairs.",
+  "roundOnly": {
+    "validation": {
+      "pass": true,
+      "counts": {
+        "features": 247,
+        "polygons": 4266,
+        "rings": 4286,
+        "vertices": 546008,
+        "polygon": 97,
+        "multiPolygon": 150
+      },
+      "errors": []
+    },
+    "ownership": {
+      "pass": true,
+      "absoluteToleranceDegreesSquared": 1e-9,
+      "overlapPairCount": 0,
+      "affectedCountryIds": [],
+      "overlaps": [],
+      "errors": [],
+      "policy": "Finite point touching is allowed; positive intersection area above tolerance blocks unambiguous country ownership. No P0 subtraction or winner-country assignment is authorized by this validator."
+    }
+  },
+  "interpretation": "Compare with unsimplified source (0 overlaps) and original seed (164 overlaps). This reference experiment isolates rounding from the independently thinned seed transform."
+}

@@ -1,0 +1,31 @@
+{
+  "version": "prompt14-shared-source-topology-v1",
+  "generatorVersion": "prompt14-shared-topology-v1",
+  "authority": "Derived game P0; pinned Natural Earth v5.1.2 unsimplified Admin0; existing metadata IDs/owner and existing map-unit assignment retained. Not external legal certification.",
+  "originals": "Raw sources, original production seed and metadata remain byte-identical.",
+  "precision": "Original doubles preserved. No independent rounding, simplification, snapping, buffer or winner-country subtraction.",
+  "operations": [
+    "same-country source union with shared coordinates unchanged",
+    "existing KAS->IND/KAB->KAZ source masks only; no new ownership decisions",
+    "exact duplicate removal and winding normalization",
+    "self-touch ring noding only if geometric area and boundary unchanged"
+  ],
+  "maximumSeedBoundaryDisplacementDegrees": 0.0015070710678118655,
+  "displacementBasis": "Existing distance thinning .0015 degrees plus 5-place rounding radius. Bidirectional continuous segment certificate by adaptive subdivision: distance to each fixed target segment is convex, so endpoint maximum bounds the entire subsegment.",
+  "areaChangeBound": "Seed perimeter * maximumSeedBoundaryDisplacementDegrees + pi * displacement^2 per ring; also report relative area and symmetric difference per country.",
+  "sourceCoverageToleranceDegreesSquared": 1e-9,
+  "p1SelfTouchNodingBoundaryToleranceDegrees": 1e-12,
+  "p1SelfTouchNodingPolicy": "Only pre-existing exact non-adjacent repeated source vertices may be noded. No bow-tie/intersection repair or guessed topology. Preserve feature properties, area within 1e-9 degree squared and certify both complete boundary sets within 1e-12 degree. Validate output independently; otherwise keep candidate invalid and explicitly exclude it through country selection.",
+  "islandHolePolicy": "Every positive-area seed component and hole must intersect a corresponding derived component/hole. Report counts and source self-touch splits; no whole island/hole deletion allowed.",
+  "failureConditions": [
+    "source hash mismatch",
+    "non-deterministic bytes",
+    "metadata/property changes",
+    "positive country overlap",
+    "unjustified ownership change",
+    "displacement/area bound exceeded",
+    "island or hole loss",
+    "invalid derived geometry"
+  ],
+  "locks": "Derived P0 locked after full checks, P1 locked after partition verification; no cap merges across either boundary."
+}

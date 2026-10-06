@@ -1,0 +1,28 @@
+{
+  "kind": "research-not-authoritative-boundary-evidence",
+  "checkedOn": "2026-10-02",
+  "naturalEarth": {
+    "release": "v5.1.2",
+    "commit": "f1890d9f152c896d250a77557a5751a93d494776",
+    "releaseUrl": "https://github.com/nvkelso/natural-earth-vector/releases/tag/v5.1.2",
+    "admin0Download": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/geojson/ne_10m_admin_0_countries.geojson",
+    "admin1Download": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/f1890d9f152c896d250a77557a5751a93d494776/geojson/ne_10m_admin_1_states_provinces.geojson",
+    "licenseUrl": "https://www.naturalearthdata.com/about/terms-of-use/",
+    "policyUrl": "https://www.naturalearthdata.com/about/disputed-boundaries-policy/",
+    "finding": "Official policy uses de facto control, not de jure boundaries. v5 has alternate viewpoints, not a globally authoritative 2020-01-01 legal polygon snapshot.",
+    "decision": "Lock as administrative-operational; retain legal-2020 hard gate blocked."
+  },
+  "alternativeInvestigated": {
+    "name": "geoBoundaries",
+    "documentationUrl": "https://www.geoboundaries.org/api.html",
+    "releaseListingUrl": "https://github.com/wmgeolab/geoBoundaries/blob/main/README.md",
+    "fixedReleaseCandidate": "3.0.0; release listing identifies June 5 2020 / 7c8dbc5",
+    "finding": "boundaryYearRepresented is per dataset and can be a range; publication in 2020 does not prove exact 2020-01-01 legal boundaries for this project's 247 metadata IDs or reproduce current P0.",
+    "decision": "Not acquired or adopted; requires country-level temporal/authority/license review and pinned polygon bytes before selection."
+  },
+  "trustedAuthorityPolicyChanged": false,
+  "authorityEvidenceAdded": false,
+  "resumeCondition": "No legal evidence acquisition required; validate fixed game seed lineage and actual selected geometry/coverage instead.",
+  "status": "historical-research-superseded-by-user-game-contract",
+  "currentDecision": "External legal-2020 proof is not required. Do not acquire further legal-boundary materials."
+}

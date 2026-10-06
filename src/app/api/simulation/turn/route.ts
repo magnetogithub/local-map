@@ -1,10 +1,8 @@
 import {parseSimulationContextV1} from "@/lib/simulation/simulation-context";
 import {assertSafeSimulationData, simulationIdSchema} from "@/lib/simulation/simulation-contract-primitives";
 import {z} from "zod";
-import {FetchOpenAIResponsesTransport} from "@/lib/simulation/server/openai-responses-transport";
-import {OpenAIResponsesSimulationProvider} from "@/lib/simulation/server/openai-responses-provider";
+import {createProductionSimulationProvider} from '@/lib/simulation/server/production-provider.server';
 import {normalizeProviderEvents} from "@/lib/simulation/server/provider-event-normalizer";
-import {loadSimulationProviderConfig} from "@/lib/simulation/server/provider-config";
 import {
   SimulationProviderError,
   type SimulationModelProvider,
@@ -97,12 +95,4 @@ export function createSimulationTurnPost(dependencies: RouteDependencies) {
   };
 }
 
-export const POST = createSimulationTurnPost({
-  createProvider() {
-    const config = loadSimulationProviderConfig();
-    return new OpenAIResponsesSimulationProvider(
-      config,
-      new FetchOpenAIResponsesTransport(config.apiKey),
-    );
-  },
-});
+export const POST = createSimulationTurnPost({createProvider:createProductionSimulationProvider});

@@ -1,0 +1,25 @@
+{
+  "version": "prompt14-game-p0-p1-alignment-v2",
+  "p0": "Bounded derived P0 from pinned unsimplified Admin0 shared boundaries; original seed bytes preserved. Derived P0 is the new catalog authority.",
+  "p1CoordinatePrecision": "preserve source doubles; no independent rounding or simplification",
+  "maximumRoundingDisplacementDegrees": 0,
+  "operations": [
+    "intersect each P1 with shared-source derived P0",
+    "split multi-adjacent residual by bounded continuation of actual shared P1 terminal boundary segments, polygonize and require unique boundary contact for every face",
+    "attach an actual P0 residual polygon only to its unique positive-length adjacent P1"
+  ],
+  "residualExtensionPolicy": "Actual shared P1 boundary terminal direction only; movement bounded by the existing seed's .0015 degree thinning plus 5-place rounding radius. This preserves the prior .00151 degree ceiling, not a widened coverage tolerance. No centroid, nearest territory, ID order, filler or inferred ownership. Unattached faces and ambiguous contacts remain blocked.",
+  "maximumAlignmentAreaFraction": 0.001,
+  "maximumResidualBoundaryDistanceDegrees": 0.0015070710678118655,
+  "residualBoundaryVerification": "Adaptive continuous segment certificate against the actual source P1 boundary; vertex-only checks cannot pass a long bridge. Spatial indexing changes lookup cost only; JSTS distances remain for rejected/borderline cases.",
+  "numericalBoundaryContactToleranceDegrees": 1e-12,
+  "sourceCoordinateCoincidenceRadiusDegrees": 0.0000014142135623730952,
+  "boundaryContactPolicy": "Exact positive-length contact, or positive projected segment overlap with both endpoints inside the two 6-place source coordinate rounding radii; excludes mere point proximity. This establishes source boundary correspondence, never nearest-territory assignment. Final partition equality tolerance remains unchanged.",
+  "coverageAbsoluteToleranceDegreesSquared": 1e-9,
+  "coverageRelativeTolerance": 1e-9,
+  "fallback": "Any invalid P1, empty clipped feature, excessive adjustment, ambiguous/unattached residual, failed overlay, invalid result or failed equality replaces the entire country's P1 selection with its unchanged P0 as ONE territory. Record every excluded source identity. Never delete an error within a selected partition.",
+  "fallbackLimitation": "Country remains selectable with the same owner and outline, but occupation is whole-country only; no partial occupation inside that country.",
+  "locks": "P0 is fixed before alignment. Final P1 boundaries are locked only after successful alignment and verification. No later merges/cap avoidance across either lock.",
+  "noFiller": "Residuals are exact P0-minus-P1 geometry, not invented polygons. Ambiguous coastal fragments must not become filler territories. Only the separately defined exact disconnected SOURCE component policy may preserve an existing island as a territory; otherwise unresolved alignment remains a whole-country fallback candidate and cannot bypass readiness gates.",
+  "disconnectedSourceComponentPolicy": "An exact ENTIRE disconnected derived P0 component with zero P1 intersection may remain a source-backed P0 component territory. Require pinned Admin0 feature IDs, full component equality and no positive boundary contact; never turn a coastal residual/sliver into a territory. Keep all valid P1 identities. Component ID is country plus SHA-256 of the actual source component geometry. No guessed administrative assignment; partial occupation within that island component is unavailable."
+}

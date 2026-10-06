@@ -1,6 +1,8 @@
 import {z} from "zod";
 
 import {readTerritoryId} from "../world/territory-id";
+import {territorialControlAuthorityIdSchema,territorialControlAuthoritySchema,MAX_AUTHORITY_TERRITORIES,authorityTerritoryIdSchema} from './simulation-state-v2';
+import {authorityMapColorSchema, countryPresentationAuthorityIdSchema, countryPresentationAuthoritySchema} from './simulation-state-v2';
 import {
   boundedTitleSchema,
   countryIdSchema,
@@ -85,6 +87,20 @@ const countryPartitionedEffectSchema = z.strictObject({
 });
 
 export const worldEffectSchema = z.discriminatedUnion("type", [
+  z.strictObject({...effectBase, type:z.literal('country.chooseMapColor'),
+    requestedMapColor:z.union([z.string().regex(/^#[0-9a-fA-F]{6}$/),z.null()]),
+    authority:z.strictObject({id:countryPresentationAuthoritySchema.shape.id,
+      actorCountryId:countryIdSchema,targetCountryId:countryIdSchema,
+      validFrom:countryPresentationAuthoritySchema.shape.validFrom,validTo:countryPresentationAuthoritySchema.shape.validTo,
+      sourceEventId:simulationIdSchema})}),
+  z.strictObject({...effectBase,type:z.literal('countryPresentationAuthority.granted'),authority:countryPresentationAuthoritySchema}),
+  z.strictObject({...effectBase,type:z.literal('territorialAuthority.granted'),authority:territorialControlAuthoritySchema}),
+  z.strictObject({...effectBase,type:z.literal('territory.occupy'),actorCountryId:countryIdSchema,targetCountryId:nullableCountryIdSchema,authorityId:territorialControlAuthorityIdSchema,territoryIds:z.array(authorityTerritoryIdSchema).max(MAX_AUTHORITY_TERRITORIES).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id)),regionRefs:z.array(z.strictObject({countryId:countryIdSchema,reference:subdivisionReferenceSchema})).min(1).max(8).nullish()}),
+  z.strictObject({...effectBase,type:z.literal('territory.liberate'),actorCountryId:countryIdSchema,targetCountryId:nullableCountryIdSchema,authorityId:territorialControlAuthorityIdSchema,territoryIds:z.array(authorityTerritoryIdSchema).max(MAX_AUTHORITY_TERRITORIES).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id)),regionRefs:z.array(z.strictObject({countryId:countryIdSchema,reference:subdivisionReferenceSchema})).min(1).max(8).nullish()}),
+  z.strictObject({...effectBase,type:z.literal('territory.transferOwnership'),actorCountryId:countryIdSchema,targetCountryId:nullableCountryIdSchema,authorityId:territorialControlAuthorityIdSchema,territoryIds:z.array(authorityTerritoryIdSchema).max(MAX_AUTHORITY_TERRITORIES).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id)),regionRefs:z.array(z.strictObject({countryId:countryIdSchema,reference:subdivisionReferenceSchema})).min(1).max(8).nullish(),newOwnerCountryId:countryIdSchema,controllerPolicy:z.enum(['new-owner','preserve'])}),
+  z.strictObject({...effectBase,type:z.literal('countries.merged'),initiatorCountryId:countryIdSchema,absorbedCountryIds:z.array(countryIdSchema).min(1).max(15).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id))}),
+  z.strictObject({...effectBase, type:z.literal('country.changeMapColor'), countryId:countryIdSchema,
+    actorCountryId:countryIdSchema, mapColor:authorityMapColorSchema, authorityId:countryPresentationAuthorityIdSchema}),
   countryRenamedEffectSchema,
   countriesUnifiedEffectSchema,
   countryEstablishedEffectSchema,

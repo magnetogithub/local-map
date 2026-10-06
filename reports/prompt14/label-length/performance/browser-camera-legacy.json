@@ -1,0 +1,67 @@
+{
+  "mode": "legacy",
+  "loadMs": 7145.532799999986,
+  "coldHeap": {
+    "usedSize": 185788108,
+    "totalSize": 190640128,
+    "embedderHeapUsedSize": 1237568,
+    "backingStorageSize": 17910429
+  },
+  "warmHeap": {
+    "usedSize": 320682940,
+    "totalSize": 325644288,
+    "embedderHeapUsedSize": 1449392,
+    "backingStorageSize": 47087538
+  },
+  "warmupMs": 8046.7871999999625,
+  "samples": [
+    {
+      "durationMs": 5655,
+      "frames": 84,
+      "frameTimeP50": 16.600000001490116,
+      "frameTimeP95": 18.200000002980232,
+      "maxFrameMs": 1612.5,
+      "fps": 14.854111405835543,
+      "worldSerializations": 0
+    },
+    {
+      "durationMs": 1570.6000000014901,
+      "frames": 95,
+      "frameTimeP50": 16.600000001490116,
+      "frameTimeP95": 17.700000002980232,
+      "maxFrameMs": 22.100000001490116,
+      "fps": 60.48258738145098,
+      "worldSerializations": 0
+    },
+    {
+      "durationMs": 1578.800000000745,
+      "frames": 95,
+      "frameTimeP50": 16.600000001490116,
+      "frameTimeP95": 17.399999998509884,
+      "maxFrameMs": 22.100000001490116,
+      "fps": 60.168471720733116,
+      "worldSerializations": 0
+    }
+  ],
+  "heap": [
+    {
+      "usedSize": 321220360,
+      "totalSize": 325382144,
+      "embedderHeapUsedSize": 1419304,
+      "backingStorageSize": 47071970
+    },
+    {
+      "usedSize": 321396404,
+      "totalSize": 324333568,
+      "embedderHeapUsedSize": 1317440,
+      "backingStorageSize": 48164517
+    },
+    {
+      "usedSize": 321514200,
+      "totalSize": 324333568,
+      "embedderHeapUsedSize": 1361560,
+      "backingStorageSize": 49239832
+    }
+  ],
+  "browserErrors": []
+}

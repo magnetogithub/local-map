@@ -71,7 +71,7 @@ const countrySearchEntry = (country: CountryEntity): CountrySearchEntry => creat
 });
 
 export function createCountrySearchProjection(
-  state: WorldStateV2,
+  state: Pick<WorldStateV2, 'revision' | 'countryOrder' | 'countriesById'>,
   fullRebuildCount = 0,
 ): CountrySearchProjection {
   return Object.freeze({

@@ -7,7 +7,8 @@ import next from "next";
 const projectRoot = process.cwd();
 const playwrightCli = path.join(projectRoot, "node_modules", "@playwright", "test", "cli.js");
 const externalBaseUrl = process.env.PLAYWRIGHT_BASE_URL;
-const ownedBaseUrl = "http://127.0.0.1:3000";
+const ownedPort = process.env.PAX_REVIEW_G_E2E === "1" ? 3170 : 3000;
+const ownedBaseUrl = `http://127.0.0.1:${ownedPort}`;
 
 const runPlaywright = (baseUrl) => new Promise((resolve, reject) => {
   const child = spawn(
@@ -51,14 +52,14 @@ if (externalBaseUrl) {
     dev: false,
     dir: projectRoot,
     hostname: "127.0.0.1",
-    port: 3000,
+    port: ownedPort,
   });
   const handle = app.getRequestHandler();
   await app.prepare();
   const server = createServer((request, response) => handle(request, response));
   await new Promise((resolve, reject) => {
     server.once("error", reject);
-    server.listen(3000, "127.0.0.1", resolve);
+    server.listen(ownedPort, "127.0.0.1", resolve);
   });
   try {
     process.exitCode = await runPlaywright(ownedBaseUrl);

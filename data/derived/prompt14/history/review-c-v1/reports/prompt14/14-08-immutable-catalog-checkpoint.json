@@ -1,0 +1,6116 @@
+{
+  "schemaVersion": "prompt14-immutable-catalog-checkpoint-v1",
+  "status": "fail",
+  "review": "C",
+  "reviewPassed": false,
+  "generatedAt": "2026-10-02T06:22:46.173Z",
+  "requestedTasks": [
+    "14-6",
+    "14-7",
+    "14-8"
+  ],
+  "requestInterpretation": "16-6 was interpreted as 14-6 from the approved 14-5 predecessor and the requested 14-8 endpoint.",
+  "stages": {
+    "14-6": {
+      "status": "pass",
+      "scope": "Coordinate/ring/component normalization and canonical atom identity; exact source-feature membership retained. Full area coverage passes the locked numerical tolerance. Absolute continuity is checked in 14-7.",
+      "atoms": 4231,
+      "rawComponentCandidates": 8156,
+      "countries": 247,
+      "vertices": 1272489,
+      "independentGeneration": {
+        "pass": true,
+        "byteIdentical": true,
+        "directories": [
+          ".tmp/prompt14-catalog/atoms-final-first",
+          ".tmp/prompt14-catalog/atoms-final-second"
+        ],
+        "artifacts": [
+          {
+            "byteLength": 32825429,
+            "path": "atoms.json",
+            "sha256": "31dba8af1c935c5673322a716907baab881ca1c10978f0143979f94020371443"
+          },
+          {
+            "byteLength": 45980,
+            "path": "normalization-evidence.json",
+            "sha256": "f9a3eecaf6648cc1d5ee4850f1008d4a4d2b74e16794d7f839abfa02e906bb70"
+          }
+        ]
+      },
+      "validation": {
+        "atomCount": 4231,
+        "authoritativeVertices": 1272489,
+        "boundaryProofScope": "Normalization preserves the locked source geometry exactly. This certifies no introduced crossings; absolute boundary pairing/continuity requires the separate complete topology gate.",
+        "caps": {
+          "caps": {
+            "authoritativeVertices": 2000000,
+            "countryAtoms": 512,
+            "worldAtoms": 6000
+          },
+          "observed": {
+            "authoritativeVertices": 1272489,
+            "largestCountry": {
+              "atomCount": 234,
+              "countryId": "GBR"
+            },
+            "worldAtoms": 4231
+          },
+          "pass": true
+        },
+        "componentMembershipBijection": true,
+        "countryCount": 247,
+        "coverage": [
+          {
+            "countryId": "IDN",
+            "gapArea": 5.314950612955727e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 153.0786073651255,
+            "pass": true,
+            "tolerance": 1.530786073651255e-7,
+            "unionArea": 153.078607311976
+          },
+          {
+            "countryId": "MYS",
+            "gapArea": 6.898062565596774e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 26.70317220120174,
+            "pass": true,
+            "tolerance": 2.670317220120174e-8,
+            "unionArea": 26.703172194303676
+          },
+          {
+            "countryId": "CHL",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 76.93674830073542,
+            "pass": true,
+            "tolerance": 7.693674830073542e-8,
+            "unionArea": 76.93674830073542
+          },
+          {
+            "countryId": "BOL",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 92.20358734408956,
+            "pass": true,
+            "tolerance": 9.220358734408957e-8,
+            "unionArea": 92.20358734408956
+          },
+          {
+            "countryId": "PER",
+            "gapArea": 9.360519470646977e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 106.41708872829392,
+            "pass": true,
+            "tolerance": 1.0641708872829393e-7,
+            "unionArea": 106.41708863468872
+          },
+          {
+            "countryId": "ARG",
+            "gapArea": 3.798868419835344e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.1368683772161603e-13,
+            "p0Area": 278.50613561842056,
+            "pass": true,
+            "tolerance": 2.785061356184206e-7,
+            "unionArea": 278.5061355804319
+          },
+          {
+            "countryId": "GBR",
+            "gapArea": 1.0126427696377505e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 33.56802236652251,
+            "pass": true,
+            "tolerance": 3.356802236652251e-8,
+            "unionArea": 33.568022356396085
+          },
+          {
+            "countryId": "CYP",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.5321685674841774,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.5321685674841774
+          },
+          {
+            "countryId": "IND",
+            "gapArea": 2.870319804060273e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 278.7815327093868,
+            "pass": true,
+            "tolerance": 2.787815327093868e-7,
+            "unionArea": 278.7815326806836
+          },
+          {
+            "countryId": "CHN",
+            "gapArea": 2.8954673325642943e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 2.2737367544323206e-12,
+            "p0Area": 951.1780840665472,
+            "pass": true,
+            "tolerance": 9.511780840665473e-7,
+            "unionArea": 951.1780840375925
+          },
+          {
+            "countryId": "ISR",
+            "gapArea": 1.1368683772161603e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.0973123564452862,
+            "pass": true,
+            "tolerance": 2.0973123564452863e-9,
+            "unionArea": 2.0973123564451726
+          },
+          {
+            "countryId": "PSX",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.5792235585925027,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.5792235585925027
+          },
+          {
+            "countryId": "LBN",
+            "gapArea": 1.1368683772161603e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.9753672001759242,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.9753672001758105
+          },
+          {
+            "countryId": "ETH",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 92.70778299436165,
+            "pass": true,
+            "tolerance": 9.270778299436165e-8,
+            "unionArea": 92.70778299436165
+          },
+          {
+            "countryId": "SDS",
+            "gapArea": 1.522994352853857e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 4.973799150320701e-14,
+            "p0Area": 51.35561702758781,
+            "pass": true,
+            "tolerance": 5.135561702758782e-8,
+            "unionArea": 51.35561701235787
+          },
+          {
+            "countryId": "SOM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 3.623767952376511e-13,
+            "p0Area": 38.51703549815197,
+            "pass": true,
+            "tolerance": 3.851703549815197e-8,
+            "unionArea": 38.51703549815197
+          },
+          {
+            "countryId": "KEN",
+            "gapArea": 3.1224942631524755e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 47.61962888909494,
+            "pass": true,
+            "tolerance": 4.761962888909494e-8,
+            "unionArea": 47.619628885972446
+          },
+          {
+            "countryId": "MWI",
+            "gapArea": 8.388013839066844e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 5.684341886080802e-14,
+            "p0Area": 9.96232725520099,
+            "pass": true,
+            "tolerance": 9.96232725520099e-9,
+            "unionArea": 9.962327246812976
+          },
+          {
+            "countryId": "TZA",
+            "gapArea": 3.153559191559907e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 77.01865058821366,
+            "pass": true,
+            "tolerance": 7.701865058821366e-8,
+            "unionArea": 77.01865055667807
+          },
+          {
+            "countryId": "SYR",
+            "gapArea": 1.3659132491739001e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 18.36860375868912,
+            "pass": true,
+            "tolerance": 1.836860375868912e-8,
+            "unionArea": 18.368603745029986
+          },
+          {
+            "countryId": "SOL",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 13.794773683860512,
+            "pass": true,
+            "tolerance": 1.3794773683860513e-8,
+            "unionArea": 13.794773683860512
+          },
+          {
+            "countryId": "FRA",
+            "gapArea": 3.574578499865311e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 71.57581719780055,
+            "pass": true,
+            "tolerance": 7.157581719780055e-8,
+            "unionArea": 71.57581716205476
+          },
+          {
+            "countryId": "SUR",
+            "gapArea": 1.0642537517924211e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 11.821689188185942,
+            "pass": true,
+            "tolerance": 1.1821689188185944e-8,
+            "unionArea": 11.821689177543405
+          },
+          {
+            "countryId": "GUY",
+            "gapArea": 9.801510714169126e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 2.7711166694643907e-13,
+            "p0Area": 17.22646084325197,
+            "pass": true,
+            "tolerance": 1.7226460843251973e-8,
+            "unionArea": 17.22646083345046
+          },
+          {
+            "countryId": "KOR",
+            "gapArea": 5.283709469949827e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.898048074231156,
+            "pass": true,
+            "tolerance": 9.898048074231156e-9,
+            "unionArea": 9.898048068947446
+          },
+          {
+            "countryId": "PRK",
+            "gapArea": 4.5656634029001e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 12.938046093469438,
+            "pass": true,
+            "tolerance": 1.2938046093469438e-8,
+            "unionArea": 12.938046088903775
+          },
+          {
+            "countryId": "MAR",
+            "gapArea": 2.257661435578484e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 55.35550165916558,
+            "pass": true,
+            "tolerance": 5.5355501659165585e-8,
+            "unionArea": 55.35550163658897
+          },
+          {
+            "countryId": "ESH",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 8.048645355935093,
+            "pass": true,
+            "tolerance": 8.048645355935094e-9,
+            "unionArea": 8.048645355935093
+          },
+          {
+            "countryId": "CRI",
+            "gapArea": 9.106884135690052e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 4.217893500804166,
+            "pass": true,
+            "tolerance": 4.217893500804167e-9,
+            "unionArea": 4.217893499893478
+          },
+          {
+            "countryId": "NIC",
+            "gapArea": 2.782599040074274e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 10.717293862793667,
+            "pass": true,
+            "tolerance": 1.0717293862793668e-8,
+            "unionArea": 10.717293860011068
+          },
+          {
+            "countryId": "COG",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.9895196601282805e-13,
+            "p0Area": 28.04454461113433,
+            "pass": true,
+            "tolerance": 2.8044544611134332e-8,
+            "unionArea": 28.04454461113433
+          },
+          {
+            "countryId": "COD",
+            "gapArea": 8.90015030563518e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.4210854715202004e-13,
+            "p0Area": 189.67890679555927,
+            "pass": true,
+            "tolerance": 1.8967890679555927e-7,
+            "unionArea": 189.67890670655777
+          },
+          {
+            "countryId": "BTN",
+            "gapArea": 1.1445990821812302e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 3.6891222562826442,
+            "pass": true,
+            "tolerance": 3.6891222562826444e-9,
+            "unionArea": 3.689122255138045
+          },
+          {
+            "countryId": "UKR",
+            "gapArea": 4.684807208832353e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 70.5412354461256,
+            "pass": true,
+            "tolerance": 7.05412354461256e-8,
+            "unionArea": 70.54123544144079
+          },
+          {
+            "countryId": "BLR",
+            "gapArea": 7.271410140674561e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 28.12239108189442,
+            "pass": true,
+            "tolerance": 2.8122391081894422e-8,
+            "unionArea": 28.12239107462301
+          },
+          {
+            "countryId": "NAM",
+            "gapArea": 3.431290451771929e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 72.12914875306592,
+            "pass": true,
+            "tolerance": 7.212914875306592e-8,
+            "unionArea": 72.12914871875302
+          },
+          {
+            "countryId": "ZAF",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 113.10134201991701,
+            "pass": true,
+            "tolerance": 1.1310134201991702e-7,
+            "unionArea": 113.10134201991701
+          },
+          {
+            "countryId": "MAF",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.005827762027479366,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.005827762027479366
+          },
+          {
+            "countryId": "SXM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.001993192831946544,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.001993192831946544
+          },
+          {
+            "countryId": "OMN",
+            "gapArea": 1.2832742868340574e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.1368683772161603e-13,
+            "p0Area": 26.98300016802034,
+            "pass": true,
+            "tolerance": 2.698300016802034e-8,
+            "unionArea": 26.983000155187597
+          },
+          {
+            "countryId": "UZB",
+            "gapArea": 7.073140295688063e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 48.50658358789428,
+            "pass": true,
+            "tolerance": 4.850658358789429e-8,
+            "unionArea": 48.50658358082114
+          },
+          {
+            "countryId": "KAZ",
+            "gapArea": 5.356014298740774e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 329.36756564021016,
+            "pass": true,
+            "tolerance": 3.2936756564021016e-7,
+            "unionArea": 329.36756563485415
+          },
+          {
+            "countryId": "TJK",
+            "gapArea": 1.5575096767861396e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 14.696674022647585,
+            "pass": true,
+            "tolerance": 1.4696674022647586e-8,
+            "unionArea": 14.696674021090075
+          },
+          {
+            "countryId": "LTU",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.190397342477468,
+            "pass": true,
+            "tolerance": 9.190397342477469e-9,
+            "unionArea": 9.190397342477468
+          },
+          {
+            "countryId": "BRA",
+            "gapArea": 9.973064152291045e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.9326762412674725e-12,
+            "p0Area": 707.1029861692731,
+            "pass": true,
+            "tolerance": 7.071029861692732e-7,
+            "unionArea": 707.1029861593
+          },
+          {
+            "countryId": "URY",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 17.07623347868332,
+            "pass": true,
+            "tolerance": 1.707623347868332e-8,
+            "unionArea": 17.07623347868332
+          },
+          {
+            "countryId": "MNG",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 184.60298714751616,
+            "pass": true,
+            "tolerance": 1.8460298714751617e-7,
+            "unionArea": 184.60298714751616
+          },
+          {
+            "countryId": "RUS",
+            "gapArea": 1.7464662960264832e-7,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2929.0009849080448,
+            "pass": true,
+            "tolerance": 0.0000029290009849080447,
+            "unionArea": 2929.000984733398
+          },
+          {
+            "countryId": "CZE",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.822666320644203,
+            "pass": true,
+            "tolerance": 9.822666320644204e-9,
+            "unionArea": 9.822666320644203
+          },
+          {
+            "countryId": "DEU",
+            "gapArea": 1.367803292851022e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 45.93002642257514,
+            "pass": true,
+            "tolerance": 4.593002642257514e-8,
+            "unionArea": 45.930026408897106
+          },
+          {
+            "countryId": "EST",
+            "gapArea": 3.115019353572279e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 7.08958319101589,
+            "pass": true,
+            "tolerance": 7.089583191015891e-9,
+            "unionArea": 7.0895831907043885
+          },
+          {
+            "countryId": "LVA",
+            "gapArea": 7.136122803785838e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.504864906175385,
+            "pass": true,
+            "tolerance": 9.504864906175386e-9,
+            "unionArea": 9.504864905461773
+          },
+          {
+            "countryId": "NOR",
+            "gapArea": 2.5623222654758138e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.9895196601282805e-13,
+            "p0Area": 85.5974437455547,
+            "pass": true,
+            "tolerance": 8.559744374555471e-8,
+            "unionArea": 85.59744371993148
+          },
+          {
+            "countryId": "SWE",
+            "gapArea": 5.3767053032061085e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 5.684341886080802e-14,
+            "p0Area": 78.56088039957052,
+            "pass": true,
+            "tolerance": 7.856088039957052e-8,
+            "unionArea": 78.56088039419382
+          },
+          {
+            "countryId": "FIN",
+            "gapArea": 5.957531357125845e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 62.22780458282932,
+            "pass": true,
+            "tolerance": 6.222780458282933e-8,
+            "unionArea": 62.22780457687179
+          },
+          {
+            "countryId": "VNM",
+            "gapArea": 7.918515620986e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 27.945060510643373,
+            "pass": true,
+            "tolerance": 2.7945060510643373e-8,
+            "unionArea": 27.945060502724857
+          },
+          {
+            "countryId": "KHM",
+            "gapArea": 3.3579681257833727e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 15.071694427237958,
+            "pass": true,
+            "tolerance": 1.507169442723796e-8,
+            "unionArea": 15.07169442387999
+          },
+          {
+            "countryId": "LUX",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.3255388838259421,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.3255388838259421
+          },
+          {
+            "countryId": "ARE",
+            "gapArea": 6.886011760798283e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 6.3035594098561205,
+            "pass": true,
+            "tolerance": 6.303559409856121e-9,
+            "unionArea": 6.303559409167519
+          },
+          {
+            "countryId": "BEL",
+            "gapArea": 8.904521564545576e-11,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 3.8973506500999378,
+            "pass": true,
+            "tolerance": 3.897350650099938e-9,
+            "unionArea": 3.8973506500108925
+          },
+          {
+            "countryId": "GEO",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 7.580224185575503,
+            "pass": true,
+            "tolerance": 7.580224185575503e-9,
+            "unionArea": 7.580224185575503
+          },
+          {
+            "countryId": "MKD",
+            "gapArea": 1.1368683772161603e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.741446670923267,
+            "pass": true,
+            "tolerance": 2.7414466709232673e-9,
+            "unionArea": 2.7414466709231533
+          },
+          {
+            "countryId": "ALB",
+            "gapArea": 1.0259668670187239e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 3.0393951980958605,
+            "pass": true,
+            "tolerance": 3.0393951980958606e-9,
+            "unionArea": 3.0393951970698936
+          },
+          {
+            "countryId": "AZE",
+            "gapArea": 2.4022028810577467e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.13545031173453,
+            "pass": true,
+            "tolerance": 9.135450311734531e-9,
+            "unionArea": 9.135450309332327
+          },
+          {
+            "countryId": "XKX",
+            "gapArea": 1.1368683772161603e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.1965719643147281,
+            "pass": true,
+            "tolerance": 1.1965719643147281e-9,
+            "unionArea": 1.1965719643146144
+          },
+          {
+            "countryId": "TUR",
+            "gapArea": 3.627701516961679e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 81.20944756229028,
+            "pass": true,
+            "tolerance": 8.120944756229028e-8,
+            "unionArea": 81.20944752601326
+          },
+          {
+            "countryId": "ESP",
+            "gapArea": 1.5582571677441592e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 53.68192797929585,
+            "pass": true,
+            "tolerance": 5.3681927979295855e-8,
+            "unionArea": 53.68192796371328
+          },
+          {
+            "countryId": "LAO",
+            "gapArea": 1.6175363271031529e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 19.528701748493745,
+            "pass": true,
+            "tolerance": 1.9528701748493746e-8,
+            "unionArea": 19.52870174687621
+          },
+          {
+            "countryId": "KGZ",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 21.44882651386547,
+            "pass": true,
+            "tolerance": 2.144882651386547e-8,
+            "unionArea": 21.44882651386547
+          },
+          {
+            "countryId": "ARM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 3.1337779953036033,
+            "pass": true,
+            "tolerance": 3.1337779953036036e-9,
+            "unionArea": 3.1337779953036033
+          },
+          {
+            "countryId": "DNK",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 6.141073879973817,
+            "pass": true,
+            "tolerance": 6.141073879973817e-9,
+            "unionArea": 6.141073879973817
+          },
+          {
+            "countryId": "LBY",
+            "gapArea": 2.218757799710147e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 3.410605131648481e-13,
+            "p0Area": 147.89433216455114,
+            "pass": true,
+            "tolerance": 1.4789433216455116e-7,
+            "unionArea": 147.89433214236357
+          },
+          {
+            "countryId": "TUN",
+            "gapArea": 9.138545919995522e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 15.310749992273585,
+            "pass": true,
+            "tolerance": 1.5310749992273587e-8,
+            "unionArea": 15.31074998313504
+          },
+          {
+            "countryId": "ROU",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 5.684341886080802e-14,
+            "p0Area": 27.387181441517953,
+            "pass": true,
+            "tolerance": 2.7387181441517956e-8,
+            "unionArea": 27.387181441517953
+          },
+          {
+            "countryId": "HUN",
+            "gapArea": 3.6745291254192125e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 11.057005178865609,
+            "pass": true,
+            "tolerance": 1.1057005178865609e-8,
+            "unionArea": 11.05700517519108
+          },
+          {
+            "countryId": "SVK",
+            "gapArea": 7.109406396921258e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 5.920517076241424,
+            "pass": true,
+            "tolerance": 5.9205170762414244e-9,
+            "unionArea": 5.9205170755304835
+          },
+          {
+            "countryId": "POL",
+            "gapArea": 3.2338789424102288e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.7053025658242404e-13,
+            "p0Area": 41.14177237554463,
+            "pass": true,
+            "tolerance": 4.1141772375544636e-8,
+            "unionArea": 41.141772372310754
+          },
+          {
+            "countryId": "IRL",
+            "gapArea": 1.7811316865845583e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.334049419779177,
+            "pass": true,
+            "tolerance": 9.334049419779177e-9,
+            "unionArea": 9.334049417998045
+          },
+          {
+            "countryId": "GRC",
+            "gapArea": 6.502091309812386e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 13.674200753196828,
+            "pass": true,
+            "tolerance": 1.3674200753196829e-8,
+            "unionArea": 13.674200746694737
+          },
+          {
+            "countryId": "ZMB",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 4.263256414560601e-14,
+            "p0Area": 62.815602350553405,
+            "pass": true,
+            "tolerance": 6.281560235055341e-8,
+            "unionArea": 62.815602350553405
+          },
+          {
+            "countryId": "SLE",
+            "gapArea": 2.336520310564083e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 8.526512829121202e-14,
+            "p0Area": 5.882082328352595,
+            "pass": true,
+            "tolerance": 5.882082328352596e-9,
+            "unionArea": 5.882082326016075
+          },
+          {
+            "countryId": "GIN",
+            "gapArea": 1.9031503484256973e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 20.176388453294763,
+            "pass": true,
+            "tolerance": 2.0176388453294763e-8,
+            "unionArea": 20.17638843426326
+          },
+          {
+            "countryId": "LBR",
+            "gapArea": 2.011560695791559e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 7.791180165639943,
+            "pass": true,
+            "tolerance": 7.791180165639944e-9,
+            "unionArea": 7.791180163628383
+          },
+          {
+            "countryId": "CAF",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 3.552713678800501e-14,
+            "p0Area": 50.54770200650673,
+            "pass": true,
+            "tolerance": 5.0547702006506736e-8,
+            "unionArea": 50.54770200650673
+          },
+          {
+            "countryId": "SDN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 157.10136564808442,
+            "pass": true,
+            "tolerance": 1.5710136564808444e-7,
+            "unionArea": 157.10136564808442
+          },
+          {
+            "countryId": "DJI",
+            "gapArea": 2.964952727779746e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.8119756008770764,
+            "pass": true,
+            "tolerance": 1.8119756008770766e-9,
+            "unionArea": 1.8119756005805812
+          },
+          {
+            "countryId": "ERI",
+            "gapArea": 5.684341886080802e-14,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 10.316162073346504,
+            "pass": true,
+            "tolerance": 1.0316162073346505e-8,
+            "unionArea": 10.316162073346447
+          },
+          {
+            "countryId": "AUT",
+            "gapArea": 9.479776963416953e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 10.043708700058204,
+            "pass": true,
+            "tolerance": 1.0043708700058204e-8,
+            "unionArea": 10.043708699110226
+          },
+          {
+            "countryId": "IRQ",
+            "gapArea": 1.0737835509644356e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 42.2439829918103,
+            "pass": true,
+            "tolerance": 4.22439829918103e-8,
+            "unionArea": 42.24398298107246
+          },
+          {
+            "countryId": "ITA",
+            "gapArea": 5.900005817238707e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 33.17217137178707,
+            "pass": true,
+            "tolerance": 3.317217137178707e-8,
+            "unionArea": 33.17217136588707
+          },
+          {
+            "countryId": "CHE",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 4.88262353035654,
+            "pass": true,
+            "tolerance": 4.88262353035654e-9,
+            "unionArea": 4.88262353035654
+          },
+          {
+            "countryId": "IRN",
+            "gapArea": 3.1445779313798994e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 3.410605131648481e-13,
+            "p0Area": 156.08798123725614,
+            "pass": true,
+            "tolerance": 1.5608798123725615e-7,
+            "unionArea": 156.08798120581037
+          },
+          {
+            "countryId": "NLD",
+            "gapArea": 3.113740376647911e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 4.909116528889172,
+            "pass": true,
+            "tolerance": 4.909116528889172e-9,
+            "unionArea": 4.909116528577798
+          },
+          {
+            "countryId": "LIE",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.016274351440017654,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.016274351440046075
+          },
+          {
+            "countryId": "CIV",
+            "gapArea": 2.4142678967109532e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.7763568394002505e-14,
+            "p0Area": 26.287117978058504,
+            "pass": true,
+            "tolerance": 2.6287117978058505e-8,
+            "unionArea": 26.287117975644236
+          },
+          {
+            "countryId": "SRB",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 8.744198129474512,
+            "pass": true,
+            "tolerance": 8.744198129474512e-9,
+            "unionArea": 8.744198129474512
+          },
+          {
+            "countryId": "MLI",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 106.68241150979668,
+            "pass": true,
+            "tolerance": 1.0668241150979669e-7,
+            "unionArea": 106.68241150979668
+          },
+          {
+            "countryId": "SEN",
+            "gapArea": 6.942528330000641e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.5631940186722204e-13,
+            "p0Area": 16.445668377165546,
+            "pass": true,
+            "tolerance": 1.6445668377165548e-8,
+            "unionArea": 16.445668370223018
+          },
+          {
+            "countryId": "NGA",
+            "gapArea": 1.3789474451186834e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 74.80306638343356,
+            "pass": true,
+            "tolerance": 7.480306638343356e-8,
+            "unionArea": 74.80306636964409
+          },
+          {
+            "countryId": "BEN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.568112406090014,
+            "pass": true,
+            "tolerance": 9.568112406090014e-9,
+            "unionArea": 9.568112406090014
+          },
+          {
+            "countryId": "AGO",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 103.58546598463246,
+            "pass": true,
+            "tolerance": 1.0358546598463247e-7,
+            "unionArea": 103.58546598463249
+          },
+          {
+            "countryId": "HRV",
+            "gapArea": 7.401581569865812e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 6.287465874300267,
+            "pass": true,
+            "tolerance": 6.2874658743002676e-9,
+            "unionArea": 6.287465873560109
+          },
+          {
+            "countryId": "SVN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.3657666351010107,
+            "pass": true,
+            "tolerance": 2.365766635101011e-9,
+            "unionArea": 2.3657666351010107
+          },
+          {
+            "countryId": "QAT",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.9996323556825928,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.9996323556827065
+          },
+          {
+            "countryId": "SAU",
+            "gapArea": 3.284753802290652e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 171.01575708345126,
+            "pass": true,
+            "tolerance": 1.7101575708345127e-7,
+            "unionArea": 171.01575705060372
+          },
+          {
+            "countryId": "BWA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 8.526512829121202e-14,
+            "p0Area": 50.73934909835617,
+            "pass": true,
+            "tolerance": 5.073934909835617e-8,
+            "unionArea": 50.73934909835617
+          },
+          {
+            "countryId": "ZWE",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.9895196601282805e-13,
+            "p0Area": 33.418583087808,
+            "pass": true,
+            "tolerance": 3.341858308780801e-8,
+            "unionArea": 33.418583087808
+          },
+          {
+            "countryId": "PAK",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 6.821210263296962e-13,
+            "p0Area": 81.71043681399044,
+            "pass": true,
+            "tolerance": 8.171043681399045e-8,
+            "unionArea": 81.71043681399044
+          },
+          {
+            "countryId": "BGR",
+            "gapArea": 2.7348505682311952e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 5.684341886080802e-14,
+            "p0Area": 12.402851270118788,
+            "pass": true,
+            "tolerance": 1.240285127011879e-8,
+            "unionArea": 12.402851267383937
+          },
+          {
+            "countryId": "THA",
+            "gapArea": 2.105707608279772e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 3.979039320256561e-13,
+            "p0Area": 43.32390061424019,
+            "pass": true,
+            "tolerance": 4.332390061424019e-8,
+            "unionArea": 43.32390059318311
+          },
+          {
+            "countryId": "SMR",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0067610290462880585,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.006761029046458589
+          },
+          {
+            "countryId": "HTI",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.3065700762969072,
+            "pass": true,
+            "tolerance": 2.3065700762969074e-9,
+            "unionArea": 2.3065700762971346
+          },
+          {
+            "countryId": "DOM",
+            "gapArea": 1.003400029730983e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 4.153769746646958,
+            "pass": true,
+            "tolerance": 4.153769746646959e-9,
+            "unionArea": 4.153769745643558
+          },
+          {
+            "countryId": "TCD",
+            "gapArea": 1.8387481759418733e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.8474111129762605e-13,
+            "p0Area": 106.80756283629673,
+            "pass": true,
+            "tolerance": 1.0680756283629674e-7,
+            "unionArea": 106.80756281790924
+          },
+          {
+            "countryId": "KWT",
+            "gapArea": 1.1300471669528633e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.6232771713181364,
+            "pass": true,
+            "tolerance": 1.6232771713181365e-9,
+            "unionArea": 1.6232771712051317
+          },
+          {
+            "countryId": "SLV",
+            "gapArea": 3.708464646479115e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.7164915589959264,
+            "pass": true,
+            "tolerance": 1.7164915589959265e-9,
+            "unionArea": 1.71649155862508
+          },
+          {
+            "countryId": "GTM",
+            "gapArea": 1.1760903362301178e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.17482551398291,
+            "pass": true,
+            "tolerance": 9.174825513982911e-9,
+            "unionArea": 9.17482551280682
+          },
+          {
+            "countryId": "TLS",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.2395867249913408,
+            "pass": true,
+            "tolerance": 1.239586724991341e-9,
+            "unionArea": 1.2395867249916819
+          },
+          {
+            "countryId": "BRN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 5.684341886080802e-14,
+            "p0Area": 0.4658364138124398,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.4658364138124398
+          },
+          {
+            "countryId": "MCO",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0021049237049624026,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0021049237049624026
+          },
+          {
+            "countryId": "DZA",
+            "gapArea": 1.7406932784069795e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 212.69094018962397,
+            "pass": true,
+            "tolerance": 2.12690940189624e-7,
+            "unionArea": 212.69094017221704
+          },
+          {
+            "countryId": "MOZ",
+            "gapArea": 1.0192707122769207e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 2.8421709430404007e-13,
+            "p0Area": 67.15973705854395,
+            "pass": true,
+            "tolerance": 6.715973705854395e-8,
+            "unionArea": 67.15973704835125
+          },
+          {
+            "countryId": "SWZ",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.5501092888692938,
+            "pass": true,
+            "tolerance": 1.5501092888692938e-9,
+            "unionArea": 1.5501092888692938
+          },
+          {
+            "countryId": "BDI",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 3.552713678800501e-14,
+            "p0Area": 2.20061338806547,
+            "pass": true,
+            "tolerance": 2.20061338806547e-9,
+            "unionArea": 2.20061338806547
+          },
+          {
+            "countryId": "RWA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.0570614834419914,
+            "pass": true,
+            "tolerance": 2.0570614834419915e-9,
+            "unionArea": 2.0570614834419914
+          },
+          {
+            "countryId": "MMR",
+            "gapArea": 1.7581896827323362e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.1368683772161603e-13,
+            "p0Area": 57.78453175979212,
+            "pass": true,
+            "tolerance": 5.778453175979212e-8,
+            "unionArea": 57.78453174221022
+          },
+          {
+            "countryId": "BGD",
+            "gapArea": 1.953821993083693e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 2.2737367544323206e-13,
+            "p0Area": 12.136246882724322,
+            "pass": true,
+            "tolerance": 1.2136246882724323e-8,
+            "unionArea": 12.1362468807705
+          },
+          {
+            "countryId": "AND",
+            "gapArea": 1.4210854715202004e-14,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.049560715859477966,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.049560715859463755
+          },
+          {
+            "countryId": "AFG",
+            "gapArea": 1.1872771210619248e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 6.821210263296962e-13,
+            "p0Area": 62.59166423699003,
+            "pass": true,
+            "tolerance": 6.259166423699003e-8,
+            "unionArea": 62.591664225117256
+          },
+          {
+            "countryId": "MNE",
+            "gapArea": 2.8546764951897785e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.5102539130488708,
+            "pass": true,
+            "tolerance": 1.510253913048871e-9,
+            "unionArea": 1.5102539127634032
+          },
+          {
+            "countryId": "BIH",
+            "gapArea": 5.684341886080802e-14,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 5.832470292082007,
+            "pass": true,
+            "tolerance": 5.832470292082008e-9,
+            "unionArea": 5.8324702920819504
+          },
+          {
+            "countryId": "UGA",
+            "gapArea": 5.569447125708393e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 19.658778849571437,
+            "pass": true,
+            "tolerance": 1.965877884957144e-8,
+            "unionArea": 19.65877884400199
+          },
+          {
+            "countryId": "USA",
+            "gapArea": 1.4595161701436155e-7,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1116.3557755127056,
+            "pass": true,
+            "tolerance": 0.0000011163557755127057,
+            "unionArea": 1116.355775366754
+          },
+          {
+            "countryId": "CUB",
+            "gapArea": 3.824425220955163e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.590755042389901,
+            "pass": true,
+            "tolerance": 9.590755042389902e-9,
+            "unionArea": 9.590755038565476
+          },
+          {
+            "countryId": "HND",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.424314733352503,
+            "pass": true,
+            "tolerance": 9.424314733352503e-9,
+            "unionArea": 9.424314733352617
+          },
+          {
+            "countryId": "ECU",
+            "gapArea": 7.649262556697067e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 20.72962148732674,
+            "pass": true,
+            "tolerance": 2.072962148732674e-8,
+            "unionArea": 20.729621479677476
+          },
+          {
+            "countryId": "COL",
+            "gapArea": 6.482650860561989e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 92.57650338393228,
+            "pass": true,
+            "tolerance": 9.257650338393229e-8,
+            "unionArea": 92.57650337744963
+          },
+          {
+            "countryId": "PRY",
+            "gapArea": 1.7379534256178886e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 35.303393923057456,
+            "pass": true,
+            "tolerance": 3.530339392305746e-8,
+            "unionArea": 35.30339390567792
+          },
+          {
+            "countryId": "PRT",
+            "gapArea": 8.405152129853377e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 9.585263387914097,
+            "pass": true,
+            "tolerance": 9.585263387914098e-9,
+            "unionArea": 9.585263387073581
+          },
+          {
+            "countryId": "MDA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 3.9419006822834035,
+            "pass": true,
+            "tolerance": 3.941900682283404e-9,
+            "unionArea": 3.9419006822834035
+          },
+          {
+            "countryId": "TKM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 2.2737367544323206e-13,
+            "p0Area": 49.059293725339785,
+            "pass": true,
+            "tolerance": 4.905929372533979e-8,
+            "unionArea": 49.059293725339785
+          },
+          {
+            "countryId": "JOR",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 8.41507383236899,
+            "pass": true,
+            "tolerance": 8.41507383236899e-9,
+            "unionArea": 8.41507383236899
+          },
+          {
+            "countryId": "NPL",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 13.527846213851035,
+            "pass": true,
+            "tolerance": 1.3527846213851036e-8,
+            "unionArea": 13.527846213851035
+          },
+          {
+            "countryId": "LSO",
+            "gapArea": 9.053451321960893e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.803340396000465,
+            "pass": true,
+            "tolerance": 2.8033403960004648e-9,
+            "unionArea": 2.8033403950951197
+          },
+          {
+            "countryId": "CMR",
+            "gapArea": 8.627978331787745e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 2.5579538487363607e-13,
+            "p0Area": 37.93757045032373,
+            "pass": true,
+            "tolerance": 3.793757045032374e-8,
+            "unionArea": 37.937570441695755
+          },
+          {
+            "countryId": "GAB",
+            "gapArea": 2.958472578029614e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 21.12697698318106,
+            "pass": true,
+            "tolerance": 2.112697698318106e-8,
+            "unionArea": 21.126976980222587
+          },
+          {
+            "countryId": "NER",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.4210854715202004e-14,
+            "p0Area": 100.57330719391513,
+            "pass": true,
+            "tolerance": 1.0057330719391513e-7,
+            "unionArea": 100.57330719391513
+          },
+          {
+            "countryId": "BFA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 22.66904591873458,
+            "pass": true,
+            "tolerance": 2.266904591873458e-8,
+            "unionArea": 22.66904591873458
+          },
+          {
+            "countryId": "TGO",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 7.105427357601002e-15,
+            "p0Area": 4.671138886185497,
+            "pass": true,
+            "tolerance": 4.671138886185498e-9,
+            "unionArea": 4.671138886185499
+          },
+          {
+            "countryId": "GHA",
+            "gapArea": 8.911001714295708e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 19.58114259098002,
+            "pass": true,
+            "tolerance": 1.958114259098002e-8,
+            "unionArea": 19.581142582069017
+          },
+          {
+            "countryId": "GNB",
+            "gapArea": 2.2180159930940135e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.725398767989674,
+            "pass": true,
+            "tolerance": 2.725398767989674e-9,
+            "unionArea": 2.725398765771658
+          },
+          {
+            "countryId": "GIB",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0003696872094991477,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0003696872094991477
+          },
+          {
+            "countryId": "CAN",
+            "gapArea": 2.9290345082699787e-7,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.3642420526593924e-12,
+            "p0Area": 1691.880706619541,
+            "pass": true,
+            "tolerance": 0.000001691880706619541,
+            "unionArea": 1691.8807063266374
+          },
+          {
+            "countryId": "MEX",
+            "gapArea": 3.418654159759171e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 174.20202034195097,
+            "pass": true,
+            "tolerance": 1.74202020341951e-7,
+            "unionArea": 174.20202030776443
+          },
+          {
+            "countryId": "BLZ",
+            "gapArea": 6.463096724473871e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.8944141321454708,
+            "pass": true,
+            "tolerance": 1.894414132145471e-9,
+            "unionArea": 1.8944141314991612
+          },
+          {
+            "countryId": "PAN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 6.120871385151929,
+            "pass": true,
+            "tolerance": 6.1208713851519296e-9,
+            "unionArea": 6.120871385151929
+          },
+          {
+            "countryId": "VEN",
+            "gapArea": 2.8353326797514455e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 74.77873862100012,
+            "pass": true,
+            "tolerance": 7.477873862100011e-8,
+            "unionArea": 74.77873859264679
+          },
+          {
+            "countryId": "PNG",
+            "gapArea": 1.1908582564501557e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 8.526512829121202e-13,
+            "p0Area": 38.04366640104091,
+            "pass": true,
+            "tolerance": 3.804366640104091e-8,
+            "unionArea": 38.043666389132326
+          },
+          {
+            "countryId": "EGY",
+            "gapArea": 2.3598147436132422e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 90.73018881484876,
+            "pass": true,
+            "tolerance": 9.073018881484877e-8,
+            "unionArea": 90.73018879125061
+          },
+          {
+            "countryId": "YEM",
+            "gapArea": 8.3674080997298e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 5.684341886080802e-14,
+            "p0Area": 38.24670171019659,
+            "pass": true,
+            "tolerance": 3.8246701710196593e-8,
+            "unionArea": 38.24670170182918
+          },
+          {
+            "countryId": "MRT",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 89.72189548299153,
+            "pass": true,
+            "tolerance": 8.972189548299153e-8,
+            "unionArea": 89.72189548299153
+          },
+          {
+            "countryId": "GNQ",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.2434497875801753e-14,
+            "p0Area": 2.1678826274039693,
+            "pass": true,
+            "tolerance": 2.1678826274039694e-9,
+            "unionArea": 2.167882627403973
+          },
+          {
+            "countryId": "GMB",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.8765418522074384,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.8765418522074384
+          },
+          {
+            "countryId": "HKG",
+            "gapArea": 1.907665136968717e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.09086575217702375,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.09086575198625724
+          },
+          {
+            "countryId": "VAT",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0000013243733860690554,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0000013243733860690554
+          },
+          {
+            "countryId": "CYN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.32885604935233914,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.32885604935233914
+          },
+          {
+            "countryId": "CNM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0337118819962825,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0337118819962825
+          },
+          {
+            "countryId": "ATA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.8189894035458565e-12,
+            "p0Area": 6049.574691530774,
+            "pass": true,
+            "tolerance": 0.000006049574691530774,
+            "unionArea": 6049.574691530774
+          },
+          {
+            "countryId": "AUS",
+            "gapArea": 1.9590515876188874e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 695.909090688612,
+            "pass": true,
+            "tolerance": 6.95909090688612e-7,
+            "unionArea": 695.9090906866529
+          },
+          {
+            "countryId": "GRL",
+            "gapArea": 1.1643487596302293e-7,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 659.8774456938008,
+            "pass": true,
+            "tolerance": 6.598774456938009e-7,
+            "unionArea": 659.877445577366
+          },
+          {
+            "countryId": "FJI",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.6102499990388424,
+            "pass": true,
+            "tolerance": 1.6102499990388425e-9,
+            "unionArea": 1.6102499990390697
+          },
+          {
+            "countryId": "NZL",
+            "gapArea": 1.5513251128140837e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 9.094947017729282e-13,
+            "p0Area": 29.14449250992709,
+            "pass": true,
+            "tolerance": 2.9144492509927093e-8,
+            "unionArea": 29.14449249441384
+          },
+          {
+            "countryId": "NCL",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.6401141440542233,
+            "pass": true,
+            "tolerance": 1.6401141440542234e-9,
+            "unionArea": 1.6401141440542233
+          },
+          {
+            "countryId": "MDG",
+            "gapArea": 3.5305390611029e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 51.069683166412574,
+            "pass": true,
+            "tolerance": 5.1069683166412574e-8,
+            "unionArea": 51.06968313110718
+          },
+          {
+            "countryId": "PHL",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 24.375607969042676,
+            "pass": true,
+            "tolerance": 2.4375607969042676e-8,
+            "unionArea": 24.375607969042676
+          },
+          {
+            "countryId": "LKA",
+            "gapArea": 2.688125277927611e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.1368683772161603e-13,
+            "p0Area": 5.432875766518464,
+            "pass": true,
+            "tolerance": 5.432875766518464e-9,
+            "unionArea": 5.432875766249651
+          },
+          {
+            "countryId": "CUW",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.03847996615240845,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.03847996615240845
+          },
+          {
+            "countryId": "ABW",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.01411889006101319,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.01411889006101319
+          },
+          {
+            "countryId": "BHS",
+            "gapArea": 2.2737367544323206e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.1368683772161603e-13,
+            "p0Area": 1.120759336651986,
+            "pass": true,
+            "tolerance": 1.120759336651986e-9,
+            "unionArea": 1.1207593366517585
+          },
+          {
+            "countryId": "TCA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.038878366421954524,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.038878366421954524
+          },
+          {
+            "countryId": "TWN",
+            "gapArea": 1.1066276783822104e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 3.2062155734215594,
+            "pass": true,
+            "tolerance": 3.2062155734215594e-9,
+            "unionArea": 3.2062155723149317
+          },
+          {
+            "countryId": "JPN",
+            "gapArea": 1.870739652076736e-8,
+            "outOfCountryArea": 0,
+            "overlapArea": 2.2737367544323206e-13,
+            "p0Area": 38.17138196300402,
+            "pass": true,
+            "tolerance": 3.8171381963004024e-8,
+            "unionArea": 38.17138194429663
+          },
+          {
+            "countryId": "SPM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.028674376493199816,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.028674376493199816
+          },
+          {
+            "countryId": "ISL",
+            "gapArea": 1.2620375855476595e-9,
+            "outOfCountryArea": 0,
+            "overlapArea": 3.410605131648481e-13,
+            "p0Area": 19.467230673401104,
+            "pass": true,
+            "tolerance": 1.9467230673401105e-8,
+            "unionArea": 19.467230672139067
+          },
+          {
+            "countryId": "PCN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.003789339215927612,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.003789339215927612
+          },
+          {
+            "countryId": "PYF",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.2813924379340733,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.2813924379340733
+          },
+          {
+            "countryId": "ATF",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.8962865113734892,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.8962865113734892
+          },
+          {
+            "countryId": "SYC",
+            "gapArea": 9.811174095375463e-11,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.035644684915467906,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.035644684817356165
+          },
+          {
+            "countryId": "KIR",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.07726765095523191,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.07726765095523191
+          },
+          {
+            "countryId": "MHL",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.013495539785310484,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.013495539785310484
+          },
+          {
+            "countryId": "TTO",
+            "gapArea": 5.684341886080802e-14,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.4230540162732268,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.42305401627316996
+          },
+          {
+            "countryId": "GRD",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.02884143369942649,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.028841433699483332
+          },
+          {
+            "countryId": "VCT",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.030665914193093613,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.030665914193150456
+          },
+          {
+            "countryId": "BRB",
+            "gapArea": 1.7053025658242404e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.03703978091368754,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.037039780913517006
+          },
+          {
+            "countryId": "LCA",
+            "gapArea": 6.399432095349766e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.05060612600340164,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.05060612536345843
+          },
+          {
+            "countryId": "DMA",
+            "gapArea": 2.1100277081131935e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.061493241910568486,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.061493241699565715
+          },
+          {
+            "countryId": "UMI",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.002364454775158009,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.002364454775158009
+          },
+          {
+            "countryId": "MSR",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.008439958860890329,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.008439958861004015
+          },
+          {
+            "countryId": "ATG",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.038399708635324714,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.038399708635324714
+          },
+          {
+            "countryId": "KNA",
+            "gapArea": 1.1368683772161603e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.022444249516183845,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.02244424951607016
+          },
+          {
+            "countryId": "VIR",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.030265270456311555,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.030265270456311555
+          },
+          {
+            "countryId": "BLM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.002082456944549449,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.002082456944549449
+          },
+          {
+            "countryId": "PRI",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.7692818839815345,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.7692818839815345
+          },
+          {
+            "countryId": "AIA",
+            "gapArea": 2.1009327610954642e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.007467633148166897,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.007467632938073621
+          },
+          {
+            "countryId": "VGB",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.012400523385622364,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.012400523385622364
+          },
+          {
+            "countryId": "JAM",
+            "gapArea": 2.270326149300672e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.9420620025800872,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.9420620023530546
+          },
+          {
+            "countryId": "CYM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.02659689931124376,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.02659689931124376
+          },
+          {
+            "countryId": "BMU",
+            "gapArea": 3.3514879760332406e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.005965749968254386,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.005965749633105588
+          },
+          {
+            "countryId": "HMD",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.052954020319020856,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.052954020319020856
+          },
+          {
+            "countryId": "SHN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.033666376703429535,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.033666376703429535
+          },
+          {
+            "countryId": "MUS",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.1741036428767302,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.1741036428767302
+          },
+          {
+            "countryId": "COM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.1387520987038613,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.1387520987038613
+          },
+          {
+            "countryId": "STP",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.08426508573700253,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.08426508573700253
+          },
+          {
+            "countryId": "CPV",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.3314756623834114,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.3314756623834967
+          },
+          {
+            "countryId": "MLT",
+            "gapArea": 8.526512829121202e-14,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.032521907364639446,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.03252190736455418
+          },
+          {
+            "countryId": "JEY",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.014694545007507998,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.014694545007507998
+          },
+          {
+            "countryId": "GGY",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.009180638693443655,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.009180638693443655
+          },
+          {
+            "countryId": "IMN",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.07918551725296652,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.07918551725296652
+          },
+          {
+            "countryId": "ALD",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.15238902180101377,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.15238902180101377
+          },
+          {
+            "countryId": "FRO",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.2280578529257582,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.2280578529257582
+          },
+          {
+            "countryId": "IOA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.009249922837852864,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.009249922837852864
+          },
+          {
+            "countryId": "IOT",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0040162663083265215,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0040162663083265215
+          },
+          {
+            "countryId": "SGP",
+            "gapArea": 9.041229986905819e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.04148500783493603,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.04148500693081303
+          },
+          {
+            "countryId": "NFK",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0038112540405563777,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0038112540405563777
+          },
+          {
+            "countryId": "COK",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.016506324289366603,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.016506324289366603
+          },
+          {
+            "countryId": "TON",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.052101766029636565,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.052101766029636565
+          },
+          {
+            "countryId": "WLF",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.011644273272395367,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.011644273272395367
+          },
+          {
+            "countryId": "WSM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.23237778657266972,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.23237778657266972
+          },
+          {
+            "countryId": "SLB",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 2.236402593562616,
+            "pass": true,
+            "tolerance": 2.236402593562616e-9,
+            "unionArea": 2.236402593562616
+          },
+          {
+            "countryId": "TUV",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0018871542267788755,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0018871542267788755
+          },
+          {
+            "countryId": "MDV",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.00886028847999576,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.008860288480091683
+          },
+          {
+            "countryId": "NRU",
+            "gapArea": 1.6500933952556807e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 1.4210854715202004e-14,
+            "p0Area": 0.0023371486100174366,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.002337148445008097
+          },
+          {
+            "countryId": "FSM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.05188214520018164,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.05188214520018164
+          },
+          {
+            "countryId": "SGS",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.5462433337557968,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.5462433337557968
+          },
+          {
+            "countryId": "FLK",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.5087758211604978,
+            "pass": true,
+            "tolerance": 1.5087758211604978e-9,
+            "unionArea": 1.5087758211604978
+          },
+          {
+            "countryId": "VUT",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 1.039553953469749,
+            "pass": true,
+            "tolerance": 1.039553953469749e-9,
+            "unionArea": 1.039553953469749
+          },
+          {
+            "countryId": "NIU",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.018930709461301376,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.018930709461301376
+          },
+          {
+            "countryId": "ASM",
+            "gapArea": 2.2737367544323206e-13,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.015101520395432999,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.015101520395205625
+          },
+          {
+            "countryId": "PLW",
+            "gapArea": 4.5770320866722614e-10,
+            "outOfCountryArea": 0,
+            "overlapArea": 5.684341886080802e-14,
+            "p0Area": 0.04028058666324341,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0402805862055402
+          },
+          {
+            "countryId": "GUM",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.04709376409300603,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.04709376409300603
+          },
+          {
+            "countryId": "MNP",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.048995271582271016,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.048995271582271016
+          },
+          {
+            "countryId": "BHR",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.062056597597461405,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.062056597597461405
+          },
+          {
+            "countryId": "CSI",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0000018013170119957067,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0000018013170119957067
+          },
+          {
+            "countryId": "PGA",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.0009896061297922643,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.0009896061297922643
+          },
+          {
+            "countryId": "CLP",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.00041283247662704525,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.00041283247662704525
+          },
+          {
+            "countryId": "MAC",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.002633198306966733,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.002633198306966733
+          },
+          {
+            "countryId": "ATC",
+            "gapArea": 0,
+            "outOfCountryArea": 0,
+            "overlapArea": 0,
+            "p0Area": 0.00022410960457364126,
+            "pass": true,
+            "tolerance": 1e-9,
+            "unionArea": 0.00022410960457364126
+          }
+        ],
+        "geometryRepairCount": 0,
+        "holes": 112,
+        "introducedProtectedBoundaryCrossings": 0,
+        "maximumCoordinateDisplacement": 0,
+        "pass": true,
+        "rawComponentAtomCandidates": 8156,
+        "sourceFeatureIdentitiesPreserved": true,
+        "validity": {
+          "counts": {
+            "features": 4231,
+            "multiPolygon": 599,
+            "polygon": 3632,
+            "polygons": 8156,
+            "rings": 8268,
+            "vertices": 1272489
+          },
+          "errors": [],
+          "pass": true
+        }
+      }
+    },
+    "14-7": {
+      "status": "fail",
+      "implementation": "Stable IDs/provenance, exact robust topology, symmetric adjacency, domain-separated roots, versioned two-layer PBF tiles z0..6, byte verification and Windows CI are implemented. Production source boundary gate fails before emitting a catalog.",
+      "productionGate": {
+        "status": "fail",
+        "message": "Topology boundary certification failed: {\"errorCount\":2048,\"p0OnlySegments\":1096,\"territorySegments\":836130}",
+        "evidence": {
+          "errorCount": 2048,
+          "errors": [
+            {
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  69.905445,
+                  34.035848
+                ],
+                [
+                  69.916021,
+                  34.038879
+                ]
+              ]
+            },
+            {
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  69.889253,
+                  34.031206
+                ],
+                [
+                  69.905445,
+                  34.035848
+                ]
+              ]
+            },
+            {
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  65.648323,
+                  37.493992
+                ],
+                [
+                  65.648323,
+                  37.494147
+                ]
+              ]
+            },
+            {
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  65.648272,
+                  37.49394
+                ],
+                [
+                  65.648323,
+                  37.493992
+                ]
+              ]
+            },
+            {
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  12.533355103170623,
+                  -13.567038932202163
+                ],
+                [
+                  12.533865,
+                  -13.565199
+                ]
+              ]
+            },
+            {
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  13.455089,
+                  -10.201755
+                ],
+                [
+                  13.489086223638434,
+                  -10.249259482836122
+                ]
+              ]
+            },
+            {
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  12.530121,
+                  -13.578709
+                ],
+                [
+                  12.533355103170623,
+                  -13.567038932202163
+                ]
+              ]
+            },
+            {
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  13.489086223638434,
+                  -10.249259482836122
+                ],
+                [
+                  13.508962,
+                  -10.277032
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.13683,
+                  18.173407
+                ],
+                [
+                  -63.12259899903508,
+                  18.183582877549476
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.12259899903508,
+                  18.183582877549476
+                ],
+                [
+                  -63.11384,
+                  18.189846
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.074645793264786,
+                  18.229347575742466
+                ],
+                [
+                  -63.072718,
+                  18.231349
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.07790194908223,
+                  18.225966883274225
+                ],
+                [
+                  -63.074645793264786,
+                  18.229347575742466
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.072718082425475,
+                  18.231349014826087
+                ],
+                [
+                  -63.072718,
+                  18.231349
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.067779,
+                  18.236477
+                ],
+                [
+                  -63.06116476783302,
+                  18.245783816006202
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.072718082425475,
+                  18.231349014826087
+                ],
+                [
+                  -63.067779,
+                  18.236477
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.099517,
+                  18.176174
+                ],
+                [
+                  -63.06138800081116,
+                  18.19885079519737
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.085846,
+                  18.217719
+                ],
+                [
+                  -63.07790194908223,
+                  18.225966883274225
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.015016895804926,
+                  18.271707999649113
+                ],
+                [
+                  -63.013497,
+                  18.271969
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.01501689585151,
+                  18.271707999641112
+                ],
+                [
+                  -63.015016895804926,
+                  18.271707999649113
+                ]
+              ]
+            },
+            {
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.0218782739697,
+                  18.270529612190778
+                ],
+                [
+                  -63.01501689585151,
+                  18.271707999641112
+                ]
+              ]
+            }
+          ],
+          "numericalDiagnostics": [
+            {
+              "candidates": [],
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  69.905445,
+                  34.035848
+                ],
+                [
+                  69.916021,
+                  34.038879
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 9.403798030657869e-7,
+                  "p0": [
+                    "PAK",
+                    "AFG"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      69.889253,
+                      34.031206
+                    ],
+                    [
+                      69.916021,
+                      34.038879
+                    ]
+                  ],
+                  "territories": [
+                    "PAK:1159309347"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 9.403798030657869e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      69.905445,
+                      34.035848
+                    ],
+                    [
+                      69.916021,
+                      34.038879
+                    ]
+                  ],
+                  "territories": [
+                    "AFG:1159312085"
+                  ]
+                }
+              ],
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  69.889253,
+                  34.031206
+                ],
+                [
+                  69.905445,
+                  34.035848
+                ]
+              ]
+            },
+            {
+              "candidates": [],
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  65.648323,
+                  37.493992
+                ],
+                [
+                  65.648323,
+                  37.494147
+                ]
+              ]
+            },
+            {
+              "candidates": [],
+              "country": "AFG",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  65.648272,
+                  37.49394
+                ],
+                [
+                  65.648323,
+                  37.493992
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.9209624010180056e-15,
+                  "p0": [
+                    "AGO"
+                  ],
+                  "projectedOverlapFraction": 0.9999999999999999,
+                  "segment": [
+                    [
+                      12.530121,
+                      -13.578709
+                    ],
+                    [
+                      12.533865,
+                      -13.565199
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  12.533355103170623,
+                  -13.567038932202163
+                ],
+                [
+                  12.533865,
+                  -13.565199
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.0096565415588668e-15,
+                  "p0": [
+                    "AGO"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      13.455089,
+                      -10.201755
+                    ],
+                    [
+                      13.508962,
+                      -10.277032
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  13.455089,
+                  -10.201755
+                ],
+                [
+                  13.489086223638434,
+                  -10.249259482836122
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.027238663829207e-16,
+                  "p0": [
+                    "AGO"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      12.530121,
+                      -13.578709
+                    ],
+                    [
+                      12.533865,
+                      -13.565199
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  12.530121,
+                  -13.578709
+                ],
+                [
+                  12.533355103170623,
+                  -13.567038932202163
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.7270026899557985e-15,
+                  "p0": [
+                    "AGO"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      13.455089,
+                      -10.201755
+                    ],
+                    [
+                      13.508962,
+                      -10.277032
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AGO",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  13.489086223638434,
+                  -10.249259482836122
+                ],
+                [
+                  13.508962,
+                  -10.277032
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.815798288069004e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.13683,
+                      18.173407
+                    ],
+                    [
+                      -63.11384,
+                      18.189846
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.13683,
+                  18.173407
+                ],
+                [
+                  -63.12259899903508,
+                  18.183582877549476
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 2.947663171273918e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 0.9999999999999998,
+                  "segment": [
+                    [
+                      -63.13683,
+                      18.173407
+                    ],
+                    [
+                      -63.11384,
+                      18.189846
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 1.0016731672170828e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.00000654154374225478,
+                  "segment": [
+                    [
+                      -63.122599,
+                      18.183583
+                    ],
+                    [
+                      -63.12259899903508,
+                      18.183582877549476
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316457",
+                    "AIA:1159315555"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.12259899903508,
+                  18.183582877549476
+                ],
+                [
+                  -63.11384,
+                  18.189846
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 6.965074854336745e-8,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.00001673459549167422,
+                  "segment": [
+                    [
+                      -63.072718082425475,
+                      18.231349014826087
+                    ],
+                    [
+                      -63.072718,
+                      18.231349
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316473"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 2.4810635031214663e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.00001673459549167422,
+                  "segment": [
+                    [
+                      -63.072718082425475,
+                      18.231349014826087
+                    ],
+                    [
+                      -63.067779,
+                      18.236477
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316473"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 4.0467832654618485e-7,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.085846,
+                      18.217719
+                    ],
+                    [
+                      -63.067779,
+                      18.236477
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.074645793264786,
+                  18.229347575742466
+                ],
+                [
+                  -63.072718,
+                  18.231349
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.835100715454361e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.085846,
+                      18.217719
+                    ],
+                    [
+                      -63.067779,
+                      18.236477
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.07790194908223,
+                  18.225966883274225
+                ],
+                [
+                  -63.074645793264786,
+                  18.229347575742466
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.2087611338470284e-10,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      -63.072718,
+                      18.231349
+                    ],
+                    [
+                      -63.046972,
+                      18.226718
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316473",
+                    "AIA:1159316463"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.072718082425475,
+                  18.231349014826087
+                ],
+                [
+                  -63.072718,
+                  18.231349
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.680795835849676e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.067779,
+                      18.236477
+                    ],
+                    [
+                      -63.055084,
+                      18.25434
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 3.680795835849676e-15,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      -63.06116476783302,
+                      18.245783816006202
+                    ],
+                    [
+                      -63.055084,
+                      18.25434
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316455"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.067779,
+                  18.236477
+                ],
+                [
+                  -63.06116476783302,
+                  18.245783816006202
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 6.4909794359499405e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.085846,
+                      18.217719
+                    ],
+                    [
+                      -63.067779,
+                      18.236477
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 6.96519141180101e-8,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.00000653133256310144,
+                  "segment": [
+                    [
+                      -63.074645793264786,
+                      18.229347575742466
+                    ],
+                    [
+                      -63.072718,
+                      18.231349
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316463"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 6.96519141180101e-8,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.00000653133256310144,
+                  "segment": [
+                    [
+                      -63.072718082425475,
+                      18.231349014826087
+                    ],
+                    [
+                      -63.072718,
+                      18.231349
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316473"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.072718082425475,
+                  18.231349014826087
+                ],
+                [
+                  -63.067779,
+                  18.236477
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.052486886579426e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.099517,
+                      18.176174
+                    ],
+                    [
+                      -63.06138800081116,
+                      18.198850795197373
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.099517,
+                  18.176174
+                ],
+                [
+                  -63.06138800081116,
+                  18.19885079519737
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.3113708333918426e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.085846,
+                      18.217719
+                    ],
+                    [
+                      -63.067779,
+                      18.236477
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.085846,
+                  18.217719
+                ],
+                [
+                  -63.07790194908223,
+                  18.225966883274225
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.4697890381113913e-7,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.015016895804926,
+                      18.271707999649113
+                    ],
+                    [
+                      -63.007395,
+                      18.273017
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.015016895804926,
+                  18.271707999649113
+                ],
+                [
+                  -63.013497,
+                  18.271969
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 4.275048640559552e-8,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      -63.015016895804926,
+                      18.271707999649113
+                    ],
+                    [
+                      -63.013497,
+                      18.271969
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316471"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 6.067906001027503e-8,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 0.9999999999999998,
+                  "segment": [
+                    [
+                      -63.0218782739697,
+                      18.270529612190778
+                    ],
+                    [
+                      -63.015016895804926,
+                      18.271707999649113
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 6.74047502934809e-8,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      -63.015016895804926,
+                      18.271707999649113
+                    ],
+                    [
+                      -63.007395,
+                      18.273017
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.01501689585151,
+                  18.271707999641112
+                ],
+                [
+                  -63.015016895804926,
+                  18.271707999649113
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 4.119682152836001e-16,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.0218782739697,
+                      18.270529612190778
+                    ],
+                    [
+                      -63.015016895804926,
+                      18.271707999649113
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.0218782739697,
+                  18.270529612190778
+                ],
+                [
+                  -63.01501689585151,
+                  18.271707999641112
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 9.55051440596188e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      -63.0218782739697,
+                      18.270529612190778
+                    ],
+                    [
+                      -63.015016895804926,
+                      18.271707999649113
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 9.962451247288781e-15,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      -63.0218782739697,
+                      18.270529612190778
+                    ],
+                    [
+                      -63.01501689585151,
+                      18.271707999641112
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316471"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 2.137565392608508e-14,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 0.9999999999999998,
+                  "segment": [
+                    [
+                      -63.038197,
+                      18.267727
+                    ],
+                    [
+                      -63.0218782739697,
+                      18.270529612190778
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.02292498741001,
+                  18.27034984743202
+                ],
+                [
+                  -63.0218782739697,
+                  18.270529612190778
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.4649629124962033e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.038197,
+                      18.267727
+                    ],
+                    [
+                      -63.0218782739697,
+                      18.270529612190778
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 1.4649629124962033e-15,
+                  "p0": [],
+                  "projectedOverlapFraction": 1.1102230246251565e-16,
+                  "segment": [
+                    [
+                      -63.02292498741001,
+                      18.27034984743202
+                    ],
+                    [
+                      -63.0218782739697,
+                      18.270529612190778
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316471"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.038197,
+                  18.267727
+                ],
+                [
+                  -63.02292498741001,
+                  18.27034984743202
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 4.003065638489089e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.067779,
+                      18.236477
+                    ],
+                    [
+                      -63.055084,
+                      18.25434
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.06116476783302,
+                  18.245783816006202
+                ],
+                [
+                  -63.055084,
+                  18.25434
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 6.693319171266431e-16,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.037668,
+                      18.212958
+                    ],
+                    [
+                      -63.011545,
+                      18.220445
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.03043500189767,
+                  18.215031018290095
+                ],
+                [
+                  -63.011545,
+                  18.220445
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.6629557608539552e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.000559,
+                      18.227362
+                    ],
+                    [
+                      -62.992909,
+                      18.236884
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.000559,
+                  18.227362
+                ],
+                [
+                  -62.99480398729503,
+                  18.234525298166893
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 5.049780831911024e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.000559,
+                      18.227362
+                    ],
+                    [
+                      -62.992909,
+                      18.236884
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -62.99480398729503,
+                  18.234525298166893
+                ],
+                [
+                  -62.992909,
+                  18.236884
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 9.26639614729784e-16,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.007395,
+                      18.273017
+                    ],
+                    [
+                      -62.983998,
+                      18.276435
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -62.99452265033887,
+                  18.274897484298915
+                ],
+                [
+                  -62.983998,
+                  18.276435
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.660958842527665e-8,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.015016895804926,
+                      18.271707999649113
+                    ],
+                    [
+                      -63.007395,
+                      18.273017
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.013497,
+                  18.271969
+                ],
+                [
+                  -63.007395,
+                  18.273017
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 3.0534914588403322e-15,
+                  "p0": [],
+                  "projectedOverlapFraction": 6.580286201786561e-14,
+                  "segment": [
+                    [
+                      -63.06138800081116,
+                      18.19885079519737
+                    ],
+                    [
+                      -63.06138800081116,
+                      18.198850795197373
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316459",
+                    "AIA:1159316475"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 3.0534914588403322e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 0.9999999999999342,
+                  "segment": [
+                    [
+                      -63.06138800081116,
+                      18.198850795197373
+                    ],
+                    [
+                      -63.037668,
+                      18.212958
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 8.147808762066735e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 6.580286201786561e-14,
+                  "segment": [
+                    [
+                      -63.099517,
+                      18.176174
+                    ],
+                    [
+                      -63.06138800081116,
+                      18.198850795197373
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 1.7560942435135646e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.000003818587107041604,
+                  "segment": [
+                    [
+                      -63.06138800081116,
+                      18.198850795197373
+                    ],
+                    [
+                      -63.061388,
+                      18.198851
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316459",
+                    "AIA:1159316475"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.06138800081116,
+                  18.19885079519737
+                ],
+                [
+                  -63.037668,
+                  18.212958
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.7489559667286235e-15,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.037668,
+                      18.212958
+                    ],
+                    [
+                      -63.011545,
+                      18.220445
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 1.7489559667286235e-15,
+                  "p0": [],
+                  "projectedOverlapFraction": 1.1102230246251565e-16,
+                  "segment": [
+                    [
+                      -63.03043500189767,
+                      18.215031018290095
+                    ],
+                    [
+                      -63.011545,
+                      18.220445
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316465"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.037668,
+                  18.212958
+                ],
+                [
+                  -63.03043500189767,
+                  18.215031018290095
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 7.57896634147185e-16,
+                  "p0": [
+                    "AIA"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      -63.007395,
+                      18.273017
+                    ],
+                    [
+                      -62.983998,
+                      18.276435
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 7.57896634147185e-16,
+                  "p0": [],
+                  "projectedOverlapFraction": 1.1102230246251565e-16,
+                  "segment": [
+                    [
+                      -62.99452265033887,
+                      18.274897484298915
+                    ],
+                    [
+                      -62.983998,
+                      18.276435
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316449"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 4.286678860873594e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.000031977554055484525,
+                  "segment": [
+                    [
+                      -62.994523,
+                      18.274897
+                    ],
+                    [
+                      -62.99452265033887,
+                      18.274897484298915
+                    ]
+                  ],
+                  "territories": [
+                    "AIA:1159316453",
+                    "AIA:1159316449"
+                  ]
+                }
+              ],
+              "country": "AIA",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  -63.007395,
+                  18.273017
+                ],
+                [
+                  -62.99452265033887,
+                  18.274897484298915
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 2.1240304323124465e-16,
+                  "p0": [
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      19.513357,
+                      41.276679
+                    ],
+                    [
+                      19.516612,
+                      41.256415
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 2.6184286147879704e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      19.515962738633128,
+                      41.26045697614079
+                    ],
+                    [
+                      19.515963,
+                      41.260457
+                    ]
+                  ],
+                  "territories": [
+                    "ALB:1159312427"
+                  ]
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  19.513357,
+                  41.276679
+                ],
+                [
+                  19.515962738633128,
+                  41.26045697614079
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.2938117041358486e-12,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      19.515963,
+                      41.260457
+                    ],
+                    [
+                      19.516204,
+                      41.260479
+                    ]
+                  ],
+                  "territories": [
+                    "ALB:1159312427",
+                    "ALB:1159309457"
+                  ]
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  19.515962738633128,
+                  41.26045697614079
+                ],
+                [
+                  19.515963,
+                  41.260457
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.7329491998619264e-8,
+                  "p0": [
+                    "MKD",
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 0.9999997024568809,
+                  "segment": [
+                    [
+                      20.495441017910373,
+                      41.250257000809285
+                    ],
+                    [
+                      20.500071,
+                      41.23552
+                    ]
+                  ],
+                  "territories": [
+                    "MKD:1159314397"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 6.344190841468457e-8,
+                  "p0": [
+                    "MKD",
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 2.975431191454709e-7,
+                  "segment": [
+                    [
+                      20.483121,
+                      41.289471
+                    ],
+                    [
+                      20.495441017910373,
+                      41.250257000809285
+                    ]
+                  ],
+                  "territories": [
+                    "MKD:1159315919"
+                  ]
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  20.495441,
+                  41.250257
+                ],
+                [
+                  20.500071,
+                  41.23552
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.7329499092198537e-8,
+                  "p0": [
+                    "MKD",
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      20.483121,
+                      41.289471
+                    ],
+                    [
+                      20.495441017910373,
+                      41.250257000809285
+                    ]
+                  ],
+                  "territories": [
+                    "MKD:1159315919"
+                  ]
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  20.483121,
+                  41.289471
+                ],
+                [
+                  20.495441,
+                  41.250257
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 5.9145486983548236e-15,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      19.52954908336639,
+                      41.83571069128384
+                    ],
+                    [
+                      19.585216,
+                      41.818549
+                    ]
+                  ],
+                  "territories": [
+                    "ALB:1159309455"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 5.9145486983548236e-15,
+                  "p0": [
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      19.465505,
+                      41.855455
+                    ],
+                    [
+                      19.585216,
+                      41.818549
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 2.704540639752667e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.000002545821269572812,
+                  "segment": [
+                    [
+                      19.529549,
+                      41.835711
+                    ],
+                    [
+                      19.52954908336639,
+                      41.83571069128384
+                    ]
+                  ],
+                  "territories": [
+                    "ALB:1159309455",
+                    "ALB:1159310593"
+                  ]
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  19.465505,
+                  41.855455
+                ],
+                [
+                  19.52954908336639,
+                  41.83571069128384
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 6.804613454794908e-15,
+                  "p0": [
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      19.465505,
+                      41.855455
+                    ],
+                    [
+                      19.585216,
+                      41.818549
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  19.52954908336639,
+                  41.83571069128384
+                ],
+                [
+                  19.585216,
+                  41.818549
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 2.4928891020550497e-14,
+                  "p0": [
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      19.447765,
+                      41.009467
+                    ],
+                    [
+                      19.453787,
+                      41.005845
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  19.447765,
+                  41.009467
+                ],
+                [
+                  19.448009095717623,
+                  41.00932018587027
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 0.0000013127259405474967,
+                  "p0": [
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 0.9999999999999998,
+                  "segment": [
+                    [
+                      19.513357,
+                      41.276679
+                    ],
+                    [
+                      19.516612,
+                      41.256415
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  19.515963,
+                  41.260457
+                ],
+                [
+                  19.516612,
+                  41.256415
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.0531404664658567e-15,
+                  "p0": [
+                    "ALB"
+                  ],
+                  "projectedOverlapFraction": 0.9999999999999999,
+                  "segment": [
+                    [
+                      19.447765,
+                      41.009467
+                    ],
+                    [
+                      19.453787,
+                      41.005845
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "ALB",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  19.448009095717623,
+                  41.00932018587027
+                ],
+                [
+                  19.453787,
+                  41.005845
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 2.221237319112247e-15,
+                  "p0": [
+                    "FRA",
+                    "AND"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      1.710624,
+                      42.527741
+                    ],
+                    [
+                      1.721683,
+                      42.548515
+                    ]
+                  ],
+                  "territories": [
+                    "FRA:1159316863"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 4.390623616701438e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.000006178929834365985,
+                  "segment": [
+                    [
+                      1.717091,
+                      42.53989
+                    ],
+                    [
+                      1.7170913591949721,
+                      42.53988974038488
+                    ]
+                  ],
+                  "territories": [
+                    "AND:1159315981",
+                    "AND:1159315985"
+                  ]
+                }
+              ],
+              "country": "AND",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  1.7170913591949721,
+                  42.53988974038488
+                ],
+                [
+                  1.721683,
+                  42.548515
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 8.227956523814139e-16,
+                  "p0": [
+                    "ESP",
+                    "AND"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      1.544432,
+                      42.450356
+                    ],
+                    [
+                      1.607478,
+                      42.456428
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 8.227956523814139e-16,
+                  "p0": [],
+                  "projectedOverlapFraction": 1.1102230246251565e-16,
+                  "segment": [
+                    [
+                      1.5726649675180189,
+                      42.453075134897844
+                    ],
+                    [
+                      1.607478,
+                      42.456428
+                    ]
+                  ],
+                  "territories": [
+                    "AND:1159315987"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 1.3739047766248697e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      1.544432,
+                      42.450356
+                    ],
+                    [
+                      1.572665,
+                      42.453075
+                    ]
+                  ],
+                  "territories": [
+                    "ESP:1159317793"
+                  ]
+                }
+              ],
+              "country": "AND",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  1.544432,
+                  42.450356
+                ],
+                [
+                  1.5726649675180189,
+                  42.453075134897844
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 1.577507580066302e-15,
+                  "p0": [
+                    "FRA",
+                    "AND"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      1.710624,
+                      42.527741
+                    ],
+                    [
+                      1.721683,
+                      42.548515
+                    ]
+                  ],
+                  "territories": [
+                    "FRA:1159316863"
+                  ]
+                }
+              ],
+              "country": "AND",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  1.710624,
+                  42.527741
+                ],
+                [
+                  1.7170913591949721,
+                  42.53988974038488
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 6.676652786829763e-16,
+                  "p0": [
+                    "ESP",
+                    "AND"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      1.544432,
+                      42.450356
+                    ],
+                    [
+                      1.607478,
+                      42.456428
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 1.3739047766255957e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 5.546992491467685e-7,
+                  "segment": [
+                    [
+                      1.544432,
+                      42.450356
+                    ],
+                    [
+                      1.572665,
+                      42.453075
+                    ]
+                  ],
+                  "territories": [
+                    "ESP:1159317793"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 1.3739047766255957e-7,
+                  "p0": [],
+                  "projectedOverlapFraction": 0.9999994453007508,
+                  "segment": [
+                    [
+                      1.572665,
+                      42.453075
+                    ],
+                    [
+                      1.607478,
+                      42.456428
+                    ]
+                  ],
+                  "territories": [
+                    "ESP:1159317793"
+                  ]
+                }
+              ],
+              "country": "AND",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  1.5726649675180189,
+                  42.453075134897844
+                ],
+                [
+                  1.607478,
+                  42.456428
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 5.993240436890363e-16,
+                  "p0": [],
+                  "projectedOverlapFraction": 4.440892098500626e-16,
+                  "segment": [
+                    [
+                      56.36500065463156,
+                      25.423165854310348
+                    ],
+                    [
+                      56.365001,
+                      25.423163
+                    ]
+                  ],
+                  "territories": [
+                    "ARE:1159308403"
+                  ]
+                },
+                {
+                  "maximumLineDistance": 5.993240436890363e-16,
+                  "p0": [
+                    "ARE"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      56.36378,
+                      25.433254
+                    ],
+                    [
+                      56.365001,
+                      25.423163
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "ARE",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  56.36378,
+                  25.433254
+                ],
+                [
+                  56.36500065463156,
+                  25.423165854310348
+                ]
+              ]
+            },
+            {
+              "candidates": [],
+              "country": "ARE",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  56.206722,
+                  25.226701
+                ],
+                [
+                  56.20672233484182,
+                  25.226701121577225
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 5.027764315380092e-11,
+                  "p0": [
+                    "OMN",
+                    "ARE"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      55.794764,
+                      24.70392
+                    ],
+                    [
+                      55.799981,
+                      24.693258
+                    ]
+                  ],
+                  "territories": [
+                    "OMN:1159315899"
+                  ]
+                }
+              ],
+              "country": "ARE",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  55.79998073521769,
+                  24.69325854113648
+                ],
+                [
+                  55.799981,
+                  24.693258
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 2.155342746222291e-15,
+                  "p0": [
+                    "ARE"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      53.361583,
+                      24.350735
+                    ],
+                    [
+                      53.399099,
+                      24.401435
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "ARE",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  53.361596461458,
+                  24.35075319212924
+                ],
+                [
+                  53.399099,
+                  24.401435
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 6.004611419003501e-12,
+                  "p0": [
+                    "ARE"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      53.361583,
+                      24.350735
+                    ],
+                    [
+                      53.399099,
+                      24.401435
+                    ]
+                  ],
+                  "territories": []
+                },
+                {
+                  "maximumLineDistance": 6.004611419003501e-12,
+                  "p0": [],
+                  "projectedOverlapFraction": 2.220446049250313e-16,
+                  "segment": [
+                    [
+                      53.361596461458,
+                      24.35075319212924
+                    ],
+                    [
+                      53.399099,
+                      24.401435
+                    ]
+                  ],
+                  "territories": [
+                    "ARE:1159307647"
+                  ]
+                }
+              ],
+              "country": "ARE",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  53.361583,
+                  24.350735
+                ],
+                [
+                  53.361596461458,
+                  24.35075319212924
+                ]
+              ]
+            },
+            {
+              "candidates": [
+                {
+                  "maximumLineDistance": 2.7603981123725164e-12,
+                  "p0": [
+                    "ARE"
+                  ],
+                  "projectedOverlapFraction": 1,
+                  "segment": [
+                    [
+                      54.389415,
+                      24.501573
+                    ],
+                    [
+                      54.396251,
+                      24.522691
+                    ]
+                  ],
+                  "territories": []
+                }
+              ],
+              "country": "ARE",
+              "kind": "unpaired-interior-boundary",
+              "p0": [],
+              "segment": [
+                [
+                  54.389415,
+                  24.501573
+                ],
+                [
+                  54.38942232820052,
+                  24.501595638522303
+                ]
+              ]
+            }
+          ],
+          "p0OnlySegments": 1096,
+          "territorySegments": 836130
+        },
+        "independentReproduction": {
+          "byteIdentical": true,
+          "sha256": "1d6c22ef701b834f365340f5d5edaf950dad26225611fd67cdf2bc1f5f47d56a",
+          "byteLength": 24642,
+          "paths": [
+            ".tmp/prompt14-catalog/catalog-first/generation-failure.json",
+            ".tmp/prompt14-catalog/catalog-second/generation-failure.json"
+          ]
+        }
+      },
+      "countsInterpretation": "2048 unmatched/ambiguous segment observations and 1096 P0-only observations are raw exact-noding results; they are not asserted to be 3144 distinct geometric defects. Some are floating-point collinearity. The independently verified AFG witness is beyond the locked 1e-12 numerical boundary-contact tolerance.",
+      "confirmedOriginalInputWitness": {
+        "sourceCountryId": "AFG",
+        "sourceFeatureId": "1159312085",
+        "inputRole": "P1",
+        "segment": [
+          [
+            69.905445,
+            34.035848
+          ],
+          [
+            69.916021,
+            34.038879
+          ]
+        ],
+        "midpoint": [
+          69.910733,
+          34.0373635
+        ],
+        "presentInOriginalLockedInput": true,
+        "distanceToLockedP0BoundaryDegrees": 2.844212698353127e-7,
+        "pointLocation": "interior",
+        "numericalBoundaryContactToleranceDegrees": 1e-12,
+        "exceedsNumericalContactTolerance": true,
+        "areaCoverageGate": {
+          "countryId": "AFG",
+          "gapArea": 1.1872771210619248e-8,
+          "outOfCountryArea": 0,
+          "overlapArea": 6.821210263296962e-13,
+          "p0Area": 62.59166423699003,
+          "pass": true,
+          "tolerance": 6.259166423699003e-8,
+          "unionArea": 62.591664225117256
+        },
+        "interpretation": "Area totals within the approved tolerance do not certify a shared boundary. This witness exists before 14-6 normalization; coordinate preservation cannot make it an exact P0 edge."
+      },
+      "fixtureValidation": {
+        "pass": true,
+        "tests": 12,
+        "zooms": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "tilesPerIndependentRun": 5461,
+        "runs": 2,
+        "checks": [
+          "exact shared/T-junction noding",
+          "country/administrative/coast classes",
+          "symmetric adjacency",
+          "hole coastline retention",
+          "tiny gap rejection",
+          "ambiguous side rejection",
+          "caps",
+          "PBF canonical feature ID decoding",
+          "all artifact hashes/byte lengths",
+          "byte-identical replay",
+          "tamper rejection",
+          "build-only/public separation"
+        ],
+        "scope": "Test fixtures only; not production readiness."
+      }
+    },
+    "14-8": {
+      "status": "blocked",
+      "reason": "A valid production catalog is required before real V2-to-V3 migration, final root comparison or freeze. The 14-7 hard gate failed.",
+      "productionCatalogRegeneration": "attempted twice; both stop at the same source boundary gate",
+      "actualCatalogMigrationDryRun": "not run",
+      "mappingVerification": "not run",
+      "ownerControllerColorVerification": "not run on a production catalog",
+      "productionRoots": null,
+      "frozenCatalogVersion": null,
+      "freezeCompleted": false
+    }
+  },
+  "baseline": {
+    "startedAt": "2026-10-02T05:46:28.270Z",
+    "startHead": "3d156a4d116d9ddfd71ff8c90e9771588035d3f5",
+    "currentHead": "3d156a4d116d9ddfd71ff8c90e9771588035d3f5",
+    "preExistingDirtyStatus": " M data/source-locks/prompt14-production-polygon-sources.json\n M package-lock.json\n M package.json\n M prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt\n M reports/prompt14/14-02-admin1-parent-resolution.json\n M reports/prompt14/14-02-source-generation-delivery-decision.json\n M scripts/audit-prompt14-stage-1-2.mjs\n M scripts/prompt14-source-gate.mjs\n M scripts/prompt14-source-gate.test.mjs\n M src/lib/simulation/atomic-turn-runtime.ts\n M src/lib/simulation/resolved-turn-plan.ts\n M src/lib/simulation/simulation-contract-primitives.ts\n M src/lib/simulation/simulation-state.ts\n?? .gitattributes\n?? data/derived/\n?? data/source-locks/prompt14-component-grouping-policy.json\n?? data/source-locks/prompt14-derived-game-input-lock.json\n?? data/source-locks/prompt14-game-selection-policy.json\n?? data/source-locks/prompt14-repair-policy.json\n?? data/source-locks/prompt14-shared-topology-policy.json\n?? reports/prompt14/14-02-admin0-repair.json\n?? reports/prompt14/14-02-admin0-topology-noding.json\n?? reports/prompt14/14-02-admin1-repair.json\n?? reports/prompt14/14-02-admin1-topology-noding.json\n?? reports/prompt14/14-02-component-grouping-plan.json\n?? reports/prompt14/14-02-derived-p0-comparison.json\n?? reports/prompt14/14-02-game-contract-start.json\n?? reports/prompt14/14-02-game-coverage-exploration.json\n?? reports/prompt14/14-02-game-input-selection.json\n?? reports/prompt14/14-02-game-selection-exploration.json\n?? reports/prompt14/14-02-independent-topology.json\n?? reports/prompt14/14-02-p0-country-overlaps.json\n?? reports/prompt14/14-02-p0-repair.json\n?? reports/prompt14/14-02-revalidation-start.json\n?? reports/prompt14/14-02-shared-boundary-origin.json\n?? reports/prompt14/14-02-shared-topology-start.json\n?? reports/prompt14/14-02-source-research.json\n?? reports/prompt14/14-02-topology-diagnosis.json\n?? reports/prompt14/14-02-transform-phase-diagnosis.json\n?? reports/prompt14/14-05-schema-migration-checkpoint.json\n?? scripts/audit-prompt14-game-inputs.mjs\n?? scripts/prompt14-game-selection.mjs\n?? scripts/prompt14-repair.mjs\n?? scripts/prompt14-shared-topology.mjs\n?? scripts/prompt14-topology-diagnosis.mjs\n?? src/lib/simulation/simulation-state-v2.test.ts\n?? src/lib/simulation/simulation-state-v2.ts\n?? src/lib/test-only/world-simulation-schema-checkpoint.test.ts\n?? src/lib/test-only/world-simulation-schema-checkpoint.ts\n?? src/lib/test-only/world-v2-to-v3-migration.test.ts\n?? src/lib/test-only/world-v2-to-v3-migration.ts\n?? src/lib/test-only/world-v3-migration.md\n?? src/lib/test-only/world-v3-synthetic-fixture.ts\n?? src/lib/world/country-entity-v3.ts\n?? src/lib/world/territory-entity-v3.ts\n?? src/lib/world/world-geometry-catalog-ref.ts\n?? src/lib/world/world-state-v3.test.ts\n?? src/lib/world/world-state-v3.ts\n?? src/lib/world/world-v3-validation.ts\n",
+    "preservedFiles": [
+      {
+        "repositoryPath": "data/source-locks/prompt14-production-polygon-sources.json",
+        "before": {
+          "sha256": "b5f5ec99e0f10dc07069c49723e9f7efa6a3942f8bb68f0f7641ea1bcc749669",
+          "byteLength": 10301
+        },
+        "after": {
+          "sha256": "b5f5ec99e0f10dc07069c49723e9f7efa6a3942f8bb68f0f7641ea1bcc749669",
+          "byteLength": 10301
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "package-lock.json",
+        "before": {
+          "sha256": "2fbeb8541b5947e289cd01fdc85f51a4a76cc9eb26e1b7e1f2f038ff2cd5fa18",
+          "byteLength": 336023
+        },
+        "after": {
+          "sha256": "2fbeb8541b5947e289cd01fdc85f51a4a76cc9eb26e1b7e1f2f038ff2cd5fa18",
+          "byteLength": 336023
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "package.json",
+        "before": {
+          "sha256": "948f5c26a6145fed6e394511a23093cb157449bc668d83e4e1796bdab19cceea",
+          "byteLength": 1374
+        },
+        "after": {
+          "sha256": "948f5c26a6145fed6e394511a23093cb157449bc668d83e4e1796bdab19cceea",
+          "byteLength": 1374
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt",
+        "before": {
+          "sha256": "808d5ac765bb39e66b78456edb0a2e42c53b025b41b13a6463d046608a36cd67",
+          "byteLength": 51019
+        },
+        "after": {
+          "sha256": "808d5ac765bb39e66b78456edb0a2e42c53b025b41b13a6463d046608a36cd67",
+          "byteLength": 51019
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-source-generation-delivery-decision.json",
+        "before": {
+          "sha256": "212f4104a33712fed237e53e200f38703df04df6edab75d85cb458a3404b5eff",
+          "byteLength": 3164528
+        },
+        "after": {
+          "sha256": "212f4104a33712fed237e53e200f38703df04df6edab75d85cb458a3404b5eff",
+          "byteLength": 3164528
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/audit-prompt14-stage-1-2.mjs",
+        "before": {
+          "sha256": "e2d76862d0f7f3b77b0e018decdf575a259252f6597076df458d8a70ee31a86c",
+          "byteLength": 121
+        },
+        "after": {
+          "sha256": "e2d76862d0f7f3b77b0e018decdf575a259252f6597076df458d8a70ee31a86c",
+          "byteLength": 121
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-source-gate.mjs",
+        "before": {
+          "sha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+          "byteLength": 38582
+        },
+        "after": {
+          "sha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+          "byteLength": 38582
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-source-gate.test.mjs",
+        "before": {
+          "sha256": "bc6755dee51e254a8e7ece80e55eda905a6660866435aec771ae9e7f26fa058f",
+          "byteLength": 30855
+        },
+        "after": {
+          "sha256": "bc6755dee51e254a8e7ece80e55eda905a6660866435aec771ae9e7f26fa058f",
+          "byteLength": 30855
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/atomic-turn-runtime.ts",
+        "before": {
+          "sha256": "6a23be3ac7d2e8b211d404d6b207107c8e4effdecae2e7d8cc0a58a0817d0d29",
+          "byteLength": 12685
+        },
+        "after": {
+          "sha256": "6a23be3ac7d2e8b211d404d6b207107c8e4effdecae2e7d8cc0a58a0817d0d29",
+          "byteLength": 12685
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/resolved-turn-plan.ts",
+        "before": {
+          "sha256": "c407a85f55446d1d3d9b38346d4f4ace5d8ef83ce76391ccf4230df1f0fb0c2d",
+          "byteLength": 10719
+        },
+        "after": {
+          "sha256": "c407a85f55446d1d3d9b38346d4f4ace5d8ef83ce76391ccf4230df1f0fb0c2d",
+          "byteLength": 10719
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-contract-primitives.ts",
+        "before": {
+          "sha256": "11c7bcbd3765af7790c3c87a98cf27dcf38718a9957395fbbd493bbbb4489a06",
+          "byteLength": 4643
+        },
+        "after": {
+          "sha256": "11c7bcbd3765af7790c3c87a98cf27dcf38718a9957395fbbd493bbbb4489a06",
+          "byteLength": 4643
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-state.ts",
+        "before": {
+          "sha256": "bd3463c44f0f731cf6d99e08840c848251c918d5edd51d3216c52253959a1e27",
+          "byteLength": 8188
+        },
+        "after": {
+          "sha256": "bd3463c44f0f731cf6d99e08840c848251c918d5edd51d3216c52253959a1e27",
+          "byteLength": 8188
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": ".gitattributes",
+        "before": {
+          "sha256": "74454513bdf34d26aadcf71b5d68c003cea37518fac4f77fe1b4e68276420805",
+          "byteLength": 652
+        },
+        "after": {
+          "sha256": "74454513bdf34d26aadcf71b5d68c003cea37518fac4f77fe1b4e68276420805",
+          "byteLength": 652
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/countries-10m.geojson",
+        "before": {
+          "sha256": "f4a75f261499d997709f456844177a9fd7511778d131ca3162b73a577e22227b",
+          "byteLength": 11241684
+        },
+        "after": {
+          "sha256": "f4a75f261499d997709f456844177a9fd7511778d131ca3162b73a577e22227b",
+          "byteLength": 11241684
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/ne_10m_admin_0_countries.geojson",
+        "before": {
+          "sha256": "78d8ec6ef290aae4cd9a7593934fe95622355ab98535e83aad292e99de97555b",
+          "byteLength": 13287192
+        },
+        "after": {
+          "sha256": "78d8ec6ef290aae4cd9a7593934fe95622355ab98535e83aad292e99de97555b",
+          "byteLength": 13287192
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/ne_10m_admin_1_states_provinces.geojson",
+        "before": {
+          "sha256": "dc5df66aa1e2041c992b1c7a660923a27bb84fd54ebf300f61be71e1eba3c98f",
+          "byteLength": 40725815
+        },
+        "after": {
+          "sha256": "dc5df66aa1e2041c992b1c7a660923a27bb84fd54ebf300f61be71e1eba3c98f",
+          "byteLength": 40725815
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/selected-game-input.geojson",
+        "before": {
+          "sha256": "119becb43aef4c417bad77c7e3bf58e2ba74ca26f8b455c28b18ce727546d76e",
+          "byteLength": 29166732
+        },
+        "after": {
+          "sha256": "119becb43aef4c417bad77c7e3bf58e2ba74ca26f8b455c28b18ce727546d76e",
+          "byteLength": 29166732
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/shared-admin1-input.geojson",
+        "before": {
+          "sha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+          "byteLength": 40725848
+        },
+        "after": {
+          "sha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+          "byteLength": 40725848
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/derived/prompt14/shared-game-p0.geojson",
+        "before": {
+          "sha256": "216cb55c553981056cb21d027ad66df6c33f6db20a649ccbb8e752d2cca9b009",
+          "byteLength": 12382975
+        },
+        "after": {
+          "sha256": "216cb55c553981056cb21d027ad66df6c33f6db20a649ccbb8e752d2cca9b009",
+          "byteLength": 12382975
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-component-grouping-policy.json",
+        "before": {
+          "sha256": "fe6e4d461009df83c09fc90402e8fc48ffa120c5772b82b7e127db050134b4bc",
+          "byteLength": 1025
+        },
+        "after": {
+          "sha256": "fe6e4d461009df83c09fc90402e8fc48ffa120c5772b82b7e127db050134b4bc",
+          "byteLength": 1025
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-derived-game-input-lock.json",
+        "before": {
+          "sha256": "886e605de488fb853456d341d49d552dbae04389c6b1c94552b8a841f0a07ab4",
+          "byteLength": 18962
+        },
+        "after": {
+          "sha256": "886e605de488fb853456d341d49d552dbae04389c6b1c94552b8a841f0a07ab4",
+          "byteLength": 18962
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-game-selection-policy.json",
+        "before": {
+          "sha256": "ac3ec638af45a18b9a884156835fa548a957c1bb7bc92f4494168c4c8d454d11",
+          "byteLength": 3570
+        },
+        "after": {
+          "sha256": "ac3ec638af45a18b9a884156835fa548a957c1bb7bc92f4494168c4c8d454d11",
+          "byteLength": 3570
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-repair-policy.json",
+        "before": {
+          "sha256": "8d1e42ca3c7a982cec176a787e4bb1b1f128a399874fd3939e49853da0c15b50",
+          "byteLength": 838
+        },
+        "after": {
+          "sha256": "8d1e42ca3c7a982cec176a787e4bb1b1f128a399874fd3939e49853da0c15b50",
+          "byteLength": 838
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "data/source-locks/prompt14-shared-topology-policy.json",
+        "before": {
+          "sha256": "f78cddfcccf811122913c8a1dbb33064521d1669c946574b0f675656f1056910",
+          "byteLength": 2460
+        },
+        "after": {
+          "sha256": "f78cddfcccf811122913c8a1dbb33064521d1669c946574b0f675656f1056910",
+          "byteLength": 2460
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin0-repair.json",
+        "before": {
+          "sha256": "506d1e0a9b57b9c0990836006f8438ef4c6c60f6f517529d50618ef8a134cda4",
+          "byteLength": 5095
+        },
+        "after": {
+          "sha256": "506d1e0a9b57b9c0990836006f8438ef4c6c60f6f517529d50618ef8a134cda4",
+          "byteLength": 5095
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin0-topology-noding.json",
+        "before": {
+          "sha256": "a4c581d48ad20eabdfe90de7cf71894b451b723f9e09e74844bb568bc2594bf6",
+          "byteLength": 1411
+        },
+        "after": {
+          "sha256": "a4c581d48ad20eabdfe90de7cf71894b451b723f9e09e74844bb568bc2594bf6",
+          "byteLength": 1411
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin1-repair.json",
+        "before": {
+          "sha256": "205cf397b20be16a341037c329d1ec72ce73720ae431216bc3ca72a529f9736c",
+          "byteLength": 23372
+        },
+        "after": {
+          "sha256": "205cf397b20be16a341037c329d1ec72ce73720ae431216bc3ca72a529f9736c",
+          "byteLength": 23372
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-admin1-topology-noding.json",
+        "before": {
+          "sha256": "b043bef5a25e43d5908c2d15a3c42dbbc38cae9a4b28a8418e9040922bb201b2",
+          "byteLength": 4019
+        },
+        "after": {
+          "sha256": "b043bef5a25e43d5908c2d15a3c42dbbc38cae9a4b28a8418e9040922bb201b2",
+          "byteLength": 4019
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-component-grouping-plan.json",
+        "before": {
+          "sha256": "e741cce0f18665d10ef083c47d049e46243b125a14d43b0ec249ca666f741e2e",
+          "byteLength": 1993393
+        },
+        "after": {
+          "sha256": "e741cce0f18665d10ef083c47d049e46243b125a14d43b0ec249ca666f741e2e",
+          "byteLength": 1993393
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-derived-p0-comparison.json",
+        "before": {
+          "sha256": "b8a8ece0f20847c95fe9e003fc93baab026dfc7af0312aeba33127d07dad3c18",
+          "byteLength": 170694
+        },
+        "after": {
+          "sha256": "b8a8ece0f20847c95fe9e003fc93baab026dfc7af0312aeba33127d07dad3c18",
+          "byteLength": 170694
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-contract-start.json",
+        "before": {
+          "sha256": "b3d80d6808398fed2ba2af03d46ea4c0590af3072b9e6dc7dccd69f3d893713d",
+          "byteLength": 6274
+        },
+        "after": {
+          "sha256": "b3d80d6808398fed2ba2af03d46ea4c0590af3072b9e6dc7dccd69f3d893713d",
+          "byteLength": 6274
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-coverage-exploration.json",
+        "before": {
+          "sha256": "f878685d20066fda51b5ba6f9b2d13196c14a1bf06f1eb366d59fb2a59e8960d",
+          "byteLength": 81004
+        },
+        "after": {
+          "sha256": "f878685d20066fda51b5ba6f9b2d13196c14a1bf06f1eb366d59fb2a59e8960d",
+          "byteLength": 81004
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-input-selection.json",
+        "before": {
+          "sha256": "ecf9538575696e1c0947c90aea492aa6291b843ebc77fbde670914669cc6f2b3",
+          "byteLength": 1618143
+        },
+        "after": {
+          "sha256": "ecf9538575696e1c0947c90aea492aa6291b843ebc77fbde670914669cc6f2b3",
+          "byteLength": 1618143
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-game-selection-exploration.json",
+        "before": {
+          "sha256": "c64249826137b0ce004b9661db70f4179bd08321d216f203f071e39363255740",
+          "byteLength": 358717
+        },
+        "after": {
+          "sha256": "c64249826137b0ce004b9661db70f4179bd08321d216f203f071e39363255740",
+          "byteLength": 358717
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-independent-topology.json",
+        "before": {
+          "sha256": "68a7b3f4a109d6d37fd596a0d619d43bdd42caa49c05b20d56325b77a383c529",
+          "byteLength": 3325
+        },
+        "after": {
+          "sha256": "68a7b3f4a109d6d37fd596a0d619d43bdd42caa49c05b20d56325b77a383c529",
+          "byteLength": 3325
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-p0-country-overlaps.json",
+        "before": {
+          "sha256": "8bdc2b568be76835f2a34d939b8dab5e78fa0341bd261a7d7df821f5fb92522d",
+          "byteLength": 359
+        },
+        "after": {
+          "sha256": "8bdc2b568be76835f2a34d939b8dab5e78fa0341bd261a7d7df821f5fb92522d",
+          "byteLength": 359
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-p0-repair.json",
+        "before": {
+          "sha256": "a19002c5e8148ff61c03e64a6d5c9651a7cb4e231da75d76e145fd69a2aa0aa3",
+          "byteLength": 2589
+        },
+        "after": {
+          "sha256": "a19002c5e8148ff61c03e64a6d5c9651a7cb4e231da75d76e145fd69a2aa0aa3",
+          "byteLength": 2589
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-revalidation-start.json",
+        "before": {
+          "sha256": "d9e386efcd47b4ab4368bf998548c6461049744cb8d87f28add5b8551a049637",
+          "byteLength": 2958
+        },
+        "after": {
+          "sha256": "d9e386efcd47b4ab4368bf998548c6461049744cb8d87f28add5b8551a049637",
+          "byteLength": 2958
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-shared-boundary-origin.json",
+        "before": {
+          "sha256": "5361b8436f99d9c5ac0cfc1a41a84cd19a47135210bdd959df8a23ec5ef9ed9b",
+          "byteLength": 279961
+        },
+        "after": {
+          "sha256": "5361b8436f99d9c5ac0cfc1a41a84cd19a47135210bdd959df8a23ec5ef9ed9b",
+          "byteLength": 279961
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-shared-topology-start.json",
+        "before": {
+          "sha256": "07206af406cd95aa1abf72a2a41356d310ac864386a7c41a08c64d22683e6297",
+          "byteLength": 719479
+        },
+        "after": {
+          "sha256": "07206af406cd95aa1abf72a2a41356d310ac864386a7c41a08c64d22683e6297",
+          "byteLength": 719479
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-source-research.json",
+        "before": {
+          "sha256": "4614a95afb0372aba0e3e726c0c0c0a85d7c0ef9969bcfbc89ffb53cf5c34786",
+          "byteLength": 2124
+        },
+        "after": {
+          "sha256": "4614a95afb0372aba0e3e726c0c0c0a85d7c0ef9969bcfbc89ffb53cf5c34786",
+          "byteLength": 2124
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-topology-diagnosis.json",
+        "before": {
+          "sha256": "cc5aa9e19ef2ffd2c07e8a81223846cfd26e41886dcff6a225b8412ff1c53903",
+          "byteLength": 7767
+        },
+        "after": {
+          "sha256": "cc5aa9e19ef2ffd2c07e8a81223846cfd26e41886dcff6a225b8412ff1c53903",
+          "byteLength": 7767
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-02-transform-phase-diagnosis.json",
+        "before": {
+          "sha256": "3aca820c3697f003699944e5c194e2f4da75c390d7ce482de3d5b88805ee22bb",
+          "byteLength": 1312
+        },
+        "after": {
+          "sha256": "3aca820c3697f003699944e5c194e2f4da75c390d7ce482de3d5b88805ee22bb",
+          "byteLength": 1312
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "reports/prompt14/14-05-schema-migration-checkpoint.json",
+        "before": {
+          "sha256": "a8d4e7cbbc54d7dec105177cd99f9e93b3fd99b31d4875945a5702f2a5be709c",
+          "byteLength": 53089
+        },
+        "after": {
+          "sha256": "a8d4e7cbbc54d7dec105177cd99f9e93b3fd99b31d4875945a5702f2a5be709c",
+          "byteLength": 53089
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/audit-prompt14-game-inputs.mjs",
+        "before": {
+          "sha256": "ae35458f951bce40344026f9b2f0efdfd0b9129fd885aef1b509b236cd2440e6",
+          "byteLength": 30536
+        },
+        "after": {
+          "sha256": "ae35458f951bce40344026f9b2f0efdfd0b9129fd885aef1b509b236cd2440e6",
+          "byteLength": 30536
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-game-selection.mjs",
+        "before": {
+          "sha256": "3a29ad719de01064221f1d6b15e275a05e0e5c284c93baa5ec274c15655a3f8b",
+          "byteLength": 23826
+        },
+        "after": {
+          "sha256": "3a29ad719de01064221f1d6b15e275a05e0e5c284c93baa5ec274c15655a3f8b",
+          "byteLength": 23826
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-repair.mjs",
+        "before": {
+          "sha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5",
+          "byteLength": 9411
+        },
+        "after": {
+          "sha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5",
+          "byteLength": 9411
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-shared-topology.mjs",
+        "before": {
+          "sha256": "d75e5566943cf878e0542b11de96896e9c37455df1e7d597ff8afc08fc41e192",
+          "byteLength": 22373
+        },
+        "after": {
+          "sha256": "d75e5566943cf878e0542b11de96896e9c37455df1e7d597ff8afc08fc41e192",
+          "byteLength": 22373
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "scripts/prompt14-topology-diagnosis.mjs",
+        "before": {
+          "sha256": "26b2883964036c184880c8ee0169f94378cbb6757c38109eef76d88f7851deca",
+          "byteLength": 2982
+        },
+        "after": {
+          "sha256": "26b2883964036c184880c8ee0169f94378cbb6757c38109eef76d88f7851deca",
+          "byteLength": 2982
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-state-v2.test.ts",
+        "before": {
+          "sha256": "45550c9c2579f867f4e8aefd6e93b3ffb8f1e0d92b2f5c6a3c8587cef437cd9f",
+          "byteLength": 25777
+        },
+        "after": {
+          "sha256": "45550c9c2579f867f4e8aefd6e93b3ffb8f1e0d92b2f5c6a3c8587cef437cd9f",
+          "byteLength": 25777
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/simulation/simulation-state-v2.ts",
+        "before": {
+          "sha256": "e5ffc47ff012930291ec399313c8df7145f2fc75633c94f42b113c30759030a5",
+          "byteLength": 11476
+        },
+        "after": {
+          "sha256": "e5ffc47ff012930291ec399313c8df7145f2fc75633c94f42b113c30759030a5",
+          "byteLength": 11476
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-simulation-schema-checkpoint.test.ts",
+        "before": {
+          "sha256": "2d7d98eebce0443b059b11522c7e4bc85eb32f6df70edcbb694546554c2446fc",
+          "byteLength": 19841
+        },
+        "after": {
+          "sha256": "2d7d98eebce0443b059b11522c7e4bc85eb32f6df70edcbb694546554c2446fc",
+          "byteLength": 19841
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-simulation-schema-checkpoint.ts",
+        "before": {
+          "sha256": "7776177535a51c6d6a47a1635085a0c3a8ca252a042e0c9361660378ec6d4e4a",
+          "byteLength": 5146
+        },
+        "after": {
+          "sha256": "7776177535a51c6d6a47a1635085a0c3a8ca252a042e0c9361660378ec6d4e4a",
+          "byteLength": 5146
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v2-to-v3-migration.test.ts",
+        "before": {
+          "sha256": "6cb5af3d47b42f9001515be1851ac06663658808191be5370411fa09ff6bc8a4",
+          "byteLength": 11749
+        },
+        "after": {
+          "sha256": "6cb5af3d47b42f9001515be1851ac06663658808191be5370411fa09ff6bc8a4",
+          "byteLength": 11749
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v2-to-v3-migration.ts",
+        "before": {
+          "sha256": "36b0fe0166d10ca9ecd2055210984516f7fb67869ed81b9cc1c8e81f5807f97f",
+          "byteLength": 6500
+        },
+        "after": {
+          "sha256": "36b0fe0166d10ca9ecd2055210984516f7fb67869ed81b9cc1c8e81f5807f97f",
+          "byteLength": 6500
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v3-migration.md",
+        "before": {
+          "sha256": "de7b836e8102c75aa04acbfdf5da7d6ac9dede5abaa550a224b8500fd0cda7c4",
+          "byteLength": 4886
+        },
+        "after": {
+          "sha256": "de7b836e8102c75aa04acbfdf5da7d6ac9dede5abaa550a224b8500fd0cda7c4",
+          "byteLength": 4886
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/test-only/world-v3-synthetic-fixture.ts",
+        "before": {
+          "sha256": "54c0c4db4620374d8c6e57dc0ac26a602a6760665da1160044bdb590371cdd4a",
+          "byteLength": 4055
+        },
+        "after": {
+          "sha256": "54c0c4db4620374d8c6e57dc0ac26a602a6760665da1160044bdb590371cdd4a",
+          "byteLength": 4055
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/world/country-entity-v3.ts",
+        "before": {
+          "sha256": "73047e4d198b3eb7e9121aa67781036b55d3798afffa0ca3c21c2ecf68c4ef77",
+          "byteLength": 969
+        },
+        "after": {
+          "sha256": "73047e4d198b3eb7e9121aa67781036b55d3798afffa0ca3c21c2ecf68c4ef77",
+          "byteLength": 969
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/world/territory-entity-v3.ts",
+        "before": {
+          "sha256": "987ced6b187c9d1d6b92bd4b031eb95130c07973b55f715f5f8822d89d1ea6e9",
+          "byteLength": 1375
+        },
+        "after": {
+          "sha256": "987ced6b187c9d1d6b92bd4b031eb95130c07973b55f715f5f8822d89d1ea6e9",
+          "byteLength": 1375
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-geometry-catalog-ref.ts",
+        "before": {
+          "sha256": "ccd55311ec1719840d73ecdfd57e34325b46cc066e46ecf53980295251a0b150",
+          "byteLength": 3904
+        },
+        "after": {
+          "sha256": "ccd55311ec1719840d73ecdfd57e34325b46cc066e46ecf53980295251a0b150",
+          "byteLength": 3904
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-state-v3.test.ts",
+        "before": {
+          "sha256": "66cc089f3c0455e536828c6749fabfae39f0b78a8a3d62150b1203a831549775",
+          "byteLength": 13133
+        },
+        "after": {
+          "sha256": "66cc089f3c0455e536828c6749fabfae39f0b78a8a3d62150b1203a831549775",
+          "byteLength": 13133
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-state-v3.ts",
+        "before": {
+          "sha256": "33b5135acebb3156f59e6475c674b590f933cbaabe0232a3afc5cd2db98e1b67",
+          "byteLength": 6385
+        },
+        "after": {
+          "sha256": "33b5135acebb3156f59e6475c674b590f933cbaabe0232a3afc5cd2db98e1b67",
+          "byteLength": 6385
+        },
+        "preserved": true
+      },
+      {
+        "repositoryPath": "src/lib/world/world-v3-validation.ts",
+        "before": {
+          "sha256": "bc19a6e435b75bb68b22b0f38af2b2e72217c26450f57043d68b3e42ccf157a9",
+          "byteLength": 4410
+        },
+        "after": {
+          "sha256": "bc19a6e435b75bb68b22b0f38af2b2e72217c26450f57043d68b3e42ccf157a9",
+          "byteLength": 4410
+        },
+        "preserved": true
+      }
+    ]
+  },
+  "changes": {
+    "addedFiles": [
+      {
+        "repositoryPath": ".github/workflows/prompt14-catalog.yml",
+        "change": "added",
+        "sha256": "c1fad4c98d7910ce7f41d744b3744f690db30fd5a00fff4ebfe978ee02a678a3",
+        "byteLength": 970
+      },
+      {
+        "repositoryPath": "scripts/prompt14-catalog-core.mjs",
+        "change": "added",
+        "sha256": "899c240f663bc54679547929984acae5584d180d1c1b40b0d4fde52e18214543",
+        "byteLength": 12120
+      },
+      {
+        "repositoryPath": "scripts/prompt14-catalog-core.node-test.mjs",
+        "change": "added",
+        "sha256": "fd37580c17066742f7f2b179af06b5f8ca00c2b1c7fc42c69ac317d0446301f2",
+        "byteLength": 2483
+      },
+      {
+        "repositoryPath": "scripts/generate-prompt14-atoms.mjs",
+        "change": "added",
+        "sha256": "ba7781aec7fec1bbc66bb7ec0c409f63ae71b39c0c9df5af96595d2f4b1f1906",
+        "byteLength": 1191
+      },
+      {
+        "repositoryPath": "scripts/prompt14-catalog-topology.mjs",
+        "change": "added",
+        "sha256": "e17f16ef474d807518ec2009cdc3fb69e2384733761d07c47230107140d44c27",
+        "byteLength": 8865
+      },
+      {
+        "repositoryPath": "scripts/prompt14-catalog-topology.node-test.mjs",
+        "change": "added",
+        "sha256": "def67ebad73b6b8d4b3ac33646a1d095c56959b0e84b957e33a6f4130ef612d3",
+        "byteLength": 4808
+      },
+      {
+        "repositoryPath": "scripts/prompt14-catalog-artifacts.mjs",
+        "change": "added",
+        "sha256": "bec8ee55283f8d43dee526d3eb468b1b1b0e7dcfd79000939aa7b625fd6bfa88",
+        "byteLength": 11044
+      },
+      {
+        "repositoryPath": "scripts/generate-prompt14-catalog.mjs",
+        "change": "added",
+        "sha256": "46013c64c71406d3b9758daeed67c93e4f8980e49287408724df307ce62c2ef2",
+        "byteLength": 1872
+      },
+      {
+        "repositoryPath": "scripts/prompt14-catalog-source-witness.mjs",
+        "change": "added",
+        "sha256": "f7c0871ec62a808b7ab8df04fb52402e4bf48ac2756f75d8f7627ce9bd97ec7d",
+        "byteLength": 1979
+      },
+      {
+        "repositoryPath": "scripts/diagnose-prompt14-catalog-source.mjs",
+        "change": "added",
+        "sha256": "f5624d7a7587f4bdd6a89963a8d6041614a3d22401db8ebdb7ed1d35376e5c77",
+        "byteLength": 510
+      },
+      {
+        "repositoryPath": "scripts/diagnose-prompt14-catalog-topology.mjs",
+        "change": "added",
+        "sha256": "3a98e6fbf3592d5ea9e17745396bf38e375f722538bf677f6fd9dacf8bbf5142",
+        "byteLength": 560
+      },
+      {
+        "repositoryPath": "scripts/write-prompt14-catalog-checkpoint.mjs",
+        "change": "added",
+        "sha256": "d2caa95e72067a22d4a218e8d0bd637890f8149186d5d8e546c18db9b9147a25",
+        "byteLength": 9685
+      }
+    ],
+    "checkpoint": "reports/prompt14/14-08-immutable-catalog-checkpoint.json",
+    "modifiedPreExistingFiles": [],
+    "productionCutover": false
+  },
+  "sourceLock": {
+    "path": "data/source-locks/prompt14-derived-game-input-lock.json",
+    "sha256": "886e605de488fb853456d341d49d552dbae04389c6b1c94552b8a841f0a07ab4",
+    "validation": {
+      "pass": true,
+      "errors": []
+    },
+    "verifiedFileCount": 20,
+    "sourceVersion": "f1890d9f152c896d250a77557a5751a93d494776",
+    "license": "Natural Earth public domain",
+    "attribution": "Natural Earth Cultural Vectors; derived by scripts/prepare-map-data.mjs (replay evidence in 14-2 report); bounded shared-source topology by scripts/prompt14-shared-topology.mjs",
+    "prerequisiteReports": [
+      "reports/prompt14/14-02-source-generation-delivery-decision.json",
+      "reports/prompt14/14-05-schema-migration-checkpoint.json"
+    ]
+  },
+  "checks": [
+    {
+      "command": "node scripts/generate-prompt14-atoms.mjs .tmp/prompt14-catalog/atoms-final-first",
+      "exitCode": 0,
+      "result": "4231 atoms / 8156 components / 1272489 vertices; full 247-country validity and approved area coverage pass"
+    },
+    {
+      "command": "node scripts/generate-prompt14-atoms.mjs .tmp/prompt14-catalog/atoms-final-second",
+      "exitCode": 0,
+      "result": "Independent normalized artifact bytes match"
+    },
+    {
+      "command": "node --test scripts/prompt14-catalog-core.node-test.mjs scripts/prompt14-catalog-topology.node-test.mjs",
+      "exitCode": 0,
+      "result": "12 tests pass; includes two complete fixture tile builds z0..6"
+    },
+    {
+      "command": "node --max-old-space-size=8192 scripts/generate-prompt14-catalog.mjs .tmp/prompt14-catalog/catalog-first",
+      "exitCode": 1,
+      "result": "Expected source boundary hard gate failure; no production artifacts emitted"
+    },
+    {
+      "command": "node --max-old-space-size=8192 scripts/generate-prompt14-catalog.mjs .tmp/prompt14-catalog/catalog-second",
+      "exitCode": 1,
+      "result": "Same source boundary failure independently reproduced byte-identically"
+    },
+    {
+      "command": "node scripts/diagnose-prompt14-catalog-source.mjs",
+      "exitCode": 0,
+      "result": "Independent JSTS point-to-boundary check confirms witness in original locked source bytes"
+    },
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "result": "Typecheck passes"
+    },
+    {
+      "command": "npx.cmd eslint scripts/prompt14-catalog-*.mjs scripts/generate-prompt14-atoms.mjs scripts/generate-prompt14-catalog.mjs scripts/diagnose-prompt14-catalog-*.mjs scripts/write-prompt14-catalog-checkpoint.mjs",
+      "exitCode": 0,
+      "result": "New generator/test/diagnostic scripts lint clean"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "result": "Whitespace checks pass"
+    },
+    {
+      "command": "node scripts/write-prompt14-catalog-checkpoint.mjs",
+      "exitCode": 0,
+      "result": "Byte comparisons, all 20 source-lock connections and all pre-existing dirty file hashes verified"
+    }
+  ],
+  "limitations": [
+    "Existing area-equality tolerance can admit a narrow gap without providing a complete boundary pairing certificate.",
+    "No production geometry/topology/render root or version was fabricated or frozen.",
+    "Actual migration and map smoke cannot be substituted by fixture success.",
+    "No browser/runtime schema cutover or public catalog publication occurred."
+  ],
+  "next": {
+    "task": "14-2",
+    "action": "Revisit the shared P0/P1 alignment/selection policy with the recorded source witness. Generate a coherent full boundary arrangement, preserve all source identities/components/holes or explicitly document eligible whole-country fallback, and revalidate/relock source inputs. Add complete boundary continuity certification beside area totals. Then rerun 14-6 through 14-8 and obtain REVIEW C before 14-9.",
+    "prohibitedShortcuts": [
+      "increase the coverage/contact tolerance to hide the mismatch",
+      "snap or round locked geometry in 14-6/14-7",
+      "label unmatched interior lines as coast",
+      "drop source components or merge source identities to fit caps",
+      "publish an invalid catalog or perform a production migration"
+    ],
+    "resumeRequires": "Revalidated source decision and matching locked bytes; successful full production boundary gate."
+  }
+}

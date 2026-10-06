@@ -1,0 +1,68 @@
+ M .github/workflows/prompt14-catalog.yml
+ M src/app/api/world/catalog/route.ts
+ M src/app/game/page.tsx
+ M src/app/page.tsx
+ M src/components/game/GameActionOverlay.tsx
+ M src/components/layout/WorldAppPage.tsx
+ M src/lib/game-ui/country-management-projection.ts
+ M src/lib/game-ui/country-view-projection.ts
+ M src/lib/game-ui/game-hud-projection.ts
+ M src/lib/game-ui/news-projection.ts
+ M src/lib/map/catalog-consumer.test.ts
+ M src/lib/map/catalog-map-consumer.ts
+ M src/lib/map/catalog-vector-delivery.ts
+ M src/lib/map/map-source-incremental-adapter.ts
+ M src/lib/projection/catalog-map-consumer-projection.ts
+ M src/lib/simulation/client/turn-report.ts
+ M src/lib/simulation/client/turn-request.ts
+ M src/lib/simulation/debug-world-effect.ts
+ M src/lib/simulation/semantic-validator.ts
+ M src/lib/simulation/server/context-resolution-validator.ts
+ M src/lib/simulation/server/provider-config.ts
+ M src/lib/simulation/server/simulation-instruction.ts
+ M src/lib/simulation/simulation-context.ts
+ M src/lib/simulation/simulation-event.ts
+ M src/lib/simulation/turn-resolution.ts
+ M src/lib/simulation/world-effect-compiler.ts
+ M src/lib/simulation/world-effect.ts
+ M src/lib/world/world-state-v3.ts
+?? reports/prompt14/14-10-production-atomic-cutover.json
+?? reports/prompt14/14-10-runtime-smoke/
+?? reports/prompt14/14-14-occupation-checkpoint.json
+?? reports/prompt14/14-14-runtime-smoke/
+?? reports/prompt14/14-17-country-color-checkpoint.json
+?? reports/prompt14/14-17-country-color/
+?? scripts/report-prompt14-country-colors.mjs
+?? scripts/run-prompt14-occupation-smoke.mjs
+?? scripts/run-prompt14-production-cutover-smoke.mjs
+?? scripts/smoke-prompt14-country-colors.mjs
+?? scripts/smoke-prompt14-occupation.mjs
+?? scripts/smoke-prompt14-production-cutover.mjs
+?? scripts/write-prompt14-occupation-checkpoint.mjs
+?? src/components/game/CatalogGameScreen.tsx
+?? src/components/layout/CatalogGameSetupShell.tsx
+?? src/components/map/CatalogWorldMap.tsx
+?? src/lib/commands/country-change-map-color.test.ts
+?? src/lib/commands/country-change-map-color.ts
+?? src/lib/commands/territorial-control-v3.ts
+?? src/lib/game-ui/catalog-map-ui-settings-adapter.test.ts
+?? src/lib/game-ui/catalog-map-ui-settings-adapter.ts
+?? src/lib/game-ui/runtime-view.ts
+?? src/lib/planning/country-map-color-planner.ts
+?? src/lib/planning/territorial-control-planner.test.ts
+?? src/lib/planning/territorial-control-planner.ts
+?? src/lib/projection/catalog-color-projection.ts
+?? src/lib/simulation/catalog-authority-lifecycle.ts
+?? src/lib/simulation/catalog-occupation-browser-contract.test.ts
+?? src/lib/simulation/catalog-occupation-lifecycle.test.ts
+?? src/lib/simulation/catalog-runtime.test.ts
+?? src/lib/simulation/catalog-runtime.ts
+?? src/lib/simulation/catalog-turn-plan.ts
+?? src/lib/simulation/client/use-catalog-simulation-turn-controller.ts
+?? src/lib/simulation/consequence-causality.ts
+?? src/lib/simulation/country-color-authority.ts
+?? src/lib/simulation/country-color-runtime.test.ts
+?? src/lib/world/country-map-color.test.ts
+?? src/lib/world/country-map-color.ts
+?? src/lib/world/production-catalog-seed.server.ts
+?? src/lib/world/world-v3-runtime-hash.ts

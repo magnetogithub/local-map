@@ -1,0 +1,584 @@
+{
+  "source": {
+    "repositoryPath": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+    "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+    "byteLength": 40726852
+  },
+  "derived": {
+    "repositoryPath": "data/derived/prompt14/ne_10m_admin_1_states_provinces.geojson",
+    "sha256": "dc5df66aa1e2041c992b1c7a660923a27bb84fd54ebf300f61be71e1eba3c98f",
+    "byteLength": 40725815
+  },
+  "policy": {
+    "version": "prompt14-lossless-ring-normalization-v1",
+    "generatorVersion": "prompt14-derived-input-v1",
+    "operations": [
+      "remove exact consecutive duplicate positions",
+      "reverse ring winding to source-specific policy"
+    ],
+    "coordinatePrecision": "preserve every original IEEE-754 coordinate; no rounding or quantization",
+    "areaAbsoluteToleranceDegreesSquared": 1e-9,
+    "areaRelativeTolerance": 1e-12,
+    "boundaryDisplacementTolerance": 0,
+    "coverageRule": "same ordered features, properties, geometry types, components, holes and undirected nonzero segment multiset per ring",
+    "forbidden": [
+      "union",
+      "buffer",
+      "make-valid",
+      "snap",
+      "simplify",
+      "delete feature/component/hole",
+      "fill gaps",
+      "split countries",
+      "move coordinates"
+    ],
+    "failureConditions": [
+      "source digest mismatch",
+      "non-determinism",
+      "feature/identity/type/ring/segment changes",
+      "area tolerance exceeded",
+      "remaining validator errors"
+    ],
+    "topologyPolicy": "Any remaining defect requires independently justified, versioned topology repair or replacement source; blocked, never silently repaired."
+  },
+  "generator": {
+    "repositoryPath": "scripts/prompt14-repair.mjs",
+    "sha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5"
+  },
+  "status": "blocked",
+  "before": {
+    "pass": false,
+    "counts": {
+      "features": 4596,
+      "polygons": 8535,
+      "rings": 8646,
+      "vertices": 1295319,
+      "polygon": 3945,
+      "multiPolygon": 651
+    },
+    "errors": [
+      "source.features[2].polygon[0].ring[0][1]: consecutive duplicate coordinate",
+      "source.features[3].polygon[0].ring[0][1]: consecutive duplicate coordinate",
+      "source.features[431].polygon[0].ring[0][79]: consecutive duplicate coordinate",
+      "source.features[1039].polygon[0].ring[0][317]: consecutive duplicate coordinate",
+      "source.features[1041].polygon[0].ring[0][16]: consecutive duplicate coordinate",
+      "source.features[1134].polygon[0].ring[0][287]: consecutive duplicate coordinate",
+      "source.features[1136].polygon[0].ring[0][17]: consecutive duplicate coordinate",
+      "source.features[1257].polygon[0].ring[0][1308]: consecutive duplicate coordinate",
+      "source.features[1684].polygon[0].ring[0][66]: consecutive duplicate coordinate",
+      "source.features[1692].polygon[0].ring[0][128]: consecutive duplicate coordinate",
+      "source.features[1692].polygon[0].ring[0][138]: consecutive duplicate coordinate",
+      "source.features[1694].polygon[0].ring[0][175]: consecutive duplicate coordinate",
+      "source.features[1740].polygon[0].ring[0][26]: consecutive duplicate coordinate",
+      "source.features[1741].polygon[0].ring[0][32]: consecutive duplicate coordinate",
+      "source.features[1741].polygon[0].ring[0][153]: consecutive duplicate coordinate",
+      "source.features[1742].polygon[0].ring[0][136]: consecutive duplicate coordinate",
+      "source.features[1809].polygon[0].ring[0][154]: consecutive duplicate coordinate",
+      "source.features[1810].polygon[0].ring[0][254]: consecutive duplicate coordinate",
+      "source.features[1810].polygon[0].ring[0][459]: consecutive duplicate coordinate",
+      "source.features[1813].polygon[0].ring[0][350]: consecutive duplicate coordinate",
+      "source.features[1824].polygon[0].ring[0][197]: consecutive duplicate coordinate",
+      "source.features[1825].polygon[0].ring[0][74]: consecutive duplicate coordinate",
+      "source.features[1825].polygon[0].ring[0][294]: consecutive duplicate coordinate",
+      "source.features[1826].polygon[0].ring[0][373]: consecutive duplicate coordinate",
+      "source.features[1827].polygon[0].ring[0][108]: consecutive duplicate coordinate",
+      "source.features[1828].polygon[0].ring[0][394]: consecutive duplicate coordinate",
+      "source.features[1887].polygon[0].ring[0][31]: consecutive duplicate coordinate",
+      "source.features[1888].polygon[0].ring[0][527]: consecutive duplicate coordinate",
+      "source.features[1904].polygon[0].ring[0][11]: consecutive duplicate coordinate",
+      "source.features[1905].polygon[0].ring[0][141]: consecutive duplicate coordinate",
+      "source.features[2082].polygon[0].ring[0][20]: consecutive duplicate coordinate",
+      "source.features[2083].polygon[0].ring[0][770]: consecutive duplicate coordinate",
+      "source.features[2164].polygon[0].ring[0][121]: consecutive duplicate coordinate",
+      "source.features[2165].polygon[0].ring[0][205]: consecutive duplicate coordinate",
+      "source.features[2171].polygon[0].ring[0][652]: consecutive duplicate coordinate",
+      "source.features[2207].polygon[0].ring[0][42]: consecutive duplicate coordinate",
+      "source.features[2208].polygon[0].ring[0][6]: consecutive duplicate coordinate",
+      "source.features[2408].polygon[0].ring[0][179]: consecutive duplicate coordinate",
+      "source.features[2409].polygon[0].ring[0][531]: consecutive duplicate coordinate",
+      "source.features[2475].polygon[0].ring[0][41]: consecutive duplicate coordinate",
+      "source.features[2476].polygon[0].ring[0][122]: consecutive duplicate coordinate",
+      "source.features[2482].polygon[0].ring[0][11]: consecutive duplicate coordinate",
+      "source.features[2483].polygon[0].ring[0][152]: consecutive duplicate coordinate",
+      "source.features[2494].polygon[0].ring[0][122]: consecutive duplicate coordinate",
+      "source.features[2494].polygon[0].ring[0][217]: consecutive duplicate coordinate",
+      "source.features[2495].polygon[0].ring[0][249]: consecutive duplicate coordinate",
+      "source.features[2508].polygon[0].ring[0][9]: consecutive duplicate coordinate",
+      "source.features[2510].polygon[1].ring[0][42]: consecutive duplicate coordinate",
+      "source.features[2512].polygon[0].ring[0][219]: consecutive duplicate coordinate",
+      "source.features[2515].polygon[0].ring[0][24]: consecutive duplicate coordinate",
+      "source.features[3813]: JSTS OGC invalid: Ring Self-intersection at {\"x\":-47.302482,\"y\":-16.040054,\"z\":null}"
+    ],
+    "diagnostics": [
+      {
+        "featureIndex": 2,
+        "sourceFeatureId": "1159310009",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2].polygon[0].ring[0][1]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 3,
+        "sourceFeatureId": "1159310033",
+        "countryId": "MYS",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[3].polygon[0].ring[0][1]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 431,
+        "sourceFeatureId": "1159316855",
+        "countryId": "FRA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[431].polygon[0].ring[0][79]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1039,
+        "sourceFeatureId": "1159317145",
+        "countryId": "THA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1039].polygon[0].ring[0][317]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1041,
+        "sourceFeatureId": "1159308257",
+        "countryId": "THA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1041].polygon[0].ring[0][16]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1134,
+        "sourceFeatureId": "1159310373",
+        "countryId": "TCD",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1134].polygon[0].ring[0][287]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1136,
+        "sourceFeatureId": "1159317319",
+        "countryId": "TCD",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1136].polygon[0].ring[0][17]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1257,
+        "sourceFeatureId": "1159308415",
+        "countryId": "USA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1257].polygon[0].ring[0][1308]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1684,
+        "sourceFeatureId": "1159310563",
+        "countryId": "PRT",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1684].polygon[0].ring[0][66]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1692,
+        "sourceFeatureId": "1159310575",
+        "countryId": "PRT",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1692].polygon[0].ring[0][128]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1692,
+        "sourceFeatureId": "1159310575",
+        "countryId": "PRT",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1692].polygon[0].ring[0][138]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1694,
+        "sourceFeatureId": "1159317817",
+        "countryId": "ESP",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1694].polygon[0].ring[0][175]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1740,
+        "sourceFeatureId": "1159307763",
+        "countryId": "URY",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1740].polygon[0].ring[0][26]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1741,
+        "sourceFeatureId": "1159307727",
+        "countryId": "URY",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1741].polygon[0].ring[0][32]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1741,
+        "sourceFeatureId": "1159307727",
+        "countryId": "URY",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1741].polygon[0].ring[0][153]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1742,
+        "sourceFeatureId": "1159307725",
+        "countryId": "URY",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1742].polygon[0].ring[0][136]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1809,
+        "sourceFeatureId": "1159314969",
+        "countryId": "PER",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1809].polygon[0].ring[0][154]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1810,
+        "sourceFeatureId": "1159307971",
+        "countryId": "PER",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1810].polygon[0].ring[0][254]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1810,
+        "sourceFeatureId": "1159307971",
+        "countryId": "PER",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1810].polygon[0].ring[0][459]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1813,
+        "sourceFeatureId": "1159309957",
+        "countryId": "PER",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1813].polygon[0].ring[0][350]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1824,
+        "sourceFeatureId": "1159309885",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1824].polygon[0].ring[0][197]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1825,
+        "sourceFeatureId": "1159309889",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1825].polygon[0].ring[0][74]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1825,
+        "sourceFeatureId": "1159309889",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1825].polygon[0].ring[0][294]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1826,
+        "sourceFeatureId": "1159307903",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1826].polygon[0].ring[0][373]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1827,
+        "sourceFeatureId": "1159308865",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1827].polygon[0].ring[0][108]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1828,
+        "sourceFeatureId": "1159308869",
+        "countryId": "IDN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1828].polygon[0].ring[0][394]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1887,
+        "sourceFeatureId": "1159310157",
+        "countryId": "COL",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1887].polygon[0].ring[0][31]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1888,
+        "sourceFeatureId": "1159308025",
+        "countryId": "COL",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1888].polygon[0].ring[0][527]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1904,
+        "sourceFeatureId": "1159308893",
+        "countryId": "GUY",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1904].polygon[0].ring[0][11]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 1905,
+        "sourceFeatureId": "1159308897",
+        "countryId": "GUY",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[1905].polygon[0].ring[0][141]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2082,
+        "sourceFeatureId": "1159315327",
+        "countryId": "USA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2082].polygon[0].ring[0][20]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2083,
+        "sourceFeatureId": "1159315329",
+        "countryId": "USA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2083].polygon[0].ring[0][770]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2164,
+        "sourceFeatureId": "1159312187",
+        "countryId": "JPN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2164].polygon[0].ring[0][121]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2165,
+        "sourceFeatureId": "1159312177",
+        "countryId": "JPN",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2165].polygon[0].ring[0][205]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2171,
+        "sourceFeatureId": "1159309549",
+        "countryId": "USA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2171].polygon[0].ring[0][652]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2207,
+        "sourceFeatureId": "1159308389",
+        "countryId": "VNM",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2207].polygon[0].ring[0][42]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2208,
+        "sourceFeatureId": "1159308397",
+        "countryId": "VNM",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2208].polygon[0].ring[0][6]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2408,
+        "sourceFeatureId": "1159309669",
+        "countryId": "NOR",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2408].polygon[0].ring[0][179]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2409,
+        "sourceFeatureId": "1159309655",
+        "countryId": "NOR",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2409].polygon[0].ring[0][531]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2475,
+        "sourceFeatureId": "1159317061",
+        "countryId": "ITA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2475].polygon[0].ring[0][41]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2476,
+        "sourceFeatureId": "1159317065",
+        "countryId": "ITA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2476].polygon[0].ring[0][122]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2482,
+        "sourceFeatureId": "1159309403",
+        "countryId": "ITA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2482].polygon[0].ring[0][11]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2483,
+        "sourceFeatureId": "1159317019",
+        "countryId": "ITA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2483].polygon[0].ring[0][152]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2494,
+        "sourceFeatureId": "1159313541",
+        "countryId": "FRA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2494].polygon[0].ring[0][122]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2494,
+        "sourceFeatureId": "1159313541",
+        "countryId": "FRA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2494].polygon[0].ring[0][217]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2495,
+        "sourceFeatureId": "1159316845",
+        "countryId": "FRA",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2495].polygon[0].ring[0][249]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2508,
+        "sourceFeatureId": "1159317815",
+        "countryId": "ESP",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2508].polygon[0].ring[0][9]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2510,
+        "sourceFeatureId": "1159310551",
+        "countryId": "PRT",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2510].polygon[1].ring[0][42]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2512,
+        "sourceFeatureId": "1159310561",
+        "countryId": "PRT",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2512].polygon[0].ring[0][219]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 2515,
+        "sourceFeatureId": "1159310587",
+        "countryId": "PRT",
+        "category": "normalization-rule",
+        "topologyWitness": null,
+        "message": "source.features[2515].polygon[0].ring[0][24]: consecutive duplicate coordinate"
+      },
+      {
+        "featureIndex": 3813,
+        "sourceFeatureId": "1159309897",
+        "countryId": "BRA",
+        "category": "geometry-defect-non-simple-ring",
+        "topologyWitness": {
+          "confirmedNonSimpleRing": true,
+          "cause": "non-adjacent repeated vertex / ring self-touch",
+          "polygonIndex": 0,
+          "ringIndex": 0,
+          "vertexIndices": [
+            263,
+            348
+          ],
+          "coordinate": [
+            -47.302482,
+            -16.040054
+          ],
+          "repair": "topology alteration requires external justification; blocked"
+        },
+        "message": "source.features[3813]: JSTS OGC invalid: Ring Self-intersection at {\"x\":-47.302482,\"y\":-16.040054,\"z\":null}"
+      }
+    ]
+  },
+  "after": {
+    "pass": false,
+    "invariantsPass": true,
+    "errors": [],
+    "maximumAreaDeltaDegreesSquared": 0,
+    "boundaryDisplacement": 0,
+    "coveragePreserved": true,
+    "validation": {
+      "pass": false,
+      "counts": {
+        "features": 4596,
+        "polygons": 8535,
+        "rings": 8646,
+        "vertices": 1295269,
+        "polygon": 3945,
+        "multiPolygon": 651
+      },
+      "errors": [
+        "derived.features[3813]: JSTS OGC invalid: Ring Self-intersection at {\"x\":-47.302482,\"y\":-16.040054,\"z\":null}"
+      ]
+    },
+    "diagnostics": [
+      {
+        "featureIndex": 3813,
+        "sourceFeatureId": "1159309897",
+        "countryId": "BRA",
+        "category": "geometry-defect-non-simple-ring",
+        "topologyWitness": {
+          "confirmedNonSimpleRing": true,
+          "cause": "non-adjacent repeated vertex / ring self-touch",
+          "polygonIndex": 0,
+          "ringIndex": 0,
+          "vertexIndices": [
+            263,
+            348
+          ],
+          "coordinate": [
+            -47.302482,
+            -16.040054
+          ],
+          "repair": "topology alteration requires external justification; blocked"
+        },
+        "message": "derived.features[3813]: JSTS OGC invalid: Ring Self-intersection at {\"x\":-47.302482,\"y\":-16.040054,\"z\":null}"
+      }
+    ]
+  },
+  "role": "candidate P1; unsafe countries explicitly excluded in selection"
+}

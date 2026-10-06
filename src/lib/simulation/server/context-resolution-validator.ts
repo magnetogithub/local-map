@@ -1,5 +1,13 @@
+import {resolveCatalogRegionEffects,type CatalogRegionIndex} from '../catalog-region';
+import {assertWorldGeometryCatalogRefMatches} from '../../world/world-geometry-catalog-ref';
 import type {SimulationContextV1} from "../simulation-context";
 import {parseTurnResolutionV1, type TurnResolutionV1} from "../turn-resolution";
+import {isAuthorityActiveAt} from '../simulation-state-v2';
+import {allowsDevelopmentWorldEffect} from '../debug-world-effect';
+import {presentationEvidenceFromContext, validatePresentationGrant} from '../presentation-grant-validation';
+import {resolveCountryColorIntents} from '../country-color-intent';
+import {isConsequenceAvailableAt} from '../consequence-causality';
+import type {ScheduledConsequenceV1} from '../narrative-state';
 
 export type ContextValidationResult = Readonly<{
   ok: boolean;
@@ -8,6 +16,7 @@ export type ContextValidationResult = Readonly<{
 }>;
 
 export type ContextValidationOptions = Readonly<{
+  regionIndex?: CatalogRegionIndex;
   debugWorldEffectActionIds?: ReadonlySet<string>;
 }>;
 
@@ -23,7 +32,8 @@ export function validateResolutionAgainstContext(
 ): ContextValidationResult {
   let resolution: TurnResolutionV1;
   try {
-    resolution = parseTurnResolutionV1(raw);
+    if(context.regionCatalog&&options.regionIndex?.catalogRef)assertWorldGeometryCatalogRefMatches(context.regionCatalog,options.regionIndex.catalogRef);
+    resolution = resolveCountryColorIntents(resolveCatalogRegionEffects(parseTurnResolutionV1(raw),options.regionIndex), context.countryMapColors, context.countryDirectory.map(c=>c.countryId));
   } catch (error) {
     return Object.freeze({
       ok: false,
@@ -89,6 +99,7 @@ export function validateResolutionAgainstContext(
     if (!countryIds.has(id)) add("DANGLING_REFERENCE", path, `Unknown country ${id}`);
   });
   resolution.events.forEach((event, index) => {
+    if(event.authorityLifecycle||event.referenceLifecycle)add('INVALID_WORLD_EFFECT',`events[${index}]`,'Host-owned lifecycle events cannot be supplied');
     if (!(context.period.startDate < event.date && event.date <= context.period.endDate)) add("INVALID_EVENT_ORDER", `events[${index}].date`, "Event is outside the turn period");
     if (index > 0 && resolution.events[index - 1].date > event.date) add("INVALID_EVENT_ORDER", `events[${index}]`, "Events are not chronological");
     validateCountries(event.actorCountryIds, `events[${index}].actorCountryIds`);
@@ -104,7 +115,7 @@ export function validateResolutionAgainstContext(
       if (cause.kind === "scheduled-consequence") {
         const consequence = consequences.get(cause.id);
         if (!consequence) add("DANGLING_REFERENCE", `events[${index}].causes`, `Unknown consequence ${cause.id}`);
-        else if (typeof field(consequence, "earliestDate") === "string" && (field(consequence, "earliestDate") as string) > context.period.endDate) add("INVALID_CAUSALITY", `events[${index}].causes`, `Consequence ${cause.id} is not due`);
+        else if (!isConsequenceAvailableAt(consequence as ScheduledConsequenceV1,event.date)) add("INVALID_CAUSALITY", `events[${index}].causes`, `Consequence ${cause.id} is unavailable on the event date`);
       }
       if (cause.kind === "resolution-event") {
         const sourceIndex = eventIndex.get(cause.id);
@@ -162,6 +173,51 @@ export function validateResolutionAgainstContext(
       return;
     }
     switch (effect.type) {
+      case 'territorialAuthority.granted': {
+        const a=effect.authority;validateCountries([a.actorCountryId,...a.targetCountryId?[a.targetCountryId]:[]],path);
+        const participants=[a.actorCountryId,...a.targetCountryId?[a.targetCountryId]:[]];
+        const grounded=event.causes.some(c=>{const prior=c.kind==='authoritative-event'?recentEvents.get(c.id):c.kind==='scheduled-consequence'?consequences.get(c.id):null;return prior&&!field(prior,'authorityLifecycle')&&!field(prior,'referenceLifecycle')&&(c.kind==='scheduled-consequence'||['military','territorial','treaty'].includes(String(field(prior,'outcomeCategory'))))&&participants.every(id=>(field(prior,'actorCountryIds') as string[]).includes(id));})
+          ||context.facts.some(f=>field(f,'status')==='active'&&['scenario','conflict-or-war','treaty-or-negotiation','military-or-occupation'].includes(String(field(f,'kind')))&&[a.actorCountryId,...a.targetCountryId?[a.targetCountryId]:[]].every(id=>(field(f,'actorCountryIds') as string[]).includes(id)));
+        if(!grounded||a.sourceEventId!==event.eventId||a.validFrom<event.date||!event.actorCountryIds.includes(a.actorCountryId)||!['military','territorial','treaty'].includes(event.outcomeCategory))add('INVALID_WORLD_EFFECT',path,'INVALID_AUTHORITY_GRANT');
+        if(context.territorialControlAuthorities?.some(v=>v.id===a.id)||resolution.worldEffects.slice(0,index).some(e=>e.type==='territorialAuthority.granted'&&e.authority.id===a.id))add('INVALID_WORLD_EFFECT',path,'DUPLICATE_AUTHORITY_ID');
+        for(const id of a.allowedTerritoryIds)if(!territoryOwners.has(id)&&!options.regionIndex?.hasTerritory(id))add('DANGLING_REFERENCE',path,'Grant territory is absent from the supplied bounded directory');
+        break;
+      }
+      case 'territory.occupy':case 'territory.liberate':case 'territory.transferOwnership': {
+        validateCountries([effect.actorCountryId,...effect.targetCountryId?[effect.targetCountryId]:[],...effect.type==='territory.transferOwnership'?[effect.newOwnerCountryId]:[]],path);
+        const a=context.territorialControlAuthorities?.find(a=>a.id===effect.authorityId)??resolution.worldEffects.slice(0,index).filter(e=>e.type==='territorialAuthority.granted').find(e=>e.authority.id===effect.authorityId)?.authority;
+        const operation=effect.type==='territory.transferOwnership'?'transfer':effect.type.slice('territory.'.length);
+        if(a?(a.actorCountryId!==effect.actorCountryId||a.targetCountryId!==effect.targetCountryId||!a.allowedOperations.includes(operation as never)||!isAuthorityActiveAt(a,event.date)||effect.territoryIds.some(id=>!a.allowedTerritoryIds.includes(id as never))):!allowsDevelopmentWorldEffect(hasDebugWorldEffectCause(event.eventId)))add('INVALID_WORLD_EFFECT',path,'TERRITORIAL_AUTHORITY_REQUIRED');
+        for(const id of effect.territoryIds)if(!territoryOwners.has(id)&&!options.regionIndex?.hasTerritory(id))add('DANGLING_REFERENCE',path,'Territory is absent from the validated directory/catalog');
+        if(!event.actorCountryIds.includes(effect.actorCountryId)||!['military','territorial','treaty'].includes(event.outcomeCategory))add('INVALID_WORLD_EFFECT',path,'INVALID_TERRITORIAL_CAUSE');
+        break;
+      }
+      case 'countries.merged': {
+        validateCountries([effect.initiatorCountryId,...effect.absorbedCountryIds],path);
+        if(effect.absorbedCountryIds.includes(effect.initiatorCountryId)||!event.actorCountryIds.includes(effect.initiatorCountryId)||event.outcomeCategory!=='treaty'||!event.causes.some(c=>c.kind==='authoritative-event'||c.kind==='scheduled-consequence'))add('INVALID_WORLD_EFFECT',path,'INVALID_MERGE_CAUSE');
+        break;
+      }
+      case 'country.changeMapColor': {
+        validateCountries([effect.actorCountryId,effect.countryId],path);
+        const authority=context.countryPresentationAuthorities?.find(a=>a.id===effect.authorityId)
+          ?? resolution.worldEffects.slice(0,index).filter(e=>e.type==='countryPresentationAuthority.granted').find(e=>e.authority.id===effect.authorityId)?.authority;
+        if (!event.actorCountryIds.includes(effect.actorCountryId)) add('INVALID_WORLD_EFFECT',path,'Color actor must participate in the causal event');
+        if (!allowsDevelopmentWorldEffect(hasDebugWorldEffectCause(event.eventId)) && (!authority
+          || authority.actorCountryId!==effect.actorCountryId || authority.targetCountryId!==effect.countryId
+          || !authority.allowedMapColors.includes(effect.mapColor) || !isAuthorityActiveAt(authority,event.date))) {
+          add('INVALID_WORLD_EFFECT',path,'PRESENTATION_AUTHORITY_REQUIRED');
+        }
+        break;
+      }
+      case 'countryPresentationAuthority.granted': {
+        const a=effect.authority;validateCountries([a.actorCountryId,a.targetCountryId],path);
+        try {
+          const evidence=presentationEvidenceFromContext(context);
+          validatePresentationGrant(a,event,{...evidence,authorities:[...evidence.authorities,
+            ...resolution.worldEffects.slice(0,index).filter(e=>e.type==='countryPresentationAuthority.granted').map(e=>e.authority)]});
+        } catch(error) {add('INVALID_WORLD_EFFECT',path,error instanceof Error?error.message:String(error));}
+        break;
+      }
       case "country.renamed":
         validateCountries([effect.countryId], path);
         break;

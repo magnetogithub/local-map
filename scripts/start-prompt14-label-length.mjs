@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const root='reports/prompt14/label-length';fs.mkdirSync(root,{recursive:true});
+if(fs.existsSync(`${root}/baseline.json`))throw Error('Baseline exists');
+const files=['src/app/api/world/labels/route.ts','src/lib/map/catalog-labels.server.ts','src/lib/map/catalog-label-renderer.ts','src/lib/map/catalog-labels.server.test.ts','reports/prompt14/14-20-final-integration.json'];
+fs.copyFileSync(files.at(-1),`${root}/previous-final-integration.json`);
+fs.writeFileSync(`${root}/baseline.json`,JSON.stringify({startedAt:new Date().toISOString(),dirtyStatus:execFileSync('git',['status','--short'],{encoding:'utf8'}),hashes:Object.fromEntries(files.map(p=>[p,createHash('sha256').update(fs.readFileSync(p)).digest('hex')]))},null,2));
+const runner=fs.readFileSync('scripts/verify-prompt14-review-g.mjs','utf8').replaceAll("reports/prompt14/review-g","reports/prompt14/label-length").replace("e2e/prompt14-review-g.spec.ts --", "e2e/prompt14-label-length.spec.ts --").replace("review:['scripts/run-playwright-e2e.mjs','e2e/prompt14-review-g.spec.ts'","review:['scripts/run-playwright-e2e.mjs','e2e/prompt14-label-length.spec.ts'").replace("focused:['node_modules/vitest/vitest.mjs','run',","focused:['node_modules/vitest/vitest.mjs','run','src/lib/map/catalog-label-length.test.ts',");
+fs.writeFileSync('scripts/verify-prompt14-label-length.mjs',runner);
