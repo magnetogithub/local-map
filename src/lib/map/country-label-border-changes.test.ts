@@ -3,11 +3,11 @@ import path from "node:path";
 import {execFileSync} from "node:child_process";
 import {describe,expect,it} from "vitest";
 
-const reportPath=path.join(process.cwd(),"reports/fix07-border-recomputation.json");
+const reportPath=path.join(process.cwd(),`reports/verification/border-recomputation-${process.pid}.json`);
 
 describe("actual country geometry border-change recomputation",()=>{
   it("recomputes and records all five real-geometry scenarios with valid incremental layouts",()=>{
-    const started=Date.now();execFileSync(process.execPath,[path.join(process.cwd(),"scripts/validate-border-recomputation.mjs")],{cwd:process.cwd(),stdio:"pipe"});
+    const started=Date.now();execFileSync(process.execPath,[path.join(process.cwd(),"scripts/validate-border-recomputation.mjs")],{cwd:process.cwd(),stdio:"pipe",env:{...process.env,PAX_BORDER_RECOMPUTATION_REPORT:reportPath}});
     expect(fs.statSync(reportPath).mtimeMs).toBeGreaterThanOrEqual(started-1000);
     const report=JSON.parse(fs.readFileSync(reportPath,"utf8"));
     expect(report.status).toBe("passed");

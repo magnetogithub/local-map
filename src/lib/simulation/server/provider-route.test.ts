@@ -16,6 +16,9 @@ import {loadSimulationProviderConfig} from "./provider-config";
 import {SimulationProviderError, type SimulationModelProvider, type SimulationProviderEvent} from "./simulation-provider";
 import {createSimulationToolManifest} from "./simulation-tools";
 import {validateResolutionAgainstContext} from "./context-resolution-validator";
+import {createModelSimulationContext} from './model-simulation-context';
+import {executeReadOnlySimulationTool} from './simulation-tools';
+import {OpenAIResponseEventAccumulator} from './openai-response-events';
 
 const context: SimulationContextV1 = {
   contextVersion: "simulation-context.v1",
@@ -85,11 +88,70 @@ const collect = async <T>(source: AsyncIterable<T>) => {
 };
 
 describe("12-23 through 12-30 provider boundary", () => {
+  it('keeps catalog model context compact while host lookups retain omitted data', () => {
+    const full = {...context,
+      regionCatalog: {catalogVersion:'catalog.v1',geometryRoot:'a'.repeat(64),topologyRoot:'b'.repeat(64),renderArtifactRoot:'c'.repeat(64),manifestPath:'/data/catalog.v1/manifest.json'},
+      countries: [context.countries[0]],
+      countryDirectory: context.countryDirectory.map(country => ({...country,searchAliases:['hidden alias']})),
+      metadata: {clipped:[{section:'directory:BBB',omittedCount:20,reason:'bounded'},{section:'territories:AAA',omittedCount:3,reason:'bounded'}]},
+    };
+    const model = createModelSimulationContext(full);
+    expect(model.territoryDirectory.map(country => country.countryId)).toEqual(['AAA']);
+    expect(model.countryDirectory).toHaveLength(full.countryDirectory.length);
+    expect(model.metadata.clipped.some(entry => entry.section === 'directory:BBB')).toBe(false);
+    expect(full.territoryDirectory).toHaveLength(2);
+    expect(executeReadOnlySimulationTool('find_country',{query:'hidden alias'},full)).toHaveLength(2);
+    expect(executeReadOnlySimulationTool('inspect_country_territories',{countryId:'BBB'},full)).toEqual(full.territoryDirectory[1]);
+    expect(createModelSimulationContext(context)).toBe(context);
+  });
+
+  it('retains streamed error codes, retry delays, and incomplete reasons', () => {
+    const accumulator = new OpenAIResponseEventAccumulator();
+    expect(accumulator.accept({type:'error',error:{code:'rate_limit_exceeded',message:'Slow down',headers:{'retry-after-ms':'30'}}})[0])
+      .toMatchObject({type:'failed',code:'rate_limit_exceeded',retryAfterMs:30,message:expect.stringContaining('Slow down')});
+    expect(accumulator.accept({type:'response.incomplete',response:{incomplete_details:{reason:'max_output_tokens'}}})[0])
+      .toMatchObject({type:'failed',message:expect.stringContaining('max_output_tokens')});
+    expect(accumulator.accept({type:'response.failed',response:{error:{code:'server_error',message:'Unavailable'}}})[0])
+      .toMatchObject({type:'failed',code:'server_error',message:expect.stringContaining('Unavailable')});
+  });
+
+  it('waits and retries a streamed rate limit even after receiving response lifecycle events', async () => {
+    const transport = new ScriptedTransport([
+      [{type:'response.created'}, {type:'error',error:{code:'rate_limit_exceeded',message:'Slow down',headers:{'retry-after-ms':'30'}}}],
+      toolResponse('call.after-rate','submit_turn_resolution',validResolution,'response.after-rate'),
+    ]);
+    const start = Date.now();
+    const events = await collect(new OpenAIResponsesSimulationProvider(config(),transport)
+      .streamTurn({turnId:'turn.rate',context},new AbortController().signal));
+    expect(Date.now() - start).toBeGreaterThanOrEqual(20);
+    expect(transport.requests).toHaveLength(2);
+    expect(events.at(-1)?.type).toBe('resolution.ready');
+    expect(events.filter(event => event.type === 'turn.failed')).toHaveLength(0);
+  });
+
+  it('cancels rate-limit backoff and bounds repeated rate-limit failures', async () => {
+    const limited = [{type:'error',error:{code:'rate_limit_exceeded',headers:{'retry-after-ms':'30'}}}];
+    const transport = new ScriptedTransport([limited,limited]);
+    const controller = new AbortController();
+    const pending = collect(new OpenAIResponsesSimulationProvider(config(),transport)
+      .streamTurn({turnId:'turn.cancel-rate',context},controller.signal));
+    setTimeout(() => controller.abort(),1);
+    expect((await pending).at(-1)?.type).toBe('turn.cancelled');
+    expect(transport.requests).toHaveLength(1);
+    const repeated = new ScriptedTransport([limited,limited]);
+    const events = await collect(new OpenAIResponsesSimulationProvider(config(),repeated)
+      .streamTurn({turnId:'turn.repeated-rate',context},new AbortController().signal));
+    expect(repeated.requests).toHaveLength(2);
+    expect(events.at(-1)).toMatchObject({type:'turn.failed',code:'PROVIDER_RATE_LIMIT'});
+  });
+
   it("uses server-only typed configuration", () => {
     expect(() => loadSimulationProviderConfig({})).toThrowError(SimulationProviderError);
     const loaded = loadSimulationProviderConfig({OPENAI_API_KEY: "key", OPENAI_MODEL: "model"});
     expect(loaded.model).toBe("model");
     expect(loaded.timeoutMs).toBe(120_000);
+    expect(loaded.maxToolIterations).toBe(8);
+    expect(loaded.maxToolCalls).toBe(12);
     expect(loaded.debugMode).toBe(false);
     expect(loadSimulationProviderConfig({
       OPENAI_API_KEY: "key",
@@ -103,7 +165,8 @@ describe("12-23 through 12-30 provider boundary", () => {
     expect(tools.every((tool) => tool.strict && tool.parameters.additionalProperties === false)).toBe(true);
     expect(JSON.stringify(tools)).not.toContain('"oneOf"');
     expect(tools.map((tool) => tool.name)).toEqual([
-      "find_country", "inspect_country_territories", "list_country_subdivisions",
+      "find_border_territories",
+      "find_region", "resolve_region", "find_country", "inspect_country_territories", "list_country_subdivisions",
       "inspect_active_situation", "inspect_recent_events", "submit_turn_resolution",
     ]);
     expect(JSON.stringify(tools)).not.toMatch(/merge_country|transfer_territory|apply_|commit_/);
@@ -224,6 +287,53 @@ describe("12-23 through 12-30 provider boundary", () => {
     expect(events.map((event) => event.type)).toContain("phase.changed");
     expect(events.at(-1)?.type).toBe("resolution.ready");
     expect(JSON.stringify(transport.requests[1].input)).toContain("STALE_REVISION");
+    expect(transport.requests.every((request) => request.tool_choice === "required")).toBe(true);
+  });
+
+  it('reserves submission and repair after ordinary lookup responses are exhausted', async () => {
+    const transport = new ScriptedTransport([
+      toolResponse('call.lookup-1','find_country',{query:'AAA'},'response.lookup-1'),
+      toolResponse('call.lookup-2','inspect_recent_events',{limit:1},'response.lookup-2'),
+      toolResponse('call.bad-final','submit_turn_resolution',{...validResolution,baseWorldRevision:99},'response.bad-final'),
+      toolResponse('call.fixed-final','submit_turn_resolution',validResolution,'response.fixed-final'),
+    ]);
+    const events = await collect(new OpenAIResponsesSimulationProvider(config({maxToolIterations:2,maxToolCalls:4}),transport)
+      .streamTurn({turnId:'turn.reserved-submit',context},new AbortController().signal));
+    expect(transport.requests).toHaveLength(4);
+    expect(transport.requests[2].tool_choice).toEqual({type:'function',name:'submit_turn_resolution'});
+    expect(transport.requests[3].tool_choice).toEqual({type:'function',name:'submit_turn_resolution'});
+    expect(events.at(-1)?.type).toBe('resolution.ready');
+  });
+
+  it('forces submission before exhausting the tool-call cap even when the response budget is larger', async () => {
+    const transport = new ScriptedTransport([
+      toolResponse('call.lookup','find_country',{query:'AAA'},'response.lookup'),
+      toolResponse('call.submit','submit_turn_resolution',validResolution,'response.submit'),
+    ]);
+    const events = await collect(new OpenAIResponsesSimulationProvider(config({maxToolIterations:20,maxToolCalls:3}),transport)
+      .streamTurn({turnId:'turn.call-budget',context},new AbortController().signal));
+    expect(transport.requests[1].tool_choice).toEqual({type:'function',name:'submit_turn_resolution'});
+    expect(events.at(-1)?.type).toBe('resolution.ready');
+  });
+
+  it("requires a tool call after a rejected submission instead of allowing a text-only repair", async () => {
+    const requests: OpenAIResponsesRequest[] = [];
+    const transport: OpenAIResponsesTransport = {
+      async *stream(request) {
+        requests.push(request);
+        const events = requests.length === 1
+          ? toolResponse("call.bad", "submit_turn_resolution", {...validResolution, baseWorldRevision: 99}, "response.bad")
+          : request.tool_choice === "required"
+            ? toolResponse("call.fixed", "submit_turn_resolution", validResolution, "response.fixed")
+            : [{type: "response.output_text.delta", delta: "판정을 수정했습니다."}, {type: "response.completed", response: {id: "response.text"}}];
+        for (const event of events) yield event;
+      },
+    };
+    const events = await collect(new OpenAIResponsesSimulationProvider(config(), transport)
+      .streamTurn({turnId: "turn.required-repair", context}, new AbortController().signal));
+    expect(requests).toHaveLength(2);
+    expect(events.at(-1)?.type).toBe("resolution.ready");
+    expect(events.filter((event) => event.type === "resolution.ready")).toHaveLength(1);
   });
 
   it("rejects every world-effect family with dangling or invalid production references", () => {

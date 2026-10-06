@@ -1,3 +1,5 @@
+import {presentationMapColor} from './runtime-view';
+import type {GameWorldView as WorldStateV2, SimulationPresentation as SimulationStateV1, MapPresentation as WorldMapRuntimeProjection} from './runtime-view';
 import type {
   CountrySummaryViewModel,
   EconomyMetricViewModel,
@@ -5,21 +7,12 @@ import type {
   NewsItemViewModel,
   PoliticsViewModel,
 } from "./contracts";
-import type {WorldMapRuntimeProjection} from "@/lib/projection/world-map-runtime-projection";
-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
 import type {ActiveCountryId, CountryId} from "@/lib/world/country-id";
-import type {WorldStateV2} from "@/lib/world/world-state-v2";
-
-type MapCountryFeature = Readonly<{
-  properties?: Readonly<{ownerCountryId?: string | null; mapColor?: string}>;
-}>;
 
 const countryMapColor = (
   mapProjection: WorldMapRuntimeProjection,
   countryId: ActiveCountryId,
-) => (mapProjection.countriesLow.features as readonly MapCountryFeature[])
-  .find((feature) => feature.properties?.ownerCountryId === countryId)
-  ?.properties?.mapColor ?? null;
+) => presentationMapColor(mapProjection, countryId);
 
 export const createCountrySummaryProjection = (
   world: WorldStateV2,

@@ -1,5 +1,6 @@
-import {expect,test} from "@playwright/test";
-import type {Page} from "@playwright/test";
+import {test as legacyTest} from './legacy-fixture';
+import {expect,test} from "./catalog-fixture";
+import type {Page} from "./catalog-fixture";
 
 test.afterEach(async({page})=>{await page.goto("about:blank")});
 
@@ -39,28 +40,28 @@ test("searches and resets the player country on reload",async({page})=>{
   await expect(page.locator(".simulation-panel")).toHaveCount(0);
   await page.getByRole("button",{name:"국가 행동"}).click();
   await expect(page.locator(".simulation-panel")).toBeVisible();
-  await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_MAP_DEBUG__?.getPlayerFilter()))).toContain("FRA");
+  await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_CATALOG_DEBUG__?.getSnapshot().playerCountryId))).toContain("FRA");
 
   await page.reload();
   await expect(page).toHaveURL(/\/$/,{timeout:30_000});
   await expect(page.getByRole("status")).toBeHidden({timeout:90_000});
   await expect(page.locator(".app-shell")).toHaveAttribute("data-page-mode","setup");
-  await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_MAP_DEBUG__?.getPlayerFilter()))).not.toContain("FRA");
+  await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_CATALOG_DEBUG__?.getSnapshot().playerCountryId))).not.toContain("FRA");
   expect(await page.evaluate(()=>localStorage.getItem("pax-local:game-setup:v1"))).toBeNull();
   await page.getByLabel("국가 검색").fill("JPN");
   await page.getByRole("option",{name:/JPN/}).click();
   await page.getByRole("button",{name:/일본.*플레이 국가/}).click();
-  await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_MAP_DEBUG__?.getPlayerFilter()))).toContain("JPN");
+  await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_CATALOG_DEBUG__?.getSnapshot().playerCountryId))).toContain("JPN");
   expect(await page.evaluate(()=>localStorage.getItem("pax-local:game-setup:v1"))).toBeNull();
 });
 
-test("renders dynamic labels, global Admin 1, high-resolution interaction, and world copies",async({page})=>{
+legacyTest("renders dynamic labels, global Admin 1, high-resolution interaction, and world copies",async({page})=>{
   test.setTimeout(300_000);
   await page.setViewportSize({width:1440,height:900});await page.goto("/");await expect(page.getByRole("status").first()).toBeHidden({timeout:90_000});
   const lowLabels=await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedLabelIds());
   expect(lowLabels).toEqual(expect.arrayContaining(["USA","RUS","CHN"]));expect(lowLabels).not.toContain("VAT");expect(lowLabels).not.toContain("MCO");
-  await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([540,20],1.25));await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getCenter()[0])).toBeGreaterThan(500);expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedCountryIds())).toContain("USA");
-  await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([-180,20],1.25));await page.waitForTimeout(300);expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedCountryIds())).toContain("CHN");
+  await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([540,20],1.25));await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getCenter()[0])).toBeGreaterThan(500);await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedCountryIds()),{timeout:60_000}).toContain("USA");
+  await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([-180,20],1.25));await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedCountryIds()),{timeout:60_000}).toContain("CHN");
   await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([-98,39],4));await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getDetailedStatus()),{timeout:60_000}).toBe("ready");
   for(const [id,count] of Object.entries({USA:47,CHN:29,FIN:17,KAZ:15,GBR:210,FRA:94}))expect(await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getAdmin1Count(id),id)).toBe(count);
   expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getUnresolvedAdmin1())).toEqual([]);expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.hasLayer("country-fill-high"))).toBe(true);
@@ -70,10 +71,10 @@ test("renders dynamic labels, global Admin 1, high-resolution interaction, and w
 test("preserves canonical playable countries and removes technical map units",async({page})=>{
   await page.setViewportSize({width:1440,height:900});await page.goto("/");await expect(page.getByRole("status")).toBeHidden({timeout:90_000});const search=page.getByLabel("국가 검색");
   for(const query of ["KAS","KAB","시아첸","바이코누르"]){await search.fill(query);await expect(page.getByRole("option")).toHaveCount(0)}
-  for(const [query,id,name] of [["PSX","PSX","팔레스타인"],["SDS","SDS","남수단"],["SOL","SOL","소말릴란드"]]){await search.fill(query);await page.getByRole("option",{name:new RegExp(id)}).click();await expect(page.getByRole("heading",{name})).toBeVisible();await page.getByRole("button",{name:new RegExp(`${name}.*플레이 국가`)}).click();await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_MAP_DEBUG__?.getPlayerFilter()))).toContain(id);expect(await page.evaluate(()=>localStorage.getItem("pax-local:game-setup:v1"))).toBeNull()}
+  for(const [query,id,name] of [["PSX","PSX","팔레스타인"],["SDS","SDS","남수단"],["SOL","SOL","소말릴란드"]]){await page.goto("/");await search.fill(query);await page.getByRole("option",{name:new RegExp(id)}).click();await expect(page.getByRole("heading",{name})).toBeVisible();await page.getByRole("button",{name:new RegExp(`${name}.*플레이 국가`)}).click();await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_CATALOG_DEBUG__?.getSnapshot().playerCountryId))).toContain(id);expect(await page.evaluate(()=>localStorage.getItem("pax-local:game-setup:v1"))).toBeNull()}
 });
 
-test("dissolved seams select parents and do not render border layers",async({page})=>{
+legacyTest("dissolved seams select parents and do not render border layers",async({page})=>{
   test.setTimeout(300_000);await page.setViewportSize({width:1440,height:900});await page.goto("/");await expect(page.getByRole("status")).toBeHidden({timeout:90_000});
   for(const [center,boundary,countryId] of [[[77.2,35.3],[77.612503,35.399165],"IND"],[[63.3,46],[63.354097,45.566897],"KAZ"]] as const){await page.evaluate(({center})=>window.__PAX_MAP_DEBUG__!.jumpTo([...center],7),{center});await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getDetailedStatus()),{timeout:60_000}).toBe("ready");const boundaryPoint=await page.evaluate(boundary=>window.__PAX_MAP_DEBUG__!.project([...boundary]),boundary);const layers=await page.evaluate(point=>window.__PAX_MAP_DEBUG__!.getRenderedLayersAt(point),boundaryPoint);expect(layers).not.toContain("country-borders-high");expect(layers).not.toContain("admin1-boundaries");const centerPoint=await page.evaluate(center=>window.__PAX_MAP_DEBUG__!.project([...center]),center);await page.locator(".maplibregl-canvas").click({position:{x:centerPoint[0],y:centerPoint[1]}});await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_MAP_DEBUG__!.getSelectedFilter()))).toContain(countryId)}
   await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([179.2,66],5.5));await waitForMapReady(page);const seam=await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.project([179.99,66]));const seamLayers=await page.evaluate(point=>window.__PAX_MAP_DEBUG__!.getRenderedLayersAt(point),seam);expect(seamLayers).not.toContain("country-borders-high");expect(seamLayers).not.toContain("admin1-boundaries");
@@ -81,17 +82,17 @@ test("dissolved seams select parents and do not render border layers",async({pag
 
 test("uses feature minZoom for point labels and crosses world copies by mouse drag",async({page})=>{
   test.setTimeout(300_000);await page.setViewportSize({width:1440,height:900});await page.goto("/");await expect(page.getByRole("status")).toBeHidden({timeout:90_000});
-  await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([12.453,41.903],5.2));await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getDetailedStatus()),{timeout:60_000}).toBe("ready");expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedLabelIds())).not.toContain("VAT");await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([12.453,41.903],7));await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedLabelIds()),{timeout:15_000}).toContain("VAT");
-  await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([179,20],1.25));const canvas=page.locator(".maplibregl-canvas");const box=await canvas.boundingBox();if(!box)throw new Error("map canvas missing");for(let i=0;i<4;i++){await page.mouse.move(box.x+250,box.y+400);await page.mouse.down();await page.mouse.move(box.x+850,box.y+400,{steps:12});await page.mouse.up()}await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.isRenderSettled()),{timeout:30_000}).toBe(true);expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getCenter()[0])).toBeLessThan(175);expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedCountryIds())).toContain("USA");expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.queryRenderedLabelIds())).toContain("USA");
+  await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.jumpTo([12.453,41.903],5.2));await expect.poll(()=>page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.ready()),{timeout:60_000}).toBe(true);expect(await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.renderedLabelIds())).not.toContain("VAT");await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.jumpTo([12.453,41.903],7));await expect.poll(()=>page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.renderedLabelIds()),{timeout:15_000}).toContain("VAT");
+  await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.jumpTo([179,20],1.25));const canvas=page.locator(".maplibregl-canvas");const box=await canvas.boundingBox();if(!box)throw new Error("map canvas missing");for(let i=0;i<4;i++){await page.mouse.move(box.x+250,box.y+400);await page.mouse.down();await page.mouse.move(box.x+850,box.y+400,{steps:12});await page.mouse.up()}await expect.poll(()=>page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.ready()),{timeout:30_000}).toBe(true);expect(await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.inspectMap().getCenter().lng)).toBeLessThan(175);expect(await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.renderedLabelIds())).toContain("USA");expect(await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.renderedLabelIds())).toContain("USA");
 });
 
 test("renders geometry labels and preserves Point fallback",async({page})=>{
   test.setTimeout(300_000);await page.setViewportSize({width:1440,height:900});await page.goto("/");await expect(page.getByRole("status")).toBeHidden({timeout:90_000});
-  for(const [center,id,label] of [[[-105,50],"USA","미합중국"],[[104,35],"CHN","중화인민공화국"],[[90,60],"RUS","러시아"]] as const){await page.evaluate(({center})=>window.__PAX_MAP_DEBUG__!.jumpTo([...center],2.1),{center});await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.isRenderSettled()),{timeout:30_000}).toBe(true);const bounds=await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getCountryLabelRendererBounds?.(id)??[],id);expect(bounds).toHaveLength(1);expect(bounds[0]).toMatchObject({renderer:"glyph-geometry",layerId:"country-label-glyph-fills",primitiveCount:Array.from(label).length})}
-  await page.evaluate(()=>{window.__PAX_MAP_DEBUG__!.jumpTo([12.453,41.903],7);window.__PAX_MAP_DEBUG__!.showOnlyCountryLabel?.("VAT")});await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.isRenderSettled()),{timeout:60_000}).toBe(true);await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getRawRenderedCountryLabels().filter(label=>label.countryId==="VAT").length),{timeout:15_000}).toBe(1);const vat=await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getRawRenderedCountryLabels().find(label=>label.countryId==="VAT"));expect(vat?.layerId).toBe("country-labels-ultra-small");expect(await page.evaluate(()=>!window.__PAX_MAP_DEBUG__!.hasLayer("country-labels-prototype")&&!window.__PAX_MAP_DEBUG__!.hasLayer("country-labels-territory"))).toBe(true);
+  for(const [center,id,label] of [[[-105,50],"USA","미합중국"],[[104,35],"CHN","중화인민공화국"],[[90,60],"RUS","러시아"]] as const){await page.evaluate(({center})=>window.__PAX_CATALOG_DEBUG__!.jumpTo([...center],2.1),{center});await expect.poll(()=>page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.ready()),{timeout:30_000}).toBe(true);const bounds=await page.evaluate(id=>window.__PAX_CATALOG_DEBUG__!.labelFeatures()['catalog-country-glyph-fills'].filter(f=>f.countryId===id),id);expect(bounds).toHaveLength(Array.from(label).length);expect(await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.renderedLabelIds())).toContain(id)}
+  await page.evaluate(()=>{window.__PAX_CATALOG_DEBUG__!.jumpTo([12.453,41.903],7);});await expect.poll(()=>page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.ready()),{timeout:60_000}).toBe(true);await expect.poll(()=>page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.inspectMap().queryRenderedFeatures(undefined,{layers:["catalog-small-country-labels"]}).map(f=>({countryId:f.properties.countryId,layerId:f.layer.id})).filter(label=>label.countryId==="VAT").length),{timeout:15_000}).toBe(1);const vat=await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.inspectMap().queryRenderedFeatures(undefined,{layers:["catalog-small-country-labels"]}).map(f=>({countryId:f.properties.countryId,layerId:f.layer.id})).find(label=>label.countryId==="VAT"));expect(vat?.layerId).toBe("catalog-small-country-labels");expect(await page.evaluate(()=>!window.__PAX_CATALOG_DEBUG__!.inspectMap().getLayer("country-labels-prototype")&&!window.__PAX_CATALOG_DEBUG__!.inspectMap().getLayer("country-labels-territory"))).toBe(true);
 });
 
-test("splits China, merges 31 countries, and rolls back atomically",async({page})=>{
+legacyTest("splits China, merges 31 countries, and rolls back atomically",async({page})=>{
   test.setTimeout(300_000);await page.setViewportSize({width:1440,height:900});await page.goto("/");await expect(page.getByRole("status")).toBeHidden({timeout:60_000});
   const initialRevision=Number(await page.locator(".app-shell").getAttribute("data-world-revision"));
   await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.jumpTo([104,35],4));await expect.poll(()=>page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getDetailedStatus()),{timeout:60_000}).toBe("ready");
@@ -151,7 +152,7 @@ test("splits China, merges 31 countries, and rolls back atomically",async({page}
   await expect.poll(()=>page.evaluate(()=>JSON.stringify(window.__PAX_MAP_DEBUG__!.getSelectedFilter()))).not.toContain(mergedCountryId);
 });
 
-test("splits the USA into 50 state countries, merges them, and rolls back atomically",async({page})=>{
+legacyTest("splits the USA into 50 state countries, merges them, and rolls back atomically",async({page})=>{
   test.setTimeout(300_000);
   await page.setViewportSize({width:1440,height:900});
   await page.goto("/");

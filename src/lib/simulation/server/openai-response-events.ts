@@ -1,10 +1,12 @@
+import {readRetryAfterMs} from './openai-responses-error';
+
 export type CompletedToolCall = Readonly<{callId: string; name: string; argumentsText: string}>;
 export type NormalizedOpenAIEvent =
   | Readonly<{type: "draft.delta"; delta: string}>
   | Readonly<{type: "tool.started"; callId: string; name: string}>
   | Readonly<{type: "tool.ready"; call: CompletedToolCall}>
   | Readonly<{type: "refusal"}>
-  | Readonly<{type: "failed"; message: string}>
+  | Readonly<{type: "failed"; message: string; code: string | null; retryAfterMs: number | null}>
   | Readonly<{type: "response.item"; item: Readonly<Record<string, unknown>>}>
   | Readonly<{type: "completed"; responseId: string}>;
 
@@ -33,7 +35,17 @@ export class OpenAIResponseEventAccumulator {
     const type = typeof event?.type === "string" ? event.type : "";
     if (type === "response.output_text.delta" && typeof event?.delta === "string") return [{type: "draft.delta", delta: event.delta}];
     if (type === "response.refusal.delta" || type === "response.refusal.done") return [{type: "refusal"}];
-    if (type === "error" || type === "response.failed" || type === "response.incomplete") return [{type: "failed", message: "Responses API did not complete"}];
+    if (type === "error" || type === "response.failed" || type === "response.incomplete") {
+      const response = record(event?.response);
+      const error = record(response?.error) ?? record(event?.error) ?? event;
+      const incomplete = record(response?.incomplete_details);
+      const details = [error?.code, error?.message, incomplete?.reason]
+        .filter((value): value is string => typeof value === "string" && value.length > 0);
+      return [{type: "failed", message: `Responses API ${type}${details.length ? `: ${details.join(" | ")}` : " did not complete"}`,
+        code: typeof error?.code === 'string' ? error.code : null,
+        retryAfterMs: readRetryAfterMs(record(error?.headers)),
+      }];
+    }
     if (type === "response.output_item.added") {
       const item = record(event?.item);
       if (item?.type === "function_call" && typeof item.call_id === "string" && typeof item.name === "string") {

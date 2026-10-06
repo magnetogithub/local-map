@@ -1,4 +1,4 @@
-import {expect, test, type Locator, type Page} from "@playwright/test";
+import {expect, test, type Locator, type Page} from "./catalog-fixture";
 
 const ndjson = (turnId: string, resolution: unknown) => [
   {version: 1, turnId, sequence: 0, type: "turn.started"},
@@ -58,37 +58,25 @@ async function enterGame(page: Page) {
   await expect(page.locator(".map-status")).toBeHidden({timeout: 90_000});
 }
 
-const runtimeSourceIds = ["countries-low", "countries-high", "borders-low", "borders-high"] as const;
-
+const runtimeSourceIds = ["world-territory-catalog", "catalog-country-glyph-fills", "catalog-country-glyph-outlines", "catalog-small-country-labels"] as const;
 async function expectHealthyMap(page: Page, expectedFranceName?: string) {
-  await expect(page.locator(".map-status")).toBeHidden({timeout: 90_000});
-  await expect(page.getByText("지도 데이터를 불러오지 못했습니다", {exact: false})).toHaveCount(0);
-  await expect.poll(async () => page.evaluate(async (sourceIds) => {
-    const debug = window.__PAX_MAP_DEBUG__;
-    if (!debug?.getWorldRevision || !debug.getMapProjectionRevision || !debug.getMapSourceSyncSnapshot || !debug.getMapSourceFeatures) return false;
-    const worldRevision = debug.getWorldRevision();
-    const snapshot = debug.getMapSourceSyncSnapshot();
-    const features = await Promise.all(sourceIds.map(id => debug.getMapSourceFeatures!(id)));
-    return debug.getMapProjectionRevision() === worldRevision && snapshot.revision === worldRevision &&
-      !snapshot.resyncRequired && !snapshot.error && sourceIds.every((id, index) =>
-        snapshot.sources[id]?.revision === worldRevision && features[index].length > 0
-      ) && (debug.queryRenderedCountryIds().length > 0 || features[0].length > 0);
-  }, runtimeSourceIds), {timeout: 90_000}).toBe(true);
-  const state = await page.evaluate(async (sourceIds) => {
-    const debug = window.__PAX_MAP_DEBUG__!;
-    const features = await Promise.all(sourceIds.map(id => debug.getMapSourceFeatures!(id)));
-    return {
-      worldRevision: debug.getWorldRevision!(),
-      projectionRevision: debug.getMapProjectionRevision!(),
-      snapshot: debug.getMapSourceSyncSnapshot!(),
-      franceNames: features.slice(0, 2).map(items => items.find(feature => feature.ownerCountryId === "FRA")?.displayName),
-      featureCounts: features.map(items => items.length),
-    };
-  }, runtimeSourceIds);
-  expect(state.snapshot).toMatchObject({revision: state.worldRevision, resyncRequired: false, error: null});
+  await expect(page.locator(".map-status")).toBeHidden({timeout:90_000});
+  if(expectedFranceName)await page.evaluate(()=>window.__PAX_CATALOG_DEBUG__!.jumpTo([2,46],4));
+  await expect.poll(()=>page.evaluate(()=>window.__PAX_CATALOG_DEBUG__?.ready()),{timeout:90_000}).toBe(true);
+  const state=await page.evaluate(sourceIds=>{
+    const d=window.__PAX_CATALOG_DEBUG__!,snapshot=d.getSnapshot(),labels=d.labelFeatures();
+    return {worldRevision:Number(snapshot.worldRevision),projectionRevision:d.projectionRevision(),snapshot,
+      sourceIdentities:sourceIds.map(id=>d.sourceIdentity(id)),
+      franceNames:[...new Set(labels['catalog-country-glyph-fills'].filter(f=>f.countryId==='FRA').map(f=>String(f.text)))],
+      featureCounts:[d.territoryFeatures().length,...['catalog-country-glyph-fills','catalog-country-glyph-outlines'].map(id=>labels[id].length)],renderedCount:d.renderedTerritoryIds().length};
+  },runtimeSourceIds);
   expect(state.projectionRevision).toBe(state.worldRevision);
-  expect(state.featureCounts.every(count => count > 0)).toBe(true);
-  if (expectedFranceName) expect(state.franceNames).toEqual([expectedFranceName, expectedFranceName]);
+  expect(state.snapshot).toMatchObject({fullProjectionBuilds:1,labelFailures:[]});
+  expect(state.sourceIdentities.every(Boolean)).toBe(true);
+  expect(state.featureCounts.every(count=>count>0)).toBe(true);
+  expect(state.renderedCount).toBeGreaterThan(0);
+  if(expectedFranceName)expect(state.franceNames).toEqual([expectedFranceName]);
+  if(expectedFranceName){const renderedNames=await page.evaluate(()=>[...new Set(window.__PAX_CATALOG_DEBUG__!.inspectMap().queryRenderedFeatures(undefined,{layers:['catalog-country-glyph-fills']}).filter(f=>f.properties.countryId==='FRA').map(f=>f.properties.text))]);expect(renderedNames).toEqual([expectedFranceName]);}
   return state;
 }
 
@@ -117,16 +105,17 @@ for (const viewport of [{width: 1280, height: 720}, {width: 1920, height: 1080}]
     await expect(page.locator(".game-hud__clock time")).toHaveText("2020-01-01");
     await expect(page.locator(".game-edge-nav__button")).toHaveCount(8);
     await expect(page.getByTestId("map-country-picker")).toBeVisible();
-    expect(await page.evaluate(() => ({areas: window.__PAX_MAP_DEBUG__?.hasLayer("war-areas"), fronts: window.__PAX_MAP_DEBUG__?.hasLayer("war-fronts")}))).toEqual({areas: true, fronts: true});
+    expect(await page.evaluate(() => ({areas: !!window.__PAX_CATALOG_DEBUG__?.inspectMap().getLayer("catalog-territory-occupation"), fronts: !!window.__PAX_CATALOG_DEBUG__?.inspectMap().getLayer("catalog-occupation-front")}))).toEqual({areas: true, fronts: true});
 
-    const initialSourceState = await page.evaluate(() => window.__PAX_MAP_DEBUG__?.getMapSourceSyncSnapshot?.());
-    const initialSourceIdentities = await page.evaluate(sourceIds => sourceIds.map(id => window.__PAX_MAP_DEBUG__?.getMapSourceIdentity?.(id)), runtimeSourceIds);
+    const initialSourceState = await page.evaluate(() => window.__PAX_CATALOG_DEBUG__?.getSnapshot());
+    const initialSourceIdentities = await page.evaluate(sourceIds => sourceIds.map(id => window.__PAX_CATALOG_DEBUG__?.sourceIdentity(id)), runtimeSourceIds);
     await page.locator('[data-menu-kind="settings"]').click();
     await page.locator('[data-setting-key="showCountryLabels"]').uncheck();
     await page.locator('[data-setting-key="showCapitalMarkers"]').uncheck();
     await page.locator('[data-setting-key="emphasizeBorders"]').check();
-    expect(await page.evaluate(() => window.__PAX_MAP_DEBUG__?.getMapSourceSyncSnapshot?.())).toEqual(initialSourceState);
-    expect(await page.evaluate(sourceIds => sourceIds.map(id => window.__PAX_MAP_DEBUG__?.getMapSourceIdentity?.(id)), runtimeSourceIds)).toEqual(initialSourceIdentities);
+    expect(await page.evaluate(() => window.__PAX_CATALOG_DEBUG__?.getSnapshot())).toEqual(initialSourceState);
+    expect(await page.evaluate(sourceIds => sourceIds.map(id => window.__PAX_CATALOG_DEBUG__?.sourceIdentity(id)), runtimeSourceIds)).toEqual(initialSourceIdentities);
+    await page.locator('[data-setting-key="showCountryLabels"]').check();
     await page.keyboard.press("Escape");
 
     const politics = page.locator('[data-menu-kind="politics"]');

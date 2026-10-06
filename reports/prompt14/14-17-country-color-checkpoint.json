@@ -1,0 +1,907 @@
+{
+  "schemaVersion": "prompt14-country-color-checkpoint-v2",
+  "status": "pass",
+  "generatedAt": "2026-10-06T02:33:15.977Z",
+  "baselineHead": "d56fba5f4eb928477a17cb640bb5b662ae9719cc",
+  "completedTasks": [
+    "14-15",
+    "14-16",
+    "14-17"
+  ],
+  "scope": "Review F remediation of 14-15 through 14-17 only. No 14-18 or later work performed.",
+  "previousRun": {
+    "path": "reports/prompt14/14-17-country-color/review-f-remediation/previous-checkpoint.json",
+    "sha256": "ace38a231b552a24d60d32973e7fe5977937c6cd02ccc8205e1f41a4731c17a3",
+    "byteLength": 28689,
+    "generatedAt": "2026-10-06T01:41:24.745Z",
+    "statusReported": "pass",
+    "role": "Archived historical result; not used as proof of current verification. Previous blanket success claims are superseded by this current run."
+  },
+  "currentRun": {
+    "baselineEvidence": [
+      {
+        "path": "reports/prompt14/14-17-country-color/review-f-remediation/baseline-status.txt",
+        "sha256": "d0fbf029f729e928222d6d006e6a7001bd15fe3055f311511e3bc67bfdbc985c",
+        "byteLength": 3233
+      },
+      {
+        "path": "reports/prompt14/14-17-country-color/review-f-remediation/baseline-tracked.diff",
+        "sha256": "4ec37f138764a4cef82c34b9006c2ef706bf975b184449cb048ad5b75582de4b",
+        "byteLength": 106160
+      }
+    ],
+    "baselinePolicy": "No reset, clean, checkout, staging or commit performed. Shared occupation/UI changes retained. Untracked starting byte hashes were not captured; previous checkpoint hashes are labelled as historical.",
+    "implementation": {
+      "sharedPolicy": "validatePresentationGrant with explicit context/full-state adapters; actual sources, causal dates, actor pending status, lifecycle exclusions, exact historical IDs and bounded collections.",
+      "intent": "country.chooseMapColor is explicit semantic presentation intent. The host expands it to exactly one-color bounded grant and matching country.changeMapColor, then normal server/local/atomic validation runs.",
+      "allocation": "Canonical requested RGB or deterministic fallback against complete unchanged base-world palette. Seed colors and initiator IDs are preserved; merge alone has no color effect.",
+      "history": "Exact sorted IDs plus completeness boolean, capped at 256. Missing/incomplete/exhausted history rejects new grants on both sides; no lossy reuse approval."
+    },
+    "commands": [
+      {
+        "stage": "lint",
+        "command": "node node_modules/eslint/bin/eslint.js src/lib/simulation/presentation-grant-validation.ts src/lib/simulation/country-color-intent.ts src/lib/simulation/country-color-authority.ts src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/simulation-context.ts src/lib/simulation/world-effect.ts src/lib/simulation/semantic-validator.ts src/lib/simulation/server/context-resolution-validator.ts src/lib/simulation/server/simulation-instruction.ts src/lib/simulation/world-effect-compiler.ts scripts/smoke-prompt14-country-colors.mjs scripts/verify-prompt14-review-f.mjs",
+        "startedAt": "2026-10-06T02:29:14.883Z",
+        "finishedAt": "2026-10-06T02:29:19.405Z",
+        "durationMs": 4520,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/lint.log"
+      },
+      {
+        "stage": "tests",
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/world/country-map-color.test.ts src/lib/commands/country-change-map-color.test.ts src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/catalog-runtime.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/catalog-occupation-browser-contract.test.ts src/lib/simulation/simulation-contract.test.ts src/lib/simulation/simulation-state-v2.test.ts src/lib/simulation/client/turn-request.test.ts src/lib/simulation/client/gameplay-behavior.test.ts src/lib/world/world-state-v3.test.ts src/lib/world/territory-control-invariant.test.ts --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/related-tests.json",
+        "startedAt": "2026-10-06T02:29:09.200Z",
+        "finishedAt": "2026-10-06T02:29:22.595Z",
+        "durationMs": 13394,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/tests.log"
+      },
+      {
+        "stage": "map",
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/map/catalog-consumer.test.ts -t catalog projection --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/map-tests.json",
+        "startedAt": "2026-10-06T02:29:10.311Z",
+        "finishedAt": "2026-10-06T02:29:24.083Z",
+        "durationMs": 13770,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/map.log"
+      },
+      {
+        "stage": "typecheck",
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "startedAt": "2026-10-06T02:29:13.186Z",
+        "finishedAt": "2026-10-06T02:29:29.548Z",
+        "durationMs": 16359,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/typecheck.log"
+      },
+      {
+        "stage": "build",
+        "command": "node node_modules/next/dist/bin/next build",
+        "startedAt": "2026-10-06T02:29:31.808Z",
+        "finishedAt": "2026-10-06T02:29:53.196Z",
+        "durationMs": 21385,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/build.log"
+      },
+      {
+        "stage": "smoke",
+        "command": "node scripts/smoke-prompt14-country-colors.mjs --review-f",
+        "startedAt": "2026-10-06T02:30:11.794Z",
+        "finishedAt": "2026-10-06T02:30:45.567Z",
+        "durationMs": 33772,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/smoke.log"
+      },
+      {
+        "stage": "smoke",
+        "command": "node scripts/smoke-prompt14-country-colors.mjs --review-f",
+        "environment": {},
+        "startedAt": "2026-10-06T02:31:27.184Z",
+        "finishedAt": "2026-10-06T02:31:54.429Z",
+        "durationMs": 27244,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/smoke.log"
+      },
+      {
+        "stage": "browserContract",
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/country-color-runtime.test.ts -t captured production browser --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/browser-contract-tests.json",
+        "environment": {
+          "PROMPT14_COLOR_EVIDENCE": "reports\\prompt14\\14-17-country-color\\review-f-remediation\\browser\\evidence.json"
+        },
+        "startedAt": "2026-10-06T02:32:32.511Z",
+        "finishedAt": "2026-10-06T02:32:34.629Z",
+        "durationMs": 2117,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/browserContract.log"
+      },
+      {
+        "stage": "typecheck",
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "environment": {},
+        "startedAt": "2026-10-06T02:32:52.238Z",
+        "finishedAt": "2026-10-06T02:32:57.181Z",
+        "durationMs": 4941,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/typecheck.log"
+      },
+      {
+        "stage": "lint",
+        "command": "node node_modules/eslint/bin/eslint.js src/lib/simulation/presentation-grant-validation.ts src/lib/simulation/country-color-intent.ts src/lib/simulation/country-color-authority.ts src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/simulation-context.ts src/lib/simulation/world-effect.ts src/lib/simulation/semantic-validator.ts src/lib/simulation/server/context-resolution-validator.ts src/lib/simulation/server/simulation-instruction.ts src/lib/simulation/world-effect-compiler.ts scripts/smoke-prompt14-country-colors.mjs scripts/verify-prompt14-review-f.mjs scripts/report-prompt14-review-f.mjs",
+        "environment": {},
+        "startedAt": "2026-10-06T02:32:54.138Z",
+        "finishedAt": "2026-10-06T02:32:57.827Z",
+        "durationMs": 3688,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/lint.log"
+      },
+      {
+        "stage": "tests",
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/world/country-map-color.test.ts src/lib/commands/country-change-map-color.test.ts src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/catalog-runtime.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/catalog-occupation-browser-contract.test.ts src/lib/simulation/simulation-contract.test.ts src/lib/simulation/simulation-state-v2.test.ts src/lib/simulation/client/turn-request.test.ts src/lib/simulation/client/gameplay-behavior.test.ts src/lib/world/world-state-v3.test.ts src/lib/world/territory-control-invariant.test.ts --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/related-tests.json",
+        "environment": {
+          "PROMPT14_COLOR_EVIDENCE": "reports\\prompt14\\14-17-country-color\\review-f-remediation\\browser\\evidence.json"
+        },
+        "startedAt": "2026-10-06T02:32:51.224Z",
+        "finishedAt": "2026-10-06T02:33:00.187Z",
+        "durationMs": 8962,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/tests.log"
+      }
+    ],
+    "latestCommands": {
+      "lint": {
+        "stage": "lint",
+        "command": "node node_modules/eslint/bin/eslint.js src/lib/simulation/presentation-grant-validation.ts src/lib/simulation/country-color-intent.ts src/lib/simulation/country-color-authority.ts src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/simulation-context.ts src/lib/simulation/world-effect.ts src/lib/simulation/semantic-validator.ts src/lib/simulation/server/context-resolution-validator.ts src/lib/simulation/server/simulation-instruction.ts src/lib/simulation/world-effect-compiler.ts scripts/smoke-prompt14-country-colors.mjs scripts/verify-prompt14-review-f.mjs scripts/report-prompt14-review-f.mjs",
+        "environment": {},
+        "startedAt": "2026-10-06T02:32:54.138Z",
+        "finishedAt": "2026-10-06T02:32:57.827Z",
+        "durationMs": 3688,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/lint.log"
+      },
+      "tests": {
+        "stage": "tests",
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/world/country-map-color.test.ts src/lib/commands/country-change-map-color.test.ts src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/catalog-runtime.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/catalog-occupation-browser-contract.test.ts src/lib/simulation/simulation-contract.test.ts src/lib/simulation/simulation-state-v2.test.ts src/lib/simulation/client/turn-request.test.ts src/lib/simulation/client/gameplay-behavior.test.ts src/lib/world/world-state-v3.test.ts src/lib/world/territory-control-invariant.test.ts --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/related-tests.json",
+        "environment": {
+          "PROMPT14_COLOR_EVIDENCE": "reports\\prompt14\\14-17-country-color\\review-f-remediation\\browser\\evidence.json"
+        },
+        "startedAt": "2026-10-06T02:32:51.224Z",
+        "finishedAt": "2026-10-06T02:33:00.187Z",
+        "durationMs": 8962,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/tests.log"
+      },
+      "map": {
+        "stage": "map",
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/map/catalog-consumer.test.ts -t catalog projection --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/map-tests.json",
+        "startedAt": "2026-10-06T02:29:10.311Z",
+        "finishedAt": "2026-10-06T02:29:24.083Z",
+        "durationMs": 13770,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/map.log"
+      },
+      "typecheck": {
+        "stage": "typecheck",
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "environment": {},
+        "startedAt": "2026-10-06T02:32:52.238Z",
+        "finishedAt": "2026-10-06T02:32:57.181Z",
+        "durationMs": 4941,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/typecheck.log"
+      },
+      "build": {
+        "stage": "build",
+        "command": "node node_modules/next/dist/bin/next build",
+        "startedAt": "2026-10-06T02:29:31.808Z",
+        "finishedAt": "2026-10-06T02:29:53.196Z",
+        "durationMs": 21385,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/build.log"
+      },
+      "smoke": {
+        "stage": "smoke",
+        "command": "node scripts/smoke-prompt14-country-colors.mjs --review-f",
+        "environment": {},
+        "startedAt": "2026-10-06T02:31:27.184Z",
+        "finishedAt": "2026-10-06T02:31:54.429Z",
+        "durationMs": 27244,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/smoke.log"
+      },
+      "browserContract": {
+        "stage": "browserContract",
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/country-color-runtime.test.ts -t captured production browser --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/browser-contract-tests.json",
+        "environment": {
+          "PROMPT14_COLOR_EVIDENCE": "reports\\prompt14\\14-17-country-color\\review-f-remediation\\browser\\evidence.json"
+        },
+        "startedAt": "2026-10-06T02:32:32.511Z",
+        "finishedAt": "2026-10-06T02:32:34.629Z",
+        "durationMs": 2117,
+        "exitCode": 0,
+        "signal": null,
+        "log": "reports/prompt14/14-17-country-color/review-f-remediation/browserContract.log"
+      }
+    },
+    "evidence": [
+      {
+        "path": "reports/prompt14/14-17-country-color/review-f-remediation/related-tests.json",
+        "sha256": "e7b843ce3cdcded0747f64fd85cab519d420935a82474c2eab04f3a5869788ef",
+        "byteLength": 59413,
+        "passed": 161,
+        "skipped": 1,
+        "skippedTests": [
+          "occupation production browser contract validates all captured actual production requests/responses against the server contract"
+        ]
+      },
+      {
+        "path": "reports/prompt14/14-17-country-color/review-f-remediation/map-tests.json",
+        "sha256": "ca392f6d107935b03055d2fb191979861c8d3941cb36ad5c945432bd9048a5f3",
+        "byteLength": 9840,
+        "passed": 12,
+        "skipped": 9,
+        "skippedTests": [
+          "frozen catalog consumer: actual delivery and immutable contracts boots through the real API with all 4,231 territories and 247 source countries",
+          "frozen catalog consumer: actual delivery and immutable contracts fails server readiness for missing assets, stale roots and altered PBF bytes",
+          "frozen catalog consumer: actual delivery and immutable contracts returns a readiness failure without exposing filesystem paths or partial contracts",
+          "frozen catalog consumer: actual delivery and immutable contracts rejects stale browser refs, path traversal, unknown metadata, duplicate IDs and forged seed links",
+          "frozen catalog consumer: actual delivery and immutable contracts checks requested response hashes and lengths and rejects HTTP failures, redirect and abort",
+          "frozen catalog consumer: actual delivery and immutable contracts uses canonical string property IDs from real PBF, caches verified bytes, and rejects unregistered requests",
+          "frozen catalog consumer: actual delivery and immutable contracts connects and removes the MapLibre protocol and forwards cancellation",
+          "frozen catalog consumer: actual delivery and immutable contracts shares protocol registration across maps until the final consumer releases it",
+          "frozen catalog consumer: actual delivery and immutable contracts bounds cached tiles while verifying the entire actual z0–6 delivery"
+        ]
+      },
+      {
+        "path": "reports/prompt14/14-17-country-color/review-f-remediation/browser-contract-tests.json",
+        "sha256": "c2c50c57543965ef8a21ba0256a8574e506773b8550b8f2a0e243498f234039b",
+        "byteLength": 11105,
+        "passed": 1,
+        "skipped": 26,
+        "skippedTests": [
+          "Review F shared presentation authority regressions rejects authority lifecycle evidence on server and local",
+          "Review F shared presentation authority regressions rejects reference lifecycle evidence on server and local",
+          "Review F shared presentation authority regressions rejects a consequence due by turn end but after the grant event",
+          "Review F shared presentation authority regressions only accepts a pending/due consequence at causal date: scheduled",
+          "Review F shared presentation authority regressions only accepts a pending/due consequence at causal date: due",
+          "Review F shared presentation authority regressions only accepts a pending/due consequence at causal date: resolved",
+          "Review F shared presentation authority regressions only accepts a pending/due consequence at causal date: cancelled",
+          "Review F shared presentation authority regressions approves an actual past event and commits grant before color; rejects reverse order",
+          "Review F shared presentation authority regressions approves an actual pending actor action, rejecting another actor or completed action",
+          "Review F shared presentation authority regressions rejects unknown and future authoritative sources in both adapters",
+          "Review F shared presentation authority regressions rejects expired ID reuse even when its lifecycle event is outside recentEvents",
+          "Review F shared presentation authority regressions rejects duplicate grants, authority collection overflow and bounded history exhaustion consistently",
+          "Review F shared presentation authority regressions rejects mismatched actor/target/source/dates/colors in both validators",
+          "Review F real presentation intent allocation and atomic history commits explicit choice #cc0000 through server normalization and local atomic plan",
+          "Review F real presentation intent allocation and atomic history commits explicit choice null through server normalization and local atomic plan",
+          "Review F real presentation intent allocation and atomic history retains initiator seed color for a merger without explicit color intent",
+          "Review F real presentation intent allocation and atomic history merges with explicit presentation choice #ffffff while preserving initiator identity and history",
+          "Review F real presentation intent allocation and atomic history merges with explicit presentation choice null while preserving initiator identity and history",
+          "Review F real presentation intent allocation and atomic history cannot enlarge the host single-color grant or bypass evidence using a production debug directive",
+          "14-16 production color atomic commit, affected projection and history applies RUS #CC0000 and restores exact state/projection without source updates",
+          "14-16 production color atomic commit, affected projection and history applies AUT #FFFFFF and restores exact state/projection without source updates",
+          "14-16 production color atomic commit, affected projection and history uses controller color and updates controlled foreign territory while leaving foreign-controlled owned territory alone",
+          "14-16 production color atomic commit, affected projection and history rejects unauthorized production color, stale revision and mixed invalid effects without publishing any pair",
+          "14-17 authority, grants, identity and production/debug paths grants and uses a bounded authority in a single normal production turn, with server/local agreement",
+          "14-17 authority, grants, identity and production/debug paths merge presentation explicitly changes the surviving initiator name/color without allocating another identity",
+          "14-17 authority, grants, identity and production/debug paths a marked debug action waives only development authority, never production authority"
+        ]
+      }
+    ],
+    "uniquePassedTests": 173,
+    "regressions": [
+      {
+        "id": "lifecycleHistoryRejected",
+        "status": "pass",
+        "description": "authority/reference lifecycle evidence rejected by server and local",
+        "tests": [
+          "Review F shared presentation authority regressions rejects authority lifecycle evidence on server and local",
+          "Review F shared presentation authority regressions rejects reference lifecycle evidence on server and local",
+          "Review F shared presentation authority regressions rejects a consequence due by turn end but after the grant event",
+          "Review F shared presentation authority regressions rejects unknown and future authoritative sources in both adapters",
+          "Review F shared presentation authority regressions rejects expired ID reuse even when its lifecycle event is outside recentEvents",
+          "Review F shared presentation authority regressions rejects duplicate grants, authority collection overflow and bounded history exhaustion consistently",
+          "Review F shared presentation authority regressions rejects mismatched actor/target/source/dates/colors in both validators"
+        ]
+      },
+      {
+        "id": "futureConsequenceRejected",
+        "status": "pass",
+        "description": "Due by turn end is insufficient before the causal date",
+        "tests": [
+          "Review F shared presentation authority regressions rejects a consequence due by turn end but after the grant event"
+        ]
+      },
+      {
+        "id": "normalEventApproved",
+        "status": "pass",
+        "description": "Past event grant then color commits; reverse order fails",
+        "tests": [
+          "Review F shared presentation authority regressions approves an actual past event and commits grant before color; rejects reverse order"
+        ]
+      },
+      {
+        "id": "normalQueuedActionApproved",
+        "status": "pass",
+        "description": "Pending actor action accepted; wrong actor or completed action rejected",
+        "tests": [
+          "Review F shared presentation authority regressions approves an actual pending actor action, rejecting another actor or completed action"
+        ]
+      },
+      {
+        "id": "endedIdReuseRejected",
+        "status": "pass",
+        "description": "Historical ID still rejected after its lifecycle source falls outside recentEvents",
+        "tests": [
+          "Review F shared presentation authority regressions rejects expired ID reuse even when its lifecycle event is outside recentEvents"
+        ]
+      },
+      {
+        "id": "capsAndDuplicatesRejected",
+        "status": "pass",
+        "description": "Duplicate grant, 128-authority cap and 256-ID history bound fail closed",
+        "tests": [
+          "Review F shared presentation authority regressions rejects duplicate grants, authority collection overflow and bounded history exhaustion consistently"
+        ]
+      },
+      {
+        "id": "grantContractChecked",
+        "status": "pass",
+        "description": "Actor, target, source date, validTo, canonical/allowed colors checked",
+        "tests": [
+          "Review F shared presentation authority regressions rejects mismatched actor/target/source/dates/colors in both validators"
+        ]
+      },
+      {
+        "id": "actualChoiceCommit",
+        "status": "pass",
+        "description": "Requested RGB and fallback normalize to one-color grant + matching effect, commit, rollback and undo/redo",
+        "tests": [
+          "Review F real presentation intent allocation and atomic history commits explicit choice #cc0000 through server normalization and local atomic plan",
+          "Review F real presentation intent allocation and atomic history commits explicit choice null through server normalization and local atomic plan"
+        ]
+      },
+      {
+        "id": "mergeKeepsExistingColor",
+        "status": "pass",
+        "description": "No color intent means existing initiator color; ID unchanged",
+        "tests": [
+          "Review F real presentation intent allocation and atomic history retains initiator seed color for a merger without explicit color intent"
+        ]
+      },
+      {
+        "id": "explicitMergeChoiceCommit",
+        "status": "pass",
+        "description": "Requested/fallback presentation applied after merger while preserving initiator ID and player",
+        "tests": [
+          "Review F real presentation intent allocation and atomic history merges with explicit presentation choice #ffffff while preserving initiator identity and history",
+          "Review F real presentation intent allocation and atomic history merges with explicit presentation choice null while preserving initiator identity and history"
+        ]
+      },
+      {
+        "id": "noExtraAuthority",
+        "status": "pass",
+        "description": "Strict choice intent cannot supply extra allowed colors; missing evidence/palette and extra unmatched color rejected",
+        "tests": [
+          "Review F real presentation intent allocation and atomic history cannot enlarge the host single-color grant or bypass evidence using a production debug directive"
+        ]
+      },
+      {
+        "id": "affectedProjectionOnly",
+        "status": "pass",
+        "description": "Only presented territories; unchanged projection collections and zero whole-source update",
+        "tests": [
+          "14-16 production color atomic commit, affected projection and history applies RUS #CC0000 and restores exact state/projection without source updates"
+        ]
+      },
+      {
+        "id": "controllerPresentation",
+        "status": "pass",
+        "description": "Foreign-controlled owned territory excluded, controlled foreign territory included",
+        "tests": [
+          "14-16 production color atomic commit, affected projection and history uses controller color and updates controlled foreign territory while leaving foreign-controlled owned territory alone"
+        ]
+      },
+      {
+        "id": "productionDebugRejected",
+        "status": "pass",
+        "description": "Marked action cannot waive production authority in either validator",
+        "tests": [
+          "14-17 authority, grants, identity and production/debug paths a marked debug action waives only development authority, never production authority"
+        ]
+      },
+      {
+        "id": "capturedServerContract",
+        "status": "pass",
+        "description": "All six real browser context/stubbed responses validated against server policy",
+        "tests": [
+          "Review F real presentation intent allocation and atomic history validates captured production browser choice/debug responses against the server contract"
+        ]
+      }
+    ],
+    "stages": {
+      "14-15": "pass: common authority validation and actual allocator integration",
+      "14-16": "pass: atomic rollback, affected projection, zero whole-source updates, undo/redo",
+      "14-17": "pass: current production build, three browser choices and captured server validation"
+    },
+    "browser": {
+      "path": "reports/prompt14/14-17-country-color/review-f-remediation/browser/evidence.json",
+      "sha256": "4686ebbd4507b327dbc1d8a384088006bebec117f46f952a961b1983f2669887",
+      "byteLength": 1471813,
+      "mode": "Next production build; deterministic local provider responses through real UI/atomic runtime",
+      "scenarios": [
+        {
+          "countryId": "RUS",
+          "requestedColor": "#CC0000",
+          "selectedColor": "#CC0000",
+          "hostChoiceIntent": true,
+          "seedColor": "#3B5E4D",
+          "visibleTerritoryCount": 32,
+          "before": {
+            "worldRevision": 0,
+            "projectionBuilds": 1
+          },
+          "after": {
+            "worldRevision": 1,
+            "projectionBuilds": 1,
+            "colorProjectionUpdates": 1
+          },
+          "undoColor": "#3B5E4D",
+          "redoColor": "#CC0000",
+          "labelState": {
+            "mapColor": "#CC0000",
+            "outlineColor": "#FFFFFF",
+            "selectionColor": "#FFFFFF",
+            "labelColor": "#FFFFFF",
+            "labelHaloColor": "#172E35"
+          },
+          "sourceUpdates": 0,
+          "affectedFeatureIds": [
+            "territory:catalog:027838839aa67a4ac4b71ab84644db50223d7c3a61dc5753c69f305a3216b7b0",
+            "territory:catalog:02e9856d5be3b52003463df30a214bb255fdfa6779a2aa4471897f493a2e026f",
+            "territory:catalog:0357dc38a385524ed6a4bbe26e3860bfea423cb981803812914f005776330288",
+            "territory:catalog:038f95791c0dc8d4a2cc0f3c21efaad14203a66b09be1b79960890ce61e78a88",
+            "territory:catalog:05b810f2b3ebb2464f54d3d503bdd84f9804838e37eca8aa8ace9fff8fc80e92",
+            "territory:catalog:06ba133ce96026bcc9fa8222bc67a6118e878995a2aee4d429c0866d448a4eb0",
+            "territory:catalog:116f9679d3abb13d83724d9a837eb36bab71ffff64f1d5af0264a31fdee8e2cb",
+            "territory:catalog:1577fe86a7f17e5b7491af73a143d5355edb03e4a654929c9308e7206796d45b",
+            "territory:catalog:158f5199c7bd062614f730f58d000de6e1a08546c0d5978c66a0bebb2bb22f3f",
+            "territory:catalog:176aec84f3d08f5b5eb718caaca47b8b6c38cbde92e76a5617b36700ec4ad9ea",
+            "territory:catalog:186e21916e66354ea23365c6e0b1d212f2c0475df26e3e941628dbf6b88d18ac",
+            "territory:catalog:1bdd9c68a61e509950de7480f41a3acd7313963270317577f35c12ad675c8e0c",
+            "territory:catalog:1c4008f7f1f1c19f4eeda1d9c9561477878b90d457ad9f82f8d0e6e0a187f360",
+            "territory:catalog:1d9a0efdecd407498e7d118b3b75e3666617e1b5f297756b02e95edc69954bc2",
+            "territory:catalog:1e520b4da186e67669cfc0d9cd03fd6c41ea8ddefd62a0b5e81b56943aab4d9b",
+            "territory:catalog:293c806c38035410889a7769d19763198b2cdb3a6616ecc77d5522bd9953bb69",
+            "territory:catalog:29eeeee6d100147d71f0ef430286a7d076d634183e59f81820faebda08dc5887",
+            "territory:catalog:2bd3fb023dd7b1fed4c7d3d2169d86d12eb6ff0f355c965e0dc408c6caf72799",
+            "territory:catalog:39f660ab2a2de1c85347e075259bcec2f577b90f602a1d25118707fce0cc4ea6",
+            "territory:catalog:3baaa9ac4f8e66e3acf8e52a063ea2c07c45ff4d3dd5a048d79a05b78c4ef520",
+            "territory:catalog:3caa13cf869564f9c402cd861d5d17897033d84b7e5162d105ef74b9f8053ebe",
+            "territory:catalog:3e538d968665e0c634b752a72cf648576547ccf4efa257e74ca19f995456335f",
+            "territory:catalog:40c935187024a590954a29944b21f484599b4c5f68e3b753be844506c23b9aad",
+            "territory:catalog:486b2b77194e62ccbc9d2c02a8f1527fc9f665cd574886b438075ed9d2828733",
+            "territory:catalog:49751cec9157f87e8e54462d711233bfa40b4c65392c802a9e28429173f6b45f",
+            "territory:catalog:4d1dad8e441feb940855f3ba731e7b8e1a29f805df6c8173117603e94abaf341",
+            "territory:catalog:5a382d6b66936e7d3043a19ed9a5fc963c3ac310f5cf972b31fe7ede4b896b9d",
+            "territory:catalog:62c3d0480883a368869b9a0bb286effb89db7d2d2ffbc2e41151538179606082",
+            "territory:catalog:6882c7389bb7f81e14009c0d767a27f660713f785e33720a347340c135053164",
+            "territory:catalog:7135020d9a9240ee0a519b3372689cef16a6dc7ac7ae438870c55ed64caddb87",
+            "territory:catalog:7162d664173e7e8145e37654adf3c989dd7c9b35ca9e26843a0c3aaf6218e8e4",
+            "territory:catalog:72bae503b293fb7f9cbd48ed6b810770ea81af38496c85fa7afb0535df8c375d",
+            "territory:catalog:730096e7b656129cf1127fd8af623f0410af5f61189a05269b30c56978d7eec2",
+            "territory:catalog:73f75a033e6b4d934e51121ddaef3e01eb71eeab1d5b70b81a91922890197ee6",
+            "territory:catalog:79502cf5f176fd851bb61adc6c3dcaa2dc20be074fad8e5ff600f4816241596d",
+            "territory:catalog:79895fbd017e3a0ab273c930d68ab8eadc8bcee8c19536dce66f6f3c5f8b59d6",
+            "territory:catalog:7b3b664773d6c9c77ea18c9a19be130d9b6b187290cdd5e624849e6b07333321",
+            "territory:catalog:7c3ef75a194a82d2f3e6eecffff3e7878e46ea47d4402614c1885a5ccb0cc5a4",
+            "territory:catalog:7eef04b7cb143f150412542b681b1bfc919acee65a6332b4afa189ddda992db5",
+            "territory:catalog:81515e75ff9c2f4902689afe49ce120d501283dc4653b946d8db8e5b793f1605",
+            "territory:catalog:82a9c6b7141d906fad58fe8959d2e20d49a552d1041eac03d5955551491d81c1",
+            "territory:catalog:82d87759b04377b5f3c6e9d5e975fdf165620f103671a3c2d5495093fb1a8ab4",
+            "territory:catalog:85e42d5e32e379912763dd69b63b173e779bc1f4864134d1761aedcd06c54e94",
+            "territory:catalog:8f0226458d527dad4684c88c2da730aa32a896545093d68f513eae876f6f1df2",
+            "territory:catalog:8f1f78eb4d74e05dee9a0d3b4378c1687d523a3473f55d86b8781a803739439d",
+            "territory:catalog:91872ba441f45d9770e8b4d9a163282a8488ca4c57e29fb8e7aebb4215801f4a",
+            "territory:catalog:94bb2c1fb623922c1acb04a13e4c058e7a852acff203ef1a68f7434ba200868c",
+            "territory:catalog:960962d1c2e0ff51364d4bba53daf3c5231b401979dd7bd853bf9ec3ba7b28be",
+            "territory:catalog:9779399f6a8f706e3fa5d791c9f2894068cc11badab214659449bf989cd3f9a7",
+            "territory:catalog:98b2daac51d8037ade37ed5164ed2c4d4cdd74615aea059b2ac8467c6fb2f761",
+            "territory:catalog:9d2b22d9494cc39eee4567b763bed0455e3f218d9c0e9681d09df031edd79076",
+            "territory:catalog:9f0a556648584d556a929e2999232bfb2bbf8a468a79498c47e9e4d26fb8f017",
+            "territory:catalog:a12fe49926493e679f8724949ee576c91c8cf5fdcc0dfd0f7174c6848231bca0",
+            "territory:catalog:a5dccad8fe3d15cbfd1bed145db6087c400a742cf9281d7360c38fe949b80d9a",
+            "territory:catalog:a7adf23196ad007396469faf28f258552b9e5f16ed14e783cd08357bdb2c1a1b",
+            "territory:catalog:ace0c4c5e5ce70ec6f267abc7af40fa40de2ab9ef01dc35975ca8bba81e89e6d",
+            "territory:catalog:b114e5affb653c6612daa84a5358de913e05c3497bb079dd3e3e98dc70b2aebc",
+            "territory:catalog:b41612132dbc9ea15e732cc423ca4554c13e168213256970a816254a2f5b62d4",
+            "territory:catalog:b5ecdc64fa607bf0226a936aea2c40f9fc5dffe1a8f9c19bf9276c1e681fe1be",
+            "territory:catalog:b783cae73519a2dcc040e91193cebaf3be9fc7145892c3d0783be43dd39f1c57",
+            "territory:catalog:b78f7402fffbc092e07cce3f46b3e5ce70a87e6cda198e7d304fee5f69244484",
+            "territory:catalog:b7b47096b23f458de780bcd0a67bbc902c16ff5e8968d5793de341e0bc4b4b0c",
+            "territory:catalog:b838c5c8a76d6c7578e054f9f7f177510da8f03bb3d06327a748b7c28bf6cb35",
+            "territory:catalog:bb9f8bf02c5ea76dbf927a4620c0d6dd98fb30c1bbcd86355df9a9951ebc25dc",
+            "territory:catalog:bbbe657560aa4f1ab94cf036a8d2bc9d01f670e403763eea6750a1c1ebc926ab",
+            "territory:catalog:bc99642686c6de040edd3c876ff16102c400a3da0466682df46994aa129e514d",
+            "territory:catalog:bfce4673e3ed0cc06cfdd28e2798bf1ae7ec006b1be33fce19c3e68b8500cc72",
+            "territory:catalog:c20d41071063695be4091898d657959f9f75de483f0492be44d3c6f8007219f3",
+            "territory:catalog:c4cd6b5607bacaaecf9fd8c56648964347a8110cc555a630ae448561fd059c4f",
+            "territory:catalog:c6be0a1d1e66f97705f9f122fddff02335fde3f6185ba4f354c782c8b75f9217",
+            "territory:catalog:c84e61850bfed03ca5e08e0401a7b52d09c9cfe8573144381f9682fb1e464f0d",
+            "territory:catalog:c8e801bd2d5b8c2e0b337dedad2df2bfa7dced5693f2577df144d272cad74cda",
+            "territory:catalog:ce33f8eb3357db180d0c3abd1a3c33229ce187cc85a5809da8e0d83f76b0f3c7",
+            "territory:catalog:d12ba4f568739ba3fa0c0e2dcf04201fd35ed4bd2d145c2a614696b355d24de2",
+            "territory:catalog:d5b3bb56f8d0d4781830dae3932ccfa487eafad0b98f9e5a1611d5ee803213ae",
+            "territory:catalog:d70427ad5c6f8a6552efd81117caf65c327512d11ec3cd2ee41584c4e0ad59f6",
+            "territory:catalog:df4eb96184b392dc21944b95dc2ad3366a5fbc4f7ffc0a49b62e094ffde10629",
+            "territory:catalog:e69f89b0e1f89f4e1623c01768dbeb9691538448d696b45b45d0564b33c0faa5",
+            "territory:catalog:e8d54f4d9152bd50b4317ec49313290d3eb1d27f190019c2f1ff88556c2b551d",
+            "territory:catalog:e8f35a9896bffb66bf9c8b3055b55f88c3fcb7cea5dae1b542d434aab6a098e0",
+            "territory:catalog:f2e65f23c3982e14e03ed3f3a597ea3d97e9429a7a6964501e0eb44afcf76849",
+            "territory:catalog:f38ff677ec15dc7b9d6c9d34ed730a8961daca9381493fda761946e0a324d943",
+            "territory:catalog:f452aa3066fa993457aa5f75b3b1414e7d822e880497b45271fee99eda1259fa",
+            "territory:catalog:f60b85a80040aba3ec1bed26e0468eacc24fdb19b5a0420666e0f1c83fbe3c12",
+            "territory:catalog:f7525d69b33a517dc85908d9242300ffbf0ecbbdb442f8d512da928a4aacf069",
+            "territory:catalog:fe4b2f7977a597f910eb1156761efe70a6104c5b65dcd08e2d03b5bd4b3cb387"
+          ],
+          "unauthorizedProductionDebugRejected": true,
+          "screenshot": "RUS-CC0000.png"
+        },
+        {
+          "countryId": "AUT",
+          "requestedColor": "#FFFFFF",
+          "selectedColor": "#FFFFFF",
+          "hostChoiceIntent": true,
+          "seedColor": "#786F7B",
+          "visibleTerritoryCount": 9,
+          "before": {
+            "worldRevision": 0,
+            "projectionBuilds": 1
+          },
+          "after": {
+            "worldRevision": 1,
+            "projectionBuilds": 1,
+            "colorProjectionUpdates": 1
+          },
+          "undoColor": "#786F7B",
+          "redoColor": "#FFFFFF",
+          "labelState": {
+            "mapColor": "#FFFFFF",
+            "outlineColor": "#172E35",
+            "selectionColor": "#172E35",
+            "labelColor": "#172E35",
+            "labelHaloColor": "#FFFFFF"
+          },
+          "sourceUpdates": 0,
+          "affectedFeatureIds": [
+            "territory:catalog:0b1c5b9de3d8b8d79cf78cc517d986800882c814ef6e5a3d5f59a708d40926ea",
+            "territory:catalog:1704d6c54a37946ec7429ca356a7f7d68a6fb542545a26dfd5ee492ffd6708ef",
+            "territory:catalog:36523204cf6ab4c0318e4b8631b59f777aeb45125d01bbe840d9c560e796a967",
+            "territory:catalog:6ae7fbcf30844ae466275adc7abcf1e085c6b5b23e07bb8c9a2ad8de3849377d",
+            "territory:catalog:9f557261bb34a2993741ce53121da3e1f855d48e09e8a4b70c3e2719cac49530",
+            "territory:catalog:a39e082380fb7c7d39ea10e5e2de3f8c80c1a705fe426041a7af3e340daca725",
+            "territory:catalog:c7e4f5c402bdec0391c7413f0b24ed9b8438a6b943f1f74f1a89901f78a4c340",
+            "territory:catalog:d43997e41c75e00c891ce80154d81dacd227c7d3019a3743aee079fe8971788c",
+            "territory:catalog:e47764f985ba1a634a624accaadcd8a7f2ca179a0564245cb23c8089b8f6f235"
+          ],
+          "unauthorizedProductionDebugRejected": true,
+          "screenshot": "AUT-FFFFFF.png"
+        },
+        {
+          "countryId": "RUS",
+          "requestedColor": null,
+          "selectedColor": "#ECA2BF",
+          "hostChoiceIntent": true,
+          "seedColor": "#3B5E4D",
+          "visibleTerritoryCount": 32,
+          "before": {
+            "worldRevision": 0,
+            "projectionBuilds": 1
+          },
+          "after": {
+            "worldRevision": 1,
+            "projectionBuilds": 1,
+            "colorProjectionUpdates": 1
+          },
+          "undoColor": "#3B5E4D",
+          "redoColor": "#ECA2BF",
+          "labelState": {
+            "mapColor": "#ECA2BF",
+            "outlineColor": "#172E35",
+            "selectionColor": "#172E35",
+            "labelColor": "#172E35",
+            "labelHaloColor": "#FFFFFF"
+          },
+          "sourceUpdates": 0,
+          "affectedFeatureIds": [
+            "territory:catalog:027838839aa67a4ac4b71ab84644db50223d7c3a61dc5753c69f305a3216b7b0",
+            "territory:catalog:02e9856d5be3b52003463df30a214bb255fdfa6779a2aa4471897f493a2e026f",
+            "territory:catalog:0357dc38a385524ed6a4bbe26e3860bfea423cb981803812914f005776330288",
+            "territory:catalog:038f95791c0dc8d4a2cc0f3c21efaad14203a66b09be1b79960890ce61e78a88",
+            "territory:catalog:05b810f2b3ebb2464f54d3d503bdd84f9804838e37eca8aa8ace9fff8fc80e92",
+            "territory:catalog:06ba133ce96026bcc9fa8222bc67a6118e878995a2aee4d429c0866d448a4eb0",
+            "territory:catalog:116f9679d3abb13d83724d9a837eb36bab71ffff64f1d5af0264a31fdee8e2cb",
+            "territory:catalog:1577fe86a7f17e5b7491af73a143d5355edb03e4a654929c9308e7206796d45b",
+            "territory:catalog:158f5199c7bd062614f730f58d000de6e1a08546c0d5978c66a0bebb2bb22f3f",
+            "territory:catalog:176aec84f3d08f5b5eb718caaca47b8b6c38cbde92e76a5617b36700ec4ad9ea",
+            "territory:catalog:186e21916e66354ea23365c6e0b1d212f2c0475df26e3e941628dbf6b88d18ac",
+            "territory:catalog:1bdd9c68a61e509950de7480f41a3acd7313963270317577f35c12ad675c8e0c",
+            "territory:catalog:1c4008f7f1f1c19f4eeda1d9c9561477878b90d457ad9f82f8d0e6e0a187f360",
+            "territory:catalog:1d9a0efdecd407498e7d118b3b75e3666617e1b5f297756b02e95edc69954bc2",
+            "territory:catalog:1e520b4da186e67669cfc0d9cd03fd6c41ea8ddefd62a0b5e81b56943aab4d9b",
+            "territory:catalog:293c806c38035410889a7769d19763198b2cdb3a6616ecc77d5522bd9953bb69",
+            "territory:catalog:29eeeee6d100147d71f0ef430286a7d076d634183e59f81820faebda08dc5887",
+            "territory:catalog:2bd3fb023dd7b1fed4c7d3d2169d86d12eb6ff0f355c965e0dc408c6caf72799",
+            "territory:catalog:39f660ab2a2de1c85347e075259bcec2f577b90f602a1d25118707fce0cc4ea6",
+            "territory:catalog:3baaa9ac4f8e66e3acf8e52a063ea2c07c45ff4d3dd5a048d79a05b78c4ef520",
+            "territory:catalog:3caa13cf869564f9c402cd861d5d17897033d84b7e5162d105ef74b9f8053ebe",
+            "territory:catalog:3e538d968665e0c634b752a72cf648576547ccf4efa257e74ca19f995456335f",
+            "territory:catalog:40c935187024a590954a29944b21f484599b4c5f68e3b753be844506c23b9aad",
+            "territory:catalog:486b2b77194e62ccbc9d2c02a8f1527fc9f665cd574886b438075ed9d2828733",
+            "territory:catalog:49751cec9157f87e8e54462d711233bfa40b4c65392c802a9e28429173f6b45f",
+            "territory:catalog:4d1dad8e441feb940855f3ba731e7b8e1a29f805df6c8173117603e94abaf341",
+            "territory:catalog:5a382d6b66936e7d3043a19ed9a5fc963c3ac310f5cf972b31fe7ede4b896b9d",
+            "territory:catalog:62c3d0480883a368869b9a0bb286effb89db7d2d2ffbc2e41151538179606082",
+            "territory:catalog:6882c7389bb7f81e14009c0d767a27f660713f785e33720a347340c135053164",
+            "territory:catalog:7135020d9a9240ee0a519b3372689cef16a6dc7ac7ae438870c55ed64caddb87",
+            "territory:catalog:7162d664173e7e8145e37654adf3c989dd7c9b35ca9e26843a0c3aaf6218e8e4",
+            "territory:catalog:72bae503b293fb7f9cbd48ed6b810770ea81af38496c85fa7afb0535df8c375d",
+            "territory:catalog:730096e7b656129cf1127fd8af623f0410af5f61189a05269b30c56978d7eec2",
+            "territory:catalog:73f75a033e6b4d934e51121ddaef3e01eb71eeab1d5b70b81a91922890197ee6",
+            "territory:catalog:79502cf5f176fd851bb61adc6c3dcaa2dc20be074fad8e5ff600f4816241596d",
+            "territory:catalog:79895fbd017e3a0ab273c930d68ab8eadc8bcee8c19536dce66f6f3c5f8b59d6",
+            "territory:catalog:7b3b664773d6c9c77ea18c9a19be130d9b6b187290cdd5e624849e6b07333321",
+            "territory:catalog:7c3ef75a194a82d2f3e6eecffff3e7878e46ea47d4402614c1885a5ccb0cc5a4",
+            "territory:catalog:7eef04b7cb143f150412542b681b1bfc919acee65a6332b4afa189ddda992db5",
+            "territory:catalog:81515e75ff9c2f4902689afe49ce120d501283dc4653b946d8db8e5b793f1605",
+            "territory:catalog:82a9c6b7141d906fad58fe8959d2e20d49a552d1041eac03d5955551491d81c1",
+            "territory:catalog:82d87759b04377b5f3c6e9d5e975fdf165620f103671a3c2d5495093fb1a8ab4",
+            "territory:catalog:85e42d5e32e379912763dd69b63b173e779bc1f4864134d1761aedcd06c54e94",
+            "territory:catalog:8f0226458d527dad4684c88c2da730aa32a896545093d68f513eae876f6f1df2",
+            "territory:catalog:8f1f78eb4d74e05dee9a0d3b4378c1687d523a3473f55d86b8781a803739439d",
+            "territory:catalog:91872ba441f45d9770e8b4d9a163282a8488ca4c57e29fb8e7aebb4215801f4a",
+            "territory:catalog:94bb2c1fb623922c1acb04a13e4c058e7a852acff203ef1a68f7434ba200868c",
+            "territory:catalog:960962d1c2e0ff51364d4bba53daf3c5231b401979dd7bd853bf9ec3ba7b28be",
+            "territory:catalog:9779399f6a8f706e3fa5d791c9f2894068cc11badab214659449bf989cd3f9a7",
+            "territory:catalog:98b2daac51d8037ade37ed5164ed2c4d4cdd74615aea059b2ac8467c6fb2f761",
+            "territory:catalog:9d2b22d9494cc39eee4567b763bed0455e3f218d9c0e9681d09df031edd79076",
+            "territory:catalog:9f0a556648584d556a929e2999232bfb2bbf8a468a79498c47e9e4d26fb8f017",
+            "territory:catalog:a12fe49926493e679f8724949ee576c91c8cf5fdcc0dfd0f7174c6848231bca0",
+            "territory:catalog:a5dccad8fe3d15cbfd1bed145db6087c400a742cf9281d7360c38fe949b80d9a",
+            "territory:catalog:a7adf23196ad007396469faf28f258552b9e5f16ed14e783cd08357bdb2c1a1b",
+            "territory:catalog:ace0c4c5e5ce70ec6f267abc7af40fa40de2ab9ef01dc35975ca8bba81e89e6d",
+            "territory:catalog:b114e5affb653c6612daa84a5358de913e05c3497bb079dd3e3e98dc70b2aebc",
+            "territory:catalog:b41612132dbc9ea15e732cc423ca4554c13e168213256970a816254a2f5b62d4",
+            "territory:catalog:b5ecdc64fa607bf0226a936aea2c40f9fc5dffe1a8f9c19bf9276c1e681fe1be",
+            "territory:catalog:b783cae73519a2dcc040e91193cebaf3be9fc7145892c3d0783be43dd39f1c57",
+            "territory:catalog:b78f7402fffbc092e07cce3f46b3e5ce70a87e6cda198e7d304fee5f69244484",
+            "territory:catalog:b7b47096b23f458de780bcd0a67bbc902c16ff5e8968d5793de341e0bc4b4b0c",
+            "territory:catalog:b838c5c8a76d6c7578e054f9f7f177510da8f03bb3d06327a748b7c28bf6cb35",
+            "territory:catalog:bb9f8bf02c5ea76dbf927a4620c0d6dd98fb30c1bbcd86355df9a9951ebc25dc",
+            "territory:catalog:bbbe657560aa4f1ab94cf036a8d2bc9d01f670e403763eea6750a1c1ebc926ab",
+            "territory:catalog:bc99642686c6de040edd3c876ff16102c400a3da0466682df46994aa129e514d",
+            "territory:catalog:bfce4673e3ed0cc06cfdd28e2798bf1ae7ec006b1be33fce19c3e68b8500cc72",
+            "territory:catalog:c20d41071063695be4091898d657959f9f75de483f0492be44d3c6f8007219f3",
+            "territory:catalog:c4cd6b5607bacaaecf9fd8c56648964347a8110cc555a630ae448561fd059c4f",
+            "territory:catalog:c6be0a1d1e66f97705f9f122fddff02335fde3f6185ba4f354c782c8b75f9217",
+            "territory:catalog:c84e61850bfed03ca5e08e0401a7b52d09c9cfe8573144381f9682fb1e464f0d",
+            "territory:catalog:c8e801bd2d5b8c2e0b337dedad2df2bfa7dced5693f2577df144d272cad74cda",
+            "territory:catalog:ce33f8eb3357db180d0c3abd1a3c33229ce187cc85a5809da8e0d83f76b0f3c7",
+            "territory:catalog:d12ba4f568739ba3fa0c0e2dcf04201fd35ed4bd2d145c2a614696b355d24de2",
+            "territory:catalog:d5b3bb56f8d0d4781830dae3932ccfa487eafad0b98f9e5a1611d5ee803213ae",
+            "territory:catalog:d70427ad5c6f8a6552efd81117caf65c327512d11ec3cd2ee41584c4e0ad59f6",
+            "territory:catalog:df4eb96184b392dc21944b95dc2ad3366a5fbc4f7ffc0a49b62e094ffde10629",
+            "territory:catalog:e69f89b0e1f89f4e1623c01768dbeb9691538448d696b45b45d0564b33c0faa5",
+            "territory:catalog:e8d54f4d9152bd50b4317ec49313290d3eb1d27f190019c2f1ff88556c2b551d",
+            "territory:catalog:e8f35a9896bffb66bf9c8b3055b55f88c3fcb7cea5dae1b542d434aab6a098e0",
+            "territory:catalog:f2e65f23c3982e14e03ed3f3a597ea3d97e9429a7a6964501e0eb44afcf76849",
+            "territory:catalog:f38ff677ec15dc7b9d6c9d34ed730a8961daca9381493fda761946e0a324d943",
+            "territory:catalog:f452aa3066fa993457aa5f75b3b1414e7d822e880497b45271fee99eda1259fa",
+            "territory:catalog:f60b85a80040aba3ec1bed26e0468eacc24fdb19b5a0420666e0f1c83fbe3c12",
+            "territory:catalog:f7525d69b33a517dc85908d9242300ffbf0ecbbdb442f8d512da928a4aacf069",
+            "territory:catalog:fe4b2f7977a597f910eb1156761efe70a6104c5b65dcd08e2d03b5bd4b3cb387"
+          ],
+          "unauthorizedProductionDebugRejected": true,
+          "screenshot": "RUS-ECA2BF.png"
+        }
+      ],
+      "captures": "Provider endpoint responses are deterministic stubs; captured contexts/responses additionally ran through the real server validator in Vitest.",
+      "visualInspection": "AUT white fill screenshot inspected: contrasting outline/selection and readable labels preserved."
+    },
+    "intermediateFailures": [
+      {
+        "command": "npx.cmd vitest run src/lib/simulation/country-color-runtime.test.ts --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/color-tests.json",
+        "exitCode": 1,
+        "evidence": {
+          "path": "reports/prompt14/14-17-country-color/review-f-remediation/color-tests-initial-schema-failure.json",
+          "sha256": "aa80980a06a4e90ff299e6b0033243be8f32680b6177b7e8b630bd0cafa64cda",
+          "byteLength": 715
+        },
+        "result": ".omit() cannot be used on object schemas containing refinements",
+        "fix": "Built a strict choice authority schema from fields; retained final grant date/color validation."
+      },
+      {
+        "command": "npx.cmd vitest run src/lib/simulation/country-color-runtime.test.ts --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/color-tests.json",
+        "exitCode": 1,
+        "evidence": {
+          "path": "reports/prompt14/14-17-country-color/review-f-remediation/color-tests-intermediate-failures.json",
+          "sha256": "9b322017862414dd47b8a97fdfb59bcd60333d989c88a43ff31bf27815f580c7",
+          "byteLength": 14858
+        },
+        "passed": 20,
+        "failed": 4,
+        "fix": "Generated effect ID kept within 64-character contract; wrong-actor fixture uses its actual player country."
+      },
+      {
+        "command": "npx.cmd vitest run src/lib/simulation/country-color-runtime.test.ts --reporter=json --outputFile=reports/prompt14/14-17-country-color/review-f-remediation/color-tests.json",
+        "exitCode": 0,
+        "evidence": {
+          "path": "reports/prompt14/14-17-country-color/review-f-remediation/color-tests.json",
+          "sha256": "9331d00dfaea7c3eda38532c79c01db96f95d4c84dc2e724b11c10681cc50393",
+          "byteLength": 10500
+        },
+        "role": "Intermediate smaller focused run (24 tests); final broader current suites supersede it."
+      }
+    ],
+    "reproduction": {
+      "baselineMethod": "Source inspection identified server kind-only grounding and lack of ended-ID context; allocator had no production callers. The old validator was not restored or executed during this remediation.",
+      "currentMethod": "Executed invalid lifecycle/future-consequence/reused-ID inputs against both validators and valid event/queued-action inputs through actual atomic plans; see regression test names and logs."
+    },
+    "warnings": "Vitest emitted existing configLoader:native/CommonJS config advisory. Scoped lint, typecheck and production build passed."
+  },
+  "immutableSeedEvidence": [
+    {
+      "path": "data/catalogs/prompt14/catalog-v1-73e30c25c9637d6376cb65afa82483c6/migration-pair.json",
+      "sha256": "c8131a74ead73e291474924b7e829b668bff77c13d2d706a8027bb42a0fa8a63",
+      "byteLength": 1506531,
+      "unchanged": true
+    },
+    {
+      "path": "data/catalogs/prompt14/catalog-v1-73e30c25c9637d6376cb65afa82483c6/migration-mapping.json",
+      "sha256": "e44ad2aaeec61a4e7d21254b829c1205f45b463031fd9c3447b52809d35d9b3c",
+      "byteLength": 382361,
+      "unchanged": true
+    },
+    {
+      "path": "data/source-locks/prompt14-derived-game-input-lock.json",
+      "sha256": "c0fcc776e0e9abd25dfb2ccbfd7884101c3e8aa59f481a6c23bb8cc8bcb740a3",
+      "byteLength": 12870,
+      "unchanged": true
+    }
+  ],
+  "seedColors": {
+    "verifiedCountries": 247,
+    "allOriginalRgbPreserved": true
+  },
+  "filesChangedByThisRun": [
+    {
+      "path": "src/lib/simulation/presentation-grant-validation.ts",
+      "sha256": "7c3e7810c7855c54cb2c3b1391661058c217ed1ce81d5985a9882c8447049569",
+      "byteLength": 4755,
+      "previousCheckpointHash": null,
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/country-color-intent.ts",
+      "sha256": "a9b17d96f5bfb074417c626c01f2ce7b6bef26ba8e38ce20f9573a82bd696d79",
+      "byteLength": 1892,
+      "previousCheckpointHash": null,
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/country-color-authority.ts",
+      "sha256": "7ce8471f02be7850879292b7d9d1718fcefb413b4a1e6b45e3df48b3ccb76e20",
+      "byteLength": 1930,
+      "previousCheckpointHash": "b23a7288634fadc570df1fa7c4f39ab0ac7a828e831b1eb58bb7485c8731a2ed",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/country-color-runtime.test.ts",
+      "sha256": "0faf4baca4acb18e2c3e4a534541ddf3b0ba90e6a6ea3f5b2cb9bb0ae8111e1e",
+      "byteLength": 31114,
+      "previousCheckpointHash": "6f82dd3e3078919d4297fd0334d5f73f9d23d4c85768dae82c0e9718ef29a50d",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/simulation-context.ts",
+      "sha256": "97115071cf1c2c81d46ffafde24bc1c86c187f98b92922b3819fb37ea6743961",
+      "byteLength": 18306,
+      "previousCheckpointHash": "f7b4e9b479385fdfdd8fa8acec8a2b0b7d1cd2bcc94c4a05628cbb881315f06b",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/world-effect.ts",
+      "sha256": "758afe54cdd61d2992190f714afe4b0c9909fb53d1333c94119fde0a06429847",
+      "byteLength": 5622,
+      "previousCheckpointHash": "f7dfed149b0ea801d86775508d993707f62c8916f5713eb385e573d72b82d90f",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/semantic-validator.ts",
+      "sha256": "c99898c11b3c48e19efcae6e57e5827d8bd2b5bf704bfcf0823b49e0d07c726c",
+      "byteLength": 18332,
+      "previousCheckpointHash": "6a7f3ee480ec58fec5241ec53dba327123425593461dfea2aa459dd6f096020f",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/server/context-resolution-validator.ts",
+      "sha256": "460af77d63a07a67f111c446b14958a0657c864e4ea88a0552f0934c843b2ed3",
+      "byteLength": 21396,
+      "previousCheckpointHash": "6c38b193b9151d5deaba46391fd085cc0d7a524db61bc8d6cfd45635442cfa39",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-instruction.ts",
+      "sha256": "7df1cad59c8cc1c3c35f51dae32da805c759602f2a43ec03a56eb14f652ca12a",
+      "byteLength": 5103,
+      "previousCheckpointHash": "ddfbd071f3c443fa57ab4334dede751de27581a4031aad8ccdd2550813e6849c",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "src/lib/simulation/world-effect-compiler.ts",
+      "sha256": "6a7f6c8a9b14af2f0f061b379a848d89e99a4f6950e8d588cbd6b3f62ce3c7d2",
+      "byteLength": 31883,
+      "previousCheckpointHash": "f69d60d2d1b517d7a240bd574a7077fba81f27b431f5ab2f1b3f1e5bdb0cb56d",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "scripts/smoke-prompt14-country-colors.mjs",
+      "sha256": "9bf38d18bc0b301b2d10e02adcae1698edf5cb5a2afc2561e8d779e3894008b9",
+      "byteLength": 10082,
+      "previousCheckpointHash": "1fd8a6e8ea1ef391359aee1acdfa83d84a4a56c81e5c816f1a171b99a98e9277",
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "scripts/verify-prompt14-review-f.mjs",
+      "sha256": "12a195ebdf5a770fc5e2c8194836221c1dff37225455ba4aadb3d6b8464d68d6",
+      "byteLength": 3335,
+      "previousCheckpointHash": null,
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    },
+    {
+      "path": "scripts/report-prompt14-review-f.mjs",
+      "sha256": "e6e30110ecd251ee12ff7916c2251043c161890d695c753c0ce3391d0b0d3580",
+      "byteLength": 12316,
+      "previousCheckpointHash": null,
+      "baseline": "Previous checkpoint hash is historical, not a current-run starting hash. Current-run dirty status and tracked diff are archived; initial hashes of untracked files were not captured.",
+      "attribution": "Only Review F additions belong to this remediation; existing worktree content was retained."
+    }
+  ],
+  "remainingLimitations": [
+    "No paid/live model call. Browser provider responses were deterministic stubs, with real UI/runtime and separate server-contract verification.",
+    "Server can validate only provided recentEvents/dueConsequences; local adapter has full simulation sources. Clipped sources cannot authorize a server grant.",
+    "New grants fail closed when exact historical plus active presentation IDs reach 256, or history/palette is absent/incomplete. Existing valid authorities remain usable. Raising/redesigning this bound is not part of this remediation.",
+    "Scoped related and map tests ran; broader map cases and the occupation captured-browser test are explicitly skipped, not passed. No 14-18+ integration/performance gate was run.",
+    "Initial untracked-file hashes were not captured in this run; historical checkpoint hashes are not represented as current starting hashes."
+  ],
+  "unresolvedColorIssues": [],
+  "nextStage": "Review F remediation review only; 14-18 and later excluded by user instruction."
+}

@@ -1,0 +1,14 @@
+{
+  "version": "prompt14-source-feature-component-grouping-v1",
+  "operation": "Plan one MultiPolygon territory for the complete component set of ONE already-selected source feature. No geometric alteration or source-feature merge.",
+  "allowed": "Disconnected components of the same selected administrative identity, or the explicitly recorded P0 fallback/source-component identity; preserve every ring, hole and component.",
+  "forbidden": [
+    "merging different selected P1 identities",
+    "merging countries",
+    "inventing connectors",
+    "dropping islands/holes",
+    "whole-country fallback to reduce caps"
+  ],
+  "basis": "Prompt permits Polygon/MultiPolygon and merges within protected P0/P1 partitions. All component identities remain recorded; the source administrative unit remains the game occupation unit.",
+  "futureGate": "14-6/14-7 must derive canonical component keys, verify this exact membership plan and final caps, coverage, topology and z0-6 delivery. Plan evidence is not a generated catalog."
+}

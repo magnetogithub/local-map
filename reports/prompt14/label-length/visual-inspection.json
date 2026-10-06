@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "inspectedAt": "2026-10-06T05:50:45Z",
+  "runtime": "ordinary Next production .next via next start; real label POST/font/layout and native MapLibre rendering",
+  "images": [
+    "reports/prompt14/label-length/production-screenshots/v3/long-name-120.png",
+    "reports/prompt14/label-length/production-screenshots/v3/long-name-160.png"
+  ],
+  "result": "Complete Korean names render as readable multiple-line point labels with contrasting halo at zoom 4. Explicit grapheme wrapping keeps every original character. Native rendered fallback and full original title are additionally asserted by permanent E2E.",
+  "supersededFailure": "reports/prompt14/label-length/history/long-name-160-before-explicit-wrap.png",
+  "supersededReason": "Automatic MapLibre line breaking did not wrap an unspaced Korean name; fixed by explicit grapheme line breaks without truncation."
+}

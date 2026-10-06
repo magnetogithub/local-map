@@ -1,0 +1,142 @@
+﻿{
+    "scope":  "Specification review only; no Prompt 15 implementation or runtime verification performed",
+    "reviewedFile":  "prompts/PROMPT_15_OPERATIONAL_MICRO_TERRITORIES_AND_PARTIAL_FRONTS.txt",
+    "sha256":  "9c4d83837dd216111d24d67afdf863973ad46b91c0ab35c3ec4176c6df5719c0",
+    "verdict":  "Requirements and review gates strengthened; implementation correctness remains unverified",
+    "originalRootCausesCovered":  [
+                                      "Missing physical resolution",
+                                      "Administrative region coupled to occupation atom",
+                                      "Coverage-error whole-country fallback",
+                                      "Preservation comparison after selection",
+                                      "Tests only checked partial country occupation",
+                                      "Provider fixes did not change geometry"
+                                  ],
+    "gapsFixed":  [
+                      "Near selection could occupy nearly whole province",
+                      "Identity counts could hide source replacement or overlapping membership",
+                      "Host did not explicitly bind effects to lookup scope",
+                      "Pagination could be mistaken for commit-cap relief",
+                      "Restored boundaries could conflict with one-to-many migration",
+                      "REVIEW F originally followed production cutover",
+                      "Policy selection wording could require unimplemented end-to-end tools"
+                  ],
+    "requirementChecks":  [
+                              {
+                                  "marker":  "같은 행정구역 안에서 일부만 점령",
+                                  "sections":  [
+                                                   "1",
+                                                   "4",
+                                                   "6",
+                                                   "10.1",
+                                                   "REVIEW E"
+                                               ],
+                                  "id":  "within_administrative_region"
+                              },
+                              {
+                                  "marker":  "대표적인 제한 진격 깊이 W",
+                                  "sections":  [
+                                                   "6.1",
+                                                   "REVIEW B"
+                                               ],
+                                  "id":  "physical_resolution"
+                              },
+                              {
+                                  "marker":  "도 대부분을 점령하고 극소 cell 하나만 남기는 결과는 실패",
+                                  "sections":  [
+                                                   "6.1",
+                                                   "10.1",
+                                                   "10.3"
+                                               ],
+                                  "id":  "near_not_almost_whole_region"
+                              },
+                              {
+                                  "marker":  "원본의 canonical source ID 집합을 선택 전 단계에서 고정",
+                                  "sections":  [
+                                                   "5",
+                                                   "10.2",
+                                                   "REVIEW C"
+                                               ],
+                                  "id":  "raw_identity_preservation"
+                              },
+                              {
+                                  "marker":  "미해결 정합은 후보 build를 실패",
+                                  "sections":  [
+                                                   "5.2",
+                                                   "REVIEW A",
+                                                   "REVIEW C"
+                                               ],
+                                  "id":  "fallback_failure"
+                              },
+                              {
+                                  "marker":  "lookup 응답을 AI가 읽었다는 사실만으로 제출 범위를 신뢰하지",
+                                  "sections":  [
+                                                   "8.2",
+                                                   "10.3",
+                                                   "REVIEW D"
+                                               ],
+                                  "id":  "host_selection_validation"
+                              },
+                              {
+                                  "marker":  "pagination과 선택 토큰은 전달 비용을 줄일 뿐 실제 commit cap을 우회하지",
+                                  "sections":  [
+                                                   "4",
+                                                   "8.2",
+                                                   "REVIEW D"
+                                               ],
+                                  "id":  "commit_cap_separate"
+                              },
+                              {
+                                  "marker":  "이전 catalog territory 경계도 protected overlay",
+                                  "sections":  [
+                                                   "7",
+                                                   "REVIEW D"
+                                               ],
+                                  "id":  "migration_refinement"
+                              },
+                              {
+                                  "marker":  "다음 진격은 현재 전선을 기준",
+                                  "sections":  [
+                                                   "8.2",
+                                                   "10.1",
+                                                   "REVIEW E"
+                                               ],
+                                  "id":  "current_frontier"
+                              },
+                              {
+                                  "marker":  "검증기가 기존 실패를 실제로 잡는지",
+                                  "sections":  [
+                                                   "10.3",
+                                                   "REVIEW F"
+                                               ],
+                                  "id":  "negative_validation"
+                              },
+                              {
+                                  "marker":  "REVIEW F 통과 후 검증된 후보를 production cutover",
+                                  "sections":  [
+                                                   "12",
+                                                   "12.1",
+                                                   "REVIEW F"
+                                               ],
+                                  "id":  "review_before_cutover"
+                              },
+                              {
+                                  "marker":  "zoom 4 미만 숨김",
+                                  "sections":  [
+                                                   "9",
+                                                   "REVIEW E"
+                                               ],
+                                  "id":  "zoom_regression"
+                              }
+                          ],
+    "mechanicalChecks":  {
+                             "requiredAnchorsFound":  12,
+                             "balancedCodeFences":  true,
+                             "replacementCharacters":  false,
+                             "missingAnchors":  0
+                         },
+    "limitations":  [
+                        "Physical thresholds and budgets must be fixed and measured during implementation before accepting artifacts",
+                        "Slovenia gap geometry still requires reproduction and certified repair",
+                        "Live API and browser behavior are required implementation evidence, not completed by this review"
+                    ]
+}

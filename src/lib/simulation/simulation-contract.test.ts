@@ -355,6 +355,9 @@ describe("12-8 TurnResolutionV1", () => {
         return;
       }
       const object = value as Record<string, unknown>;
+      for (const keyword of ["allOf", "oneOf", "not", "dependentRequired", "dependentSchemas", "if", "then", "else"]) {
+        expect(object).not.toHaveProperty(keyword);
+      }
       if (object.type === "object") {
         expect(object.additionalProperties).toBe(false);
         const propertyNames = Object.keys((object.properties ?? {}) as Record<string, unknown>);

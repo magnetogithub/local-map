@@ -1,0 +1,434 @@
+{
+  "status": "pass",
+  "environment": {
+    "platform": "win32",
+    "cpu": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
+    "browser": "154.0.8037.95",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "buildMode": "Next production E2E build, single worker; isolated legacy fixture vs default V3",
+    "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6"
+  },
+  "measurements": [
+    {
+      "mode": "legacy",
+      "loadMs": 29534.7556,
+      "coldHeap": {
+        "usedSize": 185381132,
+        "totalSize": 191426560,
+        "embedderHeapUsedSize": 896960,
+        "backingStorageSize": 17898474
+      },
+      "warmHeap": {
+        "usedSize": 320916732,
+        "totalSize": 328790016,
+        "embedderHeapUsedSize": 1371600,
+        "backingStorageSize": 47075583
+      },
+      "warmupMs": 9157.5886,
+      "samples": [
+        {
+          "durationMs": 1580.800000000745,
+          "frames": 95,
+          "frameTimeP50": 16.59999999962747,
+          "frameTimeP95": 18.300000000745058,
+          "maxFrameMs": 22.90000000037253,
+          "fps": 60.09235245744678,
+          "worldSerializations": 0
+        },
+        {
+          "durationMs": 6058.5999999996275,
+          "frames": 82,
+          "frameTimeP50": 16.699999999254942,
+          "frameTimeP95": 21.700000001117587,
+          "maxFrameMs": 1746.2999999988824,
+          "fps": 13.534479912851987,
+          "worldSerializations": 0
+        },
+        {
+          "durationMs": 1552.2000000011176,
+          "frames": 94,
+          "frameTimeP50": 16.59999999962747,
+          "frameTimeP95": 19.200000001117587,
+          "maxFrameMs": 23.09999999962747,
+          "fps": 60.5592062878059,
+          "worldSerializations": 0
+        }
+      ],
+      "heap": [
+        {
+          "usedSize": 321204436,
+          "totalSize": 327217152,
+          "embedderHeapUsedSize": 1412712,
+          "backingStorageSize": 48152562
+        },
+        {
+          "usedSize": 320863924,
+          "totalSize": 327741440,
+          "embedderHeapUsedSize": 1294296,
+          "backingStorageSize": 48191281
+        },
+        {
+          "usedSize": 321079392,
+          "totalSize": 328265728,
+          "embedderHeapUsedSize": 1312248,
+          "backingStorageSize": 49227877
+        }
+      ],
+      "browserErrors": []
+    },
+    {
+      "mode": "catalog",
+      "loadMs": 2801.7857000000004,
+      "coldHeap": {
+        "usedSize": 20939340,
+        "totalSize": 23699456,
+        "embedderHeapUsedSize": 1678848,
+        "backingStorageSize": 26867835
+      },
+      "warmHeap": {
+        "usedSize": 23088652,
+        "totalSize": 24748032,
+        "embedderHeapUsedSize": 1999248,
+        "backingStorageSize": 70416962
+      },
+      "warmupMs": 4068.762999999999,
+      "samples": [
+        {
+          "durationMs": 1826.800000000745,
+          "frames": 30,
+          "frameTimeP50": 16.699999999254942,
+          "frameTimeP95": 380.80000000074506,
+          "maxFrameMs": 524.5,
+          "fps": 16.4221589664921,
+          "worldSerializations": 0,
+          "before": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          },
+          "after": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          }
+        },
+        {
+          "durationMs": 1887.5999999996275,
+          "frames": 33,
+          "frameTimeP50": 16.799999998882413,
+          "frameTimeP95": 404.09999999962747,
+          "maxFrameMs": 543,
+          "fps": 17.481591354548108,
+          "worldSerializations": 0,
+          "before": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          },
+          "after": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          }
+        },
+        {
+          "durationMs": 1888.7999999988824,
+          "frames": 32,
+          "frameTimeP50": 16.699999999254942,
+          "frameTimeP95": 409.80000000074506,
+          "maxFrameMs": 543,
+          "fps": 16.941973739950726,
+          "worldSerializations": 0,
+          "before": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          },
+          "after": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          }
+        }
+      ],
+      "heap": [
+        {
+          "usedSize": 23183872,
+          "totalSize": 24485888,
+          "embedderHeapUsedSize": 1990168,
+          "backingStorageSize": 70416962
+        },
+        {
+          "usedSize": 23248684,
+          "totalSize": 24748032,
+          "embedderHeapUsedSize": 1972568,
+          "backingStorageSize": 70416962
+        },
+        {
+          "usedSize": 23323148,
+          "totalSize": 24485888,
+          "embedderHeapUsedSize": 1966352,
+          "backingStorageSize": 70416962
+        }
+      ],
+      "updates": {
+        "target": "GBR",
+        "occupiedTerritories": 234,
+        "occupationMs": 141.08669999999984,
+        "colorMs": 103.95679999999993,
+        "before": {
+          "worldSchema": 3,
+          "simulationSchema": 2,
+          "date": "2020-01-02",
+          "worldRevision": 0,
+          "catalogRef": {
+            "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+            "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+            "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+            "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+            "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+          },
+          "pairNotifications": 1,
+          "simulationRevision": 1,
+          "playerCountryId": "RUS",
+          "uiPlayerCountryId": "RUS",
+          "canUndo": true,
+          "canRedo": false,
+          "authorityOrder": [],
+          "eventCount": 1,
+          "projectionBuilds": 1,
+          "fullProjectionBuilds": 1,
+          "colorProjectionUpdates": 0,
+          "fullBuilds": 1,
+          "countryRebuilds": 247,
+          "territoryRebuilds": 4231,
+          "territoryUpdates": 0,
+          "edgeUpdates": 13546,
+          "indexedEdges": 13546,
+          "verifiedRequests": 11,
+          "cacheHits": 0,
+          "cachedTiles": 4,
+          "cachedBytes": 2719824
+        },
+        "after": {
+          "worldSchema": 3,
+          "simulationSchema": 2,
+          "date": "2020-01-04",
+          "worldRevision": 2,
+          "catalogRef": {
+            "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+            "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+            "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+            "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+            "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+          },
+          "pairNotifications": 4,
+          "simulationRevision": 3,
+          "playerCountryId": "RUS",
+          "uiPlayerCountryId": "RUS",
+          "canUndo": true,
+          "canRedo": false,
+          "authorityOrder": [
+            "tca:benchmark"
+          ],
+          "eventCount": 5,
+          "projectionBuilds": 1,
+          "fullProjectionBuilds": 1,
+          "colorProjectionUpdates": 1,
+          "fullBuilds": 1,
+          "countryRebuilds": 247,
+          "territoryRebuilds": 4465,
+          "territoryUpdates": 554,
+          "edgeUpdates": 13559,
+          "indexedEdges": 13546,
+          "verifiedRequests": 11,
+          "cacheHits": 0,
+          "cachedTiles": 4,
+          "cachedBytes": 2719824
+        },
+        "featureStateCalls": 568,
+        "wholeSourceSetData": 0,
+        "sourceUpdateData": 0
+      },
+      "browserErrors": []
+    }
+  ],
+  "interpretation": "Frame-time and FPS are reference-machine observations, not universal acceptance thresholds. 5-second frames and unbounded retained growth are structural failures."
+}

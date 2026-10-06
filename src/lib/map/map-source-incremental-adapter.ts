@@ -76,7 +76,7 @@ const geometrySignature = (geometry: Geometry): string => {
   return canonicalStringify(geometry);
 };
 
-export function assertUniqueMapSourceIds(collection: IdFeatureCollection, sourceId: RuntimeMapSourceId): void {
+export function assertUniqueMapSourceIds(collection: IdFeatureCollection, sourceId: string): void {
   const seen = new Set<string>();
   for (const feature of collection.features) {
     if (typeof feature.id !== "string" || !feature.id || seen.has(feature.id)) {
@@ -89,7 +89,7 @@ export function assertUniqueMapSourceIds(collection: IdFeatureCollection, source
 export function diffMapSourceFeatures(
   previous: IdFeatureCollection,
   next: IdFeatureCollection,
-  sourceId: RuntimeMapSourceId,
+  sourceId: string,
 ): Readonly<{diff: GeoJSONSourceDiff; changedIds: readonly string[]}> {
   assertUniqueMapSourceIds(previous, sourceId);
   assertUniqueMapSourceIds(next, sourceId);

@@ -36,7 +36,7 @@ function customDateError(currentDate: string, targetDate: string): string | null
 }
 
 export function GameActionOverlay({controller, advanceBlocked = false, onOpenNews}: Readonly<{
-  controller: SimulationTurnController;
+  controller: Omit<SimulationTurnController,'snapshot'> & Readonly<{snapshot:Readonly<{simulation:import('@/lib/game-ui/runtime-view').SimulationPresentation}>|null}>;
   advanceBlocked?: boolean;
   onOpenNews?(eventId?: string): void;
 }>) {

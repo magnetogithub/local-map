@@ -1,0 +1,169 @@
+{
+  "head": "d56fba5f4eb928477a17cb640bb5b662ae9719cc",
+  "status": " M .github/workflows/prompt14-catalog.yml\n M src/app/api/world/catalog/route.ts\n M src/app/game/page.tsx\n M src/app/page.tsx\n M src/components/game/GameActionOverlay.tsx\n M src/components/layout/WorldAppPage.tsx\n M src/lib/game-ui/country-management-projection.ts\n M src/lib/game-ui/country-view-projection.ts\n M src/lib/game-ui/game-hud-projection.ts\n M src/lib/game-ui/news-projection.ts\n M src/lib/simulation/client/turn-report.ts\n M src/lib/simulation/client/turn-request.ts\n M src/lib/simulation/semantic-validator.ts\n M src/lib/simulation/simulation-context.ts\n?? reports/prompt14/14-10-production-atomic-cutover.json\n?? reports/prompt14/14-10-runtime-smoke/browser-boundary-evidence.json\n?? reports/prompt14/14-10-runtime-smoke/frozen-artifact-verification.json\n?? reports/prompt14/14-10-runtime-smoke/game-refreshed.png\n?? reports/prompt14/14-10-runtime-smoke/korea-panel.png\n?? reports/prompt14/14-10-runtime-smoke/related-tests.json\n?? reports/prompt14/14-10-runtime-smoke/runtime-smoke-evidence.json\n?? reports/prompt14/14-10-runtime-smoke/runtime-tests.json\n?? reports/prompt14/14-10-runtime-smoke/world.png\n?? scripts/run-prompt14-production-cutover-smoke.mjs\n?? scripts/smoke-prompt14-production-cutover.mjs\n?? src/components/game/CatalogGameScreen.tsx\n?? src/components/layout/CatalogGameSetupShell.tsx\n?? src/components/map/CatalogWorldMap.tsx\n?? src/lib/game-ui/runtime-view.ts\n?? src/lib/simulation/catalog-runtime.test.ts\n?? src/lib/simulation/catalog-runtime.ts\n?? src/lib/simulation/catalog-turn-plan.ts\n?? src/lib/simulation/client/use-catalog-simulation-turn-controller.ts\n?? src/lib/world/production-catalog-seed.server.ts\n",
+  "targets": [
+    "src/components/map/CatalogWorldMap.tsx",
+    "src/lib/map/catalog-map-consumer.ts",
+    "src/lib/map/catalog-consumer.test.ts",
+    "scripts/smoke-prompt14-production-cutover.mjs",
+    "reports/prompt14/14-10-production-atomic-cutover.json"
+  ],
+  "hashes": {
+    ".github/workflows/prompt14-catalog.yml": {
+      "sha256": "250fab935e63b178e2db32d4e3e61d794348f71ab092d41d7dc379080e28ef17",
+      "byteLength": 5419
+    },
+    "src/app/api/world/catalog/route.ts": {
+      "sha256": "721a02583965f6919b10d9b93342b04c1401745a67dffddc3bae8bc3861aabd0",
+      "byteLength": 532
+    },
+    "src/app/game/page.tsx": {
+      "sha256": "13750c6acff0acfc56ef6d9e4deecc450fc7825bb198bb2786b6e91072f574ad",
+      "byteLength": 186
+    },
+    "src/app/page.tsx": {
+      "sha256": "1148207ad44a2141e59bee1ed5d8c9520321129ce4d190d3679d44e5834c9764",
+      "byteLength": 183
+    },
+    "src/components/game/GameActionOverlay.tsx": {
+      "sha256": "a5b9fdb5e87f0ba5e872fbc959096cdc6c8f3cd265bced5b3c7586f2c7b7893c",
+      "byteLength": 8461
+    },
+    "src/components/layout/WorldAppPage.tsx": {
+      "sha256": "4866c5ae5ccf66142adf5e1764252b18a36cafaae0e22f68c57e7096892241fd",
+      "byteLength": 634
+    },
+    "src/lib/game-ui/country-management-projection.ts": {
+      "sha256": "3b7d57c63d31234bca73354f9641a1b81b6fb124d9b24f0b04a7a40749937683",
+      "byteLength": 3534
+    },
+    "src/lib/game-ui/country-view-projection.ts": {
+      "sha256": "224f927d75acc225c9999a87751f01a898868278c3a027b78eaa1976e4dc2d52",
+      "byteLength": 4972
+    },
+    "src/lib/game-ui/game-hud-projection.ts": {
+      "sha256": "0065386bb18db5b71b194692122da99da92aede9a91ef62dc706b4883adf269a",
+      "byteLength": 2164
+    },
+    "src/lib/game-ui/news-projection.ts": {
+      "sha256": "0db85814c7e5fbc10bef5a8008b7d9ae10e32cfca3ebab0d91bc4996c60a65f7",
+      "byteLength": 3341
+    },
+    "src/lib/simulation/client/turn-report.ts": {
+      "sha256": "56c12cbf6b1a50c13d1c4fd4a684f93d096e98463d47b05ba65b2a4767ec6d36",
+      "byteLength": 3469
+    },
+    "src/lib/simulation/client/turn-request.ts": {
+      "sha256": "77555b8ac71ce82bf7f83d1fa02ca2ca3022e50a1fd8ada0a4c4d68cd0f367b8",
+      "byteLength": 2634
+    },
+    "src/lib/simulation/semantic-validator.ts": {
+      "sha256": "7f3047549b9b4c710b3ca3834ad912030cf4c04ca2fa4a22aaadc58b004889ae",
+      "byteLength": 14677
+    },
+    "src/lib/simulation/simulation-context.ts": {
+      "sha256": "5f7873a0481796308e9ae577daa2733a090b9877c2c8324883aba72f411787de",
+      "byteLength": 16088
+    },
+    "reports/prompt14/14-10-production-atomic-cutover.json": {
+      "sha256": "495e9e4b357ca42be8fa36905369264a3628d01de517197e912e74a61376968f",
+      "byteLength": 20605
+    },
+    "reports/prompt14/14-10-runtime-smoke/browser-boundary-evidence.json": {
+      "sha256": "834da37e2a32638f13b3aa97240733c5dd203ce6fa9202678bbb25fb7be19a64",
+      "byteLength": 1785
+    },
+    "reports/prompt14/14-10-runtime-smoke/frozen-artifact-verification.json": {
+      "sha256": "dfa8b694e1744711d95acbe1106397c8941397ea1fff4fe98da3492981bd1821",
+      "byteLength": 1840
+    },
+    "reports/prompt14/14-10-runtime-smoke/game-refreshed.png": {
+      "sha256": "ea532f89920084d60498f18e29914d46bf9273e126b0ea85ec3946cae1bfcb96",
+      "byteLength": 473122
+    },
+    "reports/prompt14/14-10-runtime-smoke/korea-panel.png": {
+      "sha256": "a25fc1358f0bb8f527d0b26bd56396e35989a908f06d9d3c1b72007a132bc28d",
+      "byteLength": 165684
+    },
+    "reports/prompt14/14-10-runtime-smoke/related-tests.json": {
+      "sha256": "a70ec50f6f0e66e423776de2121452cd2751186b34e1eb86ad8595f3827b6b39",
+      "byteLength": 28321
+    },
+    "reports/prompt14/14-10-runtime-smoke/runtime-smoke-evidence.json": {
+      "sha256": "bcab009d452ffcd60c2952da9dab455ce0064af92a2dc55789c6ebaac6d4f5b7",
+      "byteLength": 9776
+    },
+    "reports/prompt14/14-10-runtime-smoke/runtime-tests.json": {
+      "sha256": "aa8e9dee4d42500682ed01364cf7925d4cc1fe2467157db4d0279eeab2aab04b",
+      "byteLength": 3809
+    },
+    "reports/prompt14/14-10-runtime-smoke/world.png": {
+      "sha256": "b742e3928fd2d486a6ac67369176e8208a50cbb0703405d0dadb7798237777a4",
+      "byteLength": 386593
+    },
+    "scripts/run-prompt14-production-cutover-smoke.mjs": {
+      "sha256": "cce644300802a27cda174fb04c39650829cd4ace47982d6222f8a8a90bce24a1",
+      "byteLength": 1224
+    },
+    "scripts/smoke-prompt14-production-cutover.mjs": {
+      "sha256": "b753993ce3e256adb9463e82fda93e221f2d604db39cf97ff3b5a3d471fcb41a",
+      "byteLength": 7841
+    },
+    "src/components/game/CatalogGameScreen.tsx": {
+      "sha256": "c69c4b6bdb9fd19ffc285bb83e42b782683e0fbf8cdf7d90e0a1e1cffb3368c9",
+      "byteLength": 13301
+    },
+    "src/components/layout/CatalogGameSetupShell.tsx": {
+      "sha256": "b946689df70616e5476c6b637c5593b089e5c3588ff61cb40f1de8df8784c50b",
+      "byteLength": 4499
+    },
+    "src/components/map/CatalogWorldMap.tsx": {
+      "sha256": "98a28d248e9c05140ffc8ea3f353d38ed692d065d9bb8f33faa2671baf9754be",
+      "byteLength": 7226
+    },
+    "src/lib/game-ui/runtime-view.ts": {
+      "sha256": "9fe759e41ea9acde2dc4dc58f8b927229ee304d75322e589c39d8d7710533f66",
+      "byteLength": 955
+    },
+    "src/lib/simulation/catalog-runtime.test.ts": {
+      "sha256": "4bbfdf5d9599bdb50f4f097f21c75b2def24de3a4fd7e4fa3dd4ece9e326d58c",
+      "byteLength": 9936
+    },
+    "src/lib/simulation/catalog-runtime.ts": {
+      "sha256": "36d404d1b76b546097d7c2fb93e6ee55567370b9a5afdc678f14f57d62373931",
+      "byteLength": 4141
+    },
+    "src/lib/simulation/catalog-turn-plan.ts": {
+      "sha256": "07afa9c791fb9792b1152773f8fddb62df141ccac66060ffc65a444430dbebba",
+      "byteLength": 4116
+    },
+    "src/lib/simulation/client/use-catalog-simulation-turn-controller.ts": {
+      "sha256": "0183c7b0abe51b4612dd6d07be3ba9dd3eb75d0663b3a053ac72d9b4d9b97571",
+      "byteLength": 5029
+    },
+    "src/lib/world/production-catalog-seed.server.ts": {
+      "sha256": "ee99cb0bacc074fd97d8725935ff14981e3829210959c7893bb15c97fc2edf0b",
+      "byteLength": 2033
+    },
+    "src/lib/map/catalog-map-consumer.ts": {
+      "sha256": "dd1cbac2014cb03721d1a6f1c957b6850620a3456544beca7f8c47bba159de76",
+      "byteLength": 7955
+    },
+    "src/lib/map/catalog-consumer.test.ts": {
+      "sha256": "55ffd9cb942386c5e82c83496794325312a3c251dd8d75feeda41c72c356efc2",
+      "byteLength": 20483
+    },
+    "data/catalogs/prompt14/frozen-catalog-ref.json": {
+      "sha256": "e25ea42535ae2d103d66811a971c9d89fd8202b9cdb3f0a3d9467c4a706bd53b",
+      "byteLength": 939
+    },
+    "reports/prompt14/14-08-immutable-catalog-checkpoint.json": {
+      "sha256": "7d1134f83bd5b87a6c967010ac95695e961e504ccb60fc5d662591c7f7bcfb8e",
+      "byteLength": 1717215
+    },
+    "data/source-locks/prompt14-derived-game-input-lock.json": {
+      "sha256": "c0fcc776e0e9abd25dfb2ccbfd7884101c3e8aa59f481a6c23bb8cc8bcb740a3",
+      "byteLength": 12870
+    }
+  }
+}

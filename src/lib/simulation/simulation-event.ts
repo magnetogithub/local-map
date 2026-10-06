@@ -20,6 +20,8 @@ export const eventCauseReferenceSchema = z.strictObject({
 });
 
 export const simulationEventSchema = z.strictObject({
+  referenceLifecycle:z.strictObject({referenceId:simulationIdSchema,kind:z.enum(['queued-action','fact','situation','consequence']),operation:z.enum(['rewritten','ended','cancelled']),reason:z.enum(['country-successor','retired-actor','collapsed-relation'])}).optional(),
+  authorityLifecycle:z.strictObject({authorityId:simulationIdSchema,operation:z.enum(['granted','expired','rewritten','invalidated']),reason:z.enum(['validated-turn-grant','date-expired','country-successor','self-reference','no-successor','operation-scope-invalid']),previousActorCountryId:z.union([countryIdSchema,z.null()]),previousTargetCountryId:z.union([countryIdSchema,z.null()])}).optional(),
   eventId: simulationIdSchema,
   date: isoCalendarDateSchema,
   title: boundedTitleSchema,

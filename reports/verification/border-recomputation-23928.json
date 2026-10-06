@@ -1,0 +1,280 @@
+{
+  "subtask": "7H",
+  "status": "passed",
+  "validationStartedAt": "2026-10-06T05:55:00.901Z",
+  "inputGeometry": {
+    "path": "public/data/maps/countries-10m.geojson",
+    "modifiedAt": "2026-10-02T00:08:30.988Z",
+    "baseGeometryHashes": {
+      "USA": "3138d5b",
+      "RUS": "98d6e782",
+      "IDN": "46fdc2e2",
+      "CHL": "f17d3e38",
+      "CHN": "87eb9497"
+    }
+  },
+  "source": "Natural Earth 1:10m actual country geometry",
+  "scenarioCount": 5,
+  "recomputeApi": "recomputeCountryLabels",
+  "requestedCountryIds": [
+    "USA",
+    "USA",
+    "USA",
+    "IDN",
+    "CHL"
+  ],
+  "recomputedResultCount": 5,
+  "unchangedCountryIds": [
+    "RUS",
+    "CHN"
+  ],
+  "unchangedCountriesRecomputed": false,
+  "stabilityImprovementCount": 0,
+  "results": [
+    {
+      "scenario": "east-territory-removed",
+      "countryId": "USA",
+      "operation": "intersection: retain territory west of 100°W",
+      "coordinateOverride": false,
+      "inputGeometryHash": "3138d5b",
+      "before": {
+        "geometryHash": "3138d5b",
+        "polygonCount": 346,
+        "anchor": [
+          -99.145108,
+          39.527696
+        ],
+        "angle": 9.737164,
+        "fontSizeWorldUnits": 9.842406,
+        "insideRatio": 0.972824
+      },
+      "withPrevious": {
+        "geometryHash": "6bef495c",
+        "polygonCount": 209,
+        "anchor": [
+          -111.046857,
+          40.486977
+        ],
+        "angle": -57.443349,
+        "fontSizeWorldUnits": 6.036601,
+        "insideRatio": 1,
+        "anchorInside": true,
+        "anchorMovement": 11.940345,
+        "angleChange": 67.180513
+      },
+      "withoutPrevious": {
+        "geometryHash": "6bef495c",
+        "polygonCount": 209,
+        "anchor": [
+          -111.046857,
+          40.486977
+        ],
+        "angle": -57.443349,
+        "fontSizeWorldUnits": 6.036601,
+        "insideRatio": 1,
+        "anchorInside": true,
+        "anchorMovement": 11.940345,
+        "angleChange": 67.180513
+      },
+      "stabilityDelta": 0,
+      "stabilityImproved": false,
+      "qualityDifference": 0
+    },
+    {
+      "scenario": "adjacent-territory-annexed",
+      "countryId": "USA",
+      "operation": "union: annex an adjacent southwest rectangle",
+      "coordinateOverride": false,
+      "inputGeometryHash": "3138d5b",
+      "before": {
+        "geometryHash": "3138d5b",
+        "polygonCount": 346,
+        "anchor": [
+          -99.145108,
+          39.527696
+        ],
+        "angle": 9.737164,
+        "fontSizeWorldUnits": 9.842406,
+        "insideRatio": 0.972824
+      },
+      "withPrevious": {
+        "geometryHash": "311b3877",
+        "polygonCount": 346,
+        "anchor": [
+          -99.197781,
+          39.332349
+        ],
+        "angle": 9.125285,
+        "fontSizeWorldUnits": 9.766983,
+        "insideRatio": 0.976799,
+        "anchorInside": true,
+        "anchorMovement": 0.202324,
+        "angleChange": 0.611879
+      },
+      "withoutPrevious": {
+        "geometryHash": "311b3877",
+        "polygonCount": 346,
+        "anchor": [
+          -99.197781,
+          39.332349
+        ],
+        "angle": 9.125285,
+        "fontSizeWorldUnits": 9.766983,
+        "insideRatio": 0.976799,
+        "anchorInside": true,
+        "anchorMovement": 0.202324,
+        "angleChange": 0.611879
+      },
+      "stabilityDelta": 0,
+      "stabilityImproved": false,
+      "qualityDifference": 0
+    },
+    {
+      "scenario": "territory-split",
+      "countryId": "USA",
+      "operation": "difference: remove a north-south strip to split the mainland",
+      "coordinateOverride": false,
+      "inputGeometryHash": "3138d5b",
+      "before": {
+        "geometryHash": "3138d5b",
+        "polygonCount": 346,
+        "anchor": [
+          -99.145108,
+          39.527696
+        ],
+        "angle": 9.737164,
+        "fontSizeWorldUnits": 9.842406,
+        "insideRatio": 0.972824
+      },
+      "withPrevious": {
+        "geometryHash": "8ff694d4",
+        "polygonCount": 347,
+        "anchor": [
+          -88.267103,
+          38.650909
+        ],
+        "angle": 30.2034,
+        "fontSizeWorldUnits": 6.010463,
+        "insideRatio": 0.935131,
+        "anchorInside": true,
+        "anchorMovement": 10.913283,
+        "angleChange": 20.466236
+      },
+      "withoutPrevious": {
+        "geometryHash": "8ff694d4",
+        "polygonCount": 347,
+        "anchor": [
+          -88.267103,
+          38.650909
+        ],
+        "angle": 30.2034,
+        "fontSizeWorldUnits": 6.010463,
+        "insideRatio": 0.935131,
+        "anchorInside": true,
+        "anchorMovement": 10.913283,
+        "angleChange": 20.466236
+      },
+      "stabilityDelta": 0,
+      "stabilityImproved": false,
+      "qualityDifference": 0
+    },
+    {
+      "scenario": "two-polygons-merged",
+      "countryId": "IDN",
+      "operation": "union: bridge two existing island polygons",
+      "coordinateOverride": false,
+      "inputGeometryHash": "46fdc2e2",
+      "before": {
+        "geometryHash": "46fdc2e2",
+        "polygonCount": 264,
+        "anchor": [
+          114.018504,
+          -0.191744
+        ],
+        "angle": 34.083687,
+        "fontSizeWorldUnits": 1.902573,
+        "insideRatio": 1
+      },
+      "withPrevious": {
+        "geometryHash": "dcf9eb57",
+        "polygonCount": 256,
+        "anchor": [
+          116.034924,
+          0.843817
+        ],
+        "angle": -2.770818,
+        "fontSizeWorldUnits": 1.256041,
+        "insideRatio": 0.92653,
+        "anchorInside": true,
+        "anchorMovement": 2.26679,
+        "angleChange": 36.854505
+      },
+      "withoutPrevious": {
+        "geometryHash": "dcf9eb57",
+        "polygonCount": 256,
+        "anchor": [
+          116.034924,
+          0.843817
+        ],
+        "angle": -2.770818,
+        "fontSizeWorldUnits": 1.256041,
+        "insideRatio": 0.92653,
+        "anchorInside": true,
+        "anchorMovement": 2.26679,
+        "angleChange": 36.854505
+      },
+      "stabilityDelta": 0,
+      "stabilityImproved": false,
+      "qualityDifference": 0
+    },
+    {
+      "scenario": "narrow-corridor-added",
+      "countryId": "CHL",
+      "operation": "union: add a narrow eastward corridor",
+      "coordinateOverride": false,
+      "inputGeometryHash": "f17d3e38",
+      "before": {
+        "geometryHash": "f17d3e38",
+        "polygonCount": 163,
+        "anchor": [
+          -71.250318,
+          -35.482037
+        ],
+        "angle": 66.386917,
+        "fontSizeWorldUnits": 1.437383,
+        "insideRatio": 0.949831
+      },
+      "withPrevious": {
+        "geometryHash": "e335d66d",
+        "polygonCount": 163,
+        "anchor": [
+          -70.960462,
+          -35.700177
+        ],
+        "angle": 66.37583,
+        "fontSizeWorldUnits": 1.508049,
+        "insideRatio": 0.771417,
+        "anchorInside": true,
+        "anchorMovement": 0.362769,
+        "angleChange": 0.011087
+      },
+      "withoutPrevious": {
+        "geometryHash": "e335d66d",
+        "polygonCount": 163,
+        "anchor": [
+          -70.960462,
+          -35.700177
+        ],
+        "angle": 66.37583,
+        "fontSizeWorldUnits": 1.508049,
+        "insideRatio": 0.771417,
+        "anchorInside": true,
+        "anchorMovement": 0.362769,
+        "angleChange": 0.011087
+      },
+      "stabilityDelta": 0,
+      "stabilityImproved": false,
+      "qualityDifference": 0
+    }
+  ]
+}

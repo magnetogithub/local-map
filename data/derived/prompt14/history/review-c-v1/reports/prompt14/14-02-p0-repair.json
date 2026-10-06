@@ -1,0 +1,84 @@
+{
+  "source": {
+    "repositoryPath": "public/data/maps/countries-10m.geojson",
+    "sha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
+    "byteLength": 11241685
+  },
+  "derived": {
+    "repositoryPath": "data/derived/prompt14/countries-10m.geojson",
+    "sha256": "f4a75f261499d997709f456844177a9fd7511778d131ca3162b73a577e22227b",
+    "byteLength": 11241684
+  },
+  "policy": {
+    "version": "prompt14-lossless-ring-normalization-v1",
+    "generatorVersion": "prompt14-derived-input-v1",
+    "operations": [
+      "remove exact consecutive duplicate positions",
+      "reverse ring winding to source-specific policy"
+    ],
+    "coordinatePrecision": "preserve every original IEEE-754 coordinate; no rounding or quantization",
+    "areaAbsoluteToleranceDegreesSquared": 1e-9,
+    "areaRelativeTolerance": 1e-12,
+    "boundaryDisplacementTolerance": 0,
+    "coverageRule": "same ordered features, properties, geometry types, components, holes and undirected nonzero segment multiset per ring",
+    "forbidden": [
+      "union",
+      "buffer",
+      "make-valid",
+      "snap",
+      "simplify",
+      "delete feature/component/hole",
+      "fill gaps",
+      "split countries",
+      "move coordinates"
+    ],
+    "failureConditions": [
+      "source digest mismatch",
+      "non-determinism",
+      "feature/identity/type/ring/segment changes",
+      "area tolerance exceeded",
+      "remaining validator errors"
+    ],
+    "topologyPolicy": "Any remaining defect requires independently justified, versioned topology repair or replacement source; blocked, never silently repaired."
+  },
+  "generator": {
+    "repositoryPath": "scripts/prompt14-repair.mjs",
+    "sha256": "488305789d9bed70a7326dc41b653c6407d621970c5aefe8ae9141ccefabc8f5"
+  },
+  "status": "pass",
+  "before": {
+    "pass": true,
+    "counts": {
+      "features": 247,
+      "polygons": 4266,
+      "rings": 4286,
+      "vertices": 543585,
+      "polygon": 97,
+      "multiPolygon": 150
+    },
+    "errors": [],
+    "diagnostics": []
+  },
+  "after": {
+    "pass": true,
+    "invariantsPass": true,
+    "errors": [],
+    "maximumAreaDeltaDegreesSquared": 0,
+    "boundaryDisplacement": 0,
+    "coveragePreserved": true,
+    "validation": {
+      "pass": true,
+      "counts": {
+        "features": 247,
+        "polygons": 4266,
+        "rings": 4286,
+        "vertices": 543585,
+        "polygon": 97,
+        "multiPolygon": 150
+      },
+      "errors": []
+    },
+    "diagnostics": []
+  },
+  "role": "preserved original production game P0 reference; derived shared P0 is catalog authority"
+}

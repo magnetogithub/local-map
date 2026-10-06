@@ -1,7 +1,6 @@
 import {z} from "zod";
 
 import type {ActiveCountryId} from "../world/country-id";
-import type {WorldStateV2} from "../world/world-state-v2";
 import {
   activeSituationSchema,
   scheduledConsequenceSchema,
@@ -57,6 +56,12 @@ export type SimulationStateV1 = Readonly<{
   history: Readonly<{lastCommittedTurnId: string | null; committedTurnCount: number}>;
 }>;
 
+/** Geometry-free reference port shared by the schema migration engines. */
+export type SimulationWorldReferences = Readonly<{
+  countriesById: Readonly<Record<string, unknown>>;
+  retiredCountryIds: Iterable<string>;
+}>;
+
 export const parseSimulationStateV1 = (input: unknown): SimulationStateV1 => {
   assertSafeSimulationData(input);
   return freezeSimulationValue(
@@ -64,7 +69,7 @@ export const parseSimulationStateV1 = (input: unknown): SimulationStateV1 => {
   ) as unknown as SimulationStateV1;
 };
 
-function freezeSimulationValue<Value>(value: Value): Value {
+export function freezeSimulationValue<Value>(value: Value): Value {
   if (value === null || typeof value !== "object" || Object.isFrozen(value)) return value;
   if (Array.isArray(value)) {
     value.forEach((entry) => freezeSimulationValue(entry));
@@ -74,7 +79,7 @@ function freezeSimulationValue<Value>(value: Value): Value {
   return Object.freeze(value);
 }
 
-const assertExactOrder = (
+export const assertExactSimulationOrder = (
   record: Readonly<Record<string, unknown>>,
   order: readonly string[],
   context: string,
@@ -89,8 +94,8 @@ const assertExactOrder = (
 };
 
 export function assertSimulationStateInvariants(
-  state: SimulationStateV1,
-  world: WorldStateV2,
+  state: Omit<SimulationStateV1, "schemaVersion">,
+  world: SimulationWorldReferences,
 ): void {
   const activeCountryIds = new Set(Object.keys(world.countriesById));
   const knownCountryIds = new Set<string>([
@@ -100,8 +105,8 @@ export function assertSimulationStateInvariants(
   if (!activeCountryIds.has(state.playerCountryId)) {
     throw new Error(`Simulation player country is not active: ${state.playerCountryId}`);
   }
-  assertExactOrder(state.factsById, state.factOrder, "Simulation fact");
-  assertExactOrder(state.situationsById, state.situationOrder, "Simulation situation");
+  assertExactSimulationOrder(state.factsById, state.factOrder, "Simulation fact");
+  assertExactSimulationOrder(state.situationsById, state.situationOrder, "Simulation situation");
 
   const actionIds = new Set<string>();
   for (const action of state.queuedActions) {
@@ -194,7 +199,7 @@ export function assertSimulationStateInvariants(
 
 export function createSimulationStateV1(
   input: unknown,
-  world: WorldStateV2,
+  world: SimulationWorldReferences,
 ): SimulationStateV1 {
   const state = parseSimulationStateV1(input);
   assertSimulationStateInvariants(state, world);

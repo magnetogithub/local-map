@@ -1,0 +1,115 @@
+{
+  "status": "pass",
+  "generatedAt": "2026-10-06T07:51:56.317Z",
+  "request": "[DEBUG_WORLD_EFFECT] 대한민국이 북한에 전쟁을 개시하여 휴전선 인근을 점령",
+  "actualApi": {
+    "calls": 2,
+    "inputTokens": [
+      22365,
+      22905
+    ],
+    "committedInSeparateMemoryState": {
+      "date": "2020-01-08",
+      "turn": 1,
+      "worldRevision": 1,
+      "controlledByKOR": 2,
+      "worldEffects": [
+        "territory.occupy"
+      ],
+      "outcomes": [
+        "succeeded"
+      ]
+    }
+  },
+  "tests": {
+    "runner": "Direct TypeScript test bodies with Vitest Chai matchers; no Vitest worker runner",
+    "passed": 96,
+    "failed": 0,
+    "failures": []
+  },
+  "typecheckExitCode": 0,
+  "eslintExitCode": 0,
+  "sourceGateTests": {
+    "passed": 43,
+    "failed": 0
+  },
+  "limitations": [
+    "Vitest worker runner was unavailable; 94 existing and added test bodies ran directly with Vitest Chai matchers.",
+    "Current user game save was not modified; the exact request was verified against the approved initial world in an isolated state."
+  ],
+  "files": [
+    {
+      "path": "src/lib/simulation/server/model-simulation-context.ts",
+      "sha256": "c95a68e7238b85d03ab0b86394e1fd069355cc9348c1c66afb029a469a328304"
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-error.ts",
+      "sha256": "908dfdcb1f579526d4b76f57605b0269257740abed78be6eba96d91bfefe9308"
+    },
+    {
+      "path": "src/lib/simulation/server/openai-response-events.ts",
+      "sha256": "6113a8714c7b03199267b63118fa15a6c4d3ac4e9b9ddf56f4c80f97c3e2dbfb"
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-provider.ts",
+      "sha256": "9990b408a85f7520892186187641ce6bc99846c30db1da37c96f44fae7033624"
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-transport.ts",
+      "sha256": "75323c382f2893358f0d4c1832b3efa79b55b6bdc57f3e1b9cc3a483d0cf3627"
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-instruction.ts",
+      "sha256": "09f2c8f113ad96ce26ef0c0052072133742e86e5784602198415dfff12dc05aa"
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-tools.ts",
+      "sha256": "400951dd11db5d04885d6dfd5123cf97f5fb835cd2696bc6c617e5df0d9b9122"
+    },
+    {
+      "path": "src/lib/simulation/server/context-resolution-validator.ts",
+      "sha256": "df6d294f4a55fca247e1dc1e53615219fc5d1f4fb10facb0f6c63f495bec3fcd"
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-provider.ts",
+      "sha256": "64b177c7ff68c224871b092a2c2fc7a727a1f899fa3970d8bdd1745e4e83fe83"
+    },
+    {
+      "path": "src/lib/simulation/catalog-border-lookup.ts",
+      "sha256": "f1d97948275dc1db1fea66c75da75929906b85b34ea3405262a714fb2503e69d"
+    },
+    {
+      "path": "src/lib/simulation/catalog-region.ts",
+      "sha256": "9902d6db633f9141f6bd1208b30453e618bf2f00a3b2a4535785456516c18b96"
+    },
+    {
+      "path": "src/lib/simulation/catalog-region.server.ts",
+      "sha256": "56e76e3fb46c8adfbefb5cfd87f31a41c0cb210dc4c4dfce088423078c1e3c88"
+    },
+    {
+      "path": "src/lib/simulation/catalog-turn-plan.ts",
+      "sha256": "6780b934dfafc607dadbdc830772890bc9ec423f765691d27ff7895840bb3d48"
+    },
+    {
+      "path": "src/lib/planning/territorial-control-planner.ts",
+      "sha256": "5c68752672b3237dc67a87cc8ccb647d3f9de38b5a5d206a0c15d831a4b30f48"
+    },
+    {
+      "path": "src/lib/simulation/server/provider-config.ts",
+      "sha256": "7f1d6fde68a8d363737dfe6ff64f103a3d6e05edf809eb3546330c00e45b2482"
+    }
+  ],
+  "latestApiEvidence": "reports/verification/prompt14-provider-schema/turn-limit-final.json",
+  "focusedTests": {
+    "runner": "Direct TypeScript test bodies with Vitest Chai matchers; no Vitest worker runner",
+    "passed": 1,
+    "failed": 0,
+    "failures": []
+  },
+  "toolBudgetPolicy": {
+    "ordinaryResponses": 8,
+    "reservedSubmitAndRepairResponses": 2,
+    "maxToolCalls": 12,
+    "forcedSubmitBeforeCallCap": true
+  }
+}

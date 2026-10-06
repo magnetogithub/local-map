@@ -1,20 +1,13 @@
+import {presentationMapColor} from './runtime-view';
+import type {GameWorldView as WorldStateV2, SimulationPresentation as SimulationStateV1, MapPresentation as WorldMapRuntimeProjection} from './runtime-view';
 import type {EconomyViewModel, GameHudViewModel} from "@/lib/game-ui/contracts";
-import type {WorldMapRuntimeProjection} from "@/lib/projection/world-map-runtime-projection";
 import type {TurnClientPhase} from "@/lib/simulation/client/turn-state-machine";
-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
 import type {ActiveCountryId} from "@/lib/world/country-id";
-import type {WorldStateV2} from "@/lib/world/world-state-v2";
-
-type MapCountryFeature = Readonly<{
-  properties?: Readonly<{ownerCountryId?: string | null; mapColor?: string}>;
-}>;
 
 const playerMapColor = (
   mapProjection: WorldMapRuntimeProjection,
   playerCountryId: ActiveCountryId,
-) => (mapProjection.countriesLow.features as readonly MapCountryFeature[])
-  .find((feature) => feature.properties?.ownerCountryId === playerCountryId)
-  ?.properties?.mapColor ?? null;
+) => presentationMapColor(mapProjection, playerCountryId);
 
 export function createGameHudProjection(input: Readonly<{
   world: WorldStateV2;
