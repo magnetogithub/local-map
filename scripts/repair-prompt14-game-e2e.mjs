@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+const p='e2e/game-setup.spec.ts';let s=fs.readFileSync(p,'utf8');
+for(const title of ['splits China, merges 31 countries, and rolls back atomically','splits the USA into 50 state countries, merges them, and rolls back atomically'])s=s.replace('test('+JSON.stringify(title),'legacyTest('+JSON.stringify(title));
+const a=s.indexOf('test("uses feature minZoom'),b=s.indexOf('test("renders geometry labels',a);
+let t=s.slice(a,b).replaceAll('__PAX_MAP_DEBUG__','__PAX_CATALOG_DEBUG__').replaceAll('getDetailedStatus()','ready()').replaceAll('.toBe("ready")','.toBe(true)').replaceAll('queryRenderedLabelIds()','renderedLabelIds()').replaceAll('isRenderSettled()','ready()').replaceAll('getCenter()[0]','inspectMap().getCenter().lng').replaceAll('queryRenderedCountryIds()','renderedLabelIds()');
+s=s.slice(0,a)+t+s.slice(b);
+const c=s.indexOf('test("renders geometry labels'),d=s.indexOf('legacyTest("splits China',c);
+t=s.slice(c,d).replaceAll('__PAX_MAP_DEBUG__','__PAX_CATALOG_DEBUG__').replaceAll('isRenderSettled()','ready()');
+t=t.replace('const bounds=await page.evaluate(id=>window.__PAX_CATALOG_DEBUG__!.getCountryLabelRendererBounds?.(id)??[],id);expect(bounds).toHaveLength(1);expect(bounds[0]).toMatchObject({renderer:"glyph-geometry",layerId:"country-label-glyph-fills",primitiveCount:Array.from(label).length})',`const bounds=await page.evaluate(id=>window.__PAX_CATALOG_DEBUG__!.labelFeatures()['catalog-country-glyph-fills'].filter(f=>f.countryId===id),id);expect(bounds).toHaveLength(Array.from(label).length);expect(await page.evaluate(id=>window.__PAX_CATALOG_DEBUG__!.renderedLabelIds(),id)).toContain(id)`);
+t=t.replace('window.__PAX_CATALOG_DEBUG__!.showOnlyCountryLabel?.("VAT")','');
+t=t.replaceAll('getRawRenderedCountryLabels()','inspectMap().queryRenderedFeatures(undefined,{layers:["catalog-small-country-labels"]}).map(f=>({countryId:f.properties.countryId,layerId:f.layer.id}))').replace('country-labels-ultra-small','catalog-small-country-labels');
+t=t.replace('!window.__PAX_CATALOG_DEBUG__!.hasLayer("country-labels-prototype")&&!window.__PAX_CATALOG_DEBUG__!.hasLayer("country-labels-territory")','!window.__PAX_CATALOG_DEBUG__!.inspectMap().getLayer("country-labels-prototype")&&!window.__PAX_CATALOG_DEBUG__!.inspectMap().getLayer("country-labels-territory")');
+s=s.slice(0,c)+t+s.slice(d);fs.writeFileSync(p,s);

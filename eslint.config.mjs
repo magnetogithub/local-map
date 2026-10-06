@@ -12,9 +12,15 @@ const eslintConfig = defineConfig([
     // Default ignores of eslint-config-next:
     ".next/**",
     ".next-e2e/**",
+    ".next-e2e-review-g/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated verification bundles and scratch reproductions are not source.
+    ".tmp/**",
+    "reports/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 

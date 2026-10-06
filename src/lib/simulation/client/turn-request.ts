@@ -18,7 +18,7 @@ const addUtcDays = (date: string, days: number) => {
   return value.toISOString().slice(0, 10);
 };
 
-export function targetDateForPreset(state: SimulationStateV1, preset: TimeAdvancePreset): string {
+export function targetDateForPreset(state: Pick<SimulationStateV1,'currentDate'|'scheduledConsequences'>, preset: TimeAdvancePreset): string {
   if (preset === "day") return addUtcDays(state.currentDate, 1);
   if (preset === "week") return addUtcDays(state.currentDate, 7);
   if (preset === "month") return addUtcDays(state.currentDate, 30);

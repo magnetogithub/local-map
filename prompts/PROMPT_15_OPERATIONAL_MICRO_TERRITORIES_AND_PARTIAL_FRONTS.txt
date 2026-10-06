@@ -1,0 +1,518 @@
+# PROMPT 15 — 행정구역 내부 미세 점령과 전선, 세부 구역 소실 복구
+
+이 문서는 현재 저장소에 Prompt 15를 구현하기 위한 실행 프롬프트다. 프롬프트 작성만 요청받은 경우 구현을 시작하지 않는다. 구현 요청을 받으면 아래 checkpoint를 순서대로 수행한다. 실제 코드·데이터가 문서의 과거 설명보다 우선하며, 차이는 audit에 기록한다.
+
+목표는 기존 행정구역을 통째로 점령하는 것에서 벗어나, 같은 행정구역 안에서도 접경 일부만 점령하고 전선이 이동하는 모습을 실제 게임에 구현하는 것이다. Prompt 14의 성공 보고서를 그대로 완료 근거로 사용하지 않는다.
+
+## 1. 확인된 문제와 이번 완료 기준
+
+1. 현재 catalog는 주로 ADM1 source feature 하나를 territory 하나로 사용한다. 북한의 휴전선 인근 점령은 황해북도·강원도 전체를 선택한다. 점령 호출이 성공했어도 사용자가 원한 미세 점령은 구현되지 않았다.
+2. 현재 슬로베니아(SVN) 생성 보고서에는 원본 P1 193개를 제외하고 `P0-fallback` 하나로 대체한 기록이 있다. 정합 후 gapArea 약 3.2239881875e-9가 tolerance 약 2.3657666351e-9를 초과한 것이 기록된 원인이다. 이 수치는 기존 증거이며 새 정합의 허용 오차로 재사용하지 않는다.
+3. 세계 coverage·schema·API 성공만 검증하면, 내부 분할이 사라지거나 점령 범위가 과도하게 넓어도 pass가 된다. 기능 해상도와 기존 세부 구역 보존을 별도 hard gate로 추가한다.
+
+완료하려면 다음을 모두 보여야 한다.
+- 한 행정구역 내부에 서로 다른 controller를 가진 실제 territory가 함께 존재한다.
+- 접경 일부의 점령색과 전선이 기존 행정 경계 내부에 나타난다.
+- 미점령 내부 영토와 owner가 보존된다.
+- 슬로베니아의 고정 원본 193개 행정 identity가 정합·조회·지도 경계에 보존되고, 서로 다른 미세 영토로 연결된다.
+- 특정 국가용 코드 없이 같은 구조가 다른 국가와 이후 턴에도 동작한다.
+
+## 2. Prompt 14와의 관계 및 변경 허용 범위
+
+Prompt 15는 다음 조건에 한해 Prompt 14의 금지를 명시적으로 대체한다.
+
+- 실제 행정 polygon만이 territory 분할 원본이라는 제한을 해제한다. 검증된 국가·행정 polygon 내부에 결정적으로 생성한 게임용 operational cell을 허용한다.
+- 오프라인 grid·adaptive mesh·결정적 partition을 후보로 검토할 수 있다. 합성 cell을 실제 행정구역 또는 외부 기관의 경계로 표시하지 않는다.
+- 원본 행정 identity 하나와 territory 하나를 동일시하지 않는다. 행정구역은 여러 operational cell을 참조한다.
+- 정합 실패 시 국가 전체를 단일 territory로 대체하고 기능 완료로 보고하는 정책을 폐기한다.
+- 현재 worldAtoms=6000, countryAtoms=512, authoritativeVertices=2000000 등 catalog 생성 cap은 새 해상도와 양립하는지 측정하여 재설계할 수 있다. 숫자만 올리지 말고 메모리·타일·서버·검증 비용과 근거를 고정한다.
+
+다음은 계속 금지한다.
+- GPT가 좌표·선·GeoJSON·polygon 또는 존재하지 않는 territory ID를 생성하는 방식.
+- 턴 진행 중 polygon cutting, 신규 cell 생성, topology 재구축.
+- 소유권 추측, 국가 외곽 변경, 원본 구역 identity 삭제, cap 때문에 구역을 통째로 합치는 우회.
+- API 실패를 성공으로 표시하거나, 지도만 바꾸고 authoritative world를 그대로 두는 구현.
+
+국가 색상, 기존 UI·국가 선택·뉴스·날짜·history·undo/redo·atomic commit은 보존한다. 브라우저 persistence나 신규 전쟁 시스템은 추가하지 않는다. Next 관련 코드를 수정하기 전에 AGENTS.md와 해당 로컬 Next 문서를 읽는다.
+
+## 3. 시작 audit와 재현 가능한 baseline
+
+실제 저장소에서 다음을 확인하고 `reports/prompt15/15-01-baseline.json`에 기록한다.
+
+- frozen catalog ref, source lock, geometry/topology/render roots, 파일 hash와 byte length.
+- 국가별 원본 행정구역 수, 선택된 행정 identity 수, territory 수, fallback 이유, 내부 일부 점령 가능 여부.
+- 슬로베니아의 원본→정합→제외→현재 catalog membership 경로 및 실제 gap geometry.
+- 북한 접경 lookup이 반환하는 두 territory와 그 geometry·행정 identity.
+- V3 world와 simulation, authority, region resolver, map projection, migration 및 delivery의 실제 계약.
+- 현재 tool manifest와 strict schema, lookup/submit/repair 예산, provider 실패 분류.
+- 확대 수준별 행정 경계 표시, 국가 경계·전선·점령색, 현재 성능.
+- 기존 dirty 변경의 목록과 이번 작업 범위. 이전 사용자 수정과 Prompt 14 증거를 덮어쓰지 않는다.
+
+현재 보고서가 실제 bytes와 다른 경우 먼저 불일치를 기록한다. 과거 pass 상태만으로 현재 상태를 보증하지 않는다.
+
+## 4. 행정구역과 게임용 영토를 분리하는 모델
+
+immutable catalog에 다음 개념을 구분하여 보유한다. 이름은 기존 계약에 맞춰 정할 수 있다.
+
+1. Country envelope: 고정된 현재 게임용 국가 polygon과 sourceCountryId.
+2. Administrative region: 고정 원본 identity·이름·level·polygon provenance 및 운영 영토 membership.
+3. Operational territory: 실제 점령·해방·양도 최소 단위의 polygon, stable ID, 부모 행정 identity, 원본 연결, 생성 정책 버전.
+4. Adjacency: cell 간 양의 길이 공유 경계, 국가 경계·행정 경계·게임용 내부 경계의 구분.
+
+큰 기존 행정구역 내부에는 여러 operational territory가 있어야 한다. 작은 섬·미소 구역은 유효한 미분할 예외가 될 수 있으나 나라 전체를 예외로 묶지 않는다. 국가별 예외 geometry와 이유를 보고한다.
+
+ownerCountryId와 controllerCountryId는 각 operational territory의 mutable state다. sourceCountryId와 원본 행정 identity는 점령·병합·양도로 바뀌지 않는다. 기존 지역 조회는 같은 이름을 유지하며 새 cell 집합을 반환한다. 긴 TerritoryId를 subdivisionId로 넣지 않는다.
+
+행정 membership이 큰 cell 집합으로 확대되므로 현행 regionRecordSchema의 512 제한, resolver, authority scope, tool output, request cap을 각각 audit한다. catalog 저장 수와 한 턴 변경 수는 별도 계약이다. 전체 지역을 임의로 앞 512개로 잘라 같은 지역이라고 표시하지 않는다.
+
+## 5. 슬로베니아 및 다른 국가의 세부 구역 복구
+
+### 5.1 복구 원칙
+
+- 현재 catalog의 단일 fallback 결과가 아니라 고정 원본 행정 polygon과 provenance로 돌아가 원인을 재현한다.
+- 193개는 현재 고정 원본의 identity 수다. 현재 실제 행정구역 개수라는 새로운 외부 주장으로 바꾸지 않는다.
+- 국가 외곽은 현재 승인된 derived P0를 유지한다. 모든 구역을 동일한 공통 경계 arrangement에서 정합하고 source-side correspondence를 확인한다.
+- 기록된 작은 gap의 실제 위치·연속 경계·원본 연결·연산 오차를 조사한다. 수치 오차와 실제 source gap을 구별한다.
+- 허용된 정합은 버전 고정 정책, 변위·면적 한도, 전체 구역 identity·component·hole 보존 및 국가 coverage 증거를 가져야 한다.
+- tolerance를 결과에 맞춰 늘리거나, centroid·최근접 구역·ID 순서로 잔여 면적을 배정하지 않는다.
+- 안전하게 설명할 수 없는 face는 unresolved로 기록한다. 합성 operational mesh 허용이 행정구역 소유권 추측까지 허용하는 것은 아니다.
+
+### 5.2 단일 fallback의 대체
+
+- 하나의 구역 정합 오류로 정상 구역 전체를 삭제하지 않는다.
+- 미해결 정합은 후보 build를 실패시킨다. 기존 승인된 배포를 유지하며 문제 위치·영향 구역·대안을 보고한다.
+- 슬로베니아 복원 실패 시 Prompt 15를 완료로 보고하거나 새 catalog를 production에 게시하지 않는다.
+- 전체 국가에 동일 감사를 적용하여 source identity 소실과 단일 fallback을 찾아 복구한다. 원래 source 구역이 하나뿐인 경우와 오류로 하나가 된 경우를 구별한다.
+- 기존에 가능한 일부 점령·지역 조회·지도 경계를 새 버전에서 줄이지 않는다.
+
+## 6. 오프라인 operational cell 생성
+
+### 6.1 해상도·비용 정책을 먼저 정한다
+
+국가·행정 경계 내부를 결정적으로 분할하는 후보를 측정하여 하나의 정책을 선택한다. 국가별 수작업 예외나 한국용 mesh만으로 끝내지 않는다.
+
+- 셀의 목표 규모는 km·km² 등 물리 단위로 정의한다. 위경도 degrees를 km로 취급하지 않는다.
+- 목표는 수십 km 규모의 접경 띠가 도 전체와 구별되는 여러 cell로 표현되는 것이다.
+- 50km는 사용자의 설명 예시다. 모든 요청을 50km로 고정하거나 GPT에게 정밀 거리·좌표 생성을 요구하지 않는다.
+- 접경의 작은 cell과 넓은 내륙의 비용을 조절하는 결정적 adaptive 정책을 검토할 수 있다. 국가 내부의 새 전선도 계속 움직일 수 있도록 내부 해상도 역시 검증한다.
+- 고위도·날짜변경선·큰 국가·작은 국가·해안·island·hole을 포함해 면적, 지름, 종횡비, 작은 sliver 분포를 측정한다.
+- 접경 및 내부의 최대 cell 규모, 허용 예외, 세계/국가별 cell·vertex·edge·tile byte·초기 메모리 budget을 수치로 고정한다.
+- topology, LOD, region membership, authority 및 요청 크기의 비용을 포함한다. 측정 없이 기존 cap 유지나 무제한 확대를 선택하지 않는다.
+
+정책은 최소 한국/북한, 슬로베니아, 다른 대륙의 인접 국가, 큰 내륙 국가에서 생성·행동·성능을 검증한 뒤 확정한다. 특정 데모에서만 좋은 해상도이면 전 세계 rollout gate를 통과할 수 없다.
+
+15-3의 정책 확정에는 후보 생성과 독립 geometry/graph 실험을 사용한다. 아직 구현하지 않은 production tool·migration·지도 E2E 성공을 이 단계의 선행 조건으로 요구하지 않는다. 전체 행동 검증은 15-7/15-8에서 수행하며 실패하면 정책 확정까지 되돌아간다.
+
+단순히 cell 수가 두 개 이상이라는 기준은 해상도 증거가 아니다. REVIEW B 전에 다음 수치를 고정하고 이후 actual-byte 결과와 비교한다.
+- 접경과 내부의 물리적 최대 cell 지름·면적, sliver와 미분할 예외의 상한 및 목록.
+- 대표적인 제한 진격 깊이 W에 대해 cell 규모가 W보다 충분히 작고 여러 깊이 단계로 표현되는 해상도 비율. 내부 진격도 같은 기준을 적용한다.
+- near/limited/deeper 각각의 깊이·전선 방향 폭·범위 상한. near가 도 전체 또는 국가 전체를 의미하게 정하지 않는다.
+- 대표적으로 충분히 큰 행정구역에서 near 점령 면적의 상한 비율과 남아야 하는 내륙 면적의 하한 비율. 결과를 본 뒤 통과하도록 값을 조정하지 않는다.
+- 극소 구역 예외는 source geometry와 물리 크기로만 정한다. 실패한 국가·큰 도를 예외 목록에 넣어 해상도 gate를 우회하지 않는다.
+
+### 6.2 생성 불변식
+
+- 국가 및 보존 행정 경계를 먼저 고정하고, 그 내부에 cell을 생성한다. cell이 다른 국가나 행정 identity를 가로지르지 않는다.
+- 동일 버전의 경계와 cell을 한 공통 arrangement에서 noding하여 양쪽이 정확히 같은 공유 edge를 사용하게 한다.
+- cell union은 부모 polygon과 검증 가능한 tolerance 안에서 일치한다. gap·overlap·cross-border를 모든 국가에서 검증한다.
+- sliver 처리는 고정된 제한 정책만 사용한다. 부모 경계를 넘거나 source component를 버리는 병합은 금지한다.
+- 원본 source hash와 합성 분할 정책·generator·projection·의존성 버전 및 byte length를 provenance에 분리해 기록한다.
+- stable ID는 생성 정책·부모 identity·canonical geometry 등 실제 immutable 입력으로 유도한다. 실행 순서, locale, 현재 owner/controller, 랜덤값에 의존하지 않는다.
+- 두 번의 독립 생성에서 catalog·topology·membership·render artifact bytes가 일치해야 한다.
+- runtime은 승인된 asset만 읽는다. 개발 서버 시작이나 턴 진행 때 재생성하지 않는다.
+
+## 7. catalog 버전 전환과 기존 게임 상태
+
+새 geometry를 기존 catalog version/root에 덮어쓰지 않는다. 새 immutable version과 artifact index를 만든다.
+
+- 이전 territory→새 cell의 one-to-many mapping을 실제 geometry coverage로 증명한다.
+- 생성 입력에는 이전 catalog territory 경계도 protected overlay로 포함한다. 복원 행정 경계와 이전 경계가 다르면 공통 refinement를 만든다. 새 cell은 이전 부모를 정확히 하나 가지며, 이전 geometry union과 새 행정 membership을 모두 검증한다. 국가 단위 분류만으로 migration coverage를 대체하지 않는다.
+- 기본적으로 새 cell은 이전 부모의 owner/controller를 상속한다. 동일 sourceCountryId를 현재 owner로 오인하지 않는다.
+- authority scope, 지역 membership, simulation 내 territory 참조, pending action 및 history의 영향을 audit하여 명시적 migration 또는 기존 버전 유지 정책으로 처리한다.
+- 이전에 controller가 다른 구역을 한 새 cell로 합치지 않는다. 모호한 참조와 미완료 migration은 cutover를 실패시킨다.
+- world와 simulation, catalog ref를 하나의 atomic 전환으로 다룬다. undo/redo 또는 기존 snapshot은 해당 catalog version으로 일관되게 복원되어야 한다.
+- seed 시작·새로고침 정책은 기존 동작을 유지한다. 브라우저 저장을 신규 도입하지 않는다.
+- 옛 asset은 참조가 남는 동안 보존한다. migration 비용 때문에 기존 snapshot을 조용히 삭제하지 않는다.
+
+## 8. AI의 지리 판단과 작은 범위 선택 도구
+
+### 8.1 역할 분담
+
+AI는 자연어의 국가·방향·접경·진격 규모와 행동 문맥을 해석한다. 서버는 승인된 catalog에서 실제 cell 후보·현재 소유/통제·adjacency·범위를 검증하고 ID를 반환한다. AI는 그 ID 집합으로 effect를 제출한다.
+
+`휴전선 인근`, `국경 바로 너머`, `북부 접경 일부`처럼 판단 가능한 표현에 매번 사용자가 도 이름을 쓰도록 요구하지 않는다. 검증된 문맥으로도 대상 국가·방향을 결정할 수 없는 경우에만 구체적 이유와 후보를 제시한다.
+
+### 8.2 lookup 계약
+
+기존 find_border_territories와 region 도구를 확장하거나 적합한 bounded tool을 추가한다. 구현 전에 strict schema와 비용을 확정한다.
+
+- 입력은 canonical country IDs, 대상 region reference 또는 승인된 frontier reference, bounded qualitative depth/extent, cap 및 world/catalog revision 등 검증 가능한 의미로 제한한다.
+- `near`, `limited`, `deeper` 등 정성 범위는 공개된 서버 정책으로 cell graph의 연속적인 범위를 선택한다. 문자열을 임의 좌표로 변환하지 않는다.
+- 실제 거리 옵션을 제공한다면 검증된 서버 geometry 연산이 담당한다. 정밀 geodesic 띠와 graph-distance 근사 결과를 구별해 보고한다.
+- 출력은 catalog ref, world revision, sorted unique cell IDs, effectTarget, 부모 행정구역, 선택 근거, 범위 규모·근사 한계와 cap 상태를 포함한다.
+- 현재 통제 경계와 고정 source 국가 경계를 구별한다. 첫 점령 이후의 다음 진격은 현재 전선을 기준으로 인접한 미점령 cell을 찾는다.
+- 바다·점 접촉·멀리 떨어진 component를 육상 adjacency로 취급하지 않는다. 임의의 원격 cell 점령이나 도 전체 확대를 막는다.
+- cap 초과 시 결과를 임의 절단하지 않는다. 더 작은 범위 요청, bounded pagination 또는 검증된 선택 토큰 중 하나를 설계한다. 선택 토큰을 쓰면 catalog/world revision·actor/target·operation·실제 membership을 서버가 묶어 재검증한다.
+- 도구의 global state 사용, 재시작·동시 요청·stale 처리 계약을 명시한다. 서로 다른 게임의 선택이 섞이지 않는다.
+
+지리 범위가 제한된 effect는 도구의 범위 계약을 host에서 다시 검증해야 한다. 승인 selection reference 또는 재검증 가능한 구조화된 범위 요청을 effect와 연결하고, catalog/world revision·actor/target·operation·frontier·scope 및 반환 ID 집합을 묶는다. lookup 응답을 AI가 읽었다는 사실만으로 제출 범위를 신뢰하지 않는다. 생 ID만 제출하거나 더 큰 regionRefs로 대체하여 제한된 조회를 우회하는 경우, validator/planner가 commit 전에 거부해야 한다. 명시적인 전체 지역 요청은 별도 전체 범위·authority 계약을 따르며 near 요청과 구분한다. DEBUG에서도 범위 검증은 생략하지 않는다.
+
+현재 한 요청/aggregate의 512 cell 제한은 audit의 출발점이며, 새 mesh에서 자동으로 충분하다고 가정하지 않는다. REVIEW D 전에 대표 near 선택의 실제 cell 수를 측정하고 다음 중 하나를 결정한다.
+- 물리 해상도·선택 깊이·폭을 만족하면서 기존 cap 안에서 완료하는 정책.
+- 성능 근거를 가진 명시적 bounded cap 개정과 schema·authority·resolver·planner·aggregate 검증의 일관된 변경.
+pagination과 선택 토큰은 전달 비용을 줄일 뿐 실제 commit cap을 우회하지 않는다. 전체 선택이 cap을 넘으면 부분 턴 여러 개로 쪼개 성공 처리하지 않는다. 대표 접경 요청이 항상 cap 오류로 끝나는 구현은 REVIEW D/E를 통과하지 못한다.
+
+### 8.3 effect와 provider
+
+- territory.occupy는 선택한 작은 cell만 controller를 바꾸고 owner를 보존한다. 해방·양도·병합도 기존 검증 경로로 처리한다.
+- 도 이름을 조회한 전체 membership을 `접경 일부`의 대체로 제출하지 않는다. tool 결과의 effectTarget을 직접 사용하고 territory ID와 region reference를 혼동하지 않는다.
+- lookup·submit·단일 repair의 예산을 분리하고, 제출 전에 조회만으로 예산을 소진하지 않게 한다. 무제한 반복이나 timeout 확대만으로 해결하지 않는다.
+- 불필요한 전체 cell 목록을 모델 문맥에 넣지 않는다. 국가·행정 directory와 bounded lookup으로 필요한 후보만 전달한다.
+- strict tool schema, typed provider error, rate-limit 처리 및 현재 submit/repair 개선을 회귀시키지 않는다.
+- 개발 DEBUG는 기존 server-authorized 개발 경로만 사용한다. schema·ID·owner/controller·scope·cap·revision·atomicity를 우회하지 않는다. production에서는 DEBUG 권한이 작동하지 않는다.
+- 일반 게임 행동의 권한·인과관계는 기존 production 규칙을 그대로 만족해야 한다.
+
+## 9. 지도 표현과 사용자 동작 보존
+
+다음 경계를 별도 의미로 다룬다.
+1. 국가 경계: 현재 세계 상태의 국가 관계에 따른 표시.
+2. 행정 경계: 보존한 실제 source 구역 표시.
+3. operational cell 경계: 게임용 미세 영토 분할.
+4. 점령 전선: 인접 cell의 controller 차이에 따른 경계.
+
+- 점령색과 전선은 authoritative cell 상태에서 파생한다. 국가 polygon 위에 임시 띠를 그리는 방식은 완료가 아니다.
+- cell 내부선 전부를 흰색으로 항상 표시하지 않는다. 같은 owner/controller인 cell 사이에는 미세 선 때문에 seam이 생기지 않게 한다.
+- 행정 세부선은 현재 사용자가 승인한 zoom 4 미만 숨김을 유지한다. 정확한 layer와 visibility 동작을 코드에서 재확인하고 변경하지 않는다.
+- operational 내부선은 별도 고배율 정책을 정한다. 전선의 의미 있는 표시는 내부선 숨김과 별개로 유지한다.
+- 국경·해안·행정 경계·전선을 혼동하거나, 내부선이 기존 국가 윤곽을 덮지 않게 한다.
+- 국가 label·click·hover·panel은 cell 수 증가 후에도 기존 국가 의미를 유지한다. 내부 모델 설명을 일반 게임 UI에 불필요하게 노출하지 않는다.
+- 기존 incremental projection 경로를 사용한다. 턴마다 전 세계 GeoJSON을 다시 setData하거나 tile 전체를 재생성하지 않는다.
+- 큰 cell 수를 panel의 영토 수와 성능에 미치는 영향까지 검증한다. cell 수를 실제 주 개수라고 부르지 않는다.
+
+## 10. 반드시 통과해야 하는 행동 검증
+
+### 10.1 한국/북한 접경 일부 점령
+
+독립 테스트 상태에서 `[DEBUG_WORLD_EFFECT] 대한민국이 북한에 전쟁을 개시하여 휴전선 인근을 점령`을 사용한다.
+
+- AI 지리 해석→bounded lookup→strict submit→validator→planner→atomic commit→지도 projection 전체를 검증한다.
+- 적어도 하나의 기존 북한 도 내부에서 점령 cell과 미점령 cell이 함께 존재해야 한다.
+- 점령·미점령이 하나씩 있다는 사실만으로 통과하지 않는다. 실제 geometry로 점령 면적 비율·접경에서의 깊이·전선 방향 폭·남은 내륙 면적을 계산하고 REVIEW B에서 고정한 near 범위 기준과 비교한다. 도 대부분을 점령하고 극소 cell 하나만 남기는 결과는 실패다.
+- 선택 결과가 황해북도·강원도 전체 membership과 같으면 실패다.
+- 도의 기존 내륙 일부가 북한 controller로 남고 모든 대상 cell의 owner는 보존되어야 한다.
+- 점령 영역은 승인된 육상 접경과 연결되며 선택 정책의 깊이·범위·cap을 만족해야 한다.
+- 실제 지도 screenshot에서 행정 경계 내부를 지나는 전선과 부분 점령색을 확인한다.
+- 다음 턴 진격은 현재 전선에서 전진한다. 해방·양도·undo·redo 후 authoritative state와 지도 상태가 일치해야 한다.
+- 같은 lookup 입력과 동일 상태는 같은 IDs를 반환한다. 모델 자연어 문장까지 동일할 필요는 없다.
+
+### 10.2 슬로베니아 복원
+
+- 고정 원본 193개 identity와 최종 행정 membership을 bijection 또는 명시적 보존 관계로 증명한다.
+- 원본의 canonical source ID 집합을 선택 전 단계에서 고정한다. 최종 ID 집합과 누락·추가·중복을 비교하고, 구역별 비어 있지 않은 cell membership의 union이 해당 정합 polygon과 일치하는지 검증한다. 단일 행정 level 내 서로 다른 구역의 cell membership은 겹치지 않아야 한다. 부모/자식 level의 정당한 포함 관계는 별도 계약으로 검증한다.
+- source raw bytes, 정합 polygon, component/hole 추적 및 경계 correspondence까지 연결한다. 개수만 193으로 맞추거나 같은 source ID에 다른 geometry를 넣는 결과는 실패다. 전체 국가에 동일 원본→최종 보존 검사를 적용한다.
+- P0-fallback 하나로 완료하거나, 이름만 193개 만들고 전부 같은 국가 전체 cell을 참조하면 실패다.
+- 실제 administrative polygon·경계·region lookup이 존재해야 한다.
+- 원본 gap과 새 정합 결과, 수치 모델, 변위·면적·coverage를 실제 bytes로 재검증한다.
+- 여러 구역의 지도 경계가 승인된 확대 수준에서 보이고, 한 구역 내부의 작은 점령이 다른 구역과 같은 구역의 나머지를 바꾸지 않아야 한다.
+
+### 10.3 일반화·실패·회귀
+
+- 다른 대륙의 육상 인접 국가에서도 행정구역 내부 부분 점령을 확인한다.
+- 고위도·날짜변경선·island/hole·큰 내륙·작은 국가의 geometry와 범위를 검증한다.
+- 낡은 catalog/world revision, unknown ID, wrong owner/actor, 비연속 원격 선택, cap 초과, ambiguous geography는 안전하게 실패한다.
+- 잘못된 effect를 포함한 batch는 world와 simulation 어느 쪽도 부분 변경하지 않는다.
+- 전선이 없는 동일 controller cell 사이에 허위 전선이 나타나지 않는다.
+- API 오류 시 기존 확정 상태·대기 행동·Retry 동작을 보존한다.
+- production DEBUG 거부, 정상 authority 흐름, 색상, merge·retire, 클릭·label·undo/redo를 회귀 검증한다.
+
+검증기가 기존 실패를 실제로 잡는지 다음 음성 사례를 주입하여 확인한다. 정상 결과의 assertion만 통과시키는 것으로 대체하지 않는다.
+- 모든 원본 ID를 유지한 채 도 전체를 operational cell 하나로 만드는 후보: 해상도 gate 실패.
+- near 요청에 도 대부분과 미점령 극소 cell 하나를 남기는 결과: 범위 gate 실패.
+- 슬로베니아 identity 하나를 누락하고 다른 identity를 복제해 193개를 맞추는 후보: 원본 보존 gate 실패.
+- 이름은 193개지만 membership을 서로 공유하거나 실제 경계를 없애는 후보: membership/geometry gate 실패.
+- 제한 lookup 뒤 도 전체 IDs 또는 전체 regionRefs로 제출하는 effect: host 범위 검증 실패.
+- cap 초과 선택을 pagination 또는 여러 effect로 우회하는 aggregate: commit 전 전체 batch 실패.
+- 실제 owner/controller는 그대로 두고 지도 점령색만 변경하는 결과: state/projection 일치 검증 실패.
+
+각 실패 사례는 거부 지점·오류·world/simulation 불변 및 알림/지도 변경 부재를 확인한다. build 단계 후보 실패와 turn 단계 commit 실패는 해당 단계에서 따로 검증한다.
+
+실제 API 재현은 기존 세션에서 승인된 동일 점령 요청과 지도 문맥의 독립 테스트 범위라면 재승인을 요구하지 않는다. 범위를 벗어난 새로운 외부 전송은 해당 환경의 승인 정책을 따른다. 키·민감한 원문을 로그에 노출하지 않는다. offline scripted provider와 live API 결과를 구별한다.
+
+## 11. 성능·전체 데이터 hard gate
+
+- policy 확정 후 실제 전 세계 cell·vertex·edge·membership·tile 수, bytes, build peak memory·시간을 측정한다.
+- 서버 catalog 초기화와 lookup, validator/plan/commit, authority scope, history 크기·undo/redo를 baseline과 비교한다.
+- 브라우저 초기 적재·메모리·pan/zoom·부분 점령 update를 동일 화면·장치·시나리오로 측정한다.
+- cell ID 목록의 provider 입력/출력 tokens와 정상 행동에 필요한 API call 수를 측정한다.
+- 성능 기준은 결과를 본 후 통과하도록 바꾸지 않는다. 넘으면 정책 선택 checkpoint로 돌아간다.
+- 모든 국가의 source identity 보존, coverage·geometry·edge pairing, cap, 독립 재생성, 실제 delivery를 검증한다.
+- 작은 fixture나 한국 데모 성공으로 전 세계 pass를 대체하지 않는다.
+- required type/lint/build 및 변경에 적합한 단위·통합·브라우저 검증을 실행한다. 현재 사용 중인 dev server와 .next 충돌을 피한다.
+- 테스트 runner가 동작하지 않으면 실제 실행 방법·범위·누락을 구분해 기록한다. 원래 suite를 실행한 것처럼 보고하지 않는다.
+
+## 12. 실행 checkpoint와 산출물
+
+15-1: baseline 및 국가별 분할 소실 audit.
+15-2: 슬로베니아 정합 원인 재현, 복구 후보와 전체 fallback 복구 계획 검증.
+15-3: operational cell 후보 비교, 물리 해상도·budget·ID·provenance 정책 확정.
+15-4: 복구된 행정 경계와 전 세계 operational catalog의 독립 생성·geometry/topology 검증.
+15-5: 지역 index·bounded frontier lookup·strict tool 계약·provider 예산 구현.
+15-6: 기존 territory mapping, authority/reference 영향, atomic version migration 검증.
+15-7: runtime·지도 연결, 실제 부분 점령·연속 진격·해방·양도·undo/redo 검증.
+15-8: 최종 후보의 전 세계·API·브라우저·성능·회귀 검증과 cutover 준비. REVIEW F 통과 후 검증된 후보를 production cutover하고 게시 bytes/roots와 smoke를 재확인한다. 게시 후 검증 실패 시 검증된 이전 배포로 복구하며 최종 완료로 판정하지 않는다.
+
+### 12.1 실행 순서와 REVIEW 지점
+
+```text
+15-1 → 15-2 → REVIEW A
+                 ↓
+              15-3 → REVIEW B
+                 ↓
+              15-4 → REVIEW C
+                 ↓
+       ┌───────┴───────┐
+       ↓               ↓
+     15-5            15-6
+       └───────┬───────┘
+               ↓
+            REVIEW D
+               ↓
+              15-7 → REVIEW E
+                 ↓
+              15-8 → REVIEW F
+                 ↓
+       검증된 후보 cutover · 게시 후 재확인
+                 ↓
+        Prompt 15 최종 완료 판정
+```
+
+15-5와 15-6은 REVIEW C에서 확정한 catalog·ID·membership 계약을 공유한다. 준비 작업은 독립적으로 진행할 수 있지만 tool·authority·migration 참조 계약의 변경은 함께 맞춘다. 위 분기는 agent 생성 지시가 아니다. 두 단계가 모두 REVIEW D를 통과해야 15-7로 진행한다.
+
+### 12.2 구간별 실행 task · 통과 기준 · 사용자 검증 시점
+
+```text
+구간 | 실행할 task | 다음 단계 진입 조건 | 사용자 검증 시점
+-----|-------------|---------------------|-----------------
+A    | 15-1, 15-2  | REVIEW A 통과       | 현재 문제와 복구 근거 확인
+B    | 15-3        | REVIEW B 통과       | 해상도·범위 정책 예시 확인
+C    | 15-4        | REVIEW C 통과       | 생성된 미세 분할·행정 경계 확인
+D    | 15-5, 15-6  | REVIEW D 통과       | 조회·상태 이전 결과 확인
+E    | 15-7        | REVIEW E 통과       | 실제 부분 점령·전선 이동 직접 확인
+F    | 15-8        | REVIEW F 통과       | 최종 결과와 검증 보고서 확인
+```
+
+- REVIEW A: 북한의 큰 구역 점령과 슬로베니아의 193→1 소실을 실제 bytes로 재현했는가. gap 원인과 원본 보존 복구 후보를 검증했는가. 미해결 사항과 rollout 차단 조건이 명확한가.
+- REVIEW B: 행정구역 내부 부분 점령이 가능한 물리 해상도와 내부 진격 해상도를 확보했는가. cell 최대 규모와 near 깊이·폭·면적 비율을 결과 전 수치로 고정했는가. 비용 측정에 근거한 cap·생성 정책·예외를 고정했는가. 50km 예시를 고정 규칙으로 오해하지 않았는가.
+- REVIEW C: 슬로베니아 193개 행정 identity와 전체 국가의 기존 세부 구역을 보존했는가. 실제 전 세계 geometry·topology·membership·delivery 및 독립 생성 검증이 통과했는가.
+- REVIEW D: bounded lookup과 strict submit이 실제 작은 cell을 사용하고, 같은 승인 catalog와 revision 계약을 따르는가. host가 lookup 범위 우회 제출을 거부하는가. 대표 near 요청이 실제 commit cap 안에서 성공 가능한가. 기존 owner/controller·authority·참조의 migration과 실패 원자성이 검증됐는가. 15-5와 15-6 중 하나만 완료되면 통과할 수 없다.
+- REVIEW E: 실제 지도와 authoritative state에서 같은 도 내부의 점령·미점령 영토가 공존하는가. 다음 진격이 현재 전선에서 이어지고, 해방·양도·undo/redo가 일치하는가. zoom 4 미만의 행정 세부선 숨김과 기존 지도 동작을 유지했는가.
+- REVIEW F: 최종 후보의 실제 전 세계·API·브라우저·성능·회귀 및 기존 실패를 주입한 음성 검증이 모두 통과했는가. cutover 후보와 검증 bytes/roots가 일치하고 복구 절차가 준비됐는가. 실패·누락·제한을 숨기지 않았는가. 사용자 목적을 충족하는 최종 증거가 있는가. 통과 후 게시 bytes와 smoke를 재확인해야 최종 완료다.
+
+각 REVIEW는 앞 단계 구현과 별도로 결과·actual-byte 증거·실패 경로를 재검토한다. REVIEW 이름을 보고서에 붙이는 것만으로 통과하지 않는다. 기존 Prompt 14 pass 보고서를 새 REVIEW의 대체 증거로 사용하지 않는다.
+
+REVIEW가 실패하면 해당 원인의 checkpoint로 돌아가 수정하고, 그 변경에 영향받은 후속 증거를 다시 생성한다. 미해결 REVIEW를 건너뛰거나 마지막 단계에서 한꺼번에 pass로 바꾸지 않는다. checkpoint·REVIEW 상태와 재개 위치를 보고서에 남긴다.
+
+사용자 검증 시점은 결과를 확인하기 쉽게 공유하는 시점이다. 각 구간마다 별도의 사용자 승인 대기를 새로 만들라는 뜻은 아니다. 기존 세션에서 승인된 작업은 계속 수행하며, 사용자 확인이 필수인 정책·범위 결정이나 외부 환경의 승인 요구가 있을 때만 그 근거를 명시한다. 사용자의 답변 부재를 승인이나 기능 통과 증거로 취급하지 않는다.
+
+각 단계의 입력 hash, 명령, 도구 버전, 산출물 hash·byte length, 상태(pass/fail/blocked), 실패 원인, 다음 단계 조건을 `reports/prompt15/`에 기록한다. 기존 reports/prompt14와 source/catalog bytes는 보존한다.
+
+최종 보고서에는 최소 다음을 포함한다.
+- 변경 전후 국가별 행정 identity 수·cell 수·최대 cell 규모·fallback 및 예외 비교.
+- 슬로베니아 193개 복원 근거와 전체 국가 소실 audit 결과.
+- 한국/북한 도 내부의 부분 점령 before/after screenshot 및 실제 owner/controller cell 집합.
+- 두 번째 진격·undo/redo의 현재 전선 및 atomic state 증거.
+- geometry/topology/migration/delivery의 actual-byte 검증과 두 독립 생성 비교.
+- 실제 API 성공·실패 결과와 offline 테스트의 구분.
+- 해상도·성능 budget의 실제 측정, 검증 누락 및 남은 제한.
+
+## 13. 구조와 처리 흐름 다이어그램
+
+아래 Mermaid 다이어그램은 구현 구조와 검증 지점을 설명한다. 실제 schema·함수 이름은 저장소 계약에 맞춘다.
+
+### 13.1 행정구역과 미세 영토의 관계
+
+```mermaid
+flowchart TD
+  P0[고정된 국가 외곽 P0] --> ALIGN[공통 경계 정합 및 coverage 검증]
+  P1[원본 행정구역 P1와 source identity] --> ALIGN
+  ALIGN --> ADMIN[보존된 행정구역 polygon과 이름]
+  ADMIN --> BUILD[오프라인 결정적 미세 분할]
+  POLICY[물리 해상도와 생성 budget 정책] --> BUILD
+  BUILD --> CELLS[행정구역 내부의 작은 operational territories]
+  CELLS --> CHECK[geometry · topology · 재현성 · 해상도 검증]
+  ADMIN --> MEMBERSHIP[행정구역에서 여러 cell로 연결되는 membership]
+  CELLS --> MEMBERSHIP
+  MEMBERSHIP --> CHECK
+  CHECK --> CATALOG[새 버전 immutable catalog와 render assets]
+  CATALOG --> MIGRATION[이전 territory에서 새 cell로 상태 이전 검증]
+  MIGRATION --> WORLD[각 cell의 mutable owner와 controller]
+  WORLD --> MAP[일부 점령색과 행정구역 내부 전선]
+```
+
+행정구역은 이름·조회·실제 경계를 보존하는 단위이고, operational territory는 점령 최소 단위다. 두 단위를 하나로 합치지 않는다.
+
+### 13.2 자연어 요청에서 실제 부분 점령까지
+
+```mermaid
+sequenceDiagram
+  participant User as 사용자
+  participant AI as AI
+  participant Lookup as 서버 범위 조회
+  participant Catalog as 승인된 catalog
+  participant State as 현재 world 상태
+  participant Commit as validator와 atomic commit
+  participant Map as 지도 projection
+  User->>AI: 휴전선 인근을 점령
+  AI->>Lookup: 대상 국가와 접경 · 제한된 진격 범위
+  Lookup->>Catalog: 작은 cell geometry와 육상 adjacency 조회
+  Catalog-->>Lookup: 검증된 cell 후보
+  Lookup->>State: 현재 전선 · owner/controller · revision 확인
+  State-->>Lookup: 현재 상태
+  Lookup-->>AI: bounded cell IDs · effectTarget · 선택 근거
+  AI->>Commit: 선택한 cell 집합의 점령 effect 제출
+  Commit->>Catalog: ID와 catalog root 확인
+  Commit->>State: authority · scope · cap · stale 검증
+  alt 모든 검증 통과
+    Commit->>State: world와 simulation을 함께 commit
+    State-->>Map: 변경한 cell과 영향받은 edge
+    Map-->>User: 도 내부 일부만 점령색 변경 · 전선 이동
+  else 범위 또는 권한 등 검증 실패
+    Commit-->>User: 실패 이유와 기존 확정 상태 유지
+  end
+```
+
+AI가 판단하는 것은 행동의 지리적 의미와 범위다. 실제 polygon과 ID는 승인된 catalog 및 서버 조회가 제공한다. 후속 진격은 현재 controller 경계에서 다시 조회한다.
+
+### 13.3 슬로베니아 복구와 배포 차단
+
+```mermaid
+flowchart TD
+  SOURCE[슬로베니아 고정 원본 193개 identity] --> REPRO[기존 정합 실패와 gap 위치 재현]
+  REPRO --> FIX[원본 연결을 보존하는 공통 경계 정합]
+  FIX --> GATE{identity · coverage · 변위 검증 통과?}
+  GATE -->|아니오| STOP[후보 build 실패와 원인 보고]
+  STOP --> KEEP[기존 승인 배포 유지]
+  GATE -->|예| REGIONS[193개 행정 identity와 실제 경계 보존]
+  REGIONS --> MICRO[각 행정구역 내부 미세 영토 생성]
+  MICRO --> BEHAVIOR{도 내부 일부 점령 및 전체 검증 통과?}
+  BEHAVIOR -->|아니오| STOP
+  BEHAVIOR -->|예| RELEASE[새 catalog version으로 검증된 cutover]
+  FORBIDDEN[국가 전체를 하나로 대체하는 fallback] -. 금지 .-> GATE
+```
+
+마지막 금지 경로는 기존 문제를 설명하는 표시다. 실패한 후보를 단일 국가 영토로 바꿔 pass시키는 실행 경로를 구현하지 않는다.
+
+### 13.4 한 행정구역 안에서 전선이 움직이는 상태
+
+```mermaid
+flowchart LR
+  subgraph REGION[같은 원본 행정구역 내부]
+    direction LR
+    A[접경 cell A<br/>owner 북한<br/>controller 대한민국]
+    B[인접 cell B<br/>owner 북한<br/>controller 북한]
+    C[내륙 cell C<br/>owner 북한<br/>controller 북한]
+    A ---|현재 점령 전선| B
+    B ---|같은 controller의 내부 경계| C
+  end
+  NEXT[다음 턴 제한적 진격] --> B
+  B --> AFTER[B만 controller 대한민국으로 변경]
+  AFTER --> FRONT[새 전선은 B와 C 사이]
+```
+
+이는 구조 예시이며 한국/북한을 코드에 하드코딩하라는 뜻이 아니다. 실제 검증에서는 polygon·adjacency·선택 범위와 지도 screenshot을 함께 확인한다.
+
+## 14. 완료로 인정하지 않는 결과
+
+- 큰 행정구역을 통째로 점령한 뒤 “미세 영토 ID로 처리했으므로 완료”라고 보고하는 결과.
+- 작은 점령 띠가 화면에만 있고 실제 controller는 도 전체가 바뀌는 결과.
+- 슬로베니아 등 정상 원본 구역을 단일 fallback으로 없앤 결과.
+- 기존 국가 외곽을 바꾸거나 gap을 감추는 방식으로 193개 복원을 주장하는 결과.
+- 국경에 처음 닿는 cell만 잘게 나누고, 다음 진격은 다시 큰 도 전체를 점령하는 결과.
+- cell 수만 늘리고 자연어 lookup·effect·지도·migration을 연결하지 않은 결과.
+- 성능 cap을 무시하거나, 임의 cell 절단·source identity 병합으로 cap을 맞춘 결과.
+- 한국 전용 임시 구현, fixture-only 검증 또는 live API의 요청 성공만으로 전체 pass를 주장하는 결과.
+
+핵심 완료 조건은 “같은 행정구역 안에서 일부만 점령되고, 그 안에서 전선이 이동하며, 기존 세부 구역은 사라지지 않는다”이다. 이 동작을 실제 authoritative state와 지도에서 확인하기 전에는 Prompt 15 완료로 보고하지 않는다.
+
+## 15. Prompt 14에서 사용자 목적이 충족되지 않은 원인 분석
+
+이 분석은 현재 저장소의 Prompt 14 문서·생성 코드·고정 정책·선택 보고서·테스트를 대조한 결과다. 과거 모든 편집 시점의 의도나 의사결정 순서를 증명하는 분석은 아니다. 아래 실제 근거와 원인 해석을 구별한다.
+
+### 15.1 요구사항에서 미세 해상도를 정의하지 않았다
+
+Prompt 14는 “미세 영토”와 “일부 점령”을 목표로 두었지만, 같은 행정구역 내부를 부분 점령해야 한다는 조건이나 cell의 물리적 최대 규모를 완료 기준에 넣지 않았다. 16장의 일부 점령 완료 조건은 owner/controller 분리와 bounded authority 동작이다.
+
+반면 4.3절은 임의 grid·Voronoi·균등 분할을 금지하고 실제 행정 polygon을 기준으로 삼았다. 따라서 국가 일부의 도를 점령하는 구현도 문서의 좁은 기준으로 통과할 수 있었다. 사용자 목적과 문서의 “일부” 단위가 달랐다.
+
+근거: `prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt` 4.3절, 8장, 14-14, 16장.
+Prompt 15 대응: 1장 완료 기준, 2장 제한의 명시적 대체, 6장 물리 해상도, 10.1절 도 내부 부분 점령 검증.
+
+### 15.2 생성 정책이 행정구역 하나를 점령 단위 하나로 고정했다
+
+`prompt14-component-grouping-policy.json`의 basis에는 “the source administrative unit remains the game occupation unit”이라고 명시되어 있다. `generateAtoms`는 선택된 feature를 순회하며 그 전체 geometry를 하나의 atom으로 만든다. 여러 component를 보존해 하나의 MultiPolygon으로 묶지만 행정구역 내부를 더 작게 분할하지 않는다.
+
+이는 점령 표시만의 문제가 아니라 authoritative geometry의 최소 단위 문제다. AI 지리 판단이나 tool 호출을 고쳐도 이미 존재하는 도 전체 territory보다 작은 범위를 선택할 수 없다.
+
+근거: `data/source-locks/prompt14-component-grouping-policy.json`, `scripts/prompt14-catalog-core.mjs`의 generateAtoms.
+Prompt 15 대응: 4장의 행정구역/operational territory 분리와 6장의 오프라인 내부 분할.
+
+### 15.3 cap 검사는 있었지만 해상도 검사는 없었다
+
+Prompt 14의 세계 6000 atom·국가별 512 atom 등은 비용 상한이다. component grouping은 서로 다른 행정 identity를 합치지 않으면서 atom 수를 줄이는 정책이지만, 작은 점령 단위를 추가하는 정책은 아니다.
+
+현재 검증은 일부 필수 국가가 territory 하나로 축소되는 것은 막는다. 그러나 큰 도 하나를 cell 하나로 사용하는 것은 막지 않으며, 북한 접경의 cell이 어느 정도 깊이·면적을 가지는지도 완료 기준이 아니다.
+
+슬로베니아의 단일 fallback 원인은 cap 초과가 아니라 coverage mismatch다. cap과 fallback 원인을 혼동하지 않는다.
+
+근거: `scripts/prompt14-source-gate.mjs`의 CAPS, `scripts/prompt14-catalog-core.mjs`의 validateAtoms, 슬로베니아 선택 보고서.
+Prompt 15 대응: 비용 상한과 물리 해상도를 함께 만족시키는 6.1절 및 REVIEW B.
+
+### 15.4 정합 실패를 국가 전체 대체로 처리했다
+
+`prompt14-game-selection.mjs`는 국가의 P1 정합을 try/catch로 감싼다. 정합 실패 시 선택된 구역을 전부 P0 국가 polygon 하나로 교체하고 fallback으로 기록한다. 이후 coverage는 국가 polygon 자체와 비교하므로 통과할 수 있다.
+
+현재 슬로베니아 보고서는 원본 193개, 유지 0개, 제외 193개, 선택 1개를 기록한다. 원인은 작은 잔여 gap의 coverage mismatch다. gap이 수치 연산 오류인지 실제 source 차이인지는 추가 geometry 재현이 필요하며, 현재 보고서만으로 단정하지 않는다.
+
+이 처리는 손상된 geometry의 게시를 피하지만, 정상 구역까지 모두 잃고 국가 내부 일부 점령 기능을 없앤다. Prompt 14는 제한적 fallback을 허용했으며, 복수 구역을 필수로 지켜야 하는 국가 목록에는 슬로베니아가 없다. 그러므로 전 세계 gate가 이 기능 손실을 모두 차단하지 못했다.
+
+현재 선택 보고서의 P0-fallback 기록은 15개 국가/지역이다. 각 fallback은 원본 수·원인·geometry를 개별 조사해야 하며, 모두 슬로베니아와 같은 이유라고 추정하지 않는다.
+
+근거: `scripts/prompt14-game-selection.mjs`의 catch와 최종 pass 계산, `reports/prompt14/14-02-game-input-selection.json`, Prompt 14 4.3절.
+Prompt 15 대응: 5장 전체 fallback audit·원본 복구·후보 실패 시 기존 배포 유지 및 REVIEW A/C.
+
+### 15.5 원본 보존 검사의 비교 대상이 선택 후 데이터였다
+
+`validateAtoms`의 sourceFeatureIdentitiesPreserved는 atom 수와 `inputs.selected.features.length`가 같은지 확인한다. 이 값은 선택된 geometry가 catalog 생성 중 소실되는지 확인하는 의미는 있다.
+
+그러나 fallback 단계에서 원본 193개가 이미 하나로 바뀌었다면, 선택 feature 하나와 atom 하나가 같아서 이 검사는 true가 된다. 원본→선택 단계에서 제외된 identity까지 보존됐다는 증거는 아니다.
+
+문제는 단순한 허위 숫자가 아니라 검사 범위가 사용자에게 필요한 보존 조건보다 좁았던 것이다. 제외 목록과 제한은 보고서에 있었지만, 사용자 목적을 충족한 완료인지 판단하는 gate로 충분히 연결되지 않았다.
+
+근거: `scripts/prompt14-catalog-core.mjs`의 validateAtoms 반환값, 슬로베니아 선택 보고서의 maintained/excluded identity.
+Prompt 15 대응: 원본→정합→행정 membership→operational cell 전체 연결 검증과 10.2절 복원 기준.
+
+### 15.6 점령 테스트가 국가 내부 일부와 도 내부 일부를 구별하지 않았다
+
+기존 브라우저 occupation smoke는 중국 catalog territory 중 처음 세 개를 선택한다. 테스트는 owner/controller, 실제 지도 feature 변경, 전선 존재, atomic commit 및 undo/redo를 검사한다. 이는 점령 처리 기반을 검증하는 유효한 테스트다.
+
+그러나 같은 원본 행정구역 내부에 점령·미점령 cell이 공존하는지, 전선이 그 행정 경계 안을 지나는지, 접경 요청이 큰 도 전체로 확대되는지는 검사하지 않는다. 이미 만들어진 ID 집합을 scripted 결과로 제출하므로 자연어 범위 해석의 실제 품질까지 증명하지도 않는다.
+
+근거: `scripts/smoke-prompt14-occupation.mjs`의 중국 territory slice(0,3) 및 capture 검증, `src/lib/simulation/catalog-occupation-lifecycle.test.ts`.
+Prompt 15 대응: 10장의 actual-state·screenshot·후속 진격 검증, scripted/live 구분 및 REVIEW E/F.
+
+### 15.7 후속 API 수정도 geometry 단위를 바꾸지는 않았다
+
+사용자 실행에서 드러난 schema·tool protocol·rate limit·tool budget 문제는 실제로 해결해야 하는 별도의 결함이었다. 이후 추가한 border lookup은 승인 topology의 공유 국경에 닿는 기존 territory를 반환한다. 기존 ID를 찾는 기능이며 작은 polygon을 생성하지 않는다.
+
+따라서 API→lookup→commit 성공은 도 전체 territory의 점령 성공을 증명했지만, 사용자가 기대한 접경 띠의 미세 점령을 증명하지 못했다. 후속 보고에서도 이 구분을 명확히 하지 못했다.
+
+근거: `src/lib/simulation/catalog-border-lookup.ts`, 기존 API 재현 증거 `reports/verification/prompt14-provider-schema/`.
+Prompt 15 대응: 작은 실제 cell catalog를 먼저 만들고, 그 위에서 bounded frontier selection과 행동 검증을 수행한다.
+
+### 15.8 결론과 책임 범위
+
+원인은 요구사항의 해상도 누락, 행정구역과 점령 단위의 결합, 단일 fallback 허용, 선택 이후만 비교하는 보존 검사, 사용자 행동을 충분히 대표하지 못한 테스트가 이어진 것이다. 하나의 API 오류나 AI의 지리 지식 부족이 근본 원인은 아니다.
+
+원본·strict schema·coverage·atomicity를 보호하는 기존 검증은 유지해야 한다. 다만 그 통과를 사용자 목적의 충족으로 확대 해석하면 안 된다. 구현자는 기존 보고서의 제한을 명시하고, 같은 행정구역 내부 부분 점령과 원본 세부 구역 보존까지 확인했어야 한다. 완료 보고가 그 범위를 구별하지 못한 책임을 사용자 요청의 부족으로 돌리지 않는다.
+
+Prompt 15의 REVIEW A~F는 이 연결을 다시 검증하는 gate다. 각 REVIEW는 기술적 안전성뿐 아니라 해당 단계가 실제 사용자 목적을 만족시키는지도 별도로 판정한다.

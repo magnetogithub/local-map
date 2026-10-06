@@ -1,0 +1,1247 @@
+{
+  "schemaVersion": "prompt14-full-verification.v1",
+  "status": "pass",
+  "startedAt": "2026-10-06T06:27:45.288Z",
+  "finishedAt": "2026-10-06T06:50:04.608Z",
+  "head": "d56fba5f4eb928477a17cb640bb5b662ae9719cc",
+  "scope": "Full Prompt 14 final validation; application implementation unchanged; obsolete cutover smoke repaired; pre-existing dirty work preserved.",
+  "hardGate": {
+    "requiredCommands": true,
+    "unit": true,
+    "migration": true,
+    "sourceTests": true,
+    "e2e": true,
+    "productionLength": true,
+    "lint": true,
+    "sourceIdentity": true,
+    "applicationUnchanged": true
+  },
+  "commands": [
+    {
+      "stage": "sourceAudit",
+      "command": "node scripts/audit-prompt14-final.mjs",
+      "startedAt": "2026-10-06T06:27:55.441Z",
+      "finishedAt": "2026-10-06T06:28:03.319Z",
+      "durationMs": 7877,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/sourceAudit.log"
+    },
+    {
+      "stage": "sourceTests",
+      "command": "node --test scripts/prompt14-source-gate.test.mjs scripts/prompt14-catalog-core.node-test.mjs scripts/prompt14-catalog-topology.node-test.mjs scripts/prompt14-boundary-arrangement.node-test.mjs scripts/prompt14-checkpoint.node-test.mjs",
+      "startedAt": "2026-10-06T06:27:55.436Z",
+      "finishedAt": "2026-10-06T06:28:08.814Z",
+      "durationMs": 13378,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/sourceTests.log"
+    },
+    {
+      "stage": "catalogBytes",
+      "command": "node scripts/generate-prompt14-catalog.mjs --verify data/catalogs/prompt14/catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+      "startedAt": "2026-10-06T06:28:10.572Z",
+      "finishedAt": "2026-10-06T06:28:13.491Z",
+      "durationMs": 2918,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/catalogBytes.log"
+    },
+    {
+      "stage": "catalogAudit",
+      "command": "node scripts/verify-prompt14-catalog-consumer.mjs .tmp/prompt14-full-20261006/browser",
+      "startedAt": "2026-10-06T06:28:10.651Z",
+      "finishedAt": "2026-10-06T06:28:15.395Z",
+      "durationMs": 4742,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/catalogAudit.log"
+    },
+    {
+      "stage": "lint",
+      "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/verification/prompt14-full-20261006/lint.json",
+      "startedAt": "2026-10-06T06:27:55.497Z",
+      "finishedAt": "2026-10-06T06:28:30.415Z",
+      "durationMs": 34917,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/lint.log"
+    },
+    {
+      "stage": "build",
+      "command": "node node_modules/next/dist/bin/next build",
+      "startedAt": "2026-10-06T06:28:20.583Z",
+      "finishedAt": "2026-10-06T06:29:06.456Z",
+      "durationMs": 45872,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/build.log"
+    },
+    {
+      "stage": "typecheck",
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "startedAt": "2026-10-06T06:29:18.389Z",
+      "finishedAt": "2026-10-06T06:29:22.592Z",
+      "durationMs": 4201,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/typecheck.log"
+    },
+    {
+      "stage": "migration",
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/test-only/production-catalog-migration.test.ts --maxWorkers=1 --reporter=json --outputFile=reports/verification/prompt14-full-20261006/migration.json",
+      "startedAt": "2026-10-06T06:30:25.967Z",
+      "finishedAt": "2026-10-06T06:33:41.501Z",
+      "durationMs": 195533,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/migration.log"
+    },
+    {
+      "stage": "tests",
+      "command": "node node_modules/vitest/vitest.mjs run --maxWorkers=2 --reporter=json --outputFile=reports/verification/prompt14-full-20261006/tests.json",
+      "startedAt": "2026-10-06T06:27:55.286Z",
+      "finishedAt": "2026-10-06T06:37:01.771Z",
+      "durationMs": 546484,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/tests.log"
+    },
+    {
+      "stage": "e2e",
+      "command": "node scripts/run-playwright-e2e.mjs --output reports/verification/prompt14-full-20261006/test-results --reporter=line,json",
+      "startedAt": "2026-10-06T06:29:18.347Z",
+      "finishedAt": "2026-10-06T06:40:56.805Z",
+      "durationMs": 698456,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/e2e.log"
+    },
+    {
+      "stage": "productionCutover",
+      "command": "node scripts/run-prompt14-production-cutover-smoke.mjs 3181 .tmp/prompt14-full-20261006/cutover",
+      "startedAt": "2026-10-06T06:41:06.842Z",
+      "finishedAt": "2026-10-06T06:41:07.773Z",
+      "durationMs": 930,
+      "exitCode": 1,
+      "log": "reports/verification/prompt14-full-20261006/browser-launch-diagnostic.txt",
+      "diagnosticOnly": true
+    },
+    {
+      "stage": "productionCutover",
+      "command": "node scripts/run-prompt14-production-cutover-smoke.mjs 3181 .tmp/prompt14-full-20261006/cutover",
+      "environment": {
+        "PLAYWRIGHT_CHROMIUM_CHANNEL": "chrome",
+        "NODE_OPTIONS": "--import=file:///D:/gen/.tmp/prompt14-full-chrome.mjs"
+      },
+      "startedAt": "2026-10-06T06:41:24.439Z",
+      "finishedAt": "2026-10-06T06:43:24.546Z",
+      "durationMs": 120107,
+      "exitCode": 1,
+      "log": "reports/verification/prompt14-full-20261006/productionCutover-legacy-layer-failure.log"
+    },
+    {
+      "stage": "lint",
+      "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/verification/prompt14-full-20261006/lint.json",
+      "environment": {
+        "PLAYWRIGHT_CHROMIUM_CHANNEL": "chrome"
+      },
+      "startedAt": "2026-10-06T06:44:53.375Z",
+      "finishedAt": "2026-10-06T06:45:02.998Z",
+      "durationMs": 9622,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/lint.log"
+    },
+    {
+      "stage": "productionCutover",
+      "command": "node scripts/run-prompt14-production-cutover-smoke.mjs 3181 .tmp/prompt14-full-20261006/cutover",
+      "environment": {
+        "PLAYWRIGHT_CHROMIUM_CHANNEL": "chrome",
+        "NODE_OPTIONS": "--import=file:///D:/gen/.tmp/prompt14-full-chrome.mjs"
+      },
+      "startedAt": "2026-10-06T06:44:26.867Z",
+      "finishedAt": "2026-10-06T06:46:12.936Z",
+      "durationMs": 106067,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/productionCutover.log"
+    },
+    {
+      "stage": "productionOccupation",
+      "command": "node scripts/run-prompt14-occupation-smoke.mjs 3182 .tmp/prompt14-full-20261006/occupation",
+      "environment": {
+        "PLAYWRIGHT_CHROMIUM_CHANNEL": "chrome",
+        "NODE_OPTIONS": "--import=file:///D:/gen/.tmp/prompt14-full-chrome.mjs"
+      },
+      "startedAt": "2026-10-06T06:46:50.853Z",
+      "finishedAt": "2026-10-06T06:47:23.168Z",
+      "durationMs": 32314,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/productionOccupation.log"
+    },
+    {
+      "stage": "productionColors",
+      "command": "node scripts/smoke-prompt14-country-colors.mjs --review-f --output reports/verification/prompt14-full-20261006/production-colors",
+      "environment": {
+        "PLAYWRIGHT_CHROMIUM_CHANNEL": "chrome"
+      },
+      "startedAt": "2026-10-06T06:48:02.925Z",
+      "finishedAt": "2026-10-06T06:48:31.930Z",
+      "durationMs": 29004,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/productionColors.log"
+    },
+    {
+      "stage": "freshContracts",
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/catalog-occupation-browser-contract.test.ts --maxWorkers=2 --reporter=json --outputFile=reports/verification/prompt14-full-20261006/fresh-contracts.json",
+      "environment": {
+        "PLAYWRIGHT_CHROMIUM_CHANNEL": "chrome"
+      },
+      "startedAt": "2026-10-06T06:49:23.592Z",
+      "finishedAt": "2026-10-06T06:49:27.145Z",
+      "durationMs": 3551,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/freshContracts.log"
+    },
+    {
+      "stage": "productionLength",
+      "command": "node .tmp/prompt14-full-production-length.mjs",
+      "environment": {
+        "PLAYWRIGHT_CHROMIUM_CHANNEL": "chrome"
+      },
+      "startedAt": "2026-10-06T06:48:38.992Z",
+      "finishedAt": "2026-10-06T06:49:29.943Z",
+      "durationMs": 50950,
+      "exitCode": 0,
+      "log": "reports/verification/prompt14-full-20261006/productionLength.log"
+    }
+  ],
+  "unit": {
+    "total": 1359,
+    "passed": 1358,
+    "failed": 0,
+    "skipped": 1,
+    "skipCoveredBySeparateMigration": true,
+    "effectivePassed": 1359
+  },
+  "migration": {
+    "passed": 1,
+    "evidence": "reports/verification/prompt14-full-20261006/production-migration-evidence.json"
+  },
+  "sourceTests": {
+    "total": 60,
+    "passed": 60,
+    "failed": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "browser": {
+    "e2e": {
+      "startTime": "2026-10-06T06:30:18.601Z",
+      "duration": 638150.2810000001,
+      "expected": 32,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "ordinaryProductionLength": {
+      "startTime": "2026-10-06T06:48:41.067Z",
+      "duration": 48818.771,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "ordinaryProductionCutover": "reports/verification/prompt14-full-20261006/production-cutover",
+    "ordinaryProductionOccupation": "reports/verification/prompt14-full-20261006/production-occupation",
+    "ordinaryProductionColors": "reports/verification/prompt14-full-20261006/production-colors"
+  },
+  "audits": {
+    "source": "reports/verification/prompt14-full-20261006/source-audit.json",
+    "identity": "reports/verification/prompt14-full-20261006/identity-audit.json",
+    "browserBoundary": "reports/verification/prompt14-full-20261006/browser-boundary-evidence.json"
+  },
+  "catalogRegeneration": {
+    "rerun": false,
+    "reason": "Prompt 14 section 13: approved source/policy/generator/artifact identity unchanged; prior independent replay proof retained and actual bytes/roots reverified."
+  },
+  "checkpoints": [
+    {
+      "path": "reports/prompt14/14-01-baseline-runtime-data-audit.json",
+      "status": "pass",
+      "sha256": "19bcd5a01a5a209abfd565c144c47eb90ea75d7125ca18176735831413fe7d2d"
+    },
+    {
+      "path": "reports/prompt14/14-02-source-generation-delivery-decision.json",
+      "status": "pass",
+      "sha256": "f600cc15d2f137c25c844014996c4d9132d4735833223a43995a24fdf63d83b1"
+    },
+    {
+      "path": "reports/prompt14/14-05-schema-migration-checkpoint.json",
+      "status": "pass",
+      "sha256": "a8d4e7cbbc54d7dec105177cd99f9e93b3fd99b31d4875945a5702f2a5be709c"
+    },
+    {
+      "path": "reports/prompt14/14-08-immutable-catalog-checkpoint.json",
+      "status": "pass",
+      "sha256": "7d1134f83bd5b87a6c967010ac95695e961e504ccb60fc5d662591c7f7bcfb8e"
+    },
+    {
+      "path": "reports/prompt14/14-14-occupation-checkpoint.json",
+      "status": "pass",
+      "sha256": "6db4c65c23cdbbe1d486673e13ac9d6de1eabd5fe4895666879cabbee365dc2e"
+    },
+    {
+      "path": "reports/prompt14/14-17-country-color-checkpoint.json",
+      "status": "pass",
+      "sha256": "02908981d35364d40caa642ba8570487da1eae29afb5dff509153711a259871b"
+    },
+    {
+      "path": "reports/prompt14/14-20-final-integration.json",
+      "status": "pass",
+      "sha256": "29715fb075dfa37f45498efd75c66c2488a7588ed2f3af32bafbb24dbf7a9fca"
+    }
+  ],
+  "implementationChanges": [
+    {
+      "path": "scripts\\smoke-prompt14-production-cutover.mjs",
+      "startSha256": "9c865a575109cb482862fa80c3899d3fcfc12c1ab1fb04267a26e2f71a3bca32",
+      "endSha256": "50dde6e90b97ce8f463a900a9d61dc3a487dea98b0b9e3fd17829409a69d1561"
+    }
+  ],
+  "dirtyBaseline": "reports/verification/prompt14-full-20261006/baseline.json",
+  "requirements": [
+    {
+      "id": "1-2",
+      "result": "pass",
+      "evidence": "Locked source audit, complete actual artifact/root/PBF verification, production migration full geometry/coverage/topology, prior independent byte-identical regeneration with unchanged generator identity"
+    },
+    {
+      "id": "3",
+      "result": "pass",
+      "evidence": "Browser boundary bundle audit, catalog consumer tests, readiness/cutover smoke"
+    },
+    {
+      "id": "4-6",
+      "result": "pass",
+      "evidence": "Production migration, planner/lifecycle/runtime tests, common game integration and occupation browser smoke"
+    },
+    {
+      "id": "7-8",
+      "result": "pass",
+      "evidence": "Color allocator/authority/runtime/projection tests, production red/white/deterministic fallback smoke, runtime/camera/heap benchmarks"
+    },
+    {
+      "id": "9",
+      "result": "pass",
+      "evidence": "Strict schemas, provider route/tool-loop tests, V3 named-region server/browser E2E"
+    },
+    {
+      "id": "10-11",
+      "result": "pass",
+      "evidence": "Production cutover/reload smoke, full existing UI/simulation/typography E2E and unit suite"
+    },
+    {
+      "id": "12",
+      "result": "pass",
+      "evidence": "Seven pass checkpoints with identity audit and all current command receipts"
+    }
+  ],
+  "limitations": [
+    "Provider network transport replaced with explicit E2E fixture; actual Responses tool loop, region resolver, server validator and runtime executed.",
+    "Ordinary production color/occupation/name browser tests use deterministic turn NDJSON; they establish local UI/planner/runtime/rendering, not live provider behavior.",
+    "Catalog raw source regeneration reused approved independent replay evidence after current source/policy/generator/artifact hash verification, per Prompt 14 section 13."
+  ],
+  "newFindings": [
+    {
+      "status": "resolved",
+      "path": "scripts/smoke-prompt14-production-cutover.mjs",
+      "issue": "Obsolete cutover smoke waited for hidden catalog-country-labels layer after the restored glyph renderer; timed out at rename.",
+      "resolution": "Checks actual glyph fill/outline for rename/undo/redo, tracks incremental glyph source diffs and verifies only KOR changed; honors installed Chrome channel.",
+      "failedEvidence": "reports/verification/prompt14-full-20261006/productionCutover-legacy-layer-failure.json"
+    }
+  ],
+  "performance": {
+    "browser-camera-catalog.json": {
+      "mode": "catalog",
+      "loadMs": 1586.5892999999924,
+      "coldHeap": {
+        "usedSize": 30354756,
+        "totalSize": 31825920,
+        "embedderHeapUsedSize": 1951872,
+        "backingStorageSize": 30295019
+      },
+      "warmHeap": {
+        "usedSize": 32731248,
+        "totalSize": 35233792,
+        "embedderHeapUsedSize": 2057024,
+        "backingStorageSize": 73157885
+      },
+      "warmupMs": 3802.8089000000036,
+      "samples": [
+        {
+          "durationMs": 1757.2000000029802,
+          "frames": 30,
+          "frameTimeP50": 16.600000001490116,
+          "frameTimeP95": 371.19999999925494,
+          "maxFrameMs": 454.9000000022352,
+          "fps": 17.07261552466943,
+          "worldSerializations": 0,
+          "before": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          },
+          "after": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          }
+        },
+        {
+          "durationMs": 1751.199999999255,
+          "frames": 34,
+          "frameTimeP50": 16.699999999254942,
+          "frameTimeP95": 358.20000000298023,
+          "maxFrameMs": 463,
+          "fps": 19.415258108733706,
+          "worldSerializations": 0,
+          "before": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          },
+          "after": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          }
+        },
+        {
+          "durationMs": 1744.5,
+          "frames": 33,
+          "frameTimeP50": 16.5,
+          "frameTimeP95": 348.80000000074506,
+          "maxFrameMs": 462.30000000074506,
+          "fps": 18.915510718773252,
+          "worldSerializations": 0,
+          "before": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          },
+          "after": {
+            "worldSchema": 3,
+            "simulationSchema": 2,
+            "date": "2020-01-01",
+            "worldRevision": 0,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+            },
+            "pairNotifications": 0,
+            "simulationRevision": 0,
+            "playerCountryId": "KOR",
+            "uiPlayerCountryId": null,
+            "canUndo": false,
+            "canRedo": false,
+            "authorityOrder": [],
+            "eventCount": 0,
+            "projectionBuilds": 1,
+            "fullProjectionBuilds": 1,
+            "colorProjectionUpdates": 0,
+            "fullBuilds": 1,
+            "countryRebuilds": 247,
+            "territoryRebuilds": 4231,
+            "territoryUpdates": 0,
+            "edgeUpdates": 14918,
+            "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
+            "verifiedRequests": 31,
+            "cacheHits": 3,
+            "cachedTiles": 26,
+            "cachedBytes": 8002678
+          }
+        }
+      ],
+      "heap": [
+        {
+          "usedSize": 32889104,
+          "totalSize": 34185216,
+          "embedderHeapUsedSize": 1841048,
+          "backingStorageSize": 73339158
+        },
+        {
+          "usedSize": 33040360,
+          "totalSize": 34447360,
+          "embedderHeapUsedSize": 1874408,
+          "backingStorageSize": 73520431
+        },
+        {
+          "usedSize": 33135244,
+          "totalSize": 34447360,
+          "embedderHeapUsedSize": 1842800,
+          "backingStorageSize": 73701704
+        }
+      ],
+      "browserErrors": []
+    },
+    "browser-camera-legacy.json": {
+      "mode": "legacy",
+      "loadMs": 6847.781600000046,
+      "coldHeap": {
+        "usedSize": 185452564,
+        "totalSize": 188805120,
+        "embedderHeapUsedSize": 894664,
+        "backingStorageSize": 17910392
+      },
+      "warmHeap": {
+        "usedSize": 320734788,
+        "totalSize": 324857856,
+        "embedderHeapUsedSize": 1399032,
+        "backingStorageSize": 47087501
+      },
+      "warmupMs": 7734.850600000005,
+      "samples": [
+        {
+          "durationMs": 5547,
+          "frames": 84,
+          "frameTimeP50": 16.699999999254942,
+          "frameTimeP95": 19.199999999254942,
+          "maxFrameMs": 1522,
+          "fps": 15.143047718633854,
+          "worldSerializations": 0
+        },
+        {
+          "durationMs": 1571.699999999255,
+          "frames": 95,
+          "frameTimeP50": 16.699999999254942,
+          "frameTimeP95": 17.399999998509884,
+          "maxFrameMs": 20.600000001490116,
+          "fps": 60.44025957512414,
+          "worldSerializations": 0
+        },
+        {
+          "durationMs": 1564.699999999255,
+          "frames": 94,
+          "frameTimeP50": 16.699999999254942,
+          "frameTimeP95": 18.300000000745058,
+          "maxFrameMs": 21.600000001490116,
+          "fps": 60.07541381737378,
+          "worldSerializations": 0
+        }
+      ],
+      "heap": [
+        {
+          "usedSize": 321274828,
+          "totalSize": 323809280,
+          "embedderHeapUsedSize": 1341344,
+          "backingStorageSize": 47071933
+        },
+        {
+          "usedSize": 321430416,
+          "totalSize": 323284992,
+          "embedderHeapUsedSize": 1338872,
+          "backingStorageSize": 48164480
+        },
+        {
+          "usedSize": 321559208,
+          "totalSize": 323284992,
+          "embedderHeapUsedSize": 1303072,
+          "backingStorageSize": 49239795
+        }
+      ],
+      "browserErrors": []
+    },
+    "browser.json": {
+      "status": "pass",
+      "environment": {
+        "platform": "win32",
+        "cpu": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
+        "browser": "154.0.8037.95",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "buildMode": "Next production E2E build, single worker; isolated legacy fixture vs default V3",
+        "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6"
+      },
+      "measurements": [
+        {
+          "mode": "legacy",
+          "loadMs": 6847.781600000046,
+          "coldHeap": {
+            "usedSize": 185452564,
+            "totalSize": 188805120,
+            "embedderHeapUsedSize": 894664,
+            "backingStorageSize": 17910392
+          },
+          "warmHeap": {
+            "usedSize": 320734788,
+            "totalSize": 324857856,
+            "embedderHeapUsedSize": 1399032,
+            "backingStorageSize": 47087501
+          },
+          "warmupMs": 7734.850600000005,
+          "samples": [
+            {
+              "durationMs": 5547,
+              "frames": 84,
+              "frameTimeP50": 16.699999999254942,
+              "frameTimeP95": 19.199999999254942,
+              "maxFrameMs": 1522,
+              "fps": 15.143047718633854,
+              "worldSerializations": 0
+            },
+            {
+              "durationMs": 1571.699999999255,
+              "frames": 95,
+              "frameTimeP50": 16.699999999254942,
+              "frameTimeP95": 17.399999998509884,
+              "maxFrameMs": 20.600000001490116,
+              "fps": 60.44025957512414,
+              "worldSerializations": 0
+            },
+            {
+              "durationMs": 1564.699999999255,
+              "frames": 94,
+              "frameTimeP50": 16.699999999254942,
+              "frameTimeP95": 18.300000000745058,
+              "maxFrameMs": 21.600000001490116,
+              "fps": 60.07541381737378,
+              "worldSerializations": 0
+            }
+          ],
+          "heap": [
+            {
+              "usedSize": 321274828,
+              "totalSize": 323809280,
+              "embedderHeapUsedSize": 1341344,
+              "backingStorageSize": 47071933
+            },
+            {
+              "usedSize": 321430416,
+              "totalSize": 323284992,
+              "embedderHeapUsedSize": 1338872,
+              "backingStorageSize": 48164480
+            },
+            {
+              "usedSize": 321559208,
+              "totalSize": 323284992,
+              "embedderHeapUsedSize": 1303072,
+              "backingStorageSize": 49239795
+            }
+          ],
+          "browserErrors": []
+        },
+        {
+          "mode": "catalog",
+          "loadMs": 1586.5892999999924,
+          "coldHeap": {
+            "usedSize": 30354756,
+            "totalSize": 31825920,
+            "embedderHeapUsedSize": 1951872,
+            "backingStorageSize": 30295019
+          },
+          "warmHeap": {
+            "usedSize": 32731248,
+            "totalSize": 35233792,
+            "embedderHeapUsedSize": 2057024,
+            "backingStorageSize": 73157885
+          },
+          "warmupMs": 3802.8089000000036,
+          "samples": [
+            {
+              "durationMs": 1757.2000000029802,
+              "frames": 30,
+              "frameTimeP50": 16.600000001490116,
+              "frameTimeP95": 371.19999999925494,
+              "maxFrameMs": 454.9000000022352,
+              "fps": 17.07261552466943,
+              "worldSerializations": 0,
+              "before": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              },
+              "after": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              }
+            },
+            {
+              "durationMs": 1751.199999999255,
+              "frames": 34,
+              "frameTimeP50": 16.699999999254942,
+              "frameTimeP95": 358.20000000298023,
+              "maxFrameMs": 463,
+              "fps": 19.415258108733706,
+              "worldSerializations": 0,
+              "before": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              },
+              "after": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              }
+            },
+            {
+              "durationMs": 1744.5,
+              "frames": 33,
+              "frameTimeP50": 16.5,
+              "frameTimeP95": 348.80000000074506,
+              "maxFrameMs": 462.30000000074506,
+              "fps": 18.915510718773252,
+              "worldSerializations": 0,
+              "before": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              },
+              "after": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              }
+            }
+          ],
+          "heap": [
+            {
+              "usedSize": 32889104,
+              "totalSize": 34185216,
+              "embedderHeapUsedSize": 1841048,
+              "backingStorageSize": 73339158
+            },
+            {
+              "usedSize": 33040360,
+              "totalSize": 34447360,
+              "embedderHeapUsedSize": 1874408,
+              "backingStorageSize": 73520431
+            },
+            {
+              "usedSize": 33135244,
+              "totalSize": 34447360,
+              "embedderHeapUsedSize": 1842800,
+              "backingStorageSize": 73701704
+            }
+          ],
+          "updates": {
+            "target": "GBR",
+            "occupiedTerritories": 234,
+            "occupationMs": 141.18030000000726,
+            "colorMs": 113.35440000001108,
+            "before": {
+              "worldSchema": 3,
+              "simulationSchema": 2,
+              "date": "2020-01-02",
+              "worldRevision": 0,
+              "catalogRef": {
+                "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+              },
+              "pairNotifications": 1,
+              "simulationRevision": 1,
+              "playerCountryId": "RUS",
+              "uiPlayerCountryId": "RUS",
+              "canUndo": true,
+              "canRedo": false,
+              "authorityOrder": [],
+              "eventCount": 1,
+              "projectionBuilds": 1,
+              "fullProjectionBuilds": 1,
+              "colorProjectionUpdates": 0,
+              "fullBuilds": 1,
+              "countryRebuilds": 247,
+              "territoryRebuilds": 4231,
+              "territoryUpdates": 0,
+              "edgeUpdates": 13546,
+              "indexedEdges": 13546,
+              "labelLayoutRequests": 0,
+              "labelCountryUpdates": 0,
+              "labelFailures": [],
+              "verifiedRequests": 11,
+              "cacheHits": 0,
+              "cachedTiles": 4,
+              "cachedBytes": 2719824
+            },
+            "after": {
+              "worldSchema": 3,
+              "simulationSchema": 2,
+              "date": "2020-01-04",
+              "worldRevision": 2,
+              "catalogRef": {
+                "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+              },
+              "pairNotifications": 4,
+              "simulationRevision": 3,
+              "playerCountryId": "RUS",
+              "uiPlayerCountryId": "RUS",
+              "canUndo": true,
+              "canRedo": false,
+              "authorityOrder": [
+                "tca:benchmark"
+              ],
+              "eventCount": 5,
+              "projectionBuilds": 1,
+              "fullProjectionBuilds": 1,
+              "colorProjectionUpdates": 1,
+              "fullBuilds": 1,
+              "countryRebuilds": 247,
+              "territoryRebuilds": 4465,
+              "territoryUpdates": 554,
+              "edgeUpdates": 13559,
+              "indexedEdges": 13546,
+              "labelLayoutRequests": 0,
+              "labelCountryUpdates": 0,
+              "labelFailures": [],
+              "verifiedRequests": 11,
+              "cacheHits": 0,
+              "cachedTiles": 4,
+              "cachedBytes": 2719824
+            },
+            "featureStateCalls": 574,
+            "wholeSourceSetData": 0,
+            "sourceUpdateData": 0
+          },
+          "browserErrors": []
+        }
+      ],
+      "interpretation": "Frame-time and FPS are reference-machine observations, not universal acceptance thresholds. 5-second frames and unbounded retained growth are structural failures."
+    },
+    "runtime.json": {
+      "status": "pass",
+      "environment": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "cpu": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
+        "totalMemory": 34065707008
+      },
+      "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+      "totalTerritories": 4231,
+      "target": "GBR",
+      "occupiedTerritories": 234,
+      "occupation": {
+        "effects": 1,
+        "planMs": 127.35649999999998,
+        "commitMs": 12.089600000000019,
+        "affectedTerritoryCalls": 234
+      },
+      "color": {
+        "effects": 1,
+        "planMs": 6.634399999999914,
+        "commitMs": 4.960999999999899,
+        "affectedTerritoryCalls": 320
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "colorProjectionUpdates": 1,
+        "fullBuilds": 1,
+        "countryRebuilds": 247,
+        "territoryRebuilds": 4465,
+        "territoryUpdates": 554,
+        "edgeUpdates": 0,
+        "indexedEdges": 0
+      },
+      "wholeSourceSetDataCalls": 0,
+      "sourceUpdateDataCalls": 0,
+      "context": {
+        "bytes": 149674,
+        "listedTerritories": 839,
+        "containsGeometry": false
+      },
+      "sharedCollectionsVerified": true
+    }
+  },
+  "freshCapturedServerContracts": {
+    "passed": 29,
+    "failed": 0,
+    "evidence": "reports/verification/prompt14-full-20261006/fresh-contracts.json",
+    "description": "Revalidates freshly captured six occupation and six color production-browser request/resolution pairs against actual server schemas/semantic validator."
+  },
+  "checkpointAuditTiming": {
+    "description": "Checkpoint hashes audited before attaching this verification receipt. Original final checkpoint retained byte-identically; refreshed final checkpoint is hashed by label-length/end-hashes.json.",
+    "previousFinalPath": "reports/verification/prompt14-full-20261006/previous-final-integration.json"
+  },
+  "applicationChanges": [],
+  "verificationChanges": [
+    {
+      "path": "scripts\\smoke-prompt14-production-cutover.mjs",
+      "startSha256": "9c865a575109cb482862fa80c3899d3fcfc12c1ab1fb04267a26e2f71a3bca32",
+      "endSha256": "50dde6e90b97ce8f463a900a9d61dc3a487dea98b0b9e3fd17829409a69d1561"
+    }
+  ],
+  "executionHistory": {
+    "browserLaunch": "Initial cutover launch lacked bundled Chromium headless shell; retried with installed Chrome, matching full E2E. No application failure at launch.",
+    "obsoleteSmoke": "Second cutover attempt reached rename after canonical load, selection, repeated camera and turn checks; failed solely waiting on the hidden legacy layer. Corrected verification script and reran entire smoke."
+  },
+  "visualInspection": {
+    "status": "pass",
+    "paths": [
+      "reports/verification/prompt14-full-20261006/screenshots/v3/review-g-AUS-z2.8.png",
+      "reports/verification/prompt14-full-20261006/screenshots/v3/review-g-RUS-z1.8.png",
+      "reports/verification/prompt14-full-20261006/production-colors/AUT-FFFFFF.png",
+      "reports/verification/prompt14-full-20261006/production-length-screenshots/v3/long-name-160.png"
+    ],
+    "result": "Actual generated images inspected: curved glyph geometry/outline, dark Austria glyphs on white territories, complete wrapped 160-character Korean label."
+  }
+}

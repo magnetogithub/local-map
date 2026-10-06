@@ -5,7 +5,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
-    exclude: ["e2e/**", "node_modules/**"],
+    exclude: ["e2e/**", "node_modules/**", ".tmp/**", "reports/**", "test-results/**", "playwright-report/**", "data/**", "scripts/prompt14-source-gate.test.mjs"],
   },
   resolve: {alias: {"@": path.resolve(__dirname, "src"), "server-only": path.resolve(__dirname, "node_modules/next/dist/compiled/server-only/empty.js")}},
 });

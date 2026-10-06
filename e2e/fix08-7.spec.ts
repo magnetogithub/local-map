@@ -1,4 +1,4 @@
-import {test,expect} from "@playwright/test";
+import {test,expect} from "./legacy-fixture";
 import path from "node:path";
 
 const representatives=["USA","RUS","CHN"] as const,zoomCountries=["AUS","RUS"] as const,boundaries=[1.2499,1.25,1.2501,1.4999,1.5,1.5001] as const;

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "catalog-label-assets-v1",
+  "catalogRef": {
+    "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+    "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+    "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json",
+    "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+    "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42"
+  },
+  "assets": [
+    {
+      "path": "public/data/maps/country-labels-2020.geojson",
+      "sha256": "a9ad2ed84e656f2ccfb67e0e74e1ba1e712c71cf25b43b16d4506f4c5c14af3d",
+      "byteLength": 1421763
+    },
+    {
+      "path": "public/data/maps/country-label-glyph-fills-2020.geojson",
+      "sha256": "70ae8fb67a587d93c017839f7635822c6aafe2a361998029d2dfbb4331de96c4",
+      "byteLength": 1185058
+    },
+    {
+      "path": "public/data/maps/country-label-glyph-outlines-2020.geojson",
+      "sha256": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c",
+      "byteLength": 42
+    },
+    {
+      "path": "public/fonts/Noto Sans KR/NotoSansCJKkr-Regular.otf",
+      "sha256": "6bcb2a0703aa137e874fc2dffa85f6c21ba9a67fa329e81b8c801663af7e992a",
+      "byteLength": 16433112
+    },
+    {
+      "path": "src/data/country-label-typography-policy-v1.json",
+      "sha256": "1638f6292a2ed4b76da9b32373e0f834c4a7725c1ff3a1414622cc04d0a13b78",
+      "byteLength": 545
+    },
+    {
+      "path": "src/data/country-label-overrides-2020.json",
+      "sha256": "c7caa93f521e855bf370dc80779d62822374bda578e4c646d9ee9bbd44f217bc",
+      "byteLength": 704
+    }
+  ],
+  "policy": "Reuse unchanged validated 2020 seed placements and glyph geometry; changed owned-country geometry uses the same bounded server layout/typography functions."
+}

@@ -1,6 +1,6 @@
+import type {SimulationPresentation as SimulationStateV1} from './runtime-view';
 import type {NewsItemViewModel, NewsViewModel} from "./contracts";
 import type {TurnReport} from "@/lib/simulation/client/turn-report";
-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
 import type {CountryId} from "@/lib/world/country-id";
 
 export type NewsFilter = "all" | NewsItemViewModel["significance"];

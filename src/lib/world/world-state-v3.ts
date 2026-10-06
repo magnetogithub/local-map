@@ -33,6 +33,10 @@ export type WorldStateV3 = Readonly<{
 export type SerializedWorldStateV3 = Omit<WorldStateV3, "retiredCountryIds"> & Readonly<{
   retiredCountryIds: readonly RetiredCountryId[];
 }>;
+const validatedWorlds=new WeakSet<object>();
+export function isValidatedWorldStateV3(state:WorldStateV3,catalog:WorldGeometryCatalogContract):boolean{
+  assertWorldGeometryCatalogRefMatches(state.catalogRef,catalog.ref);return validatedWorlds.has(state);
+}
 
 function readWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract, serialized: boolean): WorldStateV3 {
   const input = readWorldV3Record(value, "WorldStateV3");
@@ -93,11 +97,30 @@ function readWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract,
 
 /** No production bootstrap uses V3 until catalog/consumer readiness and atomic cutover. */
 export function createWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract): WorldStateV3 {
-  return readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), false);
+  const state=readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), false);validatedWorlds.add(state);return state;
 }
 
 export function deserializeWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract): WorldStateV3 {
-  return readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), true);
+  const state=readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), true);validatedWorlds.add(state);return state;
+}
+
+/** Validated immutable delta: untouched records, orders and catalog identity remain shared. */
+export function transitionWorldStateV3(base:WorldStateV3,catalog:WorldGeometryCatalogContract,changes:Readonly<{
+  territories?:Readonly<Record<string,TerritoryEntityV3>>;countries?:Readonly<Record<string,CountryEntityV3|null>>;
+}>,revision=base.revision+1):WorldStateV3{
+  if(!isValidatedWorldStateV3(base,catalog))base=createWorldStateV3(base,catalog);
+  if(!Number.isSafeInteger(revision)||revision<0)throw Error('Invalid world revision');
+  let countries=base.countriesById,territories=base.territoriesById,order=base.countryOrder,retired=base.retiredCountryIds;
+  if(changes.countries&&Object.keys(changes.countries).length){const next={...countries},removed:string[]=[];
+    for(const [id,value]of Object.entries(changes.countries)){if(!Object.hasOwn(countries,id))throw Error('Country transition requires an existing active identity');
+      if(value===null){delete next[id];removed.push(id);}else{const country=createCountryEntityV3(value);if(country.id!==id)throw Error('Country transition key mismatch');next[id]=country;}}
+    countries=Object.freeze(next);if(removed.length){order=Object.freeze(order.filter(id=>!removed.includes(id)));retired=createImmutableReadonlySet([...retired,...removed].sort() as RetiredCountryId[]);}
+  }
+  if(changes.territories&&Object.keys(changes.territories).length){const next={...territories};for(const [id,value]of Object.entries(changes.territories)){
+    const t=createTerritoryEntityV3(value);if(t.id!==id||!Object.hasOwn(base.territoriesById,id)||t.sourceCountryId!==base.territoriesById[id].sourceCountryId)throw Error('Invalid immutable territory transition');next[id]=t;}territories=Object.freeze(next);}
+  const checkIds=changes.countries&&Object.values(changes.countries).some(c=>c===null)?base.territoryOrder:Object.keys(changes.territories??{});
+  for(const id of checkIds){const t=territories[id];for(const country of [t.ownerCountryId,t.controllerCountryId])if(country!==null&&!Object.hasOwn(countries,country))throw Error('Territory transition references inactive country');}
+  const state=Object.freeze({...base,revision,countriesById:countries,countryOrder:order,retiredCountryIds:retired,territoriesById:territories});validatedWorlds.add(state);return state;
 }
 
 export function serializeWorldStateV3(state: WorldStateV3): SerializedWorldStateV3 {

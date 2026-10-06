@@ -1,0 +1,1454 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\gen\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--reporter=line,json"
+    ],
+    "configFile": "D:\\gen\\playwright.config.ts",
+    "rootDir": "D:/gen/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/gen/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/gen/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "fix08-12.spec.ts",
+      "file": "fix08-12.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-12 captures fixed-camera representative typography",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49936,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "FIX08_12_RENDER {\"phase\":\"after\",\"viewport\":[1440,900],\"evidence\":[{\"countryId\":\"RUS\",\"center\":[99.071598,61.661028],\"zoom\":2,\"glyphCount\":3,\"instanceCount\":1,\"bounds\":[{\"countryId\":\"RUS\",\"layerId\":\"country-label-glyph-fills\",\"worldCopy\":0,\"source\":\"projected-glyph-polygons\",\"renderer\":\"glyph-geometry\",\"labelInstanceId\":\"RUS:primary\",\"glyphIndices\":[0,1,2],\"diagnostic\":false,\"left\":271.3402076444445,\"top\":248.97187951343614,\"right\":774.0328839111111,\"bottom\":415.96365253731125,\"width\":502.6926762666666,\"height\":166.9917730238751,\"primitiveCount\":3,\"vertexCount\":221}]},{\"countryId\":\"CHN\",\"center\":[103.806836,36.617136],\"zoom\":2,\"glyphCount\":7,\"instanceCount\":1,\"bounds\":[{\"countryId\":\"CHN\",\"layerId\":\"country-label-glyph-fills\",\"worldCopy\":0,\"source\":\"projected-glyph-polygons\",\"renderer\":\"glyph-geometry\",\"labelInstanceId\":\"CHN:primary\",\"glyphIndices\":[0,1,2,3,4,5,6],\"diagnostic\":false,\"left\":416.1930517333333,\"top\":347.16940833153404,\"right\":619.1550798222221,\"bottom\":423.23174699747227,\"width\":202.96202808888881,\"height\":76.06233866593823,\"primitiveCount\":7,\"vertexCount\":724}]},{\"countryId\":\"AUS\",\"center\":[134.354214,-25.573978],\"zoom\":2,\"glyphCount\":7,\"instanceCount\":1,\"bounds\":[{\"countryId\":\"AUS\",\"layerId\":\"country-label-glyph-fills\",\"worldCopy\":0,\"source\":\"projected-glyph-polygons\",\"renderer\":\"glyph-geometry\",\"labelInstanceId\":\"AUS:primary\",\"glyphIndices\":[0,1,2,3,4,5,6],\"diagnostic\":false,\"left\":448.14180053333325,\"top\":374.75361011412326,\"right\":605.8818040888884,\"bottom\":417.41565421224396,\"width\":157.74000355555518,\"height\":42.6620440981207,\"primitiveCount\":7,\"vertexCount\":540}]},{\"countryId\":\"USA\",\"center\":[-99.145062,39.527715],\"zoom\":2,\"glyphCount\":4,\"instanceCount\":1,\"bounds\":[{\"countryId\":\"USA\",\"layerId\":\"country-label-glyph-fills\",\"worldCopy\":0,\"source\":\"projected-glyph-polygons\",\"renderer\":\"glyph-geometry\",\"labelInstanceId\":\"USA:primary\",\"glyphIndices\":[0,1,2,3],\"diagnostic\":false,\"left\":440.2452017777776,\"top\":358.33986102503803,\"right\":607.7783886222222,\"bottom\":407.2582578499868,\"width\":167.53318684444463,\"height\":48.918396824948786,\"primitiveCount\":4,\"vertexCount\":339}]},{\"countryId\":\"CHL\",\"center\":[-71.250316,-35.482031],\"zoom\":4,\"glyphCount\":2,\"instanceCount\":1,\"bounds\":[{\"countryId\":\"CHL\",\"layerId\":\"country-label-glyph-fills\",\"worldCopy\":0,\"source\":\"projected-glyph-polygons\",\"renderer\":\"glyph-geometry\",\"labelInstanceId\":\"CHL:primary\",\"glyphIndices\":[0,1],\"diagnostic\":false,\"left\":504.11300906666594,\"top\":378.4098594793188,\"right\":524.8047950222215,\"bottom\":412.80986662456456,\"width\":20.69178595555553,\"height\":34.40000714524575,\"primitiveCount\":2,\"vertexCount\":113}]},{\"countryId\":\"IDN\",\"center\":[114.018504,-0.191744],\"zoom\":3,\"glyphCount\":5,\"instanceCount\":1,\"bounds\":[{\"countryId\":\"IDN\",\"layerId\":\"country-label-glyph-fills\",\"worldCopy\":0,\"source\":\"projected-glyph-polygons\",\"renderer\":\"glyph-geometry\",\"labelInstanceId\":\"IDN:primary\",\"glyphIndices\":[0,1,2,3,4],\"diagnostic\":false,\"left\":493.427250488889,\"top\":373.0113493580759,\"right\":553.1025230222223,\"bottom\":417.64366984716696,\"width\":59.67527253333327,\"height\":44.63232048909106,\"primitiveCount\":5,\"vertexCount\":360}]}]}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:01:46.146Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "19775f4f75869787feb4-8a166c9a10b9366d8cec",
+          "file": "fix08-12.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-5.spec.ts",
+      "file": "fix08-5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-5 geometry renderer integration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11465,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:02:36.720Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f8de5f9904a62dc19260-6511bb79c8789a91d984",
+          "file": "fix08-5.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-6.spec.ts",
+      "file": "fix08-6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-6 reports projected polygon bounds and settled render state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11374,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:02:48.206Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb20f5dcaf2c24b97dc3-4b808dff9598c95f62f3",
+          "file": "fix08-6.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-7.spec.ts",
+      "file": "fix08-7.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-7 representative zoom continuity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 42880,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "FIX08_7_SUMMARY {\"viewport\":[1440,900],\"initialCenter\":[45,25],\"initialZoom\":1,\"initialRendered\":[\"USA\",\"RUS\",\"CHN\"],\"zoomEvidence\":[{\"countryId\":\"AUS\",\"zoom\":1,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":78.87000177777759,\"territoryWidth\":89.98256397683645,\"widthRatio\":0.8765031611911005},{\"countryId\":\"AUS\",\"zoom\":2,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":157.74000355555518,\"territoryWidth\":179.96512795367295,\"widthRatio\":0.8765031611911003},{\"countryId\":\"AUS\",\"zoom\":3,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":315.48000711111035,\"territoryWidth\":359.930255907346,\"widthRatio\":0.8765031611910999},{\"countryId\":\"RUS\",\"zoom\":1,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":251.34633813333335,\"territoryWidth\":328.7182650867786,\"widthRatio\":0.7646254097470983},{\"countryId\":\"RUS\",\"zoom\":2,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":502.6926762666666,\"territoryWidth\":657.4365301735572,\"widthRatio\":0.764625409747098},{\"countryId\":\"RUS\",\"zoom\":3,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":1005.3853525333332,\"territoryWidth\":1314.8730603471145,\"widthRatio\":0.764625409747098}],\"boundaryRuns\":[[{\"countryId\":\"AUS\",\"zoom\":1.2499,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":93.7862662805012,\"territoryWidth\":107.00048834171093,\"widthRatio\":0.8765031611911012},{\"countryId\":\"AUS\",\"zoom\":1.25,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":93.79276727441032,\"territoryWidth\":107.00790530744149,\"widthRatio\":0.8765031611910997},{\"countryId\":\"AUS\",\"zoom\":1.2501,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":93.79926871895009,\"territoryWidth\":107.0153227872949,\"widthRatio\":0.8765031611911014},{\"countryId\":\"AUS\",\"zoom\":1.4999,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":111.53129515031145,\"territoryWidth\":127.24574204472788,\"widthRatio\":0.8765031611911016},{\"countryId\":\"AUS\",\"zoom\":1.5,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":111.53902617852344,\"territoryWidth\":127.25456235314681,\"widthRatio\":0.8765031611911025},{\"countryId\":\"AUS\",\"zoom\":1.5001,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":111.54675774262773,\"territoryWidth\":127.26338327296384,\"widthRatio\":0.8765031611911029},{\"countryId\":\"RUS\",\"zoom\":1.2499,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":298.88213598904076,\"territoryWidth\":390.8870045110025,\"widthRatio\":0.7646254097470974},{\"countryId\":\"RUS\",\"zoom\":1.25,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":298.90285363803963,\"territoryWidth\":390.91409967254776,\"widthRatio\":0.7646254097470977},{\"countryId\":\"RUS\",\"zoom\":1.2501,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":298.9235727231262,\"territoryWidth\":390.94119671225155,\"widthRatio\":0.764625409747098},{\"countryId\":\"RUS\",\"zoom\":1.4999,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":355.432762665378,\"territoryWidth\":464.8456069265851,\"widthRatio\":0.7646254097470967},{\"countryId\":\"RUS\",\"zoom\":1.5,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":355.45740024097364,\"territoryWidth\":464.8778286854768,\"widthRatio\":0.7646254097470974},{\"countryId\":\"RUS\",\"zoom\":1.5001,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":355.48203952437484,\"territoryWidth\":464.9100526778881,\"widthRatio\":0.7646254097470975}],[{\"countryId\":\"AUS\",\"zoom\":1.2499,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":93.7862662805012,\"territoryWidth\":107.00048834171093,\"widthRatio\":0.8765031611911012},{\"countryId\":\"AUS\",\"zoom\":1.25,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":93.79276727441032,\"territoryWidth\":107.00790530744149,\"widthRatio\":0.8765031611910997},{\"countryId\":\"AUS\",\"zoom\":1.2501,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":93.79926871895009,\"territoryWidth\":107.0153227872949,\"widthRatio\":0.8765031611911014},{\"countryId\":\"AUS\",\"zoom\":1.4999,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":111.53129515031145,\"territoryWidth\":127.24574204472788,\"widthRatio\":0.8765031611911016},{\"countryId\":\"AUS\",\"zoom\":1.5,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":111.53902617852344,\"territoryWidth\":127.25456235314681,\"widthRatio\":0.8765031611911025},{\"countryId\":\"AUS\",\"zoom\":1.5001,\"worldCopy\":0,\"glyphCount\":7,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":111.54675774262773,\"territoryWidth\":127.26338327296384,\"widthRatio\":0.8765031611911029},{\"countryId\":\"RUS\",\"zoom\":1.2499,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":298.88213598904076,\"territoryWidth\":390.8870045110025,\"widthRatio\":0.7646254097470974},{\"countryId\":\"RUS\",\"zoom\":1.25,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":298.90285363803963,\"territoryWidth\":390.91409967254776,\"widthRatio\":0.7646254097470977},{\"countryId\":\"RUS\",\"zoom\":1.2501,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":298.9235727231262,\"territoryWidth\":390.94119671225155,\"widthRatio\":0.764625409747098},{\"countryId\":\"RUS\",\"zoom\":1.4999,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":355.432762665378,\"territoryWidth\":464.8456069265851,\"widthRatio\":0.7646254097470967},{\"countryId\":\"RUS\",\"zoom\":1.5,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":355.45740024097364,\"territoryWidth\":464.8778286854768,\"widthRatio\":0.7646254097470974},{\"countryId\":\"RUS\",\"zoom\":1.5001,\"worldCopy\":0,\"glyphCount\":3,\"instanceCount\":1,\"boundsCount\":1,\"labelWidth\":355.48203952437484,\"territoryWidth\":464.9100526778881,\"widthRatio\":0.7646254097470975}]]}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:02:59.598Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "966dfafb6a644c24c395-bd7c081bc3e59589d2bc",
+          "file": "fix08-7.spec.ts",
+          "line": 7,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-aus-diag.spec.ts",
+      "file": "fix08-aus-diag.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "AUS zoom diagnostics",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20602,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "AUS_ZOOM \u001b[33m1\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m2\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m3\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m4\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m5\u001b[39m []\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:03:42.500Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fe9eb7bd98f0cead1ab5-eefe91ef4c6190af1056",
+          "file": "fix08-aus-diag.spec.ts",
+          "line": 2,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "game-setup.spec.ts",
+      "file": "game-setup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "searches and resets the player country on reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12430,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:04:03.161Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-a7663f90b09d32f92360",
+          "file": "game-setup.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "renders dynamic labels, global Admin 1, high-resolution interaction, and world copies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18604,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:04:15.603Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-840311f6b052ed3a789f",
+          "file": "game-setup.spec.ts",
+          "line": 58,
+          "column": 11
+        },
+        {
+          "title": "preserves canonical playable countries and removes technical map units",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9771,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:04:34.224Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-9bc105175615e9dd80a9",
+          "file": "game-setup.spec.ts",
+          "line": 71,
+          "column": 5
+        },
+        {
+          "title": "dissolved seams select parents and do not render border layers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 23673,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:04:44.013Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-b8faea4487822704893a",
+          "file": "game-setup.spec.ts",
+          "line": 77,
+          "column": 11
+        },
+        {
+          "title": "uses feature minZoom for point labels and crosses world copies by mouse drag",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 35722,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:05:07.701Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-e02b25dcfb657cb955ad",
+          "file": "game-setup.spec.ts",
+          "line": 83,
+          "column": 5
+        },
+        {
+          "title": "renders geometry labels and preserves Point fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 29625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:05:43.439Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-3ec8af03add40cc0523d",
+          "file": "game-setup.spec.ts",
+          "line": 89,
+          "column": 5
+        },
+        {
+          "title": "splits China, merges 31 countries, and rolls back atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49875,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:06:13.077Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-7afbc2faf085870fe681",
+          "file": "game-setup.spec.ts",
+          "line": 95,
+          "column": 11
+        },
+        {
+          "title": "splits the USA into 50 state countries, merges them, and rolls back atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 45717,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:07:02.966Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "historical World V2 geometry/source regression only; excluded from V3 evidence"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-a0f153ca3402040cfb86",
+          "file": "game-setup.spec.ts",
+          "line": 155,
+          "column": 11
+        },
+        {
+          "title": "desktop layout 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2425,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:07:48.696Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-371f659f05319b48fb94",
+          "file": "game-setup.spec.ts",
+          "line": 221,
+          "column": 7
+        },
+        {
+          "title": "desktop layout 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2690,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:07:51.132Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-9419db85a3b6a8c6f958",
+          "file": "game-setup.spec.ts",
+          "line": 221,
+          "column": 7
+        },
+        {
+          "title": "desktop layout 2560x1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2305,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:07:53.833Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-5e047d67c2153f455b28",
+          "file": "game-setup.spec.ts",
+          "line": 221,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt11-10.spec.ts",
+      "file": "prompt11-10.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "V3 catalog source, selection, focus, and revision agree",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3377,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:07:56.156Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0449f37482d3a3054143-56c9686df836f2343d6f",
+          "file": "prompt11-10.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt12-simulation.spec.ts",
+      "file": "prompt12-simulation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "queues, adjudicates, unifies, links the report, undoes, and stops atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11423,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:07:59.554Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a96b9029a7076e8620a-7d91e37443847a27abae",
+          "file": "prompt12-simulation.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "sends production CHN and USA subdivision summaries and resets the player lifecycle",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11572,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m31\u001b[39m\nReceived: \u001b[31m32\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m31\u001b[39m\nReceived: \u001b[31m32\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at D:\\gen\\e2e\\prompt12-simulation.spec.ts:178:48",
+                    "location": {
+                      "file": "D:\\gen\\e2e\\prompt12-simulation.spec.ts",
+                      "column": 48,
+                      "line": 178
+                    },
+                    "snippet": "  176 |   await page.getByRole(\"button\", {name: \"1개월\"}).click();\n  177 |   await page.locator(\".game-advance-submit\").click();\n> 178 |   await expect.poll(() => observed.get(\"CHN\")).toBe(31);\n      |                                                ^\n  179 |\n  180 |   await choose(\"USA\");\n  181 |   await expect(page.locator(\".simulation-heading time\")).toHaveText(\"2020-01-01\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\gen\\e2e\\prompt12-simulation.spec.ts",
+                        "column": 48,
+                        "line": 178
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m31\u001b[39m\nReceived: \u001b[31m32\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  176 |   await page.getByRole(\"button\", {name: \"1개월\"}).click();\n  177 |   await page.locator(\".game-advance-submit\").click();\n> 178 |   await expect.poll(() => observed.get(\"CHN\")).toBe(31);\n      |                                                ^\n  179 |\n  180 |   await choose(\"USA\");\n  181 |   await expect(page.locator(\".simulation-heading time\")).toHaveText(\"2020-01-01\");\n    at D:\\gen\\e2e\\prompt12-simulation.spec.ts:178:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:08:10.989Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\gen\\test-results\\prompt12-simulation-sends--50762-resets-the-player-lifecycle\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\gen\\e2e\\prompt12-simulation.spec.ts",
+                    "column": 48,
+                    "line": 178
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4a96b9029a7076e8620a-d28b5dbacb36fa7fcbfc",
+          "file": "prompt12-simulation.spec.ts",
+          "line": 142,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt13-integration.spec.ts",
+      "file": "prompt13-integration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "13-29 through 13-33 deterministic integration 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:08:23.326Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2865eb7db012def1526d-96ffb5901e8f6286302b",
+          "file": "prompt13-integration.spec.ts",
+          "line": 82,
+          "column": 7
+        },
+        {
+          "title": "13-29 through 13-33 deterministic integration 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13959,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:08:37.145Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2865eb7db012def1526d-760851ac0b787671d2ef",
+          "file": "prompt13-integration.spec.ts",
+          "line": 82,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt13-shell.spec.ts",
+      "file": "prompt13-shell.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "13-13 full-screen game shell 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6652,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:08:51.123Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f7496f486b4ea16412aa-84431db9fb562ab89af4",
+          "file": "prompt13-shell.spec.ts",
+          "line": 27,
+          "column": 7
+        },
+        {
+          "title": "13-13 full-screen game shell 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:08:57.788Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f7496f486b4ea16412aa-21d78afc6800381cc62a",
+          "file": "prompt13-shell.spec.ts",
+          "line": 27,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt14-benchmark.spec.ts",
+      "file": "prompt14-benchmark.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "reference machine legacy/catalog camera benchmark and bounded catalog caches",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 53471,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:09:06.474Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7545c5ef5c20bb348f2-1c2fa3905ea608b19a86",
+          "file": "prompt14-benchmark.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt14-catalog.spec.ts",
+      "file": "prompt14-catalog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "catalog production selection, map interaction, turn/news/major event, history and fresh reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9325,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:09:59.967Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "58cb8aa15efda3ff1c7b-cc3afb942df9bcb693a1",
+          "file": "prompt14-catalog.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "catalog rejects GPT coordinates/polygons and production debug without atomic publication",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9398,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:10:09.301Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "58cb8aa15efda3ff1c7b-48b101c39465573a9a6e",
+          "file": "prompt14-catalog.spec.ts",
+          "line": 36,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt14-review-g.spec.ts",
+      "file": "prompt14-review-g.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "V3 named region lookup, provider tools, server validation, planner and atomic partial occupation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4069,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:10:18.715Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "998443c4ba2e364123bd-8f70d0ae865e77997ace",
+          "file": "prompt14-review-g.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "V3 glyph fill and outline, shape size at zooms, world wrap and small-country fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "runtime",
+                  "description": "production World V3 / Simulation V2; no legacy cookie"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 94985,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:10:22.795Z",
+                  "annotations": [
+                    {
+                      "type": "runtime",
+                      "description": "production World V3 / Simulation V2; no legacy cookie"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "998443c4ba2e364123bd-2cb5ff5e1a27bc2e356f",
+          "file": "prompt14-review-g.spec.ts",
+          "line": 18,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T05:01:45.302Z",
+    "duration": 612773.431,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

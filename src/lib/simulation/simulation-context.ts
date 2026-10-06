@@ -3,6 +3,8 @@ import {z} from "zod";
 import type {CountrySearchProjection} from "../projection/country-search-index-patch";
 import {canonicalStringify} from "../world/canonical-serializer";
 import type {WorldStateV2} from "../world/world-state-v2";
+import type {WorldStateV3} from '../world/world-state-v3';
+import {countryPresentationAuthoritySchema,territorialControlAuthoritySchema, MAX_COUNTRY_PRESENTATION_AUTHORITIES, type CountryPresentationAuthority,type TerritorialControlAuthority, type SimulationStateV2} from './simulation-state-v2';
 import type {SimulationStateV1} from "./simulation-state";
 import type {SubdivisionCatalog} from "./subdivision-catalog";
 import {
@@ -17,10 +19,13 @@ import {
 } from "./simulation-contract-primitives";
 import {activeSituationSchema, scheduledConsequenceSchema, simulationFactSchema} from "./narrative-state";
 import {simulationEventSchema} from "./simulation-event";
+import {presentationHistory, presentationHistorySchema, type PresentationHistory} from './presentation-grant-validation';
+import {authorityMapColorSchema} from './simulation-state-v2';
 
 export const SIMULATION_CONTEXT_LIMITS = Object.freeze({
   countries: 64,
   territoryIdsPerCountry: 16,
+  catalogDirectoryIdsPerCountry: 4,
   countryDirectory: 512,
   aliasesPerCountry: 12,
   territoryDirectory: 4_096,
@@ -84,6 +89,11 @@ export type SimulationContextV1 = Readonly<{
   situations: readonly unknown[];
   dueConsequences: readonly unknown[];
   recentEvents: readonly unknown[];
+  countryPresentationAuthorities?: readonly CountryPresentationAuthority[];
+  presentationAuthorityHistory?: PresentationHistory;
+  countryMapColors?: readonly Readonly<{countryId: string; mapColor: string}>[];
+  territorialControlAuthorities?: readonly TerritorialControlAuthority[];
+  regionCatalog?: import("../world/world-geometry-catalog-ref").WorldGeometryCatalogRef;
   subdivisions: readonly Readonly<{
     catalogId: string;
     sourceVersion: string;
@@ -139,6 +149,11 @@ export const simulationContextSchema = z.strictObject({
   situations: z.array(activeSituationSchema).max(SIMULATION_CONTEXT_LIMITS.situations),
   dueConsequences: z.array(scheduledConsequenceSchema).max(SIMULATION_CONTEXT_LIMITS.dueConsequences),
   recentEvents: z.array(simulationEventSchema).max(SIMULATION_CONTEXT_LIMITS.recentEvents),
+  countryPresentationAuthorities: z.array(countryPresentationAuthoritySchema).max(MAX_COUNTRY_PRESENTATION_AUTHORITIES).optional(),
+  presentationAuthorityHistory: presentationHistorySchema.optional(),
+  countryMapColors: z.array(z.strictObject({countryId: countryIdSchema, mapColor: authorityMapColorSchema})).max(SIMULATION_CONTEXT_LIMITS.countryDirectory).optional(),
+  territorialControlAuthorities: z.array(territorialControlAuthoritySchema).max(8).optional(),
+  regionCatalog: z.strictObject({catalogVersion:z.string().max(160),geometryRoot:z.string().regex(/^[a-f0-9]{64}$/),topologyRoot:z.string().regex(/^[a-f0-9]{64}$/),renderArtifactRoot:z.string().regex(/^[a-f0-9]{64}$/),manifestPath:z.string().max(256)}).optional(),
   subdivisions: z.array(z.strictObject({
     catalogId: simulationIdSchema,
     sourceVersion: simulationIdSchema,
@@ -191,8 +206,8 @@ const clip = <Value>(
 };
 
 export function buildSimulationContext(input: Readonly<{
-  simulation: SimulationStateV1;
-  world: WorldStateV2;
+  simulation: SimulationStateV1|SimulationStateV2;
+  world: WorldStateV2|WorldStateV3;
   countrySearchProjection: CountrySearchProjection;
   subdivisionCatalog: SubdivisionCatalog;
   scenarioId: string;
@@ -235,7 +250,7 @@ export function buildSimulationContext(input: Readonly<{
   }
   const ownedTerritoryCount = [...territoryIdsByCountry.values()]
     .reduce((total, ids) => total + ids.length, 0);
-  if (ownedTerritoryCount > SIMULATION_CONTEXT_LIMITS.territoryDirectory) {
+  if (world.schemaVersion===2 && ownedTerritoryCount > SIMULATION_CONTEXT_LIMITS.territoryDirectory) {
     throw new SimulationContextError(
       "SIMULATION_CONTEXT_TOO_LARGE",
       `Territory directory exceeds ${SIMULATION_CONTEXT_LIMITS.territoryDirectory} entries`,
@@ -243,8 +258,7 @@ export function buildSimulationContext(input: Readonly<{
   }
   const territoryDirectory = countryDirectory.map(({countryId}) => Object.freeze({
     countryId,
-    territoryIds: Object.freeze((territoryIdsByCountry.get(countryId) ?? [])
-      .sort(compareCanonicalText)),
+    territoryIds: Object.freeze(world.schemaVersion===3?clip((territoryIdsByCountry.get(countryId)??[]).sort(compareCanonicalText),SIMULATION_CONTEXT_LIMITS.catalogDirectoryIdsPerCountry,`directory:${countryId}`,clipped):(territoryIdsByCountry.get(countryId) ?? []).sort(compareCanonicalText)),
   }));
   const relevantCountryIds = new Set<string>([simulation.playerCountryId]);
   simulation.queuedActions.forEach((action) => relevantCountryIds.add(action.actorCountryId));
@@ -358,10 +372,14 @@ export function buildSimulationContext(input: Readonly<{
       clipped,
     )),
     recentEvents: Object.freeze(recentEvents),
+    ...(simulation.schemaVersion === 2 ? {countryPresentationAuthorities:Object.freeze(simulation.countryPresentationAuthorityOrder.map(id => simulation.countryPresentationAuthoritiesById[id])),presentationAuthorityHistory:presentationHistory(simulation.eventLog)} : {}),
+    ...(world.schemaVersion === 3 ? {countryMapColors:world.countryOrder.map(countryId=>({countryId,mapColor:world.countriesById[countryId].mapColor}))} : {}),
+    ...(simulation.schemaVersion === 2 ? {territorialControlAuthorities:Object.freeze(clip(simulation.territorialControlAuthorityOrder.map(id=>simulation.territorialControlAuthoritiesById[id]).filter(a=>a.actorCountryId===simulation.playerCountryId||a.targetCountryId===simulation.playerCountryId),8,'territorialControlAuthorities',clipped).map(a=>Object.freeze({...a,allowedTerritoryIds:Object.freeze(clip(a.allowedTerritoryIds,SIMULATION_CONTEXT_LIMITS.territoryIdsPerCountry,`authority:${a.id}`,clipped))})))} : {}),
+    ...(world.schemaVersion===3?{regionCatalog:world.catalogRef}:{}),
     subdivisions: Object.freeze(subdivisions),
     rules: Object.freeze({
       locale: input.locale ?? "ko-KR",
-      capabilities: Object.freeze([
+      capabilities: Object.freeze(world.schemaVersion===3?['narrative-events','facts-and-situations','scheduled-consequences','country-rename','country-map-color','bounded-territorial-authority','territory-occupy','territory-liberate','territory-transfer-ownership','countries-merge']:[
         "narrative-events",
         "facts-and-situations",
         "scheduled-consequences",

@@ -1,4 +1,4 @@
-import {test,expect} from "@playwright/test";
+import {test,expect} from "./legacy-fixture";
 import path from "node:path";
 
 const countries=["RUS","CHN","AUS","USA","CHL","IDN"] as const;

@@ -1,0 +1,511 @@
+{
+  "schemaVersion": "prompt14-production-cutover-checkpoint-v1",
+  "task": "14-10",
+  "status": "pass",
+  "generatedAt": "2026-10-06T00:30:24.237Z",
+  "baselineHead": "d56fba5f4eb928477a17cb640bb5b662ae9719cc",
+  "review": {
+    "name": "D",
+    "status": "pass",
+    "prerequisite": {
+      "path": "reports/prompt14/14-08-immutable-catalog-checkpoint.json",
+      "sha256": "7d1134f83bd5b87a6c967010ac95695e961e504ccb60fc5d662591c7f7bcfb8e",
+      "byteLength": 1717215
+    },
+    "runtimeSmoke": {
+      "path": "reports/prompt14/14-10-runtime-smoke/runtime-smoke-evidence.json",
+      "sha256": "bcab009d452ffcd60c2952da9dab455ce0064af92a2dc55789c6ebaac6d4f5b7",
+      "byteLength": 9776
+    },
+    "separateReviewJson": false
+  },
+  "gates": {
+    "reviewC": true,
+    "approvedSeedAndSourceBytes": true,
+    "immutableInputsPreserved": true,
+    "actualRuntimeTests": true,
+    "relatedRegressionTests": true,
+    "runtimeSmoke": true,
+    "independentFrozenArtifacts": true,
+    "publishedDelivery": true,
+    "finalTypecheck": true,
+    "finalLint": true,
+    "finalProductionBuild": true,
+    "diffCheck": true
+  },
+  "sourceLock": {
+    "path": "data/source-locks/prompt14-derived-game-input-lock.json",
+    "sha256": "c0fcc776e0e9abd25dfb2ccbfd7884101c3e8aa59f481a6c23bb8cc8bcb740a3",
+    "byteLength": 12870
+  },
+  "catalogRef": {
+    "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+    "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+    "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json",
+    "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+    "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42"
+  },
+  "frozenApproval": {
+    "path": "data/catalogs/prompt14/frozen-catalog-ref.json",
+    "sha256": "e25ea42535ae2d103d66811a971c9d89fd8202b9cdb3f0a3d9467c4a706bd53b",
+    "byteLength": 939
+  },
+  "migration": {
+    "approvedPair": {
+      "path": "data/catalogs/prompt14/catalog-v1-73e30c25c9637d6376cb65afa82483c6/migration-pair.json",
+      "sha256": "c8131a74ead73e291474924b7e829b668bff77c13d2d706a8027bb42a0fa8a63",
+      "byteLength": 1506531
+    },
+    "mapping": {
+      "path": "data/catalogs/prompt14/catalog-v1-73e30c25c9637d6376cb65afa82483c6/migration-mapping.json",
+      "sha256": "e44ad2aaeec61a4e7d21254b829c1205f45b463031fd9c3447b52809d35d9b3c",
+      "byteLength": 382361
+    },
+    "reviewCStatus": "pass",
+    "productionWorldSchema": 3,
+    "productionSimulationSchema": 2,
+    "territoryCount": 4231,
+    "countryCount": 247
+  },
+  "stages": {
+    "atomicAuthority": {
+      "status": "pass",
+      "productionEntry": "src/components/layout/WorldAppPage.tsx",
+      "serverSeed": "src/lib/world/production-catalog-seed.server.ts",
+      "runtime": "src/lib/simulation/catalog-runtime.ts",
+      "wholePairPublishedOnce": true,
+      "legacyV2GeometryAuthorityReachable": false,
+      "legacyModulesRetainedForRegressionFixtures": true
+    },
+    "initialization": {
+      "status": "pass",
+      "date": "2020-01-01",
+      "refresh": {
+        "phase": "refresh-seed-restoration",
+        "snapshot": {
+          "cacheHits": 0,
+          "cachedBytes": 2719824,
+          "cachedTiles": 4,
+          "catalogRef": {
+            "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+            "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+            "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json",
+            "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+            "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42"
+          },
+          "date": "2020-01-01",
+          "projectionBuilds": 1,
+          "simulationSchema": 2,
+          "verifiedRequests": 11,
+          "worldRevision": 0,
+          "worldSchema": 3
+        }
+      },
+      "restart": "Actual pair restart test restores canonical seed and clears history",
+      "browserPersistence": {
+        "indexedDbDatabases": 0,
+        "localStorage": 0,
+        "phase": "no-browser-persistence",
+        "sessionStorage": 0
+      }
+    },
+    "mapSmoke": {
+      "status": "pass",
+      "phases": [
+        "world-load",
+        "selection-hover-label-panel",
+        "repeated-pan-zoom",
+        "game-narrative-turn",
+        "refresh-seed-restoration",
+        "no-browser-persistence",
+        "catalog-mismatch-entry-rejected"
+      ],
+      "browserErrors": [],
+      "requestFailures": [
+        {
+          "error": "net::ERR_ABORTED",
+          "path": "/game"
+        }
+      ],
+      "requestCount": 86,
+      "fullGeometryOrTopologyRequests": []
+    },
+    "readiness": {
+      "status": "pass",
+      "serverNegativeCases": [
+        "missing registered PBF",
+        "stale catalog roots",
+        "altered migration-pair bytes",
+        "mixed schema pair"
+      ],
+      "clientNegativeCase": "Corrupt manifest SHA rejected before app-shell/runtime entry"
+    },
+    "structuralPerformance": {
+      "status": "pass",
+      "scope": "14-10 first structural gate only; not the formal 14-20 performance gate",
+      "cameraRounds": 3,
+      "cameraCountries": [
+        "USA",
+        "CHN",
+        "KOR",
+        "GBR",
+        "FRA"
+      ],
+      "projectionBuildsBefore": 1,
+      "projectionBuildsAfter": 1,
+      "warmedCacheTiles": 33,
+      "warmedCacheBytes": 4306673,
+      "cacheLimits": {
+        "tiles": 256,
+        "bytes": 8388608
+      },
+      "heapSamples": [
+        {
+          "backingStorageSize": 33833048,
+          "embedderHeapUsedSize": 1693560,
+          "round": 0,
+          "snapshot": {
+            "cacheHits": 0,
+            "cachedBytes": 4306673,
+            "cachedTiles": 33,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42"
+            },
+            "date": "2020-01-01",
+            "projectionBuilds": 1,
+            "simulationSchema": 2,
+            "verifiedRequests": 38,
+            "worldRevision": 0,
+            "worldSchema": 3
+          },
+          "totalSize": 21348352,
+          "usedSize": 19777652
+        },
+        {
+          "backingStorageSize": 33833304,
+          "embedderHeapUsedSize": 1697760,
+          "round": 1,
+          "snapshot": {
+            "cacheHits": 0,
+            "cachedBytes": 4306673,
+            "cachedTiles": 33,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42"
+            },
+            "date": "2020-01-01",
+            "projectionBuilds": 1,
+            "simulationSchema": 2,
+            "verifiedRequests": 38,
+            "worldRevision": 0,
+            "worldSchema": 3
+          },
+          "totalSize": 21348352,
+          "usedSize": 19894832
+        },
+        {
+          "backingStorageSize": 33833304,
+          "embedderHeapUsedSize": 1701032,
+          "round": 2,
+          "snapshot": {
+            "cacheHits": 0,
+            "cachedBytes": 4306673,
+            "cachedTiles": 33,
+            "catalogRef": {
+              "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+              "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+              "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json",
+              "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+              "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42"
+            },
+            "date": "2020-01-01",
+            "projectionBuilds": 1,
+            "simulationSchema": 2,
+            "verifiedRequests": 38,
+            "worldRevision": 0,
+            "worldSchema": 3
+          },
+          "totalSize": 22921216,
+          "usedSize": 19958828
+        }
+      ],
+      "retainedHeapGrowthBytes": 181176,
+      "retainedGrowthFirstGateBytes": 33554432,
+      "noStallOrOOMObserved": true,
+      "cameraHasNoProjectionOrContentHashHandlers": true
+    },
+    "immutableCatalog": {
+      "status": "pass",
+      "independentOutputs": "Retained full 14-8 independent outputs were byte-verified again, not regenerated during cutover",
+      "verifiedArtifactCount": 5467,
+      "decodedCanonicalFeatureIds": {
+        "territories": 4231,
+        "edges": 15955
+      },
+      "comparedArtifactCount": 5469,
+      "publishedDeliveryFiles": 5464,
+      "protectedPaths": [
+        "assets",
+        "public/data",
+        "data/catalogs",
+        "data/catalog-consumers",
+        "data/derived",
+        "data/source-locks",
+        "package.json",
+        "package-lock.json",
+        "reports/prompt14/14-08-immutable-catalog-checkpoint.json",
+        "reports/prompt14/14-09-catalog-consumer.json"
+      ],
+      "protectedDiff": []
+    },
+    "ci": {
+      "status": "configured",
+      "workflow": ".github/workflows/prompt14-catalog.yml",
+      "localProductionBrowserReplayCommand": "node scripts/run-prompt14-production-cutover-smoke.mjs 3140 .tmp/prompt14-cutover/browser-final",
+      "remoteExecution": "Not run in this local session"
+    }
+  },
+  "limitations": [
+    "Browser turn smoke mocks the local AI NDJSON response; it validates runtime commit/undo/redo, not a live provider call.",
+    "Narrative, facts, situations, scheduled consequences and country rename are supported. Other world effects reject CATALOG_WORLD_EFFECT_NOT_READY before mutation; occupation/lifecycle tasks 14-11 onward are not implemented.",
+    "The V3 context directory exposes at most 4 territory IDs per country with explicit clipping evidence; existing byte and ID caps remain unchanged.",
+    "Existing approved capital omissions from 14-9 remain unchanged."
+  ],
+  "correctedAttemptHistory": [
+    {
+      "path": ".tmp/prompt14-cutover/browser-first/runtime-smoke-evidence.json",
+      "status": "fail",
+      "cause": "Smoke assertion expected 한국 instead of canonical 대한민국/KOR; corrected the assertion and reran in fresh outputs."
+    },
+    {
+      "path": ".tmp/prompt14-cutover/browser-second/runtime-smoke-evidence.json",
+      "status": "pass",
+      "supersededBy": "reports/prompt14/14-10-runtime-smoke/runtime-smoke-evidence.json"
+    },
+    {
+      "cause": "Initial context directory sample of 16 IDs exceeded the actual request byte cap; reduced to 4 with explicit clipping, preserving caps and reran actual runtime tests."
+    }
+  ],
+  "commands": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/catalog-runtime.test.ts --reporter=default --reporter=json --outputFile=.tmp/prompt14-cutover/runtime-tests.json",
+      "exitCode": 0,
+      "passedTests": 8
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/turn-runtime.test.ts src/lib/simulation/simulation-context-production.test.ts src/lib/simulation/client/turn-request.test.ts src/lib/simulation/client/turn-report.test.ts src/lib/game-ui/game-hud-projection.test.ts src/lib/game-ui/country-management-projection.test.ts src/lib/game-ui/country-view-projection.test.ts src/lib/game-ui/news-projection.test.ts src/components/game/GameActionOverlay.test.tsx src/lib/map/catalog-consumer.test.ts --maxWorkers=2 --reporter=default --reporter=json --outputFile=.tmp/prompt14-cutover/related-tests.json",
+      "exitCode": 0,
+      "passedTests": 71,
+      "testFiles": 9
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/next/dist/bin/next build",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js src/app/api/world/catalog/route.ts src/app/game/page.tsx src/app/page.tsx src/components/game/GameActionOverlay.tsx src/components/layout/WorldAppPage.tsx src/lib/game-ui/country-management-projection.ts src/lib/game-ui/country-view-projection.ts src/lib/game-ui/game-hud-projection.ts src/lib/game-ui/news-projection.ts src/lib/simulation/client/turn-report.ts src/lib/simulation/client/turn-request.ts src/lib/simulation/semantic-validator.ts src/lib/simulation/simulation-context.ts scripts/run-prompt14-production-cutover-smoke.mjs scripts/smoke-prompt14-production-cutover.mjs src/components/game/CatalogGameScreen.tsx src/components/layout/CatalogGameSetupShell.tsx src/components/map/CatalogWorldMap.tsx src/lib/game-ui/runtime-view.ts src/lib/simulation/catalog-runtime.test.ts src/lib/simulation/catalog-runtime.ts src/lib/simulation/catalog-turn-plan.ts src/lib/simulation/client/use-catalog-simulation-turn-controller.ts src/lib/world/production-catalog-seed.server.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/verify-prompt14-catalog-consumer.mjs .tmp/prompt14-cutover/verified-catalog .tmp/prompt14-review-c/catalog-first",
+      "exitCode": 0
+    },
+    {
+      "command": "node .tmp/verify-cutover-artifacts.mjs",
+      "exitCode": 0,
+      "description": "Reverify retained independent 14-8 outputs and compare all bytes; no new geometry generation in 14-10."
+    },
+    {
+      "command": "node scripts/run-prompt14-production-cutover-smoke.mjs 3140 .tmp/prompt14-cutover/browser-final",
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:/gen/.tmp/prompt14-cutover/browsers"
+      },
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "changedFiles": [
+    {
+      "path": ".github/workflows/prompt14-catalog.yml",
+      "sha256": "250fab935e63b178e2db32d4e3e61d794348f71ab092d41d7dc379080e28ef17",
+      "byteLength": 5419
+    },
+    {
+      "path": "src/app/api/world/catalog/route.ts",
+      "sha256": "721a02583965f6919b10d9b93342b04c1401745a67dffddc3bae8bc3861aabd0",
+      "byteLength": 532
+    },
+    {
+      "path": "src/app/game/page.tsx",
+      "sha256": "13750c6acff0acfc56ef6d9e4deecc450fc7825bb198bb2786b6e91072f574ad",
+      "byteLength": 186
+    },
+    {
+      "path": "src/app/page.tsx",
+      "sha256": "1148207ad44a2141e59bee1ed5d8c9520321129ce4d190d3679d44e5834c9764",
+      "byteLength": 183
+    },
+    {
+      "path": "src/components/game/GameActionOverlay.tsx",
+      "sha256": "a5b9fdb5e87f0ba5e872fbc959096cdc6c8f3cd265bced5b3c7586f2c7b7893c",
+      "byteLength": 8461
+    },
+    {
+      "path": "src/components/layout/WorldAppPage.tsx",
+      "sha256": "4866c5ae5ccf66142adf5e1764252b18a36cafaae0e22f68c57e7096892241fd",
+      "byteLength": 634
+    },
+    {
+      "path": "src/lib/game-ui/country-management-projection.ts",
+      "sha256": "3b7d57c63d31234bca73354f9641a1b81b6fb124d9b24f0b04a7a40749937683",
+      "byteLength": 3534
+    },
+    {
+      "path": "src/lib/game-ui/country-view-projection.ts",
+      "sha256": "224f927d75acc225c9999a87751f01a898868278c3a027b78eaa1976e4dc2d52",
+      "byteLength": 4972
+    },
+    {
+      "path": "src/lib/game-ui/game-hud-projection.ts",
+      "sha256": "0065386bb18db5b71b194692122da99da92aede9a91ef62dc706b4883adf269a",
+      "byteLength": 2164
+    },
+    {
+      "path": "src/lib/game-ui/news-projection.ts",
+      "sha256": "0db85814c7e5fbc10bef5a8008b7d9ae10e32cfca3ebab0d91bc4996c60a65f7",
+      "byteLength": 3341
+    },
+    {
+      "path": "src/lib/simulation/client/turn-report.ts",
+      "sha256": "56c12cbf6b1a50c13d1c4fd4a684f93d096e98463d47b05ba65b2a4767ec6d36",
+      "byteLength": 3469
+    },
+    {
+      "path": "src/lib/simulation/client/turn-request.ts",
+      "sha256": "77555b8ac71ce82bf7f83d1fa02ca2ca3022e50a1fd8ada0a4c4d68cd0f367b8",
+      "byteLength": 2634
+    },
+    {
+      "path": "src/lib/simulation/semantic-validator.ts",
+      "sha256": "7f3047549b9b4c710b3ca3834ad912030cf4c04ca2fa4a22aaadc58b004889ae",
+      "byteLength": 14677
+    },
+    {
+      "path": "src/lib/simulation/simulation-context.ts",
+      "sha256": "5f7873a0481796308e9ae577daa2733a090b9877c2c8324883aba72f411787de",
+      "byteLength": 16088
+    },
+    {
+      "path": "scripts/run-prompt14-production-cutover-smoke.mjs",
+      "sha256": "cce644300802a27cda174fb04c39650829cd4ace47982d6222f8a8a90bce24a1",
+      "byteLength": 1224
+    },
+    {
+      "path": "scripts/smoke-prompt14-production-cutover.mjs",
+      "sha256": "b753993ce3e256adb9463e82fda93e221f2d604db39cf97ff3b5a3d471fcb41a",
+      "byteLength": 7841
+    },
+    {
+      "path": "src/components/game/CatalogGameScreen.tsx",
+      "sha256": "c69c4b6bdb9fd19ffc285bb83e42b782683e0fbf8cdf7d90e0a1e1cffb3368c9",
+      "byteLength": 13301
+    },
+    {
+      "path": "src/components/layout/CatalogGameSetupShell.tsx",
+      "sha256": "b946689df70616e5476c6b637c5593b089e5c3588ff61cb40f1de8df8784c50b",
+      "byteLength": 4499
+    },
+    {
+      "path": "src/components/map/CatalogWorldMap.tsx",
+      "sha256": "98a28d248e9c05140ffc8ea3f353d38ed692d065d9bb8f33faa2671baf9754be",
+      "byteLength": 7226
+    },
+    {
+      "path": "src/lib/game-ui/runtime-view.ts",
+      "sha256": "9fe759e41ea9acde2dc4dc58f8b927229ee304d75322e589c39d8d7710533f66",
+      "byteLength": 955
+    },
+    {
+      "path": "src/lib/simulation/catalog-runtime.test.ts",
+      "sha256": "4bbfdf5d9599bdb50f4f097f21c75b2def24de3a4fd7e4fa3dd4ece9e326d58c",
+      "byteLength": 9936
+    },
+    {
+      "path": "src/lib/simulation/catalog-runtime.ts",
+      "sha256": "36d404d1b76b546097d7c2fb93e6ee55567370b9a5afdc678f14f57d62373931",
+      "byteLength": 4141
+    },
+    {
+      "path": "src/lib/simulation/catalog-turn-plan.ts",
+      "sha256": "07afa9c791fb9792b1152773f8fddb62df141ccac66060ffc65a444430dbebba",
+      "byteLength": 4116
+    },
+    {
+      "path": "src/lib/simulation/client/use-catalog-simulation-turn-controller.ts",
+      "sha256": "0183c7b0abe51b4612dd6d07be3ba9dd3eb75d0663b3a053ac72d9b4d9b97571",
+      "byteLength": 5029
+    },
+    {
+      "path": "src/lib/world/production-catalog-seed.server.ts",
+      "sha256": "ee99cb0bacc074fd97d8725935ff14981e3829210959c7893bb15c97fc2edf0b",
+      "byteLength": 2033
+    }
+  ],
+  "evidenceArtifacts": [
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/runtime-smoke-evidence.json",
+      "sha256": "bcab009d452ffcd60c2952da9dab455ce0064af92a2dc55789c6ebaac6d4f5b7",
+      "byteLength": 9776
+    },
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/runtime-tests.json",
+      "sha256": "aa8e9dee4d42500682ed01364cf7925d4cc1fe2467157db4d0279eeab2aab04b",
+      "byteLength": 3809
+    },
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/related-tests.json",
+      "sha256": "a70ec50f6f0e66e423776de2121452cd2751186b34e1eb86ad8595f3827b6b39",
+      "byteLength": 28321
+    },
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/frozen-artifact-verification.json",
+      "sha256": "dfa8b694e1744711d95acbe1106397c8941397ea1fff4fe98da3492981bd1821",
+      "byteLength": 1840
+    },
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/browser-boundary-evidence.json",
+      "sha256": "834da37e2a32638f13b3aa97240733c5dd203ce6fa9202678bbb25fb7be19a64",
+      "byteLength": 1785
+    },
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/game-refreshed.png",
+      "sha256": "ea532f89920084d60498f18e29914d46bf9273e126b0ea85ec3946cae1bfcb96",
+      "byteLength": 473122
+    },
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/korea-panel.png",
+      "sha256": "a25fc1358f0bb8f527d0b26bd56396e35989a908f06d9d3c1b72007a132bc28d",
+      "byteLength": 165684
+    },
+    {
+      "path": "reports/prompt14/14-10-runtime-smoke/world.png",
+      "sha256": "b742e3928fd2d486a6ac67369176e8208a50cbb0703405d0dadb7798237777a4",
+      "byteLength": 386593
+    }
+  ],
+  "stoppedAfter": "14-10 and REVIEW D; 14-11 onward not executed"
+}

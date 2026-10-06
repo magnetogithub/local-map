@@ -1,0 +1,1220 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\gen\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--reporter=line,json"
+    ],
+    "configFile": "D:\\gen\\playwright.config.ts",
+    "rootDir": "D:/gen/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/gen/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/gen/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "fix08-12.spec.ts",
+      "file": "fix08-12.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-12 captures fixed-camera representative typography",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 53265,
+                  "error": {
+                    "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\fix08-12-rus-after.png'",
+                    "stack": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\fix08-12-rus-after.png'\n    at D:\\gen\\e2e\\fix08-12.spec.ts:24:5",
+                    "location": {
+                      "file": "D:\\gen\\e2e\\fix08-12.spec.ts",
+                      "column": 5,
+                      "line": 24
+                    },
+                    "snippet": "  22 |     evidence.push(measurement);\n  23 |     const filename=phase===\"fix08-13\"?`fix08-13-${countryId.toLowerCase()}.png`:`fix08-12-${countryId.toLowerCase()}-${phase}.png`;\n> 24 |     await page.screenshot({path:path.join(process.cwd(),\"screenshots\",filename)});\n     |     ^\n  25 |   }\n  26 |   console.log(\"FIX08_12_RENDER\",JSON.stringify({phase,viewport:[1440,900],evidence}));\n  27 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\gen\\e2e\\fix08-12.spec.ts",
+                        "column": 5,
+                        "line": 24
+                      },
+                      "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\fix08-12-rus-after.png'\n\n  22 |     evidence.push(measurement);\n  23 |     const filename=phase===\"fix08-13\"?`fix08-13-${countryId.toLowerCase()}.png`:`fix08-12-${countryId.toLowerCase()}-${phase}.png`;\n> 24 |     await page.screenshot({path:path.join(process.cwd(),\"screenshots\",filename)});\n     |     ^\n  25 |   }\n  26 |   console.log(\"FIX08_12_RENDER\",JSON.stringify({phase,viewport:[1440,900],evidence}));\n  27 | });\n    at D:\\gen\\e2e\\fix08-12.spec.ts:24:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:16:14.389Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\gen\\test-results\\fix08-12-8-12-captures-fix-0d683-a-representative-typography\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\gen\\e2e\\fix08-12.spec.ts",
+                    "column": 5,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "19775f4f75869787feb4-8a166c9a10b9366d8cec",
+          "file": "fix08-12.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-5.spec.ts",
+      "file": "fix08-5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-5 geometry renderer integration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14860,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:17:08.975Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f8de5f9904a62dc19260-6511bb79c8789a91d984",
+          "file": "fix08-5.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-6.spec.ts",
+      "file": "fix08-6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-6 reports projected polygon bounds and settled render state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19161,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:17:24.507Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb20f5dcaf2c24b97dc3-4b808dff9598c95f62f3",
+          "file": "fix08-6.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-7.spec.ts",
+      "file": "fix08-7.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "8-7 representative zoom continuity",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 25240,
+                  "error": {
+                    "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\fix08-7-rus-z1.png'",
+                    "stack": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\fix08-7-rus-z1.png'\n    at D:\\gen\\e2e\\fix08-7.spec.ts:12:437",
+                    "location": {
+                      "file": "D:\\gen\\e2e\\fix08-7.spec.ts",
+                      "column": 437,
+                      "line": 12
+                    },
+                    "snippet": "  10 |   await stable();expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getCenter())).toEqual([45,25]);expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getZoom())).toBe(1);const initial=await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getRenderedGlyphLabelIds?.()??[]);for(const id of representatives)expect(initial).toContain(id);\n  11 |   const measure=async(countryId:string,zoom:number):Promise<Measurement>=>{const placement=await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getCountryLabelPlacement(id),countryId) as {anchor:[number,number];footprint:{coordinates:[number,number][][]}};await page.evaluate(({anchor,zoom})=>window.__PAX_MAP_DEBUG__!.jumpTo(anchor,zoom),{anchor:placement.anchor,zoom});await stable();return page.evaluate(({countryId,zoom,footprint})=>{const debug=window.__PAX_MAP_DEBUG__!,bounds=debug.getCountryLabelRendererBounds?.(countryId)??[],vertices=footprint.coordinates.flat().map(point=>debug.project(point)),left=Math.min(...vertices.map(point=>point[0])),right=Math.max(...vertices.map(point=>point[0])),territoryWidth=right-left,labelWidth=bounds[0]?.width??0;return {countryId,zoom,worldCopy:bounds[0]?.worldCopy??Number.NaN,glyphCount:debug.getGlyphLabelFeatureCount?.(countryId)??0,instanceCount:debug.getGlyphLabelInstanceCount?.(countryId)??0,boundsCount:bounds.length,labelWidth,territoryWidth,widthRatio:labelWidth/territoryWidth}}, {countryId,zoom,footprint:placement.footprint})};\n> 12 |   const zoomEvidence:Measurement[]=[];for(const countryId of zoomCountries){for(const zoom of [1,2,3]){const value=await measure(countryId,zoom);expect(value.boundsCount).toBe(1);expect(value.instanceCount).toBe(1);expect(value.glyphCount).toBe(countryId===\"AUS\"?7:3);expect(value.labelWidth).toBeGreaterThan(0);expect(value.territoryWidth).toBeGreaterThan(0);expect(value.widthRatio).toBeLessThanOrEqual(1.15);zoomEvidence.push(value);await page.screenshot({path:path.join(process.cwd(),`screenshots/fix08-7-${countryId.toLowerCase()}-z${zoom}.png`)})}const ratios=zoomEvidence.filter(value=>value.countryId===countryId).map(value=>value.widthRatio);expect(Math.max(...ratios)-Math.min(...ratios)).toBeLessThan(.002)}\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  13 |   const boundaryRuns:Measurement[][]=[];for(let run=0;run<2;run++){const evidence:Measurement[]=[];for(const countryId of zoomCountries)for(const zoom of boundaries){const value=await measure(countryId,zoom);expect(value.boundsCount).toBe(1);expect(value.instanceCount).toBe(1);expect(value.labelWidth).toBeGreaterThan(0);evidence.push(value)}boundaryRuns.push(evidence)}\n  14 |   expect(boundaryRuns[1].map(value=>({countryId:value.countryId,zoom:value.zoom,glyphCount:value.glyphCount,instanceCount:value.instanceCount,boundsCount:value.boundsCount,widthRatio:Number(value.widthRatio.toFixed(6))}))).toEqual(boundaryRuns[0].map(value=>({countryId:value.countryId,zoom:value.zoom,glyphCount:value.glyphCount,instanceCount:value.instanceCount,boundsCount:value.boundsCount,widthRatio:Number(value.widthRatio.toFixed(6))})));\n  15 |   console.log(\"FIX08_7_SUMMARY\",JSON.stringify({viewport:[1440,900],initialCenter:[45,25],initialZoom:1,initialRendered:representatives,zoomEvidence,boundaryRuns}));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\gen\\e2e\\fix08-7.spec.ts",
+                        "column": 437,
+                        "line": 12
+                      },
+                      "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\fix08-7-rus-z1.png'\n\n  10 |   await stable();expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getCenter())).toEqual([45,25]);expect(await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getZoom())).toBe(1);const initial=await page.evaluate(()=>window.__PAX_MAP_DEBUG__!.getRenderedGlyphLabelIds?.()??[]);for(const id of representatives)expect(initial).toContain(id);\n  11 |   const measure=async(countryId:string,zoom:number):Promise<Measurement>=>{const placement=await page.evaluate(id=>window.__PAX_MAP_DEBUG__!.getCountryLabelPlacement(id),countryId) as {anchor:[number,number];footprint:{coordinates:[number,number][][]}};await page.evaluate(({anchor,zoom})=>window.__PAX_MAP_DEBUG__!.jumpTo(anchor,zoom),{anchor:placement.anchor,zoom});await stable();return page.evaluate(({countryId,zoom,footprint})=>{const debug=window.__PAX_MAP_DEBUG__!,bounds=debug.getCountryLabelRendererBounds?.(countryId)??[],vertices=footprint.coordinates.flat().map(point=>debug.project(point)),left=Math.min(...vertices.map(point=>point[0])),right=Math.max(...vertices.map(point=>point[0])),territoryWidth=right-left,labelWidth=bounds[0]?.width??0;return {countryId,zoom,worldCopy:bounds[0]?.worldCopy??Number.NaN,glyphCount:debug.getGlyphLabelFeatureCount?.(countryId)??0,instanceCount:debug.getGlyphLabelInstanceCount?.(countryId)??0,boundsCount:bounds.length,labelWidth,territoryWidth,widthRatio:labelWidth/territoryWidth}}, {countryId,zoom,footprint:placement.footprint})};\n> 12 |   const zoomEvidence:Measurement[]=[];for(const countryId of zoomCountries){for(const zoom of [1,2,3]){const value=await measure(countryId,zoom);expect(value.boundsCount).toBe(1);expect(value.instanceCount).toBe(1);expect(value.glyphCount).toBe(countryId===\"AUS\"?7:3);expect(value.labelWidth).toBeGreaterThan(0);expect(value.territoryWidth).toBeGreaterThan(0);expect(value.widthRatio).toBeLessThanOrEqual(1.15);zoomEvidence.push(value);await page.screenshot({path:path.join(process.cwd(),`screenshots/fix08-7-${countryId.toLowerCase()}-z${zoom}.png`)})}const ratios=zoomEvidence.filter(value=>value.countryId===countryId).map(value=>value.widthRatio);expect(Math.max(...ratios)-Math.min(...ratios)).toBeLessThan(.002)}\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  13 |   const boundaryRuns:Measurement[][]=[];for(let run=0;run<2;run++){const evidence:Measurement[]=[];for(const countryId of zoomCountries)for(const zoom of boundaries){const value=await measure(countryId,zoom);expect(value.boundsCount).toBe(1);expect(value.instanceCount).toBe(1);expect(value.labelWidth).toBeGreaterThan(0);evidence.push(value)}boundaryRuns.push(evidence)}\n  14 |   expect(boundaryRuns[1].map(value=>({countryId:value.countryId,zoom:value.zoom,glyphCount:value.glyphCount,instanceCount:value.instanceCount,boundsCount:value.boundsCount,widthRatio:Number(value.widthRatio.toFixed(6))}))).toEqual(boundaryRuns[0].map(value=>({countryId:value.countryId,zoom:value.zoom,glyphCount:value.glyphCount,instanceCount:value.instanceCount,boundsCount:value.boundsCount,widthRatio:Number(value.widthRatio.toFixed(6))})));\n  15 |   console.log(\"FIX08_7_SUMMARY\",JSON.stringify({viewport:[1440,900],initialCenter:[45,25],initialZoom:1,initialRendered:representatives,zoomEvidence,boundaryRuns}));\n    at D:\\gen\\e2e\\fix08-7.spec.ts:12:437"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:17:43.695Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\gen\\test-results\\fix08-7-8-7-representative-zoom-continuity\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\gen\\e2e\\fix08-7.spec.ts",
+                    "column": 437,
+                    "line": 12
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "966dfafb6a644c24c395-bd7c081bc3e59589d2bc",
+          "file": "fix08-7.spec.ts",
+          "line": 7,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "fix08-aus-diag.spec.ts",
+      "file": "fix08-aus-diag.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "AUS zoom diagnostics",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22783,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "AUS_ZOOM \u001b[33m1\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m2\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m3\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m4\u001b[39m []\n"
+                    },
+                    {
+                      "text": "AUS_ZOOM \u001b[33m5\u001b[39m []\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:18:09.824Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fe9eb7bd98f0cead1ab5-eefe91ef4c6190af1056",
+          "file": "fix08-aus-diag.spec.ts",
+          "line": 2,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "game-setup.spec.ts",
+      "file": "game-setup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "searches and resets the player country on reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 38878,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:18:33.614Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-a7663f90b09d32f92360",
+          "file": "game-setup.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "renders dynamic labels, global Admin 1, high-resolution interaction, and world copies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17124,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:19:12.510Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-840311f6b052ed3a789f",
+          "file": "game-setup.spec.ts",
+          "line": 57,
+          "column": 5
+        },
+        {
+          "title": "preserves canonical playable countries and removes technical map units",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15949,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:19:29.655Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-9bc105175615e9dd80a9",
+          "file": "game-setup.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "dissolved seams select parents and do not render border layers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21867,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:19:45.619Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-b8faea4487822704893a",
+          "file": "game-setup.spec.ts",
+          "line": 76,
+          "column": 5
+        },
+        {
+          "title": "uses feature minZoom for point labels and crosses world copies by mouse drag",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 25577,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:20:07.499Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-e02b25dcfb657cb955ad",
+          "file": "game-setup.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "renders geometry labels and preserves Point fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 23487,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:20:33.091Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-3ec8af03add40cc0523d",
+          "file": "game-setup.spec.ts",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "splits China, merges 31 countries, and rolls back atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 47061,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:20:56.591Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-7afbc2faf085870fe681",
+          "file": "game-setup.spec.ts",
+          "line": 94,
+          "column": 5
+        },
+        {
+          "title": "splits the USA into 50 state countries, merges them, and rolls back atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 46821,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:21:43.664Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-a0f153ca3402040cfb86",
+          "file": "game-setup.spec.ts",
+          "line": 154,
+          "column": 5
+        },
+        {
+          "title": "desktop layout 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11934,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:22:30.498Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-371f659f05319b48fb94",
+          "file": "game-setup.spec.ts",
+          "line": 220,
+          "column": 7
+        },
+        {
+          "title": "desktop layout 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11033,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:22:42.450Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-9419db85a3b6a8c6f958",
+          "file": "game-setup.spec.ts",
+          "line": 220,
+          "column": 7
+        },
+        {
+          "title": "desktop layout 2560x1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10892,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:22:53.497Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f177d4b2877e605f1755-5e047d67c2153f455b28",
+          "file": "game-setup.spec.ts",
+          "line": 220,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt11-10.spec.ts",
+      "file": "prompt11-10.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "v2 map source, selection, focus, and revision agree",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13669,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:23:04.410Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0449f37482d3a3054143-a025bb2e9618e24478a4",
+          "file": "prompt11-10.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt12-simulation.spec.ts",
+      "file": "prompt12-simulation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "queues, adjudicates, unifies, links the report, undoes, and stops atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 72353,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:23:18.099Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a96b9029a7076e8620a-7d91e37443847a27abae",
+          "file": "prompt12-simulation.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "sends production CHN and USA subdivision summaries and resets the player lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44918,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:24:30.460Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a96b9029a7076e8620a-d28b5dbacb36fa7fcbfc",
+          "file": "prompt12-simulation.spec.ts",
+          "line": 142,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt13-integration.spec.ts",
+      "file": "prompt13-integration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "13-29 through 13-33 deterministic integration 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 81951,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:25:15.400Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2865eb7db012def1526d-96ffb5901e8f6286302b",
+          "file": "prompt13-integration.spec.ts",
+          "line": 96,
+          "column": 7
+        },
+        {
+          "title": "13-29 through 13-33 deterministic integration 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 83751,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:26:37.366Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2865eb7db012def1526d-760851ac0b787671d2ef",
+          "file": "prompt13-integration.spec.ts",
+          "line": 96,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt13-shell.spec.ts",
+      "file": "prompt13-shell.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "13-13 full-screen game shell 1280x720",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20480,
+                  "error": {
+                    "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\prompt13-23-action-1280x720.png'",
+                    "stack": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\prompt13-23-action-1280x720.png'\n    at D:\\gen\\e2e\\prompt13-shell.spec.ts:119:5",
+                    "location": {
+                      "file": "D:\\gen\\e2e\\prompt13-shell.spec.ts",
+                      "column": 5,
+                      "line": 119
+                    },
+                    "snippet": "  117 |     await expect(startAdvance).toBeDisabled();\n  118 |     await expect(page.locator(\".game-panel__body\")).toHaveCSS(\"overflow-y\", \"auto\");\n> 119 |     await page.screenshot({\n      |     ^\n  120 |       path: `screenshots/prompt13-23-action-${size.width}x${size.height}.png`,\n  121 |       fullPage: true,\n  122 |     });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\gen\\e2e\\prompt13-shell.spec.ts",
+                        "column": 5,
+                        "line": 119
+                      },
+                      "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\prompt13-23-action-1280x720.png'\n\n  117 |     await expect(startAdvance).toBeDisabled();\n  118 |     await expect(page.locator(\".game-panel__body\")).toHaveCSS(\"overflow-y\", \"auto\");\n> 119 |     await page.screenshot({\n      |     ^\n  120 |       path: `screenshots/prompt13-23-action-${size.width}x${size.height}.png`,\n  121 |       fullPage: true,\n  122 |     });\n    at D:\\gen\\e2e\\prompt13-shell.spec.ts:119:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:28:01.139Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\gen\\test-results\\prompt13-shell-13-13-full-screen-game-shell-1280x720\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\gen\\e2e\\prompt13-shell.spec.ts",
+                    "column": 5,
+                    "line": 119
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f7496f486b4ea16412aa-84431db9fb562ab89af4",
+          "file": "prompt13-shell.spec.ts",
+          "line": 27,
+          "column": 7
+        },
+        {
+          "title": "13-13 full-screen game shell 1920x1080",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 25061,
+                  "error": {
+                    "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\prompt13-23-action-1920x1080.png'",
+                    "stack": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\prompt13-23-action-1920x1080.png'\n    at D:\\gen\\e2e\\prompt13-shell.spec.ts:119:5",
+                    "location": {
+                      "file": "D:\\gen\\e2e\\prompt13-shell.spec.ts",
+                      "column": 5,
+                      "line": 119
+                    },
+                    "snippet": "  117 |     await expect(startAdvance).toBeDisabled();\n  118 |     await expect(page.locator(\".game-panel__body\")).toHaveCSS(\"overflow-y\", \"auto\");\n> 119 |     await page.screenshot({\n      |     ^\n  120 |       path: `screenshots/prompt13-23-action-${size.width}x${size.height}.png`,\n  121 |       fullPage: true,\n  122 |     });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\gen\\e2e\\prompt13-shell.spec.ts",
+                        "column": 5,
+                        "line": 119
+                      },
+                      "message": "Error: UNKNOWN: unknown error, open 'D:\\gen\\screenshots\\prompt13-23-action-1920x1080.png'\n\n  117 |     await expect(startAdvance).toBeDisabled();\n  118 |     await expect(page.locator(\".game-panel__body\")).toHaveCSS(\"overflow-y\", \"auto\");\n> 119 |     await page.screenshot({\n      |     ^\n  120 |       path: `screenshots/prompt13-23-action-${size.width}x${size.height}.png`,\n  121 |       fullPage: true,\n  122 |     });\n    at D:\\gen\\e2e\\prompt13-shell.spec.ts:119:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:28:22.303Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\gen\\test-results\\prompt13-shell-13-13-full-screen-game-shell-1920x1080\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\gen\\e2e\\prompt13-shell.spec.ts",
+                    "column": 5,
+                    "line": 119
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f7496f486b4ea16412aa-21d78afc6800381cc62a",
+          "file": "prompt13-shell.spec.ts",
+          "line": 27,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "prompt14-benchmark.spec.ts",
+      "file": "prompt14-benchmark.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "reference machine legacy/catalog camera benchmark and bounded catalog caches",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 24466,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m339022528\u001b[39m\nReceived:    \u001b[31m434322476\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m339022528\u001b[39m\nReceived:    \u001b[31m434322476\u001b[39m\n    at D:\\gen\\e2e\\prompt14-benchmark.spec.ts:34:35",
+                    "location": {
+                      "file": "D:\\gen\\e2e\\prompt14-benchmark.spec.ts",
+                      "column": 35,
+                      "line": 34
+                    },
+                    "snippet": "  32 |     expect(errors).toEqual([]);for(const s of samples){expect(s.frames).toBeGreaterThan(0);expect(s.maxFrameMs!).toBeLessThan(5000);expect(s.worldSerializations).toBe(0);}\n  33 |     if(mode==='catalog')for(const s of samples){expect(s.after!.projectionBuilds).toBe(s.before!.projectionBuilds);expect(Number(s.after!.cachedTiles)).toBeLessThanOrEqual(256);expect(Number(s.after!.cachedBytes)).toBeLessThanOrEqual(8*1024*1024);}\n> 34 |     expect(heap.at(-1)!.usedSize).toBeLessThanOrEqual(heap[0].usedSize+32*1024*1024);\n     |                                   ^\n  35 |     let updates:unknown;\n  36 |     if(mode==='catalog'){\n  37 |       const freeze=JSON.parse(fs.readFileSync('data/catalogs/prompt14/frozen-catalog-ref.json','utf8'));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\gen\\e2e\\prompt14-benchmark.spec.ts",
+                        "column": 35,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m339022528\u001b[39m\nReceived:    \u001b[31m434322476\u001b[39m\n\n  32 |     expect(errors).toEqual([]);for(const s of samples){expect(s.frames).toBeGreaterThan(0);expect(s.maxFrameMs!).toBeLessThan(5000);expect(s.worldSerializations).toBe(0);}\n  33 |     if(mode==='catalog')for(const s of samples){expect(s.after!.projectionBuilds).toBe(s.before!.projectionBuilds);expect(Number(s.after!.cachedTiles)).toBeLessThanOrEqual(256);expect(Number(s.after!.cachedBytes)).toBeLessThanOrEqual(8*1024*1024);}\n> 34 |     expect(heap.at(-1)!.usedSize).toBeLessThanOrEqual(heap[0].usedSize+32*1024*1024);\n     |                                   ^\n  35 |     let updates:unknown;\n  36 |     if(mode==='catalog'){\n  37 |       const freeze=JSON.parse(fs.readFileSync('data/catalogs/prompt14/frozen-catalog-ref.json','utf8'));\n    at D:\\gen\\e2e\\prompt14-benchmark.spec.ts:34:35"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:28:48.644Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\gen\\test-results\\prompt14-benchmark-referen-63ed6--and-bounded-catalog-caches\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\gen\\e2e\\prompt14-benchmark.spec.ts",
+                    "column": 35,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c7545c5ef5c20bb348f2-1c2fa3905ea608b19a86",
+          "file": "prompt14-benchmark.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "prompt14-catalog.spec.ts",
+      "file": "prompt14-catalog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "catalog production selection, map interaction, turn/news/major event, history and fresh reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:29:14.394Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "58cb8aa15efda3ff1c7b-cc3afb942df9bcb693a1",
+          "file": "prompt14-catalog.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "catalog rejects GPT coordinates/polygons and production debug without atomic publication",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5569,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T03:29:25.643Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "58cb8aa15efda3ff1c7b-48b101c39465573a9a6e",
+          "file": "prompt14-catalog.spec.ts",
+          "line": 36,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T03:16:13.942Z",
+    "duration": 797454.061,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}

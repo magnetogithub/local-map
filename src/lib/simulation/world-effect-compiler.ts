@@ -598,6 +598,12 @@ export function compileWorldEffects(input: Readonly<{
   try {
     for (const effect of input.effects) {
       switch (effect.type) {
+        case 'territorialAuthority.granted':case 'territory.occupy':case 'territory.liberate':case 'territory.transferOwnership':case 'countries.merged':
+          throw new Error('Catalog effects require the World V3 planner');
+        case 'country.changeMapColor':
+        case 'country.chooseMapColor':
+        case 'countryPresentationAuthority.granted':
+          throw new WorldEffectCompileError('UNSUPPORTED_EFFECT_COMBINATION','Color effects require the catalog V3 planner',effect.effectId);
         case "country.renamed":
           requireCountry(input.world, effect.countryId, effect.effectId);
           cursor.commands.push({

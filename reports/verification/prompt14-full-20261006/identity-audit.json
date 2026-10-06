@@ -1,0 +1,107 @@
+{
+  "status": "pass",
+  "generatedAt": "2026-10-06T06:49:47.067Z",
+  "generatorIdentityHash": "9478f8451b2fe61f4fc66885851cfafd7ca7ae778bfb579a759c3af0aaeeb5b3",
+  "generatorSourcePolicyUnchanged": true,
+  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+  "labelAssetsVerified": 6,
+  "finalIdentity": [
+    {
+      "path": "src/app/api/world/labels/route.ts",
+      "matches": true
+    },
+    {
+      "path": "src/lib/map/catalog-labels.server.ts",
+      "matches": true
+    },
+    {
+      "path": "src/lib/map/catalog-label-renderer.ts",
+      "matches": true
+    },
+    {
+      "path": "src/lib/map/catalog-labels.server.test.ts",
+      "matches": true
+    },
+    {
+      "path": "src/lib/map/catalog-label-renderer.test.ts",
+      "matches": true
+    },
+    {
+      "path": "src/lib/map/catalog-label-length.test.ts",
+      "matches": true
+    },
+    {
+      "path": "e2e/prompt14-label-length.spec.ts",
+      "matches": true
+    },
+    {
+      "path": "e2e/game-setup.spec.ts",
+      "matches": true
+    },
+    {
+      "path": "scripts/start-prompt14-label-length.mjs",
+      "matches": true
+    },
+    {
+      "path": "scripts/verify-prompt14-label-length.mjs",
+      "matches": true
+    },
+    {
+      "path": "scripts/report-prompt14-label-length.mjs",
+      "matches": true
+    },
+    {
+      "path": "scripts/smoke-prompt14-label-length.mjs",
+      "matches": true
+    },
+    {
+      "path": "reports/prompt14/14-20-final-integration.json",
+      "matches": true
+    }
+  ],
+  "productionIsolation": {
+    "serverJsFiles": 64,
+    "fixtureLeaks": []
+  },
+  "checkpoints": [
+    {
+      "path": "reports/prompt14/14-01-baseline-runtime-data-audit.json",
+      "status": "pass",
+      "sha256": "19bcd5a01a5a209abfd565c144c47eb90ea75d7125ca18176735831413fe7d2d"
+    },
+    {
+      "path": "reports/prompt14/14-02-source-generation-delivery-decision.json",
+      "status": "pass",
+      "sha256": "f600cc15d2f137c25c844014996c4d9132d4735833223a43995a24fdf63d83b1"
+    },
+    {
+      "path": "reports/prompt14/14-05-schema-migration-checkpoint.json",
+      "status": "pass",
+      "sha256": "a8d4e7cbbc54d7dec105177cd99f9e93b3fd99b31d4875945a5702f2a5be709c"
+    },
+    {
+      "path": "reports/prompt14/14-08-immutable-catalog-checkpoint.json",
+      "status": "pass",
+      "sha256": "7d1134f83bd5b87a6c967010ac95695e961e504ccb60fc5d662591c7f7bcfb8e"
+    },
+    {
+      "path": "reports/prompt14/14-14-occupation-checkpoint.json",
+      "status": "pass",
+      "sha256": "6db4c65c23cdbbe1d486673e13ac9d6de1eabd5fe4895666879cabbee365dc2e"
+    },
+    {
+      "path": "reports/prompt14/14-17-country-color-checkpoint.json",
+      "status": "pass",
+      "sha256": "02908981d35364d40caa642ba8570487da1eae29afb5dff509153711a259871b"
+    },
+    {
+      "path": "reports/prompt14/14-20-final-integration.json",
+      "status": "pass",
+      "sha256": "29715fb075dfa37f45498efd75c66c2488a7588ed2f3af32bafbb24dbf7a9fca"
+    }
+  ],
+  "catalogRegeneration": {
+    "rerun": false,
+    "reason": "Prompt 14 section 13: approved source/policy/generator/artifact identity unchanged; prior independent replay proof retained and actual bytes/roots reverified."
+  }
+}

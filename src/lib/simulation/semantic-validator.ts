@@ -1,4 +1,11 @@
 import type {WorldStateV2} from "../world/world-state-v2";
+import type {WorldStateV3} from '../world/world-state-v3';
+import type {SimulationStateV2} from './simulation-state-v2';
+import {validateCountryChangeMapColorCommand} from '../commands/country-change-map-color';
+import {allowsDevelopmentWorldEffect} from './debug-world-effect';
+import {prepareCountryColorAuthorities} from './country-color-authority';
+import {resolveCountryColorIntents} from './country-color-intent';
+import {isConsequenceAvailableAt} from './consequence-causality';
 import type {SimulationFactV1} from "./narrative-state";
 import type {SimulationEventV1} from "./simulation-event";
 import type {SimulationStateV1} from "./simulation-state";
@@ -41,11 +48,13 @@ const hasNegotiationFact = (
 
 export function validateTurnResolution(
   rawResolution: unknown,
-  simulation: SimulationStateV1,
-  world: WorldStateV2,
+  simulation: SimulationStateV1|SimulationStateV2,
+  world: WorldStateV2|WorldStateV3,
   options: ResolutionValidationOptions = {},
 ): ResolutionValidationResult {
-  const parsed = parseTurnResolutionV1(rawResolution);
+  const parsed = resolveCountryColorIntents(parseTurnResolutionV1(rawResolution),
+    world.schemaVersion === 3 ? world.countryOrder.map(countryId => ({countryId, mapColor:world.countriesById[countryId].mapColor})) : undefined,
+    world.countryOrder);
   const issues: ResolutionValidationIssue[] = [];
   const add = (code: ResolutionValidationIssueCode, path: string, message: string) => {
     issues.push(Object.freeze({code, path, message}));
@@ -156,8 +165,8 @@ export function validateTurnResolution(
       } else {
         const consequence = consequenceById.get(cause.id);
         if (!consequence) add("DANGLING_REFERENCE", path, `Unknown consequence ${cause.id}`);
-        else if (consequence.earliestDate > parsed.period.endDate) {
-          add("INVALID_CAUSALITY", path, `Consequence ${cause.id} is not due`);
+        else if (!isConsequenceAvailableAt(consequence,event.date)) {
+          add("INVALID_CAUSALITY", path, `Consequence ${cause.id} is unavailable on the event date`);
         }
       }
     }
@@ -222,6 +231,34 @@ export function validateTurnResolution(
     }
 
     switch (effect.type) {
+      case 'countryPresentationAuthority.granted':
+        if (world.schemaVersion !== 3 || simulation.schemaVersion !== 2) add('INVALID_WORLD_EFFECT',path,'Color grants require V3/V2');
+        else try {prepareCountryColorAuthorities(simulation,world,{...parsed,worldEffects:parsed.worldEffects.slice(0,index+1)},cause.date);}catch(error){add('INVALID_WORLD_EFFECT',path,String(error));}
+        break;
+      case 'territorialAuthority.granted':
+      case 'territory.occupy':
+      case 'territory.liberate':
+      case 'territory.transferOwnership':
+      case 'countries.merged': {
+        if(world.schemaVersion!==3||simulation.schemaVersion!==2){add('INVALID_WORLD_EFFECT',path,'Catalog effects require World V3 / Simulation V2');break;}
+        const ids=effect.type==='countries.merged'?[effect.initiatorCountryId,...effect.absorbedCountryIds]:effect.type==='territorialAuthority.granted'?[effect.authority.actorCountryId,effect.authority.targetCountryId]:[effect.actorCountryId,effect.targetCountryId];
+        validateCountries(ids.filter((id):id is string=>id!==null),path);
+        if(cause.authorityLifecycle)add('INVALID_CAUSALITY',path,'Lifecycle history is not a grant or operation cause');
+        if(!['military','territorial','treaty'].includes(cause.outcomeCategory))add('INVALID_CAUSALITY',path,'Catalog operation requires a territorial, military or treaty outcome');
+        if(effect.type==='countries.merged'&&(!cause.causes.some(c=>c.kind==='authoritative-event'||c.kind==='scheduled-consequence')&&!hasNegotiationFact(Object.values(simulation.factsById),ids.filter((id):id is string=>id!==null))))add('INVALID_CAUSALITY',path,'Merge requires an earlier treaty/negotiation or due consequence');
+        break;
+      }
+      case 'country.changeMapColor':
+        try {
+          if(simulation.schemaVersion===2&&!simulation.countryPresentationAuthoritiesById[effect.authorityId] && parsed.worldEffects.slice(index).some(e=>e.type==='countryPresentationAuthority.granted'&&e.authority.id===effect.authorityId))throw new Error('Color authority must be granted before use');
+          if (world.schemaVersion !== 3 || simulation.schemaVersion !== 2) throw new Error('Color effects require V3/V2');
+          const colorSimulation=prepareCountryColorAuthorities(simulation,world,{...parsed,worldEffects:parsed.worldEffects.slice(0,index)},cause.date);
+          validateCountryChangeMapColorCommand({commandId:effect.effectId,type:effect.type,expectedRevision:world.revision,
+            payload:{actorCountryId:effect.actorCountryId,countryId:effect.countryId,mapColor:effect.mapColor,authorityId:effect.authorityId}},
+            world, colorSimulation as SimulationStateV2, {date:cause.date,debugDirective:allowsDevelopmentWorldEffect(hasDebugWorldEffectCause(cause.eventId))});
+          if (!cause.actorCountryIds.includes(effect.actorCountryId)) throw new Error('Color actor must participate in the causal event');
+        } catch (error) { add('INVALID_WORLD_EFFECT',path,String(error)); }
+        break;
       case "country.renamed":
         validateCountries([effect.countryId], path);
         break;
@@ -305,8 +342,8 @@ export function validateTurnResolution(
 
 export function assertValidTurnResolution(
   rawResolution: unknown,
-  simulation: SimulationStateV1,
-  world: WorldStateV2,
+  simulation: SimulationStateV1|SimulationStateV2,
+  world: WorldStateV2|WorldStateV3,
 ): TurnResolutionV1 {
   const result = validateTurnResolution(rawResolution, simulation, world);
   if (!result.ok || result.resolution === null) {

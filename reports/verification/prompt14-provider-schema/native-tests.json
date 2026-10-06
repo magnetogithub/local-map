@@ -1,0 +1,6 @@
+{
+  "runner": "Direct TypeScript test bodies with Vitest Chai matchers; no Vitest worker runner",
+  "passed": 96,
+  "failed": 0,
+  "failures": []
+}

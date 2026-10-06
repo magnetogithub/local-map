@@ -1,9 +1,11 @@
+import {OpenAIResponsesError, readRetryAfterMs} from './openai-responses-error';
+
 export type OpenAIResponsesRequest = Readonly<{
   model: string;
   instructions: string;
   input: readonly unknown[];
   tools: readonly unknown[];
-  tool_choice: "auto";
+  tool_choice: "required" | Readonly<{type: 'function'; name: 'submit_turn_resolution'}>;
   parallel_tool_calls: false;
   store: false;
   stream: true;
@@ -35,7 +37,9 @@ export class FetchOpenAIResponsesTransport implements OpenAIResponsesTransport {
       const details = payload?.error;
       const fields = [details?.type, details?.code, details?.param, details?.message]
         .filter((value): value is string => typeof value === "string" && value.length > 0);
-      throw new Error(`Responses API HTTP ${response.status}${fields.length ? `: ${fields.join(" | ")}` : ""}`);
+      throw new OpenAIResponsesError(`Responses API HTTP ${response.status}${fields.length ? `: ${fields.join(" | ")}` : ""}`,
+        typeof details?.code === 'string' ? details.code : response.status === 429 ? 'rate_limit_exceeded' : null,
+        readRetryAfterMs(Object.fromEntries(response.headers.entries())));
     }
     if (!response.body) throw new Error("Responses API returned an empty stream");
     const reader = response.body.getReader();

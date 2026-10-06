@@ -17,6 +17,7 @@ import {
   compareCanonicalText,
   countryIdSchema,
   isoCalendarDateSchema,
+  MAX_ID_LENGTH,
   simulationIdSchema,
 } from "./simulation-contract-primitives";
 
@@ -26,7 +27,9 @@ export const MAX_AUTHORITY_TERRITORIES = 512;
 export const MAX_COUNTRY_PRESENTATION_AUTHORITIES = 128;
 export const MAX_AUTHORITY_MAP_COLORS = 16;
 
-const authorityIdSchema = (prefix: "tca" | "cpa") => simulationIdSchema
+// The prefixed pattern already enforces canonical simulation-id characters.
+// Chaining two regex checks emits allOf, which OpenAI strict tools reject.
+const authorityIdSchema = (prefix: "tca" | "cpa") => z.string().min(1).max(MAX_ID_LENGTH)
   .regex(new RegExp(`^${prefix}:[A-Za-z0-9][A-Za-z0-9._:-]*$`));
 
 export const territorialControlAuthorityIdSchema = authorityIdSchema("tca");
