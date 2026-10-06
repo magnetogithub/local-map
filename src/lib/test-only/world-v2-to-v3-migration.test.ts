@@ -152,7 +152,7 @@ describe("14-3 test-only V2 to V3 migration", () => {
     expect(canonicalStringify(input.mapping)).toBe(beforeMapping);
   });
 
-  it("keeps V3 schema, synthetic assets and migration out of production consumers", () => {
+  it("keeps synthetic assets and migration out of production consumers after the approved V3 cutover", () => {
     function files(directory: string): string[] {
       return fs.readdirSync(directory, {withFileTypes: true}).flatMap(entry => {
         if (entry.name === "test-only") return [];
@@ -161,11 +161,9 @@ describe("14-3 test-only V2 to V3 migration", () => {
         return /\.[cm]?[jt]sx?$/.test(entry.name) && !/\.(test|spec)\./.test(entry.name) ? [file] : [];
       });
     }
-    const contractFiles = new Set(["world-state-v3.ts", "country-entity-v3.ts", "territory-entity-v3.ts", "world-geometry-catalog-ref.ts", "world-v3-validation.ts"]);
     const violations = files(path.join(process.cwd(), "src")).filter(file => {
-      if (contractFiles.has(path.basename(file))) return false;
       return [...fs.readFileSync(file, "utf8").matchAll(/(?:from\s*|import\s*\()["']([^"']+)["']/g)]
-        .some(([, specifier]) => /world-state-v3|country-entity-v3|territory-entity-v3|world-geometry-catalog-ref|world-v3-validation|world-v2-to-v3-migration|world-v3-synthetic-fixture/.test(specifier));
+        .some(([, specifier]) => /world-v2-to-v3-migration|world-v3-synthetic-fixture|\/test-only\//.test(specifier));
     });
     expect(violations).toEqual([]);
   });

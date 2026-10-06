@@ -1,0 +1,1 @@
+Initial browser launch diagnostic: Playwright chromium_headless_shell-1234 executable absent. Rerun used installed Chrome, matching full E2E.

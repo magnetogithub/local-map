@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const root='reports/prompt14/review-g';fs.mkdirSync(root,{recursive:true});
+const target=`${root}/baseline.json`;if(fs.existsSync(target))throw Error('Review G baseline already exists');
+const walk=p=>fs.readdirSync(p,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(p,e.name)):[path.join(p,e.name).replaceAll('\\','/')]);
+const files=[...['src','scripts','e2e'].flatMap(walk),'next.config.ts','playwright.config.ts','vitest.config.ts','eslint.config.mjs','reports/prompt14/14-20-final-integration.json'];
+const hashes=Object.fromEntries(files.map(p=>[p,createHash('sha256').update(fs.readFileSync(p)).digest('hex')]));
+fs.copyFileSync('reports/prompt14/14-20-final-integration.json',`${root}/previous-final-integration.json`);
+fs.writeFileSync(target,JSON.stringify({startedAt:new Date().toISOString(),head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),status:execFileSync('git',['status','--short','--','src','scripts','e2e','next.config.ts','playwright.config.ts','vitest.config.ts','eslint.config.mjs'],{encoding:'utf8'}),hashes},null,2));
+console.log(`Captured ${files.length} starting hashes`);

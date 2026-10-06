@@ -11,6 +11,7 @@ import {createResolvedTurnPlan, type ResolvedTurnPlan} from "./resolved-turn-pla
 import {createSimulationStateV1} from "./simulation-state";
 import {
   countryPresentationAuthoritySchema,
+  countryPresentationAuthorityIdSchema,
   createSimulationStateV2,
   deserializeSimulationStateV2,
   isAuthorityActiveAt,
@@ -19,6 +20,7 @@ import {
   serializeSimulationStateV2,
   simulationStateV2ContentHash,
   territorialControlAuthoritySchema,
+  territorialControlAuthorityIdSchema,
   type SimulationStateV2,
 } from "./simulation-state-v2";
 
@@ -69,6 +71,16 @@ const fixture = () => {
 };
 
 describe("14-4 Simulation V2 migration and strict authority schema", () => {
+  it("preserves canonical authority ID prefixes, characters, and the 64-character bound", () => {
+    for (const [prefix, schema] of [["tca", territorialControlAuthorityIdSchema], ["cpa", countryPresentationAuthorityIdSchema]] as const) {
+      expect(schema.parse(`${prefix}:A._:-9`)).toBe(`${prefix}:A._:-9`);
+      expect(schema.safeParse(`${prefix}:${"a".repeat(60)}`).success).toBe(true);
+      for (const invalid of ["", `${prefix}:`, `${prefix}:_bad`, `${prefix}:한글`, `${prefix}:has space`, `${prefix}:${"a".repeat(61)}`, `${prefix === "tca" ? "cpa" : "tca"}:wrong`]) {
+        expect(schema.safeParse(invalid).success).toBe(false);
+      }
+    }
+  });
+
   it("preserves every V1 field and explicitly initializes all four empty collections", () => {
     const {world, legacy, empty} = fixture();
     const {schemaVersion, territorialControlAuthoritiesById, territorialControlAuthorityOrder,

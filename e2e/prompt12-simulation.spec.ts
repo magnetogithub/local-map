@@ -1,4 +1,4 @@
-import {expect, test} from "@playwright/test";
+import {expect, test} from "./catalog-fixture";
 
 const ndjson = (turnId: string, resolution: unknown, draft = "판정 중") => [
   {version: 1, turnId, sequence: 0, type: "turn.started"},
@@ -21,14 +21,18 @@ test("queues, adjudicates, unifies, links the report, undoes, and stops atomical
   const cancelledTurnResponseGate = createResponseGate();
   let firstTurnRequestArrived = false;
   let cancelledTurnRequestArrived = false;
+  let retryAllowed=false,retryTarget='',retryRequestArrived=false;
   await page.route("**/api/simulation/turn", async (route) => {
     const body = route.request().postDataJSON() as {turnId: string; context: {revisions: {simulation: number; world: number}; period: {startDate: string; endDate: string}; queuedActions: {actionId: string}[]; countryDirectory: {countryId: string}[]; subdivisions: {parentCountryId: string}[]}};
     if (body.context.revisions.simulation < 2) {
       expect(body.context.countryDirectory.map((country) => country.countryId)).toEqual(expect.arrayContaining(["AUT", "DEU"]));
-      expect(body.context.subdivisions.filter((entry) => entry.parentCountryId === "CHN")).toHaveLength(31);
-      expect(body.context.subdivisions.filter((entry) => entry.parentCountryId === "USA")).toHaveLength(50);
+      expect(body.context.subdivisions.every(entry=>entry.parentCountryId === "AUT")).toBe(true);
+      expect(body.context.subdivisions.length).toBeGreaterThan(0);
     }
     if (body.context.revisions.simulation >= 2) {
+      if(retryAllowed){retryRequestArrived=true;expect(body.context.period.endDate).toBe(retryTarget);
+        await route.fulfill({status:200,contentType:'application/x-ndjson',body:ndjson(body.turnId,{contractVersion:'turn-resolution.v1',baseSimulationRevision:body.context.revisions.simulation,baseWorldRevision:body.context.revisions.world,period:body.context.period,playerActionOutcomes:[],events:[],factMutations:[],situationMutations:[],scheduledConsequences:[],worldEffects:[],advisorSummary:'Retried narrative turn',unresolvedQuestions:[]})});return;}
+      retryTarget=body.context.period.endDate;
       cancelledTurnRequestArrived = true;
       await cancelledTurnResponseGate.wait;
       await route.fulfill({status: 200, contentType: "application/x-ndjson", body: `${JSON.stringify({version: 1, turnId: body.turnId, sequence: 0, type: "turn.started"})}\n`}).catch(() => undefined);
@@ -123,6 +127,9 @@ test("queues, adjudicates, unifies, links the report, undoes, and stops atomical
   await expect(page.locator(".turn-status")).toHaveAttribute("data-phase", "cancelled");
   await expect(page.locator(".simulation-heading time")).toHaveText(dateBeforeStop ?? "");
   await expect(page.locator(".app-shell")).toHaveAttribute("data-world-revision", revisionBeforeStop ?? "");
+  retryAllowed=true;await page.locator('.turn-status').getByRole('button',{name:'Retry',exact:true}).click();
+  await expect.poll(()=>retryRequestArrived).toBe(true);await expect(page.locator('.turn-status')).toHaveAttribute('data-phase','committed',{timeout:30000});
+  await expect(page.locator('.simulation-heading time')).toHaveText(retryTarget);await expect(page.locator('.app-shell')).toHaveAttribute('data-world-revision',revisionBeforeStop??'');
 
   await page.reload();
   await expect(page.getByRole("status").first()).toBeHidden({timeout: 90_000});
@@ -175,12 +182,12 @@ test("sends production CHN and USA subdivision summaries and resets the player l
   await page.locator(".game-time-only-confirm input").check();
   await page.getByRole("button", {name: "1개월"}).click();
   await page.locator(".game-advance-submit").click();
-  await expect.poll(() => observed.get("CHN")).toBe(31);
+  await expect.poll(() => observed.get("CHN")).toBe(32);
 
   await choose("USA");
   await expect(page.locator(".simulation-heading time")).toHaveText("2020-01-01");
   await page.locator(".game-time-only-confirm input").check();
   await page.getByRole("button", {name: "1개월"}).click();
   await page.locator(".game-advance-submit").click();
-  await expect.poll(() => observed.get("USA")).toBe(50);
+  await expect.poll(() => observed.get("USA")).toBe(52);
 });

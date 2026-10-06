@@ -13,7 +13,7 @@ import {catalogArtifactIdentity,readCatalogConsumerMetadata,readCatalogConsumerB
 import {fetchCatalogVectorDelivery,loadCatalogVectorDelivery,registerCatalogTileProtocol,verifyCatalogResponse,type CatalogFetch,type CatalogVectorDelivery} from './catalog-vector-delivery';
 import {createCatalogMapConsumer,mountCatalogMapConsumer,type CatalogMapPort,CATALOG_MAP_LAYER_IDS} from './catalog-map-consumer';
 import {mapLibreFeatureTarget} from './render-feature-ref';
-import {catalogContractForConsumer,createCatalogMapConsumerProjection,catalogHitTerritory,CATALOG_MAP_SOURCE_ID} from '../projection/catalog-map-consumer-projection';
+import {catalogContractForConsumer,createCatalogMapConsumerProjection,updateCatalogMapConsumerProjection,catalogHitTerritory,CATALOG_MAP_SOURCE_ID} from '../projection/catalog-map-consumer-projection';
 import {deserializeMigratedSchemaPair} from '../test-only/world-simulation-schema-checkpoint';
 import {createWorldStateV3,serializeWorldStateV3,type WorldStateV3} from '../world/world-state-v3';
 import {createWorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
@@ -39,15 +39,15 @@ beforeAll(async()=>{
 });
 
 function mockMap(){
-  const sources=new Map<string,{spec:SourceSpecification;setData:ReturnType<typeof vi.fn>}>(),layers=new Map<string,LayerSpecification>();
+  const sources=new Map<string,{spec:SourceSpecification;setData:ReturnType<typeof vi.fn>;updateData:ReturnType<typeof vi.fn>}>(),layers=new Map<string,LayerSpecification>();
   const listeners=new Map<string,(event:{features?:Parameters<typeof catalogHitTerritory>[1][]})=>void>();
-  const states=vi.fn();
+  const states=vi.fn(),edgeStates=vi.fn();
   const map:CatalogMapPort={
-    addSource:(id,spec)=>sources.set(id,{spec,setData:vi.fn()}),removeSource:id=>sources.delete(id),
+    addSource:(id,spec)=>sources.set(id,{spec,setData:vi.fn(),updateData:vi.fn()}),removeSource:id=>sources.delete(id),
     addLayer:layer=>layers.set(layer.id,layer),removeLayer:id=>layers.delete(id),getSource:id=>sources.get(id),getLayer:id=>layers.get(id),
-    setFeatureState:states,on:(event,layer,fn)=>listeners.set(`${event}:${layer}`,fn),off:(event,layer)=>listeners.delete(`${event}:${layer}`),
+    setFeatureState:(target,state)=>target.sourceLayer==='edges'?edgeStates(target,state):states(target,state),on:(event,layer,fn)=>listeners.set(`${event}:${layer}`,fn),off:(event,layer)=>listeners.delete(`${event}:${layer}`),
   };
-  return {map,sources,layers,listeners,states};
+  return {map,sources,layers,listeners,states,edgeStates};
 }
 const changedWorld=(id:string,ownerCountryId:string|null,controllerCountryId:string|null)=>createWorldStateV3({...world,revision:world.revision+1,
   territoriesById:{...world.territoriesById,[id]:{...world.territoriesById[id],ownerCountryId,controllerCountryId}}},catalogContractForConsumer(delivery.metadata));
@@ -136,6 +136,30 @@ describe('frozen catalog consumer: actual delivery and immutable contracts',()=>
 });
 
 describe('catalog projection and MapLibre consumer before production cutover',()=>{
+  it('updates partial occupation/controller color and adjacent fronts only, then restores both through undo/redo',async()=>{
+    const local=await loadCatalogVectorDelivery(bootstrap,ref,fetcher),incidences=new Map<string,import('./catalog-vector-delivery').CatalogEdgeIncidence>();
+    const stop=local.observeEdges(batch=>batch.forEach(e=>incidences.set(e.id,e)));
+    await local.loadTile(`${base}tiles/0/0/0.pbf`);
+    const m=mockMap(),consumer=createCatalogMapConsumer({map:m.map,delivery:local,world}),ids=world.territoryOrder.filter(id=>world.territoriesById[id].ownerCountryId==='CHN').slice(0,3);
+    const initialProjection=consumer.getProjection(),territories={...world.territoriesById};for(const id of ids)territories[id]={...territories[id],controllerCountryId:'KOR' as never};
+    const occupied=createWorldStateV3({...world,revision:world.revision+1,territoriesById:territories},catalogContractForConsumer(local.metadata));
+    for(const next of [occupied,createWorldStateV3({...world,revision:world.revision+2},catalogContractForConsumer(local.metadata)),createWorldStateV3({...occupied,revision:world.revision+3},catalogContractForConsumer(local.metadata))]){
+      m.states.mockClear();m.edgeStates.mockClear();consumer.updateWorld(next);const p=consumer.getProjection();
+      expect(m.states.mock.calls.map(([t])=>t.id)).toEqual(ids);expect(p.projectionStats.fullBuilds).toBe(1);expect(p.projectionStats.countryRebuilds).toBe(247);
+      for(const id of ids){expect(p.featuresById[id].ownerCountryId).toBe('CHN');expect(p.featuresById[id].mapColor).toBe(next.countriesById[next.territoriesById[id].controllerCountryId!].mapColor);}
+      expect(p.labels.pointFallbacksByLabelId.get('catalog-label:CHN')).toBe(initialProjection.labels.pointFallbacksByLabelId.get('catalog-label:CHN'));expect(p.capitals.featuresByCountryId.get('CHN' as never)).toBe(initialProjection.capitals.featuresByCountryId.get('CHN' as never));
+      for(const [target,state]of m.edgeStates.mock.calls){const e=incidences.get(target.id)!;const affected=new Set<string>(ids);expect(affected.has(e.left??'')||affected.has(e.right??'')).toBe(true);expect(target.sourceLayer).toBe('edges');
+        const a=e.left?next.territoriesById[e.left]:null,b=e.right?next.territoriesById[e.right]:null;expect(state.front).toBe(!!(a&&b&&((a.controllerCountryId!==a.ownerCountryId)||(b.controllerCountryId!==b.ownerCountryId))&&a.controllerCountryId!==b.controllerCountryId));}
+      expect(m.edgeStates.mock.calls.length).toBeGreaterThan(0);for(const s of m.sources.values()){expect(s.setData).not.toHaveBeenCalled();expect(s.updateData).not.toHaveBeenCalled();}
+    }
+    expect(consumer.getCountryPanel('CHN')?.ownedTerritoryCount).toBe(initialProjection.ownedByCountry.CHN.length);expect(consumer.getCountryPanel('KOR')?.controlledTerritoryCount).toBe(initialProjection.controlledByCountry.KOR.length+3);consumer.dispose();stop();
+  });
+  it('incremental ownership transfer matches a full projection and retains unaffected label/search objects',()=>{
+    const p=createCatalogMapConsumerProjection(world,delivery.metadata),id=p.ownedByCountry.CHN[0],next=changedWorld(id,'KOR','KOR'),incremental=updateCatalogMapConsumerProjection(p,next).projection,full=createCatalogMapConsumerProjection(next,delivery.metadata);
+    for(const key of ['ownedByCountry','controlledByCountry','presentedByCountry','featuresById','focusByCountryId'] as const)expect(incremental[key]).toEqual(full[key]);
+    expect(incremental.capitals.featuresByCountryId).toEqual(full.capitals.featuresByCountryId);expect(incremental.panel.inputById).toEqual(full.panel.inputById);expect(incremental.search.entriesById).toEqual(full.search.entriesById);
+    expect(incremental.labels.pointFallbacksByLabelId.get('catalog-label:USA')).toBe(p.labels.pointFallbacksByLabelId.get('catalog-label:USA'));expect(incremental.search.entriesById.get('USA' as never)).toBe(p.search.entriesById.get('USA' as never));expect(incremental.projectionStats.countryRebuilds).toBe(249);
+  });
   it('mounts from the server bootstrap through browser delivery and registers the actual vector protocol',async()=>{
     const m=mockMap(),api={addProtocol:vi.fn(),removeProtocol:vi.fn()};
     const consumer=await mountCatalogMapConsumer({map:m.map,world,protocolApi:api,fetcher});
@@ -162,7 +186,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
     for(const [o,c,expected]of [[other,owner,other],[null,other,other],[null,null,null]] as const){
       const p=createCatalogMapConsumerProjection(changedWorld(id,o,c),delivery.metadata);
       expect(catalogHitTerritory(p,hit(id))?.countryId).toBe(expected);
-      expect(p.featuresById[id].mapColor).toBe(o?world.countriesById[o].mapColor:'#D6D3C7');
+      expect(p.featuresById[id].mapColor).toBe(c?world.countriesById[c].mapColor:o?world.countriesById[o].mapColor:'#D6D3C7');
       expect(p.ownedByCountry[owner]).not.toContain(id);
       expect(catalogHitTerritory(p,{...hit(id),sourceLayer:'edges'})).toBeNull();
       expect(catalogHitTerritory(p,{...hit(id),properties:{territoryId:'unknown'}})).toBeNull();
@@ -170,7 +194,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
   });
   it('mounts real catalog sources, handles selection/hover, applies mutable changes without vector setData, and disposes',()=>{
     const m=mockMap(),onSelect=vi.fn(),onHover=vi.fn(),consumer=createCatalogMapConsumer({map:m.map,delivery,world,onSelect,onHover});
-    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.spec.type).toBe('vector');expect(m.states).toHaveBeenCalledTimes(4231);
+    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.spec.type).toBe('vector');expect(m.states).toHaveBeenCalledTimes(4231+world.countryOrder.length);
     expect(m.listeners.size).toBe(3);expect([...m.listeners.keys()].some(k=>/moveend|zoom|render/.test(k))).toBe(false);
     const id=world.territoryOrder[0],owner=world.territoriesById[id].ownerCountryId!,other=world.countryOrder.find(c=>c!==owner)!;
     const initial=consumer.getProjection(),requests=delivery.counters().verifiedRequests;
@@ -183,7 +207,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
     consumer.updateWorld(changedWorld(id,other,owner));expect(m.states).toHaveBeenCalledTimes(1);
     expect(m.states.mock.calls[0][0]).toEqual({source:CATALOG_MAP_SOURCE_ID,sourceLayer:'territories',id});
     expect(m.states.mock.calls[0][1]).toMatchObject({ownerCountryId:other,controllerCountryId:owner,occupied:true});
-    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.setData).not.toHaveBeenCalled();expect(m.sources.get('catalog-country-labels')?.setData).toHaveBeenCalledTimes(1);
+    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.setData).not.toHaveBeenCalled();expect(m.sources.get('catalog-country-labels')?.setData).not.toHaveBeenCalled();
     expect(()=>consumer.updateWorld(world)).toThrow(/Stale/);expect(()=>consumer.selectCountry('unknown')).toThrow(/active/);
     m.listeners.get(`click:${CATALOG_MAP_LAYER_IDS.fill}`)!({features:[hit(id)]});expect(onSelect).toHaveBeenLastCalledWith(other);
     consumer.dispose();consumer.dispose();expect(m.sources.size).toBe(0);expect(m.layers.size).toBe(0);expect(m.listeners.size).toBe(0);
@@ -194,7 +218,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
     consumer.updateWorld(next);expect(consumer.getProjection().catalogRef).toEqual(ref);
     expect(consumer.getCountryPanel(id)?.nameKo).toBe('변경 국가');expect(consumer.getProjection().search.entriesById.get(id)?.mapKo).toBe('변경 라벨');
     expect(consumer.getProjection().labels.jobs.find(j=>j.countryId===id)?.text).toBe('변경 라벨');
-    expect(m.states).toHaveBeenCalledTimes(consumer.getProjection().ownedByCountry[id].length);for(const [,state]of m.states.mock.calls)expect(state.mapColor).toBe('#123456');consumer.dispose();
+    expect(m.states).toHaveBeenCalledTimes(consumer.getProjection().ownedByCountry[id].length+1);for(const [,state]of m.states.mock.calls)expect(state.mapColor).toBe('#123456');consumer.dispose();
   });
   it('clears retired-country interactions and removes its labels and panel while preserving source identity',()=>{
     const old=world.countryOrder[0],nextOwner=world.countryOrder[1],m=mockMap(),onSelect=vi.fn(),onHover=vi.fn();
@@ -202,7 +226,25 @@ describe('catalog projection and MapLibre consumer before production cutover',()
     const next=createWorldStateV3({...world,revision:world.revision+1,countryOrder:world.countryOrder.filter(id=>id!==old),countriesById:Object.fromEntries(Object.entries(world.countriesById).filter(([id])=>id!==old)),
       retiredCountryIds:new Set([...world.retiredCountryIds,old]),territoriesById:Object.fromEntries(Object.entries(world.territoriesById).map(([id,t])=>[id,{...t,ownerCountryId:t.ownerCountryId===old?nextOwner:t.ownerCountryId,controllerCountryId:t.controllerCountryId===old?nextOwner:t.controllerCountryId}]))},catalogContractForConsumer(delivery.metadata));
     consumer.updateWorld(next);expect(onSelect).toHaveBeenLastCalledWith(null);expect(onHover).toHaveBeenLastCalledWith(null);expect(consumer.getCountryPanel(old)).toBeNull();
-    expect(consumer.getProjection().labels.jobs.some(j=>j.countryId===old)).toBe(false);expect(consumer.getProjection().catalogRef).toEqual(ref);consumer.dispose();
+    expect(consumer.getProjection().labels.jobs.some(j=>j.countryId===old)).toBe(false);expect(consumer.getProjection().catalogRef).toEqual(ref);
+    expect(m.sources.get('catalog-country-labels')?.updateData.mock.calls[0][0].remove).toContain(`catalog-label:${old}`);
+    consumer.updateWorld(createWorldStateV3({...world,revision:next.revision+1},catalogContractForConsumer(delivery.metadata)));
+    expect(m.sources.get('catalog-country-labels')?.updateData.mock.calls[1][0].add.some((f:{id:string})=>f.id===`catalog-label:${old}`)).toBe(true);
+    for(const source of m.sources.values())expect(source.setData).not.toHaveBeenCalled();consumer.dispose();
+  });
+  it('updates only the renamed label through rename, undo and redo, with no capital or whole-source updates',()=>{
+    const m=mockMap(),consumer=createCatalogMapConsumer({map:m.map,delivery,world}),id='KOR',country=world.countriesById[id];
+    for(const [index,text]of ['새 대한민국',country.names.mapKo,'새 대한민국'].entries()){
+      const next=createWorldStateV3({...world,revision:world.revision+index+1,countriesById:{...world.countriesById,[id]:{...country,names:{...country.names,mapKo:text}}}},catalogContractForConsumer(delivery.metadata));
+      consumer.updateWorld(next);
+      const calls=m.sources.get('catalog-country-labels')!.updateData.mock.calls;expect(calls).toHaveLength(index+1);
+      const diff=calls.at(-1)![0];expect(diff.remove).toBeUndefined();expect(diff.add).toBeUndefined();expect(diff.update).toHaveLength(1);
+      expect(diff.update[0].id).toBe('catalog-label:KOR');expect(diff.update[0].newGeometry).toBeUndefined();
+      expect(diff.update[0].addOrUpdateProperties).toContainEqual({key:'text',value:text});
+      expect(m.sources.get('catalog-capitals')!.updateData).not.toHaveBeenCalled();for(const source of m.sources.values())expect(source.setData).not.toHaveBeenCalled();
+    }
+    const last=consumer.getProjection().world;consumer.updateWorld(createWorldStateV3({...last,revision:last.revision+1},catalogContractForConsumer(delivery.metadata)));
+    expect(m.sources.get('catalog-country-labels')!.updateData).toHaveBeenCalledTimes(3);expect(m.states).toHaveBeenCalledTimes(world.territoryOrder.length+world.countryOrder.length);consumer.dispose();
   });
   it('rejects incompatible world/catalog input before mounting or applying any source mutation',()=>{
     const bad={...world,catalogRef:{...ref,renderArtifactRoot:'0'.repeat(64)}},m=mockMap();

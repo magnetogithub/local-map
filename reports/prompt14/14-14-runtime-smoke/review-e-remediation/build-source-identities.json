@@ -1,0 +1,1945 @@
+{
+  "buildId": "3YmeXkSzc6_NCQa2W-En6",
+  "files": [
+    {
+      "path": "src/app/favicon.ico",
+      "sha256": "2b8ad2d33455a8f736fc3a8ebf8f0bdea8848ad4c0db48a2833bd0f9cd775932",
+      "byteLength": 25931
+    },
+    {
+      "path": "src/app/globals.css",
+      "sha256": "f36ac55b3764f6561cda52f21d51801c09bf2a820548fb2308b59c7d2be9e4d8",
+      "byteLength": 33838
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "sha256": "7268e79635da198fbd456f68a8886f6339644680c2dfb566fb401bc76709b722",
+      "byteLength": 374
+    },
+    {
+      "path": "src/app/page.tsx",
+      "sha256": "1148207ad44a2141e59bee1ed5d8c9520321129ce4d190d3679d44e5834c9764",
+      "byteLength": 183
+    },
+    {
+      "path": "src/data/countries-2020.json",
+      "sha256": "2abf1bf755ea9225e0ff83dfb7a9692bd121dc50c7ea69ab45cc8f6da7bded3f",
+      "byteLength": 78492
+    },
+    {
+      "path": "src/data/country-id-overrides.ts",
+      "sha256": "5076d079748f2759872c6b9c05174583ce442e6e7fc703556f83ada2434415b2",
+      "byteLength": 86
+    },
+    {
+      "path": "src/data/country-label-metrics-2020.json",
+      "sha256": "112bde6a8af18ecdf06a3a86ea967c5b74e2268260b3692e204ec3bd7b46615f",
+      "byteLength": 1378983
+    },
+    {
+      "path": "src/data/country-label-overrides-2020.json",
+      "sha256": "c7caa93f521e855bf370dc80779d62822374bda578e4c646d9ee9bbd44f217bc",
+      "byteLength": 704
+    },
+    {
+      "path": "src/data/country-label-typography-policy-v1.json",
+      "sha256": "1638f6292a2ed4b76da9b32373e0f834c4a7725c1ff3a1414622cc04d0a13b78",
+      "byteLength": 545
+    },
+    {
+      "path": "src/data/playable-country-ids-2020.json",
+      "sha256": "080b8e179165ba718641afb0651ff1c600b4c67b5c9f0557e1bd5bbfd1311afd",
+      "byteLength": 1197
+    },
+    {
+      "path": "src/stores/game-setup-player-policy-projection.test.ts",
+      "sha256": "f2ea6be22d8077823e6d9ca53a35b59fd8ffdfdb04026c3c58b95bf139d7bc17",
+      "byteLength": 4221
+    },
+    {
+      "path": "src/stores/game-setup-selection-projection.test.ts",
+      "sha256": "a1c43df1d137d09986aaa332423bcde56acd3ea1ce2a308488a6885701fe8961",
+      "byteLength": 8344
+    },
+    {
+      "path": "src/stores/game-setup-store.ts",
+      "sha256": "0e518aa5587b663ca8c1ce514558f812c79f3dc301305a4dab3cd28f1146919e",
+      "byteLength": 6100
+    },
+    {
+      "path": "src/stores/world-state-country-selector.test.ts",
+      "sha256": "d38933b1929030d82450d27b74855b0003dca0db7be79cdffa8a638e8a24eeb1",
+      "byteLength": 1630
+    },
+    {
+      "path": "src/stores/world-state-iteration-selector.test.ts",
+      "sha256": "02f13da06ef614267479fc7cf8be407f7f60bf1b4c77595c900a9c577fc376d9",
+      "byteLength": 4500
+    },
+    {
+      "path": "src/stores/world-state-store-v2-fixture.ts",
+      "sha256": "8cc076312788665c84245d058c828ce5087c2cdca753039ffb121aabb8b45aec",
+      "byteLength": 4555
+    },
+    {
+      "path": "src/stores/world-state-store-v2.test.ts",
+      "sha256": "aa5e4a3c84bcc85e879199cfb9f8ef8d95b4ede8b641e5c37b0c4c692ccdadfa",
+      "byteLength": 3234
+    },
+    {
+      "path": "src/stores/world-state-store.test.tsx",
+      "sha256": "299635f606dfa8d92d00443c6961fedcb18a26a0b93fd072cfb645a7db09bf8a",
+      "byteLength": 3265
+    },
+    {
+      "path": "src/stores/world-state-store.ts",
+      "sha256": "df53cb4e4a29250df5fa75f8a12418e14ce38e8540ab068e2fc76c1e8189d245",
+      "byteLength": 9949
+    },
+    {
+      "path": "src/types/country.ts",
+      "sha256": "6f6f26be8ee8afd6edfe7de3f8601f988265f926cabc5cd78f5c81a3d8ad8d9c",
+      "byteLength": 390
+    },
+    {
+      "path": "src/types/fontkit.d.ts",
+      "sha256": "a72a79dfbab639df05d6b9f4e8ebca195deee99ae8b1d46e74fe687a3f7a2862",
+      "byteLength": 604
+    },
+    {
+      "path": "src/types/map-debug.ts",
+      "sha256": "b084c37fbbdcdc988f064e56ed863523b291acec62de0e8118e7c53f50e17546",
+      "byteLength": 4050
+    },
+    {
+      "path": "src/app/game/page.tsx",
+      "sha256": "13750c6acff0acfc56ef6d9e4deecc450fc7825bb198bb2786b6e91072f574ad",
+      "byteLength": 186
+    },
+    {
+      "path": "src/components/country/CountryFlag.tsx",
+      "sha256": "0d83087aa21cc5ad16706e868fd57cb5dac101d186f50749f8e375f0e1335f27",
+      "byteLength": 360
+    },
+    {
+      "path": "src/components/country/CountryPanel.test.tsx",
+      "sha256": "19fabc721427c12a020e7b7c57008822ad75abc213e15faef6f2dc7d9646d028",
+      "byteLength": 3738
+    },
+    {
+      "path": "src/components/country/CountryPanel.tsx",
+      "sha256": "f28b46c1f3281398257443e057515f4266795944b9cf485b3023b8e0d222abe7",
+      "byteLength": 2889
+    },
+    {
+      "path": "src/components/game/CatalogGameScreen.tsx",
+      "sha256": "f809edfcc776ead6a48f00ddc80c82e0cea7feed619f8a87f28e02faba5c7e88",
+      "byteLength": 13737
+    },
+    {
+      "path": "src/components/game/CountryManagementOverlays.test.tsx",
+      "sha256": "1639c4ab1e28ab3324b2972c8bd947d46849366abdb083778efe0ed30a216d58",
+      "byteLength": 4548
+    },
+    {
+      "path": "src/components/game/CountryManagementOverlays.tsx",
+      "sha256": "986f4eefef8e07f646d52955918e1af9e1451f7f36dc69e301d00484a8d4e58d",
+      "byteLength": 4904
+    },
+    {
+      "path": "src/components/game/DiplomacyOverlays.test.tsx",
+      "sha256": "c88ad789d50a5ee4e4a2fdb02e95c739272592d9fae32cfc1730375ec24c828b",
+      "byteLength": 10711
+    },
+    {
+      "path": "src/components/game/DiplomacyOverlays.tsx",
+      "sha256": "f4a1ff35869e89c67d6e5f2f6b5c2d253348676b164165b6bfeb304e72f0b7c0",
+      "byteLength": 9297
+    },
+    {
+      "path": "src/components/game/GameActionOverlay.test.tsx",
+      "sha256": "d0c2c548c692752e9586f88c76dedb094868396c102bbda9f9c490cff9116fd8",
+      "byteLength": 8436
+    },
+    {
+      "path": "src/components/game/GameActionOverlay.tsx",
+      "sha256": "a5b9fdb5e87f0ba5e872fbc959096cdc6c8f3cd265bced5b3c7586f2c7b7893c",
+      "byteLength": 8461
+    },
+    {
+      "path": "src/components/game/GameChrome.test.tsx",
+      "sha256": "c5470141bc6dbe73ddb64109d8e0ad303fc5577b193983ff1d1633d47bd947dd",
+      "byteLength": 10104
+    },
+    {
+      "path": "src/components/game/GameEdgeNavigation.tsx",
+      "sha256": "cdb8e1d7e74c2543ea3ce872ca650138248c435f7f98328432a4542e3f85370b",
+      "byteLength": 1690
+    },
+    {
+      "path": "src/components/game/GameHud.tsx",
+      "sha256": "780977b46a3002efab42da3a8a82a78554db18f3db79530dea522edd44d43460",
+      "byteLength": 3382
+    },
+    {
+      "path": "src/components/game/GameOverlayEscapeHandler.tsx",
+      "sha256": "655d0e97274dbaa5f5ccb7ef7f9f663aeb0d7438aaedb5797639258a5b40761b",
+      "byteLength": 459
+    },
+    {
+      "path": "src/components/game/GamePanel.tsx",
+      "sha256": "ceebbcf37920adc86a23aacfba1ee45a102c2ccda26958543f22045d2b8095d4",
+      "byteLength": 6553
+    },
+    {
+      "path": "src/components/game/GameScreen.tsx",
+      "sha256": "9c20d7695eca095ffce9d98797a87f3fef7f3006d183e6ad99339374ad2134f0",
+      "byteLength": 13615
+    },
+    {
+      "path": "src/components/game/MajorEventModal.tsx",
+      "sha256": "de22cbac3af0d26be8c8c5843b46fd4d5b685d060e52135810f843ca12ac7947",
+      "byteLength": 3400
+    },
+    {
+      "path": "src/components/game/MapCountryPicker.test.tsx",
+      "sha256": "3662eddc00637df98500e31b23d01ebdf5e27ca1b9e7b9a65c55fe51d5221245",
+      "byteLength": 1388
+    },
+    {
+      "path": "src/components/game/MapCountryPicker.tsx",
+      "sha256": "3ef8e1cbd87125d3c4726881d21e20fb52213928ae426f2e1355b6b8cab1e078",
+      "byteLength": 1115
+    },
+    {
+      "path": "src/components/game/NewsAndMajorEvents.test.tsx",
+      "sha256": "1208b263348e1dd2e57282012126871c2b231a5a78a0aef5234a4a71fd8a156a",
+      "byteLength": 5002
+    },
+    {
+      "path": "src/components/game/NewsOverlay.tsx",
+      "sha256": "e91456c7ab5f1da39d32aca671bbe9919c0d1763ecb380ea8ddcd4638f9afbb7",
+      "byteLength": 4902
+    },
+    {
+      "path": "src/components/game/WarAndSystemOverlays.test.tsx",
+      "sha256": "2a39b877da7735f8f9b01a029f5218ef71cba9996dbb45249762108b70198ff4",
+      "byteLength": 3740
+    },
+    {
+      "path": "src/components/game/WarAndSystemOverlays.tsx",
+      "sha256": "b3e5638b468e5c963325a8a045593a398f11495c0320903919b100593338a598",
+      "byteLength": 5736
+    },
+    {
+      "path": "src/components/layout/AppHeader.tsx",
+      "sha256": "6e2ff737eb1861b61a0bd89bb095e5da5c2adaa308e99bf6e7cbfd4453d40a56",
+      "byteLength": 303
+    },
+    {
+      "path": "src/components/layout/CatalogGameSetupShell.test.tsx",
+      "sha256": "8b4bb664ecf4198afc3187d2733cdfe29185348415ccc8cc16a83915c58f25ed",
+      "byteLength": 6806
+    },
+    {
+      "path": "src/components/layout/CatalogGameSetupShell.tsx",
+      "sha256": "15aaa96b75cf3996deee25121d2098567e4beae6336e0f5132b0ae736cefe038",
+      "byteLength": 4993
+    },
+    {
+      "path": "src/components/layout/GameSetupShell.tsx",
+      "sha256": "e333a1d5f775e6e9728186effb22acab6d630e79d3cdb7102f2cd87431eb6179",
+      "byteLength": 7546
+    },
+    {
+      "path": "src/components/layout/WorldAppPage.tsx",
+      "sha256": "4866c5ae5ccf66142adf5e1764252b18a36cafaae0e22f68c57e7096892241fd",
+      "byteLength": 634
+    },
+    {
+      "path": "src/components/map/CatalogWorldMap.tsx",
+      "sha256": "1524453f1688ede34edcaa4893355893c6b5f0089c374e5440a9f54beecf1efc",
+      "byteLength": 8732
+    },
+    {
+      "path": "src/components/map/map-search-projection.test.ts",
+      "sha256": "300cd553ee8be79e0b4f45f9b88e4b616e4a2c5a70351b3d4d1201b344bb72dc",
+      "byteLength": 1933
+    },
+    {
+      "path": "src/components/map/MapSearch.tsx",
+      "sha256": "31ac3552a78a5316178c7bb5adacc59572666ffb5611f6cc11c93a789c89943a",
+      "byteLength": 3070
+    },
+    {
+      "path": "src/components/map/WorldMap.tsx",
+      "sha256": "a0b94fa6cbfe75a8568de4ea8c97d2c2bce0730a54b7b65461a8c5c8d84f58a9",
+      "byteLength": 36469
+    },
+    {
+      "path": "src/lib/commands/command-batch-v2.test.ts",
+      "sha256": "e06b76c737f8244741e184574dc4f20022484a11731305d8629899d943db3df1",
+      "byteLength": 3667
+    },
+    {
+      "path": "src/lib/commands/command-batch-v2.ts",
+      "sha256": "2ec2bf115dcf5f4313e49b912e45082f9b6ec086475cac24f8e18e9aa9a94472",
+      "byteLength": 4329
+    },
+    {
+      "path": "src/lib/commands/country-change-map-color.test.ts",
+      "sha256": "6765adffec90a8dccecd465fa2990bce990b2dd0d512f4dfb0ba6d59b60ae308",
+      "byteLength": 4372
+    },
+    {
+      "path": "src/lib/commands/country-change-map-color.ts",
+      "sha256": "7c7edafbe9a22a351b87d25cb03a16c4543e6d43cad6e994352f1f83808ed25c",
+      "byteLength": 2071
+    },
+    {
+      "path": "src/lib/commands/country-create-v2.test.ts",
+      "sha256": "db792ef4e44bf10f72e4b50e937102be93d1106c7090f63418455d23d6188151",
+      "byteLength": 4232
+    },
+    {
+      "path": "src/lib/commands/country-create-v2.ts",
+      "sha256": "db0af2c5fcf339563b90fecc22603416a2cecb68cec0ba7cb5b27cdbb07ab821",
+      "byteLength": 2828
+    },
+    {
+      "path": "src/lib/commands/country-create.test.ts",
+      "sha256": "cebe4286d5b9606617e2c4073eb528568c7acd810392ff60b98777469ed559c9",
+      "byteLength": 5219
+    },
+    {
+      "path": "src/lib/commands/country-delete-v2.test.ts",
+      "sha256": "b540c778844acdfb7deeb6b5ab46aedef097e79744cee5f07041657ba65bb76e",
+      "byteLength": 1930
+    },
+    {
+      "path": "src/lib/commands/country-delete-v2.ts",
+      "sha256": "163beb63fecaa327ffbbf97c4c70892e9e499cb26cfdb34973d2a471d682daa2",
+      "byteLength": 929
+    },
+    {
+      "path": "src/lib/commands/country-delete.test.ts",
+      "sha256": "586abede52fb8502256a4dbe2373071bbcd5a860db38b11552be11b3afeab139",
+      "byteLength": 4540
+    },
+    {
+      "path": "src/lib/commands/country-dissolve-v2.test.ts",
+      "sha256": "9d822cf3270d55120a43c5652f1ae2e099c8c5d408cdb610c2d9d723a82e975c",
+      "byteLength": 3519
+    },
+    {
+      "path": "src/lib/commands/country-dissolve-v2.ts",
+      "sha256": "fee5b197109509b70186d6a35de8e04cf14aeca6c3b064009970b9b3020e2533",
+      "byteLength": 2123
+    },
+    {
+      "path": "src/lib/commands/country-establish-v2.test.ts",
+      "sha256": "7266b837b68f2028ac750e35a8c9c2d05df9046fff82e975c63fb078f1592dbc",
+      "byteLength": 2647
+    },
+    {
+      "path": "src/lib/commands/country-establish-v2.ts",
+      "sha256": "d0f919d159892c5817affde6a8c8f383842b0c5c319bc66dc38c836287f1e796",
+      "byteLength": 1457
+    },
+    {
+      "path": "src/lib/commands/country-id-v2.ts",
+      "sha256": "db056f58cb6bddd604b5149e83dee77500becf92c5798579478dcd1f99a06d45",
+      "byteLength": 259
+    },
+    {
+      "path": "src/lib/commands/country-merge-v2.test.ts",
+      "sha256": "0f4ee447efca543a984d94416eeb5e4147bb7eb7d06c10478f9bbcfbd98f044c",
+      "byteLength": 3381
+    },
+    {
+      "path": "src/lib/commands/country-merge-v2.ts",
+      "sha256": "3d34c00535127f0ff3449da7d96376646b9a543755ca952c9a15da45e53beabf",
+      "byteLength": 2554
+    },
+    {
+      "path": "src/lib/commands/country-rename-v2.test.ts",
+      "sha256": "62e055f0ffcbfe05d9d1b28ca035c40ea4ffc61180784228ad69711b9ddc7f5b",
+      "byteLength": 2375
+    },
+    {
+      "path": "src/lib/commands/country-rename-v2.ts",
+      "sha256": "7e4f00157d4246893ce0afce22e47ee1c2d190c2ea98686a6170130cd66eeb58",
+      "byteLength": 1513
+    },
+    {
+      "path": "src/lib/commands/country-rename.test.ts",
+      "sha256": "59d372717cf19cbed0da0a0bf43b3a75da10f13a016fb496ff86b958e27241d1",
+      "byteLength": 5389
+    },
+    {
+      "path": "src/lib/commands/country-split-v2.test.ts",
+      "sha256": "d640709dd99bd62b8a9b8b1b335c01b52e9546be6fcc5ab6911f512dc335905d",
+      "byteLength": 3850
+    },
+    {
+      "path": "src/lib/commands/country-split-v2.ts",
+      "sha256": "ce9276084b4426a1423e1cf867a80582c25ca5a210e41840b4c54b40973d9285",
+      "byteLength": 1433
+    },
+    {
+      "path": "src/lib/commands/map-command-v2.test.ts",
+      "sha256": "cf04ca6e0e3659568d4c0ae6f979ba12300cabb2d673d030c4de074bec4bced7",
+      "byteLength": 6722
+    },
+    {
+      "path": "src/lib/commands/map-command-v2.ts",
+      "sha256": "b5a9d805524886b2fd3708e3924929311eafa08a0bf27cbc9b8bbe0f4c901874",
+      "byteLength": 2532
+    },
+    {
+      "path": "src/lib/commands/map-command.test.ts",
+      "sha256": "deb62f7060526cdcccf6da5330613545bf893049e7b22094bbfc51600e2d0ae0",
+      "byteLength": 2497
+    },
+    {
+      "path": "src/lib/commands/map-command.ts",
+      "sha256": "af67548ff8b6f5f0e05d972a2c858141cea184a35a1157d69701e8f8e3e29296",
+      "byteLength": 731
+    },
+    {
+      "path": "src/lib/commands/object-prototype-pollution-v2.test.ts",
+      "sha256": "96150a25c6527f016640740d2f0cd192f9ad8106819faf2c01e95cd648df13f5",
+      "byteLength": 11240
+    },
+    {
+      "path": "src/lib/commands/plain-command-data-v2.test.ts",
+      "sha256": "338f4d00687ac6c28c5f16797db92b8950b796d5de1d160b4f8e0d9524e49f5c",
+      "byteLength": 2701
+    },
+    {
+      "path": "src/lib/commands/plain-command-data-v2.ts",
+      "sha256": "5648c1152f1ec6cf819d8b924d982687f8847e7fc09d292f0248b8a7489529be",
+      "byteLength": 5156
+    },
+    {
+      "path": "src/lib/commands/schema-purity-v2.test.ts",
+      "sha256": "61a431f39a8569ba700f284c02b640eb18ca8314c6eb7a7b803dc870dcb3b58e",
+      "byteLength": 18782
+    },
+    {
+      "path": "src/lib/commands/territorial-control-v3.ts",
+      "sha256": "d166eaabc50711f388620a63ec0c6b1f46ef703bc308a5e0e169f415d2f5740a",
+      "byteLength": 1808
+    },
+    {
+      "path": "src/lib/commands/territory-assign-v2.test.ts",
+      "sha256": "8f15ccfe53800a4ce2563d97334f293553bc9894c24f55c40eb0aa776067a00c",
+      "byteLength": 2425
+    },
+    {
+      "path": "src/lib/commands/territory-assign-v2.ts",
+      "sha256": "8aae76a98a228827c4d028d674cb522ca06863ea4d47a1002ace7de60ddbe079",
+      "byteLength": 1061
+    },
+    {
+      "path": "src/lib/commands/territory-partition-v2.test.ts",
+      "sha256": "0e889d77ec4dda87ac0769850f02b179654eadb7a0b7e6ee915445f443a3b5aa",
+      "byteLength": 4017
+    },
+    {
+      "path": "src/lib/commands/territory-partition-v2.ts",
+      "sha256": "fc6688e4db2707fc52787ebc9d082632f1dbfd3c02ca8ab87f49f6791c5942ec",
+      "byteLength": 2185
+    },
+    {
+      "path": "src/lib/commands/territory-replace-v2.test.ts",
+      "sha256": "f005552528bbcc220dd968ac29ccf4af39a3b455fc23e46001009ec842dd57ba",
+      "byteLength": 2334
+    },
+    {
+      "path": "src/lib/commands/territory-replace-v2.ts",
+      "sha256": "9ad063ce83b04beac89a01f286f21daf22e933fbf1eb75e353cba40288af0bad",
+      "byteLength": 1088
+    },
+    {
+      "path": "src/lib/commands/territory-replace.test.ts",
+      "sha256": "7d6cd5a27214430dfba5c924f0c27039e55b2be69f3d32f921b353779ff24c48",
+      "byteLength": 7116
+    },
+    {
+      "path": "src/lib/commands/territory-transfer-v2.test.ts",
+      "sha256": "46be033d50e60b950c00da43192156e58e7960d695465b325f78ffe5ccea266d",
+      "byteLength": 2610
+    },
+    {
+      "path": "src/lib/commands/territory-transfer-v2.ts",
+      "sha256": "1035a4d5b8e1bd243ead992e52daae6d2fa857f279d14bd5bc0dbac2188f3c2f",
+      "byteLength": 2087
+    },
+    {
+      "path": "src/lib/commands/territory-transfer.test.ts",
+      "sha256": "9287f80d6308eabab556d3ba246164f0d11ef6a4687c9be053b9e72795fc9cdf",
+      "byteLength": 7461
+    },
+    {
+      "path": "src/lib/commands/territory-unclaim-v2.test.ts",
+      "sha256": "55b1f3bea148c9d200e051aa14732e79bb8b30ec953898b602c22d44a3124e73",
+      "byteLength": 2481
+    },
+    {
+      "path": "src/lib/commands/territory-unclaim-v2.ts",
+      "sha256": "1f2e7fa460523d21e368f81a18d6255e47b350658a4e84fb1eb73d21081110ab",
+      "byteLength": 998
+    },
+    {
+      "path": "src/lib/country/country-index.test.ts",
+      "sha256": "5e6346880a8f2242ae7216d60fbb72f8a2552f378112986293aafd2805a1a488",
+      "byteLength": 712
+    },
+    {
+      "path": "src/lib/country/country-index.ts",
+      "sha256": "7261c6e6dfb6373cf340d2579735da2921abd2d534b9b0c150f45c730c5cdcb0",
+      "byteLength": 819
+    },
+    {
+      "path": "src/lib/country/normalize-search-text.ts",
+      "sha256": "2f7b681ffad7ee3db4cebdc9f6083f880fbae1afc441a728c02a6fe5a1c63a44",
+      "byteLength": 109
+    },
+    {
+      "path": "src/lib/game-ui/catalog-map-ui-settings-adapter.test.ts",
+      "sha256": "13f56dccff409be18b10e7331e4bbbee1467cf7e8ef364a9565d71488d0947a6",
+      "byteLength": 1685
+    },
+    {
+      "path": "src/lib/game-ui/catalog-map-ui-settings-adapter.ts",
+      "sha256": "8a027aac9e04c8df4e5e675cf396db58c9cdd4abce707ebf915787f4fd33db31",
+      "byteLength": 750
+    },
+    {
+      "path": "src/lib/game-ui/contracts.test.ts",
+      "sha256": "91d4871a31ca424ee28e9431ebf3c13446e7328ac2f30f9dc76f1d48e22ac952",
+      "byteLength": 3352
+    },
+    {
+      "path": "src/lib/game-ui/contracts.ts",
+      "sha256": "b6edadc305c0190f07fe7c19684b1d7b4e74a4441bba3d94af9ea122012b3b1e",
+      "byteLength": 6373
+    },
+    {
+      "path": "src/lib/game-ui/country-management-projection.test.ts",
+      "sha256": "a05c46521cda3ec6e648bc0d67f02ffa4884310e4904ea94ea9cc4fdc97154de",
+      "byteLength": 3377
+    },
+    {
+      "path": "src/lib/game-ui/country-management-projection.ts",
+      "sha256": "3b7d57c63d31234bca73354f9641a1b81b6fb124d9b24f0b04a7a40749937683",
+      "byteLength": 3534
+    },
+    {
+      "path": "src/lib/game-ui/country-view-projection.test.ts",
+      "sha256": "748816a5911552d8f80c7602b75fea569aa1b18eaafd7f8bb1511275f6f74b22",
+      "byteLength": 6463
+    },
+    {
+      "path": "src/lib/game-ui/country-view-projection.ts",
+      "sha256": "224f927d75acc225c9999a87751f01a898868278c3a027b78eaa1976e4dc2d52",
+      "byteLength": 4972
+    },
+    {
+      "path": "src/lib/game-ui/game-hud-projection.test.ts",
+      "sha256": "485b258abdb5f2b663b9901e28ee25feaae2edc15a00478d8ea192fffc022178",
+      "byteLength": 2885
+    },
+    {
+      "path": "src/lib/game-ui/game-hud-projection.ts",
+      "sha256": "0065386bb18db5b71b194692122da99da92aede9a91ef62dc706b4883adf269a",
+      "byteLength": 2164
+    },
+    {
+      "path": "src/lib/game-ui/major-event-queue.test.ts",
+      "sha256": "40df0e05c61e978d26a28339c7c36a13d9ea1827eac44d1af8868bb40aae8cde",
+      "byteLength": 2806
+    },
+    {
+      "path": "src/lib/game-ui/major-event-queue.ts",
+      "sha256": "0bd8692d8271b44288f00ba6545ff12369d7b53cb09fb6c2f601c7ab0b3aab1c",
+      "byteLength": 2273
+    },
+    {
+      "path": "src/lib/game-ui/map-integration-checkpoint.test.ts",
+      "sha256": "70f892512248612899bc1289611c1390678facaa3931310ff0ec1464e1cbc22d",
+      "byteLength": 1293
+    },
+    {
+      "path": "src/lib/game-ui/map-ui-settings-adapter.test.ts",
+      "sha256": "a001f4ef3e627b704ef3497e6fa487ca8511ea64fb288596aa91d58c47ee1df8",
+      "byteLength": 1891
+    },
+    {
+      "path": "src/lib/game-ui/map-ui-settings-adapter.ts",
+      "sha256": "870bc0c217257e5b59a596e8b380492d96055d449e54c9308054b19600b2ff0d",
+      "byteLength": 1648
+    },
+    {
+      "path": "src/lib/game-ui/news-projection.test.ts",
+      "sha256": "667a574c2001b4bab5b1b183a37fa2c30bd4729d5f8086a865f6967be57ec1a4",
+      "byteLength": 2733
+    },
+    {
+      "path": "src/lib/game-ui/news-projection.ts",
+      "sha256": "0db85814c7e5fbc10bef5a8008b7d9ae10e32cfca3ebab0d91bc4996c60a65f7",
+      "byteLength": 3341
+    },
+    {
+      "path": "src/lib/game-ui/overlay-reducer.test.ts",
+      "sha256": "906691ff573b9596cbbac93f9741543cd07ee01b91afbccbcb0e7e75dd54a0fd",
+      "byteLength": 2158
+    },
+    {
+      "path": "src/lib/game-ui/overlay-reducer.ts",
+      "sha256": "2bc9f7b4c37909da6e4e139b3f956465135b16773bdf6c55a7196aaf9b5d756d",
+      "byteLength": 1668
+    },
+    {
+      "path": "src/lib/game-ui/runtime-view.ts",
+      "sha256": "9fe759e41ea9acde2dc4dc58f8b927229ee304d75322e589c39d8d7710533f66",
+      "byteLength": 955
+    },
+    {
+      "path": "src/lib/game-ui/ui-settings.ts",
+      "sha256": "384d28f17e7d4a9a3bafd1186686a0e7677ceb984ef485d0940352efa35d63c4",
+      "byteLength": 477
+    },
+    {
+      "path": "src/lib/game-ui/war-view-projection.test.ts",
+      "sha256": "28dbf9c01a4ce916e9c345449a16c77aa98be0e6d6b1bf9a3ad800eca7e002a4",
+      "byteLength": 410
+    },
+    {
+      "path": "src/lib/game-ui/war-view-projection.ts",
+      "sha256": "574f0ae432091a9c56f65a169f24ed9e9ec1923ffdd0be76c1025ceec57661a6",
+      "byteLength": 259
+    },
+    {
+      "path": "src/lib/map/catalog-consumer-contract.ts",
+      "sha256": "033f0751f88d59d3c3790a2cf1f90457ed0d797b085d96a33612998fff5ea9e2",
+      "byteLength": 6822
+    },
+    {
+      "path": "src/lib/map/catalog-consumer.server.ts",
+      "sha256": "c8dca7f8b4a7ba3edc43080d825c2543268166b3eebb12ccfef565faf90d5bec",
+      "byteLength": 5067
+    },
+    {
+      "path": "src/lib/map/catalog-consumer.test.ts",
+      "sha256": "fc14617fef031c964104e6a9e39f66ae519a10b807a071268f8bb339c362ed3b",
+      "byteLength": 26871
+    },
+    {
+      "path": "src/lib/map/catalog-map-consumer.ts",
+      "sha256": "d004eb59c69f4f475b58e46d78d2a600af8df94a6246aca5b62827dd4312970b",
+      "byteLength": 11342
+    },
+    {
+      "path": "src/lib/map/catalog-vector-delivery.ts",
+      "sha256": "d27f24f1cca0b43211f73e5f28c90226cf61b811f6d01ca3903672b405e190a1",
+      "byteLength": 8603
+    },
+    {
+      "path": "src/lib/map/country-camera.ts",
+      "sha256": "841d93acca1c358617485cff5aa472a87303712b393b0a71bc507efd55d37ae9",
+      "byteLength": 168
+    },
+    {
+      "path": "src/lib/map/country-label-border-changes.test.ts",
+      "sha256": "9af31c698ef71272b8af1fb2fcdd3730a179749d1c475585b6ba7140d5ddb39f",
+      "byteLength": 2540
+    },
+    {
+      "path": "src/lib/map/country-label-glyph-export.test.ts",
+      "sha256": "3cf82e5e3bbed27df513360d0fc184097b6eff7ec3dcbe43495ad762acddfbf8",
+      "byteLength": 3420
+    },
+    {
+      "path": "src/lib/map/country-label-glyph-geometry.test.ts",
+      "sha256": "f10c4b547985ef7152b7de443bafce6ddf20515a038dd0450a989b528c842c6c",
+      "byteLength": 13485
+    },
+    {
+      "path": "src/lib/map/country-label-glyph-geometry.ts",
+      "sha256": "7e889b6a6998affa85374371e46159d3f1fbe00fe8a58ba6c7f0d3d52e256775",
+      "byteLength": 14552
+    },
+    {
+      "path": "src/lib/map/country-label-layout.test.ts",
+      "sha256": "f8b799dbda866f78882036a58e31e58b0d411302f5a08babc571ca96afaeec25",
+      "byteLength": 5031
+    },
+    {
+      "path": "src/lib/map/country-label-layout.ts",
+      "sha256": "02dafbe60611fe7b098a6ac4bc1dd6961c07fd886672d1e4f2d4d09f9fcaf5a1",
+      "byteLength": 25068
+    },
+    {
+      "path": "src/lib/map/country-label-real-geometry.test.ts",
+      "sha256": "cb5f71233856e669140a8a3502a943702f576e29d8baf1ab77689c419c4809f0",
+      "byteLength": 5092
+    },
+    {
+      "path": "src/lib/map/country-label-size.test.ts",
+      "sha256": "980326d21cb08610fc86049ab1050a69b12249bb991a8f41ae23c95aad048767",
+      "byteLength": 1549
+    },
+    {
+      "path": "src/lib/map/country-label-size.ts",
+      "sha256": "424dfdac18f9d85b401344a12ac30da8ec78734b390f0590c981a4cd0eb8ef87",
+      "byteLength": 605
+    },
+    {
+      "path": "src/lib/map/country-label-worker-protocol.ts",
+      "sha256": "b96eecfea712d71dca1077f19f8c1a018f0717cdc22bab22352299b15b9be50b",
+      "byteLength": 488
+    },
+    {
+      "path": "src/lib/map/font-metrics.ts",
+      "sha256": "fc0752ea749f219cf0b1d30abb3d2b7eea30644169146ef3a49a26f978736f6b",
+      "byteLength": 6449
+    },
+    {
+      "path": "src/lib/map/font-outline.ts",
+      "sha256": "b90970412291fa33fd9d37fd04adb6b2f0288e331b5fbf1eac282bf50a729d99",
+      "byteLength": 4974
+    },
+    {
+      "path": "src/lib/map/map-config.ts",
+      "sha256": "5bbe100b56939f4e1e2464858501cb85b146290d35381c90330158fe4890c3dc",
+      "byteLength": 1349
+    },
+    {
+      "path": "src/lib/map/map-data.test.ts",
+      "sha256": "9d1e2f82a6928640e4bc648ee5d06db78332e9b178c62668d21520ac8bb2b7fc",
+      "byteLength": 8480
+    },
+    {
+      "path": "src/lib/map/map-source-incremental-adapter.test.ts",
+      "sha256": "a1d46d842d4205ae794990a371027053f76d606d56c9ab7cbb00044be2087d5f",
+      "byteLength": 18524
+    },
+    {
+      "path": "src/lib/map/map-source-incremental-adapter.ts",
+      "sha256": "09df5aff132803cec0c2791c351b293ff08d4964d2f8dc581749ed00fb0d4d43",
+      "byteLength": 12168
+    },
+    {
+      "path": "src/lib/map/render-feature-ref.ts",
+      "sha256": "13bd961d3831ac8eb54bb20d47bf4e30a8a9e4af433dca71bd8eb941e176aa75",
+      "byteLength": 777
+    },
+    {
+      "path": "src/lib/map/scenario-debug-bridge.ts",
+      "sha256": "2866935c94605658a4195dc0532b70a18bf10c0fced0d51a3d1bfdc87ea63856",
+      "byteLength": 391
+    },
+    {
+      "path": "src/lib/planning/affected-set.test.ts",
+      "sha256": "dc7eb0312c876c8fc20ea56b0abc530b0e90b1fc128cc12de75b66bb4623a4ee",
+      "byteLength": 6571
+    },
+    {
+      "path": "src/lib/planning/affected-set.ts",
+      "sha256": "9b3514ad1cb3b9d63d3832507a39b1a36617f786cd2632b51f08a01eac8bb271",
+      "byteLength": 6641
+    },
+    {
+      "path": "src/lib/planning/atomic-world-commit-subscriber.test.ts",
+      "sha256": "8ef1d30e9efd34d8fce69c4bc3352d590189e09f64fa855e7dfea10a7a0473de",
+      "byteLength": 6365
+    },
+    {
+      "path": "src/lib/planning/atomic-world-commit.test.ts",
+      "sha256": "ebbf72524c48c994eec82d96ba2beced1ef0721482a29317015bd925c6870d9b",
+      "byteLength": 8827
+    },
+    {
+      "path": "src/lib/planning/atomic-world-commit.ts",
+      "sha256": "9c965eb803f0f5fdbdb5a8446517a4936a467ee09ab2f8e74989861e60279c73",
+      "byteLength": 6967
+    },
+    {
+      "path": "src/lib/planning/batch-local-reference-resolver.test.ts",
+      "sha256": "534d06b4f3f4ff3b4383d6fcc072ec3297727d1be3e7dc60e6d01f0f75df2ada",
+      "byteLength": 5749
+    },
+    {
+      "path": "src/lib/planning/batch-local-reference-resolver.ts",
+      "sha256": "4ee44e3743f684ddce6daadb90c42570a1cd0bc2e851e0cc90009fb8d0e471ed",
+      "byteLength": 5276
+    },
+    {
+      "path": "src/lib/planning/command-batch-planner.test.ts",
+      "sha256": "170310fffce78d803bb5ba0ab74c964b92a9fbe0ad49ce5c81f11d53cee8146e",
+      "byteLength": 3675
+    },
+    {
+      "path": "src/lib/planning/command-batch-planner.ts",
+      "sha256": "a0bb2db45844996365441b65a3296c0647c9e8fe2c0b889ac5b2395a6d9003fe",
+      "byteLength": 4704
+    },
+    {
+      "path": "src/lib/planning/command-ui-runtime.test.ts",
+      "sha256": "e489199fa3824a44bb0292d6944245405b04d3f1db391e816a6e845c5385a583",
+      "byteLength": 7429
+    },
+    {
+      "path": "src/lib/planning/command-ui-runtime.ts",
+      "sha256": "7ac448856bc386b879c42fd30ef6b636b9a7388620a6fe438e820791164da4c8",
+      "byteLength": 13060
+    },
+    {
+      "path": "src/lib/planning/country-create-planner.test.ts",
+      "sha256": "7821f47533d4ae3267d969c975b95b01d670592b0468e86b3175ed6033cd5c24",
+      "byteLength": 4016
+    },
+    {
+      "path": "src/lib/planning/country-create-planner.ts",
+      "sha256": "b9fffecadc36856237128076e647082b7bf6bb1698734c674bbb03273b52d685",
+      "byteLength": 3349
+    },
+    {
+      "path": "src/lib/planning/country-delete-planner.test.ts",
+      "sha256": "26d8c9ed8c0874f40424c53f10af62e74b89602f0825666b0e6ddccefb50b9b9",
+      "byteLength": 3000
+    },
+    {
+      "path": "src/lib/planning/country-delete-planner.ts",
+      "sha256": "3874e3bb842ad900f39fbef15e3cd5d22e91277e3ccfa9e68b276fea06bca539",
+      "byteLength": 2584
+    },
+    {
+      "path": "src/lib/planning/country-dissolve-planner.test.ts",
+      "sha256": "ed4c925239d86b20a59462d604483c0be1006b45db61bafc87e20494aa43e61b",
+      "byteLength": 13004
+    },
+    {
+      "path": "src/lib/planning/country-dissolve-planner.ts",
+      "sha256": "54ea2b18a1f639357e856839f27086452cc3fc9346dc298be1bddbba9d15eabf",
+      "byteLength": 11292
+    },
+    {
+      "path": "src/lib/planning/country-establish-planner.test.ts",
+      "sha256": "cc0cb412c987e8e1426f8e85872ce6ac51ebff7d130fcf17546526d06a6c7bdd",
+      "byteLength": 3101
+    },
+    {
+      "path": "src/lib/planning/country-establish-planner.ts",
+      "sha256": "b39bd44c4ad5fda209611f8f68ba5f51f8ddfdb27455cc05803cf9bb7caee8dd",
+      "byteLength": 4537
+    },
+    {
+      "path": "src/lib/planning/country-map-color-planner.ts",
+      "sha256": "5c87fcc5a6feee530fa4575eca882d5448c8b9bd82ec160e5b3c5a5d1781d5a3",
+      "byteLength": 1974
+    },
+    {
+      "path": "src/lib/planning/country-merge-planner.test.ts",
+      "sha256": "09cdb82d71424e6b748f36ce36f4e4947bb4fabca4febae05221977ada6e5b59",
+      "byteLength": 11017
+    },
+    {
+      "path": "src/lib/planning/country-merge-planner.ts",
+      "sha256": "d1cf1d91e413b6569c904b2f12b709e0cb2a79d3737c3442cc0087191b887b68",
+      "byteLength": 10090
+    },
+    {
+      "path": "src/lib/planning/country-rename-planner.test.ts",
+      "sha256": "0c6c97ad487e70e7b10636ed82c6ab51cb6fe76a922531f370f37c685036cfec",
+      "byteLength": 2469
+    },
+    {
+      "path": "src/lib/planning/country-rename-planner.ts",
+      "sha256": "2108396e0645bada15570149f345882376536b6ec5b29937273e0896b274d803",
+      "byteLength": 2246
+    },
+    {
+      "path": "src/lib/planning/country-split-planner.test.ts",
+      "sha256": "da4595bac031d422bc11a01785318b4a1708faa23ba263263f3eff8b66668bc4",
+      "byteLength": 10654
+    },
+    {
+      "path": "src/lib/planning/country-split-planner.ts",
+      "sha256": "bef35aff40a1ef3ec6c8792018dab1278d38ed0795fb5ea110546665ab5e9421",
+      "byteLength": 11597
+    },
+    {
+      "path": "src/lib/planning/history-persistence-checkpoint.test.ts",
+      "sha256": "fa5cb81771d352a2c31f8ef88f01ce0e8fed7382ed95a4091febcfe9d653d8c9",
+      "byteLength": 7726
+    },
+    {
+      "path": "src/lib/planning/history-persistence-checkpoint.ts",
+      "sha256": "d250c7b38e195fdd80432a95243fe4c5c66bfe50ce7ccf58c7c54227f1d5037d",
+      "byteLength": 12095
+    },
+    {
+      "path": "src/lib/planning/next-state-structural-sharing.test.ts",
+      "sha256": "0fe03f453df30e6c3223ecfbe3ebeeb7010bef8728dd996db88d270274a4ad43",
+      "byteLength": 6284
+    },
+    {
+      "path": "src/lib/planning/next-state-structural-sharing.ts",
+      "sha256": "f44196fce25b2d493b304149ecf6167df59436c9d3e1b89a5bc205537908a72a",
+      "byteLength": 2591
+    },
+    {
+      "path": "src/lib/planning/performance-resilience-checkpoint.test.ts",
+      "sha256": "f1e606f450142c167e49c986254bc7f8f6c4da3307e90509544d85bc41568490",
+      "byteLength": 11003
+    },
+    {
+      "path": "src/lib/planning/performance-resilience-checkpoint.ts",
+      "sha256": "0cc059f35753c37214894dc2da08a0be0f2a45ad373f06ac70caedfa2b1cfc62",
+      "byteLength": 6414
+    },
+    {
+      "path": "src/lib/planning/plan-result.test.ts",
+      "sha256": "a54a3c685c3ce1074cbd6893ffc50bc785061b9b78477d457d241eeafab2a718",
+      "byteLength": 2414
+    },
+    {
+      "path": "src/lib/planning/plan-result.ts",
+      "sha256": "8cd50e272ac6c4ca4d157aa0cdc022045ca7810f7993364ff10cb5fb4ed47104",
+      "byteLength": 2113
+    },
+    {
+      "path": "src/lib/planning/planner-boundary.test.ts",
+      "sha256": "344ef01a07cd3122c4d962f6f5be3dfc7608d4665e5be056981c1dc80eafa9ce",
+      "byteLength": 2271
+    },
+    {
+      "path": "src/lib/planning/planner-boundary.ts",
+      "sha256": "f9fe60ab3e3bd3845a2383fd99a121b91e6243eab6a8f53a267bbc9db697033b",
+      "byteLength": 1210
+    },
+    {
+      "path": "src/lib/planning/planner-test-fixture.ts",
+      "sha256": "357a86277814efe01d22cdd66058b4361f7f021235cbdfae4e3ce4da0392686e",
+      "byteLength": 2739
+    },
+    {
+      "path": "src/lib/planning/territorial-control-planner.test.ts",
+      "sha256": "5a9c32986d1d6f9398687ef161ca48f7992763d3be40f972ef52c65d5e22d998",
+      "byteLength": 7578
+    },
+    {
+      "path": "src/lib/planning/territorial-control-planner.ts",
+      "sha256": "bef2813338b0414e1ce077f5695c51d5f67d7426c2ecc090fb12dcd7612d9835",
+      "byteLength": 4437
+    },
+    {
+      "path": "src/lib/planning/territory-assign-planner.test.ts",
+      "sha256": "1d5566dd2bb7dd1fae919ef53de94eb3f2ef4d7fa7f71c255db18e91d2daae8f",
+      "byteLength": 7502
+    },
+    {
+      "path": "src/lib/planning/territory-assign-planner.ts",
+      "sha256": "7182b8e93760926768d0cd0e2a084783c4db2748eb885d2bd5cf919e6da147bf",
+      "byteLength": 3913
+    },
+    {
+      "path": "src/lib/planning/territory-partition-planner.test.ts",
+      "sha256": "abaa3f01fb95690c968d525b32f4f6bbc1d0e0305627524954737b33d0058ae8",
+      "byteLength": 9152
+    },
+    {
+      "path": "src/lib/planning/territory-partition-planner.ts",
+      "sha256": "32fa2b7d09ca70ebde2812e9666969a7fc58a2b335c8f8b804bc83302d6b2a42",
+      "byteLength": 13213
+    },
+    {
+      "path": "src/lib/planning/territory-replace-planner.test.ts",
+      "sha256": "0040650dfb412dbe61098a4616e30fe1c5fa39f1d79d4abab22e175616799acf",
+      "byteLength": 8271
+    },
+    {
+      "path": "src/lib/planning/territory-replace-planner.ts",
+      "sha256": "43e20cf57e3362b581894e2c9156b1dedef4b6d43b255f1b0e7d2dc9963d825d",
+      "byteLength": 10917
+    },
+    {
+      "path": "src/lib/planning/territory-transfer-planner.test.ts",
+      "sha256": "88bba8f917698e634cbb61bdbcbccd796d52993dc3fadc328c0b55e9d8dd3463",
+      "byteLength": 8282
+    },
+    {
+      "path": "src/lib/planning/territory-transfer-planner.ts",
+      "sha256": "ad154bc7d4626ec8803c2bb6fe54c30f434d193e7a1f28134960dbf0b66987ac",
+      "byteLength": 6086
+    },
+    {
+      "path": "src/lib/planning/territory-unclaim-planner.test.ts",
+      "sha256": "3a85137f6cb4bc9336b3e3806e95f0a5642439eb367c7f885f676a543c3ff9a6",
+      "byteLength": 8407
+    },
+    {
+      "path": "src/lib/planning/territory-unclaim-planner.ts",
+      "sha256": "5b1dc237a4feb71dc5ceceb0babc4d67dbd5d855922af9c4a1f22dc3bbbabe2b",
+      "byteLength": 4269
+    },
+    {
+      "path": "src/lib/planning/world-patch-v2.test.ts",
+      "sha256": "82ce0fcaf9607e53017c80bfcefb9d1160894d760c65153d22e6318a87d33148",
+      "byteLength": 8342
+    },
+    {
+      "path": "src/lib/planning/world-patch-v2.ts",
+      "sha256": "b19f63e003c47d003cc503f36aff69e3d4af5bbfc8e8bf11fda61a5a64344e59",
+      "byteLength": 12723
+    },
+    {
+      "path": "src/lib/projection/catalog-color-projection.ts",
+      "sha256": "416c992396dbbdc31783bd0fbb613ebb02be4f4ce9e4e0dbfe7ace87764e9b52",
+      "byteLength": 3889
+    },
+    {
+      "path": "src/lib/projection/catalog-map-consumer-projection.ts",
+      "sha256": "50ec1aa5dd471331f661f65f85c48d960ea4b1265c50170505de406c193e4a1a",
+      "byteLength": 13434
+    },
+    {
+      "path": "src/lib/projection/committed-country-search-projection.ts",
+      "sha256": "2865833716339ddf982a041d49582ac45bfa9f90128da04a28f455b114273099",
+      "byteLength": 1381
+    },
+    {
+      "path": "src/lib/projection/country-capital-projection.test.ts",
+      "sha256": "221b830ea1d298360eae9d9aa440b61c9737e91302d3a5d5abc6fced1e0fef3d",
+      "byteLength": 4816
+    },
+    {
+      "path": "src/lib/projection/country-capital-projection.ts",
+      "sha256": "753d21ef0572ac9fb2c27eccd336a839fb104ce191a6df5638853a7ebe2c0379",
+      "byteLength": 5490
+    },
+    {
+      "path": "src/lib/projection/country-label-runtime-projection.ts",
+      "sha256": "9193ed202ca6a89a2774d5b589316d01fa62796536233899857ed0004ad3ecaf",
+      "byteLength": 8805
+    },
+    {
+      "path": "src/lib/projection/country-map-marker-projection.test.ts",
+      "sha256": "2ef7ea0d105f7cb42ffef32de980c336e3a8177086a1ea9e5fadffa280f6c100",
+      "byteLength": 7013
+    },
+    {
+      "path": "src/lib/projection/country-map-marker-projection.ts",
+      "sha256": "7aefd23a7b316fccb2f477b16bda2ed0d97f6baf92c14e07ff1d8db511414417",
+      "byteLength": 4833
+    },
+    {
+      "path": "src/lib/projection/country-panel-projection.test.ts",
+      "sha256": "3573ccd3ba7c0730473f953efac98753516ad02f95b3238fefcb2243df1e8df9",
+      "byteLength": 5383
+    },
+    {
+      "path": "src/lib/projection/country-panel-projection.ts",
+      "sha256": "c87aa0008013ad730703e0e12f24ec784476bb399126ca1cf8dff88329ce72ab",
+      "byteLength": 5893
+    },
+    {
+      "path": "src/lib/projection/country-search-index-patch.test.ts",
+      "sha256": "14fa9ec040a08e9fda0685b167e31c433835c42a4dc516f0172e78c98125391a",
+      "byteLength": 5530
+    },
+    {
+      "path": "src/lib/projection/country-search-index-patch.ts",
+      "sha256": "40b661c77a95d9da903a2b69c9ca2a2ac4baabf47e3a54314784fc5329e1b914",
+      "byteLength": 7097
+    },
+    {
+      "path": "src/lib/projection/label-projection-checkpoint.test.ts",
+      "sha256": "23a9655042cf8dcc78d1f1b4a95c45b16394e413bb3e57fcb54b9fd4f94ead96",
+      "byteLength": 12977
+    },
+    {
+      "path": "src/lib/projection/label-projection-checkpoint.ts",
+      "sha256": "2b0b6dd7f543d9a5a3c5544c0c985c27637e01defe06fa88d72c8bc45f749ae7",
+      "byteLength": 11700
+    },
+    {
+      "path": "src/lib/projection/map-projection-checkpoint.test.ts",
+      "sha256": "2bdc6f1c85d3dad28cb07aff9ff9ea017726f099892d6ae0c884637ac5477a1f",
+      "byteLength": 8571
+    },
+    {
+      "path": "src/lib/projection/map-projection-checkpoint.ts",
+      "sha256": "a3b6d82abfb9fd4acd79b8a6184579214c22841a3921a0381298b322af5f9d2b",
+      "byteLength": 12290
+    },
+    {
+      "path": "src/lib/projection/territory-polygon-index.test.ts",
+      "sha256": "f51d8ae02c3f6a9fc17ffd65c38b63f69b6c87b58604dbd2e590810c962a2171",
+      "byteLength": 7668
+    },
+    {
+      "path": "src/lib/projection/territory-polygon-index.ts",
+      "sha256": "0352854580ec4143dbeafa64a342919bfd29da82620a08ef0ad1cb43936b9375",
+      "byteLength": 6267
+    },
+    {
+      "path": "src/lib/projection/topology-border-artifact.test.ts",
+      "sha256": "a1442148d1475dea35f327744a732becf64cd99130280693c8f04b6283b4ae52",
+      "byteLength": 2865
+    },
+    {
+      "path": "src/lib/projection/topology-border-artifact.ts",
+      "sha256": "d50f1a62be777a09b2451763da0583f07979739025b229ff3e72cb02048cedc7",
+      "byteLength": 2673
+    },
+    {
+      "path": "src/lib/projection/world-map-runtime-projection.test.ts",
+      "sha256": "bb8ea275ecb8e5ed3fb21835a6ae4f14e2f7e6b3c264de6c8c61b8b6065c167a",
+      "byteLength": 9242
+    },
+    {
+      "path": "src/lib/projection/world-map-runtime-projection.ts",
+      "sha256": "719dddc42b1e9972da9afb8611846063c26845a9073d241ba8786578e3a8e7d6",
+      "byteLength": 6164
+    },
+    {
+      "path": "src/lib/simulation/atomic-turn-runtime.ts",
+      "sha256": "6a23be3ac7d2e8b211d404d6b207107c8e4effdecae2e7d8cc0a58a0817d0d29",
+      "byteLength": 12685
+    },
+    {
+      "path": "src/lib/simulation/catalog-authority-lifecycle.ts",
+      "sha256": "8bad7d526bffc8637de82f2554cb2ec90201f0f6c6d9f641ad390c8a836bc18b",
+      "byteLength": 7718
+    },
+    {
+      "path": "src/lib/simulation/catalog-occupation-browser-contract.test.ts",
+      "sha256": "9112a66cd1e03eaad84d80299654bb00ca4c08657e68572cee4cbeafceeebed7",
+      "byteLength": 1571
+    },
+    {
+      "path": "src/lib/simulation/catalog-occupation-lifecycle.test.ts",
+      "sha256": "0691091819b9b7cf27483536e6e77994220867745e753631f59941b289baad59",
+      "byteLength": 15121
+    },
+    {
+      "path": "src/lib/simulation/catalog-runtime.test.ts",
+      "sha256": "ecfd83716028ce9ac85a5e64fb591c153c8b70c3cebd5de7c918fd6f7d24c725",
+      "byteLength": 9931
+    },
+    {
+      "path": "src/lib/simulation/catalog-runtime.ts",
+      "sha256": "311dcdb06dadbbc024303a9c5e8aacb497086869b0a7663b45435357d8dfaec3",
+      "byteLength": 4533
+    },
+    {
+      "path": "src/lib/simulation/catalog-turn-plan.ts",
+      "sha256": "82f707fc3fe46287d4ee6fa29f7b20bf653a7e5046fcd4ed0de7e721fee6e3fd",
+      "byteLength": 12891
+    },
+    {
+      "path": "src/lib/simulation/consequence-causality.ts",
+      "sha256": "693b3b5b3667d31b0f0f953caf45aa6974fe7a98cd71c8357669fcedbc76a148",
+      "byteLength": 395
+    },
+    {
+      "path": "src/lib/simulation/country-color-authority.ts",
+      "sha256": "7ce8471f02be7850879292b7d9d1718fcefb413b4a1e6b45e3df48b3ccb76e20",
+      "byteLength": 1930
+    },
+    {
+      "path": "src/lib/simulation/country-color-intent.ts",
+      "sha256": "a9b17d96f5bfb074417c626c01f2ce7b6bef26ba8e38ce20f9573a82bd696d79",
+      "byteLength": 1892
+    },
+    {
+      "path": "src/lib/simulation/country-color-runtime.test.ts",
+      "sha256": "9f038d7060e802b4f280c00db8d3ba40a88ee7b88f819b96076ce4323de43829",
+      "byteLength": 30174
+    },
+    {
+      "path": "src/lib/simulation/debug-world-effect.ts",
+      "sha256": "3bf0c86c69e8d5eff3cffaeaac1208cdfd339d4a9dccc2fc65f33756416480ad",
+      "byteLength": 299
+    },
+    {
+      "path": "src/lib/simulation/game-runtime-persistence.test.ts",
+      "sha256": "84c793a03b2b24fc1b7edae4e75989b29e13334bbff749173a72bd4205f11181",
+      "byteLength": 5466
+    },
+    {
+      "path": "src/lib/simulation/initial-simulation-state.ts",
+      "sha256": "85c35485401f0db4b30ada290304a5cf11e01d738ba05c6f030aa47efc5f9e57",
+      "byteLength": 1173
+    },
+    {
+      "path": "src/lib/simulation/narrative-state.ts",
+      "sha256": "29f9bdf2624bd4f9a8ec09120a2bae108c00f13b998d57ee5f3701f9b556bedc",
+      "byteLength": 7428
+    },
+    {
+      "path": "src/lib/simulation/presentation-grant-validation.ts",
+      "sha256": "7c3e7810c7855c54cb2c3b1391661058c217ed1ce81d5985a9882c8447049569",
+      "byteLength": 4755
+    },
+    {
+      "path": "src/lib/simulation/production-subdivision-catalog.server.ts",
+      "sha256": "99141a9378f2487536eca7d1a3ab1f8479d55793181723f2bea4055bf84ce42c",
+      "byteLength": 837
+    },
+    {
+      "path": "src/lib/simulation/production-subdivision-catalog.test.ts",
+      "sha256": "9a7802fc9898be39945cfe02d8c8f73bd41546bf02c5f03391beddba5e8e40c5",
+      "byteLength": 5965
+    },
+    {
+      "path": "src/lib/simulation/queued-player-action.ts",
+      "sha256": "93b3d13f6ae647dd364d7e23006d37a1e2692eb5b3303505196e3c67d5d13c54",
+      "byteLength": 2712
+    },
+    {
+      "path": "src/lib/simulation/resolved-turn-plan.ts",
+      "sha256": "c407a85f55446d1d3d9b38346d4f4ace5d8ef83ce76391ccf4230df1f0fb0c2d",
+      "byteLength": 10719
+    },
+    {
+      "path": "src/lib/simulation/review-e-regression.test.ts",
+      "sha256": "d8309b7d1da6dead1fbcf74aa31a63d62103ff1edabc67a5acc6f9697285eb3a",
+      "byteLength": 7593
+    },
+    {
+      "path": "src/lib/simulation/semantic-validator.ts",
+      "sha256": "c99898c11b3c48e19efcae6e57e5827d8bd2b5bf704bfcf0823b49e0d07c726c",
+      "byteLength": 18332
+    },
+    {
+      "path": "src/lib/simulation/simulation-clock.ts",
+      "sha256": "483c36b8f3098ebef6e5747f5c61e6fc01cd1c8ac0fde47eece0977df7a3a247",
+      "byteLength": 2415
+    },
+    {
+      "path": "src/lib/simulation/simulation-context-production.test.ts",
+      "sha256": "ce987da9318c7c6887018a72254d17c962bf51170246160da18a666a74b4875d",
+      "byteLength": 10811
+    },
+    {
+      "path": "src/lib/simulation/simulation-context.ts",
+      "sha256": "97115071cf1c2c81d46ffafde24bc1c86c187f98b92922b3819fb37ea6743961",
+      "byteLength": 18306
+    },
+    {
+      "path": "src/lib/simulation/simulation-contract-primitives.ts",
+      "sha256": "11c7bcbd3765af7790c3c87a98cf27dcf38718a9957395fbbd493bbbb4489a06",
+      "byteLength": 4643
+    },
+    {
+      "path": "src/lib/simulation/simulation-contract.test.ts",
+      "sha256": "c18e7befa5206d7c5bc2ea28678255c33ba5ce9c0726caa7376fbeb5297d400a",
+      "byteLength": 20917
+    },
+    {
+      "path": "src/lib/simulation/simulation-event.ts",
+      "sha256": "0d0ed73786a70d0842e19737c08bc2a78d65b2634432d9a4f9f04d355b7d04c9",
+      "byteLength": 2433
+    },
+    {
+      "path": "src/lib/simulation/simulation-persistence.ts",
+      "sha256": "6b7d87fe7b14875e6bcdba0f8a22c16537705d793c55ffe1555ee630d5c5e975",
+      "byteLength": 10532
+    },
+    {
+      "path": "src/lib/simulation/simulation-state-v2.test.ts",
+      "sha256": "45550c9c2579f867f4e8aefd6e93b3ffb8f1e0d92b2f5c6a3c8587cef437cd9f",
+      "byteLength": 25777
+    },
+    {
+      "path": "src/lib/simulation/simulation-state-v2.ts",
+      "sha256": "e5ffc47ff012930291ec399313c8df7145f2fc75633c94f42b113c30759030a5",
+      "byteLength": 11476
+    },
+    {
+      "path": "src/lib/simulation/simulation-state.ts",
+      "sha256": "bd3463c44f0f731cf6d99e08840c848251c918d5edd51d3216c52253959a1e27",
+      "byteLength": 8188
+    },
+    {
+      "path": "src/lib/simulation/subdivision-catalog.ts",
+      "sha256": "1ede3065181f186c23c478c410ad130d0fb570c3c436075bade3184ad85bb053",
+      "byteLength": 5999
+    },
+    {
+      "path": "src/lib/simulation/turn-resolution.ts",
+      "sha256": "88d9f448ac5f997a1102759726acafb0a9135dd4c2c554eb1c957d456bf4b928",
+      "byteLength": 3713
+    },
+    {
+      "path": "src/lib/simulation/turn-runtime.test.ts",
+      "sha256": "bdb7983e05f0c14f222ec4e10d8169b9fc5b186adbb7ea8b4231e5da7030b27b",
+      "byteLength": 29569
+    },
+    {
+      "path": "src/lib/simulation/world-effect-compiler.ts",
+      "sha256": "6a7f6c8a9b14af2f0f061b379a848d89e99a4f6950e8d588cbd6b3f62ce3c7d2",
+      "byteLength": 31883
+    },
+    {
+      "path": "src/lib/simulation/world-effect.ts",
+      "sha256": "758afe54cdd61d2992190f714afe4b0c9909fb53d1333c94119fde0a06429847",
+      "byteLength": 5622
+    },
+    {
+      "path": "src/lib/test-only/china-province-debug-scenario.test.ts",
+      "sha256": "609e3eccec0c52e0dd9b589d309adb51c742fc0258f881addc6844a7d3d9e737",
+      "byteLength": 5129
+    },
+    {
+      "path": "src/lib/test-only/china-province-debug-scenario.ts",
+      "sha256": "488c767e4c55557946828f32e663439a28ec743cf3f8c41f6e7ce5e070db5d60",
+      "byteLength": 10288
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1-isolation.test.ts",
+      "sha256": "89d9d6a94f8c63a45aa1b4db1cbf6adcb78357d634744232919d05bd5f0bcd49",
+      "byteLength": 1447
+    },
+    {
+      "path": "src/lib/test-only/map-scenario-debug-bridge.ts",
+      "sha256": "3d066c80bceaff7fcdc831246dfe452e7d42c03460a4be842a1a783c9ad1dfe9",
+      "byteLength": 1721
+    },
+    {
+      "path": "src/lib/test-only/production-catalog-migration.test.ts",
+      "sha256": "debc2bf5f256fd09d71a2e41d2fa7b9f7b09047495e5de9fa24c595ebe376313",
+      "byteLength": 6519
+    },
+    {
+      "path": "src/lib/test-only/production-catalog-migration.ts",
+      "sha256": "04dda664265d2dde4e4fd57c54eaac2779590780b4cfe7965d6374c0d65baf82",
+      "byteLength": 7172
+    },
+    {
+      "path": "src/lib/test-only/static-runtime-source-guard.test.ts",
+      "sha256": "88124e661b84482723401ae2066c96bbb701e648de67cf7e7bc9dfc62fe01622",
+      "byteLength": 4317
+    },
+    {
+      "path": "src/lib/test-only/usa-state-debug-scenario.ts",
+      "sha256": "bf7aaf528b00384024c02eb9d55f33f948667cc35868e444d6c8f70c749d45af",
+      "byteLength": 11880
+    },
+    {
+      "path": "src/lib/test-only/world-simulation-schema-checkpoint.test.ts",
+      "sha256": "2d7d98eebce0443b059b11522c7e4bc85eb32f6df70edcbb694546554c2446fc",
+      "byteLength": 19841
+    },
+    {
+      "path": "src/lib/test-only/world-simulation-schema-checkpoint.ts",
+      "sha256": "7776177535a51c6d6a47a1635085a0c3a8ca252a042e0c9361660378ec6d4e4a",
+      "byteLength": 5146
+    },
+    {
+      "path": "src/lib/test-only/world-v2-to-v3-migration.test.ts",
+      "sha256": "6cb5af3d47b42f9001515be1851ac06663658808191be5370411fa09ff6bc8a4",
+      "byteLength": 11749
+    },
+    {
+      "path": "src/lib/test-only/world-v2-to-v3-migration.ts",
+      "sha256": "36b0fe0166d10ca9ecd2055210984516f7fb67869ed81b9cc1c8e81f5807f97f",
+      "byteLength": 6500
+    },
+    {
+      "path": "src/lib/test-only/world-v3-migration.md",
+      "sha256": "de7b836e8102c75aa04acbfdf5da7d6ac9dede5abaa550a224b8500fd0cda7c4",
+      "byteLength": 4886
+    },
+    {
+      "path": "src/lib/test-only/world-v3-synthetic-fixture.ts",
+      "sha256": "54c0c4db4620374d8c6e57dc0ac26a602a6760665da1160044bdb590371cdd4a",
+      "byteLength": 4055
+    },
+    {
+      "path": "src/lib/world/canonical-geometry-serializer.test.ts",
+      "sha256": "82ad241115475d51e470332a4ff544025a9698fe2c075e7c996aeb12fcadf4b5",
+      "byteLength": 3480
+    },
+    {
+      "path": "src/lib/world/canonical-geometry-serializer.ts",
+      "sha256": "7b1b4650a19aaf77316d7ed4162853e78b26bfaa9990a91b14d41f18ce516d6a",
+      "byteLength": 8166
+    },
+    {
+      "path": "src/lib/world/canonical-serializer.test.ts",
+      "sha256": "e0237dfe26e1ac79ee337509f97888ba20dc27fd0332649a8fafecf67596a85d",
+      "byteLength": 2608
+    },
+    {
+      "path": "src/lib/world/canonical-serializer.ts",
+      "sha256": "69f5e4b260c2a0a9d2399a05de4d19595eda6acff3500f49f486c87e004b118c",
+      "byteLength": 3084
+    },
+    {
+      "path": "src/lib/world/canonical-topology.test.ts",
+      "sha256": "ca206fc720857491fca1ff98a299a13192f85a041c27057edafdebb8d7095173",
+      "byteLength": 4385
+    },
+    {
+      "path": "src/lib/world/canonical-topology.ts",
+      "sha256": "56385f2c67fe97a93427a9f3764a8e7422553a56c8ec7bc96b76916579d37955",
+      "byteLength": 7542
+    },
+    {
+      "path": "src/lib/world/country-core-hash.test.ts",
+      "sha256": "68450a112808f7e510a542c3b9e11a204957f7277ae9a4737621a70df671736a",
+      "byteLength": 3446
+    },
+    {
+      "path": "src/lib/world/country-core-hash.ts",
+      "sha256": "67b569461574cb3b61b576496b22c52a58e1eaeb219bd64c68cbcabc792688b1",
+      "byteLength": 938
+    },
+    {
+      "path": "src/lib/world/country-entity-v3.ts",
+      "sha256": "73047e4d198b3eb7e9121aa67781036b55d3798afffa0ca3c21c2ecf68c4ef77",
+      "byteLength": 969
+    },
+    {
+      "path": "src/lib/world/country-entity.test.ts",
+      "sha256": "9001b99cb77f52f3902bb3b0452e257d0c4588640031c0a292509b35935dd082",
+      "byteLength": 2380
+    },
+    {
+      "path": "src/lib/world/country-entity.ts",
+      "sha256": "fb21bf32c3e11acc0164915c5f0a500e31635b2c3554740e70cab7d07f54fcf3",
+      "byteLength": 3135
+    },
+    {
+      "path": "src/lib/world/country-id.test.ts",
+      "sha256": "e02d6b4a1a14d60491f16c5cfd7b20fead1179a927a23853f1cb1c25de2a0125",
+      "byteLength": 5718
+    },
+    {
+      "path": "src/lib/world/country-id.ts",
+      "sha256": "713c89fd047bdc44b7d9ca4b09b5a175bbf0bc813930321d001bbaa4427f7777",
+      "byteLength": 4925
+    },
+    {
+      "path": "src/lib/world/country-map-artifacts.test.ts",
+      "sha256": "f279675b8e5430addc31cc01827611c259d503e9a979c885ee7d53a864a8e348",
+      "byteLength": 10478
+    },
+    {
+      "path": "src/lib/world/country-map-color.test.ts",
+      "sha256": "0c106b9219d341e016b8be88ff974cbdd7360d756fd1b97554940a9211d7070f",
+      "byteLength": 1403
+    },
+    {
+      "path": "src/lib/world/country-map-color.ts",
+      "sha256": "d9925db0b7d6dde0486ee05f01e8b3fe81d687c0e5b6019be8f16780f86711b9",
+      "byteLength": 2310
+    },
+    {
+      "path": "src/lib/world/country-names.test.ts",
+      "sha256": "a4768fa194f4f8183dbf46f362ca550b2c3b7a02eb5e6f65a6f66a736b9230e9",
+      "byteLength": 2086
+    },
+    {
+      "path": "src/lib/world/country-names.ts",
+      "sha256": "c78c763aad42301e1922e6942005b2eb06e6005f86ce23b2788de4c90e677e40",
+      "byteLength": 2502
+    },
+    {
+      "path": "src/lib/world/country-order.test.ts",
+      "sha256": "1389bc498098b99bd7c62b928b4c56cd240bf3d890e43d06b3fdda31b5e1339a",
+      "byteLength": 2265
+    },
+    {
+      "path": "src/lib/world/country-order.ts",
+      "sha256": "0d7e1e03aca4792e9d707dc4bbe751ecc75da7470247e2db5485f4a6b09e30aa",
+      "byteLength": 2541
+    },
+    {
+      "path": "src/lib/world/country-presentation-hash.test.ts",
+      "sha256": "fced97dedb6ff4eb95736eb9663b4eecc5d415f44ef6c1b2bbc94649bace11a1",
+      "byteLength": 3075
+    },
+    {
+      "path": "src/lib/world/country-presentation-hash.ts",
+      "sha256": "4f121f6f37aa4aba694b366c7e6373fa884fb0289b1c552a361951a9bb2a4726",
+      "byteLength": 1954
+    },
+    {
+      "path": "src/lib/world/country-presentation-override.test.ts",
+      "sha256": "2c88ae59a7286715d2fc77c2c568f7ed41c40ea21b2e8ea4c1ca31ff2ac08d0a",
+      "byteLength": 2544
+    },
+    {
+      "path": "src/lib/world/country-presentation-override.ts",
+      "sha256": "b91cfdf4506b827d5c7a5d79d25f925583f8dfea63fb0b852b822b5e635658b2",
+      "byteLength": 3046
+    },
+    {
+      "path": "src/lib/world/domain-hash-root.test.ts",
+      "sha256": "189bbed5c18eef7310948a5a0b5ca6a185dd1ef340949b4cfc90e02ce1a370a0",
+      "byteLength": 2502
+    },
+    {
+      "path": "src/lib/world/domain-hash-root.ts",
+      "sha256": "00e07ebbbe79abd87289f4d05355e4c19797cf22f962a0691a8678a006dfa1fc",
+      "byteLength": 2881
+    },
+    {
+      "path": "src/lib/world/immutable-readonly-set.ts",
+      "sha256": "3ca2fc0997c77e07cd246935f8f5e1a5e9ecc65db5af27b20f52642956bc1931",
+      "byteLength": 2650
+    },
+    {
+      "path": "src/lib/world/incremental-domain-hash.test.ts",
+      "sha256": "cab1fadf28ec442b91ddfd765a07125036c574ffde2ec533dc9475764e735b2d",
+      "byteLength": 13928
+    },
+    {
+      "path": "src/lib/world/incremental-domain-hash.ts",
+      "sha256": "40918d938d1552db975272fd09b52eb8e667ac78ed5a2caf54496d9e2f150baf",
+      "byteLength": 7355
+    },
+    {
+      "path": "src/lib/world/incremental-topology-deletion-coast-merge.test.ts",
+      "sha256": "a593c3da26dfc46f5c5ecdf3f43f241de76d6b6029b47a7b84ca16ea0636f9f9",
+      "byteLength": 8904
+    },
+    {
+      "path": "src/lib/world/incremental-topology-direct-access.test.ts",
+      "sha256": "3990b4352157ed09f43a26dafe405ba0da027f4933ca7cecc0bb2366f7622a45",
+      "byteLength": 4797
+    },
+    {
+      "path": "src/lib/world/incremental-topology-partial-transition.test.ts",
+      "sha256": "8d3258efdabb030afe1bb474a2742c0ef7d458bb2fc732596a92c85e5bff04e1",
+      "byteLength": 7238
+    },
+    {
+      "path": "src/lib/world/incremental-topology.test.ts",
+      "sha256": "234c55e88f476eba1f729cdee4966273ec10449c9dbd1e44d104aa6b294fbc49",
+      "byteLength": 1844
+    },
+    {
+      "path": "src/lib/world/incremental-topology.ts",
+      "sha256": "96d43ab655885ced64bec85965606ee4376013113b9989fefaf93a21c7938b80",
+      "byteLength": 8557
+    },
+    {
+      "path": "src/lib/world/initial-world-state-v2.test.ts",
+      "sha256": "5aa71741f11545623bbbcebd557ea2678d59533561372453f3b8a3ee1b56e6fc",
+      "byteLength": 3557
+    },
+    {
+      "path": "src/lib/world/initial-world-state-v2.ts",
+      "sha256": "91b085358d87b6d1f4521c90017ff42d5034f4fab1d7b050fcd0c0ad7ccf20d4",
+      "byteLength": 5453
+    },
+    {
+      "path": "src/lib/world/initial-world-state.test.ts",
+      "sha256": "11add30fa0bbc8e6ee679048b696f6e2df79a61f4d0ac4f67f9ab75e7b2801bf",
+      "byteLength": 3805
+    },
+    {
+      "path": "src/lib/world/production-catalog-seed.server.ts",
+      "sha256": "ee99cb0bacc074fd97d8725935ff14981e3829210959c7893bb15c97fc2edf0b",
+      "byteLength": 2033
+    },
+    {
+      "path": "src/lib/world/purpose-hashes.test.ts",
+      "sha256": "a08f1a0e9468f390e9d5c54d149dd910f3d157671392c0d66eb648040d2277be",
+      "byteLength": 3921
+    },
+    {
+      "path": "src/lib/world/purpose-hashes.ts",
+      "sha256": "80ee960b1c0bf926fe90b350f532995376ed0e8600eb84bdd849fd4cbb4dabee",
+      "byteLength": 3328
+    },
+    {
+      "path": "src/lib/world/retired-country-id-registry.test.ts",
+      "sha256": "067d9626c5b842e161a139c83221959d5202f5ec6f18bbb6e6527a3660808a9c",
+      "byteLength": 3257
+    },
+    {
+      "path": "src/lib/world/retired-country-id-registry.ts",
+      "sha256": "8802a8eebcb3a1aeb67ff6f736dbc95bc56771f1f837513c6e7e5f8bf269ca4d",
+      "byteLength": 2526
+    },
+    {
+      "path": "src/lib/world/seed-topology-audit.test.ts",
+      "sha256": "359c5842e497a6ff57afc92d4a18833c47da9a2688481084ccc30da4350eded8",
+      "byteLength": 2047
+    },
+    {
+      "path": "src/lib/world/seed-topology-audit.ts",
+      "sha256": "67ca40c3ae384197a1674efb210c9091b155e8658f3d2abf7e47f24e44aa4f5e",
+      "byteLength": 4068
+    },
+    {
+      "path": "src/lib/world/seed-v1-to-v2.test.ts",
+      "sha256": "65e1adaf86c165b032bc9311282de7d3f668055af697e78420e26899cf252644",
+      "byteLength": 7778
+    },
+    {
+      "path": "src/lib/world/seed-v1-to-v2.ts",
+      "sha256": "e0a639261dc428f0f6ef23c36c83e0d1acc75dbc5df6d2eb1ede09b094c352e7",
+      "byteLength": 8904
+    },
+    {
+      "path": "src/lib/world/sha256.ts",
+      "sha256": "b73d8b736cd30637a7b0a6a689607fc358a0f47a1cad27bffe27e3868eec0df0",
+      "byteLength": 3612
+    },
+    {
+      "path": "src/lib/world/shared-segment.test.ts",
+      "sha256": "7fa91f87ec2f49a76420fb336d8cfcc07acd0d3ead407d01172fe10b60858b4a",
+      "byteLength": 1118
+    },
+    {
+      "path": "src/lib/world/shared-segment.ts",
+      "sha256": "dab58cda123ea089b6c23aa7dc68e2adbcfd0a55e24abb32d6dc810f1d718782",
+      "byteLength": 8548
+    },
+    {
+      "path": "src/lib/world/territory-bbox-index.test.ts",
+      "sha256": "7b51d8217768274fe518208a774543e0a061d712c40116452a9d84428ef72411",
+      "byteLength": 1581
+    },
+    {
+      "path": "src/lib/world/territory-bbox-index.ts",
+      "sha256": "ff3cc3c1fe10c606dc5d63257c828e6f77c71071bea5a014a01a119a006842a7",
+      "byteLength": 4009
+    },
+    {
+      "path": "src/lib/world/territory-control-invariant.test.ts",
+      "sha256": "9f8442c71420924d443dee934bc94bee6ff8a6d26f67070e02e714573a2d9c85",
+      "byteLength": 2774
+    },
+    {
+      "path": "src/lib/world/territory-control-invariant.ts",
+      "sha256": "3c9e4ea6a75a8287810776132039e30fc40fbfcae030d4830f8745e281d3dd95",
+      "byteLength": 3414
+    },
+    {
+      "path": "src/lib/world/territory-entity-v3.ts",
+      "sha256": "987ced6b187c9d1d6b92bd4b031eb95130c07973b55f715f5f8822d89d1ea6e9",
+      "byteLength": 1375
+    },
+    {
+      "path": "src/lib/world/territory-entity.test.ts",
+      "sha256": "a4654f58ce18bb9fb23ab63bb2d39d424dc3d10750bf5bee0c74c8dbc5447b31",
+      "byteLength": 4315
+    },
+    {
+      "path": "src/lib/world/territory-entity.ts",
+      "sha256": "1bc1a19623e40fefaac61da419e660e274a069242769f1a59aaad7d82aaab7ae",
+      "byteLength": 6851
+    },
+    {
+      "path": "src/lib/world/territory-geometry-hash.test.ts",
+      "sha256": "42109055e44bb94bffe58da2fb4e02d47499f8452bc3aa57649bb232178c3f5d",
+      "byteLength": 2182
+    },
+    {
+      "path": "src/lib/world/territory-geometry-hash.ts",
+      "sha256": "3044c4a7ccc0ef8fbcf82f0651751c54c09b395b9329c626036496c70d6666b8",
+      "byteLength": 1266
+    },
+    {
+      "path": "src/lib/world/territory-id.test.ts",
+      "sha256": "0e87ff4480ee023a60ee8de0050c403e47599a6ded001f82458d68938bdd915e",
+      "byteLength": 4439
+    },
+    {
+      "path": "src/lib/world/territory-id.ts",
+      "sha256": "c545f9c2ec948a03ac76b25f366ec6c29299a03ff1863ac1b6e431a5d066e662",
+      "byteLength": 6371
+    },
+    {
+      "path": "src/lib/world/territory-order.test.ts",
+      "sha256": "ba48f4acfe1da37e1d648b0e51d4539427938b4c5aa7f152f7bf94d28b35f30c",
+      "byteLength": 3675
+    },
+    {
+      "path": "src/lib/world/territory-order.ts",
+      "sha256": "10ff4923d2170989d565247041cae0eee09bec57a469a061470383cef839a8aa",
+      "byteLength": 4278
+    },
+    {
+      "path": "src/lib/world/territory-owner-invariants.test.ts",
+      "sha256": "bb1f5b9e099838a2c494eb25ef5889263d91daff21902b03189f50cfc1005bf4",
+      "byteLength": 1917
+    },
+    {
+      "path": "src/lib/world/territory-owner-invariants.ts",
+      "sha256": "87b18a212832d07d09f1f3b0efdb661e00ae9b68333f0d16b0a32e6bbb0547a8",
+      "byteLength": 1727
+    },
+    {
+      "path": "src/lib/world/territory-ownership-hash.test.ts",
+      "sha256": "d615a5af72d90f4b550e639046d13a2291ebbcab7326f7e51a9ba0b278abaad1",
+      "byteLength": 1551
+    },
+    {
+      "path": "src/lib/world/territory-ownership-hash.ts",
+      "sha256": "3a9953b99127c007e7daf7b8a63cdcc69d82a2b1d9533b8133597afcb5433e58",
+      "byteLength": 688
+    },
+    {
+      "path": "src/lib/world/topology-correctness-hardening.test.ts",
+      "sha256": "eeafdf3d7e797ea2f3b77675a47911da43437ab2f3a27e9e20fd67ac05a4e4ec",
+      "byteLength": 8463
+    },
+    {
+      "path": "src/lib/world/topology-edge-hash.test.ts",
+      "sha256": "1db6844da338949a0fcd29f0f81bbd899129d54461036566bbfdde08cdbd97e0",
+      "byteLength": 1984
+    },
+    {
+      "path": "src/lib/world/topology-edge-hash.ts",
+      "sha256": "762b942c6bc39557ec6c97fd62fb3f07a5816529c43ad1797f4bea9f5bd1681c",
+      "byteLength": 2737
+    },
+    {
+      "path": "src/lib/world/topology-geometry-policy.test.ts",
+      "sha256": "898991d447f0335d981f10a9e387223723476cdbd9a97d9db6871fb7c4b93577",
+      "byteLength": 1302
+    },
+    {
+      "path": "src/lib/world/topology-geometry-policy.ts",
+      "sha256": "ad326ec5806bc8933bad3faa4aa18242bc179556d21fb98c0dd179949858db2b",
+      "byteLength": 3474
+    },
+    {
+      "path": "src/lib/world/topology-state.test.ts",
+      "sha256": "ef817d55c4996afa9bf002f94d38dcbaf930eb8128e6d5acc8ef4d3f4f8faf41",
+      "byteLength": 3594
+    },
+    {
+      "path": "src/lib/world/topology-state.ts",
+      "sha256": "6e48ec6083c998c1b17ce77ba4916a24ac8bb11e13eb3645abcd0043ab6e6364",
+      "byteLength": 10339
+    },
+    {
+      "path": "src/lib/world/world-content-hash.test.ts",
+      "sha256": "ea07ea89d0228ed269240a44aea2c3ecc53ac4453b44406cb681b46ffb407dd9",
+      "byteLength": 2108
+    },
+    {
+      "path": "src/lib/world/world-content-hash.ts",
+      "sha256": "6911a0b0ca6b13cac913af340afc4dac701f578898ea81fe259b5c2eac03e09e",
+      "byteLength": 1748
+    },
+    {
+      "path": "src/lib/world/world-geometry-catalog-ref.ts",
+      "sha256": "ccd55311ec1719840d73ecdfd57e34325b46cc066e46ecf53980295251a0b150",
+      "byteLength": 3904
+    },
+    {
+      "path": "src/lib/world/world-state-invariants.test.ts",
+      "sha256": "d3f9f28c43f1d0deb0f2670fbc51f02a4d28f4c669dfaf9c73b01a399ea23d33",
+      "byteLength": 2735
+    },
+    {
+      "path": "src/lib/world/world-state-v2.test.ts",
+      "sha256": "6f59fae7ebf7a092d9baa2816d57ede49d09c6efe1dea00f706b100cfea30c6c",
+      "byteLength": 7379
+    },
+    {
+      "path": "src/lib/world/world-state-v2.ts",
+      "sha256": "09329abf1cc0526345a8fb9cb0c665bb9c85d40c0ab183add5ebf986cca9d9c0",
+      "byteLength": 9182
+    },
+    {
+      "path": "src/lib/world/world-state-v3.test.ts",
+      "sha256": "66cc089f3c0455e536828c6749fabfae39f0b78a8a3d62150b1203a831549775",
+      "byteLength": 13133
+    },
+    {
+      "path": "src/lib/world/world-state-v3.ts",
+      "sha256": "29fa5185efb7dca1865202a1bb66b948f70d0bd4fa4992dd090842a74acb92f9",
+      "byteLength": 9053
+    },
+    {
+      "path": "src/lib/world/world-state.test.ts",
+      "sha256": "0ce0165c2ab46e3648d31d3e749bd196e4d61d2c676cfac88d6db42275805e42",
+      "byteLength": 6660
+    },
+    {
+      "path": "src/lib/world/world-v3-runtime-hash.ts",
+      "sha256": "24e8382268fbda0aeece2faee7fb67b69ee0b36fccec361d49204e95f48add6c",
+      "byteLength": 1397
+    },
+    {
+      "path": "src/lib/world/world-v3-validation.ts",
+      "sha256": "bc19a6e435b75bb68b22b0f38af2b2e72217c26450f57043d68b3e42ccf157a9",
+      "byteLength": 4410
+    },
+    {
+      "path": "src/lib/simulation/client/application-turn-runtime.test.ts",
+      "sha256": "5a68cb1fe4751b0b289be03999bae845140bf78098d2a74c6bb92e1364154f06",
+      "byteLength": 10757
+    },
+    {
+      "path": "src/lib/simulation/client/application-turn-runtime.ts",
+      "sha256": "9314afa3099ee4f4f3d523572c73e8ea6b7d6baf8a4d803427adeb12ee75cc20",
+      "byteLength": 6687
+    },
+    {
+      "path": "src/lib/simulation/client/gameplay-behavior.test.ts",
+      "sha256": "7ba959949ea4ce74d849b56ca27fdc5e66d615f8606fc31bef1e4eaabbefd02e",
+      "byteLength": 3522
+    },
+    {
+      "path": "src/lib/simulation/client/ndjson-turn-client.ts",
+      "sha256": "de93d6c7ffe943f19a380a21c5f51d6b6560d2b62741c85a4d8d0d16e5c5a4b3",
+      "byteLength": 3162
+    },
+    {
+      "path": "src/lib/simulation/client/turn-client.test.tsx",
+      "sha256": "c1e2c704e8e3f58e0dbdf5d3765bc94a0821ff69af8e77f9a8828a54939156ed",
+      "byteLength": 5389
+    },
+    {
+      "path": "src/lib/simulation/client/turn-report.ts",
+      "sha256": "ad0820c4a4bc1e4d0a54b74db7c816120d5b737fe0625d83593968e3e9c58cb3",
+      "byteLength": 4803
+    },
+    {
+      "path": "src/lib/simulation/client/turn-request.test.ts",
+      "sha256": "5d94bfbc6a8c1d211aa2305fbfa89084b8b5aa3549b4df31b477ac8d7b7bf33b",
+      "byteLength": 1583
+    },
+    {
+      "path": "src/lib/simulation/client/turn-request.ts",
+      "sha256": "77555b8ac71ce82bf7f83d1fa02ca2ca3022e50a1fd8ada0a4c4d68cd0f367b8",
+      "byteLength": 2634
+    },
+    {
+      "path": "src/lib/simulation/client/turn-state-machine.ts",
+      "sha256": "404b5059a2f35986b49d78b44e11a890eb4884fedaf27e1bfe781ba566ba56fa",
+      "byteLength": 1963
+    },
+    {
+      "path": "src/lib/simulation/client/use-catalog-simulation-turn-controller.ts",
+      "sha256": "97bd4cc68c64b68a0549146d081c8ae02cde5cb3c7503ecdd7171b4624e5f410",
+      "byteLength": 5181
+    },
+    {
+      "path": "src/lib/simulation/client/use-simulation-turn-controller.test.tsx",
+      "sha256": "29fa9f0d2dd31b7197c2129056181516d7280b6a2cb1d9028f75af00fb203aca",
+      "byteLength": 9374
+    },
+    {
+      "path": "src/lib/simulation/client/use-simulation-turn-controller.ts",
+      "sha256": "d1d96db0574ef23b882fcf49d0e5603753714918020c30d2ad47076d37a9b366",
+      "byteLength": 10796
+    },
+    {
+      "path": "src/lib/simulation/server/context-resolution-validator.ts",
+      "sha256": "460af77d63a07a67f111c446b14958a0657c864e4ea88a0552f0934c843b2ed3",
+      "byteLength": 21396
+    },
+    {
+      "path": "src/lib/simulation/server/openai-response-events.ts",
+      "sha256": "337fd123f28b8068ee6c90550a735e1d0654ec1ae6f8f5529bbd0c42303d8c40",
+      "byteLength": 3938
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-provider.ts",
+      "sha256": "ea05eaf4ca67ba7b1c5f32909f671111e11cf38c4fe95e52490bb10fccfc485d",
+      "byteLength": 9227
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-transport.ts",
+      "sha256": "ce5d62d558416762f95fe7b265895b60ad178b6fb5cfc5e9b158b34d1cbe3c41",
+      "byteLength": 2325
+    },
+    {
+      "path": "src/lib/simulation/server/provider-config.ts",
+      "sha256": "d8f187e9c02a41308c234fa0dd9b691291847e48697a2309718008e1d9f704a9",
+      "byteLength": 976
+    },
+    {
+      "path": "src/lib/simulation/server/provider-event-normalizer.ts",
+      "sha256": "01ab8b40949f55f3a12e14a931576a494e576307a8c26857cb7ed75691d556eb",
+      "byteLength": 1902
+    },
+    {
+      "path": "src/lib/simulation/server/provider-route.test.ts",
+      "sha256": "d19f2eeb17aa7d99ccc6e566d445b6f93c5ea507a1b33db24d13a6a6c6ee67a5",
+      "byteLength": 25630
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-instruction.ts",
+      "sha256": "7df1cad59c8cc1c3c35f51dae32da805c759602f2a43ec03a56eb14f652ca12a",
+      "byteLength": 5103
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-provider.ts",
+      "sha256": "410205c467a71b381f35e2a4fe25bcb26750f0c412a9234bc9e0168845d2d96f",
+      "byteLength": 1520
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-tools.ts",
+      "sha256": "4bc3a8fd1ff7d5035dc9056b37df183160f2fc512bfffaaf5fd93a3d93a6c15e",
+      "byteLength": 4363
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/country-create.ts",
+      "sha256": "7e2ec924b081b0ab7eb89912bde1e4e137807ffe9d2136b5cc15c20ca7b1207d",
+      "byteLength": 3274
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/country-delete.ts",
+      "sha256": "cae5bdb9926edfe0705adf05f05cfb380791131398e25b9e22228246b982a94f",
+      "byteLength": 2268
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/country-map-artifacts.ts",
+      "sha256": "3fd3fa16cc541aee18c4e0a5bd7609da2379d9c6fdc5e55b4fa32d04a2053578",
+      "byteLength": 7853
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/country-rename.ts",
+      "sha256": "7580de43fe7e9c201b51eec5ed6d9cd7e8ce3c3b5b06b15cb9d089b49e088f2e",
+      "byteLength": 2874
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/initial-world-state.ts",
+      "sha256": "88adfd17c326696b9e4d567e7ac0af83a036d89c64930d8d97931f622e3bd018",
+      "byteLength": 2211
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/territory-replace.ts",
+      "sha256": "d788cb508f1d5170aa481053f201a4abfa604eec848f9abaa985a3cd942af36c",
+      "byteLength": 10746
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/territory-transfer.ts",
+      "sha256": "12aa087b260b608a2f3730d74cb9413815bbbccbb0332714dfcc59291b3a0ef8",
+      "byteLength": 8761
+    },
+    {
+      "path": "src/lib/test-only/legacy-v1/world-state.ts",
+      "sha256": "d161b54b14127594cd5fb424b6394d09bd37efce6ee7dd19f4718e17bfd12f8f",
+      "byteLength": 13448
+    },
+    {
+      "path": "src/app/api/simulation/turn/route.ts",
+      "sha256": "9774a830dd487f3cc13d1faea701d8cc2c1ec10eec749a042c895a1e6f26f03d",
+      "byteLength": 4635
+    },
+    {
+      "path": "src/app/api/world/catalog/route.ts",
+      "sha256": "721a02583965f6919b10d9b93342b04c1401745a67dffddc3bae8bc3861aabd0",
+      "byteLength": 532
+    }
+  ]
+}

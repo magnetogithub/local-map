@@ -4,6 +4,7 @@ import type {TurnResolutionV1} from "../turn-resolution";
 export type SimulationProviderFailureCode =
   | "AI_NOT_CONFIGURED"
   | "PROVIDER_ERROR"
+  | "PROVIDER_RATE_LIMIT"
   | "PROVIDER_REFUSAL"
   | "PROVIDER_TIMEOUT"
   | "TOOL_PROTOCOL_ERROR"

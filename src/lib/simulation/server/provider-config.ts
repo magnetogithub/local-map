@@ -26,8 +26,8 @@ export function loadSimulationProviderConfig(
     model,
     timeoutMs: 120_000,
     maxRetries: 1,
-    maxToolIterations: 4,
+    maxToolIterations: 8,
     maxToolCalls: 12,
-    debugMode: environment.PAX_SIMULATION_DEBUG_MODE?.trim() === "1",
+    debugMode: environment.NODE_ENV !== 'production' && environment.PAX_SIMULATION_DEBUG_MODE?.trim() === "1",
   });
 }
