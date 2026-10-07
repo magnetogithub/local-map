@@ -1,0 +1,1 @@
+{"command":"node --expose-gc --max-old-space-size=4096 scripts/prompt15-r3-refine.mjs reports/prompt15/review-c-r3/second IRN","country":"IRN","elapsedMs":1333.7853000000005,"exitCode":0,"stderr":"","stdout":"{\"status\":\"pass\",\"country\":\"IRN\",\"changes\":0,\"count\":5681}\n"}

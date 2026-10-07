@@ -1,6 +1,6 @@
 import {describe, expect, it} from "vitest";
 
-import {createSimulationTurnPost} from "../../../app/api/simulation/turn/route";
+import {createSimulationTurnPost} from "./simulation-turn-handler";
 import {createCountrySearchProjection} from "../../projection/country-search-index-patch";
 import {createProductionInitialWorldStateV2} from "../../world/initial-world-state-v2";
 import {createInitialSimulationState} from "../initial-simulation-state";
