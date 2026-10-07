@@ -14,7 +14,7 @@ import {validateResolutionAgainstContext} from './server/context-resolution-vali
 import {executeReadOnlySimulationTool} from './server/simulation-tools';
 import {OpenAIResponsesSimulationProvider} from './server/openai-responses-provider';
 import type {OpenAIResponsesRequest} from './server/openai-responses-transport';
-import {createSimulationTurnPost} from '../../app/api/simulation/turn/route';
+import {createSimulationTurnPost} from './server/simulation-turn-handler';
 const index=loadCatalogRegionIndex();
 let seed:CatalogRuntimePair,catalog:ReturnType<typeof catalogContractForConsumer>;
 beforeAll(()=>{const p=prepareProductionCatalogSeed();catalog=catalogContractForConsumer(readCatalogConsumerMetadata(JSON.parse(fs.readFileSync(`public${p.bootstrap.metadata.path}`,'utf8')),p.bootstrap.catalogRef));seed=readCatalogRuntimePair(p.serializedPair,catalog);});

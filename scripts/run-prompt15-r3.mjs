@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import {spawn} from 'node:child_process';
+import {jsonBytes} from './prompt14-catalog-core.mjs';
+import {readJSON,fileIdentity} from './prompt15-cell-core.mjs';
+import {validatePositiveGeometry} from './prompt15-r3-validity.mjs';
+const output=process.argv[2],inputs=readJSON(`${output}/input-summary.json`),results=[];
+const countryChecks=inputs.countries.map(c=>{const input=readJSON(`${output}/inputs/${c.countryId}.json`),validity=validatePositiveGeometry(input.partitions.map(p=>p.geometry));return {countryId:c.countryId,sourceArtifact:fileIdentity(`${output}/inputs/${c.countryId}.json`),validity,pass:validity.pass&&!input.unresolved.length&&input.coverage.pass&&input.oldCoverage.every(p=>p.pass)};});
+fs.writeFileSync(`${output}/input-review.json`,jsonBytes({status:countryChecks.every(c=>c.pass)?'pass':'fail',countryChecks,command:'node scripts/run-prompt15-r3.mjs <output>',inputs:[fileIdentity('scripts/run-prompt15-r3.mjs'),fileIdentity('scripts/prompt15-r3-validity.mjs'),fileIdentity(`${output}/input-summary.json`)]}));
+if(countryChecks.some(c=>!c.pass))throw Error('Revalidated world input gate failed');
+const queue=inputs.countries.map(c=>c.countryId).filter(c=>!fs.existsSync(`${output}/mesh/${c}/summary.json`));
+await Promise.all([0,1].map(async()=>{while(queue.length){const country=queue.shift(),args=['--expose-gc','--max-old-space-size=4096','scripts/prompt15-r3-mesh.mjs',output,country],start=performance.now();
+ const result=await new Promise(resolve=>{let stdout='',stderr='';const child=spawn(process.execPath,args,{stdio:['ignore','pipe','pipe']});child.stdout.on('data',d=>stdout+=d);child.stderr.on('data',d=>stderr+=d);child.on('close',exitCode=>resolve({country,exitCode,stdout,stderr,elapsedMs:performance.now()-start,command:`node ${args.join(' ')}`}));});
+ fs.writeFileSync(`${output}/mesh/${country}/execution.json`,jsonBytes(result));results.push(result);console.log(`${country}: exit ${result.exitCode}`);
+}}));
+fs.writeFileSync(`${output}/mesh-executions.json`,jsonBytes({status:results.every(r=>r.exitCode===0)?'pass':'fail',results:results.map(r=>({country:r.country,exitCode:r.exitCode,execution:fileIdentity(`${output}/mesh/${r.country}/execution.json`)}))}));

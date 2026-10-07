@@ -1,0 +1,1 @@
+{"command":"node --expose-gc --max-old-space-size=4096 scripts/prompt15-r3-refine.mjs reports/prompt15/review-c-r3/second GUY","country":"GUY","elapsedMs":1083.2617999999784,"exitCode":0,"stderr":"","stdout":"{\"status\":\"pass\",\"country\":\"GUY\",\"changes\":0,\"count\":1375}\n"}
