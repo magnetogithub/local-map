@@ -1,0 +1,1 @@
+{"command":"node scripts/prompt15-recovery-candidate.mjs CNM first","error":null,"exitCode":0,"stderr":"","stdout":"{\"country\":\"CNM\",\"status\":\"blocked\",\"reason\":\"No pinned P1 identity; retain original P0 classification without fabricating administrative identity\"}\n"}

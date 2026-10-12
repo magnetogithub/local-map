@@ -1,0 +1,13 @@
+﻿{
+    "wrapperSessions":  [
+                            48648,
+                            81075
+                        ],
+    "time":  "2026-10-07T09:08:46.0990711Z",
+    "noWorldArtifactChange":  true,
+    "manualAuditSessions":  [
+                                89962,
+                                3945
+                            ],
+    "action":  "Stop redundant wrapper audits after completed world generation; original manual full audits remain active"
+}

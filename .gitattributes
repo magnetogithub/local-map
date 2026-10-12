@@ -1,9 +1,22 @@
+.gitattributes text eol=lf
 data/source-locks/prompt14-*.json text eol=lf
 reports/prompt14/14-02-*.json text eol=lf
 data/derived/prompt14/*.geojson -text
 # Archived evidence and frozen delivery must retain their exact digest bytes.
 data/derived/prompt14/history/** -text
 data/catalogs/prompt14/** -text
+# PROMPT 15 immutable artifacts and hash-backed evidence retain exact bytes.
+data/catalogs/prompt15/** -text
+reports/prompt15/** -text
+# Large immutable JSON remains byte-exact locally and is stored through Git LFS.
+data/catalogs/prompt15/**/world/catalog.json filter=lfs diff=lfs merge=lfs -text
+data/catalogs/prompt15/**/world/metadata.json filter=lfs diff=lfs merge=lfs -text
+data/catalogs/prompt15/**/world/inheritance-state-fixture.json filter=lfs diff=lfs merge=lfs -text
+reports/prompt15/**/world/catalog.json filter=lfs diff=lfs merge=lfs -text
+reports/prompt15/**/world/metadata.json filter=lfs diff=lfs merge=lfs -text
+reports/prompt15/**/world/inheritance-state-fixture.json filter=lfs diff=lfs merge=lfs -text
+scripts/*prompt15* -text
+prompts/PROMPT_15_OPERATIONAL_MICRO_TERRITORIES_AND_PARTIAL_FRONTS.txt -text
 data/catalog-consumers/prompt14/** -text
 public/data/territory-catalog/** -text
 scripts/prepare-prompt14-catalog-consumer.mjs text eol=lf

@@ -1,0 +1,1 @@
+{"command":"node --expose-gc --max-old-space-size=4096 scripts/prompt15-r3-refine.mjs reports/prompt15/review-c-r3/first BHR","country":"BHR","elapsedMs":576.3802999999898,"exitCode":0,"stderr":"","stdout":"{\"status\":\"pass\",\"country\":\"BHR\",\"changes\":0,\"count\":21}\n"}
