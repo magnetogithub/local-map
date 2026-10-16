@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createProgressReader} from './progress-reader.mjs';
+
+test('remote reader exposes only the fixed file with its key and reads live updates', async t => {
+  const base = path.resolve('.tmp/progress-reader-tests');
+  await fs.mkdir(base, {recursive: true});
+  const directory = await fs.mkdtemp(path.join(base, 'case-'));
+  const file = path.join(directory, 'progress.txt'), token = 'test-key-'.repeat(6);
+  await fs.writeFile(file, '개인 진행 결과');
+  const server = createProgressReader({file, token});
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(async () => {await new Promise(resolve => server.close(resolve)); assert.ok(directory.startsWith(base+path.sep)); await fs.rm(directory, {recursive: true, force: true});});
+  const url = `http://127.0.0.1:${server.address().port}`;
+  const page = await fetch(url);
+  assert.equal(page.status, 200);
+  assert.equal((await page.text()).includes('개인 진행 결과'), false);
+  assert.ok(page.headers.get('content-security-policy').includes("default-src 'none'"));
+  assert.equal((await fetch(url+'/progress.txt')).status, 401);
+  assert.equal((await fetch(url+'/progress.txt', {headers:{Authorization:'Bearer wrong'}})).status, 401);
+  const headers = {Authorization:`Bearer ${token}`};
+  const authorized = await fetch(url+'/progress.txt', {headers});
+  assert.equal(await authorized.text(), '개인 진행 결과');
+  assert.ok(authorized.headers.get('cache-control').includes('no-store'));
+  await fs.writeFile(file, '새 결과');
+  assert.equal(await (await fetch(url+'/progress.txt', {headers})).text(), '새 결과');
+  for (const route of ['/state.json','/reports/latest.json','/src/app/page.tsx','/%2e%2e/.env']) assert.equal((await fetch(url+route, {headers})).status, 404);
+  assert.equal((await fetch(url+'/progress.txt', {headers, method:'POST', body:'change'})).status, 405);
+  assert.equal(await fs.readFile(file,'utf8'), '새 결과');
+});

@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "createdAt": "2026-10-16T03:09:00.102Z",
+  "sourceRun": "20261015T115644-KST-eae9ad74",
+  "purpose": "Source-only checkpoint; no approval, executable run state or diagnostic logs",
+  "reviewBApproved": false,
+  "entries": [
+    {
+      "path": "review-b-base/scripts/operational-cells/common-refinement.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/common-refinement.mjs",
+      "sha256": "a172ae680b0f2fd285cf0f6308308d539ac6c9c1e868b2f907b73565bdcab7a3",
+      "byteLength": 5043
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/compact-partition.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/compact-partition.mjs",
+      "sha256": "d71c8e2cf2db01f5aa61ce792ff320cfe53906473786dc39d5752f81fc7f9ca6",
+      "byteLength": 4927
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/cost-comparison/analysis.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/cost-comparison/analysis.mjs",
+      "sha256": "79c6c6906374c5a9b81bfbf00c3aeb7044476d2486ce68fc626e7fb65abab1df",
+      "byteLength": 19339
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/cost-comparison/cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/cost-comparison/cli.mjs",
+      "sha256": "10d5cdebf78ad48ee450cca014c572b174e281cba6c13ba8bc549d0650774bd4",
+      "byteLength": 9513
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/cost-comparison/price-report.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/cost-comparison/price-report.mjs",
+      "sha256": "815273975e540b45b16c5bd25a7c59106e8341a5a76f1f8fdfb240725ebde502",
+      "byteLength": 3333
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/cost-comparison/README.md",
+      "origin": "work/review-B-4/scripts/operational-cells/cost-comparison/README.md",
+      "sha256": "77ada8ff94b51d9b3fd022c86e60d3a67566f0dfc728fcd9f9642c0aaa823f03",
+      "byteLength": 4812
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/cost-comparison/worker.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/cost-comparison/worker.mjs",
+      "sha256": "2c607806f135b58c31f0a00c0b8a9c346c90332c082218e214f5c5a080a9626b",
+      "byteLength": 4681
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/full-prototype-cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/full-prototype-cli.mjs",
+      "sha256": "c2738a24a05c48920db60f371b3f47ca7fd0808a6188e0fa9797e8da22a22cd0",
+      "byteLength": 3180
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/full-source-samples.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/full-source-samples.mjs",
+      "sha256": "4471ee128bbd1a2beb7e99719f7e924ee37b25cfac35b5ca617afdabc4e457c7",
+      "byteLength": 3920
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/metric-chart.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/metric-chart.mjs",
+      "sha256": "5e709c08ce470ceb4b2e83d91895d56343a8556c2f668fc7714652b66f2a8d63",
+      "byteLength": 5320
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/partition-prototype.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/partition-prototype.mjs",
+      "sha256": "069666612102b965b8ba36c2011803354b6026dc158bc34036dee446aef6c0ac",
+      "byteLength": 23825
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/policy-cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/policy-cli.mjs",
+      "sha256": "cc94e81627409f1ddf8eae802cca615553a801acf26d0d99f651d5a1d36640aa",
+      "byteLength": 2067
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/policy-selection/cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/policy-selection/cli.mjs",
+      "sha256": "d64ad6bdf2c441fd9fb338177ae63bb65cc9bc77d330ef19b2474f0536a8e0c7",
+      "byteLength": 10086
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/policy-selection/README.md",
+      "origin": "work/review-B-4/scripts/operational-cells/policy-selection/README.md",
+      "sha256": "b162d552b35e5d872a85c838ec32ed048fef1a7152d34ad2056d4970e3b0434b",
+      "byteLength": 3251
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/policy-selection/summary.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/policy-selection/summary.mjs",
+      "sha256": "a5ff23064616db69f793cc05beb07440ca9e562b6ddbbf8ffb298d1b87d8863a",
+      "byteLength": 12796
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/policy-validation.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/policy-validation.mjs",
+      "sha256": "c74806f4185291d48aaaf76e3ab9f2d4f113225691770bcbe9b6deda5d7e7e76",
+      "byteLength": 8391
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/prototype-assessment.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/prototype-assessment.mjs",
+      "sha256": "83aac7e5cba94f25c2ac211dbf30f6382872cbe5f9e9a743c3aa0ec631b4cb90",
+      "byteLength": 1568
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/prototype-cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/prototype-cli.mjs",
+      "sha256": "f69496c2dee63bfb389462f92b4bee6054e449e81fffce28c49084f002803a79",
+      "byteLength": 2005
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/prototype-frontier.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/prototype-frontier.mjs",
+      "sha256": "3c741930c3e090d834b218c17b2a8a1ca7c1dafb4f3964f63f7a6b007a310ac4",
+      "byteLength": 8889
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/PROTOTYPE.md",
+      "origin": "work/review-B-4/scripts/operational-cells/PROTOTYPE.md",
+      "sha256": "5acb98d3ca68a4846f3e6ed38a09db5fc31bf62eaf30ffb1a72a50963a0226d2",
+      "byteLength": 5059
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/README.md",
+      "origin": "work/review-B-4/scripts/operational-cells/README.md",
+      "sha256": "2aae425f3683bf0b2986d4f05bd59d9b366ff05775f52046c0653dd088b60bf6",
+      "byteLength": 3569
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/refinement-cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/refinement-cli.mjs",
+      "sha256": "3eb53313621831ef17ee394868d876cf3ad04e8503344350d1477de79f7d6b60",
+      "byteLength": 1358
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/cli.mjs",
+      "sha256": "549ce25d354ddd78854c4768928a213c74500dcc8b79c04237b6312340cebf6a",
+      "byteLength": 11015
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/experiments.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/experiments.mjs",
+      "sha256": "367a718ba50f6a63b04e384805b59e857e35310bdc986b02f4b89a5e976c60f2",
+      "byteLength": 4895
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/feasibility-cli.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/feasibility-cli.mjs",
+      "sha256": "7e361143b34e783d8970c1115587c5fc8482bb4d1808f9d240f4ba26e89342f7",
+      "byteLength": 3383
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/graph.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/graph.mjs",
+      "sha256": "b0a88d76c23f9fd3b55f31cb3ba31e886937ed7530c7b631337641939147d94f",
+      "byteLength": 13425
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/metric.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/metric.mjs",
+      "sha256": "79bb4b1e8e35521a6b7ff6ee9951a5bb3f04f4c9e94514a5b705699037ff08fc",
+      "byteLength": 193
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/near-search.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/near-search.mjs",
+      "sha256": "ed0eb16d33d42a7836a7fd5fd45d785a83b9c14380b49021ebfcb45613118994",
+      "byteLength": 5009
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/README.md",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/README.md",
+      "sha256": "e360e1ff62118ab4adcdd12bf1ed19f8de740f818fc7a7c6f2ca493017802dbc",
+      "byteLength": 6074
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/representative-experiments/source-scope-bound.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/representative-experiments/source-scope-bound.mjs",
+      "sha256": "000e10cafa8d0a8380ad91b34e8a97472566393c73c7de0d45a701d3b74b2dc4",
+      "byteLength": 2618
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/scope-feasibility.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/scope-feasibility.mjs",
+      "sha256": "7460f428547e588ac0851f8ba7b967c486919869c79087984a8093e0c707e2a8",
+      "byteLength": 1784
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/scoring-policy.json",
+      "origin": "work/review-B-4/scripts/operational-cells/scoring-policy.json",
+      "sha256": "e543d125efc8469dd38ac56d8f1d0721e8de7b6b4bd35ca8f1485d14015b4918",
+      "byteLength": 2985
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/SCORING.md",
+      "origin": "work/review-B-4/scripts/operational-cells/SCORING.md",
+      "sha256": "84894a22f48e90e2459eea685eff1ee873020d27b25ef1fbc8c873c1ac9d58b1",
+      "byteLength": 7559
+    },
+    {
+      "path": "review-b-base/scripts/operational-cells/source-samples.mjs",
+      "origin": "work/review-B-4/scripts/operational-cells/source-samples.mjs",
+      "sha256": "d8f0237c72e7c1854e9f5df3649ea2794fc39cce20db518127e4bf89d8e4be6d",
+      "byteLength": 4346
+    },
+    {
+      "path": "review-b-base/src/lib/operational-cells/IDENTITY.md",
+      "origin": "work/review-B-4/src/lib/operational-cells/IDENTITY.md",
+      "sha256": "091ce98935c71d4c9aa962bdda6552fb1fd5563007f9be2a4f793049ab547e2e",
+      "byteLength": 3310
+    },
+    {
+      "path": "review-b-base/src/lib/operational-cells/identity.ts",
+      "origin": "work/review-B-4/src/lib/operational-cells/identity.ts",
+      "sha256": "265b34ad51ee168bbd2cf2c3b1662dee549d6a82392dca61ede5f86bd338cfe4",
+      "byteLength": 9273
+    },
+    {
+      "path": "review-b-base/src/lib/operational-cells/model.ts",
+      "origin": "work/review-B-4/src/lib/operational-cells/model.ts",
+      "sha256": "962d6ccab7a10452633969fac515ac86ef0c142d6dfb95db123ee8693ea7ef86",
+      "byteLength": 8762
+    },
+    {
+      "path": "task-13-attempt-005/scripts/operational-cells/partition-prototype.mjs",
+      "origin": "tasks/15-13/attempt-005/candidate/scripts/operational-cells/partition-prototype.mjs",
+      "sha256": "7ce8a13fec718969865a8de48ace355f1e3f767dbe9546cef1a8129eb6064f8f",
+      "byteLength": 32243
+    },
+    {
+      "path": "task-13-attempt-005/scripts/operational-cells/prototype-frontier.mjs",
+      "origin": "tasks/15-13/attempt-005/candidate/scripts/operational-cells/prototype-frontier.mjs",
+      "sha256": "437c9b5160a034a197fed66e0bcbae5b1fdc3abe39f5d05403a1bb1e97aa2a08",
+      "byteLength": 10869
+    },
+    {
+      "path": "task-13-attempt-005/scripts/operational-cells/prototype-cli.mjs",
+      "origin": "tasks/15-13/attempt-005/candidate/scripts/operational-cells/prototype-cli.mjs",
+      "sha256": "453743517402f0ff309fdfa19cbe149186349c93f41be5e95f15e0323035af03",
+      "byteLength": 10262
+    },
+    {
+      "path": "task-13-attempt-005/scripts/operational-cells/full-prototype-cli.mjs",
+      "origin": "tasks/15-13/attempt-005/candidate/scripts/operational-cells/full-prototype-cli.mjs",
+      "sha256": "4954391be748e6c2ff3bc33f79731443aa23f8d0aa14ac9a5854e74f90a2b35c",
+      "byteLength": 5823
+    },
+    {
+      "path": "pending-operating-repair/scripts/prompt15-orchestrator/task-workflow.mjs",
+      "origin": "guardian/repairs/repair-oversight-5ba5242e-7c81-4ff1-87ce-d8e6a300cd55-d5ae5580/mirror/scripts/prompt15-orchestrator/task-workflow.mjs",
+      "sha256": "cdc848858ed468522f2f330d10fa44c37a4f886175f6e207ec19672f9d74e1f9",
+      "byteLength": 152723
+    },
+    {
+      "path": "pending-operating-repair/scripts/prompt15-orchestrator/supervisor-oversight.mjs",
+      "origin": "guardian/repairs/repair-oversight-5ba5242e-7c81-4ff1-87ce-d8e6a300cd55-d5ae5580/mirror/scripts/prompt15-orchestrator/supervisor-oversight.mjs",
+      "sha256": "38100a417e05a08bf2b870680a8ddde8e458df7d7b73351b9a026d1f1a4ba789",
+      "byteLength": 54676
+    }
+  ]
+}

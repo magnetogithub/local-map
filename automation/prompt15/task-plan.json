@@ -1,0 +1,1215 @@
+{
+  "version": 2,
+  "approvalUnit": "review",
+  "executionOrder": "verified-dependency-dag",
+  "checkpoints": [
+    {
+      "id": "15-1",
+      "review": "A",
+      "requiresReviews": []
+    },
+    {
+      "id": "15-2",
+      "review": "A",
+      "requiresReviews": []
+    },
+    {
+      "id": "15-3",
+      "review": "B",
+      "requiresReviews": [
+        "A"
+      ]
+    },
+    {
+      "id": "15-4",
+      "review": "C",
+      "requiresReviews": [
+        "B"
+      ]
+    },
+    {
+      "id": "15-5",
+      "review": "D",
+      "requiresReviews": [
+        "C"
+      ]
+    },
+    {
+      "id": "15-6",
+      "review": "D",
+      "requiresReviews": [
+        "C"
+      ]
+    },
+    {
+      "id": "15-7",
+      "review": "E",
+      "requiresReviews": [
+        "D"
+      ]
+    },
+    {
+      "id": "15-8",
+      "review": "F",
+      "requiresReviews": [
+        "E"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "15-01",
+      "checkpoint": "15-1",
+      "dependsOn": [],
+      "sections": [
+        "3"
+      ],
+      "title": "실제 기준 후보와 입력 고정",
+      "output": "후보 경로, catalog/source/geometry/topology/render ref·hash·bytes, dirty 변경과 작업 범위 manifest",
+      "check": "실제 소비 경로와 파일 identity를 대조하고 과거 보고서와 다른 항목을 명시",
+      "tools": [
+        "identity CLI"
+      ],
+      "gates": [
+        "baseline_reproduction"
+      ],
+      "legacyId": "15-1-01"
+    },
+    {
+      "id": "15-02",
+      "checkpoint": "15-1",
+      "dependsOn": [
+        "15-01"
+      ],
+      "sections": [
+        "3",
+        "5.2"
+      ],
+      "title": "전 국가 행정구역 소실 audit",
+      "output": "국가별 원본·선택 identity 집합, territory 수, 제외·fallback 원인과 미분할 예외 목록",
+      "check": "선택 전 source와 catalog membership을 비교하고 원래 단일 구역인 국가와 소실된 국가를 구분",
+      "tools": [
+        "catalog audit CLI"
+      ],
+      "gates": [
+        "administrative_loss_audit",
+        "source_identity_preservation"
+      ],
+      "legacyId": "15-1-02"
+    },
+    {
+      "id": "15-03",
+      "checkpoint": "15-1",
+      "dependsOn": [
+        "15-01"
+      ],
+      "sections": [
+        "1",
+        "3",
+        "10.1"
+      ],
+      "title": "북한 도 전체 선택 문제 재현",
+      "output": "기존 접경 lookup의 실제 IDs·geometry·행정 identity·owner/controller와 선택 면적",
+      "check": "현재 입력으로 lookup을 재현하고 두 territory와 부모 도 전체 geometry의 관계를 확인",
+      "tools": [
+        "Vitest",
+        "geometry CLI"
+      ],
+      "gates": [
+        "baseline_reproduction"
+      ],
+      "legacyId": "15-1-03"
+    },
+    {
+      "id": "15-04",
+      "checkpoint": "15-1",
+      "dependsOn": [
+        "15-01"
+      ],
+      "sections": [
+        "3",
+        "5.1"
+      ],
+      "title": "슬로베니아 원본 lineage와 gap 추출",
+      "output": "고정 193개 source ID의 원본→정합→제외→fallback 경로 및 실제 gap geometry",
+      "check": "선택 전 ID 집합·component·hole과 재현 가능한 gap 위치·면적을 실제 bytes에 연결",
+      "tools": [
+        "geometry CLI"
+      ],
+      "gates": [
+        "baseline_reproduction",
+        "source_identity_preservation"
+      ],
+      "legacyId": "15-1-04"
+    },
+    {
+      "id": "15-05",
+      "checkpoint": "15-1",
+      "dependsOn": [
+        "15-01"
+      ],
+      "sections": [
+        "3",
+        "4",
+        "7",
+        "8"
+      ],
+      "title": "런타임 참조·제한 계약 audit",
+      "output": "world/simulation/authority/resolver/migration/delivery 계약, 512 제한 위치, tool schema·provider 예산·오류 목록",
+      "check": "저장 membership cap과 한 턴 aggregate cap을 구분하고 실제 schema·호출 지점을 대조",
+      "tools": [
+        "contract inspection",
+        "targeted Vitest"
+      ],
+      "gates": [
+        "baseline_reproduction",
+        "rollout_blockers"
+      ],
+      "legacyId": "15-1-05"
+    },
+    {
+      "id": "15-06",
+      "checkpoint": "15-1",
+      "dependsOn": [
+        "15-02",
+        "15-03",
+        "15-04",
+        "15-05"
+      ],
+      "sections": [
+        "3",
+        "9",
+        "11"
+      ],
+      "title": "지도·성능 baseline과 audit 통합",
+      "output": "동일 장치·화면·시나리오의 경계/색상/메모리/시간 기준과 reports/prompt15/15-01-baseline.json",
+      "check": "zoom 4 미만 행정선 숨김과 기존 UI를 기록하고 각 audit의 실제 입력 manifest를 참조",
+      "tools": [
+        "Playwright",
+        "performance CLI"
+      ],
+      "gates": [
+        "baseline_reproduction",
+        "administrative_loss_audit",
+        "rollout_blockers"
+      ],
+      "legacyId": "15-1-06"
+    },
+    {
+      "id": "15-07",
+      "checkpoint": "15-2",
+      "dependsOn": [
+        "15-04"
+      ],
+      "sections": [
+        "5.1"
+      ],
+      "title": "gap 원인 분리 실험",
+      "output": "수치 오차와 실제 source 차이를 구분한 최소 재현·공통 경계 correspondence·미해결 face 목록",
+      "check": "동일 원본으로 재현하고 근거 없이 원인을 단정하거나 잔여 면적을 최근접 구역에 배정하지 않음",
+      "tools": [
+        "geometry CLI",
+        "targeted Vitest"
+      ],
+      "gates": [
+        "restoration_candidates",
+        "source_identity_preservation"
+      ],
+      "legacyId": "15-2-01"
+    },
+    {
+      "id": "15-08",
+      "checkpoint": "15-2",
+      "dependsOn": [
+        "15-07"
+      ],
+      "sections": [
+        "5.1"
+      ],
+      "title": "정합 복구 정책과 허용 한도 고정",
+      "output": "공통 arrangement 정합 정책 버전·변위/면적 한도·component/hole/identity 보존 규칙",
+      "check": "복구 결과를 채점하기 전에 한도를 고정하고 승인 derived P0 외곽과 source-side 대응을 유지",
+      "tools": [
+        "policy checks",
+        "geometry CLI"
+      ],
+      "gates": [
+        "restoration_candidates",
+        "source_identity_preservation"
+      ],
+      "legacyId": "15-2-02"
+    },
+    {
+      "id": "15-09",
+      "checkpoint": "15-2",
+      "dependsOn": [
+        "15-08"
+      ],
+      "sections": [
+        "5.1",
+        "10.2"
+      ],
+      "title": "슬로베니아 행정 복구 후보 검증",
+      "output": "193개 정합 후보와 원본 ID·component·hole·coverage·경계 correspondence 결과",
+      "check": "누락·복제·국가 전체 geometry 공유를 거부하고 실패 face가 있으면 unresolved와 build 차단을 기록",
+      "tools": [
+        "geometry CLI",
+        "negative Vitest"
+      ],
+      "gates": [
+        "restoration_candidates",
+        "source_identity_preservation",
+        "rollout_blockers"
+      ],
+      "legacyId": "15-2-03"
+    },
+    {
+      "id": "15-10",
+      "checkpoint": "15-2",
+      "dependsOn": [
+        "15-02",
+        "15-06",
+        "15-09"
+      ],
+      "sections": [
+        "5.2",
+        "12.2"
+      ],
+      "title": "전체 fallback 복구 계획과 A 인계",
+      "output": "국가별 복구 전략·미해결 사항·rollout 차단 조건 및 A 증거 index",
+      "check": "각 소실 국가를 개별 원인에 연결하고 B 분할 구현이나 전 세계 mesh 성공을 A의 선행 조건으로 추가하지 않음",
+      "tools": [
+        "audit consistency CLI"
+      ],
+      "gates": [
+        "administrative_loss_audit",
+        "restoration_candidates",
+        "rollout_blockers"
+      ],
+      "legacyId": "15-2-04"
+    },
+    {
+      "id": "15-11",
+      "checkpoint": "15-3",
+      "dependsOn": [
+        "15-10"
+      ],
+      "sections": [
+        "4",
+        "6.2",
+        "7"
+      ],
+      "title": "행정·cell·이전 territory 공통 모델",
+      "output": "envelope/admin/cell/adjacency/ID 계약과 이전 territory 경계를 protected overlay로 넣는 생성 입력 계약",
+      "check": "한 cell의 행정 부모와 이전 geometry 부모를 구분하고 runtime migration 없이 공통 refinement를 설계",
+      "tools": [
+        "schema Vitest",
+        "small geometry CLI"
+      ],
+      "gates": [
+        "identity_provenance_policy"
+      ],
+      "legacyId": "15-3-01"
+    },
+    {
+      "id": "15-12",
+      "checkpoint": "15-3",
+      "dependsOn": [
+        "15-11"
+      ],
+      "sections": [
+        "6.1",
+        "8.2",
+        "11"
+      ],
+      "title": "해상도·범위·비용 채점 기준 선고정",
+      "output": "km/km² 기반 접경/내부 최대 규모, W 대비 비율, near/limited/deeper 깊이·폭·면적, 내륙 보존·sliver·예외·budget 기준",
+      "check": "실험 결과 채점 전에 기준을 고정하고 degree를 km로 취급하거나 결과에 맞춰 한도를 완화하지 않음",
+      "tools": [
+        "policy validation CLI"
+      ],
+      "gates": [
+        "physical_resolution",
+        "near_extent_policy",
+        "generation_budget"
+      ],
+      "legacyId": "15-3-02"
+    },
+    {
+      "id": "15-13",
+      "checkpoint": "15-3",
+      "dependsOn": [
+        "15-12"
+      ],
+      "sections": [
+        "6.1",
+        "6.2"
+      ],
+      "title": "결정적 분할 후보와 공통 경계 prototype",
+      "output": "허용된 grid/adaptive/partition 후보의 공통 noding·부모 경계·sliver 처리 실험기",
+      "check": "작은 실제 source 표본에서 gap·overlap·cross-border·component/hole 소실을 거부",
+      "tools": [
+        "geometry CLI",
+        "fast-check"
+      ],
+      "gates": [
+        "physical_resolution",
+        "representative_country_experiments"
+      ],
+      "legacyId": "15-3-03"
+    },
+    {
+      "id": "15-14",
+      "checkpoint": "15-3",
+      "dependsOn": [
+        "15-13"
+      ],
+      "sections": [
+        "6.1",
+        "8.2"
+      ],
+      "title": "대표 국가 해상도·연속 진격 실험",
+      "output": "한국/북한·슬로베니아·타 대륙 인접국·큰 내륙국 및 기존 고정 witness 전체의 geometry/graph 비교",
+      "check": "접경과 내부 후속 진격을 물리 기준으로 비교하고 고위도·날짜변경선·island/hole·작은 국가를 포함; production tool/E2E는 아직 요구하지 않음",
+      "tools": [
+        "geometry/graph CLI",
+        "fast-check"
+      ],
+      "gates": [
+        "physical_resolution",
+        "near_extent_policy",
+        "representative_country_experiments"
+      ],
+      "legacyId": "15-3-04"
+    },
+    {
+      "id": "15-15",
+      "checkpoint": "15-3",
+      "dependsOn": [
+        "15-13"
+      ],
+      "sections": [
+        "6.2"
+      ],
+      "title": "stable ID와 provenance 결정성",
+      "output": "canonical geometry 기반 ID 규칙과 source/정책/generator/projection/의존성 버전 provenance",
+      "check": "순서·locale·owner/controller 변화가 ID를 바꾸지 않고 변경된 immutable 입력은 구별됨을 검사",
+      "tools": [
+        "Vitest",
+        "seeded fast-check"
+      ],
+      "gates": [
+        "identity_provenance_policy"
+      ],
+      "legacyId": "15-3-05"
+    },
+    {
+      "id": "15-16",
+      "checkpoint": "15-3",
+      "dependsOn": [
+        "15-14",
+        "15-15"
+      ],
+      "sections": [
+        "6.1",
+        "11"
+      ],
+      "title": "후보별 전체 비용 구조 비교",
+      "output": "cell/vertex/edge/membership/tile bytes·생성 시간/peak heap·초기 decode/render 추정 및 cap 후보",
+      "check": "실제 대표 입력 측정으로 고정 budget과 비교하고 metadata/index 비용도 포함; 전체 production E2E를 B 선행 조건으로 추가하지 않음",
+      "tools": [
+        "bounded benchmark CLI"
+      ],
+      "gates": [
+        "generation_budget",
+        "representative_country_experiments"
+      ],
+      "legacyId": "15-3-06"
+    },
+    {
+      "id": "15-17",
+      "checkpoint": "15-3",
+      "dependsOn": [
+        "15-16"
+      ],
+      "sections": [
+        "6.1",
+        "6.2",
+        "12.2"
+      ],
+      "title": "생성 정책 선택과 B 인계",
+      "output": "선택 정책·탈락 근거·수치 기준·예외 geometry·cap·의존성 pin·B 실험 재현 index",
+      "check": "해상도·범위·비용·ID와 기존 필수 witness 전체의 증거를 연결하고 실패 시 어떤 정책으로 돌아갈지 명시",
+      "tools": [
+        "policy/experiment summary CLI"
+      ],
+      "gates": [
+        "physical_resolution",
+        "near_extent_policy",
+        "generation_budget",
+        "identity_provenance_policy",
+        "representative_country_experiments"
+      ],
+      "legacyId": "15-3-07"
+    },
+    {
+      "id": "15-18",
+      "checkpoint": "15-4",
+      "dependsOn": [
+        "15-17"
+      ],
+      "sections": [
+        "5",
+        "7"
+      ],
+      "title": "전 국가 행정 복구와 protected overlay 입력",
+      "output": "고정 정책에 따른 복구 행정 입력·모든 source identity 추적·이전 territory protected 경계",
+      "check": "슬로베니아 193개와 전체 소실 audit을 대조하고 unresolved는 새 후보 build를 실패시킴",
+      "tools": [
+        "restoration CLI",
+        "identity audit"
+      ],
+      "gates": [
+        "administrative_identity",
+        "world_geometry"
+      ],
+      "legacyId": "15-4-01"
+    },
+    {
+      "id": "15-19",
+      "checkpoint": "15-4",
+      "dependsOn": [
+        "15-18"
+      ],
+      "sections": [
+        "6.2",
+        "7"
+      ],
+      "title": "전 세계 operational cell 생성",
+      "output": "승인 정책·복구 경계·이전 경계 refinement를 사용한 새 immutable catalog 초안",
+      "check": "실제 전 국가를 생성하고 부모 union·coverage·cross-border·cap을 검사; runtime 재생성 금지",
+      "tools": [
+        "catalog generation CLI"
+      ],
+      "gates": [
+        "world_geometry"
+      ],
+      "legacyId": "15-4-02"
+    },
+    {
+      "id": "15-20",
+      "checkpoint": "15-4",
+      "dependsOn": [
+        "15-19"
+      ],
+      "sections": [
+        "4",
+        "6.2",
+        "7",
+        "10.2"
+      ],
+      "title": "topology·membership·이전 부모 index",
+      "output": "양의 공유 edge adjacency, 행정→cell membership, 새 cell→단일 이전 geometry 부모 index",
+      "check": "점 접촉·바다·원격 component를 제외하고 동일 level membership 비중복·부모 union·source correspondence 확인",
+      "tools": [
+        "topology CLI",
+        "membership Vitest"
+      ],
+      "gates": [
+        "administrative_identity",
+        "world_topology_membership"
+      ],
+      "legacyId": "15-4-03"
+    },
+    {
+      "id": "15-21",
+      "checkpoint": "15-4",
+      "dependsOn": [
+        "15-20"
+      ],
+      "sections": [
+        "6.2",
+        "9",
+        "11"
+      ],
+      "title": "LOD·render asset·delivery index 생성",
+      "output": "새 catalog ref에 연결된 render/LOD/tile·artifact index와 bytes budget",
+      "check": "국가/행정/cell/전선 의미를 구분하고 실제 전달 asset의 root·hash·bytes와 index를 대조",
+      "tools": [
+        "render/delivery CLI"
+      ],
+      "gates": [
+        "delivery",
+        "world_topology_membership"
+      ],
+      "legacyId": "15-4-04"
+    },
+    {
+      "id": "15-22",
+      "checkpoint": "15-4",
+      "dependsOn": [
+        "15-21"
+      ],
+      "sections": [
+        "10.2",
+        "10.3",
+        "11"
+      ],
+      "title": "전 국가 보존·geometry·topology 감사",
+      "output": "국가별 원본→최종 ID·polygon·component/hole·membership·해상도·gap/overlap/cap 검사",
+      "check": "193개 개수만 맞춘 누락/복제·동일 membership 공유·도 전체 단일 cell 음성 후보를 실제로 거부",
+      "tools": [
+        "whole-world audit CLI",
+        "negative Vitest"
+      ],
+      "gates": [
+        "administrative_identity",
+        "world_geometry",
+        "world_topology_membership"
+      ],
+      "legacyId": "15-4-05"
+    },
+    {
+      "id": "15-23",
+      "checkpoint": "15-4",
+      "dependsOn": [
+        "15-22"
+      ],
+      "sections": [
+        "6.2",
+        "11"
+      ],
+      "title": "두 번째 독립 전 세계 생성",
+      "output": "공유 불변 입력만 사용하는 별도 생성 결과와 catalog/topology/membership/render byte 비교",
+      "check": "첫 생성물을 복사·hardlink해 비교하지 않고 동일 입력·독립 출력 두 결과의 모든 필수 bytes 일치 확인",
+      "tools": [
+        "independent generation CLI",
+        "byte comparison CLI"
+      ],
+      "gates": [
+        "independent_generation",
+        "delivery"
+      ],
+      "legacyId": "15-4-06"
+    },
+    {
+      "id": "15-24",
+      "checkpoint": "15-4",
+      "dependsOn": [
+        "15-23"
+      ],
+      "sections": [
+        "11",
+        "12.2"
+      ],
+      "title": "C 후보 계약과 전달 묶음 고정",
+      "output": "두 생성 비교·전 국가 감사·실측 비용·새 immutable ref/roots를 묶은 C 인계 manifest",
+      "check": "D가 사용할 ID/membership/이전 부모 계약과 실제 delivery bytes 일치; 기존 catalog 덮어쓰기·production 게시 없음",
+      "tools": [
+        "candidate manifest CLI"
+      ],
+      "gates": [
+        "administrative_identity",
+        "world_geometry",
+        "world_topology_membership",
+        "delivery",
+        "independent_generation"
+      ],
+      "legacyId": "15-4-07"
+    },
+    {
+      "id": "15-25",
+      "checkpoint": "15-5",
+      "dependsOn": [
+        "15-24"
+      ],
+      "sections": [
+        "4",
+        "8.2"
+      ],
+      "title": "지역 directory·큰 membership resolver",
+      "output": "기존 지역 이름을 유지하는 행정→cell index/resolver 및 저장 membership cap 계약",
+      "check": "512개 초과 지역도 임의 절단하지 않고 전체 membership을 정확히 조회; TerritoryId/subdivisionId 혼동 거부",
+      "tools": [
+        "Vitest",
+        "fast-check"
+      ],
+      "gates": [
+        "bounded_lookup",
+        "commit_cap"
+      ],
+      "legacyId": "15-5-01"
+    },
+    {
+      "id": "15-26",
+      "checkpoint": "15-5",
+      "dependsOn": [
+        "15-25"
+      ],
+      "sections": [
+        "8.1",
+        "8.2"
+      ],
+      "title": "strict lookup/submit 공유 schema",
+      "output": "canonical ID·region/frontier ref·정성 depth/extent·revision·effectTarget·범위 근거의 입력/출력 계약",
+      "check": "좌표 생성·unknown/ambiguous geography·잘못된 ref를 거부하고 15-6과 공유할 authority/revision/aggregate 계약 고정",
+      "tools": [
+        "schema Vitest"
+      ],
+      "gates": [
+        "bounded_lookup",
+        "strict_submit_scope"
+      ],
+      "legacyId": "15-5-02"
+    },
+    {
+      "id": "15-27",
+      "checkpoint": "15-5",
+      "dependsOn": [
+        "15-26"
+      ],
+      "sections": [
+        "8.2",
+        "10.1"
+      ],
+      "title": "현재 전선 기반 bounded graph 선택",
+      "output": "near/limited/deeper의 결정적 연속 cell 선택·깊이/폭/면적·근사 한계·cap 상태",
+      "check": "현재 통제 경계에서 다음 진격이 이어지고 바다·점 접촉·원격 component·도 전체 확대를 거부",
+      "tools": [
+        "graph Vitest",
+        "geometry CLI",
+        "fast-check"
+      ],
+      "gates": [
+        "bounded_lookup",
+        "commit_cap"
+      ],
+      "legacyId": "15-5-03"
+    },
+    {
+      "id": "15-28",
+      "checkpoint": "15-5",
+      "dependsOn": [
+        "15-27"
+      ],
+      "sections": [
+        "8.2",
+        "10.3"
+      ],
+      "title": "host 제출 범위·선택 증명 검증",
+      "output": "selection ref 또는 재검증 가능한 범위 요청과 실제 effect ID 집합의 host 결합",
+      "check": "raw IDs/전체 regionRefs/변조 token·stale revision·다른 게임/actor·operation 바꿔치기·페이지/다중 effect cap 우회를 commit 전에 거부",
+      "tools": [
+        "negative Vitest",
+        "fast-check"
+      ],
+      "gates": [
+        "strict_submit_scope",
+        "commit_cap"
+      ],
+      "legacyId": "15-5-04"
+    },
+    {
+      "id": "15-29",
+      "checkpoint": "15-5",
+      "dependsOn": [
+        "15-28"
+      ],
+      "sections": [
+        "8.3"
+      ],
+      "title": "provider lookup→submit·repair 연결",
+      "output": "effectTarget 사용, lookup/submit/단일 repair 예산, typed provider error·rate-limit·DEBUG 계약",
+      "check": "전체 membership을 접경 일부로 대체하지 않고 예산 내 submit 기회를 보존; production DEBUG 거부 및 일반 authority 흐름 유지",
+      "tools": [
+        "scripted provider integration",
+        "Vitest"
+      ],
+      "gates": [
+        "bounded_lookup",
+        "strict_submit_scope"
+      ],
+      "legacyId": "15-5-05"
+    },
+    {
+      "id": "15-30",
+      "checkpoint": "15-5",
+      "dependsOn": [
+        "15-29"
+      ],
+      "sections": [
+        "8.2",
+        "10.3",
+        "12.2"
+      ],
+      "title": "near 실측 cap과 도구 분기 인계",
+      "output": "대표 near 실제 선택 수·깊이/폭/면적·수정된 cap/schema 영향과 lookup/submit 분기 증거",
+      "check": "대표 요청이 실제 aggregate cap 안에서 성공하고 전체 batch 음성 검사가 통과; 통합 D 전까지 migration 완료나 REVIEW D PASS를 주장하지 않음",
+      "tools": [
+        "targeted integration Vitest",
+        "cap benchmark CLI"
+      ],
+      "gates": [
+        "bounded_lookup",
+        "strict_submit_scope",
+        "commit_cap",
+        "both_branches"
+      ],
+      "legacyId": "15-5-06"
+    },
+    {
+      "id": "15-31",
+      "checkpoint": "15-6",
+      "dependsOn": [
+        "15-24"
+      ],
+      "sections": [
+        "7"
+      ],
+      "title": "이전 territory→새 cell mapping 검증",
+      "output": "C의 protected refinement에 대한 실제 geometry coverage와 새 cell의 유일한 이전 부모 검증",
+      "check": "국가 ID 분류로 대체하지 않고 이전 geometry union과 복원 행정 membership을 모두 확인; 모호한 mapping 차단",
+      "tools": [
+        "geometry/mapping CLI",
+        "Vitest"
+      ],
+      "gates": [
+        "migration_atomicity"
+      ],
+      "legacyId": "15-6-01"
+    },
+    {
+      "id": "15-32",
+      "checkpoint": "15-6",
+      "dependsOn": [
+        "15-31"
+      ],
+      "sections": [
+        "4",
+        "7",
+        "8.2"
+      ],
+      "title": "owner/controller·authority 상태 이전",
+      "output": "이전 부모의 mutable state 상속과 authority scope·region membership·revision/aggregate cap 변환",
+      "check": "sourceCountryId를 owner로 오인하지 않고 서로 다른 controller를 합치지 않음; 15-5와 공유 계약 충돌은 통합 전 해결",
+      "tools": [
+        "migration Vitest",
+        "fast-check"
+      ],
+      "gates": [
+        "migration_atomicity",
+        "commit_cap"
+      ],
+      "legacyId": "15-6-02"
+    },
+    {
+      "id": "15-33",
+      "checkpoint": "15-6",
+      "dependsOn": [
+        "15-32"
+      ],
+      "sections": [
+        "7"
+      ],
+      "title": "simulation·pending·history 참조 정책",
+      "output": "territory 참조·pending action·history·기존 snapshot별 명시적 migration 또는 구버전 유지 처리",
+      "check": "모호하거나 해석 불가능한 참조로 cutover하지 않고 구버전 asset을 참조 수명 동안 보존; browser persistence 추가 없음",
+      "tools": [
+        "reference migration Vitest"
+      ],
+      "gates": [
+        "migration_atomicity"
+      ],
+      "legacyId": "15-6-03"
+    },
+    {
+      "id": "15-34",
+      "checkpoint": "15-6",
+      "dependsOn": [
+        "15-33"
+      ],
+      "sections": [
+        "7",
+        "10.3"
+      ],
+      "title": "atomic version 전환과 undo/redo",
+      "output": "world/simulation/catalog ref 일괄 전환·실패 rollback·catalog-aware undo/redo",
+      "check": "중간 실패·잘못된 batch에서 부분 변경이 없고 undo/redo가 해당 버전의 geometry/state를 복원",
+      "tools": [
+        "integration Vitest",
+        "fault injection"
+      ],
+      "gates": [
+        "migration_atomicity"
+      ],
+      "legacyId": "15-6-04"
+    },
+    {
+      "id": "15-35",
+      "checkpoint": "15-6",
+      "dependsOn": [
+        "15-34"
+      ],
+      "sections": [
+        "7",
+        "12.2"
+      ],
+      "title": "migration 호환성·실패 분기 인계",
+      "output": "구버전 snapshot/asset 보존, unknown/stale/ambiguous 참조 거부, 공통 계약 영향과 migration 분기 증거",
+      "check": "기존 snapshot 삭제 없이 seed/새로고침 동작을 유지; lookup 분기와 합친 실제 cap/atomic 통합 검증을 D에 남김",
+      "tools": [
+        "migration regression Vitest"
+      ],
+      "gates": [
+        "migration_atomicity",
+        "commit_cap",
+        "both_branches"
+      ],
+      "legacyId": "15-6-05"
+    },
+    {
+      "id": "15-36",
+      "checkpoint": "15-7",
+      "dependsOn": [
+        "15-30",
+        "15-35"
+      ],
+      "sections": [
+        "8.3",
+        "10.1",
+        "10.3"
+      ],
+      "title": "effect→authoritative state runtime 연결",
+      "output": "선택 cell만 변경하는 occupy/liberate/transfer와 simulation·atomic commit 연결",
+      "check": "owner 보존·비대상 cell 불변·잘못된 effect batch 전체 불변을 실제 상태로 확인; D 통합 PASS가 선행",
+      "tools": [
+        "runtime integration Vitest"
+      ],
+      "gates": [
+        "partial_occupation",
+        "liberation_transfer_history"
+      ],
+      "legacyId": "15-7-01"
+    },
+    {
+      "id": "15-37",
+      "checkpoint": "15-7",
+      "dependsOn": [
+        "15-36"
+      ],
+      "sections": [
+        "9"
+      ],
+      "title": "incremental projection·점령색·전선 연결",
+      "output": "authoritative cell 상태에서 파생되는 변경 feature와 controller 차이 전선",
+      "check": "지도만 바꾸는 음성 사례와 동일 controller 허위 전선을 거부; 턴마다 전 세계 setData/tile 재생성 없음",
+      "tools": [
+        "projection Vitest",
+        "browser instrumentation"
+      ],
+      "gates": [
+        "partial_occupation",
+        "continued_frontier",
+        "map_regressions"
+      ],
+      "legacyId": "15-7-02"
+    },
+    {
+      "id": "15-38",
+      "checkpoint": "15-7",
+      "dependsOn": [
+        "15-37"
+      ],
+      "sections": [
+        "9",
+        "10.3"
+      ],
+      "title": "경계 layer·zoom·국가 UI 회귀",
+      "output": "국가/행정/cell/전선 layer 정책과 label/click/hover/panel·색상 보존",
+      "check": "zoom 4 미만 행정선 숨김, 같은 controller seam 부재, 전선 가시성 및 기존 국가 상호작용을 실제 브라우저로 확인",
+      "tools": [
+        "Playwright",
+        "targeted UI Vitest"
+      ],
+      "gates": [
+        "map_regressions"
+      ],
+      "legacyId": "15-7-03"
+    },
+    {
+      "id": "15-39",
+      "checkpoint": "15-7",
+      "dependsOn": [
+        "15-38"
+      ],
+      "sections": [
+        "10.1"
+      ],
+      "title": "한국/북한 도 내부 일부 점령 E2E",
+      "output": "원문 점령 요청의 해석→lookup→submit→commit→지도 before/after 및 실제 cell 상태",
+      "check": "도 내부 점령/미점령 공존과 B의 깊이·폭·면적/내륙 보존 기준을 실제 geometry로 충족; 도 전체 membership이면 실패",
+      "tools": [
+        "scripted provider E2E",
+        "Playwright",
+        "geometry CLI"
+      ],
+      "gates": [
+        "partial_occupation",
+        "map_regressions"
+      ],
+      "legacyId": "15-7-04"
+    },
+    {
+      "id": "15-40",
+      "checkpoint": "15-7",
+      "dependsOn": [
+        "15-39"
+      ],
+      "sections": [
+        "10.1",
+        "10.3"
+      ],
+      "title": "후속 진격·해방·양도·undo/redo E2E",
+      "output": "현재 전선에서의 다음 턴 진격과 lifecycle 각 단계 state/projection/snapshot 증거",
+      "check": "후속 진격이 과거 source 국경에 고정되지 않고 해방·양도·undo/redo 후 authoritative state와 지도 일치",
+      "tools": [
+        "Playwright",
+        "lifecycle Vitest"
+      ],
+      "gates": [
+        "continued_frontier",
+        "liberation_transfer_history"
+      ],
+      "legacyId": "15-7-05"
+    },
+    {
+      "id": "15-41",
+      "checkpoint": "15-7",
+      "dependsOn": [
+        "15-38"
+      ],
+      "sections": [
+        "10.2"
+      ],
+      "title": "슬로베니아 실제 경계·조회·작은 점령 E2E",
+      "output": "보존된 행정 boundary/region lookup과 한 구역 내부 일부 점령의 실제 지도·state",
+      "check": "193개 원본 연결과 보이는 경계를 확인하고 다른 구역·동일 구역 나머지의 상태가 보존됨을 검사",
+      "tools": [
+        "Playwright",
+        "membership integration Vitest"
+      ],
+      "gates": [
+        "partial_occupation",
+        "map_regressions"
+      ],
+      "legacyId": "15-7-06"
+    },
+    {
+      "id": "15-42",
+      "checkpoint": "15-7",
+      "dependsOn": [
+        "15-40",
+        "15-41"
+      ],
+      "sections": [
+        "10.3",
+        "12.2"
+      ],
+      "title": "타 대륙 일반화·실패 동작과 E 인계",
+      "output": "타 대륙 인접국 도 내부 점령·실제 lifecycle·API 오류/Retry/기존 UI 회귀 증거 index",
+      "check": "국가 전용 코드 없이 동작하고 오류 시 확정 상태·pending·알림/지도 변경 부재 및 정상 authority를 확인",
+      "tools": [
+        "Playwright",
+        "integration Vitest"
+      ],
+      "gates": [
+        "partial_occupation",
+        "continued_frontier",
+        "liberation_transfer_history",
+        "map_regressions"
+      ],
+      "legacyId": "15-7-07"
+    },
+    {
+      "id": "15-43",
+      "checkpoint": "15-8",
+      "dependsOn": [
+        "15-42"
+      ],
+      "sections": [
+        "11",
+        "12"
+      ],
+      "title": "최종 후보와 검증 입력 동결",
+      "output": "F 실제 후보·source/config·catalog/geometry/topology/render/delivery roots와 공통 입력 manifest",
+      "check": "E 승인 후보에서 출발하고 실제 import/CLI/브라우저가 같은 후보를 소비; 이후 변경은 영향 증거 무효화",
+      "tools": [
+        "candidate identity CLI"
+      ],
+      "gates": [
+        "whole_world",
+        "cutover_candidate_recovery"
+      ],
+      "legacyId": "15-8-01"
+    },
+    {
+      "id": "15-44",
+      "checkpoint": "15-8",
+      "dependsOn": [
+        "15-43"
+      ],
+      "sections": [
+        "10.2",
+        "10.3",
+        "11"
+      ],
+      "title": "최종 전 세계 감사와 생성 단계 음성 검증",
+      "output": "최종 bytes의 전 국가 identity/geometry/topology/membership/cap/delivery와 독립 생성 대응 및 build 음성 결과",
+      "check": "C 산출물은 현재 bytes가 같은 경우 참조하되 과거 PASS만 재사용하지 않음; ID 누락/복제·공유 membership·도 단일 cell 후보를 실제로 거부",
+      "tools": [
+        "whole-world audit CLI",
+        "negative Vitest"
+      ],
+      "gates": [
+        "whole_world",
+        "regressions_negative_cases"
+      ],
+      "legacyId": "15-8-02"
+    },
+    {
+      "id": "15-45",
+      "checkpoint": "15-8",
+      "dependsOn": [
+        "15-43"
+      ],
+      "sections": [
+        "8.3",
+        "10",
+        "11"
+      ],
+      "title": "실제 API 성공·실패와 예산 검증",
+      "output": "승인된 동일 점령 요청의 live provider/lookup/submit 결과, 오류·repair·tokens/call 수",
+      "check": "실제 API와 offline scripted 결과를 분리하고 키/민감 원문을 기록하지 않음; 외부 권한 차단은 미완료로 남김",
+      "tools": [
+        "live API integration",
+        "bounded reporter"
+      ],
+      "gates": [
+        "api",
+        "regressions_negative_cases"
+      ],
+      "legacyId": "15-8-03"
+    },
+    {
+      "id": "15-46",
+      "checkpoint": "15-8",
+      "dependsOn": [
+        "15-43"
+      ],
+      "sections": [
+        "9",
+        "10.1",
+        "10.2",
+        "10.3",
+        "11"
+      ],
+      "title": "최종 브라우저·턴 음성·기존 회귀",
+      "output": "부분 점령/후속 진격/슬로베니아/타 대륙 screenshot·state와 잘못된 제출 batch 거부 결과",
+      "check": "도 대부분 near·전체 regionRefs 대체·aggregate cap 우회·지도만 변경·stale/unknown/wrong actor를 실제 거부하고 world/simulation·알림/지도 불변 확인; type/lint/build 포함",
+      "tools": [
+        "Playwright",
+        "Vitest",
+        "type/lint/build"
+      ],
+      "gates": [
+        "browser",
+        "regressions_negative_cases"
+      ],
+      "legacyId": "15-8-04"
+    },
+    {
+      "id": "15-47",
+      "checkpoint": "15-8",
+      "dependsOn": [
+        "15-44",
+        "15-45",
+        "15-46"
+      ],
+      "sections": [
+        "11"
+      ],
+      "title": "전 세계·서버·브라우저·provider 실측 성능",
+      "output": "실제 cell/vertex/edge/tile bytes·생성 peak/time·서버 lookup/commit/history·브라우저 load/pan/zoom/update·API tokens/calls 비교",
+      "check": "동일 baseline 시나리오와 B의 사전 고정 budget으로 비교하고 초과 시 정책 checkpoint로 되돌림; 결과 후 기준 완화 금지",
+      "tools": [
+        "bounded benchmark CLI",
+        "Playwright instrumentation"
+      ],
+      "gates": [
+        "performance"
+      ],
+      "legacyId": "15-8-05"
+    },
+    {
+      "id": "15-48",
+      "checkpoint": "15-8",
+      "dependsOn": [
+        "15-47"
+      ],
+      "sections": [
+        "7",
+        "12",
+        "12.3"
+      ],
+      "title": "후보 delivery·복구 준비와 F 인계",
+      "output": "게시 예정 bytes/roots 대조, 검증된 이전 배포 복구 절차·격리 rehearsal, 최종 비교/제한/증거 index",
+      "check": "실제 production cutover 없이 후보와 복구 준비를 검증; 전체 필수 gate/실행 누락을 공개하고 F PASS 후 대기",
+      "tools": [
+        "delivery validation CLI",
+        "isolated recovery rehearsal"
+      ],
+      "gates": [
+        "cutover_candidate_recovery",
+        "whole_world",
+        "api",
+        "browser",
+        "performance",
+        "regressions_negative_cases"
+      ],
+      "legacyId": "15-8-06"
+    }
+  ],
+  "integration": {
+    "review": "D",
+    "beforeBranching": "총괄은 C의 승인 catalog/ID/membership/이전 부모 계약을 고정하고 두 분기 배정에 공통 revision·authority 참조·aggregate cap 경계와 겹치지 않는 파일 소유 범위를 명시한다. 15-26와 15-32는 이 공통 계약을 각각 구현·검증하며 계약 변경은 통합 작업본에서 함께 조정한다. 이 준비는 후속 production 성공을 C의 선행 조건으로 추가하지 않는다.",
+    "requiresTasks": [
+      "15-30",
+      "15-35"
+    ],
+    "check": "두 분기의 동일 C catalog·ID/membership·revision·authority·cap 계약을 병합한 실제 후보에서 near 성공과 host 범위 거부·migration 원자성을 함께 검증한다. 두 분기 완료나 작은 검사 통과만으로 REVIEW D를 승인하지 않는다."
+  },
+  "executionUnit": "task",
+  "taskAcceptance": "independent-pass",
+  "runtimeStatus": "task-scheduler-enabled",
+  "verificationPolicy": {
+    "scope": "assigned-task",
+    "pass": "release-dependents-after-input-recheck",
+    "fail": "repair-same-task-and-invalidate-affected-descendants",
+    "blocked": "hold-task-and-dependents-no-automatic-retry",
+    "review": "all-assigned-tasks-pass-plus-whole-review-gates"
+  },
+  "parallelPolicy": {
+    "maxConcurrentTasks": 4,
+    "requirements": [
+      "all-dependencies-pass",
+      "prior-review-pass",
+      "disjoint-writable-paths-or-read-only-inputs",
+      "isolated-product-workspace-and-verification-inputs",
+      "isolated-output-and-game-state"
+    ],
+    "exclusiveTaskIds": [
+      "15-06",
+      "15-47"
+    ]
+  }
+}

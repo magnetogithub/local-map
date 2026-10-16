@@ -45,3 +45,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /.tmp-prompt14-npm-ci/
+
+# Prompt 15 generated catalogs, evidence, and orchestration runtime files.
+# Keep implementation code, task definitions, and automation settings trackable.
+/data/catalogs/prompt15/
+/reports/prompt15/
+/reports/verification/
+
+# Local archives and assessments created for the Prompt 14 rollback.
+/reports/maintenance/20261014-prompt14-rollback/
+/reports/maintenance/20261014-storage-assessment/
