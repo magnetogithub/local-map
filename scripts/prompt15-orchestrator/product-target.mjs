@@ -74,7 +74,7 @@ export function validateProductTarget(root, target, {checkSource = true, checkEx
   validateIdentities(root, [target.manifest, target.requestIdentity, target.responseIdentity].filter(Boolean));
   if (target.responseIdentity && read(resolveInside(root,target.responseIdentity.path)).turnId !== target.turnId) throw Error('Target binding: implementation turn identity mismatch');
   const manifest = read(resolveInside(root, target.manifest.path));
-  if (manifest.version !== 1 || manifest.productRoot !== productRoot || !manifest.source || !Array.isArray(manifest.extraInputs)) throw Error('Target binding: manifest/root mismatch');
+  if (manifest.version !== 1 || path.resolve(manifest.productRoot) !== productRoot || !manifest.source || !Array.isArray(manifest.extraInputs)) throw Error('Target binding: manifest/root mismatch');
   if (checkSource && !same(manifest.source, productSnapshot(productRoot))) throw Error('Target binding: product source changed after handoff');
   if (checkExtra) validateIdentities(root, manifest.extraInputs);
   return manifest;
@@ -82,7 +82,7 @@ export function validateProductTarget(root, target, {checkSource = true, checkEx
 
 export function attestProductTarget(root, target, verification) {
   validateProductTarget(root, target);
-  if (verification.targetId !== target.targetId || path.resolve(verification.candidateRoot ?? '') !== target.productRoot) throw Error('Target binding: verifier inspected a different product target');
+  if (verification.targetId !== target.targetId || path.resolve(verification.candidateRoot ?? '') !== path.resolve(target.productRoot)) throw Error('Target binding: verifier inspected a different product target');
   if (!verification.inputs.some(pin => same(pin, target.manifest))) throw Error('Target binding: verdict must attest the exact product input manifest');
   verification.candidateRevision = target.revision;
   verification.productTarget = target;

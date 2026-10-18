@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {inside, resolveInside, owns} from './protocol.mjs';
+import {inside, resolveInside, owns, locatedBaseline} from './protocol.mjs';
 
 const ignored = new Set(['.git', '.codex', '.agents', '.aws', 'node_modules', '.next', 'out', 'build', 'coverage', '.tmp', '.reports', 'test-results']);
 const hash = file => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
@@ -72,7 +72,7 @@ export function prepareWorkspace(root, destination, plan, {controlRoot = root, s
 
 export function planWorkspaceMerge(root, workspace, plan, declaredChanges) {
   const after = workspaceSnapshot(workspace.directory);
-  const changed = [...new Set([...Object.keys(workspace.baseline), ...Object.keys(after)])].filter(name => workspace.baseline[name] !== after[name]);
+  const changed = [...new Set([...Object.keys(workspace.baseline), ...Object.keys(after)])].filter(name => locatedBaseline(workspace.baseline[name]) !== after[name]);
   for (const name of declaredChanges) if (!owns(plan, name)) throw Error(`Branch reported an unowned change: ${name}`);
   for (const name of changed) {
     if (!owns(plan, name)) throw Error(`Parallel write outside assigned ownership: ${name}`);

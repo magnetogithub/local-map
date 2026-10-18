@@ -1,6 +1,6 @@
 param(
   [Parameter(Mandatory=$true)][string]$Tag,
-  [string]$Destination='D:\gen',
+  [string]$Destination='C:\gen',
   [switch]$ExistingCheckout,
   [switch]$Resume
 )
@@ -8,14 +8,14 @@ $ErrorActionPreference='Stop'
 $repository='magnetogithub/local-map'
 if($Tag -notmatch '^prompt15-transfer-[A-Za-z0-9.-]+$'){throw 'Use the exact published Prompt15 transfer release tag.'}
 $destinationPath=[System.IO.Path]::GetFullPath($Destination)
-if($destinationPath.TrimEnd('\') -ne 'D:\gen'){throw 'This transfer preserves immutable absolute paths. Use D:\gen on Windows.'}
+if($destinationPath -notmatch '^[A-Za-z]:\\[^\r\n]+$' -or $destinationPath.TrimEnd('\') -eq [System.IO.Path]::GetPathRoot($destinationPath).TrimEnd('\')){throw 'Choose a local project directory, for example C:\gen.'}
 if(-not (Get-Command git -ErrorAction SilentlyContinue)){throw 'Install Git for Windows first.'}
 if(-not (Get-Command node -ErrorAction SilentlyContinue)){throw 'Install Node.js 24.18.0 x64 at C:\Program Files\nodejs first.'}
 $nodeVersion=(& node --version).Trim()
 if($nodeVersion -ne 'v24.18.0'){throw ('Install Node.js 24.18.0 x64 first. Current version: '+$nodeVersion)}
 if(Test-Path -LiteralPath (Join-Path $destinationPath 'reports\prompt15\orchestration\latest.json')){throw 'An orchestration run already exists. Do not restore over the original PC or an existing run.'}
 if($ExistingCheckout){
-  if(-not (Test-Path -LiteralPath (Join-Path $destinationPath '.git'))){throw 'ExistingCheckout requires a Git checkout at D:\gen.'}
+  if(-not (Test-Path -LiteralPath (Join-Path $destinationPath '.git'))){throw 'ExistingCheckout requires a Git checkout at Destination.'}
   & git -C $destinationPath diff --quiet HEAD -- src scripts tools automation prompts docs package.json package-lock.json
   if($LASTEXITCODE -ne 0){throw 'Preserve local source changes before restoring this checkout.'}
 }elseif(Test-Path -LiteralPath $destinationPath){throw 'Destination already exists. For a fresh clone without a local run, use -ExistingCheckout.'}

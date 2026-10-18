@@ -40,8 +40,8 @@ const saved=path.join(bundle,'release-draft.json');
 if(fs.existsSync(saved)){const draft=JSON.parse(fs.readFileSync(saved));if(draft.tag!==tag)throw Error('Preserve a different transfer release');release=await request('api.github.com',`/repos/${repository}/releases/${draft.id}`);}
 else try{release=await request('api.github.com',`/repos/${repository}/releases/tags/${encodeURIComponent(tag)}`);}catch(error){if(error.status!==404)throw error;}
 if(!release)release=await request('api.github.com','/repos/'+repository+'/releases',{method:'POST',body:{tag_name:tag,target_commitish:manifest.sourceCommit,
-  name:'Prompt15 stopped-run transfer — 2026-10-16',draft:true,prerelease:true,
-  body:'Windows x64 transfer at D:\\gen. Node.js 24.18.0. Preserves Prompt14/A approval evidence and task 15-13 BLOCKED; REVIEW B is not approved. No account credentials or native Codex database. Restore verifies exact file bytes and approvals, then runs operating regressions. It stays stopped until an explicit resume.\n\nInstructions: docs/automation/prompt15-transfer.md at the tagged commit.\n\nManifest SHA256: `'+await hashFile(path.join(bundle,'manifest.json'))+'`'}});
+  name:'Prompt15 stopped-run transfer — '+tag,draft:true,prerelease:true,
+  body:'Windows x64 transfer; default destination C:\\gen, no D: drive required. Node.js 24.18.0. Original evidence retains its D:\\gen paths and hashes; local filesystem routing resolves the restored location. Preserves Prompt14/A approval evidence and task 15-13 BLOCKED; REVIEW B is not approved. No account credentials or native Codex database. Restore verifies exact file bytes and approvals, then runs operating regressions. It stays stopped until an explicit resume.\n\nInstructions: docs/automation/prompt15-transfer.md at the tagged commit.\n\nManifest SHA256: `'+await hashFile(path.join(bundle,'manifest.json'))+'`'}});
 if(release.tag_name!==tag||release.target_commitish!==manifest.sourceCommit)throw Error('Release source commit mismatch');
 fs.writeFileSync(path.join(bundle,'release-draft.json'),JSON.stringify({id:release.id,tag,url:release.html_url},null,2)+'\n');
 for(const name of files){

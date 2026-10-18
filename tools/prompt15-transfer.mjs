@@ -6,6 +6,7 @@ import {createGunzip} from 'node:zlib';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {TransferInventory, hashFile, safeRelative, isPrivatePath, secretKinds, transferredState, sha256} from './prompt15-transfer-core.mjs';
+import {currentLocation, locatedBaseline} from './prompt15-location.mjs';
 
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
 const write = (file, value) => {fs.mkdirSync(path.dirname(file), {recursive:true}); fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n', {flag:'wx'});};
@@ -169,7 +170,7 @@ export function restoreLinks(manifest,root,{replaceInstalledDependencies=false}=
 }
 export async function restore(bundle, root, {shadow=false}={}) {
   const manifest=validateManifest(read(path.join(bundle,'manifest.json')));
-  if(!shadow&&(path.resolve(root)!==manifest.sourceRoot||process.platform!==manifest.node.platform||process.arch!==manifest.node.arch))throw Error('Use the original Windows x64 project path D:\\gen');
+  if(!shadow&&(process.platform!==manifest.node.platform||process.arch!==manifest.node.arch))throw Error('Use Windows x64');
   if(!shadow&&(process.version!==manifest.node.version||process.execPath!==manifest.node.path||await hashFile(process.execPath)!==manifest.node.sha256))throw Error('Install the exact Node.js runtime recorded in manifest.json first');
   const live=path.join(root,manifest.runRelative,'state.json');
   if(fs.existsSync(live))throw Error('Run state already exists. Do not overwrite a local run or restore onto the source PC.');
@@ -200,6 +201,9 @@ export async function restore(bundle, root, {shadow=false}={}) {
     if(index%5000===0)console.log(JSON.stringify({phase:'restore-files',completed:index,total:manifest.files.length}));
   }
   restoreLinks(manifest,root);
+  if(!shadow&&path.resolve(root)!==manifest.sourceRoot){
+    write(path.join(root,'.tmp/prompt15-location.json'),{version:1,sourceRoot:manifest.sourceRoot,destinationRoot:path.resolve(root),manifestSha256:await hashFile(path.join(bundle,'manifest.json'))});
+  }
   console.log(JSON.stringify({phase:'restored',files:manifest.files.length,links:manifest.links.length,root,shadow}));
   return manifest;
 }
@@ -219,7 +223,7 @@ export async function verify(root, manifest, {checkDependencies=true}={}) {
   // junctions once rather than repeating deep NTFS walks for each source file.
   const realpath=fs.realpathSync,parents=new Map();
   fs.realpathSync=function(file,...args){
-    if(typeof file!=='string'||args.length)return realpath(file,...args);
+    if(typeof file!=='string'||args.length||path.resolve(file)===path.resolve(root))return realpath(file,...args);
     if(fs.lstatSync(file).isSymbolicLink())return realpath(file);
     const parent=path.dirname(file);if(!parents.has(parent))parents.set(parent,realpath(parent));
     return path.join(parents.get(parent),path.basename(file));
@@ -229,14 +233,16 @@ export async function verify(root, manifest, {checkDependencies=true}={}) {
     validateProductTarget(root,state.approvedProductTarget);validateProductTarget(root,state.currentProductTarget);
     for(const task of Object.values(state.tasks))if(task.status==='pass'&&task.target)validateProductTarget(root,task.target);
     for(const task of Object.values(state.tasks))if(task.workspace?.baseline)for(const [name,expected]of Object.entries(task.workspace.baseline))if(typeof expected==='string'&&expected.startsWith('link:')){
-      const file=path.join(task.workspace.directory,name);if(!fs.lstatSync(file).isSymbolicLink()||'link:'+fs.readlinkSync(file)!==expected)throw Error('Transferred workspace input link changed: '+file);
+      const file=path.join(task.workspace.directory,name);if(!fs.lstatSync(file).isSymbolicLink()||'link:'+fs.readlinkSync(file)!==locatedBaseline(expected))throw Error('Transferred workspace input link changed: '+file);
     }
   }finally{fs.realpathSync=realpath;}
   return {pass:true,files:manifest.files.length,approvals:Object.keys(state.certificates),review:state.review,task13:state.tasks['15-13'].status};
 }
 export async function prepare(root,bundle,{regressions=true}={}) {
   const manifest=validateManifest(read(path.join(bundle,'manifest.json')));
-  if(path.resolve(root)!==manifest.sourceRoot)throw Error('Restore at the exact original project path');
+  const location=currentLocation();
+  if(path.resolve(root)!==manifest.sourceRoot&&(!location||location.sourceRoot!==manifest.sourceRoot||location.destinationRoot!==path.resolve(root)))throw Error('Restore with the verified installer location');
+  if(location&&read(path.join(root,'.tmp/prompt15-location.json')).manifestSha256!==await hashFile(path.join(bundle,'manifest.json')))throw Error('Workspace location belongs to another transfer manifest');
   restoreLinks(manifest,root,{replaceInstalledDependencies:true});
   await restoreDependencyArtifacts(bundle,root,manifest);
   await verify(root,manifest);
@@ -246,7 +252,7 @@ export async function prepare(root,bundle,{regressions=true}={}) {
     manifest:{sha256:await hashFile(path.join(bundle,'manifest.json')),byteLength:fs.statSync(path.join(bundle,'manifest.json')).size},
     sourceState:{sha256:sha256(fs.readFileSync(stateFile)),byteLength:fs.statSync(stateFile).size},
     permission:'User explicitly requested transfer through the public GitHub Release. Import preserves approvals, candidates, failures and raw evidence. New native sessions receive preserved task context.',
-    implementationTestsReexecuted:false,reviewApprovalsIssued:false};
+    implementationTestsReexecuted:false,reviewApprovalsIssued:false,workspaceLocation:location};
   const receiptBytes=Buffer.from(JSON.stringify(receipt,null,2)+'\n');
   const identity={path:path.relative(root,receiptFile).replaceAll('\\','/'),sha256:sha256(receiptBytes),byteLength:receiptBytes.length};
   const state=transferredState(original,identity);
@@ -263,7 +269,7 @@ export async function prepare(root,bundle,{regressions=true}={}) {
     const archive=path.join(run,'transfer/host-control',name);fs.mkdirSync(path.dirname(archive),{recursive:true});fs.renameSync(file,archive);}
   const {fileIdentity}=await import('../scripts/prompt15-orchestrator/protocol.mjs');
   const sourceInputs=fs.readdirSync(path.join(root,'scripts/prompt15-orchestrator')).filter(n=>n.endsWith('.mjs')).map(n=>fileIdentity(root,'scripts/prompt15-orchestrator/'+n));
-  for(const name of ['tools/prompt15-transfer.mjs','tools/prompt15-transfer-core.mjs','tools/prompt15-runtime.mjs','automation/prompt15/config.json'])sourceInputs.push(fileIdentity(root,name));
+  for(const name of ['tools/prompt15-transfer.mjs','tools/prompt15-transfer-core.mjs','tools/prompt15-location.mjs','tools/prompt15-runtime.mjs','automation/prompt15/config.json',...(location?['.tmp/prompt15-location.json']:[])])sourceInputs.push(fileIdentity(root,name));
   const maintenanceFile=path.join(run,'control/operating-maintenance/host-transfer.json');
   write(maintenanceFile,{kind:'verified-operating-maintenance',runId:state.runId,reason:'Explicit host transfer; no product approval changed',verifiedAt:new Date().toISOString(),sourceInputs,testResult:fileIdentity(root,path.join(out,'result.json'))});
   state.operatingMaintenance={receiptIdentity:fileIdentity(root,maintenanceFile)};

@@ -43,7 +43,7 @@ export class Workflow {
       createdAt: stamp(), ...(config.startReview === 'A' ? {} : {initialReviewC: 'failed'}),
       nextAction: config.startReview === 'A' ? 'Assign fresh 15-1/15-2 implementation' : 'Independent REVIEW C revalidation',
     };
-    if (this.state.projectRoot !== this.root) throw Error('Resume project does not match the recorded project');
+    if (path.resolve(this.state.projectRoot) !== this.root) throw Error('Resume project does not match the recorded project');
     this.resumePendingVerification = resume && this.state.status === 'blocked' && this.state.phase === 'verify' && !this.state.latestVerification;
     this.resumePendingImplementation = resume && (Boolean(this.state.pendingImplementation) ||
       (this.state.phase === 'implement' && this.state.error?.startsWith('Implementation requires attention:')));
@@ -333,7 +333,7 @@ export class Workflow {
       ...(settings.model ? {model: settings.model} : {}),
       ...(settings.effort ? {effort: settings.effort} : {}),
     }, {executionIdleTimeoutMs: role === 'verifier' ? this.config.verifierExecutionIdleTimeoutMs : 0});
-    if (role === 'implementer' && this.boundTargets && path.resolve(result.value.candidateRoot ?? '') !== cwd) throw Error('Target binding: implementation returned a different candidate root');
+    if (role === 'implementer' && this.boundTargets && path.resolve(result.value.candidateRoot ?? '') !== path.resolve(cwd)) throw Error('Target binding: implementation returned a different candidate root');
     // Completed turns break a consecutive runtime-failure streak. REVIEW strikes
     // are separate and remain exclusively based on independent verdicts.
     this.state.recoveryAttempts = 0;
@@ -637,7 +637,7 @@ export class Workflow {
         if (!key.startsWith('branch-')) this.state.currentProductTarget = workspace.target;
         return workspace;
       }
-      if (path.resolve(result.candidateRoot ?? '') !== workspace.directory) throw Error('Target binding: recovered report names a different candidate');
+      if (path.resolve(result.candidateRoot ?? '') !== path.resolve(workspace.directory)) throw Error('Target binding: recovered report names a different candidate');
       const after = workspaceSnapshot(workspace.directory);
       const protectedPrefixes = ['automation/','docs/automation/','scripts/prompt15-orchestrator/','tools/prompt15-','tools/discord-','prompts/'];
       for (const name of new Set([...Object.keys(workspace.baseline),...Object.keys(after)])) {

@@ -1,6 +1,6 @@
 # 다른 Windows PC로 Prompt15 이전
 
-이전 태그는 `prompt15-transfer-20261019`다. 해당 태그의 **공개 Release가
+이전 태그는 `prompt15-transfer-20261019-cdrive`다. 해당 태그의 **공개 Release가
 존재하고 `validation-report.json`이 통과한 경우에만** 아래 절차를 사용한다.
 발행기는 원본 입력 검사, 독립 복원 검사와 운영 회귀검사가 통과하지 않으면
 Release를 공개하지 않는다. 소스 코드를 pull하는 것만으로 실행 기록은 복원되지 않는다.
@@ -11,7 +11,7 @@ Release를 공개하지 않는다. 소스 코드를 pull하는 것만으로 실�
 
 ## 새 PC 준비
 
-- Windows x64에서 프로젝트 경로 `D:\gen`을 사용한다. 기존 프로젝트 폴더가
+- Windows x64에서 프로젝트 경로는 기본값 `C:\gen`을 사용한다. D: 드라이브는 필요 없다. 기존 프로젝트 폴더가
   있으면 설치기는 덮어쓰지 않는다.
 - Git for Windows와 Node.js **24.18.0 x64**를 설치한다. Node 경로는
   `C:\Program Files\nodejs\node.exe`이며 원본 실행파일의 SHA256도 검사한다.
@@ -26,18 +26,18 @@ Release를 공개하지 않는다. 소스 코드를 pull하는 것만으로 실�
 원래 PC의 실행 기록을 덮어쓰지 않는다.
 
 ```powershell
-$tag = 'prompt15-transfer-20261019'
+$tag = 'prompt15-transfer-20261019-cdrive'
 $script = Join-Path $env:TEMP 'install-prompt15-transfer.ps1'
 Invoke-WebRequest "https://raw.githubusercontent.com/magnetogithub/local-map/$tag/tools/install-prompt15-transfer.ps1" -OutFile $script
-powershell -ExecutionPolicy Bypass -File $script -Tag $tag
+powershell -ExecutionPolicy Bypass -File $script -Tag $tag -Destination C:\gen
 ```
 
-이미 다른 PC의 `D:\gen`에서 최신 main을 pull했고, 이 PC에 이전 실행 기록이
+이미 다른 PC의 `C:\gen`에서 최신 main을 pull했고, 이 PC에 이전 실행 기록이
 없다면 다음으로 필요한 Release 입력을 내려받고 복원한다.
 
 ```powershell
-Set-Location D:\gen
-powershell -ExecutionPolicy Bypass -File tools/install-prompt15-transfer.ps1 -Tag prompt15-transfer-20261019 -ExistingCheckout
+Set-Location C:\gen
+powershell -ExecutionPolicy Bypass -File tools/install-prompt15-transfer.ps1 -Tag prompt15-transfer-20261019-cdrive -Destination C:\gen -ExistingCheckout
 ```
 
 기존 체크아웃은 Release의 소스 커밋과 일치해야 하며 소스 변경이 없어야 한다.
@@ -50,7 +50,7 @@ powershell -ExecutionPolicy Bypass -File tools/install-prompt15-transfer.ps1 -Ta
 성공하면 실행기는 **중단 상태**다. 새 PC에서 Codex 로그인 뒤 다음을 실행한다.
 
 ```powershell
-Set-Location D:\gen
+Set-Location C:\gen
 node scripts/prompt15-orchestrator/run.mjs check
 node tools/prompt15-runtime.mjs resume --run reports/prompt15/orchestration/20261015T115644-KST-eae9ad74
 ```
@@ -68,13 +68,15 @@ node tools/prompt15-runtime.mjs resume --run reports/prompt15/orchestration/2026
   현재 PC의 로그인 상태가 새 PC로 복사됐다고 가정하지 않는다.
 - 인증된 기존 증거가 참조하는 일부 과거 검사 파일은 포함된다. 실행기 검증에
   필요한 증거와 단순 진행 로그를 구분한다.
-- `D:\gen` 경로를 바꾸는 자동 재매핑은 지원하지 않는다. 원본 영수증을 수정하면
-  해시와 승인 연결이 깨지므로 경로를 유지한다.
+- 원본 영수증의 `D:\gen` 경로와 해시를 그대로 보존한다. 로컬
+  `.tmp/prompt15-location.json`에 기록된 목적지로 파일 접근과 경로 비교만 연결한다.
+  자식 Node 프로세스도 같은 연결을 사용하며 모델의 cwd와 쓰기 범위는 새 경로다.
+  다른 목적지는 설치 시 `-Destination`으로 지정한다. 가상 디스크나 D: 별칭은 만들지 않는다.
 - 사용자 계정 전체의 Codex 대화를 복제하지 않는다. 모델 추론은 확률적이므로
   새 세션의 후속 판단과 표현이 이전 세션과 똑같다고 보장하지 않는다.
 
 검증은 압축파일에서 별도 시험 폴더에 실제 바이트를 복원한 다음 수행한다.
-`tools/prompt15-transfer-shadow.mjs`는 영수증에 적힌 원래 절대 경로를 시험
+`tools/prompt15-location.mjs`는 영수증에 적힌 원래 절대 경로를 복원
 폴더로만 연결하며, 누락 파일을 원래 작업공간에서 대신 읽지 않는다. 복원 폴더의
 의존성은 새로 설치하고, 원래 승인 연결과 운영 회귀검사를 실제로 다시 확인한다.
 정확한 결과와 패키지 해시는 Release의 `validation-report.json`에 남긴다.

@@ -2,6 +2,7 @@ import {spawn} from 'node:child_process';
 import {createInterface} from 'node:readline';
 import {EventEmitter} from 'node:events';
 import {ExecutionProgress} from './execution-progress.mjs';
+import path from 'node:path';
 
 /** A small client for the installed Codex JSONL app-server protocol. */
 export class AppServer extends EventEmitter {
@@ -14,7 +15,7 @@ export class AppServer extends EventEmitter {
     this.active = new Map();
     this.nextId = 1;
     this.failure = null;
-    this.process = spawn(binary, serverArgs, {cwd, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe']});
+    this.process = spawn(binary, serverArgs, {cwd: cwd ? path.resolve(cwd) : cwd, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe']});
     this.process.on('error', error => this.fail(error));
     this.process.on('exit', (code, signal) => this.fail(Error(`Codex app-server exited (${code ?? signal})`)));
     this.lines = createInterface({input: this.process.stdout});
@@ -33,6 +34,15 @@ export class AppServer extends EventEmitter {
   }
 
   request(method, params) {
+    const location = globalThis[Symbol.for('prompt15.workspaceLocation')];
+    if (location && /^(thread|turn)\//.test(method)) {
+      params = {...params};
+      if (params.cwd) params.cwd = path.resolve(params.cwd);
+      if (params.sandboxPolicy?.writableRoots) params.sandboxPolicy = {...params.sandboxPolicy, writableRoots: params.sandboxPolicy.writableRoots.map(root => path.resolve(root))};
+      const note = `Workspace moved from ${location.location.sourceRoot} to ${location.location.destinationRoot}. Historical evidence retains its original paths and hashes. Use the new workspace location for filesystem and shell commands; do not rewrite historical receipts or infer new approvals.`;
+      if (method === 'thread/start') params.developerInstructions = [params.developerInstructions, note].filter(Boolean).join('\n');
+      if (method === 'turn/start') params.input = [...(params.input ?? []), {type: 'text', text: note}];
+    }
     const id = this.nextId++;
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => { this.pending.delete(id); reject(Error(`RPC timed out: ${method}`)); }, this.requestTimeoutMs);

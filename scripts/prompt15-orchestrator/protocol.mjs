@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 
+if (fs.existsSync(new URL('../../.tmp/prompt15-location.json', import.meta.url))) await import('../../tools/prompt15-location.mjs');
+export const locatedBaseline = value => typeof value === 'string' && value.startsWith('link:') ? 'link:' + (globalThis[Symbol.for('prompt15.workspaceLocation')]?.map(value.slice(5)) ?? value.slice(5)) : value;
+
 export const REVIEWS = ['C', 'D', 'E', 'F'];
 export const REPAIR_REVIEWS = ['A', 'B', ...REVIEWS];
 export const CHECKPOINTS = {A: ['15-1', '15-2'], B: ['15-3'], C: ['15-4'], D: ['15-5', '15-6'], E: ['15-7'], F: ['15-8']};
