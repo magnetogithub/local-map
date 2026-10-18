@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "review": "prompt14",
+  "verdict": "pass",
+  "mode": "manual-independent",
+  "verification": {
+    "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/verification.json",
+    "sha256": "ae20ed3b7f030f52a5f233b1b808be6eb0908c036a411f32e5fd07c9988a11c6",
+    "byteLength": 8366
+  },
+  "target": {
+    "version": 1,
+    "productRoot": "D:\\gen\\reports\\prompt15\\orchestration\\20261014T180827-KST-924eeb68\\rounds\\0003-prompt14\\implementation\\candidate",
+    "review": "prompt14",
+    "revision": "1ccf0ceb4fa4706818d36a18dc3c270c40b4c351ae7f35ace42e14d889c9c076",
+    "manifest": {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/target/product-inputs.json",
+      "sha256": "51917fbbd9124fe455ce683f9b56448a4e902ce13704fa58e629077a433ae822",
+      "byteLength": 234517
+    },
+    "requestIdentity": null,
+    "responseIdentity": null,
+    "turnId": null,
+    "targetId": "5c84bbc7f680889f7b8e60c02a93dc7bd272163adb4cde09de4045503cff8677"
+  }
+}

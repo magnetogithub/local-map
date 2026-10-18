@@ -1,0 +1,26 @@
+{
+  "kind": "manual-independent-evidence-intake",
+  "originalReceipt": {
+    "path": "reports/verification/prompt14-manual-20261015T091151-KST/build-default.json",
+    "sha256": "9e4e9126ea57cb17aefa56f74e0afbf9a0561c5533094f57deb0295ac9e514b1",
+    "byteLength": 972
+  },
+  "originalCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "node_modules/next/dist/bin/next",
+    "build"
+  ],
+  "originalExitCode": 0,
+  "executedAt": "2026-10-15T00:15:14.135Z",
+  "acceptedAt": "2026-10-15T02:42:31.883Z",
+  "productTestsReexecuted": false,
+  "resolution": [
+    "explicit outbound transmission approval",
+    "invalid_api_key"
+  ],
+  "authoritativePass": {
+    "path": "reports/verification/prompt14-live-20261015T094701-KST/result.json",
+    "sha256": "da8c3d1654ca3ff5f6f07166a8ead23228abb05032fc3b2302459ffe640cbdf2",
+    "byteLength": 2725
+  }
+}

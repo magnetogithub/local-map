@@ -1,0 +1,1 @@
+Partial original evidence saved before shutdown. Exact bytes are preserved. This is not the complete input closure and cannot alone restore the approved environment. See prompts/PROMPT_15_TRANSFER_CONTINUE.txt.

@@ -1,0 +1,28 @@
+{
+  "kind": "manual-independent-evidence-intake",
+  "originalReceipt": {
+    "path": "reports/verification/prompt14-manual-20261015T091151-KST/typecheck.json",
+    "sha256": "a442a95315fd4f6232881062c5ab931516fad7adc61ea67dcd1134795438550e",
+    "byteLength": 1018
+  },
+  "originalCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "node_modules/typescript/bin/tsc",
+    "--noEmit",
+    "--incremental",
+    "false"
+  ],
+  "originalExitCode": 0,
+  "executedAt": "2026-10-15T00:13:13.091Z",
+  "acceptedAt": "2026-10-15T02:42:31.878Z",
+  "productTestsReexecuted": false,
+  "resolution": [
+    "explicit outbound transmission approval",
+    "invalid_api_key"
+  ],
+  "authoritativePass": {
+    "path": "reports/verification/prompt14-live-20261015T094701-KST/result.json",
+    "sha256": "da8c3d1654ca3ff5f6f07166a8ead23228abb05032fc3b2302459ffe640cbdf2",
+    "byteLength": 2725
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "review": "A",
+  "verdict": "pass",
+  "summary": "REVIEW A의 다섯 gate PASS. 실제 Vitest 13/13 통과, 실패·skip·pending 0, stage 3/3 완료. 슬로베니아 복구 후보의 build·게시 차단은 유지됩니다.",
+  "nonPassKind": "none",
+  "checks": [
+    {
+      "id": "baseline_reproduction",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json"
+      ],
+      "detail": "현재 후보 lookup으로 북한의 두 도 전체 선택을 재현하고 geometry·owner/controller를 확인했습니다. 슬로베니아의 실제 source gap도 재현했습니다."
+    },
+    {
+      "id": "source_identity_preservation",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/identity-run/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json"
+      ],
+      "detail": "14,409개 입력 pin을 대조했습니다. 슬로베니아 원본 193개 identity와 후보 polygon의 대응·component·hole·이름을 확인하고 누락·복제·공유 geometry 음성 후보를 거부했습니다. 기존 소실을 복구 완료로 표시하지 않았습니다."
+    },
+    {
+      "id": "administrative_loss_audit",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json"
+      ],
+      "detail": "247개 국가의 원본 identity·선택 feature·catalog provenance·component bytes를 비교했습니다. fallback 15개와 14개 국가의 identity 소실 394개를 재확인했습니다."
+    },
+    {
+      "id": "restoration_candidates",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/restoration-observed.json"
+      ],
+      "detail": "공통 arrangement·source correspondence·정확한 잔여 면적·고정 정책 평가를 재실행했습니다. 저장된 평가와 일치하며 미해결 face와 correspondence 실패 때문에 후보 build가 거부됩니다."
+    },
+    {
+      "id": "rollout_blockers",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json"
+      ],
+      "detail": "소실 국가별 원인·복구 전략·미해결 조건·해제 기준을 확인했습니다. build·게시 금지, 기존 승인 배포 보존, 단일 fallback 대체 금지가 유지됩니다."
+    },
+    {
+      "id": "prompt_instructions",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/final-run3/result.json"
+      ],
+      "detail": "정확한 REVIEW-A target과 원본 구현 요청 10개를 검증했습니다. 후속 REVIEW 요구사항이나 cutover는 실행하지 않았습니다."
+    },
+    {
+      "id": "scope_preservation",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/stages/progress.json"
+      ],
+      "detail": "제품은 읽기 전용으로 유지했습니다. 후보 source와 입력의 실행 전후 hash가 일치하며 증거·helper는 verification에만 기록했습니다."
+    },
+    {
+      "id": "execution_evidence",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/identity-run/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/final-run3/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/stage-check.json"
+      ],
+      "detail": "실제 Vitest 13 passed, 0 failed/skipped/pending/errors. 세 stage가 완료됐습니다. 검증 어댑터 오류 두 건의 기존 실행과 수정 영수증은 보존했습니다. 브라우저 baseline은 기존 증거의 hash·입력·screenshot을 재확인했습니다."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/identity-run/result.json",
+      "sha256": "7e40aa579add1b9e760406353fc005ef58fa754b45e2d0fdf8040ae754f612b1",
+      "byteLength": 2648
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json",
+      "sha256": "aec6ead63e8348a11608e9babad36dde23bd721f6869d2778cbffc9a4f689af4",
+      "byteLength": 2664
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/final-run3/result.json",
+      "sha256": "3b7dd0b158a825783a03b6e75921731530e758c924f5771ef1d4f5fc702c76db",
+      "byteLength": 2634
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/stages/progress.json",
+      "sha256": "1b3c72db84bd1a3901f0ed9d9e226cdc53c1dbca72c30fd3c7dfac8b0063e532",
+      "byteLength": 475
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/stages/plan.json",
+      "sha256": "e155083da42f9e8be2c06ce19953deae0d837cd84ea7ff57a475b5c490ff6704",
+      "byteLength": 7519
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/stage-check.json",
+      "sha256": "ab732e4d80cf7b3749067909591528383f329b321ff0bb90f3bf405a843ca686",
+      "byteLength": 342
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/verification-summary.json",
+      "sha256": "c95e3e960bbb8797d55db5bce5a6d40642e3ef5651caa7ed732d5909b41c9390",
+      "byteLength": 4475
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/restoration-observed.json",
+      "sha256": "01d17761d54ebd28829ee7d12b445ead8ecc71a8422cbd1223894ce24037408e",
+      "byteLength": 2989
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/harness-v2-receipt.json",
+      "sha256": "b4a42bede02a88d081a370b1fe6f28fb3f1d57413b1f8235da24c213edb7ccfa",
+      "byteLength": 925
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/harness-v3-receipt.json",
+      "sha256": "65fdc37224d312d90dd540f69ad58417935a70be7304f18617ac610671a79686",
+      "byteLength": 957
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/identity-audit.test.ts",
+      "sha256": "5d646a0d966086703c406c02463cb7d7497fe4b47befaedbbe45b78f62db2318",
+      "byteLength": 4158
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-v2.test.ts",
+      "sha256": "d24929c329276686ab6476fd6ece830e3d7c852c0f5f60b1fdf5417e6a2aad43",
+      "byteLength": 14322
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/final-v3.test.ts",
+      "sha256": "e71f536ffd45606ca28d61fcf8f7669d55e839c130f545b435c72487062827cd",
+      "byteLength": 1866
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/controller-vitest-2db597b8/result.json",
+      "sha256": "9ce17ca336ab468490e3ebb09c7272ec25101538b9f9b913fa60cfda0b680d11",
+      "byteLength": 2948
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/controller-vitest-2db597b8/test-inputs.json",
+      "sha256": "bda30864c3a05b5772705fe3e9049aa332a1193337b2030996d7c9c02c12e200",
+      "byteLength": 2924
+    }
+  ],
+  "inputs": [
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/target/product-inputs.json",
+      "sha256": "3cef2a14b8aa234305ecec9a3362324db5c163cdc16022cbe4e2c264d9ad1a97",
+      "byteLength": 205735
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-01/attempt-002/implementation/request.json",
+      "sha256": "86274a66bb273cf3292b8e2270f95125a92ddda5e888c7fe62bc1ed3b72280d6",
+      "byteLength": 12785
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-02/attempt-001/implementation/request.json",
+      "sha256": "26af205f5e67fa17cf320ef6591f3c0d983ad47ce5de511bad76ffcd89122fe3",
+      "byteLength": 7958
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-03/attempt-002/implementation/request.json",
+      "sha256": "507a3809537f7a9a09c3060a1006145df1726794f46f2935276ba47ae1ffa13f",
+      "byteLength": 15778
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-04/attempt-001/implementation/request.json",
+      "sha256": "22a54c8b75b128543e979063fc4b992a2e62f9b9adadad3c76b2f02b3e24005c",
+      "byteLength": 7857
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-05/attempt-001/implementation/request.json",
+      "sha256": "6a03fd243c8013ba63ef43de3a0e50471525708cd0f6050f8e1bf7ddd9e91520",
+      "byteLength": 8003
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-06/attempt-002/implementation/request.json",
+      "sha256": "7f9070bad232abd31bdf29698687774981647fbb2fc5f57d3e80f359cf99cdc4",
+      "byteLength": 27710
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-07/attempt-002/implementation/request.json",
+      "sha256": "febc4b63dfd47cb66a89a91ed1b9c8c061d416b09f6efe0bb5033bd430ae215b",
+      "byteLength": 19656
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-08/attempt-001/implementation/request.json",
+      "sha256": "6725f5e25c0969823b042dfba7f45074df98326a6dfe8d70548f96d2074506b3",
+      "byteLength": 8310
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-09/attempt-001/implementation/request.json",
+      "sha256": "957163f0d944dc5281c2fd3e6c898d8936c51b66ff5fd426a2d22baffb303a22",
+      "byteLength": 8952
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-10/attempt-001/implementation/request.json",
+      "sha256": "7d6717c7311710e7be6bb23a8ce7a17374de2a547faf0b3089fd69962242fc3a",
+      "byteLength": 16258
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/task-input-closure.json",
+      "sha256": "4450c07fc0dde414a5113a24b0e59535e88b72a33c732dd91461126ad93ee1db",
+      "byteLength": 4857940
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/request.json",
+      "sha256": "44d50c63c74d0de2d3c726232a5e1ad1e94ed744d0a679ce9e58636ecc2ae57a",
+      "byteLength": 33728
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/job-context.json",
+      "sha256": "1988b3c4f891a92835f5b9fee14676eba33c046eb9d340d41ba315809194fbf4",
+      "byteLength": 1217
+    }
+  ],
+  "commands": [
+    {
+      "command": "node D:/gen/scripts/prompt15-orchestrator/run-target-checks.mjs D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/job-context.json D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/identity-run D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/identity-audit.test.ts",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/identity-run/result.json"
+    },
+    {
+      "command": "node D:/gen/scripts/prompt15-orchestrator/run-target-checks.mjs D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/job-context.json D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2 D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-v2.test.ts",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/integration-run2/result.json"
+    },
+    {
+      "command": "node D:/gen/scripts/prompt15-orchestrator/run-target-checks.mjs D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/job-context.json D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/final-run3 D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/final-v3.test.ts",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/final-run3/result.json"
+    },
+    {
+      "command": "node D:/gen/scripts/prompt15-orchestrator/verification-stages-compact.mjs check D:/gen/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/job-context.json",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verification/stage-check.json"
+    }
+  ],
+  "failures": [],
+  "suggestedRepairPrompt": "",
+  "candidateRoot": "D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\work\\review-A-1",
+  "targetId": "961eedf3fa2ae704839a97604641e87e1082eabc6e589010a835173014b9d628",
+  "taskId": "REVIEW-A",
+  "candidateRevision": "2ca12855c02b99256061c3380155ba15529a5097f969eea64a0081b395c9d164",
+  "productTarget": {
+    "version": 1,
+    "productRoot": "D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\work\\review-A-1",
+    "review": "A",
+    "revision": "2ca12855c02b99256061c3380155ba15529a5097f969eea64a0081b395c9d164",
+    "manifest": {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/target/product-inputs.json",
+      "sha256": "3cef2a14b8aa234305ecec9a3362324db5c163cdc16022cbe4e2c264d9ad1a97",
+      "byteLength": 205735
+    },
+    "requestIdentity": null,
+    "responseIdentity": null,
+    "turnId": null,
+    "targetId": "961eedf3fa2ae704839a97604641e87e1082eabc6e589010a835173014b9d628"
+  },
+  "verificationFramework": "vitest"
+}

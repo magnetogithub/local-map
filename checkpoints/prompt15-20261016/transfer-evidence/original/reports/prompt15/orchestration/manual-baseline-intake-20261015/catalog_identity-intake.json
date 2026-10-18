@@ -1,0 +1,25 @@
+{
+  "kind": "manual-independent-evidence-intake",
+  "originalReceipt": {
+    "path": "reports/verification/prompt14-manual-20261015T091151-KST/catalog-audit.json",
+    "sha256": "04cc51defe070f7b8ca62ade2d569efac411e1fb0197e56035d6851ebb753ecc",
+    "byteLength": 1038
+  },
+  "originalCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "D:\\gen\\reports\\verification\\prompt14-manual-20261015T091151-KST/catalog-audit.mjs"
+  ],
+  "originalExitCode": 0,
+  "executedAt": "2026-10-15T00:16:45.969Z",
+  "acceptedAt": "2026-10-15T02:42:32.038Z",
+  "productTestsReexecuted": false,
+  "resolution": [
+    "explicit outbound transmission approval",
+    "invalid_api_key"
+  ],
+  "authoritativePass": {
+    "path": "reports/verification/prompt14-live-20261015T094701-KST/result.json",
+    "sha256": "da8c3d1654ca3ff5f6f07166a8ead23228abb05032fc3b2302459ffe640cbdf2",
+    "byteLength": 2725
+  }
+}

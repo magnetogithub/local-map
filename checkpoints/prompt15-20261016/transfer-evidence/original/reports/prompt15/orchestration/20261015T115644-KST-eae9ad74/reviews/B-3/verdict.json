@@ -1,0 +1,259 @@
+{
+  "review": "B",
+  "verdict": "fail",
+  "summary": "Controller Vitest execution failed actual assertions",
+  "nonPassKind": "implementation",
+  "checks": [
+    {
+      "id": "physical_resolution",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/temp/physical-gate.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "near_extent_policy",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/temp/near-gate.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "generation_budget",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/cost-run/temp/budget-gate.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "identity_provenance_policy",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/identity-run/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "representative_country_experiments",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "source_scope_feasibility",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/temp/source-feasibility.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "input_freeze",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/identity-run/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/seal-run/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "prompt_instructions",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/independent-inputs.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "scope_preservation",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/seal-run/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    },
+    {
+      "id": "execution_evidence",
+      "status": "fail",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/independent-verdict.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/stages/progress.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+        "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json"
+      ],
+      "detail": "Controller Vitest execution failed actual assertions"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/independent-verdict.json",
+      "sha256": "00f32e05ab75dcd2e4ee9a0ab1b34ed03eae72ca137ee438aa5f06a7264304dc",
+      "byteLength": 23506
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/identity-run/result.json",
+      "sha256": "bab94242db4c7455378a922e9a4673136f86f641b4847a6cd17d908e86108182",
+      "byteLength": 2654
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/result.json",
+      "sha256": "3853f85231632b09fe327e759733859c4c2e4891be853e6286d3dab9bb93c20a",
+      "byteLength": 3572
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/cost-run/result.json",
+      "sha256": "d4f6e620b717483ede11e84b131369dd50b306c533fe1426e4eb8436c872499a",
+      "byteLength": 2985
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/seal-run/result.json",
+      "sha256": "e1388dfe3528fbdccdecf97bd669de96845204f1c2d5a6ca09eeba8a6deeae32",
+      "byteLength": 2622
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/stages/progress.json",
+      "sha256": "e9bec3f658d8fd1e8b9cddb39ffe653c8fe86190a6ea2257bc729db0d32d4546",
+      "byteLength": 559
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/execution-summary.json",
+      "sha256": "ce9b5476733af72fc0f8ff6d37f74a080782e76a786b23088419ff5ca3c97d01",
+      "byteLength": 3276
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/temp/physical-gate.json",
+      "sha256": "50dc6167b78fe0868e89f8de3a8cbfc5f373884ea66cb19dab93c98f36e3cb5a",
+      "byteLength": 31195
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/temp/near-gate.json",
+      "sha256": "f896d30356967dfefa6a36185e78f41d042f6e5a20cf18542fffeb690caaea78",
+      "byteLength": 233268
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/cost-run/temp/budget-gate.json",
+      "sha256": "177f70c084c7ad32dc963771f197313574be9cea245903ff3f2c2a5729887c0b",
+      "byteLength": 2396
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/geometry-run/temp/source-feasibility.json",
+      "sha256": "98c7bcb4e2a6961bde67ee17dd55e9af431812a49a5f4fedcce7ae9c6c63de44",
+      "byteLength": 160328
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/independent-inputs.json",
+      "sha256": "b1b9612f75b2e77567f1b3fd164a43e17959ad5e04585cc1cadf1f868763eb9a",
+      "byteLength": 178553
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/stages/geometry.json",
+      "sha256": "385889ad4ddf078a4c98e0074005cc40ba7396b2e693729f0966242149e198c0",
+      "byteLength": 2490
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/stages/cost.json",
+      "sha256": "5074f8fe61744a7f6f772c56f9bd762b2b314faacf780802c9a82625a53d38ad",
+      "byteLength": 2467
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/result.json",
+      "sha256": "2be08b4504251eb7e5d9e452c3b43a9a70d570b931292691121e6574b82d01db",
+      "byteLength": 4345
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/controller-vitest-d0ee3811/test-inputs.json",
+      "sha256": "ba5977d0b1ff324106314722aa7d9293ecd3dc0a3e95c5f93cf485754ca7b1b2",
+      "byteLength": 3174
+    }
+  ],
+  "inputs": [
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/target/product-inputs.json",
+      "sha256": "0871125be443723907c6fa4c6ea522752395d2c81bbb7c397ecd9ded623e37a0",
+      "byteLength": 220257
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/request.json",
+      "sha256": "066598d83fb466818c8b80bf4c2a69f180c367c56ef233f5441424f49de38ca4",
+      "byteLength": 21823
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/independent-inputs.json",
+      "sha256": "b1b9612f75b2e77567f1b3fd164a43e17959ad5e04585cc1cadf1f868763eb9a",
+      "byteLength": 178553
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-17/attempt-005/implementation/request.json",
+      "sha256": "dd1965d4d3dc78cb4a33a21ee7b2b6abe2c2ee4e36cea0e2ee86bc975bcca956",
+      "byteLength": 24847
+    }
+  ],
+  "commands": [
+    {
+      "command": "node D:\\gen\\scripts\\prompt15-orchestrator\\verification-stages-compact.mjs run D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\reviews\\B-3\\verification\\job-context.json geometry",
+      "exitCode": 1,
+      "evidencePath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/stages/geometry.json"
+    },
+    {
+      "command": "node D:\\gen\\scripts\\prompt15-orchestrator\\verification-stages-compact.mjs run D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\reviews\\B-3\\verification\\job-context.json cost",
+      "exitCode": 1,
+      "evidencePath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/stages/cost.json"
+    },
+    {
+      "command": "node D:\\gen\\scripts\\prompt15-orchestrator\\verification-stages-compact.mjs check D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\reviews\\B-3\\verification\\job-context.json",
+      "exitCode": 1,
+      "evidencePath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verification/stages/progress.json"
+    }
+  ],
+  "failures": [
+    "Controller Vitest execution failed actual assertions",
+    "generation_budget REVIEW B gate: an eligible policy must satisfy unchanged generation and storage ceilings using current measured representative costs: No policy meets the frozen cost ceilings; projections remain representative estimates, not measured world bounds: expected [] to not deeply equal []",
+    "physical_resolution REVIEW B gate: a selected policy has complete physical approval under the unchanged frozen scorer: No policy has complete frozen physical approval; infeasible small-source scopes remain explicit, never exemptions: expected [] to not deeply equal []",
+    "near_extent_policy REVIEW B gate: a policy satisfies representative feasible near and current-frontier continuation requirements: Feasible large-parent near/frontier requirements remain unmet: expected [] to not deeply equal []",
+    "representative_country_experiments REVIEW B gate: complete comparisons and honest infeasibility diagnostics lead to a qualifying selected policy: A complete diagnostic report with no qualifying policy does not approve REVIEW B: expected null not to be null"
+  ],
+  "suggestedRepairPrompt": "Return to the responsible 15-13/15-16 checkpoints under unchanged 15-12 criteria. Preserve verified improvements and honest small-source infeasibility refusals. Fix feasible large-parent scope failures and generation cost; resolve the source-scale scope contract without fabricated success, invented exceptions or lowered limits. Regenerate only affected changed-input evidence, reselect in 15-17 and repeat REVIEW B. Do not repeat identical failed generation, begin 15-18 or publish.",
+  "candidateRoot": "D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\work\\review-B-4",
+  "targetId": "8b76445bdd2c588a4cc2e33298eacbde6dcec6dfd7b3000fc3054ffcbc76ddcd",
+  "taskId": "REVIEW-B",
+  "candidateRevision": "d41613b34e225aaf1878a2ca339efd797625656fdfde118f3a5e7535421c7e40",
+  "productTarget": {
+    "version": 1,
+    "productRoot": "D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\work\\review-B-4",
+    "review": "B",
+    "revision": "d41613b34e225aaf1878a2ca339efd797625656fdfde118f3a5e7535421c7e40",
+    "manifest": {
+      "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/target/product-inputs.json",
+      "sha256": "0871125be443723907c6fa4c6ea522752395d2c81bbb7c397ecd9ded623e37a0",
+      "byteLength": 220257
+    },
+    "requestIdentity": null,
+    "responseIdentity": null,
+    "turnId": null,
+    "targetId": "8b76445bdd2c588a4cc2e33298eacbde6dcec6dfd7b3000fc3054ffcbc76ddcd"
+  },
+  "verificationFramework": "vitest"
+}

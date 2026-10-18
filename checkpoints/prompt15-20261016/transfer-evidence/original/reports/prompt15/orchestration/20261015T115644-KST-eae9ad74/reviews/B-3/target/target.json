@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "productRoot": "D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\work\\review-B-4",
+  "review": "B",
+  "revision": "d41613b34e225aaf1878a2ca339efd797625656fdfde118f3a5e7535421c7e40",
+  "manifest": {
+    "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/target/product-inputs.json",
+    "sha256": "0871125be443723907c6fa4c6ea522752395d2c81bbb7c397ecd9ded623e37a0",
+    "byteLength": 220257
+  },
+  "requestIdentity": null,
+  "responseIdentity": null,
+  "turnId": null,
+  "targetId": "8b76445bdd2c588a4cc2e33298eacbde6dcec6dfd7b3000fc3054ffcbc76ddcd"
+}

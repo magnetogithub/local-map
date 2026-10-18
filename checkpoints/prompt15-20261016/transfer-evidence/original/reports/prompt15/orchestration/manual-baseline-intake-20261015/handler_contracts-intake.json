@@ -1,0 +1,28 @@
+{
+  "kind": "manual-independent-evidence-intake",
+  "originalReceipt": {
+    "path": "reports/verification/prompt14-manual-20261015T091151-KST/unit-isolated.json",
+    "sha256": "71b2c56ed99245594c25eaa80c44cfbc65cb1a1cb35846b5c0afc8ff2ad928ca",
+    "byteLength": 1091
+  },
+  "originalCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "D:\\gen\\reports\\verification\\prompt14-manual-20261015T091151-KST/vitest-isolated.config.ts"
+  ],
+  "originalExitCode": 0,
+  "executedAt": "2026-10-15T00:36:39.350Z",
+  "acceptedAt": "2026-10-15T02:42:31.929Z",
+  "productTestsReexecuted": false,
+  "resolution": [
+    "explicit outbound transmission approval",
+    "invalid_api_key"
+  ],
+  "authoritativePass": {
+    "path": "reports/verification/prompt14-live-20261015T094701-KST/result.json",
+    "sha256": "da8c3d1654ca3ff5f6f07166a8ead23228abb05032fc3b2302459ffe640cbdf2",
+    "byteLength": 2725
+  }
+}

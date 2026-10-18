@@ -1,0 +1,184 @@
+{
+  "review": "prompt14",
+  "verdict": "pass",
+  "summary": "Independent complete Prompt14 PASS adopted with exact candidate bytes. Original BLOCKED preserved; subsequent full PASS resolves its external blocker. This is receipt format adaptation, not a new product verdict.",
+  "nonPassKind": "none",
+  "checks": [
+    {
+      "id": "typecheck",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/manual-baseline-intake-20261015/typecheck-intake.json"
+      ],
+      "detail": "Retained independent actual execution, accepted only against final full manual PASS and unchanged candidate pins; no test rerun."
+    },
+    {
+      "id": "production_build",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/manual-baseline-intake-20261015/production_build-intake.json"
+      ],
+      "detail": "Retained independent actual execution, accepted only against final full manual PASS and unchanged candidate pins; no test rerun."
+    },
+    {
+      "id": "handler_contracts",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/manual-baseline-intake-20261015/handler_contracts-intake.json"
+      ],
+      "detail": "Retained independent actual execution, accepted only against final full manual PASS and unchanged candidate pins; no test rerun."
+    },
+    {
+      "id": "catalog_identity",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/manual-baseline-intake-20261015/catalog_identity-intake.json"
+      ],
+      "detail": "Retained independent actual execution, accepted only against final full manual PASS and unchanged candidate pins; no test rerun."
+    },
+    {
+      "id": "browser_regressions",
+      "status": "pass",
+      "evidencePaths": [
+        "reports/prompt15/orchestration/manual-baseline-intake-20261015/browser_regressions-intake.json"
+      ],
+      "detail": "Retained independent actual execution, accepted only against final full manual PASS and unchanged candidate pins; no test rerun."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/typecheck-intake.json",
+      "sha256": "f563de3fc126e994a23d6d89299a1ee92d8a0cbf3f2c2d82445da0db32ac69d1",
+      "byteLength": 887
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/typecheck.json",
+      "sha256": "a442a95315fd4f6232881062c5ab931516fad7adc61ea67dcd1134795438550e",
+      "byteLength": 1018
+    },
+    {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/production_build-intake.json",
+      "sha256": "f5c3c8aa9d421c1dc75b0bf6e281e193c803ccef9a4ca0a5bcf5b82b5b868ba9",
+      "byteLength": 853
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/build-default.json",
+      "sha256": "9e4e9126ea57cb17aefa56f74e0afbf9a0561c5533094f57deb0295ac9e514b1",
+      "byteLength": 972
+    },
+    {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/handler_contracts-intake.json",
+      "sha256": "5ea5bb36e780767dd214af3332275227168d83e7ee39af7b2cead001b044eb1e",
+      "byteLength": 968
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/unit-isolated.json",
+      "sha256": "71b2c56ed99245594c25eaa80c44cfbc65cb1a1cb35846b5c0afc8ff2ad928ca",
+      "byteLength": 1091
+    },
+    {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/catalog_identity-intake.json",
+      "sha256": "60b5bb7d8378b6d87f65d9ca0b3b83adf394f1cebc596422e5251aa6ad002fec",
+      "byteLength": 895
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/catalog-audit.json",
+      "sha256": "04cc51defe070f7b8ca62ade2d569efac411e1fb0197e56035d6851ebb753ecc",
+      "byteLength": 1038
+    },
+    {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/browser_regressions-intake.json",
+      "sha256": "98bfcd51be8525281a986d0fce6d80dbb3fdfd7b8d42e023bbeb40c64e0f6866",
+      "byteLength": 955
+    },
+    {
+      "path": "reports/verification/prompt14-live-20261015T094701-KST/live-contract.json",
+      "sha256": "97469a610bb72299912961fe7c8e651d55d912eb2f47ecdc3ee19515816a9bb5",
+      "byteLength": 1099
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/result.json",
+      "sha256": "e7686862038265ffd8f8d34690e6987f0f06bdd2e5424bf1f3474a97c98353ff",
+      "byteLength": 33353
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/inputs.json",
+      "sha256": "a582a40069e023f6af4e22c71dae164e2356a74516e1707f692b18278f210c44",
+      "byteLength": 169222
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/preservation.json",
+      "sha256": "b83bb5704f8657072e473e9edafbcbc7aa284682d9f557fbe7afed5fb783bfe5",
+      "byteLength": 375
+    },
+    {
+      "path": "reports/verification/prompt14-live-20261015T094701-KST/result.json",
+      "sha256": "da8c3d1654ca3ff5f6f07166a8ead23228abb05032fc3b2302459ffe640cbdf2",
+      "byteLength": 2725
+    },
+    {
+      "path": "reports/verification/prompt14-live-20261015T094701-KST/preservation.json",
+      "sha256": "4ddffe925800db0692f1e17940038207613d1d86012ad359eb9fde8d7e7d7f6d",
+      "byteLength": 148
+    },
+    {
+      "path": "reports/verification/prompt14-debug-live-20261015T102322-KST/result.json",
+      "sha256": "bf4958b21a517e4a984767f3ec9ed327a8d942b4cf83ac8061ddd1c3091509b0",
+      "byteLength": 4601
+    }
+  ],
+  "inputs": [
+    {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/verified-inputs.json",
+      "sha256": "ba905c80985f1bb5b0f4ed4f9500fdeec0fa37ca7758633806fb2d209e287d94",
+      "byteLength": 181520
+    },
+    {
+      "path": "reports/verification/prompt14-manual-20261015T091151-KST/inputs.json",
+      "sha256": "a582a40069e023f6af4e22c71dae164e2356a74516e1707f692b18278f210c44",
+      "byteLength": 169222
+    },
+    {
+      "path": "D:/gen/reports/prompt15/orchestration/20261014T180827-KST-924eeb68/rounds/0003-prompt14/implementation/candidate-binding-final.json",
+      "sha256": "7768df23367927b54f99c6bbe001e7f26fe38d092512e8e8fdfc3cf6d06f9282",
+      "byteLength": 30888
+    }
+  ],
+  "inputManifests": [
+    {
+      "path": "reports/prompt15/orchestration/manual-baseline-intake-20261015/verified-inputs.json",
+      "sha256": "ba905c80985f1bb5b0f4ed4f9500fdeec0fa37ca7758633806fb2d209e287d94",
+      "byteLength": 181520
+    }
+  ],
+  "commands": [
+    {
+      "command": "[\"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\"node_modules/typescript/bin/tsc\",\"--noEmit\",\"--incremental\",\"false\"]",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/typecheck-intake.json"
+    },
+    {
+      "command": "[\"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\"node_modules/next/dist/bin/next\",\"build\"]",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/production_build-intake.json"
+    },
+    {
+      "command": "[\"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\"node_modules/vitest/vitest.mjs\",\"run\",\"--config\",\"D:\\\\gen\\\\reports\\\\verification\\\\prompt14-manual-20261015T091151-KST/vitest-isolated.config.ts\"]",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/handler_contracts-intake.json"
+    },
+    {
+      "command": "[\"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\"D:\\\\gen\\\\reports\\\\verification\\\\prompt14-manual-20261015T091151-KST/catalog-audit.mjs\"]",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/catalog_identity-intake.json"
+    },
+    {
+      "command": "[\"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\"node_modules/vitest/vitest.mjs\",\"run\",\"--config\",\"D:\\\\gen\\\\reports\\\\verification\\\\prompt14-live-20261015T094701-KST/vitest.config.ts\"]",
+      "exitCode": 0,
+      "evidencePath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/browser_regressions-intake.json"
+    }
+  ],
+  "failures": [],
+  "suggestedRepairPrompt": "",
+  "productInputManifestPath": "D:\\gen\\reports\\prompt15\\orchestration\\manual-baseline-intake-20261015\\verified-inputs.json"
+}

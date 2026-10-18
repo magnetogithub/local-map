@@ -1,0 +1,18 @@
+{
+  "turnId": "01a13fb5-b2b8-7523-9d90-a4b0fb068840",
+  "requestIdentity": {
+    "path": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/decision/request.json",
+    "sha256": "77edd4bacf10ed83b0b74b25297ac94c8e5e013d53bbab492105f5b31779a235",
+    "byteLength": 14491
+  },
+  "schemaDigest": "d75595a3b8c5039e64c3f517cb6a0069423930387b2ac44762d5d1bfddc248e6",
+  "cwd": "D:\\gen\\reports\\prompt15\\orchestration\\20261015T115644-KST-eae9ad74\\work\\review-A-1",
+  "result": {
+    "review": "A",
+    "action": "advance",
+    "repairTaskIds": [],
+    "summary": "REVIEW A를 승인합니다. 현재 후보와 target이 일치하고, verdict의 29개 pin 및 closure의 14,409개 pin에 불일치가 없습니다. 실제 Vitest 13/13과 stage 3/3 완료를 확인했습니다.",
+    "instructions": "승인 후보와 검증 증거를 보존하고 다음 독립 태스크 15-11만 배정하십시오. 슬로베니아의 미해결 face·correspondence 실패에 따른 후보 build·게시 차단과 기존 승인 배포 보존 조건을 유지하십시오. REVIEW A 승인을 행정 복구 완료나 Prompt15 완료로 해석하지 마십시오."
+  },
+  "completedAt": "2026-10-15T13:18:01.853Z"
+}

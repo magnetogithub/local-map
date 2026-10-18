@@ -1,0 +1,155 @@
+{
+  "status": "PARTIAL_EVIDENCE_ONLY_NOT_A_RESTORABLE_BUNDLE",
+  "files": [
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/baseline-receipt.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/baseline-receipt.json",
+      "sha256": "330d1fd70c4b9ece8d7780e2d950e875939bca6d5fde2bbe7a8a4e33a8576020",
+      "bytes": 1027
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/target/product-inputs.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/target/product-inputs.json",
+      "sha256": "51917fbbd9124fe455ce683f9b56448a4e902ce13704fa58e629077a433ae822",
+      "bytes": 234517
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/target/target.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/target/target.json",
+      "sha256": "806008085eced480514a44202b5ec8e781a3d3c933fdc20570222fd6752736e0",
+      "bytes": 664
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/browser_regressions-intake.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/browser_regressions-intake.json",
+      "sha256": "98bfcd51be8525281a986d0fce6d80dbb3fdfd7b8d42e023bbeb40c64e0f6866",
+      "bytes": 955
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/catalog_identity-intake.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/catalog_identity-intake.json",
+      "sha256": "60b5bb7d8378b6d87f65d9ca0b3b83adf394f1cebc596422e5251aa6ad002fec",
+      "bytes": 895
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/handler_contracts-intake.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/handler_contracts-intake.json",
+      "sha256": "5ea5bb36e780767dd214af3332275227168d83e7ee39af7b2cead001b044eb1e",
+      "bytes": 968
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/production_build-intake.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/production_build-intake.json",
+      "sha256": "f5c3c8aa9d421c1dc75b0bf6e281e193c803ccef9a4ca0a5bcf5b82b5b868ba9",
+      "bytes": 853
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/typecheck-intake.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/typecheck-intake.json",
+      "sha256": "f563de3fc126e994a23d6d89299a1ee92d8a0cbf3f2c2d82445da0db32ac69d1",
+      "bytes": 887
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/verification.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/verification.json",
+      "sha256": "ae20ed3b7f030f52a5f233b1b808be6eb0908c036a411f32e5fd07c9988a11c6",
+      "bytes": 8366
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/manual-baseline-intake-20261015/verified-inputs.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/manual-baseline-intake-20261015/verified-inputs.json",
+      "sha256": "ba905c80985f1bb5b0f4ed4f9500fdeec0fa37ca7758633806fb2d209e287d94",
+      "bytes": 181520
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/state.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/state.json",
+      "sha256": "c382c1f9bc33c84534f3e6ea3dc832e2598379d3114b7b9495bbffd69793f49a",
+      "bytes": 3406466
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/stop.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/stop.json",
+      "sha256": "7b1f9fbe8317a801cf0902413cda196e788f92c67230a32280360c850689b75e",
+      "bytes": 48
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/latest.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/latest.json",
+      "sha256": "70f64265ea3688d7ca8f7f0c827f6c4e1f8b4124a61a6251fc60b034cfbd5bc3",
+      "bytes": 136
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verdict.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/verdict.json",
+      "sha256": "8647373e17eb80fd4e7a5c34fe01cf0f7d7404cfe18382cac2aca38655db9b4f",
+      "bytes": 14986
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/review-product-inputs.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/review-product-inputs.json",
+      "sha256": "5967b330d0b75c12c43cf213bfad1a05016ceecd96e4ef5d3a6d1dfdaede5b25",
+      "bytes": 141676
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/target/product-inputs.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/target/product-inputs.json",
+      "sha256": "3cef2a14b8aa234305ecec9a3362324db5c163cdc16022cbe4e2c264d9ad1a97",
+      "bytes": 205735
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/target/target.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/target/target.json",
+      "sha256": "b28fad2d850516336749e7b09e8ab2d07f59f5fa45034c1934811ded1ba3994b",
+      "bytes": 625
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/decision/response.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/A-1/decision/response.json",
+      "sha256": "a46d3fe08449f3a3d7194f2162d5ad4f2dffd65ac6ee97bdc8583672aca30e49",
+      "bytes": 1217
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verdict.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/verdict.json",
+      "sha256": "4fe6826330f13a310db1e45bd9e766029d805f375f3c1e989640a525cc71c49b",
+      "bytes": 15109
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/review-product-inputs.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/review-product-inputs.json",
+      "sha256": "2fff70f962a9c54859894106eb5873421f0a5c787e08d7d7f779f8f078135907",
+      "bytes": 151528
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/target/product-inputs.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/target/product-inputs.json",
+      "sha256": "0871125be443723907c6fa4c6ea522752395d2c81bbb7c397ecd9ded623e37a0",
+      "bytes": 220257
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/target/target.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/target/target.json",
+      "sha256": "d2a237da697dd3610a66938264585d79eb69bb2cd537c0e813554958e2db5e87",
+      "bytes": 625
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/decision/response.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/reviews/B-3/decision/response.json",
+      "sha256": "08b07bde9b0f2aa10bbaf57a9b34fd7d9aa76bbdc09bd71a735e3554bb86e312",
+      "bytes": 6885
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-13/attempt-005/implementation/response.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-13/attempt-005/implementation/response.json",
+      "sha256": "9a6775a977ffb2714437fb2340dd96f2cafa45d614e46355a9c5d3a4df903486",
+      "bytes": 5450
+    },
+    {
+      "originalPath": "reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-13/attempt-005/implementation/request.json",
+      "storedPath": "checkpoints/prompt15-20261016/transfer-evidence/original/reports/prompt15/orchestration/20261015T115644-KST-eae9ad74/tasks/15-13/attempt-005/implementation/request.json",
+      "sha256": "4a8dd261e32f57f637a8bb4be3925a6f5c2161ceca2976486cc5613f968e005b",
+      "bytes": 22428
+    }
+  ]
+}
