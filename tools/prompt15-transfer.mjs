@@ -66,6 +66,13 @@ export async function build(root, output, {inventoryFile=null}={}) {
     note:'Protocol requests/results and paths needed to authenticate prior decisions are retained verbatim. No raw native conversation store is included.'});
   if(failures.length)throw Error('Credential-pattern matches must be resolved before publication; see publication-scan.json');
   const requirements=(await concurrentMap(found.dependencies,async item=>{const file=path.resolve(root,item.path);if(!fs.existsSync(file))return null;return {...item,sha256:await hashFile(file),byteLength:fs.statSync(file).size};})).filter(Boolean);
+  const dependencyArtifacts=[];
+  for(const item of requirements)if(/(?:^|\/)node_modules\/(?:\.vite|\.cache)\//.test(item.path)){
+    const source=path.resolve(root,item.path);if((await scanFile(source)).length)throw Error('Pinned dependency cache contains a credential pattern');
+    if(!objects.has(item.sha256)){fs.copyFileSync(source,path.join(output,'objects',item.sha256));objects.set(item.sha256,{sha256:item.sha256,byteLength:item.byteLength});}
+    dependencyArtifacts.push({path:item.path,sha256:item.sha256,byteLength:item.byteLength});
+  }
+  const finalScan=read(path.join(output,'publication-scan.json'));finalScan.uniqueObjects=objects.size;finalScan.pinnedDependencyCaches=dependencyArtifacts.length;fs.writeFileSync(path.join(output,'publication-scan.json'),JSON.stringify(finalScan,null,2)+'\n');
   const selected=read(path.join(root,'.tmp/prompt15-block-liveness-20261016/release-004/test-inputs.json')).selected;
   const npmInstallRoots=[...new Map(requirements.filter(item=>item.kind==='npm').map(item=>{
     const prefix=item.path.slice(0,item.path.indexOf('node_modules/')).replace(/\/$/,'')||'.';return [prefix.toLowerCase(),prefix];
@@ -78,7 +85,7 @@ export async function build(root, output, {inventoryFile=null}={}) {
     node:{version:process.version,platform:process.platform,arch:process.arch,path:process.execPath,sha256:await hashFile(process.execPath)},
     state:{review:found.state.review,certificates:Object.keys(found.state.certificates),task13:found.state.tasks['15-13'].status},
     manualBaselineReceipt:found.config.manualBaselineReceipt,regressionFiles:selected,files:files.sort((a,b)=>a.path.localeCompare(b.path)),
-    links:found.links.sort((a,b)=>a.path.localeCompare(b.path)),requirements,npmInstallRoots,objects:[...objects.values()],parts:[],
+    links:found.links.sort((a,b)=>a.path.localeCompare(b.path)),requirements,npmInstallRoots,dependencyArtifacts,objects:[...objects.values()],parts:[],
     unavailableHistoricalReferenceCount:found.missingReferences.length,
     recovery:'Preserve product evidence; archive obsolete host ownership; start fresh native sessions only after explicit resume. No approval or product failure counter changes.'};
   let batch=[],size=0,index=0;
@@ -109,7 +116,56 @@ export function validateManifest(manifest) {
     if(names.has(entry.path.toLowerCase())||!/^[a-f0-9]{64}$/.test(entry.sha256)||objects.get(entry.sha256)!==entry.byteLength)throw Error('Invalid/duplicate object binding');names.add(entry.path.toLowerCase());}
   for(const link of manifest.links){safeRelative(link.path);safeRelative(link.target);if(isPrivatePath(link.path)||isPrivatePath(link.target)||names.has(link.path.toLowerCase()))throw Error('Invalid workspace link');}
   for(const part of manifest.parts){if(!/^prompt15-transfer-objects-\d{3}\.tar\.gz$/.test(part.name)||!/^[a-f0-9]{64}$/.test(part.sha256))throw Error('Invalid archive part');}
+  for(const artifact of manifest.dependencyArtifacts??[]){safeRelative(artifact.path);if(isPrivatePath(artifact.path)||!/(?:^|\/)node_modules\/(?:\.vite|\.cache)\//.test(artifact.path)||objects.get(artifact.sha256)!==artifact.byteLength||!manifest.requirements?.some(item=>item.path===artifact.path&&item.sha256===artifact.sha256&&item.byteLength===artifact.byteLength))throw Error('Invalid pinned dependency cache');}
   return manifest;
+}
+export async function restoreDependencyArtifacts(bundle,root,manifest){
+  validateManifest(manifest);
+  for(const item of manifest.dependencyArtifacts??[]){
+    const object=path.join(bundle,'objects',item.sha256);if(fs.statSync(object).size!==item.byteLength||await hashFile(object)!==item.sha256)throw Error('Pinned dependency cache integrity mismatch');
+    const target=path.resolve(root,item.path);let ancestor=path.dirname(target);while(!fs.existsSync(ancestor))ancestor=path.dirname(ancestor);
+    const relative=path.relative(fs.realpathSync(root),fs.realpathSync(ancestor));if(relative==='..'||relative.startsWith('..'+path.sep)||path.isAbsolute(relative))throw Error('Pinned cache destination escapes restore root');
+    if(fs.lstatSync(target,{throwIfNoEntry:false})?.isSymbolicLink())throw Error('Pinned cache destination is an unexpected link');
+    fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(object,target);
+  }
+}
+export function restoreLinks(manifest,root,{replaceInstalledDependencies=false}={}){
+  const links=new Map(manifest.links.map(link=>[link.path.toLowerCase(),link]));
+  const canonical=relative=>{
+    const seen=new Set();
+    for(let hop=0;hop<128;hop++){
+      if(seen.has(relative.toLowerCase()))throw Error('Workspace link cycle');seen.add(relative.toLowerCase());
+      const parts=relative.split('/');let found=false;
+      for(let end=parts.length;end>0;end--){const link=links.get(parts.slice(0,end).join('/').toLowerCase());if(link){relative=path.posix.join(link.target,...parts.slice(end));found=true;break;}}
+      if(!found)return relative;
+    }
+    throw Error('Workspace link cycle');
+  };
+  for(const link of manifest.links)fs.mkdirSync(path.resolve(root,canonical(link.target)),{recursive:true});
+  const done=new Set(),active=new Set();
+  const parents=(relative,includeSelf)=>{const parts=relative.split('/');for(let end=1;end<=parts.length-(includeSelf?0:1);end++){const link=links.get(parts.slice(0,end).join('/').toLowerCase());if(link)create(link);}};
+  const create=link=>{
+    const key=link.path.toLowerCase();if(done.has(key))return;if(active.has(key))throw Error('Workspace link cycle');active.add(key);
+    parents(link.path,false);parents(link.target,true);
+    const target=path.resolve(root,link.path),destination=path.resolve(root,link.target);fs.mkdirSync(path.dirname(target),{recursive:true});
+    const existing=fs.lstatSync(target,{throwIfNoEntry:false});
+    if(existing){
+      const actual=fs.realpathSync(target);
+      if(actual.toLowerCase()===fs.realpathSync(destination).toLowerCase()){
+        if(!existing.isSymbolicLink()||fs.readlinkSync(target)===destination){active.delete(key);done.add(key);return;}
+        fs.unlinkSync(target);
+      }else{
+      if(!replaceInstalledDependencies||!link.path.includes('/node_modules/')||!existing.isDirectory()||existing.isSymbolicLink())throw Error('Workspace link destination already exists: '+link.path);
+      const relative=path.relative(path.resolve(root),actual);
+      if(!relative||relative==='..'||relative.startsWith('..'+path.sep)||path.isAbsolute(relative)||!relative.split(path.sep).includes('node_modules'))throw Error('Refuse to move a dependency outside the restored workspace');
+      const backup=path.join(root,'.tmp/prompt15-transfer-npm-backup',sha256(relative));
+      if(fs.existsSync(backup))throw Error('Preserve existing npm backup');fs.mkdirSync(path.dirname(backup),{recursive:true});fs.renameSync(actual,backup);
+      }
+    }
+    fs.symlinkSync(destination,target,'junction');
+    active.delete(key);done.add(key);
+  };
+  for(const link of manifest.links)create(link);
 }
 export async function restore(bundle, root, {shadow=false}={}) {
   const manifest=validateManifest(read(path.join(bundle,'manifest.json')));
@@ -143,10 +199,7 @@ export async function restore(bundle, root, {shadow=false}={}) {
     fs.copyFileSync(path.join(objects,entry.sha256),target);
     if(index%5000===0)console.log(JSON.stringify({phase:'restore-files',completed:index,total:manifest.files.length}));
   }
-  const physical=relative=>path.resolve(root,relative);
-  for(const link of manifest.links){const target=physical(link.path),destination=physical(link.target);fs.mkdirSync(path.dirname(target),{recursive:true});
-    if(fs.existsSync(target)){if(fs.lstatSync(target).isSymbolicLink()&&fs.realpathSync(target).toLowerCase()===fs.realpathSync(destination).toLowerCase())continue;throw Error('Workspace link destination already exists: '+link.path);}
-    fs.symlinkSync(destination,target,'junction');}
+  restoreLinks(manifest,root);
   console.log(JSON.stringify({phase:'restored',files:manifest.files.length,links:manifest.links.length,root,shadow}));
   return manifest;
 }
@@ -175,12 +228,17 @@ export async function verify(root, manifest, {checkDependencies=true}={}) {
     validateManualBaseline(root,manifest.manualBaselineReceipt);
     validateProductTarget(root,state.approvedProductTarget);validateProductTarget(root,state.currentProductTarget);
     for(const task of Object.values(state.tasks))if(task.status==='pass'&&task.target)validateProductTarget(root,task.target);
+    for(const task of Object.values(state.tasks))if(task.workspace?.baseline)for(const [name,expected]of Object.entries(task.workspace.baseline))if(typeof expected==='string'&&expected.startsWith('link:')){
+      const file=path.join(task.workspace.directory,name);if(!fs.lstatSync(file).isSymbolicLink()||'link:'+fs.readlinkSync(file)!==expected)throw Error('Transferred workspace input link changed: '+file);
+    }
   }finally{fs.realpathSync=realpath;}
   return {pass:true,files:manifest.files.length,approvals:Object.keys(state.certificates),review:state.review,task13:state.tasks['15-13'].status};
 }
 export async function prepare(root,bundle,{regressions=true}={}) {
   const manifest=validateManifest(read(path.join(bundle,'manifest.json')));
   if(path.resolve(root)!==manifest.sourceRoot)throw Error('Restore at the exact original project path');
+  restoreLinks(manifest,root,{replaceInstalledDependencies:true});
+  await restoreDependencyArtifacts(bundle,root,manifest);
   await verify(root,manifest);
   const run=path.join(root,manifest.runRelative),stateFile=path.join(run,'state.json'),original=read(stateFile);
   const receiptFile=path.join(run,'transfer/receipt.json');

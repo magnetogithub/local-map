@@ -2,7 +2,7 @@ import {describe,it,expect} from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import {TransferInventory,safeRelative,isPrivatePath,secretKinds,sha256,transferredState} from './prompt15-transfer-core.mjs';
-import {validateManifest,restore} from './prompt15-transfer.mjs';
+import {validateManifest,restore,restoreLinks,restoreDependencyArtifacts} from './prompt15-transfer.mjs';
 import {redirectWorkspace} from './prompt15-transfer-shadow.mjs';
 
 const sourceState=()=>({version:2,runId:'fixture-run',projectRoot:'D:\\gen',status:'stopped',review:'B',phase:'operating_repair',repairAttempts:4,
@@ -26,6 +26,23 @@ describe('host transfer preserves product authority',()=>{
   it('refuses a task that would require resuming a missing native turn',()=>{const original=sourceState();original.tasks['15-13'].operatingContinuation={};expect(()=>transferredState(original,pin)).toThrow();});
 });
 describe('public bundle boundaries',()=>{
+  it('restores only hash-pinned historical dependency caches from package objects',async()=>{
+    const root=fixture(),bundle=fixture(),bytes=Buffer.from('historical-cache'),hash=sha256(bytes);fs.mkdirSync(path.join(bundle,'objects'));fs.writeFileSync(path.join(bundle,'objects',hash),bytes);
+    const artifact={path:'node_modules/.vite/deps/_metadata.json',sha256:hash,byteLength:bytes.length},manifest={version:1,kind:'prompt15-stopped-run-transfer',files:[],objects:[{sha256:hash,byteLength:bytes.length}],links:[],parts:[],requirements:[artifact],dependencyArtifacts:[artifact]};
+    await restoreDependencyArtifacts(bundle,root,manifest);expect(fs.readFileSync(path.join(root,artifact.path))).toEqual(bytes);expect(()=>validateManifest({...manifest,dependencyArtifacts:[{...artifact,path:'node_modules/unsafe.js'}]})).toThrow();
+  });
+  it('restores nested junctions whose shared parent directory has no files',()=>{
+    const root=fixture();fs.mkdirSync(path.join(root,'node_modules/next'),{recursive:true});fs.writeFileSync(path.join(root,'node_modules/next/package.json'),'{}');
+    const manifest={links:[{path:'reports/task/node_modules',target:'reports/base/node_modules'},{path:'reports/task/node_modules/next',target:'node_modules/next'}]};
+    restoreLinks(manifest,root);expect(fs.readFileSync(path.join(root,'reports/task/node_modules/next/package.json'),'utf8')).toBe('{}');expect(()=>restoreLinks(manifest,root)).not.toThrow();
+  });
+  it('preserves freshly installed module copies before restoring their original links',()=>{
+    const root=fixture();fs.mkdirSync(path.join(root,'node_modules/lib'),{recursive:true});fs.writeFileSync(path.join(root,'node_modules/lib/value'),'approved');fs.mkdirSync(path.join(root,'reports/base/node_modules/lib'),{recursive:true});fs.writeFileSync(path.join(root,'reports/base/node_modules/lib/value'),'installed-copy');
+    const manifest={links:[{path:'reports/base/node_modules/lib',target:'node_modules/lib'}]};expect(()=>restoreLinks(manifest,root)).toThrow('already exists');restoreLinks(manifest,root,{replaceInstalledDependencies:true});expect(fs.readFileSync(path.join(root,'reports/base/node_modules/lib/value'),'utf8')).toBe('approved');const backups=fs.readdirSync(path.join(root,'.tmp/prompt15-transfer-npm-backup'));expect(backups).toHaveLength(1);expect(fs.readFileSync(path.join(root,'.tmp/prompt15-transfer-npm-backup',backups[0],'value'),'utf8')).toBe('installed-copy');
+  });
+  it('retains literal input-link targets used by saved workspace baselines',()=>{
+    const root=fixture();fs.mkdirSync(path.join(root,'data'));const manifest={links:[{path:'reports/task/data',target:'reports/base/data'},{path:'reports/base/data',target:'data'}]};restoreLinks(manifest,root);expect(fs.readlinkSync(path.join(root,'reports/task/data'))).toBe(path.join(root,'reports/base/data'));
+  });
   it('does not interpret serialized JSON embedded in protocol text as a file',()=>{
     const inventory=new TransferInventory(fixture());
     inventory.document=path.join(inventory.root,'reports/protocol.json');
