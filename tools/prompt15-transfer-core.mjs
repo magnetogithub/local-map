@@ -45,7 +45,7 @@ export class TransferInventory {
   }
   relative(file) {
     const relative = slash(path.relative(this.root, file));
-    if (!relative || relative.startsWith('../') || path.isAbsolute(relative)) return null;
+    if (!relative || relative === '..' || relative.startsWith('../') || path.isAbsolute(relative)) return null;
     return safeRelative(relative);
   }
   resolve(name) {

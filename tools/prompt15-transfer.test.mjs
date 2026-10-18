@@ -25,6 +25,13 @@ describe('host transfer preserves product authority',()=>{
   it('refuses a task that would require resuming a missing native turn',()=>{const original=sourceState();original.tasks['15-13'].operatingContinuation={};expect(()=>transferredState(original,pin)).toThrow();});
 });
 describe('public bundle boundaries',()=>{
+  it('ignores the workspace parent without treating it as a transferable path',()=>{
+    const root=fixture(),inventory=new TransferInventory(root);
+    expect(inventory.relative(path.dirname(root))).toBeNull();
+    expect(inventory.resolve(path.dirname(root))).toBeNull();
+    expect(()=>inventory.addFile(path.dirname(root))).not.toThrow();
+    expect(inventory.files.size).toBe(0);
+  });
   for(const unsafe of ['../auth.json','/absolute.json','C:/auth.json','reports/../../auth.json','reports\\auth.json'])
     it('rejects path traversal: '+unsafe,()=>expect(()=>safeRelative(unsafe)).toThrow());
   it('excludes private account and environment stores',()=>{for(const name of ['.codex/auth.json','.git/config','.env.local','.aws/credentials','dir/.ssh/id_rsa'])expect(isPrivatePath(name)).toBe(true);expect(isPrivatePath('.env.example')).toBe(false);});

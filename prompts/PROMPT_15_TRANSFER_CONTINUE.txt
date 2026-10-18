@@ -21,7 +21,7 @@ Prompt14 텍스트는 기존 Git에 있다. 승인 증거와 승인 당시 입�
 구현 중인 파일
 - tools/prompt15-transfer-core.mjs: 입력 의존성 추적, 경로/비밀 검사, 새 호스트 상태 변환.
 - tools/prompt15-transfer.mjs: build/restore/verify/prepare, 중복 제거 SHA 객체, 분할 tar.gz, 원본 승인 검증과 운영 회귀검사 후 stopped 상태 준비.
-- tools/prompt15-transfer.test.mjs: 마지막 실행 21개 단위 테스트 통과. 실제 전체 이전 검증은 미완료.
+- tools/prompt15-transfer.test.mjs: 2026-10-18 마지막 실행 22개 단위 테스트 통과. 실제 전체 이전 검증은 미완료.
 - tools/install-prompt15-transfer.ps1: Release 다운로드, 소스 체크아웃, 복원과 npm ci. 실제 Release 없으므로 아직 실행 불가.
 - tools/publish-prompt15-transfer.mjs: Git Credential Manager 인증을 메모리에서만 사용해 고정 GitHub 저장소에 draft Release 업로드 후 검증/발행. 아직 실행하지 않았다.
 - docs/automation/prompt15-transfer.md: 사용 안내 초안.
@@ -38,3 +38,10 @@ Prompt14 텍스트는 기존 Git에 있다. 승인 증거와 승인 당시 입�
 Git 주의: 작업공간에는 이전부터 data/catalogs/prompt15 10,215개 및 옛 scripts 46개 삭제가 별도로 stage되어 있다. git add -A/commit 전체로 섞어 올리지 말라. reports/prompt15 대량 로그는 이미 Git 추적에서 제거됐으나 로컬 원본은 보존돼 있다. 임의 정리/삭제 금지.
 
 완료 보고는 실제 업로드한 파일/커밋/Release와 검증 범위만 명시한다. 새 PC에 실제 접속하거나 설치하지 않았으면 이전 완료라고 보고하지 않는다.
+
+2026-10-18 추가 저장 상태
+- 이전 도구, 이 후속 프롬프트, 작은 원본 증거 25개는 커밋 15a9ad2b0d52c7b455a84e45265c9d16ed954cb2로 main에 푸시됐다.
+- 현재 PC에서 원본 state, Prompt14 승인 receipt 및 기준 후보 디렉터리가 남아 있음을 다시 확인했다. state는 stopped이며 activeTurns/activeOperations는 비어 있다.
+- 실제 전체 입력 수집을 재시도했으나 프로젝트의 바로 상위 경로가 들어오면 relative()가 '..'를 외부 경로로 제외하지 못하고 Unsafe transfer path 예외를 던졌다. 이 분기를 고치고 상위 폴더를 수집하지 않는 회귀 테스트를 추가했다.
+- 권한을 적용해 실행한 정확한 이전 도구 단위 테스트는 22개 통과, 실패/건너뜀/대기/오류 0개다. 결과 원본은 .tmp/prompt15-transfer-20261018/parent-path-validation/result.json에 있다. 이 결과는 전체 입력 수집, 전체 복원이나 제품 승인을 검증한 결과가 아니다.
+- 수정 후 전체 입력 수집 재완료, 패키지 빌드, 독립 복원 검증, Release 업로드는 여전히 남아 있다. 앞의 '남은 작업' 순서대로 계속한다.
