@@ -13,7 +13,7 @@ const git = (root, args, options={}) => execFileSync('git', args, {cwd:root, enc
 const cliRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export async function scanFile(file) {
   const result = new Set();
-  if (!/\.(?:[cm]?[jt]sx?|json|jsonl|md|txt|ps1|ya?ml|html|css|csv|geojson|gz)$/i.test(file)) return [];
+  if (!/\.(?:[cm]?[jt]sx?|json|jsonl|log|md|txt|ps1|ya?ml|html|css|csv|geojson|gz)$/i.test(file)) return [];
   let stream = fs.createReadStream(file);
   if (file.endsWith('.gz')) stream = stream.pipe(createGunzip());
   let tail = '';
@@ -35,10 +35,16 @@ export async function inventory(root, progress=()=>{}) {
     'package.json','package-lock.json','tsconfig.json','vitest.config.ts','vitest.prompt15.config.ts','next.config.ts','playwright.config.ts','vitest.setup.ts'];
   return {root,run,state,config,...await collector.discover(seeds)};
 }
-export async function build(root, output) {
+export async function build(root, output, {inventoryFile=null}={}) {
   if (fs.existsSync(output)) throw Error('Preserve existing transfer bundle');
   fs.mkdirSync(path.join(output,'objects'),{recursive:true});
-  const found = await inventory(root, progress=>console.log(JSON.stringify({phase:'discover',...progress})));
+  const found = inventoryFile?read(inventoryFile):await inventory(root, progress=>console.log(JSON.stringify({phase:'discover',...progress})));
+  if(path.resolve(found.root)!==path.resolve(root)||JSON.stringify(found.state)!==JSON.stringify(read(path.join(found.run,'state.json'))))throw Error('Inventory root or stopped state changed');
+  transferredState(found.state,{path:'transfer-placeholder.json',sha256:'0'.repeat(64),byteLength:0});
+  const current=new TransferInventory(root);
+  for(const folder of ['src','scripts','tools','automation','docs','prompts','e2e'])current.addSourceRoot(path.join(root,folder));
+  for(const name of fs.readdirSync(root))if(/^(?:tsconfig.*\.json|.*\.config\.[cm]?[jt]s|vitest\.setup\.[jt]s|package(?:-lock)?\.json|\.gitattributes|\.gitignore|\.env\.example|AGENTS\.md)$/.test(name))current.addFile(path.join(root,name));
+  found.files=[...new Map([...found.files,...current.files.values()].map(file=>[file.path,file])).values()];
   const objects = new Map(), files=[], failures=[];
   for (let i=0;i<found.files.length;i++) {
     const source = found.files[i];
@@ -46,7 +52,7 @@ export async function build(root, output) {
     if (!objects.has(digest)) {
       const kinds = await scanFile(source.source);
       if (kinds.length) failures.push({path:source.path,kinds});
-      fs.linkSync(source.source,path.join(output,'objects',digest));
+      fs.copyFileSync(source.source,path.join(output,'objects',digest));
       objects.set(digest,{sha256:digest,byteLength:source.byteLength});
     }
     files.push({path:source.path,sha256:digest,byteLength:source.byteLength});
@@ -187,7 +193,7 @@ export async function prepare(root,bundle,{regressions=true}={}) {
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const [command,folder]=process.argv.slice(2);
-  if(command==='build')await build(cliRoot,path.resolve(folder));
+  if(command==='build')await build(cliRoot,path.resolve(folder),{inventoryFile:process.argv[4]?path.resolve(process.argv[4]):null});
   else if(command==='restore')await restore(path.resolve(folder),cliRoot);
   else if(command==='verify')console.log(JSON.stringify(await verify(cliRoot,validateManifest(read(path.join(folder,'manifest.json'))))));
   else if(command==='prepare')await prepare(cliRoot,path.resolve(folder));

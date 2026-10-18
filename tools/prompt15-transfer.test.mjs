@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {TransferInventory,safeRelative,isPrivatePath,secretKinds,sha256,transferredState} from './prompt15-transfer-core.mjs';
 import {validateManifest,restore} from './prompt15-transfer.mjs';
+import {redirectWorkspace} from './prompt15-transfer-shadow.mjs';
 
 const sourceState=()=>({version:2,runId:'fixture-run',projectRoot:'D:\\gen',status:'stopped',review:'B',phase:'operating_repair',repairAttempts:4,
   activeTurns:{},activeOperations:{},threads:{supervisor:'old-thread'},threadNames:{supervisor:'old'},guardian:{sequence:81,threadId:'old-guardian'},
@@ -25,6 +26,22 @@ describe('host transfer preserves product authority',()=>{
   it('refuses a task that would require resuming a missing native turn',()=>{const original=sourceState();original.tasks['15-13'].operatingContinuation={};expect(()=>transferredState(original,pin)).toThrow();});
 });
 describe('public bundle boundaries',()=>{
+  it('does not interpret serialized JSON embedded in protocol text as a file',()=>{
+    const inventory=new TransferInventory(fixture());
+    inventory.document=path.join(inventory.root,'reports/protocol.json');
+    const text='reports/candidate/{"path":"D:/gen/reports/input.json","sha256":"hash"}';
+    expect(inventory.resolve(text)).toBeNull();expect(()=>inventory.inspect(text)).not.toThrow();
+  });
+  it('redirects original absolute paths to independent files without fallback',()=>{
+    const original=fixture(),independent=fixture();fs.writeFileSync(path.join(original,'input.txt'),'original');fs.writeFileSync(path.join(original,'missing.txt'),'original-only');fs.writeFileSync(path.join(independent,'input.txt'),'restored');
+    const redirect=redirectWorkspace(original,independent);
+    try{expect(fs.readFileSync(path.join(original,'input.txt'),'utf8')).toBe('restored');expect(fs.existsSync(path.join(original,'missing.txt'))).toBe(false);expect(fs.realpathSync(path.join(original,'input.txt'))).toBe(path.join(original,'input.txt'));expect(redirect.count()).toBeGreaterThan(0);}finally{redirect.restore();}
+    expect(fs.readFileSync(path.join(original,'input.txt'),'utf8')).toBe('original');
+  });
+  it('invalidates cached paths when a workspace junction is discovered',()=>{
+    const root=fixture();fs.mkdirSync(path.join(root,'data'));fs.mkdirSync(path.join(root,'reports'));fs.writeFileSync(path.join(root,'data/input.txt'),'fixture');fs.symlinkSync(path.join(root,'data'),path.join(root,'reports/data'),'junction');
+    const inventory=new TransferInventory(root),alias=path.join(root,'reports/data/input.txt');inventory.canonical(alias);inventory.addFile(path.join(root,'data/input.txt'));inventory.addFile(alias);expect([...inventory.files.keys()]).toEqual(['data/input.txt']);expect(inventory.links.size).toBe(1);
+  });
   it('ignores the workspace parent without treating it as a transferable path',()=>{
     const root=fixture(),inventory=new TransferInventory(root);
     expect(inventory.relative(path.dirname(root))).toBeNull();

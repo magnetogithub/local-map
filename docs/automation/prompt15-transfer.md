@@ -1,12 +1,9 @@
 # 다른 Windows PC로 Prompt15 이전
 
-> **구현 중 / 이전 미완료:** 아직 전체 패키지 빌드, 독립 복원 검증 및 Release
-> 업로드를 완료하지 않았다. 아래는 완성 후 사용할 절차 초안이다.
-> 현재 이어서 할 작업은 `prompts/PROMPT_15_TRANSFER_CONTINUE.txt`를 따른다.
-
-2026-10-18에는 실제 입력 수집 중 발견한 프로젝트 상위 경로 처리 오류를
-수정했다. 이전 도구 단위 테스트 22개가 통과했다. 전체 입력 수집과 독립 복원,
-Release 발행은 아직 검증하지 않았으므로 이 결과만으로 설치를 시작하지 않는다.
+이전 태그는 `prompt15-transfer-20261019`다. 해당 태그의 **공개 Release가
+존재하고 `validation-report.json`이 통과한 경우에만** 아래 절차를 사용한다.
+발행기는 원본 입력 검사, 독립 복원 검사와 운영 회귀검사가 통과하지 않으면
+Release를 공개하지 않는다. 소스 코드를 pull하는 것만으로 실행 기록은 복원되지 않는다.
 
 이전 자료는 공개 GitHub Release의 별도 첨부파일이다. 과거 로그 전체를 Git
 이력에 다시 추가하지 않는다. 원본 승인·실패·구현 증거는 파일 바이트 그대로
@@ -25,14 +22,26 @@ Release 발행은 아직 검증하지 않았으므로 이 결과만으로 설치
 
 ## 실행
 
-공개된 이전 Release의 태그를 `TAG`에 넣는다. 먼저 설치 스크립트를 저장한다.
+프로젝트를 아직 받지 않은 새 PC에서는 다음을 실행한다. 기존 프로젝트와
+원래 PC의 실행 기록을 덮어쓰지 않는다.
 
 ```powershell
-$tag = 'TAG'
+$tag = 'prompt15-transfer-20261019'
 $script = Join-Path $env:TEMP 'install-prompt15-transfer.ps1'
 Invoke-WebRequest "https://raw.githubusercontent.com/magnetogithub/local-map/$tag/tools/install-prompt15-transfer.ps1" -OutFile $script
 powershell -ExecutionPolicy Bypass -File $script -Tag $tag
 ```
+
+이미 다른 PC의 `D:\gen`에서 최신 main을 pull했고, 이 PC에 이전 실행 기록이
+없다면 다음으로 필요한 Release 입력을 내려받고 복원한다.
+
+```powershell
+Set-Location D:\gen
+powershell -ExecutionPolicy Bypass -File tools/install-prompt15-transfer.ps1 -Tag prompt15-transfer-20261019 -ExistingCheckout
+```
+
+기존 체크아웃은 Release의 소스 커밋과 일치해야 하며 소스 변경이 없어야 한다.
+원래 PC에는 기존 실행 기록이 있으므로 이 설치 명령을 실행하지 않는다.
 
 설치기는 내려받은 파일과 모든 복원 파일의 SHA256을 검사하고, `npm ci`를
 수행한다. 원본 Prompt14 승인과 A/B 후보 바인딩을 검사한 뒤 기존 운영 회귀
@@ -64,9 +73,12 @@ node tools/prompt15-runtime.mjs resume --run reports/prompt15/orchestration/2026
 - 사용자 계정 전체의 Codex 대화를 복제하지 않는다. 모델 추론은 확률적이므로
   새 세션의 후속 판단과 표현이 이전 세션과 똑같다고 보장하지 않는다.
 
-이전 전에는 기존 코드와 전체 운영 회귀를 확인하고, 복원한 파일을 별도 시험
-폴더에서 원본 경로로 매핑해 승인 바인딩을 검증한다. 실제 새 PC의 설치·로그인과
-모델 작업 시작은 그 PC에서 수행해야 한다.
+검증은 압축파일에서 별도 시험 폴더에 실제 바이트를 복원한 다음 수행한다.
+`tools/prompt15-transfer-shadow.mjs`는 영수증에 적힌 원래 절대 경로를 시험
+폴더로만 연결하며, 누락 파일을 원래 작업공간에서 대신 읽지 않는다. 복원 폴더의
+의존성은 새로 설치하고, 원래 승인 연결과 운영 회귀검사를 실제로 다시 확인한다.
+정확한 결과와 패키지 해시는 Release의 `validation-report.json`에 남긴다.
+계정 로그인과 실제 새 PC에서의 모델 작업 시작은 그 PC에서 수행해야 한다.
 
 공식 app-server의 세션 생성·턴 실행 절차:
 https://developers.openai.com/siwc/token-sharing-open-source/codex-app-server

@@ -50,11 +50,13 @@ export class TransferInventory {
   }
   resolve(name) {
     if (typeof name !== 'string' || !name || name.length > 1000 || /[\n\r\0]/.test(name) || /^(https?:|file:)/.test(name)) return null;
+    if(/[<>"|?*]/.test(name)||(/^[A-Za-z]:[/\\]/.test(name)?name.slice(2):name).includes(':'))return null;
     if (!path.isAbsolute(name) && !/^(?:reports|data|public|src|scripts|tools|automation|docs|prompts|e2e|validation|node_modules|\.tmp)[/\\]/.test(name) && !/^(?:package(?:-lock)?\.json|.*config\.[cm]?[jt]s|AGENTS\.md|CLAUDE\.md)$/.test(name)) return null;
     const file = path.resolve(this.root, name);
     return this.relative(file) ? file : null;
   }
   registerAncestors(file) {
+    if (this.ancestorSeen.has(file)) return;
     const parts = path.relative(this.root, file).split(path.sep); let cursor = this.root;
     for (const part of parts) {
       cursor = path.join(cursor, part);
@@ -65,38 +67,43 @@ export class TransferInventory {
         const target = path.resolve(path.dirname(cursor), fs.readlinkSync(cursor));
         const relative = this.relative(cursor), targetRelative = this.relative(target);
         if (!relative || !targetRelative) throw Error(`External workspace link: ${cursor}`);
+        if (!this.links.has(relative)) {this.pathCache.clear();this.realDirectories.clear();}
         this.links.set(relative, {path: relative, target: targetRelative});
         if (target !== cursor) this.registerAncestors(target);
       }
     }
   }
-  canonical(file) {
-    let result=file;
-    for(let hop=0;hop<64;hop++){
-      let cursor=result,match=null;
-      while(cursor!==this.root){const relative=this.relative(cursor);if(relative&&this.links.has(relative)){match={cursor,link:this.links.get(relative)};break;}const parent=path.dirname(cursor);if(parent===cursor)break;cursor=parent;}
-      if(!match)return result;
-      result=path.join(this.root,match.link.target,path.relative(match.cursor,result));
-    }
-    throw Error('Workspace link cycle');
+  canonical(file, resolving = new Set()) {
+    if (file === this.root) return file;
+    if (this.pathCache.has(file)) return this.pathCache.get(file);
+    if (resolving.has(file) || resolving.size > 128) throw Error('Workspace link cycle');
+    resolving.add(file);
+    const relative=this.relative(file),link=relative&&this.links.get(relative);
+    const parent=path.dirname(file);
+    const real=link?this.canonical(path.join(this.root,link.target),resolving):
+      parent===file?file:path.join(this.canonical(parent,resolving),path.basename(file));
+    resolving.delete(file);this.pathCache.set(file,real);return real;
   }
   addFile(name) {
     const logical = this.resolve(name); if (!logical) return;
     if (this.logicalSeen.has(logical)) return;
     this.logicalSeen.add(logical);
     const relative = this.relative(logical); if (isPrivatePath(relative)) throw Error(`Private file referenced: ${relative}`);
-    if (!fs.existsSync(logical)) { this.missing.add(relative); return; }
-    if (!fs.statSync(logical).isFile()) return;
-    this.registerAncestors(logical);
-    const real = this.canonical(logical);
+    this.registerAncestors(path.dirname(logical));
+    let real=this.canonical(logical);
+    if(this.files.has(this.relative(real))||this.dependencies.has(this.relative(real)))return;
+    if (!fs.existsSync(real)) { this.missing.add(relative); return; }
+    this.registerAncestors(logical);real=this.canonical(logical);
     const realRelative = this.relative(real);
     if (!realRelative) { this.dependencies.set(logical, {path: logical, kind: 'external-tool'}); return; }
+    if(isPrivatePath(realRelative))throw Error(`Private file referenced: ${realRelative}`);
+    const stat=fs.statSync(real);if(!stat.isFile())return;
     if (realRelative.split('/').includes('node_modules')) {
       this.dependencies.set(realRelative, {path: realRelative, kind: 'npm'}); return;
     }
     if (!this.files.has(realRelative)) {
-      this.files.set(realRelative, {path: realRelative, source: real, byteLength: fs.statSync(real).size});
-      if (/\.json$/i.test(real) && fs.statSync(real).size <= 32 * 1024 * 1024) this.queue.push(realRelative);
+      this.files.set(realRelative, {path: realRelative, source: real, byteLength: stat.size});
+      if (/\.json$/i.test(real) && stat.size <= 32 * 1024 * 1024) this.queue.push(realRelative);
     }
   }
   addSourceRoot(name) {
@@ -119,12 +126,14 @@ export class TransferInventory {
   inspect(value, key = '', owner = null) {
     if (typeof value === 'string') {
       if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(value) && !path.isAbsolute(value)) return;
+      if(/[<>"|?*]/.test(value)||(/^[A-Za-z]:[/\\]/.test(value)?value.slice(2):value).includes(':'))return;
       if (!path.isAbsolute(value) && !/^(reports|data|src|scripts|tools|automation|docs|public|prompts|e2e|validation|node_modules|\.tmp)[/\\]/.test(value) &&
           !/^[^\r\n"'<>|]{1,600}\.(?:json|jsonl|gz|mjs|js|ts|tsx|md|txt|ps1|png|geojson|csv|zip|pbf|bin|html)$/.test(value)) return;
       const keyName = (path.isAbsolute(value) || /^(reports|data|src|scripts|tools|automation|docs|public|prompts|e2e|validation|\.tmp)[/\\]/.test(value)) ? value : `${path.dirname(this.document ?? this.root)}|${value}`;
       if (this.referenceSeen.has(keyName)) return;
       this.referenceSeen.add(keyName);
       let file = this.resolve(value);
+      if(file&&this.logicalSeen.has(file))return;
       if ((!file || !fs.existsSync(file)) && this.document && value.length < 1000 && !/[\n\r\0]/.test(value) && !path.isAbsolute(value)) {
         const candidate = path.resolve(path.dirname(this.document), value);
         if (!path.relative(this.root, candidate).includes(':') && this.relative(candidate) && fs.existsSync(candidate)) file = candidate;
@@ -163,6 +172,7 @@ export class TransferInventory {
         }
       }
     }
+    if(Array.isArray(value)){for(const child of value)if(child!==null&&typeof child==='object'||typeof child==='string')this.inspect(child,key,value);return;}
     for (const [childKey, child] of Object.entries(value)) if(!coldHistoryKeys.has(childKey)) this.inspect(child, childKey, value);
   }
   async discover(seeds) {
@@ -173,7 +183,7 @@ export class TransferInventory {
       if(process.env.PROMPT15_TRANSFER_TRACE)fs.appendFileSync(process.env.PROMPT15_TRANSFER_TRACE,JSON.stringify({index:cursor,path:relative,files:this.files.size})+'\n');
       try { this.document = this.files.get(relative).source; this.inspect(JSON.parse(fs.readFileSync(this.document, 'utf8').replace(/^\uFEFF/, ''))); }
       catch (error) { if (!(error instanceof SyntaxError)) throw error; }
-      if (cursor % 100 === 0) { this.progress({parsed: cursor, files: this.files.size, queued: this.queue.length}); await new Promise(resolve => setTimeout(resolve, 0)); }
+      if (cursor % 10 === 0) { this.progress({parsed: cursor, files: this.files.size, queued: this.queue.length}); await new Promise(resolve => setTimeout(resolve, 0)); }
     }
     return {files: [...this.files.values()], links: [...this.links.values()], dependencies: [...this.dependencies.values()], missingReferences: [...this.missing]};
   }
