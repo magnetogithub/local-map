@@ -65,6 +65,12 @@ try{
   if($LASTEXITCODE -ne 0){throw 'Transfer restore failed. Run remains stopped.'}
   & npm.cmd ci
   if($LASTEXITCODE -ne 0){throw 'Dependency installation failed. Run remains stopped.'}
+  foreach($environment in $manifest.npmInstallRoots){
+    if($environment -eq '.'){continue}
+    if($environment -match '(^|[/\\])\.\.([/\\]|$)' -or [System.IO.Path]::IsPathRooted($environment)){throw 'Invalid npm environment path.'}
+    & npm.cmd ci --prefix (Join-Path $destinationPath $environment)
+    if($LASTEXITCODE -ne 0){throw ('Dependency installation failed for '+$environment+'. Run remains stopped.')}
+  }
   & node tools/prompt15-transfer.mjs prepare $download
   if($LASTEXITCODE -ne 0){throw 'Approval/integrity/regression verification failed. Run remains stopped.'}
   Write-Output 'Transfer prepared. Log in to Codex on this PC; no old credentials were copied.'

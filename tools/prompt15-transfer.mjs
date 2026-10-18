@@ -11,6 +11,11 @@ const read = file => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/,
 const write = (file, value) => {fs.mkdirSync(path.dirname(file), {recursive:true}); fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n', {flag:'wx'});};
 const git = (root, args, options={}) => execFileSync('git', args, {cwd:root, encoding:'utf8', maxBuffer:32*1024*1024, ...options}).trim();
 const cliRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+async function concurrentMap(items,operation,limit=8){
+  const result=new Array(items.length);let cursor=0;
+  await Promise.all(Array.from({length:Math.min(limit,items.length)},async()=>{for(;;){const index=cursor++;if(index>=items.length)return;result[index]=await operation(items[index],index);}}));
+  return result;
+}
 export async function scanFile(file) {
   const result = new Set();
   if (!/\.(?:[cm]?[jt]sx?|json|jsonl|log|md|txt|ps1|ya?ml|html|css|csv|geojson|gz)$/i.test(file)) return [];
@@ -45,32 +50,35 @@ export async function build(root, output, {inventoryFile=null}={}) {
   for(const folder of ['src','scripts','tools','automation','docs','prompts','e2e'])current.addSourceRoot(path.join(root,folder));
   for(const name of fs.readdirSync(root))if(/^(?:tsconfig.*\.json|.*\.config\.[cm]?[jt]s|vitest\.setup\.[jt]s|package(?:-lock)?\.json|\.gitattributes|\.gitignore|\.env\.example|AGENTS\.md)$/.test(name))current.addFile(path.join(root,name));
   found.files=[...new Map([...found.files,...current.files.values()].map(file=>[file.path,file])).values()];
-  const objects = new Map(), files=[], failures=[];
-  for (let i=0;i<found.files.length;i++) {
-    const source = found.files[i];
+  const objects = new Map(), pendingObjects=new Map(), failures=[];let completed=0;
+  const files=await concurrentMap(found.files,async source=>{
     const digest = await hashFile(source.source);
-    if (!objects.has(digest)) {
-      const kinds = await scanFile(source.source);
-      if (kinds.length) failures.push({path:source.path,kinds});
-      fs.copyFileSync(source.source,path.join(output,'objects',digest));
-      objects.set(digest,{sha256:digest,byteLength:source.byteLength});
-    }
-    files.push({path:source.path,sha256:digest,byteLength:source.byteLength});
-    if(i%500===0)console.log(JSON.stringify({phase:'hash-and-scan',completed:i,total:found.files.length,unique:objects.size}));
-  }
+    if(!pendingObjects.has(digest))pendingObjects.set(digest,(async()=>{
+      const kinds=await scanFile(source.source);if(kinds.length)failures.push({path:source.path,kinds});
+      await fs.promises.copyFile(source.source,path.join(output,'objects',digest));objects.set(digest,{sha256:digest,byteLength:source.byteLength});
+    })());
+    await pendingObjects.get(digest);completed++;
+    if(completed%1000===0)console.log(JSON.stringify({phase:'hash-and-scan',completed,total:found.files.length,unique:objects.size}));
+    return {path:source.path,sha256:digest,byteLength:source.byteLength};
+  });
   write(path.join(output,'publication-scan.json'),{version:1,files:files.length,uniqueObjects:objects.size,credentialMatches:failures,
     excluded:['native Codex databases','account authentication','private environment files','unreferenced runtime/event logs'],
     note:'Protocol requests/results and paths needed to authenticate prior decisions are retained verbatim. No raw native conversation store is included.'});
   if(failures.length)throw Error('Credential-pattern matches must be resolved before publication; see publication-scan.json');
-  const requirements=[];
-  for(const item of found.dependencies){const file=path.resolve(root,item.path);if(fs.existsSync(file))requirements.push({...item,sha256:await hashFile(file),byteLength:fs.statSync(file).size});}
+  const requirements=(await concurrentMap(found.dependencies,async item=>{const file=path.resolve(root,item.path);if(!fs.existsSync(file))return null;return {...item,sha256:await hashFile(file),byteLength:fs.statSync(file).size};})).filter(Boolean);
   const selected=read(path.join(root,'.tmp/prompt15-block-liveness-20261016/release-004/test-inputs.json')).selected;
+  const npmInstallRoots=[...new Map(requirements.filter(item=>item.kind==='npm').map(item=>{
+    const prefix=item.path.slice(0,item.path.indexOf('node_modules/')).replace(/\/$/,'')||'.';return [prefix.toLowerCase(),prefix];
+  })).values()];
+  for(const directory of npmInstallRoots)for(const name of ['package.json','package-lock.json']){
+    const relative=(directory==='.'?'':directory+'/')+name;if(!files.some(item=>item.path.toLowerCase()===relative.toLowerCase()))throw Error('Missing npm environment input: '+relative);
+  }
   const manifest={version:1,kind:'prompt15-stopped-run-transfer',id:randomUUID(),createdAt:new Date().toISOString(),
     sourceRoot:root,sourceCommit:git(root,['rev-parse','HEAD']),runRelative:path.relative(root,found.run).replaceAll('\\','/'),
     node:{version:process.version,platform:process.platform,arch:process.arch,path:process.execPath,sha256:await hashFile(process.execPath)},
     state:{review:found.state.review,certificates:Object.keys(found.state.certificates),task13:found.state.tasks['15-13'].status},
     manualBaselineReceipt:found.config.manualBaselineReceipt,regressionFiles:selected,files:files.sort((a,b)=>a.path.localeCompare(b.path)),
-    links:found.links.sort((a,b)=>a.path.localeCompare(b.path)),requirements,objects:[...objects.values()],parts:[],
+    links:found.links.sort((a,b)=>a.path.localeCompare(b.path)),requirements,npmInstallRoots,objects:[...objects.values()],parts:[],
     unavailableHistoricalReferenceCount:found.missingReferences.length,
     recovery:'Preserve product evidence; archive obsolete host ownership; start fresh native sessions only after explicit resume. No approval or product failure counter changes.'};
   let batch=[],size=0,index=0;
@@ -120,8 +128,21 @@ export async function restore(bundle, root, {shadow=false}={}) {
   }
   const checked=new Set();
   for(const file of manifest.files){if(!checked.has(file.sha256)){const object=path.join(objects,file.sha256);if(!fs.lstatSync(object).isFile()||fs.statSync(object).size!==file.byteLength||await hashFile(object)!==file.sha256)throw Error('Object integrity mismatch');checked.add(file.sha256);}}
-  for(const entry of manifest.files){const target=path.resolve(root,entry.path);let cursor=path.dirname(target);while(cursor!==path.resolve(root)){if(fs.existsSync(cursor)&&fs.lstatSync(cursor).isSymbolicLink())throw Error('Destination has an unexpected link');cursor=path.dirname(cursor);}
-    fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(objects,entry.sha256),target);}
+  const directories=new Set([path.resolve(root)]);
+  const ensureDirectory=directory=>{
+    if(directories.has(directory))return;
+    const parent=path.dirname(directory);if(parent===directory)throw Error('Destination escapes restore root');ensureDirectory(parent);
+    const stat=fs.lstatSync(directory,{throwIfNoEntry:false});
+    if(stat?.isSymbolicLink()||stat&&!stat.isDirectory())throw Error('Destination has an unexpected link or non-directory');
+    if(!stat)fs.mkdirSync(directory);directories.add(directory);
+  };
+  fs.mkdirSync(root,{recursive:true});
+  for(let index=0;index<manifest.files.length;index++){
+    const entry=manifest.files[index],target=path.resolve(root,entry.path);ensureDirectory(path.dirname(target));
+    const existing=fs.lstatSync(target,{throwIfNoEntry:false});if(existing?.isSymbolicLink()||existing?.isDirectory())throw Error('Destination has an unexpected link or directory');
+    fs.copyFileSync(path.join(objects,entry.sha256),target);
+    if(index%5000===0)console.log(JSON.stringify({phase:'restore-files',completed:index,total:manifest.files.length}));
+  }
   const physical=relative=>path.resolve(root,relative);
   for(const link of manifest.links){const target=physical(link.path),destination=physical(link.target);fs.mkdirSync(path.dirname(target),{recursive:true});
     if(fs.existsSync(target)){if(fs.lstatSync(target).isSymbolicLink()&&fs.realpathSync(target).toLowerCase()===fs.realpathSync(destination).toLowerCase())continue;throw Error('Workspace link destination already exists: '+link.path);}
@@ -131,10 +152,12 @@ export async function restore(bundle, root, {shadow=false}={}) {
 }
 export async function verify(root, manifest, {checkDependencies=true}={}) {
   const failures=[];
-  for(let index=0;index<manifest.files.length;index++){const item=manifest.files[index],file=path.join(root,item.path);
+  let verified=0;
+  await concurrentMap(manifest.files,async item=>{const file=path.join(root,item.path);
     if(!fs.existsSync(file)||fs.statSync(file).size!==item.byteLength||await hashFile(file)!==item.sha256)failures.push(item.path);
-    if(index%2000===0)console.log(JSON.stringify({phase:'verify-bytes',completed:index,total:manifest.files.length}));}
-  if(checkDependencies)for(const item of manifest.requirements){const file=path.resolve(root,item.path);if(!fs.existsSync(file)||fs.statSync(file).size!==item.byteLength||await hashFile(file)!==item.sha256)failures.push('dependency:'+item.path);}
+    verified++;if(verified%5000===0)console.log(JSON.stringify({phase:'verify-bytes',completed:verified,total:manifest.files.length}));
+  });
+  if(checkDependencies)await concurrentMap(manifest.requirements,async item=>{const file=path.resolve(root,item.path);if(!fs.existsSync(file)||fs.statSync(file).size!==item.byteLength||await hashFile(file)!==item.sha256)failures.push('dependency:'+item.path);});
   if(failures.length)throw Error('Transfer verification failed: '+JSON.stringify(failures.slice(0,12)));
   const {validateManualBaseline}=await import('../scripts/prompt15-orchestrator/launch-policy.mjs');
   const {validateProductTarget}=await import('../scripts/prompt15-orchestrator/product-target.mjs');

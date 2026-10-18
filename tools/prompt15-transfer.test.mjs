@@ -79,4 +79,9 @@ describe('public bundle boundaries',()=>{
   it('rejects a damaged object before writing any restored source',async()=>{
     const bundle=fixture(),root=fixture(),hash=sha256('correct');fs.mkdirSync(path.join(bundle,'objects'));fs.writeFileSync(path.join(bundle,'objects',hash),'damaged');const manifest={version:1,kind:'prompt15-stopped-run-transfer',sourceRoot:root,runRelative:'reports/run',node:{},files:[{path:'src/a.ts',sha256:hash,byteLength:7}],objects:[{sha256:hash,byteLength:7}],links:[],parts:[]};fs.writeFileSync(path.join(bundle,'manifest.json'),JSON.stringify(manifest));await expect(restore(bundle,root,{shadow:true})).rejects.toThrow('integrity');expect(fs.existsSync(path.join(root,'src/a.ts'))).toBe(false);
   });
+  it('refuses an existing destination junction without changing its target',async()=>{
+    const bundle=fixture(),root=fixture(),outside=fixture(),bytes=Buffer.from('restore'),hash=sha256(bytes);fs.mkdirSync(path.join(bundle,'objects'));fs.writeFileSync(path.join(bundle,'objects',hash),bytes);fs.writeFileSync(path.join(outside,'a.ts'),'keep');fs.symlinkSync(outside,path.join(root,'src'),'junction');
+    fs.writeFileSync(path.join(bundle,'manifest.json'),JSON.stringify({version:1,kind:'prompt15-stopped-run-transfer',sourceRoot:root,runRelative:'reports/run',node:{},files:[{path:'src/a.ts',sha256:hash,byteLength:bytes.length}],objects:[{sha256:hash,byteLength:bytes.length}],links:[],parts:[]}));
+    await expect(restore(bundle,root,{shadow:true})).rejects.toThrow('unexpected link');expect(fs.readFileSync(path.join(outside,'a.ts'),'utf8')).toBe('keep');
+  });
 });
