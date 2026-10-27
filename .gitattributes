@@ -17,6 +17,10 @@ data/catalogs/prompt15/**/world/inheritance-state-fixture.json filter=lfs diff=l
 reports/prompt15/**/world/catalog.json filter=lfs diff=lfs merge=lfs -text
 reports/prompt15/**/world/metadata.json filter=lfs diff=lfs merge=lfs -text
 reports/prompt15/**/world/inheritance-state-fixture.json filter=lfs diff=lfs merge=lfs -text
+# One-time committed Prompt 15 generated snapshots stay in LFS even though
+# their working directories remain ignored for future untracked outputs.
+data/derived/prompt15/** filter=lfs diff=lfs merge=lfs -text
+data/operational-cells/** filter=lfs diff=lfs merge=lfs -text
 scripts/*prompt15* -text
 prompts/PROMPT_15_OPERATIONAL_MICRO_TERRITORIES_AND_PARTIAL_FRONTS.txt -text
 data/catalog-consumers/prompt14/** -text
