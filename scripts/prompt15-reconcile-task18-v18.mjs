@@ -1,0 +1,37 @@
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
+const read=file=>JSON.parse(fs.readFileSync(file,'utf8'));
+const identity=file=>{const bytes=fs.readFileSync(file);return{path:path.relative(root,file).replaceAll('\\','/'),sha256:sha(bytes),byteLength:bytes.length};};
+const atomic=(file,value)=>{const temporary=`${file}.${process.pid}.tmp`;fs.writeFileSync(temporary,`${JSON.stringify(value,null,2)}\n`,{flag:'wx'});fs.renameSync(temporary,file);};
+
+const run=path.resolve(root,process.argv[2]??''),v18File=path.resolve(root,process.argv[3]??'');
+if(!process.argv[2]||!process.argv[3])throw Error('usage: node scripts/prompt15-reconcile-task18-v18.mjs <run> <V18 report>');
+const orchestrationRoot=path.join(root,'reports','prompt15','orchestration'),relativeRun=path.relative(orchestrationRoot,run);
+if(!relativeRun||relativeRun.startsWith('..')||path.isAbsolute(relativeRun))throw Error('run escapes Prompt15 orchestration root');
+const stateFile=path.join(run,'state.json'),stopFile=path.join(run,'stop.json'),state=read(stateFile),row=state.tasks?.['15-18'],next=state.tasks?.['15-19'];
+if(state.status!=='stopped'||!fs.existsSync(stopFile))throw Error('reconciliation requires the stopped false-PASS boundary');
+if(row?.status!=='pass'||row?.implementation?.result?.status!=='blocked'||!row.verification)throw Error('15-18 is not the expected blocked-implementation false PASS');
+if(next?.status!=='pending')throw Error('15-19 must remain pending');
+for(const [id,item] of Object.entries(state.tasks))if(Number(id.slice(3))>=19&&!['pending'].includes(item.status))throw Error(`downstream task already active: ${id} ${item.status}`);
+const oldVerdictFile=path.resolve(root,row.verification),oldVerdict=read(oldVerdictFile),v18=read(v18File),stop=read(stopFile);
+if(oldVerdict.taskId!=='15-18'||oldVerdict.verdict!=='pass')throw Error('expected historical controller PASS verdict');
+if(v18.taskId!=='15-18'||v18.verification!=='V18'||v18.status!=='fail'||path.resolve(v18.candidateRoot)!==path.resolve(row.target.productRoot))throw Error('V18 does not bind the current false-PASS candidate');
+const completionFile=path.join(v18.artifactRoot,'completion.json'),completion=read(completionFile);
+if(completion.eligible!==false||completion.counts?.unresolved!==1613||completion.counts?.unresolvedPriorLosses!==394)throw Error('current completion failure counts changed');
+const at=new Date().toISOString(),record={at,reason:'Controller Vitest tested rejection behavior but did not require a successful build. Current-byte V18 rejects the candidate and the strict gate now prevents promotion.',attempt:row.attempt,priorStatus:row.status,priorPassedAt:row.passedAt??null,implementationResponse:row.implementation.responseIdentity,controllerVerdict:identity(oldVerdictFile),v18:identity(v18File),completion:identity(completionFile),stopMarker:stop};
+row.invalidPassHistory??=[];if(row.invalidPassHistory.some(item=>item.controllerVerdict?.sha256===record.controllerVerdict.sha256))throw Error('this false PASS was already reconciled');
+row.invalidPassHistory.push(record);row.status='repair';row.verificationInvalidatedAt=at;delete row.acceptedTarget;delete row.passedAt;delete row.parked;delete row.externalBlock;
+state.falsePassCorrections??=[];state.falsePassCorrections.push({taskId:'15-18',...record});state.status='recovering';state.phase='prepare';state.currentTasks=[];state.error=null;delete state.currentProductTarget;state.nextAction='15-18 attempt 4: strict V18-gated repair; 15-19 remains unadmitted until genuine PASS';state.progressAt=at;state.heartbeatAt=at;
+const receiptFile=path.join(run,'control',`task18-v18-reconciliation-${record.v18.sha256.slice(0,16)}.json`);fs.mkdirSync(path.dirname(receiptFile),{recursive:true});
+atomic(receiptFile,{version:1,kind:'task18-false-pass-reconciliation',runId:state.runId,taskId:'15-18',status:'applied',...record,nextTaskStatus:next.status,nextAction:state.nextAction});
+state.lastReconciliation=identity(receiptFile);atomic(stateFile,state);fs.unlinkSync(stopFile);
+const event={at,kind:'task_pass_invalidated',review:state.review,taskId:'15-18',reason:record.reason,v18:record.v18,receipt:state.lastReconciliation};
+fs.appendFileSync(path.join(run,'events.jsonl'),`${JSON.stringify(event)}\n`);
+const notification={id:`${state.runId}:task_pass_invalidated:15-18:${record.v18.sha256}`,at,recordedAt:at,title:'Prompt15 · 15-18 PASS 무효화 / 복구 재개',body:`현재 artifact bytes의 독립 V18 결과 FAIL · unresolved 1,613 · 기존 소실 unresolved 394 · SVN 193/193 · 15-19 미진입 · ${record.v18.path}`,review:state.review,role:'오케스트레이션',outcome:'fail'};
+fs.appendFileSync(path.join(run,'notifications.jsonl'),`${JSON.stringify(notification)}\n`);
+console.log(JSON.stringify({status:'applied',state:identity(stateFile),receipt:identity(receiptFile),v18:record.v18}));

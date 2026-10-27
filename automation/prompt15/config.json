@@ -1,32 +1,39 @@
 {
+  "version": 2,
+  "engine": "prompt15-simple-loop",
   "promptPath": "prompts/PROMPT_15_OPERATIONAL_MICRO_TERRITORIES_AND_PARTIAL_FRONTS.txt",
-  "rulesPath": "docs/automation/prompt15-orchestration.md",
-  "approvalPolicy": "on-request",
-  "approvalsReviewer": "auto_review",
+  "startTask": "15-18",
+  "maxProductAttempts": 3,
   "turnTimeoutMs": 3600000,
-  "reviewStrikeLimit": 3,
-  "implementationUnit": "task",
-  "verificationStages": true,
-  "compactVerification": true,
-  "verificationFramework": "vitest",
-  "taskVerificationMode": "controller-vitest",
-  "automaticRecovery": true,
-  "controllerProgressTimeoutMs": 300000,
-  "maxConcurrentTasks": 4,
-  "implementationSessionPolicy": "per-task-reuse-for-repair",
-  "operatingRepairTurnTimeoutMs": 600000,
-  "supervisorOversight": {"enabled": true, "boundEvidence": true, "productGapMs": 300000, "repeatedAuditLimit": 3, "auditTimeoutMs": 180000, "escalationCooldownMs": 60000, "maxAuditsPerIncident": 3},
-  "startReview": "A",
-  "baselineVerification": false,
-  "executionMode": "orchestrated",
-  "boundProductTargets": true,
-  "manualBaselineReceipt": "reports/prompt15/orchestration/manual-baseline-intake-20261015/accepted/baseline-receipt.json",
-  "verifierExecutionIdleTimeoutMs": 900000,
+  "codexBinary": "codex",
+  "automaticRecovery": false,
+  "automaticGuardian": false,
+  "sessionPolicy": "fresh-session-per-product-attempt",
   "roles": {
-    "supervisor": {"model": "gpt-6.1-sol", "effort": "high", "promptPath": "automation/prompt15/task-supervisor.txt"},
-    "implementer": {"model": "gpt-6.1-sol", "effort": "high", "promptPath": "automation/prompt15/task-implementer.txt"},
-    "verifier": {"model": "gpt-6.1-sol", "effort": "high", "promptPath": "automation/prompt15/task-verifier.txt"},
-    "testPreparer": {"model": "gpt-6.1-sol", "effort": "high", "promptPath": "automation/prompt15/test-preparer.txt"},
-    "guardian": {"model": "gpt-6.1-sol", "effort": "high", "promptPath": "automation/prompt15/guardian.txt"}
+    "supervisor": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "promptPath": "automation/prompt15/supervisor.txt"
+    },
+    "implementer": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "promptPath": "automation/prompt15/implementer.txt"
+    },
+    "verifier": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "promptPath": "automation/prompt15/verifier.txt"
+    },
+    "testPreparer": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "promptPath": "automation/prompt15/test-preparer.txt"
+    },
+    "guardian": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "promptPath": "automation/prompt15/guardian.txt"
+    }
   }
 }

@@ -5,14 +5,18 @@ import {CELL_EXPERIMENT_POLICY as P} from './prompt15-cell-policy.mjs';
 import {fileIdentity,readJSON} from './prompt15-cell-core.mjs';
 import {jsonBytes} from './prompt14-catalog-core.mjs';
 const dir='reports/prompt15';
+const policyPath=`${dir}/${P.version}.json`;
 const write=(name,value)=>{const p=`${dir}/${name}`;fs.writeFileSync(p,jsonBytes(value));return fileIdentity(p);};
 const checks=[];
-const executionInputs=fs.readdirSync('src',{recursive:true}).filter(n=>fs.statSync(path.join('src',n)).isFile()).map(n=>fileIdentity(path.join('src',n))).concat(['package.json','package-lock.json','tsconfig.json','next.config.ts','scripts/verify-prompt15-cells.mjs'].map(fileIdentity));
+const executionInputs=[...new Map([
+ ...['src','scripts','tools'].flatMap(directory=>fs.readdirSync(directory,{recursive:true}).filter(name=>fs.statSync(path.join(directory,name)).isFile()).map(name=>fileIdentity(path.join(directory,name)))),
+ ...['package.json','package-lock.json','tsconfig.json','next.config.ts','vitest.config.ts','vitest.setup.ts'].map(fileIdentity),
+].map(identity=>[identity.path,identity])).values()];
 const priorPath=`${dir}/15-03-first-validation-attempt.json`;
 const prior=process.argv.includes('--reuse-regression')?readJSON(priorPath):null;
 for(const args of [
  ['--test','scripts/prompt15-cells.node-test.mjs'],
- ['node_modules/vitest/vitest.mjs','run','src/lib/simulation/catalog-border-lookup.test.ts','src/lib/simulation/catalog-region-integration.test.ts','src/lib/simulation/server/provider-route.test.ts'],
+ ['node_modules/vitest/vitest.mjs','run'],
  ['node_modules/typescript/bin/tsc','--noEmit'],
  ['node_modules/eslint/bin/eslint.js','.'],
 ]){
@@ -48,7 +52,7 @@ write('15-03-validation-inputs.json',executionInputs);
 const decision=readJSON(`${dir}/15-03-policy-decision.json`);
 const review=readJSON(`${dir}/15-REVIEW-B.json`);
 const selected=decision.comparisons.find(x=>x.candidate.id===decision.selectedCandidate);
-if(!fs.readFileSync(`${dir}/15-03-predeclared-policy.json`).equals(jsonBytes(P)))throw Error('Predeclared thresholds differ');
+if(!fs.readFileSync(policyPath).equals(jsonBytes(P)))throw Error('Predeclared thresholds differ');
 for(const a of [review.checkpoint,...decision.inputs,...decision.independence.flatMap(x=>[x.first,x.second])]){const b=fileIdentity(a.path);if(a.sha256!==b.sha256||a.byteLength!==b.byteLength)throw Error(`Stale evidence ${a.path}`);}
 const samples=P.representativeCountries.map(c=>readJSON(`${dir}/cell-experiments/${decision.selectedCandidate}/${c}/first/summary.json`));
 const membershipLimits=samples.map(s=>({country:s.countryId,maximumParentCells:Math.max(...readJSON(`${dir}/cell-experiments/${decision.selectedCandidate}/${s.countryId}/first/membership.json`).map(p=>p.cellCount))}));
@@ -63,8 +67,9 @@ const contracts=write('15-03-downstream-contract.json',{
  migration:'15-4 must include old territory boundaries as protected overlay and common refinement. Per-parent sampling here does not prove global cross-country pairing or old-to-new migration coverage.',
  exceptions:samples.map(s=>({country:s.countryId,tinySourceComponents:s.metrics.sourceTinyParentComponents,sliverCount:s.metrics.sliverCount,measurementArtifact:fileIdentity(`${dir}/cell-experiments/${decision.selectedCandidate}/${s.countryId}/first/cell-measurements.json`)})),
 });
-const validation=write('15-03-validation.json',{status:checks.every(x=>x.status==='pass')?'pass':'fail',checks,tools:{node:process.version,next:readJSON('node_modules/next/package.json').version,typescript:readJSON('node_modules/typescript/package.json').version,vitest:readJSON('node_modules/vitest/package.json').version},inputs:[fileIdentity('scripts/verify-prompt15-cells.mjs'),fileIdentity('scripts/prompt15-cells.node-test.mjs'),...decision.inputs],outputs:[review.checkpoint,contracts,...decision.independence.flatMap(x=>[x.first,x.second])],scope:'15-3 offline policy experiment. Live API, browser E2E, global generation and production cutover deferred.'});
-review.validation=validation;review.status=decision.status==='pass'&&checks.every(x=>x.status==='pass')?'pass':'fail';review.resumeAt=review.status==='pass'?'15-4':'15-3';
+const validationStatus=checks.every(x=>x.status==='pass')&&Object.values(decision.stages).every(x=>x.status==='pass')?'pass':'fail';
+const validation=write('15-03-validation.json',{status:validationStatus,checks,stages:Object.fromEntries(Object.entries(decision.stages).map(([id,value])=>[id,{status:value.status,decision:fileIdentity(`${dir}/15-03-policy-decision.json`),validationCommands:checks.map(c=>({command:c.command,status:c.status}))}])),tools:{node:process.version,next:readJSON('node_modules/next/package.json').version,typescript:readJSON('node_modules/typescript/package.json').version,vitest:readJSON('node_modules/vitest/package.json').version},inputs:[fileIdentity('scripts/verify-prompt15-cells.mjs'),fileIdentity('scripts/prompt15-cells.node-test.mjs'),...decision.inputs],outputs:[review.checkpoint,contracts,...decision.independence.flatMap(x=>[x.first,x.second])],scope:'REVIEW B / 15-11..15-17 offline candidate policy evidence. Live API, browser E2E, global generation and production cutover remain deferred.'});
+review.validation=validation;review.status=decision.status==='pass'&&validationStatus==='pass'?'pass':'fail';review.resumeAt=review.status==='pass'?'15-18':'15-11';
 write('15-REVIEW-B.json',review);
 const fmt=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
 const rows=samples.map(s=>`| ${s.countryId} | ${s.metrics.parentCount} | ${s.metrics.cellCount} | ${fmt(s.maxBorderDiameterKm)} | ${fmt(s.metrics.maxDiameterKm)} | ${fmt(s.render.totalBytes/1024)} |`).join('\n');
@@ -88,5 +93,15 @@ fs.writeFileSync(`${dir}/15-03-README.md`,[
  '재실행: `node scripts/audit-prompt15-cells.mjs first`, `node scripts/audit-prompt15-cells.mjs second adaptive-12-24`, `node scripts/recheck-prompt15-cell-experiments.mjs`, `node scripts/audit-prompt15-cells.mjs review`, `node scripts/verify-prompt15-cells.mjs`. first는 새 실험 시작 snapshot을 기록하므로 기존 결과와 provenance를 보존한 별도 작업 환경에서 재실행해야 한다.','',
  '재개 위치는 **15-4**다. 아직 미해결인 stage A의 12개 source-backed fallback 복구 차단 조건을 유지한다. 모든 국가의 복원 행정 경계와 기존 territory를 protected overlay로 공통 세분하고 실제 world bytes/coverage/topology/membership/tiles를 독립 생성해 검증해야 한다. 생산 catalog 변경·migration·tool-loop token 비용·live API·browser E2E·runtime 점령/undo/redo·cutover는 이번 단계에서 수행하지 않았다. 기존 source/catalog/reports와 작업 시작 시 수정된 application 파일의 hash는 보존 검사를 통과했다.','',
  ].join('\n'));
+fs.writeFileSync(`${dir}/15-03-README.md`,[
+ '# Prompt 15 REVIEW B evidence','',
+ `Status: **${review.status.toUpperCase()}**`,
+ `Selected candidate: **${decision.selectedCandidate}**`,
+ `Policy: **${P.version}** (${fileIdentity(policyPath).sha256})`,'',
+ 'The selected candidate was generated from pinned source geometry for all eleven representative countries in two fresh processes. Exact bytes were compared for catalog, geometry, topology, membership, measurements, render index, every PBF tile, provenance, exceptions, and the artifact manifest. Candidate summaries contain actual country bytes, retained heap, process peak RSS, construction time, and near-provider payload bytes. World-wide values are explicitly projections; global generation and actual world-byte approval remain REVIEW C.','',
+ 'Stages 15-11 through 15-17 are recorded in `15-03-policy-decision.json`; validation commands and output are recorded in `15-03-validation.json`; the final derived verdict is in `15-REVIEW-B.json`.','',
+ `Reproduce in a clean evidence root: \`node scripts/audit-prompt15-cells.mjs first\`, \`node scripts/audit-prompt15-cells.mjs second ${decision.selectedCandidate}\`, \`node scripts/recheck-prompt15-cell-experiments.mjs\`, \`node scripts/audit-prompt15-cells.mjs review\`, \`node scripts/verify-prompt15-cells.mjs\`, then \`node scripts/review-prompt15-b.mjs\`.`,'',
+ 'Deferred: global all-country generation/actual bytes, production migration and cutover, live API/browser E2E, and authoritative runtime owner/controller integration.'
+].join('\n'));
 console.log(JSON.stringify({status:review.status,checks:checks.map(x=>({command:x.command,status:x.status})),resumeAt:review.resumeAt}));
 if(review.status!=='pass')process.exitCode=1;

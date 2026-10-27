@@ -1,13 +1,18 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {recoverCountry} from './prompt15-recovery-candidate.mjs';
+import {recoverCountry,RESTORATION_POLICY} from './prompt15-recovery-candidate.mjs';
 import {validatePartitionCoverage} from './prompt14-source-gate.mjs';
 test('SVN candidate preserves all 193 identities, components, holes and existing bounds',()=>{
  const r=recoverCountry('SVN');
  assert.equal(r.status,'pass');assert.equal(r.sourceIdentityCount,193);
  assert.ok(Object.values(r.checks).every(Boolean));
  assert.ok(r.coverage.gapArea<r.coverage.tolerance);
+ assert.equal(r.rawSourceCorrespondence.length,193);
+ assert.ok(r.rawSourceCorrespondence.every(item=>item.exactGeometry));
+ assert.ok(r.maximumBoundaryDisplacementDegrees<=RESTORATION_POLICY.maximumActualAlignmentDisplacementDegrees);
+ assert.ok(r.countryGrossFraction<=RESTORATION_POLICY.maximumGrossSymmetricDifferenceFraction);
+ assert.ok(r.correspondences.every(item=>item.grossFraction<=RESTORATION_POLICY.maximumGrossSymmetricDifferenceFraction));
  assert.equal(r.evidence.changes.length,2);
  assert.ok(r.evidence.changes.every(c=>c.decision==='oriented-pinned-shared-P1-terminal-boundary'));
 });

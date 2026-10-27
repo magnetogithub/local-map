@@ -23,12 +23,12 @@ const connected = (ids, adjacency) => {
 const decision = readJSON(`${dir}/15-03-policy-decision.json`);
 const review = readJSON(`${dir}/15-REVIEW-B.json`);
 const validation = readJSON(`${dir}/15-03-validation.json`);
-check(fs.readFileSync(`${dir}/15-03-predeclared-policy.json`).equals(jsonBytes(P)), 'Predeclared policy changed');
-check(review.status === 'pass' && decision.status === 'pass' && validation.status === 'pass', 'Checkpoint or validation failed');
+check(fs.readFileSync(`${dir}/${P.version}.json`).equals(jsonBytes(P)), 'Predeclared policy changed');
+check(review.status === 'pass' && decision.status === 'pass' && validation.status === 'pass' && Object.values(decision.stages).every(s=>s.status==='pass') && Object.values(validation.stages).every(s=>s.status==='pass'), 'Checkpoint, stage, or validation failed');
 verify(review.checkpoint);
 verify(review.validation);
 for (const input of decision.inputs) verify(input);
-for (const input of readJSON(`${dir}/15-03-start-snapshot.json`).inputs) verify(input);
+for (const input of readJSON(`${dir}/15-03-start-snapshot-${P.version}.json`).inputs) verify(input);
 for (const input of readJSON(`${dir}/15-03-validation-inputs.json`)) verify(input);
 const selected = decision.comparisons.find(c => c.candidate.id === decision.selectedCandidate);
 check(selected.allSampleChecksPassed && Object.values(selected.worldProjection.budgetChecks).every(Boolean), 'Selected candidate failed resource or sample gates');
@@ -43,16 +43,21 @@ for (const country of P.representativeCountries) {
     check(summary.status === 'pass' && Object.values(summary.checks).every(Boolean), `${country}/${run}: sample failed`);
     for (const artifact of summary.artifacts) verify(artifact);
     const render = readJSON(`${base}/render-index.json`);
-    for (const tile of render.tiles) { verify(tile); tileFiles++; }
-    const normalized = render.tiles.map(t => ({...fileIdentity(t.path), path: path.relative(base, t.path).split(path.sep).join('/')}));
-    check(digest(jsonBytes(normalized)) === summary.deterministicRoots.render, `${country}/${run}: PBF root mismatch`);
+    for (const tile of render.tiles) { const actual=fileIdentity(path.join(base,...tile.path.split('/')));check(actual.sha256===tile.sha256&&actual.byteLength===tile.byteLength,`${country}/${run}: changed PBF ${tile.path}`);tileFiles++; }
+    const normalized = render.tiles.map(t => ({...fileIdentity(path.join(base,...t.path.split('/'))), path:t.path}));
+    check(digest(jsonBytes(normalized)) === summary.deterministicRoots.tiles, `${country}/${run}: PBF root mismatch`);
+    const manifest=readJSON(`${base}/artifact-manifest.json`),manifestFiles=manifest.files.map(a=>({...fileIdentity(path.join(base,...a.path.split('/'))),path:a.path}));
+    check(digest(jsonBytes(manifestFiles))===manifest.rootSha256&&manifest.rootSha256===summary.deterministicRoots.artifactSet,`${country}/${run}: artifact manifest mismatch`);
   }
   check(JSON.stringify(first.deterministicRoots) === JSON.stringify(second.deterministicRoots), `${country}: independent roots differ`);
-  for (const name of ['geometry.geojson', 'topology.json', 'membership.json', 'cell-measurements.json']) {
+  for (const name of ['catalog.json','geometry.geojson', 'topology.json', 'membership.json', 'cell-measurements.json','render-index.json','provenance.json','exceptions.json','artifact-manifest.json']) {
     check(fs.readFileSync(`${prefix}/first/${name}`).equals(fs.readFileSync(`${prefix}/second/${name}`)), `${country}: independent ${name} differs`);
   }
   const cells = readJSON(`${prefix}/first/cell-measurements.json`), byId = new Map(cells.map(c => [c.id, c]));
   const members = readJSON(`${prefix}/first/membership.json`), topology = readJSON(`${prefix}/first/topology.json`);
+  const catalog=readJSON(`${prefix}/first/catalog.json`),provenance=readJSON(`${prefix}/first/provenance.json`);
+  check(catalog.entries.length===cells.length&&catalog.entries.every(c=>c.sourceCountryId===country&&typeof c.oldTerritoryId==='string'&&(c.adminId===null||typeof c.adminId==='string')),`${country}: hierarchy/provenance fields missing`);
+  check(provenance.policy.version===P.version&&provenance.candidate.id===decision.selectedCandidate&&Object.values(provenance.roots).every(x=>typeof x==='string'&&x.length===64),`${country}: provenance roots missing`);
   check(new Set(members.flatMap(p => p.cellIds)).size === cells.length && members.reduce((n, p) => n + p.cellIds.length, 0) === cells.length, `${country}: membership is not a partition`);
   for (const feature of readJSON(`${prefix}/first/geometry.geojson`).features) {
     const m = physicalMetrics(feature.geometry), saved = byId.get(feature.properties.territoryId);
@@ -82,8 +87,8 @@ for (const country of P.representativeCountries) {
   countries.push({country, cells: cells.length, parents: members.length, summary: fileIdentity(`${prefix}/first/summary.json`)});
 }
 const result = {review: 'B', status: failures.length ? 'fail' : 'pass', command: 'node scripts/review-prompt15-b.mjs', tools: {node: process.version}, selectedCandidate: decision.selectedCandidate,
-  inputs: [fileIdentity('scripts/review-prompt15-b.mjs'), fileIdentity(`${dir}/15-03-policy-decision.json`), fileIdentity(`${dir}/15-03-validation.json`)], countries, verifiedTileFiles: tileFiles, failures,
-  scope: 'Independent current-byte and graph recheck of existing offline samples. World costs are projections; runtime, API, migration and global generation are deferred.', resumeAt: failures.length ? '15-3' : '15-4'};
+  stages:decision.stages,inputs: [fileIdentity('scripts/review-prompt15-b.mjs'), fileIdentity(`${dir}/15-03-policy-decision.json`), fileIdentity(`${dir}/15-03-validation.json`)], countries, verifiedTileFiles: tileFiles, failures,
+  scope: 'Independent current-byte and graph recheck of existing offline samples. World costs are projections; runtime, API, migration and global generation are deferred.', resumeAt: failures.length ? '15-11' : '15-18'};
 fs.writeFileSync(`${dir}/15-review-b-recheck.json`, jsonBytes(result));
 review.independentRecheck = fileIdentity(`${dir}/15-review-b-recheck.json`);
 review.status = result.status;

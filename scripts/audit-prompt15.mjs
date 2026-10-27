@@ -30,7 +30,15 @@ if(process.argv[2]==='baseline'){
   'reports/prompt14/14-02-game-input-selection.json','reports/prompt14/14-02-source-arrangement-evidence.json',
   `${base}/migration-pair.json`,`${base}/migration-mapping.json`].filter(p=>fs.existsSync(p));
  const lock=read('data/source-locks/prompt14-derived-game-input-lock.json');
- const lockChecks=[...lock.artifacts,...lock.lineageInputs].map(a=>({...identity(a.repositoryPath),expected:{sha256:a.sha256,byteLength:a.byteLength},pass:digest(fs.readFileSync(a.repositoryPath))===a.sha256&&fs.statSync(a.repositoryPath).size===a.byteLength}));
+  const lockChecks=[...lock.artifacts,...lock.lineageInputs].map(a=>({...identity(a.repositoryPath),expected:{sha256:a.sha256,byteLength:a.byteLength},pass:digest(fs.readFileSync(a.repositoryPath))===a.sha256&&fs.statSync(a.repositoryPath).size===a.byteLength}));
+  // Prompt 14 recorded the then-current package manifests as generator lineage.
+  // They are dependency provenance, not source geometry or frozen output bytes.
+  // A later toolchain must be recorded and must produce a new Prompt 15 policy /
+  // generator identity, but it must not make unchanged Prompt 14 geometry appear
+  // corrupted. Keep both classes explicit so no drift is silently accepted.
+  const toolchainPaths=new Set(['package.json','package-lock.json']);
+  const sourceLockChecks=lockChecks.filter(x=>!toolchainPaths.has(x.path));
+  const toolchainDrift=lockChecks.filter(x=>toolchainPaths.has(x.path)&&!x.pass);
  const frozenChecks=index.artifacts.map(a=>{const actual=identity(`${base}/${a.path}`);return {...actual,expected:a,pass:actual.sha256===a.sha256&&actual.byteLength===a.byteLength};});
  const publicChecks=index.artifacts.filter(a=>a.path.startsWith('public/')).map(a=>{const actual=identity(a.path);return {...actual,expected:a,pass:actual.sha256===a.sha256&&actual.byteLength===a.byteLength};});
  const verified=verifyCatalogArtifactBytes(base);
@@ -70,11 +78,13 @@ if(process.argv[2]==='baseline'){
  const freezeIndexIdentityMatches=identity(freeze.artifactIndex.path).sha256===freeze.artifactIndex.sha256;
  const sourceLockIdentityMatches=identity('data/source-locks/prompt14-derived-game-input-lock.json').sha256===freeze.sourceLockSha256;
  const legacyReports=fs.readdirSync('reports/prompt14',{recursive:true}).filter(p=>fs.statSync(path.join('reports/prompt14',p)).isFile()).map(p=>identity(path.join('reports/prompt14',p).replaceAll('\\','/')));
- const artifactEvidence=write('15-01-artifact-byte-audit.json',{frozenChecks,publicChecks,lockChecks,verified,legacyReports,freezeIndexIdentityMatches,sourceLockIdentityMatches});
- const status=[...frozenChecks,...publicChecks,...lockChecks].every(x=>x.pass)&&freezeIndexIdentityMatches&&sourceLockIdentityMatches?'pass':'fail';
+  const artifactEvidence=write('15-01-artifact-byte-audit.json',{frozenChecks,publicChecks,lockChecks,sourceLockChecks,toolchainDrift,verified,legacyReports,freezeIndexIdentityMatches,sourceLockIdentityMatches,
+   interpretation:'Frozen catalog, source geometry and derived input bytes are integrity gates. Package manifests are recorded generator lineage; drift requires a new downstream generator/policy identity and fresh evidence, not mutation of the Prompt 14 lock.'});
+  const status=[...frozenChecks,...publicChecks,...sourceLockChecks].every(x=>x.pass)&&freezeIndexIdentityMatches&&sourceLockIdentityMatches?'pass':'fail';
  write('15-01-baseline.json',{checkpoint:'15-1',status,scope:'Current bytes and country source-identity loss audit; pass means audit completed, not Prompt 15 functionality',command:'node scripts/audit-prompt15.mjs baseline',tools:{node:process.version,jsts:read('node_modules/jsts/package.json').version,polygonClipping:read('node_modules/polygon-clipping/package.json').version},
   inputs:preservedPaths.map(identity),frozenCatalog:freeze,artifactEvidence,findings,countries,northKoreaBorder:{algorithmSource:identity('src/lib/simulation/catalog-border-lookup.ts'),scope:'Exact replay of current border adjacency algorithm from frozen topology; real function execution captured separately in 15-01-runtime-audit.json',territories:north},contractEvidence,
-  performance:{offlineAuditMs:performance.now()-started,memory:process.memoryUsage(),browserRenderAndAPI:'Not measured in checkpoint A; measure candidates in 15-3 and real runtime in 15-7/15-8'},
+   toolchainProvenance:{driftFromPrompt14:toolchainDrift,current:lockChecks.filter(x=>toolchainPaths.has(x.path)).map(x=>({path:x.path,sha256:x.sha256,byteLength:x.byteLength}))},
+   performance:{offlineAuditMs:performance.now()-started,memory:process.memoryUsage(),browserRenderAndAPI:'Not measured in checkpoint A; measure candidates in 15-3 and real runtime in 15-7/15-8'},
   dirtyAtTaskStart:[],workingScope:['scripts/prompt15-*','scripts/audit-prompt15.mjs','reports/prompt15/'],historicalReportDisagreements:lockChecks.filter(x=>!x.pass),
   next:'15-2: reproduce historical SVN selection, validate recovery without publishing or widening tolerance'});
  console.log(JSON.stringify({checkpoint:'15-1',status,findings}));

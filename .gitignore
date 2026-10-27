@@ -49,8 +49,11 @@ next-env.d.ts
 # Prompt 15 generated catalogs, evidence, and orchestration runtime files.
 # Keep implementation code, task definitions, and automation settings trackable.
 /data/catalogs/prompt15/
+/data/derived/prompt15/
+/data/operational-cells/
 /reports/prompt15/
 /reports/verification/
+/.codex-remote-attachments/
 
 # Local archives and assessments created for the Prompt 14 rollback.
 /reports/maintenance/20261014-prompt14-rollback/

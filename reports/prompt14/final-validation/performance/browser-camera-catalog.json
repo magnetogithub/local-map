@@ -1,27 +1,27 @@
 {
   "mode": "catalog",
-  "loadMs": 3564.238699999987,
+  "loadMs": 2142.501900000032,
   "coldHeap": {
-    "usedSize": 20547036,
-    "totalSize": 23175168,
-    "embedderHeapUsedSize": 1701112,
-    "backingStorageSize": 26867524
+    "usedSize": 29999364,
+    "totalSize": 31825920,
+    "embedderHeapUsedSize": 1943544,
+    "backingStorageSize": 32113767
   },
   "warmHeap": {
-    "usedSize": 23367180,
-    "totalSize": 25534464,
-    "embedderHeapUsedSize": 1952440,
-    "backingStorageSize": 70416651
+    "usedSize": 33089532,
+    "totalSize": 36020224,
+    "embedderHeapUsedSize": 1974664,
+    "backingStorageSize": 77637138
   },
-  "warmupMs": 4536.7961999999825,
+  "warmupMs": 4219.200900000054,
   "samples": [
     {
-      "durationMs": 1890.199999999255,
-      "frames": 29,
-      "frameTimeP50": 16.800000000745058,
-      "frameTimeP95": 403.2000000011176,
-      "maxFrameMs": 546,
-      "fps": 15.342291820977373,
+      "durationMs": 1969.0999999940395,
+      "frames": 24,
+      "frameTimeP50": 16.400000005960464,
+      "frameTimeP95": 499.19999998807907,
+      "maxFrameMs": 547.1000000238419,
+      "fps": 12.188309379956655,
       "worldSerializations": 0,
       "before": {
         "worldSchema": 3,
@@ -52,6 +52,9 @@
         "territoryUpdates": 0,
         "edgeUpdates": 14918,
         "indexedEdges": 14918,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
         "verifiedRequests": 31,
         "cacheHits": 3,
         "cachedTiles": 26,
@@ -86,6 +89,9 @@
         "territoryUpdates": 0,
         "edgeUpdates": 14918,
         "indexedEdges": 14918,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
         "verifiedRequests": 31,
         "cacheHits": 3,
         "cachedTiles": 26,
@@ -93,12 +99,12 @@
       }
     },
     {
-      "durationMs": 1880.2999999988824,
-      "frames": 29,
-      "frameTimeP50": 16.59999999962747,
-      "frameTimeP95": 419,
-      "maxFrameMs": 526.2999999988824,
-      "fps": 15.423070786585779,
+      "durationMs": 2038.199999988079,
+      "frames": 22,
+      "frameTimeP50": 16.69999998807907,
+      "frameTimeP95": 461.10000002384186,
+      "maxFrameMs": 642.6999999880791,
+      "fps": 10.793308148884527,
       "worldSerializations": 0,
       "before": {
         "worldSchema": 3,
@@ -129,6 +135,9 @@
         "territoryUpdates": 0,
         "edgeUpdates": 14918,
         "indexedEdges": 14918,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
         "verifiedRequests": 31,
         "cacheHits": 3,
         "cachedTiles": 26,
@@ -163,6 +172,9 @@
         "territoryUpdates": 0,
         "edgeUpdates": 14918,
         "indexedEdges": 14918,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
         "verifiedRequests": 31,
         "cacheHits": 3,
         "cachedTiles": 26,
@@ -170,12 +182,12 @@
       }
     },
     {
-      "durationMs": 1894.5,
-      "frames": 27,
-      "frameTimeP50": 16.600000001490116,
-      "frameTimeP95": 414.40000000037253,
-      "maxFrameMs": 551,
-      "fps": 14.251781472684085,
+      "durationMs": 1937.800000011921,
+      "frames": 25,
+      "frameTimeP50": 16.69999998807907,
+      "frameTimeP95": 429.2000000178814,
+      "maxFrameMs": 595.5,
+      "fps": 12.900562464483775,
       "worldSerializations": 0,
       "before": {
         "worldSchema": 3,
@@ -206,6 +218,9 @@
         "territoryUpdates": 0,
         "edgeUpdates": 14918,
         "indexedEdges": 14918,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
         "verifiedRequests": 31,
         "cacheHits": 3,
         "cachedTiles": 26,
@@ -240,6 +255,9 @@
         "territoryUpdates": 0,
         "edgeUpdates": 14918,
         "indexedEdges": 14918,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
         "verifiedRequests": 31,
         "cacheHits": 3,
         "cachedTiles": 26,
@@ -249,22 +267,22 @@
   ],
   "heap": [
     {
-      "usedSize": 23156664,
-      "totalSize": 24223744,
-      "embedderHeapUsedSize": 1947200,
-      "backingStorageSize": 70416907
+      "usedSize": 33193780,
+      "totalSize": 34447360,
+      "embedderHeapUsedSize": 1964808,
+      "backingStorageSize": 77818411
     },
     {
-      "usedSize": 23233052,
-      "totalSize": 24485888,
-      "embedderHeapUsedSize": 2075416,
-      "backingStorageSize": 70416907
+      "usedSize": 33343608,
+      "totalSize": 34447360,
+      "embedderHeapUsedSize": 1928528,
+      "backingStorageSize": 78027901
     },
     {
-      "usedSize": 23292204,
-      "totalSize": 24485888,
-      "embedderHeapUsedSize": 2058288,
-      "backingStorageSize": 70416907
+      "usedSize": 33407480,
+      "totalSize": 34971648,
+      "embedderHeapUsedSize": 1883712,
+      "backingStorageSize": 78403994
     }
   ],
   "browserErrors": []

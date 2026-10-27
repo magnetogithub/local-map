@@ -3,7 +3,7 @@
   "environment": {
     "platform": "win32",
     "cpu": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
-    "browser": "154.0.8037.95",
+    "browser": "154.0.8037.98",
     "viewport": {
       "width": 1440,
       "height": 900
@@ -14,95 +14,95 @@
   "measurements": [
     {
       "mode": "legacy",
-      "loadMs": 10153.195999999996,
+      "loadMs": 8931.159000000043,
       "coldHeap": {
-        "usedSize": 185403012,
-        "totalSize": 192737280,
-        "embedderHeapUsedSize": 894824,
-        "backingStorageSize": 17898437
+        "usedSize": 186005484,
+        "totalSize": 189853696,
+        "embedderHeapUsedSize": 1192056,
+        "backingStorageSize": 17913080
       },
       "warmHeap": {
-        "usedSize": 320688548,
-        "totalSize": 325906432,
-        "embedderHeapUsedSize": 1390776,
-        "backingStorageSize": 47075546
+        "usedSize": 321290116,
+        "totalSize": 324333568,
+        "embedderHeapUsedSize": 1423912,
+        "backingStorageSize": 47091981
       },
-      "warmupMs": 8563.66539999994,
+      "warmupMs": 10174.491099999985,
       "samples": [
         {
-          "durationMs": 6098.199999999255,
-          "frames": 72,
-          "frameTimeP50": 16.700000001117587,
-          "frameTimeP95": 773.1999999992549,
-          "maxFrameMs": 1765.699999999255,
-          "fps": 11.806569043830445,
+          "durationMs": 5007.800000011921,
+          "frames": 67,
+          "frameTimeP50": 16.5,
+          "frameTimeP95": 21.900000005960464,
+          "maxFrameMs": 2846.199999988079,
+          "fps": 13.379128559415415,
           "worldSerializations": 0
         },
         {
-          "durationMs": 1553.0999999996275,
+          "durationMs": 4677.4000000059605,
+          "frames": 76,
+          "frameTimeP50": 16.69999998807907,
+          "frameTimeP95": 19.099999994039536,
+          "maxFrameMs": 2433.300000011921,
+          "fps": 16.247995724211652,
+          "worldSerializations": 0
+        },
+        {
+          "durationMs": 1565,
           "frames": 94,
-          "frameTimeP50": 16.600000001490116,
-          "frameTimeP95": 19.600000001490116,
-          "maxFrameMs": 25,
-          "fps": 60.524113064208706,
-          "worldSerializations": 0
-        },
-        {
-          "durationMs": 1567.5999999996275,
-          "frames": 95,
-          "frameTimeP50": 16.59999999962747,
-          "frameTimeP95": 18.399999998509884,
-          "maxFrameMs": 21.5,
-          "fps": 60.60219443737087,
+          "frameTimeP50": 16.600000023841858,
+          "frameTimeP95": 18,
+          "maxFrameMs": 28.599999994039536,
+          "fps": 60.063897763578275,
           "worldSerializations": 0
         }
       ],
       "heap": [
         {
-          "usedSize": 320787912,
-          "totalSize": 326430720,
-          "embedderHeapUsedSize": 1352096,
-          "backingStorageSize": 47051234
+          "usedSize": 349537520,
+          "totalSize": 352382976,
+          "embedderHeapUsedSize": 1258128,
+          "backingStorageSize": 47467453
         },
         {
-          "usedSize": 321280560,
-          "totalSize": 325906432,
-          "embedderHeapUsedSize": 1304232,
-          "backingStorageSize": 48661166
+          "usedSize": 321482060,
+          "totalSize": 323547136,
+          "embedderHeapUsedSize": 1365160,
+          "backingStorageSize": 48996092
         },
         {
-          "usedSize": 321474856,
-          "totalSize": 326955008,
-          "embedderHeapUsedSize": 1283064,
-          "backingStorageSize": 49736481
+          "usedSize": 321662092,
+          "totalSize": 323284992,
+          "embedderHeapUsedSize": 1331408,
+          "backingStorageSize": 50071279
         }
       ],
       "browserErrors": []
     },
     {
       "mode": "catalog",
-      "loadMs": 3564.238699999987,
+      "loadMs": 2142.501900000032,
       "coldHeap": {
-        "usedSize": 20547036,
-        "totalSize": 23175168,
-        "embedderHeapUsedSize": 1701112,
-        "backingStorageSize": 26867524
+        "usedSize": 29999364,
+        "totalSize": 31825920,
+        "embedderHeapUsedSize": 1943544,
+        "backingStorageSize": 32113767
       },
       "warmHeap": {
-        "usedSize": 23367180,
-        "totalSize": 25534464,
-        "embedderHeapUsedSize": 1952440,
-        "backingStorageSize": 70416651
+        "usedSize": 33089532,
+        "totalSize": 36020224,
+        "embedderHeapUsedSize": 1974664,
+        "backingStorageSize": 77637138
       },
-      "warmupMs": 4536.7961999999825,
+      "warmupMs": 4219.200900000054,
       "samples": [
         {
-          "durationMs": 1890.199999999255,
-          "frames": 29,
-          "frameTimeP50": 16.800000000745058,
-          "frameTimeP95": 403.2000000011176,
-          "maxFrameMs": 546,
-          "fps": 15.342291820977373,
+          "durationMs": 1969.0999999940395,
+          "frames": 24,
+          "frameTimeP50": 16.400000005960464,
+          "frameTimeP95": 499.19999998807907,
+          "maxFrameMs": 547.1000000238419,
+          "fps": 12.188309379956655,
           "worldSerializations": 0,
           "before": {
             "worldSchema": 3,
@@ -133,6 +133,9 @@
             "territoryUpdates": 0,
             "edgeUpdates": 14918,
             "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
             "verifiedRequests": 31,
             "cacheHits": 3,
             "cachedTiles": 26,
@@ -167,6 +170,9 @@
             "territoryUpdates": 0,
             "edgeUpdates": 14918,
             "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
             "verifiedRequests": 31,
             "cacheHits": 3,
             "cachedTiles": 26,
@@ -174,12 +180,12 @@
           }
         },
         {
-          "durationMs": 1880.2999999988824,
-          "frames": 29,
-          "frameTimeP50": 16.59999999962747,
-          "frameTimeP95": 419,
-          "maxFrameMs": 526.2999999988824,
-          "fps": 15.423070786585779,
+          "durationMs": 2038.199999988079,
+          "frames": 22,
+          "frameTimeP50": 16.69999998807907,
+          "frameTimeP95": 461.10000002384186,
+          "maxFrameMs": 642.6999999880791,
+          "fps": 10.793308148884527,
           "worldSerializations": 0,
           "before": {
             "worldSchema": 3,
@@ -210,6 +216,9 @@
             "territoryUpdates": 0,
             "edgeUpdates": 14918,
             "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
             "verifiedRequests": 31,
             "cacheHits": 3,
             "cachedTiles": 26,
@@ -244,6 +253,9 @@
             "territoryUpdates": 0,
             "edgeUpdates": 14918,
             "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
             "verifiedRequests": 31,
             "cacheHits": 3,
             "cachedTiles": 26,
@@ -251,12 +263,12 @@
           }
         },
         {
-          "durationMs": 1894.5,
-          "frames": 27,
-          "frameTimeP50": 16.600000001490116,
-          "frameTimeP95": 414.40000000037253,
-          "maxFrameMs": 551,
-          "fps": 14.251781472684085,
+          "durationMs": 1937.800000011921,
+          "frames": 25,
+          "frameTimeP50": 16.69999998807907,
+          "frameTimeP95": 429.2000000178814,
+          "maxFrameMs": 595.5,
+          "fps": 12.900562464483775,
           "worldSerializations": 0,
           "before": {
             "worldSchema": 3,
@@ -287,6 +299,9 @@
             "territoryUpdates": 0,
             "edgeUpdates": 14918,
             "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
             "verifiedRequests": 31,
             "cacheHits": 3,
             "cachedTiles": 26,
@@ -321,6 +336,9 @@
             "territoryUpdates": 0,
             "edgeUpdates": 14918,
             "indexedEdges": 14918,
+            "labelLayoutRequests": 0,
+            "labelCountryUpdates": 0,
+            "labelFailures": [],
             "verifiedRequests": 31,
             "cacheHits": 3,
             "cachedTiles": 26,
@@ -330,29 +348,29 @@
       ],
       "heap": [
         {
-          "usedSize": 23156664,
-          "totalSize": 24223744,
-          "embedderHeapUsedSize": 1947200,
-          "backingStorageSize": 70416907
+          "usedSize": 33193780,
+          "totalSize": 34447360,
+          "embedderHeapUsedSize": 1964808,
+          "backingStorageSize": 77818411
         },
         {
-          "usedSize": 23233052,
-          "totalSize": 24485888,
-          "embedderHeapUsedSize": 2075416,
-          "backingStorageSize": 70416907
+          "usedSize": 33343608,
+          "totalSize": 34447360,
+          "embedderHeapUsedSize": 1928528,
+          "backingStorageSize": 78027901
         },
         {
-          "usedSize": 23292204,
-          "totalSize": 24485888,
-          "embedderHeapUsedSize": 2058288,
-          "backingStorageSize": 70416907
+          "usedSize": 33407480,
+          "totalSize": 34971648,
+          "embedderHeapUsedSize": 1883712,
+          "backingStorageSize": 78403994
         }
       ],
       "updates": {
         "target": "GBR",
         "occupiedTerritories": 234,
-        "occupationMs": 178.3699000000488,
-        "colorMs": 113.43259999994189,
+        "occupationMs": 175.7432999999728,
+        "colorMs": 149.203600000008,
         "before": {
           "worldSchema": 3,
           "simulationSchema": 2,
@@ -382,6 +400,9 @@
           "territoryUpdates": 0,
           "edgeUpdates": 13546,
           "indexedEdges": 13546,
+          "labelLayoutRequests": 0,
+          "labelCountryUpdates": 0,
+          "labelFailures": [],
           "verifiedRequests": 11,
           "cacheHits": 0,
           "cachedTiles": 4,
@@ -418,12 +439,15 @@
           "territoryUpdates": 554,
           "edgeUpdates": 13559,
           "indexedEdges": 13546,
+          "labelLayoutRequests": 0,
+          "labelCountryUpdates": 0,
+          "labelFailures": [],
           "verifiedRequests": 11,
           "cacheHits": 0,
           "cachedTiles": 4,
           "cachedBytes": 2719824
         },
-        "featureStateCalls": 568,
+        "featureStateCalls": 574,
         "wholeSourceSetData": 0,
         "sourceUpdateData": 0
       },

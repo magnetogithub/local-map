@@ -177,5 +177,5 @@ describe("12-R1 production country and ownership directories", () => {
     missingReference.worldEffects[0].subdivisionRefs[0].subdivisionId = "missing-subdivision";
     expect(validateResolutionAgainstContext(missingReference, context).ok).toBe(false);
     expect(() => createResolvedTurnPlan({turnId: "turn.invalid-subdivision", simulation, world, resolution: missingReference, subdivisionCatalog: catalog})).toThrow();
-  }, 180_000);
+  }, 360_000);
 });

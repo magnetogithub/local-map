@@ -28,11 +28,15 @@ it('audits the real production border tool and rejects overflow without truncati
  expect(administrative.every(r=>r.territoryIds.length===1)).toBe(true);
  const manifest=createSimulationToolManifest();
  expect(manifest.every(t=>t.strict&&t.parameters.additionalProperties===false)).toBe(true);
- fs.mkdirSync('reports/prompt15',{recursive:true});
- const identity=(path:string)=>{const bytes=fs.readFileSync(path);return {path,sha256:createHash('sha256').update(bytes).digest('hex'),byteLength:bytes.length};};
- fs.writeFileSync('reports/prompt15/15-01-runtime-audit.json',JSON.stringify({status:'pass',command:'npx vitest run scripts/prompt15-runtime-audit.test.ts',
-  mode:'Offline actual production functions and frozen assets; no provider network call or browser interaction',catalogRef:pair.world.catalogRef,
-  directBorderTerritoryIds:direct,toolResponse:response,administrativeMembership:administrative,toolManifest:manifest,
-  negativeCapCheck:'BORDER_REQUEST_CAP at cap=1; no truncated success',worldRevision:pair.world.revision,simulationRevision:pair.simulation.revision,
-  elapsedMs:performance.now()-start,memory:process.memoryUsage(),inputs:[identity('src/lib/simulation/catalog-region.server.ts'),identity('src/lib/simulation/catalog-border-lookup.ts'),identity('src/lib/simulation/server/simulation-tools.ts')]}));
+ // The package regression suite is read-only with respect to signed evidence.
+ // A deliberate Stage A evidence command opts into writing this runtime receipt.
+ if(process.env.PROMPT15_WRITE_RUNTIME_AUDIT==='1'){
+  fs.mkdirSync('reports/prompt15',{recursive:true});
+  const identity=(path:string)=>{const bytes=fs.readFileSync(path);return {path,sha256:createHash('sha256').update(bytes).digest('hex'),byteLength:bytes.length};};
+  fs.writeFileSync('reports/prompt15/15-01-runtime-audit.json',JSON.stringify({status:'pass',command:'PROMPT15_WRITE_RUNTIME_AUDIT=1 npx vitest run scripts/prompt15-runtime-audit.test.ts',
+   mode:'Offline actual production functions and frozen assets; no provider network call or browser interaction',catalogRef:pair.world.catalogRef,
+   directBorderTerritoryIds:direct,toolResponse:response,administrativeMembership:administrative,toolManifest:manifest,
+   negativeCapCheck:'BORDER_REQUEST_CAP at cap=1; no truncated success',worldRevision:pair.world.revision,simulationRevision:pair.simulation.revision,
+   elapsedMs:performance.now()-start,memory:process.memoryUsage(),inputs:[identity('src/lib/simulation/catalog-region.server.ts'),identity('src/lib/simulation/catalog-border-lookup.ts'),identity('src/lib/simulation/server/simulation-tools.ts')]}));
+ }
 },120_000);

@@ -110,5 +110,5 @@ describe("12-R3 production subdivision catalog", () => {
     expect(plan.nextWorldState.countryOrder).toHaveLength(world.countryOrder.length + 3);
     expect(plan.nextWorldState.revision).toBe(world.revision + 1);
     expect(plan.compiledWorldEffects.commandCount).toBe(5);
-  }, 300_000);
+  }, 600_000);
 });

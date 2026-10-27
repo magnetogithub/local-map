@@ -1,8 +1,8 @@
 // Frozen before candidate execution. These are experimental gates, not runtime defaults.
 export const CELL_EXPERIMENT_POLICY=Object.freeze({
- version:'prompt15-cell-experiment-v1',earthRadiusKm:6371.0088,
+version:'prompt15-cell-experiment-v6',artifactSchemaVersion:'prompt15-cell-artifacts-v2',generatorVersion:'prompt15-cell-generator-v2',earthRadiusKm:6371.0088,
  projection:'Global latitude bands; longitude count uses the maximum cos(latitude) within each band. Physical dimensions use the authalic sphere, not degrees-as-km. Planar source polygons remain unchanged. Polar rows and +/-180 map cuts are explicit.',
- candidates:[{id:'uniform-12',baseKm:12,refineKm:null},{id:'uniform-24',baseKm:24,refineKm:null},{id:'adaptive-12-24',baseKm:24,refineKm:12}],
+candidates:[{id:'uniform-12-v6',family:'uniform-12',baseKm:12,refineKm:null},{id:'uniform-24-v6',family:'uniform-24',baseKm:24,refineKm:null},{id:'adaptive-12-24-v6',family:'adaptive-12-24',baseKm:24,refineKm:12}],
  borderRefinementBandKm:48,refinement:'Refine whole base boxes intersecting a conservative expanded bounding envelope of pinned positive-length NATIONAL LAND boundary segments. No coastline refinement requirement. Interior fronts still use bounded 24km cells.',
  representativeCountries:['KOR','PRK','SVN','HRV','KEN','TZA','KAZ','FIN','FJI','LUX','ZAF'],
  boundaryMaximumDiameterKm:19,interiorMaximumDiameterKm:36,boundaryMaximumAreaKm2:150,interiorMaximumAreaKm2:600,
@@ -17,9 +17,9 @@ export const CELL_EXPERIMENT_POLICY=Object.freeze({
   offlineCountryRssBytes:2*1024**3,initialConstructionMs:20000,nearProviderPayloadBytes:128*1024},
  stableIds:'SHA-256(domain, policy version, candidate ID, pinned parent source country/identity/hash, canonical cell polygon). Independent of owner/controller, locale, enumeration and run order.',
  provenance:'Separate pinned source hash and source version from synthetic policy/generator/dependency/projection hashes. Cells are operational, never presented as real administrative boundaries.',
- topology:'Common 1e-12 numerical noding, full positive-length pairing, component-separated cells, coast/point contacts excluded from adjacency. Country-wide and global refinement is deferred to 15-4.',
+ topology:'Common 1e-12 numerical noding, full positive-length pairing, component-separated cells, coast/point contacts excluded from adjacency. All-country global generation remains REVIEW C / task 15-18 and later.',
  selection:'Graph-distance approximation through positive-length edges inside a geometric corridor anchored on an actual source frontier segment; continuous second advance starts at current controller edges. Not an exact geodesic occupation band.',
- selectionOrder:['adaptive-12-24','uniform-12','uniform-24'],
+selectionOrder:['adaptive-12-24-v6','uniform-12-v6','uniform-24-v6'],
  decision:'Choose the first candidate satisfying every physical, behavior and measured/projected resource gate. Thresholds do not change after results. Global estimates are planning evidence, not global actual-byte approval.',
- downstream:'15-4 must validate every country and actual roots/bytes against these caps; 15-5 must redesign 512-wide region records independently of per-action caps. Runtime/API/migration/E2E gates belong to 15-5..15-8.',
+ downstream:'REVIEW C must validate every country and actual world roots/bytes against these caps. Later stages must redesign 512-wide region records independently of per-action caps and validate runtime/API/migration/E2E before cutover.',
 });
