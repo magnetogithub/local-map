@@ -8,6 +8,7 @@ data/catalogs/prompt14/** -text
 # PROMPT 15 immutable artifacts and hash-backed evidence retain exact bytes.
 data/catalogs/prompt15/** -text
 reports/prompt15/** -text
+reports/maintenance/20261028-cleanup/** -text -whitespace
 # Source checkpoints carry manifests of the original source bytes.
 checkpoints/prompt15-20261016/** -text
 # Large immutable JSON remains byte-exact locally and is stored through Git LFS.

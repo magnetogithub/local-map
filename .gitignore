@@ -58,3 +58,9 @@ next-env.d.ts
 # Local archives and assessments created for the Prompt 14 rollback.
 /reports/maintenance/20261014-prompt14-rollback/
 /reports/maintenance/20261014-storage-assessment/
+
+# Keep detailed local maintenance evidence private; publish aggregate summaries only.
+/reports/maintenance/20261028-cleanup/*
+!/reports/maintenance/20261028-cleanup/push-summary.json
+!/reports/maintenance/20261028-cleanup/push-summary.md
+/reports/maintenance/20261028-cleanup-2/

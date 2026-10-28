@@ -1,0 +1,13 @@
+{
+  "status": "first-cleanup-complete",
+  "sourceCommit": "6a96a2d6ae23e95dd555a85e17419e65efd85fbb",
+  "beforeGiB": 328.08,
+  "afterGiB": 79.26,
+  "netReductionGiB": 248.82,
+  "netReductionPercent": 75.8,
+  "removedTargetDirectories": 31,
+  "protectedIdentityChecksPassed": 7,
+  "coreTestsPassed": 4,
+  "currentRuntimeDataPreserved": true,
+  "evidencePolicy": "Detailed execution records and compressed evidence remain local and are not included in this Git snapshot."
+}
