@@ -44,7 +44,11 @@
     ".next-e2e/types/**/*.ts",
     ".next-e2e/dev/types/**/*.ts",
     ".next-e2e-review-g/types/**/*.ts",
-    ".next-e2e-review-g/dev/types/**/*.ts"
+    ".next-e2e-review-g/dev/types/**/*.ts",
+    ".next-prompt16-smoke/types/**/*.ts",
+    ".next-prompt16-smoke/dev/types/**/*.ts",
+    ".next-prompt16-build/types/**/*.ts",
+    ".next-prompt16-build/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

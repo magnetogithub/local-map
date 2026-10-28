@@ -15,7 +15,7 @@ export type CatalogMapPort={
   addSource:(id:string,source:SourceSpecification)=>unknown;removeSource:(id:string)=>unknown;
   addLayer:(layer:LayerSpecification)=>unknown;removeLayer:(id:string)=>unknown;
   getSource:(id:string)=>unknown;getLayer:(id:string)=>unknown;
-  setFeatureState:(target:{source:string;sourceLayer?:string;id:string},state:Record<string,unknown>)=>unknown;
+  setFeatureState:(target:{source:string;sourceLayer?:string;id:string|number},state:Record<string,unknown>)=>unknown;
   on:(event:string,layer:string,listener:(event:MapEvent)=>void)=>unknown;off:(event:string,layer:string,listener:(event:MapEvent)=>void)=>unknown;
 };
 /** Explicit opt-in consumer; production's V2 store/bootstrap is not mounted here. */

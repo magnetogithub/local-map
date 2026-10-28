@@ -14,12 +14,16 @@ import {prepareCountryColorAuthorities} from './country-color-authority';
 import {planCountryMapColors} from '../planning/country-map-color-planner';
 import {DEBUG_WORLD_EFFECT_PREFIX,allowsDevelopmentWorldEffect} from './debug-world-effect';
 import {isConsequenceAvailableAt} from './consequence-causality';
+import {validateOperationalFrontierEffects, type OperationalFrontierValidation} from './operational-frontier-validation';
 
-/** V3 commits never materialize geometry. Territory/authority planners are introduced by subsequent tasks. */
-export function createCatalogTurnPlan(input:{turnId:string;simulation:SimulationStateV2;world:WorldStateV3;resolution:unknown;catalog:WorldGeometryCatalogContract;regionIndex?:CatalogRegionIndex}):ResolvedTurnPlan<SimulationStateV2,WorldStateV3>{
+/** Cell-level authoritative planning. No intermediate world/simulation is published. */
+export function createCatalogTurnPlan(input:{turnId:string;simulation:SimulationStateV2;world:WorldStateV3;resolution:unknown;catalog:WorldGeometryCatalogContract;regionIndex?:CatalogRegionIndex;frontier?:OperationalFrontierValidation}):ResolvedTurnPlan<SimulationStateV2,WorldStateV3>{
+  assertWorldGeometryCatalogRefMatches(input.world.catalogRef,input.catalog.ref);
   if(input.regionIndex?.catalogRef)assertWorldGeometryCatalogRefMatches(input.world.catalogRef,input.regionIndex.catalogRef);
   const debugWorldEffectActionIds=new Set(input.simulation.queuedActions.filter(a=>allowsDevelopmentWorldEffect(['queued','resolving'].includes(a.status)&&a.text.startsWith(DEBUG_WORLD_EFFECT_PREFIX))).map(a=>a.actionId));
-  const validation=validateTurnResolution(resolveCatalogRegionEffects(parseTurnResolutionV1(input.resolution),input.regionIndex),input.simulation,input.world,{debugWorldEffectActionIds});
+  const parsed=parseTurnResolutionV1(input.resolution);
+  validateOperationalFrontierEffects(parsed,input.world,input.frontier);
+  const validation=validateTurnResolution(resolveCatalogRegionEffects(parsed,input.regionIndex),input.simulation,input.world,{debugWorldEffectActionIds});
   if(!validation.ok||!validation.resolution)throw new Error(validation.issues.map(i=>`${i.code}: ${i.message}`).join('; '));
   const r=validation.resolution;
   if(r.events.some(e=>e.authorityLifecycle||e.referenceLifecycle))throw Error('HOST_OWNED_LIFECYCLE_EVENT');
@@ -55,7 +59,7 @@ export function createCatalogTurnPlan(input:{turnId:string;simulation:Simulation
       hostEvents.push(catalogLifecycleEvent({turnId:input.turnId,date:cause.date,actorIds:participants,sourceEventId:cause.eventId,authority:{authorityId:a.id,operation:'granted',reason:'validated-turn-grant',previousActorCountryId:null,previousTargetCountryId:null}}));
     }else if(effect.type==='territory.occupy'||effect.type==='territory.liberate'||effect.type==='territory.transferOwnership'){
       if(!cause.actorCountryIds.includes(effect.actorCountryId))throw Error('INVALID_TERRITORIAL_ACTOR_CAUSE');
-      const {effectId,causedByEventId,type,regionRefs,...payload}=effect;void causedByEventId;void regionRefs;
+      const {effectId,causedByEventId,type,regionRefs,frontierScope,...payload}=effect;void causedByEventId;void regionRefs;void frontierScope;
       const aggregate=planTerritorialControl({world,simulation:frame,date:cause.date,debugDirective:reachesDebug(cause.eventId),command:{commandId:effectId,type,expectedRevision:world.revision,payload:{...payload,expectedSimulationRevision:frame.revision}}});
       const territories=Object.fromEntries(aggregate.changes.map(c=>{changedTerritories.add(c.after.id);for(const id of [c.before.ownerCountryId,c.before.controllerCountryId,c.after.ownerCountryId,c.after.controllerCountryId])if(id)changedCountries.add(id);return [c.after.id,c.after];}));
       world=transitionWorldStateV3(world,input.catalog,{territories},input.world.revision);

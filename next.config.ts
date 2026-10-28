@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  ...(process.env.PAX_BUILD_DIST_DIR ? {distDir: process.env.PAX_BUILD_DIST_DIR} : {}),
   // Archived verification fixtures are never production runtime inputs.
   // Keep the approved Prompt 14 evidence and catalog assets available.
   outputFileTracingExcludes: {"/*": ["./reports/prompt15/**/*", "./reports/maintenance/**/*", "./reports/verification/**/*", "./.tmp/**/*"]},
@@ -15,6 +16,11 @@ const nextConfig: NextConfig = {
         "@/lib/simulation/server/production-provider.server": "./src/lib/test-only/region-provider.server.ts",
       },
     },
+  } : {}),
+  ...(process.env.NODE_ENV !== 'production' && process.env.PAX_OPERATIONAL_SMOKE === '1' ? {
+    turbopack: {resolveAlias: {
+      '@/lib/simulation/server/production-provider.server': './src/lib/test-only/region-provider.server.ts',
+    }},
   } : {}),
 };
 

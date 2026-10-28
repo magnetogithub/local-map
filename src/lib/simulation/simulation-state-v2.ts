@@ -65,6 +65,16 @@ export const territorialControlAuthoritySchema = z.strictObject({
   ...authorityDates,
 }).refine(validDateRange, {message: "Authority validFrom must not exceed validTo"});
 
+// A previously granted parent scope can expand to many cells during catalog
+// migration. Stored scope is complete; new grants and individual actions still
+// use territorialControlAuthoritySchema and MAX_AUTHORITY_TERRITORIES (512).
+const storedTerritorialControlAuthoritySchema = territorialControlAuthoritySchema.safeExtend({
+  allowedTerritoryIds: z.array(authorityTerritoryIdSchema).min(1).refine(
+    ids => ids.every((id, index) => index === 0 || ids[index - 1] < id),
+    {message: "Expected unique values in bytewise canonical order"},
+  ),
+});
+
 export const countryPresentationAuthoritySchema = z.strictObject({
   id: countryPresentationAuthorityIdSchema,
   actorCountryId: countryIdSchema,
@@ -84,7 +94,7 @@ const boundedRecord = <Schema extends z.ZodType>(
 export const simulationStateV2Schema = simulationStateSchema.extend({
   schemaVersion: z.literal(SIMULATION_STATE_V2_SCHEMA_VERSION),
   territorialControlAuthoritiesById: boundedRecord(
-    territorialControlAuthorityIdSchema, territorialControlAuthoritySchema,
+    territorialControlAuthorityIdSchema, storedTerritorialControlAuthoritySchema,
     MAX_TERRITORIAL_CONTROL_AUTHORITIES,
   ),
   territorialControlAuthorityOrder: z.array(territorialControlAuthorityIdSchema)

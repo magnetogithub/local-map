@@ -49,10 +49,11 @@ export async function streamSimulationTurn(
   signal: AbortSignal,
   onEvent: (event: HostTurnEvent) => void,
   fetchImplementation: typeof fetch = fetch,
+  headers?: Readonly<Record<string, string>>,
 ): Promise<void> {
   const response = await fetchImplementation("/api/simulation/turn", {
     method: "POST",
-    headers: {"Content-Type": "application/json"},
+    headers: {"Content-Type": "application/json", ...headers},
     body: JSON.stringify(request),
     signal,
   });

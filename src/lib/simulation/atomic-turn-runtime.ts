@@ -73,6 +73,10 @@ export type AtomicTurnRuntime<Simulation extends AtomicSimulation = SimulationSt
   getSubscriberFailures(): readonly AtomicSubscriberFailure[];
 }>;
 
+type AtomicCatalogTransitionPort<Simulation extends AtomicSimulation, World extends AtomicWorldReferences> = Readonly<{
+  transitionCatalogSnapshot(expected: AtomicTurnSnapshot<Simulation, World>, next: AtomicTurnSnapshot<Simulation, World>): AtomicTurnSnapshot<Simulation, World>;
+}>;
+
 export type AtomicPairPublisher<Simulation extends AtomicSimulation = SimulationStateV1, World extends AtomicWorldReferences = WorldStateV2> = (
   next: AtomicTurnSnapshot<Simulation, World>,
   previous: AtomicTurnSnapshot<Simulation, World>,
@@ -135,7 +139,7 @@ export function createAtomicTurnRuntime<Simulation extends AtomicSimulation, Wor
   initialSimulation: Simulation,
   initialWorld: World,
   options: AtomicTurnRuntimeOptions<Simulation, World> = {},
-): AtomicTurnRuntime<Simulation, World> {
+): AtomicTurnRuntime<Simulation, World> & AtomicCatalogTransitionPort<Simulation, World> {
   if (initialWorld.schemaVersion !== 2 && initialSimulation.schemaVersion !== 2) {
     throw new AtomicTurnCommitError("A migrated world requires Simulation V2 as one schema pair");
   }
@@ -196,6 +200,24 @@ export function createAtomicTurnRuntime<Simulation extends AtomicSimulation, Wor
         queuedActions: actions,
       }, current.world);
       current = snapshot(simulation, current.world);
+      return current;
+    },
+    transitionCatalogSnapshot(expected, next) {
+      if (expected !== current) throw new AtomicTurnCommitError("STALE_CATALOG_TRANSITION");
+      if (next.world.schemaVersion !== current.world.schemaVersion
+        || next.simulation.schemaVersion !== current.simulation.schemaVersion
+        || next.world.revision !== current.world.revision + 1
+        || next.simulation.revision !== current.simulation.revision + 1
+        || next.revisions.worldRevision !== next.world.revision
+        || next.revisions.simulationRevision !== next.simulation.revision) {
+        throw new AtomicTurnCommitError("INVALID_CATALOG_TRANSITION_REVISIONS");
+      }
+      worldPort.validate(next.world);
+      createRuntimeSimulation(next.simulation, next.world);
+      if (next.simulation.schemaVersion === 2) assertFrozenSimulation(next.simulation);
+      // Catalog conversion is not a simulated turn. Keep original history
+      // snapshots, plans, hashes and the undo/redo pointer intact.
+      current = snapshot(next.simulation, next.world);
       return current;
     },
     commit(plan, publishPair) {

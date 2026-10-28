@@ -1,5 +1,7 @@
 import type {SimulationContextV1} from "../simulation-context";
 import type {TurnResolutionV1} from "../turn-resolution";
+import type {OperationalWorldView} from '../../world/operational-catalog';
+import type {TerritorialControlAuthority} from '../simulation-state-v2';
 
 export type SimulationProviderFailureCode =
   | "AI_NOT_CONFIGURED"
@@ -25,6 +27,10 @@ export type SimulationProviderEvent =
 export type SimulationProviderRequest = Readonly<{
   turnId: string;
   context: SimulationContextV1;
+  /** Host-only current state. The HTTP request schema never accepts this field. */
+  operationalWorld?: OperationalWorldView;
+  /** Full current host scopes; model context may contain only clipped summaries. */
+  operationalTerritorialAuthorities?: readonly TerritorialControlAuthority[];
 }>;
 
 export interface SimulationModelProvider {

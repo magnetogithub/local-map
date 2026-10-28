@@ -1,6 +1,6 @@
 import {parseTerritorialControlCommand,type TerritorialControlCommand} from '../commands/territorial-control-v3';
 import {MAX_COMMANDS_PER_BATCH} from '../commands/command-batch-v2';
-import {createSimulationStateV2,isAuthorityActiveAt,type SimulationStateV2} from '../simulation/simulation-state-v2';
+import {createSimulationStateV2,isAuthorityActiveAt,MAX_AUTHORITY_TERRITORIES,type SimulationStateV2} from '../simulation/simulation-state-v2';
 import {createTerritoryEntityV3,type TerritoryEntityV3} from '../world/territory-entity-v3';
 import type {WorldStateV3} from '../world/world-state-v3';
 import {assertSafeSimulationData,isoCalendarDateSchema} from '../simulation/simulation-contract-primitives';
@@ -35,9 +35,16 @@ export function planTerritorialControl(input:{world:WorldStateV3;simulation:Simu
 /** Sequential aggregate plans stay within the existing command cap and never publish intermediate state. */
 export function planTerritorialControlBatch(input:{world:WorldStateV3;simulation:SimulationStateV2;commands:readonly unknown[];date?:string}){
   if(!input.commands.length||input.commands.length>MAX_COMMANDS_PER_BATCH)throw Error('COMMAND_BATCH_CAP');
-  const ids=new Set<string>(),territories={...input.world.territoriesById},effects:TerritorialControlAggregateEffect[]=[];
-  for(const command of input.commands){const effect=planTerritorialControl({...input,world:{...input.world,territoriesById:territories},command});
-    if(ids.has(effect.commandId))throw Error('DUPLICATE_COMMAND_ID');ids.add(effect.commandId);effects.push(effect);for(const change of effect.changes)territories[change.after.id]=change.after;
+  const parsed=input.commands.map(parseTerritorialControlCommand),allTerritories=new Set<string>(),commandIds=new Set<string>();
+  for(const command of parsed){
+    if(commandIds.has(command.commandId))throw Error('DUPLICATE_COMMAND_ID');
+    commandIds.add(command.commandId);
+    for(const id of command.payload.territoryIds)allTerritories.add(id);
+    if(allTerritories.size>MAX_AUTHORITY_TERRITORIES)throw Error('TERRITORIAL_AGGREGATE_CAP');
+  }
+  const territories={...input.world.territoriesById},effects:TerritorialControlAggregateEffect[]=[];
+  for(const command of parsed){const effect=planTerritorialControl({...input,world:{...input.world,territoriesById:territories},command});
+    effects.push(effect);for(const change of effect.changes)territories[change.after.id]=change.after;
   }
   return Object.freeze({effects:Object.freeze(effects),territoriesById:Object.freeze(territories),affectedTerritoryIds:Object.freeze([...new Set(effects.flatMap(e=>e.changes.map(c=>c.after.id)))].sort())});
 }

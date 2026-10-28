@@ -21,6 +21,7 @@ import {activeSituationSchema, scheduledConsequenceSchema, simulationFactSchema}
 import {simulationEventSchema} from "./simulation-event";
 import {presentationHistory, presentationHistorySchema, type PresentationHistory} from './presentation-grant-validation';
 import {authorityMapColorSchema} from './simulation-state-v2';
+import {subdivisionReferenceSchema} from './subdivision-reference';
 
 export const SIMULATION_CONTEXT_LIMITS = Object.freeze({
   countries: 64,
@@ -155,9 +156,7 @@ export const simulationContextSchema = z.strictObject({
   territorialControlAuthorities: z.array(territorialControlAuthoritySchema).max(8).optional(),
   regionCatalog: z.strictObject({catalogVersion:z.string().max(160),geometryRoot:z.string().regex(/^[a-f0-9]{64}$/),topologyRoot:z.string().regex(/^[a-f0-9]{64}$/),renderArtifactRoot:z.string().regex(/^[a-f0-9]{64}$/),manifestPath:z.string().max(256)}).optional(),
   subdivisions: z.array(z.strictObject({
-    catalogId: simulationIdSchema,
-    sourceVersion: simulationIdSchema,
-    subdivisionId: simulationIdSchema,
+    ...subdivisionReferenceSchema.shape,
     parentCountryId: countryIdSchema,
     nameKo: boundedTitleSchema,
     nameEn: boundedTitleSchema,

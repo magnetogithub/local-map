@@ -1,6 +1,12 @@
 import {loadCatalogRegionIndex} from '../catalog-region.server';
-import {loadProductionCatalogSeed} from '../../world/production-catalog-seed.server';
 import {assertWorldGeometryCatalogRefMatches} from '../../world/world-geometry-catalog-ref';
+import {OPERATIONAL_CATALOG_VERSION} from '../../world/operational-catalog';
+import {loadOperationalCatalog} from '../../world/operational-catalog.server';
+import {selectOperationalFrontier, type OperationalFrontierCatalog, type OperationalFrontierSelection} from '../operational-frontier.server';
+import type {OperationalFrontierRequest} from '../operational-frontier-contract';
+import type {CatalogRegionIndex} from '../catalog-region';
+import type {WorldGeometryCatalogRef} from '../../world/world-geometry-catalog-ref';
+import type {OperationalFrontierValidation} from '../operational-frontier-validation';
 import {serializeSimulationContext} from "../simulation-context";
 import {createModelSimulationContext} from './model-simulation-context';
 import {OpenAIResponsesError} from './openai-responses-error';
@@ -34,15 +40,46 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
   constructor(
     private readonly config: SimulationProviderConfig,
     private readonly transport: OpenAIResponsesTransport,
+    private readonly dependencies: Readonly<{
+      loadOperationalCatalog?: () => OperationalFrontierCatalog;
+      loadRegionIndex?: (ref: WorldGeometryCatalogRef) => CatalogRegionIndex;
+    }> = {},
   ) {}
 
   async *streamTurn(
     request: SimulationProviderRequest,
     signal: AbortSignal,
   ): AsyncIterable<SimulationProviderEvent> {
-    const regionIndex=request.context.regionCatalog?loadCatalogRegionIndex():undefined;
-    if(regionIndex)assertWorldGeometryCatalogRefMatches(request.context.regionCatalog!,loadProductionCatalogSeed().bootstrap.catalogRef);
-    const tools = createSimulationToolManifest();
+    const operational = request.context.regionCatalog?.catalogVersion === OPERATIONAL_CATALOG_VERSION;
+    let regionIndex: CatalogRegionIndex | undefined;
+    let frontier: OperationalFrontierValidation | undefined;
+    let frontierLookup: ((raw: unknown) => OperationalFrontierSelection) | undefined;
+    const issuedScopes: OperationalFrontierRequest[] = [];
+    try {
+      if (request.context.regionCatalog) {
+        regionIndex = (this.dependencies.loadRegionIndex ?? loadCatalogRegionIndex)(request.context.regionCatalog);
+        if (!regionIndex.catalogRef) throw Error('REGION_CATALOG_REQUIRED');
+        assertWorldGeometryCatalogRefMatches(request.context.regionCatalog, regionIndex.catalogRef);
+      }
+      if (operational) {
+        const world = request.operationalWorld;
+        if (!world) throw Error('FRONTIER_WORLD_REQUIRED');
+        assertWorldGeometryCatalogRefMatches(world.catalogRef, request.context.regionCatalog!);
+        if (world.revision !== request.context.revisions.world) throw Error('STALE_FRONTIER_REVISION');
+        const catalog = (this.dependencies.loadOperationalCatalog ?? loadOperationalCatalog)();
+        assertWorldGeometryCatalogRefMatches(world.catalogRef, catalog.ref);
+        frontier = {world,issuedScopes,resolve:(current,scope) => selectOperationalFrontier(catalog,current,scope,regionIndex)};
+        frontierLookup = raw => {
+          const selected = selectOperationalFrontier(catalog, world, raw, regionIndex);
+          issuedScopes.push(selected.scope);
+          return selected;
+        };
+      }
+    } catch (error) {
+      yield {type:'turn.failed',code:'INVALID_RESOLUTION',message:error instanceof Error?error.message:'CATALOG_LOOKUP_FAILED',retryable:false};
+      return;
+    }
+    const tools = createSimulationToolManifest({operational});
     const input: unknown[] = [{
       role: "user",
       content: [{
@@ -189,7 +226,7 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
           return;
         }
         if (call.name === "submit_turn_resolution") {
-          const result = validateResolutionAgainstContext(args, request.context, {debugWorldEffectActionIds,regionIndex});
+          const result = validateResolutionAgainstContext(args, request.context, {debugWorldEffectActionIds,regionIndex,frontier,territorialControlAuthorities:request.operationalTerritorialAuthorities});
           if (result.ok && result.resolution) {
             yield {type: "resolution.ready", resolution: result.resolution};
             return;
@@ -224,7 +261,7 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
           return;
         }
         try {
-          const output = executeReadOnlySimulationTool(call.name, args, request.context,regionIndex);
+          const output = executeReadOnlySimulationTool(call.name, args, request.context,regionIndex,frontierLookup);
           yield {type: "phase.changed", phase: "looking_up"};
           input.push({type: "function_call_output", call_id: call.callId, output: JSON.stringify({ok: true, data: output})});
         } catch {

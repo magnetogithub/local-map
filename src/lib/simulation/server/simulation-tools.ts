@@ -4,6 +4,8 @@ import type {SimulationContextV1} from "../simulation-context";
 import {createTurnResolutionFunctionParametersSchema} from "../turn-resolution";
 import type {CatalogRegionIndex} from '../catalog-region';
 import {subdivisionReferenceSchema} from '../world-effect';
+import {OPERATIONAL_CATALOG_VERSION} from '../../world/operational-catalog';
+import type {OperationalFrontierSelection} from '../operational-frontier.server';
 
 export type FunctionToolDefinition = Readonly<{
   type: "function";
@@ -30,10 +32,17 @@ export const READ_ONLY_SIMULATION_TOOL_NAMES = Object.freeze([
   "find_region",
   "resolve_region",
   "find_border_territories",
+  "find_frontier_territories",
 ] as const);
 
-export const createSimulationToolManifest = (): readonly FunctionToolDefinition[] => Object.freeze([
-  {type:'function',name:'find_border_territories',description:'Find existing catalog territory IDs on the specified country side of its shared land border with a neighbor. Use for frontier/near-border descriptions such as the Korean armistice line. IDs are sorted and bounded; coastlines and interior cells are excluded. Countries are original source classifications, and current ownership/controller relations are validated at commit. This grants no authority. Choose a bounded subset or the returned frontier cells and describe that interpretation.',strict:true,parameters:objectSchema({countryId:stringId,neighborCountryId:stringId,cap:{type:'integer',minimum:1,maximum:512}},['countryId','neighborCountryId','cap'])},
+export const createSimulationToolManifest = (options: Readonly<{operational?: boolean}> = {}): readonly FunctionToolDefinition[] => Object.freeze([
+  options.operational ? {type:'function',name:'find_frontier_territories',description:'Select a small connected advance from the CURRENT authoritative controller frontier. Infer actor and target countries from the action and geography; a province is optional. near/limited/deeper use existing physical bounds. Direction locates a portion of the current frontier. The host supplies catalog and revision. Copy the ENTIRE effectTarget, including frontierScope, unchanged into the effect; never substitute regionRefs, select a subset or extend the returned IDs. This grants no authority.',strict:true,parameters:objectSchema({
+    actorCountryId:stringId,targetCountryId:stringId,operation:{type:'string',enum:['occupy','liberate','transfer']},extent:{type:'string',enum:['near','limited','deeper']},
+    direction:{anyOf:[{type:'string',enum:['north','south','east','west']},{type:'null'}]},
+    reference:{anyOf:[objectSchema({catalogId:stringId,sourceVersion:stringId,subdivisionId:stringId},['catalogId','sourceVersion','subdivisionId']),{type:'null'}]},
+    regionQuery:{anyOf:[{type:'string',minLength:1,maxLength:120},{type:'null'}]},cap:{type:'integer',minimum:1,maximum:512},
+  },['actorCountryId','targetCountryId','operation','extent','direction','reference','regionQuery','cap'])}
+  : {type:'function',name:'find_border_territories',description:'Find existing catalog territory IDs on the specified country side of its shared land border with a neighbor. Use for frontier/near-border descriptions such as the Korean armistice line. IDs are sorted and bounded; coastlines and interior cells are excluded. Countries are original source classifications, and current ownership/controller relations are validated at commit. This grants no authority. Choose a bounded subset or the returned frontier cells and describe that interpretation.',strict:true,parameters:objectSchema({countryId:stringId,neighborCountryId:stringId,cap:{type:'integer',minimum:1,maximum:512}},['countryId','neighborCountryId','cap'])},
   {type:'function',name:'find_region',description:'Read the complete approved server region index, including regions clipped from context. Ambiguous names return bounded candidates and no selection. sourceCountryId is original classification, not current ownership.',strict:true,parameters:objectSchema({countryId:stringId,query:{type:'string',minLength:1,maxLength:120}},['countryId','query'])},
   {type:'function',name:'resolve_region',description:'Resolve a verified canonical region reference to bounded territory IDs. This is read-only and grants no authority. Use the reference in regionRefs on territorial effects; authority scope and current ownership are validated separately.',strict:true,parameters:objectSchema({countryId:stringId,reference:objectSchema({catalogId:stringId,sourceVersion:stringId,subdivisionId:stringId},['catalogId','sourceVersion','subdivisionId']),operation:{type:'string',enum:['occupy','liberate','transfer']},cap:{type:'integer',minimum:1,maximum:512}},['countryId','reference','operation','cap'])},
   {type: "function", name: "find_country", description: "Find compact country records by Korean name, English name, or country ID.", strict: true, parameters: objectSchema({query: {type: "string", minLength: 1, maxLength: 120}}, ["query"])},
@@ -51,6 +60,7 @@ export const createSimulationToolManifest = (): readonly FunctionToolDefinition[
 ]);
 
 const argumentSchemas = {
+  find_frontier_territories:z.strictObject({actorCountryId:z.string().min(1).max(160),targetCountryId:z.string().min(1).max(160),operation:z.enum(['occupy','liberate','transfer']),extent:z.enum(['near','limited','deeper']),direction:z.enum(['north','south','east','west']).nullish(),reference:subdivisionReferenceSchema.nullish(),regionQuery:z.string().trim().min(1).max(120).nullish(),cap:z.number().int().min(1).max(512)}),
   find_border_territories:z.strictObject({countryId:z.string().min(1).max(160),neighborCountryId:z.string().min(1).max(160),cap:z.number().int().min(1).max(512)}),
   find_region:z.strictObject({countryId:z.string().min(1).max(160),query:z.string().min(1).max(120)}),
   resolve_region:z.strictObject({countryId:z.string().min(1).max(160),reference:subdivisionReferenceSchema,operation:z.enum(['occupy','liberate','transfer']),cap:z.number().int().min(1).max(512)}),
@@ -68,12 +78,26 @@ export function executeReadOnlySimulationTool(
   rawArguments: unknown,
   context: SimulationContextV1,
   regionIndex?:CatalogRegionIndex,
+  frontierLookup?: (request: unknown) => OperationalFrontierSelection,
 ): unknown {
   if (!(name in argumentSchemas)) throw new Error(`UNKNOWN_TOOL:${name}`);
   const toolName = name as ReadOnlyToolName;
   const args = argumentSchemas[toolName].parse(rawArguments) as Record<string, unknown>;
   switch (toolName) {
+    case 'find_frontier_territories': {
+      if (!frontierLookup || !context.regionCatalog) return {ok:false,code:'FRONTIER_LOOKUP_UNAVAILABLE'};
+      if (![args.actorCountryId,args.targetCountryId].every(id => context.countryDirectory.some(country => country.countryId === id))) return {ok:false,code:'INACTIVE_FRONTIER_COUNTRY'};
+      try {
+        const selection = frontierLookup({...args,catalogRef:context.regionCatalog,baseWorldRevision:context.revisions.world});
+        return {ok:true,catalogRef:selection.catalogRef,baseWorldRevision:selection.baseWorldRevision,
+          actorCountryId:selection.actorCountryId,targetCountryId:selection.targetCountryId,operation:selection.operation,
+          frontier:selection.frontier,metrics:selection.metrics,limits:selection.limits,approximation:selection.approximation,
+          effectTarget:{...selection.effectTarget,frontierScope:selection.scope},
+          usage:'Copy the entire effectTarget unchanged into the matching territorial effect. Do not replace it with regionRefs, a subset, or additional IDs. This selection grants no authority.'};
+      } catch (error) {return {ok:false,code:error instanceof Error?error.message:'FRONTIER_LOOKUP_FAILED',message:'현재 육상 전선과 대상을 확인하세요. 범위 상한 초과라면 더 작은 범위나 특정 접경 지역을 요청하세요.'};}
+    }
     case 'find_border_territories': {
+      if(context.regionCatalog?.catalogVersion===OPERATIONAL_CATALOG_VERSION)return {ok:false,code:'USE_CURRENT_FRONTIER_LOOKUP'};
       if(!regionIndex?.borderTerritories)return {ok:false,code:'BORDER_LOOKUP_UNAVAILABLE'};
       if(![args.countryId,args.neighborCountryId].every(id=>context.countryDirectory.some(country=>country.countryId===id)))return {ok:false,code:'INACTIVE_BORDER_COUNTRY'};
       try {
@@ -102,7 +126,7 @@ export function executeReadOnlySimulationTool(
     case "inspect_country_territories":
       return context.territoryDirectory.find((entry) => entry.countryId === args.countryId) ?? null;
     case "list_country_subdivisions":
-      if(regionIndex){const records=regionIndex.records.filter(r=>r.parentCountryId===args.countryId);return {regions:records.slice(0,128).map(({ref,parentCountryId,nameKo,nameEn})=>({ref,parentCountryId,nameKo,nameEn,materializable:true})),clipped:records.length>128};}
+      if(regionIndex){const records=regionIndex.listCountry(String(args.countryId));return {regions:records.slice(0,128).map(({ref,parentCountryId,nameKo,nameEn})=>({ref,parentCountryId,nameKo,nameEn,materializable:true})),clipped:records.length>128};}
       return context.subdivisions.filter((entry) => entry.parentCountryId === args.countryId);
     case "inspect_active_situation":
       return context.situations.find((entry) =>

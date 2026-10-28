@@ -97,7 +97,7 @@ export function validateTurnResolution(
   }
 
   const activeCountryIds = keySet(world.countriesById);
-  const territoryIds = keySet(world.territoriesById);
+  const hasTerritory = (id: string) => Object.hasOwn(world.territoriesById, id);
   const authoritativeEvents = new Map(simulation.eventLog.map((event) => [event.eventId, event]));
   const resolutionEvents = new Map(parsed.events.map((event, index) => [event.eventId, {event, index}]));
   if (resolutionEvents.size !== parsed.events.length) {
@@ -284,7 +284,7 @@ export function validateTurnResolution(
       case "country.established":
         if (effect.sourceCountryId !== null) validateCountries([effect.sourceCountryId], path);
         for (const territoryId of effect.territoryIds) {
-          if (!territoryIds.has(territoryId)) add("DANGLING_REFERENCE", path, `Unknown territory ${territoryId}`);
+          if (!hasTerritory(territoryId)) add("DANGLING_REFERENCE", path, `Unknown territory ${territoryId}`);
         }
         if (newCountryRefs.has(effect.newCountryRef)) {
           add("INVALID_WORLD_EFFECT", path, `Duplicate new country ref ${effect.newCountryRef}`);

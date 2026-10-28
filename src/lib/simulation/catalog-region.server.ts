@@ -3,8 +3,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {createCatalogRegionIndex,type RegionRecord} from './catalog-region';
-import {createWorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
+import {assertWorldGeometryCatalogRefMatches,createWorldGeometryCatalogRef,type WorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
 import {createCatalogBorderLookup} from './catalog-border-lookup';
+import {loadOperationalCatalog} from '../world/operational-catalog.server';
+import {OPERATIONAL_CATALOG_VERSION} from '../world/operational-catalog';
+import {createOperationalRegionIndex} from './operational-region.server';
+import type {CatalogRegionIndex} from './catalog-region';
 const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
 export function prepareCatalogRegionIndex(root=process.cwd()){
   const read=(p:string)=>fs.readFileSync(path.join(root,p));
@@ -40,4 +44,14 @@ export function prepareCatalogRegionIndex(root=process.cwd()){
     borderTerritories:createCatalogBorderLookup(catalog.entries,topology.edges)});
 }
 let approved:ReturnType<typeof prepareCatalogRegionIndex>|undefined;
-export const loadCatalogRegionIndex=()=>approved??=prepareCatalogRegionIndex();
+let operational:CatalogRegionIndex|undefined;
+/** Omitted ref preserves the current game until the 16-02/16-08 atomic cutover. */
+export function loadCatalogRegionIndex(ref?:WorldGeometryCatalogRef):CatalogRegionIndex{
+  if(ref?.catalogVersion===OPERATIONAL_CATALOG_VERSION){
+    const catalog=loadOperationalCatalog();catalog.assertRef(ref);
+    return operational??=createOperationalRegionIndex(catalog);
+  }
+  const index=approved??=prepareCatalogRegionIndex();
+  if(ref)assertWorldGeometryCatalogRefMatches(ref,index.catalogRef!);
+  return index;
+}

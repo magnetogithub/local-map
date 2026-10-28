@@ -61,9 +61,10 @@ export async function fetchCatalogVectorDelivery(expected:WorldGeometryCatalogRe
   const response=await fetcher('/api/world/catalog',{signal,cache:'no-store'});if(!response.ok)throw new Error('Catalog server readiness failed');
   return loadCatalogVectorDelivery(await response.json(),expected,fetcher,signal);
 }
+export type CatalogTileDelivery=Readonly<{protocol:string;bootstrap:Readonly<{manifest:CatalogArtifactIdentity;tileIndex:CatalogArtifactIdentity}>;loadTile:(path:string,signal?:AbortSignal)=>Promise<ArrayBuffer>}>;
 type CatalogProtocolApi={addProtocol:(name:string,handler:AddProtocolAction)=>void;removeProtocol:(name:string)=>void};
-const protocolRegistrations=new WeakMap<CatalogProtocolApi,Map<string,{users:number;manifestHash:string;tileIndexHash:string;deliveries:Map<CatalogVectorDelivery,number>}>>();
-export function registerCatalogTileProtocol(api:CatalogProtocolApi,delivery:CatalogVectorDelivery){
+const protocolRegistrations=new WeakMap<CatalogProtocolApi,Map<string,{users:number;manifestHash:string;tileIndexHash:string;deliveries:Map<CatalogTileDelivery,number>}>>();
+export function registerCatalogTileProtocol(api:CatalogProtocolApi,delivery:CatalogTileDelivery){
   let registrations=protocolRegistrations.get(api);if(!registrations){registrations=new Map();protocolRegistrations.set(api,registrations);}
   let entry=registrations.get(delivery.protocol);
   if(entry){

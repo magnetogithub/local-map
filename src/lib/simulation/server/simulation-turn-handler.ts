@@ -1,6 +1,9 @@
 import {parseSimulationContextV1} from "@/lib/simulation/simulation-context";
 import {assertSafeSimulationData, simulationIdSchema} from "@/lib/simulation/simulation-contract-primitives";
 import {z} from "zod";
+import type {OperationalWorldView} from '../../world/operational-catalog';
+import {OPERATIONAL_CATALOG_VERSION} from '../../world/operational-catalog';
+import {assertWorldGeometryCatalogRefMatches} from '../../world/world-geometry-catalog-ref';
 import {normalizeProviderEvents} from "@/lib/simulation/server/provider-event-normalizer";
 import {
   SimulationProviderError,
@@ -12,6 +15,7 @@ const MAX_REQUEST_BYTES = 256 * 1024;
 
 type RouteDependencies = Readonly<{
   createProvider(): SimulationModelProvider;
+  resolveOperationalWorld?(request: SimulationProviderRequest): OperationalWorldView | Promise<OperationalWorldView>;
 }>;
 
 const simulationTurnRequestSchema = z.strictObject({
@@ -46,6 +50,15 @@ export function createSimulationTurnPost(dependencies: RouteDependencies) {
     } catch {
       return jsonError(400, "MALFORMED_REQUEST", "Request body does not match the simulation turn contract");
     }
+    if (providerRequest.context.regionCatalog?.catalogVersion === OPERATIONAL_CATALOG_VERSION) {
+      if (!dependencies.resolveOperationalWorld) return jsonError(409, 'FRONTIER_WORLD_REQUIRED', 'The host must supply the current operational world');
+      try {
+        const world = await dependencies.resolveOperationalWorld(providerRequest);
+        assertWorldGeometryCatalogRefMatches(world.catalogRef, providerRequest.context.regionCatalog);
+        if (world.revision !== providerRequest.context.revisions.world) throw Error('STALE_FRONTIER_REVISION');
+        providerRequest = {...providerRequest, operationalWorld: world};
+      } catch (error) {return jsonError(409, 'FRONTIER_WORLD_MISMATCH', error instanceof Error ? error.message : 'Unable to read the current world');}
+    }
     let provider: SimulationModelProvider;
     try {
       provider = dependencies.createProvider();
@@ -56,11 +69,13 @@ export function createSimulationTurnPost(dependencies: RouteDependencies) {
     const controller = new AbortController();
     const onAbort = () => controller.abort(request.signal.reason);
     request.signal.addEventListener("abort", onAbort, {once: true});
+    if (request.signal.aborted) onAbort();
     const encoder = new TextEncoder();
     const iterator = normalizeProviderEvents(
       providerRequest.turnId,
       provider.streamTurn(providerRequest, controller.signal),
     )[Symbol.asyncIterator]();
+    let nextSequence = 0;
     const stream = new ReadableStream<Uint8Array>({
       async pull(streamController) {
         try {
@@ -70,9 +85,11 @@ export function createSimulationTurnPost(dependencies: RouteDependencies) {
             streamController.close();
             return;
           }
+          nextSequence = item.value.sequence + 1;
           streamController.enqueue(encoder.encode(`${JSON.stringify(item.value)}\n`));
         } catch {
-          streamController.enqueue(encoder.encode(`${JSON.stringify({version: 1, turnId: providerRequest.turnId, sequence: Number.MAX_SAFE_INTEGER, type: "turn.failed", code: "PROVIDER_ERROR", message: "Provider stream failed", retryable: true})}\n`));
+          request.signal.removeEventListener('abort', onAbort);
+          streamController.enqueue(encoder.encode(`${JSON.stringify({version: 1, turnId: providerRequest.turnId, sequence: nextSequence, type: "turn.failed", code: "PROVIDER_ERROR", message: "Provider stream failed", retryable: true})}\n`));
           streamController.close();
         }
       },

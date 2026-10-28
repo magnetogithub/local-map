@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "prompt15-user-development-deferral-v1",
+  "decisionDate": "2026-10-28",
+  "timezone": "Asia/Seoul",
+  "status": "DEFERRED_BY_USER",
+  "authority": {
+    "source": "direct-user-instruction",
+    "instruction": "일단 넘어가고 나중에 다른 개발 과정에서 문제가 생기면 그 때 수정하는거로 변경할게"
+  },
+  "scope": {
+    "description": "현재 조사된 미소 수치 geometry·component·교차 표현 문제의 복구를 보류하고 후속 개발을 허용한다.",
+    "countries": [
+      "CIV",
+      "FRA",
+      "GBR",
+      "MYS",
+      "UKR",
+      "VNM"
+    ],
+    "appliesOnlyToKnownNumericalFindings": true,
+    "evidence": [
+      "reports/prompt15/15-22-component-review/20261027-components-7262c972ca/summary.json",
+      "reports/prompt15/15-22-component-repair/20261028-parent-support-aae81f14ea/summary.json",
+      "reports/prompt15/15-22-component-repair/20261028-parent-guard-d1b641a516/summary.json"
+    ]
+  },
+  "continuation": {
+    "subsequentDevelopmentAllowed": true,
+    "useExistingAdmitted15_21ArtifactsAsDevelopmentBaseline": true,
+    "numericalRepairRequiredBeforeContinuingDevelopment": false,
+    "automaticRepairOrCountryReauditAllowed": false,
+    "repeatedKnownStrictAuditOrGuardFailureAloneReopensIssue": false,
+    "historicalVerdictsRewritten": false,
+    "task15_22OverallPassDeclared": false,
+    "frozenPolicyOrApprovedCandidateModified": false,
+    "strictRunnerImplementationChanged": false,
+    "note": "사용자 승인 개발 보류 결정이다. 엄격한 runner의 FAIL을 PASS로 바꾸지 않으며, 해당 알려진 미소 FAIL만으로 개발 일정을 다시 차단하거나 재생성 루프를 시작하지 않는다."
+  },
+  "resumeCondition": {
+    "requiresObservedProblemDuringSubsequentDevelopment": true,
+    "examples": [
+      "실제 지도 표시에서 확인된 영역 누락 또는 잘못된 경계",
+      "실제 점령·전선·소유권·연결·인접성 동작 오류",
+      "해당 수치 문제로 인한 실제 런타임·데이터 처리 실패"
+    ],
+    "repeatedKnownNumericalOnlyGuardFailureIsInsufficient": true
+  },
+  "tracking": {
+    "historicalUnpassedCountries": 29,
+    "knownNumericalCountriesDeferred": 6,
+    "otherSliverCountriesPending": 23,
+    "sliverFailuresAutomaticallyDeferred": false,
+    "note": "문제 추적 분류이며 최신 코드로 247개국을 재승인한 결과가 아니다."
+  }
+}

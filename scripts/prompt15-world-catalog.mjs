@@ -8,7 +8,7 @@ import {pathToFileURL} from 'node:url';
 import {CELL_EXPERIMENT_POLICY as POLICY} from './prompt15-cell-policy.mjs';
 import {fileIdentity,generateCountryCells,loadExperimentSources,readJSON} from './prompt15-cell-core.mjs';
 import {compareText,digest,hashCanonical,jsonBytes,normalizeGeometry,polygons} from './prompt14-catalog-core.mjs';
-import {overlay} from './prompt15-world-preflight.mjs';
+import {prepareAdministrativeParent} from './prompt15-parent-preparation.mjs';
 
 export const TASK_15_19_VERSION='prompt15-task-15-19-world-catalog-v1';
 export const ADMINISTRATIVE_ROOT='data/derived/prompt15/15-18-administrative-input-v1-161260049c9100b09cb5';
@@ -31,15 +31,10 @@ function assertInputs(){
  return {admin,v18,decision:fileIdentity(POLICY_DECISION),policy:fileIdentity(POLICY_FILE),candidate};
 }
 
-function clippedToEnvelope(geometry,envelope){
- const coordinates=polygons(overlay('intersection',geometry,envelope).geometry);
- if(!coordinates.length)return null;return normalizeGeometry({type:'MultiPolygon',coordinates});
-}
-
 export function loadWorldCellSources(){
  const pins=assertInputs(),sources=loadExperimentSources(),admin=readJSON(`${ADMINISTRATIVE_ROOT}/administrative-restoration.geojson`),remainders=readJSON(`${ADMINISTRATIVE_ROOT}/residuals.geojson`),protectedOverlay=readJSON(`${ADMINISTRATIVE_ROOT}/protected-overlay.geojson`),p0=sources.p0,envelopes=new Map(p0.features.map(feature=>[feature.properties.countryId,feature.geometry]));
  const selected=[];
- for(const feature of admin.features){const countryId=feature.properties.sourceCountryId,geometry=clippedToEnvelope(feature.geometry,envelopes.get(countryId));if(!geometry)throw Error(`15-19 source identity is outside its P0 envelope: ${feature.properties.sourceFeatureId}`);selected.push({type:'Feature',properties:{...feature.properties,countryId,inputRole:'P1'},geometry});}
+ for(const feature of admin.features){const countryId=feature.properties.sourceCountryId,geometry=prepareAdministrativeParent(feature.geometry,envelopes.get(countryId),feature.properties);if(!geometry)throw Error(`15-19 source identity is outside its P0 envelope: ${feature.properties.sourceFeatureId}`);selected.push({type:'Feature',properties:{...feature.properties,countryId,inputRole:'P1'},geometry});}
  for(const feature of remainders.features){const countryId=feature.properties.countryId;selected.push({type:'Feature',properties:{...feature.properties,countryId,sourceFeatureId:`country-envelope:${feature.properties.residualId}`,inputRole:'P0R'},geometry:normalizeGeometry(feature.geometry)});}
  selected.sort((a,b)=>compareText(a.properties.countryId,b.properties.countryId)||compareText(String(a.properties.sourceFeatureId),String(b.properties.sourceFeatureId)));
  const oldTerritories=new Map();for(const feature of protectedOverlay.features){const countryId=feature.properties.sourceCountryId,list=oldTerritories.get(countryId)??[];list.push({id:feature.properties.territoryId,geometry:feature.geometry,sourceFeatureIds:[]});oldTerritories.set(countryId,list);}for(const list of oldTerritories.values())list.sort((a,b)=>compareText(a.id,b.id));
@@ -51,6 +46,7 @@ export function loadWorldCellSources(){
 export function auditCountryResult(result){
  const checks={
   validGeometry:result.validity.pass,
+  actualComponentPreservation:result.preservation?.pass===true&&result.preservation.errors?.length===0&&result.preservation.correspondence?.length===result.sourceComponents?.length&&result.preservation.correspondence.every(c=>c.exactPositive&&c.sourceFeatureIds.length>0&&c.coverage?.pass===true&&c.boundaryCertificate?.pass===true),
   parentUnion:result.coverage.length===result.parents.length&&result.coverage.every(item=>item.pass),
   countryCoverage:result.countryCoverage.pass,
   crossBorder:result.countryCoverage.outOfCountryArea<=result.countryCoverage.tolerance,
@@ -63,6 +59,9 @@ export function auditCountryResult(result){
   numericalNoding:result.numericalNoding.maximumNodedSegmentDisplacement<=1e-12,
   protectedFragmentConservation:result.metrics.numericalProtectedFragmentsSkipped===0&&(result.numericalProtectedFragmentRepairs??[]).every(item=>item.area>0&&typeof item.geometryHash==='string'&&typeof item.sourceOldTerritoryId==='string'&&typeof item.assignedOldTerritoryId==='string'),
   cellFragmentConservation:(result.numericalCellRepairs??[]).every(item=>['lost-source-face-union','pre-noding-collapsed-ring-union','post-noding-degenerate-ring-union','collapsed-hole-fill','collapsed-component-ledger'].includes(item.kind)&&item.area>0&&typeof item.lostGeometryHash==='string'&&typeof item.parentKey==='string'),
+  sliverCount:result.metrics.sliverEvaluation?.legacy.count.ratio<=POLICY.sliver.maximumNonSourceTinyCellFraction,
+  sliverArea:result.metrics.sliverEvaluation?.legacy.area.ratio<=POLICY.sliver.maximumSliverAreaFraction,
+  sliverSourceEvidence:result.metrics.sliverEvaluation?.errors.length===0,
   numericalGapRepair:(result.numericalGapRepairs??[]).every(item=>item.kind==='ambiguous-gap'&&item.area>0&&item.area<=1e-12),
  };
  return {status:Object.values(checks).every(Boolean)?'pass':'fail',checks};
@@ -72,7 +71,7 @@ const cellEntry=cell=>({id:cell.id,sourceCountryId:cell.sourceCountryId,oldTerri
 const cellFeature=cell=>({type:'Feature',properties:{cellId:cell.id,sourceCountryId:cell.sourceCountryId,oldTerritoryId:cell.oldTerritoryId,adminId:cell.adminId,parentKey:cell.parentKey,parentSourceFeatureId:cell.parentSourceFeatureId,componentIndex:cell.componentIndex,refined:cell.refined},geometry:cell.geometry});
 
 export function generateWorldCatalog({outputBase='data/derived/prompt15',countryIds=null,onProgress=console.log}={}){
- const sources=loadWorldCellSources(),candidate=sources.pins.candidate,generator=fileIdentity('scripts/prompt15-world-catalog.mjs'),inputs=[sources.pins.admin,sources.pins.v18,sources.pins.decision,sources.pins.policy,generator,fileIdentity(CELL_CORE_FILE),fileIdentity(`${ADMINISTRATIVE_ROOT}/administrative-restoration.geojson`),fileIdentity(`${ADMINISTRATIVE_ROOT}/residuals.geojson`),fileIdentity(`${ADMINISTRATIVE_ROOT}/protected-overlay.geojson`)];
+ const sources=loadWorldCellSources(),candidate=sources.pins.candidate,generator=fileIdentity('scripts/prompt15-world-catalog.mjs'),inputs=[sources.pins.admin,sources.pins.v18,sources.pins.decision,sources.pins.policy,generator,fileIdentity(CELL_CORE_FILE),...['scripts/prompt15-cell-preservation.mjs','scripts/prompt15-parent-preparation.mjs','scripts/prompt15-exact-support.mjs','scripts/prompt15-sliver-core.mjs','scripts/prompt15-cell-physical.mjs','scripts/prompt15-preservation-audit-core.mjs','scripts/prompt15-world-indices-core.mjs','scripts/prompt14-catalog-core.mjs','scripts/prompt14-exact-ring.mjs','scripts/prompt14-catalog-topology.mjs'].map(fileIdentity),fileIdentity(`${ADMINISTRATIVE_ROOT}/administrative-restoration.geojson`),fileIdentity(`${ADMINISTRATIVE_ROOT}/residuals.geojson`),fileIdentity(`${ADMINISTRATIVE_ROOT}/protected-overlay.geojson`)];
  const allCountries=sources.p0.features.map(feature=>feature.properties.countryId).sort(compareText),countries=countryIds?countryIds.slice().sort(compareText):allCountries;if(countries.some(id=>!allCountries.includes(id)))throw Error('15-19 contains an unknown country ID');
  const worldBuild=countries.length===allCountries.length&&countries.every((id,index)=>id===allCountries[index]);
  const rootKey=hashCanonical('prompt15-task-15-19-root.v1',{version:TASK_15_19_VERSION,candidate,inputs}).slice(0,20),root=path.join(outputBase,`${worldBuild?'15-19-operational-catalog':'15-19-partial'}-v1-${rootKey}`),staging=path.join(outputBase,`.15-19-staging-${rootKey}-${process.pid}`);
@@ -83,7 +82,7 @@ export function generateWorldCatalog({outputBase='data/derived/prompt15',country
   onProgress(`[${index+1}/${countries.length}] ${countryId}`);const result=generateCountryCells(sources,countryId,candidate,onProgress),audit=auditCountryResult(result),duplicates=[];for(const cell of result.cells){if(globalIds.has(cell.id))duplicates.push(cell.id);globalIds.add(cell.id);}
   if(duplicates.length)audit.checks.uniqueCellIds=false;worldCells+=result.cells.length;worldVertices+=result.metrics.vertexCount;worldEdges+=result.metrics.edgeCount;
   const prefix=`countries/${countryId}`;write(`${prefix}/catalog.json.gz`,{schemaVersion:TASK_15_19_VERSION,policyVersion:POLICY.version,candidateId:candidate.id,countryId,entries:result.cells.map(cellEntry)},true);write(`${prefix}/geometry.geojson.gz`,{type:'FeatureCollection',features:result.cells.map(cellFeature)},true);
-  const generation={countryId,status:audit.status,checks:audit.checks,metrics:result.metrics,parents:result.parents,sourceComponents:result.sourceComponents,coverage:result.coverage,countryCoverage:result.countryCoverage,validity:result.validity,numericalNoding:result.numericalNoding,numericalProtectedFragmentRepairs:result.numericalProtectedFragmentRepairs,numericalCellRepairs:result.numericalCellRepairs,numericalGapRepairs:result.numericalGapRepairs,componentSeparation:result.componentSeparation,cellRoot:digest(jsonBytes(result.cells.map(cell=>cell.id).sort(compareText)))};write(`${prefix}/generation.json.gz`,generation,true);
+  const generation={countryId,status:audit.status,checks:audit.checks,metrics:result.metrics,parents:result.parents,sourceComponents:result.sourceComponents,coverage:result.coverage,countryCoverage:result.countryCoverage,validity:result.validity,numericalNoding:result.numericalNoding,numericalProtectedFragmentRepairs:result.numericalProtectedFragmentRepairs,numericalCellRepairs:result.numericalCellRepairs,numericalGapRepairs:result.numericalGapRepairs,componentSeparation:result.componentSeparation,preservation:result.preservation,precisionAttempts:result.precisionAttempts,precisionRepair:result.precisionRepair,cellRoot:digest(jsonBytes(result.cells.map(cell=>cell.id).sort(compareText)))};write(`${prefix}/generation.json.gz`,generation,true);
   countrySummaries.push({countryId,status:audit.status,checks:audit.checks,metrics:result.metrics,cellRoot:generation.cellRoot,files:artifacts.slice(-3).map(item=>({...item}))});global.gc?.();
  }
  const capChecks={worldCells:worldCells<=POLICY.budgets.worldCells,worldVertices:worldVertices<=POLICY.budgets.worldVertices,worldEdges:worldEdges<=POLICY.budgets.worldEdges,countryCells:countrySummaries.every(item=>item.metrics.cellCount<=POLICY.budgets.countryCells)};

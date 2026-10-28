@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {CAPS, CANONICAL_P0_VALIDATOR_POLICY, validateCaps, validatePartitionCoverage, validatePolygonFeatureCollection} from './prompt14-source-gate.mjs';
 import {validateDerivedGameLock, verifySourceComponentGroups} from './prompt14-shared-topology.mjs';
+import {signedRingArea,ringAreaSign,ringAreaEvaluation,exactRingMoments} from './prompt14-exact-ring.mjs';
 
 export const GENERATOR_VERSION = 'prompt14-immutable-catalog-v1';
 export const CATALOG_POLICY = Object.freeze({
@@ -33,9 +34,7 @@ export const polygons = g => g.type === 'Polygon' ? [g.coordinates] : g.type ===
 const equalPoint = (a, b) => a[0] === b[0] && a[1] === b[1];
 const pointCompare = (a, b) => a[0] - b[0] || a[1] - b[1];
 export function signedArea(ring) {
-  const [ox, oy] = ring[0]; let sum = 0;
-  for (let i = 1; i < ring.length; i++) sum += (ring[i-1][0]-ox)*(ring[i][1]-oy)-(ring[i][0]-ox)*(ring[i-1][1]-oy);
-  return sum / 2;
+  return signedRingArea(ring);
 }
 export function normalizeRing(source, exterior) {
   if (!Array.isArray(source) || source.length < 4 || !equalPoint(source[0], source.at(-1))) throw new Error('Unclosed or short ring');
@@ -43,8 +42,9 @@ export function normalizeRing(source, exterior) {
     if (p.length !== 2 || !p.every(Number.isFinite) || Math.abs(p[0]) > 180 || Math.abs(p[1]) > 90) throw new Error('Invalid WGS84 position');
     return p.map(v => Object.is(v, -0) ? 0 : v);
   }).filter((p, i, all) => i === 0 || !equalPoint(p, all[i-1]));
-  if (ring.length < 4 || signedArea(ring) === 0) throw new Error('Degenerate ring');
-  if ((signedArea(ring) > 0) !== exterior) ring.reverse();
+  if (ring.length < 4) throw new Error('Degenerate ring');
+  const sign=ringAreaSign(ring);if(!sign)throw new Error('Degenerate ring');
+  if ((sign > 0) !== exterior) ring.reverse();
   ring.pop();
   let start = 0;
   for (let i = 1; i < ring.length; i++) {
@@ -73,8 +73,8 @@ export function geometryMetadata(geometry) {
         const p = ring[i]; bbox[0] = Math.min(bbox[0],p[0]); bbox[1] = Math.min(bbox[1],p[1]); bbox[2] = Math.max(bbox[2],p[0]); bbox[3] = Math.max(bbox[3],p[1]);
         if (i) {const a=ring[i-1], cross=(a[0]-ox)*(p[1]-oy)-(p[0]-ox)*(a[1]-oy); twice+=cross; cx+=(a[0]+p[0]-2*ox)*cross; cy+=(a[1]+p[1]-2*oy)*cross;}
       }
-      if (!twice) throw new Error('Zero area ring');
-      const signed = twice/2; area += signed; sx += (ox+cx/(3*twice))*signed; sy += (oy+cy/(3*twice))*signed;
+      if(!ringAreaEvaluation(ring).certified){const exact=exactRingMoments(ring);area+=exact.area;sx+=exact.centroid[0]*exact.area;sy+=exact.centroid[1]*exact.area;}
+      else{const signed = twice/2; area += signed; sx += (ox+cx/(3*twice))*signed; sy += (oy+cy/(3*twice))*signed;}
     }
   }
   if (!(area > 0)) throw new Error('Nonpositive polygon area');

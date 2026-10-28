@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useMemo, useReducer, useRef, useState} from "react";
+import {useEffect, useMemo, useReducer, useRef, useState, type ComponentProps, type ReactNode} from "react";
 import {useStore} from "zustand";
 
 import {CatalogWorldMap as WorldMap} from "@/components/map/CatalogWorldMap";
@@ -33,6 +33,8 @@ import {GameActionOverlay} from "./GameActionOverlay";
 import {NewsOverlay} from "./NewsOverlay";
 import {MajorEventModal} from "./MajorEventModal";
 import {MapCountryPicker} from "./MapCountryPicker";
+import type {GameWorldView, MapPresentation} from '@/lib/game-ui/runtime-view';
+import type {OperationalControlCounts} from '@/lib/simulation/operational-game-protocol';
 
 type Props = Readonly<{
   worldController: WorldStateStoreController;
@@ -63,22 +65,31 @@ export function CatalogGameScreen({
 }: Props) {
   const world = useStore(worldController.store, (state) => state.world);
   const playerCountryId = useGameSetupStore((state) => state.playerCountryId);
+  const syncPlayerCountry = useGameSetupStore((state) => state.syncSimulationPlayerCountry);
+  const turnController = useSimulationTurnController({runtime: worldController, metadata: delivery.metadata, countrySearchProjection, playerCountryId, syncPlayerCountry});
+  const counts = Object.fromEntries(world.countryOrder.map(id => [id, {owned: mapProjection.ownedByCountry[id]?.length ?? 0, controlled: mapProjection.controlledByCountry[id]?.length ?? 0,
+    occupied: (mapProjection.ownedByCountry[id] ?? []).filter(cell => mapProjection.featuresById[cell].occupied).length}]));
+  return <GameScreenContent world={world} mapProjection={mapProjection} turnController={turnController} counts={counts}
+    map={settings => <WorldMap runtime={worldController} delivery={delivery} mapProjection={mapProjection} uiSettings={settings}/>}/>;
+}
+
+/** Shared game UI for both snapshot catalogs. Each host supplies its own map/turn adapter. */
+export function GameScreenContent({world, mapProjection, turnController, counts, map}: {
+  world: GameWorldView;
+  mapProjection: MapPresentation;
+  turnController: ComponentProps<typeof GameActionOverlay>['controller'];
+  counts: OperationalControlCounts;
+  map: ReactNode | ((settings: typeof DEFAULT_GAME_UI_SETTINGS) => ReactNode);
+}) {
+  const playerCountryId = useGameSetupStore((state) => state.playerCountryId);
   const selectedCountryId = useGameSetupStore((state) => state.selectedCountryId);
   const countryPanelProjection = useGameSetupStore((state) => state.countryPanelProjection);
   const clearSelectedCountry = useGameSetupStore((state) => state.clearSelectedCountry);
   const selectCountry = useGameSetupStore((state) => state.selectCountry);
-  const syncSimulationPlayerCountry = useGameSetupStore((state) => state.syncSimulationPlayerCountry);
   const [overlay, dispatchOverlay] = useReducer(gameOverlayReducer, initialGameOverlay);
   const [majorEvents, dispatchMajorEvents] = useReducer(majorEventQueueReducer, initialMajorEventQueueState);
   const [uiSettings, setUiSettings] = useState(DEFAULT_GAME_UI_SETTINGS);
   const didObserveInitialSelection = useRef(false);
-  const turnController = useSimulationTurnController({
-    runtime:worldController,
-    metadata:delivery.metadata,
-    countrySearchProjection,
-    playerCountryId,
-    syncPlayerCountry: syncSimulationPlayerCountry,
-  });
 
   useEffect(() => {
     dispatchOverlay({
@@ -178,12 +189,7 @@ export function CatalogGameScreen({
   return (
     <main className="game-screen" data-testid="game-screen" data-reduce-motion={uiSettings.reduceMotion ? "" : undefined}>
       <GameTooltipProvider>
-        <WorldMap
-          runtime={worldController}
-          delivery={delivery}
-          mapProjection={mapProjection}
-          uiSettings={uiSettings}
-        />
+        {typeof map === 'function' ? map(uiSettings) : map}
         <MapCountryPicker
           options={mapCountryOptions}
           selectedCountryId={selectedCountryId}
@@ -215,7 +221,7 @@ export function CatalogGameScreen({
             ) : overlay.kind === "economy" && economy ? (
               <EconomyOverlay model={economy}/>
             ) : overlay.kind === "country" && country ? (
-              <><dl data-testid="country-territorial-control"><dt>소유 영토</dt><dd>{mapProjection.ownedByCountry[country.country.countryId]?.length??0}</dd><dt>통제 영토</dt><dd>{mapProjection.controlledByCountry[country.country.countryId]?.length??0}</dd><dt>타국 통제 아래의 소유 영토</dt><dd>{(mapProjection.ownedByCountry[country.country.countryId]??[]).filter(id=>mapProjection.featuresById[id].occupied).length}</dd></dl><CountryOverlay
+              <><dl data-testid="country-territorial-control"><dt>소유 영토</dt><dd>{counts[country.country.countryId]?.owned??0}</dd><dt>통제 영토</dt><dd>{counts[country.country.countryId]?.controlled??0}</dd><dt>타국 통제 아래의 소유 영토</dt><dd>{counts[country.country.countryId]?.occupied??0}</dd></dl><CountryOverlay
                 model={country}
                 onOpenPolitics={() => { clearSelectedCountry(); dispatchOverlay({type: "open", overlay: {kind: "politics"}}); }}
                 onOpenDiplomacy={(countryId) => dispatchOverlay({type: "open", overlay: {kind: "diplomacy", countryId}})}

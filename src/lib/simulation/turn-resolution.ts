@@ -70,7 +70,11 @@ function normalizeFunctionSchema(value: unknown): unknown {
     key === "oneOf" ? "anyOf" : key,
     normalizeFunctionSchema(child),
   ]));
+  // Lookup defaults are a host convenience, not part of strict function arguments.
+  delete result.default;
   if(result.properties&&typeof result.properties==='object'&&'regionRefs'in result.properties)result.required=[...new Set([...(result.required as string[]??[]),'regionRefs'])];
+  if(result.properties&&typeof result.properties==='object'&&'frontierScope'in result.properties)result.required=[...new Set([...(result.required as string[]??[]),'frontierScope'])];
+  if(result.properties&&typeof result.properties==='object'&&'extent'in result.properties&&'baseWorldRevision'in result.properties)result.required=Object.keys(result.properties);
   return result;
 }
 

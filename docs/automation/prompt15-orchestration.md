@@ -1,5 +1,13 @@
 # Prompt 15 simple-loop orchestrator
 
+The 2026-10-28 user decision in
+[prompt15-numerical-deferral.json](prompt15-numerical-deferral.json) defers
+the known six-country numerical micro-geometry findings. Do not resume a
+repair loop for those findings alone. Subsequent development is authorized
+under that recorded debt; historical FAIL receipts are not converted to
+PASS. This documentation does not change the controller state machine or
+automatically advance a stopped run.
+
 This is the second-generation Prompt 15 controller. It intentionally implements the same loop used during successful manual work:
 
 ```text

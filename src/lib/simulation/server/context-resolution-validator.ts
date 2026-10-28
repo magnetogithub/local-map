@@ -2,12 +2,14 @@ import {resolveCatalogRegionEffects,type CatalogRegionIndex} from '../catalog-re
 import {assertWorldGeometryCatalogRefMatches} from '../../world/world-geometry-catalog-ref';
 import type {SimulationContextV1} from "../simulation-context";
 import {parseTurnResolutionV1, type TurnResolutionV1} from "../turn-resolution";
-import {isAuthorityActiveAt} from '../simulation-state-v2';
+import {isAuthorityActiveAt, type TerritorialControlAuthority} from '../simulation-state-v2';
 import {allowsDevelopmentWorldEffect} from '../debug-world-effect';
 import {presentationEvidenceFromContext, validatePresentationGrant} from '../presentation-grant-validation';
 import {resolveCountryColorIntents} from '../country-color-intent';
 import {isConsequenceAvailableAt} from '../consequence-causality';
 import type {ScheduledConsequenceV1} from '../narrative-state';
+import {OPERATIONAL_CATALOG_VERSION} from '../../world/operational-catalog';
+import {validateOperationalFrontierEffects, type OperationalFrontierValidation} from '../operational-frontier-validation';
 
 export type ContextValidationResult = Readonly<{
   ok: boolean;
@@ -18,6 +20,8 @@ export type ContextValidationResult = Readonly<{
 export type ContextValidationOptions = Readonly<{
   regionIndex?: CatalogRegionIndex;
   debugWorldEffectActionIds?: ReadonlySet<string>;
+  frontier?: OperationalFrontierValidation;
+  territorialControlAuthorities?: readonly TerritorialControlAuthority[];
 }>;
 
 const field = (value: unknown, key: string): unknown =>
@@ -33,7 +37,15 @@ export function validateResolutionAgainstContext(
   let resolution: TurnResolutionV1;
   try {
     if(context.regionCatalog&&options.regionIndex?.catalogRef)assertWorldGeometryCatalogRefMatches(context.regionCatalog,options.regionIndex.catalogRef);
-    resolution = resolveCountryColorIntents(resolveCatalogRegionEffects(parseTurnResolutionV1(raw),options.regionIndex), context.countryMapColors, context.countryDirectory.map(c=>c.countryId));
+    const parsed = parseTurnResolutionV1(raw);
+    const territorial = parsed.worldEffects.some(e => e.type === 'territory.occupy' || e.type === 'territory.liberate' || e.type === 'territory.transferOwnership');
+    if (territorial && (context.regionCatalog?.catalogVersion === OPERATIONAL_CATALOG_VERSION || parsed.worldEffects.some(e => 'frontierScope' in e && e.frontierScope))) {
+      if (!options.frontier || !context.regionCatalog) throw Error('FRONTIER_WORLD_REQUIRED');
+      assertWorldGeometryCatalogRefMatches(context.regionCatalog, options.frontier.world.catalogRef);
+      if (options.frontier.world.revision !== context.revisions.world) throw Error('STALE_FRONTIER_REVISION');
+      validateOperationalFrontierEffects(parsed, options.frontier.world, options.frontier);
+    }
+    resolution = resolveCountryColorIntents(resolveCatalogRegionEffects(parsed,options.regionIndex), context.countryMapColors, context.countryDirectory.map(c=>c.countryId));
   } catch (error) {
     return Object.freeze({
       ok: false,
@@ -156,6 +168,7 @@ export function validateResolutionAgainstContext(
     if (consequence.situationId !== null && !knownSituationIds.has(consequence.situationId)) add("DANGLING_REFERENCE", `${path}.situationId`, `Unknown situation ${consequence.situationId}`);
   });
   const effectIds = new Set<string>();
+  const territorialAuthorities = options.territorialControlAuthorities ?? context.territorialControlAuthorities;
   const newCountryRefs = new Set<string>();
   const requireSubdivision = (reference: Readonly<{catalogId: string; sourceVersion: string; subdivisionId: string}>, sourceCountryId: string | null, path: string) => {
     const entry = subdivisions.get(subdivisionKey(reference));
@@ -179,13 +192,13 @@ export function validateResolutionAgainstContext(
         const grounded=event.causes.some(c=>{const prior=c.kind==='authoritative-event'?recentEvents.get(c.id):c.kind==='scheduled-consequence'?consequences.get(c.id):null;return prior&&!field(prior,'authorityLifecycle')&&!field(prior,'referenceLifecycle')&&(c.kind==='scheduled-consequence'||['military','territorial','treaty'].includes(String(field(prior,'outcomeCategory'))))&&participants.every(id=>(field(prior,'actorCountryIds') as string[]).includes(id));})
           ||context.facts.some(f=>field(f,'status')==='active'&&['scenario','conflict-or-war','treaty-or-negotiation','military-or-occupation'].includes(String(field(f,'kind')))&&[a.actorCountryId,...a.targetCountryId?[a.targetCountryId]:[]].every(id=>(field(f,'actorCountryIds') as string[]).includes(id)));
         if(!grounded||a.sourceEventId!==event.eventId||a.validFrom<event.date||!event.actorCountryIds.includes(a.actorCountryId)||!['military','territorial','treaty'].includes(event.outcomeCategory))add('INVALID_WORLD_EFFECT',path,'INVALID_AUTHORITY_GRANT');
-        if(context.territorialControlAuthorities?.some(v=>v.id===a.id)||resolution.worldEffects.slice(0,index).some(e=>e.type==='territorialAuthority.granted'&&e.authority.id===a.id))add('INVALID_WORLD_EFFECT',path,'DUPLICATE_AUTHORITY_ID');
+        if(territorialAuthorities?.some(v=>v.id===a.id)||resolution.worldEffects.slice(0,index).some(e=>e.type==='territorialAuthority.granted'&&e.authority.id===a.id))add('INVALID_WORLD_EFFECT',path,'DUPLICATE_AUTHORITY_ID');
         for(const id of a.allowedTerritoryIds)if(!territoryOwners.has(id)&&!options.regionIndex?.hasTerritory(id))add('DANGLING_REFERENCE',path,'Grant territory is absent from the supplied bounded directory');
         break;
       }
       case 'territory.occupy':case 'territory.liberate':case 'territory.transferOwnership': {
         validateCountries([effect.actorCountryId,...effect.targetCountryId?[effect.targetCountryId]:[],...effect.type==='territory.transferOwnership'?[effect.newOwnerCountryId]:[]],path);
-        const a=context.territorialControlAuthorities?.find(a=>a.id===effect.authorityId)??resolution.worldEffects.slice(0,index).filter(e=>e.type==='territorialAuthority.granted').find(e=>e.authority.id===effect.authorityId)?.authority;
+        const a=territorialAuthorities?.find(a=>a.id===effect.authorityId)??resolution.worldEffects.slice(0,index).filter(e=>e.type==='territorialAuthority.granted').find(e=>e.authority.id===effect.authorityId)?.authority;
         const operation=effect.type==='territory.transferOwnership'?'transfer':effect.type.slice('territory.'.length);
         if(a?(a.actorCountryId!==effect.actorCountryId||a.targetCountryId!==effect.targetCountryId||!a.allowedOperations.includes(operation as never)||!isAuthorityActiveAt(a,event.date)||effect.territoryIds.some(id=>!a.allowedTerritoryIds.includes(id as never))):!allowsDevelopmentWorldEffect(hasDebugWorldEffectCause(event.eventId)))add('INVALID_WORLD_EFFECT',path,'TERRITORIAL_AUTHORITY_REQUIRED');
         for(const id of effect.territoryIds)if(!territoryOwners.has(id)&&!options.regionIndex?.hasTerritory(id))add('DANGLING_REFERENCE',path,'Territory is absent from the validated directory/catalog');
