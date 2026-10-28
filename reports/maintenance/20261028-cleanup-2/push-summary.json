@@ -1,0 +1,15 @@
+{
+  "status": "second-cleanup-complete",
+  "sourceCommit": "c9886a3de9fda292fb498e876ca6a1782213747b",
+  "beforeGiB": 79.316,
+  "afterGiB": 10.272,
+  "netReductionGiB": 69.044,
+  "netReductionPercent": 87.05,
+  "removedTargets": 498,
+  "trackedObsoleteFilesRemoved": 12967,
+  "protectedIdentityChecksPassed": 72,
+  "coreTestsPassed": 4,
+  "inventoryErrors": 0,
+  "currentRuntimeDataPreserved": true,
+  "evidencePolicy": "Detailed execution records and compressed evidence remain local. This snapshot publishes aggregate statistics only."
+}

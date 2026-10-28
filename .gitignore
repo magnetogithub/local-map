@@ -63,4 +63,6 @@ next-env.d.ts
 /reports/maintenance/20261028-cleanup/*
 !/reports/maintenance/20261028-cleanup/push-summary.json
 !/reports/maintenance/20261028-cleanup/push-summary.md
-/reports/maintenance/20261028-cleanup-2/
+/reports/maintenance/20261028-cleanup-2/*
+!/reports/maintenance/20261028-cleanup-2/push-summary.json
+!/reports/maintenance/20261028-cleanup-2/push-summary.md
