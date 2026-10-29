@@ -25,6 +25,13 @@ const newsModel: GameNewsViewModel = {
 };
 
 describe("13-24 news UI", () => {
+  it("explains an empty map-change list without adding a synthetic report item", () => {
+    const turnResult = {...newsModel.turnResult!, mapChanges: []};
+    render(<NewsOverlay model={{...newsModel, turnResult}} onSelectEvent={vi.fn()} onOpenCountry={vi.fn()}/>);
+    expect(screen.getByText("즉시 발생한 지도 변화가 없습니다.")).toBeInTheDocument();
+    expect(turnResult.mapChanges).toEqual([]);
+  });
+
   it("filters the list, keeps detail within the filter, navigates countries, and renders the split result", async () => {
     const user = userEvent.setup();
     const onOpenCountry = vi.fn();

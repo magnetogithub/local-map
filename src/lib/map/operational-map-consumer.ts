@@ -4,7 +4,7 @@ import type {OperationalStateChange} from '../world/operational-catalog';
 import {mapColorPresentation} from '../world/country-map-color';
 import {createOperationalMapProjection, operationalCellView, operationalFront, prepareOperationalMapUpdate, type OperationalMapWorld} from '../projection/operational-map-projection';
 import {OPERATIONAL_MAP_SOURCE_ID} from './operational-delivery-contract';
-import {createOperationalMapSources, OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID} from './operational-map-sources';
+import {createOperationalMapSources, OperationalMapSourceWriteError, OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID, OPERATIONAL_EXACT_SOURCE_OPTIONS} from './operational-map-sources';
 import {fetchOperationalVectorDelivery, operationalEdgeFeatures, type OperationalVectorDelivery} from './operational-vector-delivery';
 import {registerCatalogTileProtocol, type CatalogFetch} from './catalog-vector-delivery';
 
@@ -25,18 +25,20 @@ export type OperationalMapPort = {
   addSource: (id: string, source: SourceSpecification) => unknown; removeSource: (id: string) => unknown; getSource: (id: string) => unknown;
   addLayer: (layer: LayerSpecification) => unknown; removeLayer: (id: string) => unknown; getLayer: (id: string) => unknown;
   setFeatureState: (target: {source: string; sourceLayer?: string; id: string | number}, state: Record<string, unknown>) => unknown;
+  removeFeatureState: (target: {source: string; sourceLayer?: string; id: string | number}) => unknown;
   on: (event: string, layer: string, listener: (event: MapEvent) => void) => unknown;
   off: (event: string, layer: string, listener: (event: MapEvent) => void) => unknown;
 };
 type CellFeature = Feature<Polygon | MultiPolygon>;
 type EdgeFeature = Feature<LineString | MultiLineString>;
+type CellCountries = Readonly<{ownerCountryId: string | null; controllerCountryId: string | null}>;
 const empty = (): FeatureCollection => ({type: 'FeatureCollection', features: []});
 type Input = {map: OperationalMapPort; protocolApi: Parameters<typeof registerCatalogTileProtocol>[0]; delivery: OperationalVectorDelivery; world: OperationalMapWorld;
   signal?: AbortSignal; onSelect?: (id: string | null) => void; onHover?: (id: string | null) => void; onTerritorySelect?: (id: string | null) => void};
 
 /** B branch: renders only the supplied authoritative snapshots/deltas, without mutating the world. */
 export async function createOperationalMapConsumer(input: Input) {
-  const {map, delivery} = input, L = OPERATIONAL_MAP_LAYERS;
+  const {map, delivery, onSelect, onHover, onTerritorySelect} = input, L = OPERATIONAL_MAP_LAYERS;
   let projection = createOperationalMapProjection(input.world, delivery.bootstrap.catalog.catalogRef, delivery.bootstrap.catalog.counts.cells);
   for (const country of Object.values(input.world.countriesById)) mapColorPresentation(country.mapColor);
   const ownedSources = [OPERATIONAL_CHANGED_CELL_SOURCE_ID, OPERATIONAL_FRONT_SOURCE_ID];
@@ -46,7 +48,9 @@ export async function createOperationalMapConsumer(input: Input) {
   const abort = new AbortController(), signal = input.signal ? AbortSignal.any([input.signal, abort.signal]) : abort.signal;
   let disposed = false, failed: unknown = null, selected: string | null = null, hovered: string | null = null, detailRequest = 0;
   let queue: Promise<unknown> = Promise.resolve(), stopFeatures = () => {};
-  const visibleCells = new Set<number>(), detailCells = new Set<number>(), exactCells = new Map<number, CellFeature>(), exactFronts = new Map<number, EdgeFeature>();
+  const vectorCells = new Set<number>(), detailCells = new Set<number>(), exactCells = new Map<number, CellFeature>(), exactFronts = new Map<number, EdgeFeature>();
+  const interactionCells = new Map<string, Set<number>>(), controllerCells = new Map<string, Set<number>>();
+  const frontOverrides = new Map<number, {front: boolean; exactFront: boolean}>();
   const stats = {fullProjectionBuilds: 1, updates: 0, cellsUpdated: 0, edgesExamined: 0, exactCellsAdded: 0, exactFrontsAdded: 0, exactFrontsRemoved: 0};
   const addLayer = (layer: LayerSpecification) => {map.addLayer(layer); addedLayers.push(layer.id);};
   const geoSource = (id: string) => {
@@ -55,15 +59,55 @@ export async function createOperationalMapConsumer(input: Input) {
     return source as {updateData: (diff: GeoJSONSourceDiff) => unknown};
   };
   const check = () => {if (disposed) throw Error('OPERATIONAL_MAP_DISPOSED'); if (failed) throw Error('OPERATIONAL_MAP_RESYNC_REQUIRED'); signal.throwIfAborted();};
-  const applyCell = (n: number) => {
+  const hasCell = (n: number) => vectorCells.has(n) || detailCells.has(n) || exactCells.has(n);
+  const updateIndex = (index: Map<string, Set<number>>, country: string | null, n: number, add: boolean) => {
+    if (country === null) return;
+    const members = index.get(country);
+    if (add) {
+      if (members) members.add(n); else index.set(country, new Set([n]));
+    } else if (members) {
+      members.delete(n); if (!members.size) index.delete(country);
+    }
+  };
+  const indexCell = (n: number, cell: CellCountries, add: boolean) => {
+    updateIndex(interactionCells, cell.ownerCountryId ?? cell.controllerCountryId, n, add);
+    updateIndex(controllerCells, cell.controllerCountryId, n, add);
+  };
+  const writeCell = (n: number, state: Record<string, unknown>) => {
+    if (vectorCells.has(n)) map.setFeatureState({source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'territories', id: n}, state);
+    if (detailCells.has(n)) map.setFeatureState({source: OPERATIONAL_EXACT_CELL_SOURCE_ID, id: n}, state);
+    if (exactCells.has(n)) map.setFeatureState({source: OPERATIONAL_CHANGED_CELL_SOURCE_ID, id: n}, state);
+  };
+  const applyCell = (n: number, onlySource?: string) => {
+    if (!hasCell(n)) return;
     const cell = operationalCellView(projection.world, n), country = cell.ownerCountryId ?? cell.controllerCountryId;
-    const state = {...cell, hover: country !== null && country === hovered, selected: country !== null && country === selected};
-    map.setFeatureState({source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'territories', id: n}, {...state, exactCell: exactCells.has(n) || detailCells.has(n)});
-    for (const source of [OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_CHANGED_CELL_SOURCE_ID]) map.setFeatureState({source, id: n}, state);
+    indexCell(n, cell, true);
+    const state = {mapColor: cell.mapColor, selectionColor: cell.selectionColor, occupied: cell.occupied,
+      hover: country !== null && country === hovered, selected: country !== null && country === selected};
+    if (vectorCells.has(n) && (!onlySource || onlySource === OPERATIONAL_MAP_SOURCE_ID)) map.setFeatureState({source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'territories', id: n}, {...state, exactCell: exactCells.has(n) || detailCells.has(n)});
+    if (detailCells.has(n) && (!onlySource || onlySource === OPERATIONAL_EXACT_CELL_SOURCE_ID)) map.setFeatureState({source: OPERATIONAL_EXACT_CELL_SOURCE_ID, id: n}, state);
+    if (exactCells.has(n) && !onlySource) map.setFeatureState({source: OPERATIONAL_CHANGED_CELL_SOURCE_ID, id: n}, state);
     stats.cellsUpdated++;
   };
-  const applyEdge = (n: number) => map.setFeatureState({source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'edges', id: n},
-    {front: operationalFront(projection.world, delivery.edgeIncidence(n)), exactFront: exactFronts.has(n)});
+  const restoreVectorMask = (n: number) => {
+    if (vectorCells.has(n)) map.setFeatureState({source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'territories', id: n}, {exactCell: exactCells.has(n) || detailCells.has(n)});
+  };
+  const removeDetailCellState = (n: number) => {
+    map.removeFeatureState({source: OPERATIONAL_EXACT_CELL_SOURCE_ID, id: n});
+    if (!hasCell(n)) indexCell(n, projection.world.territoriesById[projection.world.territoryOrder[n - 1]], false);
+    restoreVectorMask(n);
+  };
+  const applyEdge = (n: number) => {
+    const world = projection.world, pair = delivery.edgeIncidence(n), front = operationalFront(world, pair), exactFront = exactFronts.has(n);
+    const previous = frontOverrides.get(n), target = {source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'edges', id: n};
+    // Immutable country borders are peaceful by default. Only changed/restored
+    // occupation contacts override this, without scanning every border.
+    if (!front && !exactFront) {
+      if (previous) {map.removeFeatureState(target); frontOverrides.delete(n);}
+    } else if (!previous || previous.front !== front || previous.exactFront !== exactFront) {
+      map.setFeatureState(target, {front, exactFront}); frontOverrides.set(n, {front, exactFront});
+    }
+  };
   const frontValue = (n: number, world: OperationalMapWorld) => operationalFront(world, delivery.edgeIncidence(n));
   const stageDetail = async (world: OperationalMapWorld, cells: readonly {id: string; sourceCountryId: string; ordinal: number}[], edges: readonly number[]) => {
     const missingCells = cells.filter(c => !exactCells.has(c.ordinal));
@@ -97,54 +141,66 @@ export async function createOperationalMapConsumer(input: Input) {
     check(); if (id !== null && !projection.world.countriesById[id]) throw Error('UNKNOWN_OPERATIONAL_MAP_COUNTRY');
     const old = kind === 'hover' ? hovered : selected; if (old === id) return;
     if (kind === 'hover') hovered = id; else selected = id;
-    for (const n of new Set([...visibleCells, ...detailCells, ...exactCells.keys()])) {
-      const c = operationalCellView(projection.world, n), country = c.ownerCountryId ?? c.controllerCountryId;
-      if (country === old || country === id) applyCell(n);
-    }
+    try {
+      for (const [country, active] of [[old, false], [id, true]] as const) {
+        if (country === null) continue;
+        const state = {[kind]: active};
+        for (const n of interactionCells.get(country) ?? []) {writeCell(n, state); stats.cellsUpdated++;}
+      }
+    } catch (error) {failed = error; throw error;}
   };
-  const click = (event: MapEvent) => {const c = hit(event), country = c ? c.ownerCountryId ?? c.controllerCountryId : null; interaction('selected', country); input.onSelect?.(country); input.onTerritorySelect?.(c?.id ?? null);};
-  const move = (event: MapEvent) => {const c = hit(event), country = c ? c.ownerCountryId ?? c.controllerCountryId : null; interaction('hover', country); input.onHover?.(country);};
-  const leave = () => {interaction('hover', null); input.onHover?.(null);};
+  const click = (event: MapEvent) => {const c = hit(event), country = c ? c.ownerCountryId ?? c.controllerCountryId : null; interaction('selected', country); onSelect?.(country); onTerritorySelect?.(c?.id ?? null);};
+  const move = (event: MapEvent) => {const c = hit(event), country = c ? c.ownerCountryId ?? c.controllerCountryId : null; interaction('hover', country); onHover?.(country);};
+  const leave = () => {interaction('hover', null); onHover?.(null);};
   const dispose = () => {
     if (disposed) return; disposed = true; abort.abort(); stopFeatures();
+    interactionCells.clear(); controllerCells.clear();
     for (const layer of fillLayers) {map.off('click', layer, click); map.off('mousemove', layer, move); map.off('mouseleave', layer, leave);}
     for (const id of [...addedLayers].reverse()) if (map.getLayer(id)) map.removeLayer(id);
     for (const id of [...addedSources].reverse()) if (map.getSource(id)) map.removeSource(id);
     sources.dispose();
   };
   try {
-    for (const id of ownedSources) {map.addSource(id, {type: 'geojson', data: empty()}); addedSources.push(id);}
+    for (const id of ownedSources) {map.addSource(id, {...OPERATIONAL_EXACT_SOURCE_OPTIONS, data: empty()}); addedSources.push(id);}
     const fills = [[L.fill, L.occupation, L.hover, L.selected, OPERATIONAL_MAP_SOURCE_ID],
       [L.detailFill, L.detailOccupation, L.detailHover, L.detailSelected, OPERATIONAL_EXACT_CELL_SOURCE_ID],
       [L.changedFill, L.changedOccupation, L.changedHover, L.changedSelected, OPERATIONAL_CHANGED_CELL_SOURCE_ID]] as const;
     for (const [fill, occupation, hover, selectedLayer, source] of fills) {
       const vector = source === OPERATIONAL_MAP_SOURCE_ID, layerSource = {source, ...(vector ? {'source-layer': 'territories'} : {})};
       const visible: boolean | ExpressionSpecification = vector ? ['!', ['boolean', ['feature-state', 'exactCell'], false]] : true;
-      addLayer({id: fill, type: 'fill', ...layerSource, paint: {'fill-color': ['coalesce', ['feature-state', 'mapColor'], '#D6D3C7'], 'fill-outline-color': ['coalesce', ['feature-state', 'mapColor'], '#D6D3C7'], 'fill-opacity': ['case', visible, 1, 0]}});
+      addLayer({id: fill, type: 'fill', ...layerSource, paint: {'fill-antialias': false, 'fill-color': ['coalesce', ['feature-state', 'mapColor'], '#D6D3C7'], 'fill-opacity': ['case', visible, 1, 0]}});
       addLayer({id: occupation, type: 'fill', ...layerSource, paint: {'fill-antialias': false, 'fill-color': '#40285E', 'fill-opacity': ['case', ['all', visible, ['boolean', ['feature-state', 'occupied'], false]], 0.18, 0]}});
       for (const [id, key] of [[hover, 'hover'], [selectedLayer, 'selected']] as const) addLayer({id, type: 'fill', ...layerSource,
         paint: {'fill-antialias': false, 'fill-color': ['coalesce', ['feature-state', 'selectionColor'], '#FFFFFF'], 'fill-opacity': ['case', ['all', visible, ['boolean', ['feature-state', key], false]], 0.18, 0]}});
     }
-    addLayer({id: L.country, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', filter: ['in', ['get', 'c'], ['literal', [0, 1]]], paint: {'line-color': '#53615F', 'line-width': 0.8}});
-    addLayer({id: L.administrative, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'administrative', minzoom: 4, paint: {'line-color': '#FFFFFF', 'line-opacity': 0.5, 'line-width': 0.75}});
+    addLayer({id: L.country, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', filter: ['in', ['get', 'c'], ['literal', [0, 1]]], paint: {'line-color': '#000000', 'line-width': 0.8}});
+    const administrativePaint = {'line-color': '#FFFFFF', 'line-opacity': ['interpolate', ['linear'], ['zoom'], 4, 0.2, 6, 0.55],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 4, 0.35, 7, 0.75]} satisfies NonNullable<import('maplibre-gl').LineLayerSpecification['paint']>;
+    addLayer({id: L.administrative, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'administrative', minzoom: 4, layout: {visibility: 'none'}, paint: administrativePaint});
     addLayer({id: L.synthetic, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', minzoom: 8, filter: ['in', ['get', 'c'], ['literal', [3, 4]]], layout: {visibility: 'none'}, paint: {'line-color': '#53615F', 'line-opacity': 0.2, 'line-width': 0.5}});
     for (const [id, filter, minzoom, synthetic] of [[L.detailCountry, ['in', ['get', 'boundaryClass'], ['literal', ['coast', 'country']]], 0, false],
       [L.detailAdministrative, ['==', ['get', 'administrative'], true], 4, false], [L.detailSynthetic, ['in', ['get', 'boundaryClass'], ['literal', ['operational', 'residual']]], 8, true]] as const) {
       addLayer({id, type: 'line', source: OPERATIONAL_EXACT_EDGE_SOURCE_ID, minzoom, filter: filter as unknown as import('maplibre-gl').FilterSpecification,
-        layout: {visibility: synthetic ? 'none' : 'visible'}, paint: {'line-color': id === L.detailAdministrative ? '#FFFFFF' : '#53615F', 'line-width': 0.75}});
+        layout: {visibility: synthetic || id === L.detailAdministrative ? 'none' : 'visible'}, paint: id === L.detailAdministrative ? administrativePaint : {'line-color': '#000000', 'line-width': 0.75}});
     }
-    addLayer({id: L.front, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', paint: {'line-color': '#D9A43C', 'line-width': 2, 'line-dasharray': [3, 2],
+    addLayer({id: L.front, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', filter: ['==', ['get', 'c'], 1], paint: {'line-color': '#D9A43C', 'line-width': 2, 'line-dasharray': [3, 2],
       'line-opacity': ['case', ['all', ['boolean', ['feature-state', 'front'], false], ['!', ['boolean', ['feature-state', 'exactFront'], false]]], 1, 0]}});
     addLayer({id: L.detailFront, type: 'line', source: OPERATIONAL_FRONT_SOURCE_ID, paint: {'line-color': '#D9A43C', 'line-width': 2, 'line-dasharray': [3, 2]}});
     // Geometry is initially lazy; restored occupied/transferred cells still need exact coverage.
-    const initialIds = input.world.territoryOrder.filter(id => {const c = input.world.territoriesById[id]; return c.controllerCountryId !== c.sourceCountryId || c.ownerCountryId !== c.sourceCountryId;});
-    if (initialIds.length) {
-      const cells = await delivery.resolveCells(initialIds.map(id => input.world.territoriesById[id]), signal), edges = delivery.incidentEdges(cells.map(c => c.ordinal));
+    // Do not capture input/the initial world in callbacks retained for the map lifetime.
+    const initialCells: {id: string; sourceCountryId: string}[] = [];
+    for (const id of input.world.territoryOrder) {
+      const cell = input.world.territoriesById[id];
+      if (cell.controllerCountryId !== cell.sourceCountryId || cell.ownerCountryId !== cell.sourceCountryId) initialCells.push(cell);
+    }
+    if (initialCells.length) {
+      const cells = await delivery.resolveCells(initialCells, signal), edges = delivery.incidentEdges(cells.map(c => c.ordinal));
       const data = await stageDetail(input.world, cells, edges); publishDetail(data); cells.forEach(c => applyCell(c.ordinal)); edges.forEach(applyEdge);
     }
     stopFeatures = delivery.observeTileFeatures(batch => {
       if (disposed) return;
-      try {for (const n of batch.cells) {visibleCells.add(n); applyCell(n);} batch.edges.forEach(applyEdge);} catch (error) {failed = error; throw error;}
+      // Source feature-state survives tile loads. Only restored/changed incident edges need overrides.
+      try {for (const n of batch.cells) {if (!vectorCells.has(n)) {vectorCells.add(n); applyCell(n, OPERATIONAL_MAP_SOURCE_ID);}}} catch (error) {failed = error; throw error;}
     });
     for (const layer of fillLayers) {map.on('click', layer, click); map.on('mousemove', layer, move); map.on('mouseleave', layer, leave);}
   } catch (error) {dispose(); throw error;}
@@ -159,27 +215,48 @@ export async function createOperationalMapConsumer(input: Input) {
         const cells = await delivery.resolveCells(next.cells.map(c => c.after), signal);
         if (cells.some(c => world.territoryOrder[c.ordinal - 1] !== c.id || projection.world.territoryOrder[c.ordinal - 1] !== c.id)) throw Error('OPERATIONAL_MAP_ORDER_CHANGED');
         const edges = delivery.incidentEdges(cells.map(c => c.ordinal)), data = await stageDetail(world, cells, edges);
-        publishDetail(data); projection = next.projection;
         const affected = new Set(cells.map(c => c.ordinal));
-        if (next.countryColors.size) for (const n of new Set([...visibleCells, ...detailCells, ...exactCells.keys()])) {
-          const c = world.territoriesById[world.territoryOrder[n - 1]];
-          if (c.controllerCountryId && next.countryColors.has(c.controllerCountryId)) affected.add(n);
-        }
-        if (selected && !world.countriesById[selected]) {selected = null; input.onSelect?.(null);}
-        if (hovered && !world.countriesById[hovered]) {hovered = null; input.onHover?.(null);}
-        try {affected.forEach(applyCell); edges.forEach(applyEdge);} catch (error) {failed = error; throw error;}
+        for (const country of next.countryColors) for (const n of controllerCells.get(country) ?? []) affected.add(n);
+        if (selected && !world.countriesById[selected]) for (const n of interactionCells.get(selected) ?? []) affected.add(n);
+        if (hovered && !world.countriesById[hovered]) for (const n of interactionCells.get(hovered) ?? []) affected.add(n);
+        try {
+          publishDetail(data);
+          for (const c of cells) indexCell(c.ordinal, projection.world.territoriesById[c.id], false);
+          projection = next.projection;
+          if (selected && !world.countriesById[selected]) {selected = null; onSelect?.(null);}
+          if (hovered && !world.countriesById[hovered]) {hovered = null; onHover?.(null);}
+          affected.forEach(n => applyCell(n)); edges.forEach(applyEdge);
+        } catch (error) {failed = error; throw error;}
         stats.updates++; stats.edgesExamined += edges.length;
       });
       queue = update.catch(() => {}); return update;
     },
     showCountryDetail: async (id: string) => {
-      check(); const request = ++detailRequest, data = await sources.showCountryDetail(id, signal);
+      check(); const request = ++detailRequest, data = await sources.showCountryDetail(id, signal).catch(error => {
+        if (error instanceof OperationalMapSourceWriteError) failed = error;
+        throw error;
+      });
       if (disposed || request !== detailRequest) return data;
-      const previous = [...detailCells]; detailCells.clear(); data.features.forEach(f => detailCells.add(Number(f.id)));
-      new Set([...previous, ...detailCells]).forEach(applyCell); return data;
+      check();
+      try {
+        const previous = [...detailCells]; detailCells.clear(); data.features.forEach(f => detailCells.add(Number(f.id)));
+        for (const n of previous) if (!detailCells.has(n)) removeDetailCellState(n);
+        detailCells.forEach(n => {applyCell(n, OPERATIONAL_EXACT_CELL_SOURCE_ID); restoreVectorMask(n);}); return data;
+      } catch (error) {failed = error; throw error;}
     },
-    showEdgeDetail: (ordinals: readonly number[]) => {check(); return sources.showEdgeDetail(ordinals, signal);},
-    clearDetail: () => {check(); detailRequest++; sources.clearDetail(); const previous = [...detailCells]; detailCells.clear(); previous.forEach(applyCell);},
+    showEdgeDetail: (ordinals: readonly number[]) => {
+      check(); return sources.showEdgeDetail(ordinals, signal).catch(error => {
+        if (error instanceof OperationalMapSourceWriteError) failed = error;
+        throw error;
+      });
+    },
+    clearDetail: () => {
+      check(); detailRequest++;
+      try {
+        sources.clearDetail(); const previous = [...detailCells]; detailCells.clear();
+        previous.forEach(removeDetailCellState);
+      } catch (error) {failed = error; throw error;}
+    },
     dispose,
   });
 }

@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {CELL_EXPERIMENT_POLICY as policy} from '../../../scripts/prompt15-cell-policy.mjs';
+import {operationalFrontierPolicy as policy} from './operational-frontier-policy';
 import {createWorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
 import type {OperationalSelection, OperationalWorldView} from '../world/operational-catalog';
 import {countryIdSchema} from './simulation-contract-primitives';

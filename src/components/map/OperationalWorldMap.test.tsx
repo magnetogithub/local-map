@@ -13,6 +13,7 @@ import {useGameSetupStore} from '@/stores/game-setup-store';
 import {OperationalWorldMap} from './OperationalWorldMap';
 
 type MapFixture = {
+  options: Record<string, unknown>;
   fire(event: string, payload?: {error: Error}): void;
   remove: ReturnType<typeof vi.fn>;
   triggerRepaint: ReturnType<typeof vi.fn>;
@@ -30,7 +31,7 @@ vi.mock('maplibre-gl', () => {
     private layers = new Set<string>();
     remove = vi.fn();
     triggerRepaint = vi.fn(() => queueMicrotask(() => this.fire('idle')));
-    constructor() {mocks.maps.push(this);}
+    constructor(public options: Record<string, unknown>) {mocks.maps.push(this);}
     fire(event: string, payload?: {error: Error}) {
       const once = this.onceListeners.get(event) ?? []; this.onceListeners.delete(event);
       for (const listener of [...this.listeners.get(event) ?? [], ...once]) listener(payload);
@@ -129,6 +130,18 @@ async function mount() {
 }
 
 describe('F06 operational map recovery', () => {
+  it('makes boundary sources, represented years and reuse licenses available in the map attribution', async () => {
+    await mount();
+    const attribution = mocks.maps[0].options.attributionControl as {compact: boolean; customAttribution: string[]};
+    expect(attribution.compact).toBe(true);
+    expect(attribution.customAttribution.join(' ')).toContain('https://www.geoboundaries.org');
+    expect(attribution.customAttribution.join(' ')).toContain('한국 시군구: geoBoundaries·City Population, 2020');
+    expect(attribution.customAttribution.join(' ')).toContain('https://creativecommons.org/licenses/by/3.0/');
+    expect(attribution.customAttribution.join(' ')).toContain('WFP/OCHA · 자료 기준연도 2013/2019');
+    expect(attribution.customAttribution.join(' ')).toContain('CC BY 4.0');
+    expect(attribution.customAttribution.join(' ')).toContain('CC BY 3.0 IGO');
+  });
+
   it('keeps the base map ready after one detail failure and clears the error after explicit retry', async () => {
     const f = await mount();
     vi.mocked(f.consumer.showCountryDetail).mockRejectedValueOnce(Error('detail offline'));
@@ -140,6 +153,26 @@ describe('F06 operational map recovery', () => {
     await waitFor(() => expect(screen.queryByRole('alert')).not.toBeInTheDocument());
     expect(f.consumer.showCountryDetail).toHaveBeenCalledTimes(2);
     expect(mocks.maps).toHaveLength(1);
+  });
+
+  it('requires a map remount when detail state publication leaves the consumer needing resynchronization', async () => {
+    const f = await mount(), world = f.client.getSnapshot().world, stats = f.consumer.getUpdateStats();
+    vi.spyOn(f.consumer, 'getUpdateStats').mockReturnValue({...stats, resyncRequired: true});
+    vi.mocked(f.consumer.showCountryDetail).mockRejectedValueOnce(Error('feature state write failed'));
+    act(() => useGameSetupStore.getState().selectCountry('AAA'));
+    await screen.findByRole('button', {name: '지도 다시 불러오기'});
+    expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'error');
+    expect(screen.getByText('현재 세계 상태를 지도에 반영하지 못했습니다.')).toBeInTheDocument();
+    expect(screen.queryByRole('button', {name: '상세 지도 다시 시도'})).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', {name: '지도 다시 불러오기'}));
+    expect(f.consumer.dispose).toHaveBeenCalledOnce();
+    expect(mocks.maps[0].remove).toHaveBeenCalledOnce();
+    await act(async () => {mocks.maps[1].fire('load');});
+    await waitFor(() => expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'ready'));
+    expect(mocks.createConsumer).toHaveBeenLastCalledWith(expect.objectContaining({world}));
+    expect(mocks.consumers[1].showCountryDetail).toHaveBeenCalledWith('AAA');
+    await waitFor(() => expect(screen.queryByRole('alert')).not.toBeInTheDocument());
+    expect(f.client.getSnapshot().world).toBe(world);
   });
 
   it.each(['failure', 'success'] as const)('ignores a previous selection’s late %s after a new selection finishes', async outcome => {
@@ -177,7 +210,7 @@ describe('F06 operational map recovery', () => {
     expect(mocks.labelUpdates[1]).toHaveBeenLastCalledWith(next, f.client.getSnapshot().counts);
   });
 
-  it.each(['BBB', null] as const)('invalidates pending detail source writes when world sync pauses selection %s', async selected => {
+  it.each(['BBB', null] as const)('invalidates obsolete selection %s during sync while preserving the world readiness guard', async selected => {
     const f = await mount(), detail = deferred<CountryDetail>(), sync = deferred<void>();
     let request = 0;
     const published: string[] = [];
@@ -193,18 +226,35 @@ describe('F06 operational map recovery', () => {
     vi.mocked(f.consumer.updateWorld).mockReturnValueOnce(sync.promise);
     act(() => {f.publish('BBB');});
     await waitFor(() => expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'loading'));
-    expect(f.consumer.clearDetail).toHaveBeenCalledTimes(clears + 1);
+    expect(f.consumer.clearDetail).toHaveBeenCalledTimes(clears);
     act(() => {
       if (selected) useGameSetupStore.getState().selectCountry(selected);
       else useGameSetupStore.getState().clearSelectedCountry();
     });
     await act(async () => detail.resolve(empty()));
-    expect(published).toEqual([]);
+    expect(published).toEqual(selected ? ['BBB'] : []);
     expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'loading');
     await act(async () => sync.resolve());
     await waitFor(() => expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'ready'));
     if (selected) await waitFor(() => expect(published).toEqual(['BBB']));
     else expect(published).toEqual([]);
+  });
+
+  it.each(['loaded', 'pending'] as const)('keeps %s country geometry through occupation, undo and redo without reloading it', async state => {
+    const f = await mount(), detail = deferred<CountryDetail>();
+    if (state === 'pending') vi.mocked(f.consumer.showCountryDetail).mockReturnValueOnce(detail.promise);
+    act(() => useGameSetupStore.getState().selectCountry('AAA'));
+    await waitFor(() => expect(f.consumer.showCountryDetail).toHaveBeenCalledExactlyOnceWith('AAA'));
+    const clears = vi.mocked(f.consumer.clearDetail).mock.calls.length;
+    for (const [index, controller] of (['BBB', 'AAA', 'BBB'] as const).entries()) {
+      act(() => {f.publish(controller);});
+      await waitFor(() => expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-applied-revision', String(index + 1)));
+      expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'ready');
+    }
+    if (state === 'pending') await act(async () => detail.resolve(empty()));
+    expect(f.consumer.showCountryDetail).toHaveBeenCalledExactlyOnceWith('AAA');
+    expect(f.consumer.clearDetail).toHaveBeenCalledTimes(clears);
+    expect(mocks.maps).toHaveLength(1); expect(mocks.consumers).toHaveLength(1);
   });
 
   it('does not publish an older world completion while a newer occupation/undo update is pending', async () => {

@@ -44,3 +44,13 @@ data/raw/ne_10m_admin_1_states_provinces.geojson -text
 prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt text eol=lf
 package.json text eol=lf
 package-lock.json text eol=lf
+
+# Prompt 19 manifests and source locks verify original bytes on every platform.
+data/raw/prompt19/** -text
+data/source-locks/prompt19/** -text
+data/derived/prompt19/** -text
+scripts/*prompt19* -text whitespace=cr-at-eol,-blank-at-eof
+scripts/prompt19/** -text whitespace=cr-at-eol,-blank-at-eof
+reports/maintenance/prompt19-C/** -text
+# Immutable joint snapshots exceed normal GitHub blob limits.
+reports/maintenance/prompt19-C/*joined-world-input.json filter=lfs diff=lfs merge=lfs -text

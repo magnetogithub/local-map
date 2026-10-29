@@ -57,7 +57,7 @@ export function createCommittedTurnReport(plan: Pick<ResolvedTurnPlan,'resolutio
       hasMapChanges: resolution.worldEffects.some((effect) => effect.causedByEventId === event.eventId),
     }))),
     reactions: Object.freeze(resolution.events.filter((event) => event.actorCountryIds.some((id) => id !== plan.baseSimulationState.playerCountryId)).map((event) => event.publicNarrative)),
-    mapChanges: Object.freeze(mapChanges.length ? mapChanges : ["즉시 발생한 지도 변화가 없습니다."]),
+    mapChanges: Object.freeze(mapChanges),
     continuing: Object.freeze([...resolution.unresolvedQuestions]),
     advisorSummary: resolution.advisorSummary,
   });

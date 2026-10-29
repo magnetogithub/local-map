@@ -2,8 +2,10 @@ import type {CountryId} from './country-id';
 import type {TerritoryId} from './territory-id';
 import type {TerritoryEntityV3} from './territory-entity-v3';
 import {assertWorldGeometryCatalogRefMatches, type WorldGeometryCatalogRef} from './world-geometry-catalog-ref';
+import currentOperationalCatalog from '../../../data/runtime/operational-catalog/current.json';
 
-export const OPERATIONAL_CATALOG_VERSION = 'catalog-v3-56fc6c79c216e6bd1a11';
+export const OPERATIONAL_CATALOG_VERSION = currentOperationalCatalog.catalogVersion;
+export const OPERATIONAL_CATALOG_ROOT = currentOperationalCatalog.root;
 export type CellOrdinal = number; // Positive, one-based; zero is reserved for the sea.
 export type EdgeOrdinal = number;
 export type OperationalArtifact = Readonly<{path: string; sha256: string; byteLength: number}>;
@@ -43,6 +45,7 @@ export type OperationalAdministrativeParent = Readonly<{
   sourceVersion: string | null;
   restorationId: string | null;
   residualId: string | null;
+  // Presentation hints only. Country metadata rows define explicit membership.
   start: number;
   count: number;
 }>;
@@ -50,6 +53,7 @@ export type OperationalPreviousParent = Readonly<{
   ordinal: number;
   oldTerritoryId: TerritoryId;
   sourceCountryId: string;
+  // Members need not occupy a contiguous interval in global catalog order.
   start: number;
   count: number;
 }>;

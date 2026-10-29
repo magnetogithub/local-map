@@ -46,6 +46,13 @@ function createController(overrides: Partial<SimulationTurnController> = {}): Si
 afterEach(cleanup);
 
 describe("13-21 through 13-23 game action overlay", () => {
+  it.each([0, 1])("shows %i map changes from the actual report entries", (count) => {
+    const report: TurnReport = {turnId: 'turn.count', period: '2020-01-01 — 2020-01-02', outcomes: [], events: [], reactions: [],
+      mapChanges: count ? ['확정된 지도 변화'] : [], continuing: [], advisorSummary: '확정 결과'};
+    render(<GameActionOverlay controller={createController({report})}/>);
+    expect(screen.getByRole('region', {name: '최근 턴 결과 요약'})).toHaveTextContent(`지도 변화 ${count}건`);
+  });
+
   it("uses one start action for presets and requires explicit time-only confirmation", async () => {
     const user = userEvent.setup();
     const controller = createController();

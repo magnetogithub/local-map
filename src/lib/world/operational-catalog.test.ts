@@ -13,28 +13,31 @@ beforeAll(() => {
   catalog = prepareOperationalCatalog(process.cwd(), file => {reads.push(file.replaceAll('\\', '/')); return fs.readFileSync(file);});
 });
 
-describe('16-01 pinned operational catalog', () => {
+describe('current operational catalog', () => {
   it('loads admission and linked metadata without overview tiles or world geometry', () => {
     expect(catalog.ref.catalogVersion).toBe(OPERATIONAL_CATALOG_VERSION);
-    expect(catalog.descriptor.counts).toEqual({countries: 247, cells: 923443, edges: 3125743, administrativeParents: 4761, previousParents: 4231});
+    expect(catalog.descriptor.counts.countries).toBe(247);
+    expect(catalog.descriptor.counts.cells).toBeGreaterThanOrEqual(4231);
+    expect(catalog.descriptor.counts.administrativeParents).toBe(catalog.administrativeParents.length);
+    expect(catalog.descriptor.counts.previousParents).toBe(catalog.previousParents.length);
     expect(reads.some(p => /\/tiles\/|\.geojson|\/topology\/|catalog-order\.json|adjacency\.json|edge-incidence|membership\.json|previous-parent-index/.test(p))).toBe(false);
     expect(() => catalog.assertRef({...catalog.ref, topologyRoot: '0'.repeat(64)})).toThrow('Catalog ref mismatch');
     expect(() => catalog.cell(0)).toThrow('UNKNOWN_OPERATIONAL_ORDINAL');
-    expect(() => catalog.cell(923444)).toThrow('UNKNOWN_OPERATIONAL_ORDINAL');
+    expect(() => catalog.cell(catalog.descriptor.counts.cells + 1)).toThrow('UNKNOWN_OPERATIONAL_ORDINAL');
     expect(() => catalog.loadCountry('../PRK')).toThrow('UNKNOWN_OPERATIONAL_COUNTRY');
   });
 
   it('round-trips original IDs and ordinals with complete administrative and previous-parent membership', () => {
     const cells = catalog.loadCountry('PRK'), first = cells[0];
-    expect(cells).toHaveLength(1283);
+    expect(cells).toHaveLength(catalog.countryDetail('PRK').cellCount);
     expect(catalog.loadCountry('PRK')).toBe(cells);
     expect(catalog.cell(first.id)).toBe(first);
     expect(catalog.cell(first.ordinal)).toBe(first);
     const admin = catalog.administrativeParents[first.administrativeOrdinal - 1];
     const previous = catalog.previousParents[first.previousParentOrdinal - 1];
     const members = catalog.administrativeMembership(admin.parentKey), oldMembers = catalog.previousMembership(previous.oldTerritoryId);
-    expect(members).toHaveLength(admin.count);
-    expect(oldMembers).toHaveLength(previous.count);
+    expect(members).toEqual(cells.filter(c => c.administrativeOrdinal === admin.ordinal));
+    expect(oldMembers).toEqual(cells.filter(c => c.previousParentOrdinal === previous.ordinal));
     expect(members).toContain(first); expect(oldMembers).toContain(first);
     expect(members.every(c => c.administrativeOrdinal === admin.ordinal)).toBe(true);
     expect(oldMembers.every(c => c.previousParentOrdinal === previous.ordinal)).toBe(true);
@@ -42,36 +45,29 @@ describe('16-01 pinned operational catalog', () => {
     expect(reads.some(p => /\/detail\/countries\/|catalog-order\.json/.test(p))).toBe(false);
   });
 
-  it('resolves Korean source names, all 193 Slovenian identities, and memberships larger than the action cap', () => {
+  it('resolves Korean source names and coarse country memberships', () => {
     const index = createOperationalRegionIndex(catalog);
     const korean = index.search('PRK', '강원');
-    expect(korean).toHaveLength(1); expect(korean[0].nameKo).toContain('강원');
-    const slovenian = index.listCountry('SVN').filter(r => r.ref.subdivisionId.startsWith('region:ne-admin1:'));
-    expect(slovenian).toHaveLength(193);
-    expect(index.search('SVN', 'Ljubljana')).toHaveLength(1);
-    const guangdong = index.search('CHN', 'Guangdong')[0];
-    expect(guangdong.territoryIds.length).toBeGreaterThan(512);
-    expect(regionRecordSchema.parse(guangdong).territoryIds).toEqual(guangdong.territoryIds);
-    expect(index.lookup('CHN', guangdong.ref)).toBe(guangdong);
-    expect(() => index.resolve('CHN', guangdong.ref, 'occupy')).toThrow('REGION_REQUEST_CAP');
-    expect(() => index.resolve('CHN', guangdong.ref, 'occupy', 513)).toThrow('REGION_REQUEST_CAP');
-    expect(() => index.lookup('KOR', guangdong.ref)).toThrow('REGION_COUNTRY_SCOPE');
-    expect(() => index.lookup('CHN', {...guangdong.ref, sourceVersion: '0'.repeat(64)})).toThrow('UNKNOWN_REGION_OR_CATALOG');
-    const largePrevious = catalog.previousParents.find(p => p.count > 512)!;
-    expect(catalog.previousMembership(largePrevious.oldTerritoryId)).toHaveLength(largePrevious.count);
+    expect(korean).toHaveLength(1);
+    expect(korean[0].nameKo).toContain('강원');
+    expect(regionRecordSchema.parse(korean[0]).territoryIds).toEqual(korean[0].territoryIds);
+    expect(index.listCountry('SVN')).toHaveLength(1);
+    expect(() => index.resolve('PRK', korean[0].ref, 'occupy', 513)).toThrow('REGION_REQUEST_CAP');
+    expect(() => index.lookup('KOR', korean[0].ref)).toThrow('REGION_COUNTRY_SCOPE');
   });
 
   it('reads canonical edge identity, positive-length adjacency, and zero only as the coast incidence', () => {
-    const edge = catalog.edge(1), coast = catalog.edge(2);
+    const edges = Array.from({length: catalog.descriptor.counts.edges}, (_, i) => catalog.edge(i + 1));
+    const edge = edges.find(e => e.right > 0)!, coast = edges.find(e => e.right === 0)!;
     expect(edge.id).toMatch(/^edge:operational:[a-f0-9]{64}$/);
-    expect(catalog.edgeIncidence(1)).toEqual({left: edge.left, right: edge.right});
+    expect(catalog.edgeIncidence(edge.ordinal)).toEqual({left: edge.left, right: edge.right});
     expect(edge.lengthKm).toBeGreaterThan(0);
     expect(catalog.neighbors(edge.left)).toContain(edge.right);
     expect(catalog.neighbors(edge.right)).toContain(edge.left);
     expect(coast.right).toBe(0); expect(coast.flags.positiveAdjacency).toBe(false);
     expect(catalog.neighbors(coast.left)).not.toContain(0);
     expect(() => catalog.edge(0)).toThrow('UNKNOWN_OPERATIONAL_ORDINAL');
-    expect(() => catalog.edge(3125744)).toThrow('UNKNOWN_OPERATIONAL_ORDINAL');
+    expect(() => catalog.edge(catalog.descriptor.counts.edges + 1)).toThrow('UNKNOWN_OPERATIONAL_ORDINAL');
     expect(reads.some(p => /catalog-order\.json|\/detail\/countries\//.test(p))).toBe(false);
   });
 
@@ -83,7 +79,7 @@ describe('16-01 pinned operational catalog', () => {
     expect(() => broken.loadCountry('PRK')).toThrow('OPERATIONAL_ASSET_IDENTITY');
     expect(() => broken.loadCountry('PRK')).toThrow('OPERATIONAL_ASSET_IDENTITY');
     expect(broken.loadCountry('SVN').length).toBeGreaterThan(0);
-    expect(OPERATIONAL_CATALOG_PATHS.delivery).toContain('56fc6c79c216e6bd1a11');
+    expect(OPERATIONAL_CATALOG_PATHS.delivery).toContain('data/derived/prompt19/');
   });
 
   it('reads current owner/controller from the supplied world and rejects a different catalog', () => {

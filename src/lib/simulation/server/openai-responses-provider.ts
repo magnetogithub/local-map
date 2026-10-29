@@ -228,6 +228,9 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
         if (call.name === "submit_turn_resolution") {
           const result = validateResolutionAgainstContext(args, request.context, {debugWorldEffectActionIds,regionIndex,frontier,territorialControlAuthorities:request.operationalTerritorialAuthorities});
           if (result.ok && result.resolution) {
+            console.info('Simulation resolution accepted',JSON.stringify({turnId:request.turnId,verifiedFrontierLookups:issuedScopes.length,
+              territorialEffects:result.resolution.worldEffects.filter(effect=>effect.type==='territory.occupy'||effect.type==='territory.liberate'||effect.type==='territory.transferOwnership').length,
+              outcomeStatuses:result.resolution.playerActionOutcomes.map(outcome=>outcome.status)}));
             yield {type: "resolution.ready", resolution: result.resolution};
             return;
           }
@@ -263,7 +266,10 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
         try {
           const output = executeReadOnlySimulationTool(call.name, args, request.context,regionIndex,frontierLookup);
           yield {type: "phase.changed", phase: "looking_up"};
-          input.push({type: "function_call_output", call_id: call.callId, output: JSON.stringify({ok: true, data: output})});
+          const failed=output!==null&&typeof output==='object'&&'ok' in output&&output.ok===false;
+          const code=failed&&'code' in output&&typeof output.code==='string'?output.code:null;
+          console.info('Simulation lookup result',JSON.stringify({turnId:request.turnId,name:call.name,ok:!failed,code}));
+          input.push({type: "function_call_output", call_id: call.callId, output: JSON.stringify({ok: !failed, data: output})});
         } catch {
           yield {type: "tool.invalid", callId: call.callId, name: call.name, code: "INVALID_ARGUMENTS"};
           yield {type: "turn.failed", code: "TOOL_PROTOCOL_ERROR", message: "Read-only tool arguments were invalid", retryable: false};

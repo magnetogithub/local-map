@@ -27,6 +27,7 @@ export function createOperationalGameSession(input: {
   const versions = new Map([[key(input.seed.revisions), input.seed]]);
   const countCache = new WeakMap<WorldStateV3, OperationalControlCounts>();
   let busy = false, report: TurnReport | null = null;
+  let preparedContext: Readonly<{base: CatalogRuntimePair; targetDate: string; turnId: string; canonical: string}> | undefined;
   const remember = () => {
     const pair = runtime.getSnapshot(); versions.set(key(pair.revisions), pair);
     while (versions.size > 64) versions.delete(versions.keys().next().value!);
@@ -42,6 +43,7 @@ export function createOperationalGameSession(input: {
     countCache.set(world, counts); return counts;
   };
   runtime.subscribeChanges(change => {
+    preparedContext = undefined;
     remember();
     if (change.previous.world === change.next.world || !change.stateChange) return;
     const previous = controlCounts(change.previous.world);
@@ -61,12 +63,17 @@ export function createOperationalGameSession(input: {
       stateChange: base && base.world !== world ? createOperationalStateChange(base.world, world) : null,
       counts: controlCounts(world), canUndo: runtime.canUndo(), canRedo: runtime.canRedo(), report};
   };
-  const context = (targetDate: string): SimulationContextV1 => {
-    const {world, simulation} = runtime.getSnapshot();
+  const expectedContext = (targetDate: string) => {
+    const base = runtime.getSnapshot(), {world, simulation} = base;
+    if (preparedContext?.base === base && preparedContext.targetDate === targetDate) return preparedContext;
+    preparedContext = undefined;
     targetDateForCustomInput(simulation.currentDate, targetDate);
-    return parseSimulationContextV1(buildSimulationContext({world, simulation, countrySearchProjection: createCountrySearchProjection(world),
+    const context = parseSimulationContextV1(buildSimulationContext({world, simulation, countrySearchProjection: createCountrySearchProjection(world),
       subdivisionCatalog: {listCountry: id => input.regionIndex.listCountry(id).slice(0, 128).map(r => ({ref: r.ref, parentCountryId: r.parentCountryId, nameKo: r.nameKo, nameEn: r.nameEn, materializable: false})), inspect: () => null, materialize: () => null},
       scenarioId: '2020-otl', scenarioStartDate: '2020-01-01', targetDate}));
+    // Keep one private value; returned/request contexts cannot mutate the expected comparison.
+    preparedContext = Object.freeze({base, targetDate, turnId: `turn.${simulation.turnNumber + 1}.${simulation.revision}`, canonical: canonicalStringify(context)});
+    return preparedContext;
   };
   const assertRevisions = (expected: CatalogRuntimePair['revisions']) => {
     if (key(expected) !== key(runtime.getSnapshot().revisions)) throw Error('STALE_REVISION_PAIR');
@@ -76,7 +83,10 @@ export function createOperationalGameSession(input: {
     if (busy) throw Error('TURN_IN_PROGRESS');
     assertRevisions(command.revisions);
     const base = runtime.getSnapshot();
-    if (command.operation === 'prepare-turn') return {turnId: `turn.${base.simulation.turnNumber + 1}.${base.simulation.revision}`, context: context(command.targetDate)};
+    if (command.operation === 'prepare-turn') {
+      const expected = expectedContext(command.targetDate);
+      return {turnId: expected.turnId, context: JSON.parse(expected.canonical) as SimulationContextV1};
+    }
     switch (command.operation) {
       case 'select-player': runtime.selectPlayer(command.countryId); break;
       case 'queue': runtime.replacePendingActions(queuePlayerAction(base.simulation.queuedActions, {actionId: input.actionId(), playerCountryId: base.simulation.playerCountryId, submittedAtDate: base.simulation.currentDate, text: command.text})); break;
@@ -95,7 +105,9 @@ export function createOperationalGameSession(input: {
   const resolveRequest = (request: SimulationProviderRequest) => {
     if (busy) throw Error('TURN_IN_PROGRESS');
     const base = runtime.getSnapshot();
-    if (request.turnId !== `turn.${base.simulation.turnNumber + 1}.${base.simulation.revision}` || canonicalStringify(request.context) !== canonicalStringify(context(request.context.period.endDate))) throw Error('STALE_STATE');
+    if (request.turnId !== `turn.${base.simulation.turnNumber + 1}.${base.simulation.revision}`) throw Error('STALE_STATE');
+    const submitted = canonicalStringify(request.context), expected = expectedContext(request.context.period.endDate);
+    if (expected.base !== base || expected.turnId !== request.turnId || runtime.getSnapshot() !== base || submitted !== expected.canonical) throw Error('STALE_STATE');
     return base.world;
   };
   const provider = (source: SimulationModelProvider): SimulationModelProvider => ({

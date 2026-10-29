@@ -94,7 +94,15 @@ export function executeReadOnlySimulationTool(
           frontier:selection.frontier,metrics:selection.metrics,limits:selection.limits,approximation:selection.approximation,
           effectTarget:{...selection.effectTarget,frontierScope:selection.scope},
           usage:'Copy the entire effectTarget unchanged into the matching territorial effect. Do not replace it with regionRefs, a subset, or additional IDs. This selection grants no authority.'};
-      } catch (error) {return {ok:false,code:error instanceof Error?error.message:'FRONTIER_LOOKUP_FAILED',message:'현재 육상 전선과 대상을 확인하세요. 범위 상한 초과라면 더 작은 범위나 특정 접경 지역을 요청하세요.'};}
+      } catch (error) {
+        const code=error instanceof Error?error.message:'FRONTIER_LOOKUP_FAILED';
+        return {ok:false,code,message:'현재 육상 전선과 대상을 확인하세요. 범위 상한 초과라면 더 작은 범위나 특정 접경 지역을 요청하세요.',
+          ...(code==='UNKNOWN_REGION'||code==='AMBIGUOUS_REGION'?{recovery:{
+            condition:'Only when the action names no administrative region: general border descriptions are not region names. If an administrative region is explicitly required, resolve or clarify it instead.',
+            retryArguments:{...args,reference:null,regionQuery:null},
+            meaning:'Geographic lookup failure is not a military defeat. Verify the current frontier before adjudicating territorial success; never infer IDs or grant authority.',
+          }}:{})};
+      }
     }
     case 'find_border_territories': {
       if(context.regionCatalog?.catalogVersion===OPERATIONAL_CATALOG_VERSION)return {ok:false,code:'USE_CURRENT_FRONTIER_LOOKUP'};

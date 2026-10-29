@@ -1,0 +1,683 @@
+{
+  "task": "18-01",
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "status": "completed-with-measurement-limitations",
+  "scope": "Pre-implementation baseline and A/B ownership/interface handoff only. 18-02, 18-03A/B and 18-04 were not executed.",
+  "baseCommit": "6910ce071833ec1fa9ac63848b33a6b21d35bf57",
+  "applicationCodeChanged": false,
+  "preexistingChanges": [
+    "Modified tsconfig.json: existing .next-f01-browser-verification type includes; preserved.",
+    "Untracked prompts/PROMPT_18_MAP_RENDERING_PERFORMANCE_AND_PLAYABILITY.txt; preserved."
+  ],
+  "runtime": {
+    "url": "http://127.0.0.1:3001/",
+    "mode": "Existing Next.js 16.3.0 Turbopack development server",
+    "nextLauncherPid": 6868,
+    "nextServerPid": 31240,
+    "nodeMaxOldSpaceMiB": 8192,
+    "distDir": ".next-f01-browser-verification",
+    "provider": "Existing development scripted region provider alias confirmed in next.config.ts and compiled server chunk; no turn submitted.",
+    "externalAiCalls": 0,
+    "catalogVersion": "catalog-v3-56fc6c79c216e6bd1a11",
+    "cells": 923443,
+    "worldRevision": 0
+  },
+  "browser": {
+    "engine": "Existing Chrome extension-connected browser",
+    "newMeasurementTab": true,
+    "userTabPreserved": true,
+    "viewportOverrideUsed": false,
+    "measurementViewportCss": {
+      "width": 1920,
+      "height": 855
+    },
+    "originalUserTabViewportCss": {
+      "width": 1920,
+      "height": 911
+    },
+    "devicePixelRatio": 1,
+    "visualViewportScale": 1,
+    "zoom": "Read-only DOM metrics indicate scale 1 and DPR 1. Browser zoom percentage was not independently read from Chrome UI.",
+    "canvasCss": {
+      "width": 1530,
+      "height": 755
+    },
+    "initialMapView": {
+      "center": [
+        45,
+        25
+      ],
+      "zoom": 1
+    },
+    "gpuProcessFlagsObserved": [
+      "--use-gl=angle",
+      "--use-angle=d3d11-warp-webgl"
+    ],
+    "gpuLimit": "These command-line flags were recorded without changing settings; effective hardware acceleration was not independently confirmed. Shared GPU memory includes other tabs.",
+    "closedOwnMeasurementTabAt": "2026-10-29T02:48:07.835Z"
+  },
+  "observations": {
+    "initial": {
+      "navigationStartedAt": "2026-10-29T02:44:37.869Z",
+      "worldLoadingObservedAt": "2026-10-29T02:44:38.493Z",
+      "mapLoadingScreenshotCall": {
+        "startedAt": "2026-10-29T02:44:50.122Z",
+        "returnedApproximatelyAt": "2026-10-29T02:44:58.5Z"
+      },
+      "firstReadyDomObservedAt": "2026-10-29T02:45:09.046Z",
+      "firstReadyObservationElapsedMs": 31177,
+      "note": "31.177 seconds is a sampled first-ready upper bound including tool scheduling, not an instrumented exact startup duration. Initial ready-selector probe timed out while Runtime.evaluate was unresponsive."
+    },
+    "zoom": {
+      "action": "One Zoom in button click, default zoom 1 to target 2.",
+      "startedAt": "2026-10-29T02:45:24.194Z",
+      "actionAndAxReturnedAt": "2026-10-29T02:45:24.972Z",
+      "actionAndAxElapsedMs": 778,
+      "visual": "During initial/zoom observations, country fills were incomplete with large gaps. Later screenshot at 02:46:03.688Z showed complete fills.",
+      "note": "Action-return timing is not render completion or FPS."
+    },
+    "pan": {
+      "firstAttemptAt": "2026-10-29T02:45:30.228Z",
+      "firstAttemptResult": "Page.getLayoutMetrics CDP timeout after 10000 ms; input completion was not assumed.",
+      "retryAfterFreshScreenshot": {
+        "startedAt": "2026-10-29T02:46:13.705Z",
+        "returnedAt": "2026-10-29T02:46:25.218Z",
+        "actionAndAxElapsedMs": 11513,
+        "from": [
+          1100,
+          650
+        ],
+        "to": [
+          900,
+          650
+        ],
+        "verified": "Screenshot at 02:46:29.379Z confirms map shifted."
+      }
+    },
+    "hoverAndSelection": {
+      "canvasAttemptAt": "2026-10-29T02:46:34.779Z",
+      "canvasAttemptResult": "Input.dispatchMouseEvent timed out; next screenshot showed no selected country.",
+      "fallback": "Search textbox filled with 알제리; clicked visible 알제리 · Algeria DZA result.",
+      "searchStartedAt": "2026-10-29T02:46:53.331Z",
+      "selectionClickStartedAt": "2026-10-29T02:46:55.939Z",
+      "selectionClickResult": "CDP dispatch timed out, but action completed and was verified in the next observation.",
+      "selectedCountryConfirmedAt": "2026-10-29T02:47:19.984Z",
+      "selectedCountry": "DZA",
+      "finalCheckAt": "2026-10-29T02:47:37.687Z",
+      "finalMapStatus": "ready",
+      "finalDetailLoadingIndicators": 0,
+      "isolatedHoverTimingMeasured": false
+    },
+    "console": {
+      "capturedWarnings": 0,
+      "capturedErrors": 0,
+      "note": "Browser log capture scope only; not an exhaustive network or session audit."
+    },
+    "screenshot": "reports/verification/prompt18-01-baseline-20261029/selected-dza.jpg"
+  },
+  "processMeasurement": {
+    "method": "Get-Process CPU seconds and WorkingSet64 sampled approximately every 1 second; CPU cores = delta CPU seconds / elapsed wall seconds.",
+    "rawSamples": "reports/verification/prompt18-01-baseline-20261029/process-samples.jsonl",
+    "roles": {
+      "rendererCandidate": 35272,
+      "sharedGpu": 15840,
+      "developmentServer": 31240,
+      "originalMapRendererCandidate": 27632
+    },
+    "attribution": "PID 35272 is the renderer candidate whose CPU and working set rose with the new measurement tab. Per-tab process mapping was not independently verified. PID 15840 is confirmed Chrome shared GPU process; PID 31240 owns port 3001.",
+    "phases": [
+      {
+        "name": "beforeNewTab",
+        "start": "2026-10-29T02:44:26Z",
+        "end": "2026-10-29T02:44:37Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.194,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 31.715,
+            "lastWorkingSetMiB": 31.715
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.194,
+            "averageCpuCores": 0.005,
+            "peakSampleCpuCores": 0.046,
+            "peakWorkingSetMiB": 1163.246,
+            "lastWorkingSetMiB": 1156.449
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.194,
+            "averageCpuCores": 0.002,
+            "peakSampleCpuCores": 0.015,
+            "peakWorkingSetMiB": 826.535,
+            "lastWorkingSetMiB": 826.535
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.194,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.473,
+            "lastWorkingSetMiB": 1786.473
+          }
+        }
+      },
+      {
+        "name": "initialPreparation",
+        "start": "2026-10-29T02:44:37.869Z",
+        "end": "2026-10-29T02:45:09.046Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 30,
+            "sampleElapsedSeconds": 29.491,
+            "averageCpuCores": 1.123,
+            "peakSampleCpuCores": 3.464,
+            "peakWorkingSetMiB": 3637.496,
+            "lastWorkingSetMiB": 1832.055
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 30,
+            "sampleElapsedSeconds": 29.491,
+            "averageCpuCores": 0.484,
+            "peakSampleCpuCores": 5.823,
+            "peakWorkingSetMiB": 1583.875,
+            "lastWorkingSetMiB": 1557.23
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 30,
+            "sampleElapsedSeconds": 29.491,
+            "averageCpuCores": 0.083,
+            "peakSampleCpuCores": 1.173,
+            "peakWorkingSetMiB": 1004.676,
+            "lastWorkingSetMiB": 820.004
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 30,
+            "sampleElapsedSeconds": 29.491,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.566,
+            "lastWorkingSetMiB": 1786.566
+          }
+        }
+      },
+      {
+        "name": "readyThenQuietObservation",
+        "start": "2026-10-29T02:45:09.046Z",
+        "end": "2026-10-29T02:45:24.194Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 15,
+            "sampleElapsedSeconds": 14.224,
+            "averageCpuCores": 0.188,
+            "peakSampleCpuCores": 1.32,
+            "peakWorkingSetMiB": 1832.484,
+            "lastWorkingSetMiB": 1016.605
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 15,
+            "sampleElapsedSeconds": 14.224,
+            "averageCpuCores": 0.035,
+            "peakSampleCpuCores": 0.245,
+            "peakWorkingSetMiB": 1571.395,
+            "lastWorkingSetMiB": 1566.563
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 15,
+            "sampleElapsedSeconds": 14.224,
+            "averageCpuCores": 0.001,
+            "peakSampleCpuCores": 0.015,
+            "peakWorkingSetMiB": 820.004,
+            "lastWorkingSetMiB": 820.004
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 15,
+            "sampleElapsedSeconds": 14.224,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.566,
+            "lastWorkingSetMiB": 1786.566
+          }
+        }
+      },
+      {
+        "name": "zoomAndFirstPanAttempt",
+        "start": "2026-10-29T02:45:24.194Z",
+        "end": "2026-10-29T02:45:57.943Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 33,
+            "sampleElapsedSeconds": 32.662,
+            "averageCpuCores": 1.497,
+            "peakSampleCpuCores": 3.1,
+            "peakWorkingSetMiB": 4137.203,
+            "lastWorkingSetMiB": 4132.695
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 33,
+            "sampleElapsedSeconds": 32.662,
+            "averageCpuCores": 1.058,
+            "peakSampleCpuCores": 9.769,
+            "peakWorkingSetMiB": 1793.406,
+            "lastWorkingSetMiB": 1770.75
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 33,
+            "sampleElapsedSeconds": 32.662,
+            "averageCpuCores": 0.003,
+            "peakSampleCpuCores": 0.077,
+            "peakWorkingSetMiB": 824.273,
+            "lastWorkingSetMiB": 824.273
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 33,
+            "sampleElapsedSeconds": 32.662,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.887,
+            "lastWorkingSetMiB": 1786.887
+          }
+        }
+      },
+      {
+        "name": "afterZoomQuietObservation",
+        "start": "2026-10-29T02:45:57.943Z",
+        "end": "2026-10-29T02:46:13.705Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 16,
+            "sampleElapsedSeconds": 15.276,
+            "averageCpuCores": 0.815,
+            "peakSampleCpuCores": 2.424,
+            "peakWorkingSetMiB": 4278.117,
+            "lastWorkingSetMiB": 1720.969
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 16,
+            "sampleElapsedSeconds": 15.276,
+            "averageCpuCores": 0.53,
+            "peakSampleCpuCores": 7.843,
+            "peakWorkingSetMiB": 2037.684,
+            "lastWorkingSetMiB": 2022.68
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 16,
+            "sampleElapsedSeconds": 15.276,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 824.273,
+            "lastWorkingSetMiB": 824.273
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 16,
+            "sampleElapsedSeconds": 15.276,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.887,
+            "lastWorkingSetMiB": 1786.887
+          }
+        }
+      },
+      {
+        "name": "successfulPan",
+        "start": "2026-10-29T02:46:13.705Z",
+        "end": "2026-10-29T02:46:25.218Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.247,
+            "averageCpuCores": 1.76,
+            "peakSampleCpuCores": 4.176,
+            "peakWorkingSetMiB": 2487.887,
+            "lastWorkingSetMiB": 2487.887
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.247,
+            "averageCpuCores": 4.117,
+            "peakSampleCpuCores": 9.266,
+            "peakWorkingSetMiB": 2267.523,
+            "lastWorkingSetMiB": 2198.688
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.247,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 825.43,
+            "lastWorkingSetMiB": 825.43
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 11,
+            "sampleElapsedSeconds": 10.247,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.887,
+            "lastWorkingSetMiB": 1786.887
+          }
+        }
+      },
+      {
+        "name": "canvasHoverAndClickAttempt",
+        "start": "2026-10-29T02:46:34.779Z",
+        "end": "2026-10-29T02:46:44.821Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 10,
+            "sampleElapsedSeconds": 9.146,
+            "averageCpuCores": 0.986,
+            "peakSampleCpuCores": 1.585,
+            "peakWorkingSetMiB": 2041.645,
+            "lastWorkingSetMiB": 1992.602
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 10,
+            "sampleElapsedSeconds": 9.146,
+            "averageCpuCores": 1.416,
+            "peakSampleCpuCores": 6.361,
+            "peakWorkingSetMiB": 2223.117,
+            "lastWorkingSetMiB": 2207.316
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 10,
+            "sampleElapsedSeconds": 9.146,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 825.43,
+            "lastWorkingSetMiB": 825.43
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 10,
+            "sampleElapsedSeconds": 9.146,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.887,
+            "lastWorkingSetMiB": 1786.887
+          }
+        }
+      },
+      {
+        "name": "searchAndCountrySelection",
+        "start": "2026-10-29T02:46:53.331Z",
+        "end": "2026-10-29T02:47:19.984Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 26,
+            "sampleElapsedSeconds": 25.46,
+            "averageCpuCores": 1.529,
+            "peakSampleCpuCores": 4.517,
+            "peakWorkingSetMiB": 4037.379,
+            "lastWorkingSetMiB": 3905.563
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 26,
+            "sampleElapsedSeconds": 25.46,
+            "averageCpuCores": 0.786,
+            "peakSampleCpuCores": 6.67,
+            "peakWorkingSetMiB": 2233.477,
+            "lastWorkingSetMiB": 2233.316
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 26,
+            "sampleElapsedSeconds": 25.46,
+            "averageCpuCores": 0.006,
+            "peakSampleCpuCores": 0.139,
+            "peakWorkingSetMiB": 828.906,
+            "lastWorkingSetMiB": 808.012
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 26,
+            "sampleElapsedSeconds": 25.46,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1786.887,
+            "lastWorkingSetMiB": 1517.535
+          }
+        }
+      },
+      {
+        "name": "afterSelectionQuietObservation",
+        "start": "2026-10-29T02:47:20Z",
+        "end": "2026-10-29T02:48:07.835Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 47,
+            "sampleElapsedSeconds": 46.848,
+            "averageCpuCores": 0.181,
+            "peakSampleCpuCores": 2.721,
+            "peakWorkingSetMiB": 4053.484,
+            "lastWorkingSetMiB": 2065.016
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 47,
+            "sampleElapsedSeconds": 46.848,
+            "averageCpuCores": 0.185,
+            "peakSampleCpuCores": 6.338,
+            "peakWorkingSetMiB": 2305.02,
+            "lastWorkingSetMiB": 2285.559
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 47,
+            "sampleElapsedSeconds": 46.848,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 808.172,
+            "lastWorkingSetMiB": 808.172
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 47,
+            "sampleElapsedSeconds": 46.848,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1517.598,
+            "lastWorkingSetMiB": 1517.59
+          }
+        }
+      },
+      {
+        "name": "finalSettledIdleObservation",
+        "start": "2026-10-29T02:47:48Z",
+        "end": "2026-10-29T02:48:07.835Z",
+        "processes": {
+          "rendererCandidate": {
+            "id": 35272,
+            "sampleCount": 20,
+            "sampleElapsedSeconds": 19.332,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 2065.016,
+            "lastWorkingSetMiB": 2065.016
+          },
+          "sharedGpu": {
+            "id": 15840,
+            "sampleCount": 20,
+            "sampleElapsedSeconds": 19.332,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 2285.652,
+            "lastWorkingSetMiB": 2285.559
+          },
+          "developmentServer": {
+            "id": 31240,
+            "sampleCount": 20,
+            "sampleElapsedSeconds": 19.332,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 808.172,
+            "lastWorkingSetMiB": 808.172
+          },
+          "originalMapRendererCandidate": {
+            "id": 27632,
+            "sampleCount": 20,
+            "sampleElapsedSeconds": 19.332,
+            "averageCpuCores": 0,
+            "peakSampleCpuCores": 0,
+            "peakWorkingSetMiB": 1517.598,
+            "lastWorkingSetMiB": 1517.59
+          }
+        },
+        "note": "No map interaction in this final approximately 19-second quiet window; background-tab/GPU attribution limits still apply."
+      }
+    ],
+    "rawSampleCount": 240,
+    "rawSampleFirstAt": "2026-10-29T02:44:24.5206459Z",
+    "rawSampleLastAt": "2026-10-29T02:48:28.0118629Z"
+  },
+  "workloadBaseline": {
+    "measuredThisRun": false,
+    "reusedEvidence": "reports/maintenance/20261029-prompt17-completion-and-performance-summary.json",
+    "currentCodePathConfirmed": true,
+    "scope": "Four existing zoom-1 tiles from previous analysis; not asserted to equal every tile fetched by this new browser viewport.",
+    "uniqueCells": 203792,
+    "uniqueEdges": 676904,
+    "baseCountryBoundaryEdges": 921,
+    "expectedInitialStateWrites": 1288280,
+    "formula": "3 * 203792 + 676904; excludes restored/selected exact geometry and consumer replay.",
+    "liveSetFeatureStateCountMeasured": false,
+    "liveMountAndReplayCountMeasured": false,
+    "getUpdateStatsLimit": "cellsUpdated counts logical applyCell operations, not its three source writes; edgesExamined excludes initial tile edge writes."
+  },
+  "findings": [
+    "Base front layer currently has no c=1 filter; every observed edge gets front/exactFront state.",
+    "applyCell sends the full projected state to vector and both exact/changed sources, including empty sources.",
+    "Same hover value already returns early. Changed hover/selection copies and scans all historically seen/detail/changed cells and recalculates color presentation.",
+    "operationalCellView recalculates mapColorPresentation on every call; no bounded projection color cache exists.",
+    "A new delivery observer synchronously replays all seen cells/edges. Setup preparing removes the map subtree; client/mapAttempt/generation transitions can recreate it. Actual mount/replay counts were not measured.",
+    "Severe interaction delays and temporary incomplete country fills remain in this baseline. No performance improvement is claimed."
+  ],
+  "sharedContract": {
+    "function": "operationalCellView(world, ordinal)",
+    "validation": [
+      "ordinal must be a safe integer >= 1",
+      "territoryOrder ordinal resolves to an existing cell with matching id",
+      "nonnull controller must exist; color validation remains in mapColorPresentation"
+    ],
+    "returns": [
+      "ordinal",
+      "id",
+      "sourceCountryId",
+      "ownerCountryId",
+      "controllerCountryId",
+      "mapColor",
+      "outlineColor",
+      "selectionColor",
+      "labelColor",
+      "labelHaloColor",
+      "occupied"
+    ],
+    "nullControllerMapColor": "#D6D3C7",
+    "occupied": "controllerCountryId !== null && controllerCountryId !== ownerCountryId",
+    "interactionCountry": "ownerCountryId first, controllerCountryId fallback",
+    "cacheBoundary": "B may reuse color presentation only with finite scope/lifetime. Preserve arguments, fields, color/input rejection and latest world semantics; do not cache full cell views or ownership."
+  },
+  "ownership": {
+    "A": {
+      "files": [
+        "src/lib/map/operational-map-consumer.ts",
+        "src/lib/map/operational-map-consumer.test.ts"
+      ],
+      "sequence": [
+        "18-02",
+        "18-03A"
+      ],
+      "adjacentChanges": "operational-map-sources.ts / operational-vector-delivery.ts only after narrow scope coordination with integration owner."
+    },
+    "B": {
+      "files": [
+        "src/lib/projection/operational-map-projection.ts",
+        "src/lib/projection/operational-map-projection.test.ts (small new test if needed)"
+      ],
+      "sequence": [
+        "18-03B"
+      ],
+      "excludes": "No consumer/source/component edits and no global country-map-color.ts cache."
+    },
+    "integration": {
+      "files": [
+        "src/components/map/OperationalWorldMap.tsx",
+        "src/components/map/OperationalWorldMap.test.tsx",
+        "directly necessary setup-shell wiring"
+      ],
+      "responsibility": "Browser/server ownership, direct integration adjustments, grouped type/lint/regressions, one final build and identical-condition comparison in 18-04."
+    },
+    "implementationStarted": false,
+    "parallelImplementationBeginsOnlyAfterBaseline": true
+  },
+  "followupVerification": {
+    "smallTests": [
+      "src/lib/map/operational-map-consumer.test.ts",
+      "src/components/map/OperationalWorldMap.test.tsx",
+      "src/lib/map/operational-delivery.test.ts",
+      "src/lib/world/country-map-color.test.ts"
+    ],
+    "baselineTestsRun": [],
+    "buildRun": false,
+    "reason": "18-01 changes no application code. Regression/build belongs to later implementation/integration steps."
+  },
+  "limitations": [
+    "No instrumented FPS, browser long-task trace, per-function CPU, JS heap, dedicated VRAM, exact source-write count, or mount/replay count.",
+    "Browser command elapsed times include dispatch and observation overhead; CDP timeouts are evidence of unresponsiveness, not precise main-thread stall durations.",
+    "Quiet observation windows may contain deferred map work and are not asserted to be fully settled idle.",
+    "Existing unrelated Chrome tabs and the original map tab remained open; shared GPU and memory pressure were not isolated.",
+    "No game start/advance/undo/redo was executed because that play validation belongs to 18-04.",
+    "The original user tab (1920x911) was inspected only. All new measured actions used the separate actual 1920x855 window; these viewport results are not directly compared."
+  ],
+  "comparisonRecipe": [
+    "Use this existing development scripted server mode and the same 1920x855 actual CSS viewport, DPR/scale 1, no viewport override; record GPU flags and background tabs again.",
+    "Open one fresh setup tab at default center [45,25], zoom 1. Observe startup and ready, then a quiet period.",
+    "Click Zoom in once. Observe full fills, pan from [1100,650] to [900,650], then observe quiet behavior.",
+    "Attempt country pointer interaction; search 알제리 and select DZA, confirm panel/detail readiness, then observe quiet behavior.",
+    "Compare structural write counts separately from actual responsiveness/CPU/working set; no total performance ratio is implied."
+  ],
+  "sourceHashes": {
+    "src/lib/map/operational-map-consumer.ts": "64ab61320aafea05d80b398a949bf3b7cd871c8c83f8be747c5cf6019893dd5f",
+    "src/lib/map/operational-map-consumer.test.ts": "fe61913d4d13c2f2796c85fe6b5e75b97bc7ef1d878c116e14f5468207e948d2",
+    "src/lib/map/operational-vector-delivery.ts": "c6c52898a123139876724c2acdd8400bd490c5f4c79260e7fa3a358607ee439a",
+    "src/lib/map/operational-map-sources.ts": "80981d5f35f2a766ac985719e7a05f1adae5b28b744e40be908c5454d8c1e477",
+    "src/lib/map/operational-country-labels.ts": "31423aac8201f800f0fde508cb6a35b1df5893060e46dc7bf52b41e065135358",
+    "src/lib/projection/operational-map-projection.ts": "dba0282af974701695636d2bd9ac4084f3eaa5e81b1b72b25e4c673cca9dd83a",
+    "src/components/map/OperationalWorldMap.tsx": "a27be06c0226467f11b4afed11e1fffb5fac276ef82b9ff5ae1ca777505d2eb9",
+    "src/components/layout/OperationalGameSetupShell.tsx": "eaec0a919045664f712af8a782e1a68983c7e97bdc768fc46c604ea01c2377f3",
+    "next.config.ts": "08587acc718d2ff5c283217e8a7733e48d8a72bf49d7d4ac5dd4d13fb075c34b"
+  }
+}

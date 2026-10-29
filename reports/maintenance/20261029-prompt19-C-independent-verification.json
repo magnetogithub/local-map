@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "scope": "Independent verification of completed Prompt19-02 coordinator C work; no source fix, catalog regeneration, deployment or19-03 gameplay turn.",
+  "verdict": "runtime-and-land-coverage-pass-source-faithfulness-acceptance-pending",
+  "summaryKo": "새 catalog·API·seed/frontier 연결과 국토 coverage는 재검사를 통과했다. 그러나 원본 내부에 없는 face의 접촉 기반 fine 귀속, hole 보존 반례, 귀속 처리 설명의 누락이 확인되어19-02를 원본 기반 미세 경계 완료로 최종 승인할 수 없다.",
+  "catalog": {
+    "version": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+    "root": "data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987",
+    "countries": 247,
+    "cells": 9280,
+    "edges": 29744,
+    "KORCells": 4377,
+    "PRKCells": 701
+  },
+  "scopeChanges": {
+    "applicationSourceEdited": false,
+    "sourceOrCandidateArtifactsEdited": false,
+    "externalAiCalls": 0,
+    "gameplayTurnsRun": 0,
+    "fullWorldTileScanOrArtifactRehash": false,
+    "independentReportOnly": true
+  },
+  "freshPasses": {
+    "regression": {
+      "nodeTests": 14,
+      "vitestTests": 28,
+      "total": 42,
+      "failed": 0,
+      "nodeCommand": "node --max-old-space-size=4096 --test --test-concurrency=1 --test-reporter=spec scripts/prompt19-joined-arrangement.node-test.mjs scripts/prompt19-country-candidate.node-test.mjs scripts/prompt19-baseline.node-test.mjs",
+      "vitestCommand": "node node_modules/vitest/vitest.mjs run --configLoader native src/lib/simulation/prompt19-mixed-frontier.test.ts src/lib/simulation/server/operational-game-version.test.ts src/lib/world/operational-game.server.test.ts src/lib/world/operational-catalog-runtime.test.ts src/lib/map/operational-delivery.test.ts src/lib/map/operational-map-sources.test.ts",
+      "limit": "Actual frontier tests manually update controller fixtures. They do not prove HTTP/authority/atomic turn commit or undo/redo on the new catalog."
+    },
+    "http": {
+      "base": "http://127.0.0.1:3029",
+      "routes": [
+        {
+          "path": "/api/world/catalog/operational",
+          "status": 200,
+          "catalogMatches": true
+        },
+        {
+          "path": "/api/world/catalog/operational/map",
+          "status": 200,
+          "catalogMatches": true
+        }
+      ],
+      "execution": "Read-only host-local API checks. Sandbox-local fetch initially failed; the authorized read-only host check succeeded. No game/start/turn route was invoked."
+    },
+    "geometry": {
+      "runtimeIndexPin": true,
+      "selectedAssetPinsChecked": 267,
+      "selectedAssetPinMismatches": 0,
+      "method": "Current index and selected metadata, Korean exact geometry, adjacency and edge shard identities checked; no full5981-file/tile rehash. Fresh OGC/ring validity, boundary cancellation and Korea-incident edge reciprocity checks.",
+      "countries": [
+        {
+          "country": "KOR",
+          "cells": 4377,
+          "geometryValid": true,
+          "errors": 0,
+          "unionComponents": 53,
+          "unionHoles": 0,
+          "bboxMatches": true,
+          "areaDifferenceDegreesSquared": -3.552713678800501e-15
+        },
+        {
+          "country": "PRK",
+          "cells": 701,
+          "geometryValid": true,
+          "errors": 0,
+          "unionComponents": 10,
+          "unionHoles": 0,
+          "bboxMatches": true,
+          "areaDifferenceDegreesSquared": 5.329070518200751e-15
+        }
+      ],
+      "koreaIncidentEdges": 13926,
+      "koreaBorderEdges": 34,
+      "edgeOrAdjacencyProblems": 0,
+      "limit": "Coverage and valid topology do not by themselves certify correct administrative provenance, source-hole meaning or the precision of source attribution."
+    }
+  },
+  "findings": [
+    {
+      "id": "C-F01",
+      "priority": "P1",
+      "titleKo": "원본 내부 membership이 없는 영역을 fine 행정구역으로 확장 귀속",
+      "refs": [
+        {
+          "path": "scripts/prepare-prompt19-joined-candidates.mjs",
+          "line": 47
+        },
+        {
+          "path": "scripts/prompt19-source-arrangement.mjs",
+          "line": 84
+        },
+        {
+          "path": "scripts/prompt19-source-arrangement.mjs",
+          "line": 94
+        },
+        {
+          "path": "scripts/prompt19-source-arrangement.mjs",
+          "line": 168
+        }
+      ],
+      "mechanism": "The joined generator enables reconcile by default. A zero-interior-membership face touching a single source feature is assigned that fine feature with unique-positive-length-source-contact. The resulting merged cell may keep administrative basis, ADM3/ADM2 and unresolvedFineSourceAssignment:false.",
+      "actualEvidence": {
+        "path": "reports/maintenance/prompt19-C/joint-arrangement.json",
+        "decision": "unique-positive-length-source-contact",
+        "faces": 1287,
+        "countries": [
+          {
+            "country": "KOR",
+            "faces": 841,
+            "finalCellsContainingDecision": 270,
+            "areaDegreesSquared": 0.04453865783975065,
+            "percentOfFixedEnvelope": 0.449974
+          },
+          {
+            "country": "PRK",
+            "faces": 446,
+            "finalCellsContainingDecision": 91,
+            "areaDegreesSquared": 0.07674946221481482,
+            "percentOfFixedEnvelope": 0.593208
+          }
+        ]
+      },
+      "impactKo": "영토·점령·전선은 동작할 수 있어도 실제 원본 행정구역 밖의 면적이 그 행정구역으로 취급된다. 실제 자료 기반 미세 경계라는 목표와 source attribution을 별도로 검증해야 한다. 모두 machine-epsilon 틈은 아니다.",
+      "suggestedFixKo": "원본 포함 근거가 없는 면적은 미확정/coarse provenance로 구분하거나 추가 원본으로 귀속 근거를 확보한다. 접촉 추론을 사용할 정책이라면 추론 면적·경계·UI/lookup 의미를 명시하고 원본 내부 소속과 구분한다.",
+      "notClaimed": "Nearest-neighbor guessing or source coordinate snapping was not found in this path. It is a recorded contact-based inference, but is still different from original interior membership."
+    },
+    {
+      "id": "C-F02",
+      "priority": "P1",
+      "titleKo": "유일 접촉 귀속이 원본 hole을 fine 영역으로 메울 수 있음",
+      "refs": [
+        {
+          "path": "scripts/prompt19-source-arrangement.mjs",
+          "line": 94
+        },
+        {
+          "path": "scripts/prompt19-joined-arrangement.node-test.mjs",
+          "line": 1
+        }
+      ],
+      "freshReproduction": {
+        "executed": true,
+        "method": "In-memory arrangePrompt19Sources fixture, same default reconciliation and continueTerminals:false/preserveCanonicalResiduals:true as production path.",
+        "input": "Fixed envelope and coarse parent box[0,0,4,4]; sole ADM3 source has same exterior and square hole[1,1,3,3].",
+        "original": {
+          "area": 12,
+          "holes": 1
+        },
+        "output": {
+          "fineCells": 1,
+          "area": 16,
+          "holes": 0,
+          "adminLevel": 3,
+          "unresolvedFineSourceAssignment": false,
+          "coarseResiduals": 0,
+          "unresolved": 0,
+          "decisions": [
+            "actual-source-membership",
+            "unique-positive-length-source-contact"
+          ]
+        },
+        "inferredArea": 4
+      },
+      "impactKo": "원본이 덮지 않는 hole을 같은 fine 행정구역에 넣으면서 source geometry 보존·hole 보존을 통과한 것처럼 해석할 여지가 있다. 현재 실제 데이터의 모든1287face가 hole이라는 뜻은 아니며, 그 분류는 추가 확인이 필요하다.",
+      "suggestedFixKo": "한 source에 접한 zero-member hole/coast/enclave를 구분하고, 원본이 실제 포함하지 않는 face에 fine identity를 자동 부여하지 않는 회귀 검사를 추가한다."
+    },
+    {
+      "id": "C-F03",
+      "priority": "P2",
+      "titleKo": "C 결과 설명과 fine/coarse 처리 범위가 충분히 일치하지 않음",
+      "refs": [
+        {
+          "path": "reports/maintenance/20261029-prompt19-02-C.md",
+          "line": 11
+        },
+        {
+          "path": "reports/maintenance/20261029-prompt19-02-C.md",
+          "line": 16
+        }
+      ],
+      "evidence": "Report explains207/48 explicitly coarse residual cells but does not quantify the separate841/446 contact-assigned faces included in fine cells. The two mechanisms must not be conflated.",
+      "explicitCoarse": {
+        "KOR": {
+          "cells": 207,
+          "areaDegreesSquared": 0.0852313440864846
+        },
+        "PRK": {
+          "cells": 48,
+          "areaDegreesSquared": 0.05083263681895642
+        },
+        "runtimeMeaning": "These255 regions are ordinary occupiable territories, not diagnostic-only polygons."
+      },
+      "suggestedFixKo": "실제 원본 포함·접촉 추론 귀속·coarse 미확정 영역을 각각 집계하고 원본 시점/행정수준과 함께 보고·표시한다. fineAssignmentComplete:false만으로 모든 추론을 설명하지 않는다."
+    }
+  ],
+  "limits": [
+    "Existing per-zoom rendered-area report was reviewed but the full tile scan was not repeated. Its step8 scanlines, interval-midpoint coast tolerance and no extraArea rejection do not prove every subpixel gap/overlap or country label assignment.",
+    "Current fixture suites do not include the freshly reproduced single-source-hole case.",
+    "No new production build or browser gameplay/turn/undo/redo was run in this independent audit. C's previous build/UI observations remain prior evidence;19-03 remains pending.",
+    "Session/version isolation is restart/HMR based; a live pointer-only hot swap is not verified.",
+    "KOR2018 ADM3 and PRK2019/2013 source timing limitations remain. Exact2020 administrative reconstruction is not certified.",
+    "Source-contact inference policy is distinguished from implementation corruption. General permission to repair/integrate was found in C's user request; no explicit discussion accepting this specific attribution policy was found. This report does not introduce a separate permission gate."
+  ],
+  "nextStepKo": "C에서 source-contact 귀속과 hole 처리·provenance를 보완하고 작은 반례+양국 실제 자료를 재검증한다. 국토 coverage와 runtime 연결을 유지하면서 새 catalog를 갱신한 뒤19-03 실제 양방향 턴·전선·undo/redo·성능을 확인한다."
+}

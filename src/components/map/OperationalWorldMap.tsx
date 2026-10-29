@@ -40,7 +40,10 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
     const abort = new AbortController(); let disposed = false, baseFailed = false, worldRequest = 0;
     let capitalCountryOrder = client.getSnapshot().world.countryOrder;
     setBaseStatus('loading'); setWorldStatus('syncing'); setDetailStatus('idle'); setAppliedRevision(null);
-    const map = new maplibre.Map({container: container.current, style: {version: 8, glyphs: '/fonts/{fontstack}/{range}.pbf', sources: {}, layers: [{id: 'sea-background', type: 'background', paint: {'background-color': '#b8d2da'}}]}, ...MAP_OPTIONS, maxTileCacheSize: 256, localIdeographFontFamily: 'Noto Sans KR Local'});
+    const map = new maplibre.Map({container: container.current, style: {version: 8, glyphs: '/fonts/{fontstack}/{range}.pbf', sources: {}, layers: [{id: 'sea-background', type: 'background', paint: {'background-color': '#b8d2da'}}]}, ...MAP_OPTIONS, maxTileCacheSize: 256, localIdeographFontFamily: 'Noto Sans KR Local',
+      attributionControl: {compact: true, customAttribution: ['Natural Earth', '<a href="https://www.geoboundaries.org" target="_blank" rel="noopener noreferrer">geoBoundaries</a> (CC BY 4.0)',
+        '한국 시군구: geoBoundaries·City Population, 2020 · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a> (geoBoundaries 배포 CC BY 4.0)',
+        '북한 시군구: WFP/OCHA · 자료 기준연도 2013/2019 · <a href="https://creativecommons.org/licenses/by/3.0/igo/" target="_blank" rel="noopener noreferrer">CC BY 3.0 IGO</a>']}});
     mapRef.current = map; map.addControl(new maplibre.NavigationControl(), 'top-left');
     const fail = (error: unknown) => {if (!disposed && !abort.signal.aborted) {baseFailed = true; console.error('Operational map failed', error); setBaseStatus('error');}};
     map.on('error', event => fail(event.error));
@@ -109,7 +112,9 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
   }, [client, selected, hovered, ready]);
   useEffect(() => {
     const current = consumer.current;
-    if (!current || !ready) return;
+    // Exact source geometry is immutable across world revisions; updateWorld refreshes its state.
+    // Keep it mounted while a turn/undo/redo synchronizes instead of parsing the country again.
+    if (!current || baseStatus !== 'ready') return;
     let disposed = false;
     const target = selected && client.getSnapshot().world.countriesById[selected] ? selected : null;
     if (target) {
@@ -117,7 +122,11 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
       void current.showCountryDetail(target).then(() => {
         if (!disposed) setDetailStatus('ready');
       }).catch(error => {
-        if (!disposed) {console.error('Country detail failed', error); setDetailStatus('error');}
+        if (!disposed) {
+          console.error('Country detail failed', error);
+          if (current.getUpdateStats().resyncRequired) setWorldStatus('error');
+          else setDetailStatus('error');
+        }
       });
     } else {
       try {current.clearDetail(); setDetailStatus('idle');}
@@ -128,7 +137,7 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
       // Invalidate pending source writes while selection or world readiness changes.
       try {current.clearDetail();} catch { /* The map may already be disposed or require resync. */ }
     };
-  }, [client, selected, ready, detailAttempt]);
+  }, [client, selected, baseStatus, detailAttempt]);
   useEffect(applySettings, [applySettings, uiSettings, status]);
   const cell = ready && territory ? presentation.world.territoriesById[territory] : null;
   const name = (id: string | null) => id ? presentation.world.countriesById[id]?.names.shortKo ?? id : '없음';
@@ -136,5 +145,5 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
     {status !== 'ready' && <div className="map-status" role={status === 'error' ? 'alert' : 'status'}><div className="box">{status === 'error' ? <>{worldStatus === 'error' ? '현재 세계 상태를 지도에 반영하지 못했습니다.' : '지도 데이터를 불러오지 못했습니다.'}<button type="button" onClick={() => setMapAttempt(value => value + 1)}>지도 다시 불러오기</button></> : baseStatus === 'loading' ? '지도 데이터를 불러오는 중입니다' : '현재 세계 상태를 지도에 반영하는 중입니다'}</div></div>}
     {ready && detailStatus === 'loading' && <div className="detail-status" role="status">선택한 국가의 상세 지도를 불러오는 중입니다.</div>}
     {ready && detailStatus === 'error' && <div className="detail-status error" role="alert">선택한 국가의 상세 지도를 불러오지 못했습니다. 기본 지도는 계속 사용할 수 있습니다.<button type="button" onClick={() => setDetailAttempt(value => value + 1)}>상세 지도 다시 시도</button></div>}
-    <div className="legend"><span><i style={{background: '#fff'}}/>선택</span><span>점령색: 현재 통제국</span><span>금색 점선: 현재 전선</span>{cell && <span data-testid="territory-control-detail">소유: {name(cell.ownerCountryId)} · 통제: {name(cell.controllerCountryId)}{cell.ownerCountryId !== cell.controllerCountryId ? ' · 점령 중' : ''}</span>}</div></section>;
+    <div className="legend"><span><i style={{background: '#fff'}}/>선택</span><span>점령색: 현재 통제국</span><span>금색 점선: 점령 전선</span>{cell && <span data-testid="territory-control-detail">소유: {name(cell.ownerCountryId)} · 통제: {name(cell.controllerCountryId)}{cell.ownerCountryId !== cell.controllerCountryId ? ' · 점령 중' : ''}</span>}</div></section>;
 }

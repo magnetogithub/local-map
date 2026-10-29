@@ -56,11 +56,53 @@ function fixture(operation: 'occupy' | 'liberate' | 'transfer' = 'occupy') {
   const resolution = parseTurnResolutionV1({contractVersion:'turn-resolution.v1',baseSimulationRevision:simulation.revision,baseWorldRevision:world.revision,period:context.period,playerActionOutcomes:[{outcomeId:'outcome.frontier',actionId:'action.frontier',status:'succeeded',evidenceEventId:'event.advance',summary:'접경 일부 변경',remainingConditions:[]}],events:[{...ground,eventId:'event.advance',date:'2020-01-02',causes:[{kind:'queued-action',id:'action.frontier'}]}],factMutations:[],situationMutations:[],scheduledConsequences:[],worldEffects:[effect],advisorSummary:'접경 일부가 변경되었습니다.',unresolvedQuestions:[]});
   const frontier: OperationalFrontierValidation = {world,resolve:(current,request)=>selectOperationalFrontier(catalog,current,request,index)};
   const pair = {world,simulation,revisions:{worldRevision:world.revision,simulationRevision:simulation.revision}};
-  const provider = (transport: OpenAIResponsesTransport,debugMode=false) => new OpenAIResponsesSimulationProvider({...config,debugMode},transport,{loadOperationalCatalog:()=>catalog,loadRegionIndex:actual=>{expect(actual).toEqual(contract.ref);return index;}});
+  const provider = (transport: OpenAIResponsesTransport,debugMode=false,ordinaryResponses=config.maxToolIterations) => new OpenAIResponsesSimulationProvider({...config,debugMode,maxToolIterations:ordinaryResponses},transport,{loadOperationalCatalog:()=>catalog,loadRegionIndex:actual=>{expect(actual).toEqual(contract.ref);return index;}});
   return {world,simulation,contract,catalog,index,region,context,selected,effect,resolution,frontier,pair,provider};
 }
 
 describe('16-07 provider lookup, submit and host scope validation', () => {
+  it('reports a mistaken frontier region as a failed lookup and can recover using verified default scope', async () => {
+    const f=fixture(),requests:OpenAIResponsesRequest[]=[];
+    const transport:OpenAIResponsesTransport={async *stream(request){
+      requests.push(request);
+      const outputs=request.input.filter(v=>typeof v==='object'&&v!==null&&'type'in v&&v.type==='function_call_output') as {output:string}[];
+      let response;
+      if(requests.length===1)response=tools('bad-region','find_frontier_territories',{...lookupArgs,regionQuery:'휴전선'});
+      else if(requests.length===2){
+        const output=JSON.parse(outputs.at(-1)!.output);
+        expect(output).toMatchObject({ok:false,data:{ok:false,code:'UNKNOWN_REGION'}});
+        expect(output.data.recovery.condition).toContain('explicitly required');
+        expect(output.data.recovery.retryArguments).toEqual(lookupArgs);
+        expect(output.data).not.toHaveProperty('effectTarget');
+        response=tools('retry-default','find_frontier_territories',output.data.recovery.retryArguments);
+      }else{
+        const output=JSON.parse(outputs.at(-1)!.output);
+        expect(output).toMatchObject({ok:true,data:{ok:true}});
+        expect(output.data.effectTarget.territoryIds).toEqual(f.selected.cellIds);
+        response=tools('submit-recovered','submit_turn_resolution',{...f.resolution,worldEffects:[{...f.effect,...output.data.effectTarget}]});
+      }
+      for(const event of response)yield event;
+    }};
+    const events=await collect(f.provider(transport,false,2).streamTurn({turnId:'turn.region-recovery',context:f.context,operationalWorld:f.world},new AbortController().signal));
+    expect(events.at(-1)?.type).toBe('resolution.ready');
+    expect(requests).toHaveLength(3);
+    expect(requests[0].instructions).toContain('regionQuery:null and reference:null');
+    expect(requests[0].instructions).toContain('A tool/argument failure alone is not an in-world military defeat');
+    expect(requests[0].instructions).toContain('military failure remains possible');
+  });
+
+  it('still accepts a grounded ordinary failed attempt without forcing a territorial effect', async () => {
+    const f=fixture();
+    const failed={...f.resolution,worldEffects:[],
+      playerActionOutcomes:f.resolution.playerActionOutcomes.map(outcome=>({...outcome,status:'failed',summary:'기존 분쟁 상황에서 진격 시도가 저지되었습니다.'})),
+      advisorSummary:'지리 대상과 별개로 군사적 시도가 실패했습니다.'};
+    const events=await collect(f.provider({async *stream(){yield* tools('submit-failure','submit_turn_resolution',failed);}})
+      .streamTurn({turnId:'turn.normal-failure',context:f.context,operationalWorld:f.world},new AbortController().signal));
+    expect(events.at(-1)?.type).toBe('resolution.ready');
+    const ready=events.at(-1);
+    if(ready?.type==='resolution.ready')expect(ready.resolution.worldEffects).toEqual([]);
+  });
+
   it('uses one lookup and one submit within the existing budget, then plans and atomically commits exact cells', async () => {
     const f=fixture(),requests:OpenAIResponsesRequest[]=[];
     const transport:OpenAIResponsesTransport={async *stream(request){requests.push(request);let events;

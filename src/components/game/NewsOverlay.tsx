@@ -49,7 +49,7 @@ export function NewsOverlay({model, activeCountryIds, onSelectEvent, onOpenCount
       <header><span>TURN RESULT</span><h3 id="turn-result-title">{model.turnResult.period}</h3></header>
       <ResultGroup title="행동 결과" values={model.turnResult.outcomes}/>
       <ResultGroup title="관련 국가 반응" values={model.turnResult.reactions} empty="중복되지 않은 별도 반응이 없습니다."/>
-      <ResultGroup title="지도 변화" values={model.turnResult.mapChanges}/>
+      <ResultGroup title="지도 변화" values={model.turnResult.mapChanges} empty="즉시 발생한 지도 변화가 없습니다."/>
       <ResultGroup title="진행 중 상황" values={model.turnResult.continuing} empty="남은 문제가 없습니다."/>
       <div><h4>참모 요약</h4><p>{model.turnResult.advisorSummary}</p></div>
     </section>}

@@ -1,0 +1,236 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "scope": "Verify completed work claims for Prompt19-02A/B; no integration or implementation",
+  "verdict": "neither-country-has-an-integration-ready-candidate",
+  "summaryKo": "A/B의 원본 확보·정규화·진단 인계는 있으나, 한국 후보 생성은 실패했고 북한 후보는 coverage/topology 실패 상태다. 새 미세 경계로 실제 게임을 검증할 선행 조건이 충족되지 않았다.",
+  "applicationSourceEdited": false,
+  "candidateOrSourceArtifactsEdited": false,
+  "regenerationRun": false,
+  "browserServerBuildRun": false,
+  "externalAiCalls": 0,
+  "currentRuntime": {
+    "catalogVersion": "catalog-v3-prompt19-coarse-v1",
+    "cells": 4231,
+    "edges": 15955,
+    "pointer": "data/runtime/operational-catalog/current.json",
+    "fineCandidatesPublished": false,
+    "limit": "On-disk runtime pointer and candidate publication flags checked. A running browser/server session was not independently inspected."
+  },
+  "countries": {
+    "KOR": {
+      "source": {
+        "level": "ADM3",
+        "representedYear": "2018",
+        "units": 3504,
+        "vertices": 777212,
+        "sourcePreparation": "present and pinned",
+        "scenarioCaveat": "Not certified as an exact reconstruction for 2020-01-01."
+      },
+      "candidateReady": false,
+      "candidateDirectoryExists": false,
+      "status": "incomplete-candidate-generation-needs-coordinator-fix",
+      "blockers": [
+        {
+          "kind": "shared-boolean-intersection",
+          "evidence": "reports/verification/prompt19/KOR/common-boolean-reproduction.json",
+          "freshReproduced": true,
+          "inputBytes": 2007,
+          "error": "Infinite loop when passing sweep line over endpoints (queue size too big).",
+          "interpretation": "A bounded boolean library guard failure; does not alone prove an infinite loop or invalid source geometry."
+        },
+        {
+          "kind": "large-union",
+          "evidence": "reports/verification/prompt19/KOR/common-failure-sequence.json",
+          "reportedArguments": 4241,
+          "reportedVertices": 605580,
+          "fullRerun": false,
+          "interpretation": "A separate scale/resource issue from the small intersection reproduction."
+        },
+        {
+          "kind": "fixed-envelope-and-island-alignment",
+          "evidence": "reports/verification/prompt19/KOR/boundary-evidence.json",
+          "fixedDetachedIslandSourceIntersections": 0,
+          "sharedBorderValidation": "not-validated"
+        }
+      ],
+      "sourceGraphIsFinalCellGraph": false,
+      "gameplayImpact": "No fine candidate exists to publish. Fine partial occupation cannot be validated until candidate generation, country coverage and final clipped-cell topology succeed.",
+      "refs": [
+        {
+          "path": "reports/verification/prompt19/KOR/A-handoff.json",
+          "line": 7
+        },
+        {
+          "path": "reports/verification/prompt19/KOR/19-02A-result.md",
+          "line": 24
+        },
+        {
+          "path": "scripts/prompt19/KOR/source.node-test.mjs",
+          "line": 76
+        }
+      ]
+    },
+    "PRK": {
+      "source": {
+        "level": "ADM2",
+        "units": 179,
+        "sourcePreparation": "present and pinned",
+        "scenarioCaveat": "Source represented-year metadata varies between 2019 and 2013; exact 2020 reconstruction is not certified."
+      },
+      "selectedCandidate": "data/derived/prompt19/candidates/PRK/1b726665e8afc0006e1f",
+      "supersededCandidate": "data/derived/prompt19/candidates/PRK/229d1a4ac80c76f19004",
+      "supersededReason": "Publication-date metadata correction; cells geometry is identical, not an alternative solution.",
+      "status": "needs-source-or-alignment",
+      "candidateReady": false,
+      "validationPass": false,
+      "cells": 659,
+      "vertices": 33531,
+      "residualFeatures": 475,
+      "topology": null,
+      "coverage": {
+        "freshRecomputed": true,
+        "pass": false,
+        "p0AreaDegreesSquared": 12.938046093469893,
+        "unionAreaDegreesSquared": 12.810463994431302,
+        "gapAreaDegreesSquared": 0.12758209903859097,
+        "gapPercent": 0.986100204906399,
+        "reportedGapDelta": 0,
+        "interpretation": "Planar longitude/latitude area, not geodesic land area. A substantial source/baseline mismatch, not merely rounding tolerance."
+      },
+      "parentCoverage": {
+        "total": 11,
+        "passed": 1,
+        "failed": 10,
+        "booleanErrors": 4
+      },
+      "topologyDiagnostics": {
+        "errorCount": 14621,
+        "p0OnlySegments": 1468,
+        "interpretation": "Raw certification diagnostic counts, not 14621 independent defects."
+      },
+      "failedChecks": [
+        "completeBoundaryPairing",
+        "countryCoverage",
+        "everyParentCovered",
+        "residualGeometryEmpty"
+      ],
+      "sourceNativeTopologyIsPlayable": false,
+      "gameplayImpact": "Coverage gaps leave territory without a fine cell; null topology cannot support authoritative adjacency, frontier lookup, continuous advance and complete front geometry. A country underlay could hide a visual gap without repairing gameplay semantics.",
+      "refs": [
+        {
+          "path": "reports/verification/prompt19/PRK/README.md",
+          "line": 18
+        },
+        {
+          "path": "reports/verification/prompt19/PRK/verification.json",
+          "line": 1
+        },
+        {
+          "path": "scripts/prompt19/PRK/verify-candidate.mjs",
+          "line": 54
+        }
+      ]
+    }
+  },
+  "freshVerification": {
+    "tests": {
+      "command": "node --max-old-space-size=6144 --test --test-concurrency=1 --test-reporter=spec scripts/prompt19-country-candidate.node-test.mjs scripts/prompt19-baseline.node-test.mjs scripts/prompt19/KOR/source.node-test.mjs",
+      "passed": 16,
+      "failed": 0,
+      "breakdown": {
+        "commonSmallFixtures": 8,
+        "actualTwoCountryBaseline": 2,
+        "KORSourceAndFailureEvidence": 6
+      },
+      "meaning": "Checks contract behavior, actual input/baseline preservation and honest failure evidence. The KOR source suite explicitly asserts that no candidate directory exists. Test success is not candidate readiness or gameplay success."
+    },
+    "pins": {
+      "commonCodeAndBaselineChecked": 13,
+      "commonCodeAndBaselineMismatches": 0,
+      "KORInputPinsChecked": 4,
+      "KORInputMismatches": 0,
+      "PRKInputPinsChecked": 3,
+      "PRKInputMismatches": 0,
+      "PRKCandidateArtifactPinsChecked": 5,
+      "PRKCandidateMismatches": 0,
+      "PRKManifestMatchesCurrentSourceLock": true
+    },
+    "actualProbes": {
+      "KOR": "Read-only polygon-clipping.intersection on the recorded 2007-byte reproduction failed with the recorded queue guard error.",
+      "PRK": "Read-only validatePartitionCoverage on all 659 stored candidate polygons against pinned PRK envelope reproduced exactly the recorded gap and pass=false."
+    },
+    "rawCommandResults": {
+      "tests": "✔ every extracted baseline asset matches its byte pin and only KOR/PRK envelopes/parents are extracted (198.7623ms)\n✔ the three shared border chains retain exact current geometry and the raw component counts (219.8777ms)\n✔ stable local identities, complete positive land adjacency and no global registry fields (26.2785ms)\n✔ an actual gap, however small, remains diagnostic and cannot become coastline or a filler cell (4.3155ms)\n✔ overlap cannot be accepted or assigned by feature order (3.7937ms)\n✔ point contacts never produce land adjacency and missing small islands fail coverage (12.7268ms)\n✔ polygon holes are kept and cannot be filled by another source feature (5.2857ms)\n✔ parent crossing uses intersections with explicit membership rather than centroid allocation (4.1306ms)\n✔ a renamed ADM1 or split components of one feature cannot certify fine partial selection (1.9633ms)\n✔ country, source identity, duplicate IDs, rights and natural boundary evidence fail closed (0.9996ms)\n✔ acquired KOR ADM3 and preprocessing inputs match the recorded byte identities (63.7119ms)\n✔ every real source feature, component, hole and coordinate is retained without guessed parent IDs (666.1313ms)\n✔ the actual source validity report passes and the common contract/runtime remain pinned (3.9017ms)\n✔ actual source land contacts are positive, symmetric, and use known source IDs (402.5779ms)\n✔ the finer source supports partial ADM1 selection while the detached outline discrepancy remains explicit (3.4707ms)\n✔ common generator errors and the investigated alternative are recorded without claiming candidate readiness (0.9836ms)\nℹ tests 16\nℹ suites 0\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2948.324\n",
+      "pins": "{\n  \"commonAndBaselinePins\": {\n    \"checked\": 13,\n    \"mismatches\": []\n  },\n  \"runtime\": {\n    \"catalogVersion\": \"catalog-v3-prompt19-coarse-v1\",\n    \"root\": \"data/derived/prompt19/coarse-world-v1\",\n    \"index\": {\n      \"sha256\": \"66c1791b985ff5e012c6900a9bec97c22959a7acc7df47ad3645948fc4e24b25\",\n      \"byteLength\": 748788\n    }\n  },\n  \"countries\": {\n    \"KOR\": {\n      \"sourcePinsChecked\": 4,\n      \"sourcePinMismatches\": [],\n      \"sourceLockSha256\": \"b6ddc037f737ea90a0f293a38241f68064f310a26bcfb71271433912e601ee56\",\n      \"level\": [\n        3\n      ],\n      \"candidateDirectoryExists\": false\n    },\n    \"PRK\": {\n      \"sourcePinsChecked\": 3,\n      \"sourcePinMismatches\": [],\n      \"sourceLockSha256\": \"7f84a7ef7596bfde4b0afde39d002e7129cdaebcc46e68fb7114a1fd3432527c\",\n      \"level\": [\n        2\n      ],\n      \"candidateDirectoryExists\": true\n    }\n  },\n  \"prk\": {\n    \"root\": \"data/derived/prompt19/candidates/PRK/1b726665e8afc0006e1f\",\n    \"artifactPinsChecked\": 5,\n    \"pinMismatches\": [],\n    \"sourceLockMatchesManifest\": true,\n    \"status\": \"needs-source-or-alignment\",\n    \"pass\": false,\n    \"cells\": 659,\n    \"residualFeatures\": 475,\n    \"topologyIsNull\": true,\n    \"failedChecks\": [\n      \"completeBoundaryPairing\",\n      \"countryCoverage\",\n      \"everyParentCovered\",\n      \"residualGeometryEmpty\"\n    ],\n    \"parentCoverage\": {\n      \"parents\": 11,\n      \"passed\": 1,\n      \"errored\": 4\n    }\n  }\n}\n",
+      "prkCoverage": "{\"kind\":\"fresh-read-only-country-coverage\",\"country\":\"PRK\",\"cells\":659,\"elapsedMs\":2161.2195,\"actual\":{\"pass\":false,\"p0Area\":12.938046093469893,\"unionArea\":12.810463994431302,\"gapArea\":0.12758209903859097,\"overlapArea\":0,\"outOfCountryArea\":9.094947017729282e-13,\"tolerance\":1.2938046093469893e-8},\"reportedGapArea\":0.12758209903859097,\"gapDelta\":0}\n",
+      "korMinimalIntersection": "{\"kind\":\"fresh-read-only-minimal-KOR-boolean-reproduction\",\"success\":false,\"error\":\"Infinite loop when passing sweep line over endpoints (queue size too big).\",\"elapsedMs\":1143.5176,\"inputBytes\":2007}\n"
+    },
+    "avoided": "No candidate CLI rerun, no normalization/reported-verifier rewrite, no full KOR regeneration, no catalog publication, no whole-world audit/build/UI operation."
+  },
+  "impactAnswerKo": {
+    "severity": "새 미세 경계의 게임 적용을 막는 기능상 문제",
+    "currentGame": "디스크 설정은 coarse-v1이며 실패 후보가 배포되지 않았다. 현재 실행 중인 게임이 이 오류로 손상됐다고 확인한 것은 아니다.",
+    "wouldAffectIfPublished": [
+      "미세 영토 표시와 클릭 대상",
+      "owner/controller와 실제 polygon의 대응",
+      "육상 인접성·접경 일부 선택",
+      "현재 전선에서 이어지는 진격",
+      "점령색·전선 및 undo/redo의 공간적 정합성"
+    ],
+    "gate": "C의 geometry 연산·고정 외곽/섬/공유 국경 정합과 후보 coverage/topology를 먼저 해결한 뒤 catalog 연결과19-03 실제 플레이를 검증해야 한다."
+  },
+  "nextWorkInExistingScope": [
+    "C: distinguish and fix small boolean failure and large union resource use while preserving source validity and deterministic geometry",
+    "C: resolve source vs pinned coast/islands/shared-boundary alignment with actual evidence; do not manufacture filler cells or relax checks to PASS",
+    "Rebuild and verify KOR/PRK candidates; require real coverage, parent coverage and final topology/adjacency readiness",
+    "C: integrate one new catalog/seed/runtime, then execute the existing19-03 two-country gameplay and performance tests"
+  ],
+  "limits": [
+    "The large KOR generation was not rerun; its evidence and pinned code/input identities were checked, and the small recorded failure was freshly reproduced.",
+    "No actual fine-catalog gameplay, front behavior or undo/redo was run because neither candidate is ready.",
+    "Source/native adjacency is not final clipped-cell or KOR-PRK/coarse boundary certification.",
+    "No legal opinion or independent upstream license audit is claimed; local source-lock/receipt evidence was reviewed."
+  ],
+  "reportStatus": "historical-branch-verification-superseded-by-C",
+  "currentResolution": {
+    "scope": "19-02 C repair and app integration",
+    "status": "connected-with-explicit-source-limits",
+    "report": "reports/maintenance/20261029-prompt19-02-C.md",
+    "runtime": {
+      "catalogVersion": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+      "root": "data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987",
+      "index": {
+        "sha256": "0575d6d0480bdfbf3144bf1808f8cbce5978ea56a14a456bf45471d4369a2df8",
+        "byteLength": 749750
+      }
+    },
+    "candidates": {
+      "KOR": {
+        "artifactIndex": {
+          "byteLength": 564,
+          "path": "data/derived/prompt19/candidates/KOR/joined-v2-652d25d95ef0a040c72e/artifact-index.json",
+          "sha256": "b420b63f9cf192d60a7e6a55c8da423baf7694e3fdd2d98374da45fdc5c48c82"
+        },
+        "cells": 4377,
+        "coarseResidualCells": 207,
+        "fineAssignmentComplete": false,
+        "root": "data/derived/prompt19/candidates/KOR/joined-v2-652d25d95ef0a040c72e",
+        "worldCoverageComplete": true
+      },
+      "PRK": {
+        "artifactIndex": {
+          "byteLength": 561,
+          "path": "data/derived/prompt19/candidates/PRK/joined-v2-982801207a60f262ad74/artifact-index.json",
+          "sha256": "999926274b0935e36d32aeb0e5bd51e2714fc1df311a0c946a2ca86b6cf068e6"
+        },
+        "cells": 701,
+        "coarseResidualCells": 48,
+        "fineAssignmentComplete": false,
+        "root": "data/derived/prompt19/candidates/PRK/joined-v2-982801207a60f262ad74",
+        "worldCoverageComplete": true
+      }
+    },
+    "originalVerdictStillDescribesFrozenPreCInputs": true
+  }
+}

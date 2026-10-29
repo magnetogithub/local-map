@@ -3,7 +3,7 @@ import type {OperationalCatalogDescriptor} from '../world/operational-catalog';
 import {assertWorldGeometryCatalogRefMatches, createWorldGeometryCatalogRef, type WorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
 import {catalogArtifactIdentity, type CatalogArtifactIdentity} from './catalog-consumer-contract';
 
-export const OPERATIONAL_DELIVERY_SCHEMA = 'prompt15-task-15-21-world-delivery-v1';
+export const OPERATIONAL_DELIVERY_SCHEMA = 'operational-world-delivery-v2';
 export const OPERATIONAL_MAP_SOURCE_ID = 'world-operational-catalog';
 export type OperationalMapBootstrap = Readonly<{
   schemaVersion: 'operational-map-bootstrap-v1';

@@ -1,0 +1,81 @@
+{
+  "task": "18-02",
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "status": "completed",
+  "scope": "Base vector front filtering and sparse front overrides only.",
+  "changedFiles": [
+    "src/lib/map/operational-map-consumer.ts",
+    "src/lib/map/operational-map-consumer.test.ts"
+  ],
+  "implementation": {
+    "baseFrontFilter": ["==", ["get", "c"], 1],
+    "defaultFront": "coalesce(feature-state.front, c=1) preserves an explicit false override.",
+    "stateWrites": "Observed tile edges no longer receive initial feature-state writes. Only restored/changed incident edges receive overrides that differ from the original border or mask exact front geometry.",
+    "lifetime": "Repeated equal overrides are skipped. Overrides that return to the base value without an exact front are removed with removeFeatureState.",
+    "geometry": "The initialIds -> incidentEdges -> stageDetail and updateWorld -> stageDetail paths remain authoritative. Non-c1 fronts retain complete exact geometry in OPERATIONAL_FRONT_SOURCE_ID, independently of selected-country detail.",
+    "originalBorders": "Source-country identity determines the original border without consulting active countries. When liberation restores an original border through exact geometry, its base copy stays masked.",
+    "failures": "Sparse set/remove failures retain the existing resyncRequired behavior. Revision, delta, staging and stale-request checks are unchanged."
+  },
+  "contractImpact": {
+    "mapPort": "OperationalMapPort now requires MapLibre's existing removeFeatureState(target) method. The consumer fixture implements it; the real MapLibre Map already supports it.",
+    "projection": "operationalCellView arguments and return fields are unchanged.",
+    "deliveryAndSources": "No delivery API, transport, source identity, tile, catalog or approval data changes."
+  },
+  "validation": {
+    "consumerRegression": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/map/operational-map-consumer.test.ts --configLoader native",
+      "temporaryEnvironment": "TEMP and TMP were set only in the test process to D:/gen/.tmp/prompt18-02-vitest.",
+      "passed": 21,
+      "failed": 0,
+      "coverage": [
+        "Real MapLibre style validation and expression evaluation: only c=1 renders by default; explicit false remains false.",
+        "No initial edge writes or incidence lookups for an unchanged five-cell/five-edge fixture.",
+        "New and restored c=2/c=3/c=4 fronts keep full exact geometry after selected-country detail closes.",
+        "Original-border suppression, liberation, ownership transfer, undo/redo and exact masking.",
+        "Null controllers on one or both sides, owner-only restoration and a retired source country.",
+        "Overrides created before tile observation survive later edge replay without extra writes.",
+        "Obsolete override removal, repeated equal override suppression and set/remove failure resynchronization.",
+        "Existing stale/forged delta rejection, geometry load retry, rapid updates and disposal."
+      ]
+    },
+    "changedCodeLint": "Passed for consumer and consumer tests; the test file was checked again after its final adjustment.",
+    "gitDiffCheck": "Passed.",
+    "readOnlyPeerReview": "No remaining defect found in the front/filter/state paths.",
+    "runnerNote": "The first run could not rename a cache file in the sandbox temp directory before collecting tests. Using workspace-local TEMP/TMP resolved it without elevation or application configuration changes.",
+    "fullTypecheck": "Deferred to 18-04 as specified by the work split.",
+    "productionBuild": "Deferred to 18-04 as specified by the work split.",
+    "actualBrowserComparison": "Deferred to 18-04; no FPS, CPU, memory or responsiveness improvement is claimed here.",
+    "externalAiCalls": 0
+  },
+  "workReduction": {
+    "smallFixture": {
+      "cells": 5,
+      "edges": 5,
+      "initialEdgeStateWritesBefore": 5,
+      "initialEdgeStateWritesAfter": 0,
+      "initialTotalStateWritesBefore": 20,
+      "initialTotalStateWritesAfter": 15
+    },
+    "priorFourZoom1Tiles": {
+      "source": "reports/maintenance/20261029-prompt17-completion-and-performance-summary.json",
+      "remeasuredThisStep": false,
+      "baseFrontCandidatesBefore": 676904,
+      "baseFrontCandidatesAfter": 921,
+      "expectedUnchangedInitialStateWritesBefore": 1288280,
+      "expectedUnchangedInitialStateWritesAfter": 611376,
+      "formulaAfter": "3 * 203792; cell source writes remain unchanged until 18-03A.",
+      "limit": "Structural counts for the prior sample, excluding restored/selected exact geometry and replay. These are not measured frame-rate, GPU-memory or startup-time improvements."
+    }
+  },
+  "preservedWork": [
+    "Existing tsconfig.json changes and the 18-01 baseline report were preserved.",
+    "Concurrent prompt/projection/color-cache changes that appeared during this step were left untouched and are not claimed as 18-02 work."
+  ],
+  "remainingScope": [
+    "18-03A: cell source membership, payload and hover/selection work reduction.",
+    "18-03B: projection color reuse and its dedicated tests are separately owned.",
+    "18-04: grouped final validation, one production build and actual scripted-provider play/performance comparison."
+  ],
+  "commitOrPushPerformed": false
+}

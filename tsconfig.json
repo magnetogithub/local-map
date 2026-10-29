@@ -48,7 +48,11 @@
     ".next-prompt16-smoke/types/**/*.ts",
     ".next-prompt16-smoke/dev/types/**/*.ts",
     ".next-prompt16-build/types/**/*.ts",
-    ".next-prompt16-build/dev/types/**/*.ts"
+    ".next-prompt16-build/dev/types/**/*.ts",
+    ".next-f01-browser-verification/types/**/*.ts",
+    ".next-f01-browser-verification/dev/types/**/*.ts",
+    ".next-prompt19-build/types/**/*.ts",
+    ".next-prompt19-build/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

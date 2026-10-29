@@ -38,13 +38,17 @@ export function createOperationalGameClient(start: OperationalGameStart, cellIds
     if (next.stateChange || next.world.revision !== world.revision) {
       const delta = next.stateChange;
       if (!delta || delta.baseWorldRevision !== world.revision || delta.worldRevision !== next.world.revision) throw Error('STALE_GAME_DELTA');
-      const changed = new Set<string>(), cells = {...world.territoriesById};
-      for (const c of delta.cells) {
-        const old = cells[c.id];
-        if (changed.has(c.id) || !old || old.id !== c.before.id || old.sourceCountryId !== c.before.sourceCountryId || old.ownerCountryId !== c.before.ownerCountryId || old.controllerCountryId !== c.before.controllerCountryId || old.sourceCountryId !== c.after.sourceCountryId || c.id !== c.after.id) throw Error('INVALID_GAME_DELTA');
-        changed.add(c.id); cells[c.id] = createTerritoryEntityV3(c.after);
+      let cells = world.territoriesById;
+      if (delta.cells.length) {
+        const changed = new Set<string>(), updated = {...cells};
+        for (const c of delta.cells) {
+          const old = updated[c.id];
+          if (changed.has(c.id) || !old || old.id !== c.before.id || old.sourceCountryId !== c.before.sourceCountryId || old.ownerCountryId !== c.before.ownerCountryId || old.controllerCountryId !== c.before.controllerCountryId || old.sourceCountryId !== c.after.sourceCountryId || c.id !== c.after.id) throw Error('INVALID_GAME_DELTA');
+          changed.add(c.id); updated[c.id] = createTerritoryEntityV3(c.after);
+        }
+        cells = Object.freeze(updated);
       }
-      world = Object.freeze({...world, ...next.world, territoriesById: delta.cells.length ? Object.freeze(cells) : world.territoriesById,
+      world = Object.freeze({...world, ...next.world, territoriesById: cells,
         retiredCountryIds: createImmutableReadonlySet(next.world.retiredCountryIds)});
     }
     store.setState({...next, world, generation: before.generation + (reset ? 1 : 0)}, true);

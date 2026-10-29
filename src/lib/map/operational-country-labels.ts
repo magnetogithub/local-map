@@ -15,31 +15,56 @@ export async function mountOperationalCountryLabels(map: MapLibreMap, initial: W
   signal.throwIfAborted();
   const withIds = (data: Collection, kind: string): Collection => ({...data, features: data.features.map((f, i) => ({...f, id: `${kind}:${i}`}))});
   const collections = {fills: withIds(seed.fills, 'fill'), outlines: withIds(seed.outlines.features.length ? seed.outlines : seed.fills, 'outline'), points: withIds(seed.placements, 'point')};
+  for (const f of collections.points.features) f.properties = {...f.properties, currentText: initial.countriesById[String(f.properties.countryId)]?.names.mapKo ?? ''};
+  const features = Object.values(collections).flatMap(data => data.features);
+  const countryIds = [...new Set(features.map(f => String(f.properties.countryId)))].sort();
+  const initialColors = new Map<string, string | undefined>();
+  for (const id of countryIds) initialColors.set(id, initial.countriesById[id]?.mapColor);
+  const minZooms = [...new Set(features.map(f => f.properties.minZoom ?? 1).filter((value): value is number => typeof value === 'number' && Number.isFinite(value)))].sort((a, b) => a - b);
+  // These indexes and caches live only as long as the mounted seed sources and retain one entry per seed country.
+  const colorTargets = new Map<string, {source: string; id: string | number}[]>();
+  for (const kind of ['fills', 'outlines'] as const) for (const f of collections[kind].features) {
+    const countryId = String(f.properties.countryId), targets = colorTargets.get(countryId) ?? [];
+    targets.push({source: ids[kind], id: f.id!}); colorTargets.set(countryId, targets);
+  }
+  const appliedColors = new Map<string, string>(), appliedPalettes = new Map<string, {color: string; halo: string}>();
+  const defaultPalette = {color: '#FFFFFF', halo: '#53615F'};
   for (const [kind, id] of Object.entries(ids)) map.addSource(id, {type: 'geojson', data: collections[kind as keyof typeof ids]});
   map.addLayer({id: ids.outlines, type: 'line', source: ids.outlines, minzoom: 1, paint: {'line-color': ['coalesce', ['feature-state', 'halo'], '#53615F'], 'line-width': 1.5}});
   map.addLayer({id: ids.fills, type: 'fill', source: ids.fills, minzoom: 1, paint: {'fill-color': ['coalesce', ['feature-state', 'color'], '#FFFFFF']}});
   map.addLayer({id: ids.points, type: 'symbol', source: ids.points, layout: {'text-field': ['get', 'currentText'], 'text-font': ['Open Sans Regular'], 'text-size': 14, 'text-max-width': 10, 'text-allow-overlap': false}, paint: {'text-color': '#FFFFFF', 'text-halo-color': '#53615F', 'text-halo-width': 1.5}});
-  let world = initial, counts: OperationalControlCounts = {}, visible = true;
+  let visible = true, disposed = false;
+  let hidden: string[] = [], renamed: string[] = [], filterWorldKey = '', appliedWorldKey: string | undefined, appliedZoomBucket: number | undefined;
   const filter = () => {
-    const hidden = initial.countryOrder.filter(id => !world.countriesById[id] || counts[id]?.owned === 0);
-    const renamed = world.countryOrder.filter(id => world.countriesById[id].names.mapKo !== seedNames.get(id));
-    for (const id of [ids.fills, ids.outlines]) map.setFilter(id, ['all', ['!', ['in', ['get', 'countryId'], ['literal', [...hidden, ...renamed]]]], ['<=', ['coalesce', ['get', 'minZoom'], 1], map.getZoom()]]);
-    map.setFilter(ids.points, ['all', ['!', ['in', ['get', 'countryId'], ['literal', hidden]]], ['<=', ['coalesce', ['get', 'minZoom'], 1], map.getZoom()], ['any', ['==', ['get', 'placementMode'], 'small-country-point'], ['in', ['get', 'countryId'], ['literal', renamed]]]]);
+    if (disposed) return;
+    const zoom = map.getZoom(); let lower = 0, upper = minZooms.length;
+    while (lower < upper) {const middle = (lower + upper) >>> 1; if (minZooms[middle] <= zoom) lower = middle + 1; else upper = middle;}
+    if (lower === appliedZoomBucket && filterWorldKey === appliedWorldKey) return;
+    for (const id of [ids.fills, ids.outlines]) map.setFilter(id, ['all', ['!', ['in', ['get', 'countryId'], ['literal', [...hidden, ...renamed]]]], ['<=', ['coalesce', ['get', 'minZoom'], 1], zoom]]);
+    map.setFilter(ids.points, ['all', ['!', ['in', ['get', 'countryId'], ['literal', hidden]]], ['<=', ['coalesce', ['get', 'minZoom'], 1], zoom], ['any', ['==', ['get', 'placementMode'], 'small-country-point'], ['in', ['get', 'countryId'], ['literal', renamed]]]]);
+    appliedZoomBucket = lower; appliedWorldKey = filterWorldKey;
   };
   const updateWorld = (next: WorldStateV3, control: OperationalControlCounts) => {
-    const changedNames = next.countryOrder.some(id => next.countriesById[id].names.mapKo !== world.countriesById[id]?.names.mapKo);
-    world = next; counts = control;
-    if (changedNames || !(collections.points.features[0]?.properties.currentText)) {
-      collections.points = {...collections.points, features: collections.points.features.map(f => ({...f, properties: {...f.properties, currentText: world.countriesById[String(f.properties.countryId)]?.names.mapKo ?? ''}}))};
+    if (disposed) return;
+    const currentName = (id: string) => next.countriesById[id]?.names.mapKo ?? '';
+    if (collections.points.features.some(f => f.properties.currentText !== currentName(String(f.properties.countryId)))) {
+      collections.points = {...collections.points, features: collections.points.features.map(f => ({...f, properties: {...f.properties, currentText: currentName(String(f.properties.countryId))}}))};
       (map.getSource(ids.points) as GeoJSONSource).setData(collections.points);
     }
-    for (const kind of ['fills', 'outlines'] as const) for (const f of collections[kind].features) {
-      const c = world.countriesById[String(f.properties.countryId)];
-      if (c) {const p = mapColorPresentation(c.mapColor), unchanged = c.mapColor === initial.countriesById[c.id]?.mapColor; map.setFeatureState({source: ids[kind], id: f.id!}, {color: unchanged ? '#FFFFFF' : p.labelColor, halo: unchanged ? '#53615F' : p.labelHaloColor});}
+    for (const [id, targets] of colorTargets) {
+      const country = next.countriesById[id];
+      if (!country || appliedColors.get(id) === country.mapColor) continue;
+      const presentation = mapColorPresentation(country.mapColor), previous = appliedPalettes.get(id) ?? defaultPalette;
+      const palette = country.mapColor === initialColors.get(id) ? defaultPalette : {color: presentation.labelColor, halo: presentation.labelHaloColor};
+      if (previous.color !== palette.color || previous.halo !== palette.halo) for (const target of targets) map.setFeatureState(target, palette);
+      appliedColors.set(id, country.mapColor); appliedPalettes.set(id, palette);
     }
+    hidden = countryIds.filter(id => !next.countriesById[id] || control[id]?.owned === 0);
+    renamed = countryIds.filter(id => next.countriesById[id] && currentName(id) !== seedNames.get(id));
+    filterWorldKey = JSON.stringify([hidden, renamed]);
     filter();
   };
-  map.on('zoom', filter); updateWorld(initial, counts);
-  return {updateWorld, visibility: (value: boolean) => {visible = value; for (const id of Object.values(ids)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');},
-    dispose: () => {map.off('zoom', filter); for (const id of Object.values(ids).reverse()) {if (map.getLayer(id)) map.removeLayer(id); if (map.getSource(id)) map.removeSource(id);}}};
+  map.on('zoom', filter); updateWorld(initial, {});
+  return {updateWorld, visibility: (value: boolean) => {if (disposed || value === visible) return; visible = value; for (const id of Object.values(ids)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');},
+    dispose: () => {if (disposed) return; disposed = true; map.off('zoom', filter); initialColors.clear(); colorTargets.clear(); appliedColors.clear(); appliedPalettes.clear(); for (const id of Object.values(ids).reverse()) {if (map.getLayer(id)) map.removeLayer(id); if (map.getSource(id)) map.removeSource(id);}}};
 }

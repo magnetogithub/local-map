@@ -1,0 +1,67 @@
+{
+  "mode": "production-webpack",
+  "baseUrl": "http://127.0.0.1:3029",
+  "externalAiCalls": 0,
+  "result": [
+    {
+      "url": "/api/world/catalog/operational",
+      "status": 200,
+      "elapsedMs": 33.790000000000006,
+      "decodedBytes": 2357,
+      "catalogVersion": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+      "counts": {
+        "countries": 247,
+        "cells": 9280,
+        "edges": 29744,
+        "administrativeParents": 4231,
+        "previousParents": 4231
+      },
+      "keys": [
+        "schemaVersion",
+        "catalogRef",
+        "indexRoots",
+        "counts",
+        "countryOrder"
+      ]
+    },
+    {
+      "url": "/api/world/catalog/operational/map",
+      "status": 200,
+      "elapsedMs": 3.930499999999995,
+      "decodedBytes": 3452,
+      "catalogVersion": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+      "counts": {
+        "countries": 247,
+        "cells": 9280,
+        "edges": 29744,
+        "administrativeParents": 4231,
+        "previousParents": 4231
+      },
+      "keys": [
+        "manifest",
+        "tileIndex",
+        "detailIndex",
+        "parents",
+        "coverage",
+        "schemaVersion",
+        "catalog"
+      ]
+    },
+    {
+      "url": "/api/simulation/game",
+      "status": 200,
+      "elapsedMs": 19.342600000000004,
+      "decodedBytes": 366251,
+      "catalogVersion": null,
+      "counts": null,
+      "keys": [
+        "sessionId",
+        "snapshot",
+        "runs",
+        "seedVersion",
+        "policyVersion",
+        "presentation"
+      ]
+    }
+  ]
+}

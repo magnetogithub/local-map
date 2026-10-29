@@ -13,7 +13,7 @@
 - 위 commit은 출발점 식별 기록이다. 현재 사용자 변경을 reset/checkout으로 덮어쓰지 않는다.
 - 추적 가능한 요약은 reports/maintenance/20261029-prompt17-completion-and-performance-summary.json이다. 상세 로컬 분석은 reports/verification/performance-analysis-20261029/result.json에 있다. ignored 상세 보고서가 없어도 관련 코드와 작은 입력으로 계속 진행한다.
 - Prompt 17의 Retry 구분, 퇴역 국가 렌더 보호, 행동 상한·기록 보존, 초기화 세션 정리, 상세 오류 복구와 stale 요청 차단을 유지한다. F01~F12를 다시 구현하거나 과거 전체 감사를 반복하지 않는다.
-- 이번 핵심은 base front 필터, 희소 front 상태, 빈 상세 source 기록 제거, 색상 캐시와 hover 갱신 축소다. 4절의 소유권에 따라 A 렌더러와 B 색상 계산을 병렬로 진행하되, 같은 지도 consumer를 수정하는 A의 단계는 순차로 진행한다.
+- 이번 핵심은 base front 필터, 희소 front 상태, 빈 상세 source 기록 제거, 색상 캐시와 hover 갱신 축소다. 같은 지도 consumer를 수정하는 단계는 순차로 진행한다. 읽기 검토·독립된 측정은 필요할 때만 병렬화한다.
 - 별도 오케스트레이터·승인 체계·대규모 benchmark runner·검증용 workspace 복제를 만들지 않는다. 이미 수정된 부분은 확인 후 재사용한다.
 
 ## 2. 분석에서 확인한 사실과 해석 한계
@@ -55,71 +55,9 @@
 - 기존 revision·delta·stale 요청·원자적 commit·실패 후 재동기화 검사를 완화하지 않는다. 이전 world를 최신처럼 표시해서 성능을 맞추지 않는다.
 - 현재 PC 화면 높이 보정과 패널 내부 스크롤을 유지한다. 브라우저 확대·모니터 해상도·임시 대형 viewport로 실제 화면의 문제를 숨기지 않는다.
 
-## 4. 작업 분기·합류와 구현 순서
+## 4. 구현 순서
 
-### 4.1 분기와 합류 흐름
-
-```text
-공통 시작 · 합류 담당
-18-01 기존 변경 확인 + 짧은 기준 측정 + 파일/공유 계약 확인
-                         ↓ 기준 측정 후 구현 시작
-             작업 분기 [동시 최대 2개]
-                         │
-         ┌───────────────┴────────────────┐
-         ↓                                ↓
- [A 지도 렌더러·상태 갱신]          [B 색상 계산·캐시]
- 18-02 base front 필터              18-03B 기존 projection 내부 최적화
- 희소 front override               색 변경·복원·입력 검증 회귀
-         ↓                                │
- 18-03A source membership                 │
- payload·hover 최소 갱신                  │
-         └───────────────┬────────────────┘
-                         ↓ A·B 결과 합류
-              18-04 합류 담당
-     관련 회귀·타입/lint·마지막 build·실제 성능 비교
-                         ↓
-                사용자가 직접 플레이
-```
-
-| 작업 | 담당 | 선행 작업 | 결과 |
-| --- | --- | --- | --- |
-| 18-01 | 합류 담당 | 공통 시작 | 같은 조건의 기준 측정, 변경 상태·파일 소유권·공유 함수 계약 확인 |
-| 18-02 | A | 18-01 | base front 필터와 동적·복원 전선의 희소 override |
-| 18-03A | A | 18-02 | 실제 source 상태 기록과 hover 갱신 축소 |
-| 18-03B | B | 18-01 | 기존 projection 함수의 색상 계산 재사용과 유한 캐시; A와 병렬 |
-| 18-04 | 합류 담당 | A·B 완료 | 직접 연결되는 차이 조정, 필요한 한 번의 최종 묶음 확인과 전후 비교 |
-
-기준 측정 중에는 A·B가 구현을 바꿔 전후 조건을 섞지 않는다. 병렬 실행 환경이 없으면 같은 소유권과 합류 조건을 유지하며 순차로 수행한다. 분기별 새 저장소·worktree·전체 workspace 사본은 만들 필요가 없다.
-
-### 4.2 파일 소유권과 공유 계약
-
-분기 A:
-- src/lib/map/operational-map-consumer.ts와 operational-map-consumer.test.ts를 담당한다. 18-02→18-03A를 한 담당자가 이어서 수정한다.
-- front layer·희소 상태, source별 membership·payload·마스킹, 선택/hover 인덱스·최소 갱신을 담당한다.
-- operational-map-sources.ts 또는 operational-vector-delivery.ts의 직접 필요한 작은 연결 보정은 합류 담당과 범위를 정한 뒤 A가 순차로 수행한다. 전달 형식·타일·원본 데이터를 교체하지 않는다.
-- operational-map-projection.ts와 B 전용 테스트는 수정하지 않는다. 공유 함수 변경이 필요하면 B·합류 담당에게 이유를 전달하고 소유권을 순차 인계한다.
-
-분기 B:
-- src/lib/projection/operational-map-projection.ts의 색상 계산 재사용과 그에 직접 연결되는 작은 테스트를 담당한다. 필요하면 같은 디렉터리에 operational-map-projection.test.ts를 추가한다.
-- 기존 operationalCellView(world, ordinal)의 인자·반환 필드·검증 의미를 유지해 A가 현재 인터페이스로 작업할 수 있게 한다. 색 변경·undo/redo·null controller·잘못된 ordinal/controller 거부도 유지한다.
-- 색상 캐시의 범위·상한·수명을 명확히 하고 셀마다 색 대비를 다시 계산하는 비용을 줄인다. operationalCellView 전체 결과나 현재 셀 소유권을 캐시하지 않고 색상 계산 결과만 재사용한다.
-- consumer·source wiring·component·A의 테스트를 수정하지 않는다. 공용 world/country-map-color.ts를 전역 캐시로 바꾸거나 병렬화를 위해 새 API·모듈을 억지로 추가하지 않는다.
-
-합류 담당:
-- 18-01 기준 측정과 현재 서버·브라우저 조작을 맡는다. 분기 구현 중 각각 별도 브라우저를 열어 같은 baseline을 반복하거나 사용자의 진행을 덮어쓰지 않는다.
-- src/components/map/OperationalWorldMap.tsx와 해당 component 테스트, 직접 필요한 setup shell 연결, 루트 설정·빌드·최종 측정을 맡는다. 필요 없는 파일은 수정하지 않는다.
-- A·B가 쓰는 operational-map-projection의 기존 인터페이스를 공통 시작에서 확인한다. A는 소비자 기록·hover를, B는 projection 내부 색상 계산을 맡아 중복 캐시·중복 구현을 피한다.
-- A·B가 마친 파일만 인계받아 직접 연결되는 차이를 조정한다. 통과한 분기를 처음부터 다시 구현하지 않는다.
-
-공통 운영:
-- 소유권은 편집 기준이다. 다른 담당 파일은 읽을 수 있지만 동시에 고치지 않는다. 경계 변경은 담당자끼리 정하고 한 명이 수정한다.
-- 각 분기는 자기 코드에 직접 연결되는 작은 검사만 실행하고, 변경 파일·공유 계약 영향·검사 결과·남은 연결 사항을 짧게 전달한다.
-- 전체 타입/lint 묶음·production build·실제 전후 성능 비교는 합류 담당이 한 번 모아 수행한다. 같은 build나 전체 회귀를 분기마다 반복하지 않는다.
-- 각자의 작은 fixture·임시 경로만 사용하며 다른 분기의 출력이나 사용자 변경을 덮어쓰지 않는다. 공용 테스트 fixture 변경이 필요하면 먼저 소유권을 정한다.
-- 분기별 PASS 접수·독립 승인·사용자 확인 대기를 추가하지 않는다. 한 분기의 문제가 독립된 다른 분기를 멈추게 하지 않는다.
-- B가 먼저 끝나면 A의 읽기 검토를 도울 수 있다. 파일 담당을 넓혀 새 구현 범위를 추가하지 않는다.
-
-### 18-01. 짧은 기준 측정 [합류 담당]
+### 18-01. 짧은 기준 측정
 
 현재 서버·브라우저·스크립트 공급자와 관련 파일만 확인한다. 기존 분석을 반복하는 저장소 전체 감사는 하지 않는다.
 
@@ -130,7 +68,7 @@
 - 기존 getUpdateStats나 작은 임시 계측을 재사용할 수 있다. 새 전역 진단 프레임워크는 만들지 않는다. 함수별 프로파일이나 메모리 측정이 불가능하면 가능한 작업량·화면 관측을 쓰고 미확인 부분을 밝힌다.
 - 도구의 URL·권한 차단을 우회하지 않는다. Chrome 내부 진단 페이지 접근을 필수 관문으로 만들지 않는다.
 
-### 18-02. Base front와 희소 front 상태 [A · 최우선]
+### 18-02. Base front와 희소 front 상태 [최우선]
 
 operational-map-consumer.ts의 기본 전선 처리부터 줄인다.
 
@@ -142,25 +80,18 @@ operational-map-consumer.ts의 기본 전선 처리부터 줄인다.
 - 기본값과 override를 합칠 때 명시적 false를 보존한다. 예를 들어 coalesce(feature-state.front, c=1)는 false override를 유지하지만, truthy 검사로 기본 true를 되살리면 안 된다.
 - 정확성 경로를 확인하면서 수정한다. 필터 한 줄만 바꾸고 동적·복원 전선 검사를 생략하지 않는다.
 
-### 18-03A. 실제 source 상태와 hover 작업 축소 [A · 18-02 후 순차]
+### 18-03. 실제 source 상태와 hover 작업 축소
 
 - 비어 있는 exact/changed source에 모든 셀 상태를 선등록하지 않는다. 실제 해당 source에 있는 feature에 필요한 상태만 적용한다.
 - 상세 geometry가 나중에 나타날 때 최신 색·점령·선택·hover 상태가 즉시 적용돼야 한다. 상세 해제 후 vector exactCell 마스킹도 올바르게 복원한다.
 - 사라진 상세 source feature의 불필요한 상태는 수명에 맞춰 정리할 수 있다. 다른 source에 남아 있는 변경 geometry의 상태를 함께 지우지 않는다.
 - paint가 읽지 않는 ID·국가 정보 등을 매번 feature-state payload로 복사할 필요가 있는지 줄인다. authoritative world와 hit 판정은 기존 정체성을 유지한다.
+- mapColorPresentation을 셀마다 반복 계산하지 않도록 현재 국가 색상표 또는 작은 유한 캐시를 재사용한다. 색 변경·undo/redo·국가 수명 변경을 반영하고 캐시를 무제한으로 누적하지 않는다.
 - hover/선택이 바뀔 때 매번 과거 관측 셀 전체를 복사·순회하고 색까지 재계산하는 경로를 없애거나 크게 줄인다. 관련 국가/feature 인덱스와 최소 flag 갱신을 사용한다.
 - 같은 hover 값의 반복 갱신은 생략한다. 프레임 단위로 합치거나 작업을 나누는 경우 오래된 hover 결과가 최신 선택·world를 덮어쓰지 않게 한다. 작업량 자체를 줄이지 않은 채 지연만 늘리지 않는다.
-- 세션 준비·페이지 전환의 map remount 원인이 보이면 근거와 필요한 작은 보정을 합류 담당에게 전달한다. component 수정은 합류 담당이 인계 후 수행하며, 공통 layout·전역 저장 구조 전면 개편은 선행 조건으로 만들지 않는다.
+- 세션 준비·페이지 전환에서 map remount를 줄이는 작은 보정은 직접 필요할 때 허용한다. 공통 layout·전역 저장 구조 전면 개편은 선행 조건으로 만들지 않는다.
 
-### 18-03B. 색상 계산 재사용과 캐시 [B · A와 병렬]
-
-- operationalCellView가 mapColorPresentation을 셀마다 반복 계산하지 않도록 projection 내부에서 현재 국가 색상표 또는 작은 유한 캐시를 재사용한다.
-- 색 변경·undo/redo·국가 수명 변경과 null controller의 기본 색을 반영한다. 과거 색이나 상태를 계속 붙잡는 무제한 캐시를 만들지 않는다.
-- 기존 함수의 검증과 반환 의미는 유지한다. 캐시 hit 때문에 잘못된 ordinal·없는 controller·잘못된 색을 성공으로 처리하지 않는다.
-- 작은 fixture에서 반복 호출의 계산 재사용, 색 변경·복원, null controller와 입력 거부를 확인한다. 소비자 전체 테스트를 복사하거나 큰 world를 새로 만들지 않는다.
-- A가 담당하는 source별 기록·hover flag 최적화와 중복 구현하지 않는다. 경계가 필요해지면 기존 함수 계약을 먼저 유지하고 합류 시 작은 연결만 조정한다.
-
-### 18-04. 회귀와 실제 플레이 성능 비교 [합류 담당 · A/B 완료 후]
+### 18-04. 회귀와 실제 플레이 성능 비교
 
 기존 작은 fake map·projection/component 테스트를 재사용한다.
 

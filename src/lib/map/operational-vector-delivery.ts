@@ -188,10 +188,9 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
     const parent = z.object({sourceCountryId: z.string(), start: integer, count: positive});
     const data = z.object({administrative: z.array(parent.extend({parentKey: z.string()}).passthrough()), previous: z.array(parent.extend({oldTerritoryId: z.string()}).passthrough())}).parse(await json(bootstrap.parents, s));
     if (data.administrative.length !== counts.administrativeParents || data.previous.length !== counts.previousParents) throw Error('INVALID_OPERATIONAL_PARENTS');
-    for (const parents of [data.administrative, data.previous]) {
-      let end = 0; for (const p of parents) {country(p.sourceCountryId); if (p.start !== end) throw Error('INVALID_OPERATIONAL_PARENT_RANGE'); end += p.count;}
-      if (end !== counts.cells) throw Error('INVALID_OPERATIONAL_PARENT_RANGE');
-    }
+    for (const parents of [data.administrative, data.previous]) for (const p of parents) country(p.sourceCountryId);
+    if (new Set(data.administrative.map(p => p.parentKey)).size !== data.administrative.length ||
+        new Set(data.previous.map(p => p.oldTerritoryId)).size !== data.previous.length) throw Error('INVALID_OPERATIONAL_PARENT_MAPPING');
     return {administrative: data.administrative.map((p, i) => ({...p, ordinal: i + 1}) as OperationalAdministrativeParent),
       previous: data.previous.map((p, i) => ({...p, oldTerritoryId: readCatalogTerritoryId(p.oldTerritoryId), ordinal: i + 1}) as OperationalPreviousParent)};
   };
@@ -199,7 +198,7 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
     const parents = await loadParents(s), parent = parents.administrative.find(p => p.parentKey === parentKey);
     if (!parent) throw Error('UNKNOWN_OPERATIONAL_ADMINISTRATIVE_PARENT');
     const members = (await loadCountry(parent.sourceCountryId, s)).filter(c => c.administrativeOrdinal === parent.ordinal);
-    if (members.length !== parent.count) throw Error('INVALID_OPERATIONAL_MEMBERSHIP');
+    if (!members.length) throw Error('INVALID_OPERATIONAL_MEMBERSHIP');
     return members; // Complete stored membership; the action cap belongs to the command validator.
   };
   const loadCoverage = async (s?: AbortSignal) => {
@@ -244,7 +243,9 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
     return () => {featureListeners.delete(listener);};
   };
   const protocol = `pax-operational-${expected.catalogVersion.slice('catalog-v3-'.length)}`;
-  const source: VectorSourceSpecification = {type: 'vector', tiles: [`${protocol}://${base}${manifest.tileTemplate}`], minzoom: 0, maxzoom: 6, attribution: manifest.attribution};
+  // OperationalWorldMap supplies linked source/license credits. Keep the source's
+  // duplicate credit short; full provenance remains in the immutable manifest.
+  const source: VectorSourceSpecification = {type: 'vector', tiles: [`${protocol}://${base}${manifest.tileTemplate}`], minzoom: 0, maxzoom: 6, attribution: 'Natural Earth'};
   const renderRef = (sourceLayer: 'territories' | 'edges' | 'administrative', n: number): RenderFeatureRef => ({sourceType: 'vector', sourceId: OPERATIONAL_MAP_SOURCE_ID,
     sourceLayer, featureId: ordinal(n, sourceLayer === 'territories' ? counts.cells : counts.edges)});
   return Object.freeze({bootstrap, source, protocol, loadTile, edgeIncidence, incidentEdges, observeTileFeatures, loadCountry, resolveCells, loadCountryDetail, loadCellDetail, loadEdgeDetails,

@@ -1,0 +1,51 @@
+{
+  "countryId": "KOR",
+  "revision": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "receipts": [
+    {
+      "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/metadata.json",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM3/geoBoundaries-KOR-ADM3-metaData.json",
+      "finalUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM3/geoBoundaries-KOR-ADM3-metaData.json",
+      "retrievedAt": "2026-10-29T04:52:54.950Z",
+      "sha256": "bd2cf162e2f128c209077fc08a7c90643dfb12d0662cdf187e6828954d68f7ac",
+      "byteLength": 920,
+      "contentType": "application/octet-stream"
+    },
+    {
+      "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/citation-and-use.txt",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM3/CITATION-AND-USE-geoBoundaries.txt",
+      "finalUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM3/CITATION-AND-USE-geoBoundaries.txt",
+      "retrievedAt": "2026-10-29T04:52:55.570Z",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "byteLength": 4316,
+      "contentType": "text/plain"
+    },
+    {
+      "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/source.geojson",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM3/geoBoundaries-KOR-ADM3.geojson",
+      "finalUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM3/geoBoundaries-KOR-ADM3.geojson",
+      "retrievedAt": "2026-10-29T04:53:00.061Z",
+      "sha256": "689809545ead8bac64dc4ced9b08320bbf1707339373c6fad8856e368a78de8d",
+      "byteLength": 35604017,
+      "contentType": "application/octet-stream"
+    },
+    {
+      "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/api-adm3.json",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/KOR/ADM3/",
+      "finalUrl": "https://www.geoboundaries.org/api/current/gbOpen/KOR/ADM3/",
+      "retrievedAt": "2026-10-29T04:53:00.903Z",
+      "sha256": "315397a6bdc19169ece1ff4167b4a4eab7dffccbc741d6c796089f5ec5fb62cc",
+      "byteLength": 1806,
+      "contentType": "application/json"
+    },
+    {
+      "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/api-adm2-research.json",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/KOR/ADM2/",
+      "finalUrl": "https://www.geoboundaries.org/api/current/gbOpen/KOR/ADM2/",
+      "retrievedAt": "2026-10-29T04:53:01.539Z",
+      "sha256": "e365b0e5ae763cd2e600f41e99609a93d9392807aba7b16b173e4a4f5ba2b0df",
+      "byteLength": 1756,
+      "contentType": "application/json"
+    }
+  ]
+}

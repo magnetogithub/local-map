@@ -1,0 +1,8 @@
+{
+  "url": "https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/LICENSE.md",
+  "retrievedAt": "2026-10-29T04:54:41.332Z",
+  "retrievalTimeBasis": "Local file completion timestamp of the recorded Invoke-WebRequest acquisition",
+  "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/upstream-2018-license.md",
+  "sha256": "bc58e0bb6ca73073f1effc90813606c10a4af1f19ecd83e18aed9e9d7edb53a0",
+  "byteLength": 281
+}

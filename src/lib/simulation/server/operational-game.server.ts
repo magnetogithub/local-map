@@ -9,10 +9,21 @@ import {loadCatalogRegionIndex} from '../catalog-region.server';
 import {selectOperationalFrontier} from '../operational-frontier.server';
 import {createOperationalGameSession, type OperationalGameSession} from './operational-game-session';
 import type {OperationalGameStart, OperationalCountryPresentation} from '../operational-game-protocol';
+import currentOperationalCatalog from '../../../../data/runtime/operational-catalog/current.json';
 
 // Route bundles share the same local games, including across development module reloads.
-const host = globalThis as typeof globalThis & {__paxOperationalGames?: Map<string, {session: OperationalGameSession; touched: number}>};
-const sessions = host.__paxOperationalGames ??= new Map();
+type GameSessions = Map<string, {session: OperationalGameSession; touched: number}>;
+const host = globalThis as typeof globalThis & {__paxOperationalGames?: unknown; __paxOperationalGamesV19?: GameSessions;
+  __paxOperationalGamePool?: {catalogKey: string; sessions: GameSessions}};
+// A hot reload may replace the catalog while global state survives. Release its sessions.
+delete host.__paxOperationalGames;
+host.__paxOperationalGamesV19?.clear(); delete host.__paxOperationalGamesV19;
+const catalogKey = `${currentOperationalCatalog.catalogVersion}:${currentOperationalCatalog.index.sha256}`;
+if (host.__paxOperationalGamePool?.catalogKey !== catalogKey) {
+  host.__paxOperationalGamePool?.sessions.clear();
+  host.__paxOperationalGamePool = {catalogKey, sessions: new Map()};
+}
+const sessions = host.__paxOperationalGamePool!.sessions;
 const SESSION_LIFETIME = 6 * 60 * 60 * 1000;
 let presentation: readonly OperationalCountryPresentation[] | undefined;
 function countryPresentation() {
@@ -47,6 +58,7 @@ export function startOperationalGame(): OperationalGameStart {
 export function operationalGameSession(id: string): OperationalGameSession {
   const value = sessions.get(id);
   if (!value || Date.now() - value.touched > SESSION_LIFETIME && !value.session.isBusy()) {sessions.delete(id); throw Error('GAME_SESSION_EXPIRED');}
+  loadOperationalCatalog().assertRef(value.session.runtime.getSnapshot().world.catalogRef);
   value.touched = Date.now(); return value.session;
 }
 export function closeOperationalGame(id: string) {sessions.delete(id);}

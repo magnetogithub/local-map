@@ -14,6 +14,12 @@ npm.cmd run dev
 
 ## 지도 데이터
 
+기본 게임은 `catalog-v3-prompt19-korea-416fa2c3b263ab7a13be`을 사용합니다. 전체 6,530개 영토와 21,908개 경계이며 한국 1,181개·북한 1,147개입니다. 한국을 읍면동에서 시군구 수준으로 조정해 실제 행정경계에 근거한 구역의 평균 면적을 북한과 비슷하게 맞췄습니다. 다른 245개국의 4,202개 coarse 영토는 그대로입니다. 구 전 세계 92만 격자 셀은 제거했으며 새 게임으로 시작합니다.
+
+현재 지도 배포 자료는 `data/derived/prompt19/mixed-world-v2-416fa2c3b263ab7a13be`, 무결성 포인터는 `data/runtime/operational-catalog/current.json`입니다. 큰 공동 입력 스냅샷은 Git LFS로 보관하므로 복제 후 `git lfs pull`로 받습니다. `npm run data:korea`는 잠긴 한국 ADM2·북한 ADM2 원본과 고정 국가 외곽의 공동 경계 분할을 준비하고, `npm run data:world`는 검증된 공동 산출물을 패키징하며 격자를 생성하지 않습니다. 검증은 `node scripts/verify-prompt19-mixed-world.mjs`로 재현합니다. 구 생성·복구 명령은 `docs/archive/prompt15/retired-grid-tooling`에 실행할 수 없는 `.txt` 기록으로 보존했습니다.
+
+한국 자료는 geoBoundaries ADM2(2020, geoBoundaries·City Population, 자료별 CC BY 3.0·배포 CC BY 4.0), 북한은 ADM2(WFP/OCHA ROAP, CC BY 3.0 IGO, 기준연도 2013/2019 메타데이터 불일치)입니다. 한국 원본은 실제 228개 구역이며 메타데이터의 229개 표기와 다른 점을 기록했습니다. 원본 내부 소속을 확인한 면만 행정구역으로 인정하고, 원본이 덮지 않는 고정 국가 외곽은 한국 643개·북한 488개 coarse 잔여로 별도 보존합니다. 실제 행정경계 기반 셀은 한국 538개·북한 659개이며 평균 면적은 약 179㎢·184㎢입니다. 평시 국경은 검정, 점령 전선은 금색이며 미세 내부 경계선은 숨깁니다. 근거는 `reports/maintenance/20261029-map-boundaries-and-korea-scale-fix.json`과 `reports/maintenance/20261029-kor-adm2-independent-verification.json`을 참고하세요.
+
 Natural Earth 공식 GeoJSON을 가공합니다. 최초 화면은 1:50m 국가 데이터, 확대 시 1:10m 국가와 Admin 1 경계를 한 번만 지연 로드합니다. 시아첸 빙하(`KAS`)와 바이코누르 조차지(`KAB`)는 독립 지도 단위에서 제외하고 각각 인도와 카자흐스탄 geometry로 귀속합니다. 정확한 생성 개수와 파일 크기는 `npm.cmd run data:prepare` 출력에서 확인합니다.
 
 원본은 `data/raw`, 재현 가능한 변환은 `scripts/prepare-map-data.mjs`, 브라우저 산출물은 `public/data/maps`에 있습니다. 데이터 출처와 라이선스는 [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/)의 public domain 정책을 따릅니다.

@@ -10,12 +10,13 @@ import {createCatalogRegionIndex} from '../catalog-region';
 import {parseTurnResolutionV1} from '../turn-resolution';
 import {createOperationalGameClient} from './operational-game-client';
 import {useOperationalTurnController} from './use-operational-turn-controller';
-import {OPERATIONAL_GAME_HEADER, operationalGameCommandSchema} from '../operational-game-protocol';
+import {OPERATIONAL_GAME_HEADER, operationalGameCommandSchema, type OperationalGameSnapshot} from '../operational-game-protocol';
 import {prepareOperationalMapUpdate, createOperationalMapProjection} from '../../projection/operational-map-projection';
 import type {SimulationProviderRequest, SimulationModelProvider} from '../server/simulation-provider';
 import type {OperationalFrontierRequest} from '../operational-frontier-contract';
 import {validateResolutionAgainstContext} from '../server/context-resolution-validator';
 import {activePlayerActionCount, type QueuedPlayerActionV1} from '../queued-player-action';
+import * as simulationContext from '../simulation-context';
 
 const sessionId = '757c2206-552c-4e0e-99b4-816d841ec403';
 function fixture() {
@@ -61,6 +62,147 @@ function fixture() {
   return {client, session, ids, catalog, post, resolution, frontier, setSource: (next: SimulationModelProvider) => {source = next;}, disconnect: () => {disconnect = true;}};
 }
 afterEach(() => {vi.unstubAllGlobals(); vi.restoreAllMocks();});
+
+describe('18 client mirror metadata updates', () => {
+  it('applies an empty cell delta without enumerating the frozen territory dictionary', async () => {
+    const f = fixture(), before = f.client.getSnapshot();
+    const enumerate = vi.fn(() => Reflect.ownKeys(before.world.territoriesById));
+    const cells = new Proxy(before.world.territoriesById, {ownKeys: enumerate});
+    f.client.store.setState({...before, world: Object.freeze({...before.world, territoriesById: cells})}, true);
+    const wire = f.session.snapshot();
+    const next: OperationalGameSnapshot = {...wire,
+      world: {...wire.world, revision: 1, countriesById: {...wire.world.countriesById,
+        AAA: {...wire.world.countriesById.AAA, mapColor: '#ABCDEF'}}},
+      revisions: {...wire.revisions, worldRevision: 1},
+      stateChange: {catalogRef: f.catalog.ref, baseWorldRevision: 0, worldRevision: 1, cells: []},
+    };
+    vi.mocked(fetch).mockResolvedValueOnce(Response.json({snapshot: next}));
+    await f.client.read();
+    const after = f.client.getSnapshot();
+    expect(enumerate).not.toHaveBeenCalled();
+    expect(after.world.territoriesById).toBe(cells);
+    expect(after.world.territoryOrder).toBe(before.world.territoryOrder);
+    expect(after.world.revision).toBe(1);
+    expect(after.world.countriesById.AAA.mapColor).toBe('#ABCDEF');
+    expect(before.world.countriesById.AAA.mapColor).toBe('#00CC00');
+    expect(Object.isFrozen(after.world)).toBe(true);
+    expect(Object.isFrozen(after.world.territoriesById)).toBe(true);
+  });
+
+  it.each(['revision', 'delta'] as const)('rejects an empty delta with an invalid %s without publishing a partial snapshot', async failure => {
+    const f = fixture(), before = f.client.getSnapshot(), wire = f.session.snapshot();
+    const next: OperationalGameSnapshot = {...wire, world: {...wire.world, revision: 1},
+      revisions: {...wire.revisions, worldRevision: failure === 'revision' ? 2 : 1},
+      stateChange: {catalogRef: f.catalog.ref, baseWorldRevision: failure === 'delta' ? 1 : 0, worldRevision: 1, cells: []},
+    };
+    vi.mocked(fetch).mockResolvedValueOnce(Response.json({snapshot: next}));
+    await expect(f.client.read()).rejects.toThrow(failure === 'revision' ? 'INVALID_GAME_REVISIONS' : 'STALE_GAME_DELTA');
+    expect(f.client.getSnapshot()).toBe(before);
+  });
+});
+
+describe('18 authoritative prepared context reuse', () => {
+  const prepare = (f: ReturnType<typeof fixture>, targetDate = '2020-01-02'): SimulationProviderRequest => {
+    const prepared = f.session.command({operation: 'prepare-turn', sessionId, revisions: f.session.runtime.getSnapshot().revisions, targetDate});
+    if (!prepared.turnId || !prepared.context) throw Error('MISSING_PREPARED_CONTEXT');
+    return {turnId: prepared.turnId, context: prepared.context};
+  };
+  const post = (f: ReturnType<typeof fixture>, request: SimulationProviderRequest) => f.post(new Request('http://localhost/api/simulation/turn', {
+    method: 'POST', body: JSON.stringify(request),
+  }));
+
+  it('builds once across preparation, HTTP validation and provider validation', async () => {
+    const f = fixture(), build = vi.spyOn(simulationContext, 'buildSimulationContext'), before = f.session.runtime.getSnapshot();
+    const streamTurn = vi.fn(async function* () {yield {type: 'turn.cancelled' as const};});
+    f.setSource({streamTurn});
+    const request = prepare(f), response = await post(f, request);
+    expect(response.status).toBe(200); expect(await response.text()).toContain('turn.cancelled');
+    expect(streamTurn).toHaveBeenCalledOnce(); expect(build).toHaveBeenCalledOnce();
+    expect(f.session.runtime.getSnapshot()).toBe(before); expect(f.session.isBusy()).toBe(false);
+  });
+
+  it('keeps its canonical expected value private when a returned context or submitted context is mutated', async () => {
+    const f = fixture(), build = vi.spyOn(simulationContext, 'buildSimulationContext'), before = f.session.runtime.getSnapshot();
+    const first = prepare(f), clean = prepare(f);
+    expect(first.context.playerCountry).not.toBe(clean.context.playerCountry);
+    Reflect.set(first.context.playerCountry, 'name', 'forged returned context');
+    expect(() => f.session.resolveRequest(first)).toThrow('STALE_STATE');
+    expect(f.session.resolveRequest(clean)).toBe(before.world);
+    const streamTurn = vi.fn(async function* () {yield {type: 'turn.cancelled' as const};});
+    f.setSource({streamTurn});
+    const forged = {...clean, context: {...clean.context, playerCountry: {...clean.context.playerCountry, name: 'forged request'}}};
+    const response = await post(f, forged);
+    expect(response.status).toBe(409); expect(streamTurn).not.toHaveBeenCalled();
+    expect(prepare(f).context.playerCountry.name).toBe('AAA');
+    expect(build).toHaveBeenCalledOnce(); expect(f.session.runtime.getSnapshot()).toBe(before);
+  });
+
+  it('invalidates the cache when player selection replaces a pair without changing its revision numbers', () => {
+    const f = fixture(), build = vi.spyOn(simulationContext, 'buildSimulationContext'), request = prepare(f);
+    const before = f.session.runtime.getSnapshot();
+    f.session.command({operation: 'select-player', sessionId, revisions: before.revisions, countryId: 'BBB'});
+    expect(f.session.runtime.getSnapshot().revisions).toEqual(before.revisions);
+    expect(f.session.runtime.getSnapshot()).not.toBe(before);
+    expect(() => f.session.resolveRequest(request)).toThrow('STALE_STATE');
+    expect(prepare(f).context.playerCountry.countryId).toBe('BBB'); expect(build).toHaveBeenCalledTimes(2);
+  });
+
+  it('rechecks the pair after HTTP validation before the provider starts', async () => {
+    const f = fixture(), build = vi.spyOn(simulationContext, 'buildSimulationContext'), request = prepare(f);
+    const streamTurn = vi.fn(async function* () {yield {type: 'turn.cancelled' as const};});
+    const handler = createSimulationTurnPost({resolveOperationalWorld: f.session.resolveRequest, createProvider: () => {
+      f.session.runtime.selectPlayer('BBB');
+      return f.session.provider({streamTurn});
+    }});
+    const response = await handler(new Request('http://localhost/api/simulation/turn', {method: 'POST', body: JSON.stringify(request)}));
+    expect(await response.text()).toContain('turn.failed'); expect(streamTurn).not.toHaveBeenCalled();
+    expect(f.session.runtime.getHistory().entries).toHaveLength(0); expect(f.session.isBusy()).toBe(false);
+    expect(build).toHaveBeenCalledTimes(2);
+  });
+
+  it('replaces its one slot for another valid target date and clears a failed preparation', () => {
+    const f = fixture(), build = vi.spyOn(simulationContext, 'buildSimulationContext'), day = prepare(f);
+    const week = prepare(f, '2020-01-08');
+    expect(week.context.period.endDate).toBe('2020-01-08'); expect(build).toHaveBeenCalledTimes(2);
+    expect(f.session.resolveRequest(day)).toBe(f.session.runtime.getSnapshot().world); expect(build).toHaveBeenCalledTimes(3);
+    expect(() => prepare(f, '2020-01-01')).toThrow();
+    prepare(f); expect(build).toHaveBeenCalledTimes(4);
+  });
+
+  it('rebuilds after queue changes, commit, undo, redo and restart', async () => {
+    const f = fixture(), build = vi.spyOn(simulationContext, 'buildSimulationContext'), initial = prepare(f);
+    f.session.command({operation: 'queue', sessionId, revisions: f.session.runtime.getSnapshot().revisions, text: '접경 점령'});
+    const queued = prepare(f); expect(queued.context.queuedActions).toHaveLength(1); expect(build).toHaveBeenCalledTimes(2);
+    expect(() => f.session.resolveRequest(initial)).toThrow('STALE_STATE');
+    const provider = f.session.provider({async *streamTurn(request) {yield {type: 'resolution.ready', resolution: f.resolution(request)};}});
+    for await (const event of provider.streamTurn(queued, new AbortController().signal)) expect(event.type).toBe('resolution.ready');
+    expect(f.session.runtime.getHistory().entries).toHaveLength(1); expect(build).toHaveBeenCalledTimes(2);
+    prepare(f, '2020-01-03'); expect(build).toHaveBeenCalledTimes(3);
+    for (const [index, operation] of (['undo', 'redo', 'restart'] as const).entries()) {
+      f.session.command({operation, sessionId, revisions: f.session.runtime.getSnapshot().revisions});
+      const next = prepare(f, '2020-01-03'), current = f.session.runtime.getSnapshot();
+      expect(next.context.revisions).toEqual({world: current.world.revision, simulation: current.simulation.revision});
+      expect(next.context.period.startDate).toBe(current.simulation.currentDate); expect(build).toHaveBeenCalledTimes(index + 4);
+    }
+  });
+
+  it.each(['failure', 'cancellation', 'exception'] as const)('reuses the current expected value after provider %s and commits a retry atomically', async outcome => {
+    const f = fixture(), build = vi.spyOn(simulationContext, 'buildSimulationContext'), before = f.session.runtime.getSnapshot(), request = prepare(f);
+    const failed = f.session.provider({async *streamTurn() {
+      if (outcome === 'exception') throw Error('provider disconnected');
+      if (outcome === 'failure') yield {type: 'turn.failed', code: 'PROVIDER_ERROR', message: 'retry', retryable: true};
+      else yield {type: 'turn.cancelled'};
+    }});
+    const finish = async () => {for await (const event of failed.streamTurn(request, new AbortController().signal)) expect(event.type).toBe(outcome === 'failure' ? 'turn.failed' : 'turn.cancelled');};
+    if (outcome === 'exception') await expect(finish()).rejects.toThrow('provider disconnected'); else await finish();
+    expect(f.session.runtime.getSnapshot()).toBe(before); expect(f.session.isBusy()).toBe(false);
+    const retry = prepare(f); expect(f.session.resolveRequest(retry)).toBe(before.world);
+    const provider = f.session.provider({async *streamTurn(current) {yield {type: 'resolution.ready', resolution: f.resolution(current)};}});
+    for await (const event of provider.streamTurn(retry, new AbortController().signal)) expect(event.type).toBe('resolution.ready');
+    expect(build).toHaveBeenCalledOnce(); expect(f.session.runtime.getHistory().entries).toHaveLength(1);
+    expect(f.session.runtime.getSnapshot().simulation.currentDate).toBe('2020-01-02'); expect(f.session.isBusy()).toBe(false);
+  });
+});
 
 describe('F03 authoritative action admission and provider boundary', () => {
   const legacyActions = (count: number): QueuedPlayerActionV1[] => Array.from({length: count}, (_, i) => ({

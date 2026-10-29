@@ -13,12 +13,12 @@ vi.mock('node:fs', () => ({default: {readFileSync: () => Buffer.from('{}')}}));
 vi.mock('../../world/operational-game.server', () => ({createProductionOperationalGame: () => ({
   pair: {world: {territoryOrder: [], territoriesById: {}, seedVersion: 'f05', policyVersion: 'f05'}}, catalog: {},
 })}));
-vi.mock('../../world/operational-catalog.server', () => ({loadOperationalCatalog: () => ({ref: {}})}));
+vi.mock('../../world/operational-catalog.server', () => ({loadOperationalCatalog: () => ({ref: {}, assertRef: vi.fn()})}));
 vi.mock('../../world/production-catalog-seed.server', () => ({loadProductionCatalogSeed: () => ({bootstrap: {metadata: {path: '/f05.json'}, catalogRef: {}}})}));
 vi.mock('../../map/catalog-consumer-contract', () => ({readCatalogConsumerMetadata: mocks.metadata}));
 vi.mock('../catalog-region.server', () => ({loadCatalogRegionIndex: () => ({})}));
 vi.mock('../operational-frontier.server', () => ({selectOperationalFrontier: vi.fn()}));
-vi.mock('./operational-game-session', () => ({createOperationalGameSession: () => ({snapshot: mocks.snapshot, isBusy: () => false})}));
+vi.mock('./operational-game-session', () => ({createOperationalGameSession: () => ({snapshot: mocks.snapshot, isBusy: () => false, runtime: {getSnapshot: () => ({world: {catalogRef: {}}})}})}));
 import {closeOperationalGame, operationalGameSession, startOperationalGame} from './operational-game.server';
 
 afterEach(() => {mocks.ids.forEach(closeOperationalGame); vi.clearAllMocks();});

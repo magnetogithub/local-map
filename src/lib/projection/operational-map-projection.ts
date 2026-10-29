@@ -10,6 +10,21 @@ export type OperationalMapWorld = OperationalWorldView & Readonly<{
   countriesById: Readonly<Record<string, Readonly<{mapColor: string}>>>;
 }>;
 export type OperationalMapProjection = Readonly<{world: OperationalMapWorld; appliedRevision: number}>;
+// Module-lifetime FIFO: retain at most 512 successful color presentations, never worlds or cells.
+// Hits do not reorder entries, keeping the per-cell path to a single lookup.
+const COLOR_PRESENTATION_CACHE_LIMIT = 512;
+const colorPresentations = new Map<string, ReturnType<typeof mapColorPresentation>>();
+function cachedColorPresentation(color: string) {
+  const cached = colorPresentations.get(color);
+  if (cached) return cached;
+  const presentation = mapColorPresentation(color);
+  if (colorPresentations.size >= COLOR_PRESENTATION_CACHE_LIMIT) {
+    const oldest = colorPresentations.keys().next().value;
+    if (oldest !== undefined) colorPresentations.delete(oldest);
+  }
+  colorPresentations.set(color, presentation);
+  return presentation;
+}
 const same = (a: TerritoryEntityV3, b: TerritoryEntityV3) => a.id === b.id && a.sourceCountryId === b.sourceCountryId && a.ownerCountryId === b.ownerCountryId && a.controllerCountryId === b.controllerCountryId;
 export function createOperationalMapProjection(world: OperationalMapWorld, ref: WorldGeometryCatalogRef, cellCount: number): OperationalMapProjection {
   assertWorldGeometryCatalogRefMatches(world.catalogRef, ref);
@@ -25,10 +40,16 @@ function cellAt(world: OperationalMapWorld, ordinal: number) {
 export function operationalCellView(world: OperationalMapWorld, ordinal: number) {
   const cell = cellAt(world, ordinal), controller = cell.controllerCountryId, country = controller === null ? null : world.countriesById[controller];
   if (controller !== null && !country) throw Error('UNKNOWN_OPERATIONAL_MAP_CONTROLLER');
-  return {ordinal, ...cell, ...mapColorPresentation(country?.mapColor ?? '#D6D3C7'), occupied: controller !== null && controller !== cell.ownerCountryId};
+  return {ordinal, ...cell, ...cachedColorPresentation(country?.mapColor ?? '#D6D3C7'), occupied: controller !== null && controller !== cell.ownerCountryId};
 }
 export function operationalFront(world: OperationalMapWorld, pair: Readonly<{left: number; right: number}>) {
-  return pair.right > 0 && cellAt(world, pair.left).controllerCountryId !== cellAt(world, pair.right).controllerCountryId;
+  if (pair.right <= 0) return false;
+  const a = cellAt(world, pair.left), b = cellAt(world, pair.right);
+  if (!a.ownerCountryId || !b.ownerCountryId || !a.controllerCountryId || !b.controllerCountryId ||
+      !world.countriesById[a.ownerCountryId] || !world.countriesById[b.ownerCountryId] ||
+      !world.countriesById[a.controllerCountryId] || !world.countriesById[b.controllerCountryId]) return false;
+  return a.controllerCountryId !== b.controllerCountryId &&
+    (a.controllerCountryId !== a.ownerCountryId || b.controllerCountryId !== b.ownerCountryId);
 }
 
 /** An explicit runtime delta avoids a world scan. Snapshot restoration can derive the same small delta. */

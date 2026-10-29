@@ -1,6 +1,7 @@
 // @vitest-environment node
 import fs from 'node:fs';
-import {gunzipSync} from 'node:zlib';
+import {gunzipSync, gzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 import {beforeAll, describe, expect, it, vi} from 'vitest';
 import type {AddProtocolAction, Map as MapLibreMap, SourceSpecification} from 'maplibre-gl';
 import {VectorTile} from '@mapbox/vector-tile';
@@ -30,7 +31,7 @@ beforeAll(async () => {delivery = await fetchOperationalVectorDelivery(ref, fetc
 describe('16-04 operational map transport', () => {
   it('boots the admitted v3 without fetching world geometry or country metadata', () => {
     expect(requests).toEqual(['/api/world/catalog/operational/map', base + 'manifest.json', base + 'tile-index.json', base + 'detail-index.json', base + 'metadata/edge-incidence.bin.gz']);
-    expect(delivery.bootstrap.catalog.counts.cells).toBe(923443);
+    expect(delivery.bootstrap.catalog.counts.cells).toBe(catalog.descriptor.counts.cells);
     expect(delivery.source.promoteId).toBeUndefined();
     expect(delivery.source.tiles).toEqual([`${delivery.protocol}://${base}tiles/{z}/{x}/{y}.pbf.gz`]);
     expect(delivery.counters().cachedCountries).toBe(0);
@@ -92,9 +93,10 @@ describe('16-04 operational map transport', () => {
     await expect(delivery.resolveCells([{id: 'invented', sourceCountryId: 'PRK'}])).rejects.toThrow('UNKNOWN_OPERATIONAL_CELL');
   });
 
-  it('loads original exact geometry for an omitted tiny cell and reuses cached country bytes', async () => {
+  it('loads original exact coarse geometry and reuses cached country bytes', async () => {
     const coverage = await delivery.loadCoverage(), cells = await delivery.loadCountry('SVN');
-    const missing = new Set(coverage.missingOverviewCellOrdinals), cell = cells.find(c => missing.has(c.ordinal))!;
+    expect(coverage.cellCount).toBe(catalog.descriptor.counts.cells);
+    const cell = cells[0];
     expect(cell).toBeDefined();
     const selected = await delivery.loadCellDetail([cell]);
     const original = JSON.parse(gunzipSync(fs.readFileSync(`${OPERATIONAL_CATALOG_PATHS.delivery}/detail/countries/SVN.geojson.gz`)).toString());
@@ -107,27 +109,37 @@ describe('16-04 operational map transport', () => {
     expect(requests.length).toBe(before);
   });
 
-  it('preserves complete memberships larger than 512 and the source parent identities', async () => {
-    const parent = catalog.administrativeParents.find(p => p.sourceCountryId === 'CHN' && p.count > 512)!;
-    const members = await delivery.administrativeMembership(parent.parentKey);
-    expect(members).toEqual(catalog.administrativeMembership(parent.parentKey));
-    expect(members.length).toBeGreaterThan(512);
+  it('preserves coarse source parent mappings and exact edge geometry', async () => {
     const parents = await delivery.loadParents();
-    expect(parents.administrative.filter(p => p.sourceCountryId === 'SVN' && p.kind === 'administrative')).toHaveLength(193);
+    const parent = parents.administrative.find(p => p.sourceCountryId === 'PRK')!;
+    expect(await delivery.administrativeMembership(parent.parentKey)).toEqual(catalog.administrativeMembership(parent.parentKey));
+  });
+
+  it('uses explicit metadata membership when parent interval hints overlap or have different counts', async () => {
+    const data = JSON.parse(gunzipSync(fs.readFileSync(`${OPERATIONAL_CATALOG_PATHS.delivery}/metadata/parents.json.gz`)).toString());
+    for (const parents of [data.administrative, data.previous]) for (const p of parents) {p.start = 77; p.count = 999;}
+    const bytes = gzipSync(JSON.stringify(data));
+    const parents = {...delivery.bootstrap.parents, sha256: createHash('sha256').update(bytes).digest('hex'), byteLength: bytes.length};
+    const local = await loadOperationalVectorDelivery({...delivery.bootstrap, parents}, ref, async (path, init) =>
+      path === parents.path ? new Response(new Uint8Array(bytes)) : fetcher(path, init));
+    const loaded = await local.loadParents(), parent = loaded.administrative.find(p => p.sourceCountryId === 'PRK')!;
+    const members = await local.administrativeMembership(parent.parentKey);
+    expect(members).toEqual(catalog.administrativeMembership(parent.parentKey));
+    expect(members.length).not.toBe(parent.count);
   });
 
   it('loads only the requested exact topology shard and retains numeric incidence and coast', async () => {
     const before = requests.length, edges = await delivery.loadEdgeDetails([1, 2]);
     expect(requests.slice(before)).toEqual([base + 'detail/topology/000.json.gz']);
     const raw = JSON.parse(gunzipSync(fs.readFileSync(`${OPERATIONAL_CATALOG_PATHS.delivery}/detail/topology/000.json.gz`)).toString());
-    expect(edges).toEqual(raw.edges.slice(0, 2));
-    expect(edges[1].right).toBe(0);
+    expect(edges).toEqual(raw.edges.slice(0, 2).map((edge: Record<string, unknown>) => Object.fromEntries(Object.entries(edge).filter(([key]) => key !== 'lengthKm'))));
+    expect(edges[0].right).toBe(0);
     expect(delivery.edgeIncidence(1)).toEqual({left: edges[0].left, right: edges[0].right});
     const incident = delivery.incidentEdges([edges[0].left]);
     expect(incident).toContain(1);
     expect(incident.every(n => {const e = delivery.edgeIncidence(n); return e.left === edges[0].left || e.right === edges[0].left;})).toBe(true);
     expect(() => delivery.edgeIncidence(0)).toThrow();
-    expect(() => delivery.renderRef('edges', 3125744)).toThrow();
+    expect(() => delivery.renderRef('edges', catalog.descriptor.counts.edges + 1)).toThrow();
     expect(delivery.counters().cachedBytes).toBeLessThanOrEqual(32 * 1024 * 1024);
   });
 

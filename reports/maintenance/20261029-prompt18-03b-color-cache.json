@@ -1,0 +1,57 @@
+{
+  "task": "18-03B",
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "status": "completed",
+  "scope": "Projection color reuse and directly related small regressions only; reuse the completed 18-01 baseline.",
+  "changedFiles": [
+    "src/lib/projection/operational-map-projection.ts",
+    "src/lib/projection/operational-map-projection.test.ts",
+    "reports/maintenance/20261029-prompt18-03b-color-cache.json"
+  ],
+  "cache": {
+    "scope": "Private to the operational-map-projection module instance.",
+    "lifetime": "Module lifetime, with FIFO eviction before inserting beyond 512 entries.",
+    "maximumEntries": 512,
+    "key": "Current exact color string, without normalization.",
+    "value": "Only the successful frozen mapColorPresentation result; no world, country, cell or ownership references.",
+    "hit": "One Map lookup; no queue mutation or color contrast recalculation.",
+    "validation": "Every invocation still resolves and validates the ordinal, cell and current controller before lookup. Uncached colors use the original strict validation; failed calculations are never inserted."
+  },
+  "sharedContract": {
+    "function": "operationalCellView(world, ordinal)",
+    "argumentsAndReturnFieldsChanged": false,
+    "freshCellViewPerCall": true,
+    "nullControllerMapColor": "#D6D3C7",
+    "revisionDeltaAndFrontLogicChanged": false,
+    "consumerSourceComponentAndSharedColorModuleChanged": false,
+    "integrationChangesRequired": false
+  },
+  "verification": {
+    "tests": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/projection/operational-map-projection.test.ts src/lib/world/country-map-color.test.ts",
+      "filesPassed": 2,
+      "testsPassed": 15,
+      "newProjectionTestsPassed": 8,
+      "cases": [
+        "Shared colors across cells/countries and fresh complete return objects.",
+        "Color edits, undo/redo snapshots, occupation, liberation and ownership transfer.",
+        "Null controller neutral color, country retirement and recreation.",
+        "Warm-cache rejection of invalid ordinals, unknown/mismatched cells, missing controllers and invalid colors.",
+        "Eviction after 512 successful distinct colors."
+      ],
+      "environment": "TEMP and TMP pointed to D:/gen/.tmp/prompt18-03b-vitest after the default sandbox temp path failed a rename with EPERM; the workspace-local retry passed. Existing Vite config native-loader compatibility warnings remain nonblocking."
+    },
+    "focusedLint": "Passed for the two projection files.",
+    "focusedTypecheck": "Passed: tsc --noEmit --strict --skipLibCheck --target ES2017 --lib esnext,dom,dom.iterable --module esnext --moduleResolution bundler on the two projection files.",
+    "structuralEvidence": "Three fixture cells sharing one color, queried 10 times each, invoke real mapColorPresentation once rather than once per query. Two colors across edit/undo/redo snapshots invoke it twice.",
+    "performanceLimit": "Calculation counts are small-fixture evidence only; no wall-time, FPS, CPU or memory improvement is claimed."
+  },
+  "handoff": {
+    "remaining": "18-04 owns combined A/B regressions, full type/lint, the final production build and the same-condition browser/play comparison.",
+    "unrelatedChanges": "Existing tsconfig/baseline and concurrently edited map consumer files were preserved.",
+    "browserServerAndSourceDataModified": false,
+    "externalAiCalls": 0,
+    "commitOrPushPerformed": false
+  }
+}

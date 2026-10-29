@@ -51,7 +51,7 @@ export function commonNodeRings(p0,selected,onProgress=()=>{},extensions=[]){
   return {p0:outP0,selected:outSelected,edges,evidence:{maximumRoundedDisplacement,roundedPositions,coordinateChanges,insertedNodes,uniqueSegments:edges.size,
     traceNodeCount,maximumNodedSegmentDisplacement,roleDisplacements,numericalTraceFailures,continuousNumericalBoundaryCertificate:'Every inserted/rounded node is traced to its original source segment with distance <=1e-12. Source segment order/endpoints are retained; convex distance to that segment bounds every intervening subsegment. No actual wider gap is closed by this numerical equivalence.'}};
 }
-function ringsFromSegments(segments){
+export function ringsFromSegments(segments){
   const outgoing=new Map(),seen=new Set(),cycles=[];
   for(const [i,e]of segments.entries()){const key=pointKey(e[0]),list=outgoing.get(key)??[];list.push(i);outgoing.set(key,list);}
   const nextFor=(a,b)=>{const list=outgoing.get(pointKey(b))??[];if(!list.length)throw new Error('Open arrangement boundary');const reverse=Math.atan2(a[1]-b[1],a[0]-b[0]);return list.slice().sort((i,j)=>{const turn=k=>{const c=segments[k][1];return (reverse-Math.atan2(c[1]-b[1],c[0]-b[0])+2*Math.PI)%(2*Math.PI);};return turn(i)-turn(j)||i-j;})[0];};

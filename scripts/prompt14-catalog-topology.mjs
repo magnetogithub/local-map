@@ -15,13 +15,14 @@ export const territoryIdForAtom=key=>`territory:catalog:${hashCanonical('catalog
 
 // Robust indexed noding changes only the offline line decomposition, never atom coordinates.
 // P0 coast/country rings are noded in the same pass, providing an independent boundary certificate.
-export function nodeCatalogBoundarySegments(atoms,p0,onProgress=()=>{}) {
+export function nodeCatalogBoundarySegments(atoms,p0,onProgress=()=>{},additionalLines=[]) {
   const strings=new ArrayList(); let sourceSegments=0;
   const add=(geometry,data)=>{for(const polygon of polygons(geometry))for(const ring of polygon){
     strings.add(new NodedSegmentString(ring.map(([x,y])=>new Coordinate(x,y)),data));sourceSegments+=ring.length-1;
   }};
   atoms.forEach((a,i)=>add(a.geometry,{territory:i,country:a.identity.sourceCountryId}));
   p0.features.forEach(f=>add(normalizeGeometry(f.geometry),{p0:f.properties.countryId}));
+  additionalLines.forEach((line,extension)=>strings.add(new NodedSegmentString(line.coordinates.map(([x,y])=>new Coordinate(x,y)),{extension})));
   const intersector=new IntersectionAdder(new RobustLineIntersector()), noder=new MCIndexNoder(intersector);
   onProgress(`noding ${sourceSegments} territory/P0 boundary segments`); noder.computeNodes(strings);
   onProgress('collecting noded boundary sides');
@@ -35,7 +36,8 @@ export function nodeCatalogBoundarySegments(atoms,p0,onProgress=()=>{}) {
       if(a[0]===180&&b[0]===180){a=[-180,a[1]];b=[-180,b[1]];}
       const forward=pointCompare(a,b)<0;if(!forward)[a,b]=[b,a];
       const key=segmentKey(a,b),entry=segments.get(key)??{a,b,left:[],right:[],p0:[]};
-      if(data.p0){if(!entry.p0.includes(data.p0))entry.p0.push(data.p0);}
+      if(data.extension!==undefined){entry.extensions??=[];if(!entry.extensions.includes(data.extension))entry.extensions.push(data.extension);}
+      else if(data.p0){if(!entry.p0.includes(data.p0))entry.p0.push(data.p0);}
       else {const sides=forward?entry.left:entry.right;if(!sides.includes(data.territory))sides.push(data.territory);occurrences++;}
       segments.set(key,entry);
     }
