@@ -7,6 +7,7 @@ data/derived/prompt14/history/** -text
 data/catalogs/prompt14/** -text
 # PROMPT 15 immutable artifacts and hash-backed evidence retain exact bytes.
 data/catalogs/prompt15/** -text
+data/runtime/operational-catalog/**/*.json -text
 reports/prompt15/** -text
 reports/maintenance/20261028-cleanup/** -text -whitespace
 # Source checkpoints carry manifests of the original source bytes.

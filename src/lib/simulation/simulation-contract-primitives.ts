@@ -12,6 +12,9 @@ export const MAX_TITLE_LENGTH = 160;
 export const MAX_SUMMARY_LENGTH = 1_200;
 export const MAX_NARRATIVE_LENGTH = 4_000;
 export const MAX_PLAYER_ACTION_LENGTH = 2_000;
+export const MAX_ACTIVE_PLAYER_ACTIONS = 32;
+export const MAX_SIMULATION_EVENTS = 2_048;
+export const MAX_SIMULATION_EVENT_CAUSES = 16;
 
 export type SimulationContractErrorCode =
   | "INVALID_DATE"
@@ -20,6 +23,7 @@ export type SimulationContractErrorCode =
   | "INVALID_ACTION"
   | "DUPLICATE_ACTION_ID"
   | "ACTION_NOT_CANCELLABLE"
+  | "ACTION_QUEUE_LIMIT_REACHED"
   | "INVALID_REFERENCE"
   | "INVALID_CAUSALITY"
   | "INVALID_RESOLUTION";

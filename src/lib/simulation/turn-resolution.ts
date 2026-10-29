@@ -11,6 +11,7 @@ import {
   assertSafeSimulationData,
   isoCalendarDateSchema,
   SIMULATION_CONTRACT_VERSION,
+  MAX_ACTIVE_PLAYER_ACTIONS,
 } from "./simulation-contract-primitives";
 import {worldEffectSchema} from "./world-effect";
 import type {SimulationEventV1} from './simulation-event';
@@ -19,7 +20,7 @@ import type {SimulationEventV1} from './simulation-event';
 const turnResolutionEventSchema:z.ZodType<SimulationEventV1>=simulationEventSchema.omit({authorityLifecycle:true,referenceLifecycle:true});
 
 export const TURN_RESOLUTION_LIMITS = Object.freeze({
-  playerActionOutcomes: 32,
+  playerActionOutcomes: MAX_ACTIVE_PLAYER_ACTIONS,
   events: 64,
   factMutations: 64,
   situationMutations: 64,

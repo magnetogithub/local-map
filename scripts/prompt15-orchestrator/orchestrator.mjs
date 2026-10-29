@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {isDeepStrictEqual} from 'node:util';
 import {CodexClient} from './codex-client.mjs';
-import {afterImplementation, afterVerification, initialState, operatingFailure, stopState, TERMINAL} from './state-machine.mjs';
+import {acknowledgeInput, afterImplementation, afterVerification, initialState, operatingFailure, stopState, TERMINAL} from './state-machine.mjs';
 import {appendEvent, atomicJson, fileIdentity, readJson, resolveInside, resolveInsideEither, runId} from './protocol.mjs';
 
 export const IMPLEMENTATION_SCHEMA = {
@@ -67,6 +68,12 @@ function compactFailure(state) {
   };
 }
 
+function inputAcknowledgementPrompt(state) {
+  const acknowledgement = state.inputAcknowledgement;
+  if (!acknowledgement || acknowledgement.attempt !== state.productAttempt || acknowledgement.phase !== state.phase) return '';
+  return `A human explicitly confirmed that the following requested external input has been supplied: ${JSON.stringify(acknowledgement.requiredInput)}. Re-read the relevant input and continue this phase. This acknowledgement is not product PASS or verification evidence.`;
+}
+
 function implementationPrompt({task, workspace, state, config, root}) {
   return [
     `Implement only Prompt 15 task ${task.id}: ${task.title}.`,
@@ -75,15 +82,16 @@ function implementationPrompt({task, workspace, state, config, root}) {
     `Read the fixed prompt at ${path.join(root, config.promptPath)} and apply sections ${task.sections.join(', ')}.`,
     `Task contract: ${JSON.stringify(task)}`,
     `Previous independent verification failure: ${JSON.stringify(compactFailure(state))}`,
+    inputAcknowledgementPrompt(state),
     'Implement the product directly. A product failure, unresolved geometry, rejected build, or failed test is not an operating incident.',
     'Run focused implementation checks. Do not claim PASS; the verifier alone decides PASS from current bytes.',
     'Do not edit REVIEW B inputs, the fixed prompt, task plan, policy thresholds, or prior reports.',
     'Do not start a later task or REVIEW C. Preserve failed evidence instead of hiding it.',
     'Return status=blocked when the current candidate still fails, with exact remaining issues. That response will go to verification, not Guardian.',
-  ].join('\n\n');
+  ].filter(Boolean).join('\n\n');
 }
 
-function verificationPrompt({task, workspace, implementation, evidenceDirectory, config, root}) {
+function verificationPrompt({task, workspace, state, implementation, evidenceDirectory, config, root}) {
   const strict18 = task.id === '15-18' ? [
     'For 15-18, PASS requires an actual buildAllowed=true candidate, SVN source=193 and traced=193, missing=0, duplicate=0, unresolved=0, complete component/hole and protected-overlay correspondence, plus injected missing/unresolved fixtures rejected non-zero.',
     'A correctly rejected candidate is FAIL, never PASS.',
@@ -96,6 +104,7 @@ function verificationPrompt({task, workspace, implementation, evidenceDirectory,
     `Read the fixed prompt at ${path.join(root, config.promptPath)} and apply sections ${task.sections.join(', ')}.`,
     `Task contract: ${JSON.stringify(task)}`,
     `Implementation response: ${JSON.stringify(implementation)}`,
+    inputAcknowledgementPrompt(state),
     strict18,
     'Run the required targeted commands yourself. Product test failures must use failureKind=product.',
     'Use failureKind=operating only when a command could not execute because the runtime/controller/environment failed, not when the product or test failed.',
@@ -211,7 +220,29 @@ export class Prompt15Orchestrator {
     }
   }
 
-  async run() {
+  validateInputAcknowledgement() {
+    const pending = this.state.phase === 'implement' ? this.state.lastImplementation : this.state.lastVerification;
+    const readIdentity = identity => {
+      if (!identity || typeof identity.path !== 'string' || !identity.path) throw Error('Input-wait response identity is missing');
+      const file = resolveInside(this.directory, path.resolve(this.root, identity.path), 'input-wait response');
+      const current = fileIdentity(this.root, file);
+      if (current.sha256 !== identity.sha256 || current.byteLength !== identity.byteLength) throw Error('Input-wait response identity changed');
+      return readJson(file);
+    };
+    const response = readIdentity(pending.responseIdentity);
+    const recorded = this.state.phase === 'verify' ? readIdentity(pending.verdictIdentity) : response.result;
+    if (!isDeepStrictEqual(recorded, pending.value) || response.result?.summary !== this.state.requiredInput) throw Error('Input-wait response disagrees with saved state');
+  }
+
+  async run({ackInput = false} = {}) {
+    if (this.state.status === 'waiting_input' && ackInput === true) {
+      const acknowledged = acknowledgeInput(this.state);
+      this.validateInputAcknowledgement();
+      const pending = this.state.phase === 'implement' ? this.state.lastImplementation : this.state.lastVerification;
+      this.state = acknowledged;
+      this.save();
+      this.event({kind: 'input_acknowledged', taskId: this.state.taskId, ...this.state.inputAcknowledgement, responseIdentity: pending.responseIdentity, verdictIdentity: pending.verdictIdentity ?? null});
+    }
     if (TERMINAL.has(this.state.status) && this.state.status !== 'stopped') return this.state;
     if (this.state.status === 'stopped') { this.state.status = 'running'; delete this.state.stoppedAt; }
     if (fs.existsSync(this.stopFile)) fs.unlinkSync(this.stopFile);
@@ -231,7 +262,7 @@ export class Prompt15Orchestrator {
           const report = this.reportDirectory('verification');
           const evidenceDirectory = path.join(this.state.workspace, '.prompt15-v2', 'verification', `attempt-${pad(this.state.productAttempt)}`);
           fs.mkdirSync(evidenceDirectory, {recursive: true});
-          const response = await this.executeRole({roleName: 'verifier', prompt: verificationPrompt({task, workspace: this.state.workspace, implementation: this.state.lastImplementation.value, evidenceDirectory, config: this.config, root: this.root}), schema: VERIFICATION_SCHEMA, reportDirectory: report, evidenceDirectory});
+          const response = await this.executeRole({roleName: 'verifier', prompt: verificationPrompt({task, workspace: this.state.workspace, state: this.state, implementation: this.state.lastImplementation.value, evidenceDirectory, config: this.config, root: this.root}), schema: VERIFICATION_SCHEMA, reportDirectory: report, evidenceDirectory});
           const verified = this.validateVerification(response.value);
           atomicJson(path.join(report, 'authenticated-verdict.json'), verified);
           this.state.lastVerification = {attempt: this.state.productAttempt, responseIdentity: response.responseIdentity, verdictIdentity: fileIdentity(this.root, path.join(report, 'authenticated-verdict.json')), value: verified};

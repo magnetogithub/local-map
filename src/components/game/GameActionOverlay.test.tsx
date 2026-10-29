@@ -6,7 +6,7 @@ import {initialTurnClientState} from "@/lib/simulation/client/turn-state-machine
 import type {TurnReport} from "@/lib/simulation/client/turn-report";
 import type {SimulationTurnController} from "@/lib/simulation/client/use-simulation-turn-controller";
 import {createInitialSimulationState} from "@/lib/simulation/initial-simulation-state";
-import {queuePlayerAction} from "@/lib/simulation/queued-player-action";
+import {queuePlayerAction, type QueuedPlayerActionV1} from "@/lib/simulation/queued-player-action";
 import {testWorldState} from "@/stores/world-state-store-v2-fixture";
 import {GameActionOverlay} from "./GameActionOverlay";
 
@@ -142,6 +142,36 @@ describe("13-21 through 13-23 game action overlay", () => {
     expect(retry).toHaveBeenCalledOnce();
   });
 
+  it.each(["NETWORK_ERROR", "STALE_REVISION_PAIR"])("keeps %s command failures visible without offering turn Retry", (errorCode) => {
+    const retry = vi.fn(async () => undefined);
+    render(<GameActionOverlay controller={createController({
+      turn: {...initialTurnClientState(), phase: "failed", failureSource: "command", errorCode},
+      retry,
+    })}/>);
+    expect(screen.getByRole("status")).toHaveAttribute("data-phase", "failed");
+    expect(screen.getByRole("status")).toHaveTextContent(`명령 확인 실패 (${errorCode})`);
+    expect(screen.getByRole("alert")).toHaveTextContent("명령 처리 결과를 확인하지 못했습니다. 현재 상태를 확인하세요.");
+    expect(screen.queryByRole("button", {name: "Retry"})).not.toBeInTheDocument();
+    expect(retry).not.toHaveBeenCalled();
+  });
+
+  it("withholds turn Retry until the blocking major event is acknowledged", async () => {
+    const user = userEvent.setup();
+    const retry = vi.fn(async () => undefined);
+    const controller = createController({
+      turn: {...initialTurnClientState(), phase: "failed", failureSource: "turn", errorCode: "NETWORK_ERROR"},
+      retry,
+    });
+    const {rerender} = render(<GameActionOverlay controller={controller} advanceBlocked/>);
+    expect(screen.queryByRole("button", {name: "Retry"})).not.toBeInTheDocument();
+    expect(screen.getByText("미확인 주요 사건을 모두 확인해야 다음 진행을 시작할 수 있습니다.")).toBeVisible();
+    expect(retry).not.toHaveBeenCalled();
+
+    rerender(<GameActionOverlay controller={controller}/>);
+    await user.click(screen.getByRole("button", {name: "Retry"}));
+    expect(retry).toHaveBeenCalledOnce();
+  });
+
   it("blocks the next advance while a committed major event is unacknowledged", () => {
     const queuedActions = queuePlayerAction([], {
       actionId: "action.blocked",
@@ -175,5 +205,66 @@ describe("13-21 through 13-23 game action overlay", () => {
     expect(openNews).not.toBeNull();
     await user.click(openNews!);
     expect(onOpenNews).toHaveBeenCalledWith("event-result");
+  });
+});
+
+const activeActions = (count: number): readonly QueuedPlayerActionV1[] => Array.from({length: count}, (_, index) => ({
+  actionId: `action.limit.${index}`,
+  actorCountryId: "AAA",
+  submittedAtDate: "2020-01-01",
+  text: `대기 행동 ${index + 1}`,
+  visibility: "public",
+  status: "queued",
+}));
+
+function controllerWithActions(actions: readonly QueuedPlayerActionV1[], overrides: Partial<SimulationTurnController> = {}) {
+  return createController({snapshot: {...snapshot, simulation: {...initialSimulation, queuedActions: actions}},
+    queuedActions: actions.filter(action => action.status === "queued" || action.status === "resolving"),
+    actionDraft: "추가 행동", canQueue: true, ...overrides});
+}
+
+describe("F03 active action limit controls", () => {
+  it.each([31, 32, 33])("enforces the %i-action boundary for buttons and Enter", async count => {
+    const user = userEvent.setup();
+    const controller = controllerWithActions(activeActions(count));
+    render(<GameActionOverlay controller={controller}/>);
+    const add = screen.getByRole("button", {name: "대기열에 추가"});
+    const advance = screen.getByRole("button", {name: "진행 시작"});
+    expect(add).toHaveProperty("disabled", count >= 32);
+    expect(advance).toHaveProperty("disabled", count > 32);
+    fireEvent.keyDown(screen.getByLabelText("현재 플레이 국가가 시도할 행동"), {key: "Enter"});
+    await user.click(add);
+    expect(controller.queueAction).toHaveBeenCalledTimes(count < 32 ? 2 : 0);
+    if (count > 32) expect(screen.getByRole("alert")).toHaveTextContent("기존 행동을 취소해 32개 이하로 줄인 뒤 진행하세요.");
+  });
+
+  it("counts resolving actions in the full snapshot while ignoring closed records", () => {
+    const actions = [...activeActions(31),
+      {...activeActions(1)[0], actionId: "action.resolving", status: "resolving" as const},
+      {...activeActions(1)[0], actionId: "action.cancelled", status: "cancelled" as const},
+      {...activeActions(1)[0], actionId: "action.resolved", status: "resolved" as const}];
+    const controller = controllerWithActions(actions, {queuedActions: actions.filter(action => action.status === "queued")});
+    render(<GameActionOverlay controller={controller}/>);
+    expect(screen.getByRole("button", {name: "대기열에 추가"})).toBeDisabled();
+    expect(screen.getByRole("button", {name: "진행 시작"})).toBeEnabled();
+  });
+
+  it("allows legacy resolving cancellation only while over the limit and restores Retry after recovery", async () => {
+    const user = userEvent.setup();
+    const actions = activeActions(33).map((action, index) => index === 0 ? {...action, status: "resolving" as const} : action);
+    const cancelAction = vi.fn();
+    const failedTurn = {...initialTurnClientState(), phase: "failed" as const, errorCode: "NETWORK_ERROR"};
+    const controller = controllerWithActions(actions, {turn: failedTurn, cancelAction});
+    const {rerender} = render(<GameActionOverlay controller={controller}/>);
+    expect(screen.queryByRole("button", {name: "Retry"})).not.toBeInTheDocument();
+    const firstCancel = screen.getAllByRole("button", {name: "취소"})[0];
+    expect(firstCancel).toBeEnabled();
+    await user.click(firstCancel);
+    expect(cancelAction).toHaveBeenCalledWith(actions[0].actionId);
+
+    rerender(<GameActionOverlay controller={controllerWithActions(actions.slice(0, 32), {turn: failedTurn})}/>);
+    expect(screen.getAllByRole("button", {name: "취소"})[0]).toBeDisabled();
+    expect(screen.getByRole("button", {name: "진행 시작"})).toBeEnabled();
+    expect(screen.getByRole("button", {name: "Retry"})).toBeEnabled();
   });
 });

@@ -7,6 +7,7 @@ import {
   countryIdSchema,
   isoCalendarDateSchema,
   simulationIdSchema,
+  MAX_SIMULATION_EVENT_CAUSES,
 } from "./simulation-contract-primitives";
 
 export const eventCauseReferenceSchema = z.strictObject({
@@ -29,7 +30,7 @@ export const simulationEventSchema = z.strictObject({
   actorCountryIds: z.array(countryIdSchema).min(1).max(16),
   relatedFactIds: z.array(simulationIdSchema).max(32),
   relatedSituationIds: z.array(simulationIdSchema).max(32),
-  causes: z.array(eventCauseReferenceSchema).max(16),
+  causes: z.array(eventCauseReferenceSchema).max(MAX_SIMULATION_EVENT_CAUSES),
   outcomeCategory: z.enum([
     "diplomatic",
     "treaty",

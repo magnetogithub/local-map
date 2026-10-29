@@ -15,6 +15,7 @@ import {prepareOperationalMapUpdate, createOperationalMapProjection} from '../..
 import type {SimulationProviderRequest, SimulationModelProvider} from '../server/simulation-provider';
 import type {OperationalFrontierRequest} from '../operational-frontier-contract';
 import {validateResolutionAgainstContext} from '../server/context-resolution-validator';
+import {activePlayerActionCount, type QueuedPlayerActionV1} from '../queued-player-action';
 
 const sessionId = '757c2206-552c-4e0e-99b4-816d841ec403';
 function fixture() {
@@ -60,6 +61,242 @@ function fixture() {
   return {client, session, ids, catalog, post, resolution, frontier, setSource: (next: SimulationModelProvider) => {source = next;}, disconnect: () => {disconnect = true;}};
 }
 afterEach(() => {vi.unstubAllGlobals(); vi.restoreAllMocks();});
+
+describe('F03 authoritative action admission and provider boundary', () => {
+  const legacyActions = (count: number): QueuedPlayerActionV1[] => Array.from({length: count}, (_, i) => ({
+    actionId: `legacy.${i}`, actorCountryId: 'AAA', submittedAtDate: '2020-01-01',
+    text: `기존 행동 ${i}`, visibility: 'public', status: 'queued',
+  }));
+
+  it('rejects server action 33 before replacing the authoritative snapshot', () => {
+    const f = fixture();
+    f.session.runtime.replacePendingActions(legacyActions(32));
+    const before = f.session.runtime.getSnapshot();
+    expect(() => f.session.command({operation: 'queue', sessionId, revisions: before.revisions, text: '33번째 행동'}))
+      .toThrowError(expect.objectContaining({code: 'ACTION_QUEUE_LIMIT_REACHED'}));
+    expect(f.session.runtime.getSnapshot()).toBe(before);
+    f.session.command({operation: 'cancel-action', sessionId, revisions: before.revisions, actionId: 'legacy.0'});
+    f.session.command({operation: 'queue', sessionId, revisions: f.session.runtime.getSnapshot().revisions, text: '취소 후 등록'});
+    expect(activePlayerActionCount(f.session.runtime.getSnapshot().simulation.queuedActions)).toBe(32);
+  });
+
+  it('rejects an oversized HTTP context before constructing any provider', async () => {
+    const f = fixture(), prepared = await f.client.request({operation: 'prepare-turn', targetDate: '2020-01-02'});
+    const createProvider = vi.fn(() => ({async *streamTurn() {yield {type: 'turn.cancelled' as const};}}));
+    const post = createSimulationTurnPost({createProvider});
+    const result = await post(new Request('http://localhost/api/simulation/turn', {method: 'POST',
+      body: JSON.stringify({turnId: prepared.turnId, context: {...prepared.context, queuedActions: legacyActions(33).map(({status, ...a}) => {void status; return a;})}})}));
+    expect(result.status).toBe(400);
+    expect(createProvider).not.toHaveBeenCalled();
+    expect(f.session.runtime.getSnapshot().simulation.turnNumber).toBe(0);
+  });
+
+  it.each([33, 128])('recovers a legacy queue of %i without provider work until cancellation reaches 32', async count => {
+    const f = fixture(), prepared = await f.client.request({operation: 'prepare-turn', targetDate: '2020-01-02'});
+    f.session.runtime.replacePendingActions(legacyActions(count));
+    const before = f.session.runtime.getSnapshot();
+    const streamTurn = vi.fn(async function* (request: SimulationProviderRequest) {
+      yield {type: 'resolution.ready' as const, resolution: f.resolution(request)};
+    });
+    const provider = f.session.provider({streamTurn});
+    expect(() => f.session.command({operation: 'prepare-turn', sessionId, revisions: before.revisions, targetDate: '2020-01-02'}))
+      .toThrowError(expect.objectContaining({code: 'ACTION_QUEUE_LIMIT_REACHED'}));
+    await expect(provider.streamTurn({turnId: prepared.turnId!, context: prepared.context!}, new AbortController().signal)[Symbol.asyncIterator]().next())
+      .rejects.toMatchObject({code: 'ACTION_QUEUE_LIMIT_REACHED'});
+    expect(streamTurn).not.toHaveBeenCalled();
+    expect(f.session.runtime.getSnapshot()).toBe(before);
+    expect(f.session.isBusy()).toBe(false);
+    for (let i = 0; i < count - 32; i++) {
+      f.session.command({operation: 'cancel-action', sessionId, revisions: f.session.runtime.getSnapshot().revisions, actionId: `legacy.${i}`});
+    }
+    const ready = f.session.command({operation: 'prepare-turn', sessionId, revisions: f.session.runtime.getSnapshot().revisions, targetDate: '2020-01-02'});
+    expect(ready.context!.queuedActions).toHaveLength(32);
+    for await (const event of provider.streamTurn({turnId: ready.turnId!, context: ready.context!}, new AbortController().signal)) {
+      expect(event.type).toBe('resolution.ready');
+    }
+    expect(streamTurn).toHaveBeenCalledOnce();
+    expect(f.session.runtime.getSnapshot().simulation.currentDate).toBe('2020-01-02');
+    expect(activePlayerActionCount(f.session.runtime.getSnapshot().simulation.queuedActions)).toBe(0);
+  });
+
+  it('prevents direct client callbacks from submitting or advancing an oversized queue', async () => {
+    const f = fixture();
+    f.session.runtime.replacePendingActions(legacyActions(33));
+    await f.client.read();
+    const hook = renderHook(() => useOperationalTurnController(f.client));
+    act(() => hook.result.current.setActionDraft('초과 등록'));
+    expect(hook.result.current.canQueue).toBe(false);
+    vi.mocked(fetch).mockClear();
+    act(() => hook.result.current.queueAction());
+    expect(fetch).not.toHaveBeenCalled();
+    await act(async () => {await hook.result.current.advance('day');});
+    expect(hook.result.current.turn.errorCode).toBe('ACTION_QUEUE_LIMIT_REACHED');
+    const calls = vi.mocked(fetch).mock.calls;
+    expect(calls.every(([url, init]) => url === '/api/simulation/game' && JSON.parse(String(init?.body)).operation === 'read')).toBe(true);
+    expect(f.session.runtime.getSnapshot().simulation.currentDate).toBe('2020-01-01');
+  });
+});
+
+function failCommand(operation: string, afterApply = false) {
+  const transport = fetch;
+  const operations: string[] = [];
+  vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+    if (url === '/api/simulation/game') {
+      const command = JSON.parse(String(init.body));
+      operations.push(command.operation);
+      if (command.operation === operation) {
+        if (afterApply) {await transport(url, init); throw Error('DISCONNECTED');}
+        return Response.json({error: {code: 'STALE_REVISION_PAIR'}}, {status: 409});
+      }
+    }
+    return transport(url, init);
+  }));
+  return operations;
+}
+
+describe('17 F01 command failures and turn retry', () => {
+  it.each(['queue', 'cancel-action', 'undo', 'redo'] as const)('reconciles a failed %s without retrying time advancement', async operation => {
+    const f = fixture(), hook = renderHook(() => useOperationalTurnController(f.client));
+    if (operation === 'cancel-action') await act(async () => {await f.client.request({operation: 'queue', text: '대기 행동'});});
+    if (operation === 'undo' || operation === 'redo') await act(async () => {await hook.result.current.advance('day');});
+    if (operation === 'redo') await act(async () => {await f.client.request({operation: 'undo'});});
+    await act(async () => {hook.result.current.setActionDraft('새 행동');});
+    const before = f.client.getSnapshot(), operations = failCommand(operation), read = vi.spyOn(f.client, 'read');
+    await act(async () => {
+      if (operation === 'queue') hook.result.current.queueAction();
+      else if (operation === 'cancel-action') hook.result.current.cancelAction(hook.result.current.queuedActions[0].actionId);
+      else hook.result.current[operation]();
+    });
+    await waitFor(() => expect(hook.result.current.running).toBe(false));
+    expect(hook.result.current.turn).toMatchObject({phase: 'failed', failureSource: 'command', errorCode: 'STALE_REVISION_PAIR', turnId: null, resolution: null});
+    expect(read).toHaveBeenCalledOnce();
+    expect(f.client.getSnapshot().simulation).toEqual(before.simulation);
+    expect(hook.result.current.actionDraft).toBe('새 행동');
+    await act(async () => {await hook.result.current.retry();});
+    expect(operations).toEqual([operation, 'read']);
+    expect(hook.result.current.turn.phase).toBe('failed');
+    expect(hook.result.current.canQueue).toBe(true);
+  });
+
+  it.each(['queue', 'cancel-action', 'undo', 'redo'] as const)('reads the applied %s after its response is lost without applying it twice', async operation => {
+    const f = fixture(), hook = renderHook(() => useOperationalTurnController(f.client));
+    if (operation === 'cancel-action') await act(async () => {await f.client.request({operation: 'queue', text: '대기 행동'});});
+    if (operation === 'undo' || operation === 'redo') await act(async () => {await hook.result.current.advance('day');});
+    if (operation === 'redo') await act(async () => {await f.client.request({operation: 'undo'});});
+    await act(async () => {hook.result.current.setActionDraft('새 행동');});
+    const before = f.client.getSnapshot(), operations = failCommand(operation, true);
+    await act(async () => {
+      if (operation === 'queue') hook.result.current.queueAction();
+      else if (operation === 'cancel-action') hook.result.current.cancelAction(hook.result.current.queuedActions[0].actionId);
+      else hook.result.current[operation]();
+    });
+    await waitFor(() => expect(hook.result.current.running).toBe(false));
+    expect(hook.result.current.turn).toMatchObject({phase: 'failed', failureSource: 'command', errorCode: 'DISCONNECTED'});
+    const reconciled = f.client.getSnapshot();
+    expect(reconciled.simulation).toEqual(f.session.snapshot().simulation);
+    expect(reconciled.simulation).not.toEqual(before.simulation);
+    expect(reconciled.canUndo).toBe(f.session.snapshot().canUndo);
+    expect(reconciled.canRedo).toBe(f.session.snapshot().canRedo);
+    await act(async () => {await hook.result.current.retry();});
+    expect(operations).toEqual([operation, 'read']);
+    expect(f.client.getSnapshot()).toBe(reconciled);
+    expect(f.session.runtime.getHistory().entries).toHaveLength(operation === 'undo' || operation === 'redo' ? 1 : 0);
+  });
+
+  it('keeps the command failure visible and releases the lock even when reconciliation also fails', async () => {
+    const f = fixture(), hook = renderHook(() => useOperationalTurnController(f.client));
+    await act(async () => {hook.result.current.setActionDraft('새 행동');});
+    const before = f.client.getSnapshot(), operations = failCommand('queue');
+    vi.spyOn(f.client, 'read').mockRejectedValueOnce(Error('READ_FAILED'));
+    await act(async () => {hook.result.current.queueAction();});
+    await waitFor(() => expect(hook.result.current.running).toBe(false));
+    expect(hook.result.current.turn).toMatchObject({phase: 'failed', failureSource: 'command', errorCode: 'STALE_REVISION_PAIR'});
+    await act(async () => {await hook.result.current.retry();});
+    expect(operations).toEqual(['queue']);
+    expect(f.client.getSnapshot()).toBe(before);
+    expect(hook.result.current.canQueue).toBe(true);
+  });
+
+  it('invalidates an earlier turn retry while reconciling a command and blocks competing mutations', async () => {
+    const f = fixture(), hook = renderHook(() => useOperationalTurnController(f.client));
+    f.setSource({async *streamTurn() {throw Error('PROVIDER_ERROR');}});
+    await act(async () => {await hook.result.current.advance('week');});
+    expect(hook.result.current.turn.phase).toBe('failed');
+    const oldRetry = hook.result.current.retry;
+    await act(async () => {hook.result.current.setActionDraft('새 행동');});
+    const operations = failCommand('queue'), read = f.client.read;
+    let finishRead!: () => void;
+    vi.spyOn(f.client, 'read').mockImplementationOnce(async () => {
+      await new Promise<void>(resolve => {finishRead = resolve;});
+      return read();
+    });
+    await act(async () => {hook.result.current.queueAction();});
+    await waitFor(() => expect(finishRead).toBeDefined());
+    expect(hook.result.current.running).toBe(true);
+    await act(async () => {await oldRetry(); hook.result.current.undo(); hook.result.current.queueAction();});
+    expect(operations).toEqual(['queue']);
+    await act(async () => {finishRead();});
+    await waitFor(() => expect(hook.result.current.running).toBe(false));
+    await act(async () => {await oldRetry(); await hook.result.current.retry();});
+    expect(operations).toEqual(['queue', 'read']);
+    expect(hook.result.current.turn).toMatchObject({phase: 'failed', failureSource: 'command'});
+  });
+
+  it.each([
+    {preset: 'week' as const, targetDate: '2020-01-08'},
+    {preset: null, targetDate: '2020-02-29'},
+  ])('retries the selected $targetDate after a turn failure and retires old retry handlers after commit', async ({preset, targetDate}) => {
+    const f = fixture(), hook = renderHook(() => useOperationalTurnController(f.client));
+    const transport = fetch, dates: string[] = [];
+    let failTurn = true;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url === '/api/simulation/game') {
+        const command = JSON.parse(String(init.body));
+        if (command.operation === 'prepare-turn') dates.push(command.targetDate);
+      } else if (failTurn) {
+        failTurn = false;
+        return Response.json({error: {code: 'TEMPORARY_FAILURE'}}, {status: 503});
+      }
+      return transport(url, init);
+    }));
+    await act(async () => {if (preset) await hook.result.current.advance(preset); else await hook.result.current.advanceToDate(targetDate);});
+    expect(hook.result.current.turn).toMatchObject({phase: 'failed', failureSource: 'turn'});
+    const retry = hook.result.current.retry;
+    await act(async () => {await retry();});
+    expect(dates).toEqual([targetDate, targetDate]);
+    expect(hook.result.current.turn.phase).toBe('committed');
+    expect(f.client.getSnapshot().simulation.currentDate).toBe(targetDate);
+    await act(async () => {await retry();});
+    expect(dates).toHaveLength(2);
+    expect(f.session.runtime.getHistory().entries).toHaveLength(1);
+  });
+
+  it('keeps cancellation retry available with the selected duration and releases the controller lock', async () => {
+    const f = fixture(), hook = renderHook(() => useOperationalTurnController(f.client));
+    const transport = fetch;
+    let waiting = false, cancelFirst = true;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init: RequestInit) => {
+      if (url === '/api/simulation/turn' && cancelFirst) {
+        cancelFirst = false;
+        waiting = true;
+        return new Promise<Response>((_, reject) => init.signal!.addEventListener('abort', () => reject(Error('CANCELLED')), {once: true}));
+      }
+      return transport(url, init);
+    }));
+    let advance!: Promise<void>;
+    act(() => {advance = hook.result.current.advance('week');});
+    await waitFor(() => expect(waiting).toBe(true));
+    expect(hook.result.current.running).toBe(true);
+    await act(async () => {hook.result.current.stop(); await advance;});
+    expect(hook.result.current.turn.phase).toBe('cancelled');
+    expect(hook.result.current.running).toBe(false);
+    expect(f.client.getSnapshot().simulation.currentDate).toBe('2020-01-01');
+    await act(async () => {await hook.result.current.retry();});
+    expect(hook.result.current.turn.phase).toBe('committed');
+    expect(f.client.getSnapshot().simulation.currentDate).toBe('2020-01-08');
+    expect(f.session.runtime.getHistory().entries).toHaveLength(1);
+  });
+});
 
 describe('16-08 actual game turn adapters', () => {
   it('queues through the UI controller, commits partial occupation, advances from current state and projects undo/redo deltas', async () => {

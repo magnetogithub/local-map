@@ -15,6 +15,7 @@ import {
   countryIdSchema,
   isoCalendarDateSchema,
   MAX_PLAYER_ACTION_LENGTH,
+  MAX_ACTIVE_PLAYER_ACTIONS,
   simulationIdSchema,
 } from "./simulation-contract-primitives";
 import {activeSituationSchema, scheduledConsequenceSchema, simulationFactSchema} from "./narrative-state";
@@ -22,6 +23,7 @@ import {simulationEventSchema} from "./simulation-event";
 import {presentationHistory, presentationHistorySchema, type PresentationHistory} from './presentation-grant-validation';
 import {authorityMapColorSchema} from './simulation-state-v2';
 import {subdivisionReferenceSchema} from './subdivision-reference';
+import {assertPlayerActionsCanAdvance, isActivePlayerAction} from './queued-player-action';
 
 export const SIMULATION_CONTEXT_LIMITS = Object.freeze({
   countries: 64,
@@ -135,7 +137,7 @@ export const simulationContextSchema = z.strictObject({
     submittedAtDate: isoCalendarDateSchema,
     text: z.string().trim().min(1).max(MAX_PLAYER_ACTION_LENGTH),
     visibility: z.enum(["public", "private"]),
-  })).max(128),
+  })).max(MAX_ACTIVE_PLAYER_ACTIONS),
   countries: z.array(z.strictObject({
     countryId: countryIdSchema,
     shortKo: boundedTitleSchema,
@@ -215,6 +217,7 @@ export function buildSimulationContext(input: Readonly<{
   locale?: string;
 }>): SimulationContextV1 {
   const {simulation, world, countrySearchProjection, subdivisionCatalog} = input;
+  assertPlayerActionsCanAdvance(simulation.queuedActions);
   if (countrySearchProjection.revision !== world.revision) {
     throw new Error("Country search projection is stale for SimulationContextV1");
   }
@@ -260,7 +263,7 @@ export function buildSimulationContext(input: Readonly<{
     territoryIds: Object.freeze(world.schemaVersion===3?clip((territoryIdsByCountry.get(countryId)??[]).sort(compareCanonicalText),SIMULATION_CONTEXT_LIMITS.catalogDirectoryIdsPerCountry,`directory:${countryId}`,clipped):(territoryIdsByCountry.get(countryId) ?? []).sort(compareCanonicalText)),
   }));
   const relevantCountryIds = new Set<string>([simulation.playerCountryId]);
-  simulation.queuedActions.forEach((action) => relevantCountryIds.add(action.actorCountryId));
+  simulation.queuedActions.filter(isActivePlayerAction).forEach((action) => relevantCountryIds.add(action.actorCountryId));
   Object.values(simulation.factsById).forEach((fact) =>
     fact.actorCountryIds.forEach((id) => relevantCountryIds.add(id)));
   Object.values(simulation.situationsById).forEach((situation) =>
@@ -345,7 +348,7 @@ export function buildSimulationContext(input: Readonly<{
       name: playerCountry.shortKo,
     }),
     queuedActions: Object.freeze(simulation.queuedActions
-      .filter((action) => action.status === "queued" || action.status === "resolving")
+      .filter(isActivePlayerAction)
       .sort((left, right) => compareCanonicalText(left.actionId, right.actionId))
       .map(({actionId, actorCountryId, submittedAtDate, text, visibility}) => Object.freeze({
         actionId,

@@ -10,6 +10,7 @@ import type {SimulationFactV1} from "./narrative-state";
 import type {SimulationEventV1} from "./simulation-event";
 import type {SimulationStateV1} from "./simulation-state";
 import {parseTurnResolutionV1, type TurnResolutionV1} from "./turn-resolution";
+import {MAX_ACTIVE_PLAYER_ACTIONS} from './simulation-contract-primitives';
 
 export type ResolutionValidationIssueCode =
   | "STALE_REVISION"
@@ -72,6 +73,10 @@ export function validateTurnResolution(
 
   const pendingActions = simulation.queuedActions.filter((action) =>
     action.status === "queued" || action.status === "resolving");
+  if (pendingActions.length > MAX_ACTIVE_PLAYER_ACTIONS) {
+    add("ACTION_OUTCOME_MISMATCH", "playerActionOutcomes",
+      `Cancel active actions until at most ${MAX_ACTIVE_PLAYER_ACTIONS} remain before advancing`);
+  }
   const outcomesByAction = new Map<string, number>();
   for (const outcome of parsed.playerActionOutcomes) {
     outcomesByAction.set(outcome.actionId, (outcomesByAction.get(outcome.actionId) ?? 0) + 1);

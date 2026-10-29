@@ -58,6 +58,8 @@ node tools/prompt15-discord.mjs watch
 
 An `operating_failure` requires `resume --ack-operating` after a human has fixed the cause. This flag does not grant product PASS or change acceptance criteria.
 
+A `waiting_input` run stays idle without model calls until a human supplies the requested input and runs `resume --ack-input`. `status` and an unacknowledged `resume` show the pending `requiredInput`. Acknowledgement checks only the saved waiting response identities and the matching phase/attempt, then resumes that same phase in that same attempt. It does not infer that inputs are ready, revalidate every product artifact, advance the task, or grant PASS. The original request and acknowledgement are retained in state and events; `requiredInput` is cleared only after the checks succeed.
+
 The progress renderer reports every session's status and latest five messages plus the global latest five. The Discord watcher edits one fixed message every 20 seconds; it refuses to create additional messages when the fixed message ID is unavailable. Operating-error text is bounded to a short prefix.
 
 ## Preserved legacy evidence

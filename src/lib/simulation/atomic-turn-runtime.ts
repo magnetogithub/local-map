@@ -12,7 +12,7 @@ import {
   type SimulationAuthorityWorldReferences,
 } from "./simulation-state-v2";
 import type {ResolvedTurnPlan} from "./resolved-turn-plan";
-import type {QueuedPlayerActionV1} from "./queued-player-action";
+import {retainPlayerActions, type QueuedPlayerActionV1} from "./queued-player-action";
 
 export type TurnRevisionPair = Readonly<{
   simulationRevision: number;
@@ -197,7 +197,7 @@ export function createAtomicTurnRuntime<Simulation extends AtomicSimulation, Wor
     replacePendingActions(actions) {
       const simulation = createRuntimeSimulation({
         ...current.simulation,
-        queuedActions: actions,
+        queuedActions: retainPlayerActions(actions, current.simulation.eventLog),
       }, current.world);
       current = snapshot(simulation, current.world);
       return current;

@@ -39,8 +39,10 @@ export function startOperationalGame(): OperationalGameStart {
     if (last && last[1] === c.sourceCountryId && last[2] === c.ownerCountryId && last[3] === c.controllerCountryId) last[0]++;
     else runs.push([1, c.sourceCountryId, c.ownerCountryId, c.controllerCountryId]);
   }
-  const sessionId = randomUUID(); sessions.set(sessionId, {session, touched: now});
-  return {sessionId, snapshot: session.snapshot(), runs, seedVersion: game.pair.world.seedVersion, policyVersion: game.pair.world.policyVersion, presentation: countryPresentation()};
+  const sessionId = randomUUID();
+  const result = {sessionId, snapshot: session.snapshot(), runs, seedVersion: game.pair.world.seedVersion, policyVersion: game.pair.world.policyVersion, presentation: countryPresentation()};
+  sessions.set(sessionId, {session, touched: now});
+  return result;
 }
 export function operationalGameSession(id: string): OperationalGameSession {
   const value = sessions.get(id);

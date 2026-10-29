@@ -8,6 +8,7 @@ export type TurnClientState = Readonly<{
   draft: string;
   resolution: TurnResolutionV1 | null;
   errorCode: string | null;
+  failureSource?: "command" | "turn";
   nextSequence: number;
 }>;
 

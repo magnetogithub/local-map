@@ -23,7 +23,8 @@ import {
   type TurnClientState,
 } from "@/lib/simulation/client/turn-state-machine";
 import {createInitialSimulationState} from "@/lib/simulation/initial-simulation-state";
-import {cancelQueuedPlayerAction, queuePlayerAction} from "@/lib/simulation/queued-player-action";
+import {activePlayerActionCount, assertPlayerActionsCanAdvance, cancelQueuedPlayerAction, isActivePlayerAction, queuePlayerAction} from "@/lib/simulation/queued-player-action";
+import {MAX_ACTIVE_PLAYER_ACTIONS, SimulationContractError} from "@/lib/simulation/simulation-contract-primitives";
 import {createResolvedTurnPlan} from "@/lib/simulation/resolved-turn-plan";
 import {
   createProductionSubdivisionCatalog,
@@ -135,6 +136,7 @@ export function useSimulationTurnController({
     const runtime = runtimeRef.current;
     if (!runtime || running || !actionDraft.trim()) return;
     const current = runtime.getSnapshot();
+    if (activePlayerActionCount(current.simulation.queuedActions) >= MAX_ACTIVE_PLAYER_ACTIONS) return;
     actionSequence.current += 1;
     const actions = queuePlayerAction(current.simulation.queuedActions, {
       actionId: `action.${current.simulation.turnNumber}.${actionSequence.current}`,
@@ -161,6 +163,14 @@ export function useSimulationTurnController({
     const runtime = runtimeRef.current;
     if (!runtime || running || abortRef.current !== null) return;
     const base = runtime.getSnapshot();
+    try {
+      assertPlayerActionsCanAdvance(base.simulation.queuedActions);
+    } catch (error) {
+      lastAdvance.current = selection;
+      setTurn(Object.freeze({...initialTurnClientState(), phase: "failed", failureSource: "turn",
+        errorCode: error instanceof SimulationContractError ? error.code : error instanceof Error ? error.message : "NETWORK_ERROR"}));
+      return;
+    }
     const targetDate = selection.kind === "preset"
       ? targetDateForPreset(base.simulation, selection.preset)
       : targetDateForCustomInput(base.simulation.currentDate, selection.targetDate);
@@ -266,12 +276,13 @@ export function useSimulationTurnController({
     snapshot: activeSnapshot,
     actionDraft,
     setActionDraft,
-    queuedActions: activeSnapshot?.simulation.queuedActions.filter((action) => action.status === "queued") ?? [],
+    queuedActions: activeSnapshot?.simulation.queuedActions.filter(isActivePlayerAction) ?? [],
     turn,
     report,
     lifecycleNotice,
     running,
-    canQueue: !running && actionDraft.trim().length > 0,
+    canQueue: !running && actionDraft.trim().length > 0
+      && activePlayerActionCount(activeSnapshot?.simulation.queuedActions ?? []) < MAX_ACTIVE_PLAYER_ACTIONS,
     canUndo: !running && (runtimeRef.current?.canUndo() ?? false),
     canRedo: !running && (runtimeRef.current?.canRedo() ?? false),
     queueAction,

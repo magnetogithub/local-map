@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {cellPreservationGate,nodePreservingCellRings,originalGridFaceOwner,exactRingSign,mergePrecisionFragileCells,certifiedSourceGapFace,positiveIntersectionSupport,buildPreservedCellTopology,arrangePreservingCellFaces,arrangeCountrySourceFaces,orderedSourceRingCertificate,componentBoundaryCorrespondence,certifySourceConstraint} from './prompt15-cell-preservation.mjs';
+import {cellPreservationGate,nodePreservingCellRings,originalGridFaceOwner,exactRingSign,exactRingNumerator,mergePrecisionFragileCells,certifiedSourceGapFace,positiveIntersectionSupport,buildPreservedCellTopology,arrangePreservingCellFaces,arrangeCountrySourceFaces,orderedSourceRingCertificate,componentBoundaryCorrespondence,certifySourceConstraint} from './prompt15-cell-preservation.mjs';
 import {geometryHash,union,intersection,overlayArea,partitionCoverage} from './prompt15-preservation-audit-core.mjs';
 import {polygons,generateAtoms,digest,jsonBytes} from './prompt14-catalog-core.mjs';
 import {auditCountryResult} from './prompt15-world-catalog.mjs';
@@ -25,6 +25,23 @@ test('source interior connection loss, artificial bridge, wrong merge and hole f
 });
 test('normal split and legitimate source point contact survive common noding',()=>{
  const a=box(0,0,1,1),b=box(1,1,2,2),p=parent({type:'MultiPolygon',coordinates:[a.coordinates,b.coordinates]}),cells=[cell(p,box(0,0,.5,1)),cell(p,box(.5,0,1,1)),cell(p,b,1)],noded=nodePreservingCellRings(fc([p]),fc(cells));assert.equal(cellPreservationGate([p],noded.selected.features).pass,true);
+});
+test('F12 common noding failure records original and changed exact numerators independently',()=>{
+ const input=fc([parent(box(0,0,4e-13,1))]),original=structuredClone(input),before=exactRingNumerator(input.features[0].geometry.coordinates[0]);
+ assert.ok(before>0n);
+ assert.throws(()=>nodePreservingCellRings(input,fc([]),()=>{},1e12),error=>{
+  assert.equal(error.message,'Common noding changed source ring orientation or positive area');
+  const evidence=error.evidence;
+  assert.deepEqual(evidence.beforeRing,original.features[0].geometry.coordinates[0]);
+  assert.equal(evidence.beforeExactNumerator,before.toString(16));
+  assert.equal(evidence.afterExactNumerator,exactRingNumerator(evidence.afterRing).toString(16));
+  assert.equal(evidence.afterExactNumerator,'0');
+  assert.notEqual(evidence.beforeExactNumerator,evidence.afterExactNumerator);
+  assert.equal(evidence.areaDenominatorPowerOfTwo,2149);
+  assert.equal(evidence.scale,1e12);
+  return true;
+ });
+ assert.deepEqual(input,original);
 });
 test('full-face protected/grid ownership requires unique actual containment, never nearest or ID order',()=>{
  const p=parent(box(0,0,2,2)),f=cell(p,box(0,0,1,1));f.properties.oldTerritoryId='old';f.properties.gridBounds=[0,0,1,1];const parents=new Map([['TST:parent',p]]),old=new Map([['old',box(0,0,2,2)]]);

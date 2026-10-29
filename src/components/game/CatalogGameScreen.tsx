@@ -35,6 +35,8 @@ import {MajorEventModal} from "./MajorEventModal";
 import {MapCountryPicker} from "./MapCountryPicker";
 import type {GameWorldView, MapPresentation} from '@/lib/game-ui/runtime-view';
 import type {OperationalControlCounts} from '@/lib/simulation/operational-game-protocol';
+import {activePlayerActionCount} from '@/lib/simulation/queued-player-action';
+import {MAX_ACTIVE_PLAYER_ACTIONS} from '@/lib/simulation/simulation-contract-primitives';
 
 type Props = Readonly<{
   worldController: WorldStateStoreController;
@@ -81,22 +83,36 @@ export function GameScreenContent({world, mapProjection, turnController, counts,
   counts: OperationalControlCounts;
   map: ReactNode | ((settings: typeof DEFAULT_GAME_UI_SETTINGS) => ReactNode);
 }) {
-  const playerCountryId = useGameSetupStore((state) => state.playerCountryId);
-  const selectedCountryId = useGameSetupStore((state) => state.selectedCountryId);
+  const setupPlayerCountryId = useGameSetupStore((state) => state.playerCountryId);
+  const storedSelectedCountryId = useGameSetupStore((state) => state.selectedCountryId);
   const countryPanelProjection = useGameSetupStore((state) => state.countryPanelProjection);
   const clearSelectedCountry = useGameSetupStore((state) => state.clearSelectedCountry);
   const selectCountry = useGameSetupStore((state) => state.selectCountry);
-  const [overlay, dispatchOverlay] = useReducer(gameOverlayReducer, initialGameOverlay);
+  const [storedOverlay, dispatchOverlay] = useReducer(gameOverlayReducer, initialGameOverlay);
   const [majorEvents, dispatchMajorEvents] = useReducer(majorEventQueueReducer, initialMajorEventQueueState);
   const [uiSettings, setUiSettings] = useState(DEFAULT_GAME_UI_SETTINGS);
   const didObserveInitialSelection = useRef(false);
 
+  const activeCountryIds = useMemo(() => new Set(world.countryOrder), [world.countryOrder]);
+  // The simulation can publish a new player before the setup store synchronizes.
+  const currentPlayerCountryId = turnController.snapshot
+    ? turnController.snapshot.simulation.playerCountryId
+    : setupPlayerCountryId;
+  const playerCountryId = currentPlayerCountryId && activeCountryIds.has(currentPlayerCountryId)
+    ? currentPlayerCountryId : null;
+  const selectedCountryId = storedSelectedCountryId && activeCountryIds.has(storedSelectedCountryId)
+    ? storedSelectedCountryId : null;
+  const activeOverlay = gameOverlayReducer(storedOverlay, {type: "reconcile-active-countries", activeCountryIds});
+  const overlay = activeOverlay.kind === "diplomacy" && activeOverlay.countryId === playerCountryId
+    ? initialGameOverlay : activeOverlay;
+
   useEffect(() => {
-    dispatchOverlay({
-      type: "reconcile-active-countries",
-      activeCountryIds: new Set(world.countryOrder),
-    });
-  }, [world.countryOrder]);
+    if (overlay !== storedOverlay) dispatchOverlay({type: "close"});
+  }, [overlay, storedOverlay]);
+
+  useEffect(() => {
+    if (storedSelectedCountryId && !selectedCountryId) clearSelectedCountry();
+  }, [clearSelectedCountry, selectedCountryId, storedSelectedCountryId]);
 
   useEffect(() => {
     if (!didObserveInitialSelection.current) {
@@ -165,6 +181,7 @@ export function GameScreenContent({world, mapProjection, turnController, counts,
     acknowledgedEventIds: majorEvents.acknowledgedEventIds,
   }) : null, [majorEvents.acknowledgedEventIds, overlay, turnController.report, turnController.snapshot]);
   const majorEvent = majorEvents.pending[0] ?? null;
+  const actionLimitExceeded = activePlayerActionCount(turnController.snapshot?.simulation.queuedActions ?? []) > MAX_ACTIVE_PLAYER_ACTIONS;
   const countryNames = useMemo(() => Object.freeze(Object.fromEntries(
     world.countryOrder.map((countryId) => [countryId, world.countriesById[countryId].names.shortKo]),
   )), [world]);
@@ -202,7 +219,7 @@ export function GameScreenContent({world, mapProjection, turnController, counts,
           model={hud}
           onOpen={toggle}
           onStop={turnController.stop}
-          onRetry={() => void turnController.retry()}
+          onRetry={!turnController.running && turnController.turn.failureSource !== "command" && !majorEvent && !actionLimitExceeded ? () => void turnController.retry() : undefined}
           turnDraft={turnController.turn.draft}
           turnErrorCode={turnController.turn.errorCode}
         />
@@ -236,7 +253,7 @@ export function GameScreenContent({world, mapProjection, turnController, counts,
             ) : overlay.kind === "news" && news ? (
               <NewsOverlay
                 model={news}
-                activeCountryIds={new Set(world.countryOrder)}
+                activeCountryIds={activeCountryIds}
                 onSelectEvent={(eventId) => dispatchOverlay({type: "open", overlay: {kind: "news", eventId}})}
                 onOpenCountry={(countryId) => dispatchOverlay({type: "open", overlay: {kind: "country", countryId}})}
               />

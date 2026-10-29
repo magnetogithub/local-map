@@ -36,7 +36,7 @@ async function main() {
   const directory = runDirectory();
   if (command === 'status') {
     const state = readJson(path.join(directory, 'state.json'));
-    console.log(JSON.stringify({directory, status: state.status, phase: state.phase, taskId: state.taskId, productAttempt: state.productAttempt, activeTurn: state.activeTurn, updatedAt: state.updatedAt}, null, 2));
+    console.log(JSON.stringify({directory, status: state.status, phase: state.phase, taskId: state.taskId, productAttempt: state.productAttempt, requiredInput: state.requiredInput, activeTurn: state.activeTurn, updatedAt: state.updatedAt}, null, 2));
     return;
   }
   if (command === 'stop') {
@@ -52,8 +52,8 @@ async function main() {
       atomicJson(path.join(directory, 'state.json'), state);
     }
     const runtime = new Prompt15Orchestrator({root, directory, config, plan});
-    const result = await runtime.run();
-    console.log(JSON.stringify({status: result.status, phase: result.phase, taskId: result.taskId, productAttempt: result.productAttempt}, null, 2));
+    const result = await runtime.run({ackInput: args.includes('--ack-input')});
+    console.log(JSON.stringify({status: result.status, phase: result.phase, taskId: result.taskId, productAttempt: result.productAttempt, requiredInput: result.requiredInput}, null, 2));
     process.exitCode = result.status === 'passed' ? 0 : 1;
     return;
   }

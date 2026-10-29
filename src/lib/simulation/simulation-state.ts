@@ -9,7 +9,7 @@ import {
   type ScheduledConsequenceV1,
   type SimulationFactV1,
 } from "./narrative-state";
-import {queuedPlayerActionSchema, type QueuedPlayerActionV1} from "./queued-player-action";
+import {queuedPlayerActionsSchema, type QueuedPlayerActionV1} from "./queued-player-action";
 import {simulationEventSchema, type SimulationEventV1} from "./simulation-event";
 import {
   countryIdSchema,
@@ -17,6 +17,7 @@ import {
   isoCalendarDateSchema,
   SIMULATION_STATE_SCHEMA_VERSION,
   simulationIdSchema,
+  MAX_SIMULATION_EVENTS,
 } from "./simulation-contract-primitives";
 
 export const simulationHistoryMetadataSchema = z.strictObject({
@@ -30,13 +31,13 @@ export const simulationStateSchema = z.strictObject({
   currentDate: isoCalendarDateSchema,
   turnNumber: z.number().int().nonnegative(),
   playerCountryId: countryIdSchema,
-  queuedActions: z.array(queuedPlayerActionSchema).max(128),
+  queuedActions: queuedPlayerActionsSchema,
   factsById: z.record(simulationIdSchema, simulationFactSchema),
   factOrder: z.array(simulationIdSchema).max(512),
   situationsById: z.record(simulationIdSchema, activeSituationSchema),
   situationOrder: z.array(simulationIdSchema).max(256),
   scheduledConsequences: z.array(scheduledConsequenceSchema).max(256),
-  eventLog: z.array(simulationEventSchema).max(2_048),
+  eventLog: z.array(simulationEventSchema).max(MAX_SIMULATION_EVENTS),
   history: simulationHistoryMetadataSchema,
 });
 

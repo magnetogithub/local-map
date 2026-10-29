@@ -46,7 +46,7 @@ function ReadyCatalogShell({mode,delivery,runtime}:{mode:'setup'|'game';delivery
     store.syncSimulationPlayerCountry(runtime.getSnapshot().simulation.playerCountryId);
   },[mode,runtime,router]);
   if(mode==='game'&&(!player||pair.simulation.playerCountryId!==player))return <div className="route-loading" role="status">플레이 국가를 준비하고 있습니다.</div>;
-  return <><div className="unsupported"><div><h1>지원하지 않는 화면 크기입니다</h1><p>Pax Local은 1280×720 이상의 PC 화면을 지원합니다.</p></div></div>
+  return <><div className="unsupported"><div><h1>지원하지 않는 화면 크기입니다</h1><p>Pax Local은 가로 1280px 이상의 PC 화면을 지원합니다.</p></div></div>
     <div className="app-shell" data-page-mode={mode} data-world-schema-version={pair.world.schemaVersion} data-simulation-schema-version={pair.simulation.schemaVersion} data-world-revision={pair.world.revision}
       data-world-country-count={pair.world.countryOrder.length} data-world-territory-count={pair.world.territoryOrder.length} data-catalog-version={pair.world.catalogRef.catalogVersion} data-world-geometry-root={pair.world.catalogRef.geometryRoot} data-current-date={pair.simulation.currentDate}>
       {mode==='setup'?<><AppHeader/><main className="main"><CatalogWorldMap runtime={runtime} delivery={delivery} mapProjection={projection}/><CountryPanel onPlayerConfirmed={id=>{runtime.selectPlayer(id);router.push(`/game#player=${encodeURIComponent(id)}`);}}/></main>

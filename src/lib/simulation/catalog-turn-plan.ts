@@ -14,6 +14,7 @@ import {prepareCountryColorAuthorities} from './country-color-authority';
 import {planCountryMapColors} from '../planning/country-map-color-planner';
 import {DEBUG_WORLD_EFFECT_PREFIX,allowsDevelopmentWorldEffect} from './debug-world-effect';
 import {isConsequenceAvailableAt} from './consequence-causality';
+import {retainPlayerActions} from './queued-player-action';
 import {validateOperationalFrontierEffects, type OperationalFrontierValidation} from './operational-frontier-validation';
 
 /** Cell-level authoritative planning. No intermediate world/simulation is published. */
@@ -87,10 +88,11 @@ export function createCatalogTurnPlan(input:{turnId:string;simulation:Simulation
   for(const m of r.situationMutations){if(m.operation==='upsert')situations[m.situation.situationId]=m.situation;else situations[m.situationId]={...situations[m.situationId],status:'resolved',lastUpdatedByEventId:m.causedByEventId};}
   const outcomes=new Set(r.playerActionOutcomes.map(o=>o.actionId)),consequences=new Map(frame.scheduledConsequences.map(c=>[c.consequenceId,c]));
   for(const c of r.scheduledConsequences)consequences.set(c.consequenceId,c);
-  const simulation=createSimulationStateV2(reconcileCatalogSimulation({simulation:{...frame,revision:input.simulation.revision+1,currentDate:r.period.endDate,turnNumber:input.simulation.turnNumber+1,
+  const reconciled=reconcileCatalogSimulation({simulation:{...frame,revision:input.simulation.revision+1,currentDate:r.period.endDate,turnNumber:input.simulation.turnNumber+1,
     queuedActions:frame.queuedActions.map(a=>outcomes.has(a.actionId)&&a.status!=='cancelled'?{...a,status:'resolved'}:a),factsById:facts,factOrder:Object.keys(facts).sort(),situationsById:situations,situationOrder:Object.keys(situations).sort(),
     scheduledConsequences:[...consequences.values()].sort((a,b)=>a.earliestDate<b.earliestDate?-1:a.earliestDate>b.earliestDate?1:a.consequenceId<b.consequenceId?-1:1),eventLog:[...input.simulation.eventLog,...r.events,...hostEvents].sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0),
-    history:{lastCommittedTurnId:input.turnId,committedTurnCount:input.simulation.history.committedTurnCount+1}},world,successors:successors as CountrySuccessors,date:r.period.endDate,turnId:input.turnId}),world);
+    history:{lastCommittedTurnId:input.turnId,committedTurnCount:input.simulation.history.committedTurnCount+1}},world,successors:successors as CountrySuccessors,date:r.period.endDate,turnId:input.turnId});
+  const simulation=createSimulationStateV2({...reconciled,queuedActions:retainPlayerActions(reconciled.queuedActions,reconciled.eventLog)},world);
   return Object.freeze({kind:'resolved-turn-plan.v1',turnId:input.turnId,baseSimulationState:input.simulation,baseWorldState:input.world,nextSimulationState:simulation,nextWorldState:world,resolution:r,
     compiledWorldEffects:{batch:null,allocatedCountryIdsByLocalRef:{},commandCount:r.worldEffects.length},worldPatch:null,
     beforeSimulationHash:simulationStateV2ContentHash(input.simulation),afterSimulationHash:simulationStateV2ContentHash(simulation),beforeWorldHash:worldV3RuntimeContentHash(input.world),afterWorldHash:worldV3RuntimeContentHash(world),

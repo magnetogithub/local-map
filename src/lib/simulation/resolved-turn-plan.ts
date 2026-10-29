@@ -12,6 +12,7 @@ import {validateTurnResolution} from "./semantic-validator";
 import {DEBUG_WORLD_EFFECT_PREFIX} from "./debug-world-effect";
 import type {SubdivisionCatalog} from "./subdivision-catalog";
 import type {TurnResolutionV1} from "./turn-resolution";
+import {retainPlayerActions} from './queued-player-action';
 import {
   compileWorldEffects,
   createSequentialCommandIdAllocator,
@@ -161,7 +162,7 @@ function planNextSimulationState(
     currentDate: resolution.period.endDate,
     turnNumber: current.turnNumber + 1,
     playerCountryId: nextPlayerCountryId,
-    queuedActions,
+    queuedActions: retainPlayerActions(queuedActions, [...current.eventLog, ...resolution.events]),
     factsById,
     factOrder: canonicalOrder(factsById),
     situationsById,

@@ -4,7 +4,8 @@ import {useState} from "react";
 
 import type {SimulationTurnController} from "@/lib/simulation/client/use-simulation-turn-controller";
 import {targetDateForCustomInput, targetDateForPreset, type TimeAdvancePreset} from "@/lib/simulation/client/turn-request";
-import {MAX_PLAYER_ACTION_LENGTH} from "@/lib/simulation/simulation-contract-primitives";
+import {MAX_ACTIVE_PLAYER_ACTIONS, MAX_PLAYER_ACTION_LENGTH} from "@/lib/simulation/simulation-contract-primitives";
+import {activePlayerActionCount} from "@/lib/simulation/queued-player-action";
 
 const phaseLabel = {
   idle: "대기 중",
@@ -72,24 +73,30 @@ export function GameActionOverlay({controller, advanceBlocked = false, onOpenNew
   }
 
   const currentDate = activeSnapshot.simulation.currentDate;
+  const activeActionCount = activePlayerActionCount(activeSnapshot.simulation.queuedActions);
+  const actionLimitExceeded = activeActionCount > MAX_ACTIVE_PLAYER_ACTIONS;
+  const canAddAction = canQueue && !running && activeActionCount < MAX_ACTIVE_PLAYER_ACTIONS;
+  const addToQueue = () => { if (canAddAction) queue(); };
   const dateError = advanceSelection === "custom" ? customDateError(currentDate, customTargetDate) : null;
   const hasQueuedActions = queued.length > 0;
-  const canStart = !running && !advanceBlocked && (hasQueuedActions || advanceWithoutActions) && dateError === null;
+  const canStart = !running && !advanceBlocked && !actionLimitExceeded && (hasQueuedActions || advanceWithoutActions) && dateError === null;
   const startAdvance = async () => {
     if (advanceSelection === "custom") setCustomTouched(true);
     if (!canStart) return;
     if (advanceSelection === "custom") await advanceToDate(customTargetDate);
     else await advance(advanceSelection);
   };
-  const retryable = turn.phase === "failed" || turn.phase === "cancelled";
+  const commandFailure = turn.phase === "failed" && turn.failureSource === "command";
+  const retryable = !running && !advanceBlocked && !actionLimitExceeded && !commandFailure && (turn.phase === "failed" || turn.phase === "cancelled");
   const staleFailure = turn.errorCode === "STALE_STATE" || turn.errorCode === "STALE_REVISION_PAIR";
 
   return <section className="simulation-panel game-action-overlay" aria-label="대체역사 진행">
     <div className="simulation-heading"><div><span>ALTERNATE HISTORY</span><strong>국가 행동</strong></div><time dateTime={currentDate}>{currentDate}</time></div>
     <label htmlFor="game-player-action">현재 플레이 국가가 시도할 행동</label>
-    <textarea id="game-player-action" value={text} maxLength={MAX_PLAYER_ACTION_LENGTH} disabled={running} placeholder="예: 오스트리아와 통일 협상을 시작한다" onChange={(event) => setText(event.target.value)} onCompositionStart={() => setComposing(true)} onCompositionEnd={() => setComposing(false)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey && !composing && !event.nativeEvent.isComposing) { event.preventDefault(); queue(); } }}/>
-    <div className="composer-meta"><span>{text.length}/{MAX_PLAYER_ACTION_LENGTH}</span><button type="button" onClick={queue} disabled={!canQueue}>대기열에 추가</button></div>
-    <div className="action-queue" aria-label="행동 대기열">{queued.length === 0 ? <p>대기 중인 행동이 없습니다. 행동 없이 시간만 진행할 수 있습니다.</p> : queued.map((action) => <div key={action.actionId}><span>{action.text}</span><button type="button" onClick={() => cancel(action.actionId)} disabled={running}>취소</button></div>)}</div>
+    <textarea id="game-player-action" value={text} maxLength={MAX_PLAYER_ACTION_LENGTH} disabled={running} placeholder="예: 오스트리아와 통일 협상을 시작한다" onChange={(event) => setText(event.target.value)} onCompositionStart={() => setComposing(true)} onCompositionEnd={() => setComposing(false)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey && !composing && !event.nativeEvent.isComposing) { event.preventDefault(); addToQueue(); } }}/>
+    <div className="composer-meta"><span>{text.length}/{MAX_PLAYER_ACTION_LENGTH}</span><button type="button" onClick={addToQueue} disabled={!canAddAction}>대기열에 추가</button></div>
+    {activeActionCount >= MAX_ACTIVE_PLAYER_ACTIONS && <p className="game-field-message" role={actionLimitExceeded ? "alert" : undefined}>{actionLimitExceeded ? `활성 행동이 ${activeActionCount}개입니다. 기존 행동을 취소해 ${MAX_ACTIVE_PLAYER_ACTIONS}개 이하로 줄인 뒤 진행하세요.` : `활성 행동은 최대 ${MAX_ACTIVE_PLAYER_ACTIONS}개까지 등록할 수 있습니다. 진행하거나 기존 행동을 취소하세요.`}</p>}
+    <div className="action-queue" aria-label="행동 대기열">{queued.length === 0 ? <p>대기 중인 행동이 없습니다. 행동 없이 시간만 진행할 수 있습니다.</p> : queued.map((action) => <div key={action.actionId}><span>{action.text}</span><button type="button" onClick={() => cancel(action.actionId)} disabled={running || action.status === "resolving" && !actionLimitExceeded}>취소</button></div>)}</div>
 
     <fieldset className="game-advance-controls" disabled={running}>
       <legend>진행할 시간</legend>
@@ -103,9 +110,9 @@ export function GameActionOverlay({controller, advanceBlocked = false, onOpenNew
       <button className="game-advance-submit" type="button" disabled={!canStart} onClick={() => void startAdvance()}>진행 시작</button>
     </fieldset>
 
-    <div className="turn-status" data-phase={turn.phase} data-error-code={turn.errorCode ?? undefined} role="status"><span>{phaseLabel[turn.phase]}{turn.phase === "failed" && turn.errorCode ? ` (${turn.errorCode})` : ""}</span>{running && <button type="button" onClick={stop}>Stop</button>}{retryable && <button type="button" onClick={() => void retry()}>Retry</button>}</div>
+    <div className="turn-status" data-phase={turn.phase} data-error-code={turn.errorCode ?? undefined} role="status"><span>{commandFailure ? "명령 확인 실패" : phaseLabel[turn.phase]}{turn.phase === "failed" && turn.errorCode ? ` (${turn.errorCode})` : ""}</span>{running && <button type="button" onClick={stop}>Stop</button>}{retryable && <button type="button" onClick={() => void retry()}>Retry</button>}</div>
     {turn.draft && <p className="turn-draft" aria-label="임시 초안" aria-live="polite">{turn.draft}</p>}
-    {turn.phase === "failed" && <p className="game-turn-error" role="alert">{staleFailure ? "진행 중 세계 상태가 변경되어 결과를 적용하지 않았습니다. 현재 상태에서 다시 시도하세요." : "진행에 실패했습니다. 이전에 확정된 세계 상태는 유지됩니다."}</p>}
+    {turn.phase === "failed" && <p className="game-turn-error" role="alert">{commandFailure ? "명령 처리 결과를 확인하지 못했습니다. 현재 상태를 확인하세요." : staleFailure ? "진행 중 세계 상태가 변경되어 결과를 적용하지 않았습니다. 현재 상태에서 다시 시도하세요." : "진행에 실패했습니다. 이전에 확정된 세계 상태는 유지됩니다."}</p>}
     {turn.phase === "cancelled" && <p className="game-turn-error" role="alert">진행을 중단했습니다. 이전 상태에서 다시 시도할 수 있습니다.</p>}
     {lifecycleNotice && <p className="simulation-lifecycle-notice" aria-live="polite">{lifecycleNotice}</p>}
     {report && <section className="game-action-result" aria-label="최근 턴 결과 요약"><span>TURN RESULT</span><strong>{report.period}</strong><p>행동 결과 {report.outcomes.length}건 · 사건 {report.events.length}건 · 지도 변화 {report.mapChanges.length}건</p><p>{report.advisorSummary}</p>{onOpenNews && <button type="button" onClick={() => onOpenNews(report.events[0]?.eventId)}>뉴스에서 전체 결과 보기</button>}</section>}

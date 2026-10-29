@@ -10,6 +10,7 @@ import {isConsequenceAvailableAt} from '../consequence-causality';
 import type {ScheduledConsequenceV1} from '../narrative-state';
 import {OPERATIONAL_CATALOG_VERSION} from '../../world/operational-catalog';
 import {validateOperationalFrontierEffects, type OperationalFrontierValidation} from '../operational-frontier-validation';
+import {MAX_ACTIVE_PLAYER_ACTIONS} from '../simulation-contract-primitives';
 
 export type ContextValidationResult = Readonly<{
   ok: boolean;
@@ -65,6 +66,10 @@ export function validateResolutionAgainstContext(
     add("INVALID_PERIOD", "period", "Resolution must use the exact advancing context period");
   }
   const actionIds = new Set(context.queuedActions.map((action) => action.actionId));
+  if (context.queuedActions.length > MAX_ACTIVE_PLAYER_ACTIONS) {
+    add("ACTION_OUTCOME_MISMATCH", "playerActionOutcomes",
+      `Cancel active actions until at most ${MAX_ACTIVE_PLAYER_ACTIONS} remain before advancing`);
+  }
   const outcomes = new Map<string, number>();
   resolution.playerActionOutcomes.forEach((outcome) =>
     outcomes.set(outcome.actionId, (outcomes.get(outcome.actionId) ?? 0) + 1));

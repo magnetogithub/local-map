@@ -3,6 +3,7 @@ import type {GameWorldView as WorldStateV2, SimulationPresentation as Simulation
 import type {EconomyViewModel, GameHudViewModel} from "@/lib/game-ui/contracts";
 import type {TurnClientPhase} from "@/lib/simulation/client/turn-state-machine";
 import type {ActiveCountryId} from "@/lib/world/country-id";
+import {activePlayerActionCount} from '@/lib/simulation/queued-player-action';
 
 const playerMapColor = (
   mapProjection: WorldMapRuntimeProjection,
@@ -41,7 +42,7 @@ export function createGameHudProjection(input: Readonly<{
         event.significance === "major" || event.significance === "transformative").length,
     queuedActionCount: simulation === null
       ? null
-      : simulation.queuedActions.filter((action) => action.status === "queued").length,
+      : activePlayerActionCount(simulation.queuedActions),
     ongoingWarCount: null,
   });
 }

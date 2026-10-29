@@ -61,7 +61,11 @@ export function afterVerification(state, verification) {
     summary: `Verifier claimed PASS without the mandatory positive proof: ${proofFailures.join(', ')}`,
   };
   if (verification.verdict === 'pass') return {...state, status: 'passed', phase: 'done', activeTurn: null, passedAt: new Date().toISOString()};
-  if (verification.failureKind === 'operating') return {...state, status: 'operating_failure', phase: 'operating_failure', activeTurn: null};
+  if (verification.failureKind === 'operating') return operatingFailure(
+    {...state, phase: 'verify'},
+    {message: verification.summary, code: 'VERIFICATION_OPERATING_FAILURE'},
+    state.lastVerification?.verdictIdentity ?? null,
+  );
   if (verification.failureKind === 'external') return {...state, status: 'waiting_input', phase: 'verify', activeTurn: null, requiredInput: verification.summary};
   const failures = [...state.failures, {attempt: state.productAttempt, verification}];
   if (state.productAttempt >= state.maxProductAttempts) {
@@ -99,6 +103,37 @@ export function acknowledgeOperatingFailure(state) {
     operatingIncident: {
       ...state.operatingIncident,
       acknowledgedAt: new Date().toISOString(),
+    },
+  };
+}
+
+export function acknowledgeInput(state) {
+  if (state.status !== 'waiting_input') throw Error('No input request to acknowledge');
+  if (!['implement', 'verify'].includes(state.phase)) throw Error('Input request has no safe resume phase');
+  if (state.activeTurn !== null) throw Error('Input request still has an active turn');
+  if (!Number.isInteger(state.productAttempt) || !Number.isInteger(state.maxProductAttempts)
+    || state.productAttempt < 1 || state.productAttempt > state.maxProductAttempts) throw Error('Input request has an invalid product attempt');
+  if (typeof state.requiredInput !== 'string' || !state.requiredInput.trim()) throw Error('Input request is empty');
+
+  const source = state.phase === 'implement' ? state.lastImplementation : state.lastVerification;
+  if (source?.attempt !== state.productAttempt || source.value?.summary !== state.requiredInput) throw Error('Input request does not match its saved response');
+  if (state.phase === 'implement') {
+    if (source.value.status !== 'external_input') throw Error('Implementation did not request external input');
+  } else {
+    if (source.value.failureKind !== 'external' || !['fail', 'blocked'].includes(source.value.verdict)) throw Error('Verification did not request external input');
+    if (state.lastImplementation?.attempt !== state.productAttempt
+      || !['complete', 'blocked'].includes(state.lastImplementation.value?.status)) throw Error('Verification input request has no implementation for this attempt');
+  }
+
+  const {requiredInput, ...resumed} = state;
+  return {
+    ...resumed,
+    status: 'stopped',
+    inputAcknowledgement: {
+      at: new Date().toISOString(),
+      phase: state.phase,
+      attempt: state.productAttempt,
+      requiredInput,
     },
   };
 }

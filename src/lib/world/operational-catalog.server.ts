@@ -14,6 +14,12 @@ export const OPERATIONAL_CATALOG_PATHS = Object.freeze({
   indices: 'data/derived/prompt15/15-20-topology-membership-v1-22406931e1665b6ede05',
   delivery: 'data/derived/prompt15/15-21-world-delivery-v1-56fc6c79c216e6bd1a11',
 });
+// Byte-identical deployment copies. Evidence paths above remain the logical provenance.
+export const OPERATIONAL_CATALOG_RUNTIME_PATHS = Object.freeze({
+  admission: 'data/runtime/operational-catalog/catalog-v3-56fc6c79c216e6bd1a11/final-admission.json',
+  verdict: 'data/runtime/operational-catalog/catalog-v3-56fc6c79c216e6bd1a11/verdict.json',
+  deliveryIndex: 'data/runtime/operational-catalog/catalog-v3-56fc6c79c216e6bd1a11/delivery-artifact-index.json',
+});
 const DELIVERY_SCHEMA = 'prompt15-task-15-21-world-delivery-v1';
 const INDEX_SCHEMA = 'prompt15-task-15-20-world-indices-v1';
 const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
@@ -38,9 +44,9 @@ export function prepareOperationalCatalog(root = process.cwd(), read = (file: st
     if (bytes.length !== identity.byteLength || sha(bytes) !== identity.sha256) throw Error('OPERATIONAL_ASSET_IDENTITY');
     return bytes;
   };
-  const admission = json<{authoritativeVerdict: string; task15_21: string}>(readFile(OPERATIONAL_CATALOG_PATHS.admission));
+  const admission = json<{authoritativeVerdict: string; task15_21: string}>(readFile(OPERATIONAL_CATALOG_RUNTIME_PATHS.admission));
   if (admission.authoritativeVerdict !== OPERATIONAL_CATALOG_PATHS.verdict || admission.task15_21 !== 'PASS') throw Error('OPERATIONAL_CATALOG_NOT_ADMITTED');
-  const verdict = json<{candidate: string; task15_21: string; assetVerification: string; upstreamVerification: string; artifactIndex: Omit<OperationalArtifact, 'path'>}>(readFile(admission.authoritativeVerdict));
+  const verdict = json<{candidate: string; task15_21: string; assetVerification: string; upstreamVerification: string; artifactIndex: Omit<OperationalArtifact, 'path'>}>(readFile(OPERATIONAL_CATALOG_RUNTIME_PATHS.verdict));
   if (verdict.candidate !== OPERATIONAL_CATALOG_PATHS.delivery || verdict.task15_21 !== 'PASS' || verdict.assetVerification !== 'PASS' || verdict.upstreamVerification !== 'VERIFIED') throw Error('OPERATIONAL_CATALOG_NOT_ADMITTED');
 
   const artifactMap = (index: ArtifactIndex) => {
@@ -48,7 +54,7 @@ export function prepareOperationalCatalog(root = process.cwd(), read = (file: st
     if (map.size !== index.artifacts.length) throw Error('DUPLICATE_OPERATIONAL_ARTIFACT');
     return map;
   };
-  const deliveryArtifacts = artifactMap(json<ArtifactIndex>(checked(`${OPERATIONAL_CATALOG_PATHS.delivery}/artifact-index.json`, verdict.artifactIndex)));
+  const deliveryArtifacts = artifactMap(json<ArtifactIndex>(checked(OPERATIONAL_CATALOG_RUNTIME_PATHS.deliveryIndex, verdict.artifactIndex)));
   const artifact = (map: ReadonlyMap<string, OperationalArtifact>, file: string) => {
     const a = map.get(file); if (!a) throw Error('UNKNOWN_OPERATIONAL_ARTIFACT'); return a;
   };
