@@ -112,31 +112,41 @@ export function selectOperationalFrontier(
     || directionalRank(a.cell) - directionalRank(b.cell)
     || catalog.cellMetrics(b.cell.ordinal).areaKm2 - catalog.cellMetrics(a.cell.ordinal).areaKm2
     || compareId(a.cell.id, b.cell.id) || compareId(a.support.id, b.support.id));
-  const contact = contacts[0], boundary = catalog.sharedBoundary(contact.cell.ordinal, contact.support.ordinal);
-  const delta = longitudeDelta(boundary.start[0], boundary.end[0]);
-  const anchor: [number, number] = [((boundary.start[0] + delta / 2 + 540) % 360) - 180, (boundary.start[1] + boundary.end[1]) / 2];
-  const offset = (point: readonly [number, number]) => [longitudeDelta(anchor[0], point[0]) * rad * policy.earthRadiusKm * Math.cos(anchor[1] * rad), (point[1] - anchor[1]) * rad * policy.earthRadiusKm];
-  const dx = delta * Math.cos(anchor[1] * rad), dy = boundary.end[1] - boundary.start[1], length = Math.hypot(dx, dy);
-  if (!(length > 0)) throw Error('NO_OPERATIONAL_LAND_BOUNDARY');
-  const tangent = [dx / length, dy / length];
-  const targetOffset = offset(catalog.cellMetrics(contact.cell.ordinal).centroid);
-  let normal = [-tangent[1], tangent[0]];
-  if (targetOffset[0] * normal[0] + targetOffset[1] * normal[1] < 0) normal = normal.map(n => -n);
   const limits = Object.freeze({...policy.ranges[request.extent]});
-  const projected = (n: number) => {
-    const v = offset(catalog.cellMetrics(n).centroid);
-    return {forward: v[0] * normal[0] + v[1] * normal[1], lateral: Math.abs(v[0] * tangent[0] + v[1] * tangent[1])};
+  const corridorForContact = (contact: Contact) => {
+    const boundary = catalog.sharedBoundary(contact.cell.ordinal, contact.support.ordinal);
+    const delta = longitudeDelta(boundary.start[0], boundary.end[0]);
+    const anchor: [number, number] = [((boundary.start[0] + delta / 2 + 540) % 360) - 180, (boundary.start[1] + boundary.end[1]) / 2];
+    const offset = (point: readonly [number, number]) => [longitudeDelta(anchor[0], point[0]) * rad * policy.earthRadiusKm * Math.cos(anchor[1] * rad), (point[1] - anchor[1]) * rad * policy.earthRadiusKm];
+    const dx = delta * Math.cos(anchor[1] * rad), dy = boundary.end[1] - boundary.start[1], length = Math.hypot(dx, dy);
+    if (!(length > 0)) throw Error('NO_OPERATIONAL_LAND_BOUNDARY');
+    const tangent = [dx / length, dy / length];
+    const targetOffset = offset(catalog.cellMetrics(contact.cell.ordinal).centroid);
+    let normal = [-tangent[1], tangent[0]];
+    if (targetOffset[0] * normal[0] + targetOffset[1] * normal[1] < 0) normal = normal.map(n => -n);
+    const projected = (n: number) => {
+      const v = offset(catalog.cellMetrics(n).centroid);
+      return {forward: v[0] * normal[0] + v[1] * normal[1], lateral: Math.abs(v[0] * tangent[0] + v[1] * tangent[1])};
+    };
+    const inCorridor = (n: number) => {
+      if (!eligible.has(n)) return false;
+      const p = projected(n);
+      return p.forward >= -1e-8 && p.forward <= limits.depthKm && p.lateral <= limits.widthKm / 2
+        && distanceKm(anchor, catalog.cellMetrics(n).centroid) <= Math.hypot(limits.depthKm, limits.widthKm / 2);
+    };
+    const seed = contact.cell.ordinal, firstDistance = distanceKm(anchor, catalog.cellMetrics(seed).centroid);
+    if (!inCorridor(seed) || firstDistance > limits.depthKm) return null;
+    return {contact, boundary, projected, inCorridor, seed, firstDistance};
   };
-  const inCorridor = (n: number) => {
-    if (!eligible.has(n)) return false;
-    const p = projected(n);
-    return p.forward >= -1e-8 && p.forward <= limits.depthKm && p.lateral <= limits.widthKm / 2
-      && distanceKm(anchor, catalog.cellMetrics(n).centroid) <= Math.hypot(limits.depthKm, limits.widthKm / 2);
-  };
-  const seed = contact.cell.ordinal;
-  if (!inCorridor(seed)) throw Error('FRONTIER_SCOPE_EMPTY');
-  const firstDistance = distanceKm(anchor, catalog.cellMetrics(seed).centroid);
-  if (firstDistance > limits.depthKm) throw Error('FRONTIER_SCOPE_EMPTY');
+  let corridor: ReturnType<typeof corridorForContact> = null;
+  // A merged cell's centroid can lie outside one edge's bounded corridor. Keep
+  // the existing contact priority, choosing the first seed valid for its own edge.
+  for (const contact of contacts) {
+    corridor = corridorForContact(contact);
+    if (corridor) break;
+  }
+  if (!corridor) throw Error('FRONTIER_SCOPE_EMPTY');
+  const {contact, boundary, projected, inCorridor, seed, firstDistance} = corridor;
   const distances = new Map<number, number>([[seed, firstDistance]]);
   const queue: [number, number][] = [[firstDistance, seed]];
   const settled = new Set<number>();

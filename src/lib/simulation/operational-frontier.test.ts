@@ -122,4 +122,57 @@ describe('16-06 current-world bounded frontier', () => {
     expect(createOperationalFrontierLookup({...catalog, neighbors: () => []})(world, request)).toMatchObject({ok: false, code: 'NO_CURRENT_LAND_FRONTIER'});
     expect(createOperationalFrontierLookup({...catalog, cellMetrics: key => ({...catalog.cellMetrics(key), areaKm2: 3000})})(world, request)).toMatchObject({ok: false, code: 'FRONTIER_REQUEST_CAP'});
   });
+
+  it.each([
+    ['forward depth', [0.5, 0]],
+    ['lateral width', [0.09, 0.5]],
+    ['initial graph distance', [0.35, 0.15]],
+  ] as const)('tries the next ranked contact when the preferred seed exceeds its %s limit', (_limit, centroid) => {
+    const {catalog, world, request} = fixture(), contacts: number[] = [];
+    const bounded: OperationalFrontierCatalog = {...catalog,
+      cellMetrics: key => catalog.cell(key).ordinal === 3 ? {...catalog.cellMetrics(key), centroid, areaKm2: 200} : catalog.cellMetrics(key),
+      sharedBoundary: (a, b) => {contacts.push(a); return {...catalog.sharedBoundary(a, b), edgeOrdinal: a};},
+    };
+    const result = selectOperationalFrontier(bounded, world, request);
+    expect(contacts).toEqual([3, 4]);
+    expect(result.frontier).toMatchObject({cellId: id(4), supportCellId: id(2), edgeOrdinal: 4});
+    expect(result.metrics.maximumGraphDepthKm).toBeLessThanOrEqual(36);
+    expect(result.metrics.maximumForwardDepthKm).toBeLessThanOrEqual(36);
+    expect(result.metrics.maximumLateralKm).toBeLessThanOrEqual(18);
+    expect(result.metrics.areaKm2).toBeLessThanOrEqual(2800);
+    expect(result.limits).toEqual({depthKm: 36, widthKm: 36, maximumAreaKm2: 2800});
+  });
+
+  it('checks each support edge of the same target cell before declaring its frontier empty', () => {
+    const {catalog, world, request} = fixture(), contacts: [number, number][] = [];
+    const bounded: OperationalFrontierCatalog = {...catalog,
+      neighbors: n => n === 3 ? [1, 2] : n === 1 || n === 2 ? [3] : [],
+      sharedBoundary: (a, b) => {
+        contacts.push([a, b]);
+        return b === 1 ? {edgeOrdinal: 301, start: [1, -0.04], end: [1, 0.04]}
+          : {edgeOrdinal: 302, start: [0.045, -0.04], end: [0.045, 0.04]};
+      },
+    };
+    const result = selectOperationalFrontier(bounded, world, request);
+    expect(contacts).toEqual([[3, 1], [3, 2]]);
+    expect(result.frontier).toMatchObject({cellId: id(3), supportCellId: id(2), edgeOrdinal: 302});
+    expect(result.cellIds).toEqual([id(3)]);
+    expect(result.metrics.maximumGraphDepthKm).toBeLessThanOrEqual(36);
+  });
+
+  it('keeps the empty-scope error when every ranked seed is outside its own corridor', () => {
+    const {catalog, world, request} = fixture();
+    const bounded: OperationalFrontierCatalog = {...catalog, cellMetrics: key => ({...catalog.cellMetrics(key), centroid: [2, 2]})};
+    expect(createOperationalFrontierLookup(bounded)(world, request)).toMatchObject({ok: false, code: 'FRONTIER_SCOPE_EMPTY'});
+  });
+
+  it('does not bypass an area cap by trying a lower-ranked valid contact', () => {
+    const {catalog, world, request} = fixture(), contacts: number[] = [];
+    const bounded: OperationalFrontierCatalog = {...catalog,
+      cellMetrics: key => ({...catalog.cellMetrics(key), areaKm2: catalog.cell(key).ordinal === 3 ? 3000 : 100}),
+      sharedBoundary: (a, b) => {contacts.push(a); return catalog.sharedBoundary(a, b);},
+    };
+    expect(createOperationalFrontierLookup(bounded)(world, request)).toMatchObject({ok: false, code: 'FRONTIER_REQUEST_CAP'});
+    expect(contacts).toEqual([3]);
+  });
 });

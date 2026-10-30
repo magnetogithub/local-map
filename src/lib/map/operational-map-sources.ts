@@ -18,7 +18,8 @@ export class OperationalMapSourceWriteError extends Error {
 }
 
 /** Source wiring for 16-05's layers and 16-08's game mount; no independent mutable world. */
-export function createOperationalMapSources(map: SourcePort, protocolApi: ProtocolApi, delivery: OperationalVectorDelivery) {
+export function createOperationalMapSources(map: SourcePort, protocolApi: ProtocolApi, delivery: OperationalVectorDelivery,
+  onEdgeDetailChange?: (ordinals: readonly number[]) => void) {
   const ids = [OPERATIONAL_MAP_SOURCE_ID, OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID];
   if (ids.some(id => map.getSource(id))) throw Error('OPERATIONAL_MAP_SOURCE_EXISTS');
   const unregister = registerCatalogTileProtocol(protocolApi, delivery), added: string[] = [];
@@ -45,6 +46,9 @@ export function createOperationalMapSources(map: SourcePort, protocolApi: Protoc
       const source = map.getSource(id) as {setData?: (data: GeoJSON) => unknown} | undefined;
       if (typeof source?.setData !== 'function') throw Error('OPERATIONAL_EXACT_SOURCE_MISSING');
       source.setData(data);
+      if (id === OPERATIONAL_EXACT_EDGE_SOURCE_ID && data.type === 'FeatureCollection') {
+        onEdgeDetailChange?.(Object.freeze(data.features.map(feature => Number(feature.id))));
+      }
     } catch (error) {throw new OperationalMapSourceWriteError(error);}
   };
   const check = () => {if (disposed) throw Error('OPERATIONAL_MAP_SOURCES_DISPOSED');};

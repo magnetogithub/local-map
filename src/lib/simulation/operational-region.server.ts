@@ -3,6 +3,13 @@ import type {OperationalCatalog} from '../world/operational-catalog.server';
 import {subdivisionReferenceSchema} from './world-effect';
 import {regionKey, regionOperation, type CatalogRegionIndex, type RegionRecord, type RegionReference} from './catalog-region';
 
+// Localized names only; administrative membership comes exclusively from the pinned hierarchy.
+const prkLocalizedNames: Readonly<Record<string, string>> = {
+  Jagang: '자강도', Kangwon: '강원도', Nampo: '남포시', Pyongyang: '평양직할시', Ryanggang: '량강도',
+  'North Hamgyong': '함경북도', 'South Hamgyong': '함경남도', 'North Hwanghae': '황해북도',
+  'South Hwanghae': '황해남도', 'North Pyongan': '평안북도', 'South Pyongan': '평안남도',
+};
+
 /** Complete source identities and memberships, independent of current owner/controller. */
 export function createOperationalRegionIndex(catalog: OperationalCatalog): CatalogRegionIndex {
   const names = catalog.readRegionNames();
@@ -11,9 +18,11 @@ export function createOperationalRegionIndex(catalog: OperationalCatalog): Catal
     const text = (value: unknown) => typeof value === 'string' && value.trim() ? value : undefined;
     const fallback = parent.name || parent.parentKey;
     const nameEn = text(properties?.name_en) ?? text(properties?.name) ?? fallback;
-    const nameKo = text(properties?.name_ko) ?? nameEn;
+    const providedKo = text(properties?.name_ko), localizedKo = parent.sourceCountryId === 'PRK' ? prkLocalizedNames[nameEn] : undefined;
+    const nameKo = providedKo && providedKo !== nameEn ? providedKo : localizedKo ?? providedKo ?? nameEn;
     const aliases = Object.freeze([...new Set([parent.name, properties?.name, properties?.name_local, properties?.postal, properties?.gns_name].filter((v): v is string => !!text(v)))]);
-    const subdivisionId = parent.kind === 'administrative' ? `region:ne-admin1:${parent.sourceCountryId}:${parent.sourceFeatureId}` : `region:residual:${parent.sourceCountryId}:${parent.residualId}`;
+    const fineMacro = parent.parentKey.startsWith('fine-macro:');
+    const subdivisionId = parent.kind === 'administrative' ? `region:${fineMacro ? 'fine-macro' : 'ne-admin1'}:${parent.sourceCountryId}:${parent.sourceFeatureId}` : `region:residual:${parent.sourceCountryId}:${parent.residualId}`;
     return Object.freeze({parent, ref: Object.freeze({catalogId: catalog.ref.catalogVersion, sourceVersion: catalog.ref.geometryRoot, subdivisionId}), nameEn, nameKo, aliases});
   });
   const byKey = new Map(summaries.map(s => [regionKey(s.ref), s]));
@@ -29,7 +38,7 @@ export function createOperationalRegionIndex(catalog: OperationalCatalog): Catal
       const {parent} = summary;
       record = Object.freeze({ref: summary.ref, parentCountryId: countryId, nameKo: summary.nameKo, nameEn: summary.nameEn, aliases: summary.aliases,
         territoryIds: Object.freeze(catalog.administrativeMembership(parent.parentKey).map(c => c.id)),
-        provenanceIds: Object.freeze([parent.restorationId ? `restoration:${parent.restorationId}` : `residual:${parent.residualId}`])});
+        provenanceIds: Object.freeze([parent.parentKey.startsWith('fine-macro:') ? parent.parentKey : parent.restorationId ? `restoration:${parent.restorationId}` : `residual:${parent.residualId}`])});
       cached.set(key, record);
     }
     return record;

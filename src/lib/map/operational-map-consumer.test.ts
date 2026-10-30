@@ -33,7 +33,7 @@ function fixture(occupied = false, observeInitially = true) {
   let observer: ((batch: {cells: readonly number[]; edges: readonly number[]}) => void) | undefined;
   const identity = {path: ref.manifestPath, sha256: 'd'.repeat(64), byteLength: 0};
   const delivery = {
-    bootstrap: {schemaVersion: 'operational-map-bootstrap-v1', catalog: {schemaVersion: 'operational-catalog-v1', catalogRef: ref, counts: {cells: 5, edges: 5, countries: 2, administrativeParents: 20, previousParents: 2}, countryOrder: ['AAA', 'BBB'],
+    bootstrap: {schemaVersion: 'operational-map-bootstrap-v1', legacyBoundaryOrdinals: [] as number[], catalog: {schemaVersion: 'operational-catalog-v1', catalogRef: ref, counts: {cells: 5, edges: 5, countries: 2, administrativeParents: 20, previousParents: 2}, countryOrder: ['AAA', 'BBB'],
       indexRoots: {catalogOrder: 'd'.repeat(64), administrativeMembership: 'e'.repeat(64), previousParent: 'f'.repeat(64)}}, manifest: identity, tileIndex: identity, detailIndex: identity, parents: identity, coverage: identity},
     source: {type: 'vector', tiles: ['pax-test:///tiles/{z}/{x}/{y}.pbf.gz'], minzoom: 0, maxzoom: 6}, protocol: 'pax-test',
     edgeIncidence: vi.fn((n: number) => pairs[n - 1]),
@@ -57,6 +57,11 @@ function fixture(occupied = false, observeInitially = true) {
       sources.set(id, {spec, features, setData: vi.fn((data: FeatureCollection) => {features.clear(); for (const f of data.features) features.set(Number(f.id), f);}),
         updateData: vi.fn((diff: GeoJSONSourceDiff) => {for (const n of diff.remove ?? []) features.delete(Number(n)); for (const f of diff.add ?? []) features.set(Number(f.id), f);})});
     }, removeSource: id => sources.delete(id), getSource: id => sources.get(id), addLayer: layer => layers.set(layer.id, layer), removeLayer: id => layers.delete(id), getLayer: id => layers.get(id),
+    setLayoutProperty: vi.fn((id, name, value) => {
+      const layer = layers.get(id);
+      if (!layer || layer.type !== 'line' || name !== 'visibility') throw Error('INVALID_LAYOUT_TARGET');
+      layer.layout = {...layer.layout, visibility: value as 'visible' | 'none'};
+    }),
     setFeatureState: vi.fn((target, state) => {
       if (target.source !== OPERATIONAL_MAP_SOURCE_ID && !sources.get(target.source)?.features.has(Number(target.id))) throw Error('STATE_WITHOUT_SOURCE_FEATURE');
       const key = `${target.source}:${target.sourceLayer ?? ''}:${target.id}`; states.set(key, {...states.get(key), ...state});
@@ -99,14 +104,14 @@ describe('16-05 authoritative operational map projection', () => {
     const acceptsRealMap = (map: MapLibreMap) => createOperationalMapConsumer({map, protocolApi: f.api, delivery: f.delivery, world: f.world});
     expect(typeof acceptsRealMap).toBe('function');
     expect(validateStyleMin({version: 8, sources: Object.fromEntries([...f.sources].map(([id, s]) => [id, s.spec])), layers: [...f.layers.values()]})).toEqual([]);
-    expect(f.layers.get(L.administrative)).toMatchObject({'source-layer': 'administrative', minzoom: 4, layout: {visibility: 'none'}});
-    expect(f.layers.get(L.detailAdministrative)).toMatchObject({minzoom: 4, layout: {visibility: 'none'}});
+    expect(f.layers.get(L.administrative)).toMatchObject({'source-layer': 'edges', minzoom: 2.2, layout: {visibility: 'visible'}, paint: {'line-color': '#FFFFFF'}});
+    expect(f.layers.get(L.detailAdministrative)).toMatchObject({minzoom: 2.2, layout: {visibility: 'visible'}, paint: {'line-color': '#FFFFFF'}});
     for (const id of [L.country, L.detailCountry]) expect(f.layers.get(id)).toMatchObject({paint: {'line-color': '#000000'}});
     for (const id of [OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID, OPERATIONAL_CHANGED_CELL_SOURCE_ID, OPERATIONAL_FRONT_SOURCE_ID]) {
       expect(f.sources.get(id)!.spec).toMatchObject({type: 'geojson', tolerance: 0});
     }
     for (const id of [L.fill, L.detailFill, L.changedFill]) expect(f.layers.get(id)).toMatchObject({paint: {'fill-antialias': false}});
-    for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({minzoom: 8, layout: {visibility: 'none'}});
+    for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({minzoom: 2.2, layout: {visibility: 'none'}});
     expect(f.state(1)).toMatchObject({mapColor: '#0000FF', occupied: false});
     expect(f.layers.get(L.front)).toMatchObject({filter: ['==', ['get', 'c'], 1]});
     for (const n of [1, 2, 3, 4, 5]) expect(f.front(n)).toBe(false);
@@ -148,13 +153,82 @@ describe('16-05 authoritative operational map projection', () => {
     expect(f.delivery.loadEdgeDetails).toHaveBeenLastCalledWith([1, 2, 3, 4], expect.any(AbortSignal));
     const boundaries = f.sources.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!;
     expect(boundaries.features.get(1)).toMatchObject({properties: {administrative: true, boundaryClass: 'administrative'}, geometry: {coordinates: [[1, 0], [1, 1]]}});
-    expect(f.layers.get(L.detailAdministrative)).toMatchObject({filter: ['==', ['get', 'administrative'], true], layout: {visibility: 'none'}});
+    expect(f.layers.get(L.detailAdministrative)).toMatchObject({filter: ['==', ['id'], -1], layout: {visibility: 'visible'}});
     f.consumer.selectCountry('BBB'); f.consumer.hoverCountry('BBB');
     const occupied = update(f.world, {1: {controllerCountryId: 'AAA'}}); await f.consumer.updateWorld(occupied.world, occupied.change);
     expect(f.front(1)).toBe(true);
-    for (const id of [L.administrative, L.detailAdministrative, L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
+    for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
     f.consumer.clearDetail(); expect(boundaries.features.size).toBe(0); expect(f.front(4)).toBe(false); expect(f.front(1)).toBe(true);
     f.consumer.dispose();
+  });
+
+  it('separates original ADM1 boundaries from debug-only fine boundaries without data or world updates', async () => {
+    const input = fixture(); input.delivery.bootstrap.legacyBoundaryOrdinals = [2];
+    input.edgeClasses[0] = 2; input.edgeClasses[1] = 2;
+    const f = await mount(input), before = f.consumer.getProjection(), vector = f.sources.get(OPERATIONAL_MAP_SOURCE_ID);
+    expect(f.layers.get(L.administrative)).toMatchObject({filter: ['match', ['id'], [2], true, false]});
+    const matches = (layerId: string, edgeId: number, exact = false, kind = 'administrative') => {
+      const expression = createExpression((f.layers.get(layerId) as LineLayerSpecification).filter);
+      if (expression.result !== 'success') throw Error(JSON.stringify(expression.value));
+      return expression.value.evaluate({zoom: 6}, {type: 'LineString', id: edgeId, properties: exact ? {boundaryClass: kind} : {c: kind === 'country' ? 1 : 2}});
+    };
+    for (const [legacy, micro, exact] of [[L.administrative, L.synthetic, false], [L.detailAdministrative, L.detailSynthetic, true]] as const) {
+      expect(matches(legacy, 2, exact)).toBe(true); expect(matches(legacy, 1, exact)).toBe(false);
+      expect(matches(micro, 1, exact)).toBe(true); expect(matches(micro, 2, exact)).toBe(false);
+      expect(matches(micro, 4, exact, 'country')).toBe(false);
+    }
+    f.consumer.setDebugBoundaries(true);
+    for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
+    await f.consumer.showCountryDetail('BBB'); f.consumer.clearDetail();
+    for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
+    const loaded = f.delivery.loadEdgeDetails.mock.calls.length;
+    f.consumer.setDebugBoundaries(false);
+    for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
+    for (const id of [L.administrative, L.detailAdministrative]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}, paint: {'line-color': '#FFFFFF'}});
+    expect(f.consumer.getProjection()).toBe(before); expect(f.sources.get(OPERATIONAL_MAP_SOURCE_ID)).toBe(vector);
+    expect(f.delivery.loadEdgeDetails).toHaveBeenCalledTimes(loaded); expect(f.consumer.getUpdateStats().updates).toBe(0);
+    for (const source of f.sources.values()) expect(source.updateData).not.toHaveBeenCalled();
+    f.consumer.dispose();
+  });
+
+  it('replaces simplified country, legacy and micro lines with exact detail instead of drawing both', async () => {
+    const input = fixture(); input.delivery.bootstrap.legacyBoundaryOrdinals = [2];
+    input.edgeClasses[0] = 2; input.edgeClasses[1] = 2;
+    const f = await mount(input); f.consumer.setDebugBoundaries(true);
+    const opacity = (layerId: string, n: number) => {
+      const expression = createExpression((f.layers.get(layerId) as LineLayerSpecification).paint!['line-opacity']);
+      if (expression.result !== 'success') throw Error(JSON.stringify(expression.value));
+      return expression.value.evaluate({zoom: 6}, {type: 'LineString', id: n, properties: {}}, f.state(n, true) ?? {});
+    };
+    const cases = [[L.country, L.detailCountry, 4], [L.administrative, L.detailAdministrative, 2], [L.synthetic, L.detailSynthetic, 1]] as const;
+    for (const [vector, , n] of cases) expect(opacity(vector, n)).toBeGreaterThan(0);
+    await f.consumer.showCountryDetail('BBB');
+    for (const [vector, exact, n] of cases) {
+      expect(opacity(vector, n)).toBe(0); expect(opacity(exact, n)).toBeGreaterThan(0);
+      expect(f.sources.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!.features.has(n)).toBe(true);
+    }
+    expect(opacity(L.synthetic, 5)).toBeGreaterThan(0); // A different country's edge is not masked.
+    f.emit({cells: [1, 2, 3], edges: [1, 2, 3, 4]});
+    for (const [vector, , n] of cases) expect(opacity(vector, n)).toBe(0);
+    f.consumer.clearDetail();
+    for (const [vector, , n] of cases) expect(opacity(vector, n)).toBeGreaterThan(0);
+    expect(f.sources.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!.features.size).toBe(0);
+    f.consumer.dispose();
+  });
+
+  it('preserves the detail mask when fronts disappear and preserves fronts when detail closes', async () => {
+    const f = await mount(); await f.consumer.showCountryDetail('BBB');
+    const occupied = update(f.world, {1: {controllerCountryId: 'AAA'}});
+    await f.consumer.updateWorld(occupied.world, occupied.change);
+    expect(f.state(1, true)).toMatchObject({detailEdge: true, front: true, exactFront: true});
+    const liberated = update(occupied.world, {1: {controllerCountryId: 'BBB'}});
+    await f.consumer.updateWorld(liberated.world, liberated.change);
+    expect(f.state(1, true)).toMatchObject({detailEdge: true, front: false, exactFront: false});
+    const restored = update(liberated.world, {1: {controllerCountryId: 'AAA'}});
+    await f.consumer.updateWorld(restored.world, restored.change);
+    f.consumer.clearDetail();
+    expect(f.state(1, true)).toMatchObject({detailEdge: false, front: true, exactFront: true});
+    expect(f.front(1)).toBe(true); f.consumer.dispose();
   });
 
   it('shows partial occupation inside one administrative parent, preserves the polygon hole and updates only incident edges', async () => {
@@ -474,10 +548,19 @@ describe('16-05 authoritative operational map projection', () => {
   it.each(['publish', 'cleanup', 'hover'] as const)('requires resynchronization after partial cell state %s fails', async operation => {
     const f = await mount();
     if (operation === 'cleanup') {
-      await f.consumer.showCountryDetail('BBB'); vi.mocked(f.map.removeFeatureState).mockImplementationOnce(() => {throw Error('cell state cleanup');});
+      await f.consumer.showCountryDetail('BBB');
+      const remove = vi.mocked(f.map.removeFeatureState).getMockImplementation()!;
+      vi.mocked(f.map.removeFeatureState).mockImplementation(target => {
+        if (target.source === OPERATIONAL_EXACT_CELL_SOURCE_ID) throw Error('cell state cleanup');
+        return remove(target);
+      });
       expect(() => f.consumer.clearDetail()).toThrow('cell state cleanup');
     } else {
-      vi.mocked(f.map.setFeatureState).mockImplementationOnce(() => {throw Error('cell state publish');});
+      const write = vi.mocked(f.map.setFeatureState).getMockImplementation()!;
+      vi.mocked(f.map.setFeatureState).mockImplementation((target, state) => {
+        if (target.sourceLayer !== 'edges') throw Error('cell state publish');
+        return write(target, state);
+      });
       if (operation === 'publish') await expect(f.consumer.showCountryDetail('BBB')).rejects.toThrow('cell state publish');
       else expect(() => f.consumer.hoverCountry('BBB')).toThrow('cell state publish');
     }

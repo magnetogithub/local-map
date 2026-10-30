@@ -1,0 +1,3152 @@
+{
+  "schemaVersion": "prompt19-fine-macro-hierarchy-v1",
+  "countryId": "KOR",
+  "fineSourceLock": {
+    "path": "data/source-locks/prompt19/KOR-ADM2-2020.json",
+    "sha256": "9ca1908aaf24670f00dd6756bbab9594c2b52fba86715c2b33d7fb400df55e12",
+    "byteLength": 3371
+  },
+  "artifacts": [
+    {
+      "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/hierarchy-facts.json",
+      "sha256": "2daad2ff0c65acc11f2f3a43719431dcee1a9c4fd81876d9271beed6b9ec4da5",
+      "byteLength": 82878
+    },
+    {
+      "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/representative-facts.json",
+      "sha256": "0225cac7e5772a69f74427df60d1a8ec1ef62473dcd3a77ae3628241ae1015f8",
+      "byteLength": 11591
+    },
+    {
+      "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/temporal-facts.json",
+      "sha256": "f4282ac4f4f1da3a6827bc1ddd664b72c4c9281b1b525791ce2d5490cc603138",
+      "byteLength": 1754
+    },
+    {
+      "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/source-inspection.json",
+      "sha256": "3fa769938b890168a08b0f4eb19790a87017f3f8adfc12a2d7e8546a40d39875",
+      "byteLength": 2605
+    },
+    {
+      "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/verification.json",
+      "sha256": "486ae61bb2f78bc88bad0cec7cb2563d2e50b8b3c0141526fe372a2884a0dd1b",
+      "byteLength": 2557
+    },
+    {
+      "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/acquisition.json",
+      "sha256": "6155654b7f75f70dcba01e475dba5d79513c2c8882e693706502e33599a61f36",
+      "byteLength": 15469
+    }
+  ],
+  "macroGroups": [
+    {
+      "macroId": "KOR:macro:citypopulation:21",
+      "sourceFeatureId": "21",
+      "name": "Busan",
+      "nameKo": "부산광역시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:33",
+      "sourceFeatureId": "33",
+      "name": "Chungcheongbuk-do [North Chungcheong]",
+      "nameKo": "충청북도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:34",
+      "sourceFeatureId": "34",
+      "name": "Chungcheongnam-do [South Chungcheong]",
+      "nameKo": "충청남도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:22",
+      "sourceFeatureId": "22",
+      "name": "Daegu",
+      "nameKo": "대구광역시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:25",
+      "sourceFeatureId": "25",
+      "name": "Daejeon",
+      "nameKo": "대전광역시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:32",
+      "sourceFeatureId": "32",
+      "name": "Gangwon-do [Gangwon]",
+      "nameKo": "강원도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:24",
+      "sourceFeatureId": "24",
+      "name": "Gwangju",
+      "nameKo": "광주광역시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:31",
+      "sourceFeatureId": "31",
+      "name": "Gyeonggi-do [Gyeonggi]",
+      "nameKo": "경기도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:37",
+      "sourceFeatureId": "37",
+      "name": "Gyeongsangbuk-do [North Gyeongsang]",
+      "nameKo": "경상북도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:38",
+      "sourceFeatureId": "38",
+      "name": "Gyeongsangnam-do [South Gyeongsang]",
+      "nameKo": "경상남도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:23",
+      "sourceFeatureId": "23",
+      "name": "Incheon",
+      "nameKo": "인천광역시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:39",
+      "sourceFeatureId": "39",
+      "name": "Jeju-do [Jeju]",
+      "nameKo": "제주특별자치도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:35",
+      "sourceFeatureId": "35",
+      "name": "Jeollabuk-do [North Jeolla]",
+      "nameKo": "전라북도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:36",
+      "sourceFeatureId": "36",
+      "name": "Jeollanam-do [South Jeolla]",
+      "nameKo": "전라남도",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:29",
+      "sourceFeatureId": "29",
+      "name": "Sejong",
+      "nameKo": "세종특별자치시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:11",
+      "sourceFeatureId": "11",
+      "name": "Seoul",
+      "nameKo": "서울특별시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    },
+    {
+      "macroId": "KOR:macro:citypopulation:26",
+      "sourceFeatureId": "26",
+      "name": "Ulsan",
+      "nameKo": "울산광역시",
+      "sourceVersion": "citypopulation-admin-facts-20261030-with-documented-2020-Gunwi-parent"
+    }
+  ],
+  "members": [
+    {
+      "sourceFeatureId": "91817680B43621567480447",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sokcho-si",
+        "matchedPublisherChildId": "32060",
+        "matchedPublisherChildName": "Sokcho-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32060__sokcho_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B50485812736392",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Goseong-gun",
+        "matchedPublisherChildId": "32400",
+        "matchedPublisherChildName": "Goseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32400__goseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.388,
+          38.374
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B9940099959324",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yangyang-gun",
+        "matchedPublisherChildId": "32410",
+        "matchedPublisherChildName": "Yangyang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32410__yangyang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B99242230797556",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gangneung-si",
+        "matchedPublisherChildId": "32030",
+        "matchedPublisherChildName": "Gangneung-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32030__gangneung_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B21216327036282",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Donghae-si",
+        "matchedPublisherChildId": "32040",
+        "matchedPublisherChildName": "Donghae-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32040__donghae_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B11339106619066",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Samcheok-si",
+        "matchedPublisherChildId": "32070",
+        "matchedPublisherChildName": "Samcheok-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32070__samcheok_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B55715776787208",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Taebaek-si",
+        "matchedPublisherChildId": "32050",
+        "matchedPublisherChildName": "Taebaek-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32050__taebaek_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B88731995383072",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Uljin-gun",
+        "matchedPublisherChildId": "37420",
+        "matchedPublisherChildName": "Uljin-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37420__uljin_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B91067436457746",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongdeok-gun",
+        "matchedPublisherChildId": "37350",
+        "matchedPublisherChildName": "Yeongdeok-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37350__yeongdeok_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B48442195707238",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Pohang-si",
+        "matchedPublisherChildId": "37010",
+        "matchedPublisherChildName": "Pohang-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37010__pohang_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B5353031397212",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gyeongju-si",
+        "matchedPublisherChildId": "37020",
+        "matchedPublisherChildName": "Gyeongju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37020__gyeongju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B63178832268751",
+      "macroId": "KOR:macro:citypopulation:26",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Buk-gu",
+        "matchedPublisherChildId": "26040",
+        "matchedPublisherChildName": "Buk-gu [North Distrikt]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26040__buk_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.394,
+          35.612
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B44823551048989",
+      "macroId": "KOR:macro:citypopulation:26",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Ulju-gun",
+        "matchedPublisherChildId": "26310",
+        "matchedPublisherChildName": "Ulju-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26310__ulju_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B54012703126739",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gijang-gun",
+        "matchedPublisherChildId": "21310",
+        "matchedPublisherChildName": "Gijang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21310__gijang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B11624916188823",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yangsan-si",
+        "matchedPublisherChildId": "38100",
+        "matchedPublisherChildName": "Yangsan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38100__yangsan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B61474779558203",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Inje-gun",
+        "matchedPublisherChildId": "32390",
+        "matchedPublisherChildName": "Inje-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32390__inje_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B93219729656421",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Pyeongchang-gun",
+        "matchedPublisherChildId": "32340",
+        "matchedPublisherChildName": "Pyeongchang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32340__pyeongchang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B94972366910411",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jeongseon-gun",
+        "matchedPublisherChildId": "32350",
+        "matchedPublisherChildName": "Jeongseon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32350__jeongseon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B23922363914919",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yanggu-gun",
+        "matchedPublisherChildId": "32380",
+        "matchedPublisherChildName": "Yanggu-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32380__yanggu_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B86395324328742",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hwacheon-gun",
+        "matchedPublisherChildId": "32370",
+        "matchedPublisherChildName": "Hwacheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32370__hwacheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B67839742247787",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Chuncheon-si",
+        "matchedPublisherChildId": "32010",
+        "matchedPublisherChildName": "Chuncheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32010__chuncheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B73346878676901",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Cheorwon-gun",
+        "matchedPublisherChildId": "32360",
+        "matchedPublisherChildName": "Cheorwon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32360__cheorwon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B98224083425041",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeoncheon-gun",
+        "matchedPublisherChildId": "31350",
+        "matchedPublisherChildName": "Yeoncheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31350__yeoncheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B11345954741605",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dongducheon-si",
+        "matchedPublisherChildId": "31080",
+        "matchedPublisherChildName": "Dongducheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31080__dongducheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B75483661313195",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Pocheon-si",
+        "matchedPublisherChildId": "31270",
+        "matchedPublisherChildName": "Pocheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31270__pocheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B15226656503507",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hongcheon-gun",
+        "matchedPublisherChildId": "32310",
+        "matchedPublisherChildName": "Hongcheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32310__hongcheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B96761005572442",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gapyeong-gun",
+        "matchedPublisherChildId": "31370",
+        "matchedPublisherChildName": "Gapyeong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31370__gapyeong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B58418421780923",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hoengseong-gun",
+        "matchedPublisherChildId": "32320",
+        "matchedPublisherChildName": "Hoengseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32320__hoengseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B89058224266184",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yangpyeong-gun",
+        "matchedPublisherChildId": "31380",
+        "matchedPublisherChildName": "Yangpyeong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31380__yangpyeong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B33140835215225",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gwangju-si",
+        "matchedPublisherChildId": "31250",
+        "matchedPublisherChildName": "Gwangju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31250__gwangju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B81929081090334",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-name-explicit-suffix-alias",
+      "evidence": {
+        "sourceName": "Yeoju",
+        "matchedPublisherChildId": "31280",
+        "matchedPublisherChildName": "Yeoju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31280__yeoju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "explicitNameAlias": {
+          "source": "Yeoju",
+          "publisher": "Yeoju-si",
+          "reason": "Only the administrative suffix differs; no competing Yeoju source or table child."
+        }
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B41990583973423",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Wonju-si",
+        "matchedPublisherChildId": "32020",
+        "matchedPublisherChildName": "Wonju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32020__wonju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B79863718076959",
+      "macroId": "KOR:macro:citypopulation:32",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongwol-gun",
+        "matchedPublisherChildId": "32330",
+        "matchedPublisherChildName": "Yeongwol-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32330__yeongwol_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B6202152929023",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Icheon-si",
+        "matchedPublisherChildId": "31210",
+        "matchedPublisherChildName": "Icheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31210__icheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B44245642839981",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Eumseong-gun",
+        "matchedPublisherChildId": "33370",
+        "matchedPublisherChildName": "Eumseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33370__eumseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B87543439372548",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Chungju-si",
+        "matchedPublisherChildId": "33020",
+        "matchedPublisherChildName": "Chungju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33020__chungju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B41858032192319",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jecheon-si",
+        "matchedPublisherChildId": "33030",
+        "matchedPublisherChildName": "Jecheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33030__jecheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B46750425552975",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Danyang-gun",
+        "matchedPublisherChildId": "33380",
+        "matchedPublisherChildName": "Danyang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33380__danyang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B73468767289539",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongju-si",
+        "matchedPublisherChildId": "37060",
+        "matchedPublisherChildName": "Yeongju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37060__yeongju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B47987210748527",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Bonghwa-gun",
+        "matchedPublisherChildId": "37410",
+        "matchedPublisherChildName": "Bonghwa-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37410__bonghwa_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B35472999009946",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongyang-gun",
+        "matchedPublisherChildId": "37340",
+        "matchedPublisherChildName": "Yeongyang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37340__yeongyang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B74553451927555",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Goesan-gun",
+        "matchedPublisherChildId": "33360",
+        "matchedPublisherChildName": "Goesan-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33360__goesan_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B75298348451478",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jeungpyeong-gun",
+        "matchedPublisherChildId": "33390",
+        "matchedPublisherChildName": "Jeungpyeong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33390__jeungpyeong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B43065782555772",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Mungyeong-si",
+        "matchedPublisherChildId": "37090",
+        "matchedPublisherChildName": "Mungyeong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37090__mungyeong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B75354784424725",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yecheon-gun",
+        "matchedPublisherChildId": "37400",
+        "matchedPublisherChildName": "Yecheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37400__yecheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B16014600177045",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Andong-si",
+        "matchedPublisherChildId": "37040",
+        "matchedPublisherChildName": "Andong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37040__andong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B32757414449699",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Cheongsong-gun",
+        "matchedPublisherChildId": "37330",
+        "matchedPublisherChildName": "Cheongsong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37330__cheongsong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B48235767363306",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongcheon-si",
+        "matchedPublisherChildId": "37070",
+        "matchedPublisherChildName": "Yeongcheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37070__yeongcheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B30315657457409",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name-with-documented-2020-parent-restoration",
+      "evidence": {
+        "sourceName": "Gunwi-gun",
+        "matchedPublisherChildId": "22320",
+        "matchedPublisherChildName": "Gunwi-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22320__gunwi_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "observedCurrentMacroId": "KOR:macro:citypopulation:22",
+        "temporalCorrection": {
+          "scenarioDate": "2020-01-01",
+          "parentName": "Gyeongsangbuk-do",
+          "parentNameKo": "경상북도",
+          "transferEffectiveDate": "2023-07-01",
+          "laterParent": "Daegu",
+          "law": "Act No.19155, enacted 2023-01-03, effective 2023-07-01",
+          "sources": [
+            "https://www.law.go.kr/LSW/lsInfoP.do?efYd=20230701&lsiSeq=247229",
+            "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=97607",
+            "https://mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000052&nttId=101209"
+          ],
+          "meaning": "The source-represented 2020 county retains Gyeongsangbuk-do membership; current web table Daegu membership must not be copied back in time."
+        }
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B75376031789242",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Uiseong-gun",
+        "matchedPublisherChildId": "37320",
+        "matchedPublisherChildName": "Uiseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37320__uiseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B21539665501577",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sangju-si",
+        "matchedPublisherChildId": "37080",
+        "matchedPublisherChildName": "Sangju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37080__sangju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B86853073591153",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gumi-si",
+        "matchedPublisherChildId": "37050",
+        "matchedPublisherChildName": "Gumi-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37050__gumi_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B36624004409046",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Boeun-gun",
+        "matchedPublisherChildId": "33320",
+        "matchedPublisherChildName": "Boeun-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33320__boeun_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B7472001038353",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Cheongju-si",
+        "matchedPublisherChildId": "33040",
+        "matchedPublisherChildName": "Cheongju-si [← Cheongwon-gun]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33040__cheongju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B53543824194985",
+      "macroId": "KOR:macro:citypopulation:25",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Dong-gu",
+        "matchedPublisherChildId": "25010",
+        "matchedPublisherChildName": "Dong-gu [East District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25010__dong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          127.491,
+          36.379
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B30301323398004",
+      "macroId": "KOR:macro:citypopulation:25",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Jung-gu",
+        "matchedPublisherChildId": "25020",
+        "matchedPublisherChildName": "Jung-gu [Central District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25020__jung_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          127.408,
+          36.297
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B57044302860475",
+      "macroId": "KOR:macro:citypopulation:25",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Seo-gu",
+        "matchedPublisherChildId": "25030",
+        "matchedPublisherChildName": "Seo-gu [West District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25030__seo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          127.33,
+          36.251
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B29564477042831",
+      "macroId": "KOR:macro:citypopulation:25",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Daedeok-gu",
+        "matchedPublisherChildId": "25050",
+        "matchedPublisherChildName": "Daedeok-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25050__daedeok_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B90442190394967",
+      "macroId": "KOR:macro:citypopulation:25",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yuseong-gu",
+        "matchedPublisherChildId": "25040",
+        "matchedPublisherChildName": "Yuseong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25040__yuseong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B40148089014896",
+      "macroId": "KOR:macro:citypopulation:29",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sejong-si",
+        "matchedPublisherChildId": "29010",
+        "matchedPublisherChildName": "Sejong-si [Yeongi-gun]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/sejong/29010__sejong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B50780672353800",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Cheonan-si",
+        "matchedPublisherChildId": "34010",
+        "matchedPublisherChildName": "Cheonan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34010__cheonan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B40614027699537",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jincheon-gun",
+        "matchedPublisherChildId": "33350",
+        "matchedPublisherChildName": "Jincheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33350__jincheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B64740203795166",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Anseong-si",
+        "matchedPublisherChildId": "31220",
+        "matchedPublisherChildName": "Anseong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31220__anseong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B86612267469181",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yongin-si",
+        "matchedPublisherChildId": "31190",
+        "matchedPublisherChildName": "Yongin-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31190__yongin_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B96375859106804",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Osan-si",
+        "matchedPublisherChildId": "31140",
+        "matchedPublisherChildName": "Osan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31140__osan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B85680883794904",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Pyeongtaek-si",
+        "matchedPublisherChildId": "31070",
+        "matchedPublisherChildName": "Pyeongtaek-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31070__pyeongtaek_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B1659695850463",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Okcheon-gun",
+        "matchedPublisherChildId": "33330",
+        "matchedPublisherChildName": "Okcheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33330__okcheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B37299464646583",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gyeongsan-si",
+        "matchedPublisherChildId": "37100",
+        "matchedPublisherChildName": "Gyeongsan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37100__gyeongsan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B59018342058044",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Cheongdo-gun",
+        "matchedPublisherChildId": "37360",
+        "matchedPublisherChildName": "Cheongdo-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37360__cheongdo_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B88513858108060",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Miryang-si",
+        "matchedPublisherChildId": "38080",
+        "matchedPublisherChildName": "Miryang-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38080__miryang_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B1708787718818",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gimhae-si",
+        "matchedPublisherChildId": "38070",
+        "matchedPublisherChildName": "Gimhae-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38070__gimhae_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B44952414610796",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Chilgok-gun",
+        "matchedPublisherChildId": "37390",
+        "matchedPublisherChildName": "Chilgok-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37390__chilgok_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B33489673734556",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dalseong-gun",
+        "matchedPublisherChildId": "22310",
+        "matchedPublisherChildName": "Dalseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22310__dalseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B96924831002014",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Dong-gu",
+        "matchedPublisherChildId": "22020",
+        "matchedPublisherChildName": "Dong-gu [East District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22020__dong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.684,
+          35.945
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B88985387415210",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Goryeong-gun",
+        "matchedPublisherChildId": "37370",
+        "matchedPublisherChildName": "Goryeong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37370__goryeong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B40534015790157",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seongju-gun",
+        "matchedPublisherChildId": "37380",
+        "matchedPublisherChildName": "Seongju-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37380__seongju_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B51485783996699",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gimcheon-si",
+        "matchedPublisherChildId": "37030",
+        "matchedPublisherChildName": "Gimcheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37030__gimcheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B4431337162748",
+      "macroId": "KOR:macro:citypopulation:33",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongdong-gun",
+        "matchedPublisherChildId": "33340",
+        "matchedPublisherChildName": "Yeongdong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongbuk_do/33340__yeongdong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B68842805087026",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Geumsan-gun",
+        "matchedPublisherChildId": "34310",
+        "matchedPublisherChildName": "Geumsan-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34310__geumsan_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B70392770223342",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gyeryong-si",
+        "matchedPublisherChildId": "34070",
+        "matchedPublisherChildName": "Gyeryong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34070__gyeryong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B8449507929864",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gongju-si",
+        "matchedPublisherChildId": "34020",
+        "matchedPublisherChildName": "Gongju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34020__gongju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B56248521536513",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Asan-si",
+        "matchedPublisherChildId": "34040",
+        "matchedPublisherChildName": "Asan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34040__asan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B1629367715088",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yesan-gun",
+        "matchedPublisherChildId": "34370",
+        "matchedPublisherChildName": "Yesan-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34370__yesan_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B7861346133014",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Cheongyang-gun",
+        "matchedPublisherChildId": "34350",
+        "matchedPublisherChildName": "Cheongyang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34350__cheongyang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B11377751855609",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Nonsan-si",
+        "matchedPublisherChildId": "34060",
+        "matchedPublisherChildName": "Nonsan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34060__nonsan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B35509676151777",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Buyeo-gun",
+        "matchedPublisherChildId": "34330",
+        "matchedPublisherChildName": "Buyeo-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34330__buyeo_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B39611758954351",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Changnyeong-gun",
+        "matchedPublisherChildId": "38330",
+        "matchedPublisherChildName": "Changnyeong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38330__changnyeong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B92973690121395",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hapcheon-gun",
+        "matchedPublisherChildId": "38400",
+        "matchedPublisherChildName": "Hapcheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38400__hapcheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B90592918780723",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Uiryeong-gun",
+        "matchedPublisherChildId": "38310",
+        "matchedPublisherChildName": "Uiryeong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38310__uiryeong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B30389585516178",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Haman-gun",
+        "matchedPublisherChildId": "38320",
+        "matchedPublisherChildName": "Haman-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38320__haman_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B91736183236009",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Geochang-gun",
+        "matchedPublisherChildId": "38390",
+        "matchedPublisherChildName": "Geochang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38390__geochang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B53198155341948",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Muju-gun",
+        "matchedPublisherChildId": "35330",
+        "matchedPublisherChildName": "Muju-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35330__muju_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B59476098361869",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hamyang-gun",
+        "matchedPublisherChildId": "38380",
+        "matchedPublisherChildName": "Hamyang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38380__hamyang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B92610564128426",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sancheong-gun",
+        "matchedPublisherChildId": "38370",
+        "matchedPublisherChildName": "Sancheong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38370__sancheong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B32789615967236",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jinju-si",
+        "matchedPublisherChildId": "38030",
+        "matchedPublisherChildName": "Jinju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38030__jinju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B93090957259339",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jangsu-gun",
+        "matchedPublisherChildId": "35340",
+        "matchedPublisherChildName": "Jangsu-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35340__jangsu_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B51132506733028",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jinan-gun",
+        "matchedPublisherChildId": "35320",
+        "matchedPublisherChildName": "Jinan-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35320__jinan_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B88957070935676",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jeonju-si",
+        "matchedPublisherChildId": "35010",
+        "matchedPublisherChildName": "Jeonju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35010__jeonju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B60221740281290",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Wanju-gun",
+        "matchedPublisherChildId": "35310",
+        "matchedPublisherChildName": "Wanju-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35310__wanju_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B56582975498752",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Iksan-si",
+        "matchedPublisherChildId": "35030",
+        "matchedPublisherChildName": "Iksan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35030__iksan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B86480113122364",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Imsil-gun",
+        "matchedPublisherChildId": "35350",
+        "matchedPublisherChildName": "Imsil-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35350__imsil_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B14892127844453",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jeongeup-si",
+        "matchedPublisherChildId": "35040",
+        "matchedPublisherChildName": "Jeongeup-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35040__jeongeup_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B21680824294868",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Namwon-si",
+        "matchedPublisherChildId": "35050",
+        "matchedPublisherChildName": "Namwon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35050__namwon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B23901291202395",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sunchang-gun",
+        "matchedPublisherChildId": "35360",
+        "matchedPublisherChildName": "Sunchang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35360__sunchang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B48783047676904",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Damyang-gun",
+        "matchedPublisherChildId": "36310",
+        "matchedPublisherChildName": "Damyang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36310__damyang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B55822624410007",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gokseong-gun",
+        "matchedPublisherChildId": "36320",
+        "matchedPublisherChildName": "Gokseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36320__gokseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B46219646335198",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gurye-gun",
+        "matchedPublisherChildId": "36330",
+        "matchedPublisherChildName": "Gurye-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36330__gurye_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B60872934813823",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hwasun-gun",
+        "matchedPublisherChildId": "36370",
+        "matchedPublisherChildName": "Hwasun-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36370__hwasun_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B40505476377979",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Naju-si",
+        "matchedPublisherChildId": "36040",
+        "matchedPublisherChildName": "Naju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36040__naju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B75710427976091",
+      "macroId": "KOR:macro:citypopulation:24",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Buk-gu",
+        "matchedPublisherChildId": "24040",
+        "matchedPublisherChildName": "Buk-gu [North Distrikt]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24040__buk_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.905,
+          35.206
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B35753357340942",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gimje-si",
+        "matchedPublisherChildId": "35060",
+        "matchedPublisherChildName": "Gimje-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35060__gimje_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B44911241756091",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Buan-gun",
+        "matchedPublisherChildId": "35380",
+        "matchedPublisherChildName": "Buan-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35380__buan_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B73468302874709",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gochang-gun",
+        "matchedPublisherChildId": "35370",
+        "matchedPublisherChildName": "Gochang-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35370__gochang_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B915295689263",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jangseong-gun",
+        "matchedPublisherChildId": "36450",
+        "matchedPublisherChildName": "Jangseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36450__jangseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B7912985797785",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hampyeong-gun",
+        "matchedPublisherChildId": "36430",
+        "matchedPublisherChildName": "Hampyeong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36430__hampyeong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B67324121140218",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jangheung-gun",
+        "matchedPublisherChildId": "36380",
+        "matchedPublisherChildName": "Jangheung-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36380__jangheung_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B37660936440541",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gangjin-gun",
+        "matchedPublisherChildId": "36390",
+        "matchedPublisherChildName": "Gangjin-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36390__gangjin_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B93885607227135",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Haenam-gun",
+        "matchedPublisherChildId": "36400",
+        "matchedPublisherChildName": "Haenam-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36400__haenam_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B36456413113015",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongam-gun",
+        "matchedPublisherChildId": "36410",
+        "matchedPublisherChildName": "Yeongam-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36410__yeongam_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B27152027053647",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Boseong-gun",
+        "matchedPublisherChildId": "36360",
+        "matchedPublisherChildName": "Boseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36360__boseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B16002130574290",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Suncheon-si",
+        "matchedPublisherChildId": "36030",
+        "matchedPublisherChildName": "Suncheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36030__suncheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B6691327376510",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seocheon-gun",
+        "matchedPublisherChildId": "34340",
+        "matchedPublisherChildName": "Seocheon-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34340__seocheon_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B43357769940671",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hongseong-gun",
+        "matchedPublisherChildId": "34360",
+        "matchedPublisherChildName": "Hongseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34360__hongseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B60871253292980",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seosan-si",
+        "matchedPublisherChildId": "34050",
+        "matchedPublisherChildName": "Seosan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34050__seosan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B24929628173287",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Ganghwa-gun",
+        "matchedPublisherChildId": "23310",
+        "matchedPublisherChildName": "Ganghwa-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23310__ganghwa_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B93241302453804",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gimpo-si",
+        "matchedPublisherChildId": "31230",
+        "matchedPublisherChildName": "Gimpo-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31230__gimpo_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B14253606839965",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Paju-si",
+        "matchedPublisherChildId": "31200",
+        "matchedPublisherChildName": "Paju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31200__paju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B27371207272645",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Goyang-si",
+        "matchedPublisherChildId": "31100",
+        "matchedPublisherChildName": "Goyang-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31100__goyang_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B42166609445104",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yangju-si",
+        "matchedPublisherChildId": "31260",
+        "matchedPublisherChildName": "Yangju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31260__yangju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B6871011244235",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Uijeongbu-si",
+        "matchedPublisherChildId": "31030",
+        "matchedPublisherChildName": "Uijeongbu-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31030__uijeongbu_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B38772026787440",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Namyangju-si",
+        "matchedPublisherChildId": "31130",
+        "matchedPublisherChildName": "Namyangju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31130__namyangju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B94836834309250",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seongnam-si",
+        "matchedPublisherChildId": "31020",
+        "matchedPublisherChildName": "Seongnam-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31020__seongnam_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B43312282385471",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Suwon-si",
+        "matchedPublisherChildId": "31010",
+        "matchedPublisherChildName": "Suwon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31010__suwon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B68494559899558",
+      "macroId": "KOR:macro:citypopulation:24",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Nam-gu [South District]",
+        "matchedPublisherChildId": "24030",
+        "matchedPublisherChildName": "Nam-gu [South District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24030__nam_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.895,
+          35.099
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B89733153975870",
+      "macroId": "KOR:macro:citypopulation:24",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Dong-gu [East District]",
+        "matchedPublisherChildId": "24010",
+        "matchedPublisherChildName": "Dong-gu [East District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24010__dong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.952,
+          35.11
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B16538338684661",
+      "macroId": "KOR:macro:citypopulation:24",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gwangsan-gu",
+        "matchedPublisherChildId": "24050",
+        "matchedPublisherChildName": "Gwangsan-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24050__gwangsan_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B87996420220515",
+      "macroId": "KOR:macro:citypopulation:24",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Seo-gu [West District]",
+        "matchedPublisherChildId": "24020",
+        "matchedPublisherChildName": "Seo-gu [West District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24020__seo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.856,
+          35.141
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B33034423068968",
+      "macroId": "KOR:macro:citypopulation:26",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Dong-gu [East District]",
+        "matchedPublisherChildId": "26030",
+        "matchedPublisherChildName": "Dong-gu [East District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26030__dong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.431,
+          35.545
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B65451529480853",
+      "macroId": "KOR:macro:citypopulation:26",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Nam-gu [South District]",
+        "matchedPublisherChildId": "26020",
+        "matchedPublisherChildName": "Nam-gu [South District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26020__nam_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.331,
+          35.519
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B57927404517776",
+      "macroId": "KOR:macro:citypopulation:26",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Jung-gu [Central District]",
+        "matchedPublisherChildId": "26010",
+        "matchedPublisherChildName": "Jung-gu [Central District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26010__jung_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.326,
+          35.572
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B8006777837161",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Haeundae-gu",
+        "matchedPublisherChildId": "21090",
+        "matchedPublisherChildName": "Haeundae-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21090__haeundae_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B87761816793360",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Geumjeong-gu",
+        "matchedPublisherChildId": "21110",
+        "matchedPublisherChildName": "Geumjeong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21110__geumjeong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B37722151409475",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Buk-gu [North Distrikt]",
+        "matchedPublisherChildId": "21080",
+        "matchedPublisherChildName": "Buk-gu [North Distrikt]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21080__buk_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.023,
+          35.221
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B26152541530210",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Changwon-si",
+        "matchedPublisherChildId": "38110",
+        "matchedPublisherChildName": "Changwon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38110__changwon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B97433571779884",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Goseong-gun",
+        "matchedPublisherChildId": "38340",
+        "matchedPublisherChildName": "Goseong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38340__goseong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.276,
+          35.033
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B75900877128055",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sacheon-si",
+        "matchedPublisherChildId": "38060",
+        "matchedPublisherChildName": "Sacheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38060__sacheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B17319558643664",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hadong-gun",
+        "matchedPublisherChildId": "38360",
+        "matchedPublisherChildName": "Hadong-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38360__hadong_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B99071511370380",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gwangyang-si",
+        "matchedPublisherChildId": "36060",
+        "matchedPublisherChildName": "Gwangyang-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36060__gwangyang_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B30407776748413",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Namhae-gun",
+        "matchedPublisherChildId": "38350",
+        "matchedPublisherChildName": "Namhae-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38350__namhae_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B95262291256995",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Tongyeong-si",
+        "matchedPublisherChildId": "38050",
+        "matchedPublisherChildName": "Tongyeong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38050__tongyeong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B58127051569150",
+      "macroId": "KOR:macro:citypopulation:38",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Geoje-si",
+        "matchedPublisherChildId": "38090",
+        "matchedPublisherChildName": "Geoje-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38090__geoje_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B15590775835688",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Saha-gu",
+        "matchedPublisherChildId": "21100",
+        "matchedPublisherChildName": "Saha-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21100__saha_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B63526671374694",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongdo-gu",
+        "matchedPublisherChildId": "21040",
+        "matchedPublisherChildName": "Yeongdo-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21040__yeongdo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B12008242239928",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dongnae-gu",
+        "matchedPublisherChildId": "21060",
+        "matchedPublisherChildName": "Dongnae-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21060__dongnae_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B55707549130569",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Suyeong-gu",
+        "matchedPublisherChildId": "21140",
+        "matchedPublisherChildName": "Suyeong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21140__suyeong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B90297389150949",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeonje-gu",
+        "matchedPublisherChildId": "21130",
+        "matchedPublisherChildName": "Yeonje-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21130__yeonje_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B11476058556898",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Nam-gu [South District]",
+        "matchedPublisherChildId": "21070",
+        "matchedPublisherChildName": "Nam-gu [South District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21070__nam_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.091,
+          35.129
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B85909931268472",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Jung-gu [Central District]",
+        "matchedPublisherChildId": "21010",
+        "matchedPublisherChildName": "Jung-gu [Central District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21010__jung_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.031,
+          35.104
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B65504384218086",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Seo-gu [West District]",
+        "matchedPublisherChildId": "21020",
+        "matchedPublisherChildName": "Seo-gu [West District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21020__seo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.013,
+          35.122
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B32751924176777",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Busanjin-gu",
+        "matchedPublisherChildId": "21050",
+        "matchedPublisherChildName": "Busanjin-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21050__busanjin_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B24548286345957",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Dong-gu [East District]",
+        "matchedPublisherChildId": "21030",
+        "matchedPublisherChildName": "Dong-gu [East District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21030__dong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          129.039,
+          35.126
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B91211823266814",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Gangseo-gu",
+        "matchedPublisherChildId": "21120",
+        "matchedPublisherChildName": "Gangseo-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21120__gangseo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.921,
+          35.164
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B78599330358722",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Goheung-gun",
+        "matchedPublisherChildId": "36350",
+        "matchedPublisherChildName": "Goheung-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36350__goheung_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B85222249357664",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Wando-gun",
+        "matchedPublisherChildId": "36460",
+        "matchedPublisherChildName": "Wando-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36460__wando_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B20286966250971",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Muan-gun",
+        "matchedPublisherChildId": "36420",
+        "matchedPublisherChildName": "Muan-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36420__muan_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B26607970527366",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Mokpo-si",
+        "matchedPublisherChildId": "36010",
+        "matchedPublisherChildName": "Mokpo-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36010__mokpo_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B85110926045998",
+      "macroId": "KOR:macro:citypopulation:39",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seogwipo-si",
+        "matchedPublisherChildId": "39020",
+        "matchedPublisherChildName": "Seogwipo-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeju_do/39020__seogwipo_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B29624883381183",
+      "macroId": "KOR:macro:citypopulation:39",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jeju-si",
+        "matchedPublisherChildId": "39010",
+        "matchedPublisherChildName": "Jeju-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeju_do/39010__jeju_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B49679347075852",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Suseong-gu",
+        "matchedPublisherChildId": "22060",
+        "matchedPublisherChildName": "Suseong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22060__suseong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B84202113891253",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Buk-gu [North Distrikt]",
+        "matchedPublisherChildId": "22050",
+        "matchedPublisherChildName": "Buk-gu [North Distrikt]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22050__buk_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.582,
+          35.93
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B37138617445780",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Seo-gu [West District]",
+        "matchedPublisherChildId": "22030",
+        "matchedPublisherChildName": "Seo-gu [West District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22030__seo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.55,
+          35.874
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B11201690622195",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Jung-gu [Central District]",
+        "matchedPublisherChildId": "22010",
+        "matchedPublisherChildName": "Jung-gu [Central District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22010__jung_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.591,
+          35.867
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B72214553011774",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Nam-gu [South District]",
+        "matchedPublisherChildId": "22040",
+        "matchedPublisherChildName": "Nam-gu [South District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22040__nam_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          128.586,
+          35.835
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B1574399427608",
+      "macroId": "KOR:macro:citypopulation:22",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dalseo-gu",
+        "matchedPublisherChildId": "22070",
+        "matchedPublisherChildName": "Dalseo-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/daegu/22070__dalseo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B58085958229296",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hwaseong-si",
+        "matchedPublisherChildId": "31240",
+        "matchedPublisherChildName": "Hwaseong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31240__hwaseong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B720891985776",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dangjin-si",
+        "matchedPublisherChildId": "34080",
+        "matchedPublisherChildName": "Dangjin-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34080__dangjin_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B6497324316239",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Jung-gu [Central District]",
+        "matchedPublisherChildId": "23010",
+        "matchedPublisherChildName": "Jung-gu [Central District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23010__jung_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.44,
+          37.464
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B43125449030549",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Ongjin-gun",
+        "matchedPublisherChildId": "23320",
+        "matchedPublisherChildName": "Ongjin-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23320__ongjin_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B78801700081843",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Boryeong-si",
+        "matchedPublisherChildId": "34030",
+        "matchedPublisherChildName": "Boryeong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34030__boryeong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B59614790278386",
+      "macroId": "KOR:macro:citypopulation:34",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Taean-gun",
+        "matchedPublisherChildId": "34380",
+        "matchedPublisherChildName": "Taean-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/chungcheongnam_do/34380__taean_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B14745943099772",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeonsu-gu",
+        "matchedPublisherChildId": "23040",
+        "matchedPublisherChildName": "Yeonsu-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23040__yeonsu_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B54049766777888",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Namdong-gu",
+        "matchedPublisherChildId": "23050",
+        "matchedPublisherChildName": "Namdong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23050__namdong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B37911583032119",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Siheung-si",
+        "matchedPublisherChildId": "31150",
+        "matchedPublisherChildName": "Siheung-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31150__siheung_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B39459501575733",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Ansan-si",
+        "matchedPublisherChildId": "31090",
+        "matchedPublisherChildName": "Ansan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31090__ansan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B44728384221537",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Uiwang-si",
+        "matchedPublisherChildId": "31170",
+        "matchedPublisherChildName": "Uiwang-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31170__uiwang_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B51138241033746",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gunpo-si",
+        "matchedPublisherChildId": "31160",
+        "matchedPublisherChildName": "Gunpo-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31160__gunpo_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B14096955932506",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gwacheon-si",
+        "matchedPublisherChildId": "31110",
+        "matchedPublisherChildName": "Gwacheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31110__gwacheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B3942656644244",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gwangmyeong-si",
+        "matchedPublisherChildId": "31060",
+        "matchedPublisherChildName": "Gwangmyeong-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31060__gwangmyeong_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B16033238555875",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Michuhol-gu [Nam-gu]",
+        "matchedPublisherChildId": "23090",
+        "matchedPublisherChildName": "Michuhol-gu [Nam-gu]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23090__michuhol_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B43546326994356",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Dong-gu [East District]",
+        "matchedPublisherChildId": "23020",
+        "matchedPublisherChildName": "Dong-gu [East District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23020__dong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.642,
+          37.482
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B73279111808647",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Seo-gu [West District]",
+        "matchedPublisherChildId": "23080",
+        "matchedPublisherChildName": "Seo-gu [West District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23080__seo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.646,
+          37.557
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B94833670639499",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gyeyang-gu",
+        "matchedPublisherChildId": "23070",
+        "matchedPublisherChildName": "Gyeyang-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23070__gyeyang_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B45509654992593",
+      "macroId": "KOR:macro:citypopulation:23",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Bupyeong-gu",
+        "matchedPublisherChildId": "23060",
+        "matchedPublisherChildName": "Bupyeong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/incheon/23060__bupyeong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B41928523553758",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Bucheon-si",
+        "matchedPublisherChildId": "31050",
+        "matchedPublisherChildName": "Bucheon-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31050__bucheon_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B75936691302089",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "same-name-and-representative-covered",
+      "evidence": {
+        "sourceName": "Gangseo-gu",
+        "matchedPublisherChildId": "11160",
+        "matchedPublisherChildName": "Gangseo-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11160__gangseo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "representative": [
+          126.816,
+          37.566
+        ],
+        "representativeCovered": true
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B2886775060222",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Hanam-si",
+        "matchedPublisherChildId": "31180",
+        "matchedPublisherChildName": "Hanam-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31180__hanam_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B5684950588758",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Guri-si",
+        "matchedPublisherChildId": "31120",
+        "matchedPublisherChildName": "Guri-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31120__guri_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B8309013283439",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gangdong-gu",
+        "matchedPublisherChildId": "11250",
+        "matchedPublisherChildName": "Gangdong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11250__gangdong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B10131618900015",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Songpa-gu",
+        "matchedPublisherChildId": "11240",
+        "matchedPublisherChildName": "Songpa-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11240__songpa_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B5725333816693",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seocho-gu",
+        "matchedPublisherChildId": "11220",
+        "matchedPublisherChildName": "Seocho-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11220__seocho_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B53321453404308",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gangnam-gu",
+        "matchedPublisherChildId": "11230",
+        "matchedPublisherChildName": "Gangnam-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11230__gangnam_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B6950995223857",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Nowon-gu",
+        "matchedPublisherChildId": "11110",
+        "matchedPublisherChildName": "Nowon-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11110__nowon_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B55050579859044",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dobong-gu",
+        "matchedPublisherChildId": "11100",
+        "matchedPublisherChildName": "Dobong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11100__dobong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B92844029998138",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gangbuk-gu",
+        "matchedPublisherChildId": "11090",
+        "matchedPublisherChildName": "Gangbuk-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11090__gangbuk_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B66829558888986",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jungnang-gu",
+        "matchedPublisherChildId": "11070",
+        "matchedPublisherChildName": "Jungnang-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11070__jungnang_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B53616587081026",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Eunpyeong-gu",
+        "matchedPublisherChildId": "11120",
+        "matchedPublisherChildName": "Eunpyeong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11120__eunpyeong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B55576639555152",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jongno-gu",
+        "matchedPublisherChildId": "11010",
+        "matchedPublisherChildName": "Jongno-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11010__jongno_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B19736947579274",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seongbuk-gu",
+        "matchedPublisherChildId": "11080",
+        "matchedPublisherChildName": "Seongbuk-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11080__seongbuk_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B25965069984368",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dongdaemun-gu",
+        "matchedPublisherChildId": "11060",
+        "matchedPublisherChildName": "Dongdaemun-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11060__dongdaemun_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B49246193334347",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gwangjin-gu",
+        "matchedPublisherChildId": "11050",
+        "matchedPublisherChildName": "Gwangjin-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11050__gwangjin_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B63185877293812",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seongdong-gu",
+        "matchedPublisherChildId": "11040",
+        "matchedPublisherChildName": "Seongdong-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11040__seongdong_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B29418542168397",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "same-name-group-bijection-elimination",
+      "evidence": {
+        "sourceName": "Jung-gu [Central District]",
+        "matchedPublisherChildId": "11020",
+        "matchedPublisherChildName": "Jung-gu [Central District]",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11020__jung_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/",
+        "bijection": {
+          "sourceGroupCount": 6,
+          "officialChildGroupCount": 6,
+          "alreadyUniquelyVerified": 5,
+          "remainingOfficialChild": "11020",
+          "representativeCovered": false,
+          "nearestBoundaryPoint": [
+            127.00374601109804,
+            37.55771843173546
+          ],
+          "representativeBoundaryDistanceKm": 0.1442520866179763,
+          "condition": "All six source Jung-gu units and all six official Jung-gu table children are present. Five pairs are independently fixed by a same-name representative within source geometry. The remaining one-to-one pair is unique; no nearest-area parent assignment."
+        }
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B50347392057391",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yongsan-gu",
+        "matchedPublisherChildId": "11030",
+        "matchedPublisherChildName": "Yongsan-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11030__yongsan_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B72690271662871",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Dongjak-gu",
+        "matchedPublisherChildId": "11200",
+        "matchedPublisherChildName": "Dongjak-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11200__dongjak_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B65126245655882",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Seodaemun-gu",
+        "matchedPublisherChildId": "11130",
+        "matchedPublisherChildName": "Seodaemun-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11130__seodaemun_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B14643286354390",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Mapo-gu",
+        "matchedPublisherChildId": "11140",
+        "matchedPublisherChildName": "Mapo-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11140__mapo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B5490200958143",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeongdeungpo-gu",
+        "matchedPublisherChildId": "11190",
+        "matchedPublisherChildName": "Yeongdeungpo-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11190__yeongdeungpo_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B99536699865294",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gwanak-gu",
+        "matchedPublisherChildId": "11210",
+        "matchedPublisherChildName": "Gwanak-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11210__gwanak_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B1968034056748",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Guro-gu",
+        "matchedPublisherChildId": "11170",
+        "matchedPublisherChildName": "Guro-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11170__guro_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B8017156108400",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yangcheon-gu",
+        "matchedPublisherChildId": "11150",
+        "matchedPublisherChildName": "Yangcheon-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11150__yangcheon_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B69479464976516",
+      "macroId": "KOR:macro:citypopulation:11",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Geumcheon-gu",
+        "matchedPublisherChildId": "11180",
+        "matchedPublisherChildName": "Geumcheon-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/seoul/11180__geumcheon_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B51344731064077",
+      "macroId": "KOR:macro:citypopulation:35",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Gunsan-si",
+        "matchedPublisherChildId": "35020",
+        "matchedPublisherChildName": "Gunsan-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollabuk_do/35020__gunsan_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B50207003035",
+      "macroId": "KOR:macro:citypopulation:21",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sasang-gu",
+        "matchedPublisherChildId": "21150",
+        "matchedPublisherChildName": "Sasang-gu",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/busan/21150__sasang_gu/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B8944082307158",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Yeosu-si",
+        "matchedPublisherChildId": "36020",
+        "matchedPublisherChildName": "Yeosu-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36020__yeosu_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B30491742711894",
+      "macroId": "KOR:macro:citypopulation:31",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Anyang-si",
+        "matchedPublisherChildId": "31040",
+        "matchedPublisherChildName": "Anyang-si",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeonggi_do/31040__anyang_si/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B56099735913612",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Jindo-gun",
+        "matchedPublisherChildId": "36470",
+        "matchedPublisherChildName": "Jindo-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36470__jindo_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B46467557111645",
+      "macroId": "KOR:macro:citypopulation:36",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Sinan-gun",
+        "matchedPublisherChildId": "36480",
+        "matchedPublisherChildName": "Sinan-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/jeollanam_do/36480__sinan_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    },
+    {
+      "sourceFeatureId": "91817680B98862203953263",
+      "macroId": "KOR:macro:citypopulation:37",
+      "method": "unique-source-name",
+      "evidence": {
+        "sourceName": "Ulleung-gun",
+        "matchedPublisherChildId": "37430",
+        "matchedPublisherChildName": "Ulleung-gun",
+        "publisherChildUrl": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangbuk_do/37430__ulleung_gun/",
+        "publisherTableUrl": "https://www.citypopulation.de/en/southkorea/admin/"
+      }
+    }
+  ],
+  "verification": {
+    "schemaVersion": "fine-macro-hierarchy-verification-v1",
+    "complete": true,
+    "unresolved": [],
+    "sourceFeatures": 228,
+    "macroGroups": 17,
+    "publisherChildren": 229,
+    "uniqueMappedPublisherChildren": 228,
+    "methods": {
+      "unique-source-name": 197,
+      "same-name-and-representative-covered": 28,
+      "unique-name-explicit-suffix-alias": 1,
+      "unique-source-name-with-documented-2020-parent-restoration": 1,
+      "same-name-group-bijection-elimination": 1
+    },
+    "counts": {
+      "KOR:macro:citypopulation:21": 16,
+      "KOR:macro:citypopulation:33": 11,
+      "KOR:macro:citypopulation:34": 15,
+      "KOR:macro:citypopulation:22": 8,
+      "KOR:macro:citypopulation:25": 5,
+      "KOR:macro:citypopulation:32": 18,
+      "KOR:macro:citypopulation:24": 5,
+      "KOR:macro:citypopulation:31": 31,
+      "KOR:macro:citypopulation:37": 23,
+      "KOR:macro:citypopulation:38": 18,
+      "KOR:macro:citypopulation:23": 10,
+      "KOR:macro:citypopulation:39": 2,
+      "KOR:macro:citypopulation:35": 14,
+      "KOR:macro:citypopulation:36": 21,
+      "KOR:macro:citypopulation:29": 1,
+      "KOR:macro:citypopulation:11": 25,
+      "KOR:macro:citypopulation:26": 5
+    },
+    "unmatchedPublisherChildren": [
+      {
+        "id": "36440",
+        "name": "Yeonggwang-gun",
+        "parent": {
+          "id": "36",
+          "name": "Jeollanam-do [South Jeolla]",
+          "native": "전라남도",
+          "href": "/en/southkorea/admin/36__jeollanam_do/"
+        }
+      }
+    ],
+    "representativeNonCoveringBijection": [
+      {
+        "sourceFeatureId": "91817680B29418542168397",
+        "macroId": "KOR:macro:citypopulation:11",
+        "sourceGroupCount": 6,
+        "officialChildGroupCount": 6,
+        "alreadyUniquelyVerified": 5,
+        "remainingOfficialChild": "11020",
+        "representativeCovered": false,
+        "nearestBoundaryPoint": [
+          127.00374601109804,
+          37.55771843173546
+        ],
+        "representativeBoundaryDistanceKm": 0.1442520866179763,
+        "condition": "All six source Jung-gu units and all six official Jung-gu table children are present. Five pairs are independently fixed by a same-name representative within source geometry. The remaining one-to-one pair is unique; no nearest-area parent assignment."
+      }
+    ],
+    "temporalCorrections": 1,
+    "oldNaturalEarthParentGeometryUsed": false,
+    "oldParentMajorityUsed": false,
+    "geometryModified": false,
+    "meaning": "Complete means all published fine source identities have one evidenced macro group. It does not claim complete national ADM2 coverage or certify the exact 2020-01-01 hierarchy or boundary geometry."
+  },
+  "temporalCoverage": {
+    "representedFineSourceYear": 2020,
+    "scenarioDate": "2020-01-01",
+    "hierarchyFactsRetrievedAt": "2026-10-30T01:20:13.788Z",
+    "documentedCorrections": [
+      "Gunwi restored to Gyeongsangbuk-do before 2023-07-01 transfer"
+    ],
+    "caveat": "Current publisher facts plus documented temporal correction. Not certification of exact administrative boundaries on 2020-01-01."
+  },
+  "attribution": "Administrative hierarchy facts extracted from Thomas Brinkhoff / City Population, https://www.citypopulation.de/en/southkorea/admin/. Fine geometry source is separately pinned in KOR-ADM2-2020.json. Gunwi transfer effective date verified from Ministry of the Interior and Safety and the National Law Information Center. No population data, source map geometry or site prose is redistributed in this hierarchy artifact."
+}

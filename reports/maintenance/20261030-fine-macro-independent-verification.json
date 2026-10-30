@@ -1,0 +1,281 @@
+{
+  "date": "2026-10-30",
+  "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+  "bundlePath": "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json",
+  "inputPin": {
+    "path": "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json",
+    "sha256": "ce438f6027baa0a0ff8831b224b32ceadd7377791604395d89b5a8b3d491aa3d",
+    "byteLength": 75275879
+  },
+  "pass": true,
+  "counts": {
+    "countries": 247,
+    "cells": 4718,
+    "edges": 17238,
+    "administrativeParents": 4232,
+    "previousParents": 4231
+  },
+  "countries": [
+    {
+      "country": "KOR",
+      "cells": 322,
+      "fineCells": 289,
+      "residualCells": 33,
+      "macroGroups": 17,
+      "invalid": 0,
+      "duplicates": 0,
+      "bboxCandidatePairs": 852,
+      "interiorIntersections": 0,
+      "pairClipPositive": 0,
+      "pairErrors": 0,
+      "boundaryContacts": 660,
+      "sourceContainmentContract": "unchanged original source plus independently verified former-residual additions",
+      "sourceOutsideMaximumDegreesSquared": 0.011188474272882398,
+      "unadjustedSourceOutsideMaximumDegreesSquared": 8.433287559717104e-14,
+      "adjustedFineCells": 134,
+      "countryOutsideMaximumDegreesSquared": 5.2051050440844217e-14,
+      "hierarchyMismatches": 0,
+      "residualsChanged": 31,
+      "residualIdentityContract": "remaining residual area audited against the pinned pre-adjustment mesh",
+      "unionMissingAreaDegreesSquared": 1.3059900219756994e-12,
+      "unionExtraAreaDegreesSquared": 1.3130012436509422e-12,
+      "unionComponents": 53,
+      "unionHoles": 0,
+      "expectedComponents": 53,
+      "expectedHoles": 0,
+      "summedAreaMinusEnvelopeDegreesSquared": 7.105427357601002e-15
+    },
+    {
+      "country": "PRK",
+      "cells": 194,
+      "fineCells": 192,
+      "residualCells": 2,
+      "macroGroups": 11,
+      "invalid": 0,
+      "duplicates": 0,
+      "bboxCandidatePairs": 549,
+      "interiorIntersections": 0,
+      "pairClipPositive": 0,
+      "pairErrors": 0,
+      "boundaryContacts": 448,
+      "sourceContainmentContract": "unchanged original source plus independently verified former-residual additions",
+      "sourceOutsideMaximumDegreesSquared": 0.011400745397806906,
+      "unadjustedSourceOutsideMaximumDegreesSquared": 7.56068285406104e-14,
+      "adjustedFineCells": 95,
+      "countryOutsideMaximumDegreesSquared": 6.985021586098495e-14,
+      "hierarchyMismatches": 0,
+      "residualsChanged": 2,
+      "residualIdentityContract": "remaining residual area audited against the pinned pre-adjustment mesh",
+      "unionMissingAreaDegreesSquared": 1.3179606606631196e-12,
+      "unionExtraAreaDegreesSquared": 1.2310098832382414e-12,
+      "unionComponents": 10,
+      "unionHoles": 0,
+      "expectedComponents": 10,
+      "expectedHoles": 0,
+      "summedAreaMinusEnvelopeDegreesSquared": -9.059419880941277e-14
+    }
+  ],
+  "unchangedCountries": 245,
+  "nationalEdgesByteExact": false,
+  "nationalBoundaryContract": "gameplay reconciliation with independently verified source-family inclusion and residual-only additions",
+  "nationalBoundaryVerification": {
+    "path": "reports/maintenance/20261030-western-sector-independent-verification.json",
+    "sha256": "62be6912793b6137125f15b74f74f81b26a9db6c0890cdd4f01fb4c072081bb3",
+    "byteLength": 370222
+  },
+  "nationalCounts": {
+    "CHN|PRK": 25,
+    "KOR|PRK": 13,
+    "PRK|RUS": 1
+  },
+  "adjacency": {
+    "missingAdjacency": 0,
+    "phantomAdjacency": 0
+  },
+  "macro": {
+    "macroEdges": 278,
+    "macroNotFineBoundary": 0,
+    "macroSameSourceSeams": 0,
+    "macroLabelsEqual": 0
+  },
+  "decodedTileAlignment": {
+    "tiles": 15,
+    "koreaEdges": 10281,
+    "samples": 558162,
+    "maximumBoundaryDistanceQuantizationUnits": 1.028991510855053,
+    "strictThresholdQuantizationUnits": 1.01,
+    "overOneUnit": 2,
+    "certifiedCollinearRoundingCorners": 2,
+    "uncertifiedThresholdExceedances": 0,
+    "missingAdjacentFeature": 0,
+    "examples": [
+      {
+        "z": 5,
+        "x": 27,
+        "y": 12,
+        "edge": 16249,
+        "cell": 1663,
+        "distance": 1.028991510855053,
+        "point": {
+          "x": 702,
+          "y": 102
+        },
+        "certified": true
+      },
+      {
+        "z": 5,
+        "x": 27,
+        "y": 12,
+        "edge": 16405,
+        "cell": 1663,
+        "distance": 1.028991510855053,
+        "point": {
+          "x": 702,
+          "y": 102
+        },
+        "certified": true
+      }
+    ],
+    "cornerCertificates": [
+      {
+        "z": 5,
+        "x": 27,
+        "y": 12,
+        "edge": 16249,
+        "cell": 1663,
+        "decodedPoint": {
+          "x": 702,
+          "y": 102
+        },
+        "decodedPolygonSegment": [
+          {
+            "x": 704,
+            "y": 102
+          },
+          {
+            "x": 699,
+            "y": 105
+          }
+        ],
+        "worldPoint": [
+          125.678992287466,
+          40.767124152609
+        ],
+        "worldPolygonSegment": [
+          [
+            125.682643,
+            40.768882
+          ],
+          [
+            125.668691,
+            40.762164
+          ]
+        ],
+        "worldSegmentParameter": 0.2616623089075881,
+        "worldSegmentDistanceDegrees": 2.699015933591488e-13,
+        "projectedPoint": {
+          "x": 702.3246586187306,
+          "y": 102.45071295373782
+        },
+        "projectedPolygonSegment": [
+          {
+            "x": 703.6538424888859,
+            "y": 101.60565533583576
+          },
+          {
+            "x": 698.5740743111091,
+            "y": 104.83510816131457
+          }
+        ],
+        "roundingErrors": {
+          "edgeVertex": 0.555468617820249,
+          "polygonA": 0.5247215801313517,
+          "polygonB": 0.45672969130790514
+        },
+        "mercatorCollinearSubdivisionDeviationQuantizationUnits": 0.000031535079145357506,
+        "weightedPolygonRoundingErrorBound": 0.5069306655148207,
+        "triangleInequalityBoundQuantizationUnits": 1.062430818414215,
+        "observedBoundaryDistanceQuantizationUnits": 1.028991510855053,
+        "native512PixelTileDeviation": 0.12862393885688161,
+        "theoreticalIndependentRoundingBoundQuantizationUnits": 1.4142135623730951,
+        "proof": "The raw edge endpoint lies on this raw adjacent polygon segment within 1e-12 degrees; the decoded points are their exact independent nearest-integer roundings. Triangle inequality bounds the observed mismatch by the edge rounding, measured Mercator subdivision curvature, and weighted polygon endpoint rounding. No global threshold is enlarged."
+      },
+      {
+        "z": 5,
+        "x": 27,
+        "y": 12,
+        "edge": 16405,
+        "cell": 1663,
+        "decodedPoint": {
+          "x": 702,
+          "y": 102
+        },
+        "decodedPolygonSegment": [
+          {
+            "x": 704,
+            "y": 102
+          },
+          {
+            "x": 699,
+            "y": 105
+          }
+        ],
+        "worldPoint": [
+          125.678992287466,
+          40.767124152609
+        ],
+        "worldPolygonSegment": [
+          [
+            125.682643,
+            40.768882
+          ],
+          [
+            125.668691,
+            40.762164
+          ]
+        ],
+        "worldSegmentParameter": 0.2616623089075881,
+        "worldSegmentDistanceDegrees": 2.699015933591488e-13,
+        "projectedPoint": {
+          "x": 702.3246586187306,
+          "y": 102.45071295373782
+        },
+        "projectedPolygonSegment": [
+          {
+            "x": 703.6538424888859,
+            "y": 101.60565533583576
+          },
+          {
+            "x": 698.5740743111091,
+            "y": 104.83510816131457
+          }
+        ],
+        "roundingErrors": {
+          "edgeVertex": 0.555468617820249,
+          "polygonA": 0.5247215801313517,
+          "polygonB": 0.45672969130790514
+        },
+        "mercatorCollinearSubdivisionDeviationQuantizationUnits": 0.000031535079145357506,
+        "weightedPolygonRoundingErrorBound": 0.5069306655148207,
+        "triangleInequalityBoundQuantizationUnits": 1.062430818414215,
+        "observedBoundaryDistanceQuantizationUnits": 1.028991510855053,
+        "native512PixelTileDeviation": 0.12862393885688161,
+        "theoreticalIndependentRoundingBoundQuantizationUnits": 1.4142135623730951,
+        "proof": "The raw edge endpoint lies on this raw adjacent polygon segment within 1e-12 degrees; the decoded points are their exact independent nearest-integer roundings. Triangle inequality bounds the observed mismatch by the edge rounding, measured Mercator subdivision curvature, and weighted polygon endpoint rounding. No global threshold is enlarged."
+      }
+    ]
+  },
+  "overlayFallbacks": {
+    "jsts": 103,
+    "commonBits": 0
+  },
+  "numericalAreaToleranceDegreesSquared": 1e-10,
+  "failures": [],
+  "conclusion": "KOR/PRK macro boundaries are existing fine shared edges with no overlapping territory or changed fixed national outline. Source containment is evaluated under the explicit pinned strict or gameplay-reconciliation contract.",
+  "limits": [
+    "The crosswalk must remain complete and pinned. Missing, ambiguous or unverified fine-to-macro membership must fail publication rather than selecting a majority-overlap or nearest parent.",
+    "Adjusted gameplay outlines include only independently verified prior residual additions; these outlines are explicitly not unchanged raw administrative-source geometry. Unassigned residuals remain explicit.",
+    "Fine-derived macro outlines follow the pinned fine-source distribution and do not certify all legal administrative boundaries as of 2020-01-01.",
+    "Decoded tile alignment retains the strict 1.01-unit threshold. Every exceedance requires its own raw shared-segment, Mercator-subdivision and independent integer-rounding triangle certificate; uncertified exceedances fail. Zero-area quantized tiny adjacent polygons may be absent and are counted separately."
+  ]
+}

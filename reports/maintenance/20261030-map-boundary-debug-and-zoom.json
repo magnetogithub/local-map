@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Asia/Seoul",
+  "scope": "Display original ADM1 borders in white, expose later operational subdivisions only in map debug mode, and soften country/coast outlines at whole-world zoom.",
+  "catalog": {
+    "version": "catalog-v3-prompt19-korea-416fa2c3b263ab7a13be",
+    "geometryChanged": false,
+    "worldStateContractChanged": false,
+    "regenerated": false
+  },
+  "changes": {
+    "debug": {
+      "setting": "debugMapBoundaries",
+      "label": "지도 디버그 모드",
+      "default": false,
+      "location": "설정",
+      "sessionOnly": true,
+      "behavior": "Toggles vector and exact fine-subdivision layers without rebuilding map sources, fetching geometry, or mutating the world. Default restored after browser QA."
+    },
+    "legacy": {
+      "boundaries": 8943,
+      "color": "#FFFFFF",
+      "classification": "Same source country, different original coarse administrative parents, and both parents have administrative kind. Country/coast, operational subdivisions and residual parents excluded.",
+      "transport": "Sorted immutable edge ordinals in optional validated bootstrap metadata. Derived once from small country metadata plus 175264-byte incidence; no polygon/topology geometry reads.",
+      "lookup": "MapLibre match uses a lookup table rather than scanning a large in-array on each edge."
+    },
+    "country": {
+      "color": "#000000",
+      "normalWidthPixels": {
+        "zoom1": 0.25,
+        "zoom3": 0.55,
+        "zoom5": 0.8
+      },
+      "opacity": {
+        "zoom1": 0.55,
+        "zoom3": 0.85,
+        "zoom5": 1
+      },
+      "emphasis": "Doubles the zoom-specific width; retains zoom behavior for vector and exact borders."
+    }
+  },
+  "validation": {
+    "tests": {
+      "files": 5,
+      "passed": 79,
+      "failed": 0,
+      "consumerAndStyleFinalRerun": 45
+    },
+    "typecheck": "passed",
+    "eslint": "passed",
+    "diffCheck": "passed",
+    "productionBuild": "passed, webpack, .next-map-boundary-debug-build",
+    "generatedBuildConfig": "tsconfig.json and next-env.d.ts restored byte-for-byte to pre-build snapshots.",
+    "browser": {
+      "normalLegacyWhite": true,
+      "normalMicroHidden": true,
+      "debugMicroVisible": true,
+      "toggleOffRestoresHidden": true,
+      "worldOutlineSofter": true,
+      "mapStatus": "ready",
+      "consoleErrors": 0,
+      "viewportOverride": false,
+      "gameTurnAfter": 0,
+      "queuedActionsAfter": 0
+    },
+    "api": {
+      "status": 200,
+      "legacyBoundaryCount": 8943,
+      "bootstrapBytes": 51378,
+      "observedResponseMs": 120,
+      "measurement": "Single local read, not a performance benchmark."
+    },
+    "actualAiCalls": 0
+  },
+  "runtime": {
+    "url": "http://127.0.0.1:3030/",
+    "pid": 18852,
+    "note": "Replaced the prior 3030 preview after observing turn 0 and 0 queued actions; reloaded and recreated the empty KOR game for UI verification. Existing3029 server remains unchanged."
+  },
+  "evidence": {
+    "normal": "reports/verification/map-boundary-debug-20261030/normal-mode-restored.png",
+    "debug": "reports/verification/map-boundary-debug-20261030/debug-mode.png",
+    "settings": "reports/verification/map-boundary-debug-20261030/debug-setting.png",
+    "world": "reports/verification/map-boundary-debug-20261030/world-overview.png",
+    "build": ".tmp/map-boundary-debug-20261030/build.log"
+  }
+}

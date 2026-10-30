@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Asia/Seoul",
+  "request": "Resolve apparent polygon overlap and old macro/fine mismatch, check national and cross-country seams, first try fine-driven macro boundaries, and retain macro-led adjustment/paint masks as fallbacks.",
+  "diagnosis": {
+    "actualAreaOverlap": "Old KOR catalog: 1181 valid polygons, 2625 bbox-candidate pairs, zero positive-area intersections and zero DE-9IM interior intersections.",
+    "displayIssue": "Simplified vector and exact detail edges could be visible together. Added publication-aware masking that preserves occupation front state.",
+    "dataIssue": "Old ADM1 geometry cut through whole fine-source units. Merely changing white-line display would leave region lookup and gameplay on the old hierarchy."
+  },
+  "catalog": {
+    "previous": "catalog-v3-prompt19-korea-416fa2c3b263ab7a13be",
+    "current": "catalog-v3-prompt19-korea-193b0c3584df064fcdbf",
+    "countries": 247,
+    "cells": 5837,
+    "edges": 21195,
+    "KOR": {
+      "total": 946,
+      "fine": 303,
+      "sourceFreeResiduals": 643,
+      "sourceUnits": 228,
+      "macroGroups": 17
+    },
+    "PRK": {
+      "total": 689,
+      "fine": 201,
+      "sourceFreeResiduals": 488,
+      "sourceUnits": 179,
+      "macroGroups": 11
+    },
+    "unchangedOtherCountries": 245
+  },
+  "implementation": {
+    "hierarchy": "KOR uses pinned source administrative membership facts with documented duplicate-name identity checks and the Gunwi temporal correction. PRK uses exact same-distribution ADM2 containment and 11 matching ADM1 child unions.",
+    "quotient": "Complete fine-source families merge by exact shared-edge cancellation. Removed 713 old same-source seams, moved no source coordinates, and promoted only existing shared fine edges between different verified macro parents.",
+    "residuals": "All 1131 source-free residual IDs and geometries retained. They have explicit unassigned macro membership; no invented administrative identity.",
+    "runtime": "Administrative memberships, region refs/names and near-frontier parent scopes follow the new hierarchy. Merged predecessor seed states must agree on source/owner/controller or new-game construction fails.",
+    "rendering": "Exact detail edges mask matching vector edges; clearing detail restores vector coverage without removing gold occupation fronts. Korea edge tiles and adjacent-country border-touching cells use tolerance0 to avoid separate line/fill simplification.",
+    "fallback": "Fine-driven construction passed current data and UI checks. Macro-led rebuilding and continuous painted occupation masks are not activated; painted masks remain a possible alternative requiring authoritative area/adjacency/undo logic."
+  },
+  "validation": {
+    "relatedTests": {
+      "vitestCore": 87,
+      "localizedRegion": 2,
+      "clientTurnUndoRedoIntegration": 35,
+      "nodeQuotientAndPrkHierarchy": 12,
+      "nodeKorSourceAndHierarchy": 18,
+      "totalDistinct": 154
+    },
+    "typecheck": "passed",
+    "eslint": "passed",
+    "diffCheck": "passed",
+    "productionBuild": "passed, webpack, .next-fine-macro-build",
+    "buildConfigsRestored": true,
+    "artifacts": {
+      "count": 5977,
+      "bytes": 35128975,
+      "allPinned": true
+    },
+    "independent": "All KOR946/PRK689 polygons valid and non-overlapping. No duplicate geometry or lost/phantom adjacency. Every817 new macro edge is an existing shared fine boundary with different parent labels. No same-fine old macro seam remains.",
+    "nationalSeams": {
+      "geometryByteExact": true,
+      "pairs": {
+        "CHN|PRK": 290,
+        "KOR|PRK": 40,
+        "PRK|RUS": 8
+      },
+      "countryEnvelopesPreserved": true
+    },
+    "tileAlignment": {
+      "tiles": 15,
+      "edgeInstances": 38616,
+      "samples": 792825,
+      "maxQuantizationUnitDistance": 0.9922778767136676,
+      "overTolerance": 0,
+      "missingAdjacentFeature": 0
+    },
+    "browser": {
+      "url": "http://127.0.0.1:3030/game",
+      "mapStatus": "ready",
+      "appliedRevision": 0,
+      "consoleErrors": 0,
+      "normalAndDebugViewed": true,
+      "detailSelectionAndCloseViewed": true,
+      "restoredDebugOff": true
+    },
+    "externalAiCalls": 0
+  },
+  "runtime": {
+    "url": "http://127.0.0.1:3030/",
+    "pid": 31416,
+    "newGameRequired": true,
+    "note": "Replaced only3030 after observing turn0 and zero queued actions. Existing3029 old server preserved."
+  },
+  "evidence": {
+    "independent": "reports/maintenance/20261030-fine-macro-independent-verification.json",
+    "package": "reports/maintenance/prompt19-C/fine-macro-2020-mixed-verification.json",
+    "quotient": "reports/maintenance/prompt19-C/fine-macro-2020-quotient-verification.json",
+    "sourceLocks": [
+      "data/source-locks/prompt19/KOR-macro-hierarchy.json",
+      "data/source-locks/prompt19/PRK-macro-hierarchy.json"
+    ],
+    "screenshots": {
+      "normal": "reports/verification/fine-macro-20261030/normal-final.png",
+      "debug": "reports/verification/fine-macro-20261030/debug-settings.png",
+      "selected": "reports/verification/fine-macro-20261030/normal-selected.png"
+    },
+    "build": ".tmp/fine-macro-cutover-20261030/build.log"
+  },
+  "limits": [
+    "Published KOR source lacks Yeonggwang-gun; unverified source-free land remains explicit rather than being filled with guessed fine geometry.",
+    "PRK source years are inconsistent (2018/2019/2013 metadata); fine-driven hierarchy is source-consistent rather than a certification of legal2020 boundaries.",
+    "No external AI military adjudication was requested or re-tested."
+  ]
+}

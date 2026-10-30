@@ -1,0 +1,2979 @@
+{
+  "schemaVersion": "publisher-hierarchy-facts-v1",
+  "countryId": "KOR",
+  "publisher": "City Population / Thomas Brinkhoff",
+  "url": "https://www.citypopulation.de/en/southkorea/admin/",
+  "retrievedAt": "2026-10-30T01:20:13.788Z",
+  "parents": [
+    {
+      "id": "21",
+      "name": "Busan",
+      "native": "부산광역시",
+      "href": "/en/southkorea/admin/21__busan/"
+    },
+    {
+      "id": "33",
+      "name": "Chungcheongbuk-do [North Chungcheong]",
+      "native": "충청북도",
+      "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+    },
+    {
+      "id": "34",
+      "name": "Chungcheongnam-do [South Chungcheong]",
+      "native": "충청남도",
+      "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+    },
+    {
+      "id": "22",
+      "name": "Daegu",
+      "native": "대구광역시",
+      "href": "/en/southkorea/admin/22__daegu/"
+    },
+    {
+      "id": "25",
+      "name": "Daejeon",
+      "native": "대전광역시",
+      "href": "/en/southkorea/admin/25__daejeon/"
+    },
+    {
+      "id": "32",
+      "name": "Gangwon-do [Gangwon]",
+      "native": "강원도",
+      "href": "/en/southkorea/admin/32__gangwon_do/"
+    },
+    {
+      "id": "24",
+      "name": "Gwangju",
+      "native": "광주광역시",
+      "href": "/en/southkorea/admin/24__gwangju/"
+    },
+    {
+      "id": "31",
+      "name": "Gyeonggi-do [Gyeonggi]",
+      "native": "경기도",
+      "href": "/en/southkorea/admin/31__gyeonggi_do/"
+    },
+    {
+      "id": "37",
+      "name": "Gyeongsangbuk-do [North Gyeongsang]",
+      "native": "경상북도",
+      "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+    },
+    {
+      "id": "38",
+      "name": "Gyeongsangnam-do [South Gyeongsang]",
+      "native": "경상남도",
+      "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+    },
+    {
+      "id": "23",
+      "name": "Incheon",
+      "native": "인천광역시",
+      "href": "/en/southkorea/admin/23__incheon/"
+    },
+    {
+      "id": "39",
+      "name": "Jeju-do [Jeju]",
+      "native": "제주특별자치도",
+      "href": "/en/southkorea/admin/39__jeju_do/"
+    },
+    {
+      "id": "35",
+      "name": "Jeollabuk-do [North Jeolla]",
+      "native": "전라북도",
+      "href": "/en/southkorea/admin/35__jeollabuk_do/"
+    },
+    {
+      "id": "36",
+      "name": "Jeollanam-do [South Jeolla]",
+      "native": "전라남도",
+      "href": "/en/southkorea/admin/36__jeollanam_do/"
+    },
+    {
+      "id": "29",
+      "name": "Sejong",
+      "native": "세종특별자치시",
+      "href": "/en/southkorea/admin/29__sejong/"
+    },
+    {
+      "id": "11",
+      "name": "Seoul",
+      "native": "서울특별시",
+      "href": "/en/southkorea/admin/11__seoul/"
+    },
+    {
+      "id": "26",
+      "name": "Ulsan",
+      "native": "울산광역시",
+      "href": "/en/southkorea/admin/26__ulsan/"
+    }
+  ],
+  "children": [
+    {
+      "id": "21080",
+      "name": "Buk-gu [North Distrikt]",
+      "native": "북구",
+      "href": "/en/southkorea/admin/busan/21080__buk_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      },
+      "representative": [
+        129.023,
+        35.221
+      ]
+    },
+    {
+      "id": "21050",
+      "name": "Busanjin-gu",
+      "native": "부산진구",
+      "href": "/en/southkorea/admin/busan/21050__busanjin_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21030",
+      "name": "Dong-gu [East District]",
+      "native": "동구",
+      "href": "/en/southkorea/admin/busan/21030__dong_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      },
+      "representative": [
+        129.039,
+        35.126
+      ]
+    },
+    {
+      "id": "21060",
+      "name": "Dongnae-gu",
+      "native": "동래구",
+      "href": "/en/southkorea/admin/busan/21060__dongnae_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21120",
+      "name": "Gangseo-gu",
+      "native": "강서구",
+      "href": "/en/southkorea/admin/busan/21120__gangseo_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      },
+      "representative": [
+        128.921,
+        35.164
+      ]
+    },
+    {
+      "id": "21110",
+      "name": "Geumjeong-gu",
+      "native": "금정구",
+      "href": "/en/southkorea/admin/busan/21110__geumjeong_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21310",
+      "name": "Gijang-gun",
+      "native": "기장군",
+      "href": "/en/southkorea/admin/busan/21310__gijang_gun/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21090",
+      "name": "Haeundae-gu",
+      "native": "해운대구",
+      "href": "/en/southkorea/admin/busan/21090__haeundae_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21010",
+      "name": "Jung-gu [Central District]",
+      "native": "중구",
+      "href": "/en/southkorea/admin/busan/21010__jung_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      },
+      "representative": [
+        129.031,
+        35.104
+      ]
+    },
+    {
+      "id": "21070",
+      "name": "Nam-gu [South District]",
+      "native": "남구",
+      "href": "/en/southkorea/admin/busan/21070__nam_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      },
+      "representative": [
+        129.091,
+        35.129
+      ]
+    },
+    {
+      "id": "21100",
+      "name": "Saha-gu",
+      "native": "사하구",
+      "href": "/en/southkorea/admin/busan/21100__saha_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21150",
+      "name": "Sasang-gu",
+      "native": "사상구",
+      "href": "/en/southkorea/admin/busan/21150__sasang_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21020",
+      "name": "Seo-gu [West District]",
+      "native": "서구",
+      "href": "/en/southkorea/admin/busan/21020__seo_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      },
+      "representative": [
+        129.013,
+        35.122
+      ]
+    },
+    {
+      "id": "21140",
+      "name": "Suyeong-gu",
+      "native": "수영구",
+      "href": "/en/southkorea/admin/busan/21140__suyeong_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21040",
+      "name": "Yeongdo-gu",
+      "native": "영도구",
+      "href": "/en/southkorea/admin/busan/21040__yeongdo_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "21130",
+      "name": "Yeonje-gu",
+      "native": "연제구",
+      "href": "/en/southkorea/admin/busan/21130__yeonje_gu/",
+      "parent": {
+        "id": "21",
+        "name": "Busan",
+        "native": "부산광역시",
+        "href": "/en/southkorea/admin/21__busan/"
+      }
+    },
+    {
+      "id": "33320",
+      "name": "Boeun-gun",
+      "native": "보은군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33320__boeun_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33040",
+      "name": "Cheongju-si [← Cheongwon-gun]",
+      "native": "청주시",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33040__cheongju_si/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33020",
+      "name": "Chungju-si",
+      "native": "충주시",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33020__chungju_si/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33380",
+      "name": "Danyang-gun",
+      "native": "단양군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33380__danyang_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33370",
+      "name": "Eumseong-gun",
+      "native": "음성군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33370__eumseong_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33360",
+      "name": "Goesan-gun",
+      "native": "괴산군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33360__goesan_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33030",
+      "name": "Jecheon-si",
+      "native": "제천시",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33030__jecheon_si/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33390",
+      "name": "Jeungpyeong-gun",
+      "native": "증평군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33390__jeungpyeong_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33350",
+      "name": "Jincheon-gun",
+      "native": "진천군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33350__jincheon_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33330",
+      "name": "Okcheon-gun",
+      "native": "옥천군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33330__okcheon_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "33340",
+      "name": "Yeongdong-gun",
+      "native": "영동군",
+      "href": "/en/southkorea/admin/chungcheongbuk_do/33340__yeongdong_gun/",
+      "parent": {
+        "id": "33",
+        "name": "Chungcheongbuk-do [North Chungcheong]",
+        "native": "충청북도",
+        "href": "/en/southkorea/admin/33__chungcheongbuk_do/"
+      }
+    },
+    {
+      "id": "34040",
+      "name": "Asan-si",
+      "native": "아산시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34040__asan_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34030",
+      "name": "Boryeong-si",
+      "native": "보령시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34030__boryeong_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34330",
+      "name": "Buyeo-gun",
+      "native": "부여군",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34330__buyeo_gun/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34010",
+      "name": "Cheonan-si",
+      "native": "천안시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34010__cheonan_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34350",
+      "name": "Cheongyang-gun",
+      "native": "청양군",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34350__cheongyang_gun/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34080",
+      "name": "Dangjin-si",
+      "native": "당진시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34080__dangjin_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34310",
+      "name": "Geumsan-gun",
+      "native": "금산군",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34310__geumsan_gun/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34020",
+      "name": "Gongju-si",
+      "native": "공주시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34020__gongju_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34070",
+      "name": "Gyeryong-si",
+      "native": "계룡시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34070__gyeryong_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34360",
+      "name": "Hongseong-gun",
+      "native": "홍성군",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34360__hongseong_gun/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34060",
+      "name": "Nonsan-si",
+      "native": "논산시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34060__nonsan_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34340",
+      "name": "Seocheon-gun",
+      "native": "서천군",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34340__seocheon_gun/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34050",
+      "name": "Seosan-si",
+      "native": "서산시",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34050__seosan_si/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34380",
+      "name": "Taean-gun",
+      "native": "태안군",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34380__taean_gun/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "34370",
+      "name": "Yesan-gun",
+      "native": "예산군",
+      "href": "/en/southkorea/admin/chungcheongnam_do/34370__yesan_gun/",
+      "parent": {
+        "id": "34",
+        "name": "Chungcheongnam-do [South Chungcheong]",
+        "native": "충청남도",
+        "href": "/en/southkorea/admin/34__chungcheongnam_do/"
+      }
+    },
+    {
+      "id": "22050",
+      "name": "Buk-gu [North Distrikt]",
+      "native": "북구",
+      "href": "/en/southkorea/admin/daegu/22050__buk_gu/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      },
+      "representative": [
+        128.582,
+        35.93
+      ]
+    },
+    {
+      "id": "22070",
+      "name": "Dalseo-gu",
+      "native": "달서구",
+      "href": "/en/southkorea/admin/daegu/22070__dalseo_gu/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      }
+    },
+    {
+      "id": "22310",
+      "name": "Dalseong-gun",
+      "native": "달성군",
+      "href": "/en/southkorea/admin/daegu/22310__dalseong_gun/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      }
+    },
+    {
+      "id": "22020",
+      "name": "Dong-gu [East District]",
+      "native": "동구",
+      "href": "/en/southkorea/admin/daegu/22020__dong_gu/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      },
+      "representative": [
+        128.684,
+        35.945
+      ]
+    },
+    {
+      "id": "22320",
+      "name": "Gunwi-gun",
+      "native": "군위군",
+      "href": "/en/southkorea/admin/daegu/22320__gunwi_gun/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      }
+    },
+    {
+      "id": "22010",
+      "name": "Jung-gu [Central District]",
+      "native": "중구",
+      "href": "/en/southkorea/admin/daegu/22010__jung_gu/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      },
+      "representative": [
+        128.591,
+        35.867
+      ]
+    },
+    {
+      "id": "22040",
+      "name": "Nam-gu [South District]",
+      "native": "남구",
+      "href": "/en/southkorea/admin/daegu/22040__nam_gu/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      },
+      "representative": [
+        128.586,
+        35.835
+      ]
+    },
+    {
+      "id": "22030",
+      "name": "Seo-gu [West District]",
+      "native": "서구",
+      "href": "/en/southkorea/admin/daegu/22030__seo_gu/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      },
+      "representative": [
+        128.55,
+        35.874
+      ]
+    },
+    {
+      "id": "22060",
+      "name": "Suseong-gu",
+      "native": "수성구",
+      "href": "/en/southkorea/admin/daegu/22060__suseong_gu/",
+      "parent": {
+        "id": "22",
+        "name": "Daegu",
+        "native": "대구광역시",
+        "href": "/en/southkorea/admin/22__daegu/"
+      }
+    },
+    {
+      "id": "25050",
+      "name": "Daedeok-gu",
+      "native": "대덕구",
+      "href": "/en/southkorea/admin/daejeon/25050__daedeok_gu/",
+      "parent": {
+        "id": "25",
+        "name": "Daejeon",
+        "native": "대전광역시",
+        "href": "/en/southkorea/admin/25__daejeon/"
+      }
+    },
+    {
+      "id": "25010",
+      "name": "Dong-gu [East District]",
+      "native": "동구",
+      "href": "/en/southkorea/admin/daejeon/25010__dong_gu/",
+      "parent": {
+        "id": "25",
+        "name": "Daejeon",
+        "native": "대전광역시",
+        "href": "/en/southkorea/admin/25__daejeon/"
+      },
+      "representative": [
+        127.491,
+        36.379
+      ]
+    },
+    {
+      "id": "25020",
+      "name": "Jung-gu [Central District]",
+      "native": "중구",
+      "href": "/en/southkorea/admin/daejeon/25020__jung_gu/",
+      "parent": {
+        "id": "25",
+        "name": "Daejeon",
+        "native": "대전광역시",
+        "href": "/en/southkorea/admin/25__daejeon/"
+      },
+      "representative": [
+        127.408,
+        36.297
+      ]
+    },
+    {
+      "id": "25030",
+      "name": "Seo-gu [West District]",
+      "native": "서구",
+      "href": "/en/southkorea/admin/daejeon/25030__seo_gu/",
+      "parent": {
+        "id": "25",
+        "name": "Daejeon",
+        "native": "대전광역시",
+        "href": "/en/southkorea/admin/25__daejeon/"
+      },
+      "representative": [
+        127.33,
+        36.251
+      ]
+    },
+    {
+      "id": "25040",
+      "name": "Yuseong-gu",
+      "native": "유성구",
+      "href": "/en/southkorea/admin/daejeon/25040__yuseong_gu/",
+      "parent": {
+        "id": "25",
+        "name": "Daejeon",
+        "native": "대전광역시",
+        "href": "/en/southkorea/admin/25__daejeon/"
+      }
+    },
+    {
+      "id": "32360",
+      "name": "Cheorwon-gun",
+      "native": "철원군",
+      "href": "/en/southkorea/admin/gangwon_do/32360__cheorwon_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32010",
+      "name": "Chuncheon-si",
+      "native": "춘천시",
+      "href": "/en/southkorea/admin/gangwon_do/32010__chuncheon_si/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32040",
+      "name": "Donghae-si",
+      "native": "동해시",
+      "href": "/en/southkorea/admin/gangwon_do/32040__donghae_si/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32030",
+      "name": "Gangneung-si",
+      "native": "강릉시",
+      "href": "/en/southkorea/admin/gangwon_do/32030__gangneung_si/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32400",
+      "name": "Goseong-gun",
+      "native": "고성군",
+      "href": "/en/southkorea/admin/gangwon_do/32400__goseong_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      },
+      "representative": [
+        128.388,
+        38.374
+      ]
+    },
+    {
+      "id": "32320",
+      "name": "Hoengseong-gun",
+      "native": "횡성군",
+      "href": "/en/southkorea/admin/gangwon_do/32320__hoengseong_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32310",
+      "name": "Hongcheon-gun",
+      "native": "홍천군",
+      "href": "/en/southkorea/admin/gangwon_do/32310__hongcheon_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32370",
+      "name": "Hwacheon-gun",
+      "native": "화천군",
+      "href": "/en/southkorea/admin/gangwon_do/32370__hwacheon_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32390",
+      "name": "Inje-gun",
+      "native": "인제군",
+      "href": "/en/southkorea/admin/gangwon_do/32390__inje_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32350",
+      "name": "Jeongseon-gun",
+      "native": "정선군",
+      "href": "/en/southkorea/admin/gangwon_do/32350__jeongseon_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32340",
+      "name": "Pyeongchang-gun",
+      "native": "평창군",
+      "href": "/en/southkorea/admin/gangwon_do/32340__pyeongchang_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32070",
+      "name": "Samcheok-si",
+      "native": "삼척시",
+      "href": "/en/southkorea/admin/gangwon_do/32070__samcheok_si/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32060",
+      "name": "Sokcho-si",
+      "native": "속초시",
+      "href": "/en/southkorea/admin/gangwon_do/32060__sokcho_si/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32050",
+      "name": "Taebaek-si",
+      "native": "태백시",
+      "href": "/en/southkorea/admin/gangwon_do/32050__taebaek_si/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32020",
+      "name": "Wonju-si",
+      "native": "원주시",
+      "href": "/en/southkorea/admin/gangwon_do/32020__wonju_si/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32380",
+      "name": "Yanggu-gun",
+      "native": "양구군",
+      "href": "/en/southkorea/admin/gangwon_do/32380__yanggu_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32410",
+      "name": "Yangyang-gun",
+      "native": "양양군",
+      "href": "/en/southkorea/admin/gangwon_do/32410__yangyang_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "32330",
+      "name": "Yeongwol-gun",
+      "native": "영월군",
+      "href": "/en/southkorea/admin/gangwon_do/32330__yeongwol_gun/",
+      "parent": {
+        "id": "32",
+        "name": "Gangwon-do [Gangwon]",
+        "native": "강원도",
+        "href": "/en/southkorea/admin/32__gangwon_do/"
+      }
+    },
+    {
+      "id": "24040",
+      "name": "Buk-gu [North Distrikt]",
+      "native": "북구",
+      "href": "/en/southkorea/admin/gwangju/24040__buk_gu/",
+      "parent": {
+        "id": "24",
+        "name": "Gwangju",
+        "native": "광주광역시",
+        "href": "/en/southkorea/admin/24__gwangju/"
+      },
+      "representative": [
+        126.905,
+        35.206
+      ]
+    },
+    {
+      "id": "24010",
+      "name": "Dong-gu [East District]",
+      "native": "동구",
+      "href": "/en/southkorea/admin/gwangju/24010__dong_gu/",
+      "parent": {
+        "id": "24",
+        "name": "Gwangju",
+        "native": "광주광역시",
+        "href": "/en/southkorea/admin/24__gwangju/"
+      },
+      "representative": [
+        126.952,
+        35.11
+      ]
+    },
+    {
+      "id": "24050",
+      "name": "Gwangsan-gu",
+      "native": "광산구",
+      "href": "/en/southkorea/admin/gwangju/24050__gwangsan_gu/",
+      "parent": {
+        "id": "24",
+        "name": "Gwangju",
+        "native": "광주광역시",
+        "href": "/en/southkorea/admin/24__gwangju/"
+      }
+    },
+    {
+      "id": "24030",
+      "name": "Nam-gu [South District]",
+      "native": "남구",
+      "href": "/en/southkorea/admin/gwangju/24030__nam_gu/",
+      "parent": {
+        "id": "24",
+        "name": "Gwangju",
+        "native": "광주광역시",
+        "href": "/en/southkorea/admin/24__gwangju/"
+      },
+      "representative": [
+        126.895,
+        35.099
+      ]
+    },
+    {
+      "id": "24020",
+      "name": "Seo-gu [West District]",
+      "native": "서구",
+      "href": "/en/southkorea/admin/gwangju/24020__seo_gu/",
+      "parent": {
+        "id": "24",
+        "name": "Gwangju",
+        "native": "광주광역시",
+        "href": "/en/southkorea/admin/24__gwangju/"
+      },
+      "representative": [
+        126.856,
+        35.141
+      ]
+    },
+    {
+      "id": "31090",
+      "name": "Ansan-si",
+      "native": "안산시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31090__ansan_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31220",
+      "name": "Anseong-si",
+      "native": "안성시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31220__anseong_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31040",
+      "name": "Anyang-si",
+      "native": "안양시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31040__anyang_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31050",
+      "name": "Bucheon-si",
+      "native": "부천시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31050__bucheon_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31080",
+      "name": "Dongducheon-si",
+      "native": "동두천시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31080__dongducheon_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31370",
+      "name": "Gapyeong-gun",
+      "native": "가평군",
+      "href": "/en/southkorea/admin/gyeonggi_do/31370__gapyeong_gun/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31230",
+      "name": "Gimpo-si",
+      "native": "김포시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31230__gimpo_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31100",
+      "name": "Goyang-si",
+      "native": "고양시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31100__goyang_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31160",
+      "name": "Gunpo-si",
+      "native": "군포시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31160__gunpo_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31120",
+      "name": "Guri-si",
+      "native": "구리시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31120__guri_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31110",
+      "name": "Gwacheon-si",
+      "native": "과천시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31110__gwacheon_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31250",
+      "name": "Gwangju-si",
+      "native": "광주시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31250__gwangju_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31060",
+      "name": "Gwangmyeong-si",
+      "native": "광명시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31060__gwangmyeong_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31180",
+      "name": "Hanam-si",
+      "native": "하남시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31180__hanam_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31240",
+      "name": "Hwaseong-si",
+      "native": "화성시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31240__hwaseong_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31210",
+      "name": "Icheon-si",
+      "native": "이천시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31210__icheon_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31130",
+      "name": "Namyangju-si",
+      "native": "남양주시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31130__namyangju_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31140",
+      "name": "Osan-si",
+      "native": "오산시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31140__osan_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31200",
+      "name": "Paju-si",
+      "native": "파주시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31200__paju_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31270",
+      "name": "Pocheon-si",
+      "native": "포천시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31270__pocheon_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31070",
+      "name": "Pyeongtaek-si",
+      "native": "평택시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31070__pyeongtaek_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31020",
+      "name": "Seongnam-si",
+      "native": "성남시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31020__seongnam_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31150",
+      "name": "Siheung-si",
+      "native": "시흥시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31150__siheung_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31010",
+      "name": "Suwon-si",
+      "native": "수원시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31010__suwon_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31030",
+      "name": "Uijeongbu-si",
+      "native": "의정부시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31030__uijeongbu_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31170",
+      "name": "Uiwang-si",
+      "native": "의왕시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31170__uiwang_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31260",
+      "name": "Yangju-si",
+      "native": "양주시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31260__yangju_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31380",
+      "name": "Yangpyeong-gun",
+      "native": "양평군",
+      "href": "/en/southkorea/admin/gyeonggi_do/31380__yangpyeong_gun/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31280",
+      "name": "Yeoju-si",
+      "native": "여주시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31280__yeoju_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31350",
+      "name": "Yeoncheon-gun",
+      "native": "연천군",
+      "href": "/en/southkorea/admin/gyeonggi_do/31350__yeoncheon_gun/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "31190",
+      "name": "Yongin-si",
+      "native": "용인시",
+      "href": "/en/southkorea/admin/gyeonggi_do/31190__yongin_si/",
+      "parent": {
+        "id": "31",
+        "name": "Gyeonggi-do [Gyeonggi]",
+        "native": "경기도",
+        "href": "/en/southkorea/admin/31__gyeonggi_do/"
+      }
+    },
+    {
+      "id": "37040",
+      "name": "Andong-si",
+      "native": "안동시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37040__andong_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37410",
+      "name": "Bonghwa-gun",
+      "native": "봉화군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37410__bonghwa_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37360",
+      "name": "Cheongdo-gun",
+      "native": "청도군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37360__cheongdo_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37330",
+      "name": "Cheongsong-gun",
+      "native": "청송군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37330__cheongsong_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37390",
+      "name": "Chilgok-gun",
+      "native": "칠곡군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37390__chilgok_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37030",
+      "name": "Gimcheon-si",
+      "native": "김천시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37030__gimcheon_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37370",
+      "name": "Goryeong-gun",
+      "native": "고령군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37370__goryeong_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37050",
+      "name": "Gumi-si",
+      "native": "구미시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37050__gumi_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37020",
+      "name": "Gyeongju-si",
+      "native": "경주시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37020__gyeongju_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37100",
+      "name": "Gyeongsan-si",
+      "native": "경산시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37100__gyeongsan_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37090",
+      "name": "Mungyeong-si",
+      "native": "문경시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37090__mungyeong_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37010",
+      "name": "Pohang-si",
+      "native": "포항시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37010__pohang_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37080",
+      "name": "Sangju-si",
+      "native": "상주시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37080__sangju_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37380",
+      "name": "Seongju-gun",
+      "native": "성주군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37380__seongju_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37320",
+      "name": "Uiseong-gun",
+      "native": "의성군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37320__uiseong_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37420",
+      "name": "Uljin-gun",
+      "native": "울진군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37420__uljin_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37430",
+      "name": "Ulleung-gun",
+      "native": "울릉군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37430__ulleung_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37400",
+      "name": "Yecheon-gun",
+      "native": "예천군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37400__yecheon_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37070",
+      "name": "Yeongcheon-si",
+      "native": "영천시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37070__yeongcheon_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37350",
+      "name": "Yeongdeok-gun",
+      "native": "영덕군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37350__yeongdeok_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37060",
+      "name": "Yeongju-si",
+      "native": "영주시",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37060__yeongju_si/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "37340",
+      "name": "Yeongyang-gun",
+      "native": "영양군",
+      "href": "/en/southkorea/admin/gyeongsangbuk_do/37340__yeongyang_gun/",
+      "parent": {
+        "id": "37",
+        "name": "Gyeongsangbuk-do [North Gyeongsang]",
+        "native": "경상북도",
+        "href": "/en/southkorea/admin/37__gyeongsangbuk_do/"
+      }
+    },
+    {
+      "id": "38330",
+      "name": "Changnyeong-gun",
+      "native": "창녕군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38330__changnyeong_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38110",
+      "name": "Changwon-si",
+      "native": "창원시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38110__changwon_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38390",
+      "name": "Geochang-gun",
+      "native": "거창군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38390__geochang_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38090",
+      "name": "Geoje-si",
+      "native": "거제시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38090__geoje_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38070",
+      "name": "Gimhae-si",
+      "native": "김해시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38070__gimhae_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38340",
+      "name": "Goseong-gun",
+      "native": "고성군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38340__goseong_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      },
+      "representative": [
+        128.276,
+        35.033
+      ]
+    },
+    {
+      "id": "38360",
+      "name": "Hadong-gun",
+      "native": "하동군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38360__hadong_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38320",
+      "name": "Haman-gun",
+      "native": "함안군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38320__haman_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38380",
+      "name": "Hamyang-gun",
+      "native": "함양군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38380__hamyang_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38400",
+      "name": "Hapcheon-gun",
+      "native": "합천군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38400__hapcheon_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38030",
+      "name": "Jinju-si",
+      "native": "진주시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38030__jinju_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38080",
+      "name": "Miryang-si",
+      "native": "밀양시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38080__miryang_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38350",
+      "name": "Namhae-gun",
+      "native": "남해군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38350__namhae_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38060",
+      "name": "Sacheon-si",
+      "native": "사천시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38060__sacheon_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38370",
+      "name": "Sancheong-gun",
+      "native": "산청군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38370__sancheong_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38050",
+      "name": "Tongyeong-si",
+      "native": "통영시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38050__tongyeong_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38310",
+      "name": "Uiryeong-gun",
+      "native": "의령군",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38310__uiryeong_gun/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "38100",
+      "name": "Yangsan-si",
+      "native": "양산시",
+      "href": "/en/southkorea/admin/gyeongsangnam_do/38100__yangsan_si/",
+      "parent": {
+        "id": "38",
+        "name": "Gyeongsangnam-do [South Gyeongsang]",
+        "native": "경상남도",
+        "href": "/en/southkorea/admin/38__gyeongsangnam_do/"
+      }
+    },
+    {
+      "id": "23060",
+      "name": "Bupyeong-gu",
+      "native": "부평구",
+      "href": "/en/southkorea/admin/incheon/23060__bupyeong_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      }
+    },
+    {
+      "id": "23020",
+      "name": "Dong-gu [East District]",
+      "native": "동구",
+      "href": "/en/southkorea/admin/incheon/23020__dong_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      },
+      "representative": [
+        126.642,
+        37.482
+      ]
+    },
+    {
+      "id": "23310",
+      "name": "Ganghwa-gun",
+      "native": "강화군",
+      "href": "/en/southkorea/admin/incheon/23310__ganghwa_gun/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      }
+    },
+    {
+      "id": "23070",
+      "name": "Gyeyang-gu",
+      "native": "계양구",
+      "href": "/en/southkorea/admin/incheon/23070__gyeyang_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      }
+    },
+    {
+      "id": "23010",
+      "name": "Jung-gu [Central District]",
+      "native": "중구",
+      "href": "/en/southkorea/admin/incheon/23010__jung_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      },
+      "representative": [
+        126.44,
+        37.464
+      ]
+    },
+    {
+      "id": "23090",
+      "name": "Michuhol-gu [Nam-gu]",
+      "native": "미추홀구",
+      "href": "/en/southkorea/admin/incheon/23090__michuhol_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      }
+    },
+    {
+      "id": "23050",
+      "name": "Namdong-gu",
+      "native": "남동구",
+      "href": "/en/southkorea/admin/incheon/23050__namdong_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      }
+    },
+    {
+      "id": "23320",
+      "name": "Ongjin-gun",
+      "native": "옹진군",
+      "href": "/en/southkorea/admin/incheon/23320__ongjin_gun/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      }
+    },
+    {
+      "id": "23080",
+      "name": "Seo-gu [West District]",
+      "native": "서구",
+      "href": "/en/southkorea/admin/incheon/23080__seo_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      },
+      "representative": [
+        126.646,
+        37.557
+      ]
+    },
+    {
+      "id": "23040",
+      "name": "Yeonsu-gu",
+      "native": "연수구",
+      "href": "/en/southkorea/admin/incheon/23040__yeonsu_gu/",
+      "parent": {
+        "id": "23",
+        "name": "Incheon",
+        "native": "인천광역시",
+        "href": "/en/southkorea/admin/23__incheon/"
+      }
+    },
+    {
+      "id": "39010",
+      "name": "Jeju-si",
+      "native": "제주시",
+      "href": "/en/southkorea/admin/jeju_do/39010__jeju_si/",
+      "parent": {
+        "id": "39",
+        "name": "Jeju-do [Jeju]",
+        "native": "제주특별자치도",
+        "href": "/en/southkorea/admin/39__jeju_do/"
+      }
+    },
+    {
+      "id": "39020",
+      "name": "Seogwipo-si",
+      "native": "서귀포시",
+      "href": "/en/southkorea/admin/jeju_do/39020__seogwipo_si/",
+      "parent": {
+        "id": "39",
+        "name": "Jeju-do [Jeju]",
+        "native": "제주특별자치도",
+        "href": "/en/southkorea/admin/39__jeju_do/"
+      }
+    },
+    {
+      "id": "35380",
+      "name": "Buan-gun",
+      "native": "부안군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35380__buan_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35060",
+      "name": "Gimje-si",
+      "native": "김제시",
+      "href": "/en/southkorea/admin/jeollabuk_do/35060__gimje_si/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35370",
+      "name": "Gochang-gun",
+      "native": "고창군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35370__gochang_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35020",
+      "name": "Gunsan-si",
+      "native": "군산시",
+      "href": "/en/southkorea/admin/jeollabuk_do/35020__gunsan_si/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35030",
+      "name": "Iksan-si",
+      "native": "익산시",
+      "href": "/en/southkorea/admin/jeollabuk_do/35030__iksan_si/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35350",
+      "name": "Imsil-gun",
+      "native": "임실군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35350__imsil_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35340",
+      "name": "Jangsu-gun",
+      "native": "장수군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35340__jangsu_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35040",
+      "name": "Jeongeup-si",
+      "native": "정읍시",
+      "href": "/en/southkorea/admin/jeollabuk_do/35040__jeongeup_si/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35010",
+      "name": "Jeonju-si",
+      "native": "전주시",
+      "href": "/en/southkorea/admin/jeollabuk_do/35010__jeonju_si/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35320",
+      "name": "Jinan-gun",
+      "native": "진안군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35320__jinan_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35330",
+      "name": "Muju-gun",
+      "native": "무주군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35330__muju_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35050",
+      "name": "Namwon-si",
+      "native": "남원시",
+      "href": "/en/southkorea/admin/jeollabuk_do/35050__namwon_si/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35360",
+      "name": "Sunchang-gun",
+      "native": "순창군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35360__sunchang_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "35310",
+      "name": "Wanju-gun",
+      "native": "완주군",
+      "href": "/en/southkorea/admin/jeollabuk_do/35310__wanju_gun/",
+      "parent": {
+        "id": "35",
+        "name": "Jeollabuk-do [North Jeolla]",
+        "native": "전라북도",
+        "href": "/en/southkorea/admin/35__jeollabuk_do/"
+      }
+    },
+    {
+      "id": "36360",
+      "name": "Boseong-gun",
+      "native": "보성군",
+      "href": "/en/southkorea/admin/jeollanam_do/36360__boseong_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36310",
+      "name": "Damyang-gun",
+      "native": "담양군",
+      "href": "/en/southkorea/admin/jeollanam_do/36310__damyang_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36390",
+      "name": "Gangjin-gun",
+      "native": "강진군",
+      "href": "/en/southkorea/admin/jeollanam_do/36390__gangjin_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36350",
+      "name": "Goheung-gun",
+      "native": "고흥군",
+      "href": "/en/southkorea/admin/jeollanam_do/36350__goheung_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36320",
+      "name": "Gokseong-gun",
+      "native": "곡성군",
+      "href": "/en/southkorea/admin/jeollanam_do/36320__gokseong_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36330",
+      "name": "Gurye-gun",
+      "native": "구례군",
+      "href": "/en/southkorea/admin/jeollanam_do/36330__gurye_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36060",
+      "name": "Gwangyang-si",
+      "native": "광양시",
+      "href": "/en/southkorea/admin/jeollanam_do/36060__gwangyang_si/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36400",
+      "name": "Haenam-gun",
+      "native": "해남군",
+      "href": "/en/southkorea/admin/jeollanam_do/36400__haenam_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36430",
+      "name": "Hampyeong-gun",
+      "native": "함평군",
+      "href": "/en/southkorea/admin/jeollanam_do/36430__hampyeong_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36370",
+      "name": "Hwasun-gun",
+      "native": "화순군",
+      "href": "/en/southkorea/admin/jeollanam_do/36370__hwasun_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36380",
+      "name": "Jangheung-gun",
+      "native": "장흥군",
+      "href": "/en/southkorea/admin/jeollanam_do/36380__jangheung_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36450",
+      "name": "Jangseong-gun",
+      "native": "장성군",
+      "href": "/en/southkorea/admin/jeollanam_do/36450__jangseong_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36470",
+      "name": "Jindo-gun",
+      "native": "진도군",
+      "href": "/en/southkorea/admin/jeollanam_do/36470__jindo_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36010",
+      "name": "Mokpo-si",
+      "native": "목포시",
+      "href": "/en/southkorea/admin/jeollanam_do/36010__mokpo_si/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36420",
+      "name": "Muan-gun",
+      "native": "무안군",
+      "href": "/en/southkorea/admin/jeollanam_do/36420__muan_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36040",
+      "name": "Naju-si",
+      "native": "나주시",
+      "href": "/en/southkorea/admin/jeollanam_do/36040__naju_si/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36480",
+      "name": "Sinan-gun",
+      "native": "신안군",
+      "href": "/en/southkorea/admin/jeollanam_do/36480__sinan_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36030",
+      "name": "Suncheon-si",
+      "native": "순천시",
+      "href": "/en/southkorea/admin/jeollanam_do/36030__suncheon_si/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36460",
+      "name": "Wando-gun",
+      "native": "완도군",
+      "href": "/en/southkorea/admin/jeollanam_do/36460__wando_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36410",
+      "name": "Yeongam-gun",
+      "native": "영암군",
+      "href": "/en/southkorea/admin/jeollanam_do/36410__yeongam_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36440",
+      "name": "Yeonggwang-gun",
+      "native": "영광군",
+      "href": "/en/southkorea/admin/jeollanam_do/36440__yeonggwang_gun/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "36020",
+      "name": "Yeosu-si",
+      "native": "여수시",
+      "href": "/en/southkorea/admin/jeollanam_do/36020__yeosu_si/",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    },
+    {
+      "id": "29010",
+      "name": "Sejong-si [Yeongi-gun]",
+      "native": "세종시",
+      "href": "/en/southkorea/admin/sejong/29010__sejong_si/",
+      "parent": {
+        "id": "29",
+        "name": "Sejong",
+        "native": "세종특별자치시",
+        "href": "/en/southkorea/admin/29__sejong/"
+      }
+    },
+    {
+      "id": "11100",
+      "name": "Dobong-gu",
+      "native": "도봉구",
+      "href": "/en/southkorea/admin/seoul/11100__dobong_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11060",
+      "name": "Dongdaemun-gu",
+      "native": "동대문구",
+      "href": "/en/southkorea/admin/seoul/11060__dongdaemun_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11200",
+      "name": "Dongjak-gu",
+      "native": "동작구",
+      "href": "/en/southkorea/admin/seoul/11200__dongjak_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11120",
+      "name": "Eunpyeong-gu",
+      "native": "은평구",
+      "href": "/en/southkorea/admin/seoul/11120__eunpyeong_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11090",
+      "name": "Gangbuk-gu",
+      "native": "강북구",
+      "href": "/en/southkorea/admin/seoul/11090__gangbuk_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11250",
+      "name": "Gangdong-gu",
+      "native": "강동구",
+      "href": "/en/southkorea/admin/seoul/11250__gangdong_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11230",
+      "name": "Gangnam-gu",
+      "native": "강남구",
+      "href": "/en/southkorea/admin/seoul/11230__gangnam_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11160",
+      "name": "Gangseo-gu",
+      "native": "강서구",
+      "href": "/en/southkorea/admin/seoul/11160__gangseo_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      },
+      "representative": [
+        126.816,
+        37.566
+      ]
+    },
+    {
+      "id": "11180",
+      "name": "Geumcheon-gu",
+      "native": "금천구",
+      "href": "/en/southkorea/admin/seoul/11180__geumcheon_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11170",
+      "name": "Guro-gu",
+      "native": "구로구",
+      "href": "/en/southkorea/admin/seoul/11170__guro_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11210",
+      "name": "Gwanak-gu",
+      "native": "관악구",
+      "href": "/en/southkorea/admin/seoul/11210__gwanak_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11050",
+      "name": "Gwangjin-gu",
+      "native": "광진구",
+      "href": "/en/southkorea/admin/seoul/11050__gwangjin_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11010",
+      "name": "Jongno-gu",
+      "native": "종로구",
+      "href": "/en/southkorea/admin/seoul/11010__jongno_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11020",
+      "name": "Jung-gu [Central District]",
+      "native": "중구",
+      "href": "/en/southkorea/admin/seoul/11020__jung_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      },
+      "representative": [
+        127.004,
+        37.559
+      ]
+    },
+    {
+      "id": "11070",
+      "name": "Jungnang-gu",
+      "native": "중랑구",
+      "href": "/en/southkorea/admin/seoul/11070__jungnang_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11140",
+      "name": "Mapo-gu",
+      "native": "마포구",
+      "href": "/en/southkorea/admin/seoul/11140__mapo_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11110",
+      "name": "Nowon-gu",
+      "native": "노원구",
+      "href": "/en/southkorea/admin/seoul/11110__nowon_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11220",
+      "name": "Seocho-gu",
+      "native": "서초구",
+      "href": "/en/southkorea/admin/seoul/11220__seocho_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11130",
+      "name": "Seodaemun-gu",
+      "native": "서대문구",
+      "href": "/en/southkorea/admin/seoul/11130__seodaemun_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11080",
+      "name": "Seongbuk-gu",
+      "native": "성북구",
+      "href": "/en/southkorea/admin/seoul/11080__seongbuk_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11040",
+      "name": "Seongdong-gu",
+      "native": "성동구",
+      "href": "/en/southkorea/admin/seoul/11040__seongdong_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11240",
+      "name": "Songpa-gu",
+      "native": "송파구",
+      "href": "/en/southkorea/admin/seoul/11240__songpa_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11150",
+      "name": "Yangcheon-gu",
+      "native": "양천구",
+      "href": "/en/southkorea/admin/seoul/11150__yangcheon_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11190",
+      "name": "Yeongdeungpo-gu",
+      "native": "영등포구",
+      "href": "/en/southkorea/admin/seoul/11190__yeongdeungpo_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "11030",
+      "name": "Yongsan-gu",
+      "native": "용산구",
+      "href": "/en/southkorea/admin/seoul/11030__yongsan_gu/",
+      "parent": {
+        "id": "11",
+        "name": "Seoul",
+        "native": "서울특별시",
+        "href": "/en/southkorea/admin/11__seoul/"
+      }
+    },
+    {
+      "id": "26040",
+      "name": "Buk-gu [North Distrikt]",
+      "native": "북구",
+      "href": "/en/southkorea/admin/ulsan/26040__buk_gu/",
+      "parent": {
+        "id": "26",
+        "name": "Ulsan",
+        "native": "울산광역시",
+        "href": "/en/southkorea/admin/26__ulsan/"
+      },
+      "representative": [
+        129.394,
+        35.612
+      ]
+    },
+    {
+      "id": "26030",
+      "name": "Dong-gu [East District]",
+      "native": "동구",
+      "href": "/en/southkorea/admin/ulsan/26030__dong_gu/",
+      "parent": {
+        "id": "26",
+        "name": "Ulsan",
+        "native": "울산광역시",
+        "href": "/en/southkorea/admin/26__ulsan/"
+      },
+      "representative": [
+        129.431,
+        35.545
+      ]
+    },
+    {
+      "id": "26010",
+      "name": "Jung-gu [Central District]",
+      "native": "중구",
+      "href": "/en/southkorea/admin/ulsan/26010__jung_gu/",
+      "parent": {
+        "id": "26",
+        "name": "Ulsan",
+        "native": "울산광역시",
+        "href": "/en/southkorea/admin/26__ulsan/"
+      },
+      "representative": [
+        129.326,
+        35.572
+      ]
+    },
+    {
+      "id": "26020",
+      "name": "Nam-gu [South District]",
+      "native": "남구",
+      "href": "/en/southkorea/admin/ulsan/26020__nam_gu/",
+      "parent": {
+        "id": "26",
+        "name": "Ulsan",
+        "native": "울산광역시",
+        "href": "/en/southkorea/admin/26__ulsan/"
+      },
+      "representative": [
+        129.331,
+        35.519
+      ]
+    },
+    {
+      "id": "26310",
+      "name": "Ulju-gun",
+      "native": "울주군",
+      "href": "/en/southkorea/admin/ulsan/26310__ulju_gun/",
+      "parent": {
+        "id": "26",
+        "name": "Ulsan",
+        "native": "울산광역시",
+        "href": "/en/southkorea/admin/26__ulsan/"
+      }
+    }
+  ],
+  "contentPolicy": "Only factual names, administrative identifiers, parent membership and source URLs are redistributed. Population tables, prose, map geometry, HTML/CSS and scripts are not copied into this artifact.",
+  "limitations": "The live table contains newer census columns. Membership is adapted for the source-represented 2020 scenario using separately documented corrections; this is not certification of exact boundaries on 2020-01-01."
+}

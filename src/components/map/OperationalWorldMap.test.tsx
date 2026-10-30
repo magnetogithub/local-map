@@ -10,6 +10,8 @@ import {createWorldGeometryCatalogContract, readCatalogTerritoryId} from '@/lib/
 import {createWorldStateV3, transitionWorldStateV3, type WorldStateV3} from '@/lib/world/world-state-v3';
 import {createOperationalStateChange} from '@/lib/world/operational-state-change';
 import {useGameSetupStore} from '@/stores/game-setup-store';
+import {DEFAULT_GAME_UI_SETTINGS, type GameUiSettings} from '@/lib/game-ui/ui-settings';
+import {operationalCountryBorderWidth} from '@/lib/map/operational-boundary-style';
 import {OperationalWorldMap} from './OperationalWorldMap';
 
 type MapFixture = {
@@ -17,6 +19,7 @@ type MapFixture = {
   fire(event: string, payload?: {error: Error}): void;
   remove: ReturnType<typeof vi.fn>;
   triggerRepaint: ReturnType<typeof vi.fn>;
+  setPaintProperty: ReturnType<typeof vi.fn>;
 };
 const mocks = vi.hoisted(() => ({
   maps: [] as MapFixture[], consumers: [] as OperationalMapConsumer[],
@@ -44,7 +47,7 @@ vi.mock('maplibre-gl', () => {
     addLayer(layer: {id: string}) {this.layers.add(layer.id);}
     getLayer(id: string) {return this.layers.has(id);}
     setLayoutProperty() {}
-    setPaintProperty() {}
+    setPaintProperty = vi.fn();
     getCanvas() {return {style: {cursor: ''}};}
     getCenter() {return {lng: 0};}
     flyTo() {}
@@ -53,7 +56,7 @@ vi.mock('maplibre-gl', () => {
   return {Map: FakeMap, NavigationControl: class {}};
 });
 vi.mock('@/lib/map/operational-map-consumer', () => ({
-  createOperationalMapConsumer: mocks.createConsumer, OPERATIONAL_MAP_LAYERS: {country: 'operational-country-border'},
+  createOperationalMapConsumer: mocks.createConsumer, OPERATIONAL_MAP_LAYERS: {country: 'operational-country-border', detailCountry: 'operational-detail-country-border'},
 }));
 vi.mock('@/lib/map/operational-vector-delivery', () => ({fetchOperationalVectorDelivery: mocks.delivery}));
 vi.mock('@/lib/map/operational-country-labels', () => ({mountOperationalCountryLabels: mocks.labels}));
@@ -93,10 +96,10 @@ function fixture() {
   };
   return {client, publish};
 }
-function MapHarness({client}: {client: ReturnType<typeof fixture>['client']}) {
+function MapHarness({client, uiSettings}: {client: ReturnType<typeof fixture>['client']; uiSettings?: GameUiSettings}) {
   const world = useStore(client.store, value => value.world);
   const presentation = useMemo(() => operationalGamePresentation(world, client.presentation), [client, world]);
-  return <OperationalWorldMap client={client} presentation={presentation}/>;
+  return <OperationalWorldMap client={client} presentation={presentation} uiSettings={uiSettings}/>;
 }
 beforeEach(() => {
   useGameSetupStore.getState().resetGameSetup();
@@ -109,11 +112,12 @@ beforeEach(() => {
     return {updateWorld, visibility: vi.fn(), dispose: vi.fn()};
   });
   mocks.createConsumer.mockImplementation(async (input: Parameters<typeof createOperationalMapConsumer>[0]) => {
+    for (const id of ['operational-country-border', 'operational-detail-country-border']) input.map.addLayer({id, type: 'line', source: 'fixture'});
     let projection = {world: input.world, appliedRevision: input.world.revision};
     const consumer: OperationalMapConsumer = {
       getProjection: () => projection, getUpdateStats: () => ({fullProjectionBuilds: 1, updates: 0, cellsUpdated: 0, edgesExamined: 0,
         exactCellsAdded: 0, exactFrontsAdded: 0, exactFrontsRemoved: 0, exactCells: 0, exactFronts: 0, resyncRequired: false}),
-      selectCountry: vi.fn(), hoverCountry: vi.fn(),
+      selectCountry: vi.fn(), hoverCountry: vi.fn(), setDebugBoundaries: vi.fn(),
       updateWorld: vi.fn(async world => {projection = {world, appliedRevision: world.revision};}),
       showCountryDetail: vi.fn(async () => empty()), showEdgeDetail: vi.fn(async () => ({type: 'FeatureCollection' as const, features: []})), clearDetail: vi.fn(), dispose: vi.fn(),
     };
@@ -130,6 +134,40 @@ async function mount() {
 }
 
 describe('F06 operational map recovery', () => {
+  it('toggles debug boundaries immediately without remounting the map or changing the game snapshot', async () => {
+    const f = await mount(), snapshot = f.client.getSnapshot();
+    expect(DEFAULT_GAME_UI_SETTINGS.debugMapBoundaries).toBe(false);
+    expect(f.consumer.setDebugBoundaries).toHaveBeenLastCalledWith(false);
+    const worldUpdates = vi.mocked(f.consumer.updateWorld).mock.calls.length;
+    const detailLoads = vi.mocked(f.consumer.showCountryDetail).mock.calls.length;
+    f.rerender(<MapHarness client={f.client} uiSettings={{...DEFAULT_GAME_UI_SETTINGS, debugMapBoundaries: true}}/>);
+    await waitFor(() => expect(f.consumer.setDebugBoundaries).toHaveBeenLastCalledWith(true));
+    f.rerender(<MapHarness client={f.client} uiSettings={DEFAULT_GAME_UI_SETTINGS}/>);
+    await waitFor(() => expect(f.consumer.setDebugBoundaries).toHaveBeenLastCalledWith(false));
+    expect(f.client.getSnapshot()).toBe(snapshot);
+    expect(f.consumer.updateWorld).toHaveBeenCalledTimes(worldUpdates);
+    expect(f.consumer.showCountryDetail).toHaveBeenCalledTimes(detailLoads);
+    expect(mocks.maps).toHaveLength(1); expect(mocks.consumers).toHaveLength(1);
+    expect(mocks.delivery).toHaveBeenCalledOnce();
+    expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'ready');
+  });
+
+  it('keeps zoom-dependent border widths on vector and exact borders when emphasis changes', async () => {
+    const f = await mount(), map = mocks.maps[0];
+    for (const id of ['operational-country-border', 'operational-detail-country-border']) {
+      expect(map.setPaintProperty).toHaveBeenCalledWith(id, 'line-width', operationalCountryBorderWidth(false));
+    }
+    f.rerender(<MapHarness client={f.client} uiSettings={{...DEFAULT_GAME_UI_SETTINGS, emphasizeBorders: true}}/>);
+    for (const id of ['operational-country-border', 'operational-detail-country-border']) {
+      expect(map.setPaintProperty).toHaveBeenCalledWith(id, 'line-width', operationalCountryBorderWidth(true));
+    }
+    f.rerender(<MapHarness client={f.client} uiSettings={DEFAULT_GAME_UI_SETTINGS}/>);
+    for (const id of ['operational-country-border', 'operational-detail-country-border']) {
+      expect(map.setPaintProperty).toHaveBeenCalledWith(id, 'line-width', operationalCountryBorderWidth(false));
+    }
+    expect(mocks.maps).toHaveLength(1); expect(mocks.consumers).toHaveLength(1);
+  });
+
   it('makes boundary sources, represented years and reuse licenses available in the map attribution', async () => {
     await mount();
     const attribution = mocks.maps[0].options.attributionControl as {compact: boolean; customAttribution: string[]};
@@ -158,12 +196,14 @@ describe('F06 operational map recovery', () => {
   it('requires a map remount when detail state publication leaves the consumer needing resynchronization', async () => {
     const f = await mount(), world = f.client.getSnapshot().world, stats = f.consumer.getUpdateStats();
     vi.spyOn(f.consumer, 'getUpdateStats').mockReturnValue({...stats, resyncRequired: true});
+    vi.mocked(f.consumer.setDebugBoundaries).mockClear().mockImplementation(() => {throw Error('map requires resynchronization');});
     vi.mocked(f.consumer.showCountryDetail).mockRejectedValueOnce(Error('feature state write failed'));
     act(() => useGameSetupStore.getState().selectCountry('AAA'));
     await screen.findByRole('button', {name: '지도 다시 불러오기'});
     expect(screen.getByTestId('world-map')).toHaveAttribute('data-map-status', 'error');
     expect(screen.getByText('현재 세계 상태를 지도에 반영하지 못했습니다.')).toBeInTheDocument();
     expect(screen.queryByRole('button', {name: '상세 지도 다시 시도'})).not.toBeInTheDocument();
+    expect(f.consumer.setDebugBoundaries).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole('button', {name: '지도 다시 불러오기'}));
     expect(f.consumer.dispose).toHaveBeenCalledOnce();
     expect(mocks.maps[0].remove).toHaveBeenCalledOnce();

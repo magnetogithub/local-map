@@ -68,12 +68,16 @@ describe("13-18 through 13-20 war and system overlays", () => {
     render(<SettingsOverlay settings={DEFAULT_GAME_UI_SETTINGS} onChange={onChange}/>);
     const labels = screen.getByRole("checkbox", {name: /지도 국가명/});
     const borders = screen.getByRole("checkbox", {name: /국경선 강조/});
+    const debugBoundaries = screen.getByRole("checkbox", {name: /지도 디버그 모드/});
     const reduceMotion = screen.getByRole("checkbox", {name: /움직임 줄이기/});
     expect(labels).toBeChecked();
     expect(borders).not.toBeChecked();
+    expect(debugBoundaries).not.toBeChecked();
     expect(reduceMotion).not.toBeChecked();
     await user.click(borders);
     expect(onChange).toHaveBeenCalledWith("emphasizeBorders", true);
+    await user.click(debugBoundaries);
+    expect(onChange).toHaveBeenCalledWith("debugMapBoundaries", true);
     await user.click(reduceMotion);
     expect(onChange).toHaveBeenCalledWith("reduceMotion", true);
     expect(screen.getByText(/현재 세션에만 적용/)).toBeVisible();

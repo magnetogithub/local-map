@@ -10,6 +10,7 @@ import {useGameSetupStore} from '@/stores/game-setup-store';
 import {MAP_OPTIONS} from '@/lib/map/map-config';
 import {nearestWrappedLongitude} from '@/lib/map/country-camera';
 import {DEFAULT_GAME_UI_SETTINGS, type GameUiSettings} from '@/lib/game-ui/ui-settings';
+import {operationalCountryBorderWidth} from '@/lib/map/operational-boundary-style';
 
 const deliveries = new WeakMap<OperationalGameClient, Promise<OperationalVectorDelivery>>();
 export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_GAME_UI_SETTINGS}: {
@@ -33,7 +34,11 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
     const map = mapRef.current, settings = live.current.uiSettings;
     labels.current?.visibility(settings.showCountryLabels);
     if (map?.getLayer('operational-capitals')) map.setLayoutProperty('operational-capitals', 'visibility', settings.showCapitalMarkers ? 'visible' : 'none');
-    if (map?.getLayer(L.country)) map.setPaintProperty(L.country, 'line-width', settings.emphasizeBorders ? 1.6 : .8);
+    const mounted = consumer.current;
+    if (mounted && !mounted.getUpdateStats().resyncRequired) mounted.setDebugBoundaries(settings.debugMapBoundaries);
+    for (const id of [L.country, L.detailCountry]) {
+      if (map?.getLayer(id)) map.setPaintProperty(id, 'line-width', operationalCountryBorderWidth(settings.emphasizeBorders));
+    }
   }, []);
   useEffect(() => {
     if (!container.current) return;

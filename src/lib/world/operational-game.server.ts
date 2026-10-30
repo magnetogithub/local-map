@@ -19,9 +19,12 @@ export function inheritOperationalSeedTerritories(
   const catalog = operational.worldContract();
   return Object.freeze(Object.fromEntries(catalog.territoryOrder.map(id => {
     const cell = operational.cell(id), parent = operational.previousParents[cell.previousParentOrdinal - 1];
-    const original = parent && source.territoriesById[parent.oldTerritoryId];
+    const origins = parent && (parent.seedParentIds ?? [parent.oldTerritoryId]).map(id => source.territoriesById[id]);
+    const original = origins?.[0];
     if (!original || parent.sourceCountryId !== cell.sourceCountryId || original.sourceCountryId !== cell.sourceCountryId ||
         cell.sourceCountryId !== catalog.territoriesById[id].sourceCountryId) throw Error('OPERATIONAL_SEED_SOURCE_MISMATCH');
+    if (origins?.some(candidate => !candidate || candidate.sourceCountryId !== original.sourceCountryId ||
+        candidate.ownerCountryId !== original.ownerCountryId || candidate.controllerCountryId !== original.controllerCountryId)) throw Error('OPERATIONAL_SEED_CONSENSUS_MISMATCH');
     return [id, createTerritoryEntityV3({...original, id})];
   })));
 }

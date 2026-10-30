@@ -1,0 +1,42 @@
+{
+  "countryId": "PRK",
+  "revision": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "receipts": [
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1.geojson",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PRK/ADM1/geoBoundaries-PRK-ADM1.geojson",
+      "finalUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PRK/ADM1/geoBoundaries-PRK-ADM1.geojson",
+      "status": 200,
+      "bytes": 1219409,
+      "sha256": "f9aab34ec157591f4e3c573cc13b2dc390c9274f241768c7d7d98141a944368c",
+      "retrievedAt": "2026-10-30T01:22:58.923Z",
+      "byteLength": 1219409
+    },
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1-metaData.json",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PRK/ADM1/geoBoundaries-PRK-ADM1-metaData.json",
+      "finalUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PRK/ADM1/geoBoundaries-PRK-ADM1-metaData.json",
+      "status": 200,
+      "bytes": 916,
+      "sha256": "95d09c12b0a8079efdd35595e596b8204bc98fdd60f0273fb46501e03bc3737a",
+      "retrievedAt": "2026-10-30T01:22:59.298Z",
+      "byteLength": 916
+    },
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoboundaries-api-ADM1.json",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/PRK/ADM1/",
+      "sha256": "fb88b17069d18be0b883bd828fad69e091153532ebc2754f7ad47b39d1abd606",
+      "byteLength": 1818,
+      "savedAt": "2026-10-30T01:22:33.363Z",
+      "role": "Mutable API snapshot used for discovery; geometry and metadata are independently pinned to the fixed repository revision."
+    },
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/cc-by-3.0-igo.html",
+      "url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "sha256": "289673667396de8b9ea265e2c7c019d00765772673eeb70d017d3f8461b524e3",
+      "byteLength": 35411,
+      "copiedFrom": "data/raw/prompt19/PRK/cc-by-3.0-igo.html",
+      "role": "Verbatim license evidence already preserved with the PRK source; no new retrieval date asserted."
+    }
+  ]
+}

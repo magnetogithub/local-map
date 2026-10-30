@@ -52,6 +52,8 @@ export type OperationalAdministrativeParent = Readonly<{
 export type OperationalPreviousParent = Readonly<{
   ordinal: number;
   oldTerritoryId: TerritoryId;
+  /** Merged fine units may cross old coarse pieces; every seed source must agree. */
+  seedParentIds?: readonly TerritoryId[];
   sourceCountryId: string;
   // Members need not occupy a contiguous interval in global catalog order.
   start: number;

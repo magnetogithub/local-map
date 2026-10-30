@@ -2,7 +2,7 @@
 import {afterEach, describe, expect, it, vi} from 'vitest';
 import type {FeatureCollection, Polygon} from 'geojson';
 import type {OperationalVectorDelivery} from './operational-vector-delivery';
-import {createOperationalMapSources, OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID} from './operational-map-sources';
+import {createOperationalMapSources, OperationalMapSourceWriteError, OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID} from './operational-map-sources';
 
 const cleanups: (() => void)[] = [];
 afterEach(() => {for (const cleanup of cleanups.splice(0)) cleanup();});
@@ -13,7 +13,7 @@ function untilAborted<Value>(signal?: AbortSignal): Promise<Value> {
     signal.throwIfAborted(); signal.addEventListener('abort', () => reject(signal.reason), {once: true});
   });
 }
-function fixture() {
+function fixture(onEdgeDetailChange = vi.fn<(ordinals: readonly number[]) => void>()) {
   const ports = new Map<string, {setData: ReturnType<typeof vi.fn>}>();
   const map = {addSource: (id: string) => ports.set(id, {setData: vi.fn()}), removeSource: (id: string) => ports.delete(id), getSource: (id: string) => ports.get(id)};
   const api = {addProtocol: vi.fn(), removeProtocol: vi.fn()};
@@ -24,9 +24,14 @@ function fixture() {
     loadCountryDetail: vi.fn(async (_id: string, signal?: AbortSignal) => {signal?.throwIfAborted(); return data;}),
     loadCellDetail: vi.fn(async (_cells: readonly {id: string; sourceCountryId: string}[], signal?: AbortSignal) => {signal?.throwIfAborted(); return data;}),
     loadEdgeDetails: vi.fn(async (_ordinals: readonly number[], signal?: AbortSignal) => {signal?.throwIfAborted(); return [] as Awaited<ReturnType<OperationalVectorDelivery['loadEdgeDetails']>>;})};
-  const sources = createOperationalMapSources(map, api, delivery as unknown as OperationalVectorDelivery);
-  cleanups.push(sources.dispose); return {sources, delivery, ports, api};
+  const sources = createOperationalMapSources(map, api, delivery as unknown as OperationalVectorDelivery, onEdgeDetailChange);
+  cleanups.push(sources.dispose); return {sources, delivery, ports, api, onEdgeDetailChange};
 }
+const edgeDetails = (...ordinals: number[]): Awaited<ReturnType<OperationalVectorDelivery['loadEdgeDetails']>> => ordinals.map(ordinal => ({
+  id: `edge:operational:${String(ordinal).padStart(64, '0')}`, ordinal, left: 1, right: 2, boundaryClass: 'administrative',
+  flags: {positiveAdjacency: true, country: false, administrative: true, previous: false, residual: false},
+  geometry: {type: 'LineString', coordinates: [[0, ordinal], [1, ordinal]]},
+}));
 
 describe('operational detail request cancellation', () => {
   it('stages country polygons and their real incident boundaries before replacing detail', async () => {
@@ -34,11 +39,14 @@ describe('operational detail request cancellation', () => {
     await f.sources.showCountryDetail('AAA');
     const cells = f.ports.get(OPERATIONAL_EXACT_CELL_SOURCE_ID)!, edges = f.ports.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!;
     expect(cells.setData).toHaveBeenCalledOnce(); expect(edges.setData).toHaveBeenCalledOnce();
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([]);
     f.delivery.loadEdgeDetails.mockRejectedValueOnce(Error('boundaries offline'));
     await expect(f.sources.showCountryDetail('BBB')).rejects.toThrow('boundaries offline');
     expect(cells.setData).toHaveBeenCalledOnce(); expect(edges.setData).toHaveBeenCalledOnce();
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([]);
     await f.sources.showCountryDetail('BBB');
     expect(cells.setData).toHaveBeenCalledTimes(2); expect(edges.setData).toHaveBeenCalledTimes(2);
+    expect(f.onEdgeDetailChange).toHaveBeenCalledTimes(2);
   });
 
   it('cancels pending country boundaries when a new selection replaces them', async () => {
@@ -50,6 +58,7 @@ describe('operational detail request cancellation', () => {
     await f.sources.showCountryDetail('BBB'); await old;
     expect(f.ports.get(OPERATIONAL_EXACT_CELL_SOURCE_ID)!.setData).toHaveBeenCalledOnce();
     expect(f.ports.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!.setData).toHaveBeenCalledOnce();
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([]);
   });
 
   it.each(['country', 'cell'] as const)('cancels an obsolete %s request when its shared cell source is replaced', async kind => {
@@ -102,5 +111,60 @@ describe('operational detail request cancellation', () => {
     const cancelled = expect(f.sources.showCountryDetail('AAA', parent.signal)).rejects.toHaveProperty('name', 'AbortError');
     parent.abort(); await cancelled;
     expect(f.ports.get(OPERATIONAL_EXACT_CELL_SOURCE_ID)!.setData).not.toHaveBeenCalled();
+    expect(f.onEdgeDetailChange).not.toHaveBeenCalled();
+  });
+
+  it.each(['country', 'edge'] as const)('notifies exact edge identities after successful %s publication and releases them on clear', async kind => {
+    const f = fixture(), order: string[] = [];
+    f.delivery.incidentEdges.mockReturnValue([2, 5]); f.delivery.loadEdgeDetails.mockResolvedValue(edgeDetails(2, 5));
+    f.ports.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!.setData.mockImplementation(() => order.push('published'));
+    f.onEdgeDetailChange.mockImplementation(ids => {order.push('notified'); expect(Object.isFrozen(ids)).toBe(true);});
+    if (kind === 'country') await f.sources.showCountryDetail('AAA'); else await f.sources.showEdgeDetail([2, 5]);
+    expect(order).toEqual(['published', 'notified']); expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([2, 5]);
+    await f.sources.showCellDetail([]); expect(f.onEdgeDetailChange).toHaveBeenCalledOnce();
+    f.sources.clearDetail(); expect(f.onEdgeDetailChange).toHaveBeenLastCalledWith([]);
+    expect(order).toEqual(['published', 'notified', 'published', 'notified']);
+  });
+
+  it('does not notify a stale edge result that ignores request cancellation', async () => {
+    const f = fixture(); let finish!: (value: Awaited<ReturnType<OperationalVectorDelivery['loadEdgeDetails']>>) => void;
+    f.delivery.loadEdgeDetails.mockImplementationOnce(() => new Promise(resolve => {finish = resolve;}));
+    const stale = expect(f.sources.showEdgeDetail([2])).rejects.toHaveProperty('name', 'AbortError');
+    f.delivery.loadEdgeDetails.mockResolvedValueOnce(edgeDetails(5)); await f.sources.showEdgeDetail([5]);
+    finish(edgeDetails(2)); await stale;
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([5]);
+  });
+
+  it.each(['clear', 'dispose'] as const)('does not notify late edge data after %s', async operation => {
+    const f = fixture(); let finish!: (value: Awaited<ReturnType<OperationalVectorDelivery['loadEdgeDetails']>>) => void;
+    f.delivery.loadEdgeDetails.mockImplementationOnce(() => new Promise(resolve => {finish = resolve;}));
+    const stale = expect(f.sources.showEdgeDetail([2])).rejects.toHaveProperty('name', 'AbortError');
+    if (operation === 'clear') f.sources.clearDetail(); else f.sources.dispose();
+    finish(edgeDetails(2)); await stale;
+    if (operation === 'clear') expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([]);
+    else expect(f.onEdgeDetailChange).not.toHaveBeenCalled();
+  });
+
+  it('keeps the previous edge identities when fetch or source publication fails', async () => {
+    const f = fixture(); f.delivery.loadEdgeDetails.mockResolvedValueOnce(edgeDetails(2)); await f.sources.showEdgeDetail([2]);
+    f.delivery.loadEdgeDetails.mockRejectedValueOnce(Error('edge offline'));
+    await expect(f.sources.showEdgeDetail([5])).rejects.toThrow('edge offline');
+    f.ports.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!.setData.mockImplementationOnce(() => {throw Error('edge worker');});
+    await expect(f.sources.showEdgeDetail([5])).rejects.toBeInstanceOf(OperationalMapSourceWriteError);
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([2]);
+  });
+
+  it.each(['country', 'edge', 'clear'] as const)('wraps a synchronous %s notification failure as a source publication failure', async operation => {
+    const failure = Error('edge mask publication');
+    const f = fixture(); f.onEdgeDetailChange.mockImplementationOnce(() => {throw failure;});
+    f.delivery.loadEdgeDetails.mockResolvedValue(edgeDetails(2));
+    if (operation === 'clear') {
+      expect(() => f.sources.clearDetail()).toThrow(OperationalMapSourceWriteError);
+    } else {
+      const pending = operation === 'country' ? f.sources.showCountryDetail('AAA') : f.sources.showEdgeDetail([2]);
+      await expect(pending).rejects.toMatchObject({name: 'Error', message: 'OPERATIONAL_MAP_SOURCE_WRITE_FAILED', cause: failure});
+    }
+    expect(f.ports.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!.setData).toHaveBeenCalledOnce();
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith(operation === 'clear' ? [] : [2]);
   });
 });

@@ -75,6 +75,23 @@ describe('mixed operational catalog membership and seed lineage', () => {
     expect(() => inheritOperationalSeedTerritories({territoriesById: {[wrong.id]: wrong}}, catalog)).toThrow('OPERATIONAL_SEED_SOURCE_MISMATCH');
   });
 
+  it('merges old coarse seed pieces only when their authoritative ownership and control agree', () => {
+    const catalog = fixture(parents => {parents.previous[0].seedParentIds = [id('7'), id('8')];});
+    const first = createTerritoryEntityV3({id: id('7'), sourceCountryId: 'KOR', ownerCountryId: 'KOR', controllerCountryId: 'KOR'});
+    const second = createTerritoryEntityV3({...first, id: id('8')});
+    const source = {territoriesById: {[first.id]: first, [second.id]: second}};
+    expect(inheritOperationalSeedTerritories(source, catalog)[id('1')]).toEqual({...first, id: id('1')});
+    const changed = createTerritoryEntityV3({...second, controllerCountryId: 'PRK'});
+    expect(() => inheritOperationalSeedTerritories({territoriesById: {...source.territoriesById, [changed.id]: changed}}, catalog)).toThrow('OPERATIONAL_SEED_CONSENSUS_MISMATCH');
+    expect(() => inheritOperationalSeedTerritories({territoriesById: {[first.id]: first}}, catalog)).toThrow('OPERATIONAL_SEED_CONSENSUS_MISMATCH');
+  });
+
+  it('rejects empty, duplicated, unordered or anchor-free consensus lineage', () => {
+    for (const seedParentIds of [[], [id('7'), id('7')], [id('8'), id('7')], [id('8')]]) {
+      expect(() => fixture(parents => {parents.previous[0].seedParentIds = seedParentIds;})).toThrow('OPERATIONAL_SEED_LINEAGE');
+    }
+  });
+
   it('rejects duplicate parent identities rather than silently replacing their memberships', () => {
     expect(() => fixture(parents => {parents.administrative[1].parentKey = parents.administrative[0].parentKey;})).toThrow('OPERATIONAL_PARENT_MAPPING');
     expect(() => fixture(parents => {parents.previous[1].oldTerritoryId = parents.previous[0].oldTerritoryId;})).toThrow('OPERATIONAL_PARENT_MAPPING');

@@ -8,7 +8,7 @@ import {VectorTile} from '@mapbox/vector-tile';
 import {PbfReader} from 'pbf';
 import {GET as bootstrapGET} from '@/app/api/world/catalog/operational/map/route';
 import {GET as assetGET} from '@/app/data/territory-catalog/[version]/[...asset]/route';
-import {prepareOperationalCatalog, OPERATIONAL_CATALOG_PATHS} from '../world/operational-catalog.server';
+import {prepareOperationalCatalog, OPERATIONAL_CATALOG_PATHS, type OperationalCatalog} from '../world/operational-catalog.server';
 import {prepareOperationalMapDelivery} from './operational-delivery.server';
 import {OPERATIONAL_MAP_SOURCE_ID, readOperationalMapBootstrap} from './operational-delivery-contract';
 import {fetchOperationalVectorDelivery, loadOperationalVectorDelivery, type OperationalVectorDelivery} from './operational-vector-delivery';
@@ -29,6 +29,60 @@ let delivery: OperationalVectorDelivery;
 beforeAll(async () => {delivery = await fetchOperationalVectorDelivery(ref, fetcher);});
 
 describe('16-04 operational map transport', () => {
+  it('classifies original ADM1 contacts while excluding fine, foreign, coast and residual contacts', () => {
+    const kor = catalog.loadCountry('KOR').slice(0, 7), prkCountryId = catalog.loadCountry('PRK')[0].sourceCountryId;
+    const korParents = catalog.administrativeParents.filter(p => p.sourceCountryId === 'KOR' && p.kind === 'administrative').slice(0, 2);
+    const prkParents = catalog.administrativeParents.filter(p => p.sourceCountryId === 'PRK' && p.kind === 'administrative').slice(0, 2);
+    const parents = [korParents[0], korParents[1], {...korParents[0], kind: 'country-envelope-residual' as const}, ...prkParents]
+      .map((p, i) => ({...p, ordinal: i + 1}));
+    const cells = kor.map((cell, i) => ({...cell, ordinal: i + 1, administrativeOrdinal: [1, 1, 2, 3, 4, 4, 5][i],
+      sourceCountryId: i < 4 ? cell.sourceCountryId : prkCountryId}));
+    const pairs = [[1, 2], [2, 3], [3, 4], [1, 5], [1, 0], [6, 7]];
+    const incidence = Buffer.alloc(pairs.length * 8);
+    pairs.forEach(([left, right], i) => {incidence.writeUInt32LE(left, i * 8); incidence.writeUInt32LE(right, i * 8 + 4);});
+    const loadCountry = vi.fn((id: string) => cells.filter(c => c.sourceCountryId === id));
+    const readDeliveryAsset = vi.fn((file: string) => {
+      if (file !== 'metadata/edge-incidence.bin.gz') throw Error('UNEXPECTED_GEOMETRY_READ');
+      return gzipSync(incidence);
+    });
+    const edge = vi.fn(() => {throw Error('UNEXPECTED_TOPOLOGY_GEOMETRY');});
+    const fixture: OperationalCatalog = {...catalog, administrativeParents: parents, loadCountry, readDeliveryAsset, edge,
+      cell: id => {const found = cells.find(c => c.ordinal === id || c.id === id); if (!found) throw Error('UNKNOWN_OPERATIONAL_CELL'); return found;},
+      descriptor: {...catalog.descriptor, countryOrder: ['KOR', 'PRK'], counts: {...catalog.descriptor.counts, countries: 2, cells: 7, edges: pairs.length}}};
+    const bootstrap = prepareOperationalMapDelivery(fixture).bootstrap;
+    expect(bootstrap.legacyBoundaryOrdinals).toEqual([2, 6]);
+    expect(loadCountry.mock.calls.map(([id]) => id)).toEqual(['KOR', 'PRK']);
+    expect(readDeliveryAsset).toHaveBeenCalledExactlyOnceWith('metadata/edge-incidence.bin.gz');
+    expect(edge).not.toHaveBeenCalled();
+    readDeliveryAsset.mockReturnValueOnce(gzipSync(incidence.subarray(0, -1)));
+    expect(() => prepareOperationalMapDelivery(fixture)).toThrow('INVALID_OPERATIONAL_BOUNDARY_INCIDENCE');
+  });
+
+  it('rejects malformed legacy edge ordinals and defaults older bootstraps to no legacy contacts', () => {
+    const bootstrap = prepareOperationalMapDelivery(catalog).bootstrap;
+    const {legacyBoundaryOrdinals, ...older} = bootstrap;
+    expect(legacyBoundaryOrdinals!.length).toBeGreaterThan(0);
+    const normalized = readOperationalMapBootstrap(older, ref);
+    expect(normalized.legacyBoundaryOrdinals).toEqual([]);
+    expect(Object.isFrozen(normalized.legacyBoundaryOrdinals)).toBe(true);
+    for (const ordinals of [[0], [-1], [1.5], [1, 1], [2, 1], [catalog.descriptor.counts.edges + 1]]) {
+      expect(() => readOperationalMapBootstrap({...bootstrap, legacyBoundaryOrdinals: ordinals}, ref)).toThrow();
+    }
+  });
+
+  it('matches exact coarse lineage without sending country metadata or polygon payloads to the browser', () => {
+    const detail = JSON.parse(fs.readFileSync(`${OPERATIONAL_CATALOG_PATHS.delivery}/detail-index.json`, 'utf8'));
+    const edges = detail.edgeDetails.flatMap((s: {artifact: {path: string}}) =>
+      JSON.parse(gunzipSync(fs.readFileSync(`${OPERATIONAL_CATALOG_PATHS.delivery}/${s.artifact.path}`)).toString()).edges);
+    const fineMacro = JSON.parse(fs.readFileSync(`${OPERATIONAL_CATALOG_PATHS.delivery}/provenance.json`, 'utf8')).fineMacro;
+    const expected = edges.filter((e: {right: number; boundaryClass: string; flags: {previous: boolean; country: boolean}}) => e.right > 0 && !e.flags.country && (fineMacro ? e.boundaryClass === 'administrative' : e.flags.previous))
+      .map((e: {ordinal: number}) => e.ordinal);
+    expect(delivery.bootstrap.legacyBoundaryOrdinals).toEqual(expected);
+    expect(expected.length).toBeGreaterThan(0);
+    expect(delivery.bootstrap).not.toHaveProperty('territoryMetadata');
+    expect(delivery.bootstrap).not.toHaveProperty('geometry');
+  });
+
   it('boots the admitted v3 without fetching world geometry or country metadata', () => {
     expect(requests).toEqual(['/api/world/catalog/operational/map', base + 'manifest.json', base + 'tile-index.json', base + 'detail-index.json', base + 'metadata/edge-incidence.bin.gz']);
     expect(delivery.bootstrap.catalog.counts.cells).toBe(catalog.descriptor.counts.cells);

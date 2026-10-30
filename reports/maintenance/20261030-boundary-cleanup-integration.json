@@ -1,0 +1,413 @@
+{
+  "date": "2026-10-30",
+  "catalogVersion": "catalog-v3-prompt19-korea-4ea088f21e300a1c4ffc",
+  "counts": {
+    "administrativeParents": 4232,
+    "cells": 4720,
+    "countries": 247,
+    "edges": 17246,
+    "previousParents": 4231
+  },
+  "request": "Remove small residual loops next to the Korean DMZ and long parallel residual bands along the east coast, including Uljin/Yeongdeok.",
+  "cause": [
+    "Near-outline enclosed source-free P0 land had been categorically preserved as an inland residual.",
+    "The 159 km² east-coast strip exceeded a total-area guard despite its narrow geometry.",
+    "A heading at Uljin stopped at its first 35 m exit instead of crossing a certified 23.9 m same-pair protrusion to the final coast."
+  ],
+  "cleanup": {
+    "policy": {
+      "distanceBasis": "Minimum polygon-to-existing-national/coast-line distance in local kilometers; longitude scaled by cosine of candidate latitude.",
+      "landBasis": "Only an existing source-free residual cell of the verified P0 land partition can be absorbed. A water hole has no such cell and remains unchanged.",
+      "maximumBoundaryDistanceKm": 5,
+      "maximumBoundaryVertexDistanceKm": 5,
+      "maximumEnclosedResidualAreaKm2": 3,
+      "maximumLongThinResidualAreaKm2": 250,
+      "maximumLongThinResidualWidthKm": 2,
+      "maximumRayKm": 10,
+      "originalTerminalHeadingRequired": true,
+      "preserveAllOriginalFineTerritory": true,
+      "requireEntireEnclosedPerimeterContact": true,
+      "requireSameCountryFineFamily": true,
+      "wholeSourcePairCorridorCertified": true
+    },
+    "dmzLoops": [
+      {
+        "id": "territory:catalog:0a6b183776f65f055a1ca22285df971b93a3ad805c58e8e16d33d298837ae4ff",
+        "countryId": "PRK",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      },
+      {
+        "id": "territory:catalog:36b4c73f72d8980b9da2b0dbe7c74cf688c1434e4563a07413d26dba7c52be94",
+        "countryId": "KOR",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      },
+      {
+        "id": "territory:catalog:75371f7ef89f485ea3d73045e702b870dac9a363fe9b31b6fa3d35f8e2bd1f23",
+        "countryId": "KOR",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      },
+      {
+        "id": "territory:catalog:75d2eab4557abfd7a17dc1ab7f0e5944c95822dc1b80b8a0399b546d08289fa8",
+        "countryId": "PRK",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      },
+      {
+        "id": "territory:catalog:8ae449e7ebdc800a79973b2338823338eb52bfde8a96a5159f3796a6a964e2f0",
+        "countryId": "KOR",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      },
+      {
+        "id": "territory:catalog:b12cc26223fcbd0d865ef7c277a9328d9bf2f1be37be57bd2b445659102aca14",
+        "countryId": "PRK",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      },
+      {
+        "id": "territory:catalog:b80c3dc6b78c8317f6d0f7967ef346080beaec533aa425af82e94761ed713d0d",
+        "countryId": "KOR",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      },
+      {
+        "id": "territory:catalog:fb7987388c86cc640e839820eec9f0d81b93b6136af0cf0af0d484a66f2028fb",
+        "countryId": "KOR",
+        "oldLinesStillInternalKm": 0,
+        "remainingResidualAreaDegreesSquared": 0
+      }
+    ],
+    "eastCoast": {
+      "id": "territory:catalog:a3d6b442da48bfe6c5ad9474a29b83d75e55cd447d5c60289fef3b00503b41e7",
+      "required": true,
+      "present": true,
+      "bbox": [
+        128.507865781391,
+        37.247054489051,
+        129.346527159391,
+        38.37420946292
+      ],
+      "centroid": [
+        128.92293793914894,
+        37.793363256740605
+      ],
+      "area": 0.01627806691764703,
+      "vertices": 136,
+      "components": 1,
+      "holes": 0,
+      "areaKm2": 158.95604983061938,
+      "previousCoastKm": 148.3376356619496,
+      "previousInternalLineKm": 157.20602927414788,
+      "remainingResidualAreaDegreesSquared": 0,
+      "oldCoastStillResidualKm": 0,
+      "oldLinesStillInternalKm": 1.7326228297663533,
+      "oldLinesStillResidualKm": 0,
+      "oldLinesStillSameFamilyKm": 0,
+      "fineJunctions": [
+        {
+          "edgeId": "edge:operational:739febeb7c7156f432b49b6df737775ec350c000f4b3dbb2eeee6cc34ddc697c",
+          "boundaryClass": "operational",
+          "sharedPreviousLineKm": 0.3799366783290479,
+          "leftName": "Yangyang-gun",
+          "rightName": "Gangneung-si",
+          "certificate": {
+            "leftFineSourceIdentity": {
+              "sourceFeatureId": "91817680B9940099959324",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "rightFineSourceIdentity": {
+              "sourceFeatureId": "91817680B99242230797556",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "originalSharedFinePairEdgeWitnesses": [
+              {
+                "edgeId": "edge:operational:a5463d43815c965b46c06ee2dac7908dd05f1445420a0320467d33f8de56de9c",
+                "sharedSourceLineKm": 20.622759294076896
+              }
+            ],
+            "afterSeamEndpoints": [
+              [
+                128.588381849,
+                37.853419135
+              ],
+              [
+                128.811989329968,
+                37.93000601613
+              ]
+            ],
+            "coastConnectedEndpoints": [
+              {
+                "coordinate": [
+                  128.811989329968,
+                  37.93000601613
+                ],
+                "coastEdgeIds": [
+                  "edge:operational:0a77ceb9420d0826ea3a6661a20b9460eddf2addb9494dfc23f1ed63c24f2e01",
+                  "edge:operational:0e05cbe088fe81c7ee1314078cb6cf8d8b8dc06f6063e2aeb4a41bc952ec3a4e"
+                ]
+              }
+            ],
+            "afterSeamClosed": false,
+            "originalPairToCoastConnected": true
+          }
+        },
+        {
+          "edgeId": "edge:operational:9c0acdb6c898e27631fa5f7f1a85da020e3c9746f4207801c3c325b6b803ba95",
+          "boundaryClass": "operational",
+          "sharedPreviousLineKm": 0.1271735405493824,
+          "leftName": "Sokcho-si",
+          "rightName": "Yangyang-gun",
+          "certificate": {
+            "leftFineSourceIdentity": {
+              "sourceFeatureId": "91817680B43621567480447",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "rightFineSourceIdentity": {
+              "sourceFeatureId": "91817680B9940099959324",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "originalSharedFinePairEdgeWitnesses": [
+              {
+                "edgeId": "edge:operational:8ee2670681965066e5c258c241f5e58f3eecf13d992dc10b658347efbfd13dfa",
+                "sharedSourceLineKm": 13.141854163346986
+              }
+            ],
+            "afterSeamEndpoints": [
+              [
+                128.472418844922,
+                38.114853263903
+              ],
+              [
+                128.625292544339,
+                38.158162005449
+              ]
+            ],
+            "coastConnectedEndpoints": [
+              {
+                "coordinate": [
+                  128.625292544339,
+                  38.158162005449
+                ],
+                "coastEdgeIds": [
+                  "edge:operational:0a77ceb9420d0826ea3a6661a20b9460eddf2addb9494dfc23f1ed63c24f2e01",
+                  "edge:operational:0f6c0b2e6287a3aaef3a14b97b6cfdea78ebd9149b865adb71ecb054f0fdb70f"
+                ]
+              }
+            ],
+            "afterSeamClosed": false,
+            "originalPairToCoastConnected": true
+          }
+        },
+        {
+          "edgeId": "edge:operational:f083e00c915bba049f6b47b0c565237b543b5f24675e287d8285f655f8073b92",
+          "boundaryClass": "operational",
+          "sharedPreviousLineKm": 1.225512610887923,
+          "leftName": "Gangneung-si",
+          "rightName": "Donghae-si",
+          "certificate": {
+            "leftFineSourceIdentity": {
+              "sourceFeatureId": "91817680B99242230797556",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "rightFineSourceIdentity": {
+              "sourceFeatureId": "91817680B21216327036282",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "originalSharedFinePairEdgeWitnesses": [
+              {
+                "edgeId": "edge:operational:03b757e9b1174e4c95c49afaede6712766a21603b32059b2986eaed3fb01113b",
+                "sharedSourceLineKm": 13.325208286499606
+              }
+            ],
+            "afterSeamEndpoints": [
+              [
+                128.978346189754,
+                37.527198278346
+              ],
+              [
+                129.079231252739,
+                37.610420119459
+              ]
+            ],
+            "coastConnectedEndpoints": [
+              {
+                "coordinate": [
+                  129.079231252739,
+                  37.610420119459
+                ],
+                "coastEdgeIds": [
+                  "edge:operational:0e05cbe088fe81c7ee1314078cb6cf8d8b8dc06f6063e2aeb4a41bc952ec3a4e",
+                  "edge:operational:95f1217fee55db1d42d866ce15fd8a1b1a9db3ff0226f9bc420ad17a2455c4e6"
+                ]
+              }
+            ],
+            "afterSeamClosed": false,
+            "originalPairToCoastConnected": true
+          }
+        }
+      ]
+    },
+    "uljinYeongdeok": {
+      "id": "territory:catalog:9b03db0fbcc86fac9bcbe8baae61b17dcc0c8777f187dd678705abbd2867ead8",
+      "required": true,
+      "present": true,
+      "bbox": [
+        129.410347728,
+        36.616645,
+        129.462195924351,
+        36.690489023928
+      ],
+      "centroid": [
+        129.42906444413973,
+        36.648526356083266
+      ],
+      "area": 0.0010892614479794712,
+      "vertices": 18,
+      "components": 1,
+      "holes": 0,
+      "areaKm2": 10.806096869323628,
+      "previousCoastKm": 8.95897484006532,
+      "previousInternalLineKm": 10.973482928442703,
+      "remainingResidualAreaDegreesSquared": 0,
+      "oldCoastStillResidualKm": 0,
+      "oldLinesStillInternalKm": 0.059652157977458584,
+      "oldLinesStillResidualKm": 0,
+      "oldLinesStillSameFamilyKm": 0,
+      "fineJunctions": [
+        {
+          "edgeId": "edge:operational:50fca385b11cd6487c9e75bbb375c1f62d7c742df11bb8bcc7cb7cc10b2515c5",
+          "boundaryClass": "operational",
+          "sharedPreviousLineKm": 0.059652157977458584,
+          "leftName": "Uljin-gun",
+          "rightName": "Yeongdeok-gun",
+          "certificate": {
+            "leftFineSourceIdentity": {
+              "sourceFeatureId": "91817680B88731995383072",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "rightFineSourceIdentity": {
+              "sourceFeatureId": "91817680B91067436457746",
+              "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+            },
+            "originalSharedFinePairEdgeWitnesses": [
+              {
+                "edgeId": "edge:operational:056b57c29fe3edcc087b0f9fd4accbc25ed8f61cef04a022b541d8d7be1ac666",
+                "sharedSourceLineKm": 12.41087260100524
+              },
+              {
+                "edgeId": "edge:operational:e7d34fa21442d6eee5f32fe8824c6658134868ab9656bc7bf817f932379b089c",
+                "sharedSourceLineKm": 2.134305858013486
+              }
+            ],
+            "afterSeamEndpoints": [
+              [
+                129.267547169,
+                36.667644615
+              ],
+              [
+                129.431059255746,
+                36.635608898074
+              ]
+            ],
+            "coastConnectedEndpoints": [
+              {
+                "coordinate": [
+                  129.431059255746,
+                  36.635608898074
+                ],
+                "coastEdgeIds": [
+                  "edge:operational:3c8b55230550ad219dab33f1ff3788a09f794a6c7e31d7013b4d3fbbf20c5c93",
+                  "edge:operational:79507f357f77b5dd1f8bd633a22627070e772b73057ca7c37e0674c2eba21b08"
+                ]
+              }
+            ],
+            "afterSeamClosed": false,
+            "originalPairToCoastConnected": true
+          }
+        }
+      ]
+    },
+    "remainingDmzResiduals": [
+      {
+        "bbox": [
+          126.737106655397,
+          37.961603106,
+          126.871701109648,
+          38.08101430161
+        ],
+        "countryId": "KOR",
+        "id": "territory:catalog:178ba77ad94ea2e4a571d8e0785f19653b641dd4e82de1640c81a9c9ac541634",
+        "lengthKm": 16.331084544015752,
+        "reason": "No original shared-fine terminal heading reaches this residual through the same established source pair within 10 km. Preserve unassigned gameplay land instead of inventing administrative ownership."
+      }
+    ]
+  },
+  "preservation": {
+    "originalFineFamilies": 407,
+    "sourceFamilyRemovedArea": 0,
+    "unchangedOtherCountries": 245,
+    "topology": {
+      "missingEdgeSides": 0,
+      "nationalBoundaryNotMesh": 0,
+      "coastBoundaryNotMesh": 0,
+      "invalidInteriorEdges": 0,
+      "missingMeshSegments": 0,
+      "duplicateGraphSegments": 0,
+      "crossCountryOverlapAreaDegreesSquared": 0
+    },
+    "yeongdoGu": "Independent audit confirmed its 0.062743433465 km² geometry hash exactly matches the preceding catalog. No fine cell is eligible for residual cleanup."
+  },
+  "verification": [
+    {
+      "path": "reports/maintenance/20261030-boundary-cleanup-independent-verification.json",
+      "sha256": "65fa49033830fbcfcf2ce2e8b63010a1303aa2530867ca6c9797b0b3853ff07f",
+      "byteLength": 186894
+    },
+    {
+      "path": "reports/maintenance/20261030-fine-macro-independent-verification.json",
+      "sha256": "31d6cd6b5e2f94c89c5aabb0d8ba1f20c0dfb8c48d2a1bce0b77f196e4fbac8f",
+      "byteLength": 9970
+    },
+    {
+      "path": "reports/maintenance/prompt19-C/boundary-cleanup-2020-mixed-verification.json",
+      "sha256": "f20092335048e42d419564df9268d79d1e7328cd15487fcc5530327ecafac71f",
+      "byteLength": 2521
+    }
+  ],
+  "tests": {
+    "reconciliationFixtures": 18,
+    "koreaSourceTests": 8,
+    "frontierGameMembershipRegionTests": 25,
+    "allPassed": true,
+    "webpackProductionBuild": "pass",
+    "targetedEslint": "pass",
+    "configurationRestoredByteExactly": true
+  },
+  "ui": {
+    "url": "http://127.0.0.1:3030/game",
+    "serverProcessId": 25700,
+    "player": "KOR",
+    "date": "2020-01-01",
+    "turn": 0,
+    "queuedActions": 0,
+    "mapStatus": "ready",
+    "baseStatus": "ready",
+    "appliedRevision": 0,
+    "debugBoundariesVerified": true,
+    "finalDebugSetting": false,
+    "screenshots": [
+      "reports/verification/boundary-cleanup-20261030/debug-dmz-coast.png",
+      "reports/verification/boundary-cleanup-20261030/normal-dmz-coast.png"
+    ]
+  },
+  "limits": [
+    "The earlier western KOR 16.331 km unassigned sector remains. It is separate from these eight loops and the two eastern coastal strips.",
+    "Correct fine-to-fine junctions from original shared fine boundaries to exact coast nodes are retained and explicitly certified in cleanupAcceptance.",
+    "Adjusted geometry is gameplay reconciliation. Raw source artifacts and all original fine extents remain preserved."
+  ],
+  "externalAiCalls": 0,
+  "pushed": false
+}

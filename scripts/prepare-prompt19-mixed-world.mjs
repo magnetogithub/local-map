@@ -12,17 +12,33 @@ if(inputArg>=0&&(!process.argv[inputArg+1]||process.argv[inputArg+1].startsWith(
 const inputPath=inputArg<0?'reports/maintenance/prompt19-C/joined-world-input.json':process.argv[inputArg+1];
 const inputBytes=fs.readFileSync(inputPath), bundle=JSON.parse(inputBytes);
 if(bundle.report.invalid.length || bundle.report.unresolved.length || !bundle.report.topology?.pass)throw Error('UNVERIFIED_JOINED_INPUT');
+const verificationArg=process.argv.indexOf('--national-verification');
+let nationalBoundaryVerification=null;
+if(bundle.report.nationalBoundaryReconciliation){
+  const file=verificationArg<0?null:process.argv[verificationArg+1];
+  if(!file||file.startsWith('--'))throw Error('MISSING_ARGUMENT:--national-verification');
+  const bytes=fs.readFileSync(file), verification=JSON.parse(bytes);
+  if(verification.pass!==true||verification.after?.sha256!==digest(inputBytes)||verification.after?.byteLength!==inputBytes.length||verification.before?.sha256!==bundle.report.nationalBoundaryInput?.bundle.sha256)throw Error('UNVERIFIED_NATIONAL_BOUNDARY_INPUT');
+  if(bundle.report.nationalBoundaryReconciliation.cleanupBoundarySlivers&&verification.cleanupAcceptance?.pass!==true)throw Error('UNVERIFIED_BOUNDARY_CLEANUP');
+  if(bundle.report.westernSectorReconciliation&&(!verification.westernAcceptance?.pass||!verification.westernIsolation?.pass||!verification.westernContactEvidence?.pass||!verification.reproducibility?.pass))throw Error('UNVERIFIED_WESTERN_SECTOR');
+  nationalBoundaryVerification={path:file,sha256:digest(bytes),byteLength:bytes.length};
+}
 // Runtime version depends on geometry, topology, source locks and code, not probe timing/RSS.
-const codeInputs=['scripts/prepare-prompt19-joined-candidates.mjs','scripts/prompt19-source-arrangement.mjs','scripts/prompt19-joined-topology.mjs','scripts/prepare-prompt19-mixed-world.mjs'].map(file=>({path:file,sha256:digest(fs.readFileSync(file))}));
+const codeInputs=['scripts/prepare-prompt19-joined-candidates.mjs','scripts/prompt19-source-arrangement.mjs','scripts/prompt19-joined-topology.mjs','scripts/prepare-prompt19-mixed-world.mjs',...(bundle.report.fineMacro?['scripts/prepare-prompt19-fine-macro-world.mjs','scripts/prompt19-fine-macro-topology.mjs']:[]),...(bundle.report.nationalBoundaryReconciliation?['scripts/prepare-prompt19-national-boundary-world.mjs','scripts/prompt19-national-boundary-reconciliation.mjs','scripts/prompt14-boundary-arrangement.mjs','scripts/prompt14-catalog-topology.mjs','scripts/prompt14-catalog-core.mjs']:[])].map(file=>({path:file,sha256:digest(fs.readFileSync(file))}));
 const sourceLockArtifacts=bundle.report.sourceLockArtifacts??['KOR','PRK'].map(countryId=>({countryId,path:`data/source-locks/prompt19/${countryId}.json`}));
+if(bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers)codeInputs.push({path:'scripts/prepare-prompt19-boundary-cleanup-world.mjs',sha256:digest(fs.readFileSync('scripts/prepare-prompt19-boundary-cleanup-world.mjs'))});
+if(bundle.report.westernSectorReconciliation)for(const file of ['scripts/prepare-prompt19-western-sector-world.mjs','scripts/prompt19-western-sector-reconciliation.mjs'])codeInputs.push({path:file,sha256:digest(fs.readFileSync(file))});
 if(sourceLockArtifacts.length!==2||new Set(sourceLockArtifacts.map(a=>a.countryId)).size!==2||!sourceLockArtifacts.every(a=>['KOR','PRK'].includes(a.countryId)))throw Error('SOURCE_LOCK_SCOPE');
 const sourceLocks=sourceLockArtifacts.map(a=>{const bytes=fs.readFileSync(a.path);if(a.sha256&&(digest(bytes)!==a.sha256||bytes.length!==a.byteLength))throw Error('SOURCE_LOCK_CHANGED');const lock=JSON.parse(bytes);if(lock.countryId!==a.countryId)throw Error('SOURCE_LOCK_COUNTRY');return lock;});
-const key=digest(jsonBytes({features:bundle.features,records:bundle.records,edges:bundle.edges,sourceLocks,codeInputs})).slice(0,20), version=`catalog-v3-prompt19-korea-${key}`;
+for(const a of bundle.report.hierarchyArtifacts??[]){const bytes=fs.readFileSync(a.path);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error('HIERARCHY_LOCK_CHANGED');}
+for(const a of Object.values(bundle.report.nationalBoundaryInput??{})){const bytes=fs.readFileSync(a.path);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error('NATIONAL_BOUNDARY_INPUT_CHANGED');}
+for(const a of Object.values(bundle.report.westernSectorInput??{})){const bytes=fs.readFileSync(a.path);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error('WESTERN_SECTOR_INPUT_CHANGED');}
+const key=digest(jsonBytes({features:bundle.features,records:bundle.records,edges:bundle.edges,parents:bundle.parents,regionNames:bundle.regionNames??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,sourceLocks,codeInputs})).slice(0,20), version=`catalog-v3-prompt19-korea-${key}`;
 const schemaVersion='operational-world-delivery-v2';
 const output=`data/derived/prompt19/mixed-world-v2-${key}`;
 const json=value=>Buffer.from(`${JSON.stringify(value)}\n`);
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
-const inputRoot=digest(inputBytes), identities=[{path:inputPath,sha256:inputRoot,byteLength:inputBytes.length}];
+const inputRoot=digest(inputBytes), identities=[{path:inputPath,sha256:inputRoot,byteLength:inputBytes.length},...(bundle.report.hierarchyArtifacts??[]),...Object.values(bundle.report.nationalBoundaryInput??{}),...Object.values(bundle.report.westernSectorInput??{})];
 if(fs.existsSync(output)) {
   const index=fs.readFileSync(`${output}/artifact-index.json`);
   for(const a of JSON.parse(index).artifacts){const bytes=fs.readFileSync(path.join(output,a.path));if(bytes.length!==a.byteLength||sha(bytes)!==a.sha256)throw Error(`IMMUTABLE_ARTIFACT_CHANGED:${a.path}`);}
@@ -44,7 +60,7 @@ const entries=new Map(records.map(r=>[r.id,{...r,sourceCountryId:r.countryId}]))
 const countryOrder=[...new Set(records.map(r=>r.countryId))].sort();
 const featureById=new Map(bundle.features.map(f=>[f.id,f]));
 const features=records.map((r,i)=>({type:'Feature',id:i+1,properties:{},geometry:featureById.get(r.id).geometry}));
-const names=new Map(Object.entries(JSON.parse(gunzipSync(fs.readFileSync('data/derived/prompt19/coarse-world-v1/region-names.json.gz')))));
+const names=new Map([...Object.entries(JSON.parse(gunzipSync(fs.readFileSync('data/derived/prompt19/coarse-world-v1/region-names.json.gz')))),...Object.entries(bundle.regionNames??{})]);
 const administrative=bundle.parents.administrative.map(p=>({...p,start:0,count:0}));
 const previous=bundle.parents.previous.map(p=>({...p,start:0,count:0}));
 const adminOrdinal=new Map(administrative.map((p,i)=>[p.parentKey,i+1]));
@@ -72,7 +88,7 @@ const distances = coordinates => coordinates.slice(1).reduce((sum, b, i) => {
 const edges = topology.edges.map((e, i) => {
   const left = ordinal.get(e.leftTerritoryId), right = ordinal.get(e.rightTerritoryId) ?? 0;
   const country = right > 0 && entries.get(e.leftTerritoryId).sourceCountryId !== entries.get(e.rightTerritoryId).sourceCountryId;
-  const boundaryClass = !right ? 'coast' : country ? 'country' : e.boundaryClass === 'administrative' ? 'administrative' : 'residual';
+  const boundaryClass = !right ? 'coast' : country ? 'country' : ['administrative','operational','residual'].includes(e.boundaryClass) ? e.boundaryClass : 'residual';
   return {id: e.id, ordinal: i + 1, left, right,
     lengthKm: distances(e.geometry.coordinates), boundaryClass,
     flags: {positiveAdjacency: right > 0, country, administrative: boundaryClass === 'administrative', previous: right > 0 && entries.get(e.leftTerritoryId).previousParentId!==entries.get(e.rightTerritoryId).previousParentId, residual: boundaryClass === 'residual'}, geometry: e.geometry};
@@ -107,16 +123,21 @@ const edgeIncidence = write('metadata/edge-incidence.bin.gz', incidence, true);
 const options = {maxZoom: 6, indexMaxZoom: 4, indexMaxPoints: 100000, tolerance: 1, extent: 4096, buffer: 64, generateId: false};
 const fc = values => ({type: 'FeatureCollection', features: values});
 const classes = ['coast', 'country', 'administrative', 'operational', 'residual'];
-const isKorea=f=>['KOR','PRK'].includes(records[f.id-1].countryId);
-const cellIndex=geojsonvt(fc(features.filter(f=>!isKorea(f))),options);
-const koreaIndex=geojsonvt(fc(features.filter(isKorea)),{...options,tolerance:0});
-const edgeIndex = geojsonvt(fc(edges.map(e => ({type: 'Feature', id: e.ordinal, properties: {c: classes.indexOf(e.boundaryClass), a: Number(e.flags.administrative)}, geometry: e.geometry}))), options);
+const isKoreaOrdinal=n=>n>0&&['KOR','PRK'].includes(records[n-1].countryId);
+const exactOverviewCells=new Set(features.filter(f=>isKoreaOrdinal(f.id)).map(f=>f.id));
+for(const e of edges)if(e.flags.country&&(isKoreaOrdinal(e.left)||isKoreaOrdinal(e.right))){exactOverviewCells.add(e.left);exactOverviewCells.add(e.right);}
+const cellIndex=geojsonvt(fc(features.filter(f=>!exactOverviewCells.has(f.id))),options);
+const koreaIndex=geojsonvt(fc(features.filter(f=>exactOverviewCells.has(f.id))),{...options,tolerance:0});
+const edgeFeature=e=>({type:'Feature',id:e.ordinal,properties:{c:classes.indexOf(e.boundaryClass),a:Number(e.flags.administrative)},geometry:e.geometry});
+const exactEdge=e=>isKoreaOrdinal(e.left)||isKoreaOrdinal(e.right);
+const edgeIndex=geojsonvt(fc(edges.filter(e=>!exactEdge(e)).map(edgeFeature)),options);
+const koreaEdgeIndex=geojsonvt(fc(edges.filter(exactEdge).map(edgeFeature)),{...options,tolerance:0});
 const tiles = [], seenCells = new Set(), seenEdges = new Set();
 for (let z = 0; z <= 6; z++) {
   console.log(`Packaging mixed tiles z${z}`);
   for (let x = 0; x < 2 ** z; x++) for (let y = 0; y < 2 ** z; y++) {
     const coarse=cellIndex.getTile(z,x,y),fine=koreaIndex.getTile(z,x,y);
-    const cells={features:[...(coarse?.features??[]),...(fine?.features??[])]}, lines=edgeIndex.getTile(z,x,y),layers={};
+    const cells={features:[...(coarse?.features??[]),...(fine?.features??[])]},coarseLines=edgeIndex.getTile(z,x,y),fineLines=koreaEdgeIndex.getTile(z,x,y),lines={features:[...(coarseLines?.features??[]),...(fineLines?.features??[])]},layers={};
     if (cells?.features.length) {layers.territories = cells; cells.features.forEach(f => seenCells.add(f.id));}
     if (lines?.features.length) {
       layers.edges = lines; lines.features.forEach(f => seenEdges.add(f.id));
@@ -139,9 +160,9 @@ const detailIndex = write('detail-index.json', {schemaVersion, ref, countries, e
 write('manifest.json', {schemaVersion, ref, counts, sourceId: 'world-operational-catalog', minZoom: 0, maxZoom: 6, promoteId: null,
   tileTemplate: 'tiles/{z}/{x}/{y}.pbf.gz', tileIndex, detailIndex, policy: {tileTransport: {compression: 'gzip', httpContentEncoding: null}, administrativeMinZoom: 4, operationalMinZoom: 8},
   edgeIncidence: {format: 'uint32-le-pairs', recordBytes: 8, recordCount: edges.length, decodedByteLength: incidence.length, artifact: edgeIncidence},
-  runtimeRegeneration: false, attribution: `Natural Earth (public domain). ${sourceLocks.flatMap(lock=>lock.sources.map(s=>`${lock.countryId} ADM${s.adminLevel}: ${s.license.attribution} (${s.license.name}).`)).join(' ')} Source properties normalized, boundaries noded and limited to fixed project envelopes. Coarse residuals have no fine administrative attribution.`});
+  runtimeRegeneration: false, attribution: `Natural Earth (public domain). ${sourceLocks.flatMap(lock=>lock.sources.map(s=>`${lock.countryId} ADM${s.adminLevel}: ${s.license.attribution} (${s.license.name}).`)).join(' ')} Source properties normalized, boundaries noded and limited to fixed project envelopes. ${bundle.report.nationalBoundaryReconciliation ? "Fine gameplay outlines include documented country/coast residual-strip reconciliation; unchanged raw sources remain independent evidence. Remaining residuals have no fine administrative attribution." : "Coarse residuals have no fine administrative attribution."}`});
 write('catalog.json', descriptor);
-write('provenance.json',{stage:'19-02-C',inputRoot,inputs:identities,sourceLocks,sourceLockArtifacts,codeInputs,summary:bundle.report.summary,topology:bundle.report.topology,method:'Joint exact source/coarse/P0 arrangement. Zero source coordinates moved; no extrapolated lines; unmatched fixed P0 land explicitly retains coarse provenance. Other 245 countries unchanged.',worldCoverageComplete:true,fineAssignmentComplete:false,compatibility:'New games only; previous catalog sessions are rejected.'});
+write('provenance.json',{stage:bundle.report.westernSectorReconciliation?'fine-western-sector-complete':bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers?'fine-boundary-sliver-cleanup':bundle.report.nationalBoundaryReconciliation?'fine-national-coast-reconciled':bundle.report.fineMacro?'fine-derived-macro':'19-02-C',inputRoot,inputs:identities,sourceLocks,sourceLockArtifacts,codeInputs,summary:bundle.report.summary,topology:bundle.report.topology,fineMacro:bundle.report.fineMacro??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,method:bundle.report.nationalBoundaryReconciliation?.policy??bundle.report.fineMacro?.method??'Joint exact source/coarse/P0 arrangement. Zero source coordinates moved; no extrapolated lines; unmatched fixed P0 land explicitly retains coarse provenance. Other 245 countries unchanged.',worldCoverageComplete:true,fineAssignmentComplete:false,compatibility:'New games only; previous catalog sessions are rejected.'});
 artifacts.sort((a, b) => a.path.localeCompare(b.path));
 const indexBytes = json({schemaVersion, artifacts: [...artifacts], totalByteLength: artifacts.reduce((n, a) => n + a.byteLength, 0)});
 fs.writeFileSync(path.join(output, 'artifact-index.json'), indexBytes, {flag: 'wx'});

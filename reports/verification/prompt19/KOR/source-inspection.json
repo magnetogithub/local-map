@@ -1,0 +1,24 @@
+{
+  "stage": "19-02A",
+  "countryId": "KOR",
+  "sourceValidity": {
+    "pass": true,
+    "counts": {
+      "features": 3504,
+      "polygons": 4767,
+      "rings": 4777,
+      "vertices": 777212,
+      "polygon": 3280,
+      "multiPolygon": 224
+    },
+    "errors": []
+  },
+  "totals": {
+    "features": 3504,
+    "components": 4767,
+    "holes": 10,
+    "vertices": 777212
+  },
+  "coordinateChanges": 0,
+  "normalizedGeometryPolicy": "Ring orientation/start and component ordering only. Source bytes remain preserved."
+}

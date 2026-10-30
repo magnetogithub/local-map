@@ -52,5 +52,9 @@ data/derived/prompt19/** -text
 scripts/*prompt19* -text whitespace=cr-at-eol,-blank-at-eof
 scripts/prompt19/** -text whitespace=cr-at-eol,-blank-at-eof
 reports/maintenance/prompt19-C/** -text
+# Independent reports are pinned by runtime provenance and must survive checkout byte-exact.
+reports/maintenance/20261030-*.json -text
+# Required historical source evidence is explicitly tracked despite the general QA-output ignore.
+reports/verification/prompt19/KOR/** -text
 # Immutable joint snapshots exceed normal GitHub blob limits.
 reports/maintenance/prompt19-C/*joined-world-input.json filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,196 @@
+# 국가 지정형 미세 국경 개발 지침 — 레퍼런스 조사부터 실제 플레이 검증까지
+
+작성 기준: 2026-10-30, D:\gen.
+
+## 0. 사용 방법과 개발 정책
+
+전 세계 미세 국경을 한 번에 구현하지 않는다. 일반 게임 개발은 계속하고, 사용자가 원하는 국가를 지정할 때 그 국가의 미세 영토를 추가한다. 한국·북한 구현과 후속 경계 정합을 재사용 기준으로 삼는다.
+
+이 문서의 작성·수정 요청에는 문서만 수정한다. 국가 구현 요청을 받으면 반드시 1절의 레퍼런스 조사부터 시작하고, 자료 채택 → 증분 구현 → 독립 검증 → 앱 반영까지 진행한다. 자료를 찾기 전에 생성기를 먼저 고치거나 임의 미세 셀을 만들지 않는다.
+
+다음은 채팅에서 사용하는 요청 예시이며, 현재 존재하는 CLI 명령이 아니다.
+
+- "일본 미세 국경 구현해. COUNTRY_MICRO_BOUNDARY_GUIDE.txt 기준으로 진행해."
+- "다음 미세 국경 대상은 프랑스야."
+- "이 지침으로 COUNTRY=JPN 실행."
+
+미세 국경 추가를 논의하는 맥락에서 국가만 지정해도 해당 국가 작업 요청으로 해석한다. 그 밖의 대화에서 국가명이 나왔다는 이유만으로 실행하지 않는다.
+
+입력값:
+
+- TARGET_COUNTRY: 필수. 국가명 또는 현재 게임의 국가 ID. 원본 자료의 ISO 코드와 게임 ID가 다르면 실제 매핑을 확인한다.
+- SCENARIO_DATE: 별도 지시가 없으면 프로젝트의 현재 시작 시점. 현재 기준은 2020-01-01이다.
+- GRANULARITY: 별도 지시가 없으면 북한 사례 정도의 부분 점령 정밀도를 참고하되 대상국 자료·면적·도시 밀도·성능으로 결정한다. ADM2라는 이름만 같다고 같은 크기로 취급하지 않는다.
+- SOURCE_PREFERENCE / SPECIAL_SCOPE: 사용자가 지정하면 적용한다. 없으면 조사 결과로 판단한다.
+
+기본 범위는 지정한 국가 하나와 정합에 필요한 인접국 접경 처리다. 이미 구현한 국가를 거친 표현으로 되돌리거나, 인접국 전체의 미세 자료까지 자동 수집하지 않는다. 완료 후 다른 국가·다음 프롬프트·반복 작업을 자동 실행하지 않는다.
+
+대상국 개발 요청에는 공개 자료 조사·허가가 확인된 다운로드·오프라인 전처리·통상적인 게임 형상 정합·관련 검증·로컬 앱 반영이 포함된다. 일반적인 구현 선택마다 승인을 다시 묻지 않는다. 자료의 중요한 한계와 보정 방법은 짧게 알리고 근거를 남기며 진행한다. 외부 AI 유료 호출·메신저 전송·원격 배포·push는 별도 요청 없이 시작하지 않는다.
+
+## 1. 첫 실행 단계: 대상 국가의 레퍼런스를 찾는다
+
+착수 시 AGENTS.md와 현재 git 상태, 현재 활성 catalog 포인터를 읽어 대상국과 이미 있는 자료를 확인한다. 이 읽기 준비 이후 첫 실질 작업은 레퍼런스 조사다. 이 단계에서는 runtime 포인터·게임 상태·생성기 코드를 변경하지 않는다.
+
+1. 대상국의 공식 행정·통계·지도 기관과 원 배포자를 먼저 검색한다. 필요한 경우 허가가 명시된 공개 경계 배포 자료까지 비교한다. 검색 결과 요약만 보지 말고 원 배포 페이지·메타데이터·라이선스·실제 파일 또는 샘플을 연다.
+2. 다음 세 종류의 근거를 함께 찾는다.
+   - 실제 미세 경계 polygon과 안정된 원본 feature ID.
+   - 미세 구역의 광역 소속을 입증하는 행정 계층표·원본 코드·같은 배포자의 호환 경계.
+   - 국경·해안·섬·세분화 수준을 대조할 지도와 시점 자료. 이미지 참고만으로 실제 polygon을 확보했다고 보고하지 않는다.
+3. 후보별 원 배포자, 직접 URL, 고정 release/revision, 적용 연도, 게시일과 취득일, ADM 단계, CRS, 실제 feature/component 수, 부모 정보, 누락·분쟁·시점 한계, 라이선스와 재배포 조건을 비교한다.
+4. 실제 파일을 읽어 대표 지역·접경·해안·섬·도시의 형태와 크기를 확인한다. 메타데이터의 개수와 실제 파일 개수가 다르면 그대로 기록한다. 데이터가 없는 지역을 이름이나 문서상의 개수로 만들어 채우지 않는다.
+5. 시나리오 시점과 맞는 후보를 선택한다. 최신 자료라는 이유만으로 2020년 자료처럼 사용하지 않는다. 과거 자료가 없으면 가장 적합한 자료와 확인된 시점 차이를 명시하고, 실제로 검증한 변경만 보정한다.
+6. 자료를 채택한 뒤 구현 단계로 넘어간다. 후보·채택 이유·배제 이유·한계·예상 정밀도·출처를 남긴다. 자료가 하나뿐이면 그 사실을 기록하고 비교 후보를 지어내지 않는다.
+
+허가를 확인하지 못한 파일에 redistributionAllowed:true를 쓰거나 빈 source-lock을 먼저 만들지 않는다. 공개 열람과 재배포 허가는 다르다. 후보의 허가가 부족하면 다른 후보를 찾는다. 사용 가능한 자료가 끝내 없거나 국가 식별이 모호한 경우에만 조사한 사실과 구체적인 대안을 제시한다. 랜덤 분할·전국 Voronoi·직사각 격자를 원본 레퍼런스 대신 제시하지 않는다.
+
+한국 사례의 실제 ADM2 228개/메타데이터 229개 차이, 군위의 시점별 광역 소속, 북한 자료의 2013/2019 메타데이터 충돌은 조사 항목의 필요성을 보여주는 사례다. 다음 국가의 사실로 복사하지 않는다.
+
+## 2. 자료 채택 후 기준선을 고정하고 증분 경로를 설계한다
+
+현재 상태의 출발점은 data/runtime/operational-catalog/current.json이다. 버전·경로·개수를 이 문서의 작성 시점 값으로 하드코딩하지 않는다. 해당 catalog의 index, provenance, 입력 bundle·cells·source-lock·행정 계층·seed lineage를 확인하고 바이트 해시를 고정한다. 실행 중인 게임의 점령 상태를 새 시나리오 원본으로 사용하지 않는다.
+
+중요: 현재 Prompt 19 코드는 범용 국가 생성기가 아니다.
+
+- scripts/prompt19-country-core.mjs와 경로 검증에는 KOR/PRK 제한이 있다.
+- scripts/prepare-prompt19-joined-candidates.mjs는 두 국가 합류 및 coarse-world-v1 복원을 전제로 한다. 새 국가 추가에 그대로 사용하면 기존 fine 국가가 coarse로 되돌아갈 수 있다.
+- fine-macro/national helper, packager, source-lock 개수, verifier, exact tile 대상에도 한국·북한 전제가 있다.
+- --input, --output-prefix 또는 국가 문자열만 바꾸면 제3국을 처리할 수 있다고 가정하지 않는다. 존재하지 않는 범용 CLI를 실행했다고 보고하지 않는다.
+
+첫 추가 국가에서는 필요한 범위만 다음과 같이 일반화한다.
+
+1. 원본을 확보한 대상국 adapter와 공용 geometry 처리의 역할을 분리한다.
+2. 현재 활성 bundle을 읽어 대상국 영토만 교체하는 증분 coordinator를 마련한다. 기존 fine 국가와 다른 국가의 논리적 영토를 그대로 가져온다.
+3. source-lock·hierarchy·packager·검증의 대상국 목록을 실제 활성 fine 국가 목록과 연결한다. KOR/PRK 제한을 아무 문자열이나 허용하는 방식으로 풀지 않는다.
+4. 실제 필요한 인접국 공통 노드·전역 index·tile·ordinal은 다시 조립하되 다른 국가를 재세분화하지 않는다. ID 기반 비교를 사용하고 ordinal이 연속이거나 이전과 같다고 가정하지 않는다.
+5. 기존 seedParentIds를 포함한 전이 lineage를 보존한다. 여러 실제 선행 영토를 합칠 때 owner/controller 합의 검증을 재사용한다. 한 부모나 국가 색을 임의 복사해 통과시키지 않는다.
+
+비대상국 ID·정확 geometry·행정 소속 보존이 원칙이다. 공유 국경에 공선상 노드를 넣거나 표현용 타일을 갱신해야 하는 경우에는 물리적 영토 불변을 증명하고 표현 변경·필요한 ID 영향·lineage를 분리 기록한다. 불필요한 ID 재발급과 기존 fine 해상도 손실을 금지한다.
+
+관련 코드를 쓰기 전 AGENTS.md와 설치된 Next 문서를 확인한다. 기존 사용자 변경을 reset/checkout으로 덮어쓰지 않는다. 과거 92만 셀 생성기·fallback·오케스트레이터를 되살리지 않는다.
+
+## 3. 원본과 계층을 고정한다
+
+- raw, 정규화 입력, adapter 코드, license 근거를 {path, sha256, byteLength}로 pin한다. CRSs·축 순서·투영 변환·누락된 원본 component를 기록한다.
+- sourceId/sourceFeatureId/version을 보존한다. 원본 MultiPolygon·섬·hole·중복 명칭을 인위적으로 새 행정구역 ID로 바꾸지 않는다.
+- 원본에 고유 ID가 없으면 고정 배포본의 실제 feature를 재현하는 파생 ID와 생성 근거를 남긴다. 이를 원래 존재한 공식 행정 코드처럼 표기하지 않는다.
+- 광역 소속은 출판된 계층표·원본 코드·시점이 호환되는 실제 포함 관계 등으로 검증한다. 가까운 centroid·가장 넓은 겹침·이름 유사도만으로 공식 부모를 추정하지 않는다.
+- 같은 이름의 구역은 원본 고유 코드와 확인 가능한 위치 근거로 구분한다. 군위 사례처럼 시점이 다른 소속을 소급 적용하지 않는다.
+- 공식 광역 소속을 입증할 수 없는 부분은 지원되는 미확정/fallback 계약으로 명시한다. 현재 코드가 지원하지 않는 새 kind를 이름만 추가하거나, 게임용 묶음을 공식 행정 소속처럼 표기하지 않는다.
+- target 세분화 단계는 feature 면적·직경의 분포, 도시의 과분할, 섬과 접경의 실제 점령 규모, vertex/bytes·성능을 보고 정한다. 특정 국가와 동일한 ADM 명칭·셀 개수를 합격 조건으로 삼지 않는다.
+
+## 4. 하나의 공유 partition으로 미세·광역·국경·해안을 만든다
+
+1. 현재 게임의 대상국 외곽과 모든 인접국 공유 국경을 기준으로 원본을 정합한다. 상세 원본의 union으로 국가 외곽을 통째로 교체해 누락 지역·섬을 없애지 않는다. 정치적 귀속과 영토 변경은 이 작업의 기본 범위가 아니다.
+2. 공통 노딩·polygonization으로 cell과 edge를 함께 만든다. 미세 경계 위에 독립된 옛 ADM1·해안·국경 선을 겹쳐 그리지 않는다.
+3. 광역 경계는 검증된 동일 부모의 미세 구역을 union하여 승격한다. 같은 원본 fine family 내부를 자르던 옛 광역 선과 불필요한 조각을 없앤다.
+4. 양의 길이를 공유하는 육상 경계만 adjacency로 만든다. 점 접촉·바다 건너·self edge·일방향 인접을 만들지 않는다.
+5. 이미 fine인 접경국과 coarse인 접경국을 모두 처리한다. 이웃이 coarse여도 동일한 공유 국경과 정확한 양측 incidence를 가져야 한다. fine↔fine 100%를 맞추려고 요청받지 않은 이웃 국가 전체를 fine화하지 않는다.
+6. 국가 크기·날짜변경선·극지·다중 섬에 맞는 투영과 수치 정책을 정한다. 원본 변위·면적 오차를 측정하고 일반적인 epsilon 증가로 오류를 숨기지 않는다.
+
+원본 polygon 정합·분할·행정 lookup·topology 작성은 오프라인 작업이다. 렌더 루프나 턴 진행 도중 전 세계 boolean geometry 연산을 수행하지 않는다. AI가 좌표·polygon·미등록 셀 ID를 만들어 직접 적용하지 못하게 한다.
+
+## 5. 잔여 띠·작은 고리와 불일치를 끝까지 정리한다
+
+겹침 0은 잔여 선 제거의 증명이 아니다. 국가/해안과 나란한 얇은 띠, 접경 바로 옆의 작은 closed loop, 내부 미분류 component, 실제 작은 섬·행정구역을 분리 감사한다. 위치·면적·폭·전체 접촉·외곽 거리·원본 출처를 확인한다.
+
+원본 레퍼런스와 게임 형상을 구분한 다음 순서로 처리한다.
+
+1. 실제 fine 구역과 양의 길이로 유일하게 접촉하는 source-free 육지는 그 접촉을 근거로 정합한다.
+2. 작은 enclosed 잔여가 실제 국가의 물 구멍이 아니라 기준 국토 안의 미분류 육지이고, 둘레 전체가 동일 fine family와 접촉하면 크기·외곽 거리 guard를 두고 흡수할 수 있다. 최소거리 하나만으로 긴 내륙 구역까지 흡수하지 않는다.
+3. 다중 접촉의 얇은 띠는 원래 공유 미세 경계의 끝선·동일 source-pair 경로 등 확인 가능한 연결을 이용해 국경/해안까지 분할한다. 긴 띠를 총면적만 보고 무조건 제외하지 않는다.
+4. 그래도 남는 제한된 연결 미분류 구역은, 실제 같은 나라 fine 접촉선만을 seed로 한 bounded gameplay contact partition 등을 사용할 수 있다. 범위·받는 family·거리 근사·tie 정책·연결성·면적 회계를 명시한다. 외국의 접촉선·바다·국가 centroid는 seed가 아니다.
+5. 각 배정 연결 조각은 받는 기존 fine family와 양의 접촉을 가져야 한다. 다른 fine에 이미 귀속된 땅을 빼앗거나, 원본 family의 유일한 작은 구역·실제 섬을 면적만으로 삭제하지 않는다.
+
+위 정합은 국가 구현 요청에 포함된 통상적인 게임 보정이다. 원본을 위조하지 않고 검증 가능한 범위에서 진행하며, 고칠 수 있는 띠를 단순히 미귀속으로 남긴 채 완료하지 않는다. 큰 자료 공백·실제 물 구멍·근거 없는 섬 소속은 구분하여 보존하고, 남는 fallback의 위치·면적·영향을 보고한다.
+
+보정 기록에는 최소한 다음이 필요하다.
+
+- geometryAdjusted:true, rawSourceArtifactGeometryUnmodified:true, administrativeTruthClaim:false와 실제 method.
+- 원래 residual ID·geometry/hash·면적, 입력 범위, 원래 fine identity/검증된 parent, 받은 조각과 assignedPartGeometry.
+- 기존 확정 fine 영토 손실 0, 원래 residual 밖으로의 증가 0, family별 gain ledger, 국가·국경·섬·hole 보존 증명.
+- 이전 단계와 새 단계의 lineage, combined national proof에 포함된 모든 추가 면적, 독립 검증과 재현 입력 pin.
+
+한국의 3km²/5km loop, 100·250km²/2·5km strip, 10km ray, 서부 150km² 범위/250m contact sampling은 검증된 사례값이지 전 세계 기본값이 아니다. 대상국의 형상·투영·해상도에 맞게 근거를 세운다. 접촉선 샘플 Voronoi의 거리 추정 오차를 분할선 위치 정확도로 표현하지 않는다. 전국을 임의 Voronoi나 직사각 셀로 대체하는 것은 여전히 금지한다.
+
+## 6. 독립 검증과 실제 완료 조건
+
+생성기의 성공 메시지나 fixture만으로 완료하지 않는다. 실제 최종 국가 데이터와 통합 catalog에 다음 검증을 적용한다.
+
+A. 원본·형상·보존
+
+- 자료·계층·코드·입력 bytes와 pin 일치, 원본 feature/component 추적, 실제 family 수 검증.
+- polygon 유효성, 중복 geometry/ID, DE-9IM 내부 교차와 양의 면적 겹침, union 누락/초과 검사.
+- 국가 외곽·섬·hole·해안·공유 국경의 위치 보존. 공선상 subdivision과 실제 선 이동을 구분한다.
+- 비대상국, 특히 기존 fine 국가의 ID·형상·해상도·소속 보존. 불가피한 표현 변경만 별도 증명한다.
+- 같은 fine source를 자르는 가짜 광역선, missing/phantom adjacency, edge 양측 mesh 불일치가 없어야 한다.
+
+B. 눈에 보이는 문제
+
+- 보고된 접경·해안 strip/loop의 잔여 면적과 잔존 선을 별도로 검사한다. 기존 잘못된 입력이 새 acceptance에서 실패하는 음성 대조를 둔다.
+- 정상적인 서로 다른 fine 구역의 해안 접속부는 유지한다. 예전 선과 겹친다는 이유만으로 정상 경계까지 삭제하지 않는다. 유지 이유는 원래 fine pair와 국경/해안 연결로 증명한다.
+- 실제 전달 타일을 decode하여 zoom별 fill coverage·edge 접합을 검사한다. 타일에 ID가 존재한다는 사실만으로 육지 coverage를 증명하지 않는다.
+- 정수화·공선상 추가 노드의 수치 예외는 원인·좌표·개별 오차 상한으로 증명한다. 전역 허용치를 넓혀 통과시키지 않는다.
+- 일반 모드의 미세 경계 숨김, 디버그의 미세 경계 표시, 흰 광역선, 검은 국경·해안, 실제 점령 전선의 금색 표시를 확인한다. 평시 모든 국경을 금색으로 표시하지 않는다.
+- 세계 전체·국가 확대·문제 접경·해안·섬·선택 상세 진입/해제 화면을 실제 브라우저에서 확인하고 스크린샷을 남긴다. vector와 exact detail의 중복선·늦은 요청도 확인한다.
+
+C. 플레이·AI 조회
+
+- 새 실제 catalog로 새 게임을 만들고 대상국과 적절한 육상 접경국의 양방향 첫 진입, 점령 후 현재 통제선에서의 후속 진입을 검사한다. 섬나라는 바다를 가짜 육상 인접으로 만들지 말고 적용 가능한 기존 메커니즘을 구분한다.
+- owner/controller 구분, 부분 점령, 지역 참조, 양도·복원·undo/redo, 원자적 commit, stale revision/catalog 거부를 유지한다.
+- 실제 거리·폭·면적·행정 부모 상한을 유지한다. 첫 접경 seed가 범위 밖이면 다른 유효한 접경을 찾는 일반 로직을 재사용한다. 검사 통과를 위해 상한을 완화하거나 국가별 전투 결과를 하드코딩하지 않는다.
+- AI의 region/frontier 도구가 새 catalog의 등록된 참조를 반환하는지 mock/scripted provider로 확인한다. 지리 조회의 기술적 실패를 군사적 실패 사건으로 바꾸지 않는다. 실제 외부 AI 호출은 기본 0회다.
+
+D. 성능
+
+- 초기 지도 준비와 턴 진행을 각각 전후 측정한다. viewport·DPR·카메라·국가·행동·기간·실행 모드·cold/warm 조건을 기록한다.
+- 셀/edge/vertex 수, index와 metadata bytes, overview/detail 전송량, 초기화·턴 지연, long task·메모리와 hot path를 확인한다.
+- 필요한 국가·영역·배율만 로드하고, 정적인 geometry/topology는 재사용한다. 전체 world 복사·재파싱·선형 ID 검색·상태별 재생성을 반복하지 않는다.
+- 자료 단계·공유 LOD·캐시·전달을 조정해 과분할과 렉을 줄인다. 한국 당시의 셀 수나 테스트 개수를 고정 목표로 삼지 않는다. 모든 상세 polygon을 세계 축소 화면에 강제로 전달하지 않는다.
+
+## 7. 후보에서 활성 카탈로그로 발행한다
+
+순서는 candidate → 독립 검증 → packager → current → 로컬 실행 확인이다. 실패한 결과로 기존 current를 덮어쓰지 않는다. 검증 report의 after {sha256,byteLength}가 발행 입력의 정확한 bytes와 일치해야 하며, 원본·계층·추가 보정·코드·proof를 연결한다. 새 stage에 필요한 acceptance가 빠진 입력도 거부한다.
+
+기존 산출물과 원본을 덮어쓰지 말고 content-key별 새 출력과 새 catalogRef를 만든다. 전역 index를 다시 만들더라도 이전 미세 국가를 coarse baseline에서 복원하지 않는다. 실제 pin bytes를 checkout 줄바꿈 변환으로 바꾸지 않도록 .gitattributes와 큰 입력의 Git LFS 정책을 확인한다.
+
+국가 adapter와 새 국가 출력 경로는 실제 coordinator 계약에 맞춰 정하고 문서화한다. 예를 들어 국가별 raw/source-lock/candidate/report 디렉터리를 둘 수 있지만, 아직 없는 경로·명령을 구현돼 있다고 가정하지 않는다. placeholder lock, 가짜 PASS report, 재현되지 않는 임시 파일 의존을 남기지 않는다.
+
+새 catalog는 검증된 자동 이관이 없는 한 새 게임으로 시작한다. 이전 save·캐시·AI region/frontier 참조를 새 ID로 조용히 해석하지 않는다. 실행 중인 사용자 게임을 보존하고, 버전·서버·클라이언트·캐시가 일치하도록 전환한다.
+
+반영 전 현재 포인터와 실행 상태를 보존한다. 새 버전 연결·부팅 검증에 실패하면 자신이 발행한 버전이 아직 current인지 확인한 뒤 검증된 이전 포인터로 복구한다. 다른 작업의 새 current를 덮어쓰거나 사용자 변경을 되돌리지 않는다. 실패 후보와 진단 증거는 남기고 반영 성공으로 보고하지 않는다.
+
+현재 프로젝트의 빌드와 로컬 실행 방식을 확인하고 관련 검사/build를 마친다. Windows 백그라운드 서버는 숨김 창과 로컬 주소로 실행하며, 교체할 프로세스와 포트를 확인한다. Next가 추가한 임시 build 경로는 변경분을 검증한 뒤 복원한다. 문서만 바꾼 작업에서는 데이터 재생성·빌드·서버 재시작을 하지 않는다.
+
+동시 작업은 조사·국가 adapter·독립 검토의 파일 소유권을 분리한다. 최종 catalog/포인터·공용 코드·실제 build·서버·브라우저 조작은 한 담당자가 순차 소유한다. 별도 채팅·오케스트레이터·자동 반복 작업을 새로 만들 필요는 없다.
+
+## 8. 최종 보고와 인계
+
+짧은 최종 답변과 재현 가능한 상세 보고서를 남긴다.
+
+- 대상국·채택 레퍼런스/직접 URL·버전·시점·행정 단계·허가·선택 이유.
+- 기존 catalog와 새 catalog, 기존 fine 국가 보존 결과, 실제 cell/edge/vertex·bytes 변화.
+- 원본 행정 사실과 게임 보정의 구분, 미세 구역·접경·해안 coverage, 잔여 fallback의 위치/면적/게임 영향.
+- 실제 겹침·coverage·공유선·strip/loop·타일·플레이·성능 결과와 검사 명령, 입력·proof hash, 사용한 근사와 한계.
+- 적용한 로컬 URL·새 게임 필요 여부·화면 캡처·관련 코드/데이터 경로. 숨겨진 실패나 미실행 검사를 통과로 쓰지 않는다.
+
+요청한 국가가 완료되면 일반 개발로 돌아갈 수 있게 인계하고 종료한다. 전 세계 미세화 완료를 후속 개발의 선행 조건으로 만들지 않는다.
+
+## 9. 한국·북한 구현에서 참고할 실제 파일
+
+이 목록은 구조와 실패 사례를 읽기 위한 참고다. 그대로 실행하면 다른 나라를 추가하는 명령 목록이 아니다. 활성 기준선은 항상 current.json에서 다시 읽는다.
+
+- 역사 범위: prompts/PROMPT_19_REMOVE_GRID_AND_KOREA_MICRO_BOUNDARIES.txt
+- 현재 안내/출처: README.md, data/ATTRIBUTION.md, data/runtime/operational-catalog/README.md
+- 원본/계층: data/source-locks/prompt19/KOR-ADM2-2020.json, data/source-locks/prompt19/PRK.json, data/source-locks/prompt19/KOR-macro-hierarchy.json, data/source-locks/prompt19/PRK-macro-hierarchy.json
+- source/공통 분할: scripts/prompt19-country-core.mjs, scripts/prompt19-source-arrangement.mjs, scripts/prompt19-joined-topology.mjs
+- 공통 노딩/정확 union: scripts/prompt14-boundary-arrangement.mjs, scripts/prompt14-catalog-topology.mjs
+- fine-derived macro: scripts/prompt19-fine-macro-topology.mjs, scripts/prepare-prompt19-fine-macro-world.mjs
+- 국경/해안/작은 고리 정합: scripts/prompt19-national-boundary-reconciliation.mjs, scripts/prepare-prompt19-boundary-cleanup-world.mjs
+- 제한된 게임용 공백 분할: scripts/prompt19-western-sector-reconciliation.mjs, scripts/prepare-prompt19-western-sector-world.mjs
+- 발행: scripts/prepare-prompt19-mixed-world.mjs
+- 독립 검사: scripts/verify-prompt19-national-boundaries.mjs, scripts/verify-prompt19-boundary-cleanup.mjs, scripts/verify-prompt19-western-sector.mjs, scripts/verify-prompt19-fine-macro-world.mjs, scripts/verify-prompt19-mixed-world.mjs
+- 실제 게임 회귀: src/lib/simulation/prompt19-mixed-frontier.test.ts, src/lib/simulation/western-sector-frontier.test.ts, src/lib/simulation/operational-frontier.test.ts
+- 원본·발행 연결 회귀: scripts/prompt19/KOR/source.node-test.mjs
+- 최종 사례: reports/maintenance/20261030-western-sector-independent-verification.json, reports/maintenance/20261030-western-sector-integration.json
+
+현재 한국·북한 전용 재현 명령은 npm run data:korea / npm run data:world다. 제3국을 지정해 실행할 수 있는 범용 CLI는 아직 없으므로 2절의 증분 경로를 먼저 실제로 구현·검증해야 한다.

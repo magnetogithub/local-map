@@ -13,6 +13,8 @@ export type OperationalMapBootstrap = Readonly<{
   detailIndex: CatalogArtifactIdentity;
   parents: CatalogArtifactIdentity;
   coverage: CatalogArtifactIdentity;
+  /** Original coarse ADM1 contacts, independent of later fine subdivisions. */
+  legacyBoundaryOrdinals?: readonly number[];
 }>;
 const positive = z.number().int().positive().max(0xffffffff);
 const hash = z.string().regex(/^[a-f0-9]{64}$/);
@@ -25,12 +27,14 @@ const descriptorSchema = z.strictObject({
 const bootstrapSchema = z.strictObject({
   schemaVersion: z.literal('operational-map-bootstrap-v1'), catalog: descriptorSchema,
   manifest: z.unknown(), tileIndex: z.unknown(), detailIndex: z.unknown(), parents: z.unknown(), coverage: z.unknown(),
+  legacyBoundaryOrdinals: z.array(positive).optional().default([]),
 });
 export function readOperationalMapBootstrap(value: unknown, expected: WorldGeometryCatalogRef): OperationalMapBootstrap {
   const b = bootstrapSchema.parse(value), ref = createWorldGeometryCatalogRef(b.catalog.catalogRef);
   assertWorldGeometryCatalogRefMatches(ref, expected);
   if (!/^catalog-v3-/.test(ref.catalogVersion) || b.catalog.counts.countries !== b.catalog.countryOrder.length ||
       b.catalog.countryOrder.some((id, i, all) => i > 0 && id <= all[i - 1])) throw Error('INVALID_OPERATIONAL_BOOTSTRAP');
+  if (b.legacyBoundaryOrdinals.some((n, i, all) => n > b.catalog.counts.edges || (i > 0 && n <= all[i - 1]))) throw Error('INVALID_OPERATIONAL_LEGACY_BOUNDARIES');
   const names = {manifest: 'manifest.json', tileIndex: 'tile-index.json', detailIndex: 'detail-index.json', parents: 'metadata/parents.json.gz', coverage: 'lod-coverage.json.gz'} as const;
   const identities = Object.fromEntries(Object.entries(names).map(([key, file]) => {
     const a = catalogArtifactIdentity(b[key as keyof typeof names], ref);
@@ -38,7 +42,8 @@ export function readOperationalMapBootstrap(value: unknown, expected: WorldGeome
     return [key, a];
   })) as Pick<OperationalMapBootstrap, keyof typeof names>;
   if (identities.manifest.path !== ref.manifestPath) throw Error('INVALID_OPERATIONAL_MANIFEST_PATH');
-  return Object.freeze({...identities, schemaVersion: b.schemaVersion, catalog: Object.freeze({...b.catalog, catalogRef: ref})});
+  return Object.freeze({...identities, schemaVersion: b.schemaVersion, catalog: Object.freeze({...b.catalog, catalogRef: ref}),
+    legacyBoundaryOrdinals: Object.freeze(b.legacyBoundaryOrdinals)});
 }
 
 /** Delivery manifests carry additional source roots; never silently discard their identity. */

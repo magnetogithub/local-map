@@ -45,7 +45,13 @@ export function prepareOperationalCatalog(root = process.cwd(), read = (file: st
   const countries = new Map(details.countries.map(c => [c.countryId, c]));
   const parents = gzip<{administrative: Omit<OperationalAdministrativeParent, 'ordinal'>[]; previous: Omit<OperationalPreviousParent, 'ordinal'>[]}>('metadata/parents.json.gz');
   const administrativeParents = Object.freeze(parents.administrative.map((p, i) => Object.freeze({...p, ordinal: i + 1})));
-  const previousParents = Object.freeze(parents.previous.map((p, i) => Object.freeze({...p, oldTerritoryId: readCatalogTerritoryId(p.oldTerritoryId), ordinal: i + 1})));
+  const previousParents = Object.freeze(parents.previous.map((p, i) => {
+    const oldTerritoryId = readCatalogTerritoryId(p.oldTerritoryId);
+    const seedParentIds = p.seedParentIds?.map(id => readCatalogTerritoryId(id));
+    if (seedParentIds && (!seedParentIds.length || !seedParentIds.includes(oldTerritoryId) ||
+        seedParentIds.some((id, n) => n > 0 && id <= seedParentIds[n - 1]))) throw Error('OPERATIONAL_SEED_LINEAGE');
+    return Object.freeze({...p, oldTerritoryId, ...(seedParentIds ? {seedParentIds: Object.freeze(seedParentIds)} : {}), ordinal: i + 1});
+  }));
   if (administrativeParents.length !== raw.counts.administrativeParents || previousParents.length !== raw.counts.previousParents) throw Error('OPERATIONAL_PARENT_COUNT');
   const adminByKey = new Map(administrativeParents.map(p => [p.parentKey, p]));
   const previousById = new Map(previousParents.map(p => [p.oldTerritoryId as string, p]));

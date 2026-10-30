@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-30",
+  "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+  "counts": {
+    "administrativeParents": 4232,
+    "cells": 4718,
+    "countries": 247,
+    "edges": 17238,
+    "previousParents": 4231
+  },
+  "request": "Complete the remaining western unassigned gameplay sector rather than leaving it unresolved.",
+  "result": {
+    "inputKoreaCells": 518,
+    "outputKoreaCells": 516,
+    "sourceFreeInputCells": [
+      "territory:catalog:178ba77ad94ea2e4a571d8e0785f19653b641dd4e82de1640c81a9c9ac541634",
+      "territory:catalog:22e50270a1c7917d9108b16dac307e874448e81be0fe8cfa8be30e08d4199a5b"
+    ],
+    "areaKm2": 107.91339889380139,
+    "receivingFamilies": [
+      {
+        "name": "Paju-si",
+        "fineSourceIdentity": {
+          "sourceFeatureId": "91817680B14253606839965",
+          "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+        },
+        "sourceParentId": "KOR:macro:citypopulation:31"
+      },
+      {
+        "name": "Yeoncheon-gun",
+        "fineSourceIdentity": {
+          "sourceFeatureId": "91817680B98224083425041",
+          "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020"
+        },
+        "sourceParentId": "KOR:macro:citypopulation:31"
+      }
+    ],
+    "before": {
+      "fineBothSidesFraction": 0.9198286447565807,
+      "fineBothSidesKm": 187.37115417242734,
+      "totalKm": 203.7022387164431
+    },
+    "after": {
+      "fineBothSidesFraction": 1,
+      "fineBothSidesKm": 203.70224004355558,
+      "totalKm": 203.70224004355558
+    },
+    "remainingDmzResiduals": [],
+    "ledger": {
+      "areaError": -7.41073868937292e-15,
+      "assignedArea": 0.011074747040489167,
+      "assignedFamilyArea": 0.011074747040489177,
+      "inputResidualArea": 0.011074747040496578,
+      "originalFineAreaRemoved": 0,
+      "unassignedResidualArea": 0
+    },
+    "originalFineExtentPreserved": true,
+    "nationalBoundaryPhysicalGeometryPreserved": true
+  },
+  "method": {
+    "name": "gameplay-contact-partition",
+    "administrativeTruthClaim": false,
+    "sampledContactSites": 208,
+    "maximumSampleSpacingKm": 0.2490637758449732,
+    "maximumNearestContactDistanceRegretKm": 0.1245318879224866,
+    "boundaryPositionDisplacementBoundClaimed": false
+  },
+  "independentChecks": {
+    "geometry": true,
+    "priorCleanup": true,
+    "western": true,
+    "isolation": true,
+    "contactEvidence": true,
+    "replay": true,
+    "topology": {
+      "missingEdgeSides": 0,
+      "nationalBoundaryNotMesh": 0,
+      "coastBoundaryNotMesh": 0,
+      "invalidInteriorEdges": 0,
+      "missingMeshSegments": 0,
+      "duplicateGraphSegments": 0,
+      "crossCountryOverlapAreaDegreesSquared": 0
+    },
+    "unchangedOtherCountries": 245,
+    "sourceFamilies": 407,
+    "maximumRemovedFineAreaDegreesSquared": 0
+  },
+  "verification": [
+    {
+      "path": "reports/maintenance/20261030-western-sector-independent-verification.json",
+      "sha256": "62be6912793b6137125f15b74f74f81b26a9db6c0890cdd4f01fb4c072081bb3",
+      "byteLength": 370222
+    },
+    {
+      "path": "reports/maintenance/20261030-fine-macro-independent-verification.json",
+      "sha256": "d49f7b489f42c871cab059546cd80e1a5b8e9b05fbe52290a9f577de3e64499f",
+      "byteLength": 9963
+    },
+    {
+      "path": "reports/maintenance/prompt19-C/western-sector-2020-mixed-verification.json",
+      "sha256": "2e516bcbed8ad1dde56013da182fed34b2d6786550870874f0dbe2f1267b7a6c",
+      "byteLength": 2523
+    }
+  ],
+  "tests": {
+    "westernPartitionFixtures": 7,
+    "frontierGameMembershipRegion": 26,
+    "koreaSource": 8,
+    "total": 41,
+    "passed": true,
+    "webpackProductionBuild": "pass",
+    "targetedEslint": "pass",
+    "buildConfigRestoredByteExactly": true,
+    "missingWesternProofPublicationRejected": true
+  },
+  "ui": {
+    "url": "http://127.0.0.1:3030/game",
+    "serverProcessId": 13476,
+    "player": "KOR",
+    "date": "2020-01-01",
+    "turn": 0,
+    "queuedActions": 0,
+    "mapStatus": "ready",
+    "baseStatus": "ready",
+    "appliedRevision": 0,
+    "debugBoundaryRenderingVerified": true,
+    "finalDebugSetting": false,
+    "screenshots": [
+      "reports/verification/western-sector-20261030/debug-western-sector.png",
+      "reports/verification/western-sector-20261030/normal-western-sector.png"
+    ]
+  },
+  "limits": [
+    "This completes the Korean shared-border classification; unrelated source-free residuals elsewhere remain explicit.",
+    "The new western affiliation is a documented gameplay contact partition, not a claim about an official administrative boundary. Raw source artifacts and every original fine footprint remain preserved."
+  ],
+  "externalAiCalls": 0,
+  "pushed": false
+}
