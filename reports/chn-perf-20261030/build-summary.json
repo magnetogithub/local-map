@@ -1,0 +1,21 @@
+{
+  "pass": true,
+  "exitCode": 0,
+  "command": "npm run build -- --webpack",
+  "distDir": ".next-chn-perf-20261030",
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "log": {
+    "path": "reports/chn-perf-20261030/build-webpack.log",
+    "sha256": "3b46b00ab8b92dc6cdab13e81cdecf8d4bfaa03a31056520a5d830a2f93984f6",
+    "byteLength": 1588
+  },
+  "checks": {
+    "productionCompilation": true,
+    "typeScript": true,
+    "scopedRuntimeTests": true,
+    "transportTests": true,
+    "scopedEslint": true,
+    "visualCountryLabels": true
+  },
+  "completedAt": "2026-10-30T06:26:18.907Z"
+}

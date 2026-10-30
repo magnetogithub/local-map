@@ -1,0 +1,93 @@
+{
+  "pass": true,
+  "activeCatalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+  "activeCatalogKey": "catalog-v3-prompt19-korea-bd5f69398db196fa244d:bac01e28fa6e694fe1a2c9974c9bde9c0c5caa519e47b8a10d47d9dc017ae388",
+  "sessionCount": 4,
+  "busySessions": 0,
+  "mutationsLocked": true,
+  "checkpointFormat": "operational-game-preservation.v1",
+  "pools": [
+    {
+      "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+      "catalogKey": "catalog-v3-prompt19-korea-bd5f69398db196fa244d:bac01e28fa6e694fe1a2c9974c9bde9c0c5caa519e47b8a10d47d9dc017ae388",
+      "sessionCount": 4,
+      "checkpoints": [
+        {
+          "artifact": {
+            "path": "data/runtime/operational-game-checkpoints/b368907daf575bbf5fcaf31c40dad6554fe044d0240e9e0af0e9991efadc13e8.json.gz",
+            "sha256": "b1f04361c7d638969b5f7273f0116f4032ee62e5a2a6138d7065aea679ba0e4a",
+            "byteLength": 1135068
+          },
+          "payloadHash": "b368907daf575bbf5fcaf31c40dad6554fe044d0240e9e0af0e9991efadc13e8",
+          "sessionIdHash": "a3b3531bd18472453e9fe0965948dd5bffc09d8955037ab3eac0646dce843611",
+          "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+          "revisions": {
+            "simulationRevision": 0,
+            "worldRevision": 0
+          },
+          "historyEntries": 0,
+          "historyPointer": 0,
+          "completeInitialCurrentAndHistory": true,
+          "roundtripValidated": true
+        },
+        {
+          "artifact": {
+            "path": "data/runtime/operational-game-checkpoints/35b6bd91e4a90bc844f1f652dcb7e87acfbb7f63ebbc42406a7f72639c267f6e.json.gz",
+            "sha256": "c76a47b229c03c2a72822e3322090d15a71df7273534f31b02553346e01c3665",
+            "byteLength": 1135058
+          },
+          "payloadHash": "35b6bd91e4a90bc844f1f652dcb7e87acfbb7f63ebbc42406a7f72639c267f6e",
+          "sessionIdHash": "ba9bd953320a19a06eaed0663223280d75c7f9a0f9346a64a91c0c90e7bb19f0",
+          "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+          "revisions": {
+            "simulationRevision": 0,
+            "worldRevision": 0
+          },
+          "historyEntries": 0,
+          "historyPointer": 0,
+          "completeInitialCurrentAndHistory": true,
+          "roundtripValidated": true
+        },
+        {
+          "artifact": {
+            "path": "data/runtime/operational-game-checkpoints/e2b90bf488d1819f0999ad60e2c3150184f7228f1e7906d7cd37e7ce61899170.json.gz",
+            "sha256": "48b5058afcf98e326acad69624a7b298308e9cf3c064be114ace4af1966f0ce6",
+            "byteLength": 1135062
+          },
+          "payloadHash": "e2b90bf488d1819f0999ad60e2c3150184f7228f1e7906d7cd37e7ce61899170",
+          "sessionIdHash": "243a7baa9753a836d5347611eec7a5c3a8da7157e1cd60a1ef1f06362101ad7c",
+          "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+          "revisions": {
+            "simulationRevision": 0,
+            "worldRevision": 0
+          },
+          "historyEntries": 0,
+          "historyPointer": 0,
+          "completeInitialCurrentAndHistory": true,
+          "roundtripValidated": true
+        },
+        {
+          "artifact": {
+            "path": "data/runtime/operational-game-checkpoints/6e11cac15793c3bc7e613f02a333c1b7fd1a8c058c0c4578d5e6a80d789a5d83.json.gz",
+            "sha256": "d6265ed3405ec9e13234101ab7371a50c18091c100627bb0cdf180c1e49d1cea",
+            "byteLength": 1135398
+          },
+          "payloadHash": "6e11cac15793c3bc7e613f02a333c1b7fd1a8c058c0c4578d5e6a80d789a5d83",
+          "sessionIdHash": "47d37d8a1d64d5e5803bbb964212665e310ac160c709fdf272e3c541dabce0ec",
+          "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+          "revisions": {
+            "simulationRevision": 0,
+            "worldRevision": 0
+          },
+          "historyEntries": 0,
+          "historyPointer": 0,
+          "completeInitialCurrentAndHistory": true,
+          "roundtripValidated": true
+        }
+      ]
+    }
+  ],
+  "expectedNextCatalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "checkpointedAtUtc": "2026-10-30T05:31:59.3294501Z",
+  "existingServerUrl": "http://127.0.0.1:3000"
+}

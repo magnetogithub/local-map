@@ -1,0 +1,78 @@
+[
+  {
+    "edgeId": "edge:operational:b90b38aa8be7d1abfdcc5f3651049f2d8b4b17bd8f769a89bb2f074b592a5806",
+    "lengthKm": 0.5934753668142712,
+    "chn": {
+      "administrativeParentKey": "fine-macro-residual:CHN",
+      "countryId": "CHN",
+      "id": "territory:catalog:fa94335baf9331b792ca97a39a42f7c07391e50fcc29f73b8d02d450b198ab80",
+      "previousParentId": "territory:catalog:cec7a5f42ba0feb5e7fc35d2b4d27aef576c664bb88ee3f021a6c2af6913a824",
+      "seedParentIds": [
+        "territory:catalog:cec7a5f42ba0feb5e7fc35d2b4d27aef576c664bb88ee3f021a6c2af6913a824"
+      ],
+      "sourceIdentity": null
+    },
+    "prk": {
+      "administrativeParentKey": "fine-macro:PRK:macro:PRK:KP01",
+      "countryId": "PRK",
+      "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+      "previousParentId": "territory:catalog:0454f548ffa40e7076cdac0440b6fedaa5dd929ae7a3f3df71ead1252b6e3166",
+      "seedParentIds": [
+        "territory:catalog:0454f548ffa40e7076cdac0440b6fedaa5dd929ae7a3f3df71ead1252b6e3166"
+      ],
+      "knownFine": true
+    },
+    "coordinates": [
+      [
+        128.08230623796806,
+        41.99878319277878
+      ],
+      [
+        128.0779219355619,
+        41.998709148141394
+      ],
+      [
+        128.0751262645966,
+        41.998661933231546
+      ]
+    ]
+  },
+  {
+    "edgeId": "edge:operational:f950fe75588f7badd44b380a3ffc342623b3eb8c5d9dea9b829ae64dabb4577d",
+    "lengthKm": 0.4432655968309918,
+    "chn": {
+      "administrativeParentKey": "fine-macro-residual:CHN",
+      "countryId": "CHN",
+      "id": "territory:catalog:71716e8984e7ae872bf439e9e06a8eb5e70d5432755e4d24276ffdb5572030eb",
+      "previousParentId": "territory:catalog:cec7a5f42ba0feb5e7fc35d2b4d27aef576c664bb88ee3f021a6c2af6913a824",
+      "seedParentIds": [
+        "territory:catalog:cec7a5f42ba0feb5e7fc35d2b4d27aef576c664bb88ee3f021a6c2af6913a824"
+      ],
+      "sourceIdentity": null
+    },
+    "prk": {
+      "administrativeParentKey": "fine-macro:PRK:macro:PRK:KP01",
+      "countryId": "PRK",
+      "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+      "previousParentId": "territory:catalog:0454f548ffa40e7076cdac0440b6fedaa5dd929ae7a3f3df71ead1252b6e3166",
+      "seedParentIds": [
+        "territory:catalog:0454f548ffa40e7076cdac0440b6fedaa5dd929ae7a3f3df71ead1252b6e3166"
+      ],
+      "knownFine": true
+    },
+    "coordinates": [
+      [
+        128.06585270112117,
+        41.99850531592253
+      ],
+      [
+        128.0609229967802,
+        41.99842206022151
+      ],
+      [
+        128.06049001509115,
+        41.99841474777607
+      ]
+    ]
+  }
+]

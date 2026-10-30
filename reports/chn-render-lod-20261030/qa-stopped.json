@@ -1,0 +1,15 @@
+{
+  "verifiedLauncher": 26952,
+  "stoppedOnlyOwnedPort": 3001,
+  "verifiedDescendants": [
+    26952,
+    18224,
+    5508,
+    752
+  ],
+  "preservedPorts": [
+    3000,
+    3002,
+    3030
+  ]
+}

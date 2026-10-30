@@ -1,0 +1,440 @@
+{
+  "schemaVersion": "chn-2020-play-performance-v1",
+  "phase": "candidate",
+  "pass": false,
+  "pointer": {
+    "path": "reports/chn-2020/candidate-runtime-pointer.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251,
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "root": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7",
+    "index": {
+      "sha256": "f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+      "byteLength": 757545
+    }
+  },
+  "code": [
+    {
+      "path": "scripts/chn-2020/verify-play-performance.test.ts",
+      "sha256": "f0797fdd18789fc636d3fef40617690d4b798b582686b61a641f8e5e17a786f6",
+      "byteLength": 19512
+    },
+    {
+      "path": "src/lib/world/operational-catalog.server.ts",
+      "sha256": "f60600c11d5677f9b818aeb7bfb35221c566f8b3cd82b48a091f6b86eac95f7f",
+      "byteLength": 15907
+    },
+    {
+      "path": "src/lib/world/operational-game.server.ts",
+      "sha256": "be76fcbde3c2e8f69958a9306d2c34fae82d9bca4de0130165a150f623f3fa9e",
+      "byteLength": 3492
+    },
+    {
+      "path": "src/lib/simulation/operational-frontier-policy.ts",
+      "sha256": "f9dcb2b854cc0346188abb46fe871d441b5db6d00236eed79bad7cfeb821bc35",
+      "byteLength": 465
+    },
+    {
+      "path": "src/lib/simulation/operational-frontier.server.ts",
+      "sha256": "0c6701d9bb1e44f6d9e77187b4c5235ef5c9ba8684ed109490a29682ed57049f",
+      "byteLength": 13984
+    },
+    {
+      "path": "src/lib/simulation/catalog-turn-plan.ts",
+      "sha256": "19b628c57da4f6e8b4130ee73d20920979ae4c560b8f975887c4ae4c4d17f88d",
+      "byteLength": 13892
+    },
+    {
+      "path": "src/lib/simulation/catalog-runtime.ts",
+      "sha256": "185e3286477626529a833ec1b3a146218496332929e581fec70eee5816caeaad",
+      "byteLength": 9022
+    }
+  ],
+  "conditions": {
+    "mode": "Vitest Node production runtime; fresh process module caches for cold, same process immutable metadata cache for warm",
+    "osPageCache": "not flushed",
+    "player": "CHN/PRK",
+    "scenario": "2020-01-01 to 2020-01-02",
+    "viewport": null,
+    "browserMeasurement": "separate root-owned browser evidence",
+    "externalAiCalls": 0
+  },
+  "counts": {
+    "countries": 247,
+    "cells": 8005,
+    "edges": 26273,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "countryCells": {
+    "CHN": 3320,
+    "PRK": 194,
+    "KOR": 322
+  },
+  "initialization": {
+    "catalogColdMs": 20.27890000000002,
+    "chnMetadataColdMs": 8.553300000000036,
+    "chnMetadataWarmMs": 0.014599999999973079,
+    "newGameColdMs": 1562.9291999999998,
+    "newGameWarmMs": [
+      0.0965000000001055,
+      0.07700000000022555,
+      0.07589999999981956,
+      0.0816000000004351,
+      0.10629999999991924
+    ],
+    "regionsColdMs": 68.47990000000027
+  },
+  "bytes": {
+    "artifactIndex": 757545,
+    "metadata": 785199,
+    "detail": 79108724,
+    "tiles": 19978712,
+    "overviewZ0": 831486,
+    "overviewZ2": 1686174,
+    "total": 108943102,
+    "adjacencyDecoded": 235905
+  },
+  "memory": {
+    "before": {
+      "rss": 85450752,
+      "heapTotal": 55894016,
+      "heapUsed": 27744280,
+      "external": 3348445,
+      "arrayBuffers": 751992
+    },
+    "afterInitialization": {
+      "rss": 370307072,
+      "heapTotal": 190046208,
+      "heapUsed": 114264560,
+      "external": 119109918,
+      "arrayBuffers": 90763226
+    },
+    "afterTurns": {
+      "rss": 444895232,
+      "heapTotal": 271466496,
+      "heapUsed": 195525992,
+      "external": 119454537,
+      "arrayBuffers": 99129303
+    }
+  },
+  "gameplay": [
+    {
+      "actor": "CHN",
+      "target": "PRK",
+      "pass": true,
+      "first": {
+        "ids": [
+          "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29"
+        ],
+        "metrics": {
+          "count": 1,
+          "areaKm2": 1695.2306113685627,
+          "maximumGraphDepthKm": 7.240346541375061,
+          "maximumForwardDepthKm": 3.950332598381271,
+          "maximumLateralKm": 6.069377158582811,
+          "maximumCellDiameterKm": 89.05975967345964
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+          "supportCellId": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+          "edgeOrdinal": 12154
+        },
+        "ms": 176.79619999999977
+      },
+      "warmSelectionMs": [
+        2.458900000000085,
+        2.2408000000000357,
+        2.1200999999996384,
+        1.9227999999998246,
+        1.6386999999999716
+      ],
+      "followup": {
+        "ids": [
+          "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f"
+        ],
+        "metrics": {
+          "count": 1,
+          "areaKm2": 1894.9140083993673,
+          "maximumGraphDepthKm": 28.309123700576727,
+          "maximumForwardDepthKm": 24.027447564932704,
+          "maximumLateralKm": 14.966866999087314,
+          "maximumCellDiameterKm": 99.16416247496656
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f",
+          "supportCellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+          "edgeOrdinal": 22440
+        },
+        "ms": 50.628600000000006
+      },
+      "limits": {
+        "depthKm": 36,
+        "widthKm": 36,
+        "maximumAreaKm2": 2800
+      },
+      "ownerControllerSeparated": true,
+      "staleRevisionRejected": true,
+      "staleCatalogRejected": true
+    },
+    {
+      "actor": "PRK",
+      "target": "CHN",
+      "pass": false,
+      "error": "expected 'land-border' to be 'current-controller' // Object.is equality"
+    },
+    {
+      "actor": "KOR",
+      "target": "PRK",
+      "pass": true,
+      "first": {
+        "ids": [
+          "territory:catalog:d8d84a9ec249d4e748a2715ea5b1e162e3a27683ee059c2fad2f58cc61dc867d"
+        ],
+        "metrics": {
+          "count": 1,
+          "areaKm2": 976.1545415033592,
+          "maximumGraphDepthKm": 26.391207904700302,
+          "maximumForwardDepthKm": 25.56694736341646,
+          "maximumLateralKm": 6.585706200634716,
+          "maximumCellDiameterKm": 64.40831621595648
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:d8d84a9ec249d4e748a2715ea5b1e162e3a27683ee059c2fad2f58cc61dc867d",
+          "supportCellId": "territory:catalog:729162b8e6648961fd3f034da3c0a240fb626ce91bc260dec146153de289afb2",
+          "edgeOrdinal": 18622
+        },
+        "ms": 15.118799999999737
+      },
+      "warmSelectionMs": [
+        1.4735999999998057,
+        1.3575999999998203,
+        1.3436000000001513,
+        1.3089999999997417,
+        1.3568999999997686
+      ],
+      "followup": {
+        "ids": [
+          "territory:catalog:5e393aaf64d1b2a032f1db00046fc9a2c188077a2c4e6cf0b1540a232c6cb758"
+        ],
+        "metrics": {
+          "count": 1,
+          "areaKm2": 954.2926613370805,
+          "maximumGraphDepthKm": 13.738430162200327,
+          "maximumForwardDepthKm": 11.695048000813271,
+          "maximumLateralKm": 7.20047558613219,
+          "maximumCellDiameterKm": 72.67684181166261
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:5e393aaf64d1b2a032f1db00046fc9a2c188077a2c4e6cf0b1540a232c6cb758",
+          "supportCellId": "territory:catalog:d8d84a9ec249d4e748a2715ea5b1e162e3a27683ee059c2fad2f58cc61dc867d",
+          "edgeOrdinal": 22253
+        },
+        "ms": 1.1661000000003696
+      },
+      "limits": {
+        "depthKm": 36,
+        "widthKm": 36,
+        "maximumAreaKm2": 2800
+      },
+      "ownerControllerSeparated": true,
+      "staleRevisionRejected": true,
+      "staleCatalogRejected": true
+    },
+    {
+      "actor": "PRK",
+      "target": "KOR",
+      "pass": true,
+      "first": {
+        "ids": [
+          "territory:catalog:d99eb6693f2d434215efc95d5ee9a2a74c86e5a4e4bce92c22fe88331a4f7940"
+        ],
+        "metrics": {
+          "count": 1,
+          "areaKm2": 1011.520445103096,
+          "maximumGraphDepthKm": 19.610681618294965,
+          "maximumForwardDepthKm": 19.106145809810783,
+          "maximumLateralKm": 4.417701468382638,
+          "maximumCellDiameterKm": 54.820584710868225
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:d99eb6693f2d434215efc95d5ee9a2a74c86e5a4e4bce92c22fe88331a4f7940",
+          "supportCellId": "territory:catalog:5444ff78935a4bcfc82db908db9cccdf16781342b94b9153f11c9e44f1924bb6",
+          "edgeOrdinal": 18626
+        },
+        "ms": 1.8600999999998749
+      },
+      "warmSelectionMs": [
+        2.4575999999997293,
+        2.105800000000272,
+        2.0356000000001586,
+        1.723700000000008,
+        1.620300000000043
+      ],
+      "followup": {
+        "ids": [
+          "territory:catalog:9e81fcb0bcb2da0183204d6189ed96fc0a3086c31cf9eef9a2770b63bf8d08b2"
+        ],
+        "metrics": {
+          "count": 1,
+          "areaKm2": 1125.6158082020477,
+          "maximumGraphDepthKm": 21.37458485200617,
+          "maximumForwardDepthKm": 18.23040017641597,
+          "maximumLateralKm": 11.14496866444595,
+          "maximumCellDiameterKm": 64.87880857416815
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:9e81fcb0bcb2da0183204d6189ed96fc0a3086c31cf9eef9a2770b63bf8d08b2",
+          "supportCellId": "territory:catalog:d99eb6693f2d434215efc95d5ee9a2a74c86e5a4e4bce92c22fe88331a4f7940",
+          "edgeOrdinal": 18429
+        },
+        "ms": 20.728200000000015
+      },
+      "limits": {
+        "depthKm": 36,
+        "widthKm": 36,
+        "maximumAreaKm2": 2800
+      },
+      "ownerControllerSeparated": true,
+      "staleRevisionRejected": true,
+      "staleCatalogRejected": true
+    }
+  ],
+  "turns": [
+    {
+      "actor": "CHN",
+      "target": "PRK",
+      "pass": true,
+      "scriptedCalls": 2,
+      "externalAiCalls": 0,
+      "contextMs": 14.189800000000105,
+      "contextBytes": 149435,
+      "providerMs": 19.1253999999999,
+      "planMs": 173.42540000000008,
+      "commitMs": 6.029500000000098,
+      "followupAfterActualCommit": {
+        "ms": 1.6752000000001317,
+        "ids": [
+          "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f"
+        ],
+        "metrics": {
+          "count": 1,
+          "areaKm2": 1894.9140083993673,
+          "maximumGraphDepthKm": 28.309123700576727,
+          "maximumForwardDepthKm": 24.027447564932704,
+          "maximumLateralKm": 14.966866999087314,
+          "maximumCellDiameterKm": 99.16416247496656
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f",
+          "supportCellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+          "edgeOrdinal": 22440
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        }
+      },
+      "warmTurnSamples": [
+        {
+          "planMs": 42.203799999999774,
+          "commitMs": 4.102799999999661
+        },
+        {
+          "planMs": 33.573599999999715,
+          "commitMs": 4.408599999999751
+        },
+        {
+          "planMs": 41.69599999999991,
+          "commitMs": 4.845100000000002
+        },
+        {
+          "planMs": 38.80110000000013,
+          "commitMs": 4.661799999999857
+        },
+        {
+          "planMs": 40.960000000000036,
+          "commitMs": 5.33600000000024
+        }
+      ],
+      "changedCells": 1,
+      "authorityCells": 194,
+      "newGrantCap": 512,
+      "atomicNotifications": 1,
+      "undoRedo": true,
+      "staleCommitAtomic": true,
+      "toolOutputs": [
+        {
+          "ok": true,
+          "data": {
+            "ok": true,
+            "catalogRef": {
+              "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+              "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+              "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+              "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+              "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+            },
+            "baseWorldRevision": 0,
+            "actorCountryId": "CHN",
+            "targetCountryId": "PRK",
+            "operation": "occupy",
+            "frontier": {
+              "kind": "land-border",
+              "cellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+              "supportCellId": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+              "edgeOrdinal": 12154
+            },
+            "metrics": {
+              "count": 1,
+              "areaKm2": 1695.2306113685627,
+              "maximumGraphDepthKm": 7.240346541375061,
+              "maximumForwardDepthKm": 3.950332598381271,
+              "maximumLateralKm": 6.069377158582811,
+              "maximumCellDiameterKm": 89.05975967345964
+            },
+            "limits": {
+              "depthKm": 36,
+              "widthKm": 36,
+              "maximumAreaKm2": 2800
+            },
+            "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band.",
+            "effectTarget": {
+              "territoryIds": [
+                "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29"
+              ],
+              "regionRefs": null,
+              "frontierScope": {
+                "catalogRef": {
+                  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+                  "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+                  "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+                  "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+                  "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+                },
+                "baseWorldRevision": 0,
+                "actorCountryId": "CHN",
+                "targetCountryId": "PRK",
+                "operation": "occupy",
+                "extent": "near",
+                "direction": null,
+                "reference": null,
+                "regionQuery": null,
+                "cap": 512
+              }
+            },
+            "usage": "Copy the entire effectTarget unchanged into the matching territorial effect. Do not replace it with regionRefs, a subset, or additional IDs. This selection grants no authority."
+          }
+        }
+      ]
+    }
+  ]
+}

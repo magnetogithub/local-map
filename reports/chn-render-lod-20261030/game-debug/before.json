@@ -1,0 +1,506 @@
+{
+  "schemaVersion": "actual-game-debug-scope-browser-v1",
+  "label": "before",
+  "pass": false,
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "code": [
+    {
+      "path": "scripts/chn-2020/verify-game-debug-scope.mjs",
+      "sha256": "f2732c3e2956b676671f08b4c43df24589f78435f5e6e224f9ac637f6d446413",
+      "byteLength": 28058
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "5e0a7a143095215813bab485be7bf48e7efed4ebb2608b4640d43573cda5ba9f",
+      "byteLength": 23790
+    },
+    {
+      "path": "src/components/layout/OperationalGameSetupShell.tsx",
+      "sha256": "eaec0a919045664f712af8a782e1a68983c7e97bdc768fc46c604ea01c2377f3",
+      "byteLength": 5815
+    },
+    {
+      "path": "src/components/game/CatalogGameScreen.tsx",
+      "sha256": "e938d8841620ddf409db0772ca1e1c095092666e7db2f9df965a94cd5d65940a",
+      "byteLength": 16178
+    },
+    {
+      "path": "src/components/game/WarAndSystemOverlays.tsx",
+      "sha256": "49d224d3ca83a65f50a194fec28fa4ff2e4fa047b3bee98a8542152ab157fc04",
+      "byteLength": 5906
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "69f310197982f063c8ad706b9d7663383e831de2468b6b443f16fab5ee70bcc7",
+      "byteLength": 35395
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "8714a385b3f2e544d3da64de2e819585feb5139487a8d2f3ccb1ce35d36437c5",
+      "byteLength": 7700
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "7ae5bb3888113f90f9180fe60ff780fc112aa3c81577d57aacaae8851e95f451",
+      "byteLength": 37131
+    },
+    {
+      "path": "src/lib/map/operational-debug-boundary-scope.ts",
+      "sha256": "3f2e2e09c128ff213435f2a1816522b79c42ade2b6b5d52d3cf5ea2776e04e93",
+      "byteLength": 6390
+    },
+    {
+      "path": "src/lib/map/operational-delivery.server.ts",
+      "sha256": "ee7d6f17cb4b35c1ed252d236240364590f3a0cf9297b4c83ddaf014b8bca669",
+      "byteLength": 4035
+    }
+  ],
+  "conditions": {
+    "url": "http://127.0.0.1:3001",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "browser": "fresh isolated Chromium; software WebGL permitted",
+    "actualGameEntry": "search CHN, confirm play country, wait for /game",
+    "debugToggle": "HUD settings checkbox click and keyboard Space; no debug bridge setter",
+    "hover": "real mouse pointer; geometry/camera diagnostic bridge only",
+    "httpCache": "disabled by interception; immutable application caches remain enabled",
+    "externalAiCalls": 0,
+    "turnsSubmitted": 0,
+    "permittedGamePosts": [
+      "start",
+      "select-player"
+    ],
+    "existingUserSessionsTouched": 0,
+    "limitation": "Presentation/scope regression only. No turn is advanced; exact authoritative fills and base PBF byte count are unchanged by stroke LOD."
+  },
+  "expectedScopes": {
+    "PRK": [
+      "CHN",
+      "KOR",
+      "PRK",
+      "RUS"
+    ],
+    "CHN": [
+      "AFG",
+      "BTN",
+      "CHN",
+      "HKG",
+      "IND",
+      "KAZ",
+      "KGZ",
+      "LAO",
+      "MMR",
+      "MNG",
+      "NPL",
+      "PAK",
+      "PRK",
+      "RUS",
+      "TJK",
+      "VNM"
+    ],
+    "USA": [
+      "CAN",
+      "CUB",
+      "MEX",
+      "USA"
+    ]
+  },
+  "sourceCellCounts": {
+    "total": 8005,
+    "CHN": 3320
+  },
+  "views": [],
+  "screenshots": [
+    {
+      "path": "reports/chn-render-lod-20261030/game-debug/before-actual-game-chn-3320.png",
+      "sha256": "9ca2f11546d6216d7067f687388b62c80912aa6e63629f0bd6bee25cc7d997f9",
+      "byteLength": 545440
+    }
+  ],
+  "requests": [
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_0j_9op0._.css",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_1anvha4._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/turbopack-_08bm286._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_219uq1s._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_lib_11i8f47._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_components_03h2rfc._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_stores_game-setup-store_ts_0vcke35._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/data_runtime_operational-catalog_current_json_%5Bjson%5D_cjs_14uxah9._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_maplibre-gl_dist_maplibre-gl_1w0u9x2.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_zod_v4_06yv92s._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_0jbk0j2._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/simulation/game",
+      "method": "POST"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/cells",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/map",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tile-index.json",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail-index.json",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/edge-incidence.bin.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/labels",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/3/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/2/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/3/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/2/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/api/simulation/game",
+      "method": "POST"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/game?_rsc=64EBvAagmAisvzuu",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/api/world/labels",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/__nextjs_font/geist-latin.woff2",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/api/world/labels",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/fonts/Open%20Sans%20Regular/0-255.pbf",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/fonts/Noto%20Sans%20KR/NotoSansCJKkr-Regular.otf",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/27/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/27/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/26/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/26/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/28/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/28/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/3/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/2/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/0/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/27/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/27/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/26/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/26/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/28/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/28/11.pbf.gz",
+      "method": "GET"
+    }
+  ],
+  "commands": [
+    {
+      "case": "initial",
+      "operation": "start",
+      "countryId": null
+    },
+    {
+      "case": "actual-chn-game-entry",
+      "operation": "select-player",
+      "countryId": "CHN"
+    }
+  ],
+  "failures": [
+    {
+      "message": "normal-game-korea-no-hover:INVALID_PROJECTION_OR_UNEXPECTED_FRONT",
+      "stack": "Error: normal-game-korea-no-hover:INVALID_PROJECTION_OR_UNEXPECTED_FRONT\n    at check (file:///D:/gen/scripts/chn-2020/verify-game-debug-scope.mjs:19:48)\n    at view (file:///D:/gen/scripts/chn-2020/verify-game-debug-scope.mjs:98:3)\n    at async file:///D:/gen/scripts/chn-2020/verify-game-debug-scope.mjs:175:56"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "cleanup": [
+    {
+      "sessionIdSha256": "074f0c14f5e4d82644579c9ba45714a0a4c8c2072d9a87e049d819693d37d1f6",
+      "status": 204
+    }
+  ],
+  "bootstrap": {
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+      "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+      "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+      "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+    },
+    "provinceCount": 994,
+    "provinceLod": null,
+    "microLod": null
+  },
+  "entry": {
+    "pathname": "/game",
+    "worldRevision": 0,
+    "simulationRevision": 0,
+    "cells": 8005,
+    "CHN": {
+      "owned": 3320,
+      "controlled": 3320,
+      "occupied": 0
+    },
+    "controlPanel": {
+      "소유 영토": "3320",
+      "통제 영토": "3320",
+      "타국 통제 아래의 소유 영토": "0"
+    }
+  },
+  "fullCountryGeometryRequests": [],
+  "elapsedMs": 12327.663
+}

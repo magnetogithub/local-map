@@ -12,9 +12,42 @@ if(inputArg>=0&&(!process.argv[inputArg+1]||process.argv[inputArg+1].startsWith(
 const inputPath=inputArg<0?'reports/maintenance/prompt19-C/joined-world-input.json':process.argv[inputArg+1];
 const inputBytes=fs.readFileSync(inputPath), bundle=JSON.parse(inputBytes);
 if(bundle.report.invalid.length || bundle.report.unresolved.length || !bundle.report.topology?.pass)throw Error('UNVERIFIED_JOINED_INPUT');
+const option=name=>{const i=process.argv.indexOf(name);if(i<0)return null;const value=process.argv[i+1];if(!value||value.startsWith('--'))throw Error(`MISSING_ARGUMENT:${name}`);return value;};
+const incremental=bundle.report.incremental??null;
+if(process.argv.includes('--activate')&&process.argv.includes('--no-activate'))throw Error('CONFLICTING_ACTIVATION_ARGUMENTS');
+const activate=incremental?process.argv.includes('--activate'):!process.argv.includes('--no-activate');
+const checkedPin=(a,label)=>{
+  if(!a||typeof a.path!=='string'||!/^[a-f0-9]{64}$/.test(a.sha256)||!Number.isSafeInteger(a.byteLength)||a.byteLength<0)throw Error(`INVALID_PIN:${label}`);
+  const physicalRoot=fs.realpathSync(process.cwd()),physical=fs.realpathSync(a.path),relative=path.relative(physicalRoot,physical);
+  if(relative.startsWith('..')||path.isAbsolute(relative))throw Error(`PIN_OUTSIDE_WORKSPACE:${label}`);
+  const bytes=fs.readFileSync(physical);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error(`PIN_CHANGED:${label}`);return bytes;
+};
+let incrementalVerification=null,baselinePointer=null,baselineBundle=null;
+if(incremental){
+  if(incremental.countryId!=='CHN')throw Error('UNSUPPORTED_INCREMENTAL_ADAPTER');
+  const file=option('--incremental-verification');if(!file)throw Error('MISSING_ARGUMENT:--incremental-verification');
+  const bytes=fs.readFileSync(file),verification=JSON.parse(bytes),baseline=incremental.baseline;
+  if(!baseline)throw Error('MISSING_INCREMENTAL_BASELINE');
+  baselinePointer=JSON.parse(checkedPin(baseline.pointer,'baseline.pointer'));
+  baselineBundle=JSON.parse(checkedPin(baseline.bundle,'baseline.bundle'));
+  const proof=JSON.parse(checkedPin(baseline.nationalBoundaryVerification,'baseline.nationalBoundaryVerification'));
+  if(!baselinePointer.root||!baselinePointer.catalogVersion||!baselinePointer.index)throw Error('INVALID_BASELINE_POINTER');
+  const baselineIndex=JSON.parse(checkedPin({path:`${baselinePointer.root}/artifact-index.json`,...baselinePointer.index},'baseline.index'));
+  const provenanceArtifact=baselineIndex.artifacts?.find(a=>a.path==='provenance.json');if(!provenanceArtifact)throw Error('BASELINE_PROVENANCE_NOT_INDEXED');
+  const provenance=JSON.parse(checkedPin({...provenanceArtifact,path:`${baselinePointer.root}/provenance.json`},'baseline.provenance'));
+  if(provenance.inputRoot!==baseline.bundle.sha256||!provenance.inputs?.some(a=>a.path===baseline.bundle.path&&a.sha256===baseline.bundle.sha256&&a.byteLength===baseline.bundle.byteLength))throw Error('BASELINE_INPUT_NOT_ACTIVE');
+  if(provenance.nationalBoundaryVerification?.sha256!==baseline.nationalBoundaryVerification.sha256||provenance.nationalBoundaryVerification?.byteLength!==baseline.nationalBoundaryVerification.byteLength)throw Error('BASELINE_PROOF_NOT_ACTIVE');
+  if(proof.pass!==true||proof.after?.sha256!==baseline.bundle.sha256||proof.after?.byteLength!==baseline.bundle.byteLength||proof.before?.sha256!==baselineBundle.report.nationalBoundaryInput?.bundle.sha256)throw Error('UNVERIFIED_BASELINE_NATIONAL_BOUNDARY');
+  if(baselineBundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers&&proof.cleanupAcceptance?.pass!==true)throw Error('UNVERIFIED_BASELINE_BOUNDARY_CLEANUP');
+  if(baselineBundle.report.westernSectorReconciliation&&(!proof.westernAcceptance?.pass||!proof.westernIsolation?.pass||!proof.westernContactEvidence?.pass||!proof.reproducibility?.pass))throw Error('UNVERIFIED_BASELINE_WESTERN_SECTOR');
+  if(verification.pass!==true||verification.after?.sha256!==digest(inputBytes)||verification.after?.byteLength!==inputBytes.length||verification.before?.sha256!==baseline.bundle.sha256||verification.before?.byteLength!==baseline.bundle.byteLength||verification.baselinePointer?.sha256!==baseline.pointer.sha256||verification.baselinePointer?.byteLength!==baseline.pointer.byteLength)throw Error('UNVERIFIED_INCREMENTAL_INPUT');
+  for(const check of ['nonTargetPreservation','sourcePins','hierarchy','topology','coverage','residualAudit','reproducibility'])if(verification.checks?.[check]!==true)throw Error(`MISSING_INCREMENTAL_ACCEPTANCE:${check}`);
+  incrementalVerification={path:file,sha256:digest(bytes),byteLength:bytes.length};
+}
 const verificationArg=process.argv.indexOf('--national-verification');
 let nationalBoundaryVerification=null;
-if(bundle.report.nationalBoundaryReconciliation){
+if(incremental)nationalBoundaryVerification=incremental.baseline.nationalBoundaryVerification;
+else if(bundle.report.nationalBoundaryReconciliation){
   const file=verificationArg<0?null:process.argv[verificationArg+1];
   if(!file||file.startsWith('--'))throw Error('MISSING_ARGUMENT:--national-verification');
   const bytes=fs.readFileSync(file), verification=JSON.parse(bytes);
@@ -24,26 +57,68 @@ if(bundle.report.nationalBoundaryReconciliation){
   nationalBoundaryVerification={path:file,sha256:digest(bytes),byteLength:bytes.length};
 }
 // Runtime version depends on geometry, topology, source locks and code, not probe timing/RSS.
-const codeInputs=['scripts/prepare-prompt19-joined-candidates.mjs','scripts/prompt19-source-arrangement.mjs','scripts/prompt19-joined-topology.mjs','scripts/prepare-prompt19-mixed-world.mjs',...(bundle.report.fineMacro?['scripts/prepare-prompt19-fine-macro-world.mjs','scripts/prompt19-fine-macro-topology.mjs']:[]),...(bundle.report.nationalBoundaryReconciliation?['scripts/prepare-prompt19-national-boundary-world.mjs','scripts/prompt19-national-boundary-reconciliation.mjs','scripts/prompt14-boundary-arrangement.mjs','scripts/prompt14-catalog-topology.mjs','scripts/prompt14-catalog-core.mjs']:[])].map(file=>({path:file,sha256:digest(fs.readFileSync(file))}));
+const codeInputs=(incremental?['scripts/chn-2020/prepare-china.py','scripts/chn-2020/incremental-coordinator.mjs','scripts/prepare-prompt19-mixed-world.mjs','scripts/prompt14-catalog-core.mjs']:['scripts/prepare-prompt19-joined-candidates.mjs','scripts/prompt19-source-arrangement.mjs','scripts/prompt19-joined-topology.mjs','scripts/prepare-prompt19-mixed-world.mjs',...(bundle.report.fineMacro?['scripts/prepare-prompt19-fine-macro-world.mjs','scripts/prompt19-fine-macro-topology.mjs']:[]),...(bundle.report.nationalBoundaryReconciliation?['scripts/prepare-prompt19-national-boundary-world.mjs','scripts/prompt19-national-boundary-reconciliation.mjs','scripts/prompt14-boundary-arrangement.mjs','scripts/prompt14-catalog-topology.mjs','scripts/prompt14-catalog-core.mjs']:[])]).map(file=>({path:file,sha256:digest(fs.readFileSync(file))}));
 const sourceLockArtifacts=bundle.report.sourceLockArtifacts??['KOR','PRK'].map(countryId=>({countryId,path:`data/source-locks/prompt19/${countryId}.json`}));
-if(bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers)codeInputs.push({path:'scripts/prepare-prompt19-boundary-cleanup-world.mjs',sha256:digest(fs.readFileSync('scripts/prepare-prompt19-boundary-cleanup-world.mjs'))});
-if(bundle.report.westernSectorReconciliation)for(const file of ['scripts/prepare-prompt19-western-sector-world.mjs','scripts/prompt19-western-sector-reconciliation.mjs'])codeInputs.push({path:file,sha256:digest(fs.readFileSync(file))});
-if(sourceLockArtifacts.length!==2||new Set(sourceLockArtifacts.map(a=>a.countryId)).size!==2||!sourceLockArtifacts.every(a=>['KOR','PRK'].includes(a.countryId)))throw Error('SOURCE_LOCK_SCOPE');
+if(!incremental&&bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers)codeInputs.push({path:'scripts/prepare-prompt19-boundary-cleanup-world.mjs',sha256:digest(fs.readFileSync('scripts/prepare-prompt19-boundary-cleanup-world.mjs'))});
+if(!incremental&&bundle.report.westernSectorReconciliation)for(const file of ['scripts/prepare-prompt19-western-sector-world.mjs','scripts/prompt19-western-sector-reconciliation.mjs'])codeInputs.push({path:file,sha256:digest(fs.readFileSync(file))});
+const fineCountries=incremental?incremental.fineCountries:['KOR','PRK'];
+const expectedCountries=incremental?['CHN','KOR','PRK']:['KOR','PRK'];
+if(!Array.isArray(fineCountries)||JSON.stringify([...fineCountries].sort())!==JSON.stringify(expectedCountries)||sourceLockArtifacts.length!==expectedCountries.length||new Set(sourceLockArtifacts.map(a=>a.countryId)).size!==expectedCountries.length||!sourceLockArtifacts.every(a=>expectedCountries.includes(a.countryId)))throw Error('SOURCE_LOCK_SCOPE');
 const sourceLocks=sourceLockArtifacts.map(a=>{const bytes=fs.readFileSync(a.path);if(a.sha256&&(digest(bytes)!==a.sha256||bytes.length!==a.byteLength))throw Error('SOURCE_LOCK_CHANGED');const lock=JSON.parse(bytes);if(lock.countryId!==a.countryId)throw Error('SOURCE_LOCK_COUNTRY');return lock;});
+if(incremental){
+  for(const a of sourceLockArtifacts)checkedPin(a,`source-lock:${a.countryId}`);
+  for(const old of baselineBundle.report.sourceLockArtifacts){const retained=sourceLockArtifacts.find(a=>a.countryId===old.countryId);if(!retained||retained.sha256!==old.sha256||retained.byteLength!==old.byteLength)throw Error('BASELINE_SOURCE_LOCK_REPLACED');}
+  for(const old of baselineBundle.report.hierarchyArtifacts??[]){const retained=(bundle.report.hierarchyArtifacts??[]).find(a=>a.countryId===old.countryId);if(!retained||retained.sha256!==old.sha256||retained.byteLength!==old.byteLength)throw Error('BASELINE_HIERARCHY_REPLACED');}
+  if(!Array.isArray(incremental.codeArtifacts)||!incremental.codeArtifacts.length)throw Error('MISSING_INCREMENTAL_CODE_PINS');
+  for(const file of ['scripts/chn-2020/prepare-china.py','scripts/chn-2020/incremental-coordinator.mjs'])if(!incremental.codeArtifacts.some(a=>a.path===file))throw Error(`MISSING_INCREMENTAL_CODE_PIN:${file}`);
+  for(const a of incremental.codeArtifacts){checkedPin(a,`code:${a.path}`);const existing=codeInputs.find(c=>c.path===a.path);if(existing&&existing.sha256!==a.sha256)throw Error(`CODE_PIN_CONFLICT:${a.path}`);if(!existing)codeInputs.push(a);}
+  for(const lock of sourceLocks){for(const source of lock.sources){if(source.license?.redistributionAllowed!==true)throw Error('SOURCE_REDISTRIBUTION_NOT_AUTHORIZED');checkedPin(source.artifact,`raw:${lock.countryId}:${source.sourceId}`);}checkedPin(lock.normalizedInput,`normalized:${lock.countryId}`);for(const a of lock.preprocessing.code)checkedPin(a,`source-code:${lock.countryId}`);}
+}
 for(const a of bundle.report.hierarchyArtifacts??[]){const bytes=fs.readFileSync(a.path);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error('HIERARCHY_LOCK_CHANGED');}
 for(const a of Object.values(bundle.report.nationalBoundaryInput??{})){const bytes=fs.readFileSync(a.path);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error('NATIONAL_BOUNDARY_INPUT_CHANGED');}
 for(const a of Object.values(bundle.report.westernSectorInput??{})){const bytes=fs.readFileSync(a.path);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error('WESTERN_SECTOR_INPUT_CHANGED');}
-const key=digest(jsonBytes({features:bundle.features,records:bundle.records,edges:bundle.edges,parents:bundle.parents,regionNames:bundle.regionNames??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,sourceLocks,codeInputs})).slice(0,20), version=`catalog-v3-prompt19-korea-${key}`;
+function assertActiveFineCountriesPreserved(){
+  const currentFile='data/runtime/operational-catalog/current.json',currentBytes=fs.readFileSync(currentFile),current=JSON.parse(currentBytes);
+  const index=JSON.parse(checkedPin({...current.index,path:`${current.root}/artifact-index.json`},'active.index'));
+  const artifact=index.artifacts?.find(a=>a.path==='provenance.json');if(!artifact)throw Error('ACTIVE_FINE_COUNTRIES_UNVERIFIABLE');
+  const provenance=JSON.parse(checkedPin({...artifact,path:`${current.root}/provenance.json`},'active.provenance'));
+  const explicit=provenance.fineCountries,sourceCountries=provenance.sourceLockArtifacts?.map(a=>a.countryId)??provenance.sourceLocks?.map(a=>a.countryId);
+  if((explicit!==undefined&&!Array.isArray(explicit))||!Array.isArray(sourceCountries))throw Error('ACTIVE_FINE_COUNTRIES_UNVERIFIABLE');
+  const activeFineCountries=[...new Set([...(explicit??[]),...sourceCountries])].sort();
+  if(activeFineCountries.some(countryId=>typeof countryId!=='string'||!/^[A-Z]{3}$/.test(countryId)))throw Error('ACTIVE_FINE_COUNTRIES_UNVERIFIABLE');
+  for(const countryId of activeFineCountries)if(!fineCountries.includes(countryId))throw Error(`ACTIVE_FINE_COUNTRY_WOULD_BE_DROPPED:${countryId}`);
+  return {activeFineCountries,candidateFineCountries:fineCountries,current:{sha256:digest(currentBytes),byteLength:currentBytes.length}};
+}
+if(process.argv.includes('--check-input')){
+  const activationGuard=process.argv.includes('--check-activation')?assertActiveFineCountriesPreserved():null;
+  console.log(JSON.stringify({pass:true,inputPath,incremental:!!incremental,fineCountries,activationRequested:activate,publicationGuard:activationGuard??'not-evaluated-by-input-only-check'}));process.exit(0);
+}
+if(activate)assertActiveFineCountriesPreserved();
+const key=digest(jsonBytes({features:bundle.features,records:bundle.records,edges:bundle.edges,parents:bundle.parents,regionNames:bundle.regionNames??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,...(incremental?{incremental,incrementalVerification}:{}),sourceLocks,codeInputs})).slice(0,20), version=`catalog-v3-prompt19-${incremental?'incremental-CHN':'korea'}-${key}`;
 const schemaVersion='operational-world-delivery-v2';
 const output=`data/derived/prompt19/mixed-world-v2-${key}`;
 const json=value=>Buffer.from(`${JSON.stringify(value)}\n`);
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
-const inputRoot=digest(inputBytes), identities=[{path:inputPath,sha256:inputRoot,byteLength:inputBytes.length},...(bundle.report.hierarchyArtifacts??[]),...Object.values(bundle.report.nationalBoundaryInput??{}),...Object.values(bundle.report.westernSectorInput??{})];
+const inputRoot=digest(inputBytes), identities=[{path:inputPath,sha256:inputRoot,byteLength:inputBytes.length},...(bundle.report.hierarchyArtifacts??[]),...Object.values(bundle.report.nationalBoundaryInput??{}),...Object.values(bundle.report.westernSectorInput??{}),...(incremental?[...Object.values(incremental.baseline),incrementalVerification]:[])];
+function publishPointer(pointer){
+  if(activate)assertActiveFineCountriesPreserved();
+  const pointerFile=option('--pointer-output')??`${output}.pointer.json`,pointerBytes=json(pointer);
+  fs.mkdirSync(path.dirname(pointerFile),{recursive:true});
+  if(fs.existsSync(pointerFile)){if(!fs.readFileSync(pointerFile).equals(pointerBytes))throw Error('IMMUTABLE_POINTER_CHANGED');}else fs.writeFileSync(pointerFile,pointerBytes,{flag:'wx'});
+  if(activate){
+    const currentFile='data/runtime/operational-catalog/current.json';
+    if(incremental&&digest(fs.readFileSync(currentFile))!==incremental.baseline.pointer.sha256)throw Error('CURRENT_CATALOG_CHANGED_SINCE_BASELINE');
+    const temporary=`${currentFile}.${process.pid}.tmp`;fs.mkdirSync(path.dirname(currentFile),{recursive:true});fs.writeFileSync(temporary,pointerBytes,{flag:'wx'});
+    try{assertActiveFineCountriesPreserved();if(incremental&&digest(fs.readFileSync(currentFile))!==incremental.baseline.pointer.sha256)throw Error('CURRENT_CATALOG_CHANGED_SINCE_BASELINE');}catch(error){fs.unlinkSync(temporary);throw error;}
+    fs.renameSync(temporary,currentFile);
+  }
+  return pointerFile;
+}
 if(fs.existsSync(output)) {
   const index=fs.readFileSync(`${output}/artifact-index.json`);
   for(const a of JSON.parse(index).artifacts){const bytes=fs.readFileSync(path.join(output,a.path));if(bytes.length!==a.byteLength||sha(bytes)!==a.sha256)throw Error(`IMMUTABLE_ARTIFACT_CHANGED:${a.path}`);}
   const pointer={catalogVersion:version,root:output,index:{sha256:sha(index),byteLength:index.length}};
-  fs.writeFileSync('data/runtime/operational-catalog/current.json',json(pointer));console.log(JSON.stringify(pointer));process.exit(0);
+  const pointerFile=publishPointer(pointer);console.log(JSON.stringify({...pointer,pointerFile,activated:activate}));process.exit(0);
 }
 const artifacts = [];
 function write(file, value, raw = false) {
@@ -60,7 +135,7 @@ const entries=new Map(records.map(r=>[r.id,{...r,sourceCountryId:r.countryId}]))
 const countryOrder=[...new Set(records.map(r=>r.countryId))].sort();
 const featureById=new Map(bundle.features.map(f=>[f.id,f]));
 const features=records.map((r,i)=>({type:'Feature',id:i+1,properties:{},geometry:featureById.get(r.id).geometry}));
-const names=new Map([...Object.entries(JSON.parse(gunzipSync(fs.readFileSync('data/derived/prompt19/coarse-world-v1/region-names.json.gz')))),...Object.entries(bundle.regionNames??{})]);
+const names=new Map([...Object.entries(JSON.parse(gunzipSync(fs.readFileSync(`${incremental?baselinePointer.root:'data/derived/prompt19/coarse-world-v1'}/region-names.json.gz`)))),...Object.entries(bundle.regionNames??{})]);
 const administrative=bundle.parents.administrative.map(p=>({...p,start:0,count:0}));
 const previous=bundle.parents.previous.map(p=>({...p,start:0,count:0}));
 const adminOrdinal=new Map(administrative.map((p,i)=>[p.parentKey,i+1]));
@@ -85,7 +160,11 @@ const distances = coordinates => coordinates.slice(1).reduce((sum, b, i) => {
   const h = Math.sin(dy / 2) ** 2 + Math.cos(a[1] * rad) * Math.cos(b[1] * rad) * Math.sin(dx / 2) ** 2;
   return sum + 2 * 6371.0088 * Math.asin(Math.min(1, Math.sqrt(h)));
 }, 0);
-const edges = topology.edges.map((e, i) => {
+const edgeCountryPair=e=>[entries.get(e.leftTerritoryId).sourceCountryId,e.rightTerritoryId?entries.get(e.rightTerritoryId).sourceCountryId:'~coast'].sort().join('|');
+// Source-country grouping keeps a local frontier's geometry in few shards.
+// IDs and coordinates are unchanged; each same-cell-pair tie retains edge-ID order.
+const runtimeEdges=incremental?[...topology.edges].sort((a,b)=>edgeCountryPair(a).localeCompare(edgeCountryPair(b))||a.id.localeCompare(b.id)):topology.edges;
+const edges = runtimeEdges.map((e, i) => {
   const left = ordinal.get(e.leftTerritoryId), right = ordinal.get(e.rightTerritoryId) ?? 0;
   const country = right > 0 && entries.get(e.leftTerritoryId).sourceCountryId !== entries.get(e.rightTerritoryId).sourceCountryId;
   const boundaryClass = !right ? 'coast' : country ? 'country' : ['administrative','operational','residual'].includes(e.boundaryClass) ? e.boundaryClass : 'residual';
@@ -103,13 +182,35 @@ write('adjacency.json.gz', {cellCount: rows.length, offsets, neighbors});
 write('metrics.json.gz', metrics);
 write('region-names.json.gz', Object.fromEntries([...new Set(administrative.map(p => p.sourceFeatureId).filter(Boolean))].map(id => [id, names.get(id)])));
 write('metadata/parents.json.gz', {administrative, previous});
-const countries = [];
+const countries = [],cellDetails=[],cellDetailSharding={maximumCellsPerShard:64,targetDecodedBytes:2*1024*1024,shardedCountries:[],oversizeSingleCellOrdinals:[],maximumDecodedShardBytes:0};
+// Morton order groups nearby centroids for transport only. Every exact feature
+// remains intact; neither the gameplay partition nor any coordinate is changed.
+const spatialOrder=([longitude,latitude])=>{
+  const x=Math.max(0,Math.min(65535,Math.floor((longitude+180)/360*65535))),y=Math.max(0,Math.min(65535,Math.floor((latitude+90)/180*65535)));
+  let value=0;for(let bit=0;bit<16;bit++){value+=(x>>bit&1)*2**(bit*2);value+=(y>>bit&1)*2**(bit*2+1);}return value;
+};
 for (const countryId of countryOrder) {
   const countryRows = rows.filter(r => entries.get(r[1]).sourceCountryId === countryId);
   const ids = new Set(countryRows.map(r => r[0]));
   const metadata = write(`metadata/countries/${countryId}.json.gz`, {countryId, columns: ['cellOrdinal', 'cellId', 'administrativeOrdinal', 'previousParentOrdinal'], rows: countryRows});
-  const detail = write(`detail/countries/${countryId}.geojson.gz`, {type: 'FeatureCollection', features: features.filter(f => ids.has(f.id))});
+  const countryFeatures=features.filter(f=>ids.has(f.id)),fullDetail={type:'FeatureCollection',features:countryFeatures};
+  const detail = write(`detail/countries/${countryId}.geojson.gz`, fullDetail);
   countries.push({countryId, cellCount: countryRows.length, metadata, detail});
+  if(json(fullDetail).length>cellDetailSharding.targetDecodedBytes){
+    const ordered=countryFeatures.map(feature=>({feature,bytes:json(feature).length,key:spatialOrder(metrics[feature.id-1].centroid)})).sort((a,b)=>a.key-b.key||a.feature.id-b.feature.id);
+    let pending=[],estimatedBytes=json({type:'FeatureCollection',features:[]}).length,shardNumber=0;
+    const flush=()=>{
+      if(!pending.length)return;
+      const selected=pending.map(p=>p.feature).sort((a,b)=>a.id-b.id),value={type:'FeatureCollection',features:selected},decodedBytes=json(value).length;
+      if(decodedBytes>cellDetailSharding.targetDecodedBytes){if(selected.length!==1)throw Error('CELL_DETAIL_SHARD_TOO_LARGE');cellDetailSharding.oversizeSingleCellOrdinals.push(selected[0].id);}
+      const bbox=selected.reduce((box,feature)=>{const b=geometryMetadata(feature.geometry).bbox;return [Math.min(box[0],b[0]),Math.min(box[1],b[1]),Math.max(box[2],b[2]),Math.max(box[3],b[3])];},[180,90,-180,-90]);
+      const artifact=write(`detail/cells/${countryId}/${String(shardNumber++).padStart(4,'0')}.geojson.gz`,value);
+      cellDetails.push({countryId,cellOrdinals:selected.map(f=>f.id),bbox,artifact});cellDetailSharding.maximumDecodedShardBytes=Math.max(cellDetailSharding.maximumDecodedShardBytes,decodedBytes);
+      pending=[];estimatedBytes=json({type:'FeatureCollection',features:[]}).length;
+    };
+    for(const item of ordered){if(pending.length&&(pending.length>=cellDetailSharding.maximumCellsPerShard||estimatedBytes+item.bytes>cellDetailSharding.targetDecodedBytes))flush();pending.push(item);estimatedBytes+=item.bytes;}
+    flush();cellDetailSharding.shardedCountries.push({countryId,cells:countryFeatures.length,shards:shardNumber,fullDecodedBytes:json(fullDetail).length});
+  }
 }
 const edgeDetails = [];
 for (let start = 0; start < edges.length; start += 2048) {
@@ -123,7 +224,7 @@ const edgeIncidence = write('metadata/edge-incidence.bin.gz', incidence, true);
 const options = {maxZoom: 6, indexMaxZoom: 4, indexMaxPoints: 100000, tolerance: 1, extent: 4096, buffer: 64, generateId: false};
 const fc = values => ({type: 'FeatureCollection', features: values});
 const classes = ['coast', 'country', 'administrative', 'operational', 'residual'];
-const isKoreaOrdinal=n=>n>0&&['KOR','PRK'].includes(records[n-1].countryId);
+const isKoreaOrdinal=n=>n>0&&fineCountries.includes(records[n-1].countryId);
 const exactOverviewCells=new Set(features.filter(f=>isKoreaOrdinal(f.id)).map(f=>f.id));
 for(const e of edges)if(e.flags.country&&(isKoreaOrdinal(e.left)||isKoreaOrdinal(e.right))){exactOverviewCells.add(e.left);exactOverviewCells.add(e.right);}
 const cellIndex=geojsonvt(fc(features.filter(f=>!exactOverviewCells.has(f.id))),options);
@@ -156,17 +257,16 @@ const descriptor = {schemaVersion: 'operational-catalog-v1', catalogRef: {catalo
   topologyRoot: ref.topologyRoot, renderArtifactRoot: ref.renderArtifactRoot, manifestPath: `/data/territory-catalog/${version}/manifest.json`},
   indexRoots: {catalogOrder: ref.catalogOrderRoot, administrativeMembership: ref.administrativeMembershipRoot, previousParent: ref.previousParentRoot}, counts, countryOrder};
 const tileIndex = write('tile-index.json', {schemaVersion, ref, artifacts: tiles});
-const detailIndex = write('detail-index.json', {schemaVersion, ref, countries, edgeDetails, parents: 'metadata/parents.json.gz', lodCoverage: 'lod-coverage.json.gz', lazy: true});
+const detailIndex = write('detail-index.json', {schemaVersion, ref, countries, edgeDetails,...(cellDetails.length?{cellDetails}:{}),parents: 'metadata/parents.json.gz', lodCoverage: 'lod-coverage.json.gz', lazy: true});
 write('manifest.json', {schemaVersion, ref, counts, sourceId: 'world-operational-catalog', minZoom: 0, maxZoom: 6, promoteId: null,
   tileTemplate: 'tiles/{z}/{x}/{y}.pbf.gz', tileIndex, detailIndex, policy: {tileTransport: {compression: 'gzip', httpContentEncoding: null}, administrativeMinZoom: 4, operationalMinZoom: 8},
   edgeIncidence: {format: 'uint32-le-pairs', recordBytes: 8, recordCount: edges.length, decodedByteLength: incidence.length, artifact: edgeIncidence},
   runtimeRegeneration: false, attribution: `Natural Earth (public domain). ${sourceLocks.flatMap(lock=>lock.sources.map(s=>`${lock.countryId} ADM${s.adminLevel}: ${s.license.attribution} (${s.license.name}).`)).join(' ')} Source properties normalized, boundaries noded and limited to fixed project envelopes. ${bundle.report.nationalBoundaryReconciliation ? "Fine gameplay outlines include documented country/coast residual-strip reconciliation; unchanged raw sources remain independent evidence. Remaining residuals have no fine administrative attribution." : "Coarse residuals have no fine administrative attribution."}`});
 write('catalog.json', descriptor);
-write('provenance.json',{stage:bundle.report.westernSectorReconciliation?'fine-western-sector-complete':bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers?'fine-boundary-sliver-cleanup':bundle.report.nationalBoundaryReconciliation?'fine-national-coast-reconciled':bundle.report.fineMacro?'fine-derived-macro':'19-02-C',inputRoot,inputs:identities,sourceLocks,sourceLockArtifacts,codeInputs,summary:bundle.report.summary,topology:bundle.report.topology,fineMacro:bundle.report.fineMacro??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,method:bundle.report.nationalBoundaryReconciliation?.policy??bundle.report.fineMacro?.method??'Joint exact source/coarse/P0 arrangement. Zero source coordinates moved; no extrapolated lines; unmatched fixed P0 land explicitly retains coarse provenance. Other 245 countries unchanged.',worldCoverageComplete:true,fineAssignmentComplete:false,compatibility:'New games only; previous catalog sessions are rejected.'});
+write('provenance.json',{stage:incremental?'incremental-country-CHN':bundle.report.westernSectorReconciliation?'fine-western-sector-complete':bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers?'fine-boundary-sliver-cleanup':bundle.report.nationalBoundaryReconciliation?'fine-national-coast-reconciled':bundle.report.fineMacro?'fine-derived-macro':'19-02-C',inputRoot,inputs:identities,sourceLocks,sourceLockArtifacts,codeInputs,summary:bundle.report.summary,topology:bundle.report.topology,fineMacro:bundle.report.fineMacro??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,...(incremental?{incremental,incrementalVerification,fineCountries}:{}),cellDetailSharding,edgeOrdinalPolicy:incremental?'source-country-pair-then-original-edge-id':'retained-input-order',method:incremental?.method??bundle.report.nationalBoundaryReconciliation?.policy??bundle.report.fineMacro?.method??'Joint exact source/coarse/P0 arrangement. Zero source coordinates moved; no extrapolated lines; unmatched fixed P0 land explicitly retains coarse provenance. Other 245 countries unchanged.',worldCoverageComplete:true,fineAssignmentComplete:false,compatibility:'New games only; previous catalog sessions are rejected.'});
 artifacts.sort((a, b) => a.path.localeCompare(b.path));
 const indexBytes = json({schemaVersion, artifacts: [...artifacts], totalByteLength: artifacts.reduce((n, a) => n + a.byteLength, 0)});
 fs.writeFileSync(path.join(output, 'artifact-index.json'), indexBytes, {flag: 'wx'});
 const pointer = {catalogVersion: version, root: output, index: {sha256: sha(indexBytes), byteLength: indexBytes.length}};
-fs.mkdirSync('data/runtime/operational-catalog', {recursive: true});
-fs.writeFileSync('data/runtime/operational-catalog/current.json', json(pointer));
-console.log(JSON.stringify({output, ...pointer, counts, deliveredBytes: artifacts.reduce((n, a) => n + a.byteLength, 0)}));
+const pointerFile=publishPointer(pointer);
+console.log(JSON.stringify({output, ...pointer, pointerFile,activated:activate,counts, deliveredBytes: artifacts.reduce((n, a) => n + a.byteLength, 0)}));

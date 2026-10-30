@@ -66,3 +66,13 @@ next-env.d.ts
 /reports/maintenance/20261028-cleanup-2/*
 !/reports/maintenance/20261028-cleanup-2/push-summary.json
 !/reports/maintenance/20261028-cleanup-2/push-summary.md
+
+# Private complete game snapshots and undo/redo history; never publish actions.
+/data/runtime/operational-game-checkpoints/
+
+# Published CHN acceptance reports pin these small test/build logs.
+!/reports/chn-2020/**/*.log
+!/reports/chn-perf-20261030/**/*.log
+!/reports/chn-province-20261030/**/*.log
+!/reports/chn-render-lod-20261030/**/*.log
+!/reports/hover-debug-20261030/**/*.log

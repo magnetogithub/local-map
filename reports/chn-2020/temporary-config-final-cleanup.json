@@ -1,0 +1,10 @@
+{
+  "pass": true,
+  "removed": [],
+  "after": {
+    "sha256": "5ff57473858449e98053cd5aebf23fdaf8093cdbf6182fd3565604ce3e370c2e",
+    "byteLength": 1471
+  },
+  "sameOriginalCleanupResult": true,
+  "runningNextDevMayAutomaticallyReaddItsOwnTypeIncludes": true
+}

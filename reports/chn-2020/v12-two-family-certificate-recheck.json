@@ -1,0 +1,4102 @@
+[
+  {
+    "id": "62558664B39866240327847",
+    "pass": true,
+    "proof": {
+      "id": "source-family:62558664B39866240327847",
+      "symmetricDifferenceAreaDegreesSquared": 0.0,
+      "boundaryDisplacementDegrees": 0.005889632356560396,
+      "accepted": true,
+      "exception": null,
+      "independentNodingProof": {
+        "pass": true,
+        "method": "complete per-interval correspondence of both polygon boundaries to the unchanged approved raw-source/recorded-gain segment network",
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "actualBoundaryIntervals": {
+          "pass": true,
+          "exact": false,
+          "existingRepresentationPolicyDegrees": 1e-12,
+          "subdivisionExceptions": [
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  115.95757890024606,
+                  22.9550904003018
+                ],
+                [
+                  115.95824610007753,
+                  22.953445499810016
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999999,
+                1.0
+              ],
+              "lengthDegrees": 1.970717247870963e-19
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.14316060008173,
+                  22.894800299993904
+                ],
+                [
+                  116.15719330023069,
+                  22.890362500029426
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999999,
+                1.0
+              ],
+              "lengthDegrees": 1.633993124655779e-18
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.21891934413152,
+                  22.918278222856355
+                ],
+                [
+                  116.21993313990224,
+                  22.917259515869493
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999998,
+                1.0
+              ],
+              "lengthDegrees": 3.191226568188294e-19
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22719759396664,
+                  22.922102821869547
+                ],
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.22599862929215,
+                  22.92353451203247
+                ],
+                [
+                  116.22719759396664,
+                  22.92210282186955
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22719759396664,
+                  22.922102821869547
+                ],
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.22719759396664,
+                  22.92210282186955
+                ],
+                [
+                  116.23500792941383,
+                  22.926006127920942
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 6.355714580362584e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22719759396664,
+                  22.922102821869547
+                ],
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ]
+              ],
+              "missingInterval": [
+                0.999999999998544,
+                1.0
+              ],
+              "lengthDegrees": 1.2712433702942933e-14
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ],
+                [
+                  116.24148710529504,
+                  22.929244171484644
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ],
+                [
+                  116.24377666789273,
+                  22.930388407043164
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.1447216592236267e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.24148710529504,
+                  22.929244171484644
+                ],
+                [
+                  116.24248323679203,
+                  22.92974199979515
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ],
+                [
+                  116.24377666789273,
+                  22.930388407043164
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.9682577323105395e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.24248323679203,
+                  22.92974199979515
+                ],
+                [
+                  116.24327172707693,
+                  22.930136056992996
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ],
+                [
+                  116.24377666789273,
+                  22.930388407043164
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.9682577323105395e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.24327172707693,
+                  22.930136056992996
+                ],
+                [
+                  116.24377666789273,
+                  22.930388407043164
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ],
+                [
+                  116.24377666789273,
+                  22.930388407043164
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.4910414365612096e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.25668160733073,
+                  22.93940867655289
+                ],
+                [
+                  116.25827463156978,
+                  22.940594830922223
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.25668160733073,
+                  22.93940867655289
+                ],
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.244353310316276e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.25827463156978,
+                  22.940594830922223
+                ],
+                [
+                  116.25910873393804,
+                  22.941215897535226
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.25668160733073,
+                  22.93940867655289
+                ],
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.188948032827005e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.25910873393804,
+                  22.941215897535226
+                ],
+                [
+                  116.26041261665202,
+                  22.942186759208504
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.25668160733073,
+                  22.93940867655289
+                ],
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.188948032827005e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.26041261665202,
+                  22.942186759208504
+                ],
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.25668160733073,
+                  22.93940867655289
+                ],
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.9945856660750107e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ],
+                [
+                  116.2646332436242,
+                  22.94532940763888
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ],
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 9.305855383288743e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.2646332436242,
+                  22.94532940763888
+                ],
+                [
+                  116.26470524984177,
+                  22.945383022949617
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ],
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.2440468852067393e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.26470524984177,
+                  22.945383022949617
+                ],
+                [
+                  116.26700711589827,
+                  22.94709697582844
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ],
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.5642875365359275e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.26700711589827,
+                  22.94709697582844
+                ],
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.26398711569794,
+                  22.944848305440875
+                ],
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.5642875365359275e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ],
+                [
+                  116.27414623541962,
+                  22.95241271278077
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ],
+                [
+                  116.2753137179955,
+                  22.95328201189409
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.5108662445903928e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27414623541962,
+                  22.95241271278077
+                ],
+                [
+                  116.27443874522751,
+                  22.952630513475953
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ],
+                [
+                  116.2753137179955,
+                  22.95328201189409
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.845795159386637e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27443874522751,
+                  22.952630513475953
+                ],
+                [
+                  116.27487162673621,
+                  22.952952833928055
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ],
+                [
+                  116.2753137179955,
+                  22.95328201189409
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.845795159386637e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27487162673621,
+                  22.952952833928055
+                ],
+                [
+                  116.2753137179955,
+                  22.95328201189409
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ],
+                [
+                  116.2753137179955,
+                  22.95328201189409
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.664147660688715e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.31984430288934,
+                  22.957129414246314
+                ],
+                [
+                  116.320075550013,
+                  22.957063175821144
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.31984430288934,
+                  22.957129414246314
+                ],
+                [
+                  116.3260226519012,
+                  22.955359687980213
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.4142606993655493e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.320075550013,
+                  22.957063175821144
+                ],
+                [
+                  116.32148461695546,
+                  22.956659562691815
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.31984430288934,
+                  22.957129414246314
+                ],
+                [
+                  116.3260226519012,
+                  22.955359687980213
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.4142606993655493e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.32148461695546,
+                  22.956659562691815
+                ],
+                [
+                  116.32247128625966,
+                  22.956376941140288
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.31984430288934,
+                  22.957129414246314
+                ],
+                [
+                  116.3260226519012,
+                  22.955359687980213
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.022750281778587e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.32247128625966,
+                  22.956376941140288
+                ],
+                [
+                  116.3260226519012,
+                  22.955359687980213
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.31984430288934,
+                  22.957129414246314
+                ],
+                [
+                  116.3260226519012,
+                  22.955359687980213
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.4883222231620605e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.35558241245809,
+                  22.93718720893448
+                ],
+                [
+                  116.36034345134235,
+                  22.93556154952848
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.35558241245809,
+                  22.93718720893448
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.168804627503784e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36034345134235,
+                  22.93556154952848
+                ],
+                [
+                  116.36286408877912,
+                  22.934700876457367
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.35558241245809,
+                  22.93718720893448
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.168804627503784e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36286408877912,
+                  22.934700876457367
+                ],
+                [
+                  116.36318985614537,
+                  22.934589643006856
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.35558241245809,
+                  22.93718720893448
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.1785304489187322e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36318985614537,
+                  22.934589643006856
+                ],
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.35558241245809,
+                  22.93718720893448
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.1785304489187322e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.36334881483053,
+                  22.934535366474364
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.36837990021229,
+                  22.93281749953984
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.4493251072797323e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36334881483053,
+                  22.934535366474364
+                ],
+                [
+                  116.36342503066693,
+                  22.934509342534138
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.36837990021229,
+                  22.93281749953984
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.395368309137895e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36342503066693,
+                  22.934509342534138
+                ],
+                [
+                  116.36417541651534,
+                  22.934253122863968
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.36837990021229,
+                  22.93281749953984
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.81893468488297e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36417541651534,
+                  22.934253122863968
+                ],
+                [
+                  116.36837990021229,
+                  22.93281749953984
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.3633349514145,
+                  22.93454010014557
+                ],
+                [
+                  116.36837990021229,
+                  22.93281749953984
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.81893468488297e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36930975594923,
+                  22.932499999775246
+                ],
+                [
+                  116.36955143295563,
+                  22.93241747902542
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.36930975594923,
+                  22.932499999775246
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 9.862589767519811e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36955143295563,
+                  22.93241747902542
+                ],
+                [
+                  116.36991517198965,
+                  22.93229328012759
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.36930975594923,
+                  22.932499999775246
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 9.862589767519811e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.36991517198965,
+                  22.93229328012759
+                ],
+                [
+                  116.37040933136947,
+                  22.93212454912929
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.36930975594923,
+                  22.932499999775246
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.9102454384662712e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.37040933136947,
+                  22.93212454912929
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.36930975594923,
+                  22.932499999775246
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.9102454384662712e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ],
+                [
+                  116.3723452609914,
+                  22.931463524870562
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.37825570605919,
+                  22.92944540007644
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.0816589113990497e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.3723452609914,
+                  22.931463524870562
+                ],
+                [
+                  116.37364526904003,
+                  22.93101963639086
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.37825570605919,
+                  22.92944540007644
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.0816589113990497e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.37364526904003,
+                  22.93101963639086
+                ],
+                [
+                  116.37424810369934,
+                  22.93081379815723
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.37825570605919,
+                  22.92944540007644
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.6953691395619224e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.37424810369934,
+                  22.93081379815723
+                ],
+                [
+                  116.37825570605919,
+                  22.92944540007644
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.37825570605919,
+                  22.92944540007644
+                ],
+                [
+                  116.37177722161296,
+                  22.93165748223596
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.160352151273622e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.38333246532456,
+                  22.929657621078437
+                ],
+                [
+                  116.38640485577237,
+                  22.930213156236203
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.38333246532456,
+                  22.929657621078437
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.6678325885287084e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.38640485577237,
+                  22.930213156236203
+                ],
+                [
+                  116.38751551121152,
+                  22.93041397971717
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.38333246532456,
+                  22.929657621078437
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.528112293094265e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.38751551121152,
+                  22.93041397971717
+                ],
+                [
+                  116.38905088204834,
+                  22.93069159823426
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.38333246532456,
+                  22.929657621078437
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.528112293094265e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.38905088204834,
+                  22.93069159823426
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.38333246532456,
+                  22.929657621078437
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 8.960784406587687e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ],
+                [
+                  116.39753569606955,
+                  22.93222578230883
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.39758530502517,
+                  22.932234752366334
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.2156540975439904e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.39753569606955,
+                  22.93222578230883
+                ],
+                [
+                  116.39758426775572,
+                  22.93223456481216
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.39758530502517,
+                  22.932234752366334
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.3882447565992656e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.39758426775572,
+                  22.93223456481216
+                ],
+                [
+                  116.39758528563533,
+                  22.932234748860353
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.39758530502517,
+                  22.932234752366334
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.3882447565992656e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.39758528563533,
+                  22.932234748860353
+                ],
+                [
+                  116.39758530502517,
+                  22.932234752366334
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.39758530502517,
+                  22.932234752366334
+                ],
+                [
+                  116.39534670936249,
+                  22.93182998005117
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.0051439621187225e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.4378147357741,
+                  22.941000100374367
+                ],
+                [
+                  116.44402159934765,
+                  22.942925538034753
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.44521279453211,
+                  22.943295059942535
+                ],
+                [
+                  116.4378147357741,
+                  22.941000100374367
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.2583819840874015e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.44402159934765,
+                  22.942925538034753
+                ],
+                [
+                  116.44499725771423,
+                  22.943228198040156
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.44521279453211,
+                  22.943295059942535
+                ],
+                [
+                  116.4378147357741,
+                  22.941000100374367
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.2583819840874015e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.44499725771423,
+                  22.943228198040156
+                ],
+                [
+                  116.44502735823147,
+                  22.943237535553184
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.44521279453211,
+                  22.943295059942535
+                ],
+                [
+                  116.4378147357741,
+                  22.941000100374367
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 5.222572286120719e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.44502735823147,
+                  22.943237535553184
+                ],
+                [
+                  116.44521279453211,
+                  22.943295059942535
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.44521279453211,
+                  22.943295059942535
+                ],
+                [
+                  116.4378147357741,
+                  22.941000100374367
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.57079041604827e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.54286736537676,
+                  23.00457184484851
+                ],
+                [
+                  116.54312261067966,
+                  23.004646972614
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.54286736537676,
+                  23.00457184484851
+                ],
+                [
+                  116.54326351027008,
+                  23.004688444371823
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.492108974355753e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.54312261067966,
+                  23.004646972614
+                ],
+                [
+                  116.5431778824729,
+                  23.004663241067423
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.54286736537676,
+                  23.00457184484851
+                ],
+                [
+                  116.54326351027008,
+                  23.004688444371823
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 9.735914910907874e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.5431778824729,
+                  23.004663241067423
+                ],
+                [
+                  116.54323614786458,
+                  23.00468039064327
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.54286736537676,
+                  23.00457184484851
+                ],
+                [
+                  116.54326351027008,
+                  23.004688444371823
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 9.735914910907874e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.54323614786458,
+                  23.00468039064327
+                ],
+                [
+                  116.54326351027008,
+                  23.004688444371823
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.54286736537676,
+                  23.00457184484851
+                ],
+                [
+                  116.54326351027008,
+                  23.004688444371823
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.5569296077433302e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56178927647314,
+                  23.021784439253373
+                ],
+                [
+                  116.56162049548645,
+                  23.022132283933207
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56178927647314,
+                  23.021784439253373
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.336217505812835e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56162049548645,
+                  23.022132283933207
+                ],
+                [
+                  116.56158536428201,
+                  23.022204686653456
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56178927647314,
+                  23.021784439253373
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 7.031810197155238e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56158536428201,
+                  23.022204686653456
+                ],
+                [
+                  116.56155363991766,
+                  23.022270068137313
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56178927647314,
+                  23.021784439253373
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 7.031810197155238e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56155363991766,
+                  23.022270068137313
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56178927647314,
+                  23.021784439253373
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 8.046371937808901e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ],
+                [
+                  116.56121143115243,
+                  23.022975334178938
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.893464014416125e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56121143115243,
+                  23.022975334178938
+                ],
+                [
+                  116.56119592778681,
+                  23.02300728542745
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.893464014416125e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56119592778681,
+                  23.02300728542745
+                ],
+                [
+                  116.56119407082633,
+                  23.023011112480717
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.67088880059353e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56119407082633,
+                  23.023011112480717
+                ],
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.5614227894566,
+                  23.02253974091046
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.907179288091028e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.56104514269467,
+                  23.023318041947697
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.56075300550849,
+                  23.02392011430187
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 6.5466975501174765e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56104514269467,
+                  23.023318041947697
+                ],
+                [
+                  116.56079416405252,
+                  23.023835289696606
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.56075300550849,
+                  23.02392011430187
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 6.5466975501174765e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56079416405252,
+                  23.023835289696606
+                ],
+                [
+                  116.56076490461584,
+                  23.023895591153448
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.56075300550849,
+                  23.02392011430187
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.562302825768243e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.56076490461584,
+                  23.023895591153448
+                ],
+                [
+                  116.56075300550849,
+                  23.02392011430187
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.56119375309736,
+                  23.02301176729578
+                ],
+                [
+                  116.56075300550849,
+                  23.02392011430187
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.708929478166339e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55716527926157,
+                  23.03131414316868
+                ],
+                [
+                  116.55701615601089,
+                  23.03162147476098
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55716527926157,
+                  23.03131414316868
+                ],
+                [
+                  116.55500628282705,
+                  23.035763669375946
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.344361220407754e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55701615601089,
+                  23.03162147476098
+                ],
+                [
+                  116.55666936546407,
+                  23.032336183503364
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55716527926157,
+                  23.03131414316868
+                ],
+                [
+                  116.55500628282705,
+                  23.035763669375946
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 5.170065379587689e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55666936546407,
+                  23.032336183503364
+                ],
+                [
+                  116.55650765579954,
+                  23.032669454730133
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55716527926157,
+                  23.03131414316868
+                ],
+                [
+                  116.55500628282705,
+                  23.035763669375946
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 5.170065379587689e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55650765579954,
+                  23.032669454730133
+                ],
+                [
+                  116.55500628282705,
+                  23.035763669375946
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55716527926157,
+                  23.03131414316868
+                ],
+                [
+                  116.55500628282705,
+                  23.035763669375946
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.2653610751583914e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55420190799839,
+                  23.039168195336185
+                ],
+                [
+                  116.554052179407,
+                  23.03988283693432
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55420190799839,
+                  23.039168195336185
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 6.477221339876121e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.554052179407,
+                  23.03988283693432
+                ],
+                [
+                  116.5539259227898,
+                  23.04048544883254
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55420190799839,
+                  23.039168195336185
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 6.477221339876121e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.5539259227898,
+                  23.04048544883254
+                ],
+                [
+                  116.55392252560819,
+                  23.040501663286175
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55420190799839,
+                  23.039168195336185
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 7.619013261612308e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55392252560819,
+                  23.040501663286175
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55420190799839,
+                  23.039168195336185
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 7.619013261612308e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ],
+                [
+                  116.55348112574552,
+                  23.04260842659914
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55271356966091,
+                  23.046271905309798
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 5.222496442295167e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55348112574552,
+                  23.04260842659914
+                ],
+                [
+                  116.55327288765591,
+                  23.043602328964504
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55271356966091,
+                  23.046271905309798
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 5.222496442295167e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55327288765591,
+                  23.043602328964504
+                ],
+                [
+                  116.55301900338571,
+                  23.04481409659621
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55271356966091,
+                  23.046271905309798
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.289064154275401e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.55301900338571,
+                  23.04481409659621
+                ],
+                [
+                  116.55271356966091,
+                  23.046271905309798
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.55271356966091,
+                  23.046271905309798
+                ],
+                [
+                  116.55389007522412,
+                  23.040656546158633
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.289064154275401e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.53825749957595,
+                  23.10339846651508
+                ],
+                [
+                  116.53689877119177,
+                  23.105089407309038
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.53825749957595,
+                  23.10339846651508
+                ],
+                [
+                  116.53601741201189,
+                  23.10618626096188
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.3373284169355637e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.53689877119177,
+                  23.105089407309038
+                ],
+                [
+                  116.53647430622186,
+                  23.10561765500122
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.53825749957595,
+                  23.10339846651508
+                ],
+                [
+                  116.53601741201189,
+                  23.10618626096188
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.5271312544970783e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.53647430622186,
+                  23.10561765500122
+                ],
+                [
+                  116.53611533689404,
+                  23.10606439320678
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.53825749957595,
+                  23.10339846651508
+                ],
+                [
+                  116.53601741201189,
+                  23.10618626096188
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.5271312544970783e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.53611533689404,
+                  23.10606439320678
+                ],
+                [
+                  116.53606959975392,
+                  23.106121313189412
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.53825749957595,
+                  23.10339846651508
+                ],
+                [
+                  116.53601741201189,
+                  23.10618626096188
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.449445312281456e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.53606959975392,
+                  23.106121313189412
+                ],
+                [
+                  116.53601741201189,
+                  23.10618626096188
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.53825749957595,
+                  23.10339846651508
+                ],
+                [
+                  116.53601741201189,
+                  23.10618626096188
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 7.842016910851347e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.14227809985448,
+                  23.1513022998613
+                ],
+                [
+                  116.14135050042535,
+                  23.1436260996648
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999999,
+                1.0
+              ],
+              "lengthDegrees": 8.584292252418103e-19
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.11816100033002,
+                  23.167932500184804
+                ],
+                [
+                  116.11839290041212,
+                  23.17603360037043
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999998,
+                1.0
+              ],
+              "lengthDegrees": 1.7995424401791553e-18
+            }
+          ],
+          "failures": []
+        },
+        "expectedBoundaryIntervals": {
+          "pass": true,
+          "exact": false,
+          "existingRepresentationPolicyDegrees": 1e-12,
+          "subdivisionExceptions": [
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.21993313990224,
+                  22.917259515869493
+                ],
+                [
+                  116.21891934413152,
+                  22.918278222856355
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999998,
+                1.0
+              ],
+              "lengthDegrees": 3.191226568188294e-19
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  115.93574520008099,
+                  22.965234400447287
+                ],
+                [
+                  115.94103360042038,
+                  22.966680799879043
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999998,
+                1.0
+              ],
+              "lengthDegrees": 1.217388771714337e-18
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  115.91868260032186,
+                  23.029055300261973
+                ],
+                [
+                  115.92216290019769,
+                  23.02578419978107
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999999,
+                1.0
+              ],
+              "lengthDegrees": 5.302705222417779e-19
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.15410479989669,
+                  23.165374099834878
+                ],
+                [
+                  116.15387289981459,
+                  23.173262200090505
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999998,
+                1.0
+              ],
+              "lengthDegrees": 1.7522668433260757e-18
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.17219269963346,
+                  23.169637999693975
+                ],
+                [
+                  116.17914949974966,
+                  23.164947699776576
+                ]
+              ],
+              "missingInterval": [
+                0.9999999999999998,
+                1.0
+              ],
+              "lengthDegrees": 1.863005592973303e-18
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ],
+                [
+                  116.23321579850898,
+                  22.92856075256349
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23500792941383,
+                  22.926006127920942
+                ],
+                [
+                  116.23321579850898,
+                  22.92856075256349
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.5888218580782548e-14
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.23321579850898,
+                  22.92856075256349
+                ],
+                [
+                  116.23500792941383,
+                  22.926006127920942
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23321579850898,
+                  22.92856075256349
+                ],
+                [
+                  116.23500792941384,
+                  22.926006127920942
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.1633788054990446e-14
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22719759396664,
+                  22.92210282186955
+                ],
+                [
+                  116.22599862929215,
+                  22.92353451203247
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.22719759396664,
+                  22.922102821869547
+                ],
+                [
+                  116.22599862929215,
+                  22.923534512032468
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.2809978007211583e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22599862929215,
+                  22.92353451203247
+                ],
+                [
+                  116.22612000023787,
+                  22.924019900098358
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.22612000023787,
+                  22.924019900098358
+                ],
+                [
+                  116.22598999963884,
+                  22.923500000224863
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.1164930166131975e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22598999963884,
+                  22.923500000224863
+                ],
+                [
+                  116.22599862929215,
+                  22.923534512032468
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.22612000023787,
+                  22.924019900098358
+                ],
+                [
+                  116.22598999963884,
+                  22.923500000224863
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.9783182461195073e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22599862929215,
+                  22.923534512032468
+                ],
+                [
+                  116.22719759396664,
+                  22.922102821869547
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.22599862929215,
+                  22.92353451203247
+                ],
+                [
+                  116.22719759396664,
+                  22.92210282186955
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.2809978007211583e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.22599862929215,
+                  22.923534512032468
+                ],
+                [
+                  116.22719759396664,
+                  22.922102821869547
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.22719759396664,
+                  22.92210282186955
+                ],
+                [
+                  116.23500792941383,
+                  22.926006127920942
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27083992023366,
+                  22.951687523943576
+                ],
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ],
+                [
+                  116.27083992023366,
+                  22.951687523943573
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27083992023366,
+                  22.951687523943576
+                ],
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27083992023366,
+                  22.951687523943573
+                ],
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27083992023366,
+                  22.951687523943576
+                ],
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.2715499998327,
+                  22.95190990022178
+                ],
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.4847090789924193e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ],
+                [
+                  116.27083992023366,
+                  22.951687523943573
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.2715499998327,
+                  22.95190990022178
+                ],
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.905628775037565e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27083992023366,
+                  22.951687523943573
+                ],
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27083992023366,
+                  22.951687523943576
+                ],
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 1.596224937708985e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.27147536667086,
+                  22.95042400315626
+                ],
+                [
+                  116.27083992023366,
+                  22.951687523943576
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.27083992023366,
+                  22.951687523943573
+                ],
+                [
+                  116.27072010005259,
+                  22.951649999747758
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.2331799004321,
+                  22.928430099869274
+                ],
+                [
+                  116.23321579850898,
+                  22.92856075256349
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23332000041773,
+                  22.928940000180887
+                ],
+                [
+                  116.2331799004321,
+                  22.928430099869274
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.861390647817608e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.23321579850898,
+                  22.92856075256349
+                ],
+                [
+                  116.23332000041773,
+                  22.928940000180887
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.23332000041773,
+                  22.928940000180887
+                ],
+                [
+                  116.2331799004321,
+                  22.928430099869274
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.861390647817608e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.53930000039475,
+                  23.101970099640425
+                ],
+                [
+                  116.53778369510086,
+                  23.10289955877726
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.5376200002629,
+                  23.10299989982559
+                ],
+                [
+                  116.53930000039475,
+                  23.101970099640425
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.155993946626885e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.53778369510086,
+                  23.10289955877726
+                ],
+                [
+                  116.5376200002629,
+                  23.10299989982559
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.5376200002629,
+                  23.10299989982559
+                ],
+                [
+                  116.53930000039475,
+                  23.101970099640425
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 4.155993946626885e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.5376200002629,
+                  23.10299989982559
+                ],
+                [
+                  116.53930000039475,
+                  23.101970099640425
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.53778369510086,
+                  23.10289955877726
+                ],
+                [
+                  116.53930000039475,
+                  23.101970099640425
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.028949577408237e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.5376200002629,
+                  23.10299989982559
+                ],
+                [
+                  116.53930000039475,
+                  23.101970099640425
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.5376200002629,
+                  23.10299989982559
+                ],
+                [
+                  116.53778369510086,
+                  23.10289955877726
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.23954999993259,
+                  22.933349899578275
+                ],
+                [
+                  116.23966234452533,
+                  22.93356030054457
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.24065000029736,
+                  22.93540999997157
+                ],
+                [
+                  116.23954999993259,
+                  22.933349899578275
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.8121595256007255e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.23966234452533,
+                  22.93356030054457
+                ],
+                [
+                  116.24065000029736,
+                  22.93540999997157
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.24065000029736,
+                  22.93540999997157
+                ],
+                [
+                  116.23954999993259,
+                  22.933349899578275
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.8121595256007255e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.25408989972914,
+                  22.94230000024487
+                ],
+                [
+                  116.254272970009,
+                  22.942422314409388
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ],
+                [
+                  116.25408989972914,
+                  22.94230000024487
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.1308818710981655e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.254272970009,
+                  22.942422314409388
+                ],
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ],
+                [
+                  116.25408989972914,
+                  22.94230000024487
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.1308818710981655e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ],
+                [
+                  116.25408989972914,
+                  22.94230000024487
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ],
+                [
+                  116.254272970009,
+                  22.942422314409388
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.9540825236914056e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ],
+                [
+                  116.25408989972914,
+                  22.94230000024487
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.254272970009,
+                  22.942422314409388
+                ],
+                [
+                  116.25408989972914,
+                  22.94230000024487
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.26231254919254,
+                  22.94749265352053
+                ],
+                [
+                  116.26822999961485,
+                  22.950349900227764
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.26822999961485,
+                  22.950349900227764
+                ],
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 8.344986456577731e-16
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ],
+                [
+                  116.26231254919254,
+                  22.94749265352053
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  116.26822999961485,
+                  22.950349900227764
+                ],
+                [
+                  116.2606873001788,
+                  22.94670790044927
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 8.344986456577731e-16
+            }
+          ],
+          "failures": []
+        },
+        "observedSymmetricDifferenceAreaDegreesSquared": 0.0,
+        "perCaseAreaBoundDerivedFromCoordinateBoundAndPerimeters": 5.053508420008381e-12,
+        "nativeSourceHoles": [],
+        "originalSourceComponentsIndependentlyGuarded": true,
+        "componentsAndHolesUnchanged": false,
+        "overlayCycleDifferencesIndividuallyBoundedByInputSegments": true
+      },
+      "containmentCertificate": null
+    }
+  },
+  {
+    "id": "62558664B57626430847443",
+    "pass": true,
+    "proof": {
+      "id": "source-family:62558664B57626430847443",
+      "symmetricDifferenceAreaDegreesSquared": 8.26264237055023e-17,
+      "boundaryDisplacementDegrees": 0.0053860489599625895,
+      "accepted": true,
+      "exception": null,
+      "independentNodingProof": {
+        "method": "individual microscopic overlay delta traced to unchanged raw-source/recorded-gain boundary segments",
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "maximumMeasuredCoordinateDistanceDegrees": 8.257744387018622e-15,
+        "symmetricDifferenceComponentWidthsDegrees": [
+          1.8166342266190476e-15,
+          2.4765911770892504e-15,
+          3.475778760899994e-16,
+          1.153486665937614e-15,
+          2.1820237096039974e-15,
+          1.2683077664578594e-15,
+          2.5466356919266467e-15,
+          7.510122335276916e-16,
+          1.5370375640240632e-15,
+          1.8274886025226004e-15,
+          5.302482235579612e-16,
+          8.342657312905188e-16
+        ],
+        "deltaCoordinateWitnesses": [
+          {
+            "coordinate": [
+              125.72621528312472,
+              40.86353002088631
+            ],
+            "originalSegment": [
+              [
+                125.71822899472129,
+                40.862288991400156
+              ],
+              [
+                125.72621528312472,
+                40.86353002088631
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.7261265198577,
+              40.86351622751621
+            ],
+            "originalSegment": [
+              [
+                125.71822899472129,
+                40.862288991400156
+              ],
+              [
+                125.72621528312472,
+                40.86353002088631
+              ]
+            ],
+            "distanceDegrees": 3.69221241651272e-15
+          },
+          {
+            "coordinate": [
+              125.72572899271326,
+              40.86345445377566
+            ],
+            "originalSegment": [
+              [
+                125.71822899472129,
+                40.862288991400156
+              ],
+              [
+                125.72621528312472,
+                40.86353002088631
+              ]
+            ],
+            "distanceDegrees": 3.2300308452149316e-16
+          },
+          {
+            "coordinate": [
+              125.72621528312472,
+              40.86353002088631
+            ],
+            "originalSegment": [
+              [
+                125.71822899472129,
+                40.862288991400156
+              ],
+              [
+                125.72621528312472,
+                40.86353002088631
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.71822899472129,
+              40.862288991400156
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.72063858463964,
+              40.862663429685774
+            ],
+            "originalSegment": [
+              [
+                125.71822899472129,
+                40.862288991400156
+              ],
+              [
+                125.72621528312472,
+                40.86353002088631
+              ]
+            ],
+            "distanceDegrees": 1.998018268935758e-15
+          },
+          {
+            "coordinate": [
+              125.72528988296398,
+              40.863386218305195
+            ],
+            "originalSegment": [
+              [
+                125.71822899472129,
+                40.862288991400156
+              ],
+              [
+                125.72621528312472,
+                40.86353002088631
+              ]
+            ],
+            "distanceDegrees": 4.07830695362407e-15
+          },
+          {
+            "coordinate": [
+              125.72572899271326,
+              40.86345445377566
+            ],
+            "originalSegment": [
+              [
+                125.71822899472129,
+                40.862288991400156
+              ],
+              [
+                125.72621528312472,
+                40.86353002088631
+              ]
+            ],
+            "distanceDegrees": 3.2300308452149316e-16
+          },
+          {
+            "coordinate": [
+              125.71822899472129,
+              40.862288991400156
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.71707751982075,
+              40.86211005792919
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 2.5398603548803786e-17
+          },
+          {
+            "coordinate": [
+              125.71725736789713,
+              40.86213800542552
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 6.737956460687466e-16
+          },
+          {
+            "coordinate": [
+              125.71822899472129,
+              40.862288991400156
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.71707751982075,
+              40.86211005792919
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 2.5398603548803786e-17
+          },
+          {
+            "coordinate": [
+              125.71707751982075,
+              40.86211005792919
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 2.5398603548803786e-17
+          },
+          {
+            "coordinate": [
+              125.7167495026441,
+              40.862059085691826
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 1.228779555344291e-15
+          },
+          {
+            "coordinate": [
+              125.71494456698424,
+              40.86177860766983
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 1.9855480432948267e-15
+          },
+          {
+            "coordinate": [
+              125.71137454617643,
+              40.86122384419713
+            ],
+            "originalSegment": [
+              [
+                125.706414,
+                40.860453
+              ],
+              [
+                125.71137454617643,
+                40.86122384419713
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.71707751982075,
+              40.86211005792919
+            ],
+            "originalSegment": [
+              [
+                125.71137454617643,
+                40.86122384419713
+              ],
+              [
+                125.71822899472129,
+                40.862288991400156
+              ]
+            ],
+            "distanceDegrees": 2.5398603548803786e-17
+          },
+          {
+            "coordinate": [
+              126.00900088469324,
+              40.93256045482182
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                126.00900088469324,
+                40.93256045482182
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              126.00662834326995,
+              40.93197266912841
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                126.00900088469324,
+                40.93256045482182
+              ]
+            ],
+            "distanceDegrees": 1.5240304908252214e-15
+          },
+          {
+            "coordinate": [
+              126.00602137319916,
+              40.93182229522117
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                126.00900088469324,
+                40.93256045482182
+              ]
+            ],
+            "distanceDegrees": 3.566304193962468e-15
+          },
+          {
+            "coordinate": [
+              126.00900088469324,
+              40.93256045482182
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                126.00900088469324,
+                40.93256045482182
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.99635989629878,
+              40.929428710922295
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                125.99203,
+                40.928356
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.99977139363921,
+              40.930273892932654
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                126.00900088469324,
+                40.93256045482182
+              ]
+            ],
+            "distanceDegrees": 2.7656548536561137e-15
+          },
+          {
+            "coordinate": [
+              126.00406671943348,
+              40.93133803917921
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                126.00900088469324,
+                40.93256045482182
+              ]
+            ],
+            "distanceDegrees": 4.9084812684191616e-15
+          },
+          {
+            "coordinate": [
+              126.00602137319916,
+              40.93182229522117
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                126.00900088469324,
+                40.93256045482182
+              ]
+            ],
+            "distanceDegrees": 3.566304193962468e-15
+          },
+          {
+            "coordinate": [
+              125.99635989629878,
+              40.929428710922295
+            ],
+            "originalSegment": [
+              [
+                125.99635989629878,
+                40.929428710922295
+              ],
+              [
+                125.99203,
+                40.928356
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              126.01530244418358,
+              40.90916196888058
+            ],
+            "originalSegment": [
+              [
+                126.015336,
+                40.909132
+              ],
+              [
+                126.01530244418358,
+                40.90916196888058
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              126.01487252349467,
+              40.90954593336585
+            ],
+            "originalSegment": [
+              [
+                126.01362102495821,
+                40.910663653456524
+              ],
+              [
+                126.01530244418358,
+                40.90916196888058
+              ]
+            ],
+            "distanceDegrees": 8.257744387018622e-15
+          },
+          {
+            "coordinate": [
+              126.01458426411598,
+              40.90980337937118
+            ],
+            "originalSegment": [
+              [
+                126.01362102495821,
+                40.910663653456524
+              ],
+              [
+                126.01530244418358,
+                40.90916196888058
+              ]
+            ],
+            "distanceDegrees": 3.3130733264461483e-15
+          },
+          {
+            "coordinate": [
+              126.0143821954483,
+              40.90998384798779
+            ],
+            "originalSegment": [
+              [
+                126.01362102495821,
+                40.910663653456524
+              ],
+              [
+                126.01530244418358,
+                40.90916196888058
+              ]
+            ],
+            "distanceDegrees": 1.0472471581908113e-15
+          },
+          {
+            "coordinate": [
+              126.01362102495821,
+              40.910663653456524
+            ],
+            "originalSegment": [
+              [
+                126.01362102495821,
+                40.910663653456524
+              ],
+              [
+                126.01530244418358,
+                40.90916196888058
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              126.01530244418358,
+              40.90916196888058
+            ],
+            "originalSegment": [
+              [
+                126.015336,
+                40.909132
+              ],
+              [
+                126.01530244418358,
+                40.90916196888058
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.85883359360935,
+              40.88530696694467
+            ],
+            "originalSegment": [
+              [
+                125.85883359360935,
+                40.88530696694467
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.85674507400783,
+              40.884194321628456
+            ],
+            "originalSegment": [
+              [
+                125.85883359360935,
+                40.88530696694467
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 7.067486874521442e-16
+          },
+          {
+            "coordinate": [
+              125.85654315543265,
+              40.884086750812855
+            ],
+            "originalSegment": [
+              [
+                125.85883359360935,
+                40.88530696694467
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 8.72211237665567e-16
+          },
+          {
+            "coordinate": [
+              125.85883359360935,
+              40.88530696694467
+            ],
+            "originalSegment": [
+              [
+                125.85883359360935,
+                40.88530696694467
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.85047523536458,
+              40.88085410562342
+            ],
+            "originalSegment": [
+              [
+                125.831678,
+                40.87084
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.85371907582054,
+              40.88258224065612
+            ],
+            "originalSegment": [
+              [
+                125.85883359360935,
+                40.88530696694467
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 2.5568883164872055e-15
+          },
+          {
+            "coordinate": [
+              125.85551518603371,
+              40.88353910676101
+            ],
+            "originalSegment": [
+              [
+                125.85883359360935,
+                40.88530696694467
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 3.598318551452122e-15
+          },
+          {
+            "coordinate": [
+              125.85654315543265,
+              40.884086750812855
+            ],
+            "originalSegment": [
+              [
+                125.85883359360935,
+                40.88530696694467
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 8.72211237665567e-16
+          },
+          {
+            "coordinate": [
+              125.85047523536458,
+              40.88085410562342
+            ],
+            "originalSegment": [
+              [
+                125.831678,
+                40.87084
+              ],
+              [
+                125.85047523536458,
+                40.88085410562342
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.74428759049228,
+              40.8676202110253
+            ],
+            "originalSegment": [
+              [
+                125.73827062509515,
+                40.86562583883109
+              ],
+              [
+                125.74428759049228,
+                40.8676202110253
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.74384686189724,
+              40.86747412794236
+            ],
+            "originalSegment": [
+              [
+                125.73827062509515,
+                40.86562583883109
+              ],
+              [
+                125.74428759049228,
+                40.8676202110253
+              ]
+            ],
+            "distanceDegrees": 2.0845504355466907e-15
+          },
+          {
+            "coordinate": [
+              125.74301741280004,
+              40.86719920028253
+            ],
+            "originalSegment": [
+              [
+                125.73827062509515,
+                40.86562583883109
+              ],
+              [
+                125.74428759049228,
+                40.8676202110253
+              ]
+            ],
+            "distanceDegrees": 4.526146945694711e-15
+          },
+          {
+            "coordinate": [
+              125.74428759049228,
+              40.8676202110253
+            ],
+            "originalSegment": [
+              [
+                125.73827062509515,
+                40.86562583883109
+              ],
+              [
+                125.74428759049228,
+                40.8676202110253
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.73827062509515,
+              40.86562583883109
+            ],
+            "originalSegment": [
+              [
+                125.737007,
+                40.865207
+              ],
+              [
+                125.73827062509515,
+                40.86562583883109
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.74140584977286,
+              40.86666503458961
+            ],
+            "originalSegment": [
+              [
+                125.73827062509515,
+                40.86562583883109
+              ],
+              [
+                125.74428759049228,
+                40.8676202110253
+              ]
+            ],
+            "distanceDegrees": 4.0499073461890446e-15
+          },
+          {
+            "coordinate": [
+              125.74301741280004,
+              40.86719920028253
+            ],
+            "originalSegment": [
+              [
+                125.73827062509515,
+                40.86562583883109
+              ],
+              [
+                125.74428759049228,
+                40.8676202110253
+              ]
+            ],
+            "distanceDegrees": 4.526146945694711e-15
+          },
+          {
+            "coordinate": [
+              125.73827062509515,
+              40.86562583883109
+            ],
+            "originalSegment": [
+              [
+                125.737007,
+                40.865207
+              ],
+              [
+                125.73827062509515,
+                40.86562583883109
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.73871261971138,
+              40.86820888839089
+            ],
+            "originalSegment": [
+              [
+                125.74341469962872,
+                40.8677848995535
+              ],
+              [
+                125.73871261971138,
+                40.86820888839089
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.72766119980463,
+              40.869205400309056
+            ],
+            "originalSegment": [
+              [
+                125.74341469962872,
+                40.8677848995535
+              ],
+              [
+                125.72766119980463,
+                40.869205400309056
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.74341469962872,
+              40.8677848995535
+            ],
+            "originalSegment": [
+              [
+                125.74428759049228,
+                40.8676202110253
+              ],
+              [
+                125.74341469962872,
+                40.8677848995535
+              ]
+            ],
+            "distanceDegrees": 0.0
+          },
+          {
+            "coordinate": [
+              125.73871261971138,
+              40.86820888839089
+            ],
+            "originalSegment": [
+              [
+                125.74341469962872,
+                40.8677848995535
+              ],
+              [
+                125.73871261971138,
+                40.86820888839089
+              ]
+            ],
+            "distanceDegrees": 0.0
+          }
+        ],
+        "deltaGeometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  125.72621528312472,
+                  40.86353002088631
+                ],
+                [
+                  125.7261265198577,
+                  40.86351622751621
+                ],
+                [
+                  125.72572899271326,
+                  40.86345445377566
+                ],
+                [
+                  125.72621528312472,
+                  40.86353002088631
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.71822899472129,
+                  40.862288991400156
+                ],
+                [
+                  125.72063858463964,
+                  40.862663429685774
+                ],
+                [
+                  125.72528988296398,
+                  40.863386218305195
+                ],
+                [
+                  125.72572899271326,
+                  40.86345445377566
+                ],
+                [
+                  125.71822899472129,
+                  40.862288991400156
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.71707751982075,
+                  40.86211005792919
+                ],
+                [
+                  125.71725736789713,
+                  40.86213800542552
+                ],
+                [
+                  125.71822899472129,
+                  40.862288991400156
+                ],
+                [
+                  125.71707751982075,
+                  40.86211005792919
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.71707751982075,
+                  40.86211005792919
+                ],
+                [
+                  125.7167495026441,
+                  40.862059085691826
+                ],
+                [
+                  125.71494456698424,
+                  40.86177860766983
+                ],
+                [
+                  125.71137454617643,
+                  40.86122384419713
+                ],
+                [
+                  125.71707751982075,
+                  40.86211005792919
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  126.00900088469324,
+                  40.93256045482182
+                ],
+                [
+                  126.00662834326995,
+                  40.93197266912841
+                ],
+                [
+                  126.00602137319916,
+                  40.93182229522117
+                ],
+                [
+                  126.00900088469324,
+                  40.93256045482182
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.99635989629878,
+                  40.929428710922295
+                ],
+                [
+                  125.99977139363921,
+                  40.930273892932654
+                ],
+                [
+                  126.00406671943348,
+                  40.93133803917921
+                ],
+                [
+                  126.00602137319916,
+                  40.93182229522117
+                ],
+                [
+                  125.99635989629878,
+                  40.929428710922295
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  126.01530244418358,
+                  40.90916196888058
+                ],
+                [
+                  126.01487252349467,
+                  40.90954593336585
+                ],
+                [
+                  126.01458426411598,
+                  40.90980337937118
+                ],
+                [
+                  126.0143821954483,
+                  40.90998384798779
+                ],
+                [
+                  126.01362102495821,
+                  40.910663653456524
+                ],
+                [
+                  126.01530244418358,
+                  40.90916196888058
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.85883359360935,
+                  40.88530696694467
+                ],
+                [
+                  125.85674507400783,
+                  40.884194321628456
+                ],
+                [
+                  125.85654315543265,
+                  40.884086750812855
+                ],
+                [
+                  125.85883359360935,
+                  40.88530696694467
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.85047523536458,
+                  40.88085410562342
+                ],
+                [
+                  125.85371907582054,
+                  40.88258224065612
+                ],
+                [
+                  125.85551518603371,
+                  40.88353910676101
+                ],
+                [
+                  125.85654315543265,
+                  40.884086750812855
+                ],
+                [
+                  125.85047523536458,
+                  40.88085410562342
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.74428759049228,
+                  40.8676202110253
+                ],
+                [
+                  125.74384686189724,
+                  40.86747412794236
+                ],
+                [
+                  125.74301741280004,
+                  40.86719920028253
+                ],
+                [
+                  125.74428759049228,
+                  40.8676202110253
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.73827062509515,
+                  40.86562583883109
+                ],
+                [
+                  125.74140584977286,
+                  40.86666503458961
+                ],
+                [
+                  125.74301741280004,
+                  40.86719920028253
+                ],
+                [
+                  125.73827062509515,
+                  40.86562583883109
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  125.73871261971138,
+                  40.86820888839089
+                ],
+                [
+                  125.72766119980463,
+                  40.869205400309056
+                ],
+                [
+                  125.74341469962872,
+                  40.8677848995535
+                ],
+                [
+                  125.73871261971138,
+                  40.86820888839089
+                ]
+              ]
+            ]
+          ]
+        },
+        "deltaGeometrySha256WKB": "fc444225331584ebcc8c35c217e4dd24eb2bdbf38ae41436e02a175de9c2f1b3",
+        "componentsAndHolesUnchanged": false,
+        "structureDifferenceConfinedToRecordedNumericalDelta": true
+      },
+      "containmentCertificate": null
+    }
+  }
+]

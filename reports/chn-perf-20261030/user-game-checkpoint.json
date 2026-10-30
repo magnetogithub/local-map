@@ -1,0 +1,72 @@
+{
+  "pass": true,
+  "activeCatalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "activeCatalogKey": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7:f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+  "sessionCount": 3,
+  "busySessions": 0,
+  "mutationsLocked": true,
+  "checkpointFormat": "operational-game-preservation.v1",
+  "pools": [
+    {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+      "catalogKey": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7:f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+      "sessionCount": 3,
+      "checkpoints": [
+        {
+          "artifact": {
+            "path": "data/runtime/operational-game-checkpoints/699d41841ec1daa0773c5c8535b6c70c77961db5861713fb694693ac5fd7e07b.json.gz",
+            "sha256": "b43e2d45571f0bc7d65081bf3b3fe66aec6e57b43652f2765320a5e9548159c5",
+            "byteLength": 1884602
+          },
+          "payloadHash": "699d41841ec1daa0773c5c8535b6c70c77961db5861713fb694693ac5fd7e07b",
+          "sessionIdHash": "bdb449f661c54a855fecf29b8ed40650c8fa65f7d8db6f14b96c401119cee8d0",
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "revisions": {
+            "simulationRevision": 0,
+            "worldRevision": 0
+          },
+          "historyEntries": 0,
+          "historyPointer": 0,
+          "completeInitialCurrentAndHistory": true,
+          "roundtripValidated": true
+        },
+        {
+          "artifact": {
+            "path": "data/runtime/operational-game-checkpoints/a46d1f7ad58400adf561fec6e2b3c11841d234266320f595b02cb38e56722947.json.gz",
+            "sha256": "e12c417a824d7ab42695980b4940f8705afe9aca098ee0cdeb0af4bdd84fe505",
+            "byteLength": 1884963
+          },
+          "payloadHash": "a46d1f7ad58400adf561fec6e2b3c11841d234266320f595b02cb38e56722947",
+          "sessionIdHash": "98a06f8c4a4cdc47af077f3d4cd33f32945cf2baca16d92c6a9cbe9cb3319f88",
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "revisions": {
+            "simulationRevision": 0,
+            "worldRevision": 0
+          },
+          "historyEntries": 0,
+          "historyPointer": 0,
+          "completeInitialCurrentAndHistory": true,
+          "roundtripValidated": true
+        },
+        {
+          "artifact": {
+            "path": "data/runtime/operational-game-checkpoints/c597739c4c11af12ed3d8e106b21fa16ec910296df4e619a541aace74d76f2c4.json.gz",
+            "sha256": "315197c9b1a8f73c491035ac537ecb5aeeec10c2b28cf3f8b21f82e75580e0d2",
+            "byteLength": 1884967
+          },
+          "payloadHash": "c597739c4c11af12ed3d8e106b21fa16ec910296df4e619a541aace74d76f2c4",
+          "sessionIdHash": "79ed9def0cb7ea660270576f6cd44c2d61f07bffc0dadd160f5341d07165a240",
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "revisions": {
+            "simulationRevision": 0,
+            "worldRevision": 0
+          },
+          "historyEntries": 0,
+          "historyPointer": 0,
+          "completeInitialCurrentAndHistory": true,
+          "roundtripValidated": true
+        }
+      ]
+    }
+  ]
+}

@@ -74,7 +74,7 @@ const settingLabels: ReadonlyArray<Readonly<{key: GameUiSettingKey; label: strin
   {key: "showCountryLabels", label: "지도 국가명", description: "지도 위 국가 이름을 표시합니다."},
   {key: "showCapitalMarkers", label: "수도 마커", description: "수도 점과 이름을 표시합니다."},
   {key: "emphasizeBorders", label: "국경선 강조", description: "국가 경계선을 더 굵게 표시합니다."},
-  {key: "debugMapBoundaries", label: "지도 디버그 모드", description: "미세 구역 경계선을 표시합니다."},
+  {key: "debugMapBoundaries", label: "지도 디버그 모드", description: "커서를 올린 나라와 직접 육상 접경국의 미세 경계를 표시합니다."},
   {key: "showNewsNotifications", label: "뉴스 알림", description: "새 사건 알림을 표시합니다."},
   {key: "reduceMotion", label: "움직임 줄이기", description: "게임 UI 전환 효과를 제거합니다."},
 ];

@@ -1,0 +1,15 @@
+
+> pax-local@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.3.0 (webpack)
+- Environments: .env.local
+✓ Running next.config.ts took 41ms
+
+  Creating an optimized production build ...
+Failed to compile.
+
+Error: EPERM: operation not permitted, mkdir 'D:\gen\.next-chn-internal-lod-20261030\static\chunks\app\api\world\catalog'
+
+
+> Build failed because of webpack errors

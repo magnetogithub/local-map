@@ -166,10 +166,26 @@ describe('16-06 current-world bounded frontier', () => {
     expect(createOperationalFrontierLookup(bounded)(world, request)).toMatchObject({ok: false, code: 'FRONTIER_SCOPE_EMPTY'});
   });
 
-  it('does not bypass an area cap by trying a lower-ranked valid contact', () => {
+  it('skips an intrinsically oversized seed while retaining the same area limit', () => {
     const {catalog, world, request} = fixture(), contacts: number[] = [];
     const bounded: OperationalFrontierCatalog = {...catalog,
       cellMetrics: key => ({...catalog.cellMetrics(key), areaKm2: catalog.cell(key).ordinal === 3 ? 3000 : 100}),
+      neighbors: n => n === 1 ? [3] : n === 3 ? [1] : n === 2 ? [4] : n === 4 ? [2] : [],
+      sharedBoundary: (a, b) => {contacts.push(a); return catalog.sharedBoundary(a, b);},
+    };
+    const result = selectOperationalFrontier(bounded, world, request);
+    expect(contacts).toEqual([3, 4]);
+    expect(result.frontier).toMatchObject({cellId: id(4), supportCellId: id(2)});
+    expect(result.cellIds).toEqual([id(4)]);
+    expect(result.metrics.areaKm2).toBe(100);
+    expect(result.limits.maximumAreaKm2).toBe(2800);
+  });
+
+  it('does not bypass a traversal area cap by trying a lower-ranked valid contact', () => {
+    const {catalog, world, request} = fixture(), contacts: number[] = [];
+    const bounded: OperationalFrontierCatalog = {...catalog,
+      cellMetrics: key => ({...catalog.cellMetrics(key), areaKm2: catalog.cell(key).ordinal === 3 ? 2500 : catalog.cell(key).ordinal === 5 ? 400 : 100}),
+      neighbors: n => n === 1 ? [3] : n === 3 ? [1, 5] : n === 5 ? [3] : n === 2 ? [4] : n === 4 ? [2] : [],
       sharedBoundary: (a, b) => {contacts.push(a); return catalog.sharedBoundary(a, b);},
     };
     expect(createOperationalFrontierLookup(bounded)(world, request)).toMatchObject({ok: false, code: 'FRONTIER_REQUEST_CAP'});

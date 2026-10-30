@@ -14,6 +14,8 @@ const integer = z.number().int().nonnegative().max(0xffffffff), positive = integ
 const artifactSchema = z.strictObject({path: z.string(), sha256: z.string().regex(/^[a-f0-9]{64}$/), byteLength: integer});
 const countrySchema = z.strictObject({countryId: z.string().regex(/^[A-Z]{3}$/), cellCount: positive, metadata: artifactSchema, detail: artifactSchema});
 const shardSchema = z.strictObject({shard: z.string(), firstOrdinal: positive, count: positive, artifact: artifactSchema});
+const cellDetailSchema = z.strictObject({countryId: z.string().regex(/^[A-Z]{3}$/), cellOrdinals: z.array(positive).min(1).max(64),
+  bbox: z.tuple([z.number().finite(), z.number().finite(), z.number().finite(), z.number().finite()]).optional(), artifact: artifactSchema});
 const indexSchema = z.object({schemaVersion: z.literal(OPERATIONAL_DELIVERY_SCHEMA), ref: z.unknown()});
 const coordinate = z.array(z.number().finite()).min(2).max(3);
 const polygon = z.array(z.array(coordinate).min(4)).min(1);
@@ -25,9 +27,32 @@ const edgeSchema = z.object({id: z.string().regex(/^edge:operational:[a-f0-9]{64
   boundaryClass: z.enum(['coast', 'country', 'administrative', 'operational', 'residual']),
   flags: z.object({positiveAdjacency: z.boolean(), country: z.boolean(), administrative: z.boolean(), previous: z.boolean(), residual: z.boolean()}), geometry: lineSchema});
 const decoder = new TextDecoder();
+const exactCellsSchema = z.object({type: z.literal('FeatureCollection'), features: z.array(z.object({type: z.literal('Feature'), id: positive,
+  properties: z.record(z.string(), z.unknown()), geometry: polygonSchema}))});
 type CellHint = Readonly<{id: string; sourceCountryId: string}>;
 type ExactCells = FeatureCollection<Polygon | MultiPolygon>;
 type ExactEdge = Omit<OperationalEdge, 'lengthKm'> & Readonly<{geometry: LineString | MultiLineString}>;
+export type OperationalViewportBounds = readonly [west: number, south: number, east: number, north: number];
+
+// MapLibre can report wrapped longitudes or an east value less than west. These
+// intervals only select complete stored cells; they do not clip their geometry.
+function viewportIntersects(bounds: OperationalViewportBounds) {
+  const [west, south, east, north] = bounds;
+  if (bounds.length !== 4 || bounds.some(n => !Number.isFinite(n)) || south < -90 || north > 90 || south > north) throw Error('INVALID_OPERATIONAL_VIEWPORT_BOUNDS');
+  const world = Math.abs(east - west) >= 360, start = ((west + 180) % 360 + 360) % 360 - 180;
+  const width = ((east - west) % 360 + 360) % 360;
+  const intervals = world ? [[-180, 180]] : start + width <= 180 ? [[start, start + width]] : [[start, 180], [-180, start + width - 360]];
+  return (bbox: readonly number[]) => bbox[1] <= north && bbox[3] >= south && intervals.some(([left, right]) =>
+    [-360, 0, 360].some(offset => bbox[0] <= right + offset && bbox[2] >= left + offset));
+}
+function cellBounds(feature: ExactCells['features'][number]): OperationalViewportBounds {
+  let west = Infinity, south = Infinity, east = -Infinity, north = -Infinity;
+  const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+  for (const polygon of polygons) for (const ring of polygon) for (const [x, y] of ring) {
+    west = Math.min(west, x); south = Math.min(south, y); east = Math.max(east, x); north = Math.max(north, y);
+  }
+  return [west, south, east, north];
+}
 
 /** V3 transport keeps ordinals numeric. It never constructs a v1 metadata/world surrogate. */
 export async function loadOperationalVectorDelivery(value: unknown, expected: WorldGeometryCatalogRef, fetcher: CatalogFetch = fetch, signal?: AbortSignal) {
@@ -58,6 +83,60 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
     return bytes.slice(0);
   };
   const json = async (a: CatalogArtifactIdentity, s?: AbortSignal) => JSON.parse(decoder.decode(await read(a, s)));
+  // Small verified geometry shards are also retained parsed, privately. A warm
+  // one-cell delta must not parse and validate all 64 neighbours again. Returned
+  // payloads are detached, so callers cannot mutate this LRU. Budget by decoded
+  // bytes (at most 4 MiB / eight entries); never retain full-country geometry.
+  type ParsedShard = {kind: 'cells'; data: ExactCells; bounds: ReadonlyMap<number, OperationalViewportBounds>; bytes: number} |
+    {kind: 'edges'; data: readonly ExactEdge[]; bytes: number};
+  const parsedShards = new Map<string, ParsedShard>();
+  let parsedShardBytes = 0, parsedShardBuilds = 0, parsedShardHits = 0;
+  const exactCellCache = new Map<number, {feature: ExactCells['features'][number]; estimatedBytes: number}>();
+  const cellShardBounds = new Map<string, ReadonlyMap<number, OperationalViewportBounds>>();
+  let exactCellEstimatedBytes = 0, exactCellCacheHits = 0;
+  const cachedExactCell = (n: number) => {
+    const cached = exactCellCache.get(n); if (!cached) return;
+    exactCellCache.delete(n); exactCellCache.set(n, cached); exactCellCacheHits++; return cached.feature;
+  };
+  const cacheExactCell = (feature: ExactCells['features'][number]) => {
+    const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+    const estimatedBytes = 2048 + JSON.stringify(feature.properties).length * 2 + polygons.reduce((sum, p) => sum + p.reduce((n, ring) => n + 64 + ring.length * 64, 0), 0);
+    if (estimatedBytes > 2 * 1024 * 1024) return;
+    const n = Number(feature.id), old = exactCellCache.get(n); if (old) exactCellEstimatedBytes -= old.estimatedBytes;
+    exactCellCache.delete(n); exactCellCache.set(n, {feature, estimatedBytes}); exactCellEstimatedBytes += estimatedBytes;
+    while (exactCellCache.size > 256 || exactCellEstimatedBytes > 4 * 1024 * 1024) {
+      const first = exactCellCache.keys().next().value!; exactCellEstimatedBytes -= exactCellCache.get(first)!.estimatedBytes; exactCellCache.delete(first);
+    }
+  };
+  // Old immutable topology shards may span the whole country. Retain only the
+  // requested validated edges as well, so a small warm viewport does not reload
+  // every national shard when the raw-byte LRU cannot hold that working set.
+  const exactEdges = new Map<number, {edge: ExactEdge; estimatedBytes: number}>();
+  let exactEdgeEstimatedBytes = 0, exactEdgeCacheHits = 0;
+  const cacheExactEdge = (edge: ExactEdge) => {
+    const lines = edge.geometry.type === 'LineString' ? [edge.geometry.coordinates] : edge.geometry.coordinates;
+    const estimatedBytes = 2048 + lines.reduce((sum, line) => sum + 64 + line.length * 64, 0);
+    if (estimatedBytes > 2 * 1024 * 1024) return;
+    const old = exactEdges.get(edge.ordinal); if (old) exactEdgeEstimatedBytes -= old.estimatedBytes;
+    exactEdges.delete(edge.ordinal); exactEdges.set(edge.ordinal, {edge, estimatedBytes}); exactEdgeEstimatedBytes += estimatedBytes;
+    while (exactEdges.size > 512 || exactEdgeEstimatedBytes > 4 * 1024 * 1024) {
+      const first = exactEdges.keys().next().value!; exactEdgeEstimatedBytes -= exactEdges.get(first)!.estimatedBytes; exactEdges.delete(first);
+    }
+  };
+  const parsedShard = <K extends ParsedShard['kind']>(path: string, kind: K): Extract<ParsedShard, {kind: K}> | undefined => {
+    const entry = parsedShards.get(path); if (!entry || entry.kind !== kind) return;
+    parsedShards.delete(path); parsedShards.set(path, entry); parsedShardHits++;
+    return entry as Extract<ParsedShard, {kind: K}>;
+  };
+  const cacheParsedShard = (path: string, entry: ParsedShard) => {
+    parsedShardBuilds++;
+    if (entry.bytes > 2 * 1024 * 1024) return;
+    const old = parsedShards.get(path); if (old) parsedShardBytes -= old.bytes;
+    parsedShards.delete(path); parsedShards.set(path, entry); parsedShardBytes += entry.bytes;
+    while (parsedShards.size > 8 || parsedShardBytes > 4 * 1024 * 1024) {
+      const first = parsedShards.keys().next().value!; parsedShardBytes -= parsedShards.get(first)!.bytes; parsedShards.delete(first);
+    }
+  };
   const manifest = await json(bootstrap.manifest, signal);
   indexSchema.parse(manifest); assertOperationalDeliveryRef(manifest.ref, catalog);
   if (manifest.sourceId !== OPERATIONAL_MAP_SOURCE_ID || manifest.minZoom !== 0 || manifest.maxZoom !== 6 || manifest.promoteId !== null ||
@@ -71,7 +150,7 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
   const tileRaw = await json(bootstrap.tileIndex, signal);
   const tiles = z.object({artifacts: z.array(artifactSchema)}).parse(tileRaw);
   const detailRaw = await json(bootstrap.detailIndex, signal);
-  const detail = z.object({countries: z.array(countrySchema), edgeDetails: z.array(shardSchema), lazy: z.literal(true),
+  const detail = z.object({countries: z.array(countrySchema), edgeDetails: z.array(shardSchema), cellDetails: z.array(cellDetailSchema).optional(), lazy: z.literal(true),
     parents: z.literal('metadata/parents.json.gz'), lodCoverage: z.literal('lod-coverage.json.gz')}).parse(detailRaw);
   for (const raw of [tileRaw, detailRaw]) {
     indexSchema.parse(raw); assertOperationalDeliveryRef(raw.ref, catalog);
@@ -85,6 +164,21 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
   if (index !== tiles.artifacts.length || detail.countries.length !== counts.countries ||
       detail.countries.reduce((n, c) => n + c.cellCount, 0) !== counts.cells ||
       detail.countries.some((c, i) => c.countryId !== catalog.countryOrder[i] || c.metadata.path !== `metadata/countries/${c.countryId}.json.gz` || c.detail.path !== `detail/countries/${c.countryId}.geojson.gz`)) throw Error('INVALID_OPERATIONAL_DETAIL_INDEX');
+  const cellDetailByOrdinal = new Map<number, z.infer<typeof cellDetailSchema>>(), cellDetailsByCountry = new Map<string, z.infer<typeof cellDetailSchema>[]>();
+  const cellDetailPaths = new Set<string>();
+  for (const shard of detail.cellDetails ?? []) {
+    const c = detail.countries.find(c => c.countryId === shard.countryId), existing = cellDetailsByCountry.get(shard.countryId) ?? [];
+    if (!c || shard.artifact.path !== `detail/cells/${shard.countryId}/${String(existing.length).padStart(4, '0')}.geojson.gz` || cellDetailPaths.has(shard.artifact.path)) throw Error('INVALID_OPERATIONAL_CELL_DETAIL_INDEX');
+    identity(shard.artifact); cellDetailPaths.add(shard.artifact.path);
+    if (shard.bbox && (shard.bbox[0] > shard.bbox[2] || shard.bbox[1] > shard.bbox[3] || shard.bbox[0] < -180 || shard.bbox[2] > 180 || shard.bbox[1] < -90 || shard.bbox[3] > 90)) throw Error('INVALID_OPERATIONAL_CELL_DETAIL_INDEX');
+    shard.cellOrdinals.forEach((n, i) => {
+      ordinal(n, counts.cells);
+      if ((i > 0 && shard.cellOrdinals[i - 1] >= n) || cellDetailByOrdinal.has(n)) throw Error('INVALID_OPERATIONAL_CELL_DETAIL_INDEX');
+      cellDetailByOrdinal.set(n, shard);
+    });
+    existing.push(shard); cellDetailsByCountry.set(shard.countryId, existing);
+  }
+  for (const [countryId, shards] of cellDetailsByCountry) if (shards.reduce((n, shard) => n + shard.cellOrdinals.length, 0) !== detail.countries.find(c => c.countryId === countryId)!.cellCount) throw Error('INVALID_OPERATIONAL_CELL_DETAIL_INDEX');
   let edgeEnd = 1;
   for (const shard of detail.edgeDetails) {
     if (shard.firstOrdinal !== edgeEnd || !/^topology\/\d{3}\.json\.gz$/.test(shard.shard) || shard.artifact.path !== `detail/${shard.shard}`) throw Error('INVALID_OPERATIONAL_EDGE_INDEX');
@@ -126,10 +220,12 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
   };
   const countries = new Map(detail.countries.map(c => [c.countryId, c]));
   const country = (id: string) => {const c = countries.get(id); if (!c) throw Error('UNKNOWN_OPERATIONAL_COUNTRY'); return c;};
-  const countryCells = new Map<string, readonly OperationalCell[]>();
+  type CountryCells = Readonly<{cells: readonly OperationalCell[]; byId: ReadonlyMap<string, OperationalCell>; byOrdinal: ReadonlyMap<number, OperationalCell>}>;
+  const countryCells = new Map<string, CountryCells>();
+  let countryMetadataBuilds = 0;
   const loadCountry = async (countryId: string, s?: AbortSignal): Promise<readonly OperationalCell[]> => {
     s?.throwIfAborted(); const c = country(countryId), old = countryCells.get(countryId);
-    if (old) {countryCells.delete(countryId); countryCells.set(countryId, old); return old;}
+    if (old) {countryCells.delete(countryId); countryCells.set(countryId, old); return old.cells;}
     const metadata = z.object({countryId: z.literal(countryId), columns: z.tuple([z.literal('cellOrdinal'), z.literal('cellId'), z.literal('administrativeOrdinal'), z.literal('previousParentOrdinal')]),
       rows: z.array(z.tuple([positive, z.string(), positive, positive]))}).parse(await json(identity(c.metadata), s));
     const seen = new Set<string>();
@@ -140,13 +236,15 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
       return Object.freeze({id: readCatalogTerritoryId(id), ordinal: n, sourceCountryId: countryId, administrativeOrdinal: a, previousParentOrdinal: p}) as OperationalCell;
     });
     if (cells.length !== c.cellCount) throw Error('INVALID_OPERATIONAL_COUNTRY_COUNT');
+    const byId = new Map<string, OperationalCell>(cells.map(c => [c.id, c])), byOrdinal = new Map(cells.map(c => [c.ordinal, c]));
+    if (cellDetailsByCountry.has(countryId) && cells.some(c => cellDetailByOrdinal.get(c.ordinal)?.countryId !== countryId)) throw Error('INVALID_OPERATIONAL_CELL_DETAIL_MAPPING');
     if (countryCells.size >= 16) countryCells.delete(countryCells.keys().next().value!);
-    countryCells.set(countryId, Object.freeze(cells)); return countryCells.get(countryId)!;
+    countryMetadataBuilds++; countryCells.set(countryId, {cells: Object.freeze(cells), byId, byOrdinal}); return countryCells.get(countryId)!.cells;
   };
   const resolveCells = async (hints: readonly CellHint[], s?: AbortSignal) => {
     const found = new Map<string, OperationalCell>();
     for (const countryId of new Set(hints.map(c => c.sourceCountryId))) {
-      const byId = new Map((await loadCountry(countryId, s)).map(c => [c.id as string, c]));
+      await loadCountry(countryId, s); const byId = countryCells.get(countryId)!.byId;
       for (const hint of hints) if (hint.sourceCountryId === countryId) {
         const cell = byId.get(hint.id); if (!cell) throw Error('UNKNOWN_OPERATIONAL_CELL'); found.set(hint.id, cell);
       }
@@ -155,34 +253,126 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
   };
   const loadCountryDetail = async (countryId: string, s?: AbortSignal): Promise<ExactCells> => {
     const cells = await loadCountry(countryId, s), bytes = await json(identity(country(countryId).detail), s);
-    const fc = z.object({type: z.literal('FeatureCollection'), features: z.array(z.object({type: z.literal('Feature'), id: positive, properties: z.record(z.string(), z.unknown()), geometry: polygonSchema}))}).parse(bytes);
+    const fc = exactCellsSchema.parse(bytes);
     if (fc.features.length !== cells.length || fc.features.some((f, i) => f.id !== cells[i].ordinal)) throw Error('INVALID_OPERATIONAL_EXACT_CELLS');
+    s?.throwIfAborted();
     return fc as ExactCells;
+  };
+  const loadCellShard = async (shard: z.infer<typeof cellDetailSchema>, s?: AbortSignal) => {
+    s?.throwIfAborted();
+    const cached = parsedShard(shard.artifact.path, 'cells'); if (cached) return cached;
+    await loadCountry(shard.countryId, s); const metadata = countryCells.get(shard.countryId)!;
+    const bytes = await read(identity(shard.artifact), s), fc = exactCellsSchema.parse(JSON.parse(decoder.decode(bytes)));
+    if (fc.features.length !== shard.cellOrdinals.length || fc.features.some((f, i) => f.id !== shard.cellOrdinals[i] || !metadata.byOrdinal.has(f.id))) throw Error('INVALID_OPERATIONAL_EXACT_CELL_SHARD');
+    const bounds = new Map(fc.features.map(f => [f.id, cellBounds(f)]));
+    if (shard.bbox && [...bounds.values()].some(b => b[0] < shard.bbox![0] || b[1] < shard.bbox![1] || b[2] > shard.bbox![2] || b[3] > shard.bbox![3])) throw Error('INVALID_OPERATIONAL_EXACT_CELL_SHARD_BOUNDS');
+    s?.throwIfAborted();
+    cellShardBounds.delete(shard.artifact.path); cellShardBounds.set(shard.artifact.path, bounds);
+    if (cellShardBounds.size > 256) cellShardBounds.delete(cellShardBounds.keys().next().value!);
+    const entry: Extract<ParsedShard, {kind: 'cells'}> = {kind: 'cells', data: fc as ExactCells, bounds, bytes: bytes.byteLength};
+    cacheParsedShard(shard.artifact.path, entry); return entry;
   };
   const loadCellDetail = async (hints: readonly CellHint[], s?: AbortSignal): Promise<ExactCells> => {
     const selected = await resolveCells(hints, s), ids = new Set(selected.map(c => c.ordinal));
     const features: ExactCells['features'] = [];
     for (const countryId of new Set(selected.map(c => c.sourceCountryId))) {
-      features.push(...(await loadCountryDetail(countryId, s)).features.filter(f => ids.has(f.id as number)));
+      if (!cellDetailsByCountry.has(countryId)) {features.push(...(await loadCountryDetail(countryId, s)).features.filter(f => ids.has(f.id as number))); continue;}
+      const wanted = selected.filter(c => c.sourceCountryId === countryId), shards = new Set(wanted.map(c => cellDetailByOrdinal.get(c.ordinal)));
+      for (const shard of shards) {
+        if (!shard || shard.countryId !== countryId) throw Error('MISSING_OPERATIONAL_CELL_DETAIL_MAPPING');
+        const cached = shard.cellOrdinals.filter(n => ids.has(n)).map(n => cachedExactCell(n));
+        if (cached.every((f): f is ExactCells['features'][number] => !!f)) {features.push(...structuredClone(cached)); continue;}
+        const fc = (await loadCellShard(shard, s)).data;
+        const matches = fc.features.filter(f => ids.has(Number(f.id))); matches.forEach(cacheExactCell);
+        features.push(...structuredClone(matches));
+      }
     }
     if (features.length !== ids.size) throw Error('MISSING_OPERATIONAL_EXACT_CELLS');
+    s?.throwIfAborted();
     return {type: 'FeatureCollection', features: features.sort((a, b) => Number(a.id) - Number(b.id))};
   };
   const loadEdgeDetails = async (ordinals: readonly number[], s?: AbortSignal): Promise<readonly ExactEdge[]> => {
+    s?.throwIfAborted();
     const wanted = new Set(ordinals.map(n => ordinal(n, counts.edges))), found = new Map<number, ExactEdge>();
+    for (const n of wanted) {
+      const cached = exactEdges.get(n); if (!cached) continue;
+      exactEdges.delete(n); exactEdges.set(n, cached); exactEdgeCacheHits++; found.set(n, cached.edge);
+    }
     for (const shard of detail.edgeDetails) {
-      if (![...wanted].some(n => n >= shard.firstOrdinal && n < shard.firstOrdinal + shard.count)) continue;
-      const raw = await json(identity(shard.artifact), s);
-      const data = z.object({schemaVersion: z.literal(OPERATIONAL_DELIVERY_SCHEMA), edges: z.array(edgeSchema)}).parse(raw);
-      if (data.edges.length !== shard.count) throw Error('INVALID_OPERATIONAL_EXACT_EDGES');
-      data.edges.forEach((e, i) => {
-        const pair = edgeIncidence(e.ordinal);
-        if (e.ordinal !== shard.firstOrdinal + i || e.left !== pair.left || e.right !== pair.right || e.flags.positiveAdjacency !== (e.right > 0)) throw Error('INVALID_OPERATIONAL_EXACT_EDGE');
-        if (wanted.has(e.ordinal)) found.set(e.ordinal, e as ExactEdge);
-      });
+      if (![...wanted].some(n => !found.has(n) && n >= shard.firstOrdinal && n < shard.firstOrdinal + shard.count)) continue;
+      let cached = parsedShard(shard.artifact.path, 'edges');
+      if (!cached) {
+        const bytes = await read(identity(shard.artifact), s);
+        const data = z.object({schemaVersion: z.literal(OPERATIONAL_DELIVERY_SCHEMA), edges: z.array(edgeSchema)}).parse(JSON.parse(decoder.decode(bytes)));
+        if (data.edges.length !== shard.count) throw Error('INVALID_OPERATIONAL_EXACT_EDGES');
+        data.edges.forEach((e, i) => {
+          const pair = edgeIncidence(e.ordinal);
+          if (e.ordinal !== shard.firstOrdinal + i || e.left !== pair.left || e.right !== pair.right || e.flags.positiveAdjacency !== (e.right > 0)) throw Error('INVALID_OPERATIONAL_EXACT_EDGE');
+        });
+        s?.throwIfAborted();
+        cached = {kind: 'edges', data: data.edges as ExactEdge[], bytes: bytes.byteLength}; cacheParsedShard(shard.artifact.path, cached);
+      }
+      for (const e of cached.data) if (wanted.has(e.ordinal)) {found.set(e.ordinal, e); cacheExactEdge(e);}
     }
     if (found.size !== wanted.size) throw Error('MISSING_OPERATIONAL_EXACT_EDGES');
-    return ordinals.map(n => found.get(n)!);
+    s?.throwIfAborted(); return structuredClone(ordinals.map(n => found.get(n)!));
+  };
+  // Optional hover inspection must never fall back to a whole-country file.
+  // Tooling retains the explicit legacy loader below for older catalogs.
+  const supportsCountryViewportDetail = (countryId: string) => cellDetailsByCountry.has(countryId);
+  const loadCountryViewportDetail = async (countryId: string, bounds: OperationalViewportBounds, s?: AbortSignal) => {
+    s?.throwIfAborted(); const intersects = viewportIntersects(bounds), shards = cellDetailsByCountry.get(countryId);
+    await loadCountry(countryId, s);
+    let cells: ExactCells;
+    if (!shards) {
+      // Older v2 catalogs have no cell shard index. Keep their exact geometry
+      // path, but still limit the returned complete cells to the viewport.
+      const full = await loadCountryDetail(countryId, s);
+      cells = {type: 'FeatureCollection', features: full.features.filter(f => intersects(cellBounds(f)))};
+    } else {
+      const features: ExactCells['features'] = [];
+      for (const shard of shards) {
+        if (shard.bbox && !intersects(shard.bbox)) continue;
+        const knownBounds = cellShardBounds.get(shard.artifact.path);
+        if (knownBounds) {
+          const cached = [...knownBounds].filter(([, bbox]) => intersects(bbox)).map(([n]) => cachedExactCell(n));
+          if (cached.every((f): f is ExactCells['features'][number] => !!f)) {features.push(...structuredClone(cached)); continue;}
+        }
+        const loaded = await loadCellShard(shard, s);
+        const matches = loaded.data.features.filter(f => intersects(loaded.bounds.get(Number(f.id))!)); matches.forEach(cacheExactCell);
+        features.push(...structuredClone(matches));
+      }
+      cells = {type: 'FeatureCollection', features: features.sort((a, b) => Number(a.id) - Number(b.id))};
+    }
+    s?.throwIfAborted();
+    const edges = await loadEdgeDetails(incidentEdges(cells.features.map(f => Number(f.id))), s);
+    s?.throwIfAborted(); return {cells, edges};
+  };
+  let provinceBoundaryLod: FeatureCollection<LineString> | undefined;
+  const loadProvinceBoundaryLod = async (s?: AbortSignal): Promise<FeatureCollection<LineString>> => {
+    if (!bootstrap.provinceBoundaryLod) throw Error('PROVINCE_BOUNDARY_LOD_UNAVAILABLE');
+    if (!provinceBoundaryLod) {
+      const data = z.object({type: z.literal('FeatureCollection'), features: z.array(z.object({type: z.literal('Feature'), id: positive,
+        properties: z.record(z.string(), z.unknown()), geometry: z.object({type: z.literal('LineString'), coordinates: z.array(coordinate).min(2)})}))})
+        .parse(await json(bootstrap.provinceBoundaryLod.artifact, s));
+      const expected = bootstrap.provincePresentationBoundaryOrdinals ?? [];
+      if (data.features.length !== expected.length || data.features.some((f, i) => f.id !== expected[i])) throw Error('PROVINCE_BOUNDARY_LOD_MEMBERSHIP');
+      provinceBoundaryLod = data as FeatureCollection<LineString>;
+    }
+    s?.throwIfAborted(); return structuredClone(provinceBoundaryLod);
+  };
+  let microBoundaryLod: FeatureCollection<LineString> | undefined;
+  const loadMicroBoundaryLod = async (s?: AbortSignal): Promise<FeatureCollection<LineString>> => {
+    if (!bootstrap.microBoundaryLod) throw Error('MICRO_BOUNDARY_LOD_UNAVAILABLE');
+    if (!microBoundaryLod) {
+      const data = z.object({type: z.literal('FeatureCollection'), features: z.array(z.object({type: z.literal('Feature'), id: positive,
+        properties: z.record(z.string(), z.unknown()), geometry: z.object({type: z.literal('LineString'), coordinates: z.array(coordinate).min(2)})}))})
+        .parse(await json(bootstrap.microBoundaryLod.artifact, s));
+      const expected = bootstrap.microBoundaryLod.edgeOrdinals;
+      if (data.features.length !== expected.length || data.features.some((f, i) => f.id !== expected[i])) throw Error('MICRO_BOUNDARY_LOD_MEMBERSHIP');
+      microBoundaryLod = data as FeatureCollection<LineString>;
+    }
+    s?.throwIfAborted(); return structuredClone(microBoundaryLod);
   };
   const loadParents = async (s?: AbortSignal) => {
     const parent = z.object({sourceCountryId: z.string(), start: integer, count: positive});
@@ -213,6 +403,8 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
   type TileFeatures = Readonly<{cells: readonly number[]; edges: readonly number[]}>;
   const featureListeners = new Set<(features: TileFeatures) => void>();
   const seenCells = new Set<number>(), seenEdges = new Set<number>();
+  const indexedTilePaths = new Set<string>();
+  let tileIndexBuilds = 0;
   const indexTile = (bytes: ArrayBuffer) => {
     const tile = new VectorTile(new PbfReader(new Uint8Array(bytes)) as unknown as ConstructorParameters<typeof VectorTile>[0]);
     const cells = new Set<number>(), edges = new Set<number>();
@@ -231,10 +423,16 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
     const added = {cells: [...cells].filter(n => !seenCells.has(n)), edges: [...edges].filter(n => !seenEdges.has(n))};
     added.cells.forEach(n => seenCells.add(n)); added.edges.forEach(n => seenEdges.add(n));
     if (added.cells.length || added.edges.length) for (const listener of featureListeners) listener(added);
+    tileIndexBuilds++;
   };
   const loadTile = async (path: string, s?: AbortSignal) => {
     const a = tileArtifacts.get(path); if (!a) throw Error('UNREGISTERED_OPERATIONAL_TILE');
-    const bytes = await read(a, s); indexTile(bytes);
+    const bytes = await read(a, s); s?.throwIfAborted();
+    // Immutable path + catalog identity: every read still verifies uncached
+    // bytes, but successful PBF validation/publication only needs to run once.
+    // Keep the marker after observer publication so failed attempts retry.
+    if (!indexedTilePaths.has(path)) {indexTile(bytes); indexedTilePaths.add(path);}
+    s?.throwIfAborted();
     return bytes;
   };
   const observeTileFeatures = (listener: (features: TileFeatures) => void) => {
@@ -248,9 +446,13 @@ export async function loadOperationalVectorDelivery(value: unknown, expected: Wo
   const source: VectorSourceSpecification = {type: 'vector', tiles: [`${protocol}://${base}${manifest.tileTemplate}`], minzoom: 0, maxzoom: 6, attribution: 'Natural Earth'};
   const renderRef = (sourceLayer: 'territories' | 'edges' | 'administrative', n: number): RenderFeatureRef => ({sourceType: 'vector', sourceId: OPERATIONAL_MAP_SOURCE_ID,
     sourceLayer, featureId: ordinal(n, sourceLayer === 'territories' ? counts.cells : counts.edges)});
-  return Object.freeze({bootstrap, source, protocol, loadTile, edgeIncidence, incidentEdges, observeTileFeatures, loadCountry, resolveCells, loadCountryDetail, loadCellDetail, loadEdgeDetails,
+  return Object.freeze({bootstrap, source, protocol, loadTile, edgeIncidence, incidentEdges, observeTileFeatures, loadCountry, resolveCells, loadCountryDetail, loadCellDetail, supportsCountryViewportDetail, loadCountryViewportDetail, loadEdgeDetails, loadProvinceBoundaryLod, loadMicroBoundaryLod,
     loadParents, administrativeMembership, loadCoverage, renderRef,
-    counters: () => ({verifiedRequests, cacheHits, cachedEntries: cache.size, cachedBytes, cachedCountries: countryCells.size})});
+    counters: () => ({verifiedRequests, cacheHits, cachedEntries: cache.size, cachedBytes, cachedCountries: countryCells.size, countryMetadataBuilds,
+      indexedTiles: indexedTilePaths.size, tileIndexBuilds,
+      parsedShardBuilds, parsedShardHits, parsedShardEntries: parsedShards.size, parsedShardBytes,
+      exactCellCacheHits, cachedExactCells: exactCellCache.size, cachedExactCellEstimatedBytes: exactCellEstimatedBytes, cachedCellShardBounds: cellShardBounds.size,
+      exactEdgeCacheHits, cachedExactEdges: exactEdges.size, cachedExactEdgeEstimatedBytes: exactEdgeEstimatedBytes})});
 }
 export type OperationalVectorDelivery = Awaited<ReturnType<typeof loadOperationalVectorDelivery>>;
 export async function fetchOperationalVectorDelivery(expected: WorldGeometryCatalogRef, fetcher: CatalogFetch = fetch, signal?: AbortSignal) {

@@ -1,0 +1,10 @@
+{"phase":"after","name":"us-before-china","province":0,"lod":0,"original":0,"active":false,"sourceWrites":0}
+{"phase":"after","name":"world-overview","province":0,"lod":0,"original":0,"active":false,"sourceWrites":0}
+{"phase":"after","name":"east-china","province":567,"lod":567,"original":0,"active":true,"sourceWrites":1}
+{"phase":"after","name":"china","province":947,"lod":947,"original":0,"active":true,"sourceWrites":1}
+{"phase":"after","name":"border","province":18,"lod":18,"original":0,"active":true,"sourceWrites":1}
+{"phase":"after","name":"warm-pan","province":452,"lod":452,"original":0,"active":true,"sourceWrites":1}
+{"phase":"after","name":"warm-return","province":567,"lod":567,"original":0,"active":true,"sourceWrites":1}
+{"phase":"after","name":"shanghai-high-original","province":48,"lod":0,"original":48,"active":false,"sourceWrites":1}
+{"phase":"after","name":"debug-high-exact-original","province":48,"lod":0,"original":48,"active":false,"sourceWrites":1}
+{"phase":"after","pass":false,"artifact":{"path":"reports/chn-render-lod-20261030/browser/after.json","sha256":"cab1958562dd75507678ef4e0da115d4efec2b1225bfedb495985e9a541d2cdd","byteLength":468098},"views":9,"lodRequests":1,"failures":["HIGH_DEBUG_EXACT_NOT_EXERCISED"]}

@@ -1,0 +1,3735 @@
+{
+  "schemaVersion": "chn-interaction-performance-v1",
+  "phase": "baseline",
+  "pass": false,
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "code": [
+    {
+      "path": "scripts/chn-2020/verify-interaction-performance.mjs",
+      "sha256": "8a7836453de1af4d305e7ad6ad7ed6e926a13428cc9da4edb4ac1cd7050c22f2",
+      "byteLength": 18235
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "8938b77473db4754460352804ee50d2f08312c966956f25932f0a85f57d5e577",
+      "byteLength": 19301
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "953c2e484aa4c77ac45148a6521deeef293fb73376dd7ca5ae893cb9bf65b75d",
+      "byteLength": 25094
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "041497731fb384f826936701edd47fd7dfa915ceb010ce4660e841c1caac38e7",
+      "byteLength": 6191
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "64b29ffdb917c02c12f26925a244dcadd363acc27737475e24716b0ecb16ca5e",
+      "byteLength": 31801
+    },
+    {
+      "path": "src/lib/projection/operational-map-projection.ts",
+      "sha256": "13a0bdde6e942927979de58b14626765a37fe2d4532cfbc478c6ca0090517b1c",
+      "byteLength": 5896
+    },
+    {
+      "path": "src/lib/map/operational-country-labels.ts",
+      "sha256": "d310fc9b054c88e14574e7922a802d3438e9ffeb51e87e9832548a7be802d6bf",
+      "byteLength": 6815
+    }
+  ],
+  "conditions": {
+    "baseURL": "http://127.0.0.1:3002",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "browser": "Chromium headless with WebGL",
+    "browserCache": "fresh isolated context; normal HTTP caching thereafter",
+    "serverAndOSCache": "not flushed",
+    "reducedMotion": "reduce",
+    "cameraWorkflow": "Fixed rAF-paced jumpTo trajectory; each phase waits for map and detail settlement. This is a synthetic repeatable interaction, not a mouse hardware profile.",
+    "externalAiCalls": 0,
+    "gameWrites": "only the isolated context ordinary initial game allocation; no AI/turn/game commands are sent by the probe"
+  },
+  "phases": [
+    {
+      "name": "world-pan-zoom",
+      "startTime": 4949,
+      "endTime": 14224,
+      "durationMs": 9275,
+      "frames": {
+        "count": 53,
+        "medianMs": 183.30000000000018,
+        "p95Ms": 200.10000000000036,
+        "maximumMs": 283.39999999999964,
+        "over50ms": 50,
+        "over100ms": 50,
+        "intervalsMs": [
+          16.699999999999818,
+          166.69999999999982,
+          183.30000000000018,
+          166.69999999999982,
+          183.30000000000018,
+          166.69999999999982,
+          183.30000000000018,
+          183.30000000000018,
+          166.69999999999982,
+          166.69999999999982,
+          166.60000000000036,
+          183.39999999999964,
+          166.60000000000036,
+          166.59999999999945,
+          166.70000000000073,
+          200,
+          166.69999999999982,
+          183.30000000000018,
+          183.29999999999927,
+          166.70000000000073,
+          183.29999999999927,
+          183.3000000000011,
+          183.29999999999927,
+          183.39999999999964,
+          183.3000000000011,
+          166.59999999999854,
+          183.40000000000146,
+          183.29999999999927,
+          166.60000000000036,
+          283.39999999999964,
+          200,
+          216.70000000000073,
+          199.89999999999964,
+          200,
+          200.10000000000036,
+          199.89999999999964,
+          200,
+          183.39999999999964,
+          200,
+          200,
+          183.29999999999927,
+          200,
+          199.90000000000146,
+          183.39999999999964,
+          200,
+          199.89999999999964,
+          166.70000000000073,
+          166.59999999999854,
+          183.40000000000146,
+          166.6999999999989,
+          166.60000000000036,
+          16.700000000000728,
+          16.69999999999891
+        ]
+      },
+      "longTasks": {
+        "count": 50,
+        "totalWithinPhaseMs": 9124,
+        "maximumMs": 271,
+        "entries": [
+          {
+            "startTime": 4956.200000017881,
+            "duration": 173,
+            "name": "self"
+          },
+          {
+            "startTime": 5133.4000000059605,
+            "duration": 175,
+            "name": "self"
+          },
+          {
+            "startTime": 5311.4000000059605,
+            "duration": 170,
+            "name": "self"
+          },
+          {
+            "startTime": 5485,
+            "duration": 172,
+            "name": "self"
+          },
+          {
+            "startTime": 5660.700000017881,
+            "duration": 175,
+            "name": "self"
+          },
+          {
+            "startTime": 5839.5,
+            "duration": 173,
+            "name": "self"
+          },
+          {
+            "startTime": 6016,
+            "duration": 180,
+            "name": "self"
+          },
+          {
+            "startTime": 6200.600000023842,
+            "duration": 166,
+            "name": "self"
+          },
+          {
+            "startTime": 6367.100000023842,
+            "duration": 164,
+            "name": "self"
+          },
+          {
+            "startTime": 6532.100000023842,
+            "duration": 169,
+            "name": "self"
+          },
+          {
+            "startTime": 6702.200000017881,
+            "duration": 172,
+            "name": "self"
+          },
+          {
+            "startTime": 6874.5,
+            "duration": 170,
+            "name": "self"
+          },
+          {
+            "startTime": 7045.300000011921,
+            "duration": 168,
+            "name": "self"
+          },
+          {
+            "startTime": 7214.100000023842,
+            "duration": 172,
+            "name": "self"
+          },
+          {
+            "startTime": 7387.100000023842,
+            "duration": 185,
+            "name": "self"
+          },
+          {
+            "startTime": 7572.9000000059605,
+            "duration": 178,
+            "name": "self"
+          },
+          {
+            "startTime": 7751.600000023842,
+            "duration": 175,
+            "name": "self"
+          },
+          {
+            "startTime": 7926.9000000059605,
+            "duration": 183,
+            "name": "self"
+          },
+          {
+            "startTime": 8110.100000023842,
+            "duration": 173,
+            "name": "self"
+          },
+          {
+            "startTime": 8283.200000017881,
+            "duration": 177,
+            "name": "self"
+          },
+          {
+            "startTime": 8464.40000000596,
+            "duration": 178,
+            "name": "self"
+          },
+          {
+            "startTime": 8646,
+            "duration": 179,
+            "name": "self"
+          },
+          {
+            "startTime": 8828.90000000596,
+            "duration": 181,
+            "name": "self"
+          },
+          {
+            "startTime": 9013.600000023842,
+            "duration": 176,
+            "name": "self"
+          },
+          {
+            "startTime": 9193.800000011921,
+            "duration": 176,
+            "name": "self"
+          },
+          {
+            "startTime": 9372.700000017881,
+            "duration": 175,
+            "name": "self"
+          },
+          {
+            "startTime": 9548.200000017881,
+            "duration": 175,
+            "name": "self"
+          },
+          {
+            "startTime": 9726.200000017881,
+            "duration": 176,
+            "name": "self"
+          },
+          {
+            "startTime": 9905.600000023842,
+            "duration": 271,
+            "name": "self"
+          },
+          {
+            "startTime": 10182.300000011921,
+            "duration": 197,
+            "name": "self"
+          },
+          {
+            "startTime": 10386.700000017881,
+            "duration": 201,
+            "name": "self"
+          },
+          {
+            "startTime": 10588.800000011921,
+            "duration": 202,
+            "name": "self"
+          },
+          {
+            "startTime": 10791.600000023842,
+            "duration": 200,
+            "name": "self"
+          },
+          {
+            "startTime": 10996.40000000596,
+            "duration": 202,
+            "name": "self"
+          },
+          {
+            "startTime": 11198.600000023842,
+            "duration": 193,
+            "name": "self"
+          },
+          {
+            "startTime": 11396.700000017881,
+            "duration": 196,
+            "name": "self"
+          },
+          {
+            "startTime": 11593.600000023842,
+            "duration": 192,
+            "name": "self"
+          },
+          {
+            "startTime": 11786.300000011921,
+            "duration": 196,
+            "name": "self"
+          },
+          {
+            "startTime": 11982.600000023842,
+            "duration": 194,
+            "name": "self"
+          },
+          {
+            "startTime": 12177.700000017881,
+            "duration": 188,
+            "name": "self"
+          },
+          {
+            "startTime": 12369.600000023842,
+            "duration": 192,
+            "name": "self"
+          },
+          {
+            "startTime": 12563,
+            "duration": 195,
+            "name": "self"
+          },
+          {
+            "startTime": 12761.200000017881,
+            "duration": 193,
+            "name": "self"
+          },
+          {
+            "startTime": 12954.40000000596,
+            "duration": 196,
+            "name": "self"
+          },
+          {
+            "startTime": 13150.700000017881,
+            "duration": 194,
+            "name": "self"
+          },
+          {
+            "startTime": 13348,
+            "duration": 168,
+            "name": "self"
+          },
+          {
+            "startTime": 13518.100000023842,
+            "duration": 169,
+            "name": "self"
+          },
+          {
+            "startTime": 13690.200000017881,
+            "duration": 168,
+            "name": "self"
+          },
+          {
+            "startTime": 13860.700000017881,
+            "duration": 170,
+            "name": "self"
+          },
+          {
+            "startTime": 14031.600000023842,
+            "duration": 161,
+            "name": "self"
+          }
+        ]
+      },
+      "heapBefore": {
+        "usedJSHeapSize": 140273550,
+        "totalJSHeapSize": 189949530,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapAfter": {
+        "usedJSHeapSize": 155581701,
+        "totalJSHeapSize": 209653665,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "resources": [],
+      "resourceTotals": {},
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "counts": {
+          "countries": 247,
+          "cells": 8005,
+          "edges": 26273
+        },
+        "selectedCountryId": null,
+        "debugBoundaries": false,
+        "baseStatus": "ready",
+        "worldStatus": "ready",
+        "detailStatus": "idle",
+        "appliedRevision": 0
+      },
+      "center": [
+        15,
+        20
+      ],
+      "zoom": 1.2,
+      "updateStats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 7732,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "resyncRequired": false
+      },
+      "exactCells": [],
+      "exactEdges": [],
+      "renderSettled": true
+    },
+    {
+      "name": "china-pan-zoom",
+      "startTime": 14235.200000017881,
+      "endTime": 26189.80000001192,
+      "durationMs": 11954.59999999404,
+      "frames": {
+        "count": 53,
+        "medianMs": 283.2999999999993,
+        "p95Ms": 350,
+        "maximumMs": 466.7000000000007,
+        "over50ms": 50,
+        "over100ms": 50,
+        "intervalsMs": [
+          16.600000000000364,
+          116.70000000000073,
+          200,
+          133.29999999999927,
+          150,
+          150,
+          150,
+          150,
+          233.29999999999927,
+          150,
+          150,
+          150,
+          150,
+          133.3000000000011,
+          133.3000000000011,
+          150,
+          133.39999999999782,
+          133.29999999999927,
+          150,
+          133.3000000000029,
+          133.29999999999927,
+          150,
+          133.29999999999927,
+          466.7000000000007,
+          383.2999999999993,
+          333.2999999999993,
+          316.7000000000007,
+          283.2999999999993,
+          350,
+          300,
+          300,
+          283.2999999999993,
+          283.3000000000029,
+          316.6999999999971,
+          283.3000000000029,
+          300,
+          299.8999999999978,
+          300.1000000000022,
+          300,
+          283.2999999999993,
+          283.2999999999993,
+          300,
+          300,
+          300,
+          283.2000000000007,
+          316.7000000000007,
+          300,
+          300,
+          300,
+          283.2999999999993,
+          300,
+          16.700000000000728,
+          16.599999999998545
+        ]
+      },
+      "longTasks": {
+        "count": 51,
+        "totalWithinPhaseMs": 11634,
+        "maximumMs": 344,
+        "entries": [
+          {
+            "startTime": 14240,
+            "duration": 123,
+            "name": "self"
+          },
+          {
+            "startTime": 14428,
+            "duration": 134,
+            "name": "self"
+          },
+          {
+            "startTime": 14564.100000023842,
+            "duration": 133,
+            "name": "self"
+          },
+          {
+            "startTime": 14702.800000011921,
+            "duration": 136,
+            "name": "self"
+          },
+          {
+            "startTime": 14854,
+            "duration": 135,
+            "name": "self"
+          },
+          {
+            "startTime": 15013.5,
+            "duration": 138,
+            "name": "self"
+          },
+          {
+            "startTime": 15161.600000023842,
+            "duration": 136,
+            "name": "self"
+          },
+          {
+            "startTime": 15309.90000000596,
+            "duration": 224,
+            "name": "self"
+          },
+          {
+            "startTime": 15537.800000011921,
+            "duration": 141,
+            "name": "self"
+          },
+          {
+            "startTime": 15679.90000000596,
+            "duration": 148,
+            "name": "self"
+          },
+          {
+            "startTime": 15829.700000017881,
+            "duration": 151,
+            "name": "self"
+          },
+          {
+            "startTime": 15981.800000011921,
+            "duration": 141,
+            "name": "self"
+          },
+          {
+            "startTime": 16129.5,
+            "duration": 135,
+            "name": "self"
+          },
+          {
+            "startTime": 16265.100000023842,
+            "duration": 134,
+            "name": "self"
+          },
+          {
+            "startTime": 16400.90000000596,
+            "duration": 140,
+            "name": "self"
+          },
+          {
+            "startTime": 16541.100000023842,
+            "duration": 140,
+            "name": "self"
+          },
+          {
+            "startTime": 16681.40000000596,
+            "duration": 136,
+            "name": "self"
+          },
+          {
+            "startTime": 16818.30000001192,
+            "duration": 138,
+            "name": "self"
+          },
+          {
+            "startTime": 16957.40000000596,
+            "duration": 139,
+            "name": "self"
+          },
+          {
+            "startTime": 17096.70000001788,
+            "duration": 139,
+            "name": "self"
+          },
+          {
+            "startTime": 17236.30000001192,
+            "duration": 139,
+            "name": "self"
+          },
+          {
+            "startTime": 17375.40000000596,
+            "duration": 140,
+            "name": "self"
+          },
+          {
+            "startTime": 17516.70000001788,
+            "duration": 137,
+            "name": "self"
+          },
+          {
+            "startTime": 17654.30000001192,
+            "duration": 326,
+            "name": "self"
+          },
+          {
+            "startTime": 18014.80000001192,
+            "duration": 344,
+            "name": "self"
+          },
+          {
+            "startTime": 18405.90000000596,
+            "duration": 295,
+            "name": "self"
+          },
+          {
+            "startTime": 18702.20000001788,
+            "duration": 307,
+            "name": "self"
+          },
+          {
+            "startTime": 19009.40000000596,
+            "duration": 290,
+            "name": "self"
+          },
+          {
+            "startTime": 19343,
+            "duration": 301,
+            "name": "self"
+          },
+          {
+            "startTime": 19645.5,
+            "duration": 296,
+            "name": "self"
+          },
+          {
+            "startTime": 19942.30000001192,
+            "duration": 296,
+            "name": "self"
+          },
+          {
+            "startTime": 20238.600000023842,
+            "duration": 286,
+            "name": "self"
+          },
+          {
+            "startTime": 20524.80000001192,
+            "duration": 294,
+            "name": "self"
+          },
+          {
+            "startTime": 20818.90000000596,
+            "duration": 307,
+            "name": "self"
+          },
+          {
+            "startTime": 21126.40000000596,
+            "duration": 294,
+            "name": "self"
+          },
+          {
+            "startTime": 21420.70000001788,
+            "duration": 297,
+            "name": "self"
+          },
+          {
+            "startTime": 21717.90000000596,
+            "duration": 300,
+            "name": "self"
+          },
+          {
+            "startTime": 22018.40000000596,
+            "duration": 294,
+            "name": "self"
+          },
+          {
+            "startTime": 22312.70000001788,
+            "duration": 293,
+            "name": "self"
+          },
+          {
+            "startTime": 22606.100000023842,
+            "duration": 287,
+            "name": "self"
+          },
+          {
+            "startTime": 22893.5,
+            "duration": 287,
+            "name": "self"
+          },
+          {
+            "startTime": 23181.30000001192,
+            "duration": 295,
+            "name": "self"
+          },
+          {
+            "startTime": 23476.90000000596,
+            "duration": 297,
+            "name": "self"
+          },
+          {
+            "startTime": 23774,
+            "duration": 297,
+            "name": "self"
+          },
+          {
+            "startTime": 24071.40000000596,
+            "duration": 289,
+            "name": "self"
+          },
+          {
+            "startTime": 24361,
+            "duration": 320,
+            "name": "self"
+          },
+          {
+            "startTime": 24681.70000001788,
+            "duration": 302,
+            "name": "self"
+          },
+          {
+            "startTime": 24984.600000023842,
+            "duration": 301,
+            "name": "self"
+          },
+          {
+            "startTime": 25286.20000001788,
+            "duration": 292,
+            "name": "self"
+          },
+          {
+            "startTime": 25578.40000000596,
+            "duration": 291,
+            "name": "self"
+          },
+          {
+            "startTime": 25870.600000023842,
+            "duration": 299,
+            "name": "self"
+          }
+        ]
+      },
+      "heapBefore": {
+        "usedJSHeapSize": 156082369,
+        "totalJSHeapSize": 209653665,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapAfter": {
+        "usedJSHeapSize": 217694744,
+        "totalJSHeapSize": 269768860,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3002/fonts/Open%20Sans%20Regular/0-255.pbf",
+          "startTime": 14371.700000017881,
+          "duration": 31.799999982118607,
+          "initiatorType": "fetch",
+          "transferSize": 74996,
+          "encodedBodySize": 74696,
+          "decodedBodySize": 74696
+        },
+        {
+          "name": "http://127.0.0.1:3002/fonts/Noto%20Sans%20KR/NotoSansCJKkr-Regular.otf",
+          "startTime": 14373.5,
+          "duration": 4225,
+          "initiatorType": "css",
+          "transferSize": 13672034,
+          "encodedBodySize": 13671734,
+          "decodedBodySize": 16433112
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/3.pbf.gz",
+          "startTime": 14425.100000023842,
+          "duration": 138.89999997615814,
+          "initiatorType": "fetch",
+          "transferSize": 1000516,
+          "encodedBodySize": 1000216,
+          "decodedBodySize": 1000216
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/2.pbf.gz",
+          "startTime": 14425.40000000596,
+          "duration": 174,
+          "initiatorType": "fetch",
+          "transferSize": 196305,
+          "encodedBodySize": 196005,
+          "decodedBodySize": 196005
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/3.pbf.gz",
+          "startTime": 14425.700000017881,
+          "duration": 191.09999999403954,
+          "initiatorType": "fetch",
+          "transferSize": 126359,
+          "encodedBodySize": 126059,
+          "decodedBodySize": 126059
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/2.pbf.gz",
+          "startTime": 14425.90000000596,
+          "duration": 229.30000001192093,
+          "initiatorType": "fetch",
+          "transferSize": 87067,
+          "encodedBodySize": 86767,
+          "decodedBodySize": 86767
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/3.pbf.gz",
+          "startTime": 14426.200000017881,
+          "duration": 237,
+          "initiatorType": "fetch",
+          "transferSize": 8999,
+          "encodedBodySize": 8699,
+          "decodedBodySize": 8699
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/2.pbf.gz",
+          "startTime": 14426.40000000596,
+          "duration": 278.80000001192093,
+          "initiatorType": "fetch",
+          "transferSize": 19670,
+          "encodedBodySize": 19370,
+          "decodedBodySize": 19370
+        }
+      ],
+      "resourceTotals": {
+        "fonts": {
+          "requests": 2,
+          "transferBytes": 13747030,
+          "encodedBodyBytes": 13746430,
+          "httpDecodedBodyBytes": 16507808
+        },
+        "vectorTiles": {
+          "requests": 6,
+          "transferBytes": 1438916,
+          "encodedBodyBytes": 1437116,
+          "httpDecodedBodyBytes": 1437116
+        }
+      },
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "counts": {
+          "countries": 247,
+          "cells": 8005,
+          "edges": 26273
+        },
+        "selectedCountryId": null,
+        "debugBoundaries": false,
+        "baseStatus": "ready",
+        "worldStatus": "ready",
+        "detailStatus": "idle",
+        "appliedRevision": 0
+      },
+      "center": [
+        104.5,
+        35
+      ],
+      "zoom": 3.3,
+      "updateStats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 7769,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "resyncRequired": false
+      },
+      "exactCells": [],
+      "exactEdges": [],
+      "renderSettled": true
+    },
+    {
+      "name": "select-china-z3.3",
+      "startTime": 26201.30000001192,
+      "endTime": 41182.80000001192,
+      "durationMs": 14981.5,
+      "frames": {
+        "count": 248,
+        "medianMs": 16.69999999999709,
+        "p95Ms": 283.40000000000146,
+        "maximumMs": 1750,
+        "over50ms": 21,
+        "over100ms": 18,
+        "intervalsMs": [
+          16.700000000000728,
+          500,
+          299.8999999999978,
+          283.40000000000146,
+          300,
+          16.599999999998545,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.700000000000728,
+          16.700000000000728,
+          16.599999999998545,
+          16.700000000000728,
+          16.600000000002183,
+          16.799999999999272,
+          16.599999999998545,
+          16.600000000002183,
+          16.69999999999709,
+          216.70000000000073,
+          16.700000000000728,
+          1233.2999999999993,
+          16.600000000002183,
+          16.69999999999709,
+          16.600000000002183,
+          16.700000000000728,
+          66.69999999999709,
+          16.600000000002183,
+          16.700000000000728,
+          16.599999999998545,
+          16.700000000000728,
+          16.700000000000728,
+          116.69999999999709,
+          16.600000000002183,
+          16.700000000000728,
+          16.599999999998545,
+          16.700000000000728,
+          16.700000000000728,
+          133.29999999999927,
+          16.700000000000728,
+          16.69999999999709,
+          16.600000000002183,
+          16.700000000000728,
+          133.29999999999927,
+          16.599999999998545,
+          16.700000000000728,
+          16.700000000000728,
+          16.599999999998545,
+          16.700000000000728,
+          116.70000000000073,
+          16.599999999998545,
+          16.700000000000728,
+          16.700000000000728,
+          16.700000000000728,
+          16.599999999998545,
+          16.599999999998545,
+          16.700000000000728,
+          1750,
+          16.700000000000728,
+          16.700000000000728,
+          16.5,
+          16.799999999999272,
+          16.599999999998545,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.700000000000728,
+          16.700000000000728,
+          16.700000000000728,
+          16.5,
+          16.700000000000728,
+          16.69999999999709,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.600000000002183,
+          16.799999999999272,
+          16.599999999998545,
+          16.600000000002183,
+          16.799999999999272,
+          16.599999999998545,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.700000000000728,
+          16.600000000002183,
+          16.69999999999709,
+          16.700000000000728,
+          16.700000000000728,
+          16.599999999998545,
+          16.599999999998545,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.599999999998545,
+          16.80000000000291,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.599999999998545,
+          16.80000000000291,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          933.3000000000029,
+          16.599999999998545,
+          16.69999999999709,
+          16.60000000000582,
+          16.69999999999709,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.69999999999709,
+          16.60000000000582,
+          16.69999999999709,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.60000000000582,
+          16.69999999999709,
+          16.69999999999709,
+          16.60000000000582,
+          16.69999999999709,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.60000000000582,
+          650,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.69999999999709,
+          16.60000000000582,
+          16.69999999999709,
+          16.69999999999709,
+          16.60000000000582,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.599999999998545,
+          16.799999999995634,
+          16.60000000000582,
+          16.69999999999709,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.69999999999709,
+          16.5,
+          16.700000000004366,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          716.6999999999971,
+          16.599999999998545,
+          16.700000000004366,
+          16.69999999999709,
+          16.700000000004366,
+          16.599999999998545,
+          16.69999999999709,
+          16.700000000004366,
+          16.69999999999709,
+          16.599999999998545,
+          16.599999999998545,
+          766.7000000000044,
+          850,
+          983.2999999999956,
+          949.9000000000015,
+          33.30000000000291,
+          83.40000000000146,
+          99.89999999999418
+        ]
+      },
+      "longTasks": {
+        "count": 26,
+        "totalWithinPhaseMs": 11180,
+        "maximumMs": 1239,
+        "entries": [
+          {
+            "startTime": 26213.30000001192,
+            "duration": 494,
+            "name": "self"
+          },
+          {
+            "startTime": 26712.40000000596,
+            "duration": 294,
+            "name": "self"
+          },
+          {
+            "startTime": 27010.600000023842,
+            "duration": 287,
+            "name": "self"
+          },
+          {
+            "startTime": 27299.70000001788,
+            "duration": 297,
+            "name": "self"
+          },
+          {
+            "startTime": 27804.80000001192,
+            "duration": 219,
+            "name": "self"
+          },
+          {
+            "startTime": 28044.90000000596,
+            "duration": 1239,
+            "name": "self"
+          },
+          {
+            "startTime": 29332.40000000596,
+            "duration": 77,
+            "name": "self"
+          },
+          {
+            "startTime": 29489.20000001788,
+            "duration": 124,
+            "name": "self"
+          },
+          {
+            "startTime": 29695.5,
+            "duration": 135,
+            "name": "self"
+          },
+          {
+            "startTime": 29897.90000000596,
+            "duration": 128,
+            "name": "self"
+          },
+          {
+            "startTime": 30103.600000023842,
+            "duration": 130,
+            "name": "self"
+          },
+          {
+            "startTime": 30345.30000001192,
+            "duration": 1230,
+            "name": "self"
+          },
+          {
+            "startTime": 31576,
+            "duration": 524,
+            "name": "self"
+          },
+          {
+            "startTime": 33713,
+            "duration": 644,
+            "name": "self"
+          },
+          {
+            "startTime": 34357.70000001788,
+            "duration": 301,
+            "name": "self"
+          },
+          {
+            "startTime": 35143.40000000596,
+            "duration": 363,
+            "name": "self"
+          },
+          {
+            "startTime": 35506.40000000596,
+            "duration": 301,
+            "name": "self"
+          },
+          {
+            "startTime": 36504.80000001192,
+            "duration": 121,
+            "name": "self"
+          },
+          {
+            "startTime": 36626.70000001788,
+            "duration": 612,
+            "name": "self"
+          },
+          {
+            "startTime": 37389.80000001192,
+            "duration": 57,
+            "name": "self"
+          },
+          {
+            "startTime": 37447.20000001788,
+            "duration": 727,
+            "name": "self"
+          },
+          {
+            "startTime": 38214.90000000596,
+            "duration": 817,
+            "name": "self"
+          },
+          {
+            "startTime": 39062.60000002384,
+            "duration": 949,
+            "name": "self"
+          },
+          {
+            "startTime": 40025.30000001192,
+            "duration": 945,
+            "name": "self"
+          },
+          {
+            "startTime": 40980.80000001192,
+            "duration": 87,
+            "name": "self"
+          },
+          {
+            "startTime": 41094.30000001192,
+            "duration": 78,
+            "name": "self"
+          }
+        ]
+      },
+      "heapBefore": {
+        "usedJSHeapSize": 218225469,
+        "totalJSHeapSize": 269769717,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "heapAfter": {
+        "usedJSHeapSize": 899167675,
+        "totalJSHeapSize": 968685603,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/countries/CHN.json.gz",
+          "startTime": 26212.90000000596,
+          "duration": 55.30000001192093,
+          "initiatorType": "fetch",
+          "transferSize": 138430,
+          "encodedBodySize": 138130,
+          "decodedBodySize": 138130
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz",
+          "startTime": 27614.5,
+          "duration": 130.2000000178814,
+          "initiatorType": "fetch",
+          "transferSize": 23664464,
+          "encodedBodySize": 23664164,
+          "decodedBodySize": 23664164
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/000.json.gz",
+          "startTime": 29284,
+          "duration": 29.200000017881393,
+          "initiatorType": "fetch",
+          "transferSize": 1049670,
+          "encodedBodySize": 1049370,
+          "decodedBodySize": 1049370
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/001.json.gz",
+          "startTime": 29409.40000000596,
+          "duration": 40.099999994039536,
+          "initiatorType": "fetch",
+          "transferSize": 2085290,
+          "encodedBodySize": 2084990,
+          "decodedBodySize": 2084990
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/002.json.gz",
+          "startTime": 29613.20000001788,
+          "duration": 28.799999982118607,
+          "initiatorType": "fetch",
+          "transferSize": 3005144,
+          "encodedBodySize": 3004844,
+          "decodedBodySize": 3004844
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/003.json.gz",
+          "startTime": 29831,
+          "duration": 24.600000023841858,
+          "initiatorType": "fetch",
+          "transferSize": 3073299,
+          "encodedBodySize": 3072999,
+          "decodedBodySize": 3072999
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/004.json.gz",
+          "startTime": 30026.5,
+          "duration": 27.200000017881393,
+          "initiatorType": "fetch",
+          "transferSize": 2912370,
+          "encodedBodySize": 2912070,
+          "decodedBodySize": 2912070
+        },
+        {
+          "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/005.json.gz",
+          "startTime": 30234.20000001788,
+          "duration": 63.79999998211861,
+          "initiatorType": "fetch",
+          "transferSize": 2833227,
+          "encodedBodySize": 2832927,
+          "decodedBodySize": 2832927
+        }
+      ],
+      "resourceTotals": {
+        "applicationAndMetadata": {
+          "requests": 1,
+          "transferBytes": 138430,
+          "encodedBodyBytes": 138130,
+          "httpDecodedBodyBytes": 138130
+        },
+        "fullChinaExact": {
+          "requests": 1,
+          "transferBytes": 23664464,
+          "encodedBodyBytes": 23664164,
+          "httpDecodedBodyBytes": 23664164
+        },
+        "otherExact": {
+          "requests": 6,
+          "transferBytes": 14959000,
+          "encodedBodyBytes": 14957200,
+          "httpDecodedBodyBytes": 14957200
+        }
+      },
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "counts": {
+          "countries": 247,
+          "cells": 8005,
+          "edges": null
+        },
+        "selectedCountryId": "CHN",
+        "debugBoundaries": false,
+        "baseStatus": "loading",
+        "worldStatus": "syncing",
+        "detailStatus": "idle",
+        "appliedRevision": null
+      },
+      "center": [
+        45,
+        25
+      ],
+      "zoom": 1,
+      "updateStats": null,
+      "exactCells": [],
+      "exactEdges": [],
+      "renderSettled": false
+    }
+  ],
+  "requests": [
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/_0j_9op0._.css",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/_1anvha4._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/turbopack-_08bm286._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/_219uq1s._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/src_lib_0_abdj8._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/src_components_03h2rfc._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/src_stores_game-setup-store_ts_0vcke35._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/data_runtime_operational-catalog_current_json_%5Bjson%5D_cjs_14uxah9._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_maplibre-gl_dist_maplibre-gl_1w0u9x2.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_zod_v4_06yv92s._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_0jbk0j2._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/simulation/game",
+      "method": "POST"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/world/catalog/operational/cells",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/world/catalog/operational/map",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tile-index.json",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail-index.json",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/edge-incidence.bin.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/world/labels",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/fonts/Open%20Sans%20Regular/0-255.pbf",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/fonts/Noto%20Sans%20KR/NotoSansCJKkr-Regular.otf",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/3.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/3.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/3.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/countries/CHN.json.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/000.json.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/001.json.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/002.json.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/003.json.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/004.json.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/005.json.gz",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/?_rsc=bFe_VC0g8VplWXKP",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/api/world/catalog/operational/map",
+      "method": "GET"
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/__nextjs_font/geist-latin.woff2",
+      "method": "GET"
+    }
+  ],
+  "responses": [
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/_0j_9op0._.css",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/_1anvha4._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/_219uq1s._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/turbopack-_08bm286._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/src_stores_game-setup-store_ts_0vcke35._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/data_runtime_operational-catalog_current_json_%5Bjson%5D_cjs_14uxah9._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/src_components_03h2rfc._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_0jbk0j2._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/src_lib_0_abdj8._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_zod_v4_06yv92s._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/node_modules_maplibre-gl_dist_maplibre-gl_1w0u9x2.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/simulation/game",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/world/catalog/operational/cells",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/world/catalog/operational/map",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tile-index.json",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail-index.json",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/edge-incidence.bin.gz",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/api/world/labels",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/0.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/1.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "navigation",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/fonts/Open%20Sans%20Regular/0-255.pbf",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/3.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/2.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/3.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/2.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/3.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/2.pbf.gz",
+      "status": 200
+    },
+    {
+      "phase": "china-pan-zoom",
+      "url": "http://127.0.0.1:3002/fonts/Noto%20Sans%20KR/NotoSansCJKkr-Regular.otf",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/countries/CHN.json.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/000.json.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/001.json.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/002.json.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/003.json.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/004.json.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/005.json.gz",
+      "status": 200
+    },
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/?_rsc=bFe_VC0g8VplWXKP",
+      "status": 200
+    }
+  ],
+  "failedRequests": [
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/?_rsc=bFe_VC0g8VplWXKP",
+      "error": "net::ERR_ABORTED",
+      "ordinaryCancellation": true
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "screenshots": [],
+  "failures": [
+    {
+      "message": "SCREENSHOT_HAS_NO_RENDERED_LAND",
+      "stack": "Error: SCREENSHOT_HAS_NO_RENDERED_LAND\n    at check (file:///D:/gen/scripts/chn-2020/verify-interaction-performance.mjs:33:62)\n    at screenshot (file:///D:/gen/scripts/chn-2020/verify-interaction-performance.mjs:119:3)\n    at async file:///D:/gen/scripts/chn-2020/verify-interaction-performance.mjs:160:3"
+    },
+    {
+      "message": "INPUT_CHANGED_DURING_MEASUREMENT",
+      "path": "scripts/chn-2020/verify-interaction-performance.mjs"
+    },
+    {
+      "message": "INPUT_CHANGED_DURING_MEASUREMENT",
+      "path": "src/lib/map/operational-vector-delivery.ts"
+    }
+  ],
+  "mapReady": {
+    "wallMs": 4943.4276,
+    "time": 4941.100000023842,
+    "heap": {
+      "usedJSHeapSize": 140092462,
+      "totalJSHeapSize": 189949530,
+      "jsHeapSizeLimit": 4395630592
+    },
+    "state": {
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+        "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+        "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+        "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+      },
+      "revision": 0,
+      "simulationRevision": 0,
+      "counts": {
+        "countries": 247,
+        "cells": 8005,
+        "edges": 26273
+      },
+      "selectedCountryId": null,
+      "debugBoundaries": false,
+      "baseStatus": "ready",
+      "worldStatus": "ready",
+      "detailStatus": "idle",
+      "appliedRevision": 0
+    },
+    "center": [
+      45,
+      25
+    ],
+    "zoom": 1,
+    "updateStats": {
+      "fullProjectionBuilds": 1,
+      "updates": 0,
+      "cellsUpdated": 7732,
+      "edgesExamined": 0,
+      "exactCellsAdded": 0,
+      "exactFrontsAdded": 0,
+      "exactFrontsRemoved": 0,
+      "exactCells": 0,
+      "exactFronts": 0,
+      "resyncRequired": false
+    },
+    "exactCells": [],
+    "exactEdges": [],
+    "renderSettled": true
+  },
+  "final": {
+    "time": 41278.90000000596,
+    "longTasksSupported": true,
+    "frames": {
+      "count": 463,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 300,
+      "maximumMs": 1750,
+      "over50ms": 141,
+      "over100ms": 129,
+      "intervalsMs": [
+        50,
+        16.700000000000017,
+        99.99999999999997,
+        16.700000000000045,
+        16.599999999999966,
+        16.69999999999999,
+        16.700000000000045,
+        16.599999999999966,
+        50,
+        16.600000000000023,
+        16.80000000000001,
+        16.599999999999966,
+        16.69999999999999,
+        16.600000000000023,
+        83.39999999999998,
+        83.30000000000007,
+        100,
+        16.59999999999991,
+        16.700000000000045,
+        16.700000000000045,
+        16.699999999999932,
+        16.600000000000023,
+        16.700000000000045,
+        16.699999999999932,
+        16.600000000000023,
+        16.700000000000045,
+        16.59999999999991,
+        16.800000000000068,
+        33.299999999999955,
+        16.699999999999932,
+        16.600000000000136,
+        66.70000000000005,
+        33.299999999999955,
+        16.59999999999991,
+        50,
+        100.10000000000014,
+        66.69999999999982,
+        33.200000000000045,
+        33.299999999999955,
+        83.40000000000009,
+        66.59999999999991,
+        133.5,
+        99.90000000000009,
+        116.70000000000005,
+        50,
+        33.299999999999955,
+        50,
+        16.699999999999818,
+        16.600000000000364,
+        16.699999999999818,
+        16.59999999999991,
+        16.700000000000273,
+        16.699999999999818,
+        16.59999999999991,
+        16.700000000000273,
+        16.699999999999818,
+        16.59999999999991,
+        16.700000000000273,
+        16.699999999999818,
+        16.59999999999991,
+        16.700000000000273,
+        16.59999999999991,
+        16.699999999999818,
+        16.700000000000273,
+        16.699999999999818,
+        16.59999999999991,
+        16.700000000000273,
+        16.699999999999818,
+        16.59999999999991,
+        16.700000000000273,
+        16.59999999999991,
+        16.799999999999727,
+        16.700000000000273,
+        16.5,
+        16.699999999999818,
+        16.700000000000273,
+        16.59999999999991,
+        16.699999999999818,
+        16.700000000000273,
+        16.59999999999991,
+        16.699999999999818,
+        16.700000000000273,
+        16.59999999999991,
+        16.799999999999727,
+        16.600000000000364,
+        16.59999999999991,
+        16.699999999999818,
+        16.700000000000273,
+        16.59999999999991,
+        16.799999999999727,
+        16.5,
+        16.700000000000273,
+        16.699999999999818,
+        16.700000000000273,
+        533.2999999999997,
+        283.3000000000002,
+        233.4000000000001,
+        183.30000000000018,
+        16.699999999999818,
+        199.89999999999964,
+        200.10000000000036,
+        199.89999999999964,
+        183.40000000000055,
+        16.699999999999818,
+        16.5,
+        16.699999999999818,
+        166.69999999999982,
+        183.30000000000018,
+        166.69999999999982,
+        183.30000000000018,
+        166.69999999999982,
+        183.30000000000018,
+        183.30000000000018,
+        166.69999999999982,
+        166.69999999999982,
+        166.60000000000036,
+        183.39999999999964,
+        166.60000000000036,
+        166.59999999999945,
+        166.70000000000073,
+        200,
+        166.69999999999982,
+        183.30000000000018,
+        183.29999999999927,
+        166.70000000000073,
+        183.29999999999927,
+        183.3000000000011,
+        183.29999999999927,
+        183.39999999999964,
+        183.3000000000011,
+        166.59999999999854,
+        183.40000000000146,
+        183.29999999999927,
+        166.60000000000036,
+        283.39999999999964,
+        200,
+        216.70000000000073,
+        199.89999999999964,
+        200,
+        200.10000000000036,
+        199.89999999999964,
+        200,
+        183.39999999999964,
+        200,
+        200,
+        183.29999999999927,
+        200,
+        199.90000000000146,
+        183.39999999999964,
+        200,
+        199.89999999999964,
+        166.70000000000073,
+        166.59999999999854,
+        183.40000000000146,
+        166.6999999999989,
+        166.60000000000036,
+        16.700000000000728,
+        16.69999999999891,
+        16.600000000000364,
+        116.70000000000073,
+        200,
+        133.29999999999927,
+        150,
+        150,
+        150,
+        150,
+        233.29999999999927,
+        150,
+        150,
+        150,
+        150,
+        133.3000000000011,
+        133.3000000000011,
+        150,
+        133.39999999999782,
+        133.29999999999927,
+        150,
+        133.3000000000029,
+        133.29999999999927,
+        150,
+        133.29999999999927,
+        466.7000000000007,
+        383.2999999999993,
+        333.2999999999993,
+        316.7000000000007,
+        283.2999999999993,
+        350,
+        300,
+        300,
+        283.2999999999993,
+        283.3000000000029,
+        316.6999999999971,
+        283.3000000000029,
+        300,
+        299.8999999999978,
+        300.1000000000022,
+        300,
+        283.2999999999993,
+        283.2999999999993,
+        300,
+        300,
+        300,
+        283.2000000000007,
+        316.7000000000007,
+        300,
+        300,
+        300,
+        283.2999999999993,
+        300,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        500,
+        299.8999999999978,
+        283.40000000000146,
+        300,
+        16.599999999998545,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.600000000002183,
+        16.799999999999272,
+        16.599999999998545,
+        16.600000000002183,
+        16.69999999999709,
+        216.70000000000073,
+        16.700000000000728,
+        1233.2999999999993,
+        16.600000000002183,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        66.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        116.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        133.29999999999927,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        133.29999999999927,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        116.70000000000073,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000000728,
+        1750,
+        16.700000000000728,
+        16.700000000000728,
+        16.5,
+        16.799999999999272,
+        16.599999999998545,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        16.5,
+        16.700000000000728,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.600000000002183,
+        16.799999999999272,
+        16.599999999998545,
+        16.600000000002183,
+        16.799999999999272,
+        16.599999999998545,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.69999999999709,
+        16.700000000000728,
+        16.700000000000728,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.599999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        933.3000000000029,
+        16.599999999998545,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.60000000000582,
+        650,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.599999999998545,
+        16.799999999995634,
+        16.60000000000582,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.69999999999709,
+        16.5,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        716.6999999999971,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.599999999998545,
+        766.7000000000044,
+        850,
+        983.2999999999956,
+        949.9000000000015,
+        33.30000000000291,
+        83.40000000000146,
+        99.89999999999418,
+        16.700000000004366,
+        33.299999999995634,
+        33.400000000001455,
+        16.599999999998545
+      ]
+    },
+    "longTasks": [
+      {
+        "startTime": 222.40000000596046,
+        "duration": 101,
+        "name": "self"
+      },
+      {
+        "startTime": 399.40000000596046,
+        "duration": 60,
+        "name": "self"
+      },
+      {
+        "startTime": 557.4000000059605,
+        "duration": 70,
+        "name": "self"
+      },
+      {
+        "startTime": 627.7000000178814,
+        "duration": 55,
+        "name": "self"
+      },
+      {
+        "startTime": 729.4000000059605,
+        "duration": 78,
+        "name": "self"
+      },
+      {
+        "startTime": 977.8000000119209,
+        "duration": 52,
+        "name": "self"
+      },
+      {
+        "startTime": 1265.300000011921,
+        "duration": 73,
+        "name": "self"
+      },
+      {
+        "startTime": 1607.800000011921,
+        "duration": 64,
+        "name": "self"
+      },
+      {
+        "startTime": 1744.9000000059605,
+        "duration": 103,
+        "name": "self"
+      },
+      {
+        "startTime": 1851.300000011921,
+        "duration": 110,
+        "name": "self"
+      },
+      {
+        "startTime": 2861,
+        "duration": 227,
+        "name": "self"
+      },
+      {
+        "startTime": 3088.4000000059605,
+        "duration": 319,
+        "name": "self"
+      },
+      {
+        "startTime": 3515.800000011921,
+        "duration": 182,
+        "name": "self"
+      },
+      {
+        "startTime": 3724.2000000178814,
+        "duration": 198,
+        "name": "self"
+      },
+      {
+        "startTime": 3922.300000011921,
+        "duration": 196,
+        "name": "self"
+      },
+      {
+        "startTime": 4122.200000017881,
+        "duration": 202,
+        "name": "self"
+      },
+      {
+        "startTime": 4327.100000023842,
+        "duration": 207,
+        "name": "self"
+      },
+      {
+        "startTime": 4535.4000000059605,
+        "duration": 188,
+        "name": "self"
+      },
+      {
+        "startTime": 4724.4000000059605,
+        "duration": 189,
+        "name": "self"
+      },
+      {
+        "startTime": 4956.200000017881,
+        "duration": 173,
+        "name": "self"
+      },
+      {
+        "startTime": 5133.4000000059605,
+        "duration": 175,
+        "name": "self"
+      },
+      {
+        "startTime": 5311.4000000059605,
+        "duration": 170,
+        "name": "self"
+      },
+      {
+        "startTime": 5485,
+        "duration": 172,
+        "name": "self"
+      },
+      {
+        "startTime": 5660.700000017881,
+        "duration": 175,
+        "name": "self"
+      },
+      {
+        "startTime": 5839.5,
+        "duration": 173,
+        "name": "self"
+      },
+      {
+        "startTime": 6016,
+        "duration": 180,
+        "name": "self"
+      },
+      {
+        "startTime": 6200.600000023842,
+        "duration": 166,
+        "name": "self"
+      },
+      {
+        "startTime": 6367.100000023842,
+        "duration": 164,
+        "name": "self"
+      },
+      {
+        "startTime": 6532.100000023842,
+        "duration": 169,
+        "name": "self"
+      },
+      {
+        "startTime": 6702.200000017881,
+        "duration": 172,
+        "name": "self"
+      },
+      {
+        "startTime": 6874.5,
+        "duration": 170,
+        "name": "self"
+      },
+      {
+        "startTime": 7045.300000011921,
+        "duration": 168,
+        "name": "self"
+      },
+      {
+        "startTime": 7214.100000023842,
+        "duration": 172,
+        "name": "self"
+      },
+      {
+        "startTime": 7387.100000023842,
+        "duration": 185,
+        "name": "self"
+      },
+      {
+        "startTime": 7572.9000000059605,
+        "duration": 178,
+        "name": "self"
+      },
+      {
+        "startTime": 7751.600000023842,
+        "duration": 175,
+        "name": "self"
+      },
+      {
+        "startTime": 7926.9000000059605,
+        "duration": 183,
+        "name": "self"
+      },
+      {
+        "startTime": 8110.100000023842,
+        "duration": 173,
+        "name": "self"
+      },
+      {
+        "startTime": 8283.200000017881,
+        "duration": 177,
+        "name": "self"
+      },
+      {
+        "startTime": 8464.40000000596,
+        "duration": 178,
+        "name": "self"
+      },
+      {
+        "startTime": 8646,
+        "duration": 179,
+        "name": "self"
+      },
+      {
+        "startTime": 8828.90000000596,
+        "duration": 181,
+        "name": "self"
+      },
+      {
+        "startTime": 9013.600000023842,
+        "duration": 176,
+        "name": "self"
+      },
+      {
+        "startTime": 9193.800000011921,
+        "duration": 176,
+        "name": "self"
+      },
+      {
+        "startTime": 9372.700000017881,
+        "duration": 175,
+        "name": "self"
+      },
+      {
+        "startTime": 9548.200000017881,
+        "duration": 175,
+        "name": "self"
+      },
+      {
+        "startTime": 9726.200000017881,
+        "duration": 176,
+        "name": "self"
+      },
+      {
+        "startTime": 9905.600000023842,
+        "duration": 271,
+        "name": "self"
+      },
+      {
+        "startTime": 10182.300000011921,
+        "duration": 197,
+        "name": "self"
+      },
+      {
+        "startTime": 10386.700000017881,
+        "duration": 201,
+        "name": "self"
+      },
+      {
+        "startTime": 10588.800000011921,
+        "duration": 202,
+        "name": "self"
+      },
+      {
+        "startTime": 10791.600000023842,
+        "duration": 200,
+        "name": "self"
+      },
+      {
+        "startTime": 10996.40000000596,
+        "duration": 202,
+        "name": "self"
+      },
+      {
+        "startTime": 11198.600000023842,
+        "duration": 193,
+        "name": "self"
+      },
+      {
+        "startTime": 11396.700000017881,
+        "duration": 196,
+        "name": "self"
+      },
+      {
+        "startTime": 11593.600000023842,
+        "duration": 192,
+        "name": "self"
+      },
+      {
+        "startTime": 11786.300000011921,
+        "duration": 196,
+        "name": "self"
+      },
+      {
+        "startTime": 11982.600000023842,
+        "duration": 194,
+        "name": "self"
+      },
+      {
+        "startTime": 12177.700000017881,
+        "duration": 188,
+        "name": "self"
+      },
+      {
+        "startTime": 12369.600000023842,
+        "duration": 192,
+        "name": "self"
+      },
+      {
+        "startTime": 12563,
+        "duration": 195,
+        "name": "self"
+      },
+      {
+        "startTime": 12761.200000017881,
+        "duration": 193,
+        "name": "self"
+      },
+      {
+        "startTime": 12954.40000000596,
+        "duration": 196,
+        "name": "self"
+      },
+      {
+        "startTime": 13150.700000017881,
+        "duration": 194,
+        "name": "self"
+      },
+      {
+        "startTime": 13348,
+        "duration": 168,
+        "name": "self"
+      },
+      {
+        "startTime": 13518.100000023842,
+        "duration": 169,
+        "name": "self"
+      },
+      {
+        "startTime": 13690.200000017881,
+        "duration": 168,
+        "name": "self"
+      },
+      {
+        "startTime": 13860.700000017881,
+        "duration": 170,
+        "name": "self"
+      },
+      {
+        "startTime": 14031.600000023842,
+        "duration": 161,
+        "name": "self"
+      },
+      {
+        "startTime": 14240,
+        "duration": 123,
+        "name": "self"
+      },
+      {
+        "startTime": 14428,
+        "duration": 134,
+        "name": "self"
+      },
+      {
+        "startTime": 14564.100000023842,
+        "duration": 133,
+        "name": "self"
+      },
+      {
+        "startTime": 14702.800000011921,
+        "duration": 136,
+        "name": "self"
+      },
+      {
+        "startTime": 14854,
+        "duration": 135,
+        "name": "self"
+      },
+      {
+        "startTime": 15013.5,
+        "duration": 138,
+        "name": "self"
+      },
+      {
+        "startTime": 15161.600000023842,
+        "duration": 136,
+        "name": "self"
+      },
+      {
+        "startTime": 15309.90000000596,
+        "duration": 224,
+        "name": "self"
+      },
+      {
+        "startTime": 15537.800000011921,
+        "duration": 141,
+        "name": "self"
+      },
+      {
+        "startTime": 15679.90000000596,
+        "duration": 148,
+        "name": "self"
+      },
+      {
+        "startTime": 15829.700000017881,
+        "duration": 151,
+        "name": "self"
+      },
+      {
+        "startTime": 15981.800000011921,
+        "duration": 141,
+        "name": "self"
+      },
+      {
+        "startTime": 16129.5,
+        "duration": 135,
+        "name": "self"
+      },
+      {
+        "startTime": 16265.100000023842,
+        "duration": 134,
+        "name": "self"
+      },
+      {
+        "startTime": 16400.90000000596,
+        "duration": 140,
+        "name": "self"
+      },
+      {
+        "startTime": 16541.100000023842,
+        "duration": 140,
+        "name": "self"
+      },
+      {
+        "startTime": 16681.40000000596,
+        "duration": 136,
+        "name": "self"
+      },
+      {
+        "startTime": 16818.30000001192,
+        "duration": 138,
+        "name": "self"
+      },
+      {
+        "startTime": 16957.40000000596,
+        "duration": 139,
+        "name": "self"
+      },
+      {
+        "startTime": 17096.70000001788,
+        "duration": 139,
+        "name": "self"
+      },
+      {
+        "startTime": 17236.30000001192,
+        "duration": 139,
+        "name": "self"
+      },
+      {
+        "startTime": 17375.40000000596,
+        "duration": 140,
+        "name": "self"
+      },
+      {
+        "startTime": 17516.70000001788,
+        "duration": 137,
+        "name": "self"
+      },
+      {
+        "startTime": 17654.30000001192,
+        "duration": 326,
+        "name": "self"
+      },
+      {
+        "startTime": 18014.80000001192,
+        "duration": 344,
+        "name": "self"
+      },
+      {
+        "startTime": 18405.90000000596,
+        "duration": 295,
+        "name": "self"
+      },
+      {
+        "startTime": 18702.20000001788,
+        "duration": 307,
+        "name": "self"
+      },
+      {
+        "startTime": 19009.40000000596,
+        "duration": 290,
+        "name": "self"
+      },
+      {
+        "startTime": 19343,
+        "duration": 301,
+        "name": "self"
+      },
+      {
+        "startTime": 19645.5,
+        "duration": 296,
+        "name": "self"
+      },
+      {
+        "startTime": 19942.30000001192,
+        "duration": 296,
+        "name": "self"
+      },
+      {
+        "startTime": 20238.600000023842,
+        "duration": 286,
+        "name": "self"
+      },
+      {
+        "startTime": 20524.80000001192,
+        "duration": 294,
+        "name": "self"
+      },
+      {
+        "startTime": 20818.90000000596,
+        "duration": 307,
+        "name": "self"
+      },
+      {
+        "startTime": 21126.40000000596,
+        "duration": 294,
+        "name": "self"
+      },
+      {
+        "startTime": 21420.70000001788,
+        "duration": 297,
+        "name": "self"
+      },
+      {
+        "startTime": 21717.90000000596,
+        "duration": 300,
+        "name": "self"
+      },
+      {
+        "startTime": 22018.40000000596,
+        "duration": 294,
+        "name": "self"
+      },
+      {
+        "startTime": 22312.70000001788,
+        "duration": 293,
+        "name": "self"
+      },
+      {
+        "startTime": 22606.100000023842,
+        "duration": 287,
+        "name": "self"
+      },
+      {
+        "startTime": 22893.5,
+        "duration": 287,
+        "name": "self"
+      },
+      {
+        "startTime": 23181.30000001192,
+        "duration": 295,
+        "name": "self"
+      },
+      {
+        "startTime": 23476.90000000596,
+        "duration": 297,
+        "name": "self"
+      },
+      {
+        "startTime": 23774,
+        "duration": 297,
+        "name": "self"
+      },
+      {
+        "startTime": 24071.40000000596,
+        "duration": 289,
+        "name": "self"
+      },
+      {
+        "startTime": 24361,
+        "duration": 320,
+        "name": "self"
+      },
+      {
+        "startTime": 24681.70000001788,
+        "duration": 302,
+        "name": "self"
+      },
+      {
+        "startTime": 24984.600000023842,
+        "duration": 301,
+        "name": "self"
+      },
+      {
+        "startTime": 25286.20000001788,
+        "duration": 292,
+        "name": "self"
+      },
+      {
+        "startTime": 25578.40000000596,
+        "duration": 291,
+        "name": "self"
+      },
+      {
+        "startTime": 25870.600000023842,
+        "duration": 299,
+        "name": "self"
+      },
+      {
+        "startTime": 26213.30000001192,
+        "duration": 494,
+        "name": "self"
+      },
+      {
+        "startTime": 26712.40000000596,
+        "duration": 294,
+        "name": "self"
+      },
+      {
+        "startTime": 27010.600000023842,
+        "duration": 287,
+        "name": "self"
+      },
+      {
+        "startTime": 27299.70000001788,
+        "duration": 297,
+        "name": "self"
+      },
+      {
+        "startTime": 27804.80000001192,
+        "duration": 219,
+        "name": "self"
+      },
+      {
+        "startTime": 28044.90000000596,
+        "duration": 1239,
+        "name": "self"
+      },
+      {
+        "startTime": 29332.40000000596,
+        "duration": 77,
+        "name": "self"
+      },
+      {
+        "startTime": 29489.20000001788,
+        "duration": 124,
+        "name": "self"
+      },
+      {
+        "startTime": 29695.5,
+        "duration": 135,
+        "name": "self"
+      },
+      {
+        "startTime": 29897.90000000596,
+        "duration": 128,
+        "name": "self"
+      },
+      {
+        "startTime": 30103.600000023842,
+        "duration": 130,
+        "name": "self"
+      },
+      {
+        "startTime": 30345.30000001192,
+        "duration": 1230,
+        "name": "self"
+      },
+      {
+        "startTime": 31576,
+        "duration": 524,
+        "name": "self"
+      },
+      {
+        "startTime": 33713,
+        "duration": 644,
+        "name": "self"
+      },
+      {
+        "startTime": 34357.70000001788,
+        "duration": 301,
+        "name": "self"
+      },
+      {
+        "startTime": 35143.40000000596,
+        "duration": 363,
+        "name": "self"
+      },
+      {
+        "startTime": 35506.40000000596,
+        "duration": 301,
+        "name": "self"
+      },
+      {
+        "startTime": 36504.80000001192,
+        "duration": 121,
+        "name": "self"
+      },
+      {
+        "startTime": 36626.70000001788,
+        "duration": 612,
+        "name": "self"
+      },
+      {
+        "startTime": 37389.80000001192,
+        "duration": 57,
+        "name": "self"
+      },
+      {
+        "startTime": 37447.20000001788,
+        "duration": 727,
+        "name": "self"
+      },
+      {
+        "startTime": 38214.90000000596,
+        "duration": 817,
+        "name": "self"
+      },
+      {
+        "startTime": 39062.60000002384,
+        "duration": 949,
+        "name": "self"
+      },
+      {
+        "startTime": 40025.30000001192,
+        "duration": 945,
+        "name": "self"
+      },
+      {
+        "startTime": 40980.80000001192,
+        "duration": 87,
+        "name": "self"
+      },
+      {
+        "startTime": 41094.30000001192,
+        "duration": 78,
+        "name": "self"
+      }
+    ],
+    "resources": [
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/_0j_9op0._.css",
+        "startTime": 85.10000002384186,
+        "duration": 23,
+        "transferSize": 20198,
+        "encodedBodySize": 19898,
+        "decodedBodySize": 124494
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+        "startTime": 85.40000000596046,
+        "duration": 23.900000005960464,
+        "transferSize": 894,
+        "encodedBodySize": 594,
+        "decodedBodySize": 594
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+        "startTime": 85.5,
+        "duration": 92.10000002384186,
+        "transferSize": 184806,
+        "encodedBodySize": 184506,
+        "decodedBodySize": 1062157
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+        "startTime": 85.5,
+        "duration": 99.5,
+        "transferSize": 250244,
+        "encodedBodySize": 249944,
+        "decodedBodySize": 864176
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+        "startTime": 85.60000002384186,
+        "duration": 52.29999998211861,
+        "transferSize": 32489,
+        "encodedBodySize": 32189,
+        "decodedBodySize": 176854
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+        "startTime": 85.7000000178814,
+        "duration": 52.900000005960464,
+        "transferSize": 27306,
+        "encodedBodySize": 27006,
+        "decodedBodySize": 144344
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+        "startTime": 85.7000000178814,
+        "duration": 104.40000000596046,
+        "transferSize": 192696,
+        "encodedBodySize": 192396,
+        "decodedBodySize": 893406
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+        "startTime": 85.80000001192093,
+        "duration": 66,
+        "transferSize": 1040,
+        "encodedBodySize": 740,
+        "decodedBodySize": 1984
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+        "startTime": 85.80000001192093,
+        "duration": 52.400000005960464,
+        "transferSize": 33343,
+        "encodedBodySize": 33043,
+        "decodedBodySize": 159374
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/_1anvha4._.js",
+        "startTime": 85.90000000596046,
+        "duration": 64.09999999403954,
+        "transferSize": 1134,
+        "encodedBodySize": 834,
+        "decodedBodySize": 834
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/_219uq1s._.js",
+        "startTime": 85.90000000596046,
+        "duration": 73.09999999403954,
+        "transferSize": 979,
+        "encodedBodySize": 679,
+        "decodedBodySize": 679
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/turbopack-_08bm286._.js",
+        "startTime": 85.90000000596046,
+        "duration": 74.2000000178814,
+        "transferSize": 26349,
+        "encodedBodySize": 26049,
+        "decodedBodySize": 105168
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+        "startTime": 86,
+        "duration": 86.10000002384186,
+        "transferSize": 14893,
+        "encodedBodySize": 14593,
+        "decodedBodySize": 70692
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/src_lib_0_abdj8._.js",
+        "startTime": 86,
+        "duration": 120.60000002384186,
+        "transferSize": 110607,
+        "encodedBodySize": 110307,
+        "decodedBodySize": 799241
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/src_stores_game-setup-store_ts_0vcke35._.js",
+        "startTime": 86.2000000178814,
+        "duration": 99.7999999821186,
+        "transferSize": 1766,
+        "encodedBodySize": 1466,
+        "decodedBodySize": 6563
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/data_runtime_operational-catalog_current_json_%5Bjson%5D_cjs_14uxah9._.js",
+        "startTime": 86.2000000178814,
+        "duration": 104.09999999403954,
+        "transferSize": 1192,
+        "encodedBodySize": 892,
+        "decodedBodySize": 892
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/src_components_03h2rfc._.js",
+        "startTime": 86.2000000178814,
+        "duration": 110.2999999821186,
+        "transferSize": 46352,
+        "encodedBodySize": 46052,
+        "decodedBodySize": 482970
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_maplibre-gl_dist_maplibre-gl_1w0u9x2.js",
+        "startTime": 86.40000000596046,
+        "duration": 161,
+        "transferSize": 297664,
+        "encodedBodySize": 297364,
+        "decodedBodySize": 1655311
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_zod_v4_06yv92s._.js",
+        "startTime": 86.5,
+        "duration": 132.60000002384186,
+        "transferSize": 101382,
+        "encodedBodySize": 101082,
+        "decodedBodySize": 954570
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/node_modules_0jbk0j2._.js",
+        "startTime": 86.60000002384186,
+        "duration": 113.69999998807907,
+        "transferSize": 13024,
+        "encodedBodySize": 12724,
+        "decodedBodySize": 60930
+      },
+      {
+        "name": "http://127.0.0.1:3002/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+        "startTime": 317.30000001192093,
+        "duration": 13,
+        "transferSize": 4176,
+        "encodedBodySize": 3876,
+        "decodedBodySize": 15615
+      },
+      {
+        "name": "http://127.0.0.1:3002/api/simulation/game",
+        "startTime": 469.7000000178814,
+        "duration": 32.19999998807907,
+        "transferSize": 353305,
+        "encodedBodySize": 353005,
+        "decodedBodySize": 353005
+      },
+      {
+        "name": "http://127.0.0.1:3002/api/world/catalog/operational/cells",
+        "startTime": 470.2000000178814,
+        "duration": 42.099999994039536,
+        "transferSize": 291398,
+        "encodedBodySize": 291098,
+        "decodedBodySize": 680893
+      },
+      {
+        "name": "http://127.0.0.1:3002/api/world/catalog/operational/map",
+        "startTime": 756.4000000059605,
+        "duration": 83.40000000596046,
+        "transferSize": 52827,
+        "encodedBodySize": 52527,
+        "decodedBodySize": 52527
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json",
+        "startTime": 851.9000000059605,
+        "duration": 52.900000005960464,
+        "transferSize": 3452,
+        "encodedBodySize": 3152,
+        "decodedBodySize": 3152
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tile-index.json",
+        "startTime": 908.6000000238419,
+        "duration": 38.89999997615814,
+        "transferSize": 679914,
+        "encodedBodySize": 679614,
+        "decodedBodySize": 679614
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail-index.json",
+        "startTime": 959,
+        "duration": 16.700000017881393,
+        "transferSize": 116446,
+        "encodedBodySize": 116146,
+        "decodedBodySize": 116146
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/edge-incidence.bin.gz",
+        "startTime": 1030.4000000059605,
+        "duration": 16.5,
+        "transferSize": 83239,
+        "encodedBodySize": 82939,
+        "decodedBodySize": 82939
+      },
+      {
+        "name": "http://127.0.0.1:3002/api/world/labels",
+        "startTime": 1100.7000000178814,
+        "duration": 129.7999999821186,
+        "transferSize": 2608799,
+        "encodedBodySize": 2608499,
+        "decodedBodySize": 2608499
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/0.pbf.gz",
+        "startTime": 1186.1000000238419,
+        "duration": 58.39999997615814,
+        "transferSize": 925973,
+        "encodedBodySize": 925673,
+        "decodedBodySize": 925673
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/1.pbf.gz",
+        "startTime": 1187.4000000059605,
+        "duration": 87.59999999403954,
+        "transferSize": 63565,
+        "encodedBodySize": 63265,
+        "decodedBodySize": 63265
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+        "startTime": 1188.1000000238419,
+        "duration": 108.39999997615814,
+        "transferSize": 166751,
+        "encodedBodySize": 166451,
+        "decodedBodySize": 166451
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+        "startTime": 1189,
+        "duration": 96.7000000178814,
+        "transferSize": 166751,
+        "encodedBodySize": 166451,
+        "decodedBodySize": 166451
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+        "startTime": 1189.5,
+        "duration": 125.7000000178814,
+        "transferSize": 46758,
+        "encodedBodySize": 46458,
+        "decodedBodySize": 46458
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+        "startTime": 1190,
+        "duration": 136.40000000596046,
+        "transferSize": 46758,
+        "encodedBodySize": 46458,
+        "decodedBodySize": 46458
+      },
+      {
+        "name": "http://127.0.0.1:3002/fonts/Open%20Sans%20Regular/0-255.pbf",
+        "startTime": 14371.700000017881,
+        "duration": 31.799999982118607,
+        "transferSize": 74996,
+        "encodedBodySize": 74696,
+        "decodedBodySize": 74696
+      },
+      {
+        "name": "http://127.0.0.1:3002/fonts/Noto%20Sans%20KR/NotoSansCJKkr-Regular.otf",
+        "startTime": 14373.5,
+        "duration": 4225,
+        "transferSize": 13672034,
+        "encodedBodySize": 13671734,
+        "decodedBodySize": 16433112
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/3.pbf.gz",
+        "startTime": 14425.100000023842,
+        "duration": 138.89999997615814,
+        "transferSize": 1000516,
+        "encodedBodySize": 1000216,
+        "decodedBodySize": 1000216
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/2.pbf.gz",
+        "startTime": 14425.40000000596,
+        "duration": 174,
+        "transferSize": 196305,
+        "encodedBodySize": 196005,
+        "decodedBodySize": 196005
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/3.pbf.gz",
+        "startTime": 14425.700000017881,
+        "duration": 191.09999999403954,
+        "transferSize": 126359,
+        "encodedBodySize": 126059,
+        "decodedBodySize": 126059
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/2.pbf.gz",
+        "startTime": 14425.90000000596,
+        "duration": 229.30000001192093,
+        "transferSize": 87067,
+        "encodedBodySize": 86767,
+        "decodedBodySize": 86767
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/3.pbf.gz",
+        "startTime": 14426.200000017881,
+        "duration": 237,
+        "transferSize": 8999,
+        "encodedBodySize": 8699,
+        "decodedBodySize": 8699
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/2.pbf.gz",
+        "startTime": 14426.40000000596,
+        "duration": 278.80000001192093,
+        "transferSize": 19670,
+        "encodedBodySize": 19370,
+        "decodedBodySize": 19370
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/countries/CHN.json.gz",
+        "startTime": 26212.90000000596,
+        "duration": 55.30000001192093,
+        "transferSize": 138430,
+        "encodedBodySize": 138130,
+        "decodedBodySize": 138130
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz",
+        "startTime": 27614.5,
+        "duration": 130.2000000178814,
+        "transferSize": 23664464,
+        "encodedBodySize": 23664164,
+        "decodedBodySize": 23664164
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/000.json.gz",
+        "startTime": 29284,
+        "duration": 29.200000017881393,
+        "transferSize": 1049670,
+        "encodedBodySize": 1049370,
+        "decodedBodySize": 1049370
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/001.json.gz",
+        "startTime": 29409.40000000596,
+        "duration": 40.099999994039536,
+        "transferSize": 2085290,
+        "encodedBodySize": 2084990,
+        "decodedBodySize": 2084990
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/002.json.gz",
+        "startTime": 29613.20000001788,
+        "duration": 28.799999982118607,
+        "transferSize": 3005144,
+        "encodedBodySize": 3004844,
+        "decodedBodySize": 3004844
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/003.json.gz",
+        "startTime": 29831,
+        "duration": 24.600000023841858,
+        "transferSize": 3073299,
+        "encodedBodySize": 3072999,
+        "decodedBodySize": 3072999
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/004.json.gz",
+        "startTime": 30026.5,
+        "duration": 27.200000017881393,
+        "transferSize": 2912370,
+        "encodedBodySize": 2912070,
+        "decodedBodySize": 2912070
+      },
+      {
+        "name": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/005.json.gz",
+        "startTime": 30234.20000001788,
+        "duration": 63.79999998211861,
+        "transferSize": 2833227,
+        "encodedBodySize": 2832927,
+        "decodedBodySize": 2832927
+      }
+    ],
+    "heap": {
+      "usedJSHeapSize": 900850269,
+      "totalJSHeapSize": 968688885
+    },
+    "resourceTotals": {
+      "applicationAndMetadata": {
+        "requests": 30,
+        "transferBytes": 5690344,
+        "encodedBodyBytes": 5681344,
+        "httpDecodedBodyBytes": 12295753
+      },
+      "vectorTiles": {
+        "requests": 12,
+        "transferBytes": 2855472,
+        "encodedBodyBytes": 2851872,
+        "httpDecodedBodyBytes": 2851872
+      },
+      "fonts": {
+        "requests": 2,
+        "transferBytes": 13747030,
+        "encodedBodyBytes": 13746430,
+        "httpDecodedBodyBytes": 16507808
+      },
+      "fullChinaExact": {
+        "requests": 1,
+        "transferBytes": 23664464,
+        "encodedBodyBytes": 23664164,
+        "httpDecodedBodyBytes": 23664164
+      },
+      "otherExact": {
+        "requests": 6,
+        "transferBytes": 14959000,
+        "encodedBodyBytes": 14957200,
+        "httpDecodedBodyBytes": 14957200
+      }
+    }
+  },
+  "fullChinaRequests": [
+    {
+      "phase": "select-china-z3.3",
+      "url": "http://127.0.0.1:3002/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz",
+      "method": "GET"
+    }
+  ],
+  "elapsedMs": 42122.106499999994
+}

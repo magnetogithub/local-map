@@ -10,7 +10,7 @@ import type {OperationalCell, OperationalStateChange} from '../world/operational
 import type {OperationalMapWorld} from '../projection/operational-map-projection';
 import * as projection from '../projection/operational-map-projection';
 import {createOperationalMapConsumer, OPERATIONAL_CHANGED_CELL_SOURCE_ID, OPERATIONAL_FRONT_SOURCE_ID, OPERATIONAL_MAP_LAYERS as L, type OperationalMapPort} from './operational-map-consumer';
-import {OPERATIONAL_MAP_SOURCE_ID} from './operational-delivery-contract';
+import {OPERATIONAL_MAP_SOURCE_ID, type OperationalMapBootstrap} from './operational-delivery-contract';
 import type {OperationalVectorDelivery} from './operational-vector-delivery';
 import {OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID} from './operational-map-sources';
 
@@ -30,10 +30,12 @@ function fixture(occupied = false, observeInitially = true) {
     ...(c.ordinal === 1 ? [[[1.2, 0.2], [1.2, 0.3], [1.3, 0.3], [1.3, 0.2], [1.2, 0.2]]] : []),
   ]}}));
   const collection = (selected: Feature[]): FeatureCollection => ({type: 'FeatureCollection', features: selected});
+  const exactEdgeDetails = (ordinals: readonly number[]) => ordinals.map(ordinal => ({id: `edge:operational:${String(ordinal).padStart(64, '0')}`, ordinal, ...pairs[ordinal - 1], boundaryClass: (['coast', 'country', 'administrative', 'operational', 'residual'] as const)[edgeClasses[ordinal - 1]],
+    flags: {positiveAdjacency: pairs[ordinal - 1].right > 0, country: edgeClasses[ordinal - 1] === 1, administrative: edgeClasses[ordinal - 1] === 2, previous: false, residual: edgeClasses[ordinal - 1] === 4}, geometry: {type: 'LineString' as const, coordinates: [[ordinal, 0], [ordinal, 1]]}}));
   let observer: ((batch: {cells: readonly number[]; edges: readonly number[]}) => void) | undefined;
   const identity = {path: ref.manifestPath, sha256: 'd'.repeat(64), byteLength: 0};
   const delivery = {
-    bootstrap: {schemaVersion: 'operational-map-bootstrap-v1', legacyBoundaryOrdinals: [] as number[], catalog: {schemaVersion: 'operational-catalog-v1', catalogRef: ref, counts: {cells: 5, edges: 5, countries: 2, administrativeParents: 20, previousParents: 2}, countryOrder: ['AAA', 'BBB'],
+    bootstrap: {schemaVersion: 'operational-map-bootstrap-v1', legacyBoundaryOrdinals: [] as number[], provincePresentationBoundaryOrdinals: [] as number[], provinceBoundaryLod: undefined as OperationalMapBootstrap['provinceBoundaryLod'], microBoundaryLod: undefined as OperationalMapBootstrap['microBoundaryLod'], catalog: {schemaVersion: 'operational-catalog-v1', catalogRef: ref, counts: {cells: 5, edges: 5, countries: 2, administrativeParents: 20, previousParents: 2}, countryOrder: ['AAA', 'BBB'],
       indexRoots: {catalogOrder: 'd'.repeat(64), administrativeMembership: 'e'.repeat(64), previousParent: 'f'.repeat(64)}}, manifest: identity, tileIndex: identity, detailIndex: identity, parents: identity, coverage: identity},
     source: {type: 'vector', tiles: ['pax-test:///tiles/{z}/{x}/{y}.pbf.gz'], minzoom: 0, maxzoom: 6}, protocol: 'pax-test',
     edgeIncidence: vi.fn((n: number) => pairs[n - 1]),
@@ -44,8 +46,14 @@ function fixture(occupied = false, observeInitially = true) {
     })),
     loadCellDetail: vi.fn(async (hints: readonly {id: string}[]) => collection(features.filter((_, i) => hints.some(h => h.id === ids[i]))) as FeatureCollection<Polygon>),
     loadCountryDetail: vi.fn(async (country: string) => collection(features.filter((_, i) => cells[i].sourceCountryId === country)) as FeatureCollection<Polygon>),
-    loadEdgeDetails: vi.fn(async (ordinals: readonly number[]) => ordinals.map(ordinal => ({id: `edge:operational:${String(ordinal).padStart(64, '0')}`, ordinal, ...pairs[ordinal - 1], boundaryClass: (['coast', 'country', 'administrative', 'operational', 'residual'] as const)[edgeClasses[ordinal - 1]],
-      flags: {positiveAdjacency: pairs[ordinal - 1].right > 0, country: edgeClasses[ordinal - 1] === 1, administrative: edgeClasses[ordinal - 1] === 2, previous: false, residual: edgeClasses[ordinal - 1] === 4}, geometry: {type: 'LineString' as const, coordinates: [[ordinal, 0], [ordinal, 1]]}}))),
+    loadCountryViewportDetail: vi.fn(async (country: string) => {
+      const selected = features.filter((_, i) => cells[i].sourceCountryId === country), ordinals = new Set(selected.map(f=>Number(f.id)));
+      return {cells: collection(selected) as FeatureCollection<Polygon>, edges: exactEdgeDetails(pairs.flatMap((e,i)=>ordinals.has(e.left)||ordinals.has(e.right)?[i+1]:[]))};
+    }),
+    supportsCountryViewportDetail: vi.fn(() => true),
+    loadEdgeDetails: vi.fn(async (ordinals: readonly number[]) => exactEdgeDetails(ordinals)),
+    loadProvinceBoundaryLod: vi.fn(async () => ({type: 'FeatureCollection' as const, features: [{type: 'Feature' as const, id: 2, properties: {}, geometry: exactEdgeDetails([2])[0].geometry}]})),
+    loadMicroBoundaryLod: vi.fn(async () => ({type: 'FeatureCollection' as const, features: [{type: 'Feature' as const, id: 1, properties: {}, geometry: exactEdgeDetails([1])[0].geometry}]})),
     loadTile: vi.fn(), loadCountry: vi.fn(), loadParents: vi.fn(), administrativeMembership: vi.fn(), loadCoverage: vi.fn(), renderRef: vi.fn(), counters: vi.fn(),
   } satisfies OperationalVectorDelivery;
   const sources = new Map<string, {spec: SourceSpecification; features: Map<number, Feature>; updateData: ReturnType<typeof vi.fn>; setData: ReturnType<typeof vi.fn>}>();
@@ -61,6 +69,11 @@ function fixture(occupied = false, observeInitially = true) {
       const layer = layers.get(id);
       if (!layer || layer.type !== 'line' || name !== 'visibility') throw Error('INVALID_LAYOUT_TARGET');
       layer.layout = {...layer.layout, visibility: value as 'visible' | 'none'};
+    }),
+    setFilter: vi.fn((id, filter) => {
+      const layer = layers.get(id);
+      if (!layer || layer.type !== 'line') throw Error('INVALID_FILTER_TARGET');
+      layer.filter = filter;
     }),
     setFeatureState: vi.fn((target, state) => {
       if (target.source !== OPERATIONAL_MAP_SOURCE_ID && !sources.get(target.source)?.features.has(Number(target.id))) throw Error('STATE_WITHOUT_SOURCE_FEATURE');
@@ -99,6 +112,88 @@ function deferred<Value>() {
 }
 
 describe('16-05 authoritative operational map projection', () => {
+  it('retains click selection without registering delegated hover when the pointer tracker owns hover', async () => {
+    const f = fixture(), onSelect = vi.fn();
+    const consumer = await createOperationalMapConsumer({map: f.map, protocolApi: f.api, delivery: f.delivery, world: f.world, externalHover: true, onSelect});
+    expect([...f.listeners.keys()].some(key => key.startsWith('mousemove:') || key.startsWith('mouseleave:'))).toBe(false);
+    f.listeners.get(`click:${L.fill}`)!({features: [{id: 1, source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'territories'}]});
+    expect(onSelect).toHaveBeenLastCalledWith('BBB'); consumer.dispose();
+  });
+  it('keeps simplified micro lines in the same hover scope and restores original vector/exact lines when disabled', async () => {
+    const input = fixture(); input.delivery.bootstrap.microBoundaryLod = {artifact: {path: '/lod-micro', sha256: 'd'.repeat(64), byteLength: 10}, bounds: [0, 0, 5, 1], minZoom: 2.2, maxZoom: 7, edgeOrdinals: [1]};
+    const f = await mount(input); f.consumer.setDebugBoundaries(true); f.consumer.hoverCountry('BBB');
+    await f.consumer.loadMicroBoundaryLod(); f.consumer.setMicroBoundaryLodEnabled(true);
+    expect(f.consumer.getUpdateStats()).toMatchObject({microDisplayLodReady: true, microDisplayLodActive: true, microDisplayLodInScope: true, microDisplayLodSourceWrites: 1});
+    for (const id of [L.microOriginal, L.detailMicroOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
+    expect(f.layers.get(L.microDisplayLod)).toMatchObject({layout: {visibility: 'visible'}});
+    f.consumer.hoverCountry('CCC');
+    expect(f.consumer.getUpdateStats()).toMatchObject({microDisplayLodActive: false, microDisplayLodInScope: false});
+    expect(f.layers.get(L.microDisplayLod)).toMatchObject({layout: {visibility: 'none'}});
+    f.consumer.hoverCountry('BBB'); f.consumer.setMicroBoundaryLodEnabled(true); f.consumer.setDebugBoundaries(false);
+    for (const id of [L.microDisplayLod, L.microOriginal, L.detailMicroOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
+    f.consumer.setDebugBoundaries(true); f.consumer.setMicroBoundaryLodEnabled(false);
+    for (const id of [L.microOriginal, L.detailMicroOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
+    await f.consumer.loadMicroBoundaryLod(); expect(f.delivery.loadMicroBoundaryLod).toHaveBeenCalledOnce(); f.consumer.dispose();
+  });
+  it('swaps both original province sources only after display data is ready and reuses its geometry', async () => {
+    const input = fixture(); input.delivery.bootstrap.provincePresentationBoundaryOrdinals = [2];
+    input.delivery.bootstrap.provinceBoundaryLod = {artifact: {path: '/lod', sha256: 'd'.repeat(64), byteLength: 10}, bounds: [0, 0, 5, 1], minZoom: 2.2, maxZoom: 7};
+    const f = await mount(input), projectionBefore = f.consumer.getProjection();
+    f.consumer.setProvinceBoundaryLodEnabled(true);
+    expect(f.consumer.getUpdateStats().provinceDisplayLodActive).toBe(false);
+    await f.consumer.loadProvinceBoundaryLod();
+    expect(f.consumer.getUpdateStats()).toMatchObject({provinceDisplayLodReady: true, provinceDisplayLodActive: false, provinceDisplayLodVertexCount: 2, provinceDisplayLodSourceWrites: 1});
+    f.consumer.setProvinceBoundaryLodEnabled(true);
+    for (const id of [L.provinceOriginal, L.detailProvinceOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
+    expect(f.layers.get(L.provinceDisplayLod)).toMatchObject({minzoom: 2.2, maxzoom: 7, layout: {visibility: 'visible', 'line-join': 'round'}});
+    expect(validateStyleMin({version: 8, sources: Object.fromEntries([...f.sources].map(([id, source]) => [id, source.spec])), layers: [...f.layers.values()]})).toEqual([]);
+    await f.consumer.showCountryDetail('BBB');
+    expect(f.layers.get(L.detailProvinceOriginal)).toMatchObject({layout: {visibility: 'none'}});
+    await f.consumer.loadProvinceBoundaryLod(); expect(f.delivery.loadProvinceBoundaryLod).toHaveBeenCalledOnce();
+    f.consumer.setProvinceBoundaryLodEnabled(false);
+    expect(f.layers.get(L.provinceDisplayLod)).toMatchObject({layout: {visibility: 'none'}});
+    for (const id of [L.provinceOriginal, L.detailProvinceOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
+    expect(f.consumer.getProjection()).toBe(projectionBefore); f.consumer.dispose();
+    expect(f.sources.size).toBe(0); expect(f.layers.size).toBe(0);
+  });
+  it('uses one tint-composed fill pass per source instead of drawing three transparent overlays', async () => {
+    const f = await mount();
+    expect([...f.layers.values()].filter(l=>l.type==='fill').map(l=>l.id).sort()).toEqual([L.fill,L.detailFill,L.changedFill].sort());
+    f.consumer.dispose();
+  });
+
+  it('keeps immutable viewport geometry and feature state when a settled pan returns the same scope', async () => {
+    const f = await mount(), bounds = [0,0,4,1] as const;
+    await f.consumer.showCountryViewportDetail('BBB',bounds);
+    const writes=f.consumer.getUpdateStats().detailSourceWrites, updates=f.consumer.getUpdateStats().cellsUpdated;
+    expect(f.delivery.loadCountryDetail).not.toHaveBeenCalled();
+    expect(f.consumer.getUpdateStats().selectedDetailCells).toBe(3);
+    await f.consumer.showCountryViewportDetail('BBB',bounds);
+    expect(f.consumer.getUpdateStats().detailSourceWrites).toBe(writes);
+    expect(f.consumer.getUpdateStats().cellsUpdated).toBe(updates);
+    f.consumer.clearDetail();const cleared=f.consumer.getUpdateStats().detailSourceWrites;
+    f.consumer.clearDetail();expect(f.consumer.getUpdateStats().detailSourceWrites).toBe(cleared);
+    expect(f.state(1).exactCell).toBe(false);f.consumer.dispose();
+  });
+
+  it('emits hover only when the country under the pointer changes', async () => {
+    const onHover=vi.fn(),f=await mount(fixture(),{onHover});
+    const move=f.listeners.get(`mousemove:${L.fill}`)!,leave=f.listeners.get(`mouseleave:${L.fill}`)!;
+    for(const id of [1,2,3,1])move({features:[{id,source:OPERATIONAL_MAP_SOURCE_ID,sourceLayer:'territories'}]});
+    expect(onHover.mock.calls).toEqual([['BBB']]);leave({});leave({});
+    expect(onHover.mock.calls).toEqual([['BBB'],[null]]);f.consumer.dispose();
+  });
+
+  it('applies the current committed control state when a viewport request finishes after a turn', async () => {
+    const f=await mount(), pending=deferred<Awaited<ReturnType<typeof f.delivery.loadCountryViewportDetail>>>();
+    f.delivery.loadCountryViewportDetail.mockReturnValueOnce(pending.promise);
+    const loading=f.consumer.showCountryViewportDetail('BBB',[0,0,4,1]);
+    const next=update(f.world,{1:{controllerCountryId:'AAA'}});await f.consumer.updateWorld(next.world,next.change);
+    f.consumer.hoverCountry('BBB');f.consumer.selectCountry('BBB');
+    pending.resolve({cells:{type:'FeatureCollection',features:f.features.slice(0,3)},edges:await f.delivery.loadEdgeDetails([1,2,3,4])});await loading;
+    expect(f.sourceState(OPERATIONAL_EXACT_CELL_SOURCE_ID,1)).toMatchObject({mapColor:'#FF0000',occupied:true,hover:true,selected:true});
+    expect(f.consumer.getProjection().world).toBe(next.world);f.consumer.dispose();
+  });
   it('mounts black peaceful country borders and hides every internal boundary layer', async () => {
     const f = await mount();
     const acceptsRealMap = (map: MapLibreMap) => createOperationalMapConsumer({map, protocolApi: f.api, delivery: f.delivery, world: f.world});
@@ -172,12 +267,17 @@ describe('16-05 authoritative operational map projection', () => {
       if (expression.result !== 'success') throw Error(JSON.stringify(expression.value));
       return expression.value.evaluate({zoom: 6}, {type: 'LineString', id: edgeId, properties: exact ? {boundaryClass: kind} : {c: kind === 'country' ? 1 : 2}});
     };
+    expect(matches(L.synthetic, 1)).toBe(false);
+    expect(f.consumer.getUpdateStats().debugBoundaryScopeBuilds).toBe(0);
+    f.consumer.setDebugBoundaries(true);
+    expect(matches(L.synthetic, 1)).toBe(false);
+    f.consumer.hoverCountry('BBB');
+    expect(f.consumer.getUpdateStats().debugBoundaryCountryIds).toEqual(['AAA', 'BBB']);
     for (const [legacy, micro, exact] of [[L.administrative, L.synthetic, false], [L.detailAdministrative, L.detailSynthetic, true]] as const) {
       expect(matches(legacy, 2, exact)).toBe(true); expect(matches(legacy, 1, exact)).toBe(false);
       expect(matches(micro, 1, exact)).toBe(true); expect(matches(micro, 2, exact)).toBe(false);
       expect(matches(micro, 4, exact, 'country')).toBe(false);
     }
-    f.consumer.setDebugBoundaries(true);
     for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
     await f.consumer.showCountryDetail('BBB'); f.consumer.clearDetail();
     for (const id of [L.synthetic, L.detailSynthetic]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
@@ -191,10 +291,50 @@ describe('16-05 authoritative operational map projection', () => {
     f.consumer.dispose();
   });
 
+  it('hides both micro sources on sea/unrelated hover and reuses the scope without geometry or source rewrites', async () => {
+    const f = await mount(), snapshot = f.consumer.getProjection();
+    const visible = (layerId: string, edgeId: number) => {
+      const expr = createExpression((f.layers.get(layerId) as LineLayerSpecification).filter);
+      if (expr.result !== 'success') throw Error(JSON.stringify(expr.value));
+      return expr.value.evaluate({zoom: 6}, {type: 'LineString', id: edgeId, properties: {c: 3, boundaryClass: 'operational'}});
+    };
+    f.consumer.selectCountry('BBB'); f.consumer.setDebugBoundaries(true);
+    expect(visible(L.synthetic, 1)).toBe(false);
+    f.consumer.hoverCountry('BBB');
+    const writes = f.consumer.getUpdateStats().debugBoundaryFilterWrites;
+    for (let i = 0; i < 5; i++) f.consumer.hoverCountry('BBB');
+    expect(f.consumer.getUpdateStats().debugBoundaryFilterWrites).toBe(writes);
+    for (const id of [L.synthetic, L.detailSynthetic]) expect(visible(id, 1)).toBe(true);
+    f.consumer.hoverCountry('CCC');
+    for (const id of [L.synthetic, L.detailSynthetic]) expect(visible(id, 1)).toBe(false);
+    f.consumer.hoverCountry(null);
+    expect(f.consumer.getUpdateStats().debugBoundaryCountryIds).toEqual([]);
+    expect(f.consumer.getUpdateStats().debugBoundaryScopeBuilds).toBe(1);
+    expect(f.consumer.getProjection()).toBe(snapshot);
+    expect(f.delivery.loadCellDetail).not.toHaveBeenCalled(); expect(f.delivery.loadEdgeDetails).not.toHaveBeenCalled();
+    for (const source of f.sources.values()) {expect(source.updateData).not.toHaveBeenCalled(); expect(source.setData).not.toHaveBeenCalled();}
+    f.consumer.dispose();
+  });
+
+  it('updates debug neighbors after ownership changes without changing the scope for controller-only occupation', async () => {
+    const f = await mount(); f.consumer.setDebugBoundaries(true); f.consumer.hoverCountry('CCC');
+    expect(f.consumer.getUpdateStats().debugBoundaryCountryIds).toEqual(['CCC']);
+    const claimed = update(f.world, {1: {ownerCountryId: 'CCC'}});
+    await f.consumer.updateWorld(claimed.world, claimed.change);
+    expect(f.consumer.getUpdateStats().debugBoundaryCountryIds).toEqual(['BBB', 'CCC']);
+    const writes = f.consumer.getUpdateStats().debugBoundaryFilterWrites;
+    const occupied = update(claimed.world, {1: {controllerCountryId: 'AAA'}});
+    await f.consumer.updateWorld(occupied.world, occupied.change);
+    expect(f.consumer.getUpdateStats().debugBoundaryFilterWrites).toBe(writes);
+    expect(f.consumer.getUpdateStats().debugBoundaryScopeBuilds).toBe(1);
+    expect(f.consumer.getProjection().world).toBe(occupied.world);
+    f.consumer.dispose();
+  });
+
   it('replaces simplified country, legacy and micro lines with exact detail instead of drawing both', async () => {
     const input = fixture(); input.delivery.bootstrap.legacyBoundaryOrdinals = [2];
     input.edgeClasses[0] = 2; input.edgeClasses[1] = 2;
-    const f = await mount(input); f.consumer.setDebugBoundaries(true);
+    const f = await mount(input); f.consumer.setDebugBoundaries(true); f.consumer.hoverCountry('BBB');
     const opacity = (layerId: string, n: number) => {
       const expression = createExpression((f.layers.get(layerId) as LineLayerSpecification).paint!['line-opacity']);
       if (expression.result !== 'success') throw Error(JSON.stringify(expression.value));

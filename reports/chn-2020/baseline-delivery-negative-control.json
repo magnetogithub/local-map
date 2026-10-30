@@ -1,0 +1,1 @@
+{"baselineFile":"reports/chn-2020/baseline-runtime-pointer.json","elapsedMs":5413.4322999999995,"error":"exact cell/edge mismatch edge 16027 side 1663 segment 1","pass":false,"peakRssBytes":788373504,"pointerFile":"reports/chn-2020/baseline-runtime-pointer.json","schemaVersion":"chn-2020-delivery-verification-v1","stage":"exact-cell-edge-mesh"}

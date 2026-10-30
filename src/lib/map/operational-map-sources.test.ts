@@ -22,6 +22,7 @@ function fixture(onEdgeDetailChange = vi.fn<(ordinals: readonly number[]) => voi
     bootstrap: {manifest: identity, tileIndex: identity}, loadTile: vi.fn(async () => new ArrayBuffer(0)),
     incidentEdges: vi.fn<OperationalVectorDelivery['incidentEdges']>(() => []),
     loadCountryDetail: vi.fn(async (_id: string, signal?: AbortSignal) => {signal?.throwIfAborted(); return data;}),
+    loadCountryViewportDetail: vi.fn<OperationalVectorDelivery['loadCountryViewportDetail']>(async (_id, _bounds, signal) => {signal?.throwIfAborted(); return {cells:data,edges:[]};}),
     loadCellDetail: vi.fn(async (_cells: readonly {id: string; sourceCountryId: string}[], signal?: AbortSignal) => {signal?.throwIfAborted(); return data;}),
     loadEdgeDetails: vi.fn(async (_ordinals: readonly number[], signal?: AbortSignal) => {signal?.throwIfAborted(); return [] as Awaited<ReturnType<OperationalVectorDelivery['loadEdgeDetails']>>;})};
   const sources = createOperationalMapSources(map, api, delivery as unknown as OperationalVectorDelivery, onEdgeDetailChange);
@@ -34,6 +35,26 @@ const edgeDetails = (...ordinals: number[]): Awaited<ReturnType<OperationalVecto
 }));
 
 describe('operational detail request cancellation', () => {
+  it('publishes complete viewport cells and edges once and skips the same immutable scope', async () => {
+    const f=fixture(), cells:FeatureCollection<Polygon>={type:'FeatureCollection',features:[{type:'Feature',id:11,properties:{},geometry:{type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,1],[0,0]],[[.2,.2],[.2,.3],[.3,.3],[.3,.2],[.2,.2]]]}}]};
+    f.delivery.loadCountryViewportDetail.mockResolvedValue({cells,edges:edgeDetails(2)});
+    await f.sources.showCountryViewportDetail('AAA',[0,0,1,1]);
+    const cell=f.ports.get(OPERATIONAL_EXACT_CELL_SOURCE_ID)!,edge=f.ports.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID)!;
+    expect(f.delivery.loadCountryDetail).not.toHaveBeenCalled();expect(cell.setData).toHaveBeenCalledExactlyOnceWith(cells);
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([2]);expect(f.sources.getDetailSourceWrites()).toBe(2);
+    f.delivery.loadCountryViewportDetail.mockResolvedValue(structuredClone({cells,edges:edgeDetails(2)}));
+    await f.sources.showCountryViewportDetail('AAA',[.01,0,1.01,1]);
+    expect(cell.setData).toHaveBeenCalledOnce();expect(edge.setData).toHaveBeenCalledOnce();expect(f.sources.getDetailSourceWrites()).toBe(2);
+  });
+
+  it('rejects an obsolete viewport even when transport ignores cancellation', async () => {
+    const f=fixture();let finish!:(value:Awaited<ReturnType<OperationalVectorDelivery['loadCountryViewportDetail']>>)=>void;
+    f.delivery.loadCountryViewportDetail.mockImplementationOnce(()=>new Promise(resolve=>{finish=resolve;}));
+    const stale=expect(f.sources.showCountryViewportDetail('AAA',[0,0,1,1])).rejects.toHaveProperty('name','AbortError');
+    f.delivery.loadCountryViewportDetail.mockResolvedValueOnce({cells:data,edges:edgeDetails(5)});
+    await f.sources.showCountryViewportDetail('BBB',[1,1,2,2]);finish({cells:data,edges:edgeDetails(2)});await stale;
+    expect(f.onEdgeDetailChange).toHaveBeenCalledExactlyOnceWith([5]);expect(f.sources.getDetailSourceWrites()).toBe(2);
+  });
   it('stages country polygons and their real incident boundaries before replacing detail', async () => {
     const f = fixture();
     await f.sources.showCountryDetail('AAA');

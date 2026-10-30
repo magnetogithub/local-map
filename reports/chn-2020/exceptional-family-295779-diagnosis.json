@@ -1,0 +1,190 @@
+{
+  "sourceFeatureId": "62558664B29577970904240",
+  "name": "Nagarz\u00ea County",
+  "actualBoundary": {
+    "maximumDistance": 8.593242252949183e-11,
+    "coordinate": [
+      90.34137029840059,
+      28.294247851856937
+    ],
+    "originalSegment": [
+      [
+        90.34415389978273,
+        28.300743000289287
+      ],
+      [
+        90.3405847999486,
+        28.292415000252106
+      ]
+    ]
+  },
+  "expectedOverlayBoundary": {
+    "maximumDistance": 0.0,
+    "coordinate": [
+      90.34763350926167,
+      28.30299491190097
+    ],
+    "originalSegment": [
+      [
+        90.34688643957168,
+        28.303363426159553
+      ],
+      [
+        90.34763350926167,
+        28.30299491190097
+      ]
+    ]
+  },
+  "delta": {
+    "maximumDistance": 8.593242252949183e-11,
+    "coordinate": [
+      90.34137029840059,
+      28.294247851856937
+    ],
+    "originalSegment": [
+      [
+        90.34415389978273,
+        28.300743000289287
+      ],
+      [
+        90.3405847999486,
+        28.292415000252106
+      ]
+    ]
+  },
+  "deltaWorstPointPresentIn": {
+    "actual": true,
+    "expectedOverlay": false,
+    "rawOrGainInputs": false
+  },
+  "actualBoundaryIntervalCertificate": {
+    "pass": false,
+    "exact": false,
+    "existingRepresentationPolicyDegrees": 1e-12,
+    "subdivisionExceptions": [
+      {
+        "direction": "reference-to-actual",
+        "originalSegment": [
+          [
+            90.11962879982929,
+            28.570003399637244
+          ],
+          [
+            90.11188529976681,
+            28.567298899924367
+          ]
+        ],
+        "missingInterval": [
+          0.9999999999999998,
+          1.0
+        ],
+        "lengthDegrees": 1.8212546249875875e-18
+      },
+      {
+        "direction": "reference-to-actual",
+        "originalSegment": [
+          [
+            90.29147,
+            28.261351
+          ],
+          [
+            90.30518849762021,
+            28.259347364981853
+          ]
+        ],
+        "missingInterval": [
+          0.9999999999999999,
+          1.0
+        ],
+        "lengthDegrees": 1.5392181432081493e-18
+      },
+      {
+        "direction": "reference-to-actual",
+        "originalSegment": [
+          [
+            91.0274733000528,
+            28.514194399851704
+          ],
+          [
+            91.01950829966836,
+            28.50676339981112
+          ]
+        ],
+        "missingInterval": [
+          0.9999999999999998,
+          1.0
+        ],
+        "lengthDegrees": 2.4187679991232585e-18
+      }
+    ],
+    "failures": [
+      {
+        "direction": "reference-to-actual",
+        "originalSegment": [
+          [
+            90.3405847999486,
+            28.292415000252106
+          ],
+          [
+            90.34137029840059,
+            28.294247851856937
+          ]
+        ],
+        "missingInterval": [
+          0.0,
+          1.0
+        ],
+        "lengthDegrees": 0.001994079442602738
+      },
+      {
+        "direction": "reference-to-actual",
+        "originalSegment": [
+          [
+            90.34137029840059,
+            28.294247851856937
+          ],
+          [
+            90.34276209909166,
+            28.297495426073112
+          ]
+        ],
+        "missingInterval": [
+          0.0,
+          0.9999999999999999
+        ],
+        "lengthDegrees": 0.003533248852433125
+      }
+    ]
+  },
+  "expectedArea": 0.7300781812308602,
+  "actualArea": 0.7300781812312498,
+  "absoluteAreaDifference": 3.8957725934096743e-13,
+  "oneTimesExistingCoordinatePolicyPerimeterBound": 9.848311257221492e-12,
+  "deltaGeometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          90.34415389978273,
+          28.300743000289287
+        ],
+        [
+          90.34276209909166,
+          28.297495426073112
+        ],
+        [
+          90.34137029840059,
+          28.294247851856937
+        ],
+        [
+          90.3405847999486,
+          28.292415000252106
+        ],
+        [
+          90.34415389978273,
+          28.300743000289287
+        ]
+      ]
+    ]
+  }
+}

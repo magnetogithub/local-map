@@ -54,7 +54,61 @@ scripts/prompt19/** -text whitespace=cr-at-eol,-blank-at-eof
 reports/maintenance/prompt19-C/** -text
 # Independent reports are pinned by runtime provenance and must survive checkout byte-exact.
 reports/maintenance/20261030-*.json -text
+
+# Local game-preservation code is pinned by activation maintenance evidence.
+src/lib/simulation/server/operational-game.server.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/simulation/server/operational-game-checkpoint.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/app/api/local-maintenance/operational-games/checkpoint/route.ts -text whitespace=cr-at-eol,-blank-at-eof
 # Required historical source evidence is explicitly tracked despite the general QA-output ignore.
 reports/verification/prompt19/KOR/** -text
 # Immutable joint snapshots exceed normal GitHub blob limits.
 reports/maintenance/prompt19-C/*joined-world-input.json filter=lfs diff=lfs merge=lfs -text
+# CHN experimental source and immutable incremental candidates retain exact bytes.
+data/raw/chn-2020/** -text
+data/raw/chn-2020/**/*.geojson filter=lfs diff=lfs merge=lfs -text
+data/raw/chn-2020/**/*.zip filter=lfs diff=lfs merge=lfs -text
+data/source-locks/chn-2020/** -text
+data/derived/chn-2020/** -text
+data/derived/chn-2020/**/joined-world-input.json filter=lfs diff=lfs merge=lfs -text
+data/derived/chn-2020/**/geometry.json filter=lfs diff=lfs merge=lfs -text
+data/derived/chn-2020/**/*.geojson filter=lfs diff=lfs merge=lfs -text
+reports/chn-2020/** -text
+scripts/chn-2020/** -text
+# Runtime and QA code identities recorded by the CHN acceptance proofs.
+src/components/map/OperationalWorldMap.tsx -text
+src/lib/map/operational-delivery.server.ts -text
+src/lib/map/operational-vector-delivery.ts -text
+src/lib/world/operational-catalog.server.ts -text
+src/lib/world/operational-game.server.ts -text
+src/lib/simulation/operational-frontier-policy.ts -text
+src/lib/simulation/operational-frontier.server.ts -text
+src/lib/simulation/catalog-turn-plan.ts -text
+src/lib/simulation/catalog-runtime.ts -text
+src/lib/simulation/server/provider-config.ts -text
+src/lib/test-only/region-provider.server.ts -text
+next.config.ts -text
+# Runtime performance evidence preserves the measured code and screenshot bytes.
+reports/chn-perf-20261030/** -text
+src/lib/map/operational-map-consumer.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/map/operational-map-sources.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/map/operational-country-labels.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/map/operational-fill-paint.ts -text whitespace=cr-at-eol,-blank-at-eof
+reports/chn-province-20261030/** -text
+reports/world-micro-scale-20261030/** -text
+src/lib/map/chn-province-presentation.server.ts -text
+src/lib/map/province-presentation.server.ts -text
+src/lib/map/operational-delivery-contract.ts -text
+reports/hover-debug-20261030/** -text
+reports/chn-render-lod-20261030/** -text
+reports/chn-internal-render-lod-20261030/** -text
+src/lib/map/chn-boundary-display-lod.server.ts -text
+src/lib/map/operational-pointer-hover.ts -text
+src/lib/map/operational-debug-boundary-scope.ts -text
+src/components/game/WarAndSystemOverlays.tsx text eol=crlf
+
+# Large CHN source/proof payloads retain exact checkout bytes through Git LFS.
+data/raw/chn-2020/references/ADM3-source/*.shp filter=lfs diff=lfs merge=lfs -text
+data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz filter=lfs diff=lfs merge=lfs -text
+reports/chn-2020/independent-*.json filter=lfs diff=lfs merge=lfs -text
+reports/chn-2020/proofs/geometry-*.json filter=lfs diff=lfs merge=lfs -text
+reports/chn-render-lod-20261030/game-debug/archive/after-0fa7ab903c6cddeba90e2d5795a93a7684a192b2b34df095c2ab08901ddf128f.json filter=lfs diff=lfs merge=lfs -text

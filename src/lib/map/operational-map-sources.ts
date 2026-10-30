@@ -1,7 +1,7 @@
 import type {FeatureCollection, GeoJSON} from 'geojson';
 import type {SourceSpecification} from 'maplibre-gl';
 import {OPERATIONAL_MAP_SOURCE_ID} from './operational-delivery-contract';
-import {fetchOperationalVectorDelivery, operationalEdgeFeatures, type OperationalVectorDelivery} from './operational-vector-delivery';
+import {fetchOperationalVectorDelivery, operationalEdgeFeatures, type OperationalVectorDelivery, type OperationalViewportBounds} from './operational-vector-delivery';
 import {registerCatalogTileProtocol, type CatalogFetch} from './catalog-vector-delivery';
 import type {WorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
 
@@ -28,7 +28,9 @@ export function createOperationalMapSources(map: SourcePort, protocolApi: Protoc
       map.addSource(id, id === OPERATIONAL_MAP_SOURCE_ID ? delivery.source : {...OPERATIONAL_EXACT_SOURCE_OPTIONS, data: empty()}); added.push(id);
     }
   } catch (error) {for (const id of added.reverse()) map.removeSource(id); unregister(); throw error;}
-  let disposed = false, cellRequest = 0, edgeRequest = 0;
+  let disposed = false, cellRequest = 0, edgeRequest = 0, detailSourceWrites = 0;
+  const publishedKeys = new Map<string, string>();
+  const contentKey = (data: FeatureCollection) => data.features.map(f => Number(f.id)).sort((a,b) => a-b).join(',');
   let cellAbort: AbortController | undefined, edgeAbort: AbortController | undefined;
   const beginCellRequest = (signal?: AbortSignal) => {
     cellAbort?.abort(); cellAbort = new AbortController();
@@ -46,6 +48,8 @@ export function createOperationalMapSources(map: SourcePort, protocolApi: Protoc
       const source = map.getSource(id) as {setData?: (data: GeoJSON) => unknown} | undefined;
       if (typeof source?.setData !== 'function') throw Error('OPERATIONAL_EXACT_SOURCE_MISSING');
       source.setData(data);
+      detailSourceWrites++;
+      if (data.type === 'FeatureCollection') publishedKeys.set(id, contentKey(data));
       if (id === OPERATIONAL_EXACT_EDGE_SOURCE_ID && data.type === 'FeatureCollection') {
         onEdgeDetailChange?.(Object.freeze(data.features.map(feature => Number(feature.id))));
       }
@@ -53,6 +57,7 @@ export function createOperationalMapSources(map: SourcePort, protocolApi: Protoc
   };
   const check = () => {if (disposed) throw Error('OPERATIONAL_MAP_SOURCES_DISPOSED');};
   return Object.freeze({delivery,
+    getDetailSourceWrites: () => detailSourceWrites,
     showCountryDetail: async (countryId: string, signal?: AbortSignal) => {
       check(); const request = ++cellRequest, requestSignal = beginCellRequest(signal), data = await delivery.loadCountryDetail(countryId, requestSignal);
       requestSignal.throwIfAborted();
@@ -66,6 +71,20 @@ export function createOperationalMapSources(map: SourcePort, protocolApi: Protoc
       }
       return data;
     },
+    showCountryViewportDetail: async (countryId: string, bounds: OperationalViewportBounds, signal?: AbortSignal) => {
+      check(); const request = ++cellRequest, requestSignal = beginCellRequest(signal);
+      const boundaryRequest = ++edgeRequest, boundarySignal = beginEdgeRequest(requestSignal);
+      const result = await delivery.loadCountryViewportDetail(countryId, bounds, boundarySignal);
+      boundarySignal.throwIfAborted();
+      if (!disposed && request === cellRequest && boundaryRequest === edgeRequest) {
+        const edges = operationalEdgeFeatures(result.edges);
+        // Coordinates and IDs belong to this immutable catalog. Identical cell
+        // and edge sets need neither another worker tessellation nor state replay.
+        if (publishedKeys.get(OPERATIONAL_EXACT_CELL_SOURCE_ID) !== contentKey(result.cells)) setData(OPERATIONAL_EXACT_CELL_SOURCE_ID, result.cells);
+        if (publishedKeys.get(OPERATIONAL_EXACT_EDGE_SOURCE_ID) !== contentKey(edges)) setData(OPERATIONAL_EXACT_EDGE_SOURCE_ID, edges);
+      }
+      return result.cells;
+    },
     showCellDetail: async (cells: Parameters<OperationalVectorDelivery['loadCellDetail']>[0], signal?: AbortSignal) => {
       check(); const request = ++cellRequest, requestSignal = beginCellRequest(signal), data = await delivery.loadCellDetail(cells, requestSignal);
       requestSignal.throwIfAborted(); if (!disposed && request === cellRequest) setData(OPERATIONAL_EXACT_CELL_SOURCE_ID, data);
@@ -77,7 +96,7 @@ export function createOperationalMapSources(map: SourcePort, protocolApi: Protoc
       if (!disposed && request === edgeRequest) setData(OPERATIONAL_EXACT_EDGE_SOURCE_ID, data);
       return data;
     },
-    clearDetail: () => {check(); cancelDetail(); setData(OPERATIONAL_EXACT_CELL_SOURCE_ID, empty()); setData(OPERATIONAL_EXACT_EDGE_SOURCE_ID, empty());},
+    clearDetail: () => {check(); cancelDetail(); for (const id of [OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID]) if (publishedKeys.get(id) !== '') setData(id, empty());},
     // Remove dependent layers before disposing the sources.
     dispose: () => {if (disposed) return; disposed = true; cancelDetail(); for (const id of [...ids].reverse()) if (map.getSource(id)) map.removeSource(id); unregister();},
   });

@@ -1,0 +1,129 @@
+[
+  {
+    "faceIndex": 37,
+    "historicalSourceFeatureId": "62558664B38041865832175",
+    "currentReceivers": [
+      {
+        "id": "territory:catalog:0fea8d72d938dc4121d3194eacc3ab5a549548d2ac152f4337060d793c09e8a4",
+        "sourceFeatureId": "62558664B42356006189021",
+        "exactCovers": false,
+        "boundaryCertificate": {
+          "pass": true,
+          "exact": false,
+          "existingRepresentationPolicyDegrees": 1e-12,
+          "subdivisionExceptions": [],
+          "failures": []
+        }
+      }
+    ]
+  },
+  {
+    "faceIndex": 43,
+    "historicalSourceFeatureId": "62558664B30113975876867",
+    "currentReceivers": [
+      {
+        "id": "territory:catalog:1aa968e28fdcd0b7aee1f344742f842e9748ea744fa23f0a2e2577289cc72fa7",
+        "sourceFeatureId": "62558664B69963011901153",
+        "exactCovers": true,
+        "boundaryCertificate": null
+      }
+    ]
+  },
+  {
+    "faceIndex": 47,
+    "historicalSourceFeatureId": "62558664B39665521082446",
+    "currentReceivers": [
+      {
+        "id": "territory:catalog:d5de97e9f860f0f3fdb1e2c597f656857f155b41a46c547a7bad8b8f1e1a0fa8",
+        "sourceFeatureId": "62558664B66395277469023",
+        "exactCovers": false,
+        "boundaryCertificate": {
+          "pass": true,
+          "exact": false,
+          "existingRepresentationPolicyDegrees": 1e-12,
+          "subdivisionExceptions": [
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  120.6107163123129,
+                  27.5855918994303
+                ],
+                [
+                  120.6146333145725,
+                  27.589775573747374
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  120.6107163123129,
+                  27.5855918994303
+                ],
+                [
+                  120.61191448529328,
+                  27.586871644805267
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 2.428132539831858e-15
+            },
+            {
+              "direction": "reference-to-actual",
+              "originalSegment": [
+                [
+                  120.6107163123129,
+                  27.5855918994303
+                ],
+                [
+                  120.6146333145725,
+                  27.589775573747374
+                ]
+              ],
+              "matchingSegment": [
+                [
+                  120.61191448529328,
+                  27.586871644805267
+                ],
+                [
+                  120.6146333145725,
+                  27.589775573747374
+                ]
+              ],
+              "maximumPerpendicularDistanceDegrees": 3.552713678800501e-15
+            }
+          ],
+          "failures": []
+        }
+      }
+    ]
+  },
+  {
+    "faceIndex": 64,
+    "historicalSourceFeatureId": "62558664B73469042980967",
+    "currentReceivers": [
+      {
+        "id": "territory:catalog:4bd21a2e2c7a2136d6ac46a0550996c884a95b264a10cd52c612ba49c280860d",
+        "sourceFeatureId": "62558664B25388197424197",
+        "exactCovers": true,
+        "boundaryCertificate": null
+      }
+    ]
+  },
+  {
+    "faceIndex": 74,
+    "historicalSourceFeatureId": "62558664B70034553182695",
+    "currentReceivers": [
+      {
+        "id": "territory:catalog:fd9c64218c2215fd4212ff16e1b758bdccda84c36da62c2b17d3f32b6bd7037e",
+        "sourceFeatureId": "62558664B73997834239622",
+        "exactCovers": false,
+        "boundaryCertificate": {
+          "pass": true,
+          "exact": false,
+          "existingRepresentationPolicyDegrees": 1e-12,
+          "subdivisionExceptions": [],
+          "failures": []
+        }
+      }
+    ]
+  }
+]

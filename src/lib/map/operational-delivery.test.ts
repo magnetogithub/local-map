@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import {gunzipSync, gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {beforeAll, describe, expect, it, vi} from 'vitest';
+import type {FeatureCollection, LineString} from 'geojson';
 import type {AddProtocolAction, Map as MapLibreMap, SourceSpecification} from 'maplibre-gl';
 import {VectorTile} from '@mapbox/vector-tile';
 import {PbfReader} from 'pbf';
@@ -15,6 +16,7 @@ import {fetchOperationalVectorDelivery, loadOperationalVectorDelivery, type Oper
 import {registerCatalogTileProtocol, type CatalogFetch} from './catalog-vector-delivery';
 import {createOperationalMapSources, OPERATIONAL_EXACT_CELL_SOURCE_ID, OPERATIONAL_EXACT_EDGE_SOURCE_ID} from './operational-map-sources';
 import {mapLibreFeatureTarget} from './render-feature-ref';
+import {assertAcceptedBoundaryDisplayLod, CHN_BOUNDARY_DISPLAY_LOD_IDENTITY} from './chn-boundary-display-lod.server';
 
 const catalog = prepareOperationalCatalog(), ref = catalog.ref, base = `/data/territory-catalog/${ref.catalogVersion}/`;
 const requests: string[] = [];
@@ -28,7 +30,29 @@ const fetcher: CatalogFetch = async path => {
 let delivery: OperationalVectorDelivery;
 beforeAll(async () => {delivery = await fetchOperationalVectorDelivery(ref, fetcher);});
 
+const lodKinds = ['province', 'micro'] as const;
+type LodKind = typeof lodKinds[number];
+const lodDescriptor = (bootstrap: OperationalVectorDelivery['bootstrap'], kind: LodKind) =>
+  kind === 'province' ? bootstrap.provinceBoundaryLod! : bootstrap.microBoundaryLod!;
+const loadLod = (local: OperationalVectorDelivery, kind: LodKind, signal?: AbortSignal) =>
+  kind === 'province' ? local.loadProvinceBoundaryLod(signal) : local.loadMicroBoundaryLod(signal);
+function isolatedFetch(seen: string[], transform?: (path: string, response: Response) => Promise<Response>): CatalogFetch {
+  return async path => {
+    seen.push(path);
+    const response = path === '/api/world/catalog/operational/map' ? await bootstrapGET() :
+      path.startsWith(base) ? await asset(path.slice(base.length)) : (() => {throw Error(`UNEXPECTED_ISOLATED_REQUEST:${path}`);})();
+    return transform ? transform(path, response) : response;
+  };
+}
+
 describe('16-04 operational map transport', () => {
+  it('advertises bounded hover inspection only for countries with cell shards, without loading fallback geometry', () => {
+    const count = requests.length;
+    expect(delivery.supportsCountryViewportDetail('CHN')).toBe(true);
+    expect(delivery.supportsCountryViewportDetail('PRK')).toBe(false);
+    expect(delivery.supportsCountryViewportDetail('KOR')).toBe(false);
+    expect(requests).toHaveLength(count);
+  });
   it('classifies original ADM1 contacts while excluding fine, foreign, coast and residual contacts', () => {
     const kor = catalog.loadCountry('KOR').slice(0, 7), prkCountryId = catalog.loadCountry('PRK')[0].sourceCountryId;
     const korParents = catalog.administrativeParents.filter(p => p.sourceCountryId === 'KOR' && p.kind === 'administrative').slice(0, 2);
@@ -60,14 +84,33 @@ describe('16-04 operational map transport', () => {
 
   it('rejects malformed legacy edge ordinals and defaults older bootstraps to no legacy contacts', () => {
     const bootstrap = prepareOperationalMapDelivery(catalog).bootstrap;
-    const {legacyBoundaryOrdinals, ...older} = bootstrap;
+    const {legacyBoundaryOrdinals, provinceBoundaryLod: ignoredProvince, microBoundaryLod: ignoredMicro, ...older} = bootstrap;
+    void ignoredProvince; void ignoredMicro;
     expect(legacyBoundaryOrdinals!.length).toBeGreaterThan(0);
     const normalized = readOperationalMapBootstrap(older, ref);
     expect(normalized.legacyBoundaryOrdinals).toEqual([]);
     expect(Object.isFrozen(normalized.legacyBoundaryOrdinals)).toBe(true);
+    expect(normalized.provinceBoundaryLod).toBeUndefined();
+    expect(normalized.microBoundaryLod).toBeUndefined();
     for (const ordinals of [[0], [-1], [1.5], [1, 1], [2, 1], [catalog.descriptor.counts.edges + 1]]) {
       expect(() => readOperationalMapBootstrap({...bootstrap, legacyBoundaryOrdinals: ordinals}, ref)).toThrow();
     }
+  });
+
+  it('keeps presentation grouping separate from administrative references and rejects malformed display ordinals', () => {
+    const bootstrap = prepareOperationalMapDelivery(catalog).bootstrap;
+    const {provincePresentationBoundaryOrdinals: ignored, provincePresentationRoot: ignoredRoot,
+      provinceBoundaryLod: ignoredProvince, microBoundaryLod: ignoredMicro, ...older} = bootstrap;
+    void ignored; void ignoredRoot; void ignoredProvince; void ignoredMicro;
+    expect(readOperationalMapBootstrap(older, ref).provincePresentationBoundaryOrdinals).toEqual([]);
+    const accepted = readOperationalMapBootstrap({...older, provincePresentationBoundaryOrdinals: [1], provincePresentationRoot: 'a'.repeat(64)}, ref);
+    expect(accepted.legacyBoundaryOrdinals).toEqual(bootstrap.legacyBoundaryOrdinals);
+    expect(Object.isFrozen(accepted.provincePresentationBoundaryOrdinals)).toBe(true);
+    for (const ordinals of [[0], [1, 1], [2, 1], [catalog.descriptor.counts.edges + 1]]) {
+      expect(() => readOperationalMapBootstrap({...accepted, provincePresentationBoundaryOrdinals: ordinals}, ref)).toThrow();
+    }
+    expect(() => readOperationalMapBootstrap({...older, provincePresentationBoundaryOrdinals: [1]}, ref)).toThrow('PROVINCE_PRESENTATION');
+    expect(() => readOperationalMapBootstrap({...accepted, provincePresentationRoot: 'invalid'}, ref)).toThrow();
   });
 
   it('matches exact coarse lineage without sending country metadata or polygon payloads to the browser', () => {
@@ -89,7 +132,148 @@ describe('16-04 operational map transport', () => {
     expect(delivery.source.promoteId).toBeUndefined();
     expect(delivery.source.tiles).toEqual([`${delivery.protocol}://${base}tiles/{z}/{x}/{y}.pbf.gz`]);
     expect(delivery.counters().cachedCountries).toBe(0);
+    expect(requests.some(path => /\/display\/chn-(?:province|micro)-lines-/.test(path))).toBe(false);
     expect(() => readOperationalMapBootstrap(delivery.bootstrap, {...ref, geometryRoot: '0'.repeat(64)})).toThrow();
+  });
+
+  it('advertises separate catalog-bound province and micro LODs without requesting either on boot', async () => {
+    const seen: string[] = [];
+    const local = await fetchOperationalVectorDelivery(ref, isolatedFetch(seen));
+    const bootstrap = local.bootstrap, macro = bootstrap.provincePresentationBoundaryOrdinals!;
+    expect(macro).toHaveLength(994);
+    expect(bootstrap.microBoundaryLod!.edgeOrdinals).toHaveLength(7568);
+    const micro = bootstrap.microBoundaryLod!.edgeOrdinals;
+    expect([...micro]).toEqual([...new Set(micro)].sort((a, b) => a - b));
+    expect(micro.every(n => n > 0 && n <= catalog.descriptor.counts.edges && !macro.includes(n))).toBe(true);
+    expect(Object.isFrozen(micro)).toBe(true);
+    for (const kind of lodKinds) {
+      const descriptor = lodDescriptor(bootstrap, kind);
+      expect(descriptor.artifact.path).toBe(`${base}display/chn-${kind}-lines-${descriptor.artifact.sha256}.geojson.gz`);
+      expect(descriptor.artifact.byteLength).toBeGreaterThan(0);
+      expect(descriptor.minZoom).toBe(2.2); expect(descriptor.maxZoom).toBe(7);
+      expect(Object.isFrozen(descriptor.bounds)).toBe(true);
+    }
+    expect(seen).toEqual(['/api/world/catalog/operational/map', base + 'manifest.json', base + 'tile-index.json', base + 'detail-index.json', base + 'metadata/edge-incidence.bin.gz']);
+    expect(seen.some(path => path.includes('/display/'))).toBe(false);
+  });
+
+  it('rejects a same-length tampered bundled boundary LOD before trusting its payload or descriptors', () => {
+    const accepted = JSON.parse(fs.readFileSync(CHN_BOUNDARY_DISPLAY_LOD_IDENTITY.path, 'utf8'));
+    expect(() => assertAcceptedBoundaryDisplayLod(accepted)).not.toThrow();
+    const tampered = structuredClone(accepted);
+    const payload: string = tampered.micro.payloadBase64;
+    tampered.micro.payloadBase64 = (payload[0] === 'A' ? 'B' : 'A') + payload.slice(1);
+    expect(Buffer.byteLength(JSON.stringify(tampered) + '\n')).toBe(CHN_BOUNDARY_DISPLAY_LOD_IDENTITY.byteLength);
+    expect(() => assertAcceptedBoundaryDisplayLod(tampered)).toThrow('BOUNDARY_DISPLAY_LOD_IDENTITY');
+  });
+
+  it('does not serve unknown-hash display assets or accepted display bytes through another catalog version', async () => {
+    for (const kind of lodKinds) {
+      const descriptor = lodDescriptor(delivery.bootstrap, kind);
+      const file = descriptor.artifact.path.slice(base.length);
+      expect((await asset(`display/chn-${kind}-lines-${'0'.repeat(64)}.geojson.gz`)).status).toBe(404);
+      expect((await asset(file.replace('.geojson.gz', '.geojson'))).status).toBe(404);
+      const otherVersion = 'catalog-v3-stale-line-lod-test';
+      const response = await assetGET(new Request(`http://localhost/data/territory-catalog/${otherVersion}/${file}`),
+        {params: Promise.resolve({version: otherVersion, asset: file.split('/')})});
+      expect(response.status).toBe(404);
+    }
+  });
+
+  it('accepts an older bootstrap without either optional line LOD and never fetches unavailable data', async () => {
+    const {provinceBoundaryLod, microBoundaryLod, ...older} = delivery.bootstrap;
+    void provinceBoundaryLod; void microBoundaryLod;
+    const normalized = readOperationalMapBootstrap(older, ref), seen: string[] = [];
+    expect(normalized.provinceBoundaryLod).toBeUndefined(); expect(normalized.microBoundaryLod).toBeUndefined();
+    const local = await loadOperationalVectorDelivery(normalized, ref, isolatedFetch(seen));
+    const before = seen.length;
+    await expect(local.loadProvinceBoundaryLod()).rejects.toThrow('PROVINCE_BOUNDARY_LOD_UNAVAILABLE');
+    await expect(local.loadMicroBoundaryLod()).rejects.toThrow('MICRO_BOUNDARY_LOD_UNAVAILABLE');
+    expect(seen).toHaveLength(before);
+  });
+
+  it('rejects malformed micro ordinals and hash-addressed LOD paths before loading geometry', () => {
+    const bootstrap = delivery.bootstrap, descriptor = bootstrap.microBoundaryLod!;
+    const [a, b] = descriptor.edgeOrdinals, macro = bootstrap.provincePresentationBoundaryOrdinals![0];
+    for (const edgeOrdinals of [[b, a], [a, a], [macro], [0], [catalog.descriptor.counts.edges + 1]]) {
+      expect(() => readOperationalMapBootstrap({...bootstrap, microBoundaryLod: {...descriptor, edgeOrdinals}}, ref)).toThrow();
+    }
+    for (const kind of lodKinds) {
+      const original = lodDescriptor(bootstrap, kind);
+      const key = kind === 'province' ? 'provinceBoundaryLod' : 'microBoundaryLod';
+      for (const path of [
+        `${base}display/chn-${kind}-lines-${'0'.repeat(64)}.geojson.gz`,
+        `${base}display/chn-${kind === 'province' ? 'micro' : 'province'}-lines-${original.artifact.sha256}.geojson.gz`,
+        `${base}display/chn-${kind}-lines-${original.artifact.sha256}.geojson`,
+        `/data/territory-catalog/stale/display/chn-${kind}-lines-${original.artifact.sha256}.geojson.gz`,
+      ]) {
+        expect(() => readOperationalMapBootstrap({...bootstrap, [key]: {...original, artifact: {...original.artifact, path}}}, ref)).toThrow();
+      }
+      expect(() => readOperationalMapBootstrap({...bootstrap, [key]: {...original, bounds: [110, 30, 100, 40]}}, ref)).toThrow();
+    }
+  });
+
+  it.each(lodKinds)('serves the real %s gzip bytes with the advertised digest and sorted original edge IDs', async kind => {
+    const descriptor = lodDescriptor(delivery.bootstrap, kind), response = await asset(descriptor.artifact.path.slice(base.length));
+    expect(response.status).toBe(200); expect(response.headers.get('content-type')).toBe('application/gzip');
+    expect(response.headers.get('content-encoding')).toBeNull();
+    expect(response.headers.get('cache-control')).toContain('immutable');
+    const bytes = Buffer.from(await response.arrayBuffer());
+    expect(bytes.subarray(0, 2)).toEqual(Buffer.from([31, 139]));
+    expect(bytes.length).toBe(descriptor.artifact.byteLength);
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(descriptor.artifact.sha256);
+    const collection = JSON.parse(gunzipSync(bytes).toString()) as FeatureCollection<LineString>;
+    const expected = kind === 'province' ? delivery.bootstrap.provincePresentationBoundaryOrdinals : delivery.bootstrap.microBoundaryLod!.edgeOrdinals;
+    expect(collection.type).toBe('FeatureCollection');
+    expect(collection.features.map(f => f.id)).toEqual(expected);
+    expect(collection.features.every(f => f.type === 'Feature' && f.geometry.type === 'LineString' && f.geometry.coordinates.length >= 2)).toBe(true);
+    expect((await asset(descriptor.artifact.path.slice(base.length), {'if-none-match': response.headers.get('etag')!})).status).toBe(304);
+  });
+
+  it('loads each line layer once on demand and protects cached collections from caller mutations', async () => {
+    const seen: string[] = [], local = await loadOperationalVectorDelivery(delivery.bootstrap, ref, isolatedFetch(seen));
+    expect(seen.some(path => path.includes('/display/'))).toBe(false);
+    for (const kind of lodKinds) {
+      const first = await loadLod(local, kind), expected = structuredClone(first);
+      first.features[0].geometry.coordinates[0][0] += 1;
+      first.features[0].properties = {callerMutation: true};
+      first.features.pop();
+      const second = await loadLod(local, kind);
+      expect(second).toEqual(expected); expect(second).not.toBe(first);
+      const path = lodDescriptor(local.bootstrap, kind).artifact.path;
+      expect(seen.filter(value => value === path)).toHaveLength(1);
+      const abort = new AbortController(); abort.abort();
+      await expect(loadLod(local, kind, abort.signal)).rejects.toThrow();
+      expect(seen.filter(value => value === path)).toHaveLength(1);
+    }
+  });
+
+  it.each(lodKinds)('rejects corrupted %s bytes before decompression and retries an uncached failure', async kind => {
+    const path = lodDescriptor(delivery.bootstrap, kind).artifact.path, seen: string[] = [];
+    let corrupt = true;
+    const local = await loadOperationalVectorDelivery(delivery.bootstrap, ref, isolatedFetch(seen, async (requested, response) => {
+      if (requested !== path || !corrupt) return response;
+      const bytes = new Uint8Array(await response.arrayBuffer()); bytes[0] ^= 1;
+      return new Response(bytes);
+    }));
+    await expect(loadLod(local, kind)).rejects.toThrow('SHA-256');
+    corrupt = false;
+    expect((await loadLod(local, kind)).features.length).toBe(kind === 'province' ? 994 : 7568);
+    expect(seen.filter(value => value === path)).toHaveLength(2);
+  });
+
+  it.each(lodKinds)('rejects a validly hashed %s collection whose IDs no longer match the sorted descriptor', async kind => {
+    const original = lodDescriptor(delivery.bootstrap, kind);
+    const response = await asset(original.artifact.path.slice(base.length));
+    const collection = JSON.parse(gunzipSync(Buffer.from(await response.arrayBuffer())).toString()) as FeatureCollection<LineString>;
+    [collection.features[0], collection.features[1]] = [collection.features[1], collection.features[0]];
+    const bytes = gzipSync(JSON.stringify(collection)), sha256 = createHash('sha256').update(bytes).digest('hex');
+    const path = `${base}display/chn-${kind}-lines-${sha256}.geojson.gz`;
+    const descriptor = {...original, artifact: {...original.artifact, path, sha256, byteLength: bytes.length}};
+    const key = kind === 'province' ? 'provinceBoundaryLod' : 'microBoundaryLod', seen: string[] = [];
+    const local = await loadOperationalVectorDelivery({...delivery.bootstrap, [key]: descriptor}, ref, async (requested, init) =>
+      requested === path ? new Response(new Uint8Array(bytes)) : isolatedFetch(seen)(requested, init));
+    await expect(loadLod(local, kind)).rejects.toThrow(`${kind === 'province' ? 'PROVINCE' : 'MICRO'}_BOUNDARY_LOD_MEMBERSHIP`);
   });
 
   it('serves approved bytes as gzip payloads and denies build artifacts, traversal and other versions', async () => {
@@ -107,6 +291,7 @@ describe('16-04 operational map transport', () => {
     let handler: AddProtocolAction | undefined;
     const api = {addProtocol: vi.fn((_id: string, action: AddProtocolAction) => {handler = action;}), removeProtocol: vi.fn()};
     const stopA = registerCatalogTileProtocol(api, delivery), stopB = registerCatalogTileProtocol(api, delivery);
+    const indexBuilds = delivery.counters().tileIndexBuilds;
     const response = await handler!({url: `${delivery.protocol}://${base}tiles/0/0/0.pbf.gz`, type: 'arrayBuffer'}, new AbortController());
     const bytes = response.data as ArrayBuffer;
     expect(new Uint8Array(bytes).slice(0, 2)).not.toEqual(new Uint8Array([31, 139]));
@@ -117,7 +302,9 @@ describe('16-04 operational map transport', () => {
     const edge = tile.layers.edges.feature(0);
     expect(delivery.edgeIncidence(edge.id!).left).toBeGreaterThan(0);
     expect(mapLibreFeatureTarget(delivery.renderRef('territories', tile.layers.territories.feature(0).id!))).toEqual({source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'territories', id: tile.layers.territories.feature(0).id});
+    expect(delivery.counters().tileIndexBuilds).toBe(indexBuilds + 1);
     const before = requests.length; await delivery.loadTile(base + 'tiles/0/0/0.pbf.gz'); expect(requests.length).toBe(before);
+    expect(delivery.counters().tileIndexBuilds).toBe(indexBuilds + 1);expect(delivery.counters().indexedTiles).toBe(1);
     stopA(); expect(api.removeProtocol).not.toHaveBeenCalled(); stopB(); expect(api.removeProtocol).toHaveBeenCalledOnce();
     await expect(delivery.loadTile(base + 'tiles/0/0/0.pbf')).rejects.toThrow('UNREGISTERED');
     const abort = new AbortController(); abort.abort(); await expect(delivery.loadTile(base + 'tiles/0/0/0.pbf.gz', abort.signal)).rejects.toThrow();
@@ -133,7 +320,24 @@ describe('16-04 operational map transport', () => {
     };
     const local = await loadOperationalVectorDelivery(bootstrap, ref, broken);
     await expect(local.loadTile(base + 'tiles/0/0/0.pbf.gz')).rejects.toThrow('SHA-256');
+    expect(local.counters().tileIndexBuilds).toBe(0);expect(local.counters().indexedTiles).toBe(0);
     corrupt = false; expect((await local.loadTile(base + 'tiles/0/0/0.pbf.gz')).byteLength).toBeGreaterThan(0);
+    expect(local.counters().tileIndexBuilds).toBe(1);expect(local.counters().indexedTiles).toBe(1);
+  });
+
+  it('does not memoize PBF indexing until observer publication succeeds', async () => {
+    const local = await loadOperationalVectorDelivery(delivery.bootstrap, ref, fetcher);
+    const stop = local.observeTileFeatures(features => {if (features.cells.length || features.edges.length) throw Error('OBSERVER_REJECTED');});
+    await expect(local.loadTile(base + 'tiles/0/0/0.pbf.gz')).rejects.toThrow('OBSERVER_REJECTED');
+    expect(local.counters().tileIndexBuilds).toBe(0);expect(local.counters().indexedTiles).toBe(0);stop();
+    await local.loadTile(base + 'tiles/0/0/0.pbf.gz');
+    expect(local.counters().tileIndexBuilds).toBe(1);expect(local.counters().indexedTiles).toBe(1);
+    const bytes = await local.loadTile(base + 'tiles/0/0/0.pbf.gz');new Uint8Array(bytes).fill(0);
+    expect(new Uint8Array(await local.loadTile(base + 'tiles/0/0/0.pbf.gz')).some(value => value !== 0)).toBe(true);
+    expect(local.counters().tileIndexBuilds).toBe(1);
+    const abort = new AbortController();abort.abort();
+    await expect(local.loadTile(base + 'tiles/0/0/0.pbf.gz', abort.signal)).rejects.toThrow();
+    expect(local.counters().tileIndexBuilds).toBe(1);
   });
 
   it('maps original cell IDs, administrative and previous parents lazily for PRK and SVN', async () => {

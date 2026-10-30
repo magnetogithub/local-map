@@ -1,0 +1,11 @@
+﻿{
+    "url":  "http://127.0.0.1:3001",
+    "externalAI":  "disabled; browser also blocks turn endpoint",
+    "pid":  19548,
+    "smoke":  false,
+    "launchCode":  {
+                       "path":  "scripts/chn-2020/start-hover-debug-qa.ps1",
+                       "sha256":  "45484618de29bd171330a2355b3575211eb0ab69c40de0a07efe56948a1caa1e",
+                       "byteLength":  1542
+                   }
+}

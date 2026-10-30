@@ -1,0 +1,12 @@
+Boundary Representative of Year: 2017.0
+ISO-3166-1 (Alpha-3): CHN
+Boundary Type: ADM3
+Canonical Boundary Type Name: County, City
+Source 1: Lee Beryman
+Source 2: OpenStreetMap
+Release Type: gbOpen
+License: Open Data Commons Open Database License 1.0
+License Notes: Open Data Commons Open Database License 1.0
+License Source: https://www.openstreetmap.org/copyright
+Link to Source Data: https://wambachers-osm.website/boundaries/
+Other Notes: 

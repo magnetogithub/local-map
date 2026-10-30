@@ -1,0 +1,2721 @@
+{
+  "schemaVersion": "hover-country-debug-browser-v1",
+  "pass": true,
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "code": [
+    {
+      "path": "scripts/chn-2020/verify-hover-debug-browser.mjs",
+      "sha256": "1b44bf67b4ebdced6274cea40d349eacb5a1444f966597518d331159b67c838a",
+      "byteLength": 19744
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "28144206591957f5d52da1e8bea1f833d0c915bd2a02c84fd5ceeb02c98b62fd",
+      "byteLength": 21763
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "88555a6eaa0e4fe2c4c61da284ae14c0720cf70a7f2ae401d1f156cb3191b773",
+      "byteLength": 27762
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "8714a385b3f2e544d3da64de2e819585feb5139487a8d2f3ccb1ce35d36437c5",
+      "byteLength": 7700
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "16f540f050e611af10823eebedb634fa559b5572c2954f5fbd23df88fdeb3635",
+      "byteLength": 35052
+    },
+    {
+      "path": "src/lib/map/operational-debug-boundary-scope.ts",
+      "sha256": "3f2e2e09c128ff213435f2a1816522b79c42ade2b6b5d52d3cf5ea2776e04e93",
+      "byteLength": 6390
+    }
+  ],
+  "conditions": {
+    "url": "http://127.0.0.1:3001",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "browser": "fresh isolated Chromium; software WebGL permitted",
+    "httpCache": "disabled by Playwright interception; application immutable caches remain active",
+    "actualPointerHover": true,
+    "externalAiCalls": 0,
+    "turnsSubmitted": 0,
+    "worldWrites": "only this isolated context initial allocation; finally deletes only captured own session IDs",
+    "scope": "live owner-or-controller country and its direct positive land neighbors; fresh seed equals source-country identities",
+    "limitation": "This change filters existing vector/exact micro-line presentation. Existing base PBF tiles still carry fine geometry; it does not remove non-target bytes from those tiles."
+  },
+  "failures": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "requests": [
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_0j_9op0._.css",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_1anvha4._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/turbopack-_08bm286._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_219uq1s._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_lib_11i8f47._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_components_03h2rfc._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_stores_game-setup-store_ts_0vcke35._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/data_runtime_operational-catalog_current_json_%5Bjson%5D_cjs_14uxah9._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_maplibre-gl_dist_maplibre-gl_1w0u9x2.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_zod_v4_06yv92s._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_0jbk0j2._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/simulation/game",
+      "method": "POST"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/cells",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/__nextjs_font/geist-latin.woff2",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/map",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tile-index.json",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail-index.json",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/edge-incidence.bin.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/labels",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/1/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/1/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/fonts/Open%20Sans%20Regular/0-255.pbf",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/fonts/Noto%20Sans%20KR/NotoSansCJKkr-Regular.otf",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/27/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/27/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/26/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/26/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/28/12.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "world-debug-no-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/5/28/11.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-same-country-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/3.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-same-country-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/6/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-same-country-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/3.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-same-country-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/5/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-same-country-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/3.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-same-country-hover",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/3/7/2.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "sea-clears-china-scope",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/3/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "sea-clears-china-scope",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/3/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "sea-clears-china-scope",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/0/1.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "sea-clears-china-scope",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/2/0/0.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "usa-hover-hides-korean-micros",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/54/24.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "usa-hover-hides-korean-micros",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/53/24.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "usa-hover-hides-korean-micros",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/54/23.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "usa-hover-hides-korean-micros",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/53/23.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "usa-hover-hides-korean-micros",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/countries/CHN.json.gz",
+      "method": "GET"
+    },
+    {
+      "case": "usa-hover-hides-korean-micros",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/cells/CHN/0045.geojson.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/cells/CHN/0045.geojson.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/cells/CHN/0048.geojson.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/cells/CHN/0050.geojson.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/001.json.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/002.json.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/003.json.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/004.json.gz",
+      "method": "GET"
+    },
+    {
+      "case": "rapid-hover-sea-rejects-late-detail",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/005.json.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-high-hover-uses-existing-fine-pbf",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/51/26.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-high-hover-uses-existing-fine-pbf",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/52/26.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-high-hover-uses-existing-fine-pbf",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/51/25.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-high-hover-uses-existing-fine-pbf",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/52/25.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-high-hover-uses-existing-fine-pbf",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/50/26.pbf.gz",
+      "method": "GET"
+    },
+    {
+      "case": "prk-high-hover-uses-existing-fine-pbf",
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/tiles/6/50/25.pbf.gz",
+      "method": "GET"
+    }
+  ],
+  "failedRequests": [
+    {
+      "url": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/cells/CHN/0045.geojson.gz",
+      "reason": "net::ERR_ABORTED"
+    }
+  ],
+  "views": [
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": null,
+        "hoveredCountryId": null,
+        "debugBoundaries": false,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 7732,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 0,
+        "debugBoundaryFilterWrites": 0,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [],
+        "debugBoundaryEdgeCount": 0,
+        "resyncRequired": false
+      },
+      "center": [
+        105,
+        30
+      ],
+      "zoom": 1.7,
+      "micro": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "white": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "world-normal-no-hover",
+      "expectedCountries": [],
+      "microCountries": {},
+      "microBySource": {},
+      "provinceWhite": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": null,
+        "hoveredCountryId": null,
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 7732,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 0,
+        "debugBoundaryFilterWrites": 0,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [],
+        "debugBoundaryEdgeCount": 0,
+        "resyncRequired": false
+      },
+      "center": [
+        105,
+        30
+      ],
+      "zoom": 1.7,
+      "micro": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "white": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "world-debug-no-hover",
+      "expectedCountries": [],
+      "microCountries": {},
+      "microBySource": {},
+      "provinceWhite": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": null,
+        "hoveredCountryId": null,
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 7732,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 0,
+        "debugBoundaryFilterWrites": 0,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [],
+        "debugBoundaryEdgeCount": 0,
+        "resyncRequired": false
+      },
+      "center": [
+        127,
+        39.5
+      ],
+      "zoom": 5.2,
+      "micro": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "white": {
+        "count": 434,
+        "sha256": "d659724c85e96f17857bafb184aaccf8b693a1f235c00c83a475116d6e8cb64f",
+        "sample": [
+          3508,
+          3759,
+          3866,
+          4065,
+          4099,
+          4188,
+          4213,
+          4284,
+          4433,
+          4525,
+          4591,
+          4603,
+          4629,
+          4690,
+          4841,
+          4845,
+          5081,
+          5179,
+          5206,
+          5278,
+          5281,
+          5349,
+          5377,
+          5395,
+          5401,
+          5451,
+          5489,
+          5525,
+          5565,
+          5631,
+          5653,
+          5744
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "korea-debug-no-hover",
+      "expectedCountries": [],
+      "microCountries": {},
+      "microBySource": {},
+      "provinceWhite": {
+        "count": 117,
+        "sha256": "f453f4f554cabd5814d462b6b7ea20f48aeabc9a0e7db598ada37474068e8828",
+        "sample": [
+          3508,
+          3759,
+          3866,
+          4065,
+          4099,
+          4188,
+          4213,
+          4284,
+          4433,
+          4525,
+          4591,
+          4603,
+          4629,
+          4690,
+          4841,
+          4845,
+          5081,
+          5179,
+          5206,
+          5278,
+          5281,
+          5349,
+          5377,
+          5395,
+          5401,
+          5451,
+          5489,
+          5525,
+          5565,
+          5631,
+          5653,
+          5744
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "CHN",
+        "hoveredCountryId": "PRK",
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 11246,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 1,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [
+          "CHN",
+          "KOR",
+          "PRK",
+          "RUS"
+        ],
+        "debugBoundaryEdgeCount": 10250,
+        "resyncRequired": false
+      },
+      "center": [
+        127,
+        39.5
+      ],
+      "zoom": 5.2,
+      "micro": {
+        "count": 1818,
+        "sha256": "c5b9b484fe5cae6786c7f12697eaf244f8f82b94cebc19f016537c2e18388efc",
+        "sample": [
+          3442,
+          3463,
+          3475,
+          3495,
+          3497,
+          3513,
+          3516,
+          3522,
+          3524,
+          3534,
+          3548,
+          3549,
+          3589,
+          3608,
+          3616,
+          3622,
+          3630,
+          3658,
+          3659,
+          3667,
+          3684,
+          3687,
+          3690,
+          3698,
+          3721,
+          3725,
+          3732,
+          3733,
+          3737,
+          3742,
+          3747,
+          3753
+        ]
+      },
+      "white": {
+        "count": 434,
+        "sha256": "d659724c85e96f17857bafb184aaccf8b693a1f235c00c83a475116d6e8cb64f",
+        "sample": [
+          3508,
+          3759,
+          3866,
+          4065,
+          4099,
+          4188,
+          4213,
+          4284,
+          4433,
+          4525,
+          4591,
+          4603,
+          4629,
+          4690,
+          4841,
+          4845,
+          5081,
+          5179,
+          5206,
+          5278,
+          5281,
+          5349,
+          5377,
+          5395,
+          5401,
+          5451,
+          5489,
+          5525,
+          5565,
+          5631,
+          5653,
+          5744
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "prk-hover-selected-chn",
+      "expectedCountries": [
+        "CHN",
+        "KOR",
+        "PRK",
+        "RUS"
+      ],
+      "microCountries": {
+        "CHN": 1016,
+        "PRK": 349,
+        "KOR": 506
+      },
+      "microBySource": {
+        "world-operational-catalog": {
+          "count": 1818,
+          "sha256": "c5b9b484fe5cae6786c7f12697eaf244f8f82b94cebc19f016537c2e18388efc",
+          "sample": [
+            3442,
+            3463,
+            3475,
+            3495,
+            3497,
+            3513,
+            3516,
+            3522,
+            3524,
+            3534,
+            3548,
+            3549,
+            3589,
+            3608,
+            3616,
+            3622,
+            3630,
+            3658,
+            3659,
+            3667,
+            3684,
+            3687,
+            3690,
+            3698,
+            3721,
+            3725,
+            3732,
+            3733,
+            3737,
+            3742,
+            3747,
+            3753
+          ]
+        }
+      },
+      "provinceWhite": {
+        "count": 117,
+        "sha256": "f453f4f554cabd5814d462b6b7ea20f48aeabc9a0e7db598ada37474068e8828",
+        "sample": [
+          3508,
+          3759,
+          3866,
+          4065,
+          4099,
+          4188,
+          4213,
+          4284,
+          4433,
+          4525,
+          4591,
+          4603,
+          4629,
+          4690,
+          4841,
+          4845,
+          5081,
+          5179,
+          5206,
+          5278,
+          5281,
+          5349,
+          5377,
+          5395,
+          5401,
+          5451,
+          5489,
+          5525,
+          5565,
+          5631,
+          5653,
+          5744
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "CHN",
+        "hoveredCountryId": "PRK",
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 11246,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 1,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [
+          "CHN",
+          "KOR",
+          "PRK",
+          "RUS"
+        ],
+        "debugBoundaryEdgeCount": 10250,
+        "resyncRequired": false
+      },
+      "center": [
+        127,
+        39.5
+      ],
+      "zoom": 5.2,
+      "micro": {
+        "count": 1818,
+        "sha256": "c5b9b484fe5cae6786c7f12697eaf244f8f82b94cebc19f016537c2e18388efc",
+        "sample": [
+          3442,
+          3463,
+          3475,
+          3495,
+          3497,
+          3513,
+          3516,
+          3522,
+          3524,
+          3534,
+          3548,
+          3549,
+          3589,
+          3608,
+          3616,
+          3622,
+          3630,
+          3658,
+          3659,
+          3667,
+          3684,
+          3687,
+          3690,
+          3698,
+          3721,
+          3725,
+          3732,
+          3733,
+          3737,
+          3742,
+          3747,
+          3753
+        ]
+      },
+      "white": {
+        "count": 434,
+        "sha256": "d659724c85e96f17857bafb184aaccf8b693a1f235c00c83a475116d6e8cb64f",
+        "sample": [
+          3508,
+          3759,
+          3866,
+          4065,
+          4099,
+          4188,
+          4213,
+          4284,
+          4433,
+          4525,
+          4591,
+          4603,
+          4629,
+          4690,
+          4841,
+          4845,
+          5081,
+          5179,
+          5206,
+          5278,
+          5281,
+          5349,
+          5377,
+          5395,
+          5401,
+          5451,
+          5489,
+          5525,
+          5565,
+          5631,
+          5653,
+          5744
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "prk-same-country-hover",
+      "expectedCountries": [
+        "CHN",
+        "KOR",
+        "PRK",
+        "RUS"
+      ],
+      "microCountries": {
+        "CHN": 1016,
+        "PRK": 349,
+        "KOR": 506
+      },
+      "microBySource": {
+        "world-operational-catalog": {
+          "count": 1818,
+          "sha256": "c5b9b484fe5cae6786c7f12697eaf244f8f82b94cebc19f016537c2e18388efc",
+          "sample": [
+            3442,
+            3463,
+            3475,
+            3495,
+            3497,
+            3513,
+            3516,
+            3522,
+            3524,
+            3534,
+            3548,
+            3549,
+            3589,
+            3608,
+            3616,
+            3622,
+            3630,
+            3658,
+            3659,
+            3667,
+            3684,
+            3687,
+            3690,
+            3698,
+            3721,
+            3725,
+            3732,
+            3733,
+            3737,
+            3742,
+            3747,
+            3753
+          ]
+        }
+      },
+      "provinceWhite": {
+        "count": 117,
+        "sha256": "f453f4f554cabd5814d462b6b7ea20f48aeabc9a0e7db598ada37474068e8828",
+        "sample": [
+          3508,
+          3759,
+          3866,
+          4065,
+          4099,
+          4188,
+          4213,
+          4284,
+          4433,
+          4525,
+          4591,
+          4603,
+          4629,
+          4690,
+          4841,
+          4845,
+          5081,
+          5179,
+          5206,
+          5278,
+          5281,
+          5349,
+          5377,
+          5395,
+          5401,
+          5451,
+          5489,
+          5525,
+          5565,
+          5631,
+          5653,
+          5744
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "PRK",
+        "hoveredCountryId": "CHN",
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 18483,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 4,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [
+          "AFG",
+          "BTN",
+          "CHN",
+          "HKG",
+          "IND",
+          "KAZ",
+          "KGZ",
+          "LAO",
+          "MMR",
+          "MNG",
+          "NPL",
+          "PAK",
+          "PRK",
+          "RUS",
+          "TJK",
+          "VNM"
+        ],
+        "debugBoundaryEdgeCount": 10318,
+        "resyncRequired": false
+      },
+      "center": [
+        105,
+        35
+      ],
+      "zoom": 3.3,
+      "micro": {
+        "count": 7908,
+        "sha256": "24b6eb4581b129f8917314235bc6cdc19301d72bbd6626ef50c56b4a7183e4d4",
+        "sample": [
+          3437,
+          3438,
+          3440,
+          3441,
+          3442,
+          3443,
+          3444,
+          3445,
+          3446,
+          3447,
+          3448,
+          3449,
+          3450,
+          3451,
+          3452,
+          3453,
+          3454,
+          3455,
+          3456,
+          3457,
+          3459,
+          3460,
+          3461,
+          3462,
+          3463,
+          3464,
+          3465,
+          3466,
+          3467,
+          3468,
+          3469,
+          3470
+        ]
+      },
+      "white": {
+        "count": 2140,
+        "sha256": "fca50086c7567efb89cdb3c0152ed298c8b58df23b2f58ad7e56f1fb2645a44c",
+        "sample": [
+          2,
+          5,
+          7,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          17,
+          21,
+          22,
+          23,
+          27,
+          28,
+          29,
+          30,
+          31,
+          33,
+          34,
+          35,
+          38,
+          39,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          51,
+          52
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "chn-hover-selected-prk",
+      "expectedCountries": [
+        "AFG",
+        "BTN",
+        "CHN",
+        "HKG",
+        "IND",
+        "KAZ",
+        "KGZ",
+        "LAO",
+        "MMR",
+        "MNG",
+        "NPL",
+        "PAK",
+        "PRK",
+        "RUS",
+        "TJK",
+        "VNM"
+      ],
+      "microCountries": {
+        "CHN": 7632,
+        "PRK": 349
+      },
+      "microBySource": {
+        "world-operational-catalog": {
+          "count": 7908,
+          "sha256": "24b6eb4581b129f8917314235bc6cdc19301d72bbd6626ef50c56b4a7183e4d4",
+          "sample": [
+            3437,
+            3438,
+            3440,
+            3441,
+            3442,
+            3443,
+            3444,
+            3445,
+            3446,
+            3447,
+            3448,
+            3449,
+            3450,
+            3451,
+            3452,
+            3453,
+            3454,
+            3455,
+            3456,
+            3457,
+            3459,
+            3460,
+            3461,
+            3462,
+            3463,
+            3464,
+            3465,
+            3466,
+            3467,
+            3468,
+            3469,
+            3470
+          ]
+        }
+      },
+      "provinceWhite": {
+        "count": 994,
+        "sha256": "f455aec8b7a8b0a9da1ac6c8564d65ca84db1a1fc51a7496ea819e5fd932c8dd",
+        "sample": [
+          3439,
+          3458,
+          3482,
+          3486,
+          3498,
+          3504,
+          3508,
+          3510,
+          3514,
+          3528,
+          3535,
+          3539,
+          3543,
+          3559,
+          3585,
+          3586,
+          3599,
+          3600,
+          3602,
+          3603,
+          3612,
+          3624,
+          3632,
+          3636,
+          3638,
+          3653,
+          3660,
+          3668,
+          3670,
+          3674,
+          3688,
+          3692
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "PRK",
+        "hoveredCountryId": null,
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 21803,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 5,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [],
+        "debugBoundaryEdgeCount": 0,
+        "resyncRequired": false
+      },
+      "center": [
+        105,
+        35
+      ],
+      "zoom": 3.3,
+      "micro": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "white": {
+        "count": 2140,
+        "sha256": "fca50086c7567efb89cdb3c0152ed298c8b58df23b2f58ad7e56f1fb2645a44c",
+        "sample": [
+          2,
+          5,
+          7,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          17,
+          21,
+          22,
+          23,
+          27,
+          28,
+          29,
+          30,
+          31,
+          33,
+          34,
+          35,
+          38,
+          39,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          51,
+          52
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "sea-clears-china-scope",
+      "expectedCountries": [],
+      "microCountries": {},
+      "microBySource": {},
+      "provinceWhite": {
+        "count": 994,
+        "sha256": "f455aec8b7a8b0a9da1ac6c8564d65ca84db1a1fc51a7496ea819e5fd932c8dd",
+        "sample": [
+          3439,
+          3458,
+          3482,
+          3486,
+          3498,
+          3504,
+          3508,
+          3510,
+          3514,
+          3528,
+          3535,
+          3539,
+          3543,
+          3559,
+          3585,
+          3586,
+          3599,
+          3600,
+          3602,
+          3603,
+          3612,
+          3624,
+          3632,
+          3636,
+          3638,
+          3653,
+          3660,
+          3668,
+          3670,
+          3674,
+          3688,
+          3692
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "PRK",
+        "hoveredCountryId": "PRK",
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 21998,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 6,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [
+          "CHN",
+          "KOR",
+          "PRK",
+          "RUS"
+        ],
+        "debugBoundaryEdgeCount": 10250,
+        "resyncRequired": false
+      },
+      "center": [
+        170,
+        50
+      ],
+      "zoom": 2.7,
+      "micro": {
+        "count": 4722,
+        "sha256": "ee9662c8169dc7b0fe1a395a483d888e01d43a5ad292b17c5e50b994682b763e",
+        "sample": [
+          3437,
+          3440,
+          3442,
+          3446,
+          3447,
+          3448,
+          3449,
+          3453,
+          3459,
+          3462,
+          3463,
+          3464,
+          3466,
+          3469,
+          3475,
+          3476,
+          3477,
+          3480,
+          3483,
+          3487,
+          3488,
+          3489,
+          3494,
+          3495,
+          3497,
+          3499,
+          3507,
+          3509,
+          3513,
+          3516,
+          3520,
+          3522
+        ]
+      },
+      "white": {
+        "count": 934,
+        "sha256": "eb209f0c6cf25ac44d9c7d6f6d54cbf92ee6ac47e0191e38a6b4e0357a87338a",
+        "sample": [
+          2650,
+          2660,
+          3486,
+          3508,
+          3510,
+          3514,
+          3535,
+          3585,
+          3603,
+          3624,
+          3636,
+          3638,
+          3653,
+          3660,
+          3668,
+          3670,
+          3701,
+          3716,
+          3724,
+          3728,
+          3759,
+          3802,
+          3826,
+          3866,
+          3891,
+          3917,
+          3967,
+          3983,
+          4005,
+          4065,
+          4099,
+          4137
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "korea-before-usa-hover",
+      "expectedCountries": [
+        "CHN",
+        "KOR",
+        "PRK",
+        "RUS"
+      ],
+      "microCountries": {
+        "PRK": 340,
+        "KOR": 506,
+        "CHN": 3876
+      },
+      "microBySource": {
+        "world-operational-catalog": {
+          "count": 4722,
+          "sha256": "ee9662c8169dc7b0fe1a395a483d888e01d43a5ad292b17c5e50b994682b763e",
+          "sample": [
+            3437,
+            3440,
+            3442,
+            3446,
+            3447,
+            3448,
+            3449,
+            3453,
+            3459,
+            3462,
+            3463,
+            3464,
+            3466,
+            3469,
+            3475,
+            3476,
+            3477,
+            3480,
+            3483,
+            3487,
+            3488,
+            3489,
+            3494,
+            3495,
+            3497,
+            3499,
+            3507,
+            3509,
+            3513,
+            3516,
+            3520,
+            3522
+          ]
+        }
+      },
+      "provinceWhite": {
+        "count": 488,
+        "sha256": "767306df54c65586d10eb55d07608484ec82645bf896e4835601ea44af603838",
+        "sample": [
+          3486,
+          3508,
+          3510,
+          3514,
+          3535,
+          3585,
+          3603,
+          3624,
+          3636,
+          3638,
+          3653,
+          3660,
+          3668,
+          3670,
+          3701,
+          3716,
+          3724,
+          3728,
+          3759,
+          3802,
+          3826,
+          3866,
+          3891,
+          3917,
+          3967,
+          3983,
+          4005,
+          4065,
+          4099,
+          4137,
+          4154,
+          4164
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "PRK",
+        "hoveredCountryId": "USA",
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 22244,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 8,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [
+          "CAN",
+          "CUB",
+          "MEX",
+          "USA"
+        ],
+        "debugBoundaryEdgeCount": 281,
+        "resyncRequired": false
+      },
+      "center": [
+        170,
+        50
+      ],
+      "zoom": 2.7,
+      "micro": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "white": {
+        "count": 934,
+        "sha256": "eb209f0c6cf25ac44d9c7d6f6d54cbf92ee6ac47e0191e38a6b4e0357a87338a",
+        "sample": [
+          2650,
+          2660,
+          3486,
+          3508,
+          3510,
+          3514,
+          3535,
+          3585,
+          3603,
+          3624,
+          3636,
+          3638,
+          3653,
+          3660,
+          3668,
+          3670,
+          3701,
+          3716,
+          3724,
+          3728,
+          3759,
+          3802,
+          3826,
+          3866,
+          3891,
+          3917,
+          3967,
+          3983,
+          4005,
+          4065,
+          4099,
+          4137
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "usa-hover-hides-korean-micros",
+      "expectedCountries": [
+        "CAN",
+        "CUB",
+        "MEX",
+        "USA"
+      ],
+      "microCountries": {},
+      "microBySource": {},
+      "provinceWhite": {
+        "count": 488,
+        "sha256": "767306df54c65586d10eb55d07608484ec82645bf896e4835601ea44af603838",
+        "sample": [
+          3486,
+          3508,
+          3510,
+          3514,
+          3535,
+          3585,
+          3603,
+          3624,
+          3636,
+          3638,
+          3653,
+          3660,
+          3668,
+          3670,
+          3701,
+          3716,
+          3724,
+          3728,
+          3759,
+          3802,
+          3826,
+          3866,
+          3891,
+          3917,
+          3967,
+          3983,
+          4005,
+          4065,
+          4099,
+          4137,
+          4154,
+          4164
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "USA",
+        "hoveredCountryId": null,
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 29958,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 13,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "debugBoundaryCountryIds": [],
+        "debugBoundaryEdgeCount": 0,
+        "resyncRequired": false
+      },
+      "center": [
+        125,
+        39.7
+      ],
+      "zoom": 7.3,
+      "micro": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "white": {
+        "count": 79,
+        "sha256": "47415a7aa825c3923d5cf9fb8b790abd1d5fd031ce6bbe3b912ef8e30633ee10",
+        "sample": [
+          5565,
+          9369,
+          22036,
+          22037,
+          22042,
+          22053,
+          22063,
+          22065,
+          22084,
+          22091,
+          22110,
+          22119,
+          22120,
+          22121,
+          22128,
+          22129,
+          22135,
+          22139,
+          22148,
+          22149,
+          22151,
+          22161,
+          22172,
+          22175,
+          22177,
+          22178,
+          22186,
+          22188,
+          22191,
+          22193,
+          22195,
+          22198
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "rapid-hover-sea-rejects-late-detail",
+      "expectedCountries": [],
+      "microCountries": {},
+      "microBySource": {},
+      "provinceWhite": {
+        "count": 2,
+        "sha256": "ea7739456aa579929e04850cd0af40e3b3c4a71b08d224bda0d820b3d777c0a2",
+        "sample": [
+          5565,
+          9369
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "USA",
+        "hoveredCountryId": "CHN",
+        "debugBoundaries": true,
+        "detailStatus": "ready"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 33303,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 14,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 25,
+        "detailSourceWrites": 2,
+        "debugBoundaryCountryIds": [
+          "AFG",
+          "BTN",
+          "CHN",
+          "HKG",
+          "IND",
+          "KAZ",
+          "KGZ",
+          "LAO",
+          "MMR",
+          "MNG",
+          "NPL",
+          "PAK",
+          "PRK",
+          "RUS",
+          "TJK",
+          "VNM"
+        ],
+        "debugBoundaryEdgeCount": 10318,
+        "resyncRequired": false
+      },
+      "center": [
+        125,
+        39.7
+      ],
+      "zoom": 7.3,
+      "micro": {
+        "count": 254,
+        "sha256": "4bef99c32dc3dfe7826b9c41ca828c270739d3300252cf1a37cd5bb04bee64ce",
+        "sample": [
+          3534,
+          3737,
+          3938,
+          4063,
+          4372,
+          4634,
+          4711,
+          4736,
+          5078,
+          5131,
+          5205,
+          5213,
+          5331,
+          5619,
+          6203,
+          6309,
+          6772,
+          6780,
+          7881,
+          7997,
+          8024,
+          8104,
+          8343,
+          8409,
+          8739,
+          9103,
+          9350,
+          9619,
+          9684,
+          10039,
+          10136,
+          10896
+        ]
+      },
+      "white": {
+        "count": 79,
+        "sha256": "47415a7aa825c3923d5cf9fb8b790abd1d5fd031ce6bbe3b912ef8e30633ee10",
+        "sample": [
+          5565,
+          9369,
+          22036,
+          22037,
+          22042,
+          22053,
+          22063,
+          22065,
+          22084,
+          22091,
+          22110,
+          22119,
+          22120,
+          22121,
+          22128,
+          22129,
+          22135,
+          22139,
+          22148,
+          22149,
+          22151,
+          22161,
+          22172,
+          22175,
+          22177,
+          22178,
+          22186,
+          22188,
+          22191,
+          22193,
+          22195,
+          22198
+        ]
+      },
+      "exactCells": {
+        "count": 25,
+        "sha256": "52f564a5c925a1395fa56ee4f8c6eafae4fdcce1e734f03701b385493d3d949d",
+        "sample": [
+          913,
+          1871,
+          2048,
+          2138,
+          2420,
+          2654,
+          2665,
+          3246,
+          3453,
+          3463,
+          4057,
+          4186,
+          5035,
+          5534,
+          5754,
+          5871,
+          6111,
+          6664,
+          6759,
+          6903,
+          7264,
+          7629,
+          7734,
+          7754,
+          7808
+        ]
+      },
+      "exactEdges": {
+        "count": 100,
+        "sha256": "35465db7065098d983cfd012693c86170d42e6ed94b926ec2ccea45256e70fe3",
+        "sample": [
+          3033,
+          3055,
+          3106,
+          3119,
+          3142,
+          3193,
+          3270,
+          3303,
+          3370,
+          3377,
+          3534,
+          3737,
+          3938,
+          4063,
+          4372,
+          4634,
+          4711,
+          4736,
+          4772,
+          4897,
+          5078,
+          5131,
+          5205,
+          5213,
+          5331,
+          5565,
+          5586,
+          5619,
+          5867,
+          5921,
+          6203,
+          6309
+        ]
+      },
+      "name": "chn-high-hover-exact-scope",
+      "expectedCountries": [
+        "AFG",
+        "BTN",
+        "CHN",
+        "HKG",
+        "IND",
+        "KAZ",
+        "KGZ",
+        "LAO",
+        "MMR",
+        "MNG",
+        "NPL",
+        "PAK",
+        "PRK",
+        "RUS",
+        "TJK",
+        "VNM"
+      ],
+      "microCountries": {
+        "CHN": 99,
+        "PRK": 224
+      },
+      "microBySource": {
+        "world-operational-exact-edges": {
+          "count": 36,
+          "sha256": "253d42534d7f329df3b66713c3beb2a7db0de59a4318f46461a091cc1bd8d395",
+          "sample": [
+            3534,
+            3737,
+            3938,
+            4063,
+            4372,
+            4634,
+            4711,
+            4736,
+            5078,
+            5131,
+            5205,
+            5213,
+            5331,
+            5619,
+            6203,
+            6309,
+            6772,
+            6780,
+            7881,
+            7997,
+            8024,
+            8104,
+            8343,
+            8409,
+            8739,
+            9103,
+            9350,
+            9619,
+            9684,
+            10039,
+            10136,
+            10896
+          ]
+        },
+        "world-operational-catalog": {
+          "count": 254,
+          "sha256": "4bef99c32dc3dfe7826b9c41ca828c270739d3300252cf1a37cd5bb04bee64ce",
+          "sample": [
+            3534,
+            3737,
+            3938,
+            4063,
+            4372,
+            4634,
+            4711,
+            4736,
+            5078,
+            5131,
+            5205,
+            5213,
+            5331,
+            5619,
+            6203,
+            6309,
+            6772,
+            6780,
+            7881,
+            7997,
+            8024,
+            8104,
+            8343,
+            8409,
+            8739,
+            9103,
+            9350,
+            9619,
+            9684,
+            10039,
+            10136,
+            10896
+          ]
+        }
+      },
+      "provinceWhite": {
+        "count": 2,
+        "sha256": "ea7739456aa579929e04850cd0af40e3b3c4a71b08d224bda0d820b3d777c0a2",
+        "sample": [
+          5565,
+          9369
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "USA",
+        "hoveredCountryId": "PRK",
+        "debugBoundaries": true,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 36817,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 15,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 4,
+        "debugBoundaryCountryIds": [
+          "CHN",
+          "KOR",
+          "PRK",
+          "RUS"
+        ],
+        "debugBoundaryEdgeCount": 10250,
+        "resyncRequired": false
+      },
+      "center": [
+        125,
+        39.7
+      ],
+      "zoom": 7.3,
+      "micro": {
+        "count": 254,
+        "sha256": "4bef99c32dc3dfe7826b9c41ca828c270739d3300252cf1a37cd5bb04bee64ce",
+        "sample": [
+          3534,
+          3737,
+          3938,
+          4063,
+          4372,
+          4634,
+          4711,
+          4736,
+          5078,
+          5131,
+          5205,
+          5213,
+          5331,
+          5619,
+          6203,
+          6309,
+          6772,
+          6780,
+          7881,
+          7997,
+          8024,
+          8104,
+          8343,
+          8409,
+          8739,
+          9103,
+          9350,
+          9619,
+          9684,
+          10039,
+          10136,
+          10896
+        ]
+      },
+      "white": {
+        "count": 79,
+        "sha256": "47415a7aa825c3923d5cf9fb8b790abd1d5fd031ce6bbe3b912ef8e30633ee10",
+        "sample": [
+          5565,
+          9369,
+          22036,
+          22037,
+          22042,
+          22053,
+          22063,
+          22065,
+          22084,
+          22091,
+          22110,
+          22119,
+          22120,
+          22121,
+          22128,
+          22129,
+          22135,
+          22139,
+          22148,
+          22149,
+          22151,
+          22161,
+          22172,
+          22175,
+          22177,
+          22178,
+          22186,
+          22188,
+          22191,
+          22193,
+          22195,
+          22198
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "prk-high-hover-uses-existing-fine-pbf",
+      "expectedCountries": [
+        "CHN",
+        "KOR",
+        "PRK",
+        "RUS"
+      ],
+      "microCountries": {
+        "CHN": 49,
+        "PRK": 224
+      },
+      "microBySource": {
+        "world-operational-catalog": {
+          "count": 254,
+          "sha256": "4bef99c32dc3dfe7826b9c41ca828c270739d3300252cf1a37cd5bb04bee64ce",
+          "sample": [
+            3534,
+            3737,
+            3938,
+            4063,
+            4372,
+            4634,
+            4711,
+            4736,
+            5078,
+            5131,
+            5205,
+            5213,
+            5331,
+            5619,
+            6203,
+            6309,
+            6772,
+            6780,
+            7881,
+            7997,
+            8024,
+            8104,
+            8343,
+            8409,
+            8739,
+            9103,
+            9350,
+            9619,
+            9684,
+            10039,
+            10136,
+            10896
+          ]
+        }
+      },
+      "provinceWhite": {
+        "count": 2,
+        "sha256": "ea7739456aa579929e04850cd0af40e3b3c4a71b08d224bda0d820b3d777c0a2",
+        "sample": [
+          5565,
+          9369
+        ]
+      }
+    },
+    {
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "selectedCountryId": "USA",
+        "hoveredCountryId": null,
+        "debugBoundaries": false,
+        "detailStatus": "idle"
+      },
+      "stats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 37011,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "debugBoundaryScopeBuilds": 1,
+        "debugBoundaryFilterWrites": 16,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 4,
+        "debugBoundaryCountryIds": [],
+        "debugBoundaryEdgeCount": 0,
+        "resyncRequired": false
+      },
+      "center": [
+        112,
+        31
+      ],
+      "zoom": 6,
+      "micro": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "white": {
+        "count": 246,
+        "sha256": "6e93b0d6056b0421edd6a0c044141390aa374a519c6902e9b60f006e7c086c47",
+        "sample": [
+          3510,
+          3535,
+          3586,
+          3603,
+          3692,
+          3759,
+          3789,
+          3834,
+          3870,
+          3873,
+          3922,
+          3983,
+          4005,
+          4043,
+          4174,
+          4181,
+          4202,
+          4213,
+          4222,
+          4279,
+          4295,
+          4375,
+          4380,
+          4381,
+          4383,
+          4386,
+          4448,
+          4516,
+          4587,
+          4609,
+          4615,
+          4690
+        ]
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "exactEdges": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "name": "debug-off-preserves-normal-province-white",
+      "expectedCountries": [],
+      "microCountries": {},
+      "microBySource": {},
+      "provinceWhite": {
+        "count": 246,
+        "sha256": "6e93b0d6056b0421edd6a0c044141390aa374a519c6902e9b60f006e7c086c47",
+        "sample": [
+          3510,
+          3535,
+          3586,
+          3603,
+          3692,
+          3759,
+          3789,
+          3834,
+          3870,
+          3873,
+          3922,
+          3983,
+          4005,
+          4043,
+          4174,
+          4181,
+          4202,
+          4213,
+          4222,
+          4279,
+          4295,
+          4375,
+          4380,
+          4381,
+          4383,
+          4386,
+          4448,
+          4516,
+          4587,
+          4609,
+          4615,
+          4690
+        ]
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "reports/hover-debug-20261030/prk-hover-selected-chn.png",
+      "sha256": "e80e01c41555eb2fef3dc047f6a450645dfad0bc3e743180383282d859f84065",
+      "byteLength": 356390
+    },
+    {
+      "path": "reports/hover-debug-20261030/chn-hover-selected-prk.png",
+      "sha256": "99968a9bf774ea2f82d6d3ea65e9fdaeee65f75995131536e75638168a463681",
+      "byteLength": 546703
+    },
+    {
+      "path": "reports/hover-debug-20261030/usa-hover-hides-korean-micros.png",
+      "sha256": "616a3040ba673d78631cc8cc2ab332508d67307a5cce3b1c62b14337d3797155",
+      "byteLength": 184692
+    },
+    {
+      "path": "reports/hover-debug-20261030/debug-off-preserves-normal-province-white.png",
+      "sha256": "c8626bf8448fd346a1a5b8dfc653c22f701467b2021e1b5e5e4e76b9f706973b",
+      "byteLength": 127568
+    }
+  ],
+  "cleanup": [
+    {
+      "sessionIdSha256": "13b1ef0b3ef123dffb36f9da9f5f7794a9afd501992bc227eac12927c7aeabeb",
+      "status": 204
+    }
+  ],
+  "expectedScopes": {
+    "PRK": [
+      "CHN",
+      "KOR",
+      "PRK",
+      "RUS"
+    ],
+    "CHN": [
+      "AFG",
+      "BTN",
+      "CHN",
+      "HKG",
+      "IND",
+      "KAZ",
+      "KGZ",
+      "LAO",
+      "MMR",
+      "MNG",
+      "NPL",
+      "PAK",
+      "PRK",
+      "RUS",
+      "TJK",
+      "VNM"
+    ],
+    "USA": [
+      "CAN",
+      "CUB",
+      "MEX",
+      "USA"
+    ]
+  },
+  "bootstrap": {
+    "legacyCount": 8422,
+    "provinceCount": 994,
+    "provinceRoot": "f1c91c059cdb06f5234f22843e4739991f0036048ef8fb5da433ae345d70cd3f",
+    "provinceOrdinalsHash": "f455aec8b7a8b0a9da1ac6c8564d65ca84db1a1fc51a7496ea819e5fd932c8dd"
+  },
+  "race": {
+    "delayedRequests": [
+      "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/cells/CHN/0045.geojson.gz"
+    ],
+    "finalScopeEmpty": true,
+    "finalExactEmpty": true
+  },
+  "fullCountryGeometryRequests": [],
+  "elapsedMs": 44731.301400000004
+}

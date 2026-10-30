@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "chn-hierarchy-floating-exceptions-v1",
+  "exceptions": [
+    {
+      "sourceFeatureId": "62558664B89351603081795",
+      "sourceName": "Sucheng District",
+      "parentSourceFeatureId": "CHN-ADM1-3_0_0-B19",
+      "outsideParentAreaDegrees2": 8.839112422006452e-13,
+      "outsideParentAreaKm2": 9.072191833912058e-09,
+      "maxOutsideVertexDistanceDegrees": 3.673675920601867e-15,
+      "maxOutsideVertexDistanceMetersUpperBound": 4.0895360348139985e-10,
+      "outsideGeometrySha256WKB": "2d3b4a031d3b71a01ea7cdde7235e47832885f7f0924c59b4148324776167e14",
+      "outsideCoordinateCount": 4,
+      "outsideCoordinates": [
+        [
+          118.17211390746792,
+          33.746065760241486
+        ],
+        [
+          118.1790695,
+          33.7427673
+        ],
+        [
+          118.17906949992576,
+          33.74276729978104
+        ],
+        [
+          118.17211390746792,
+          33.746065760241486
+        ]
+      ],
+      "areaAcceptanceBoundDegrees2": 1e-12,
+      "distanceAcceptanceBoundDegrees": 1e-10,
+      "reason": "Individually measured machine-scale coordinate arithmetic residual against the same OSM/Wambacher 2017 source family; no parent inferred by area majority or centroid."
+    },
+    {
+      "sourceFeatureId": "62558664B65872463896949",
+      "sourceName": "Wen'an County",
+      "parentSourceFeatureId": "CHN-ADM1-3_0_0-B13",
+      "outsideParentAreaDegrees2": 3.5800533629891097e-13,
+      "outsideParentAreaKm2": 3.4549163126200712e-09,
+      "maxOutsideVertexDistanceDegrees": 3.509080968293151e-15,
+      "maxOutsideVertexDistanceMetersUpperBound": 3.9063089339039357e-10,
+      "outsideGeometrySha256WKB": "08a23fdeaf209368ef053f11f8d5a9a1eb0b941c821eec23f1d43057c7994bb2",
+      "outsideCoordinateCount": 4,
+      "outsideCoordinates": [
+        [
+          116.72669220007866,
+          38.85069269993011
+        ],
+        [
+          116.7266922,
+          38.8506927
+        ],
+        [
+          116.72310995550085,
+          38.86297888634465
+        ],
+        [
+          116.72669220007866,
+          38.85069269993011
+        ]
+      ],
+      "areaAcceptanceBoundDegrees2": 1e-12,
+      "distanceAcceptanceBoundDegrees": 1e-10,
+      "reason": "Individually measured machine-scale coordinate arithmetic residual against the same OSM/Wambacher 2017 source family; no parent inferred by area majority or centroid."
+    },
+    {
+      "sourceFeatureId": "62558664B17838404417950",
+      "sourceName": "Jinxiang County",
+      "parentSourceFeatureId": "CHN-ADM1-3_0_0-B4",
+      "outsideParentAreaDegrees2": 3.640488737997058e-15,
+      "outsideParentAreaKm2": 2.0586545796508205e-11,
+      "maxOutsideVertexDistanceDegrees": 2.034614518177814e-12,
+      "maxOutsideVertexDistanceMetersUpperBound": 2.2649328816355425e-07,
+      "outsideGeometrySha256WKB": "5d0471e422b845416647a9ea2be54c1f6545fe254976a8d7de16e0ea70175026",
+      "outsideCoordinateCount": 4,
+      "outsideCoordinates": [
+        [
+          116.40660860010689,
+          34.8529930001269
+        ],
+        [
+          116.40660860010472,
+          34.852993000127455
+        ],
+        [
+          116.40888343350667,
+          34.85576185462873
+        ],
+        [
+          116.40660860010689,
+          34.8529930001269
+        ]
+      ],
+      "areaAcceptanceBoundDegrees2": 1e-12,
+      "distanceAcceptanceBoundDegrees": 1e-10,
+      "reason": "Individually measured machine-scale coordinate arithmetic residual against the same OSM/Wambacher 2017 source family; no parent inferred by area majority or centroid."
+    }
+  ]
+}

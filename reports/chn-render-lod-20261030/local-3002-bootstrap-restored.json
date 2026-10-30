@@ -1,0 +1,30 @@
+{
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+    "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+    "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+  },
+  "microEdges": 7568,
+  "province": {
+    "artifact": {
+      "path": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/display/chn-province-lines-5db25ad2123394bbc22761a6a4d5b3e3304f8f78a2dee0ca9c5a5a0e0e21f493.geojson.gz",
+      "sha256": "5db25ad2123394bbc22761a6a4d5b3e3304f8f78a2dee0ca9c5a5a0e0e21f493",
+      "byteLength": 411639
+    },
+    "bounds": [
+      78.95979121140321,
+      21.57606361112376,
+      131.249515121152,
+      53.32646382951208
+    ],
+    "minZoom": 2.2,
+    "maxZoom": 7
+  },
+  "micro": {
+    "path": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/display/chn-micro-lines-77b31ae8938ffee3d49f7a475c3e77af39b640b24a1571826d871c380958d96f.geojson.gz",
+    "sha256": "77b31ae8938ffee3d49f7a475c3e77af39b640b24a1571826d871c380958d96f",
+    "byteLength": 2978766
+  }
+}

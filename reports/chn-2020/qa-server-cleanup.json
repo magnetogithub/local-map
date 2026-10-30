@@ -1,0 +1,15 @@
+{
+  "pass": true,
+  "stoppedAtUtc": "2026-10-30T05:46:49.1487254Z",
+  "qaUrl": "http://127.0.0.1:3001",
+  "ownedLauncherPid": 9184,
+  "stoppedOwnedProcessIds": [
+    9184,
+    35952,
+    31452,
+    8328
+  ],
+  "normalAppUrl": "http://127.0.0.1:3002",
+  "normalAppStopped": false,
+  "previousGameServerStopped": false
+}

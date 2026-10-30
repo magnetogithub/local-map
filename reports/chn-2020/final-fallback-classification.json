@@ -1,0 +1,4508 @@
+{
+  "schemaVersion": "chn-final-fallback-classification-v1",
+  "date": "2026-10-30",
+  "countryId": "CHN",
+  "scenarioDate": "2020-01-01",
+  "readOnlyClassification": true,
+  "candidateGeometry": {
+    "path": "data/derived/chn-2020/geometry-v12/geometry.json",
+    "sha256": "ef33c6341da4125c34ac7c390816bff0cda339f9f12be1fcc81fb90761e0689e",
+    "byteLength": 123996651
+  },
+  "baselineInput": {
+    "path": "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json",
+    "sha256": "ce438f6027baa0a0ff8831b224b32ceadd7377791604395d89b5a8b3d491aa3d",
+    "byteLength": 75275879
+  },
+  "rawSource": {
+    "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+    "sha256": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e",
+    "byteLength": 88780624
+  },
+  "independentVerification": {
+    "path": "reports/chn-2020/independent-v12.json",
+    "sha256": "79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf",
+    "byteLength": 65964710
+  },
+  "sourceDecision": {
+    "path": "reports/chn-2020/source-decision.json",
+    "sha256": "6208e958ad8e3f813e4419f03fce01f853fe03fdd6e34ec7a5ea1ed09ee48e27",
+    "byteLength": 11811
+  },
+  "geometryAnalysisCode": {
+    "path": "scripts/chn-2020/prepare-china.py",
+    "sha256": "20e7b9fbe91dc043a83834480fba02d17373398dcfb0bd10eb1bc93038b9c824",
+    "byteLength": 63063
+  },
+  "summary": {
+    "fallbackCells": 7,
+    "totalAreaKm2": 21.88565004548664,
+    "wholeOriginalCoastOnlyGameIslandComponents": 5,
+    "islandAreaKm2": 17.30194976686147,
+    "boundedCoastalMainlandRemainders": 2,
+    "coastalRemainderAreaKm2": 4.5837002786251695,
+    "originalSourcePositiveContactComponents": 0,
+    "currentFineContactComponents": 2,
+    "wholeRemainingComponentsAssignableWithinTenKm": 0,
+    "newCountryLandAddedOrOriginalIslandsDeleted": false,
+    "officialAdministrativeAssignmentsInferred": 0
+  },
+  "components": [
+    {
+      "cellId": "territory:catalog:0eceab47c872e01dc0a57c9d93c52c2ce77150c66870cd707f837a7375e7b9ee",
+      "classification": "whole-original-game-island-source-omission",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              111.599864,
+              16.527493
+            ],
+            [
+              111.600108,
+              16.527289
+            ],
+            [
+              111.602794,
+              16.524644
+            ],
+            [
+              111.606293,
+              16.524237
+            ],
+            [
+              111.608897,
+              16.527248
+            ],
+            [
+              111.60963,
+              16.528266
+            ],
+            [
+              111.608165,
+              16.531806
+            ],
+            [
+              111.605724,
+              16.533515
+            ],
+            [
+              111.602875,
+              16.533352
+            ],
+            [
+              111.600841,
+              16.531968
+            ],
+            [
+              111.599864,
+              16.527493
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "geometrySha256WKB": "83a10399c18b609d36d9e2edae33528e52ac818805318bf333ceffae214ec50c",
+      "bboxLongitudeLatitude": [
+        111.599864,
+        16.524237,
+        111.60963,
+        16.533515
+      ],
+      "representativePointLongitudeLatitude": [
+        111.6046583489944,
+        16.530036
+      ],
+      "areaKm2": 0.7693958251080737,
+      "perimeterKm": 3.2117655503842584,
+      "effectiveWidthProxyKm": 0.4791108273865273,
+      "boundingBoxDiagonalKm": 1.4632206199732098,
+      "compactness4PiAreaOverPerimeterSquared": 0.9372857588517081,
+      "vertices": 11,
+      "holes": 0,
+      "originalActiveCHNComponent": {
+        "componentIndex": 8,
+        "normalizedGeometrySha256WKB": "6db8009c388fcf7d661d92eedc905961f9bcd4d275ce96ac11da801b77ff456d",
+        "areaKm2": 0.7693958251080737,
+        "isWholeOriginalComponent": true,
+        "outsideOriginalComponentAreaDegrees2": 0.0,
+        "originalComponentFullyPreservedByFinalCountry": "proved by independent-v12; this polygon may be only a source-free subset of the original mainland"
+      },
+      "rawSourcePositiveContacts": [],
+      "currentCHNFinePositiveContacts": [],
+      "foreignLandContacts": [],
+      "coastLengthKm": 3.2117655503842584,
+      "allBoundaryIncidences": [
+        {
+          "edgeId": "edge:operational:3fe32f6d5c65487f66c76583fe6d2a7856d45abedc278aa4b63765457f050c1a",
+          "otherCellId": null,
+          "otherSourceCountryId": null,
+          "otherIsCHNSourceFine": false,
+          "otherSourceFeatureId": null,
+          "otherSourceName": null,
+          "positiveLengthKm": 3.2117655503842584,
+          "geometry": {
+            "coordinates": [
+              [
+                111.599864,
+                16.527493
+              ],
+              [
+                111.600108,
+                16.527289
+              ],
+              [
+                111.602794,
+                16.524644
+              ],
+              [
+                111.606293,
+                16.524237
+              ],
+              [
+                111.608897,
+                16.527248
+              ],
+              [
+                111.60963,
+                16.528266
+              ],
+              [
+                111.608165,
+                16.531806
+              ],
+              [
+                111.605724,
+                16.533515
+              ],
+              [
+                111.602875,
+                16.533352
+              ],
+              [
+                111.600841,
+                16.531968
+              ],
+              [
+                111.599864,
+                16.527493
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "nearestClippedRawSource": {
+        "sourceFeatureId": "62558664B29410794950581",
+        "sourceName": "西沙群岛",
+        "approximateDistanceKm": 83.67495992239452,
+        "method": "WGS84 great-circle distance between planar longitude/latitude nearest points; diagnostic only, never assignment authority"
+      },
+      "administrativeTruthClaim": false,
+      "stripLoopAudit": {
+        "newCountryLand": false,
+        "wholeOriginalCoastOnlyIslandComponent": true,
+        "sameCountryFineLandContact": false,
+        "fullyEnclosedFineLoop": false,
+        "repairableByNearbyFineAssignment": false,
+        "reason": "No positive same-country source/fine contact on this disconnected original game component. Proximity across sea is not a valid distance seed and no physical island name or political identity is inferred from its bounding box."
+      },
+      "gameplayImpact": "Original game island component is retained with country-envelope-residual membership; no invented fine administrative ID or sea-crossing land adjacency."
+    },
+    {
+      "cellId": "territory:catalog:1b8d081feb524a166657271dc6fd41dc1d881ec5365f01597100b3532fda4717",
+      "classification": "whole-original-game-island-source-omission",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              112.333669,
+              16.926418
+            ],
+            [
+              112.33546,
+              16.923814
+            ],
+            [
+              112.340505,
+              16.92357
+            ],
+            [
+              112.341075,
+              16.926988
+            ],
+            [
+              112.337576,
+              16.931342
+            ],
+            [
+              112.337087,
+              16.932034
+            ],
+            [
+              112.336681,
+              16.932115
+            ],
+            [
+              112.333669,
+              16.933254
+            ],
+            [
+              112.333669,
+              16.926418
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "geometrySha256WKB": "9bc0220da3f03751ba2e054744e0d207725402a783595d8d3137ea5af85eae0d",
+      "bboxLongitudeLatitude": [
+        112.333669,
+        16.92357,
+        112.341075,
+        16.933254
+      ],
+      "representativePointLongitudeLatitude": [
+        112.33649725000001,
+        16.929165
+      ],
+      "areaKm2": 0.5905625766802282,
+      "perimeterKm": 3.1140655417393353,
+      "effectiveWidthProxyKm": 0.3792871850413106,
+      "boundingBoxDiagonalKm": 1.33078361810681,
+      "compactness4PiAreaOverPerimeterSquared": 0.7652798684904972,
+      "vertices": 9,
+      "holes": 0,
+      "originalActiveCHNComponent": {
+        "componentIndex": 13,
+        "normalizedGeometrySha256WKB": "77c7c3bb3580ca9ff2f6565faf065be7f8e7ff7250aaa33ce946e409947b72a0",
+        "areaKm2": 0.5905625766802282,
+        "isWholeOriginalComponent": true,
+        "outsideOriginalComponentAreaDegrees2": 0.0,
+        "originalComponentFullyPreservedByFinalCountry": "proved by independent-v12; this polygon may be only a source-free subset of the original mainland"
+      },
+      "rawSourcePositiveContacts": [],
+      "currentCHNFinePositiveContacts": [],
+      "foreignLandContacts": [],
+      "coastLengthKm": 3.1140655417393353,
+      "allBoundaryIncidences": [
+        {
+          "edgeId": "edge:operational:589b04500fc86b026b943804234fac722623577c9cecc0f9f6d6488c9bb08362",
+          "otherCellId": null,
+          "otherSourceCountryId": null,
+          "otherIsCHNSourceFine": false,
+          "otherSourceFeatureId": null,
+          "otherSourceName": null,
+          "positiveLengthKm": 3.1140655417393353,
+          "geometry": {
+            "coordinates": [
+              [
+                112.333669,
+                16.926418
+              ],
+              [
+                112.33546,
+                16.923814
+              ],
+              [
+                112.340505,
+                16.92357
+              ],
+              [
+                112.341075,
+                16.926988
+              ],
+              [
+                112.337576,
+                16.931342
+              ],
+              [
+                112.337087,
+                16.932034
+              ],
+              [
+                112.336681,
+                16.932115
+              ],
+              [
+                112.333669,
+                16.933254
+              ],
+              [
+                112.333669,
+                16.926418
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "nearestClippedRawSource": {
+        "sourceFeatureId": "62558664B29410794950581",
+        "sourceName": "西沙群岛",
+        "approximateDistanceKm": 9.551657406658096,
+        "method": "WGS84 great-circle distance between planar longitude/latitude nearest points; diagnostic only, never assignment authority"
+      },
+      "administrativeTruthClaim": false,
+      "stripLoopAudit": {
+        "newCountryLand": false,
+        "wholeOriginalCoastOnlyIslandComponent": true,
+        "sameCountryFineLandContact": false,
+        "fullyEnclosedFineLoop": false,
+        "repairableByNearbyFineAssignment": false,
+        "reason": "No positive same-country source/fine contact on this disconnected original game component. Proximity across sea is not a valid distance seed and no physical island name or political identity is inferred from its bounding box."
+      },
+      "gameplayImpact": "Original game island component is retained with country-envelope-residual membership; no invented fine administrative ID or sea-crossing land adjacency."
+    },
+    {
+      "cellId": "territory:catalog:319a92b614f96bfc166568d8a46c09e2a4971abda5738d69e0e0a8ef302a640c",
+      "classification": "bounded-contact-coastal-remainder-of-original-mainland",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              108.06337565798961,
+              21.483808075211687
+            ],
+            [
+              108.080577,
+              21.485663
+            ],
+            [
+              108.080577,
+              21.493109
+            ],
+            [
+              108.07267204962548,
+              21.494344262328763
+            ],
+            [
+              108.06337565798961,
+              21.483808075211687
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "geometrySha256WKB": "f16a2c485957924067915e5278db85831ea45838948689419fc6baa67be18024",
+      "bboxLongitudeLatitude": [
+        108.06337565798961,
+        21.483808075211687,
+        108.080577,
+        21.494344262328763
+      ],
+      "representativePointLongitudeLatitude": [
+        108.07443711356382,
+        21.489386
+      ],
+      "areaKm2": 1.278504786523342,
+      "perimeterKm": 4.962275884374747,
+      "effectiveWidthProxyKm": 0.5152896841342933,
+      "boundingBoxDiagonalKm": 2.130354460654012,
+      "compactness4PiAreaOverPerimeterSquared": 0.6524547702977525,
+      "vertices": 5,
+      "holes": 0,
+      "originalActiveCHNComponent": {
+        "componentIndex": 0,
+        "normalizedGeometrySha256WKB": "f572791000d557e08160b6fb2fd11e0478c0e50bf71662036e007ef3d5eefa8a",
+        "areaKm2": 9335915.12245455,
+        "isWholeOriginalComponent": false,
+        "outsideOriginalComponentAreaDegrees2": 0.0,
+        "originalComponentFullyPreservedByFinalCountry": "proved by independent-v12; this polygon may be only a source-free subset of the original mainland"
+      },
+      "rawSourcePositiveContacts": [],
+      "currentCHNFinePositiveContacts": [
+        {
+          "edgeId": "edge:operational:b9452028adddb60c8b2e2c818797315c9af9ba1e02ffc68fb65761e5e6a7b0e7",
+          "otherCellId": "territory:catalog:bc8940bbacea4b5ab7fc8c09e5157614e554452b1bfa003eecb187634e7be7bb",
+          "otherSourceCountryId": "CHN",
+          "otherIsCHNSourceFine": true,
+          "otherSourceFeatureId": "62558664B74840950654849",
+          "otherSourceName": "Dongxing City",
+          "positiveLengthKm": 1.5129561493663406,
+          "geometry": {
+            "coordinates": [
+              [
+                108.07267204962548,
+                21.494344262328763
+              ],
+              [
+                108.06337565798961,
+                21.483808075211687
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "foreignLandContacts": [],
+      "coastLengthKm": 3.4493197350084066,
+      "allBoundaryIncidences": [
+        {
+          "edgeId": "edge:operational:97db9f82b60ae0ce7a8b9fd0ac68b6d20c55921279bd0c93a43351ee2fc9bdc0",
+          "otherCellId": null,
+          "otherSourceCountryId": null,
+          "otherIsCHNSourceFine": false,
+          "otherSourceFeatureId": null,
+          "otherSourceName": null,
+          "positiveLengthKm": 3.4493197350084066,
+          "geometry": {
+            "coordinates": [
+              [
+                108.06337565798961,
+                21.483808075211687
+              ],
+              [
+                108.080577,
+                21.485663
+              ],
+              [
+                108.080577,
+                21.493109
+              ],
+              [
+                108.07267204962548,
+                21.494344262328763
+              ]
+            ],
+            "type": "LineString"
+          }
+        },
+        {
+          "edgeId": "edge:operational:b9452028adddb60c8b2e2c818797315c9af9ba1e02ffc68fb65761e5e6a7b0e7",
+          "otherCellId": "territory:catalog:bc8940bbacea4b5ab7fc8c09e5157614e554452b1bfa003eecb187634e7be7bb",
+          "otherSourceCountryId": "CHN",
+          "otherIsCHNSourceFine": true,
+          "otherSourceFeatureId": "62558664B74840950654849",
+          "otherSourceName": "Dongxing City",
+          "positiveLengthKm": 1.5129561493663406,
+          "geometry": {
+            "coordinates": [
+              [
+                108.07267204962548,
+                21.494344262328763
+              ],
+              [
+                108.06337565798961,
+                21.483808075211687
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "nearestClippedRawSource": {
+        "sourceFeatureId": "62558664B74840950654849",
+        "sourceName": "Dongxing City",
+        "approximateDistanceKm": 4.6779484378498015,
+        "method": "WGS84 great-circle distance between planar longitude/latitude nearest points; diagnostic only, never assignment authority"
+      },
+      "administrativeTruthClaim": false,
+      "boundedContactEvidence": {
+        "originalResidualLedgerIndex": 286,
+        "originalResidualId": "CHN:residual:699a7c5d1b93e833e3fe0194486e079e16e87263402e159910a4e52c7e5974a8",
+        "originalResidualAreaKm2": 112.50764871130934,
+        "projection": {
+          "latitude": 21.545371999917904,
+          "method": "local affine longitude*cos(latitude), latitude",
+          "xKmPerDegree": 103.42547702889745,
+          "yKmPerDegree": 111.195
+        },
+        "originalContactGeometry": {
+          "type": "MultiLineString",
+          "coordinates": [
+            [
+              [
+                107.99412119541262,
+                21.546395809558913
+              ],
+              [
+                107.99394799980041,
+                21.54639100014458
+              ]
+            ],
+            [
+              [
+                107.99394799980041,
+                21.54639100014458
+              ],
+              [
+                107.99252449980588,
+                21.54644830044873
+              ]
+            ],
+            [
+              [
+                107.99252449980588,
+                21.54644830044873
+              ],
+              [
+                107.99174809979502,
+                21.54623619984079
+              ]
+            ],
+            [
+              [
+                107.99174809979502,
+                21.54623619984079
+              ],
+              [
+                107.9905712002008,
+                21.54593239986042
+              ]
+            ],
+            [
+              [
+                107.9905712002008,
+                21.54593239986042
+              ],
+              [
+                107.98817409955512,
+                21.544499599976632
+              ]
+            ],
+            [
+              [
+                107.98817409955512,
+                21.544499599976632
+              ],
+              [
+                107.9872004998033,
+                21.54410979962762
+              ]
+            ],
+            [
+              [
+                107.9872004998033,
+                21.54410979962762
+              ],
+              [
+                107.98623300015288,
+                21.543857600048227
+              ]
+            ],
+            [
+              [
+                107.98623300015288,
+                21.543857600048227
+              ],
+              [
+                107.98555520001253,
+                21.543754499970248
+              ]
+            ],
+            [
+              [
+                107.98555520001253,
+                21.543754499970248
+              ],
+              [
+                107.98436589966661,
+                21.543914900352434
+              ]
+            ],
+            [
+              [
+                107.98436589966661,
+                21.543914900352434
+              ],
+              [
+                107.9816111997971,
+                21.54441990025822
+              ]
+            ],
+            [
+              [
+                107.9816111997971,
+                21.54441990025822
+              ],
+              [
+                107.9800206003705,
+                21.54481159997539
+              ]
+            ],
+            [
+              [
+                107.9800206003705,
+                21.54481159997539
+              ],
+              [
+                107.97928299981066,
+                21.54479920012301
+              ]
+            ],
+            [
+              [
+                107.97928299981066,
+                21.54479920012301
+              ],
+              [
+                107.9787129996053,
+                21.54426800026806
+              ]
+            ],
+            [
+              [
+                107.9787129996053,
+                21.54426800026806
+              ],
+              [
+                107.97804200013826,
+                21.54337999978719
+              ]
+            ],
+            [
+              [
+                107.97804200013826,
+                21.54337999978719
+              ],
+              [
+                107.97772480025941,
+                21.542711100237113
+              ]
+            ],
+            [
+              [
+                107.97772480025941,
+                21.542711100237113
+              ],
+              [
+                107.97750069999739,
+                21.541603399877033
+              ]
+            ],
+            [
+              [
+                107.97750069999739,
+                21.541603399877033
+              ],
+              [
+                107.9769335002809,
+                21.540912400387015
+              ]
+            ],
+            [
+              [
+                107.9769335002809,
+                21.540912400387015
+              ],
+              [
+                107.97621989992848,
+                21.540326500167907
+              ]
+            ],
+            [
+              [
+                107.97621989992848,
+                21.540326500167907
+              ],
+              [
+                107.97541880003763,
+                21.53986899975456
+              ]
+            ],
+            [
+              [
+                107.97541880003763,
+                21.53986899975456
+              ],
+              [
+                107.97444909974621,
+                21.539630999571045
+              ]
+            ],
+            [
+              [
+                107.97444909974621,
+                21.539630999571045
+              ],
+              [
+                107.97407549978453,
+                21.539565900346076
+              ]
+            ],
+            [
+              [
+                107.97407549978453,
+                21.539565900346076
+              ],
+              [
+                107.97361779972175,
+                21.539622300428846
+              ]
+            ],
+            [
+              [
+                107.97361779972175,
+                21.539622300428846
+              ],
+              [
+                107.97302010039738,
+                21.539943799966466
+              ]
+            ],
+            [
+              [
+                107.97302010039738,
+                21.539943799966466
+              ],
+              [
+                107.97138880035294,
+                21.540730400087966
+              ]
+            ],
+            [
+              [
+                107.97138880035294,
+                21.540730400087966
+              ],
+              [
+                107.97079980017071,
+                21.540731099760478
+              ]
+            ],
+            [
+              [
+                107.97079980017071,
+                21.540731099760478
+              ],
+              [
+                107.97051529964142,
+                21.540663000397217
+              ]
+            ],
+            [
+              [
+                107.97051529964142,
+                21.540663000397217
+              ],
+              [
+                107.97008619981835,
+                21.540471999683064
+              ]
+            ],
+            [
+              [
+                107.97008619981835,
+                21.540471999683064
+              ],
+              [
+                107.968670600368,
+                21.537458599934496
+              ]
+            ],
+            [
+              [
+                107.968670600368,
+                21.537458599934496
+              ],
+              [
+                107.96770109972601,
+                21.536314799888146
+              ]
+            ],
+            [
+              [
+                107.96770109972601,
+                21.536314799888146
+              ],
+              [
+                107.96668079997897,
+                21.5360388995756
+              ]
+            ],
+            [
+              [
+                107.96668079997897,
+                21.5360388995756
+              ],
+              [
+                107.96564639976162,
+                21.535926999631386
+              ]
+            ],
+            [
+              [
+                107.96564639976162,
+                21.535926999631386
+              ],
+              [
+                107.96295400042686,
+                21.53721399962643
+              ]
+            ],
+            [
+              [
+                107.96295400042686,
+                21.53721399962643
+              ],
+              [
+                107.96151299962531,
+                21.53721399962643
+              ]
+            ],
+            [
+              [
+                107.96151299962531,
+                21.53721399962643
+              ],
+              [
+                107.95925499981843,
+                21.536859000342645
+              ]
+            ],
+            [
+              [
+                107.95925499981843,
+                21.536859000342645
+              ],
+              [
+                107.95718899987253,
+                21.53641499965255
+              ]
+            ],
+            [
+              [
+                107.95718899987253,
+                21.53641499965255
+              ],
+              [
+                107.95598800024607,
+                21.53650400015954
+              ]
+            ],
+            [
+              [
+                107.95598800024607,
+                21.53650400015954
+              ],
+              [
+                107.95411400016104,
+                21.537791000154584
+              ]
+            ],
+            [
+              [
+                107.95411400016104,
+                21.537791000154584
+              ],
+              [
+                107.95238400042132,
+                21.539565000124696
+              ]
+            ],
+            [
+              [
+                107.95238400042132,
+                21.539565000124696
+              ],
+              [
+                107.95161600007839,
+                21.540896000350187
+              ]
+            ],
+            [
+              [
+                107.95161600007839,
+                21.540896000350187
+              ],
+              [
+                107.9500299997847,
+                21.54440100010612
+              ]
+            ],
+            [
+              [
+                107.9500299997847,
+                21.54440100010612
+              ],
+              [
+                107.9487809997434,
+                21.548438000113663
+              ]
+            ],
+            [
+              [
+                107.9487809997434,
+                21.548438000113663
+              ],
+              [
+                107.94777199997787,
+                21.550568000313035
+              ]
+            ],
+            [
+              [
+                107.94777199997787,
+                21.550568000313035
+              ],
+              [
+                107.94719600039514,
+                21.552653000235807
+              ]
+            ],
+            [
+              [
+                107.94719600039514,
+                21.552653000235807
+              ],
+              [
+                107.94575400044681,
+                21.556202000222186
+              ]
+            ],
+            [
+              [
+                107.94575400044681,
+                21.556202000222186
+              ],
+              [
+                107.94445699999062,
+                21.559884000046623
+              ]
+            ],
+            [
+              [
+                107.94445699999062,
+                21.559884000046623
+              ],
+              [
+                107.94306399960396,
+                21.562723999712887
+              ]
+            ],
+            [
+              [
+                107.94306399960396,
+                21.562723999712887
+              ],
+              [
+                107.94243899956024,
+                21.564985999704163
+              ]
+            ],
+            [
+              [
+                107.94243899956024,
+                21.564985999704163
+              ],
+              [
+                107.94234299962977,
+                21.566184000091596
+              ]
+            ],
+            [
+              [
+                107.94234299962977,
+                21.566184000091596
+              ],
+              [
+                107.94239100004467,
+                21.56667200011276
+              ]
+            ],
+            [
+              [
+                107.94239100004467,
+                21.56667200011276
+              ],
+              [
+                107.94316000043375,
+                21.568091999945864
+              ]
+            ],
+            [
+              [
+                107.94316000043375,
+                21.568091999945864
+              ],
+              [
+                107.94330399987973,
+                21.568979000380637
+              ]
+            ],
+            [
+              [
+                107.94330399987973,
+                21.568979000380637
+              ],
+              [
+                107.94316000043375,
+                21.56937799989481
+              ]
+            ],
+            [
+              [
+                107.94316000043375,
+                21.56937799989481
+              ],
+              [
+                107.94267899983606,
+                21.569865999916033
+              ]
+            ],
+            [
+              [
+                107.94267899983606,
+                21.569865999916033
+              ],
+              [
+                107.94099799965801,
+                21.570974999796476
+              ]
+            ],
+            [
+              [
+                107.94099799965801,
+                21.570974999796476
+              ],
+              [
+                107.93792399999268,
+                21.57323799983385
+              ]
+            ],
+            [
+              [
+                107.93792399999268,
+                21.57323799983385
+              ],
+              [
+                107.93629000018342,
+                21.57425800010668
+              ]
+            ],
+            [
+              [
+                107.93629000018342,
+                21.57425800010668
+              ],
+              [
+                107.9324460000829,
+                21.576210000191395
+              ]
+            ],
+            [
+              [
+                107.9324460000829,
+                21.576210000191395
+              ],
+              [
+                107.93105299969625,
+                21.577097999772946
+              ]
+            ],
+            [
+              [
+                107.93105299969625,
+                21.577097999772946
+              ],
+              [
+                107.93004399993072,
+                21.578162000276166
+              ]
+            ],
+            [
+              [
+                107.93004399993072,
+                21.578162000276166
+              ],
+              [
+                107.92951499981746,
+                21.579316000433096
+              ]
+            ],
+            [
+              [
+                107.92951499981746,
+                21.579316000433096
+              ],
+              [
+                107.92850600005193,
+                21.580646999759267
+              ]
+            ],
+            [
+              [
+                107.92850600005193,
+                21.580646999759267
+              ],
+              [
+                107.92696900021923,
+                21.582200000329806
+              ]
+            ],
+            [
+              [
+                107.92696900021923,
+                21.582200000329806
+              ],
+              [
+                107.92573390009949,
+                21.58343599977161
+              ]
+            ],
+            [
+              [
+                107.92573390009949,
+                21.58343599977161
+              ],
+              [
+                107.92495070031464,
+                21.584214200225233
+              ]
+            ],
+            [
+              [
+                107.92495070031464,
+                21.584214200225233
+              ],
+              [
+                107.92413530030393,
+                21.584952399733538
+              ]
+            ],
+            [
+              [
+                107.92413530030393,
+                21.584952399733538
+              ],
+              [
+                107.92378659987173,
+                21.585521100418475
+              ]
+            ],
+            [
+              [
+                107.92378659987173,
+                21.585521100418475
+              ],
+              [
+                107.92371150018562,
+                21.586114699733628
+              ]
+            ],
+            [
+              [
+                107.92371150018562,
+                21.586114699733628
+              ],
+              [
+                107.92397969960354,
+                21.586902799924303
+              ]
+            ],
+            [
+              [
+                107.92397969960354,
+                21.586902799924303
+              ],
+              [
+                107.92487020019962,
+                21.58792039990658
+              ]
+            ],
+            [
+              [
+                107.92487020019962,
+                21.58792039990658
+              ],
+              [
+                107.92490240042548,
+                21.5890677001143
+              ]
+            ],
+            [
+              [
+                107.92490240042548,
+                21.5890677001143
+              ],
+              [
+                107.92365400023198,
+                21.58960800020907
+              ]
+            ],
+            [
+              [
+                107.92365400023198,
+                21.58960800020907
+              ],
+              [
+                107.92216399986876,
+                21.589120000187904
+              ]
+            ],
+            [
+              [
+                107.92216399986876,
+                21.589120000187904
+              ],
+              [
+                107.92101099975787,
+                21.588853999612468
+              ]
+            ],
+            [
+              [
+                107.92101099975787,
+                21.588853999612468
+              ],
+              [
+                107.9196659997861,
+                21.587967000077015
+              ]
+            ],
+            [
+              [
+                107.9196659997861,
+                21.587967000077015
+              ],
+              [
+                107.9184650001597,
+                21.58747900005585
+              ]
+            ],
+            [
+              [
+                107.9184650001597,
+                21.58747900005585
+              ],
+              [
+                107.91735999956438,
+                21.58668000008197
+              ]
+            ],
+            [
+              [
+                107.91735999956438,
+                21.58668000008197
+              ],
+              [
+                107.91644699972932,
+                21.586280999668475
+              ]
+            ],
+            [
+              [
+                107.91644699972932,
+                21.586280999668475
+              ],
+              [
+                107.91562999982472,
+                21.586414000405853
+              ]
+            ],
+            [
+              [
+                107.91562999982472,
+                21.586414000405853
+              ],
+              [
+                107.91476599955132,
+                21.58668000008197
+              ]
+            ],
+            [
+              [
+                107.91476599955132,
+                21.58668000008197
+              ],
+              [
+                107.91404499957713,
+                21.58730099994125
+              ]
+            ],
+            [
+              [
+                107.91404499957713,
+                21.58730099994125
+              ],
+              [
+                107.91265200008979,
+                21.58809999991513
+              ]
+            ],
+            [
+              [
+                107.91265200008979,
+                21.58809999991513
+              ],
+              [
+                107.91188299970071,
+                21.588322000260177
+              ]
+            ],
+            [
+              [
+                107.91188299970071,
+                21.588322000260177
+              ],
+              [
+                107.9098650001697,
+                21.588365999591247
+              ]
+            ],
+            [
+              [
+                107.9098650001697,
+                21.588365999591247
+              ],
+              [
+                107.90899999985015,
+                21.588720999774353
+              ]
+            ],
+            [
+              [
+                107.90899999985015,
+                21.588720999774353
+              ],
+              [
+                107.90808700001509,
+                21.589208999795574
+              ]
+            ],
+            [
+              [
+                107.90808700001509,
+                21.589208999795574
+              ],
+              [
+                107.90544499958713,
+                21.591160999880287
+              ]
+            ],
+            [
+              [
+                107.90544499958713,
+                21.591160999880287
+              ],
+              [
+                107.90458000016696,
+                21.59102800004223
+              ]
+            ],
+            [
+              [
+                107.90458000016696,
+                21.59102800004223
+              ],
+              [
+                107.90381099977787,
+                21.590540000021008
+              ]
+            ],
+            [
+              [
+                107.90381099977787,
+                21.590540000021008
+              ],
+              [
+                107.90352299998654,
+                21.590051999999844
+              ]
+            ],
+            [
+              [
+                107.90352299998654,
+                21.590051999999844
+              ],
+              [
+                107.903618999917,
+                21.589519999748234
+              ]
+            ],
+            [
+              [
+                107.903618999917,
+                21.589519999748234
+              ],
+              [
+                107.90357100040143,
+                21.588055999684684
+              ]
+            ],
+            [
+              [
+                107.90357100040143,
+                21.588055999684684
+              ],
+              [
+                107.90347499957164,
+                21.58761199989391
+              ]
+            ],
+            [
+              [
+                107.90347499957164,
+                21.58761199989391
+              ],
+              [
+                107.9031869997803,
+                21.587035000265075
+              ]
+            ],
+            [
+              [
+                107.9031869997803,
+                21.587035000265075
+              ],
+              [
+                107.90261000015147,
+                21.58676899968964
+              ]
+            ],
+            [
+              [
+                107.90261000015147,
+                21.58676899968964
+              ],
+              [
+                107.90203399966941,
+                21.586725000358513
+              ]
+            ],
+            [
+              [
+                107.90203399966941,
+                21.586725000358513
+              ],
+              [
+                107.90126500017965,
+                21.586902000427017
+              ]
+            ],
+            [
+              [
+                107.90126500017965,
+                21.586902000427017
+              ],
+              [
+                107.90030399992969,
+                21.58730099994125
+              ]
+            ],
+            [
+              [
+                107.90030399992969,
+                21.58730099994125
+              ],
+              [
+                107.89948700002509,
+                21.587877999570082
+              ]
+            ],
+            [
+              [
+                107.89948700002509,
+                21.587877999570082
+              ],
+              [
+                107.89895899995793,
+                21.588677000443283
+              ]
+            ],
+            [
+              [
+                107.89895899995793,
+                21.588677000443283
+              ],
+              [
+                107.89867100016659,
+                21.589298000302506
+              ]
+            ],
+            [
+              [
+                107.89867100016659,
+                21.589298000302506
+              ],
+              [
+                107.89876700009705,
+                21.590007999769398
+              ]
+            ],
+            [
+              [
+                107.89876700009705,
+                21.590007999769398
+              ],
+              [
+                107.89929500016416,
+                21.590584000251454
+              ]
+            ],
+            [
+              [
+                107.89929500016416,
+                21.590584000251454
+              ],
+              [
+                107.89958400000165,
+                21.591516000063393
+              ]
+            ],
+            [
+              [
+                107.89958400000165,
+                21.591516000063393
+              ],
+              [
+                107.89972800034701,
+                21.592447999875333
+              ]
+            ],
+            [
+              [
+                107.89972800034701,
+                21.592447999875333
+              ],
+              [
+                107.89953500043998,
+                21.59320199957267
+              ]
+            ],
+            [
+              [
+                107.89953500043998,
+                21.59320199957267
+              ],
+              [
+                107.89886300002752,
+                21.59413400028393
+              ]
+            ],
+            [
+              [
+                107.89886300002752,
+                21.59413400028393
+              ],
+              [
+                107.89804600012286,
+                21.59506500004977
+              ]
+            ],
+            [
+              [
+                107.89804600012286,
+                21.59506500004977
+              ],
+              [
+                107.8962679999683,
+                21.59621900020676
+              ]
+            ],
+            [
+              [
+                107.8962679999683,
+                21.59621900020676
+              ],
+              [
+                107.89521099978788,
+                21.596484999882875
+              ]
+            ],
+            [
+              [
+                107.89521099978788,
+                21.596484999882875
+              ],
+              [
+                107.89401000016142,
+                21.596574000389865
+              ]
+            ],
+            [
+              [
+                107.89401000016142,
+                21.596574000389865
+              ],
+              [
+                107.89285700005058,
+                21.59692899967365
+              ]
+            ],
+            [
+              [
+                107.89285700005058,
+                21.59692899967365
+              ],
+              [
+                107.89184800028505,
+                21.59746099992526
+              ]
+            ],
+            [
+              [
+                107.89184800028505,
+                21.59746099992526
+              ],
+              [
+                107.89059900024375,
+                21.598569999805704
+              ]
+            ],
+            [
+              [
+                107.89059900024375,
+                21.598569999805704
+              ],
+              [
+                107.89031099955304,
+                21.59905799982687
+              ]
+            ],
+            [
+              [
+                107.89031099955304,
+                21.59905799982687
+              ],
+              [
+                107.89055099982886,
+                21.599901000031196
+              ]
+            ],
+            [
+              [
+                107.89055099982886,
+                21.599901000031196
+              ],
+              [
+                107.89117599987253,
+                21.600566000120864
+              ]
+            ],
+            [
+              [
+                107.89117599987253,
+                21.600566000120864
+              ],
+              [
+                107.89295299998105,
+                21.601497999932803
+              ]
+            ],
+            [
+              [
+                107.89295299998105,
+                21.601497999932803
+              ],
+              [
+                107.89333799974895,
+                21.602341000137073
+              ]
+            ],
+            [
+              [
+                107.89333799974895,
+                21.602341000137073
+              ],
+              [
+                107.89290499956616,
+                21.6031840003414
+              ]
+            ],
+            [
+              [
+                107.89290499956616,
+                21.6031840003414
+              ],
+              [
+                107.89256900025924,
+                21.604070999876797
+              ]
+            ],
+            [
+              [
+                107.89256900025924,
+                21.604070999876797
+              ],
+              [
+                107.89280899963569,
+                21.60495900035761
+              ]
+            ],
+            [
+              [
+                107.89280899963569,
+                21.60495900035761
+              ],
+              [
+                107.89280899963569,
+                21.605534999940346
+              ]
+            ],
+            [
+              [
+                107.89280899963569,
+                21.605534999940346
+              ],
+              [
+                107.89237700039831,
+                21.60611199956918
+              ]
+            ],
+            [
+              [
+                107.89237700039831,
+                21.60611199956918
+              ],
+              [
+                107.89189599980062,
+                21.606556000259275
+              ]
+            ],
+            [
+              [
+                107.89189599980062,
+                21.606556000259275
+              ],
+              [
+                107.89136799973346,
+                21.60673300032778
+              ]
+            ],
+            [
+              [
+                107.89136799973346,
+                21.60673300032778
+              ],
+              [
+                107.8908870000351,
+                21.606556000259275
+              ]
+            ],
+            [
+              [
+                107.8908870000351,
+                21.606556000259275
+              ],
+              [
+                107.88992699983123,
+                21.60642300042116
+              ]
+            ],
+            [
+              [
+                107.88992699983123,
+                21.60642300042116
+              ],
+              [
+                107.8889180000657,
+                21.606333999914227
+              ]
+            ],
+            [
+              [
+                107.8889180000657,
+                21.606333999914227
+              ],
+              [
+                107.88694800005021,
+                21.606333999914227
+              ]
+            ],
+            [
+              [
+                107.88694800005021,
+                21.606333999914227
+              ],
+              [
+                107.88603500021514,
+                21.60651099998273
+              ]
+            ],
+            [
+              [
+                107.88603500021514,
+                21.60651099998273
+              ],
+              [
+                107.88459400031292,
+                21.60695499977345
+              ]
+            ],
+            [
+              [
+                107.88459400031292,
+                21.60695499977345
+              ],
+              [
+                107.88425700006059,
+                21.607177000118497
+              ]
+            ],
+            [
+              [
+                107.88425700006059,
+                21.607177000118497
+              ],
+              [
+                107.88401699978476,
+                21.607709000370107
+              ]
+            ],
+            [
+              [
+                107.88401699978476,
+                21.607709000370107
+              ],
+              [
+                107.88396900026919,
+                21.60797500004628
+              ]
+            ],
+            [
+              [
+                107.88396900026919,
+                21.60797500004628
+              ],
+              [
+                107.88315200036459,
+                21.609306000271772
+              ]
+            ],
+            [
+              [
+                107.88315200036459,
+                21.609306000271772
+              ],
+              [
+                107.88295999960434,
+                21.610193999853266
+              ]
+            ],
+            [
+              [
+                107.88295999960434,
+                21.610193999853266
+              ],
+              [
+                107.88305600043412,
+                21.61090300017338
+              ]
+            ],
+            [
+              [
+                107.88305600043412,
+                21.61090300017338
+              ],
+              [
+                107.88334400022546,
+                21.61174600037765
+              ]
+            ],
+            [
+              [
+                107.88334400022546,
+                21.61174600037765
+              ],
+              [
+                107.88411299971523,
+                21.61223400039887
+              ]
+            ],
+            [
+              [
+                107.88411299971523,
+                21.61223400039887
+              ],
+              [
+                107.88507399996519,
+                21.61236700023693
+              ]
+            ],
+            [
+              [
+                107.88507399996519,
+                21.61236700023693
+              ],
+              [
+                107.88641899993695,
+                21.612455999844542
+              ]
+            ],
+            [
+              [
+                107.88641899993695,
+                21.612455999844542
+              ],
+              [
+                107.88872500015867,
+                21.612989000142306
+              ]
+            ],
+            [
+              [
+                107.88872500015867,
+                21.612989000142306
+              ],
+              [
+                107.88925400027193,
+                21.613254999818423
+              ]
+            ],
+            [
+              [
+                107.88925400027193,
+                21.613254999818423
+              ],
+              [
+                107.89021499962257,
+                21.61383100030048
+              ]
+            ],
+            [
+              [
+                107.89021499962257,
+                21.61383100030048
+              ],
+              [
+                107.89064699975927,
+                21.614586000043914
+              ]
+            ],
+            [
+              [
+                107.89064699975927,
+                21.614586000043914
+              ],
+              [
+                107.8908389996202,
+                21.61529500036403
+              ]
+            ],
+            [
+              [
+                107.8908389996202,
+                21.61529500036403
+              ],
+              [
+                107.89093599959676,
+                21.616315999783637
+              ]
+            ],
+            [
+              [
+                107.89093599959676,
+                21.616315999783637
+              ],
+              [
+                107.89074299968973,
+                21.61693699964286
+              ]
+            ],
+            [
+              [
+                107.89074299968973,
+                21.61693699964286
+              ],
+              [
+                107.89035899996793,
+                21.61760199973253
+              ]
+            ],
+            [
+              [
+                107.89035899996793,
+                21.61760199973253
+              ],
+              [
+                107.8897820003391,
+                21.618223999637905
+              ]
+            ],
+            [
+              [
+                107.8897820003391,
+                21.618223999637905
+              ],
+              [
+                107.8889180000657,
+                21.61880000011996
+              ]
+            ],
+            [
+              [
+                107.8889180000657,
+                21.61880000011996
+              ],
+              [
+                107.88824499960708,
+                21.618711999659126
+              ]
+            ],
+            [
+              [
+                107.88824499960708,
+                21.618711999659126
+              ],
+              [
+                107.88675600018934,
+                21.61919999968029
+              ]
+            ],
+            [
+              [
+                107.88675600018934,
+                21.61919999968029
+              ],
+              [
+                107.88593900028468,
+                21.6197319999319
+              ]
+            ],
+            [
+              [
+                107.88593900028468,
+                21.6197319999319
+              ],
+              [
+                107.88560300007845,
+                21.620442000298112
+              ]
+            ],
+            [
+              [
+                107.88560300007845,
+                21.620442000298112
+              ],
+              [
+                107.88560300007845,
+                21.621151999765004
+              ]
+            ],
+            [
+              [
+                107.88560300007845,
+                21.621151999765004
+              ],
+              [
+                107.88685200011975,
+                21.622039000199777
+              ]
+            ],
+            [
+              [
+                107.88685200011975,
+                21.622039000199777
+              ],
+              [
+                107.88713999991114,
+                21.622482999990496
+              ]
+            ],
+            [
+              [
+                107.88713999991114,
+                21.622482999990496
+              ],
+              [
+                107.88757200004784,
+                21.622971000011717
+              ]
+            ],
+            [
+              [
+                107.88757200004784,
+                21.622971000011717
+              ],
+              [
+                107.88858099981337,
+                21.62474499998183
+              ]
+            ],
+            [
+              [
+                107.88858099981337,
+                21.62474499998183
+              ],
+              [
+                107.88858099981337,
+                21.625278000279536
+              ]
+            ],
+            [
+              [
+                107.88858099981337,
+                21.625278000279536
+              ],
+              [
+                107.88824499960708,
+                21.625899000138816
+              ]
+            ],
+            [
+              [
+                107.88824499960708,
+                21.625899000138816
+              ],
+              [
+                107.8877170004393,
+                21.626341999883437
+              ]
+            ],
+            [
+              [
+                107.8877170004393,
+                21.626341999883437
+              ],
+              [
+                107.88685200011975,
+                21.6268299999046
+              ]
+            ],
+            [
+              [
+                107.88685200011975,
+                21.6268299999046
+              ],
+              [
+                107.88593900028468,
+                21.62745099976388
+              ]
+            ],
+            [
+              [
+                107.88593900028468,
+                21.62745099976388
+              ],
+              [
+                107.88516999989565,
+                21.628206000406635
+              ]
+            ],
+            [
+              [
+                107.88516999989565,
+                21.628206000406635
+              ],
+              [
+                107.88444999996756,
+                21.62878199998937
+              ]
+            ],
+            [
+              [
+                107.88444999996756,
+                21.62878199998937
+              ],
+              [
+                107.88319999988016,
+                21.629402999848594
+              ]
+            ],
+            [
+              [
+                107.88319999988016,
+                21.629402999848594
+              ],
+              [
+                107.88238400002166,
+                21.62962500019364
+              ]
+            ]
+          ]
+        },
+        "maximumContactDistanceKm": 10,
+        "minimumAnyPointDistanceToContinuousOriginalContactKm": 9.951847266722206,
+        "minimumVertexDistanceToContinuousOriginalContactKm": 9.975040280267816,
+        "maximumVertexDistanceToContinuousOriginalContactKm": 11.205359896739497,
+        "minimumAnyPointDistanceToReproducedOriginalSamplesKm": 9.951847266722206,
+        "originalSampleCount": 40,
+        "samplingMaximumKm": 1,
+        "nearestContactSamplingErrorUpperBoundKm": 0.5,
+        "bufferRadiusKm": 10,
+        "bufferQuadSegments": 8,
+        "bufferSides": 32,
+        "bufferApothemKm": 9.95184726672197,
+        "wholePartWouldExceedUnchangedTenKmBound": true,
+        "allOfPartWithinOriginalSourceFreeScope": true
+      },
+      "stripLoopAudit": {
+        "newCountryLand": false,
+        "fullyEnclosedFineLoop": false,
+        "touchesCoast": true,
+        "positiveExistingFineFamilyContact": true,
+        "wholePartCannotBeAssignedUnderExistingDistanceGuard": true,
+        "limitation": "Some inner land lies below 10 km from the continuous original contact. It remains because 1 km contact sampling and an inscribed 32-sided radius-10 km buffer conservatively approximate the bound. This report does not claim all remaining land is farther than 10 km, nor that the final coast is residual-strip-free.",
+        "possibleFurtherRefinement": "Denser/exact original-contact distance construction could recover some inner land while retaining the 10 km bound, but would change delivered gameplay geometry and require a new immutable candidate and full independent acceptance. No source relabel or administrative truth claim can substitute for that work."
+      },
+      "gameplayImpact": "Unconfirmed country-envelope-residual component adjacent to Dongxing gameplay fine family. Existing country ownership, coast and land adjacency are preserved. Whole-component assignment is blocked by the unchanged original-contact distance guard."
+    },
+    {
+      "cellId": "territory:catalog:8e0bf7b3a41f31e4e8fc214ad1ed17672324bdfbee08ad4cd9c7cc66402a740b",
+      "classification": "whole-original-game-island-source-omission",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              111.678884,
+              16.581122
+            ],
+            [
+              111.680268,
+              16.578152
+            ],
+            [
+              111.681651,
+              16.580186
+            ],
+            [
+              111.678884,
+              16.581122
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "geometrySha256WKB": "488be6391d85a92b71d4f362b74cfd7fa983a77e9f3a094f6070eb9e7bba4e54",
+      "bboxLongitudeLatitude": [
+        111.678884,
+        16.578152,
+        111.681651,
+        16.581122
+      ],
+      "representativePointLongitudeLatitude": [
+        111.68037679242424,
+        16.579169
+      ],
+      "areaKm2": 0.04087826080089808,
+      "perimeterKm": 0.9424369270320805,
+      "effectiveWidthProxyKm": 0.08675012540018306,
+      "boundingBoxDiagonalKm": 0.44184395169550206,
+      "compactness4PiAreaOverPerimeterSquared": 0.5783592489599708,
+      "vertices": 4,
+      "holes": 0,
+      "originalActiveCHNComponent": {
+        "componentIndex": 9,
+        "normalizedGeometrySha256WKB": "f10d086e0e96caddb050ab20fc1a17464413d9190cda9906f21a003984591cd1",
+        "areaKm2": 0.04087826080089808,
+        "isWholeOriginalComponent": true,
+        "outsideOriginalComponentAreaDegrees2": 0.0,
+        "originalComponentFullyPreservedByFinalCountry": "proved by independent-v12; this polygon may be only a source-free subset of the original mainland"
+      },
+      "rawSourcePositiveContacts": [],
+      "currentCHNFinePositiveContacts": [],
+      "foreignLandContacts": [],
+      "coastLengthKm": 0.9424369270320805,
+      "allBoundaryIncidences": [
+        {
+          "edgeId": "edge:operational:c573d56ad1e8be522837cc5f9f0916ba623c389fb78e74e74a6870c38a4046f8",
+          "otherCellId": null,
+          "otherSourceCountryId": null,
+          "otherIsCHNSourceFine": false,
+          "otherSourceFeatureId": null,
+          "otherSourceName": null,
+          "positiveLengthKm": 0.9424369270320805,
+          "geometry": {
+            "coordinates": [
+              [
+                111.678884,
+                16.581122
+              ],
+              [
+                111.680268,
+                16.578152
+              ],
+              [
+                111.681651,
+                16.580186
+              ],
+              [
+                111.678884,
+                16.581122
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "nearestClippedRawSource": {
+        "sourceFeatureId": "62558664B29410794950581",
+        "sourceName": "西沙群岛",
+        "approximateDistanceKm": 74.36054601315553,
+        "method": "WGS84 great-circle distance between planar longitude/latitude nearest points; diagnostic only, never assignment authority"
+      },
+      "administrativeTruthClaim": false,
+      "stripLoopAudit": {
+        "newCountryLand": false,
+        "wholeOriginalCoastOnlyIslandComponent": true,
+        "sameCountryFineLandContact": false,
+        "fullyEnclosedFineLoop": false,
+        "repairableByNearbyFineAssignment": false,
+        "reason": "No positive same-country source/fine contact on this disconnected original game component. Proximity across sea is not a valid distance seed and no physical island name or political identity is inferred from its bounding box."
+      },
+      "gameplayImpact": "Original game island component is retained with country-envelope-residual membership; no invented fine administrative ID or sea-crossing land adjacency."
+    },
+    {
+      "cellId": "territory:catalog:ae8ab27924929fad74b04d0eb6577b4dbb597cd5f4fda115b026db3501c389ed",
+      "classification": "bounded-contact-coastal-remainder-of-original-mainland",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              107.963878,
+              21.431627
+            ],
+            [
+              107.970714,
+              21.431627
+            ],
+            [
+              107.99590592640548,
+              21.452888485318958
+            ],
+            [
+              107.98194405692153,
+              21.448949130508467
+            ],
+            [
+              107.96539989861485,
+              21.447433528137083
+            ],
+            [
+              107.965343,
+              21.447333
+            ],
+            [
+              107.963878,
+              21.431627
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "geometrySha256WKB": "8064abbe079ee10c7a7b7d9a993de5698a4df0abd8f85f2b3ce56e6a8a7012d1",
+      "bboxLongitudeLatitude": [
+        107.963878,
+        21.431627,
+        107.99590592640548,
+        21.452888485318958
+      ],
+      "representativePointLongitudeLatitude": [
+        107.97231461071456,
+        21.43948
+      ],
+      "areaKm2": 3.3051954921018276,
+      "perimeterKm": 9.217416793246791,
+      "effectiveWidthProxyKm": 0.7171630764323045,
+      "boundingBoxDiagonalKm": 4.069970305236082,
+      "compactness4PiAreaOverPerimeterSquared": 0.4888645708190793,
+      "vertices": 7,
+      "holes": 0,
+      "originalActiveCHNComponent": {
+        "componentIndex": 0,
+        "normalizedGeometrySha256WKB": "f572791000d557e08160b6fb2fd11e0478c0e50bf71662036e007ef3d5eefa8a",
+        "areaKm2": 9335915.12245455,
+        "isWholeOriginalComponent": false,
+        "outsideOriginalComponentAreaDegrees2": 0.0,
+        "originalComponentFullyPreservedByFinalCountry": "proved by independent-v12; this polygon may be only a source-free subset of the original mainland"
+      },
+      "rawSourcePositiveContacts": [],
+      "currentCHNFinePositiveContacts": [
+        {
+          "edgeId": "edge:operational:b4a7477e9d7731ffcc961ab0c894e010b456f7a32bd3cb7f9db25d864d93ef56",
+          "otherCellId": "territory:catalog:bc8940bbacea4b5ab7fc8c09e5157614e554452b1bfa003eecb187634e7be7bb",
+          "otherSourceCountryId": "CHN",
+          "otherIsCHNSourceFine": true,
+          "otherSourceFeatureId": "62558664B74840950654849",
+          "otherSourceName": "Dongxing City",
+          "positiveLengthKm": 3.2346243958124825,
+          "geometry": {
+            "coordinates": [
+              [
+                107.99590592640548,
+                21.452888485318958
+              ],
+              [
+                107.98194405692153,
+                21.448949130508467
+              ],
+              [
+                107.96539989861485,
+                21.447433528137083
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "foreignLandContacts": [],
+      "coastLengthKm": 5.9827923974343085,
+      "allBoundaryIncidences": [
+        {
+          "edgeId": "edge:operational:a1d57dae0cb07d85887bd560f9956c55cefd02a64099b5a54c12e4da9b32aba9",
+          "otherCellId": null,
+          "otherSourceCountryId": null,
+          "otherIsCHNSourceFine": false,
+          "otherSourceFeatureId": null,
+          "otherSourceName": null,
+          "positiveLengthKm": 5.9827923974343085,
+          "geometry": {
+            "coordinates": [
+              [
+                107.96539989861485,
+                21.447433528137083
+              ],
+              [
+                107.965343,
+                21.447333
+              ],
+              [
+                107.963878,
+                21.431627
+              ],
+              [
+                107.970714,
+                21.431627
+              ],
+              [
+                107.99590592640548,
+                21.452888485318958
+              ]
+            ],
+            "type": "LineString"
+          }
+        },
+        {
+          "edgeId": "edge:operational:b4a7477e9d7731ffcc961ab0c894e010b456f7a32bd3cb7f9db25d864d93ef56",
+          "otherCellId": "territory:catalog:bc8940bbacea4b5ab7fc8c09e5157614e554452b1bfa003eecb187634e7be7bb",
+          "otherSourceCountryId": "CHN",
+          "otherIsCHNSourceFine": true,
+          "otherSourceFeatureId": "62558664B74840950654849",
+          "otherSourceName": "Dongxing City",
+          "positiveLengthKm": 3.2346243958124825,
+          "geometry": {
+            "coordinates": [
+              [
+                107.99590592640548,
+                21.452888485318958
+              ],
+              [
+                107.98194405692153,
+                21.448949130508467
+              ],
+              [
+                107.96539989861485,
+                21.447433528137083
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "nearestClippedRawSource": {
+        "sourceFeatureId": "62558664B74840950654849",
+        "sourceName": "Dongxing City",
+        "approximateDistanceKm": 9.693524850441259,
+        "method": "WGS84 great-circle distance between planar longitude/latitude nearest points; diagnostic only, never assignment authority"
+      },
+      "administrativeTruthClaim": false,
+      "boundedContactEvidence": {
+        "originalResidualLedgerIndex": 286,
+        "originalResidualId": "CHN:residual:699a7c5d1b93e833e3fe0194486e079e16e87263402e159910a4e52c7e5974a8",
+        "originalResidualAreaKm2": 112.50764871130934,
+        "projection": {
+          "latitude": 21.545371999917904,
+          "method": "local affine longitude*cos(latitude), latitude",
+          "xKmPerDegree": 103.42547702889745,
+          "yKmPerDegree": 111.195
+        },
+        "originalContactGeometry": {
+          "type": "MultiLineString",
+          "coordinates": [
+            [
+              [
+                107.99412119541262,
+                21.546395809558913
+              ],
+              [
+                107.99394799980041,
+                21.54639100014458
+              ]
+            ],
+            [
+              [
+                107.99394799980041,
+                21.54639100014458
+              ],
+              [
+                107.99252449980588,
+                21.54644830044873
+              ]
+            ],
+            [
+              [
+                107.99252449980588,
+                21.54644830044873
+              ],
+              [
+                107.99174809979502,
+                21.54623619984079
+              ]
+            ],
+            [
+              [
+                107.99174809979502,
+                21.54623619984079
+              ],
+              [
+                107.9905712002008,
+                21.54593239986042
+              ]
+            ],
+            [
+              [
+                107.9905712002008,
+                21.54593239986042
+              ],
+              [
+                107.98817409955512,
+                21.544499599976632
+              ]
+            ],
+            [
+              [
+                107.98817409955512,
+                21.544499599976632
+              ],
+              [
+                107.9872004998033,
+                21.54410979962762
+              ]
+            ],
+            [
+              [
+                107.9872004998033,
+                21.54410979962762
+              ],
+              [
+                107.98623300015288,
+                21.543857600048227
+              ]
+            ],
+            [
+              [
+                107.98623300015288,
+                21.543857600048227
+              ],
+              [
+                107.98555520001253,
+                21.543754499970248
+              ]
+            ],
+            [
+              [
+                107.98555520001253,
+                21.543754499970248
+              ],
+              [
+                107.98436589966661,
+                21.543914900352434
+              ]
+            ],
+            [
+              [
+                107.98436589966661,
+                21.543914900352434
+              ],
+              [
+                107.9816111997971,
+                21.54441990025822
+              ]
+            ],
+            [
+              [
+                107.9816111997971,
+                21.54441990025822
+              ],
+              [
+                107.9800206003705,
+                21.54481159997539
+              ]
+            ],
+            [
+              [
+                107.9800206003705,
+                21.54481159997539
+              ],
+              [
+                107.97928299981066,
+                21.54479920012301
+              ]
+            ],
+            [
+              [
+                107.97928299981066,
+                21.54479920012301
+              ],
+              [
+                107.9787129996053,
+                21.54426800026806
+              ]
+            ],
+            [
+              [
+                107.9787129996053,
+                21.54426800026806
+              ],
+              [
+                107.97804200013826,
+                21.54337999978719
+              ]
+            ],
+            [
+              [
+                107.97804200013826,
+                21.54337999978719
+              ],
+              [
+                107.97772480025941,
+                21.542711100237113
+              ]
+            ],
+            [
+              [
+                107.97772480025941,
+                21.542711100237113
+              ],
+              [
+                107.97750069999739,
+                21.541603399877033
+              ]
+            ],
+            [
+              [
+                107.97750069999739,
+                21.541603399877033
+              ],
+              [
+                107.9769335002809,
+                21.540912400387015
+              ]
+            ],
+            [
+              [
+                107.9769335002809,
+                21.540912400387015
+              ],
+              [
+                107.97621989992848,
+                21.540326500167907
+              ]
+            ],
+            [
+              [
+                107.97621989992848,
+                21.540326500167907
+              ],
+              [
+                107.97541880003763,
+                21.53986899975456
+              ]
+            ],
+            [
+              [
+                107.97541880003763,
+                21.53986899975456
+              ],
+              [
+                107.97444909974621,
+                21.539630999571045
+              ]
+            ],
+            [
+              [
+                107.97444909974621,
+                21.539630999571045
+              ],
+              [
+                107.97407549978453,
+                21.539565900346076
+              ]
+            ],
+            [
+              [
+                107.97407549978453,
+                21.539565900346076
+              ],
+              [
+                107.97361779972175,
+                21.539622300428846
+              ]
+            ],
+            [
+              [
+                107.97361779972175,
+                21.539622300428846
+              ],
+              [
+                107.97302010039738,
+                21.539943799966466
+              ]
+            ],
+            [
+              [
+                107.97302010039738,
+                21.539943799966466
+              ],
+              [
+                107.97138880035294,
+                21.540730400087966
+              ]
+            ],
+            [
+              [
+                107.97138880035294,
+                21.540730400087966
+              ],
+              [
+                107.97079980017071,
+                21.540731099760478
+              ]
+            ],
+            [
+              [
+                107.97079980017071,
+                21.540731099760478
+              ],
+              [
+                107.97051529964142,
+                21.540663000397217
+              ]
+            ],
+            [
+              [
+                107.97051529964142,
+                21.540663000397217
+              ],
+              [
+                107.97008619981835,
+                21.540471999683064
+              ]
+            ],
+            [
+              [
+                107.97008619981835,
+                21.540471999683064
+              ],
+              [
+                107.968670600368,
+                21.537458599934496
+              ]
+            ],
+            [
+              [
+                107.968670600368,
+                21.537458599934496
+              ],
+              [
+                107.96770109972601,
+                21.536314799888146
+              ]
+            ],
+            [
+              [
+                107.96770109972601,
+                21.536314799888146
+              ],
+              [
+                107.96668079997897,
+                21.5360388995756
+              ]
+            ],
+            [
+              [
+                107.96668079997897,
+                21.5360388995756
+              ],
+              [
+                107.96564639976162,
+                21.535926999631386
+              ]
+            ],
+            [
+              [
+                107.96564639976162,
+                21.535926999631386
+              ],
+              [
+                107.96295400042686,
+                21.53721399962643
+              ]
+            ],
+            [
+              [
+                107.96295400042686,
+                21.53721399962643
+              ],
+              [
+                107.96151299962531,
+                21.53721399962643
+              ]
+            ],
+            [
+              [
+                107.96151299962531,
+                21.53721399962643
+              ],
+              [
+                107.95925499981843,
+                21.536859000342645
+              ]
+            ],
+            [
+              [
+                107.95925499981843,
+                21.536859000342645
+              ],
+              [
+                107.95718899987253,
+                21.53641499965255
+              ]
+            ],
+            [
+              [
+                107.95718899987253,
+                21.53641499965255
+              ],
+              [
+                107.95598800024607,
+                21.53650400015954
+              ]
+            ],
+            [
+              [
+                107.95598800024607,
+                21.53650400015954
+              ],
+              [
+                107.95411400016104,
+                21.537791000154584
+              ]
+            ],
+            [
+              [
+                107.95411400016104,
+                21.537791000154584
+              ],
+              [
+                107.95238400042132,
+                21.539565000124696
+              ]
+            ],
+            [
+              [
+                107.95238400042132,
+                21.539565000124696
+              ],
+              [
+                107.95161600007839,
+                21.540896000350187
+              ]
+            ],
+            [
+              [
+                107.95161600007839,
+                21.540896000350187
+              ],
+              [
+                107.9500299997847,
+                21.54440100010612
+              ]
+            ],
+            [
+              [
+                107.9500299997847,
+                21.54440100010612
+              ],
+              [
+                107.9487809997434,
+                21.548438000113663
+              ]
+            ],
+            [
+              [
+                107.9487809997434,
+                21.548438000113663
+              ],
+              [
+                107.94777199997787,
+                21.550568000313035
+              ]
+            ],
+            [
+              [
+                107.94777199997787,
+                21.550568000313035
+              ],
+              [
+                107.94719600039514,
+                21.552653000235807
+              ]
+            ],
+            [
+              [
+                107.94719600039514,
+                21.552653000235807
+              ],
+              [
+                107.94575400044681,
+                21.556202000222186
+              ]
+            ],
+            [
+              [
+                107.94575400044681,
+                21.556202000222186
+              ],
+              [
+                107.94445699999062,
+                21.559884000046623
+              ]
+            ],
+            [
+              [
+                107.94445699999062,
+                21.559884000046623
+              ],
+              [
+                107.94306399960396,
+                21.562723999712887
+              ]
+            ],
+            [
+              [
+                107.94306399960396,
+                21.562723999712887
+              ],
+              [
+                107.94243899956024,
+                21.564985999704163
+              ]
+            ],
+            [
+              [
+                107.94243899956024,
+                21.564985999704163
+              ],
+              [
+                107.94234299962977,
+                21.566184000091596
+              ]
+            ],
+            [
+              [
+                107.94234299962977,
+                21.566184000091596
+              ],
+              [
+                107.94239100004467,
+                21.56667200011276
+              ]
+            ],
+            [
+              [
+                107.94239100004467,
+                21.56667200011276
+              ],
+              [
+                107.94316000043375,
+                21.568091999945864
+              ]
+            ],
+            [
+              [
+                107.94316000043375,
+                21.568091999945864
+              ],
+              [
+                107.94330399987973,
+                21.568979000380637
+              ]
+            ],
+            [
+              [
+                107.94330399987973,
+                21.568979000380637
+              ],
+              [
+                107.94316000043375,
+                21.56937799989481
+              ]
+            ],
+            [
+              [
+                107.94316000043375,
+                21.56937799989481
+              ],
+              [
+                107.94267899983606,
+                21.569865999916033
+              ]
+            ],
+            [
+              [
+                107.94267899983606,
+                21.569865999916033
+              ],
+              [
+                107.94099799965801,
+                21.570974999796476
+              ]
+            ],
+            [
+              [
+                107.94099799965801,
+                21.570974999796476
+              ],
+              [
+                107.93792399999268,
+                21.57323799983385
+              ]
+            ],
+            [
+              [
+                107.93792399999268,
+                21.57323799983385
+              ],
+              [
+                107.93629000018342,
+                21.57425800010668
+              ]
+            ],
+            [
+              [
+                107.93629000018342,
+                21.57425800010668
+              ],
+              [
+                107.9324460000829,
+                21.576210000191395
+              ]
+            ],
+            [
+              [
+                107.9324460000829,
+                21.576210000191395
+              ],
+              [
+                107.93105299969625,
+                21.577097999772946
+              ]
+            ],
+            [
+              [
+                107.93105299969625,
+                21.577097999772946
+              ],
+              [
+                107.93004399993072,
+                21.578162000276166
+              ]
+            ],
+            [
+              [
+                107.93004399993072,
+                21.578162000276166
+              ],
+              [
+                107.92951499981746,
+                21.579316000433096
+              ]
+            ],
+            [
+              [
+                107.92951499981746,
+                21.579316000433096
+              ],
+              [
+                107.92850600005193,
+                21.580646999759267
+              ]
+            ],
+            [
+              [
+                107.92850600005193,
+                21.580646999759267
+              ],
+              [
+                107.92696900021923,
+                21.582200000329806
+              ]
+            ],
+            [
+              [
+                107.92696900021923,
+                21.582200000329806
+              ],
+              [
+                107.92573390009949,
+                21.58343599977161
+              ]
+            ],
+            [
+              [
+                107.92573390009949,
+                21.58343599977161
+              ],
+              [
+                107.92495070031464,
+                21.584214200225233
+              ]
+            ],
+            [
+              [
+                107.92495070031464,
+                21.584214200225233
+              ],
+              [
+                107.92413530030393,
+                21.584952399733538
+              ]
+            ],
+            [
+              [
+                107.92413530030393,
+                21.584952399733538
+              ],
+              [
+                107.92378659987173,
+                21.585521100418475
+              ]
+            ],
+            [
+              [
+                107.92378659987173,
+                21.585521100418475
+              ],
+              [
+                107.92371150018562,
+                21.586114699733628
+              ]
+            ],
+            [
+              [
+                107.92371150018562,
+                21.586114699733628
+              ],
+              [
+                107.92397969960354,
+                21.586902799924303
+              ]
+            ],
+            [
+              [
+                107.92397969960354,
+                21.586902799924303
+              ],
+              [
+                107.92487020019962,
+                21.58792039990658
+              ]
+            ],
+            [
+              [
+                107.92487020019962,
+                21.58792039990658
+              ],
+              [
+                107.92490240042548,
+                21.5890677001143
+              ]
+            ],
+            [
+              [
+                107.92490240042548,
+                21.5890677001143
+              ],
+              [
+                107.92365400023198,
+                21.58960800020907
+              ]
+            ],
+            [
+              [
+                107.92365400023198,
+                21.58960800020907
+              ],
+              [
+                107.92216399986876,
+                21.589120000187904
+              ]
+            ],
+            [
+              [
+                107.92216399986876,
+                21.589120000187904
+              ],
+              [
+                107.92101099975787,
+                21.588853999612468
+              ]
+            ],
+            [
+              [
+                107.92101099975787,
+                21.588853999612468
+              ],
+              [
+                107.9196659997861,
+                21.587967000077015
+              ]
+            ],
+            [
+              [
+                107.9196659997861,
+                21.587967000077015
+              ],
+              [
+                107.9184650001597,
+                21.58747900005585
+              ]
+            ],
+            [
+              [
+                107.9184650001597,
+                21.58747900005585
+              ],
+              [
+                107.91735999956438,
+                21.58668000008197
+              ]
+            ],
+            [
+              [
+                107.91735999956438,
+                21.58668000008197
+              ],
+              [
+                107.91644699972932,
+                21.586280999668475
+              ]
+            ],
+            [
+              [
+                107.91644699972932,
+                21.586280999668475
+              ],
+              [
+                107.91562999982472,
+                21.586414000405853
+              ]
+            ],
+            [
+              [
+                107.91562999982472,
+                21.586414000405853
+              ],
+              [
+                107.91476599955132,
+                21.58668000008197
+              ]
+            ],
+            [
+              [
+                107.91476599955132,
+                21.58668000008197
+              ],
+              [
+                107.91404499957713,
+                21.58730099994125
+              ]
+            ],
+            [
+              [
+                107.91404499957713,
+                21.58730099994125
+              ],
+              [
+                107.91265200008979,
+                21.58809999991513
+              ]
+            ],
+            [
+              [
+                107.91265200008979,
+                21.58809999991513
+              ],
+              [
+                107.91188299970071,
+                21.588322000260177
+              ]
+            ],
+            [
+              [
+                107.91188299970071,
+                21.588322000260177
+              ],
+              [
+                107.9098650001697,
+                21.588365999591247
+              ]
+            ],
+            [
+              [
+                107.9098650001697,
+                21.588365999591247
+              ],
+              [
+                107.90899999985015,
+                21.588720999774353
+              ]
+            ],
+            [
+              [
+                107.90899999985015,
+                21.588720999774353
+              ],
+              [
+                107.90808700001509,
+                21.589208999795574
+              ]
+            ],
+            [
+              [
+                107.90808700001509,
+                21.589208999795574
+              ],
+              [
+                107.90544499958713,
+                21.591160999880287
+              ]
+            ],
+            [
+              [
+                107.90544499958713,
+                21.591160999880287
+              ],
+              [
+                107.90458000016696,
+                21.59102800004223
+              ]
+            ],
+            [
+              [
+                107.90458000016696,
+                21.59102800004223
+              ],
+              [
+                107.90381099977787,
+                21.590540000021008
+              ]
+            ],
+            [
+              [
+                107.90381099977787,
+                21.590540000021008
+              ],
+              [
+                107.90352299998654,
+                21.590051999999844
+              ]
+            ],
+            [
+              [
+                107.90352299998654,
+                21.590051999999844
+              ],
+              [
+                107.903618999917,
+                21.589519999748234
+              ]
+            ],
+            [
+              [
+                107.903618999917,
+                21.589519999748234
+              ],
+              [
+                107.90357100040143,
+                21.588055999684684
+              ]
+            ],
+            [
+              [
+                107.90357100040143,
+                21.588055999684684
+              ],
+              [
+                107.90347499957164,
+                21.58761199989391
+              ]
+            ],
+            [
+              [
+                107.90347499957164,
+                21.58761199989391
+              ],
+              [
+                107.9031869997803,
+                21.587035000265075
+              ]
+            ],
+            [
+              [
+                107.9031869997803,
+                21.587035000265075
+              ],
+              [
+                107.90261000015147,
+                21.58676899968964
+              ]
+            ],
+            [
+              [
+                107.90261000015147,
+                21.58676899968964
+              ],
+              [
+                107.90203399966941,
+                21.586725000358513
+              ]
+            ],
+            [
+              [
+                107.90203399966941,
+                21.586725000358513
+              ],
+              [
+                107.90126500017965,
+                21.586902000427017
+              ]
+            ],
+            [
+              [
+                107.90126500017965,
+                21.586902000427017
+              ],
+              [
+                107.90030399992969,
+                21.58730099994125
+              ]
+            ],
+            [
+              [
+                107.90030399992969,
+                21.58730099994125
+              ],
+              [
+                107.89948700002509,
+                21.587877999570082
+              ]
+            ],
+            [
+              [
+                107.89948700002509,
+                21.587877999570082
+              ],
+              [
+                107.89895899995793,
+                21.588677000443283
+              ]
+            ],
+            [
+              [
+                107.89895899995793,
+                21.588677000443283
+              ],
+              [
+                107.89867100016659,
+                21.589298000302506
+              ]
+            ],
+            [
+              [
+                107.89867100016659,
+                21.589298000302506
+              ],
+              [
+                107.89876700009705,
+                21.590007999769398
+              ]
+            ],
+            [
+              [
+                107.89876700009705,
+                21.590007999769398
+              ],
+              [
+                107.89929500016416,
+                21.590584000251454
+              ]
+            ],
+            [
+              [
+                107.89929500016416,
+                21.590584000251454
+              ],
+              [
+                107.89958400000165,
+                21.591516000063393
+              ]
+            ],
+            [
+              [
+                107.89958400000165,
+                21.591516000063393
+              ],
+              [
+                107.89972800034701,
+                21.592447999875333
+              ]
+            ],
+            [
+              [
+                107.89972800034701,
+                21.592447999875333
+              ],
+              [
+                107.89953500043998,
+                21.59320199957267
+              ]
+            ],
+            [
+              [
+                107.89953500043998,
+                21.59320199957267
+              ],
+              [
+                107.89886300002752,
+                21.59413400028393
+              ]
+            ],
+            [
+              [
+                107.89886300002752,
+                21.59413400028393
+              ],
+              [
+                107.89804600012286,
+                21.59506500004977
+              ]
+            ],
+            [
+              [
+                107.89804600012286,
+                21.59506500004977
+              ],
+              [
+                107.8962679999683,
+                21.59621900020676
+              ]
+            ],
+            [
+              [
+                107.8962679999683,
+                21.59621900020676
+              ],
+              [
+                107.89521099978788,
+                21.596484999882875
+              ]
+            ],
+            [
+              [
+                107.89521099978788,
+                21.596484999882875
+              ],
+              [
+                107.89401000016142,
+                21.596574000389865
+              ]
+            ],
+            [
+              [
+                107.89401000016142,
+                21.596574000389865
+              ],
+              [
+                107.89285700005058,
+                21.59692899967365
+              ]
+            ],
+            [
+              [
+                107.89285700005058,
+                21.59692899967365
+              ],
+              [
+                107.89184800028505,
+                21.59746099992526
+              ]
+            ],
+            [
+              [
+                107.89184800028505,
+                21.59746099992526
+              ],
+              [
+                107.89059900024375,
+                21.598569999805704
+              ]
+            ],
+            [
+              [
+                107.89059900024375,
+                21.598569999805704
+              ],
+              [
+                107.89031099955304,
+                21.59905799982687
+              ]
+            ],
+            [
+              [
+                107.89031099955304,
+                21.59905799982687
+              ],
+              [
+                107.89055099982886,
+                21.599901000031196
+              ]
+            ],
+            [
+              [
+                107.89055099982886,
+                21.599901000031196
+              ],
+              [
+                107.89117599987253,
+                21.600566000120864
+              ]
+            ],
+            [
+              [
+                107.89117599987253,
+                21.600566000120864
+              ],
+              [
+                107.89295299998105,
+                21.601497999932803
+              ]
+            ],
+            [
+              [
+                107.89295299998105,
+                21.601497999932803
+              ],
+              [
+                107.89333799974895,
+                21.602341000137073
+              ]
+            ],
+            [
+              [
+                107.89333799974895,
+                21.602341000137073
+              ],
+              [
+                107.89290499956616,
+                21.6031840003414
+              ]
+            ],
+            [
+              [
+                107.89290499956616,
+                21.6031840003414
+              ],
+              [
+                107.89256900025924,
+                21.604070999876797
+              ]
+            ],
+            [
+              [
+                107.89256900025924,
+                21.604070999876797
+              ],
+              [
+                107.89280899963569,
+                21.60495900035761
+              ]
+            ],
+            [
+              [
+                107.89280899963569,
+                21.60495900035761
+              ],
+              [
+                107.89280899963569,
+                21.605534999940346
+              ]
+            ],
+            [
+              [
+                107.89280899963569,
+                21.605534999940346
+              ],
+              [
+                107.89237700039831,
+                21.60611199956918
+              ]
+            ],
+            [
+              [
+                107.89237700039831,
+                21.60611199956918
+              ],
+              [
+                107.89189599980062,
+                21.606556000259275
+              ]
+            ],
+            [
+              [
+                107.89189599980062,
+                21.606556000259275
+              ],
+              [
+                107.89136799973346,
+                21.60673300032778
+              ]
+            ],
+            [
+              [
+                107.89136799973346,
+                21.60673300032778
+              ],
+              [
+                107.8908870000351,
+                21.606556000259275
+              ]
+            ],
+            [
+              [
+                107.8908870000351,
+                21.606556000259275
+              ],
+              [
+                107.88992699983123,
+                21.60642300042116
+              ]
+            ],
+            [
+              [
+                107.88992699983123,
+                21.60642300042116
+              ],
+              [
+                107.8889180000657,
+                21.606333999914227
+              ]
+            ],
+            [
+              [
+                107.8889180000657,
+                21.606333999914227
+              ],
+              [
+                107.88694800005021,
+                21.606333999914227
+              ]
+            ],
+            [
+              [
+                107.88694800005021,
+                21.606333999914227
+              ],
+              [
+                107.88603500021514,
+                21.60651099998273
+              ]
+            ],
+            [
+              [
+                107.88603500021514,
+                21.60651099998273
+              ],
+              [
+                107.88459400031292,
+                21.60695499977345
+              ]
+            ],
+            [
+              [
+                107.88459400031292,
+                21.60695499977345
+              ],
+              [
+                107.88425700006059,
+                21.607177000118497
+              ]
+            ],
+            [
+              [
+                107.88425700006059,
+                21.607177000118497
+              ],
+              [
+                107.88401699978476,
+                21.607709000370107
+              ]
+            ],
+            [
+              [
+                107.88401699978476,
+                21.607709000370107
+              ],
+              [
+                107.88396900026919,
+                21.60797500004628
+              ]
+            ],
+            [
+              [
+                107.88396900026919,
+                21.60797500004628
+              ],
+              [
+                107.88315200036459,
+                21.609306000271772
+              ]
+            ],
+            [
+              [
+                107.88315200036459,
+                21.609306000271772
+              ],
+              [
+                107.88295999960434,
+                21.610193999853266
+              ]
+            ],
+            [
+              [
+                107.88295999960434,
+                21.610193999853266
+              ],
+              [
+                107.88305600043412,
+                21.61090300017338
+              ]
+            ],
+            [
+              [
+                107.88305600043412,
+                21.61090300017338
+              ],
+              [
+                107.88334400022546,
+                21.61174600037765
+              ]
+            ],
+            [
+              [
+                107.88334400022546,
+                21.61174600037765
+              ],
+              [
+                107.88411299971523,
+                21.61223400039887
+              ]
+            ],
+            [
+              [
+                107.88411299971523,
+                21.61223400039887
+              ],
+              [
+                107.88507399996519,
+                21.61236700023693
+              ]
+            ],
+            [
+              [
+                107.88507399996519,
+                21.61236700023693
+              ],
+              [
+                107.88641899993695,
+                21.612455999844542
+              ]
+            ],
+            [
+              [
+                107.88641899993695,
+                21.612455999844542
+              ],
+              [
+                107.88872500015867,
+                21.612989000142306
+              ]
+            ],
+            [
+              [
+                107.88872500015867,
+                21.612989000142306
+              ],
+              [
+                107.88925400027193,
+                21.613254999818423
+              ]
+            ],
+            [
+              [
+                107.88925400027193,
+                21.613254999818423
+              ],
+              [
+                107.89021499962257,
+                21.61383100030048
+              ]
+            ],
+            [
+              [
+                107.89021499962257,
+                21.61383100030048
+              ],
+              [
+                107.89064699975927,
+                21.614586000043914
+              ]
+            ],
+            [
+              [
+                107.89064699975927,
+                21.614586000043914
+              ],
+              [
+                107.8908389996202,
+                21.61529500036403
+              ]
+            ],
+            [
+              [
+                107.8908389996202,
+                21.61529500036403
+              ],
+              [
+                107.89093599959676,
+                21.616315999783637
+              ]
+            ],
+            [
+              [
+                107.89093599959676,
+                21.616315999783637
+              ],
+              [
+                107.89074299968973,
+                21.61693699964286
+              ]
+            ],
+            [
+              [
+                107.89074299968973,
+                21.61693699964286
+              ],
+              [
+                107.89035899996793,
+                21.61760199973253
+              ]
+            ],
+            [
+              [
+                107.89035899996793,
+                21.61760199973253
+              ],
+              [
+                107.8897820003391,
+                21.618223999637905
+              ]
+            ],
+            [
+              [
+                107.8897820003391,
+                21.618223999637905
+              ],
+              [
+                107.8889180000657,
+                21.61880000011996
+              ]
+            ],
+            [
+              [
+                107.8889180000657,
+                21.61880000011996
+              ],
+              [
+                107.88824499960708,
+                21.618711999659126
+              ]
+            ],
+            [
+              [
+                107.88824499960708,
+                21.618711999659126
+              ],
+              [
+                107.88675600018934,
+                21.61919999968029
+              ]
+            ],
+            [
+              [
+                107.88675600018934,
+                21.61919999968029
+              ],
+              [
+                107.88593900028468,
+                21.6197319999319
+              ]
+            ],
+            [
+              [
+                107.88593900028468,
+                21.6197319999319
+              ],
+              [
+                107.88560300007845,
+                21.620442000298112
+              ]
+            ],
+            [
+              [
+                107.88560300007845,
+                21.620442000298112
+              ],
+              [
+                107.88560300007845,
+                21.621151999765004
+              ]
+            ],
+            [
+              [
+                107.88560300007845,
+                21.621151999765004
+              ],
+              [
+                107.88685200011975,
+                21.622039000199777
+              ]
+            ],
+            [
+              [
+                107.88685200011975,
+                21.622039000199777
+              ],
+              [
+                107.88713999991114,
+                21.622482999990496
+              ]
+            ],
+            [
+              [
+                107.88713999991114,
+                21.622482999990496
+              ],
+              [
+                107.88757200004784,
+                21.622971000011717
+              ]
+            ],
+            [
+              [
+                107.88757200004784,
+                21.622971000011717
+              ],
+              [
+                107.88858099981337,
+                21.62474499998183
+              ]
+            ],
+            [
+              [
+                107.88858099981337,
+                21.62474499998183
+              ],
+              [
+                107.88858099981337,
+                21.625278000279536
+              ]
+            ],
+            [
+              [
+                107.88858099981337,
+                21.625278000279536
+              ],
+              [
+                107.88824499960708,
+                21.625899000138816
+              ]
+            ],
+            [
+              [
+                107.88824499960708,
+                21.625899000138816
+              ],
+              [
+                107.8877170004393,
+                21.626341999883437
+              ]
+            ],
+            [
+              [
+                107.8877170004393,
+                21.626341999883437
+              ],
+              [
+                107.88685200011975,
+                21.6268299999046
+              ]
+            ],
+            [
+              [
+                107.88685200011975,
+                21.6268299999046
+              ],
+              [
+                107.88593900028468,
+                21.62745099976388
+              ]
+            ],
+            [
+              [
+                107.88593900028468,
+                21.62745099976388
+              ],
+              [
+                107.88516999989565,
+                21.628206000406635
+              ]
+            ],
+            [
+              [
+                107.88516999989565,
+                21.628206000406635
+              ],
+              [
+                107.88444999996756,
+                21.62878199998937
+              ]
+            ],
+            [
+              [
+                107.88444999996756,
+                21.62878199998937
+              ],
+              [
+                107.88319999988016,
+                21.629402999848594
+              ]
+            ],
+            [
+              [
+                107.88319999988016,
+                21.629402999848594
+              ],
+              [
+                107.88238400002166,
+                21.62962500019364
+              ]
+            ]
+          ]
+        },
+        "maximumContactDistanceKm": 10,
+        "minimumAnyPointDistanceToContinuousOriginalContactKm": 9.723930989506556,
+        "minimumVertexDistanceToContinuousOriginalContactKm": 9.724431248005606,
+        "maximumVertexDistanceToContinuousOriginalContactKm": 11.609475376726373,
+        "minimumAnyPointDistanceToReproducedOriginalSamplesKm": 9.951847266721812,
+        "originalSampleCount": 40,
+        "samplingMaximumKm": 1,
+        "nearestContactSamplingErrorUpperBoundKm": 0.5,
+        "bufferRadiusKm": 10,
+        "bufferQuadSegments": 8,
+        "bufferSides": 32,
+        "bufferApothemKm": 9.95184726672197,
+        "wholePartWouldExceedUnchangedTenKmBound": true,
+        "allOfPartWithinOriginalSourceFreeScope": true
+      },
+      "stripLoopAudit": {
+        "newCountryLand": false,
+        "fullyEnclosedFineLoop": false,
+        "touchesCoast": true,
+        "positiveExistingFineFamilyContact": true,
+        "wholePartCannotBeAssignedUnderExistingDistanceGuard": true,
+        "limitation": "Some inner land lies below 10 km from the continuous original contact. It remains because 1 km contact sampling and an inscribed 32-sided radius-10 km buffer conservatively approximate the bound. This report does not claim all remaining land is farther than 10 km, nor that the final coast is residual-strip-free.",
+        "possibleFurtherRefinement": "Denser/exact original-contact distance construction could recover some inner land while retaining the 10 km bound, but would change delivered gameplay geometry and require a new immutable candidate and full independent acceptance. No source relabel or administrative truth claim can substitute for that work."
+      },
+      "gameplayImpact": "Unconfirmed country-envelope-residual component adjacent to Dongxing gameplay fine family. Existing country ownership, coast and land adjacency are preserved. Whole-component assignment is blocked by the unchanged original-contact distance guard."
+    },
+    {
+      "cellId": "territory:catalog:c5fd5fe99079344edd1367f4f490406447ba4cd51157b393934132df75dbc13d",
+      "classification": "whole-original-game-island-source-omission",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              109.090505,
+              21.041938
+            ],
+            [
+              109.095958,
+              21.02204
+            ],
+            [
+              109.100922,
+              21.021186
+            ],
+            [
+              109.105235,
+              21.024482
+            ],
+            [
+              109.112559,
+              21.027086
+            ],
+            [
+              109.127696,
+              21.032172
+            ],
+            [
+              109.136241,
+              21.051011
+            ],
+            [
+              109.122732,
+              21.065416
+            ],
+            [
+              109.099864,
+              21.060696
+            ],
+            [
+              109.090505,
+              21.041938
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "geometrySha256WKB": "890ff119b235db9e22bbc2e62cb2e9d9adda0823fba135357119e443232414c5",
+      "bboxLongitudeLatitude": [
+        109.090505,
+        21.021186,
+        109.136241,
+        21.065416
+      ],
+      "representativePointLongitudeLatitude": [
+        109.11347587296203,
+        21.0464745
+      ],
+      "areaKm2": 15.371302207383394,
+      "perimeterKm": 14.98143633744258,
+      "effectiveWidthProxyKm": 2.0520465276038236,
+      "boundingBoxDiagonalKm": 6.824937371365626,
+      "compactness4PiAreaOverPerimeterSquared": 0.8606243287678123,
+      "vertices": 10,
+      "holes": 0,
+      "originalActiveCHNComponent": {
+        "componentIndex": 2,
+        "normalizedGeometrySha256WKB": "17a953c0fbd878ca854eea5c92dd8a49fe72c470f7c1dad05d287b393f5e9022",
+        "areaKm2": 15.371302207383394,
+        "isWholeOriginalComponent": true,
+        "outsideOriginalComponentAreaDegrees2": 0.0,
+        "originalComponentFullyPreservedByFinalCountry": "proved by independent-v12; this polygon may be only a source-free subset of the original mainland"
+      },
+      "rawSourcePositiveContacts": [],
+      "currentCHNFinePositiveContacts": [],
+      "foreignLandContacts": [],
+      "coastLengthKm": 14.98143633744258,
+      "allBoundaryIncidences": [
+        {
+          "edgeId": "edge:operational:ab5f24c7aac90e4fba7caa37d10cf91319c16f910339da72aa61f96282971d01",
+          "otherCellId": null,
+          "otherSourceCountryId": null,
+          "otherIsCHNSourceFine": false,
+          "otherSourceFeatureId": null,
+          "otherSourceName": null,
+          "positiveLengthKm": 14.98143633744258,
+          "geometry": {
+            "coordinates": [
+              [
+                109.090505,
+                21.041938
+              ],
+              [
+                109.095958,
+                21.02204
+              ],
+              [
+                109.100922,
+                21.021186
+              ],
+              [
+                109.105235,
+                21.024482
+              ],
+              [
+                109.112559,
+                21.027086
+              ],
+              [
+                109.127696,
+                21.032172
+              ],
+              [
+                109.136241,
+                21.051011
+              ],
+              [
+                109.122732,
+                21.065416
+              ],
+              [
+                109.099864,
+                21.060696
+              ],
+              [
+                109.090505,
+                21.041938
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "nearestClippedRawSource": {
+        "sourceFeatureId": "62558664B79614472901286",
+        "sourceName": "Yinhai District",
+        "approximateDistanceKm": 37.56916342744898,
+        "method": "WGS84 great-circle distance between planar longitude/latitude nearest points; diagnostic only, never assignment authority"
+      },
+      "administrativeTruthClaim": false,
+      "stripLoopAudit": {
+        "newCountryLand": false,
+        "wholeOriginalCoastOnlyIslandComponent": true,
+        "sameCountryFineLandContact": false,
+        "fullyEnclosedFineLoop": false,
+        "repairableByNearbyFineAssignment": false,
+        "reason": "No positive same-country source/fine contact on this disconnected original game component. Proximity across sea is not a valid distance seed and no physical island name or political identity is inferred from its bounding box."
+      },
+      "gameplayImpact": "Original game island component is retained with country-envelope-residual membership; no invented fine administrative ID or sea-crossing land adjacency."
+    },
+    {
+      "cellId": "territory:catalog:e5c0e64f244d56a23d3ee76ac4c2cfc8c4f86e537da96c4d53798e71674c63ea",
+      "classification": "whole-original-game-island-source-omission",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              111.753103,
+              16.044664
+            ],
+            [
+              111.763357,
+              16.043443
+            ],
+            [
+              111.76588,
+              16.045315
+            ],
+            [
+              111.761404,
+              16.048651
+            ],
+            [
+              111.753429,
+              16.047431
+            ],
+            [
+              111.753103,
+              16.044664
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "geometrySha256WKB": "7f686cb3960228f3b0240f2f32f5853a5ab0f39e18b7dcbe35acc6dd73980272",
+      "bboxLongitudeLatitude": [
+        111.753103,
+        16.043443,
+        111.76588,
+        16.048651
+      ],
+      "representativePointLongitudeLatitude": [
+        111.75888240135669,
+        16.046373
+      ],
+      "areaKm2": 0.5298108968888745,
+      "perimeterKm": 3.2227893748703518,
+      "effectiveWidthProxyKm": 0.32879027157037716,
+      "boundingBoxDiagonalKm": 1.4837618842166618,
+      "compactness4PiAreaOverPerimeterSquared": 0.641013098647716,
+      "vertices": 6,
+      "holes": 0,
+      "originalActiveCHNComponent": {
+        "componentIndex": 10,
+        "normalizedGeometrySha256WKB": "8d6f57b01af569a527b8a3d46186d14f43d5bb99d282b23bd3fb09608257e8e5",
+        "areaKm2": 0.5298108968888745,
+        "isWholeOriginalComponent": true,
+        "outsideOriginalComponentAreaDegrees2": 0.0,
+        "originalComponentFullyPreservedByFinalCountry": "proved by independent-v12; this polygon may be only a source-free subset of the original mainland"
+      },
+      "rawSourcePositiveContacts": [],
+      "currentCHNFinePositiveContacts": [],
+      "foreignLandContacts": [],
+      "coastLengthKm": 3.2227893748703518,
+      "allBoundaryIncidences": [
+        {
+          "edgeId": "edge:operational:96d1f7788a3b3754de3c3a7d32ed2579d2a5e0748497ab3cb8e5a1c711bf9e0d",
+          "otherCellId": null,
+          "otherSourceCountryId": null,
+          "otherIsCHNSourceFine": false,
+          "otherSourceFeatureId": null,
+          "otherSourceName": null,
+          "positiveLengthKm": 3.2227893748703518,
+          "geometry": {
+            "coordinates": [
+              [
+                111.753103,
+                16.044664
+              ],
+              [
+                111.763357,
+                16.043443
+              ],
+              [
+                111.76588,
+                16.045315
+              ],
+              [
+                111.761404,
+                16.048651
+              ],
+              [
+                111.753429,
+                16.047431
+              ],
+              [
+                111.753103,
+                16.044664
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
+      ],
+      "nearestClippedRawSource": {
+        "sourceFeatureId": "62558664B29410794950581",
+        "sourceName": "西沙群岛",
+        "approximateDistanceKm": 64.89487542973289,
+        "method": "WGS84 great-circle distance between planar longitude/latitude nearest points; diagnostic only, never assignment authority"
+      },
+      "administrativeTruthClaim": false,
+      "stripLoopAudit": {
+        "newCountryLand": false,
+        "wholeOriginalCoastOnlyIslandComponent": true,
+        "sameCountryFineLandContact": false,
+        "fullyEnclosedFineLoop": false,
+        "repairableByNearbyFineAssignment": false,
+        "reason": "No positive same-country source/fine contact on this disconnected original game component. Proximity across sea is not a valid distance seed and no physical island name or political identity is inferred from its bounding box."
+      },
+      "gameplayImpact": "Original game island component is retained with country-envelope-residual membership; no invented fine administrative ID or sea-crossing land adjacency."
+    }
+  ],
+  "limitations": "This report classifies pinned game geometry and source omissions, not verified real-world island names or political claims. Five polygons are unchanged original game islands; two are conservative bounded-contact coastal remainders, so residual-strip-free coverage is not claimed. Source vintage remains mixed/uncertified (metadata 2017, observed processing 2021), with experimental scenario date 2020-01-01."
+}

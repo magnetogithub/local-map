@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "chn-province-presentation-independent-verification-v1",
+  "pass": true,
+  "artifact": {
+    "path": "data/derived/chn-2020/province-presentation-83395e2fc2f450771e8b/presentation.json",
+    "sha256": "83395e2fc2f450771e8bdaa6cb1ca49a9a74b1ac01324cb808350319b5186ffd",
+    "byteLength": 4031742
+  },
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "code": {
+    "path": "scripts/chn-2020/verify-province-presentation.mjs",
+    "sha256": "e572f98f14e91b4e3a4a9bf1854c6b68dd2685656bb241ae1af8fc993420fdd2",
+    "byteLength": 26927
+  },
+  "inputs": {
+    "pointer": {
+      "path": "data/runtime/operational-catalog/current.json",
+      "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+      "byteLength": 251
+    },
+    "index": {
+      "sha256": "f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+      "byteLength": 757545,
+      "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/artifact-index.json"
+    },
+    "metadata": {
+      "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/metadata/countries/CHN.json.gz",
+      "sha256": "fe6049cf64cea5a97ef53599cef98ec1bb8c7b3f0a50bae547560cc16c12cebe",
+      "byteLength": 138130
+    },
+    "parents": {
+      "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/metadata/parents.json.gz",
+      "sha256": "5b5656625f5a8ae156f3b94a649878aca210d6cbb254fccbf08d7cc6a5f80e58",
+      "byteLength": 319026
+    },
+    "hierarchy": {
+      "byteLength": 1142103,
+      "countryId": "CHN",
+      "path": "data/source-locks/chn-2020/CHN-hierarchy.json",
+      "sha256": "072ddaf551d5aec7061d9f5301c213820d554f77daa5d489f654b123d15fcfc2"
+    },
+    "fineSource": {
+      "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+      "sha256": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e",
+      "byteLength": 88780624
+    },
+    "provinceSource": {
+      "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+      "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72",
+      "byteLength": 17277078
+    },
+    "incidence": {
+      "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/metadata/edge-incidence.bin.gz",
+      "sha256": "26b166053975eb92a77a65c0a2a020299192a430e04da78362ab1c406e5b7fbd",
+      "byteLength": 82939
+    },
+    "geometry": {
+      "byteLength": 123996651,
+      "path": "data/derived/chn-2020/geometry-v12/geometry.json",
+      "sha256": "ef33c6341da4125c34ac7c390816bff0cda339f9f12be1fcc81fb90761e0689e"
+    }
+  },
+  "runtime": {
+    "node": "v24.18.0",
+    "coverage": {
+      "shapely": "2.2.0",
+      "GEOS": "3.14.1",
+      "pyproj": "3.8.0",
+      "PROJ": "9.8.1"
+    }
+  },
+  "checks": {
+    "pass": true,
+    "cells": 3320,
+    "activeFamilies": 2850,
+    "mappedFamilies": 2850,
+    "assignedCells": 3073,
+    "unassignedCells": 247,
+    "representedProvinces": [
+      "macro:CHN:CN-11",
+      "macro:CHN:CN-12",
+      "macro:CHN:CN-13",
+      "macro:CHN:CN-14",
+      "macro:CHN:CN-15",
+      "macro:CHN:CN-21",
+      "macro:CHN:CN-22",
+      "macro:CHN:CN-23",
+      "macro:CHN:CN-31",
+      "macro:CHN:CN-32",
+      "macro:CHN:CN-33",
+      "macro:CHN:CN-34",
+      "macro:CHN:CN-35",
+      "macro:CHN:CN-36",
+      "macro:CHN:CN-37",
+      "macro:CHN:CN-41",
+      "macro:CHN:CN-42",
+      "macro:CHN:CN-43",
+      "macro:CHN:CN-44",
+      "macro:CHN:CN-45",
+      "macro:CHN:CN-46",
+      "macro:CHN:CN-50",
+      "macro:CHN:CN-51",
+      "macro:CHN:CN-52",
+      "macro:CHN:CN-53",
+      "macro:CHN:CN-54",
+      "macro:CHN:CN-61",
+      "macro:CHN:CN-62",
+      "macro:CHN:CN-63",
+      "macro:CHN:CN-64",
+      "macro:CHN:CN-65"
+    ],
+    "normalWhiteEdges": 978,
+    "independentlyRecomputedUnconfirmedFamilies": 1187,
+    "analysisAreaValuesExactReproduction": true,
+    "administrativeParentsUnchanged": true,
+    "wholeFamiliesPreserved": true,
+    "sourceFreeCellsUnassigned": true,
+    "noForeignOrCoastPromotion": true
+  },
+  "negativeControls": [
+    {
+      "name": "different-catalog",
+      "rejected": true,
+      "error": "PRESENTATION_STALE_CATALOG"
+    },
+    {
+      "name": "stale-input-hash",
+      "rejected": true,
+      "error": "PRESENTATION_PIN_MISMATCH:parents"
+    },
+    {
+      "name": "weakened-coverage-policy",
+      "rejected": true,
+      "error": "PRESENTATION_TOP_COVERAGE_POLICY_CHANGED"
+    },
+    {
+      "name": "false-coverage-evidence",
+      "rejected": true,
+      "error": "PRESENTATION_EVIDENCE_CHANGED"
+    },
+    {
+      "name": "heterogeneous-whole-family",
+      "rejected": true,
+      "error": "HETEROGENEOUS_FAMILY_PRESENTATION"
+    },
+    {
+      "name": "verified-parent-mutation",
+      "rejected": true,
+      "error": "VERIFIED_PRESENTATION_PARENT_CHANGED"
+    },
+    {
+      "name": "foreign-edge-promotion",
+      "rejected": true,
+      "error": "UNSUPPORTED_PRESENTATION_EDGE_PROMOTION"
+    },
+    {
+      "name": "coast-edge-promotion",
+      "rejected": true,
+      "error": "UNSUPPORTED_PRESENTATION_EDGE_PROMOTION"
+    }
+  ],
+  "inputPinsVerifiedBeforeAndAfter": true,
+  "methodology": "Independent existing-whole-family/source-province CRS84 GEOS overlay, existing-vertex WGS84 Albers equal-area coverage recomputation, fixed verified hierarchy, ID-exact cell family mapping, and binary incidence-derived same-country edges. Raw coverage is not an adoption threshold. No generator imports, buffers, snapped coordinates, inferred official parents, cell splitting or catalog mutation. Coverage shares are geometric diagnostics, not accuracy or statistical confidence.",
+  "limits": [
+    "Presentation-only source overlap does not certify an official administrative parent or exact 2020 boundary.",
+    "Browser visibility and delivered tile filtering require separate actual-browser evidence."
+  ],
+  "elapsedMs": 98100.0945
+}

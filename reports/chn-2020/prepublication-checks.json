@@ -1,0 +1,47 @@
+{
+  "pass": true,
+  "checkedAt": "2026-10-30T05:32:56.903Z",
+  "target": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "before": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "652a233e6b26397fdb32bc56781e2fbc6dcc67a1545774a7ed7d571a3e5ad8df",
+    "byteLength": 241
+  },
+  "evidence": [
+    {
+      "path": "reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json",
+      "sha256": "79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf",
+      "byteLength": 65964710
+    },
+    {
+      "path": "reports/chn-2020/delivery-verification.json",
+      "sha256": "bafcfafe717ebe81e7e5ee9970042788e9c48e8894fb5330d9032e64bd90db79",
+      "byteLength": 7702369
+    },
+    {
+      "path": "reports/chn-2020/delivery-subdivision-recheck.json",
+      "sha256": "a2eb07c2cec0330043b0d51d2c9bef1295d428bb58c8d07cad93c8c1fead3494",
+      "byteLength": 9512746
+    },
+    {
+      "path": "reports/chn-2020/candidate-play-performance.json",
+      "sha256": "ae505417d44c2268a375a512de2b44e39ed9fb6b24c8f6ab6dd166b09c4c134c",
+      "byteLength": 31057
+    },
+    {
+      "path": "reports/chn-2020/candidate-cell-detail-performance.json",
+      "sha256": "1c041e2d731182f4f8e62e48e473f7729647dd6f7f64a8b7e25de88914600446",
+      "byteLength": 4839
+    }
+  ],
+  "preservation": {
+    "path": "reports/chn-2020/live-game-preservation.json",
+    "sha256": "0b34b7842df5cdeaeac30d3556a16ec1bd41f387da7ba2d8f4acec4de9d7b65d",
+    "byteLength": 4313
+  },
+  "candidate": {
+    "path": "reports/chn-2020/candidate-runtime-pointer.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  }
+}

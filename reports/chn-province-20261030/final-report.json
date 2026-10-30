@@ -1,0 +1,755 @@
+{
+  "schemaVersion": "chn-province-display-fix-v1",
+  "pass": true,
+  "activeURL": "http://127.0.0.1:3002",
+  "scope": "CHN presentation only; worldwide scale analysis only",
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "runtimeIndex": {
+    "path": "data/derived/chn-2020/province-render-f1c91c059cdb06f5234f/index.json",
+    "sha256": "f1c91c059cdb06f5234f22843e4739991f0036048ef8fb5da433ae345d70cd3f",
+    "byteLength": 631021
+  },
+  "presentation": {
+    "path": "data/derived/chn-2020/province-presentation-526d9b422857d1058ac2/presentation.json",
+    "sha256": "526d9b422857d1058ac2d69cd240b89f2e5ad01bd6d93043f2104d8c0d4a9684",
+    "byteLength": 4426127
+  },
+  "verification": {
+    "path": "reports/chn-province-20261030/verification/independent-v2.json",
+    "sha256": "94c3fb17e1749d1760e5788cea050d9b338abc02cd76d069b6aeea1a17a4d60a",
+    "byteLength": 8892
+  },
+  "implementation": {
+    "normalWhiteSharedEdges": 994,
+    "debugMicroOnly": true,
+    "officialParentsChanged": false,
+    "catalogRefChanged": false,
+    "geometryChanged": false,
+    "otherCountriesChanged": false,
+    "verifiedFamiliesUnchanged": 1663,
+    "activeCoverageDisplayFamilies": 1025,
+    "rawFamilyDisplayInheritanceFamilies": 150,
+    "unresolvedFineFamilies": 12,
+    "sourceFreeCells": 7,
+    "unassignedCells": 33
+  },
+  "limitations": [
+    "Separate game presentation membership; never replaces administrativeParents or gameplay cap checks.",
+    "Source-family display inheritance includes existing game gains outside the historical source province polygon; it is separately recorded and does not claim administrative coverage of those gains.",
+    "Province contours consist only of existing positive-adjacency shared mesh edges between differently assigned CHN cells.",
+    "No old independent coarse lines, new polygon coordinates, inferred official parent or foreign territory are added.",
+    "Unassigned fine families and all seven source-free cells retain visible uncertainty in the ledger."
+  ],
+  "temporalLimits": {
+    "fine": "The original metadata claims 2017, but original shapefile XML records append/dissolve processing in August 2021. The fixed file is mixed or uncertified vintage. It is used as an experimental county geometry reference for the 2020-01-01 game scenario, not certified 2020 or untouched 2017 administrative truth. No unverified change is backdated.",
+    "province2020AdministrativeTruthCertified": false,
+    "provincePublishedUpdate": "2020-05-25",
+    "provinceRepresentedYear": 2017
+  },
+  "potentialMissingInterfaces": {
+    "method": "Lengths use existing delivered edge geometry and the catalog spherical-distance convention. Connected suggested gaps join exact matching endpoints only within one tentative province pair.",
+    "gapMeaning": "Suggested omitted source-overlap display interfaces only: at least one family failed the display policy, but its unique positive top differs from its neighbor. These are uncertainty diagnostics, not certified administrative province boundary lengths; none are added to the render index.",
+    "all31GroupsHavePositiveAssignedCellArea": true,
+    "provinces": [
+      {
+        "renderProvinceId": "macro:CHN:CN-11",
+        "name": "Beijing",
+        "assignedFamilies": 16,
+        "assignedCells": 17,
+        "interProvinceBoundaryEdges": 26,
+        "interProvinceBoundaryLengthKm": 1094.5279802309578,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-12",
+        "name": "Tianjin",
+        "assignedFamilies": 15,
+        "assignedCells": 17,
+        "interProvinceBoundaryEdges": 26,
+        "interProvinceBoundaryLengthKm": 829.9262773421085,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 124.62702115162702
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-13",
+        "name": "Hebei",
+        "assignedFamilies": 169,
+        "assignedCells": 191,
+        "interProvinceBoundaryEdges": 129,
+        "interProvinceBoundaryLengthKm": 4864.79883259408,
+        "countryCoastBoundaryLengthKm": 390.49330881743566,
+        "suggestedOmittedBoundaryLengthKm": 124.62702115162702
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-14",
+        "name": "Shanxi",
+        "assignedFamilies": 119,
+        "assignedCells": 183,
+        "interProvinceBoundaryEdges": 83,
+        "interProvinceBoundaryLengthKm": 2622.8539153841484,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-15",
+        "name": "Inner Mongolia",
+        "assignedFamilies": 99,
+        "assignedCells": 103,
+        "interProvinceBoundaryEdges": 111,
+        "interProvinceBoundaryLengthKm": 8088.837133491592,
+        "countryCoastBoundaryLengthKm": 3808.7227504175266,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-21",
+        "name": "Liaoning",
+        "assignedFamilies": 97,
+        "assignedCells": 133,
+        "interProvinceBoundaryEdges": 38,
+        "interProvinceBoundaryLengthKm": 1704.7954959345666,
+        "countryCoastBoundaryLengthKm": 1673.1862655401446,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-22",
+        "name": "Jilin",
+        "assignedFamilies": 60,
+        "assignedCells": 62,
+        "interProvinceBoundaryEdges": 49,
+        "interProvinceBoundaryLengthKm": 2731.4765994896666,
+        "countryCoastBoundaryLengthKm": 1003.234178354909,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-23",
+        "name": "Heilongjiang",
+        "assignedFamilies": 130,
+        "assignedCells": 145,
+        "interProvinceBoundaryEdges": 35,
+        "interProvinceBoundaryLengthKm": 3372.6677363589156,
+        "countryCoastBoundaryLengthKm": 2545.381919354623,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-31",
+        "name": "Shanghai",
+        "assignedFamilies": 16,
+        "assignedCells": 18,
+        "interProvinceBoundaryEdges": 10,
+        "interProvinceBoundaryLengthKm": 279.6360287457234,
+        "countryCoastBoundaryLengthKm": 418.9114281593097,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-32",
+        "name": "Jiangsu",
+        "assignedFamilies": 97,
+        "assignedCells": 126,
+        "interProvinceBoundaryEdges": 70,
+        "interProvinceBoundaryLengthKm": 2343.9510016211425,
+        "countryCoastBoundaryLengthKm": 1200.3997635732449,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-33",
+        "name": "Zhejiang",
+        "assignedFamilies": 89,
+        "assignedCells": 107,
+        "interProvinceBoundaryEdges": 40,
+        "interProvinceBoundaryLengthKm": 1770.2702699850722,
+        "countryCoastBoundaryLengthKm": 2312.0543224619187,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-34",
+        "name": "Anhui",
+        "assignedFamilies": 105,
+        "assignedCells": 125,
+        "interProvinceBoundaryEdges": 93,
+        "interProvinceBoundaryLengthKm": 3505.2598209890953,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-35",
+        "name": "Fujian",
+        "assignedFamilies": 84,
+        "assignedCells": 106,
+        "interProvinceBoundaryEdges": 42,
+        "interProvinceBoundaryLengthKm": 1673.544945154342,
+        "countryCoastBoundaryLengthKm": 2600.4514796896196,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-36",
+        "name": "Jiangxi",
+        "assignedFamilies": 100,
+        "assignedCells": 110,
+        "interProvinceBoundaryEdges": 81,
+        "interProvinceBoundaryLengthKm": 3259.2407075744277,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-37",
+        "name": "Shandong",
+        "assignedFamilies": 137,
+        "assignedCells": 145,
+        "interProvinceBoundaryEdges": 61,
+        "interProvinceBoundaryLengthKm": 1788.6084620454626,
+        "countryCoastBoundaryLengthKm": 1717.1874732025772,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-41",
+        "name": "Henan",
+        "assignedFamilies": 158,
+        "assignedCells": 160,
+        "interProvinceBoundaryEdges": 105,
+        "interProvinceBoundaryLengthKm": 3391.122332119385,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-42",
+        "name": "Hubei",
+        "assignedFamilies": 103,
+        "assignedCells": 117,
+        "interProvinceBoundaryEdges": 94,
+        "interProvinceBoundaryLengthKm": 3837.394738919758,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 49.93748561617717
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-43",
+        "name": "Hunan",
+        "assignedFamilies": 121,
+        "assignedCells": 143,
+        "interProvinceBoundaryEdges": 97,
+        "interProvinceBoundaryLengthKm": 3769.179033703626,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 49.93748561617717
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-44",
+        "name": "Guangdong",
+        "assignedFamilies": 123,
+        "assignedCells": 173,
+        "interProvinceBoundaryEdges": 55,
+        "interProvinceBoundaryLengthKm": 2101.2085731262396,
+        "countryCoastBoundaryLengthKm": 3960.9836762513605,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-45",
+        "name": "Guangxi",
+        "assignedFamilies": 110,
+        "assignedCells": 120,
+        "interProvinceBoundaryEdges": 63,
+        "interProvinceBoundaryLengthKm": 3194.443219971126,
+        "countryCoastBoundaryLengthKm": 1354.537835669853,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-46",
+        "name": "Hainan",
+        "assignedFamilies": 24,
+        "assignedCells": 30,
+        "interProvinceBoundaryEdges": 0,
+        "interProvinceBoundaryLengthKm": 0,
+        "countryCoastBoundaryLengthKm": 1128.1323726934518,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-50",
+        "name": "Chongqing",
+        "assignedFamilies": 38,
+        "assignedCells": 39,
+        "interProvinceBoundaryEdges": 69,
+        "interProvinceBoundaryLengthKm": 3293.9566615549306,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-51",
+        "name": "Sichuan",
+        "assignedFamilies": 181,
+        "assignedCells": 198,
+        "interProvinceBoundaryEdges": 117,
+        "interProvinceBoundaryLengthKm": 6814.0683914106685,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-52",
+        "name": "Guizhou",
+        "assignedFamilies": 88,
+        "assignedCells": 92,
+        "interProvinceBoundaryEdges": 74,
+        "interProvinceBoundaryLengthKm": 4013.1864525917817,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-53",
+        "name": "Yunnan",
+        "assignedFamilies": 129,
+        "assignedCells": 134,
+        "interProvinceBoundaryEdges": 64,
+        "interProvinceBoundaryLengthKm": 3518.043686690327,
+        "countryCoastBoundaryLengthKm": 2500.569133815477,
+        "suggestedOmittedBoundaryLengthKm": 161.60635933979074
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-54",
+        "name": "Tibet Autonomous Region",
+        "assignedFamilies": 67,
+        "assignedCells": 69,
+        "interProvinceBoundaryEdges": 27,
+        "interProvinceBoundaryLengthKm": 4088.3175616596977,
+        "countryCoastBoundaryLengthKm": 1757.6137223741332,
+        "suggestedOmittedBoundaryLengthKm": 161.60635933979074
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-61",
+        "name": "Shaanxi",
+        "assignedFamilies": 107,
+        "assignedCells": 113,
+        "interProvinceBoundaryEdges": 101,
+        "interProvinceBoundaryLengthKm": 4169.769279518211,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-62",
+        "name": "Gansu",
+        "assignedFamilies": 89,
+        "assignedCells": 102,
+        "interProvinceBoundaryEdges": 116,
+        "interProvinceBoundaryLengthKm": 8184.171010336862,
+        "countryCoastBoundaryLengthKm": 65.5420492181593,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-63",
+        "name": "Qinghai",
+        "assignedFamilies": 46,
+        "assignedCells": 54,
+        "interProvinceBoundaryEdges": 56,
+        "interProvinceBoundaryLengthKm": 6488.026643997667,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-64",
+        "name": "Ningxia Hui",
+        "assignedFamilies": 22,
+        "assignedCells": 24,
+        "interProvinceBoundaryEdges": 38,
+        "interProvinceBoundaryLengthKm": 1921.6847564023237,
+        "countryCoastBoundaryLengthKm": 0,
+        "suggestedOmittedBoundaryLengthKm": 0
+      },
+      {
+        "renderProvinceId": "macro:CHN:CN-65",
+        "name": "Xinjiang",
+        "assignedFamilies": 99,
+        "assignedCells": 131,
+        "interProvinceBoundaryEdges": 18,
+        "interProvinceBoundaryLengthKm": 2926.0515592193915,
+        "countryCoastBoundaryLengthKm": 4517.623346166303,
+        "suggestedOmittedBoundaryLengthKm": 0
+      }
+    ],
+    "totalRenderedInterProvinceLengthKm": 50820.50955408164,
+    "suggestedOmittedBoundaryLengthKm": 336.1708661075949,
+    "suggestedOmittedConnectedComponents": 6,
+    "suggestedOmittedEdges": [
+      3549,
+      3838,
+      4050,
+      6750,
+      7152,
+      7473,
+      7977,
+      9565
+    ],
+    "largestSuggestedGaps": [
+      {
+        "suggestedProvinceIds": [
+          "macro:CHN:CN-53",
+          "macro:CHN:CN-54"
+        ],
+        "edgeOrdinals": [
+          3838,
+          7977
+        ],
+        "sourceFeatureIds": [
+          "62558664B63578283386767",
+          "62558664B77013388289820",
+          "62558664B92755068302320"
+        ],
+        "lengthKm": 161.60635933979074,
+        "bounds": [
+          98.11115828903249,
+          28.106885700314876,
+          98.75309749955005,
+          28.438449600368813
+        ],
+        "sourceNames": [
+          "Zayü County",
+          "Gongshan Derung and Nu Autonomous County",
+          "Dêqên"
+        ]
+      },
+      {
+        "suggestedProvinceIds": [
+          "macro:CHN:CN-12",
+          "macro:CHN:CN-13"
+        ],
+        "edgeOrdinals": [
+          4050
+        ],
+        "sourceFeatureIds": [
+          "62558664B17454932046206",
+          "62558664B9090922381654"
+        ],
+        "lengthKm": 75.6072438243273,
+        "bounds": [
+          117.14363169984313,
+          38.55495270000716,
+          117.56678043199611,
+          38.64339429990707
+        ],
+        "sourceNames": [
+          "Binhai New Area",
+          "Huanghua City"
+        ]
+      },
+      {
+        "suggestedProvinceIds": [
+          "macro:CHN:CN-42",
+          "macro:CHN:CN-43"
+        ],
+        "edgeOrdinals": [
+          7152
+        ],
+        "sourceFeatureIds": [
+          "62558664B31875854659451",
+          "62558664B94418753148767"
+        ],
+        "lengthKm": 49.93748561617717,
+        "bounds": [
+          112.90636539984337,
+          29.433501899892804,
+          113.13503979994687,
+          29.625399499787136
+        ],
+        "sourceNames": [
+          "Jianli County",
+          "Junshan District"
+        ]
+      },
+      {
+        "suggestedProvinceIds": [
+          "macro:CHN:CN-12",
+          "macro:CHN:CN-13"
+        ],
+        "edgeOrdinals": [
+          3549,
+          9565
+        ],
+        "sourceFeatureIds": [
+          "62558664B17454932046206",
+          "62558664B27418699179982",
+          "62558664B67620620210469"
+        ],
+        "lengthKm": 31.838630982768112,
+        "bounds": [
+          117.84062629996379,
+          39.2172696798306,
+          118.06000029997392,
+          39.33329099987981
+        ],
+        "sourceNames": [
+          "Binhai New Area",
+          "Lunan District",
+          "Fengnan District"
+        ]
+      },
+      {
+        "suggestedProvinceIds": [
+          "macro:CHN:CN-12",
+          "macro:CHN:CN-13"
+        ],
+        "edgeOrdinals": [
+          6750
+        ],
+        "sourceFeatureIds": [
+          "62558664B17454932046206",
+          "62558664B27418699179982"
+        ],
+        "lengthKm": 11.071921625989631,
+        "bounds": [
+          117.79975449977042,
+          39.25946180042183,
+          117.8463421004077,
+          39.305072599720745
+        ],
+        "sourceNames": [
+          "Binhai New Area",
+          "Lunan District"
+        ]
+      },
+      {
+        "suggestedProvinceIds": [
+          "macro:CHN:CN-12",
+          "macro:CHN:CN-13"
+        ],
+        "edgeOrdinals": [
+          7473
+        ],
+        "sourceFeatureIds": [
+          "62558664B17454932046206",
+          "62558664B9090922381654"
+        ],
+        "lengthKm": 6.10922471854196,
+        "bounds": [
+          117.36917069996787,
+          38.48589710017109,
+          117.38211529958153,
+          38.5076788995616
+        ],
+        "sourceNames": [
+          "Binhai New Area",
+          "Huanghua City"
+        ]
+      }
+    ],
+    "unassignedInterfaceOrdinals": [
+      3549,
+      3621,
+      3655,
+      3708,
+      3738,
+      3784,
+      3838,
+      3965,
+      4050,
+      4092,
+      4156,
+      4260,
+      4415,
+      4667,
+      4804,
+      4823,
+      5062,
+      5170,
+      5261,
+      5359,
+      5473,
+      5637,
+      5783,
+      6259,
+      6440,
+      6466,
+      6601,
+      6672,
+      6750,
+      6832,
+      7065,
+      7152,
+      7213,
+      7286,
+      7394,
+      7473,
+      7614,
+      7977,
+      8091,
+      8128,
+      8261,
+      8774,
+      8784,
+      9197,
+      9246,
+      9411,
+      9417,
+      9444,
+      9478,
+      9565,
+      9587,
+      9935,
+      9962,
+      9977,
+      10232,
+      10337,
+      10646,
+      10683,
+      10947,
+      11179,
+      11192,
+      11632,
+      11783,
+      11844,
+      11913
+    ],
+    "noInterProvinceBoundaryGroups": [
+      {
+        "renderProvinceId": "macro:CHN:CN-46",
+        "name": "Hainan",
+        "countryCoastBoundaryLengthKm": 1128.1323726934518,
+        "reason": "Island province has no positive-length inter-province land boundary; existing coast remains country/coast rendering."
+      }
+    ]
+  },
+  "preservation": {
+    "pass": true,
+    "previousSessions": 8,
+    "currentSessions": 8,
+    "unchangedCheckpointPayloadHashes": 8,
+    "receipt": {
+      "path": "reports/chn-province-20261030/user-game-after-checkpoint.json",
+      "sha256": "61a867c9b8eea210d7192c92da5cb0252e85ef55b1b2bd9d15d4dd6bb219b0af",
+      "byteLength": 7517
+    },
+    "unlocked": {
+      "path": "reports/chn-province-20261030/user-game-after-unlocked.json",
+      "sha256": "d524facb95a6944f0d1c1df2f75f193286feb97eadbf1bf6925a54a72142e016",
+      "byteLength": 133
+    }
+  },
+  "checks": {
+    "unit": {
+      "passed": 87,
+      "files": 4,
+      "artifact": {
+        "path": "reports/chn-province-20261030/tests.log",
+        "sha256": "1f9380e876b77040bc978915a140b043b1a6807c1eb4c68fb47ed6d0c466eab0",
+        "byteLength": 1341
+      }
+    },
+    "lint": {
+      "pass": true,
+      "artifact": {
+        "path": "reports/chn-province-20261030/lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": 0
+      }
+    },
+    "build": {
+      "pass": true,
+      "mode": "Next production webpack",
+      "artifact": {
+        "path": "reports/chn-province-20261030/build.log",
+        "sha256": "849908618a318cb37fd2d37892a235dfeb0654a417c39e3aa67cc3c172011356",
+        "byteLength": 1596
+      }
+    },
+    "independentNegativeControls": 11
+  },
+  "browser": {
+    "before": {
+      "path": "reports/chn-province-20261030/browser/before.json",
+      "sha256": "29b97df7beda764422cec5841ecb039f2d42f8f62b3480940de7f79a26e8b1f6",
+      "byteLength": 3888984
+    },
+    "after": {
+      "path": "reports/chn-province-20261030/browser/after.json",
+      "sha256": "84e28aed6c73d54f882e8784cd7b771611d08f2163ea1c5ff770ee24d394599b",
+      "byteLength": 4553900
+    },
+    "sameGameRefresh": {
+      "path": "reports/chn-province-20261030/browser/same-game-refresh.json",
+      "sha256": "4bb0b70ce309b7255482ed66e749e0985ee0d77798966bd151dc361ac55908bb",
+      "byteLength": 47521
+    },
+    "externalAiCalls": 0,
+    "fullChinaExactRequests": 0
+  },
+  "liveDelivery": {
+    "calls": [
+      {
+        "request": 1,
+        "wallMs": 33.982699999999994,
+        "rawBytes": 57849,
+        "gzipBytes": 25439
+      },
+      {
+        "request": 2,
+        "wallMs": 9.628900000000002,
+        "rawBytes": 57849,
+        "gzipBytes": 25439
+      },
+      {
+        "request": 3,
+        "wallMs": 11.383099999999985,
+        "rawBytes": 57849,
+        "gzipBytes": 25439
+      },
+      {
+        "request": 4,
+        "wallMs": 17.310000000000002,
+        "rawBytes": 57849,
+        "gzipBytes": 25439
+      },
+      {
+        "request": 5,
+        "wallMs": 10.76740000000001,
+        "rawBytes": 57849,
+        "gzipBytes": 25439
+      }
+    ],
+    "conditions": "development endpoint diagnostics: first may include compilation; warm server/OS cache; not a matched cold/warm geometry or FPS benchmark",
+    "addedBootstrapBytes": 5322,
+    "serverOnlyIndexBytes": 631021,
+    "noAdditionalPolygonOrLineAsset": true,
+    "legacyBoundaryCount": 8422
+  },
+  "worldwideAnalysis": {
+    "path": "reports/world-micro-scale-20261030/scaling-audit.json",
+    "sha256": "fee7b71487e74038a58fcad5ad52d7c48efd979245fb20d58fff42c02c3cf9a4",
+    "byteLength": 125746
+  },
+  "code": [
+    {
+      "path": "scripts/chn-2020/write-province-report.mjs",
+      "sha256": "72d93a10e1603bba18ec7846ca6517dc49cc82d5cb36e3b98e5f034385d86e65",
+      "byteLength": 6414
+    },
+    {
+      "path": "src/lib/map/chn-province-presentation.server.ts",
+      "sha256": "2536e8de008c35c9a372833224339fe86cd5944572de70fdaac0c1f78b389cae",
+      "byteLength": 1786
+    },
+    {
+      "path": "src/lib/map/province-presentation.server.ts",
+      "sha256": "21973c8f3ba66eebc1bc92fb5fa3868025579276237a05fdb73652856e6eb2b4",
+      "byteLength": 3074
+    },
+    {
+      "path": "src/lib/map/operational-delivery.server.ts",
+      "sha256": "ee7d6f17cb4b35c1ed252d236240364590f3a0cf9297b4c83ddaf014b8bca669",
+      "byteLength": 4035
+    },
+    {
+      "path": "src/lib/map/operational-delivery-contract.ts",
+      "sha256": "29e8c2ab721d22b4fbc7336e2d1b3e87c029d0ca2656e63740a242dceef3ba65",
+      "byteLength": 5115
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "ad47f4e42ad6196b115e0af506a1c23c1f6955cda310deef99d4ce04f7cf3b83",
+      "byteLength": 25735
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "ad564bbc64d51fc655f3c0be580b5d307e53271734487800820371c5a2e5a83b",
+      "byteLength": 21230
+    }
+  ]
+}

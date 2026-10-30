@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "url": "http://127.0.0.1:3002",
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "counts": {
+    "countries": 247,
+    "cells": 8005,
+    "edges": 26273,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "checkedAtUtc": "2026-10-30T06:28:06.1038426Z",
+  "normalGamesUnlocked": true
+}

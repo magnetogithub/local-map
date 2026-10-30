@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "chn-2020-source-decision-v1",
+  "decisionDate": "2026-10-30",
+  "countryId": "CHN",
+  "scenarioDate": "2020-01-01",
+  "decision": "adopt-fixed-gbOpen-ADM3-for-experimental-scenario",
+  "sourceAcquisitionCompletedBeforeGeneratorChanges": true,
+  "selected": {
+    "publisher": "geoBoundaries / William & Mary geoLab; original OpenStreetMap, Lee Beryman / Wambacher",
+    "sourceId": "geoboundaries-gbOpen-CHN-ADM3-62558664",
+    "revision": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "sourceUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM3/geoBoundaries-CHN-ADM3.geojson",
+    "originalDistributorUrl": "https://wambachers-osm.website/boundaries/",
+    "apiMetadataUrl": "https://www.geoboundaries.org/api/current/gbOpen/CHN/ADM3/",
+    "artifact": {
+      "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+      "sha256": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e",
+      "byteLength": 88780624
+    },
+    "originalArchive": {
+      "path": "data/raw/chn-2020/references/CHN_ADM3-source.zip",
+      "sha256": "a313e1f2dfbc0c6c135420d667dcc625456706602dff79fbd6a58ed22f6791c8",
+      "byteLength": 24353877
+    },
+    "metadata": {
+      "path": "data/raw/chn-2020/references/ADM3-metadata.json",
+      "sha256": "1c56fc94bc9d1fb41473b74dda9e66a9f5ff252c81a6b0b6bc79fa0989dcea01",
+      "byteLength": 1748
+    },
+    "originalMetadata": {
+      "path": "data/raw/chn-2020/references/ADM3-source/meta.txt",
+      "sha256": "66c98f2844b6dcbfd7a2845645e7bc53bbcb5f1e6c24426d63a2b9c86c3b9076",
+      "byteLength": 441
+    },
+    "originalProcessHistory": {
+      "path": "data/raw/chn-2020/references/ADM3-source/CHN_ADM3.shp.xml",
+      "sha256": "174e6487b141ab4b03dfb8c1e61a7ab3bf1641aff48a0baaafa6decaaa8ebc17",
+      "byteLength": 11604
+    },
+    "reportedRepresentedYear": 2017,
+    "reportedBuildDate": "2023-12-12",
+    "observedProcessDates": [
+      "2017-10-20",
+      "2021-08-03",
+      "2021-08-04",
+      "2021-08-11"
+    ],
+    "scenarioDateExactMatch": false,
+    "temporalLimitation": "The original metadata claims 2017, but original shapefile XML records append/dissolve processing in August 2021. The fixed file is mixed or uncertified vintage. It is used as an experimental county geometry reference for the 2020-01-01 game scenario, not certified 2020 or untouched 2017 administrative truth. No unverified change is backdated.",
+    "administrativeLevel": "ADM3; canonical County, City",
+    "featureCountActual": 2864,
+    "featureCountApi": 2867,
+    "originalShapefileRecordCount": 2867,
+    "recordDifference": "Published GeoJSON omits Bayuquan District, Lanzhou New Area and Qingshuihe County from the source archive; source names Zhijiang City and Jiangshan City have leading whitespace normalized. No missing feature is fabricated.",
+    "stableIdPolicy": "Preserve published shapeID and fixed revision. Original archive has NAME/Level/Shape_Leng/Shape_Area only, no OSM relation ID, official administrative code or parent code. shapeID is explicitly a distributor identifier.",
+    "crs": "OGC CRS84 / WGS84 longitude,latitude degrees",
+    "axisOrder": "longitude,latitude",
+    "coordinateTransformationAtAcquisition": "none",
+    "areaKm2Geodesic": {
+      "min": 2.4995797120025753,
+      "p10": 212.13583234711643,
+      "p50": 1560.6848862710253,
+      "p90": 5684.627206876987,
+      "p99": 34901.88679756126,
+      "max": 198329.20306595005
+    },
+    "boundingBoxDiagonalKmGeodesic": {
+      "min": 3.7459400374706098,
+      "p10": 31.031436548640315,
+      "p50": 80.07071475169818,
+      "p90": 154.79839811091784,
+      "p99": 416.365959779568,
+      "max": 858.7784119214757
+    },
+    "diameterMethod": "Maximum geodesic distance of the two axis-aligned geographic bounding-box diagonals; diagnostic extent proxy, not exact geodesic polygon diameter.",
+    "license": {
+      "id": "ODbL-1.0",
+      "redistributionAllowed": true,
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; geoBoundaries / William & Mary geoLab; Lee Beryman / Wambacher. Contains information available under ODbL 1.0.",
+      "conditions": "Retain notices and attribution; include ODbL URI; distribute publicly used derivative database under ODbL and offer machine-readable derivative data or alterations. Local internal use is allowed. This does not license program code.",
+      "evidence": [
+        {
+          "path": "data/raw/chn-2020/references/ADM3-source/license.PNG",
+          "sha256": "55663d8345f40f7bd328f82e9c0edcd4898f26a976cedccfbba09fc134e92207",
+          "byteLength": 28417
+        },
+        {
+          "path": "data/raw/chn-2020/references/OSM-copyright.html",
+          "sha256": "961fe339449a7a583224b12ce666fa7472129d4cf40229208278d85d5c2d46c5",
+          "byteLength": 21314
+        },
+        {
+          "path": "data/raw/chn-2020/references/ODbL-1.0.html",
+          "sha256": "85bc21fb2c00b2effb9202b2aa785934ce5a05df954e17cbd2a1f7c10c04c633",
+          "byteLength": 51543
+        }
+      ]
+    },
+    "adoptionReason": "Actual whole-country county polygons, clear source-archive ODbL license and fixed revision; actual current partition has better validity/overlap/coverage than the available 2020-published historical OSM edition. County polygons are used rather than relabelled provinces or synthetic nationwide subdivision. Large western counties and tiny city districts remain granularity risks to check against unchanged gameplay limits."
+  },
+  "hierarchy": {
+    "path": "data/source-locks/chn-2020/CHN-hierarchy.json",
+    "sha256": "072ddaf551d5aec7061d9f5301c213820d554f77daa5d489f654b123d15fcfc2",
+    "byteLength": 1142103
+  },
+  "hierarchySummary": {
+    "sourceFineFeatures": 2864,
+    "sourceMacroFeatures": 31,
+    "exactContained": 1660,
+    "individualFloatingExceptions": 3,
+    "assigned": 1663,
+    "unresolved": 1201
+  },
+  "alternatives": [
+    {
+      "name": "Official NGCC 2019 DLG",
+      "url": "https://search.ngcc.cn/xwzx/bnyw/202401/t20240110_2036.html",
+      "evidence": {
+        "path": "data/raw/chn-2020/references/NGCC-2019-announcement.html",
+        "sha256": "a4cd7b389a54ee8317b76de27772f9bffd74ae411705cd1b90523ba87c4996de",
+        "byteLength": 22835
+      },
+      "observed": "Official announcement dated 2019-07-23; 1:50,000 data current to 2018; 1:250,000 and 1:1,000,000 current to 2017; CGCS2000. Provided/used under surveying-results management provisions; free for government decision, national defence and public services.",
+      "decision": "not-adopted",
+      "reason": "No confirmed general redistribution grant or directly acquired redistributable county polygon snapshot; public availability is not a redistribution license."
+    },
+    {
+      "name": "National Bureau of Statistics hierarchy/2019 and 2020 statistical codes",
+      "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202104/t20210401_1815920.html",
+      "rulesUrl": "https://www.stats.gov.cn/zt_18555/zdtjgz/zgjjpc/dycjjpc/pcfa/202303/t20230306_1935317.htm",
+      "observed": "Official reply identifies 2020 statistical codes as of 2020-06-30 and based on county-and-above administrative codes. Official coding rules distinguish province, prefecture, county and lower statistical units.",
+      "decision": "reference-only",
+      "reason": "A hierarchy/code table is not a polygon source; post-January-2020 table cannot silently certify January boundaries. No code-to-English-distributor-ID crosswalk was fabricated."
+    },
+    {
+      "name": "geoBoundaries 3.0.0 CHN ADM3/ADM2/ADM1",
+      "url": "https://www.geoboundaries.org/data/geoBoundaries-3_0_0/CHN/ADM3/",
+      "artifacts": [
+        {
+          "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+          "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72",
+          "byteLength": 17277078
+        },
+        {
+          "path": "data/raw/chn-2020/references/gb3-CHN-ADM2.geojson",
+          "sha256": "9f7457ffafe1ccaad7f27259b2c9b6b3773f173eb4082ddc85e12ac232bc872d",
+          "byteLength": 29217250
+        },
+        {
+          "path": "data/raw/chn-2020/references/gb3-CHN-ADM3.geojson",
+          "sha256": "fde51c1e70771302b0301fc64b2c5cab21badbeea892ad6119d684a1790bd2cf",
+          "byteLength": 33151588
+        }
+      ],
+      "actualFeatureCounts": {
+        "ADM1": 31,
+        "ADM2": 340,
+        "ADM3": 2852
+      },
+      "reportedRepresentedYear": 2017,
+      "updateDate": "2020-05-25",
+      "license": "ODbL-1.0",
+      "decision": "ADM3-not-adopted; ADM1-retained-as-exact-containment-evidence-only",
+      "reason": "Publication in May 2020 does not mean January-2020 boundaries. Actual historical ADM3 has material overlap and larger omissions versus active CHN territory, measured in historical-source-metrics.json. Historical ADM1 is the compatible original OSM/Wambacher 2017 source family; only exact whole containment or individually bounded machine-scale remnants support parents.",
+      "actualCandidateMetrics": {
+        "path": "reports/chn-2020/historical-source-metrics.json",
+        "sha256": "851666bcd87d06404ae8485583ce5601ff626ddc3be9d5455efa18fdf4d23657",
+        "byteLength": 205
+      }
+    },
+    {
+      "name": "geoBoundaries fixed current CHN ADM2",
+      "artifact": {
+        "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM2.geojson",
+        "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+        "byteLength": 7618692
+      },
+      "featureCountActual": 2391,
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "decision": "not-adopted",
+      "reason": "Older 2,391 county features versus ADM3 2,864. Metadata PDDL proof references a 2014 prefecture/province post, while actual county source points to a different 2017 post; licensing provenance and missing detail are weaker."
+    },
+    {
+      "name": "geoBoundaries current CHN ADM1",
+      "artifact": {
+        "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM1.geojson",
+        "sha256": "3a00467a0db9b4136facb5f2f3d0edbfd96adb15651cfdf63991da9281030e85",
+        "byteLength": 270578
+      },
+      "featureCountActual": 34,
+      "decision": "not-used-as-parent-source",
+      "reason": "2019 Wikimedia-derived boundaries differ from OSM county original source and include Taiwan/Hong Kong/Macao; cannot infer official parents by largest overlap or enlarge CHN ownership."
+    },
+    {
+      "name": "OCHA HDX China COD-AB 2020",
+      "url": "https://data.humdata.org/dataset/cod-ab-chn",
+      "decision": "not-adopted",
+      "reason": "Primary dataset access returned HTTP 403 during research. Metadata-only summaries indicate coarse ADM2 prefecture-scale units, not the county precision sought; actual source file not acquired, so no polygon/ID/license claim is made from the inaccessible file."
+    }
+  ],
+  "scopePolicy": "Clip only to currently active CHN game territory, preserve all non-CHN territory and existing KOR/PRK fine IDs/geometry/admin lineage. Hong Kong/Macao/Taiwan and disputed source areas are not acquired because a source labels them CHN.",
+  "acquisitionDate": "2026-10-30",
+  "sourceNotes": "No API-provided count or represented year overrides actual bytes, record count, embedded process history or checked license. Original files are retained unmodified."
+}

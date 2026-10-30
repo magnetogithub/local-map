@@ -106,11 +106,42 @@ export function prepareOperationalCatalog(root = process.cwd(), read = (file: st
     const values = adjacency!.neighbors.slice(adjacency!.offsets[n - 1], adjacency!.offsets[n]);
     values.forEach((v, i) => {ordinal(v); if (v === n || (i && v <= values[i - 1])) throw Error('OPERATIONAL_ADJACENCY_CELL');}); return Object.freeze(values);
   };
+  // Small verified incidence is independent of geometry. Build the pair index
+  // once, then each frontier contact reads only its matching exact edge shards.
+  let incidence: Buffer | undefined, pairEdges: ReadonlyMap<string, readonly number[]> | undefined;
+  const pairKey = (a: number, b: number) => a < b ? `${a}:${b}` : `${b}:${a}`;
+  const loadIncidence = () => {
+    if (incidence) return;
+    const bytes = gunzipSync(deliveryBytes('metadata/edge-incidence.bin.gz'));
+    if (bytes.length !== raw.counts.edges * 8) throw Error('OPERATIONAL_EDGE_INCIDENCE_SHAPE');
+    const pairs = new Map<string, number[]>();
+    for (let n = 1; n <= raw.counts.edges; n++) {
+      const left = bytes.readUInt32LE((n - 1) * 8), right = bytes.readUInt32LE((n - 1) * 8 + 4);
+      if (left < 1 || left > raw.counts.cells || right > raw.counts.cells || left === right) throw Error('OPERATIONAL_EDGE_INCIDENCE_MAPPING');
+      if (right) {const key = pairKey(left, right), values = pairs.get(key) ?? [];values.push(n);pairs.set(key, values);}
+    }
+    pairEdges = new Map([...pairs].map(([key, values]) => [key, Object.freeze(values)]));incidence = bytes;
+  };
+  const edgeIncidence = (n: number) => {
+    ordinal(n, raw.counts.edges);loadIncidence();
+    return Object.freeze({left: incidence!.readUInt32LE((n - 1) * 8), right: incidence!.readUInt32LE((n - 1) * 8 + 4)});
+  };
+  const shardByOrdinal: (EdgeShard | undefined)[] = new Array(raw.counts.edges);
+  const indexedShards = new Set<string>();
+  let nextEdge = 1;
+  for (const shard of details.edgeDetails) {
+    if (shard.firstOrdinal !== nextEdge || !Number.isSafeInteger(shard.count) || shard.count < 1 || shard.firstOrdinal + shard.count > raw.counts.edges + 1 ||
+        !/^topology\/\d{3}\.json\.gz$/.test(shard.shard) || shard.artifact.path !== `detail/${shard.shard}` || indexedShards.has(shard.shard)) throw Error('OPERATIONAL_EDGE_INDEX');
+    indexedShards.add(shard.shard);
+    for (let n = shard.firstOrdinal; n < shard.firstOrdinal + shard.count; n++) shardByOrdinal[n - 1] = shard;
+    nextEdge += shard.count;
+  }
+  if (nextEdge !== raw.counts.edges + 1) throw Error('OPERATIONAL_EDGE_INDEX');
   // Only current catalog edges are loaded on demand; no old world incidence.
   const shards = new Map<string, readonly ExactEdge[]>();
   const edge = (n: number): ExactEdge => {
     ordinal(n, raw.counts.edges);
-    const shard = details.edgeDetails.find(s => n >= s.firstOrdinal && n < s.firstOrdinal + s.count);
+    const shard = shardByOrdinal[n - 1];
     if (!shard) throw Error('UNKNOWN_OPERATIONAL_EDGE');
     let values = shards.get(shard.shard);
     if (!values) {
@@ -119,18 +150,20 @@ export function prepareOperationalCatalog(root = process.cwd(), read = (file: st
       values = Object.freeze(data.edges.map((e, i) => {
         ordinal(e.left); if (e.right) ordinal(e.right);
         if (e.ordinal !== shard.firstOrdinal + i || !/^edge:operational:[a-f0-9]{64}$/.test(e.id) || !(e.lengthKm > 0) || e.left === e.right || e.flags.positiveAdjacency !== (e.right > 0)) throw Error('OPERATIONAL_EDGE_MAPPING');
+        const pair = edgeIncidence(e.ordinal);
+        if (e.left !== pair.left || e.right !== pair.right) throw Error('OPERATIONAL_EDGE_INCIDENCE_MISMATCH');
         return Object.freeze({...e, flags: Object.freeze(e.flags)});
       }));
       shards.set(shard.shard, values);
     }
     return values[n - shard.firstOrdinal];
   };
-  const edgeIncidence = (n: number) => {const e = edge(n); return Object.freeze({left: e.left, right: e.right});};
   const sharedBoundary = (left: number, right: number) => {
     ordinal(left); ordinal(right);
     if (!neighbors(left).includes(right)) throw Error('NO_OPERATIONAL_LAND_BOUNDARY');
     let selected: ExactEdge | undefined;
-    for (let n = 1; n <= raw.counts.edges; n++) {
+    loadIncidence();
+    for (const n of pairEdges!.get(pairKey(left, right)) ?? []) {
       const e = edge(n);
       if (((e.left === left && e.right === right) || (e.left === right && e.right === left)) && (!selected || e.lengthKm > selected.lengthKm)) selected = e;
     }

@@ -139,13 +139,21 @@ export function selectOperationalFrontier(
     return {contact, boundary, projected, inCorridor, seed, firstDistance};
   };
   let corridor: ReturnType<typeof corridorForContact> = null;
-  // A merged cell's centroid can lie outside one edge's bounded corridor. Keep
-  // the existing contact priority, choosing the first seed valid for its own edge.
+  let oversizedSeed = false;
+  // A whole source cell may be too large to enter under this request, or its
+  // centroid may lie outside one edge's corridor. Keep contact priority among
+  // feasible seeds. Once traversal starts, every expansion cap remains fatal.
   for (const contact of contacts) {
-    corridor = corridorForContact(contact);
-    if (corridor) break;
+    const candidate = corridorForContact(contact);
+    if (!candidate) continue;
+    if (catalog.cellMetrics(candidate.seed).areaKm2 > limits.maximumAreaKm2) {
+      oversizedSeed = true;
+      continue;
+    }
+    corridor = candidate;
+    break;
   }
-  if (!corridor) throw Error('FRONTIER_SCOPE_EMPTY');
+  if (!corridor) throw Error(oversizedSeed ? 'FRONTIER_REQUEST_CAP' : 'FRONTIER_SCOPE_EMPTY');
   const {contact, boundary, projected, inCorridor, seed, firstDistance} = corridor;
   const distances = new Map<number, number>([[seed, firstDistance]]);
   const queue: [number, number][] = [[firstDistance, seed]];
