@@ -1,0 +1,35 @@
+{
+  "stage": "13-17",
+  "status": "pass",
+  "summary": "외교 채널의 5개 연결 상태, 역할별 transcript, 로컬 draft/quick intent와 optional send boundary를 보완했다. production에는 전용 port가 없으므로 전송은 비활성화된다.",
+  "stateMapping": {
+    "disconnected": {"label": "외교 채널 API 연결 예정", "tone": "warning", "composerLocked": false, "sendEnabled": false},
+    "connecting": {"label": "외교 채널 연결 중", "tone": "active", "composerLocked": false, "sendEnabled": false},
+    "ready": {"label": "외교 채널 사용 가능", "tone": "active", "composerLocked": false, "sendRequires": ["canSend", "counterpart", "non-empty draft", "send handler"]},
+    "sending": {"label": "메시지 전달 중", "tone": "active", "composerLocked": true, "sendEnabled": false},
+    "error": {"label": "외교 채널 오류", "tone": "error", "composerLocked": false, "sendEnabled": false}
+  },
+  "transcriptFixture": "DiplomacyOverlays.test.tsx 내부 fixture만 player, foreign, system 메시지와 ISO createdAt을 주입한다. production projection은 빈 transcript를 반환하고 메시지 ID는 화면에 노출되지 않는다.",
+  "sendBoundary": {
+    "request": ["counterpartCountryId", "사용자 원문 text", "intentId 또는 null"],
+    "cancellation": "AbortSignal 전달 및 unmount 시 abort",
+    "production": "GameScreen은 onSend를 전달하지 않으며 DiplomacyChannelPort는 null 상태이므로 전송 불가",
+    "negativeEvidence": "component는 fetch, /api/simulation/turn 또는 일반 action queue를 호출하지 않으며 send spy 후에도 transcript에 임시 성공 메시지를 추가하지 않는다."
+  },
+  "filesChanged": [
+    "src/components/game/DiplomacyOverlays.tsx",
+    "src/components/game/DiplomacyOverlays.test.tsx",
+    "reports/prompt13/13-17-diplomacy-channel-shell.json"
+  ],
+  "verification": {
+    "typescriptExitCode": 0,
+    "eslintExitCode": 0,
+    "vitest": {"exitCode": 0, "files": 10, "tests": 60},
+    "productionBuildExitCode": 0
+  },
+  "knownLimitations": [
+    "실제 DiplomacyChannelPort와 외교 backend/API는 연결하지 않았다.",
+    "production transcript와 관계 점수는 authoritative domain 연결 전까지 비어 있다."
+  ],
+  "nextStage": "13-18"
+}

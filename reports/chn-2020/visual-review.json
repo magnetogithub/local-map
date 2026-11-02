@@ -1,0 +1,44 @@
+{
+  "pass": true,
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "method": "Root agent inspected the actual Chromium PNGs with view_image after automated browser acceptance.",
+  "screenshots": [
+    {
+      "path": "reports/chn-2020/browser-candidate/world-normal.png",
+      "sha256": "5e92c531072f34e46858b3abf0f04c643894c4ae6462f034ba164d5e11ba7805",
+      "byteLength": 321838
+    },
+    {
+      "path": "reports/chn-2020/browser-candidate/china-debug.png",
+      "sha256": "7024f904c4c322ea4a891931f52e402018438d74322c37173447287ef94dacd9",
+      "byteLength": 556166
+    },
+    {
+      "path": "reports/chn-2020/browser-candidate/chn-prk-border-normal.png",
+      "sha256": "8f8cc9525d2915a37c56d279946debfc4a7e8034cd2a0e1ce61db2f586e028fb",
+      "byteLength": 122104
+    },
+    {
+      "path": "reports/chn-2020/browser-candidate/shanghai-coast-debug.png",
+      "sha256": "ef445035d5f04743d5499073d0e6ca5167e7fc6c51886481f57bf5b0c7d39f7f",
+      "byteLength": 278221
+    },
+    {
+      "path": "reports/chn-2020/browser-candidate/hainan-island-debug.png",
+      "sha256": "d87a86482e878560b164c6bc6e6f2aa355830b9e8e50b1a8aaf92a32fa00933f",
+      "byteLength": 237957
+    },
+    {
+      "path": "reports/chn-2020/browser-play-candidate/turn-2-gold-front-normal.png",
+      "sha256": "e5328386ad8877d86272de2594cc573d84574cc9c10a454a31b0d58c3b1a9e5f",
+      "byteLength": 199973
+    }
+  ],
+  "observations": [
+    "World normal view hides micro lines; country and coast remain dark.",
+    "China debug view displays the actual natural county boundaries, with larger western source counties intact.",
+    "CHN–PRK border, Shanghai estuary/coast and Hainan retain contiguous fills and visible islands in the inspected views.",
+    "Second actual UI turn shows golden occupation fronts with ordinary internal micro lines hidden."
+  ],
+  "limits": "These six visual inspections complement the full geometric and decoded-tile proofs. They do not assert residual-strip-free coverage; remaining coastal patches and source-free islands remain documented."
+}

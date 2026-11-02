@@ -1,0 +1,34 @@
+{
+  "stage": "13-11",
+  "status": "pass",
+  "summary": "Connected the top-left player badge, central HUD, and top-right date/turn/status to the current WorldStateV2 map projection and shared simulation turn controller.",
+  "filesChanged": [
+    "src/components/game/GameHud.tsx",
+    "src/lib/game-ui/game-hud-projection.ts",
+    "src/lib/game-ui/game-hud-projection.test.ts",
+    "src/lib/game-ui/contracts.ts",
+    "src/components/game/GameScreen.tsx",
+    "reports/prompt13/13-11-hud-player-badge.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd vitest run src/lib/game-ui/game-hud-projection.test.ts src/components/game/GameChrome.test.tsx",
+      "exitCode": 0,
+      "evidence": "HUD tests passed for canonical player name/code/color, simulation date/turn, navigation, and null rendering."
+    }
+  ],
+  "screenshots": [
+    "screenshots/prompt13-13-shell-1280x720.png",
+    "screenshots/prompt13-13-shell-1920x1080.png"
+  ],
+  "tests": [
+    "Canonical current player country projection",
+    "Population and war counts remain null and render as em dashes",
+    "HUD shortcuts open the requested menu"
+  ],
+  "knownLimitations": [
+    "Population, economy, and war domain ports are not available yet and therefore intentionally display em dashes."
+  ],
+  "nextStage": "13-12"
+}
+

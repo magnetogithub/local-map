@@ -1,0 +1,23 @@
+{
+  "stage": "13-2",
+  "status": "pass",
+  "summary": "Recorded the map-first information architecture, single-overlay interaction, blocking event modal, map interaction, and honest empty-data policy as an ADR.",
+  "filesChanged": [
+    "docs/game-ui/internal-game-interface-v1.md",
+    "reports/prompt13/13-2-information-architecture.json"
+  ],
+  "commands": [
+    {
+      "command": "Manual decision-table review against prompts/PROMPT_13_INTERNAL_GAME_INTERFACE.txt",
+      "exitCode": 0,
+      "evidence": "D01-D18 map every enumerated user decision; D19-D20 explicitly capture the prompt's runtime-preservation and authoritative/no-fake-data governing decisions."
+    }
+  ],
+  "screenshots": [],
+  "tests": [],
+  "knownLimitations": [
+    "The source prompt labels the acceptance target as 20 decisions but enumerates 18; the ADR documents the discrepancy and derives D19-D20 from explicit absolute principles."
+  ],
+  "nextStage": "13-3"
+}
+

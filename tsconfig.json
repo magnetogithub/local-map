@@ -1,0 +1,63 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.mts",
+    "src/**/*.cts",
+    "e2e/**/*.ts",
+    "*.ts",
+    "*.mts",
+    "*.cts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    ".next-e2e/types/**/*.ts",
+    ".next-e2e/dev/types/**/*.ts",
+    ".next-e2e-review-g/types/**/*.ts",
+    ".next-e2e-review-g/dev/types/**/*.ts",
+    ".next-prompt16-smoke/types/**/*.ts",
+    ".next-prompt16-smoke/dev/types/**/*.ts",
+    ".next-prompt16-build/types/**/*.ts",
+    ".next-prompt16-build/dev/types/**/*.ts",
+    ".next-f01-browser-verification/types/**/*.ts",
+    ".next-f01-browser-verification/dev/types/**/*.ts",
+    ".next-prompt19-build/types/**/*.ts",
+    ".next-prompt19-build/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "reports",
+    ".tmp",
+    "data"
+  ]
+}

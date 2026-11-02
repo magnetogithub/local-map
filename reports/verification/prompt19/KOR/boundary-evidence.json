@@ -1,0 +1,70 @@
+{
+  "stage": "19-02A",
+  "countryId": "KOR",
+  "detachedCoarseIsland": {
+    "coarseTerritoryId": "territory:catalog:c9bb21daa77cf42383ff2e284dcea12bdccab331a641f9da967e02658b3eacf5",
+    "parentKey": "coarse:KOR:c9bb21daa77cf42383ff2e284dcea12bdccab331a641f9da967e02658b3eacf5",
+    "bbox": [
+      131.860148,
+      37.241606,
+      131.862522,
+      37.244006
+    ],
+    "areaDegrees2": 0.00000308215500000874,
+    "actualSourceIntersections": [],
+    "assignmentPerformed": false
+  },
+  "originalSourceHoleFeatures": [
+    {
+      "sourceFeatureId": "71637012B36526679242406",
+      "name": "Sindorim-dong",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B30769436752225",
+      "name": "Songdo 3-dong",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B16168690912194",
+      "name": "Moksang-dong",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B44064192825017",
+      "name": "Songsan-myeon",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B72873571025594",
+      "name": "Daecheon5-dong",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B4110973378502",
+      "name": "Hoehyeon-myeon",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B65872369886993",
+      "name": "Mandeok-dong",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B40673760933066",
+      "name": "Ichang-dong",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B95818928168604",
+      "name": "Geumho-dong",
+      "holes": 1
+    },
+    {
+      "sourceFeatureId": "71637012B93316534967161",
+      "name": "Haksan-myeon",
+      "holes": 1
+    }
+  ],
+  "sharedBorderPolicy": "The three pinned KOR/PRK chains remain unchanged. Intersection/coverage evidence does not grant A authority to move or fill the country outline."
+}

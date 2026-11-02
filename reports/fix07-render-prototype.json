@@ -1,0 +1,188 @@
+{
+  "subtask": "7I",
+  "status": "passed",
+  "prototypeCountryIds": [
+    "RUS",
+    "USA",
+    "CHN",
+    "CHL",
+    "IDN"
+  ],
+  "policy": {
+    "worldSpaceExponentialZoom": true,
+    "minimumReadability": "feature minZoom filter",
+    "renderFontCaps": {
+      "territory": 180,
+      "small": 120
+    },
+    "capSeparatedFromCalculatedFontSize": true
+  },
+  "baselineGeoJson": {
+    "featureCount": 256,
+    "prototypeIdsPresent": true
+  },
+  "emphasisCounts": {
+    "selected": 1,
+    "player": 1,
+    "method": "selection/player layers contain no symbol text; prototype remains the sole text layer"
+  },
+  "results": [
+    {
+      "countryId": "RUS",
+      "pointFeatureCount": 1,
+      "renderedLabelCounts": [
+        1,
+        1
+      ],
+      "widths": [
+        {
+          "zoom": 1.2,
+          "width": 176.50566259840832,
+          "validTerritoryWidth": 222.08165975792522,
+          "ratio": 0.7947782036157515,
+          "fontSize": 61.28668712589361,
+          "cap": 180
+        },
+        {
+          "zoom": 2.2,
+          "width": 353.0113251968167,
+          "validTerritoryWidth": 444.1633195158505,
+          "ratio": 0.7947782036157515,
+          "fontSize": 122.57337425178723,
+          "cap": 180
+        }
+      ],
+      "doublingRatio": 2.0000000000000004,
+      "ratioDrift": 0,
+      "beforeCap": true,
+      "pass": true
+    },
+    {
+      "countryId": "USA",
+      "pointFeatureCount": 1,
+      "renderedLabelCounts": [
+        1,
+        1
+      ],
+      "widths": [
+        {
+          "zoom": 1.2,
+          "width": 89.07128117453625,
+          "validTerritoryWidth": 115.34459023242705,
+          "ratio": 0.7722189744230888,
+          "fontSize": 46.8796227590491,
+          "cap": 180
+        },
+        {
+          "zoom": 2.2,
+          "width": 178.14256234907253,
+          "validTerritoryWidth": 230.68918046485413,
+          "ratio": 0.772218974423089,
+          "fontSize": 93.75924551809821,
+          "cap": 180
+        }
+      ],
+      "doublingRatio": 2.0000000000000004,
+      "ratioDrift": 1.1102230246251565e-16,
+      "beforeCap": true,
+      "pass": true
+    },
+    {
+      "countryId": "CHN",
+      "pointFeatureCount": 1,
+      "renderedLabelCounts": [
+        1,
+        1
+      ],
+      "widths": [
+        {
+          "zoom": 1.2,
+          "width": 87.3377735948201,
+          "validTerritoryWidth": 120.59309180446704,
+          "ratio": 0.7242352964665005,
+          "fontSize": 45.967248414022315,
+          "cap": 180
+        },
+        {
+          "zoom": 2.2,
+          "width": 174.67554718964024,
+          "validTerritoryWidth": 241.1861836089341,
+          "ratio": 0.7242352964665006,
+          "fontSize": 91.93449682804464,
+          "cap": 180
+        }
+      ],
+      "doublingRatio": 2.0000000000000004,
+      "ratioDrift": 1.1102230246251565e-16,
+      "beforeCap": true,
+      "pass": true
+    },
+    {
+      "countryId": "CHL",
+      "pointFeatureCount": 1,
+      "renderedLabelCounts": [
+        1,
+        1
+      ],
+      "widths": [
+        {
+          "zoom": 3,
+          "width": 35.85344,
+          "validTerritoryWidth": 107.291672,
+          "ratio": 0.33416796785495145,
+          "fontSize": 18.870232,
+          "cap": 180
+        },
+        {
+          "zoom": 4,
+          "width": 71.70688,
+          "validTerritoryWidth": 214.583344,
+          "ratio": 0.33416796785495145,
+          "fontSize": 37.740464,
+          "cap": 180
+        }
+      ],
+      "doublingRatio": 2,
+      "ratioDrift": 0,
+      "beforeCap": true,
+      "pass": true
+    },
+    {
+      "countryId": "IDN",
+      "pointFeatureCount": 1,
+      "renderedLabelCounts": [
+        1,
+        1
+      ],
+      "widths": [
+        {
+          "zoom": 3,
+          "width": 72.6442,
+          "validTerritoryWidth": 104.62128,
+          "ratio": 0.6943539593474674,
+          "fontSize": 15.009136,
+          "cap": 180
+        },
+        {
+          "zoom": 4,
+          "width": 145.2884,
+          "validTerritoryWidth": 209.24256,
+          "ratio": 0.6943539593474674,
+          "fontSize": 30.018272,
+          "cap": 180
+        }
+      ],
+      "doublingRatio": 2,
+      "ratioDrift": 0,
+      "beforeCap": true,
+      "pass": true
+    }
+  ],
+  "screenshots": [
+    "screenshots/fix07-7i/rus-prototype.png",
+    "screenshots/fix07-7i/usa-prototype.png",
+    "screenshots/fix07-7i/chn-prototype.png",
+    "screenshots/fix07-7i/chl-prototype.png",
+    "screenshots/fix07-7i/idn-prototype.png"
+  ]
+}

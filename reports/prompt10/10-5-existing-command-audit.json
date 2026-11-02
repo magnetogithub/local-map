@@ -1,0 +1,76 @@
+{
+  "stage": "10-5",
+  "status": "pass",
+  "objective": "Classify the Prompt 09 command envelope and 9-10 through 9-14 command schemas by structural and semantic responsibility, and specify all v2 persistence, movement, and atomicity fields.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-4-runtime-geometry-owner-audit.json": "503679574d77672100492e987f04f318d3af913b604239ee01284853c6318f2c"
+  },
+  "outputHashes": {
+    "existingCommandAudit": "ba2a93c50b4d5d3baaf2ff398a1b810fb4a71670a2afbdf00bb006acf38ed77f",
+    "v2ResponsibilityAudit": "343b008efcbbd79c0e285e3ee6c13c6c299e90596404b63ebd0e901d702a8dc4"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-5-existing-command-audit.json"
+  ],
+  "commands": [
+    {"command": "Verify 10-4 status and both direct output hashes", "exitCode": 0, "durationMs": 80},
+    {"command": "Read the MapCommand envelope and country.create, country.delete, country.rename, territory.replace, and territory.transfer implementations", "exitCode": 0, "durationMs": 70},
+    {"command": "Run targeted structural-versus-semantic responsibility audit and v2 field-completeness gate", "exitCode": 0, "durationMs": 53},
+    {"command": "npm.cmd run lint -- reports/prompt10/10-5-existing-command-audit.json", "exitCode": 0, "durationMs": 2422, "note": "ESLint emitted one ignored-JSON warning and zero errors."},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0, "durationMs": 2534}
+  ],
+  "measurements": {
+    "auditedCommandSurfaces": 6,
+    "strictSchemaCount": 6,
+    "stateSemanticRefinementCount": 5,
+    "applyFunctionCount": 3,
+    "expectedRevisionSemanticGateCount": 0,
+    "commandIdDeduplicationGateCount": 0,
+    "atomicExecutorCount": 0,
+    "v2ResponsibilityGroups": 4,
+    "missingV2ResponsibilityGroups": 0,
+    "lintErrors": 0,
+    "lintWarnings": 1,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 0,
+    "commandAuditTable": [
+      {"command": "MapCommand envelope", "file": "src/lib/commands/map-command.ts", "structural": ["commandId", "type", "expectedRevision", "payload", "issuedAt", "source", "strict unknown-field rejection"], "semantic": ["none"], "v2": ["retain commandId/type/expectedRevision/payload", "move issuedAt/source outside domain content", "planner enforces revision and idempotency"]},
+      {"command": "country.create", "file": "src/lib/commands/country-create.ts", "structural": ["complete CountryEntity", "optional initialPresentation", "strict nested schemas"], "semantic": ["active ID collision"], "v2": ["identity/core metadata only", "reject active and retired IDs", "no geometry or duplicate presentation input"]},
+      {"command": "country.delete", "file": "src/lib/commands/country-delete.ts", "structural": ["countryId", "ifMissing", "ifLastCountry including allow-empty-world"], "semantic": ["country existence", "last-country policy"], "v2": ["zero owned territories required", "always reject last-country deletion", "remove allow-empty-world"]},
+      {"command": "country.rename", "file": "src/lib/commands/country-rename.ts", "structural": ["countryId", "non-empty partial name changes"], "semantic": ["active country existence"], "v2": ["name-module-only update", "preserve geometry/ownership/topology hashes"]},
+      {"command": "territory.replace", "file": "src/lib/commands/territory-replace.ts", "structural": ["countryId", "canonicalized polygon geometry"], "semantic": ["country existence", "ring validity and deterministic normalization"], "v2": ["territoryId replaces countryId", "executor policyVersion owns precision/tolerance", "planner validates topology/gap/overlap"]},
+      {"command": "territory.transfer", "file": "src/lib/commands/territory-transfer.ts", "structural": ["from", "to", "transferGeometry", "client-selected operation and areaTolerance"], "semantic": ["source/target existence and difference", "overlap/collision", "area conservation"], "v2": ["territoryId or partition result plus targetCountryId", "remove client tolerance choice", "planner produces ownership move and topology delta", "single atomic commit"]}
+    ],
+    "v2ResponsibilityTable": [
+      {"responsibility": "structural envelope", "fields": ["commandId", "type", "expectedRevision", "payload"]},
+      {"responsibility": "preservation and lifecycle", "fields": ["countryId", "territoryId", "ownerCountryId", "retiredCountryIds", "policyVersion", "countryOrder", "territoryOrder", "beforeContentHash", "afterContentHash", "moduleHashChanges"]},
+      {"responsibility": "movement and topology", "fields": ["sourceCountryId", "targetCountryId", "territoryIds", "partitionResults", "ownershipChanged", "geometryChanged", "topologyEdgesChanged", "affectedCountryIds", "affectedTerritoryIds"]},
+      {"responsibility": "atomic planning and commit", "fields": ["immutableNextState", "WorldPatch", "beforeRevision", "afterRevision", "expectedRevision", "commandId", "commitHash", "previousCommitHash", "singleSubscriberNotification", "historyEntry"]}
+    ]
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "currentPromptTenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeAudit": true,
+    "allExistingCommandsAudited": true,
+    "structuralAndSemanticResponsibilitiesSeparated": true,
+    "currentV1ResponsibilityGapsRecorded": true,
+    "allV2PreservationFieldsSpecified": true,
+    "allV2MovementFieldsSpecified": true,
+    "allV2AtomicityFieldsSpecified": true,
+    "productCodeUnmodified": true,
+    "targetedAuditPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "The repository ESLint configuration does not include JSON files, so the target-lint command completed with one ignored-file warning."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-6"
+}

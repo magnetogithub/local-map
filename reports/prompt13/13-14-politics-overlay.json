@@ -1,0 +1,49 @@
+{
+  "stage": "13-14",
+  "status": "pass",
+  "summary": "현재 플레이 국가의 권위 있는 식별 정보, 정치 도메인의 명시적 미연결 상태, 실제 국내 사건 로그를 표시하는 정치 오버레이를 구현했다.",
+  "filesChanged": [
+    "src/components/game/CountryManagementOverlays.tsx",
+    "src/components/game/CountryManagementOverlays.test.tsx",
+    "src/components/game/GameScreen.tsx",
+    "src/lib/game-ui/country-management-projection.ts",
+    "src/lib/game-ui/country-management-projection.test.ts",
+    "src/lib/game-ui/game-hud-projection.ts",
+    "src/lib/game-ui/game-hud-projection.test.ts",
+    "src/app/globals.css"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "evidence": "TypeScript completed without diagnostics."
+    },
+    {
+      "command": "npx.cmd eslint <13-14~13-15 changed TypeScript files>",
+      "exitCode": 0,
+      "evidence": "ESLint completed without diagnostics."
+    },
+    {
+      "command": "npx.cmd vitest run <country management and shell targeted tests>",
+      "exitCode": 0,
+      "evidence": "5 test files and 19 tests passed."
+    },
+    {
+      "command": "npm.cmd run build",
+      "exitCode": 0,
+      "evidence": "Next.js production build completed; /game was statically prerendered."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "canonical player country projection",
+    "null politics fields are not replaced with invented values",
+    "domestic event category and country filtering",
+    "politics empty event state",
+    "existing overlay reducer and game shell regression"
+  ],
+  "knownLimitations": [
+    "정치 체제, 지도자, 국내 상황의 authoritative domain은 아직 연결되지 않아 null과 미연결 안내로 표시된다."
+  ],
+  "nextStage": "13-15"
+}

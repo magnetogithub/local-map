@@ -1,0 +1,552 @@
+# Pax Local 지도 시스템 4차 개선 작업
+
+당신은 기존 `pax-local` 프로젝트를 수정하는 시니어 GIS·MapLibre·WebGL 개발자다.
+
+이 작업은 새 프로젝트를 만드는 것이 아니다. 현재 동작하는 검색, 국가 선택, 플레이 국가 확정 및 복원, Admin 1 표시, PC 전용 레이아웃을 보존하면서 아래 문제를 실제 화면 기준으로 해결해야 한다.
+
+이번 작업의 가장 중요한 원칙은 다음과 같다.
+
+- 데이터 파일에 특정 ID가 없다는 사실만으로 문제가 해결됐다고 판단하지 마라.
+- 자동 테스트 통과만으로 완료 처리하지 마라.
+- 문제가 보이는 좌표를 실제 브라우저에서 확대하고, 어떤 source와 layer가 선을 그리는지 진단하라.
+- 수정 전후 스크린샷을 같은 중심·줌·화면 크기로 비교하라.
+- 국경선, Admin 1 경계, 선택선, hover 선, 폴리곤 외곽선 중 어느 레이어가 문제인지 증명한 뒤 수정하라.
+
+모바일은 지원하지 않는다. 1280×720 이상의 PC 환경만 대상으로 한다.
+
+---
+
+# 1. 작업 전 필수 확인
+
+다음 파일을 처음부터 끝까지 읽고 현재 데이터 흐름을 파악하라.
+
+- `prompts/PROMPT_03_MAP_ADMIN_LABELS.txt`
+- `scripts/prepare-map-data.mjs`
+- `scripts/capture-map-screenshots.mjs`
+- `src/components/map/WorldMap.tsx`
+- `src/lib/map/map-config.ts`
+- `src/lib/map/map-data.test.ts`
+- `src/data/playable-country-ids-2020.json`
+- `src/data/country-label-overrides-2020.json`
+- `src/data/country-label-metrics-2020.json`
+- `src/data/countries-2020.json`
+- `public/data/maps/countries-50m.geojson`
+- `public/data/maps/countries-10m.geojson`
+- `public/data/maps/country-borders-50m.geojson`
+- `public/data/maps/country-borders-10m.geojson`
+- `public/data/maps/admin1-boundaries-10m.geojson`
+- `public/data/maps/country-label-baselines-2020.geojson`
+- `public/data/maps/country-labels-2020.geojson`
+- `public/data/maps/admin1-validation-2020.json`
+- `data/raw/ne_10m_admin_0_countries.geojson`
+- `data/raw/ne_50m_admin_0_countries.geojson`
+- `data/raw/ne_10m_admin_1_states_provinces.geojson`
+- 모든 Vitest 및 Playwright 테스트
+- `README.md`
+- `data/ATTRIBUTION.md`
+
+기존 사용자 변경사항을 되돌리지 마라.
+
+---
+
+# 2. 현재 반드시 보존해야 하는 정책
+
+다음 세 지도 ID는 플레이 가능 국가여야 한다.
+
+- 팔레스타인: 내부 지도 ID `PSX`, ISO3 `PSE`
+- 남수단: 내부 지도 ID `SDS`, ISO3 `SSD`
+- 소말릴란드: 내부 지도 ID `SOL`
+
+세 국가 모두 다음 조건을 만족해야 한다.
+
+```ts
+playable === true
+unitType === "sovereign-country"
+```
+
+플레이 가능 국가 목록에는 내부 canonical ID인 `PSX`, `SDS`, `SOL`을 사용한다. 존재하지 않는 `PSE`, `SSD`를 내부 ID로 다시 넣지 마라.
+
+---
+
+# 3. 해결되지 않은 세 개의 굵은 선
+
+사용자가 실제 화면에서 다음 세 곳의 불필요한 굵은 선이 여전히 보인다고 확인했다.
+
+1. 시아첸 빙하 영역
+2. 카자흐스탄 내부 바이코누르 조차지 영역
+3. 러시아 추코트카의 날짜변경선 부근
+
+이전 구현에서는 다음 작업을 했지만 실제 화면 문제는 해결되지 않았다.
+
+- `KAS → IND` ID 정규화
+- `KAB → KAZ` ID 정규화
+- `KAS`, `KAB`를 검색·라벨·독립 지도 단위에서 제거
+- 별도 country border GeoJSON 생성
+- ±180°에 위치한 일부 수직 선분 제거
+
+따라서 위 조치를 반복하고 완료했다고 보고해서는 안 된다. 남아 있는 실제 렌더링 선의 출처를 다시 찾아야 한다.
+
+---
+
+# 4. 세 선의 레이어별 진단
+
+각 문제 좌표에서 MapLibre의 `queryRenderedFeatures`를 사용해 선 아래에 렌더링된 모든 피처를 조사하라.
+
+최소한 다음 레이어를 각각 켜고 끄면서 비교한다.
+
+- 저해상도 국가 채움
+- 고해상도 국가 채움
+- 저해상도 국가 국경
+- 고해상도 국가 국경
+- Admin 1 경계
+- hover 강조선
+- selected 강조선
+- player 강조선
+- 라벨 기준선 또는 디버그 레이어
+
+개발용 API를 확장해 좌표 또는 화면 픽셀에서 다음 정보를 확인할 수 있게 하라.
+
+```ts
+window.__PAX_MAP_DEBUG__.queryFeaturesAt([x, y])
+window.__PAX_MAP_DEBUG__.setLayerVisibility(layerId, visible)
+window.__PAX_MAP_DEBUG__.getRenderedLayersAt([x, y])
+```
+
+반환 결과에는 최소한 다음이 있어야 한다.
+
+```ts
+{
+  layerId: string;
+  source: string;
+  countryId?: string;
+  admin1Id?: string;
+  geometryType?: string;
+}
+```
+
+진단 결과를 최종 보고서에 기록한다.
+
+---
+
+# 5. 시아첸 빙하의 올바른 제거
+
+요구사항:
+
+- `KAS`는 독립 국가 또는 지도 단위로 존재하면 안 된다.
+- 검색 결과에 나오면 안 된다.
+- 국가 라벨이 없어야 한다.
+- 별도 수도·마커·선택 대상이 없어야 한다.
+- `KAS`의 외곽선이 국가 국경이나 Admin 1 경계로 보이면 안 된다.
+- 해당 위치에 바다색 구멍이나 투명 구멍이 생기면 안 된다.
+- 게임 지도 정책상 해당 geometry는 인도 `IND` 채움에 귀속한다.
+
+단순히 두 피처의 `countryId`만 `IND`로 같게 만드는 것은 geometry 병합이 아니다. 같은 ID를 가진 별도 Polygon 두 개를 line layer에 넣으면 내부 외곽선이 계속 표시될 수 있다.
+
+반드시 다음 중 하나를 사용해 실제 geometry를 dissolve 또는 union하라.
+
+- Mapshaper dissolve
+- `polygon-clipping` 기반 union
+- Turf union
+- 다른 검증된 topology-aware polygon union 도구
+
+결과 데이터에서 `IND`는 하나의 논리적 Feature여야 한다. MultiPolygon은 가능하지만 `KAS` 경계가 내부 국경선으로 남으면 안 된다.
+
+Admin 1에서도 `KAS` 원본 피처를 단순 제거한 뒤 끝내지 말고, 해당 선이 다른 인도 Admin 1 피처의 hole 또는 외곽선으로 남는지 확인한다.
+
+---
+
+# 6. 바이코누르의 올바른 제거
+
+요구사항:
+
+- `KAB`는 독립 국가 또는 지도 단위로 존재하면 안 된다.
+- 검색·라벨·수도·마커·선택 대상에서 제거한다.
+- 바이코누르 조차지 외곽선이 국가 국경으로 표시되면 안 된다.
+- 사용자가 지적한 굵은 선이 Admin 1 경계로도 남으면 안 된다.
+- 해당 geometry는 카자흐스탄 `KAZ` 채움으로 귀속한다.
+- 바다색 또는 배경색 구멍이 생기면 안 된다.
+
+`KAB`와 `KAZ`가 같은 `countryId`를 갖는 별도 Feature로 남아 있어서는 안 된다. build-time에 실제 dissolve 또는 union해 하나의 카자흐스탄 geometry로 만든다.
+
+바이코누르 Admin 1 원본인 `Baykonur lease in Qyzylorda`도 독립 경계로 렌더링하지 않는다. 필요하면 주변 카자흐스탄 행정구역 geometry와 dissolve하고, 최소한 조차지 외곽선이 Admin 1 레이어에 남지 않음을 확인한다.
+
+---
+
+# 7. 추코트카 굵은 선 제거
+
+추코트카 문제를 단순히 “경도 180도인 두 점 사이의 선분 삭제”로 가정하지 마라.
+
+가능한 원인을 모두 확인한다.
+
+- 러시아 Admin 0 폴리곤의 antimeridian 절단선
+- 추코트카 Admin 1 폴리곤의 antimeridian 절단선
+- Polygon hole 외곽선
+- 중복된 world copy의 경계
+- 동일 선분이 country border와 Admin 1에서 중복 렌더링되는 문제
+- 선 양 끝이 정확히 ±180이 아니라 tolerance 범위 밖에 있는 문제
+- 선택·플레이·hover 강조선이 날짜변경선 절단면을 따라 그려지는 문제
+- MultiPolygon ring의 닫힘 선분
+
+추코트카의 실제 화면 좌표를 기준으로 문제 선을 클릭 또는 query하고 어느 레이어인지 증명하라.
+
+필요한 경우 antimeridian-aware geometry 처리를 구현한다.
+
+- 날짜변경선을 지나는 ring을 unwrap
+- 선형 연산 후 다시 ±180 범위로 split
+- 인공적인 닫힘 절단선은 국경선 데이터에서 제외
+- 실제 러시아-미국 해상 경계 또는 해안선은 보존
+- 세계 사본을 이동해도 절단선이 다시 나타나지 않게 처리
+
+Admin 0 국경 레이어만 수정하고 Admin 1 또는 highlight 레이어에서 동일 선이 남는 상태는 실패다.
+
+---
+
+# 8. 국경과 Admin 1 경계 생성 원칙
+
+채움용 Polygon을 그대로 line layer에 넣어 모든 ring을 그리지 마라.
+
+국경 데이터는 다음 원칙으로 생성한다.
+
+- 국가 간 공유 경계 및 해안 외곽만 표시
+- 같은 `countryId` 사이의 내부 경계는 제거
+- 제거·병합된 지도 단위의 외곽선 제거
+- Polygon hole은 정치적 국경으로 필요한 경우만 표시
+- 날짜변경선에 의해 생긴 인공 절단선 제거
+- 실제 국가 간 경계는 보존
+
+Admin 1 데이터는 다음 원칙으로 생성한다.
+
+- 같은 국가 내부의 실제 1단계 행정구역 경계만 표시
+- 국가 외곽선과 중복되는 선분은 가능하면 제거하거나 국가 국경보다 약하게 처리
+- 제거된 `KAS`, `KAB` 경계가 남지 않음
+- 날짜변경선 절단면이 Admin 1 경계로 나타나지 않음
+- 폴리곤 전체 외곽을 중복으로 그려 선이 두껍게 보이지 않도록 공통 경계 deduplication 검토
+
+공유 경계가 양쪽 행정구역에서 두 번 들어오는 경우 동일 선분을 deduplicate하거나, 별도의 boundary extraction 도구를 사용한다.
+
+---
+
+# 9. HOI4식 국가명 크기 개선
+
+현재 가장 중요한 시각 문제는 국가 이름이 영토에 비해 너무 작다는 점이다.
+
+현재처럼 국가 면적에 따라 16px, 22px, 28px 중 하나를 선택하는 단순 단계식을 사용하지 마라. 대형 국가의 이름은 기준선과 영토 폭을 충분히 활용해야 한다.
+
+필수 목표:
+
+- 러시아, 캐나다, 미국, 중국의 이름이 세계지도에서 지금보다 명확하게 커져야 한다.
+- 브라질, 오스트레일리아, 인도, 카자흐스탄도 영토에 맞는 크기로 표시한다.
+- 이름이 단순히 중앙에 작은 글씨로 찍히는 것이 아니라 영토의 긴 방향을 따라 넓게 자리 잡아야 한다.
+- 글자 크기 증가를 자간 증가보다 우선한다.
+- 한국어 두 글자 국가가 `미       국`처럼 과도하게 벌어지지 않아야 한다.
+- 글자가 국가 밖으로 과도하게 벗어나면 안 된다.
+- 확대 시 무한정 커지지 않고 상한에 도달해야 한다.
+
+---
+
+# 10. 화면상 기준선 길이에 맞춘 글꼴 크기 계산
+
+각 국가에 다음 값을 생성한다.
+
+```ts
+type CountryLabelMetrics = {
+  countryId: string;
+  baselineLengthDegrees: number;
+  minZoom: number;
+  labelLength: number;
+  fontSizeAtEntry: number;
+  fontSizeWorld: number;
+  fontSizeClose: number;
+  letterSpacing: number;
+  maxWidthUsage: number;
+};
+```
+
+국가 라벨의 화면상 기준선 길이를 추정한다.
+
+```ts
+const projectedBaselinePixels = projectBaselineLength(
+  baseline,
+  targetZoom,
+  referenceLatitude
+);
+```
+
+한글 문자열의 예상 폭을 계산한다. 가능하면 실제 사용하는 폰트의 측정값 또는 근사 glyph advance를 사용한다.
+
+```ts
+const desiredTextWidth = projectedBaselinePixels * widthUsage;
+const fittedFontSize = desiredTextWidth / estimatedTextUnits;
+```
+
+권장 `widthUsage`:
+
+- 대형·넓은 국가: 0.55~0.75
+- 중형 국가: 0.45~0.65
+- 길고 좁은 국가: 0.30~0.50
+- 소국가: Point 라벨 사용
+
+권장 최대 크기 범위:
+
+- 러시아: 46~56px
+- 캐나다: 42~52px
+- 미국: 40~50px
+- 중국: 40~50px
+- 브라질·오스트레일리아: 36~46px
+- 인도·카자흐스탄: 30~40px
+- 프랑스·독일·영국: 22~32px
+- 대한민국·네덜란드 등: 16~24px
+
+위 값은 무조건 하드코딩하는 답이 아니라 시각 검증을 위한 목표 범위다. geometry와 글자 수에 따라 계산하고 국가별 override는 예외에만 사용한다.
+
+---
+
+# 11. MapLibre text-size 표현식
+
+각 피처의 크기 값을 실제 MapLibre 레이어에서 사용한다.
+
+예시:
+
+```ts
+"text-size": [
+  "interpolate",
+  ["linear"],
+  ["zoom"],
+  1,
+  ["get", "fontSizeWorld"],
+  3,
+  ["get", "fontSizeAtEntry"],
+  6,
+  ["get", "fontSizeClose"]
+]
+```
+
+실제 데이터 의미에 맞게 순서를 정하라. 확대할 때 라벨 크기가 갑자기 튀지 않도록 보간한다.
+
+다음 속성이 실제 렌더링에서 사용되는지 검증한다.
+
+- `fontSizeAtEntry`
+- `fontSizeWorld`
+- `fontSizeClose`
+- `letterSpacing`
+- `minZoom`
+- `placementMode`
+
+속성을 JSON에 기록만 하고 레이어에서 사용하지 않는 구현은 실패다.
+
+---
+
+# 12. 소국가 minZoom 오류 수정
+
+현재 LineString 국가 라벨에는 피처별 `minZoom` 필터가 적용되지만 소국가 Point 라벨은 레이어 전체 `minzoom: 6`만 사용한다.
+
+소국가 Point 라벨에도 반드시 피처별 필터를 적용한다.
+
+```ts
+["<=", ["get", "minZoom"], currentZoom]
+```
+
+다음을 검증한다.
+
+- 모나코가 계산된 `minZoom` 이전에는 보이지 않음
+- 바티칸이 계산된 `minZoom` 이전에는 보이지 않음
+- 싱가포르가 계산된 `minZoom` 이전에는 보이지 않음
+- 충분히 확대하면 각각 나타남
+- LineString 라벨과 Point 라벨이 동시에 중복 표시되지 않음
+
+---
+
+# 13. placementMode 실제 적용
+
+현재 `placementMode`가 데이터에만 있고 렌더링에서는 모든 국가가 `line-center`를 사용하는 문제가 있다.
+
+다음 두 방식을 실제로 분리한다.
+
+- `territory-line`: LineString + `symbol-placement: line-center`
+- `point`: Point + 일반 point symbol placement
+
+긴 선형 배치가 부적절한 칠레, 일부 섬 국가, 극소국가는 Point 또는 별도 회전 Point 레이어를 사용할 수 있다.
+
+하나의 레이어에서 geometry 타입이 맞지 않는 설정을 억지로 공유하지 마라.
+
+---
+
+# 14. 상세 지도 전환 개선
+
+사용자는 천천히 렌더링하면 세계 사본과 확대 지도가 보이는 현재 속도를 수용할 수 있다고 했다. 이번 작업에서 벡터 타일 전환은 필수가 아니다.
+
+다만 다음 작은 개선은 적용하라.
+
+- 고해상도 source가 실제 준비되기 전 저해상도 채움을 완전히 숨기지 않음
+- 고해상도 국가와 Admin 1이 준비된 뒤 opacity 전환
+- 빠르게 확대하거나 이동해도 일시적으로 바다만 보이지 않게 처리
+- 상세 데이터 중복 fetch 방지 유지
+- 고해상도 준비 전에는 저해상도 클릭을 허용
+- 고해상도 준비 후에만 high interaction으로 전환
+
+PMTiles 또는 벡터 타일 전환은 측정 결과 현재 성능이 실제로 문제일 때만 제안하고, 이번 작업의 필수 범위로 확대하지 마라.
+
+---
+
+# 15. world copy 검증
+
+날짜변경선 이동은 설정값이나 `jumpTo([540, ...])`만으로 검증하지 마라.
+
+Playwright에서 실제 마우스 드래그를 수행한다.
+
+1. 태평양 또는 동아시아가 보이는 상태에서 시작
+2. 여러 번 실제 드래그
+3. 미국 또는 아시아가 다음 world copy에서 나타나는지 확인
+4. 국가 채움, 국경, Admin 1, 국가명이 함께 나타나는지 확인
+5. 충분한 렌더링 시간을 준 뒤 판정
+6. 추코트카 절단선이 다른 world copy에서 다시 나타나지 않는지 확인
+
+현재 성능 특성을 고려해 구체적인 렌더 완료 신호를 기다린다. 무조건 300ms 같은 짧은 고정 대기만 사용하지 마라.
+
+---
+
+# 16. 필수 자동 데이터 검증
+
+다음 테스트를 추가한다.
+
+## 16.1 플레이 국가
+
+- `PSX`, `SDS`, `SOL`이 존재
+- 세 국가 모두 playable
+- `PSE`, `SSD`가 내부 지도 ID 목록에 잘못 들어 있지 않음
+
+## 16.2 제거 지도 단위
+
+- `KAS`, `KAB` 메타데이터 없음
+- 검색 인덱스 없음
+- 라벨 없음
+- 수도 없음
+- 소국가 마커 없음
+- 독립 country feature 없음
+- 독립 border feature 없음
+- 독립 Admin 1 feature 없음
+
+## 16.3 geometry 병합
+
+- `IND`와 `KAZ`에 동일 countryId를 가진 중복 Feature가 남지 않음
+- dissolve 후 각각 하나의 논리적 Feature
+- 원래 `KAS`, `KAB` 면적이 부모 채움에서 사라지지 않음
+- 제거 구역 중심점이 부모 국가 Polygon 내부로 판정됨
+- 제거 구역 외곽선이 border 데이터에 존재하지 않음
+
+## 16.4 추코트카
+
+- 날짜변경선 인공 수직 선분이 Admin 0 border 데이터에 없음
+- Admin 1 border 데이터에도 없음
+- highlight용 geometry에서도 불필요한 절단선이 표시되지 않도록 검증
+
+## 16.5 라벨
+
+- 대형 국가의 `fontSizeWorld`가 기존 28px 상한보다 실질적으로 커짐
+- 러시아, 미국, 캐나다, 중국이 목표 범위에 들어감
+- 소국가의 피처별 minZoom이 실제 두 라벨 레이어 필터에 반영됨
+- `placementMode`에 따라 적절한 source와 layer에 배치됨
+- 동일 국가 이름이 같은 화면에서 중복 렌더링되지 않음
+
+---
+
+# 17. 필수 브라우저 검증 좌표와 스크린샷
+
+정확한 중심 좌표는 원본 geometry를 조사해 조정할 수 있지만 다음 세 지역을 반드시 고해상도로 캡처한다.
+
+```text
+screenshots/fix04-siachen-before.png
+screenshots/fix04-siachen-after.png
+screenshots/fix04-baykonur-before.png
+screenshots/fix04-baykonur-after.png
+screenshots/fix04-chukotka-before.png
+screenshots/fix04-chukotka-after.png
+```
+
+추가 라벨 검증:
+
+```text
+screenshots/fix04-world-labels-1440.png
+screenshots/fix04-world-labels-1920.png
+screenshots/fix04-russia-label.png
+screenshots/fix04-usa-canada-labels.png
+screenshots/fix04-china-label.png
+screenshots/fix04-small-label-before-minzoom.png
+screenshots/fix04-small-label-after-minzoom.png
+screenshots/fix04-world-copy-chukotka.png
+```
+
+스크린샷 요구사항:
+
+- before와 after는 같은 viewport, center, zoom 사용
+- 해당 문제 위치를 표시하는 설명용 좌표 또는 마커를 개발 모드에서만 사용할 수 있음
+- after 화면에서 문제 선이 실제로 없어졌는지 육안 확인
+- 단순히 화면이 너무 축소되어 선이 안 보이는 상태는 실패
+- Admin 1이 보이는 충분한 줌에서도 확인
+- 선택·hover·플레이 강조 상태에서도 불필요한 선이 재등장하지 않는지 확인
+
+---
+
+# 18. Playwright 필수 시나리오
+
+다음 E2E 시나리오를 구현한다.
+
+1. `KAS`, `KAB`, `시아첸`, `바이코누르` 검색 결과 없음
+2. 팔레스타인 검색·선택·플레이 국가 확정 가능
+3. 남수단 검색·선택·플레이 국가 확정 가능
+4. 소말릴란드 검색·선택·플레이 국가 확정 가능
+5. 시아첸 위치 클릭 시 `KAS`가 아니라 부모 국가 정책에 맞는 `IND` 선택
+6. 바이코누르 위치 클릭 시 `KAB`가 아니라 `KAZ` 선택
+7. 세 문제 위치에서 문제 layer가 렌더링되지 않음
+8. 실제 드래그로 world copy 이동
+9. 이동 후 추코트카 굵은 절단선 없음
+10. 낮은 줌에서 대형 국가 이름 표시 및 크기 검증
+11. 소국가 minZoom 직전에는 숨김, 직후에는 표시
+12. 고해상도 준비 전후 모두 지도 채움이 사라지지 않음
+
+가능하면 캔버스 픽셀만 비교하지 말고 디버그 API와 `queryRenderedFeatures`를 함께 사용한다.
+
+---
+
+# 19. 완료 조건
+
+다음 조건을 모두 만족해야 완료다.
+
+1. 시아첸 영역의 불필요한 국가급 굵은 선이 실제 화면에서 사라짐
+2. 바이코누르 영역의 불필요한 국가급 굵은 선이 실제 화면에서 사라짐
+3. 추코트카의 불필요한 굵은 수직 또는 절단선이 실제 화면에서 사라짐
+4. 세 선이 Admin 1, selected, hover, player 레이어에서도 재등장하지 않음
+5. 시아첸 위치는 인도 채움으로, 바이코누르 위치는 카자흐스탄 채움으로 이어짐
+6. `KAS`, `KAB`는 검색·선택·라벨·메타데이터에서 제거됨
+7. `PSX`, `SDS`, `SOL`은 플레이 가능
+8. 러시아·미국·캐나다·중국 이름이 기존보다 명확히 커짐
+9. 국가명이 영토 폭과 주축을 더 적극적으로 활용함
+10. 소국가 라벨이 피처별 minZoom 전에는 숨겨지고 이후 표시됨
+11. `placementMode`가 실제 렌더링에 반영됨
+12. 빠르게 확대해도 고해상도 준비 전 바다만 보이는 시간이 최소화됨
+13. 실제 드래그 기반 world copy 테스트 통과
+14. 데이터 생성, lint, Vitest, production build, Playwright 모두 통과
+15. 같은 좌표의 before/after 스크린샷으로 수정 결과를 입증함
+
+---
+
+# 20. 최종 보고 형식
+
+다음 순서로 보고하라.
+
+1. 변경한 파일 목록
+2. 시아첸 선의 실제 원인 레이어와 source
+3. 바이코누르 선의 실제 원인 레이어와 source
+4. 추코트카 선의 실제 원인 레이어와 source
+5. geometry dissolve 또는 union 구현 방식
+6. Admin 1 중복 경계 처리 방식
+7. 국가명 크기 계산식과 국가별 결과값
+8. 소국가 minZoom 및 placementMode 수정 내용
+9. 상세 지도 전환 개선 내용
+10. 플레이 가능 국가 검증 결과
+11. 데이터 전후 개수
+12. 실행한 테스트와 결과
+13. before/after 스크린샷 경로
+14. 남아 있는 제한사항
+
+세 선이 데이터상 없다는 설명만 제시하지 마라. 실제 브라우저에서 같은 좌표와 충분한 확대 수준으로 선이 사라진 것을 확인해야 한다. 사용자가 다시 봤을 때 선이 남아 있으면 작업 실패다.

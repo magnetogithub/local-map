@@ -1,0 +1,94 @@
+name: Immutable territory catalog
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/*prompt14*'
+      - 'data/source-locks/prompt14-*'
+      - 'data/derived/prompt14/**'
+      - 'src/lib/test-only/**'
+      - 'src/lib/map/**'
+      - 'src/lib/projection/**'
+      - 'src/app/api/world/catalog/**'
+      - 'src/components/layout/**'
+      - 'src/components/map/CatalogWorldMap.tsx'
+      - 'src/components/game/CatalogGameScreen.tsx'
+      - 'src/lib/simulation/**'
+      - 'src/lib/commands/territorial-control-v3.ts'
+      - 'src/lib/planning/territorial-control-planner*'
+      - 'src/lib/world/world-state-v3*'
+      - 'src/lib/world/world-v3-runtime-hash.ts'
+      - 'src/lib/game-ui/**'
+      - 'src/app/page.tsx'
+      - 'src/app/game/page.tsx'
+      - 'src/components/game/GameActionOverlay.tsx'
+      - 'src/lib/world/production-catalog-seed.server.ts'
+      - 'data/catalog-consumers/prompt14/**'
+      - 'public/data/territory-catalog/**'
+      - 'vitest.config.ts'
+      - 'package-lock.json'
+      - '.github/workflows/prompt14-catalog.yml'
+jobs:
+  validate-and-replay:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          cache: npm
+      - run: npm.cmd ci
+      - run: node --test scripts/prompt14-catalog-core.node-test.mjs scripts/prompt14-catalog-topology.node-test.mjs scripts/prompt14-boundary-arrangement.node-test.mjs scripts/prompt14-checkpoint.node-test.mjs
+      - run: node --max-old-space-size=8192 scripts/regenerate-prompt14-sources.mjs .tmp/prompt14-catalog/ci-source-first
+      - run: node --max-old-space-size=8192 scripts/regenerate-prompt14-sources.mjs .tmp/prompt14-catalog/ci-source-second
+      - run: node scripts/verify-prompt14-source-correspondence.mjs .tmp/prompt14-catalog/ci-source-first
+      - run: node scripts/verify-prompt14-source-correspondence.mjs .tmp/prompt14-catalog/ci-source-second
+      - run: node scripts/resolve-prompt14-boundary-observations.mjs
+      - run: node --max-old-space-size=8192 scripts/verify-prompt14-construction-tails.mjs
+      - run: node --max-old-space-size=8192 scripts/generate-prompt14-catalog.mjs .tmp/prompt14-catalog/ci-first --sources .tmp/prompt14-catalog/ci-source-first
+      - run: node --max-old-space-size=8192 scripts/generate-prompt14-catalog.mjs .tmp/prompt14-catalog/ci-second --sources .tmp/prompt14-catalog/ci-source-second
+      - run: node scripts/generate-prompt14-catalog.mjs --compare .tmp/prompt14-catalog/ci-first .tmp/prompt14-catalog/ci-second
+      - run: npx.cmd vitest run src/lib/test-only/production-catalog-migration.test.ts
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          PROMPT14_CATALOG_OUTPUT: .tmp/prompt14-catalog/ci-first
+      - run: npx.cmd vitest run src/lib/test-only/production-catalog-migration.test.ts
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          PROMPT14_CATALOG_OUTPUT: .tmp/prompt14-catalog/ci-second
+      - run: node scripts/write-prompt14-catalog-checkpoint.mjs --first .tmp/prompt14-catalog/ci-first --second .tmp/prompt14-catalog/ci-second --source-first .tmp/prompt14-catalog/ci-source-first --source-second .tmp/prompt14-catalog/ci-source-second --output .tmp/prompt14-catalog/ci-review-c.json --freeze --freeze-output .tmp/prompt14-catalog/ci-frozen-ref.json
+        if: always()
+      - run: node --max-old-space-size=8192 scripts/prepare-prompt14-catalog-consumer.mjs .tmp/prompt14-consumer/ci-first
+      - run: node --max-old-space-size=8192 scripts/prepare-prompt14-catalog-consumer.mjs .tmp/prompt14-consumer/ci-second
+      - run: node scripts/publish-prompt14-catalog-consumer.mjs .tmp/prompt14-consumer/ci-first .tmp/prompt14-consumer/ci-second
+      - run: node scripts/verify-prompt14-catalog-consumer.mjs .tmp/prompt14-consumer/ci-browser .tmp/prompt14-catalog/ci-first
+      - run: npx.cmd vitest run src/lib/map/catalog-consumer.test.ts src/lib/projection/country-panel-projection.test.ts src/lib/projection/country-search-index-patch.test.ts src/lib/world/initial-world-state-v2.test.ts src/lib/game-ui/country-view-projection.test.ts
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+      - run: npx.cmd tsc --noEmit
+      - run: npx.cmd vitest run src/lib/simulation/catalog-runtime.test.ts
+      - run: npx.cmd vitest run src/lib/planning/territorial-control-planner.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/catalog-occupation-browser-contract.test.ts src/lib/world/world-state-v3.test.ts src/lib/simulation/simulation-state-v2.test.ts
+      - run: npx.cmd eslint src/lib/commands/territorial-control-v3.ts src/lib/planning/territorial-control-planner.ts src/lib/simulation/catalog-authority-lifecycle.ts src/lib/world/world-v3-runtime-hash.ts src/lib/projection/catalog-map-consumer-projection.ts src/lib/projection/catalog-color-projection.ts src/lib/map/catalog-vector-delivery.ts scripts/run-prompt14-occupation-smoke.mjs scripts/smoke-prompt14-occupation.mjs scripts/write-prompt14-occupation-checkpoint.mjs
+      - run: npx.cmd eslint src/components/layout/CatalogGameSetupShell.tsx src/components/layout/WorldAppPage.tsx src/components/game/CatalogGameScreen.tsx src/components/map/CatalogWorldMap.tsx src/lib/simulation/catalog-runtime.ts src/lib/simulation/catalog-turn-plan.ts src/lib/simulation/client/use-catalog-simulation-turn-controller.ts src/lib/world/production-catalog-seed.server.ts scripts/run-prompt14-production-cutover-smoke.mjs scripts/smoke-prompt14-production-cutover.mjs
+      - run: npm.cmd run build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+      - run: node scripts/run-prompt14-catalog-consumer-http-smoke.mjs 3139 .tmp/prompt14-consumer/ci-http
+      - run: npx.cmd playwright install chromium
+      - run: node scripts/run-prompt14-production-cutover-smoke.mjs 3140 .tmp/prompt14-cutover/ci-browser
+      - run: node scripts/run-prompt14-occupation-smoke.mjs 3141 .tmp/prompt14-occupation/ci-browser
+      - run: npx.cmd vitest run src/lib/simulation/catalog-occupation-browser-contract.test.ts
+        env:
+          PROMPT14_OCCUPATION_EVIDENCE: .tmp/prompt14-occupation/ci-browser/occupation-smoke-evidence.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prompt14-review-c-evidence
+          include-hidden-files: true
+          path: |
+            .tmp/prompt14-catalog/ci-*
+            .tmp/prompt14-consumer/ci-*
+            .tmp/prompt14-cutover/ci-*
+            .tmp/prompt14-occupation/ci-*
+            reports/prompt14/14-02-boundary-observation-resolution.json
+            reports/prompt14/14-02-construction-tail-proof.json

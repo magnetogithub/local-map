@@ -1,0 +1,1 @@
+{"stage":"12-28","status":"pass","changedFiles":["src/lib/simulation/server/openai-responses-provider.ts"],"gates":{"callIdCorrelation":"pass","unknownToolTerminal":"pass","invalidArgumentsTerminal":"pass","duplicateCallIdTerminal":"pass","boundedIterations":4,"boundedCalls":12,"worldMutation":false}}

@@ -1,0 +1,153 @@
+{
+  "prompt": "10-88",
+  "title": "selection existence validation by projection revision",
+  "status": "pass",
+  "createdAt": "2026-09-18T11:15:40.5357173+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-87",
+    "reportPath": "reports/prompt10/10-87-search-ui-committed-projection.json",
+    "reportSha256": "10c2d9eb1be31bd98f9251d33c1c85c0ec0b75f897659ab93f9db6bd4f60e6e5",
+    "status": "pass"
+  },
+  "objective": {
+    "action": "Allow selectCountry only for active country entries in the current committed projection revision.",
+    "verification": "A newly projected country can be selected and a retired/deleted country is rejected."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/stores/game-setup-store.ts",
+        "sha256": "978424e7bd612f23d034e52c3d12d68b2f81d51e790abd6e4fef1fe7dd73f372"
+      },
+      {
+        "path": "src/stores/game-setup-selection-projection.test.ts",
+        "sha256": "b030635a56248d7fff3912c6bc0cf9510b8597c14dee9ace4e78d50c82bec8d0"
+      },
+      {
+        "path": "src/components/map/MapSearch.tsx",
+        "sha256": "367ca356ad036c5612acb6d90a9eea516fe15dd7b8e08c842c0388a9fccbcd2d"
+      },
+      {
+        "path": "src/lib/projection/committed-country-search-projection.ts",
+        "sha256": "bb740c257d4639aa82a03ef7ef76b9066dbbd6e0a15178acba73ef11d8a271e2"
+      }
+    ],
+    "storeChanges": [
+      "countrySearchProjection is stored as the current committed selection/search projection",
+      "selectedCountryProjectionRevision records the projection revision used at selection time",
+      "selectCountry checks countrySearchProjection.entriesById instead of static country metadata"
+    ],
+    "uiChanges": [
+      "MapSearch queries the projection from game setup store",
+      "Search and select share the same current projection revision"
+    ]
+  },
+  "measurements": {
+    "newCountrySelection": {
+      "countryId": "BBB",
+      "result": "selected",
+      "projectionRevisionRecorded": true
+    },
+    "retiredCountrySelection": {
+      "countryId": "AAA",
+      "result": "rejected",
+      "previousSelectionPreserved": true,
+      "entryAbsentFromProjection": true
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/stores/game-setup-selection-projection.test.ts src/components/map/map-search-projection.test.ts src/lib/projection/country-search-index-patch.test.ts",
+        "status": "pass",
+        "testFiles": 3,
+        "tests": 8
+      },
+      {
+        "command": "npm.cmd test -- --run src/stores/game-setup-selection-projection.test.ts src/components/map/map-search-projection.test.ts src/lib/projection/country-search-index-patch.test.ts src/lib/storage/game-setup-storage.test.ts src/stores/world-state-country-selector.test.ts src/lib/planning/country-delete-planner.test.ts src/lib/planning/country-create-planner.test.ts",
+        "status": "pass",
+        "testFiles": 7,
+        "tests": 22
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/components/map/MapSearch.tsx src/components/map/map-search-projection.test.ts src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-search-index-patch.ts",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "previousStageOutputHashRecorded": true,
+      "selectCountryUsesProjectionRevision": true,
+      "newCountrySelectionAllowed": true,
+      "retiredCountrySelectionRejected": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-89",
+  "stage": "10-88",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-87-search-ui-committed-projection.json": "10c2d9eb1be31bd98f9251d33c1c85c0ec0b75f897659ab93f9db6bd4f60e6e5",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/components/map/MapSearch.tsx": "367ca356ad036c5612acb6d90a9eea516fe15dd7b8e08c842c0388a9fccbcd2d",
+    "src/lib/projection/committed-country-search-projection.ts": "bb740c257d4639aa82a03ef7ef76b9066dbbd6e0a15178acba73ef11d8a271e2",
+    "src/stores/game-setup-selection-projection.test.ts": "275de04d220637f7203f283a5284ec396664b2eac3fbcf271879b972024af56a",
+    "src/stores/game-setup-store.ts": "d6b1439444e7c13d35f224c3f041700a37d981c5959f104bc0a6b7cf8ef6bf47"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-88-selection-existence-projection.json",
+    "src/components/map/MapSearch.tsx",
+    "src/lib/projection/committed-country-search-projection.ts",
+    "src/stores/game-setup-selection-projection.test.ts",
+    "src/stores/game-setup-store.ts"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/projection/country-search-index-patch.test.ts src/components/map/map-search-projection.test.ts src/stores/game-setup-selection-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-player-policy-projection.test.ts",
+      "exitCode": 0,
+      "result": "5 files passed; 14 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/projection src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.test.ts",
+      "exitCode": 0,
+      "result": "6 files passed; 17 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/projection/country-search-index-patch.ts src/lib/projection/country-search-index-patch.test.ts src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-panel-projection.ts src/components/map/MapSearch.tsx src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.tsx src/components/country/CountryPanel.test.tsx src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "result": "102 files passed; 885 tests passed"
+    },
+    {
+      "command": "Get-FileHash -Algorithm SHA256 prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+      "exitCode": 0,
+      "result": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+    }
+  ],
+  "firstFailedGate": null
+}

@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-30",
+  "catalogVersion": "catalog-v3-prompt19-korea-43189a03106e62a65a11",
+  "pointer": {
+    "catalogVersion": "catalog-v3-prompt19-korea-43189a03106e62a65a11",
+    "root": "data/derived/prompt19/mixed-world-v2-43189a03106e62a65a11",
+    "index": {
+      "sha256": "1d3e6f356e687649a13283a60aa31022ad8a9dca95bf011bd5833c14d58b0bac",
+      "byteLength": 748936
+    }
+  },
+  "counts": {
+    "administrativeParents": 4232,
+    "cells": 4735,
+    "countries": 247,
+    "edges": 17275,
+    "previousParents": 4231
+  },
+  "request": "Reconcile national borders/coasts with fine gameplay territories, prioritizing the KOR–PRK shared border.",
+  "method": "One shared noded country/coast/fine partition; narrow source-free strips gain gameplay affiliation only with recorded contact or terminal-continuation witnesses. Raw source artifacts stay unchanged.",
+  "summary": [
+    {
+      "arrangedFaceArea": 9.898048074225906,
+      "cells": 335,
+      "coarseResidualArea": 0.07443871856666916,
+      "coarseResidualCells": 46,
+      "countryId": "KOR",
+      "envelopeArea": 9.898048074225994,
+      "fineCells": 289,
+      "sourceFeatures": 228,
+      "unresolvedArea": 0
+    },
+    {
+      "arrangedFaceArea": 12.938046093470415,
+      "cells": 198,
+      "coarseResidualArea": 0.01860566430940862,
+      "coarseResidualCells": 6,
+      "countryId": "PRK",
+      "envelopeArea": 12.938046093470511,
+      "fineCells": 192,
+      "sourceFeatures": 179,
+      "unresolvedArea": 0
+    }
+  ],
+  "reconciliation": {
+    "inputKoreaCells": 1635,
+    "outputKoreaCells": 533,
+    "before": {
+      "fineBothSidesFraction": 0.10357150614353641,
+      "fineBothSidesKm": 21.097747633841564,
+      "totalKm": 203.7022383801475
+    },
+    "after": {
+      "fineBothSidesFraction": 0.9198286447565807,
+      "fineBothSidesKm": 187.37115417242737,
+      "totalKm": 203.70223871644313
+    },
+    "remaining": [
+      {
+        "bbox": [
+          126.737106655397,
+          37.961603106,
+          126.871701109648,
+          38.08101430161
+        ],
+        "countryId": "KOR",
+        "id": "territory:catalog:178ba77ad94ea2e4a571d8e0785f19653b641dd4e82de1640c81a9c9ac541634",
+        "lengthKm": 16.331084544015752,
+        "reason": "No original shared-fine terminal heading reaches this residual through the same established source pair within 10 km. Preserve unassigned gameplay land instead of inventing administrative ownership."
+      }
+    ],
+    "precisionNormalization": {
+      "gridDegrees": 1e-12,
+      "insertedNodes": 277,
+      "maxRoundedCoordinateDisplacementDegrees": 6.98395198395416e-13,
+      "maxSourceSegmentDeviationDegrees": 7.303885595860056e-13,
+      "normalizedSourcePositions": 41262,
+      "passes": 2,
+      "policy": "Country/coast physical geometry is preserved within the existing <=1e-12 degree numerical representation policy. Final cells and edges share one noded partition; exact source coordinate bytes can be normalized."
+    }
+  },
+  "independentVerification": [
+    {
+      "path": "reports/maintenance/20261030-national-boundary-independent-verification.json",
+      "sha256": "763123a1f6a8d71f3705bb1e9ef3435f51a11d65f818eaba80543600a0b38743",
+      "byteLength": 168549
+    },
+    {
+      "path": "reports/maintenance/20261030-fine-macro-independent-verification.json",
+      "sha256": "9c3de1e4284721b4ba41ad6fece5b6581b047133d1e205e890f1e0d963949656",
+      "byteLength": 9973
+    },
+    {
+      "path": "reports/maintenance/prompt19-C/national-boundary-2020-mixed-verification.json",
+      "sha256": "74537de91f375223a2b551caea9f08787b2fc653f7c3939959d8865e129afda5",
+      "byteLength": 2517
+    }
+  ],
+  "topology": {
+    "missingEdgeSides": 0,
+    "nationalBoundaryNotMesh": 0,
+    "coastBoundaryNotMesh": 0,
+    "invalidInteriorEdges": 0,
+    "missingMeshSegments": 0,
+    "duplicateGraphSegments": 0,
+    "crossCountryOverlapAreaDegreesSquared": 0
+  },
+  "unchangedOtherCountries": 245,
+  "tests": {
+    "distinctPassed": 176,
+    "groups": [
+      {
+        "scope": "Map consumer/sources/delivery/style, membership and region lookup",
+        "passed": 86
+      },
+      {
+        "scope": "Actual new-game initialization",
+        "passed": 2
+      },
+      {
+        "scope": "Client integration with mock providers",
+        "passed": 35
+      },
+      {
+        "scope": "Actual two-country frontier, generic frontier and frontier-catalog tests",
+        "passed": 15
+      },
+      {
+        "scope": "Fine/macro quotient and KOR/PRK hierarchy",
+        "passed": 19
+      },
+      {
+        "scope": "National reconciliation fixtures",
+        "passed": 11
+      },
+      {
+        "scope": "KOR source/active national provenance and decoded rounding fixture",
+        "passed": 8
+      }
+    ],
+    "typeScript": "pass",
+    "targetedEslint": "pass",
+    "diffCheck": "pass",
+    "webpackProductionBuild": "pass",
+    "unverifiedPublicationRejected": true
+  },
+  "gameplayFix": "Skip contacts whose seed fails its own existing depth/lateral/first-distance corridor, preserving original priority and all traversal caps. The previous first-contact-only selection could reject valid PRK-to-KOR near advances.",
+  "delivery": {
+    "root": "data/derived/prompt19/mixed-world-v2-43189a03106e62a65a11",
+    "artifacts": 5975,
+    "bytes": 39860646,
+    "decodedTileSamples": 578328,
+    "certifiedRoundingCorners": 2,
+    "uncertifiedThresholdExceedances": 0,
+    "proofPin": {
+      "path": "reports/maintenance/20261030-national-boundary-independent-verification.json",
+      "sha256": "763123a1f6a8d71f3705bb1e9ef3435f51a11d65f818eaba80543600a0b38743",
+      "byteLength": 168549
+    }
+  },
+  "ui": {
+    "url": "http://127.0.0.1:3030/game",
+    "processId": 2252,
+    "mapStatus": "ready",
+    "baseStatus": "ready",
+    "appliedRevision": 0,
+    "game": {
+      "country": "KOR",
+      "date": "2020-01-01",
+      "turn": 0,
+      "queuedActions": 0
+    },
+    "normalMicroBoundariesHidden": true,
+    "debugMicroBoundariesVisible": true,
+    "finalDebugSetting": true,
+    "currentErrorsAfterUtc": "2026-10-30T02:13:40.000Z",
+    "currentErrors": 0,
+    "oldBundleErrorsDuringCutover": {
+      "count": 4,
+      "bundle": "204-36065be4db1c4e3a.js",
+      "timestamp": "2026-10-30T02:10:38Z",
+      "finalBuildBundle": "204-a27781c43d2ea6f6.js"
+    },
+    "screenshots": [
+      "reports/verification/national-boundary-20261030/normal-dmz.png",
+      "reports/verification/national-boundary-20261030/debug-dmz.png"
+    ]
+  },
+  "limits": [
+    "KOR western 16.331 km sector lacks justified fine-family continuation; its unassigned residual remains visible in debug mode. Other unsupported source holes, missing districts and islands remain residual.",
+    "Reconciled outlines are gameplay geometry, not certification of unchanged official administrative boundaries.",
+    "Old catalog saves require their matching server/catalog; this version is for new games. The older 3029 server was preserved."
+  ],
+  "externalAiCalls": 0,
+  "pushed": false
+}

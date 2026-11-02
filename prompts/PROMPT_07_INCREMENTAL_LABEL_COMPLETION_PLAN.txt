@@ -1,0 +1,696 @@
+# Pax Local 7차 작업: 국가명 시스템 미해결 문제의 소단위 완료 계획
+
+이 문서는 `PROJECT_DIRECTOR_HANDOFF.txt`와 `PROMPT_01`~`PROMPT_06`에서 해결되지 않았거나 검증되지 않은 문제를 작은 실행 단위로 나눈 작업 계획이다.
+
+이 문서 전체를 한 번에 실행하지 마라. 한 번의 작업에서는 아래 소단위 하나만 수행하고, 해당 단위의 검증 결과를 보고한 뒤 반드시 종료한다. 다음 소단위는 사용자가 결과를 확인하고 명시적으로 지시한 뒤 시작한다.
+
+모든 응답은 한국어로 작성한다. 과거 보고서나 기존 테스트 통과 주장을 사실로 가정하지 말고 실제 코드, 생성 데이터, 브라우저 렌더 결과와 새로 실행한 명령으로 검증한다.
+
+## 현재 실행 체크포인트
+
+2026-08-14 독립 검증 결과를 기준으로 현재 상태는 다음과 같다.
+
+- 7A: 통과
+- 7B: 통과
+- 7C: 통과
+- 7D: 통과
+- 7E: 통과
+- 7F: 통과. 최신 알고리즘으로 전체 layout 데이터 재생성 및 footprint validator 통과
+- 7G: 통과. MapLibre의 실제 하이브리드 glyph 구성과 계산 폰트 metric 일치 확인
+- 7H: 통과. 테스트가 validator를 실제 재실행하며 5종 국경 변경과 `previousLayout` 안정성 개선 3건 확인
+- 7I: 통과. 5개국 Point 렌더링, world-space 확대, baseline 256개 확인
+- 7J: 통과. production 서버에서 raw 중복 E2E 1/1 통과
+- 7K: 통과. 이미지 9개, 동일 카메라, 변경 후 layout/raw/afterLayout 일치 확인
+- 7L: 검증 스크립트가 영국의 `shapeClass: vertical`을 무시하고 본토형 임계값을 적용해 실패
+- 7M: 통과. 전체 256개국 품질·중복·캐시 validator 재실행 통과
+- 7N: 통과. 전체 계산 3회, 단일 국가, 캐시, 직렬화, Worker 준비 benchmark 재실행 통과
+- 7O: 시작 금지
+
+따라서 다음 실행은 앞 단계를 반복하지 않고 **7L validator의 shapeClass 임계값 판정만 수정하고 재검증**한다. 영국의 계산 결과, 국가별 정책, 좌표, 각도, 렌더링 코드는 수정하지 않는다. 관련 소스가 변경되면 영향받은 단계만 회귀 검증한다.
+
+현재 독립 검증 기준선:
+
+- focused test 19/19 통과
+- 전체 unit test 39/39 통과
+- lint 오류 0, 기존 경고 3
+- production build는 컴파일, TypeScript, 정적 페이지 생성을 마쳤으나 `.next` 캐시와 `.next/trace`의 `EPERM`으로 종료 코드 1
+- 7F validator 종료 코드 0
+- 7G validator 종료 코드 0
+- 7H validator 재실행 테스트 1/1 통과, 안정성 개선 3건
+- 7J raw 중복 E2E 1/1 통과
+- baseline GeoJSON은 256개 국가의 중복 없는 256개 LineString 포함
+- 7K 보고서와 이미지 증거 통과
+- 7M validator 종료 코드 0, 실패 국가 0
+- 7N benchmark 종료 코드 0, 전체 256개국 3회 평균 약 59.4초
+
+build의 `EPERM`은 통과로 간주하지 않는다. 제품 코드 오류와 파일 잠금/권한 문제를 구분해 다시 검증한다.
+
+---
+
+## 0. 공통 운영 규칙
+
+- `AGENTS.md`를 먼저 읽는다.
+- Next.js 코드를 수정할 때는 설치된 버전의 `node_modules/next/dist/docs/` 관련 문서를 먼저 확인한다.
+- 기존 사용자 변경과 지도 기능을 보존한다.
+- 한 소단위에서 요구하지 않은 대규모 리팩터링이나 전체 국가 재작업을 하지 않는다.
+- 실패한 검증이 있으면 완료라고 보고하지 않는다.
+- 수치 산출물과 화면 검증을 구분한다.
+- `국가당 GeoJSON 피처 하나`, `한 월드에서 raw 렌더 하나`, `형상에 적합한 배치`를 각각 검증한다.
+- 고정 anchor, 고정 angle 같은 국가별 좌표 override로 알고리즘 실패를 숨기지 않는다.
+- 국가별 정책은 좌표가 아니라 일반화 가능한 임계값과 탐색 전략만 지정할 수 있다.
+- 개발 서버와 Playwright worker를 작업 후 남기지 않는다.
+- 장시간 명령은 60초 이상 침묵하지 말고 진행 상태를 알린다.
+- 각 소단위가 끝나면 변경 파일, 실행 명령, 통과/실패 항목, 남은 제한사항을 보고한다.
+
+## 1. 보존해야 할 기존 기능
+
+- 2020 OTL 국가 데이터
+- 플레이 가능한 국가 중 한 국가 선택
+- 검색, 지도 클릭, 국가 선택, 플레이 국가 확정
+- 국가별 지도 채색
+- 1:50m/1:10m 지도 전환
+- Admin 1 경계
+- 월드 래핑
+- KAS→IND, KAB→KAZ 병합
+- 시아첸, 바이코누르, 추코트카 경계 정제
+- PSX, SDS, SOL 플레이 가능 상태
+- 국가당 하나의 최종 Point 라벨 피처 원칙
+
+---
+
+## 7A. 현재 상태 기준선 감사
+
+### 목적
+
+6차 구현의 실제 상태를 재현 가능한 기준선으로 확정한다. 이 단계에서는 제품 코드를 수정하지 않는다. 잘못된 테스트나 보고서도 아직 고치지 않고 문제 목록만 확정한다.
+
+### 확인 항목
+
+1. `src/lib/map/country-label-layout.ts`의 공개 인터페이스와 알고리즘 흐름
+2. `scripts/prepare-map-data.mjs`의 전체 국가 생성 연결 상태
+3. `WorldMap.tsx`의 world-space 크기 표현식과 라벨 레이어 배타성
+4. raw/deduplicated 디버그 API의 실제 의미
+5. 대표 15개국 layout 수치
+6. 빈 baseline 파일, 누락된 fix06 스크린샷과 보고서
+7. unit test, lint, build, Playwright의 현재 상태
+8. `.next/trace` EPERM의 원인이 코드인지 환경/파일 잠금인지 구분
+
+### 산출물
+
+- `reports/fix07-baseline-audit.json`
+- 사용자에게 전달할 짧은 감사 요약
+
+### 완료 게이트
+
+- 대표 15개국의 anchor, angle, insideRatio, coverageRatio, confidence가 기록돼야 한다.
+- 모든 필수 fix06 산출물의 존재 여부가 기록돼야 한다.
+- 실행하지 못한 검증은 통과가 아니라 `blocked` 또는 `not-run`으로 기록해야 한다.
+- 제품 코드는 변경하지 않는다.
+
+---
+
+## 7B. 실제 geometry 기반 5개국 알고리즘 테스트
+
+### 목적
+
+러시아, 미국, 중국, 칠레, 인도네시아의 실제 1:10m geometry에서 현재 알고리즘의 실패를 재현한다. 단순 사각형 fixture만으로 통과시키지 않는다.
+
+### 작업 범위
+
+- 실제 생성 지도에서 5개국 geometry를 읽는 테스트 fixture 작성
+- anchor가 선택 영토 내부인지 검증
+- baseline과 회전 footprint의 내부 비율 검증
+- 날짜변경선과 MultiPolygon 성분 선택 검증
+- 각 국가의 계산 결과 snapshot 또는 JSON 저장
+- 알고리즘 수정은 하지 않고 실패를 명확히 드러내는 테스트부터 작성
+
+### 산출물
+
+- 실제 geometry 기반 테스트
+- `reports/fix07-five-country-baseline.json`
+
+### 완료 게이트
+
+- 5개국 모두 실제 geometry가 사용됐다는 증거가 있어야 한다.
+- 실패 국가는 실패 상태로 남겨 원인을 기록해야 한다.
+- synthetic rectangle 테스트를 실제 국가 검증의 대체물로 사용하지 않는다.
+
+---
+
+## 7C. 좌표계·날짜변경선·geometry 전처리 개선
+
+### 목적
+
+러시아와 고위도 국가에서 antimeridian 폐합선과 투영 왜곡을 장축으로 오인하지 않도록 한다. 일정 간격으로 꼭짓점을 버리는 현재 단순 thinning이 좁은 지형과 구멍을 훼손하지 않도록 개선한다.
+
+### 작업 범위
+
+- ring 단위의 안정적인 longitude unwrap
+- 로컬 투영 또는 일관된 world-coordinate 변환
+- 외곽 ring과 hole 보존
+- 단순 stride thinning 대신 형상 보존 단순화 검토
+- canonical layout 하나만 계산하고 world copy는 렌더러가 처리
+
+### 완료 게이트
+
+- 러시아 실제 geometry에서 비정상적인 360도 폭이 없어야 한다.
+- round-trip 후 anchor가 canonical 경도 범위에 있어야 한다.
+- hole 내부를 영토로 판정하지 않아야 한다.
+- 동일 입력의 결과가 결정적이어야 한다.
+
+---
+
+## 7D. 유효 라벨 영토와 MultiPolygon 성분 선택 개선
+
+### 목적
+
+무조건 가장 큰 Polygon 또는 단순 면적·거리 임계값에 의존하지 않고 본토형과 군도형 국가의 유효 라벨 영역을 일반적으로 선택한다.
+
+### 검증 국가
+
+- 미국: 연속 본토 우선, 알래스카·하와이 제외
+- 프랑스: 유럽 본토 우선
+- 러시아: 유효 본토 선택
+- 일본·인도네시아: 가까운 주요 섬 묶음 허용
+- 영국·캐나다: 부속 섬이 방향을 왜곡하지 않는지 확인
+
+### 작업 범위
+
+- 성분별 면적, 내부 폭, 인접 거리, 군집성 평가
+- 본토형과 군도형을 구분하는 일반 정책
+- 선택된 성분과 제외 이유를 디버그 지표로 노출
+- 국가별 좌표 지정 금지
+
+### 완료 게이트
+
+- 검증 국가마다 선택된 componentIds가 설명 가능해야 한다.
+- 미국 라벨 영역이 연속 본토에 있어야 한다.
+- 일본·인도네시아는 가장 큰 섬 하나만 강제 선택해서는 안 된다.
+
+---
+
+## 7E. 후보 중심과 후보 각도 탐색 개선
+
+### 목적
+
+성긴 고정 grid와 `PCA±20°, 0°, 90°`만 사용하는 현재 탐색을 개선한다.
+
+### 작업 범위
+
+- polylabel 또는 동등한 내부 안전점 후보
+- centroid, 내부 clearance 극대점, corridor 후보
+- PCA와 minimum rotated rectangle에서 각도 후보 생성
+- 형상에 따른 추가 각도 샘플
+- coarse-to-fine adaptive refinement
+- `previousLayout`은 유효 후보 사이의 안정성 tie-break로만 사용
+
+### 완료 게이트
+
+- 오목한 polygon에서 centroid가 외부여도 후보를 찾을 수 있어야 한다.
+- 칠레와 노르웨이에 세로/사선 후보가 생성돼야 한다.
+- 같은 입력에서 후보 순서와 최종 결과가 결정적이어야 한다.
+- 실제 5개국 테스트 결과가 기존 기준선보다 악화되지 않아야 한다.
+
+---
+
+## 7F. 정확한 회전 footprint와 내부 포함률
+
+### 목적
+
+153개 표본점으로 근사하는 현재 `insideRatio`를 실제 회전 사각형과 Polygon 교차 면적 기반으로 교체하거나 충분히 검증된 정밀 계산으로 개선한다.
+
+### 작업 범위
+
+- 회전된 텍스트 footprint 생성
+- Polygon/MultiPolygon과 footprint 교차 면적 계산
+- hole과 분리 성분 처리
+- baseline containment와 footprint containment를 별도 지표로 기록
+- adaptive search의 상위 후보에 정밀 검증 적용
+
+### 기본 품질 기준
+
+- 일반 본토형 대표국: `insideRatio >= 0.85`
+- 좁은 세로형 및 군도형: `insideRatio >= 0.75`
+- 예외가 필요하면 수치와 화면 증거를 함께 보고하고 임의 완화하지 않는다.
+
+### 완료 게이트
+
+- 칠레의 현재 `insideRatio 약 0.523` 문제를 해결해야 한다.
+- anchor는 반드시 선택된 영토 내부여야 한다.
+- 교차 면적 기반 값과 표본 근사의 차이를 테스트해야 한다.
+- `reports/fix07-footprint-validation.json`을 반드시 생성한다.
+- 보고서에는 대표 5개국과 노르웨이의 exactInsideRatio, sampledInsideRatio, 두 값의 차이, baselineInsideRatio, anchor containment가 포함돼야 한다.
+- 테스트 통과 주장만 기록하지 말고 실제 계산 결과를 보고서에 저장한다.
+- 기존 `country-label-layout-report-2020.json`의 값이 최신 알고리즘으로 재생성됐는지 여부를 명시한다.
+
+### 현재 남은 작업
+
+Polygon 교차 면적 기반 계산과 관련 테스트, 전용 보고서는 이미 들어가 있다. 대표국 footprint 수치도 기준을 만족한다. 현재 실패 원인은 `src/lib/map/country-label-layout.ts`가 `public/data/maps/country-label-layout-report-2020.json`보다 최신이라는 점뿐이다. 이 단위에서는 구현을 처음부터 다시 만들지 말고 다음만 수행한다.
+
+1. `npm.cmd run data:prepare`를 실행해 전체 국가 layout 산출물을 최신 알고리즘으로 재생성한다.
+2. 데이터 생성 명령의 종료 코드와 누락 국가 여부를 확인한다.
+3. `node scripts/validate-footprint-precision.mjs`를 실행한다.
+4. `reports/fix07-footprint-validation.json`이 새 실행 시각으로 갱신됐는지 확인한다.
+5. `latestAlgorithmDataRegenerated`, 대표국 임계값, anchor containment가 모두 통과해야 한다.
+6. 두 명령이 통과하면 제품 알고리즘을 추가 수정하지 않고 7F를 완료한다.
+
+현재 재현된 실패 메시지:
+
+```text
+Generated country-label layout report predates the current algorithm sources;
+run npm.cmd run data:prepare
+```
+
+---
+
+## 7G. 실제 한글 폰트 메트릭
+
+### 목적
+
+문자 종류별 고정 폭 휴리스틱을 실제 사용 폰트와 재현 가능한 glyph advance 측정으로 교체한다.
+
+### 작업 범위
+
+- 프로젝트가 실제로 렌더링하는 폰트 확정
+- OpenType glyph advance 또는 동등한 결정적 측정 방식 적용
+- 브라우저와 빌드 스크립트 측정값 비교
+- 한글, 공백, 라틴 문자, 숫자, 긴 이름, 짧은 이름 fixture
+- 폰트 로딩 실패 시 명시적 오류 또는 검증된 fallback 정책
+
+### 완료 게이트
+
+- `대한민국`, `미국`, `콩고 민주 공화국`, 혼합 문자열의 기대 폭 fixture가 있어야 한다.
+- 동일 폰트와 크기에서 빌드/브라우저 폭 차이가 정한 허용 오차 이내여야 한다.
+- 기존 고정 문자폭 함수만으로 완료 처리하지 않는다.
+- 계산 모듈이 측정하는 폰트와 MapLibre가 실제 라벨에 사용하는 폰트가 동일해야 한다.
+- CSS Canvas에 Noto Sans KR을 지정해 측정한 결과만으로 MapLibre 렌더 일치를 주장하지 않는다.
+- MapLibre glyph source와 `text-font` 설정에서 한글 glyph가 실제로 어떤 폰트에서 공급되는지 확인해야 한다.
+- 혼합 한글·라틴 문자열도 같은 렌더 스택을 기준으로 검증한다.
+- `reports/fix07-font-metrics.json`에는 선언된 계산 폰트, MapLibre `text-font`, glyph source, 실제 사용 폰트 판정과 불일치 여부를 기록한다.
+
+### 현재 실패 원인과 수정 목표
+
+이 절의 문제는 해결됐다. 현재 계산기는 MapLibre의 실제 하이브리드 glyph 구성을 재현한다.
+
+- 한글과 CJK: `Noto Sans KR Local`의 OpenType advance
+- 라틴 문자와 숫자: `Open Sans Regular` glyph PBF advance
+- MapLibre `text-font`: `Open Sans Regular`
+- MapLibre `localIdeographFontFamily`: `Noto Sans KR Local`
+- glyph source: `/fonts/{fontstack}/{range}.pbf`
+
+실제 브라우저에서 Open Sans glyph 요청 HTTP 200을 확인했고 한글·혼합 문자열 fixture 4/4가 허용 오차 내에서 통과했다. 관련 폰트 코드가 다시 변경되지 않는 한 7G를 반복 구현하지 않는다.
+
+향후 관련 코드가 변경된 경우에만 다음 validator를 재실행한다.
+
+```text
+node scripts/validate-font-metrics.mjs
+```
+
+---
+
+## 7H. 실제 국경 변경 5종 재계산
+
+### 목적
+
+사각형이 아닌 실제 국가 geometry에 가상 국경 변경을 적용하고 별도 좌표 수정 없이 재배치되는지 검증한다.
+
+### 필수 시나리오
+
+1. 동쪽 영토 일부 제거
+2. 인접 영토 일부 합병
+3. 두 영역으로 분할
+4. 두 Polygon 합병
+5. 가늘고 긴 corridor 추가 또는 제거
+
+### 작업 범위
+
+- 최소 러시아, 미국, 칠레, 인도네시아 중 적합한 실제 geometry 사용
+- 변경 전후 geometry hash, anchor, angle, 크기, insideRatio 기록
+- 제거된 영토에 이전 anchor가 남는지 확인
+- `previousLayout` 사용 여부에 따른 안정성과 유효성 비교
+- 영향받은 국가만 `recomputeCountryLabels()`로 계산
+
+### 완료 게이트
+
+- 5개 시나리오 모두 새 anchor가 새 영토 내부여야 한다.
+- footprint가 해당 유형의 insideRatio 기준을 만족해야 한다.
+- 국가별 좌표 override가 없어야 한다.
+- 변경되지 않은 국가는 재계산하지 않아야 한다.
+- 테스트는 기존 `reports/fix07-border-recomputation.json`을 읽기만 해서는 안 된다. 테스트 실행 중 실제 geometry 변경과 재계산을 수행하거나, 검증 직전에 validator를 실행해 보고서를 새로 생성해야 한다.
+- 보고서에 입력 geometry hash와 검증 실행 시각 또는 재생성 증거를 포함해 stale JSON 통과를 방지한다.
+- `previousLayout`을 사용한 경우와 사용하지 않은 경우를 실제로 비교해야 한다.
+- 최소 하나의 경계 변경 시나리오에서, 품질 차이가 허용 범위 안인 후보들 중 `previousLayout` 사용 결과의 anchor 이동 또는 angle 변화가 더 작아야 한다.
+- 모든 시나리오에서 `stabilityDelta == 0`이면 안정성 기능이 검증된 것이 아니므로 완료 처리하지 않는다.
+- 안정성 때문에 insideRatio 기준을 위반하거나 새 영토 밖 anchor를 선택해서는 안 된다.
+
+### 현재 남은 문제
+
+이 절의 문제는 해결됐다. 현재 테스트는 실행 중 `scripts/validate-border-recomputation.mjs`를 실제 호출하고 보고서 수정 시각과 `validationStartedAt`을 확인한다. 실제 1:10m geometry 변경 5종이 통과했고, `previousLayout`은 3개 시나리오에서 anchor 이동 또는 angle 변화를 줄였다.
+
+확인된 결과:
+
+- 5종 변경 모두 anchor containment 및 insideRatio 기준 통과
+- 변경되지 않은 러시아와 중국은 재계산하지 않음
+- 안정성 개선 3건
+- 안정성 적용 전후 insideRatio 차이 최대 허용치 0.05 이내
+- validator 재실행 테스트 1/1 통과
+
+관련 알고리즘이나 validator가 변경되지 않는 한 7H를 반복 구현하지 않는다.
+
+---
+
+## 7I. 5개국 렌더링 프로토타입
+
+### 현재 상태
+
+독립 검증을 통과했다. 관련 렌더링 소스가 변경되지 않는 한 반복 구현하지 않는다.
+
+### 선행 조건
+
+7B~7H의 관련 알고리즘 게이트가 통과하고, 특히 7F 보고서·7G 실제 렌더 폰트 일치·7H `previousLayout` 실효성 검증이 완료된 뒤에만 시작한다.
+
+### 목적
+
+러시아, 미국, 중국, 칠레, 인도네시아에만 개선 알고리즘을 실제 지도 렌더링에 적용한다.
+
+### 작업 범위
+
+- 국가당 Point 하나 유지
+- world-space 크기와 지수 줌 적용
+- 최소 가독성 미만 숨김 정책
+- 폭주 방지 상한 정책을 계산 기준과 분리
+- 선택·hover·플레이 강조가 텍스트를 복제하지 않는지 확인
+- 계산된 baseline GeoJSON이 실제 데이터를 포함하도록 수정
+
+### 완료 게이트
+
+- 줌이 1 증가하면 상한에 닿기 전 라벨 화면 폭이 약 2배가 되어야 한다.
+- 같은 국가의 라벨 폭/유효 국토 폭 비율이 줌별 허용 오차 내에서 유지돼야 한다.
+- 5개국 배치가 수치 기준과 시각 검증을 모두 통과해야 한다.
+
+---
+
+## 7J. raw 렌더 중복 검증 수정
+
+### 현재 상태
+
+독립 검증을 통과했다. production 서버에서 러시아 다중 줌, 미국·중국, 날짜변경선 드래그, 프로토타입·일반국·소국가 레이어 배타성을 raw API로 검증했다. 관련 코드가 변경되지 않는 한 반복 구현하지 않는다.
+
+### 목적
+
+deduplicate된 디버그 결과로 중복을 숨기는 현재 E2E를 수정한다.
+
+### 작업 범위
+
+- `getRawRenderedCountryLabels()`의 반환 의미 검증
+- `getRenderedCountryLabels()`는 논리적 조회용으로 유지
+- E2E에서 `getRenderedCountryLabelCount(id, {raw:true})` 사용
+- 한 화면 안의 world copy 식별 방법 검증
+- 일반국·주요국·소국가 레이어의 상호 배타성 확인
+
+### 완료 게이트
+
+- 대표 대형국은 한 월드 복사본당 raw 라벨이 정확히 1개여야 한다.
+- 줌 확대 시 raw 라벨 수가 2개, 3개로 증가하지 않아야 한다.
+- 날짜변경선을 넘어 드래그한 후에도 각 world copy당 정확히 1개여야 한다.
+- deduplicated 결과를 raw 검증의 대체물로 사용하지 않는다.
+
+---
+
+## 7K. 동일 조건 스크린샷과 수치 보고서
+
+### 현재 상태와 수정 범위
+
+필수 이미지 9개는 존재하고 실제 렌더 화면도 정상이다. 실패 범위는 `reports/fix07-render-evidence.json`의 국경 변경 후 항목에 한정된다.
+
+현재 불일치:
+
+```text
+변경 후 실제 raw anchor: 약 [-110.0500, 38.5052]
+변경 후 실제 raw angle: 약 -57.4433
+JSON evidence.layout anchor: [-99.1451, 39.5277]
+JSON evidence.layout angle: 6.4487
+```
+
+`scripts/capture-fix07-render-evidence.mjs`에는 변경 후 layout을 보정하는 코드가 들어갔지만, 보고서가 그 스크립트 수정 전에 생성됐다. 따라서 이 단계에서는 알고리즘이나 지도 렌더링을 수정하지 말고 최신 캡처 스크립트를 재실행하는 것부터 시작한다.
+
+허용되는 변경 범위:
+
+- `scripts/capture-fix07-render-evidence.mjs`의 보고서 조립 오류가 재현될 때만 최소 수정
+- `reports/fix07-render-evidence.json` 재생성
+- 필수 스크린샷 9개 재생성 또는 동일 조건 재확인
+
+금지 사항:
+
+- 국가명 계산 알고리즘 수정
+- 7I 렌더 레이어 재설계
+- 7J raw API 또는 E2E 의미 변경
+- 전체 국가 정책 수정
+
+### 선행 조건
+
+5개국 렌더링과 raw 중복 검증이 통과한 뒤 시작한다.
+
+### 목적
+
+고정 시간 대기가 아니라 render-settled 상태에서 재현 가능한 시각 증거를 만든다.
+
+### 작업 범위
+
+- 동일 viewport, center, zoom, bearing, pitch 사용
+- 상세 source 준비 완료 및 대상 국가 가시성 assertion
+- MapLibre idle 또는 신뢰 가능한 render-settled 대기
+- 이미지마다 카메라와 layout 수치를 JSON으로 저장
+- before/after 비교는 동일 조건 사용
+
+### 5개국 단계 필수 이미지
+
+- `screenshots/fix07-russia-z1.png`
+- `screenshots/fix07-russia-z2.png`
+- `screenshots/fix07-russia-z3.png`
+- `screenshots/fix07-usa.png`
+- `screenshots/fix07-china.png`
+- `screenshots/fix07-chile.png`
+- `screenshots/fix07-indonesia.png`
+- `screenshots/fix07-border-change-before.png`
+- `screenshots/fix07-border-change-after.png`
+
+### 산출물
+
+- 위 이미지
+- `reports/fix07-render-evidence.json`
+
+### 완료 게이트
+
+- 모든 이미지가 존재하고 비어 있지 않아야 한다.
+- JSON에 viewport와 카메라, 대상 국가, layout 수치, raw 라벨 수가 있어야 한다.
+- 대상 국가가 실제 화면에 보인다는 assertion을 통과해야 한다.
+- 국경 변경 전후의 viewport, center, zoom, bearing, pitch가 동일해야 한다.
+- 변경 후 `evidence[].layout.anchor`와 `borderChange.afterLayout.anchor`가 허용 오차 내에서 일치해야 한다.
+- 변경 후 `evidence[].layout.angle`과 `borderChange.afterLayout.angle`이 허용 오차 내에서 일치해야 한다.
+- 변경 후 raw label의 anchor·angle도 위 두 계산 결과와 MapLibre 좌표 정밀도 범위에서 일치해야 한다.
+- JSON의 `generatedAt`과 파일 수정 시각이 최신 캡처 실행을 반영해야 한다.
+- 최신 스크립트 재실행만으로 통과하면 제품 코드를 수정하지 않는다.
+
+---
+
+## 7L. 대표 15개국 품질 게이트
+
+### 현재 실패 원인과 수정 범위
+
+제품 알고리즘이나 영국 배치가 실패한 것이 아니라 `scripts/validate-fix07-fifteen-country-quality.mjs`의 임계값 판정이 7M과 불일치한다.
+
+현재 영국 수치:
+
+```text
+countryId: GBR
+shapeClass: vertical
+insideRatio: 0.768405
+baselineInsideRatio: 1
+coverageRatio: 0.557133
+confidence: 0.779212
+```
+
+세로형 기준 `insideRatio >= 0.75`는 통과하지만, 현재 7L validator는 아래처럼 국가 ID 목록만 특수형으로 간주한다.
+
+```js
+const special = ["CHL", "NOR", "IDN"].includes(countryId);
+const threshold = special ? 0.75 : 0.85;
+```
+
+이 때문에 `shapeClass: vertical`인 영국에 본토형 기준 0.85가 잘못 적용된다. 7M validator는 이미 `metric.shapeClass`를 사용해 영국을 세로형 기준으로 올바르게 통과시킨다.
+
+허용되는 변경 범위:
+
+- `scripts/validate-fix07-fifteen-country-quality.mjs`의 threshold 선택 로직
+- 재실행으로 갱신되는 `reports/fix07-fifteen-country-quality.json`
+- 필요하면 threshold 판정의 작은 자동 테스트
+
+금지 사항:
+
+- 영국을 별도 국가 ID 예외 목록에 추가
+- 영국 anchor, angle, font scale, 좌표 override 수정
+- `insideRatio` 기준을 전체적으로 낮추기
+- 국가명 알고리즘이나 MapLibre 렌더링 수정
+- 이미 통과한 7M·7N 구현 변경
+
+수정 원칙:
+
+```text
+shapeClass가 vertical 또는 archipelago이면 insideRatio >= 0.75
+그 외에는 insideRatio >= 0.85
+```
+
+7M과 같은 일반화된 기준 함수를 사용하거나 동일한 판정식을 사용한다. 가능하면 두 validator가 다시 달라지지 않도록 공통 기준 상수 또는 함수를 재사용한다. 다만 이번 소단위 범위를 넘어가는 대규모 리팩터링은 하지 않는다.
+
+### 선행 조건
+
+5개국 프로토타입이 통과한 뒤에만 시작한다.
+
+### 검증 국가
+
+- 러시아, 캐나다, 미국, 중국, 브라질, 호주, 인도
+- 카자흐스탄, 아르헨티나
+- 칠레, 노르웨이
+- 영국, 프랑스
+- 일본, 인도네시아
+
+### 확인 항목
+
+- anchor containment
+- baseline 및 footprint containment
+- 형상에 적합한 angle
+- insideRatio와 coverageRatio
+- confidence와 선택 성분
+- 줌별 화면 점유율 안정성
+- 한 월드 복사본당 raw 라벨 하나
+
+### 완료 게이트
+
+- 모든 국가의 수치 표와 화면 증거가 있어야 한다.
+- 품질 기준을 낮춰 실패를 통과시키지 않는다.
+- 실패 국가를 좌표 override로 수정하지 않고 일반 알고리즘 또는 정책을 개선한다.
+- 15개국 모두 각자의 `shapeClass`에 맞는 임계값을 사용해야 한다.
+- 영국은 국가 ID 예외가 아니라 `shapeClass: vertical` 판정으로 통과해야 한다.
+- `node scripts\validate-fix07-fifteen-country-quality.mjs`가 종료 코드 0이어야 한다.
+- 새 `reports/fix07-fifteen-country-quality.json`의 `generatedAt`이 재실행 시각을 반영해야 한다.
+- 보고서에 각 국가의 shapeClass와 적용된 threshold가 포함돼야 한다.
+- 7M validator를 다시 실행해 256개국 실패 0이 유지되는지 확인한다.
+- 수정 후 결과를 보고하고 종료하며 7O를 시작하지 않는다.
+
+---
+
+## 7M. 전체 국가 확장과 특이 형상 정책
+
+### 현재 상태
+
+독립 재검증을 통과했다. 256개국 layout·Point·baseline, 플레이 가능 국가 198개, 누락·중복 0, anchor와 품질 기준, geometry hash 캐시가 모두 통과했다. 7L validator 수정으로 생성 데이터가 변경되지 않는 한 반복 구현하지 않는다.
+
+### 선행 조건
+
+대표 15개국 품질 게이트 통과 후에만 시작한다.
+
+### 작업 범위
+
+- 전체 256개국에 적용
+- 소국가 minZoom과 숨김 정책
+- 군도형, 세로형, 분리 영토형 일반 정책
+- geometry hash 기반 캐시 구조
+- 변경된 국가만 재계산하는 API 유지
+- baseline과 layout report 전체 생성
+
+### 완료 게이트
+
+- playable 국가의 라벨 누락이 없어야 한다.
+- 모든 anchor가 유효 선택 영토 내부여야 한다.
+- 기준 미달 국가 목록이 자동 보고돼야 한다.
+- 기준 미달이 남아 있으면 전체 완료라고 하지 않는다.
+
+---
+
+## 7N. 성능과 Worker 준비
+
+### 현재 상태
+
+독립 benchmark 재실행을 통과했다. 전체 256개국 3회 평균 약 59.4초, 전체 캐시 적중 평균 약 0.020ms, 단일 국가 평균 약 1.45초였으며 직렬화·UI 프레임워크 비의존성·캐시 전후 품질 동일성이 통과했다. Worker 구현은 아직 없고 직렬화 가능한 프로토콜만 준비된 상태다. 7L validator 수정으로 계산 코드가 변경되지 않는 한 benchmark를 반복하지 않는다.
+
+### 목적
+
+정확도를 유지하면서 전체 계산과 단일 국가 재계산 성능을 측정하고 UI 스레드 독립성을 검증한다.
+
+### 작업 범위
+
+- 전체 256개국 사전 계산 시간
+- 대표 국가별 단일 재계산 시간
+- 평균, 중앙값, 최대 시간
+- 직렬화 가능한 입출력 확인
+- DOM, React, MapLibre 의존성 검사
+- geometry hash 캐시 적중/미적중 비교
+- 필요할 경우 Worker 메시지 인터페이스만 설계
+
+### 완료 게이트
+
+- 성능 수치가 동일 환경에서 재현 가능해야 한다.
+- 최적화 전후 품질 지표를 함께 기록해야 한다.
+- 정확도를 희생한 최적화는 명시적으로 보고해야 한다.
+
+---
+
+## 7O. 전체 회귀 및 최종 완료 감사
+
+### 선행 조건
+
+7A~7N 중 적용 대상 단계가 모두 통과한 뒤 마지막으로 실행한다.
+
+### 실행 항목
+
+1. 데이터 생성
+2. unit test
+3. lint
+4. production build
+5. 전체 Playwright 2회 연속
+6. 필수 스크린샷 및 JSON 존재 검사
+7. 개발 서버와 Playwright worker 종료 확인
+8. 기존 기능 회귀 확인
+
+### 완료 게이트
+
+- 모든 명령의 실제 종료 코드가 0이어야 한다.
+- lint 경고도 목록화하고 새 경고 여부를 확인해야 한다.
+- build의 EPERM 같은 환경 실패는 통과가 아니라 `blocked`로 기록한다.
+- Playwright 2회 중 한 번이라도 실패하면 전체 통과가 아니다.
+- 필수 산출물 누락이 없어야 한다.
+- 기존 검색·선택·확정·경계·월드 래핑 기능이 유지돼야 한다.
+
+---
+
+## 2. 각 소단위의 공통 보고 형식
+
+1. 이번에 실행한 소단위 ID
+2. 변경한 파일
+3. 구현 또는 검사한 내용
+4. 실행한 명령과 종료 결과
+5. 정량 품질 지표
+6. 통과한 게이트
+7. 실패하거나 실행하지 못한 게이트
+8. 생성한 산출물 경로
+9. 다음 권장 소단위
+
+보고 후 반드시 종료한다. 사용자의 확인 없이 다음 소단위를 연속 실행하지 않는다.
+
+---
+
+## 3. 현재 권장 시작점
+
+현재 가장 먼저 실행할 작업은 `7L 대표 15개국 품질 게이트`의 threshold 판정 수정과 재검증이다.
+
+정확한 실행 순서는 다음과 같다.
+
+```powershell
+node scripts\validate-fix07-fifteen-country-quality.mjs
+node scripts\validate-fix07-all-country-quality.mjs
+```
+
+첫 명령은 실제 브라우저 검증이 필요하므로 실행 중인 앱의 주소가 기본 `http://localhost:3000`이 아니면 `PLAYWRIGHT_BASE_URL`을 명시한다. 15개국 모두 통과하고, 영국이 `shapeClass: vertical` 기준 0.75로 통과하며, 두 번째 명령에서도 전체 256개국 실패 0이 유지돼야 한다.
+
+결과를 사용자에게 보고하고 반드시 종료한다. 사용자 확인 없이 7O를 시작하지 않는다. 7A~7K·7M·7N은 관련 구현이 바뀌지 않는 한 반복하지 않는다.

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "fine-macro-hierarchy-verification-v1",
+  "complete": true,
+  "unresolved": [],
+  "sourceFeatures": 228,
+  "macroGroups": 17,
+  "publisherChildren": 229,
+  "uniqueMappedPublisherChildren": 228,
+  "methods": {
+    "unique-source-name": 197,
+    "same-name-and-representative-covered": 28,
+    "unique-name-explicit-suffix-alias": 1,
+    "unique-source-name-with-documented-2020-parent-restoration": 1,
+    "same-name-group-bijection-elimination": 1
+  },
+  "counts": {
+    "KOR:macro:citypopulation:21": 16,
+    "KOR:macro:citypopulation:33": 11,
+    "KOR:macro:citypopulation:34": 15,
+    "KOR:macro:citypopulation:22": 8,
+    "KOR:macro:citypopulation:25": 5,
+    "KOR:macro:citypopulation:32": 18,
+    "KOR:macro:citypopulation:24": 5,
+    "KOR:macro:citypopulation:31": 31,
+    "KOR:macro:citypopulation:37": 23,
+    "KOR:macro:citypopulation:38": 18,
+    "KOR:macro:citypopulation:23": 10,
+    "KOR:macro:citypopulation:39": 2,
+    "KOR:macro:citypopulation:35": 14,
+    "KOR:macro:citypopulation:36": 21,
+    "KOR:macro:citypopulation:29": 1,
+    "KOR:macro:citypopulation:11": 25,
+    "KOR:macro:citypopulation:26": 5
+  },
+  "unmatchedPublisherChildren": [
+    {
+      "id": "36440",
+      "name": "Yeonggwang-gun",
+      "parent": {
+        "id": "36",
+        "name": "Jeollanam-do [South Jeolla]",
+        "native": "전라남도",
+        "href": "/en/southkorea/admin/36__jeollanam_do/"
+      }
+    }
+  ],
+  "representativeNonCoveringBijection": [
+    {
+      "sourceFeatureId": "91817680B29418542168397",
+      "macroId": "KOR:macro:citypopulation:11",
+      "sourceGroupCount": 6,
+      "officialChildGroupCount": 6,
+      "alreadyUniquelyVerified": 5,
+      "remainingOfficialChild": "11020",
+      "representativeCovered": false,
+      "nearestBoundaryPoint": [
+        127.00374601109804,
+        37.55771843173546
+      ],
+      "representativeBoundaryDistanceKm": 0.1442520866179763,
+      "condition": "All six source Jung-gu units and all six official Jung-gu table children are present. Five pairs are independently fixed by a same-name representative within source geometry. The remaining one-to-one pair is unique; no nearest-area parent assignment."
+    }
+  ],
+  "temporalCorrections": 1,
+  "oldNaturalEarthParentGeometryUsed": false,
+  "oldParentMajorityUsed": false,
+  "geometryModified": false,
+  "meaning": "Complete means all published fine source identities have one evidenced macro group. It does not claim complete national ADM2 coverage or certify the exact 2020-01-01 hierarchy or boundary geometry."
+}

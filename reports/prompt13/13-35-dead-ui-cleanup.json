@@ -1,0 +1,49 @@
+{
+  "stage": "13-35",
+  "status": "pass",
+  "summary": "Removed the unused turn-report presentation selectors and the tracked debug log while preserving the live GameActionOverlay styles. After two fresh canonical E2E runs, debug.log and environment-bearing generated caches were removed, production still has no scenario fixture, and the PAX_E2E_BUILD-only output intentionally contains the map scenario fixture.",
+  "filesChanged": [
+    "src/app/globals.css",
+    "debug.log",
+    "reports/prompt13/13-35-dead-ui-cleanup.json"
+  ],
+  "commands": [
+    {
+      "command": "rg turn-report and live GameActionOverlay selectors",
+      "exitCode": 0,
+      "evidence": "No .turn-report selector or class remains; simulation-panel, simulation-heading, composer-meta, action-queue, time-controls, turn-status, turn-draft, turn-undo, and turn-redo remain in both CSS and live JSX."
+    },
+    {
+      "command": "production source ownership audit",
+      "exitCode": 0,
+      "evidence": "Zero production matches for SimulationPanel, .side-stack, test-only imports, or world-state-store-v2-fixture; scenario-debug-bridge.ts remains a no-op."
+    },
+    {
+      "command": "production/E2E application bundle fixture audit",
+      "exitCode": 0,
+      "evidence": "After the final rebuilds, the splitChina/splitUnitedStates scenario marker occurs in 0 production application files and 1 .next-e2e client chunk. world-state-store-v2-fixture occurs in neither application output."
+    },
+    {
+      "command": ".gitignore and generated-evidence audit",
+      "exitCode": 0,
+      "evidence": "/.next-e2e/, /.tmp/, *.log, .env*, and !.env.example are present; all 18 screenshots/prompt13-* files are retained; debug.log is absent after final verification."
+    }
+  ],
+  "screenshots": [
+    "screenshots/prompt13-13-shell-repair-1280x720.png",
+    "screenshots/prompt13-13-shell-repair-1920x1080.png",
+    "screenshots/prompt13-23-action-1280x720.png",
+    "screenshots/prompt13-23-action-1920x1080.png",
+    "screenshots/prompt13-32-hud-map-1280x720.png",
+    "screenshots/prompt13-32-hud-map-1920x1080.png"
+  ],
+  "tests": [
+    "Production and E2E build isolation audit",
+    "GameActionOverlay selector-to-JSX audit",
+    "Full verification is recorded in 13-37-final.json"
+  ],
+  "knownLimitations": [
+    "The E2E build intentionally aliases the production no-op bridge to deterministic map scenario tooling only when PAX_E2E_BUILD=1."
+  ],
+  "nextStage": "13-36"
+}

@@ -1,0 +1,24 @@
+{
+  "stage": "12-R5",
+  "status": "PASS",
+  "summary": "Application-level turn publication now coordinates simulation state, world state, and history as one rollback-capable boundary.",
+  "evidence": {
+    "implementation": [
+      "src/lib/simulation/atomic-turn-runtime.ts",
+      "src/lib/simulation/client/application-turn-runtime.ts",
+      "src/stores/world-state-store.ts",
+      "src/components/simulation/SimulationPanel.tsx"
+    ],
+    "tests": [
+      "src/lib/simulation/client/application-turn-runtime.test.ts",
+      "src/lib/simulation/turn-runtime.test.ts",
+      "src/stores/world-state-store-v2.test.ts"
+    ],
+    "commands": [
+      "npx.cmd tsc --noEmit",
+      "npx.cmd vitest run src/lib/simulation/client/application-turn-runtime.test.ts src/lib/simulation/turn-runtime.test.ts src/stores/world-state-store-v2.test.ts"
+    ],
+    "result": "20 tests passed"
+  },
+  "persistenceFailurePolicy": "Persistence occurs after the canonical in-memory pair is committed. A persistence failure is surfaced to the user and does not roll back the already-published canonical pair."
+}

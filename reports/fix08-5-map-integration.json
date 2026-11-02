@@ -1,0 +1,37 @@
+{
+  "stage": "8-5",
+  "status": "pass",
+  "inputHashes": {"reports/fix08-4-artifact-pipeline.json":"f567f9c183979aac6dbe9ba6ff71fe76e29b5f5f8438ad0ce7ad454a00a42bdb"},
+  "outputHashes": {
+    "src/components/map/WorldMap.tsx":"8e87c21054a17f4fe29390dabcd995992dff7cb1785bba147c9dc79e97a51422",
+    "src/lib/map/map-config.ts":"b7bff40d81f9fa13cbcd050c1b6fa16859091ebfa5bad29e041463cbc6cabc59",
+    "src/types/map-debug.ts":"ec49b62d0c4a763d3a0a45c336b73b459cf3d684048406ea6b67ccd91d154a37",
+    "src/lib/map/country-label-glyph-export.test.ts":"48ad9f66ec6dad69c2bb6c6c64909ab8d6dcf90700202387760dc5a2039fb318",
+    "e2e/fix08-5.spec.ts":"14fb47b78bd8f2cce3a23f61e6298b9f01283063ea5e76ae094ac2e328771dc5",
+    "public/data/maps/country-label-glyph-fills-2020.geojson":"4bedeec819d4c2162384e9c3e230e9d9e6c835c8604cb52528c1641c460f0ab5",
+    "public/data/maps/country-label-glyph-outlines-2020.geojson":"ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c",
+    "screenshots/fix08-5-world-default.png":"fee7946f60bf33c39d1af40a6fe89cff1e95342ccc1729b24542b01a6f60b010"
+  },
+  "changedFiles": ["src/components/map/WorldMap.tsx","src/lib/map/map-config.ts","src/types/map-debug.ts","src/lib/map/country-label-glyph-export.test.ts","e2e/fix08-5.spec.ts","public/data/maps/country-label-glyph-fills-2020.geojson","public/data/maps/country-label-glyph-outlines-2020.geojson","screenshots/fix08-5-world-default.png","reports/fix08-5-map-integration.json"],
+  "commands": [
+    {"command":"PAX_FIX08_5_EXPORT=1 npm test -- src/lib/map/country-label-glyph-export.test.ts src/lib/world/country-map-artifacts.test.ts","status":"pass","result":"2 files, 9 tests passed"},
+    {"command":"npx playwright test e2e/fix08-5.spec.ts --workers=1 --timeout=60000","status":"pass","result":"1 test passed"},
+    {"command":"npx eslint src/components/map/WorldMap.tsx src/lib/map/map-config.ts src/types/map-debug.ts src/lib/map/country-label-glyph-export.test.ts e2e/fix08-5.spec.ts","status":"pass","result":"no diagnostics"},
+    {"command":"npx tsc --noEmit --pretty false","status":"fail-pre-existing","result":"existing tuple-cast errors in fix08-8a3.spec.ts, WorldMap.tsx debug casts, and country-map-artifacts.test.ts; no new 8-5 API/export/E2E diagnostic"}
+  ],
+  "gates": {
+    "glyphFillSourceAndLayer":true,
+    "diagnosticOutlineSourceAndLayer":true,
+    "layerOrder":["territory fill","country borders","Admin1 when loaded","hover/selected/player highlights","legacy curved symbols (hidden)","diagnostic glyph outline","glyph fill","Point fallback labels"],
+    "rendererToggleMutuallyExclusive":true,
+    "legacyCurvedDuplicatesWhenGeometryActive":0,
+    "pointFallbackUnaffected":true,
+    "stateChangesPreserveGlyphFeatureCount":true,
+    "representativeRenderedIds":["AUS","RUS","USA","CHN"],
+    "representativeGlyphCounts":{"AUS":7,"RUS":3,"USA":2,"CHN":2},
+    "initialScreenshot":"screenshots/fix08-5-world-default.png"
+  },
+  "implementationErrors": [],
+  "environmentErrors": ["Sandboxed Playwright could not write the requested screenshot; the approved project-scoped run succeeded.","In-app Browser runtime bootstrap failed because its trusted RPC dependency was not configured; project Playwright E2E supplied the browser evidence."],
+  "nextStage": "8-6"
+}

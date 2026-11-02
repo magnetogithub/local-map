@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "c7eb273198925d5f12ce1b0946174e86f1e3f0f4",
+  "scope": "Prompt 17 stability fixes, actual browser verification, desktop height fix, and performance follow-up findings",
+  "completed": {
+    "F01": "Command errors are separated from turn retry.",
+    "F02": "Country/diplomacy views validate live targets during rendering.",
+    "F03": "Active action limit is shared at 32; legacy oversized snapshots can recover by cancellation.",
+    "F04": "Terminal action retention preserves recent history and retained event references without mutating snapshots.",
+    "F05": "Operational game loader shares leases and cleans failed/cancelled/late-start sessions.",
+    "F06": "Map detail retry, stale completion rejection and world resynchronization are preserved.",
+    "F07": "Acknowledged operating failures return to their original verification phase.",
+    "F08": "Input acknowledgement retains the original attempt and phase.",
+    "F09": "Codex client polling and RPC timers are cleaned on all exit paths.",
+    "F10": "Byte-preserving runtime admission/verdict/delivery index copies are explicitly traced.",
+    "F11": "Five retired recovery CLIs exit clearly without historical state side effects.",
+    "F12": "Exact diagnostic numerator before/after values use their respective original/changed rings.",
+    "desktopHeight": "Desktop app is no longer hidden solely because browser content height is below 720px; short-window navigation remains reachable."
+  },
+  "validation": {
+    "typecheck": "passed --noEmit --incremental false",
+    "changedCodeLint": "passed",
+    "relatedTests": {
+      "actionPolicyAndRetention": 167,
+      "loaderAndMap": 71,
+      "orchestrator": 86,
+      "runtimeInputsAndLegacyDiagnostics": 16,
+      "note": "Groups reuse prior successful checks; counts are not asserted to be globally disjoint."
+    },
+    "productionBuild": {
+      "bundler": "Next.js 16.3.0 Turbopack",
+      "status": "passed for Prompt 17 runtime tracing checkpoint",
+      "traces": 14,
+      "representativeRuntimePaths": 26,
+      "missing": 0,
+      "excludedArchivePathsPresent": 0
+    },
+    "windowsProductionSmoke": {
+      "gameStartCells": 923443,
+      "countries": 247,
+      "date": "2020-01-01",
+      "sessionCleanupStatus": 204
+    },
+    "actualScriptedBrowser": {
+      "country": "KOR",
+      "start": "passed",
+      "queue": "passed",
+      "advanceOneDay": "2020-01-02 / turn 1",
+      "undo": "2020-01-01 / turn 0 / queued action restored",
+      "redo": "2020-01-02 / turn 1 / no queued actions",
+      "consoleErrors": 0,
+      "consoleWarnings": 0
+    },
+    "desktopHeightCheck": {
+      "actualViewport": {
+        "width": 1280,
+        "height": 570
+      },
+      "viewportOverrideUsed": false,
+      "setupAndGameVisible": true,
+      "horizontalOverflow": false,
+      "navigationButtons": 8,
+      "lastNavigationBottom": 474,
+      "historyControlsReachableByPanelScroll": true
+    },
+    "externalAiCalls": 0
+  },
+  "performanceFollowUp": {
+    "implementationStarted": false,
+    "userSymptom": "Browser remains sluggish even without interaction",
+    "tileProbe": {
+      "scope": "Only four existing zoom-1 tiles, no world/geometry regeneration",
+      "compressedBytes": 6517508,
+      "decodedBytes": 21991704,
+      "totalCellFeatures": 208372,
+      "totalEdgeFeatures": 692017,
+      "uniqueCells": 203792,
+      "uniqueEdges": 676904,
+      "edgeClasses": {
+        "coast": 14997,
+        "country": 921,
+        "administrative": 4861,
+        "operational": 656102,
+        "residual": 23
+      },
+      "stateWritesFromCurrentCode": 1288280,
+      "stateWriteFormula": "3 * uniqueCells + uniqueEdges; excludes additional restored/selected exact geometry work",
+      "nodeHeaderLoopMs": 203.6,
+      "nodeReadGunzipAndHeaderLoopMs": 271,
+      "note": "These times do not measure MapLibre feature-state storage, paint-buffer updates, browser frame time or GPU work."
+    },
+    "observations": {
+      "rendererPeakWorkingSetMiB": 3270,
+      "rendererLaterWorkingSetMiB": 2828,
+      "chromeSharedGpuWorkingSetMiB": 1599,
+      "initialCpuCoresObserved": 1.15,
+      "laterIdleMaxChromeCpuCores": 0.09,
+      "note": "Process observations are not per-function browser profiling; an infinite loop or leak is not established."
+    },
+    "primaryTargets": [
+      "Base front layer has no c=1 filter; opacity zero does not prevent line geometry creation.",
+      "Initial state writes reach 1288280 for the four zoom-1 tiles, including two empty exact/changed sources.",
+      "Hover scans all historically seen cells and recomputes colors."
+    ],
+    "recommendedFirstScope": [
+      "Base-front c=1 filter with exact dynamic/restored front coverage.",
+      "Sparse front overrides preserving explicit false.",
+      "State writes limited to actual source members, bounded color cache and minimal hover updates."
+    ],
+    "constraints": [
+      "Original source/catalog/approval bytes and hashes remain unchanged.",
+      "Territory PBF properties are empty; cell ordinal order is hash-ID order, not country-contiguous. A 247-country ordinal-range color expression would be incorrect.",
+      "A future worker-derived render property path would verify original bytes first and preserve geometry/IDs; it requires separate implementation and correctness checks.",
+      "New operational fronts, occupations, retired countries and undo/redo must remain covered by regression tests."
+    ]
+  },
+  "limitations": [
+    "Performance fixes are not yet implemented.",
+    "Linux/POSIX isolated package launch is untested.",
+    "External AI interpretation and long-run performance/history testing were not exercised.",
+    "The production build checkpoint preceded the later desktop-height CSS/message change; that change was verified by live Next compilation, lint and the actual browser."
+  ],
+  "evidence": "Detailed local screenshots, trace and diagnostic reports remain under ignored reports/verification/. This tracked file records aggregate results only."
+}

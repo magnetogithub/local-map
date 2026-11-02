@@ -1,0 +1,68 @@
+{
+  "stage": "10-55",
+  "status": "pass",
+  "objective": "Generate and audit the complete seed topology for determinism, duplicate edges, classification, and dateline safety.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "src/lib/world/canonical-topology.ts": "432520cf3414bc6f05d6e13f6fc4464bce600cb4680ca7add45da45b7329f3be",
+    "src/lib/world/topology-edge-hash.ts": "a36eb0b7dc0bfbbe3b6603b855507392fc35775679c17bfd196ed6e0c3c9bc70"
+  },
+  "outputHashes": {
+    "src/lib/world/seed-topology-audit.ts": "81d7aa30b45600286f9127dca6453219b6c0bd1a44affe37fb2e5b821883d7fc",
+    "src/lib/world/seed-topology-audit.test.ts": "f05721805ba95b67dea4bf7c11fd3c3092457314a5045aadcfc4daef3698321b",
+    "src/lib/world/initial-world-state-v2.ts": "013e536d62caae0e08de7ac6e4d9ddd638836702ffa38506ab3f73f04ae6bf13",
+    "src/lib/world/initial-world-state-v2.test.ts": "be3f345e615456d0e0786ec239f0568276c6988d4c67546433f31c7f96fb732d"
+  },
+  "commands": [
+    {
+      "command": "initial seed topology tests",
+      "exitCode": 1,
+      "note": "Raw per-segment edge generation exceeded the default test timeout; connected segments were merged into canonical paths."
+    },
+    {
+      "command": "world test suite after moving topology assembly to the production v2 entrypoint",
+      "exitCode": 0,
+      "note": "36 files and 255 tests passed."
+    },
+    {"command": "related ESLint and npm.cmd exec tsc -- --noEmit", "exitCode": 0},
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "note": "73 files and 728 tests passed after the final incremental implementation."
+    }
+  ],
+  "measurements": {
+    "seedTerritories": 247,
+    "seedRawSegments": 539299,
+    "seedCanonicalEdges": 5924,
+    "seedInternalEdges": 793,
+    "seedCoastEdges": 5131,
+    "duplicateEdges": 0,
+    "worldSpanningEdges": 0,
+    "deterministicTopologyHash": "22ae5e0b51c899b4479b58cb8df5b02400dd7cc8bcbeb7eeda2e9706f5589b52",
+    "worldTestFilesPassed": 36,
+    "worldTestsPassed": 255,
+    "fullUnitTestFilesPassed": 73,
+    "fullUnitTestsPassed": 728,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "runningReportCreatedBeforeImplementation": true,
+    "seedTopologyGenerated": true,
+    "deterministicHash": true,
+    "duplicateEdgesZero": true,
+    "classificationComplete": true,
+    "worldSpanningEdgesZero": true,
+    "worldTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true,
+    "fullUnitSuitePass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "nextStage": "10-56"
+}

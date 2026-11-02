@@ -1,0 +1,32 @@
+{
+  "stage": "13-9",
+  "status": "pass",
+  "summary": "Introduced a dedicated GameScreen with a full-viewport persistent WorldMap and sibling HUD, edge navigation, and overlay layers; removed the game-mode side stack and footer from map layout.",
+  "filesChanged": [
+    "src/components/game/GameScreen.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/components/simulation/SimulationPanel.tsx",
+    "src/app/globals.css",
+    "e2e/game-setup.spec.ts",
+    "e2e/prompt13-shell.spec.ts",
+    "reports/prompt13/13-9-full-screen-game-screen.json"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd run test:e2e -- e2e/prompt13-shell.spec.ts",
+      "exitCode": 0,
+      "evidence": "Both viewport tests confirmed the world-map bounding box starts at 0,0 and equals the full 1280x720 or 1920x1080 viewport."
+    }
+  ],
+  "screenshots": [
+    "screenshots/prompt13-13-shell-1280x720.png",
+    "screenshots/prompt13-13-shell-1920x1080.png"
+  ],
+  "tests": [
+    "Persistent map is rendered outside conditional overlay content",
+    "Full viewport map dimensions at both required sizes"
+  ],
+  "knownLimitations": [],
+  "nextStage": "13-10"
+}
+

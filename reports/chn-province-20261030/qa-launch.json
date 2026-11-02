@@ -1,0 +1,11 @@
+﻿{
+    "url":  "http://127.0.0.1:3001",
+    "externalAI":  "disabled; browser also blocks turn endpoint",
+    "pid":  12056,
+    "smoke":  false,
+    "launchCode":  {
+                       "path":  "scripts/chn-2020/start-province-qa.ps1",
+                       "sha256":  "3583c94ef57e6201976bac02b4e43e231fa46fcfece907d27f015295df57fb20",
+                       "byteLength":  1502
+                   }
+}

@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "scope": "Audit of current Korean province size and acquisition of a separate KOR ADM2 source. Existing geometry, catalog pointer, old source files, game state and API credentials were preserved.",
+  "requestKo": "최초 한국 미세 프로빈스 크기 피드백을 감사한 뒤, 사용자가 한국이 너무 세분화되어 북한 정도 크기로 합치기를 원한다고 정정했다. 현재 한국 구획이 훨씬 작다는 통계는 정정된 요청과 일치한다.",
+  "catalogVersion": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+  "evidence": [
+    "data/runtime/operational-catalog/current.json",
+    "data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987/metrics.json.gz",
+    "data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987/metadata/countries/KOR.json.gz",
+    "data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987/metadata/countries/PRK.json.gz",
+    "data/derived/prompt19/candidates/KOR/joined-v2-652d25d95ef0a040c72e/cells.geojson",
+    "data/derived/prompt19/candidates/PRK/joined-v2-982801207a60f262ad74/cells.geojson",
+    "prompts/PROMPT_19_REMOVE_GRID_AND_KOREA_MICRO_BOUNDARIES.txt",
+    "reports/maintenance/20261029-prompt19-C-independent-verification.json"
+  ],
+  "summaryKo": [
+    "현재 한국은 읍면동급 ADM3, 북한은 시군급 ADM2를 사용하므로 주 구획 면적은 한국이 훨씬 작다.",
+    "한국 4377셀 평균22.51km², 북한701셀 평균174.39km². 1km² 이상 구획 중앙값도 한국17.02km², 북한274.59km²이다.",
+    "북한 전체 셀 중앙값0.745km²만 보면 한국4.505km²보다 작지만, 북한의 1km² 미만390셀은 국토면적0.076%만 차지하므로 대표 크기로 쓰기 어렵다.",
+    "사용자의 최종 정정은 한국이 너무 세분화되어 있다는 뜻이다. 한국만 실제 ADM2 원본으로 교체하거나 검증된 시군구 부모를 기준으로 통합하는 방향이 맞다."
+  ],
+  "method": {
+    "areaSource": "Current published metrics.json.gz areaKm2, filtered by sourceCountryId; no new area approximation applied.",
+    "quantile": "Sort cell areas ascending and use floor((n-1)*p), without interpolation.",
+    "areaWeightedMedian": "Smallest cell area for which the cumulative area reaches half of total country area.",
+    "threshold": "1km² is only an audit filter separating tiny components for interpretation; it is not a proposed cell deletion or generation threshold.",
+    "caveat": "Sub-1km² cells include administrative cells as well as coarse residual/components. This audit does not claim that every small cell is an erroneous sliver."
+  },
+  "statistics": {
+    "KOR": {
+      "count": 4377,
+      "totalAreaKm2": 98521.13291024877,
+      "meanAreaKm2": 22.50882634458505,
+      "quantilesKm2": {
+        "min": 5.314869464530976e-7,
+        "p25": 0.94929000992859,
+        "p50": 4.505389609408807,
+        "p75": 34.89259213048428,
+        "p90": 65.03791265676611,
+        "p95": 88.48507967302892,
+        "max": 447.96666498144725
+      },
+      "atLeast1Km2": {
+        "count": 3225,
+        "p50": 17.020965833032687,
+        "mean": 30.377416890179838
+      },
+      "areaWeightedMedianKm2": 61.24698490092749,
+      "under1Km2": {
+        "count": 1152,
+        "areaShare": 0.005622787954777537
+      },
+      "over100Km2": {
+        "count": 164,
+        "areaShare": 0.2463010657018499
+      },
+      "over500Km2Count": 0,
+      "uniqueFineSourceFeatures": 3478,
+      "byBoundaryBasis": {
+        "administrative": {
+          "count": 4170,
+          "areaKm2": 97671.75393171655,
+          "under1": 1056
+        },
+        "canonical-country-residual": {
+          "count": 206,
+          "areaKm2": 849.3486409290973,
+          "under1": 95
+        },
+        "canonical-country-component": {
+          "count": 1,
+          "areaKm2": 0.03033760303842467,
+          "under1": 1
+        }
+      },
+      "largestFive": [
+        {
+          "name": "Nae-myeon",
+          "areaKm2": 447.96666498144725,
+          "adminLevel": 3,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Buk-myeon",
+          "areaKm2": 346.8517070900514,
+          "adminLevel": 3,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Jinbu-myeon",
+          "areaKm2": 332.12362085538336,
+          "adminLevel": 3,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Inje-eup",
+          "areaKm2": 315.6061933627709,
+          "adminLevel": 3,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Hwacheon-eup",
+          "areaKm2": 291.67344283818323,
+          "adminLevel": 3,
+          "boundaryBasis": "administrative"
+        }
+      ]
+    },
+    "PRK": {
+      "count": 701,
+      "totalAreaKm2": 122246.06566395005,
+      "meanAreaKm2": 174.38811079022832,
+      "quantilesKm2": {
+        "min": 9.243466711611798e-9,
+        "p25": 0.07893184670504515,
+        "p50": 0.7448839328405081,
+        "p75": 129.7709407666886,
+        "p90": 673.083549252256,
+        "p95": 979.6990628963185,
+        "max": 1965.11866277839
+      },
+      "atLeast1Km2": {
+        "count": 311,
+        "p50": 274.58805030652326,
+        "mean": 392.77558234298914
+      },
+      "areaWeightedMedianKm2": 811.315373896955,
+      "under1Km2": {
+        "count": 390,
+        "areaShare": 0.0007596118106221323
+      },
+      "over100Km2": {
+        "count": 179,
+        "areaShare": 0.9853244385485438
+      },
+      "over500Km2Count": 108,
+      "uniqueFineSourceFeatures": 179,
+      "byBoundaryBasis": {
+        "administrative": {
+          "count": 653,
+          "areaKm2": 121766.71031431449,
+          "under1": 379
+        },
+        "canonical-country-residual": {
+          "count": 48,
+          "areaKm2": 479.35534963549435,
+          "under1": 11
+        }
+      },
+      "largestFive": [
+        {
+          "name": "Jangjin",
+          "areaKm2": 1965.11866277839,
+          "adminLevel": 2,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Orang",
+          "areaKm2": 1933.2150238914917,
+          "adminLevel": 2,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Chongjin City",
+          "areaKm2": 1892.4860469893536,
+          "adminLevel": 2,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Tanchon City",
+          "areaKm2": 1755.7600997270074,
+          "adminLevel": 2,
+          "boundaryBasis": "administrative"
+        },
+        {
+          "name": "Phungso",
+          "areaKm2": 1751.5886051297189,
+          "adminLevel": 2,
+          "boundaryBasis": "administrative"
+        }
+      ]
+    }
+  },
+  "renderingFindings": [
+    {
+      "file": "scripts/prompt19-joined-topology.mjs",
+      "line": 45,
+      "finding": "Every paired same-country cell edge is assigned boundaryClass administrative; fine cell versus coarse ADM1 display boundary is not distinguished here."
+    },
+    {
+      "file": "scripts/prepare-prompt19-mixed-world.mjs",
+      "line": 72,
+      "finding": "Carries all such administrative edges into delivery flags; later vector administrative layer is emitted from zoom4."
+    },
+    {
+      "file": "src/lib/map/operational-map-consumer.ts",
+      "line": 178,
+      "finding": "White administrative boundary paint is visible from zoom4 in both vector and exact-detail layers. Existing synthetic-only hidden layers do not hide fine administrative cell edges."
+    },
+    {
+      "file": "src/components/map/OperationalWorldMap.tsx",
+      "line": 120,
+      "finding": "Selecting a country requests its exact cell/edge geometry; detail paint can expose all fine cell boundaries even when synthetic grid layers are hidden."
+    }
+  ],
+  "recommendedNextStepsKo": [
+    "미세 내부 경계선을 숨기는 렌더링 수정을 병행한다.",
+    "한국만 북한과 같은 ADM2 시군구급의 실제 원본으로 전환한다. 현재 ADM3 파일에는 부모 식별자가 없으므로 이름이나 shapeID 접두어로 임의 통합하지 않는다.",
+    "이미 조사한 geoBoundaries KOR ADM2 2020은229개·평균435.44km²로 북한179원본 ADM2에 근접한다. 원본과 라이선스 원문을 확보하고 별도 source lock/candidate로 검증한다.",
+    "기존 공통 생성기의 source 외부 face 접촉귀속·hole 처리 문제는 별개이며 통합으로 해결됐다고 보고하지 않는다."
+  ],
+  "coarseningSourceAudit": {
+    "currentSourceFeatureProperties": ["shapeName", "shapeISO", "shapeID", "shapeGroup", "shapeType"],
+    "currentParentFieldAvailable": false,
+    "currentSourceParentId": null,
+    "localResearchMetadata": "data/raw/prompt19/KOR/geoboundaries-9469f095/api-adm2-research.json",
+    "candidate": {
+      "boundaryId": "KOR-ADM2-91817680",
+      "representedYear": "2020",
+      "adminLevel": 2,
+      "canonical": "Si, Kun (districts and city districts)",
+      "unitCount": 229,
+      "meanAreaKm2": 435.4374563849334,
+      "maxAreaKm2": 1835.2861469168276,
+      "metadataLicense": "Creative Commons Attribution 3.0 License",
+      "metadataSource": "geoBoundaries, citypopulation.de",
+      "fixedRevisionGeoJsonUrl": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/KOR/ADM2/geoBoundaries-KOR-ADM2.geojson",
+      "actualFeatureCount": 228,
+      "actualMeanAreaKm2": 436.2270578151554,
+      "actualMedianAreaKm2": 441.2060174395452,
+      "newSourceLock": "data/source-locks/prompt19/KOR-ADM2-2020.json",
+      "normalizedPath": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/normalized-boundaries.geojson",
+      "sourceVerification": "reports/maintenance/20261029-kor-adm2-source-verification.json",
+      "validation": {"freshOgcValidity": "passed", "originalCoordinatesPreserved": true, "nodeTests": 4, "failedTests": 0},
+      "status": "Acquired fixed source separately. Metadata says 229 but original GeoJSON actually contains 228 valid features; discrepancy remains explicit. geoBoundaries metadata/citation and City Population terms were retained. No runtime publication by this adapter."
+    },
+    "alternativeKo": "동일한 KoStat2018 계열의 실제 시군구 geometry 또는 읍면동 코드·부모 crosswalk를 확보한 경우, 문서화된 부모를 기준으로 dissolve할 수 있다. 현재 geoBoundaries ADM3 파일만으로는 정당한 부모 그룹을 복원할 수 없다.",
+    "runtimeImpactKo": "셀 통합은 신규 catalogRef/territoryID/ordinal/topology/vector/detail/seed 전체를 함께 재발행해야 한다. 현재 사용자 게임에 catalog만 바꿔 끼우지 않는다."
+  },
+  "existingSourceCaveats": {
+    "reference": "reports/maintenance/20261029-prompt19-C-independent-verification.json",
+    "summaryKo": "원본 미포함 face의 접촉 기반 fine 귀속1287건과 hole 보존 반례가 이미 보고되어 있다. 이번 크기 감사로 해결되거나 최종 승인된 것이 아니다.",
+    "temporalKo": "한국2018 ADM3, 북한2019/2013 메타데이터 충돌이 있는 ADM2로 정확한2020 재구성은 인증되지 않았다."
+  },
+  "reproduction": {
+    "workingDirectory": "D:\\gen",
+    "program": "node",
+    "arguments": [
+      "--input-type=module",
+      "-e",
+      "import fs from 'node:fs';\nimport {gunzipSync} from 'node:zlib';\nimport {globalCellId} from './scripts/prompt19-joined-topology.mjs';\nconst root = 'data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987';\nconst metrics = JSON.parse(gunzipSync(fs.readFileSync(root + '/metrics.json.gz')));\nconst metricsById = new Map(metrics.map(x => [x.id, x]));\nconst candidates = {KOR:'joined-v2-652d25d95ef0a040c72e',PRK:'joined-v2-982801207a60f262ad74'};\nconst out = {};\nfor (const country of ['KOR','PRK']) {\n  const cells = JSON.parse(fs.readFileSync('data/derived/prompt19/candidates/' + country + '/' + candidates[country] + '/cells.geojson')).features;\n  const byId = new Map(cells.map(x => [globalCellId(x), x.properties]));\n  const rows = metrics.filter(x => x.sourceCountryId === country);\n  const areas = rows.map(x => x.areaKm2).sort((a,b) => a-b);\n  const sum = areas.reduce((a,b) => a+b,0);\n  const q = p => areas[Math.floor((areas.length-1)*p)];\n  let cumulative=0, weightedMedian=0;\n  for (const area of areas) {cumulative += area; if(cumulative >= sum/2) {weightedMedian=area;break;}}\n  const main=areas.filter(x => x >= 1);\n  const groups={};\n  for(const cell of cells) {\n    const basis=cell.properties.boundaryBasis;\n    const group=groups[basis] ??= {count:0,areaKm2:0,under1:0};\n    const area=metricsById.get(globalCellId(cell)).areaKm2;\n    group.count++;group.areaKm2+=area;if(area<1)group.under1++;\n  }\n  out[country]={\n    count:areas.length,totalAreaKm2:sum,meanAreaKm2:sum/areas.length,\n    quantilesKm2:{min:q(0),p25:q(.25),p50:q(.5),p75:q(.75),p90:q(.9),p95:q(.95),max:q(1)},\n    atLeast1Km2:{count:main.length,p50:main[Math.floor((main.length-1)/2)],mean:main.reduce((a,b)=>a+b,0)/main.length},\n    areaWeightedMedianKm2:weightedMedian,\n    under1Km2:{count:areas.filter(x=>x<1).length,areaShare:areas.filter(x=>x<1).reduce((a,b)=>a+b,0)/sum},\n    over100Km2:{count:areas.filter(x=>x>100).length,areaShare:areas.filter(x=>x>100).reduce((a,b)=>a+b,0)/sum},\n    over500Km2Count:areas.filter(x=>x>500).length,\n    uniqueFineSourceFeatures:new Set(cells.filter(x=>x.properties.fineSourceIdentity).map(x=>x.properties.sourceFeatureId)).size,\n    byBoundaryBasis:groups,\n    largestFive:rows.sort((a,b)=>b.areaKm2-a.areaKm2).slice(0,5).map(x=>({name:byId.get(x.id)?.name,areaKm2:x.areaKm2,adminLevel:byId.get(x.id)?.adminLevel,boundaryBasis:byId.get(x.id)?.boundaryBasis}))\n  };\n}\nconsole.log(JSON.stringify(out,null,2));"
+    ],
+    "script": "import fs from 'node:fs';\nimport {gunzipSync} from 'node:zlib';\nimport {globalCellId} from './scripts/prompt19-joined-topology.mjs';\nconst root = 'data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987';\nconst metrics = JSON.parse(gunzipSync(fs.readFileSync(root + '/metrics.json.gz')));\nconst metricsById = new Map(metrics.map(x => [x.id, x]));\nconst candidates = {KOR:'joined-v2-652d25d95ef0a040c72e',PRK:'joined-v2-982801207a60f262ad74'};\nconst out = {};\nfor (const country of ['KOR','PRK']) {\n  const cells = JSON.parse(fs.readFileSync('data/derived/prompt19/candidates/' + country + '/' + candidates[country] + '/cells.geojson')).features;\n  const byId = new Map(cells.map(x => [globalCellId(x), x.properties]));\n  const rows = metrics.filter(x => x.sourceCountryId === country);\n  const areas = rows.map(x => x.areaKm2).sort((a,b) => a-b);\n  const sum = areas.reduce((a,b) => a+b,0);\n  const q = p => areas[Math.floor((areas.length-1)*p)];\n  let cumulative=0, weightedMedian=0;\n  for (const area of areas) {cumulative += area; if(cumulative >= sum/2) {weightedMedian=area;break;}}\n  const main=areas.filter(x => x >= 1);\n  const groups={};\n  for(const cell of cells) {\n    const basis=cell.properties.boundaryBasis;\n    const group=groups[basis] ??= {count:0,areaKm2:0,under1:0};\n    const area=metricsById.get(globalCellId(cell)).areaKm2;\n    group.count++;group.areaKm2+=area;if(area<1)group.under1++;\n  }\n  out[country]={\n    count:areas.length,totalAreaKm2:sum,meanAreaKm2:sum/areas.length,\n    quantilesKm2:{min:q(0),p25:q(.25),p50:q(.5),p75:q(.75),p90:q(.9),p95:q(.95),max:q(1)},\n    atLeast1Km2:{count:main.length,p50:main[Math.floor((main.length-1)/2)],mean:main.reduce((a,b)=>a+b,0)/main.length},\n    areaWeightedMedianKm2:weightedMedian,\n    under1Km2:{count:areas.filter(x=>x<1).length,areaShare:areas.filter(x=>x<1).reduce((a,b)=>a+b,0)/sum},\n    over100Km2:{count:areas.filter(x=>x>100).length,areaShare:areas.filter(x=>x>100).reduce((a,b)=>a+b,0)/sum},\n    over500Km2Count:areas.filter(x=>x>500).length,\n    uniqueFineSourceFeatures:new Set(cells.filter(x=>x.properties.fineSourceIdentity).map(x=>x.properties.sourceFeatureId)).size,\n    byBoundaryBasis:groups,\n    largestFive:rows.sort((a,b)=>b.areaKm2-a.areaKm2).slice(0,5).map(x=>({name:byId.get(x.id)?.name,areaKm2:x.areaKm2,adminLevel:byId.get(x.id)?.adminLevel,boundaryBasis:byId.get(x.id)?.boundaryBasis}))\n  };\n}\nconsole.log(JSON.stringify(out,null,2));"
+  },
+  "externalAiRequests": 0,
+  "geometryChanged": false,
+  "integrationFollowUp": {
+    "catalogVersion": "catalog-v3-prompt19-korea-416fa2c3b263ab7a13be",
+    "context": "The parent agent published a new ADM2-based catalog after this source audit. Statistics below were independently read from the final published metrics and matched content-addressed candidates. The earlier statistics remain the original pre-change baseline.",
+    "KOR": {
+      "candidate": "joined-6aef6cb1a60dcb12e091",
+      "all": {"count": 1181, "meanAreaKm2": 83.42174646408527, "p50AreaKm2": 1.6862096229663017, "areaWeightedMedianKm2": 643.3854388930057},
+      "fineSourceCells": {"count": 538, "meanAreaKm2": 179.26233633996753, "p50AreaKm2": 26.192849110482953, "areaWeightedMedianKm2": 651.8200063412811},
+      "coarseResidualCells": 643,
+      "priorFineSourceCells": 4170
+    },
+    "PRK": {
+      "candidate": "joined-b7d0c129f0112789690c",
+      "all": {"count": 1147, "meanAreaKm2": 106.57896084976996, "p50AreaKm2": 0.6010271143249086, "areaWeightedMedianKm2": 803.1086106127082},
+      "fineSourceCells": {"count": 659, "meanAreaKm2": 183.67737762641278, "p50AreaKm2": 0.5923907405154639, "areaWeightedMedianKm2": 803.7514856119545},
+      "coarseResidualCells": 488,
+      "priorFineSourceCells": 653
+    },
+    "interpretationKo": "실제 원본이 뒷받침하는 fine 구획 평균은 한국179.26km², 북한183.68km²로 가까워졌다. 작은 coarse 미확정 성분이 전체 셀 수와 중앙값에 섞이므로 전체 개수만으로 시각적 세분화 정도를 판단하지 않는다. 북한 원본179개 ADM2는 교체되지 않았고 strict source membership 분리로 runtime component 수가 달라졌다."
+  }
+}

@@ -1,0 +1,2392 @@
+{
+  "schemaVersion": "prompt19-fine-macro-hierarchy-v1",
+  "countryId": "PRK",
+  "fineSourceLock": {
+    "path": "data/source-locks/prompt19/PRK.json",
+    "sha256": "7f84a7ef7596bfde4b0afde39d002e7129cdaebcc46e68fb7114a1fd3432527c",
+    "byteLength": 2504
+  },
+  "artifacts": [
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1.geojson",
+      "sha256": "f9aab34ec157591f4e3c573cc13b2dc390c9274f241768c7d7d98141a944368c",
+      "byteLength": 1219409
+    },
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1-metaData.json",
+      "sha256": "95d09c12b0a8079efdd35595e596b8204bc98fdd60f0273fb46501e03bc3737a",
+      "byteLength": 916
+    },
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoboundaries-api-ADM1.json",
+      "sha256": "fb88b17069d18be0b883bd828fad69e091153532ebc2754f7ad47b39d1abd606",
+      "byteLength": 1818
+    },
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/cc-by-3.0-igo.html",
+      "sha256": "289673667396de8b9ea265e2c7c019d00765772673eeb70d017d3f8461b524e3",
+      "byteLength": 35411
+    },
+    {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/acquisition.json",
+      "sha256": "86b9bac558af18a7673210d933b381daadcace1c6e1bcfe0001cbec508e30600",
+      "byteLength": 2409
+    }
+  ],
+  "sourceAdmin1": {
+    "sourceId": "geoboundaries-gbOpen-PRK-ADM1-3916807",
+    "artifact": {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1.geojson",
+      "sha256": "f9aab34ec157591f4e3c573cc13b2dc390c9274f241768c7d7d98141a944368c",
+      "byteLength": 1219409
+    },
+    "metadata": {
+      "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1-metaData.json",
+      "sha256": "95d09c12b0a8079efdd35595e596b8204bc98fdd60f0273fb46501e03bc3737a",
+      "byteLength": 916
+    },
+    "version": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807",
+    "publisher": "World Food Programme and OCHA ROAP; distributed by geoBoundaries / William & Mary geoLab",
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PRK/ADM1/geoBoundaries-PRK-ADM1.geojson",
+    "temporalCoverage": "ADM1 metadata represents 2018. The paired ADM2 source reports 2019 in gbOpen and 2013 in related humanitarian metadata; their raw polygon hierarchy is independently verified, without certifying legal 2020 boundaries.",
+    "license": {
+      "name": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "attribution": "World Food Programme, OCHA ROAP; geoBoundaries gbOpen PRK ADM1 PRK-ADM1-3916807, fixed revision 9469f09592ced973a3448cf66b6100b741b64c0d. Hierarchy derived from exact original ADM2 containment and verified ADM2 dissolves; original coordinates and administrative names retained. No institutional endorsement implied.",
+      "redistributionAllowed": true
+    }
+  },
+  "macroGroups": [
+    {
+      "macroId": "macro:PRK:KP01",
+      "sourceFeatureId": "3916807B2118550659035",
+      "name": "Ryanggang",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP02",
+      "sourceFeatureId": "3916807B66197610677259",
+      "name": "North Hamgyong",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP03",
+      "sourceFeatureId": "3916807B59695090380014",
+      "name": "South Hamgyong",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP04",
+      "sourceFeatureId": "3916807B60771411413787",
+      "name": "Kangwon",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP05",
+      "sourceFeatureId": "3916807B5646338397672",
+      "name": "Jagang",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP06",
+      "sourceFeatureId": "3916807B80386364257881",
+      "name": "North Pyongan",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP07",
+      "sourceFeatureId": "3916807B57216784573597",
+      "name": "South Pyongan",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP08",
+      "sourceFeatureId": "3916807B54689859523154",
+      "name": "North Hwanghae",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP09",
+      "sourceFeatureId": "3916807B69422143587516",
+      "name": "South Hwanghae",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP10",
+      "sourceFeatureId": "3916807B24987303688366",
+      "name": "Pyongyang",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    },
+    {
+      "macroId": "macro:PRK:KP11",
+      "sourceFeatureId": "3916807B42842403076429",
+      "name": "Nampo",
+      "nameKo": null,
+      "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/PRK-ADM1-3916807"
+    }
+  ],
+  "members": [
+    {
+      "sourceFeatureId": "82179303B10108678790042",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.13674191635121913,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B10222488142424",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.035350000835844456,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B10482682881188",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.07169814381963988,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B1056018992840",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.03927151898295444,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B10804861284408",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.053830344932902896,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B1083832537536",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.05272262257928701,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B11091889229707",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.056936529028681404,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B11143169061479",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.06390190360371502,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B11827018498152",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.040938534070372845,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B12447049329197",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.08280840616315348,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B128003605723",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.05212371855712424,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B13009461499859",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.0416865583166988,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B13626815484241",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.05588335016454622,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B14875494019042",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.17877230059538782,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B15741079373395",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.09934683256505039,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B17598108149664",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.051071625145601054,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B18261928237919",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.05861562433107827,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B18505219089610",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.04845942826919891,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B18704732408852",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.07640179683309337,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B18733431209554",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.06994809338582306,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B19451054742324",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.06129901099583901,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B20024569416279",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.20828794149955318,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B2030756807209",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.03788071724086424,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B20654085451729",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.051056884206880794,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B20796163774072",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.04059539503508099,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B21594878793257",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.03261141039322451,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B21659587132529",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.2059111463703783,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B22390657322605",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.032241422319546215,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B22742196001734",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.0007333738313477372,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B22851132027505",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.022388976783157672,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B23592668869801",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.07318366587925043,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B23606982482595",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.07291107362656271,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B23816821783286",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.1430396675402501,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B23970649452661",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.06596908047603235,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B23985566152661",
+      "macroId": "macro:PRK:KP11",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B42842403076429",
+        "insideParentAreaDegrees2": 0.005463245388177608,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B24369360194646",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.054199694193727596,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B24749722055654",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.13765887989564488,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B2578505364646",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.1466480819399901,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B26132853361668",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.023502215825088116,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B26306903245930",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.047048077655019734,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B26506354510144",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.06055986228314485,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B2846476233094",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.02285251259296195,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B2981535202544",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.006757833012803479,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B30150640587931",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.11040568400371446,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B3017694876336",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.030112216911000224,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B30475034164158",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.05014886421306357,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B30689671895320",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.019026397480655124,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B31233151456599",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.0922119439861409,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B32066025180418",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.034322407465445647,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B33326321250637",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.11243002309675837,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B33699377246047",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.014914023846860644,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B33919717050875",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.11515494669689443,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B34267251323335",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.10827998997927511,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B35188226848964",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.17039493439219586,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B35312856855320",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.025539496968275625,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B35443402904983",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.049243486036531406,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B3587564724867",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.03239256911071399,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B35883429877711",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.049649851178025,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B38365888495896",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.08715114072342486,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B38572973441712",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.15044106450093603,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B38580271965004",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.19482282393975361,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B39212929407944",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.21000170503059798,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B39263220364420",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.06303370796963319,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B40793124111890",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.027188980086976917,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B41089875582012",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.015133393474630347,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B41250986640334",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.053886274771508716,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B41531617373143",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.03607046588082379,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B42180748236160",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.0012459862763395937,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B42335507852567",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.0848550344425853,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B43316794404011",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.07277896183231332,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B43556128459055",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.058627135700154,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B43918374415643",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.09636866714276668,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B44322363830429",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.14448220007606247,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B44729459459193",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.06603582052339456,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B45279105584010",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.07464859012858546,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B45554830914621",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.05849717935337739,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B45638248322590",
+      "macroId": "macro:PRK:KP11",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B42842403076429",
+        "insideParentAreaDegrees2": 0.028013462050678575,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B45759472884401",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.04197595651268771,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B46729479227191",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.06211514411124524,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B46901799029181",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.0580636641387759,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B46927697528233",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.05409247747149379,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B47267328602468",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.032165576556570014,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B47367102754155",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.09186627914215265,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B48656719864416",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.11120641407019953,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B48679015064508",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.0814664573180716,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B49493469146837",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.05263253517822644,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B50455397600006",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.061082421029891164,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B50652768805745",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.041725415538260986,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B51146356154870",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.08975862574126152,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B51352172049621",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.04227833567160245,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B51657859086197",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.04659506301904496,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B51910076802628",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.07803305587774163,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B51934598994225",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.05189521203294017,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B52063530776064",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.0780480300122316,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B53175016570528",
+      "macroId": "macro:PRK:KP11",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B42842403076429",
+        "insideParentAreaDegrees2": 0.03300874009775398,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B532613620970",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.0351251347539018,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B53420606691311",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.13330393825062706,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B54196732560859",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.009230929343222213,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B5428034439323",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.07082785809675306,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B54519262383509",
+      "macroId": "macro:PRK:KP10",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B24987303688366",
+        "insideParentAreaDegrees2": 0.05985884095758153,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B5529079256515",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.06338904662299645,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B55497026765088",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.0452159196666832,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B55886689837874",
+      "macroId": "macro:PRK:KP11",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B42842403076429",
+        "insideParentAreaDegrees2": 0.0021465167481794062,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B55999426557094",
+      "macroId": "macro:PRK:KP10",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B24987303688366",
+        "insideParentAreaDegrees2": 0.12147628136955868,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B57192008066519",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.2093429756999845,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B57222251804338",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.03670343971673851,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B57298285068990",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.1270528597456427,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B5734042978537",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.058186746610512596,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B57975227411207",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.03483668628475461,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B58088097152813",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.08302507103719756,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B5816291579612",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.066951562389043,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B58303989641607",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.1480780145090727,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B58420780140205",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.06828009610625023,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B59678099693620",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.05226151492181841,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B59888018028618",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.06460433309765024,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B59934044847437",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.029032261612194833,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B61369301137013",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.030716269612037068,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B61862606891781",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.14952439033520876,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B62276356715792",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.1821651487268202,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B62384537244682",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.1056341748160696,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B62623868631396",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.04370320983050124,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B63049631124183",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.21009089613977608,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B63177642668058",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.18042391860239984,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B64116140751716",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.07220936462620914,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B65076017972610",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.01071562776060559,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B65927505203644",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.06563218784347191,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B67987786077582",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.044952954963173065,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B68159150924260",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.05032605763814683,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B68633969029735",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.12898410751624195,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B69390699872040",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.04029638187017272,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B70197071761439",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.0524963736545529,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B70820658627831",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.06256211847675647,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B72462969749210",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.07351218420915155,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B72509498170942",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.05718946312973246,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B73199246171338",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.04813413783707456,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B73748645094132",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.07809389985409942,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B74961933380219",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.1239904945987911,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B75449776739739",
+      "macroId": "macro:PRK:KP11",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B42842403076429",
+        "insideParentAreaDegrees2": 0.02374224568253346,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B76324542059269",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.1405064258612431,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B77244062124892",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.20733403202929931,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B77985943192226",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.03172500332107224,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B78642437827574",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.06967800205890504,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B78887339067777",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.06979819464869197,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B79358107253704",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.08824442871269018,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B80718033581165",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.08218672544963565,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B82011588476807",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.08271572976863151,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B82902527088629",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.10659874305000108,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B8327085431714",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.09512360510261095,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B83506580076946",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.13615404922312543,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B84023939599766",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.1407914224622203,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B85891331606678",
+      "macroId": "macro:PRK:KP10",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B24987303688366",
+        "insideParentAreaDegrees2": 0.0017419618609951495,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B86306184890234",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.004184950885973875,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B86388706464223",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.014405743743127527,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B86824596043159",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.05833175832827537,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B87943019672886",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.0928851974760186,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B88623362081426",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.07367755233168653,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B89029266614527",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.07071123424487571,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B90038198338897",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.02258675574772086,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B90804961571919",
+      "macroId": "macro:PRK:KP05",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B5646338397672",
+        "insideParentAreaDegrees2": 0.1615152995693269,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B90819617668456",
+      "macroId": "macro:PRK:KP01",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B2118550659035",
+        "insideParentAreaDegrees2": 0.11199918680574403,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B90843555893266",
+      "macroId": "macro:PRK:KP04",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B60771411413787",
+        "insideParentAreaDegrees2": 0.10193446609442106,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B91092350263646",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.05171237140966884,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B91694454499505",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.06194274676489792,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B91931790309769",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.09703935055465124,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B92685512874627",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.05708029823106989,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B93868129225348",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.06972999553206245,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B95281313978448",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.11512589892307336,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B9528454471639",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.04833687688004753,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B95293101027847",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.05708233600681355,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B95814990753322",
+      "macroId": "macro:PRK:KP02",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B66197610677259",
+        "insideParentAreaDegrees2": 0.09325326068376234,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B96536489392823",
+      "macroId": "macro:PRK:KP11",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B42842403076429",
+        "insideParentAreaDegrees2": 0.025435048697591573,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B96637573116833",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.038338420553338914,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B96835998752740",
+      "macroId": "macro:PRK:KP07",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B57216784573597",
+        "insideParentAreaDegrees2": 0.009024280105474094,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B97817957609730",
+      "macroId": "macro:PRK:KP09",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B69422143587516",
+        "insideParentAreaDegrees2": 0.04038737492342478,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B97977133847329",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.09206996857107547,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B98001602077811",
+      "macroId": "macro:PRK:KP08",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B54689859523154",
+        "insideParentAreaDegrees2": 0.059694355827393915,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B98077140175950",
+      "macroId": "macro:PRK:KP03",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B59695090380014",
+        "insideParentAreaDegrees2": 0.09155248255609535,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B99713456197263",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.029057228066708657,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    },
+    {
+      "sourceFeatureId": "82179303B99885007667227",
+      "macroId": "macro:PRK:KP06",
+      "method": "unique-exact-polygon-containment",
+      "evidence": {
+        "parentSourceFeatureId": "3916807B80386364257881",
+        "insideParentAreaDegrees2": 0.03600288091438875,
+        "outsideParentAreaDegrees2": 0,
+        "positiveAreaParentCandidates": 1,
+        "parentUnionEqual": true
+      }
+    }
+  ],
+  "verification": {
+    "complete": true,
+    "unresolved": [],
+    "sourceFeatures": 179,
+    "macroGroups": 11,
+    "maximumOutsideParentAreaDegrees2": 0,
+    "parentUnionEqual": true,
+    "parentUnionReports": [
+      {
+        "parentId": "3916807B5646338397672",
+        "name": "Jagang",
+        "children": 18,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B60771411413787",
+        "name": "Kangwon",
+        "children": 17,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B42842403076429",
+        "name": "Nampo",
+        "children": 6,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B66197610677259",
+        "name": "North Hamgyong",
+        "children": 16,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B54689859523154",
+        "name": "North Hwanghae",
+        "children": 21,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B80386364257881",
+        "name": "North Pyongan",
+        "children": 25,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B24987303688366",
+        "name": "Pyongyang",
+        "children": 3,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B2118550659035",
+        "name": "Ryanggang",
+        "children": 12,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B59695090380014",
+        "name": "South Hamgyong",
+        "children": 20,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B69422143587516",
+        "name": "South Hwanghae",
+        "children": 20,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      },
+      {
+        "parentId": "3916807B57216784573597",
+        "name": "South Pyongan",
+        "children": 21,
+        "missingFromChildUnionArea": 0,
+        "extraOutsideParentArea": 0
+      }
+    ],
+    "geometryModified": false,
+    "dominantOverlapUsed": false,
+    "centroidAssignmentUsed": false
+  },
+  "preprocessing": {
+    "description": "Use the native ADM1 shapeISO values only as stable macro IDs and retain original geoBoundaries ADM1 shapeID/name. For each original ADM2 shapeID, require exactly one positive-area ADM1 intersection and exactly zero outside area. Require every parent to equal the dissolve of its member ADM2 polygons by two directional zero-area differences. Never use old Natural Earth ADM1 boundaries, majority overlap, nearest centers, new coordinates or guessed administrative codes. No source geometry is changed.",
+    "code": [
+      {
+        "path": "scripts/prompt19/PRK/verify-macro-hierarchy.mjs",
+        "sha256": "a74aea8e0dc819c6b7692972c7d9ba5e98f4aeeec590aaf734671f9e1d53072e",
+        "byteLength": 5456
+      }
+    ]
+  },
+  "limits": [
+    "This is an exact geometry-backed parent crosswalk for the pinned source distribution, not a certification of 2020 administrative legal status.",
+    "The parent outlines for gameplay should be derived from these member fine units, with fixed country envelopes/coasts and source-free residuals handled explicitly by the coordinator."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "stage":"8-8",
+  "status":"pass",
+  "inputHashes":{"reports/fix08-7-representative-zoom.json":"9d2145c65d37c859e837d36d0ab32e8c9cb2d7143e2ba736576b1510271d7089"},
+  "outputHashes":{
+    "src/components/map/WorldMap.tsx":"68716202c67d6c67441e7b26509b9218f68c02e3ea6a080a4b91865aa3cd57c3",
+    "src/lib/map/map-config.ts":"a62582f1240c9f43021d9efaffc17ab6f87d2c547e77b6c5148acc088b2e5bd4",
+    "src/lib/map/country-label-size.ts":"77e479c6a5cb540a53c8620238afc7907097da9f2bebe345a901b327f0ca0954",
+    "src/lib/map/country-label-size.test.ts":"8ee83d172d27f5092fab60a6c67d6028d9460d4dd7c00c8436bb746eb27e9fa8",
+    "src/types/map-debug.ts":"4e12bf38110493814fce0609c7f48839f0190f7c0edc77d335cf0be57c965698",
+    "src/lib/world/country-map-artifacts.test.ts":"5c33fb91209fd280fa360f2764db42f509a2d01bac1eaf702e6a5e0eef28865e",
+    "e2e/fix08-5.spec.ts":"6678393957dc38959815b22bdb9ad69c171591a47bba797c3a8f6f40ae2034c8",
+    "e2e/fix08-6.spec.ts":"feceea81851a5bd8f6d27f27197e5f8c38598e2ad0a4f670eb0e050789e785b6",
+    "e2e/game-setup.spec.ts":"def3e0f52abf4e328061e71a8a291fe5a04b8cb45c287d8bc1069976c12cc98b",
+    "eslint.config.mjs":"d968c4c24a76828aafffd5429fdb01e86cd52efce0a4a5e952215fb4ced6b476"
+  },
+  "changedFiles":["src/components/map/WorldMap.tsx","src/lib/map/map-config.ts","src/lib/map/country-label-size.ts","src/lib/map/country-label-size.test.ts","src/types/map-debug.ts","src/lib/world/country-map-artifacts.test.ts","e2e/fix08-5.spec.ts","e2e/fix08-6.spec.ts","e2e/game-setup.spec.ts","eslint.config.mjs","reports/fix08-8-legacy-renderer-removal.json"],
+  "deletedFiles":["e2e/fix08-8a1.spec.ts","e2e/fix08-8a3.spec.ts","e2e/fix08-8a4.spec.ts","e2e/fix08-8ar3.spec.ts"],
+  "commands":[
+    {"command":"npm test -- src/lib/map/country-label-size.test.ts src/lib/map/country-label-glyph-export.test.ts src/lib/world/country-map-artifacts.test.ts","status":"pass","result":"3 files, 14 tests passed"},
+    {"command":"npm run lint","status":"pass","result":"0 errors, 2 existing unused-function warnings in scripts/prepare-map-data.mjs"},
+    {"command":"npx tsc --noEmit --pretty false","status":"pass","result":"exit 0"},
+    {"command":"npm run build","status":"environment-fail-then-pass","result":"sandbox run compiled but could not write .next Turbopack cache; approved project-scoped rerun completed production build and static generation"},
+    {"command":"npx playwright test e2e/fix08-5.spec.ts e2e/fix08-6.spec.ts e2e/fix08-7.spec.ts --workers=1 --timeout=180000","status":"pass","result":"3 tests passed"},
+    {"command":"npx playwright test e2e/game-setup.spec.ts --grep 'renders geometry labels and preserves Point fallback' --workers=1 --timeout=120000","status":"pass","result":"1 test passed"}
+  ],
+  "gates":{
+    "curvedRendererZoomBandDependencies":0,
+    "curvedRendererTextMaxAngleDependencies":0,
+    "curvedRendererDynamicTextSizeMutations":0,
+    "runtimeBaselineSources":0,
+    "runtimeCurvedSymbolLayers":0,
+    "legacyCollisionDebugDependencies":0,
+    "legacyRendererToggleDependencies":0,
+    "pointFallbackPreserved":true,
+    "geometryRendererPreserved":true,
+    "obsoleteCurvedE2ETestsRemoved":4,
+    "unitTests":true,
+    "lintErrors":0,
+    "typescript":true,
+    "productionBuild":true,
+    "regressionE2E":true
+  },
+  "implementationErrors":[],
+  "environmentErrors":["Initial sandboxed production build could not persist .next Turbopack cache files (EPERM/os error 5); approved rerun passed.","Initial sandboxed Point fallback E2E could not acquire the Next dev lockfile; approved rerun passed."],
+  "nextStage":"8-9"
+}

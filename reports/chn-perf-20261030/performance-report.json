@@ -1,0 +1,407 @@
+{
+  "schemaVersion": "chn-runtime-performance-fix-v1",
+  "pass": true,
+  "createdAt": "2026-10-30T06:28:07.222Z",
+  "timezone": "Asia/Seoul",
+  "url": "http://127.0.0.1:3002",
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "evidence": {
+    "baseline-interaction.json": {
+      "path": "reports/chn-perf-20261030/baseline-interaction.json",
+      "sha256": "21df5c37846c2863a4c5761d74bc0f7554326f264e11fc9ed5b7179533bd5404",
+      "byteLength": 503182
+    },
+    "optimized-interaction.json": {
+      "path": "reports/chn-perf-20261030/optimized-interaction.json",
+      "sha256": "a82b301f3924ee3ed5ba47bd74b70bd2018116b5b215c7a3b899d404535b0bb4",
+      "byteLength": 194616
+    },
+    "visual-comparison.json": {
+      "path": "reports/chn-perf-20261030/visual-comparison.json",
+      "sha256": "ee0f5cbc07b3f5edfc11df0121cb8505bd8d477834b2ab3154fb89ea6fe3df4b",
+      "byteLength": 1195
+    },
+    "browser-play/verification.json": {
+      "path": "reports/chn-perf-20261030/browser-play/verification.json",
+      "sha256": "345528f6b85b2fd535b410b368d57225ba53e8789e15de7a8f05424bf4409007",
+      "byteLength": 67099
+    },
+    "build-summary.json": {
+      "path": "reports/chn-perf-20261030/build-summary.json",
+      "sha256": "ab26ecf6b3cb0fae1beda012207a76738fc7e6c2e5395cf2181880793999baf6",
+      "byteLength": 620
+    },
+    "qa-cleanup.json": {
+      "path": "reports/chn-perf-20261030/qa-cleanup.json",
+      "sha256": "daea68545af221be19798ecd35a799f7da45f1bf7797d11bd373f91a62a09710",
+      "byteLength": 271
+    },
+    "user-game-checkpoint.json": {
+      "path": "reports/chn-perf-20261030/user-game-checkpoint.json",
+      "sha256": "885e8d04f464802b0a2254ca2a52841bdb9b095f272487cc7879698d3cdc0429",
+      "byteLength": 3324
+    }
+  },
+  "activePointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "catalogChanged": false,
+  "geometryTopologyAndMilitaryRulesChanged": false,
+  "existingSessionsCheckpointed": 3,
+  "changes": [
+    "Compose occupation, hover and selection tints in one fill pass instead of four. The eight flag combinations retain the original ordered RGB alpha composition.",
+    "Ordinary country selection uses the already verified vector partition. Optional exact inspection loads only complete viewport cells and their incident edges in debug mode at zoom 7 or above.",
+    "Debounce settled viewport requests; abort obsolete camera/selection work; skip identical cell/edge source publication and state replay.",
+    "Bound private parsed cell/edge caches; memoize successful immutable PBF indexing without removing response digest validation.",
+    "Avoid duplicate hover callbacks and heavy glyph-source retiling on zoom. Retain exact fractional label thresholds and point collision behavior; numeric source-local IDs survive the real renderer worker."
+  ],
+  "conditions": {
+    "baseURL": "http://127.0.0.1:3002",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "browser": "Chromium headless with WebGL; unsafe SwiftShader fallback enabled; actual driver recorded below",
+    "browserCache": "fresh isolated context; Playwright interception disables HTTP cache in both phases; application decoded-byte cache remains active",
+    "serverAndOSCache": "not flushed",
+    "reducedMotion": "reduce",
+    "cameraWorkflow": "Fixed rAF-paced jumpTo trajectory; each phase waits for map and detail settlement. This is a synthetic repeatable interaction, not a mouse hardware profile.",
+    "cpuProfile": true,
+    "cpuProfileScope": "CDP V8 main renderer thread only; worker, compositor and GPU time are not attributed by this sampler",
+    "externalAiCalls": 0,
+    "gameWrites": "only the isolated context ordinary initial game allocation; no AI/turn/game commands are sent by the probe",
+    "hardware": {
+      "hardwareConcurrency": 16,
+      "deviceMemoryGiB": 32,
+      "platform": "Win32",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "webgl": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "drawingBufferWidth": 1051,
+        "drawingBufferHeight": 800,
+        "contextAttributes": {
+          "alpha": true,
+          "antialias": false,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": true,
+          "xrCompatible": false
+        },
+        "softwareRenderer": true
+      }
+    },
+    "limitation": "One paired synthetic trajectory per final code version, with HTTP cache disabled and OS/server caches retained. SwiftShader is software rendering; these absolute frame intervals are not a hardware-GPU FPS guarantee."
+  },
+  "phases": [
+    {
+      "name": "world-pan-zoom",
+      "before": {
+        "durationMs": 9094.90000000596,
+        "frameP95Ms": 200,
+        "longTaskMs": 8926,
+        "jsHeapAfter": 163937692
+      },
+      "after": {
+        "durationMs": 5708.800000011921,
+        "frameP95Ms": 116.70000000000073,
+        "longTaskMs": 5624,
+        "jsHeapAfter": 104785642
+      },
+      "durationRatio": 1.593136911432695,
+      "frameP95Ratio": 1.7137960582690552
+    },
+    {
+      "name": "china-pan-zoom",
+      "before": {
+        "durationMs": 10351.300000011921,
+        "frameP95Ms": 366.6999999999971,
+        "longTaskMs": 9973,
+        "jsHeapAfter": 196721016
+      },
+      "after": {
+        "durationMs": 4883.5,
+        "frameP95Ms": 150,
+        "longTaskMs": 4457,
+        "jsHeapAfter": 156847335
+      },
+      "durationRatio": 2.1196477935931033,
+      "frameP95Ratio": 2.4446666666666474
+    },
+    {
+      "name": "select-china-z3.3",
+      "before": {
+        "durationMs": 12713.899999976158,
+        "frameP95Ms": 133.29999999999927,
+        "longTaskMs": 9125,
+        "jsHeapAfter": 893235307
+      },
+      "after": {
+        "durationMs": 228.59999999403954,
+        "frameP95Ms": 183.40000000000146,
+        "longTaskMs": 195,
+        "jsHeapAfter": 153430407
+      },
+      "durationRatio": 55.616360456288966,
+      "frameP95Ratio": 0.7268266085059881
+    },
+    {
+      "name": "selected-china-z5.3-pan",
+      "before": {
+        "durationMs": 16185.09999999404,
+        "frameP95Ms": 533.3000000000029,
+        "longTaskMs": 15944,
+        "jsHeapAfter": 583324797
+      },
+      "after": {
+        "durationMs": 3581,
+        "frameP95Ms": 116.59999999999854,
+        "longTaskMs": 3394,
+        "jsHeapAfter": 164933561
+      },
+      "durationRatio": 4.519715163360525,
+      "frameP95Ratio": 4.57375643224708
+    },
+    {
+      "name": "selected-china-z6.2-pan",
+      "before": {
+        "durationMs": 7910.800000011921,
+        "frameP95Ms": 349.90000000000146,
+        "longTaskMs": 7522,
+        "jsHeapAfter": 613134747
+      },
+      "after": {
+        "durationMs": 2751.300000011921,
+        "frameP95Ms": 83.39999999999782,
+        "longTaskMs": 2517,
+        "jsHeapAfter": 171637144
+      },
+      "durationRatio": 2.875295314933902,
+      "frameP95Ratio": 4.19544364508406
+    },
+    {
+      "name": "normal-border-z7.3",
+      "before": {
+        "durationMs": 939.9000000059605,
+        "frameP95Ms": 200,
+        "longTaskMs": 788,
+        "jsHeapAfter": 645863903
+      },
+      "after": {
+        "durationMs": 536,
+        "frameP95Ms": 66.70000000000073,
+        "longTaskMs": 463,
+        "jsHeapAfter": 186158527
+      },
+      "durationRatio": 1.7535447761305232,
+      "frameP95Ratio": 2.998500749625155
+    },
+    {
+      "name": "debug-border-z7.3",
+      "before": {
+        "durationMs": 854.5,
+        "frameP95Ms": 150,
+        "longTaskMs": 766,
+        "jsHeapAfter": 664865951
+      },
+      "after": {
+        "durationMs": 2773,
+        "frameP95Ms": 133.40000000000146,
+        "longTaskMs": 1957,
+        "jsHeapAfter": 290264174
+      },
+      "durationRatio": 0.30815001803101333,
+      "frameP95Ratio": 1.124437781109433
+    },
+    {
+      "name": "stable-scope-tiny-pan",
+      "before": {
+        "durationMs": 4304.799999982119,
+        "frameP95Ms": 150,
+        "longTaskMs": 4217,
+        "jsHeapAfter": 457739905
+      },
+      "after": {
+        "durationMs": 2639.699999988079,
+        "frameP95Ms": 83.40000000000146,
+        "longTaskMs": 2344,
+        "jsHeapAfter": 275828326
+      },
+      "durationRatio": 1.630791377808675,
+      "frameP95Ratio": 1.7985611510791053
+    }
+  ],
+  "fullChinaRequests": {
+    "before": 1,
+    "after": 0
+  },
+  "stableViewportReuse": {
+    "sameCellIds": true,
+    "sameEdgeIds": true,
+    "exactRequestsBefore": 9,
+    "exactRequestsAfter": 9,
+    "sourceWriteCounter": "detailSourceWrites",
+    "sourceWritesBefore": 2,
+    "sourceWritesAfter": 2,
+    "cellsUpdatedBefore": 11167,
+    "cellsUpdatedAfter": 11167
+  },
+  "visual": {
+    "pass": true,
+    "labelPixelComparison": [
+      {
+        "name": "map",
+        "bounds": [
+          0,
+          60,
+          1051,
+          800
+        ],
+        "baselineWhitePixels": 28620,
+        "optimizedWhitePixels": 28620,
+        "ratio": 1,
+        "pass": true
+      },
+      {
+        "name": "large-china-label",
+        "bounds": [
+          100,
+          300,
+          900,
+          550
+        ],
+        "baselineWhitePixels": 12525,
+        "optimizedWhitePixels": 12525,
+        "ratio": 1,
+        "pass": true
+      }
+    ],
+    "screenshot": {
+      "path": "reports/chn-perf-20261030/optimized-china.png",
+      "sha256": "f37496d59afd5649f0dc90f8d670b375394dccc3d968a36d7c7857ef443d4475",
+      "byteLength": 321978
+    },
+    "review": "Root inspected the final screenshot; country names, selection tint, coast and ordinary hidden micro lines remain visible as intended."
+  },
+  "actualUiTurns": [
+    {
+      "condition": "cold-turn",
+      "changedCells": 1,
+      "areaKm2": 1695.2306113685627,
+      "ownerPreserved": true,
+      "currentControlAdjacency": true,
+      "beforeCommitMs": 1377.4484999999986,
+      "commitMs": 1502.0791000000027,
+      "beforeRenderedMs": 2111.410299999996,
+      "renderedMs": 2144.679400000001,
+      "goldFrontFeatures": 6
+    },
+    {
+      "condition": "warm-followup-turn",
+      "changedCells": 1,
+      "areaKm2": 1894.9140083993673,
+      "ownerPreserved": true,
+      "currentControlAdjacency": true,
+      "beforeCommitMs": 745.0675999999949,
+      "commitMs": 578.1075999999994,
+      "beforeRenderedMs": 945.969299999997,
+      "renderedMs": 809.4303999999975,
+      "goldFrontFeatures": 10
+    }
+  ],
+  "build": {
+    "pass": true,
+    "exitCode": 0,
+    "command": "npm run build -- --webpack",
+    "distDir": ".next-chn-perf-20261030",
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "log": {
+      "path": "reports/chn-perf-20261030/build-webpack.log",
+      "sha256": "3b46b00ab8b92dc6cdab13e81cdecf8d4bfaa03a31056520a5d830a2f93984f6",
+      "byteLength": 1588
+    },
+    "checks": {
+      "productionCompilation": true,
+      "typeScript": true,
+      "scopedRuntimeTests": true,
+      "transportTests": true,
+      "scopedEslint": true,
+      "visualCountryLabels": true
+    },
+    "completedAt": "2026-10-30T06:26:18.907Z"
+  },
+  "sourceCode": [
+    {
+      "path": "scripts/chn-2020/verify-interaction-performance.mjs",
+      "sha256": "790d550ab6b066329b1dd00cf5e90a9ebc1efa96b8b4cba701af141fc9f3184d",
+      "byteLength": 22004
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "b502d7ded16d5c9eb303d0ed036d5e58ad24d02c19afc1602c2edc23d3fc3381",
+      "byteLength": 20771
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "1d5f754daaf9cecf482024de214697daed5f2abefe4527cc43f8917abeb7e739",
+      "byteLength": 25646
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "8714a385b3f2e544d3da64de2e819585feb5139487a8d2f3ccb1ce35d36437c5",
+      "byteLength": 7700
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "01692966f51b843d9bc0e90a5eada7e0e77e94f58567b6665a3532897fd5519d",
+      "byteLength": 34770
+    },
+    {
+      "path": "src/lib/projection/operational-map-projection.ts",
+      "sha256": "13a0bdde6e942927979de58b14626765a37fe2d4532cfbc478c6ca0090517b1c",
+      "byteLength": 5896
+    },
+    {
+      "path": "src/lib/map/operational-country-labels.ts",
+      "sha256": "1b018d46f5f65a7aef3e98e61991f69f5faed42b047ec0d805b55cc7abbabdfd",
+      "byteLength": 8838
+    },
+    {
+      "path": "src/lib/map/operational-fill-paint.ts",
+      "sha256": "a0eddb4412dc7a29868ce141012278971de49153640e201f0925f5afacf54c88",
+      "byteLength": 815
+    }
+  ],
+  "limits": [
+    "Global software-renderer frame time is still substantial. No constant 60 FPS claim is made.",
+    "The first enlarged debug viewport can still decode several national topology shards from the immutable catalog. It is excluded from ordinary selection and retained results make identical viewport queries warm.",
+    "First-turn UI/compile latency did not improve consistently; the measured first turn remains about 1.5 seconds. External AI inference was not invoked or benchmarked.",
+    "Administrative source vintage, unresolved macro parents, large western county units and documented residual geometry retain the previous implementation limits."
+  ],
+  "externalAiCalls": 0,
+  "remoteDeployment": false,
+  "push": false,
+  "gameContinuity": {
+    "unlocked": {
+      "path": "reports/chn-perf-20261030/user-game-unlocked.json",
+      "sha256": "132417cdd08cdc564a9549888d1438263d643d4ad39d59ed75117556e8005ea3",
+      "byteLength": 138
+    },
+    "finalBoot": {
+      "path": "reports/chn-perf-20261030/final-boot.json",
+      "sha256": "90312d3d907067ea9ff8fd6d6b025f6d69348f3e51b8604bd1a307a5d57fb076",
+      "byteLength": 371
+    },
+    "catalogUnchanged": true,
+    "newGameRequired": false
+  }
+}

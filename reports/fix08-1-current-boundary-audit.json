@@ -1,0 +1,108 @@
+{
+  "stage": "8-1",
+  "status": "pass",
+  "scope": {"auditOnly": true, "productCodeModified": false, "nextJsVersion": "16.3.0", "nextStageExecuted": false},
+  "prerequisite": {"requiredPriorStage": null, "result": "8-1 is the first approval stage"},
+  "inputHashes": {
+    "AGENTS.md": "63f2c50380ed6303237cce215ce27af1d620d094c215e28d1b1538a3c070e3bb",
+    "package.json": "d8f14bd07dc8a9a9c855857763dbe0784b976f36ed8e0c10c4f24406eb8772c7",
+    "src/lib/world/world-state.ts": "5f0aed6864acb3b96d657cf674f67c64eb506622c78288d18f44fbca94d44bd6",
+    "src/lib/world/country-map-artifacts.ts": "74253f2b8c234b479bc5b1974a701c1d03a149bad5cd97328d419038a252eb39",
+    "src/lib/map/country-label-layout.ts": "36e18bce764a669805baae8e0f754cb01e9a8b8007b826cb09141b8853bdee44",
+    "src/lib/map/font-metrics.ts": "cbb8c267a44ba1e17b40ce860835ea1c892d3c52577ae642cc336a0a1850bd18",
+    "src/lib/map/country-label-size.ts": "0155c0ef8e50f1c1f9679afbf2db01627f7fafb50cdb41a28a7b307caa944ff3",
+    "src/lib/map/map-config.ts": "285c0fc329a893556e58b965499ecd902e4d08ecffb96479fdb71f0ce620e3ae",
+    "src/components/map/WorldMap.tsx": "86d61f298c6a3704268f0784dc5724bc4fb2b0ec2e1a4779a15e4cca5e18b878",
+    "public/data/maps/country-label-baselines-2020.geojson": "2588a131b2ed46d853ca1ac6b072b3f0bcb1bf9e33f4212f0784fc6b28d23e78",
+    "public/data/maps/country-labels-2020.geojson": "08871731f131a297bc6d15b5c42251cda25b8d94b65afeca44824dce70468c32"
+  },
+  "outputHashes": {},
+  "nextDocsRead": [
+    "node_modules/next/dist/docs/01-app/01-getting-started/02-project-structure.md",
+    "node_modules/next/dist/docs/01-app/01-getting-started/05-server-and-client-components.md"
+  ],
+  "domainBoundary": {
+    "CountryEntity": {"file": "src/lib/world/world-state.ts", "line": 5, "owns": ["names.mapKo", "geometry", "capital", "presentation", "mapColor", "playable", "unitType"], "mapLibreObjects": false},
+    "WorldState": {"file": "src/lib/world/world-state.ts", "line": 6, "shape": "Record<countryId, CountryEntity> plus revision", "mutations": ["replaceCountryNames", "replaceCountryGeometry"]},
+    "adapter": {"function": "countryEntityToLabelInput", "flow": "CountryEntity.geometry + names.mapKo -> CountryLabelLayoutInput"}
+  },
+  "artifactBoundary": {
+    "builder": {"function": "buildCountryMapArtifacts", "outputs": ["countryFeature", "borderFeature", "exclusive curvedLabelFeature or pointLabelFeature", "optional capitalFeature", "layout"]},
+    "collections": {"function": "buildCountryMapArtifactCollections", "names": ["countries", "borders", "curvedLabels", "pointLabels", "capitals"]},
+    "patch": {"function": "applyCountryMapArtifactPatch", "operations": ["upserts", "removedCountryIds"]},
+    "sourceUpdater": {"function": "updateCountryMapSources", "setData": ["countries", "borders", "curvedLabels", "pointLabels", "capitals"], "mapLibreImport": false},
+    "liveRuntimeConnected": false,
+    "runtimeEvidence": "No product import of country-map-artifacts exists outside its test; WorldMap initializes static GeoJSON URL sources directly. The pure setData boundary is tested but not wired into the live map."
+  },
+  "runtimeSources": [
+    {"id": "countries-low", "data": "/data/maps/countries-50m.geojson"},
+    {"id": "borders-low", "data": "/data/maps/country-borders-50m.geojson"},
+    {"id": "country-label-placements", "data": "/data/maps/country-labels-2020.geojson", "role": "Point fallback"},
+    {"id": "country-label-baselines", "data": "/data/maps/country-label-baselines-2020.geojson", "maxzoom": 0, "role": "curved symbols"},
+    {"id": "capitals", "data": "/data/maps/capitals-2020.geojson"},
+    {"id": "small-countries", "data": "/data/maps/small-country-points-2020.geojson"},
+    {"id": "countries-high", "data": "fetched countries-10m then addSource"},
+    {"id": "borders-high", "data": "/data/maps/country-borders-10m.geojson"},
+    {"id": "admin1", "data": "fetched admin1-boundaries-10m then addSource"}
+  ],
+  "labelLayers": [
+    {"id": "country-labels-prototype", "type": "symbol", "source": "country-label-baselines", "placement": "line", "ids": ["RUS", "USA", "CHN", "AUS", "CHL", "IDN"]},
+    {"id": "country-labels-territory", "type": "symbol", "source": "country-label-baselines", "placement": "line"},
+    {"id": "country-labels-small", "type": "symbol", "source": "country-label-placements", "placement": "point"},
+    {"id": "country-labels-ultra-small", "type": "symbol", "source": "country-label-placements", "placement": "point", "allowOverlap": true}
+  ],
+  "legacyDependencies": {
+    "baseline": ["computeCountryLabelLayout", "src/data/country-label-metrics-2020.json", "public/data/maps/country-label-baselines-2020.geojson"],
+    "fontMetrics": [
+      {"function": "extractFontMetrics", "capability": "cmap and advances only; no contours or kerning"},
+      {"function": "createMapLibreCountryLabelMetrics", "capability": "Noto local ideograph advances plus Open Sans PBF advances"},
+      {"function": "measureTextWithFont", "capability": "advance plus letter-spacing width"}
+    ],
+    "zoomBand": {"constants": ["CURVED_ZOOM_BAND_STEP=0.25", "CURVED_EXPRESSION_PADDING=0.01", "COUNTRY_LABEL_MAX_ZOOM=9"], "functions": ["worldSpaceTextSizeExpressionForZoomBand", "curvedBandSize", "updateLabelFilter"], "event": "map.on('zoom', updateLabelFilter)", "mutation": "setLayoutProperty(curved layer, text-size, size)", "textMaxSizeReferences": 0},
+    "bounds": "MapLibre private placement.collisionIndex and retainedQueryData"
+  },
+  "pastReportComparison": [
+    {"report": "reports/fix08-8ar1-world-state.json", "hash": "929f5fd41b4a50daf021cca7c07642496d886fe13de1be8f01ef8dcb5ecdac67", "pastStatus": "pass", "current": "Ownership claims still match code and tests."},
+    {"report": "reports/fix08-8ar2-artifact-pipeline.json", "hash": "019c24c9449c6de9ea10d11b26f4fc60c996aa84674b1d26d461bd49d7438180", "pastStatus": "pass", "current": "Pure five-collection/five-setData contract passes, but live subscription remains absent as the report itself stated."},
+    {"report": "reports/fix08-8ar3-world-space-zoom.json", "hash": "f7c0eb0b72f33bcefc9d25276bdfacfe2de0f2fa88e0d7ee99e02cb8d07654fb", "pastStatus": "fail", "current": "The failed quarter-zoom mechanism and private collision bounds remain in current code."}
+  ],
+  "disposition": {
+    "reuse": ["CountryEntity/WorldState ownership", "countryEntityToLabelInput", "shape-aware baseline and geometry hash", "pure artifact/collection/patch boundaries", "explicit setData updater pattern", "Point fallback policy"],
+    "replace": ["CurvedLabelFeature LineString with glyph fill/outline artifacts", "advance-only curved font path with contour/advance/kerning extraction", "static curved source truth with WorldState-derived glyph collections", "curved symbol layers with polygon layers", "collision-index bounds with projected glyph polygon bounds", "estimated symbol width PASS diagnostics with actual geometry bounds"],
+    "removeAfter8_7Pass": ["CURVED_ZOOM_BAND_STEP", "CURVED_EXPRESSION_PADDING", "curvedZoomBands and band IDs", "worldSpaceTextSizeExpressionForZoomBand curved use", "zoom-event curved text-size mutation", "country-labels-prototype and country-labels-territory symbol paths", "private collisionIndex curved inspection", "curved estimatedWidth diagnostics"]
+  },
+  "preservationContracts": [
+    "CountryEntity owns current geometry and names.mapKo.",
+    "Name-only changes preserve territory and regenerate derived label data only.",
+    "Geometry changes regenerate baseline and label artifacts together.",
+    "Pure artifacts remain serializable and MapLibre-free.",
+    "Upsert/removal propagates across all derived collections.",
+    "Curved and Point fallback populations remain exclusive.",
+    "Labels do not mutate territory, borders, Admin 1, hit testing, selection, hover, or player state.",
+    "Product integration must use the explicit collection-to-setData boundary, not debug setEvidenceSourceData."
+  ],
+  "blockersAndRisks": [
+    {"severity": "high", "finding": "Live WorldMap bypasses WorldState/artifact builders.", "impact": "8-4/8-5 integration target"},
+    {"severity": "high", "finding": "Curved rendering is still MapLibre symbol text, not glyph polygons.", "impact": "Expected replacement target"},
+    {"severity": "high", "finding": "Past 8A-R3 failed at zoom 1.25 and the mechanism remains.", "impact": "Old PASS logs cannot prove Prompt 08"},
+    {"severity": "medium", "finding": "Font code lacks contour and kerning extraction.", "impact": "8-2 must prove technology"},
+    {"severity": "medium", "finding": "Debug bounds use private collision structures and settlement omits explicit source/style completion.", "impact": "8-6 target"}
+  ],
+  "testEvidence": {"command": "npx.cmd vitest run src/lib/world/world-state.test.ts src/lib/world/country-map-artifacts.test.ts src/lib/map/country-label-layout.test.ts src/lib/map/country-label-size.test.ts src/lib/map/map-data.test.ts --reporter=verbose", "exitCode": 0, "durationMs": 10300, "files": "5/5", "tests": "35/35", "warning": "Non-fatal Vite native config-loader warning"},
+  "changedFiles": ["reports/fix08-1-current-boundary-audit.json"],
+  "commands": [
+    {"command": "search and read Prompt 08 authority file", "exitCode": 0, "durationMs": 2900},
+    {"command": "initialize stage report as running via apply_patch", "exitCode": 0, "durationMs": 900},
+    {"command": "combined package/hash/git/rg discovery", "exitCode": 1, "durationMs": 600, "note": "Git metadata unavailable and guessed directories absent; search narrowed."},
+    {"command": "list src/reports/Next docs", "exitCode": 1, "durationMs": 600, "note": "Listings returned; bounded pipeline ended nonzero."},
+    {"command": "read Next 16.3 project structure and server/client docs", "exitCode": 0, "durationMs": 400},
+    {"command": "targeted source, type, layer, font, zoom and report inspection", "exitCode": 0, "durationMs": 2200},
+    {"command": "focused Vitest audit suite", "exitCode": 0, "durationMs": 10300},
+    {"command": "hash audited inputs and inspect numbered WorldMap", "exitCode": 0, "durationMs": 600},
+    {"command": "finalize 8-1 report via apply_patch", "exitCode": 0, "durationMs": 1300}
+  ],
+  "gates": {"initializedRunning": true, "instructionsAndNextDocsRead": true, "domainAndArtifactBoundaryLocated": true, "sourceLayerDependenciesListed": true, "legacyDependenciesListed": true, "pastClaimsRetested": true, "dispositionAndPreservationRecorded": true, "focusedTestsPass": true, "productCodeUnmodified": true, "stageStatus": "pass"},
+  "implementationErrors": [],
+  "environmentErrors": ["git status unavailable because the shell does not see a usable Git repository; only the report was intentionally written.", "Focused tests emitted a non-fatal Vite config-loader warning."],
+  "nextStage": "8-2"
+}

@@ -1,0 +1,4491 @@
+{
+  "subtask": "8A-2",
+  "status": "pass",
+  "generatedAt": "2026-08-14T06:21:57.233Z",
+  "algorithm": "shape-aware-v4-curved-quality",
+  "thresholds": {
+    "coordinateCount": [
+      13,
+      25
+    ],
+    "curvatureRatio": {
+      "minimum": 0.002,
+      "unit": "sagitta/chord"
+    },
+    "baselineInsideRatio": 0.9,
+    "insideRatio": "existing shapeClass thresholds"
+  },
+  "summary": {
+    "curvedCountryCount": 182,
+    "minCoordinateCount": 17,
+    "maxCoordinateCount": 17,
+    "minimumCurvatureRatio": 0.003366456886666979,
+    "minimumBaselineInsideRatio": 0.901235,
+    "maximumAnchorMovement": 0.4079660000000018,
+    "maximumAngleChange": 4.021090000000001,
+    "maximumCurvatureChange": 0.04522071965426111,
+    "failureCount": 0
+  },
+  "failures": [],
+  "results": [
+    {
+      "countryId": "AFG",
+      "coordinateCount": 17,
+      "signedCurvature": 0.09904599744331348,
+      "absoluteCurvature": 0.09904599744331348,
+      "curvatureRatio": 0.00783912671397411,
+      "baselineLength": 12.636887554914429,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.998895,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "b445597a",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "AGO",
+      "coordinateCount": 17,
+      "signedCurvature": 0.11980520495798637,
+      "absoluteCurvature": 0.11980520495798637,
+      "curvatureRatio": 0.008019721036729053,
+      "baselineLength": 14.94137622614501,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.969168,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000011045361017927038,
+        "angleChange": 2.0959739999999982,
+        "curvatureChange": 0.002349498163698685
+      },
+      "geometryHash": "5babb08f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ALB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.024801000000000073,
+      "absoluteCurvature": 0.024801000000000073,
+      "curvatureRatio": 0.01060565241375774,
+      "baselineLength": 2.3391684588291524,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000004472135956419096,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "4f1438b9",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ARE",
+      "coordinateCount": 17,
+      "signedCurvature": 0.029339629947644778,
+      "absoluteCurvature": 0.029339629947644778,
+      "curvatureRatio": 0.007861336668614438,
+      "baselineLength": 3.7327552310795684,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.977445,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.0000014142135663389928,
+        "angleChange": 0,
+        "curvatureChange": 3.8952175077447415e-7
+      },
+      "geometryHash": "a90c6d8f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ARG",
+      "coordinateCount": 17,
+      "signedCurvature": 0.2933110422006579,
+      "absoluteCurvature": 0.2933110422006579,
+      "curvatureRatio": 0.009909934698961696,
+      "baselineLength": 29.60539572638688,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.963852,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "b850eca9",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ARM",
+      "coordinateCount": 17,
+      "signedCurvature": -0.2128153699283753,
+      "absoluteCurvature": 0.2128153699283753,
+      "curvatureRatio": 0.08403421610791637,
+      "baselineLength": 2.5794301376966517,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.987905,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00019900000000205864,
+        "curvatureChange": 1.9253166169685976e-7
+      },
+      "geometryHash": "58e7e032",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ATA",
+      "coordinateCount": 17,
+      "signedCurvature": -3.9119565773962024,
+      "absoluteCurvature": 3.9119565773962024,
+      "curvatureRatio": 0.032250438780919335,
+      "baselineLength": 121.63835482758185,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.895899,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000019999999999242846,
+        "curvatureChange": 0.000028263930077709887
+      },
+      "geometryHash": "63a1e9ac",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ATF",
+      "coordinateCount": 17,
+      "signedCurvature": 0.006694593403341104,
+      "absoluteCurvature": 0.006694593403341104,
+      "curvatureRatio": 0.0055557517132485594,
+      "baselineLength": 1.2050830488262254,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.989894,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-9"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "7b060ef8",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "AUS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.28349826066911415,
+      "absoluteCurvature": 0.28349826066911415,
+      "curvatureRatio": 0.007330495807810069,
+      "baselineLength": 38.67933745995837,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.989243,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-3"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0010639999999995098,
+        "curvatureChange": 0.0000011108676460924727
+      },
+      "geometryHash": "2b22599e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "AUT",
+      "coordinateCount": 17,
+      "signedCurvature": -0.03545902955053047,
+      "absoluteCurvature": 0.03545902955053047,
+      "curvatureRatio": 0.005473782620083704,
+      "baselineLength": 6.4784909962155774,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.945035,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0000029999999995311555,
+        "curvatureChange": 0
+      },
+      "geometryHash": "59bee31d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "AZE",
+      "coordinateCount": 17,
+      "signedCurvature": 0.02816385155897077,
+      "absoluteCurvature": 0.02816385155897077,
+      "curvatureRatio": 0.007022414432120661,
+      "baselineLength": 4.011090595899399,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.999962,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-2"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000007615773109027649,
+        "angleChange": 0.00003199999999736747,
+        "curvatureChange": 4.7551421168690045e-9
+      },
+      "geometryHash": "b0daceca",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BDI",
+      "coordinateCount": 17,
+      "signedCurvature": -0.011378433324964137,
+      "absoluteCurvature": 0.011378433324964137,
+      "curvatureRatio": 0.007997343716275664,
+      "baselineLength": 1.4230182690777522,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.999967,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0040230000000036625,
+        "curvatureChange": 6.324781437871269e-7
+      },
+      "geometryHash": "2c5673d5",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BEL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.016794691430909486,
+      "absoluteCurvature": 0.016794691430909486,
+      "curvatureRatio": 0.005346312534400796,
+      "baselineLength": 3.1415983302567123,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.996737,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00011045361017508898,
+        "angleChange": 0.35228400000000093,
+        "curvatureChange": 0.000023848174255419047
+      },
+      "geometryHash": "1b05f5c5",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BEN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.038245490671007895,
+      "absoluteCurvature": 0.038245490671007895,
+      "curvatureRatio": 0.008122120154253615,
+      "baselineLength": 4.709631316248211,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.784672,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00018199999999524152,
+        "curvatureChange": 6.394932104691886e-9
+      },
+      "geometryHash": "58d4b88",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BFA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04818863737004746,
+      "absoluteCurvature": 0.04818863737004746,
+      "curvatureRatio": 0.007998338662598024,
+      "baselineLength": 6.025854463010134,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.976389,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "b0ff0a78",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BGD",
+      "coordinateCount": 17,
+      "signedCurvature": 0.028592506060548466,
+      "absoluteCurvature": 0.028592506060548466,
+      "curvatureRatio": 0.007358948410265697,
+      "baselineLength": 3.88596534712543,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.991017,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "c56e5ea9",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BGR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.03400325094781641,
+      "absoluteCurvature": 0.03400325094781641,
+      "curvatureRatio": 0.006202224332808034,
+      "baselineLength": 5.482988572515184,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.99982,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.3833589999999987,
+        "curvatureChange": 0.00008426028936284885
+      },
+      "geometryHash": "65fe2669",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BHS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.003390634130646338,
+      "absoluteCurvature": 0.003390634130646338,
+      "curvatureRatio": 0.007368085212012254,
+      "baselineLength": 0.46024481610834905,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.997031,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-6",
+        "component-9",
+        "component-39",
+        "component-10",
+        "component-5",
+        "component-22",
+        "component-31",
+        "component-37",
+        "component-27",
+        "component-36",
+        "component-42",
+        "component-25",
+        "component-17",
+        "component-43",
+        "component-34",
+        "component-33",
+        "component-8"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "5b458d84",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BIH",
+      "coordinateCount": 17,
+      "signedCurvature": 0.02633812668641009,
+      "absoluteCurvature": 0.02633812668641009,
+      "curvatureRatio": 0.008420615821193423,
+      "baselineLength": 3.128403854902588,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000003000000006636583,
+        "curvatureChange": 0
+      },
+      "geometryHash": "d8f0754a",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BLR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.049725245197855705,
+      "absoluteCurvature": 0.049725245197855705,
+      "curvatureRatio": 0.006882614275637125,
+      "baselineLength": 7.225670382196721,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.999832,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000017999999997186933,
+        "curvatureChange": 1.009088074210851e-8
+      },
+      "geometryHash": "7ef5e1e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BLZ",
+      "coordinateCount": 17,
+      "signedCurvature": 0.017892614677913928,
+      "absoluteCurvature": 0.017892614677913928,
+      "curvatureRatio": 0.008354320758766551,
+      "baselineLength": 2.1421168482932407,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.999268,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "4cf26ea",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BOL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.1060344434891384,
+      "absoluteCurvature": 0.1060344434891384,
+      "curvatureRatio": 0.007953344129929237,
+      "baselineLength": 13.334297520732942,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.951997,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 3.2122870724515806e-7
+      },
+      "geometryHash": "e858a19b",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BRA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.29408812846959204,
+      "absoluteCurvature": 0.29408812846959204,
+      "curvatureRatio": 0.007884000872617281,
+      "baselineLength": 37.30804724919069,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.960602,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "2fe9177d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BRN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.005787997739980802,
+      "absoluteCurvature": 0.005787997739980802,
+      "curvatureRatio": 0.007996527840906533,
+      "baselineLength": 0.723936794499597,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.980016,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 3.2745565277901567e-7
+      },
+      "geometryHash": "bb4f7606",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BRT",
+      "coordinateCount": 17,
+      "signedCurvature": 0.004987359106372801,
+      "absoluteCurvature": 0.004987359106372801,
+      "curvatureRatio": 0.007476004423101403,
+      "baselineLength": 0.6672146111227121,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.995339,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "ed3dd20c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BTN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.019353042164711048,
+      "absoluteCurvature": 0.019353042164711048,
+      "curvatureRatio": 0.007109684787507249,
+      "baselineLength": 2.722432996689473,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.996256,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "a98b92c5",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "BWA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.3723935698524268,
+      "absoluteCurvature": 0.3723935698524268,
+      "curvatureRatio": 0.04311979453091382,
+      "baselineLength": 8.678725843394727,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00003220248437588375,
+        "angleChange": 0.13481099999999913,
+        "curvatureChange": 0.00040625607593453017
+      },
+      "geometryHash": "ced0b587",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CAF",
+      "coordinateCount": 17,
+      "signedCurvature": 0.09155926461262857,
+      "absoluteCurvature": 0.09155926461262857,
+      "curvatureRatio": 0.007953422029410729,
+      "baselineLength": 11.513867419506392,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "18b118cc",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CAN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.3698396390387318,
+      "absoluteCurvature": 0.3698396390387318,
+      "curvatureRatio": 0.00564860429125389,
+      "baselineLength": 65.48006733066535,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.900127,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0001430000000013365,
+        "curvatureChange": 1.5758959182043952e-7
+      },
+      "geometryHash": "b3992f3c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CHE",
+      "coordinateCount": 17,
+      "signedCurvature": -0.2026831147653119,
+      "absoluteCurvature": 0.2026831147653119,
+      "curvatureRatio": 0.057675173663458375,
+      "baselineLength": 3.545030307743445,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.963802,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 2.3767997653356687e-8
+      },
+      "geometryHash": "ba1ef4ea",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CHL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.049964313821330854,
+      "absoluteCurvature": 0.049964313821330854,
+      "curvatureRatio": 0.011711768139722384,
+      "baselineLength": 4.267717045457113,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.946645,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-6"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 9.920377479141762e-7
+      },
+      "geometryHash": "814f0bfc",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CHN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.28396851904174286,
+      "absoluteCurvature": 0.28396851904174286,
+      "curvatureRatio": 0.006823957673990006,
+      "baselineLength": 41.618610976359264,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.916765,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00007800000000024454,
+        "curvatureChange": 0.0000033861940241242117
+      },
+      "geometryHash": "1a55da6c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CIV",
+      "coordinateCount": 17,
+      "signedCurvature": 0.051916121410970455,
+      "absoluteCurvature": 0.051916121410970455,
+      "curvatureRatio": 0.007990320311658444,
+      "baselineLength": 6.498478468262781,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 3.2639295895198206e-7
+      },
+      "geometryHash": "60da8bee",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CMR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.06070277097658384,
+      "absoluteCurvature": 0.06070277097658384,
+      "curvatureRatio": 0.008008438283850167,
+      "baselineLength": 7.581142353811038,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.997046,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "34a1c7a3",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "COD",
+      "coordinateCount": 17,
+      "signedCurvature": 0.13452949139726478,
+      "absoluteCurvature": 0.13452949139726478,
+      "curvatureRatio": 0.007998249099216091,
+      "baselineLength": 16.82272533403645,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "d1d56bd2",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "COG",
+      "coordinateCount": 17,
+      "signedCurvature": 0.07186939076447103,
+      "absoluteCurvature": 0.07186939076447103,
+      "curvatureRatio": 0.008000252929476058,
+      "baselineLength": 8.984916884823951,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.975177,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000003999999997006398,
+        "curvatureChange": 4.1497230092446546e-7
+      },
+      "geometryHash": "fabce00a",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "COL",
+      "coordinateCount": 17,
+      "signedCurvature": -0.104972429806937,
+      "absoluteCurvature": 0.104972429806937,
+      "curvatureRatio": 0.008009557882375562,
+      "baselineLength": 13.108128652191684,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.98324,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-4"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000001000000000139778,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "69aaf105",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CRI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.025453988497013667,
+      "absoluteCurvature": 0.025453988497013667,
+      "curvatureRatio": 0.007990233271292283,
+      "baselineLength": 3.1861778934352767,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.98884,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000009219544449044265,
+        "angleChange": 0.00017700000000075988,
+        "curvatureChange": 7.052189749529036e-7
+      },
+      "geometryHash": "1fb9f9b4",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CUB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.021291650746867934,
+      "absoluteCurvature": 0.021291650746867934,
+      "curvatureRatio": 0.007530378649888085,
+      "baselineLength": 2.8278601193961896,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.915827,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000008000000001118224,
+        "curvatureChange": 4.77215289496763e-7
+      },
+      "geometryHash": "acd11a3b",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CYN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.05512261779837709,
+      "absoluteCurvature": 0.05512261779837709,
+      "curvatureRatio": 0.05368984552078501,
+      "baselineLength": 1.0344959278197217,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.955873,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "8a8afeb2",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CYP",
+      "coordinateCount": 17,
+      "signedCurvature": 0.006948570879711425,
+      "absoluteCurvature": 0.006948570879711425,
+      "curvatureRatio": 0.006562216102356176,
+      "baselineLength": 1.0589967643847151,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "fc5c4258",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "CZE",
+      "coordinateCount": 17,
+      "signedCurvature": -0.028744547839999458,
+      "absoluteCurvature": 0.028744547839999458,
+      "curvatureRatio": 0.005239418212427724,
+      "baselineLength": 5.4866098661735885,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.941129,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 9.999999992515995e-7,
+        "curvatureChange": 0
+      },
+      "geometryHash": "5e3d908e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "DEU",
+      "coordinateCount": 17,
+      "signedCurvature": 0.06920448228622329,
+      "absoluteCurvature": 0.06920448228622329,
+      "curvatureRatio": 0.008411334276514049,
+      "baselineLength": 8.229073474042401,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.936691,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00018000000000029104,
+        "curvatureChange": 5.151929264868294e-7
+      },
+      "geometryHash": "362a62ff",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "DJI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.013752632832300356,
+      "absoluteCurvature": 0.013752632832300356,
+      "curvatureRatio": 0.008019854987522251,
+      "baselineLength": 1.7151160321607009,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.986454,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 9.999999974752427e-7,
+        "curvatureChange": 0
+      },
+      "geometryHash": "9ccb12e9",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "DNK",
+      "coordinateCount": 17,
+      "signedCurvature": 0.031505207076111146,
+      "absoluteCurvature": 0.031505207076111146,
+      "curvatureRatio": 0.0138162397272223,
+      "baselineLength": 2.281458335631593,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.923486,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0003200000000020964,
+        "curvatureChange": 4.337198374754214e-8
+      },
+      "geometryHash": "d36bb3af",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "DOM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.022959496268457218,
+      "absoluteCurvature": 0.022959496268457218,
+      "curvatureRatio": 0.007650267634158938,
+      "baselineLength": 3.001602850231621,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.992334,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "6590f24c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "DZA",
+      "coordinateCount": 17,
+      "signedCurvature": -0.11218200000000067,
+      "absoluteCurvature": 0.11218200000000067,
+      "curvatureRatio": 0.0068692056270883055,
+      "baselineLength": 16.33319266017049,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.972015,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000017204650534270238,
+        "angleChange": 0,
+        "curvatureChange": 0.0000029999999995311555
+      },
+      "geometryHash": "afb6ba6f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ECU",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04857334697421321,
+      "absoluteCurvature": 0.04857334697421321,
+      "curvatureRatio": 0.00799967703328418,
+      "baselineLength": 6.072945498551664,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-12"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "ebd10dbc",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "EGY",
+      "coordinateCount": 17,
+      "signedCurvature": 1.6259145268680995,
+      "absoluteCurvature": 1.6259145268680995,
+      "curvatureRatio": 0.11525422813890071,
+      "baselineLength": 14.591184825662005,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.966625,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00008500000000566388,
+        "curvatureChange": 6.235116827291165e-7
+      },
+      "geometryHash": "656eb2f9",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ERI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.03919613892631864,
+      "absoluteCurvature": 0.03919613892631864,
+      "curvatureRatio": 0.007815969681194433,
+      "baselineLength": 5.015692218543149,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.931419,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00007700000000099294,
+        "curvatureChange": 1.9990180257639656e-7
+      },
+      "geometryHash": "f2fd5a80",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ESH",
+      "coordinateCount": 17,
+      "signedCurvature": 0.022319247089289174,
+      "absoluteCurvature": 0.022319247089289174,
+      "curvatureRatio": 0.007389665145512762,
+      "baselineLength": 3.020770718090958,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.999168,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "3e03fd6b",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ESP",
+      "coordinateCount": 17,
+      "signedCurvature": 0.07193531085098455,
+      "absoluteCurvature": 0.07193531085098455,
+      "curvatureRatio": 0.006780619949481221,
+      "baselineLength": 10.610253292481161,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.949092,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-8"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 1.055564510799023e-9
+      },
+      "geometryHash": "daa3e563",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "EST",
+      "coordinateCount": 17,
+      "signedCurvature": 0.02131602213426068,
+      "absoluteCurvature": 0.02131602213426068,
+      "curvatureRatio": 0.007222986706935889,
+      "baselineLength": 2.951545839829054,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-5"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00012699999999910005,
+        "curvatureChange": 2.4155428966082804e-8
+      },
+      "geometryHash": "449d0240",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ETH",
+      "coordinateCount": 17,
+      "signedCurvature": 0.5629960000000009,
+      "absoluteCurvature": 0.5629960000000009,
+      "curvatureRatio": 0.04148098941483103,
+      "baselineLength": 13.634167706152617,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.961575,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "6a375a96",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "FIN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.11897545210185799,
+      "absoluteCurvature": 0.11897545210185799,
+      "curvatureRatio": 0.017086523052940127,
+      "baselineLength": 6.96851299487006,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.904704,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000010000000003174137,
+        "curvatureChange": 4.7336102815265235e-9
+      },
+      "geometryHash": "9de64fb2",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "FJI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.00819204384103036,
+      "absoluteCurvature": 0.00819204384103036,
+      "curvatureRatio": 0.007692363186279492,
+      "baselineLength": 1.0651253886412786,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.999939,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-22"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000042000000000541604,
+        "curvatureChange": 0
+      },
+      "geometryHash": "cd901b27",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "FLK",
+      "coordinateCount": 17,
+      "signedCurvature": 0.005532394929658355,
+      "absoluteCurvature": 0.005532394929658355,
+      "curvatureRatio": 0.006740874080677845,
+      "baselineLength": 0.820822756825261,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.99996,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-12",
+        "component-4",
+        "component-2",
+        "component-6",
+        "component-10"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "dc8ad51d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "FRA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.07771181921475748,
+      "absoluteCurvature": 0.07771181921475748,
+      "curvatureRatio": 0.006773967915524702,
+      "baselineLength": 11.473525006218836,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.959796,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-9"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00021000000000004349,
+        "angleChange": 0.05075100000000177,
+        "curvatureChange": 0.00004791569231968329
+      },
+      "geometryHash": "e1303996",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GAB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04113922811450613,
+      "absoluteCurvature": 0.04113922811450613,
+      "curvatureRatio": 0.007998965836201532,
+      "baselineLength": 5.143942332119288,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.996733,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "686e4138",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GBR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.06958057353372475,
+      "absoluteCurvature": 0.06958057353372475,
+      "curvatureRatio": 0.010835087317944038,
+      "baselineLength": 6.423784867617145,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.768405,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-23"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0000010000000116860974,
+        "curvatureChange": 0
+      },
+      "geometryHash": "38f6fb20",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GEO",
+      "coordinateCount": 17,
+      "signedCurvature": 0.034132499304153505,
+      "absoluteCurvature": 0.034132499304153505,
+      "curvatureRatio": 0.006437444813383688,
+      "baselineLength": 5.3027648728469865,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.960593,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.0000040000000041118255,
+        "angleChange": 0.000007000000000090267,
+        "curvatureChange": 1.124100812432971e-15
+      },
+      "geometryHash": "60dd5d24",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GHA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04157622415945743,
+      "absoluteCurvature": 0.04157622415945743,
+      "curvatureRatio": 0.008011191035293375,
+      "baselineLength": 5.190652758559406,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.953633,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "d73c4477",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GIN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04917013059830597,
+      "absoluteCurvature": 0.04917013059830597,
+      "curvatureRatio": 0.007967871352880147,
+      "baselineLength": 6.172090271299596,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.901455,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00005699999999819738,
+        "curvatureChange": 6.814816419509206e-10
+      },
+      "geometryHash": "44f1fb98",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GMB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.005938062828290456,
+      "absoluteCurvature": 0.005938062828290456,
+      "curvatureRatio": 0.007859599926360678,
+      "baselineLength": 0.7556411404330737,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.993658,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00011100000000041632,
+        "curvatureChange": 1.4216886088519454e-10
+      },
+      "geometryHash": "8b83c78d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GNB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.01950255015254386,
+      "absoluteCurvature": 0.01950255015254386,
+      "curvatureRatio": 0.00784451119404432,
+      "baselineLength": 2.486545949673284,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.976158,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "b9e4050c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GNQ",
+      "coordinateCount": 17,
+      "signedCurvature": 0.012046028509545666,
+      "absoluteCurvature": 0.012046028509545666,
+      "curvatureRatio": 0.007999425167682308,
+      "baselineLength": 1.5061176911352177,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-2"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "79196af5",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GRC",
+      "coordinateCount": 17,
+      "signedCurvature": 0.024133286519053526,
+      "absoluteCurvature": 0.024133286519053526,
+      "curvatureRatio": 0.0075106328062385305,
+      "baselineLength": 3.213697552037112,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.945145,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00025099999999866895,
+        "curvatureChange": 1.0065506581002914e-8
+      },
+      "geometryHash": "e9f9df6b",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GRL",
+      "coordinateCount": 17,
+      "signedCurvature": -3.082184588512236,
+      "absoluteCurvature": 3.082184588512236,
+      "curvatureRatio": 0.08499203489963272,
+      "baselineLength": 37.02606875047327,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.912066,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "a9c338c6",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GTM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.027441082286264483,
+      "absoluteCurvature": 0.027441082286264483,
+      "curvatureRatio": 0.008110049995666542,
+      "baselineLength": 3.384180813807579,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.989716,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00022910696190980872,
+        "angleChange": 0.00000100000000458067,
+        "curvatureChange": 0.0000019261699481243344
+      },
+      "geometryHash": "c894fe82",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "GUY",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04894354171164963,
+      "absoluteCurvature": 0.04894354171164963,
+      "curvatureRatio": 0.00801082497918657,
+      "baselineLength": 6.1107168583823155,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.927892,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "39ae0eb2",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "HND",
+      "coordinateCount": 17,
+      "signedCurvature": 0.039311810460900744,
+      "absoluteCurvature": 0.039311810460900744,
+      "curvatureRatio": 0.007737936516447353,
+      "baselineLength": 5.0812076068430265,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.997203,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000025999999999637424,
+        "curvatureChange": 5.189942643285539e-7
+      },
+      "geometryHash": "4989161e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "HRV",
+      "coordinateCount": 17,
+      "signedCurvature": -0.16326624075874727,
+      "absoluteCurvature": 0.16326624075874727,
+      "curvatureRatio": 0.036530198051892934,
+      "baselineLength": 4.485142890887192,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.988092,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00007300000000043383,
+        "angleChange": 0,
+        "curvatureChange": 0.000004992784508217607
+      },
+      "geometryHash": "14d31ece",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "HTI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.01116425212977811,
+      "absoluteCurvature": 0.01116425212977811,
+      "curvatureRatio": 0.008099753296215664,
+      "baselineLength": 1.3785848593635806,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.993666,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 9.999999974752427e-7,
+        "curvatureChange": 3.1726818020168246e-7
+      },
+      "geometryHash": "b6a20c9a",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "HUN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.03265735318138431,
+      "absoluteCurvature": 0.03265735318138431,
+      "curvatureRatio": 0.005614976760994324,
+      "baselineLength": 5.816602508725432,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.993203,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0002990000000000492,
+        "curvatureChange": 2.183832949892439e-8
+      },
+      "geometryHash": "cb8f4f07",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "IDN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.06897575928161397,
+      "absoluteCurvature": 0.06897575928161397,
+      "curvatureRatio": 0.007995002298275534,
+      "baselineLength": 8.628824119592196,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.999069,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-73",
+        "component-2",
+        "component-222",
+        "component-102",
+        "component-56",
+        "component-261",
+        "component-139",
+        "component-161",
+        "component-192",
+        "component-180",
+        "component-92",
+        "component-55",
+        "component-103",
+        "component-107"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000007000000000090267,
+        "curvatureChange": 0
+      },
+      "geometryHash": "ee070033",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "IND",
+      "coordinateCount": 17,
+      "signedCurvature": 0.15021136091734466,
+      "absoluteCurvature": 0.15021136091734466,
+      "curvatureRatio": 0.007470093901448695,
+      "baselineLength": 20.111343318816076,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.9565,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000003000000000419334,
+        "curvatureChange": 4.980218568095829e-7
+      },
+      "geometryHash": "c3894713",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "IRL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.027514462265559446,
+      "absoluteCurvature": 0.027514462265559446,
+      "curvatureRatio": 0.007564993675516524,
+      "baselineLength": 3.6376296006172737,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0000029999999995311555,
+        "curvatureChange": 4.585486126224003e-9
+      },
+      "geometryHash": "8d1cd169",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "IRN",
+      "coordinateCount": 17,
+      "signedCurvature": -1.4132691856515278,
+      "absoluteCurvature": 1.4132691856515278,
+      "curvatureRatio": 0.08574732275595713,
+      "baselineLength": 16.79883133852631,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.922739,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 3.704588296127298e-7
+      },
+      "geometryHash": "e9d32355",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "IRQ",
+      "coordinateCount": 17,
+      "signedCurvature": 0.062335143388410987,
+      "absoluteCurvature": 0.062335143388410987,
+      "curvatureRatio": 0.008221280431402911,
+      "baselineLength": 7.583530789236214,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.968445,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00010799999999733245,
+        "curvatureChange": 2.1367119434900772e-8
+      },
+      "geometryHash": "9eb7952b",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ISL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.03061689614893009,
+      "absoluteCurvature": 0.03061689614893009,
+      "curvatureRatio": 0.003366456886666979,
+      "baselineLength": 9.094968033563486,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.990189,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 1.4633832170346528e-8
+      },
+      "geometryHash": "cc84d75c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ISR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.021715000000000373,
+      "absoluteCurvature": 0.021715000000000373,
+      "curvatureRatio": 0.009423682062369623,
+      "baselineLength": 2.304844415082402,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.914967,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0.00000100000000458067
+      },
+      "geometryHash": "d52f7842",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ITA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.06546346487187944,
+      "absoluteCurvature": 0.06546346487187944,
+      "curvatureRatio": 0.007123521180475022,
+      "baselineLength": 9.191000699102036,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.896195,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 2.4967919687313156e-7
+      },
+      "geometryHash": "3e0862dd",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "JAM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.012960638913560767,
+      "absoluteCurvature": 0.012960638913560767,
+      "curvatureRatio": 0.007631933544253155,
+      "baselineLength": 1.6984743876297361,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.979955,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "a29b28e4",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "JOR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.037645656528646015,
+      "absoluteCurvature": 0.037645656528646015,
+      "curvatureRatio": 0.00812816586763778,
+      "baselineLength": 4.632319607987246,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.914321,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.003317000000002679,
+        "curvatureChange": 7.822506913751637e-8
+      },
+      "geometryHash": "3eaba184",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "JPN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04185153910416026,
+      "absoluteCurvature": 0.04185153910416026,
+      "curvatureRatio": 0.007000395843790556,
+      "baselineLength": 5.979231362139357,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.918653,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-50",
+        "component-88",
+        "component-32",
+        "component-53"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00018399999999729744,
+        "curvatureChange": 5.645035230927853e-9
+      },
+      "geometryHash": "e6915e2f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "KAZ",
+      "coordinateCount": 17,
+      "signedCurvature": 0.20542999999999978,
+      "absoluteCurvature": 0.20542999999999978,
+      "curvatureRatio": 0.005344624749611362,
+      "baselineLength": 38.439665227604614,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.992714,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000015033296382955625,
+        "angleChange": 0,
+        "curvatureChange": 0.000003999999997006398
+      },
+      "geometryHash": "69cf4d42",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "KEN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.07163168470023372,
+      "absoluteCurvature": 0.07163168470023372,
+      "curvatureRatio": 0.008000028745571455,
+      "baselineLength": 8.955450343061111,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.973992,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000008944271911845178,
+        "angleChange": 0,
+        "curvatureChange": 3.5355267628822684e-7
+      },
+      "geometryHash": "91aeb75f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "KGZ",
+      "coordinateCount": 17,
+      "signedCurvature": 0.05623426018643289,
+      "absoluteCurvature": 0.05623426018643289,
+      "curvatureRatio": 0.006433817875613384,
+      "baselineLength": 8.74137935776787,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.991373,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0001239999999995689,
+        "curvatureChange": 4.6049763228334095e-7
+      },
+      "geometryHash": "9d542a0c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "KHM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.21234018554838555,
+      "absoluteCurvature": 0.21234018554838555,
+      "curvatureRatio": 0.04185031700055661,
+      "baselineLength": 5.097308690423317,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.998761,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00015900000000357295,
+        "curvatureChange": 4.912962174585811e-7
+      },
+      "geometryHash": "60dfddd0",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "KOR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.02707407238819527,
+      "absoluteCurvature": 0.02707407238819527,
+      "curvatureRatio": 0.007833545598537857,
+      "baselineLength": 3.45673419903899,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.995232,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-18"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "61667b66",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "KWT",
+      "coordinateCount": 17,
+      "signedCurvature": 0.01168075289512407,
+      "absoluteCurvature": 0.01168075289512407,
+      "curvatureRatio": 0.007900876935444908,
+      "baselineLength": 1.4786573064751678,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00005936328831860227,
+        "angleChange": 0.0015040000000041687,
+        "curvatureChange": 0.000001748815235659562
+      },
+      "geometryHash": "24817941",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LAO",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04196869877059648,
+      "absoluteCurvature": 0.04196869877059648,
+      "curvatureRatio": 0.007821448708666828,
+      "baselineLength": 5.366719006191964,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.933861,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00003399999999942338,
+        "curvatureChange": 8.526552338489202e-7
+      },
+      "geometryHash": "fe1d0c1d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LBN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.01142147050479992,
+      "absoluteCurvature": 0.01142147050479992,
+      "curvatureRatio": 0.008213748045377662,
+      "baselineLength": 1.3907800757783906,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.982896,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00034400000000545106,
+        "angleChange": 9.999999974752427e-7,
+        "curvatureChange": 0.0000028630552121773623
+      },
+      "geometryHash": "b3b5682e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LBR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.031915148045977636,
+      "absoluteCurvature": 0.031915148045977636,
+      "curvatureRatio": 0.008006752810276309,
+      "baselineLength": 3.986707545222901,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0004789999999985639,
+        "curvatureChange": 7.505513774652695e-7
+      },
+      "geometryHash": "d38d7e3",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LBY",
+      "coordinateCount": 17,
+      "signedCurvature": 0.14305003801381747,
+      "absoluteCurvature": 0.14305003801381747,
+      "curvatureRatio": 0.008078304209493983,
+      "baselineLength": 17.71099821741216,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.975518,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 3.513228118978695e-7
+      },
+      "geometryHash": "4cdcc642",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LKA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.02521253211554762,
+      "absoluteCurvature": 0.02521253211554762,
+      "curvatureRatio": 0.008084165543707939,
+      "baselineLength": 3.1192963736724906,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000003000000006636583,
+        "curvatureChange": 3.903127820947816e-14
+      },
+      "geometryHash": "ee0e379d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LSO",
+      "coordinateCount": 17,
+      "signedCurvature": 0.0139303195052505,
+      "absoluteCurvature": 0.0139303195052505,
+      "curvatureRatio": 0.006988547243049465,
+      "baselineLength": 1.9935654700398124,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000001000000000139778,
+        "curvatureChange": 0
+      },
+      "geometryHash": "4cdc67d8",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LTU",
+      "coordinateCount": 17,
+      "signedCurvature": 0.023095071906157675,
+      "absoluteCurvature": 0.023095071906157675,
+      "curvatureRatio": 0.0047576343217564,
+      "baselineLength": 4.854610278009069,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0008199999999991547,
+        "curvatureChange": 9.471939577641864e-7
+      },
+      "geometryHash": "623baf6d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LUX",
+      "coordinateCount": 17,
+      "signedCurvature": 0.006095071052223072,
+      "absoluteCurvature": 0.006095071052223072,
+      "curvatureRatio": 0.009808665314379817,
+      "baselineLength": 0.6215553517675826,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "80e42df1",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "LVA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.026906990240547712,
+      "absoluteCurvature": 0.026906990240547712,
+      "curvatureRatio": 0.0044521172558968855,
+      "baselineLength": 6.0439573526482215,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.960509,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.34753100000000003,
+        "curvatureChange": 0.00009485794822519655
+      },
+      "geometryHash": "c3704cc0",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MAR",
+      "coordinateCount": 17,
+      "signedCurvature": -0.6966591811531396,
+      "absoluteCurvature": 0.6966591811531396,
+      "curvatureRatio": 0.07811196196965471,
+      "baselineLength": 9.0613596722147,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.957715,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000020024984393751555,
+        "angleChange": 0.0005780000000008556,
+        "curvatureChange": 0.00000276307700497469
+      },
+      "geometryHash": "7fc69c05",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MDA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.022367333939170113,
+      "absoluteCurvature": 0.022367333939170113,
+      "curvatureRatio": 0.007226023214085063,
+      "baselineLength": 3.0958157071363566,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.982763,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000007211102551443258,
+        "angleChange": 0.0006089999999971951,
+        "curvatureChange": 7.644434316840532e-7
+      },
+      "geometryHash": "f809f854",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MDG",
+      "coordinateCount": 17,
+      "signedCurvature": -0.10939650149651284,
+      "absoluteCurvature": 0.10939650149651284,
+      "curvatureRatio": 0.008256752810085826,
+      "baselineLength": 13.251735995033012,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.963385,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "2d5e7227",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MEX",
+      "coordinateCount": 17,
+      "signedCurvature": 0.17806070378454678,
+      "absoluteCurvature": 0.17806070378454678,
+      "curvatureRatio": 0.007964014183547136,
+      "baselineLength": 22.361926274020714,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.926126,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-2"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00014422205101507034,
+        "angleChange": 0,
+        "curvatureChange": 0.000004281694920921231
+      },
+      "geometryHash": "841d038f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MKD",
+      "coordinateCount": 17,
+      "signedCurvature": 0.01288850734727095,
+      "absoluteCurvature": 0.01288850734727095,
+      "curvatureRatio": 0.006458186069954894,
+      "baselineLength": 1.9959064193665088,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0000010000000010279564,
+        "curvatureChange": 0
+      },
+      "geometryHash": "a8e49c58",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MLI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.09370601604509154,
+      "absoluteCurvature": 0.09370601604509154,
+      "curvatureRatio": 0.007902866768234562,
+      "baselineLength": 11.859185028795139,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.979384,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00020699999999962415,
+        "angleChange": 0.0005079999999964002,
+        "curvatureChange": 5.660090506842685e-7
+      },
+      "geometryHash": "13ce33de",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MMR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.10247384815669044,
+      "absoluteCurvature": 0.10247384815669044,
+      "curvatureRatio": 0.00837174698391483,
+      "baselineLength": 12.242716173262503,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.942781,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.0000029999999995311555,
+        "angleChange": 0.000015000000004761205,
+        "curvatureChange": 0.0000010659752024272384
+      },
+      "geometryHash": "c1139802",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MNE",
+      "coordinateCount": 17,
+      "signedCurvature": 0.008639695968027768,
+      "absoluteCurvature": 0.008639695968027768,
+      "curvatureRatio": 0.005895210016557985,
+      "baselineLength": 1.4656803311165731,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000008062257749094981,
+        "angleChange": 0,
+        "curvatureChange": 2.565920778282993e-8
+      },
+      "geometryHash": "e7665dc5",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MNG",
+      "coordinateCount": 17,
+      "signedCurvature": -0.6092722354675293,
+      "absoluteCurvature": 0.6092722354675293,
+      "curvatureRatio": 0.028203160221165972,
+      "baselineLength": 21.6485361431462,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.900834,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "b264dc8",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MOZ",
+      "coordinateCount": 17,
+      "signedCurvature": -0.9228860097904151,
+      "absoluteCurvature": 0.9228860097904151,
+      "curvatureRatio": 0.08415231861412602,
+      "baselineLength": 11.169828094628393,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.933563,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00043999999999755346,
+        "curvatureChange": 0.00000228813348435164
+      },
+      "geometryHash": "5d88c1ef",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MRT",
+      "coordinateCount": 17,
+      "signedCurvature": 0.10449979464493978,
+      "absoluteCurvature": 0.10449979464493978,
+      "curvatureRatio": 0.007989436556723455,
+      "baselineLength": 13.081962569485833,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 6.480737906877643e-7
+      },
+      "geometryHash": "de179e28",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MUS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.003548064040121719,
+      "absoluteCurvature": 0.003548064040121719,
+      "curvatureRatio": 0.008173654008722152,
+      "baselineLength": 0.4341624402518466,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "8e9e7666",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MWI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.042830983082714436,
+      "absoluteCurvature": 0.042830983082714436,
+      "curvatureRatio": 0.008189192478688158,
+      "baselineLength": 5.231115482092034,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.780979,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "a04f7bea",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "MYS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.06188257650108215,
+      "absoluteCurvature": 0.06188257650108215,
+      "curvatureRatio": 0.007993202017777482,
+      "baselineLength": 7.743214425231345,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.896413,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-7"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000032000000004472895,
+        "curvatureChange": 1.1567810349888408e-7
+      },
+      "geometryHash": "8a809172",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NAM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.07088600185920253,
+      "absoluteCurvature": 0.07088600185920253,
+      "curvatureRatio": 0.007469741343376638,
+      "baselineLength": 9.491159522413781,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.911981,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "7354f460",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NCL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.07547767744175472,
+      "absoluteCurvature": 0.07547767744175472,
+      "curvatureRatio": 0.0406005118086398,
+      "baselineLength": 1.867141552492485,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.997313,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-2",
+        "component-7",
+        "component-9"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "c8dbfad1",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NER",
+      "coordinateCount": 17,
+      "signedCurvature": 0.12538917483527354,
+      "absoluteCurvature": 0.12538917483527354,
+      "curvatureRatio": 0.007800837433156223,
+      "baselineLength": 16.07640730467899,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.970161,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00006899999999987472,
+        "curvatureChange": 3.915823054700951e-9
+      },
+      "geometryHash": "59c30446",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NGA",
+      "coordinateCount": 17,
+      "signedCurvature": -0.4849330386124776,
+      "absoluteCurvature": 0.4849330386124776,
+      "curvatureRatio": 0.04176723554069536,
+      "baselineLength": 11.663949135738,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.970397,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000012999999999152578,
+        "curvatureChange": 2.6194238167409623e-8
+      },
+      "geometryHash": "f1088098",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NIC",
+      "coordinateCount": 17,
+      "signedCurvature": 0.032528567594860495,
+      "absoluteCurvature": 0.032528567594860495,
+      "curvatureRatio": 0.008054973560441037,
+      "baselineLength": 4.0390167233630745,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0013709999999989009,
+        "curvatureChange": 2.0004493138381374e-8
+      },
+      "geometryHash": "5d200c27",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NLD",
+      "coordinateCount": 17,
+      "signedCurvature": -0.020762766757337514,
+      "absoluteCurvature": 0.020762766757337514,
+      "curvatureRatio": 0.006637472420066034,
+      "baselineLength": 3.1284795174270483,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.988866,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-4"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00022599999999783904,
+        "curvatureChange": 2.5053075999176277e-8
+      },
+      "geometryHash": "42ebbe7c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NOR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.14017063775493466,
+      "absoluteCurvature": 0.14017063775493466,
+      "curvatureRatio": 0.01834913932865265,
+      "baselineLength": 7.6459146134006435,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.774013,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-8"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.009220999999996593,
+        "curvatureChange": 0.000019114281534254873
+      },
+      "geometryHash": "5f676f9a",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NPL",
+      "coordinateCount": 17,
+      "signedCurvature": -0.031479572615891085,
+      "absoluteCurvature": 0.031479572615891085,
+      "curvatureRatio": 0.0072121700974919845,
+      "baselineLength": 4.365388107035481,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.989799,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000021000000000270802,
+        "curvatureChange": 4.796811303997561e-7
+      },
+      "geometryHash": "6d6f6a8c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "NZL",
+      "coordinateCount": 17,
+      "signedCurvature": -0.05889812857264645,
+      "absoluteCurvature": 0.05889812857264645,
+      "curvatureRatio": 0.007413140175921993,
+      "baselineLength": 7.946258122745277,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.908793,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-7"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.001338999999994428,
+        "curvatureChange": 9.378368323320618e-7
+      },
+      "geometryHash": "2997538e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "OMN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04358437611858095,
+      "absoluteCurvature": 0.04358437611858095,
+      "curvatureRatio": 0.00797750298007687,
+      "baselineLength": 5.464334263090083,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.979791,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0.0000011197802755394393
+      },
+      "geometryHash": "5a37cafa",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PAK",
+      "coordinateCount": 17,
+      "signedCurvature": 0.13242645313859,
+      "absoluteCurvature": 0.13242645313859,
+      "curvatureRatio": 0.00792452891966142,
+      "baselineLength": 16.713743005590494,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.922164,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "44888e2b",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PAN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.017365982428532097,
+      "absoluteCurvature": 0.017365982428532097,
+      "curvatureRatio": 0.007942384252322122,
+      "baselineLength": 2.1868611779212617,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.926478,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00004900000000063187,
+        "curvatureChange": 1.728752835328251e-10
+      },
+      "geometryHash": "6e145746",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PER",
+      "coordinateCount": 17,
+      "signedCurvature": 0.09678907891983168,
+      "absoluteCurvature": 0.09678907891983168,
+      "curvatureRatio": 0.007995266364119968,
+      "baselineLength": 12.107853143383803,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.983238,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000377999999997769,
+        "curvatureChange": 3.874563200695347e-7
+      },
+      "geometryHash": "ffeb72f3",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PHL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.025248738643058675,
+      "absoluteCurvature": 0.025248738643058675,
+      "curvatureRatio": 0.008062487997966016,
+      "baselineLength": 3.1321717965339113,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-13",
+        "component-53",
+        "component-4",
+        "component-82",
+        "component-51",
+        "component-62",
+        "component-26",
+        "component-84",
+        "component-74",
+        "component-67",
+        "component-68",
+        "component-78"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00006299999999725969,
+        "curvatureChange": 0
+      },
+      "geometryHash": "4894874b",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PNG",
+      "coordinateCount": 17,
+      "signedCurvature": 0.05747434519881775,
+      "absoluteCurvature": 0.05747434519881775,
+      "curvatureRatio": 0.007961384293948664,
+      "baselineLength": 7.220354923411917,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-0",
+        "component-20",
+        "component-28",
+        "component-57"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0000010000000010279564,
+        "curvatureChange": 0
+      },
+      "geometryHash": "e3f8d766",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "POL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.05562858576530046,
+      "absoluteCurvature": 0.05562858576530046,
+      "curvatureRatio": 0.005827714857554805,
+      "baselineLength": 9.546384018943945,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.0000022360679750319044,
+        "angleChange": 0,
+        "curvatureChange": 9.444828865390331e-7
+      },
+      "geometryHash": "24b47d40",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PRI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.009499159189014733,
+      "absoluteCurvature": 0.009499159189014733,
+      "curvatureRatio": 0.007625285059637993,
+      "baselineLength": 1.2459371726671913,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "9f04a096",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PRK",
+      "coordinateCount": 17,
+      "signedCurvature": 0.15654373245343306,
+      "absoluteCurvature": 0.15654373245343306,
+      "curvatureRatio": 0.034646274025901265,
+      "baselineLength": 4.532714864698915,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.992798,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00023999999999801958,
+        "curvatureChange": 6.203010289862476e-7
+      },
+      "geometryHash": "62b245",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PRT",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04486100000000093,
+      "absoluteCurvature": 0.04486100000000093,
+      "curvatureRatio": 0.010273327157871805,
+      "baselineLength": 4.367968898239866,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.995629,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-14"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "760206d7",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PRY",
+      "coordinateCount": 17,
+      "signedCurvature": 0.0684565507764164,
+      "absoluteCurvature": 0.0684565507764164,
+      "curvatureRatio": 0.008202409664232078,
+      "baselineLength": 8.347398578844832,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.96455,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00018764061394591596,
+        "angleChange": 0.00012100000000003774,
+        "curvatureChange": 6.049260599105821e-7
+      },
+      "geometryHash": "fcff5da6",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "PSX",
+      "coordinateCount": 17,
+      "signedCurvature": 0.007826000000001443,
+      "absoluteCurvature": 0.007826000000001443,
+      "curvatureRatio": 0.009422286005992722,
+      "baselineLength": 0.8307798399935359,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.995842,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "da0d631c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "QAT",
+      "coordinateCount": 17,
+      "signedCurvature": 0.010658999999996865,
+      "absoluteCurvature": 0.010658999999996865,
+      "curvatureRatio": 0.00886023128536682,
+      "baselineLength": 1.2032668090925784,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0.00004400000000259752
+      },
+      "geometryHash": "f383ecac",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ROU",
+      "coordinateCount": 17,
+      "signedCurvature": 0.046020947429101865,
+      "absoluteCurvature": 0.046020947429101865,
+      "curvatureRatio": 0.005667470480130955,
+      "baselineLength": 8.120884587781617,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000005099019512563654,
+        "angleChange": 0,
+        "curvatureChange": 5.616554892076686e-7
+      },
+      "geometryHash": "a5b7d688",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "RUS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.5246776300570807,
+      "absoluteCurvature": 0.5246776300570807,
+      "curvatureRatio": 0.003580647807231146,
+      "baselineLength": 146.53647223108257,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.8989,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-8"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000008544003739546916,
+        "angleChange": 0.00009999999999976694,
+        "curvatureChange": 0.000010417304149412665
+      },
+      "geometryHash": "604bb490",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "RWA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.014331892440549502,
+      "absoluteCurvature": 0.014331892440549502,
+      "curvatureRatio": 0.007998337617266323,
+      "baselineLength": 1.7921633299252682,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0013769999999979632,
+        "curvatureChange": 1.7658789708274725e-10
+      },
+      "geometryHash": "50154f90",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SAU",
+      "coordinateCount": 17,
+      "signedCurvature": 0.15795407616314985,
+      "absoluteCurvature": 0.15795407616314985,
+      "curvatureRatio": 0.0075173187938781,
+      "baselineLength": 21.015176691814595,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0005429999999968516,
+        "curvatureChange": 0.0000020314353100792104
+      },
+      "geometryHash": "71d65720",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SDN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.14054732377009643,
+      "absoluteCurvature": 0.14054732377009643,
+      "curvatureRatio": 0.00801873897151918,
+      "baselineLength": 17.530353043788555,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.978198,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000016278820596465513,
+        "angleChange": 0.05888699999999858,
+        "curvatureChange": 0.00010347843043106986
+      },
+      "geometryHash": "545bbbc9",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SDS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.08311131074089424,
+      "absoluteCurvature": 0.08311131074089424,
+      "curvatureRatio": 0.00795403791630249,
+      "baselineLength": 10.450701468666482,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.911244,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.06108700000000056,
+        "curvatureChange": 0.00006591184147011764
+      },
+      "geometryHash": "e75a1c56",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SEN",
+      "coordinateCount": 17,
+      "signedCurvature": -0.23662916782621654,
+      "absoluteCurvature": 0.23662916782621654,
+      "curvatureRatio": 0.041806718225599185,
+      "baselineLength": 5.6862448387211755,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.972132,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 1.8975745696980795e-9
+      },
+      "geometryHash": "5e4db720",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SGS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.009149459664090481,
+      "absoluteCurvature": 0.009149459664090481,
+      "curvatureRatio": 0.006243443330103802,
+      "baselineLength": 1.4656026575372985,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.994814,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "a4de233",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SLB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.00801628392385993,
+      "absoluteCurvature": 0.00801628392385993,
+      "curvatureRatio": 0.007926244650321834,
+      "baselineLength": 1.0115284037246612,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-25",
+        "component-21",
+        "component-32",
+        "component-3",
+        "component-34",
+        "component-12",
+        "component-8",
+        "component-4",
+        "component-28",
+        "component-16",
+        "component-40",
+        "component-35",
+        "component-11",
+        "component-1",
+        "component-43",
+        "component-30",
+        "component-24",
+        "component-6",
+        "component-22",
+        "component-15",
+        "component-42",
+        "component-31",
+        "component-13",
+        "component-17",
+        "component-10",
+        "component-20"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "f39857a",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SLE",
+      "coordinateCount": 17,
+      "signedCurvature": -0.02075878361106379,
+      "absoluteCurvature": 0.02075878361106379,
+      "curvatureRatio": 0.007926558016154436,
+      "baselineLength": 2.6193270421866908,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 2.4911236268243542e-11
+      },
+      "geometryHash": "5e02578d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SLV",
+      "coordinateCount": 17,
+      "signedCurvature": 0.015009000000000938,
+      "absoluteCurvature": 0.015009000000000938,
+      "curvatureRatio": 0.007770169878309757,
+      "baselineLength": 1.9319277510782356,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.9999,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "8b6ca31f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SOL",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04029035103732242,
+      "absoluteCurvature": 0.04029035103732242,
+      "curvatureRatio": 0.007886309492191863,
+      "baselineLength": 5.109741922138748,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.979913,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "264f2255",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SOM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.10508973759483337,
+      "absoluteCurvature": 0.10508973759483337,
+      "curvatureRatio": 0.008003927193790193,
+      "baselineLength": 13.132005700651035,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.888746,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "b32b69dd",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SPI",
+      "coordinateCount": 17,
+      "signedCurvature": 0.004299535261316475,
+      "absoluteCurvature": 0.004299535261316475,
+      "curvatureRatio": 0.009044598186728878,
+      "baselineLength": 0.4754738049161597,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "c3dcda36",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SRB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.03643125371029007,
+      "absoluteCurvature": 0.03643125371029007,
+      "curvatureRatio": 0.008511472442572202,
+      "baselineLength": 4.281076388861225,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.999467,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.000006324555320097325,
+        "angleChange": 0.00018700000000393402,
+        "curvatureChange": 3.0480982446401406e-8
+      },
+      "geometryHash": "b9819c0e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SUR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.0307297616662226,
+      "absoluteCurvature": 0.0307297616662226,
+      "curvatureRatio": 0.007998323409528232,
+      "baselineLength": 3.842678180310165,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.995149,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.2199069999999992,
+        "curvatureChange": 0.00002764745469406235
+      },
+      "geometryHash": "9710585e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SVK",
+      "coordinateCount": 17,
+      "signedCurvature": 0.025559690341934865,
+      "absoluteCurvature": 0.025559690341934865,
+      "curvatureRatio": 0.0054095940476187555,
+      "baselineLength": 4.725248654628479,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.998075,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000023999999999801958,
+        "curvatureChange": 1.909416087048088e-9
+      },
+      "geometryHash": "7cfd7660",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SVN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.016341010485258312,
+      "absoluteCurvature": 0.016341010485258312,
+      "curvatureRatio": 0.006890855681475242,
+      "baselineLength": 2.3717042158071164,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00012199999999751299,
+        "curvatureChange": 1.3575173454100087e-8
+      },
+      "geometryHash": "61fbb0a9",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SWE",
+      "coordinateCount": 17,
+      "signedCurvature": -1.2743657170575151,
+      "absoluteCurvature": 1.2743657170575151,
+      "curvatureRatio": 0.14575966140328164,
+      "baselineLength": 9.214154210641306,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.751766,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.4079660000000018,
+        "angleChange": 4.021090000000001,
+        "curvatureChange": 0.04522071965426111
+      },
+      "geometryHash": "11ae2c92",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SWZ",
+      "coordinateCount": 17,
+      "signedCurvature": 0.009370325818691998,
+      "absoluteCurvature": 0.009370325818691998,
+      "curvatureRatio": 0.007950016357228962,
+      "baselineLength": 1.1788527681730796,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "77a4430c",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "SYR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.05346634539265129,
+      "absoluteCurvature": 0.05346634539265129,
+      "curvatureRatio": 0.007659232767035228,
+      "baselineLength": 6.9817274870651005,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.989216,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00017800000000534055,
+        "angleChange": 0.004939000000000249,
+        "curvatureChange": 6.020083901311923e-7
+      },
+      "geometryHash": "41ae3688",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TCD",
+      "coordinateCount": 17,
+      "signedCurvature": -0.11245971844207335,
+      "absoluteCurvature": 0.11245971844207335,
+      "curvatureRatio": 0.008077433857393878,
+      "baselineLength": 13.925116237590064,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.895267,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.0008279999999984966,
+        "curvatureChange": 3.039075636146471e-7
+      },
+      "geometryHash": "1c9271bc",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TGO",
+      "coordinateCount": 17,
+      "signedCurvature": 0.017261000000000193,
+      "absoluteCurvature": 0.017261000000000193,
+      "curvatureRatio": 0.008095432395799712,
+      "baselineLength": 2.1325611092666548,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.982847,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "e8780948",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "THA",
+      "coordinateCount": 17,
+      "signedCurvature": -0.06678409419165729,
+      "absoluteCurvature": 0.06678409419165729,
+      "curvatureRatio": 0.008163359372779084,
+      "baselineLength": 8.182405183058581,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.821024,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "6532c260",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TJK",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04558674535027957,
+      "absoluteCurvature": 0.04558674535027957,
+      "curvatureRatio": 0.0064995382436980435,
+      "baselineLength": 7.014630649371391,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.888189,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00000900000000214618,
+        "curvatureChange": 0
+      },
+      "geometryHash": "b118acf",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TKM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.39633318457117267,
+      "absoluteCurvature": 0.39633318457117267,
+      "curvatureRatio": 0.03302587708057847,
+      "baselineLength": 12.03536878414939,
+      "baselineInsideRatio": 0.925926,
+      "insideRatio": 0.97362,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00001699999999971169,
+        "curvatureChange": 7.312883454346775e-8
+      },
+      "geometryHash": "b43de3af",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TLS",
+      "coordinateCount": 17,
+      "signedCurvature": 0.015241112736091307,
+      "absoluteCurvature": 0.015241112736091307,
+      "curvatureRatio": 0.007930764977481268,
+      "baselineLength": 1.9220918279808548,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.99175,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00005299999999763827,
+        "curvatureChange": 0
+      },
+      "geometryHash": "559b34fd",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TTO",
+      "coordinateCount": 17,
+      "signedCurvature": 0.006270488628654676,
+      "absoluteCurvature": 0.006270488628654676,
+      "curvatureRatio": 0.00803128610746002,
+      "baselineLength": 0.7808914902747611,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.998311,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "f47c30a5",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TUN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.06109899999999868,
+      "absoluteCurvature": 0.06109899999999868,
+      "curvatureRatio": 0.009755015772729431,
+      "baselineLength": 6.264924815435148,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.877264,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 9.999999992515995e-7
+      },
+      "geometryHash": "593cb718",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TUR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.08835157873833431,
+      "absoluteCurvature": 0.08835157873833431,
+      "curvatureRatio": 0.006244303647271321,
+      "baselineLength": 14.150613677658297,
+      "baselineInsideRatio": 0.950617,
+      "insideRatio": 0.961064,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-3"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "dd2f0d35",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TWN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.022592328977399306,
+      "absoluteCurvature": 0.022592328977399306,
+      "curvatureRatio": 0.00872774655518803,
+      "baselineLength": 2.589087513441622,
+      "baselineInsideRatio": 0.987654,
+      "insideRatio": 0.995817,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-5"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "9f8db81e",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "TZA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.09574628394233026,
+      "absoluteCurvature": 0.09574628394233026,
+      "curvatureRatio": 0.00800347998108034,
+      "baselineLength": 11.965116780271154,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.926967,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00003399999999942338,
+        "curvatureChange": 3.627602890438064e-7
+      },
+      "geometryHash": "a935808f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "UGA",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04981642801454069,
+      "absoluteCurvature": 0.04981642801454069,
+      "curvatureRatio": 0.008000000641450185,
+      "baselineLength": 6.228111423895353,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.0000020000000020559128,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "52d99bf8",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "UKR",
+      "coordinateCount": 17,
+      "signedCurvature": 0.08939877474997537,
+      "absoluteCurvature": 0.08939877474997537,
+      "curvatureRatio": 0.005322428279642679,
+      "baselineLength": 16.79787806531948,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.960343,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 9.999999974752427e-7,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "6e312859",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "URY",
+      "coordinateCount": 17,
+      "signedCurvature": 0.04243504889991045,
+      "absoluteCurvature": 0.04243504889991045,
+      "curvatureRatio": 0.008425618410343779,
+      "baselineLength": 5.037380958727643,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00022200000000083264,
+        "curvatureChange": 2.732839803065712e-8
+      },
+      "geometryHash": "d46a1260",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "USA",
+      "coordinateCount": 17,
+      "signedCurvature": -0.2720686738420769,
+      "absoluteCurvature": 0.2720686738420769,
+      "curvatureRatio": 0.005378649454335138,
+      "baselineLength": 50.58697018685404,
+      "baselineInsideRatio": 0.962963,
+      "insideRatio": 0.944573,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-186"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.00004976946854821316,
+        "angleChange": 0.047594000000000136,
+        "curvatureChange": 0.000016728312308533777
+      },
+      "geometryHash": "d3a595c0",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "UZB",
+      "coordinateCount": 17,
+      "signedCurvature": 0.07136383124883179,
+      "absoluteCurvature": 0.07136383124883179,
+      "curvatureRatio": 0.0072813385021645305,
+      "baselineLength": 9.802302215717322,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.904704,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.004462999999994111,
+        "curvatureChange": 6.768457541661554e-8
+      },
+      "geometryHash": "84d07a2",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "VEN",
+      "coordinateCount": 17,
+      "signedCurvature": 0.4836651747446071,
+      "absoluteCurvature": 0.4836651747446071,
+      "curvatureRatio": 0.04168066531072972,
+      "baselineLength": 11.657395098974645,
+      "baselineInsideRatio": 0.91358,
+      "insideRatio": 0.973951,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.00012900000000115597,
+        "curvatureChange": 1.4987477081618295e-7
+      },
+      "geometryHash": "8d7e3633",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "VNM",
+      "coordinateCount": 17,
+      "signedCurvature": -0.4207275678331203,
+      "absoluteCurvature": 0.4207275678331203,
+      "curvatureRatio": 0.12497537625214396,
+      "baselineLength": 3.5013725158269233,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.939898,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "vertical",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000017999999997186933,
+        "curvatureChange": 1.774937363752116e-9
+      },
+      "geometryHash": "5373c6fb",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "VUT",
+      "coordinateCount": 17,
+      "signedCurvature": 0.004245406125511112,
+      "absoluteCurvature": 0.004245406125511112,
+      "curvatureRatio": 0.007850081357558804,
+      "baselineLength": 0.5408989753560056,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.993483,
+      "insideRatioThreshold": 0.75,
+      "shapeClass": "archipelago",
+      "selectedComponents": [
+        "component-1",
+        "component-7",
+        "component-24",
+        "component-17",
+        "component-13",
+        "component-25",
+        "component-16",
+        "component-12",
+        "component-10",
+        "component-15",
+        "component-9",
+        "component-4",
+        "component-26",
+        "component-14",
+        "component-6"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.035312999999998596,
+        "curvatureChange": 2.4568741244755665e-7
+      },
+      "geometryHash": "70733b1d",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "WSM",
+      "coordinateCount": 17,
+      "signedCurvature": 0.003729289098573806,
+      "absoluteCurvature": 0.003729289098573806,
+      "curvatureRatio": 0.00784266039565491,
+      "baselineLength": 0.47559093428973664,
+      "baselineInsideRatio": 1,
+      "insideRatio": 0.999019,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "5bc1a18f",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "XKX",
+      "coordinateCount": 17,
+      "signedCurvature": 0.00761500000000126,
+      "absoluteCurvature": 0.00761500000000126,
+      "curvatureRatio": 0.005892758755177938,
+      "baselineLength": 1.292383183790235,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "d619e1bd",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "YEM",
+      "coordinateCount": 17,
+      "signedCurvature": -0.35651355062083045,
+      "absoluteCurvature": 0.35651355062083045,
+      "curvatureRatio": 0.041524188298812145,
+      "baselineLength": 8.624847759952269,
+      "baselineInsideRatio": 0.938272,
+      "insideRatio": 0.893117,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-1"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000036999999998954536,
+        "curvatureChange": 2.7436744926001566e-7
+      },
+      "geometryHash": "635ccca8",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ZAF",
+      "coordinateCount": 17,
+      "signedCurvature": 0.1316847451889516,
+      "absoluteCurvature": 0.1316847451889516,
+      "curvatureRatio": 0.007926126382160477,
+      "baselineLength": 16.61678234451351,
+      "baselineInsideRatio": 1,
+      "insideRatio": 1,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "separated-territory",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0,
+        "curvatureChange": 0
+      },
+      "geometryHash": "3656c6bf",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ZMB",
+      "coordinateCount": 17,
+      "signedCurvature": -0.8712933872873235,
+      "absoluteCurvature": 0.8712933872873235,
+      "curvatureRatio": 0.08223256269450656,
+      "baselineLength": 10.78284882192641,
+      "baselineInsideRatio": 0.901235,
+      "insideRatio": 0.925644,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0,
+        "angleChange": 0.000009999999999621423,
+        "curvatureChange": 4.749395307035442e-7
+      },
+      "geometryHash": "9a3bc1cc",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "countryId": "ZWE",
+      "coordinateCount": 17,
+      "signedCurvature": -0.05561601207033743,
+      "absoluteCurvature": 0.05561601207033743,
+      "curvatureRatio": 0.007605766826833984,
+      "baselineLength": 7.313471238019676,
+      "baselineInsideRatio": 0.975309,
+      "insideRatio": 0.999519,
+      "insideRatioThreshold": 0.85,
+      "shapeClass": "mainland",
+      "selectedComponents": [
+        "component-0"
+      ],
+      "previousLayoutComparison": {
+        "anchorMovement": 0.0000029999999995311555,
+        "angleChange": 0.00040500000000065484,
+        "curvatureChange": 2.2789489566993337e-7
+      },
+      "geometryHash": "1c0ecaba",
+      "finiteCoordinates": true,
+      "pass": true,
+      "reasons": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "error": "Infinite loop when putting segment endpoints in a priority queue (queue size too big).",
+  "counts": {
+    "intersection": 98919,
+    "difference": 3504,
+    "union": 17
+  },
+  "failures": [
+    {
+      "operation": "intersection",
+      "error": "Infinite loop when passing sweep line over endpoints (queue size too big).",
+      "counts": {
+        "intersection": 91269,
+        "difference": 3504,
+        "union": 3
+      },
+      "argumentCount": 2,
+      "inputVertices": 70
+    },
+    {
+      "operation": "intersection",
+      "error": "Infinite loop when passing sweep line over endpoints (too many sweep line segments).",
+      "counts": {
+        "intersection": 94344,
+        "difference": 3504,
+        "union": 12
+      },
+      "argumentCount": 2,
+      "inputVertices": 688
+    },
+    {
+      "operation": "union",
+      "error": "Infinite loop when putting segment endpoints in a priority queue (queue size too big).",
+      "counts": {
+        "intersection": 98919,
+        "difference": 3504,
+        "union": 16
+      },
+      "argumentCount": 4241,
+      "inputVertices": 605583
+    },
+    {
+      "operation": "union",
+      "error": "Infinite loop when putting segment endpoints in a priority queue (queue size too big).",
+      "counts": {
+        "intersection": 98919,
+        "difference": 3504,
+        "union": 17
+      },
+      "argumentCount": 4241,
+      "inputVertices": 605580
+    }
+  ],
+  "elapsedMs": 94189.5124,
+  "maximumRssBytes": 2235879424
+}

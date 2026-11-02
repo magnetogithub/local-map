@@ -1,0 +1,34 @@
+{
+  "stage": "12-19",
+  "status": "pass",
+  "objective": "Publish simulation and world state as one atomic turn snapshot.",
+  "filesRead": [
+    "src/lib/simulation/resolved-turn-plan.ts",
+    "src/stores/world-state-store.ts",
+    "src/lib/planning/atomic-world-commit.ts",
+    "src/lib/planning/history-persistence-checkpoint.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/atomic-turn-runtime.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-19-atomic-turn-commit.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "completeRevisionPairPublished": "pass",
+    "singleSubscriberNotification": "pass",
+    "failureInjectionLeavesSimulationUnchanged": "pass",
+    "failureInjectionLeavesWorldUnchanged": "pass",
+    "normalCommitUpdatesClockEventAndMap": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Stale and duplicate turn plans are rejected before publication."
+  ],
+  "notes": [
+    "The combined snapshot is the coordinator boundary; subscribers cannot observe a half-published pair."
+  ],
+  "nextStage": "12-20"
+}

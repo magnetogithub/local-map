@@ -1,0 +1,88 @@
+{
+  "stage": "11-3",
+  "status": "pass",
+  "objective": "Replace the world state store boundary with a WorldStateV2 controller that applies committed atomic replacements, exposes read-only selectors, rejects stale replacements, and prevents direct writable store mutation.",
+  "filesRead": [
+    "reports/prompt11/11-2-seed-to-v2-runtime-entry.json",
+    "src/stores/world-state-store.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/lib/planning/atomic-world-commit.ts",
+    "src/lib/world/territory-entity.ts",
+    "src/lib/world/topology-state.ts",
+    "src/lib/world/country-entity.ts",
+    "src/lib/world/territory-id.ts",
+    "src/stores/world-state-store.test.tsx",
+    "src/stores/world-state-country-selector.test.ts",
+    "src/stores/world-state-iteration-selector.test.ts"
+  ],
+  "changedFiles": [
+    "src/lib/world/world-state-v2.ts",
+    "src/stores/world-state-store.ts",
+    "src/stores/world-state-store-v2.test.ts",
+    "src/stores/world-state-store-v2-fixture.test.ts",
+    "src/stores/world-state-store.test.tsx",
+    "src/stores/world-state-country-selector.test.ts",
+    "src/stores/world-state-iteration-selector.test.ts",
+    "reports/prompt11/11-3-v2-store-boundary.json"
+  ],
+  "commands": [
+    "Get-Content -LiteralPath 'reports\\prompt11\\11-2-seed-to-v2-runtime-entry.json'",
+    "Get-Content -LiteralPath 'src\\stores\\world-state-store.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\world\\world-state-v2.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\planning\\atomic-world-commit.ts'",
+    "npm.cmd test -- --run src/stores/world-state-store-v2.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "Get-Content -LiteralPath 'src\\stores\\world-state-store.test.tsx'",
+    "Get-Content -LiteralPath 'src\\stores\\world-state-country-selector.test.ts'",
+    "Get-Content -LiteralPath 'src\\stores\\world-state-iteration-selector.test.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\world\\territory-entity.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\world\\topology-state.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\world\\country-entity.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\world\\territory-id.ts'",
+    "npm.cmd test -- --run src/stores/world-state-store-v2.test.ts src/stores/world-state-store.test.tsx src/stores/world-state-country-selector.test.ts src/stores/world-state-iteration-selector.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint -- src/stores/world-state-store.ts src/stores/world-state-store-v2.test.ts src/stores/world-state-store-v2-fixture.test.ts src/stores/world-state-store.test.tsx src/stores/world-state-country-selector.test.ts src/stores/world-state-iteration-selector.test.ts src/lib/world/world-state-v2.ts",
+    "git diff -- src/stores/world-state-store.ts src/stores/world-state-store-v2.test.ts src/stores/world-state-store-v2-fixture.test.ts src/stores/world-state-store.test.tsx src/stores/world-state-country-selector.test.ts src/stores/world-state-iteration-selector.test.ts src/lib/world/world-state-v2.ts",
+    "git status --short -- src/stores/world-state-store.ts src/stores/world-state-store-v2.test.ts src/stores/world-state-store-v2-fixture.test.ts src/stores/world-state-store.test.tsx src/stores/world-state-country-selector.test.ts src/stores/world-state-iteration-selector.test.ts src/lib/world/world-state-v2.ts reports/prompt11"
+  ],
+  "gates": {
+    "storeUsesWorldStateV2": true,
+    "storeImportsV1WorldState": false,
+    "storeSatisfiesAtomicWorldCommitStore": true,
+    "revisionMustIncreaseByOne": true,
+    "staleReplacementRejected": true,
+    "duplicateCommandRejected": true,
+    "commitHashMustMatchCurrentHead": true,
+    "writableZustandSetStateExposed": false,
+    "snapshotFrozen": true,
+    "directSnapshotMutationThrows": true,
+    "domainSubscriberNotificationCountForOneCommit": 1,
+    "targetedStoreTests": "pass",
+    "typecheck": "pass",
+    "scopedLint": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "world-state-store.ts now imports WorldStateV2 and assertWorldStateV2 instead of src/lib/world/world-state.ts.",
+    "The controller hides the writable Zustand setState surface and exposes getState, getCommitHash, getCommittedCommandIds, replaceWorldState, and subscribeDomain for the v2 atomic commit boundary.",
+    "replaceWorldState now requires AtomicWorldCommitMetadata, rejects non-sequential revisions, stale previousCommitHash values, mismatched commit revisions, and duplicate command ids.",
+    "The existing v1-oriented store selector tests were migrated to v2 fixtures so repo-wide TypeScript still passes after the store boundary replacement.",
+    "A focused 11-3 test verifies committed revision advance, stale replacement rejection, atomic store type compatibility, and direct snapshot mutation rejection."
+  ],
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/stores/world-state-store-v2.test.ts src/stores/world-state-store.test.tsx src/stores/world-state-country-selector.test.ts src/stores/world-state-iteration-selector.test.ts",
+      "status": "pass",
+      "result": "4 test files passed, 12 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit --incremental false",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/stores/world-state-store.ts src/stores/world-state-store-v2.test.ts src/stores/world-state-store-v2-fixture.test.ts src/stores/world-state-store.test.tsx src/stores/world-state-country-selector.test.ts src/stores/world-state-iteration-selector.test.ts src/lib/world/world-state-v2.ts",
+      "status": "pass"
+    }
+  ],
+  "nextStage": "11-4"
+}

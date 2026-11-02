@@ -1,0 +1,200 @@
+{
+  "generatorVersion": "prompt14-topology-diagnosis-v1",
+  "generator": {
+    "repositoryPath": "scripts/prompt14-topology-diagnosis.mjs",
+    "exists": true,
+    "sha256": "26b2883964036c184880c8ee0169f94378cbb6757c38109eef76d88f7851deca",
+    "byteLength": 2982
+  },
+  "results": [
+    {
+      "source": "rawAdmin0",
+      "countryId": "USA",
+      "sourceFeatureId": "1159321369",
+      "featureIndex": 154,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        263,
+        264
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    },
+    {
+      "source": "rawAdmin0",
+      "countryId": "CAN",
+      "sourceFeatureId": "1159320467",
+      "featureIndex": 155,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        0,
+        1
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    },
+    {
+      "source": "rawAdmin0",
+      "countryId": "EGY",
+      "sourceFeatureId": "1159320575",
+      "featureIndex": 161,
+      "classification": "ring-spike-or-puncture-defect",
+      "polygonIndex": 0,
+      "ringIndex": 0,
+      "vertexIndex": 765,
+      "segmentIndices": [
+        769,
+        770
+      ],
+      "coordinate": [
+        35.621087,
+        23.139293
+      ],
+      "segment": [
+        [
+          35.486665,
+          23.023266
+        ],
+        [
+          35.621087,
+          23.139293
+        ]
+      ],
+      "decision": "blocked: topology change requires justification"
+    },
+    {
+      "source": "rawAdmin1",
+      "countryId": "CHE",
+      "sourceFeatureId": "1159314893",
+      "featureIndex": 770,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        0,
+        1
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    },
+    {
+      "source": "rawAdmin1",
+      "countryId": "USA",
+      "sourceFeatureId": "1159308731",
+      "featureIndex": 1613,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        148,
+        149
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    },
+    {
+      "source": "rawAdmin1",
+      "countryId": "USA",
+      "sourceFeatureId": "1159315259",
+      "featureIndex": 2081,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        5,
+        7
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    },
+    {
+      "source": "rawAdmin1",
+      "countryId": "BMU",
+      "sourceFeatureId": "1159316503",
+      "featureIndex": 2735,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        0,
+        1
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    },
+    {
+      "source": "rawAdmin1",
+      "countryId": "BRA",
+      "sourceFeatureId": "1159309897",
+      "featureIndex": 3813,
+      "classification": "ring-spike-or-puncture-defect",
+      "polygonIndex": 0,
+      "ringIndex": 0,
+      "vertexIndex": 263,
+      "segmentIndices": [
+        347,
+        348
+      ],
+      "coordinate": [
+        -47.302482,
+        -16.040054
+      ],
+      "segment": [
+        [
+          -47.60652,
+          -16.04176
+        ],
+        [
+          -47.302482,
+          -16.040054
+        ]
+      ],
+      "decision": "blocked: topology change requires justification"
+    },
+    {
+      "source": "canonicalP0",
+      "countryId": "USA",
+      "sourceFeatureId": "USA",
+      "featureIndex": 132,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        22,
+        23
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    },
+    {
+      "source": "canonicalP0",
+      "countryId": "CAN",
+      "sourceFeatureId": "CAN",
+      "featureIndex": 152,
+      "classification": "validator-component-crossing-rejection-not-proven-area-overlap",
+      "componentIndices": [
+        0,
+        293
+      ],
+      "intersectionAreaDegreesSquared": 0,
+      "sharedBoundarySegment": null,
+      "decision": "blocked pending independent OGC topology verification; zero clipped area is not proof of complete validity",
+      "standard": "OGC allows disjoint interiors and finite point boundary contacts; Turf rejection is not alone proof of an OGC defect",
+      "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+    }
+  ],
+  "status": "historical-Turf-diagnostics-superseded",
+  "supersededBy": "reports/prompt14/14-02-independent-topology.json",
+  "currentInterpretation": "Full pinned JSTS OGC validation accepts point-contact components; prior pending judgments are historical, not current blocking conditions."
+}

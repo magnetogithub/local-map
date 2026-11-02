@@ -1,0 +1,78 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/.next-e2e/
+/.next-*/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+/.tmp/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+/.tmp-prompt14-npm-ci/
+
+# Prompt 15 generated catalogs and evidence.
+# Keep implementation code trackable.
+/data/catalogs/prompt15/
+/data/derived/prompt15/
+/data/operational-cells/
+/reports/prompt15/
+/reports/verification/
+/.codex-remote-attachments/
+
+# Local archives and assessments created for the Prompt 14 rollback.
+/reports/maintenance/20261014-prompt14-rollback/
+/reports/maintenance/20261014-storage-assessment/
+
+# Keep detailed local maintenance evidence private; publish aggregate summaries only.
+/reports/maintenance/20261028-cleanup/*
+!/reports/maintenance/20261028-cleanup/push-summary.json
+!/reports/maintenance/20261028-cleanup/push-summary.md
+/reports/maintenance/20261028-cleanup-2/*
+!/reports/maintenance/20261028-cleanup-2/push-summary.json
+!/reports/maintenance/20261028-cleanup-2/push-summary.md
+
+# Private complete game snapshots and undo/redo history; never publish actions.
+/data/runtime/operational-game-checkpoints/
+
+# Published CHN acceptance reports pin these small test/build logs.
+!/reports/chn-2020/**/*.log
+!/reports/chn-perf-20261030/**/*.log
+!/reports/chn-province-20261030/**/*.log
+!/reports/chn-render-lod-20261030/**/*.log
+!/reports/hover-debug-20261030/**/*.log

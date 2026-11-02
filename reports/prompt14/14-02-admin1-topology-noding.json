@@ -1,0 +1,84 @@
+{
+  "policy": {
+    "version": "prompt14-shared-source-topology-v1",
+    "generatorVersion": "prompt14-shared-topology-v1",
+    "authority": "Derived game P0; pinned Natural Earth v5.1.2 unsimplified Admin0; existing metadata IDs/owner and existing map-unit assignment retained. Not external legal certification.",
+    "originals": "Raw sources, original production seed and metadata remain byte-identical.",
+    "precision": "Original doubles preserved. No independent rounding, simplification, snapping, buffer or winner-country subtraction.",
+    "operations": [
+      "same-country source union with shared coordinates unchanged",
+      "existing KAS->IND/KAB->KAZ source masks only; no new ownership decisions",
+      "exact duplicate removal and winding normalization",
+      "self-touch ring noding only if geometric area and boundary unchanged"
+    ],
+    "maximumSeedBoundaryDisplacementDegrees": 0.0015070710678118655,
+    "displacementBasis": "Existing distance thinning .0015 degrees plus 5-place rounding radius. Bidirectional continuous segment certificate by adaptive subdivision: distance to each fixed target segment is convex, so endpoint maximum bounds the entire subsegment.",
+    "areaChangeBound": "Seed perimeter * maximumSeedBoundaryDisplacementDegrees + pi * displacement^2 per ring; also report relative area and symmetric difference per country.",
+    "sourceCoverageToleranceDegreesSquared": 1e-9,
+    "p1SelfTouchNodingBoundaryToleranceDegrees": 1e-12,
+    "p1SelfTouchNodingPolicy": "Only pre-existing exact non-adjacent repeated source vertices may be noded. No bow-tie/intersection repair or guessed topology. Preserve feature properties, area within 1e-9 degree squared and certify both complete boundary sets within 1e-12 degree. Validate output independently; otherwise keep candidate invalid and explicitly exclude it through country selection.",
+    "islandHolePolicy": "Every positive-area seed component and hole must intersect a corresponding derived component/hole. Report counts and source self-touch splits; no whole island/hole deletion allowed.",
+    "failureConditions": [
+      "source hash mismatch",
+      "non-deterministic bytes",
+      "metadata/property changes",
+      "positive country overlap",
+      "unjustified ownership change",
+      "displacement/area bound exceeded",
+      "island or hole loss",
+      "invalid derived geometry"
+    ],
+    "locks": "Derived P0 locked after full checks, P1 locked after partition verification; no cap merges across either boundary."
+  },
+  "artifact": {
+    "repositoryPath": "data/derived/prompt14/shared-admin1-input.geojson",
+    "sha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+    "byteLength": 40725848
+  },
+  "repairs": [
+    {
+      "sourceFeatureId": "1159309897",
+      "featureIndex": 3813,
+      "typeBefore": "Polygon",
+      "typeAfter": "MultiPolygon",
+      "componentsBefore": 1,
+      "componentsAfter": 1,
+      "areaDeltaDegreesSquared": -3.552713678800501e-15,
+      "boundary": {
+        "sampledMaximumBoundaryDisplacementDegrees": 3.97146451841487e-15,
+        "certifiedMaximumBoundaryDisplacementUpperBoundDegrees": 3.97146451841487e-15,
+        "seedPerimeterDegrees": 33.08656850073185,
+        "continuousMaximumCertified": true
+      },
+      "before": {
+        "pass": false,
+        "counts": {
+          "features": 1,
+          "polygons": 1,
+          "rings": 1,
+          "vertices": 1417,
+          "polygon": 1,
+          "multiPolygon": 0
+        },
+        "errors": [
+          "source-P1.features[0]: JSTS OGC invalid: Ring Self-intersection at {\"x\":-47.302482,\"y\":-16.040054,\"z\":null}"
+        ]
+      },
+      "after": {
+        "pass": true,
+        "counts": {
+          "features": 1,
+          "polygons": 1,
+          "rings": 2,
+          "vertices": 1418,
+          "polygon": 0,
+          "multiPolygon": 1
+        },
+        "errors": []
+      }
+    }
+  ],
+  "unresolved": [],
+  "identityPreserved": true,
+  "deterministic": true
+}

@@ -1,0 +1,102 @@
+{
+  "stage": "10-68",
+  "status": "pass",
+  "objective": "Plan assignment of one unclaimed Territory to one active Country while rejecting occupied Territories and unknown or retired targets.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-67-territory-partition-planner.json": "cd35a8a068e7e2d64f00c579fa6399defadb7cd1ec8e56223782582eb0fa36be",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/plan-result.test.ts": "75452858fbb52a334c35174ecc1b88fe8bf96572fc661a5298aca4e91840693a",
+    "src/lib/planning/plan-result.ts": "b90e8959e6ce2af14a86a02be7ce1a7deca9caea83858122c50905fb4d0607da",
+    "src/lib/planning/territory-assign-planner.test.ts": "17b5dccae388503e718614ea86218a5193a54367714773710767e1b7698c0d9f",
+    "src/lib/planning/territory-assign-planner.ts": "1c820dcf726dd102e39da482302247bebdc4cd8fa5faa747f05a8ade23a4c127"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-68-territory-assign-planner.json",
+    "src/lib/planning/plan-result.test.ts",
+    "src/lib/planning/plan-result.ts",
+    "src/lib/planning/territory-assign-planner.test.ts",
+    "src/lib/planning/territory-assign-planner.ts"
+  ],
+  "commands": [
+    {
+      "command": "Verify 10-67 status and every recorded output hash",
+      "exitCode": 0
+    },
+    {
+      "command": "Read the local Next.js 16.3 Vitest guide and inspect the assign schema plus ownership/hash contracts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/territory-assign-planner.test.ts",
+      "exitCode": 1,
+      "note": "Expected red test: the territory-assign planner module did not exist."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/territory-assign-planner.test.ts src/lib/planning/plan-result.test.ts src/lib/planning/planner-boundary.test.ts",
+      "exitCode": 0,
+      "result": "3 files passed; 11 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run assign schema/planner/previous planners/ownership/hash/world-state targeted files",
+      "exitCode": 0,
+      "result": "13 files passed; 81 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/territory-assign-planner.ts src/lib/planning/territory-assign-planner.test.ts src/lib/planning/plan-result.ts src/lib/planning/plan-result.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "measurements": {
+    "successfulOwnershipChanges": 1,
+    "geometryHashChanges": 0,
+    "topologyHashChanges": 0,
+    "countryDomainChanges": 0,
+    "occupiedTerritoriesAccepted": 0,
+    "unknownTargetsAccepted": 0,
+    "retiredTargetsAccepted": 0,
+    "targetedTestFilesPassed": 13,
+    "targetedTestsPassed": 81,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-77"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "unclaimedTerritoryAssigned": true,
+    "occupiedTerritoryRejected": true,
+    "unknownTerritoryRejected": true,
+    "unknownTargetRejected": true,
+    "retiredTargetRejected": true,
+    "geometryAndPropertiesShared": true,
+    "topologyShared": true,
+    "countryDomainsShared": true,
+    "ownershipHashChanged": true,
+    "geometryHashStable": true,
+    "territoriesRootUpdated": true,
+    "singleRevisionNextState": true,
+    "inputStateUnchanged": true,
+    "targetedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-69"
+}

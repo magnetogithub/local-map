@@ -1,0 +1,58 @@
+{
+  "stage": "10-37",
+  "status": "pass",
+  "objective": "Define a strict territory.partition v2 schema for a source Territory and deterministic keyed result partitions while leaving union equivalence to the planner.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-36-country-dissolve-schema.json": "c8d8c852e468eda014900526a926c05652d01a5d9f107e0c688e0d20c8d0c3c6",
+    "src/lib/commands/map-command-v2.ts": "9cfabb30e0dfde7742b4806c0d31081be6b92baaacc8562bc63716676bea766f",
+    "src/lib/commands/country-establish-v2.ts": "54a711027bf41467253510fc744cd74bb8a7f5a0c8bdbffdd38e4d506a58684e"
+  },
+  "outputHashes": {
+    "src/lib/commands/territory-partition-v2.ts": "5de2e4de3982679d06892ba65f7320d0ccc4846eb4c4fe42e84713f931f127ae",
+    "src/lib/commands/territory-partition-v2.test.ts": "8f156e0f993913d4c5c3c8b5814b1661eaa9aba6cb832f170214968202278c97"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-37-territory-partition-schema.json",
+    "src/lib/commands/territory-partition-v2.test.ts",
+    "src/lib/commands/territory-partition-v2.ts"
+  ],
+  "commands": [
+    {"command": "Verify reports/prompt10/10-36-country-dissolve-schema.json status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/commands/territory-partition-v2.test.ts", "exitCode": 1, "note": "Expected red test: territory-partition-v2 module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/commands/territory-partition-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/commands/territory-partition-v2.ts src/lib/commands/territory-partition-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 13,
+    "minimumResultPartitions": 2,
+    "supportedGeometryTypes": 2,
+    "plannerUnionChecks": 0,
+    "worldStateReads": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-45"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "sourceTerritoryAndKeyedResultsDefined": true,
+    "minimumTwoPartitionsRequired": true,
+    "basicPolygonStructureAndFiniteCoordinatesChecked": true,
+    "unionEquivalenceDeferredToPlanner": true,
+    "policyAndPlannerFieldsRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-38"
+}

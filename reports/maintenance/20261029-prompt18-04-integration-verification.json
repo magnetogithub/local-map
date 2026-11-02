@@ -1,0 +1,123 @@
+{
+  "task": "18-04",
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "status": "incomplete-browser-verification",
+  "completionClaimed": false,
+  "summary": "Merged automated regressions, type checking and lint pass. A supported webpack production build passes after two Turbopack PostCSS worker failures. Actual scripted play and a valid same-condition browser performance comparison remain unfinished because Computer Use stopped this turn.",
+  "integration": {
+    "AandBContract": "operationalCellView arguments, return fields, validation and fresh cell views remain compatible with source membership, controller-color and owner-first interaction indexes.",
+    "applicationCodeChangedThisStep": false,
+    "testTypingFixes": [
+      "Typed the nullable-controller patch dictionary explicitly instead of inferring an optional key incompatible with Record<number, patch>.",
+      "Matched two deferred detail promises to the polygon fixture's actual return type rather than the wider production Polygon/MultiPolygon union."
+    ],
+    "changedCodeThisStep": ["src/lib/map/operational-map-consumer.test.ts"],
+    "priorUserAndImplementationChangesPreserved": true
+  },
+  "automatedValidation": {
+    "regressions": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/map/operational-map-consumer.test.ts src/components/map/OperationalWorldMap.test.tsx src/lib/projection/operational-map-projection.test.ts src/lib/world/country-map-color.test.ts src/lib/map/operational-delivery.test.ts --configLoader native",
+      "filesPassed": 5,
+      "uniqueTestsPassed": 75,
+      "failed": 0,
+      "elapsedSeconds": 12.32,
+      "consumerRerunAfterTestTypingFixes": {"passed": 40, "failed": 0, "countedAgainInUniqueTotal": false}
+    },
+    "typecheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "status": "passed after correcting three test-only type errors"
+    },
+    "lint": {
+      "status": "passed",
+      "files": [
+        "src/lib/map/operational-map-consumer.ts",
+        "src/lib/map/operational-map-consumer.test.ts",
+        "src/lib/map/operational-map-sources.ts",
+        "src/components/map/OperationalWorldMap.tsx",
+        "src/components/map/OperationalWorldMap.test.tsx",
+        "src/lib/projection/operational-map-projection.ts",
+        "src/lib/projection/operational-map-projection.test.ts"
+      ],
+      "note": "The consumer test was linted again after its type-only changes."
+    },
+    "gitDiffCheck": "passed",
+    "readOnlyIntegrationReview": "No direct A/B integration defect found; actual MapLibre rendering, responsiveness and mount counts remain outside fake-map proof."
+  },
+  "productionBuild": {
+    "status": "passed-with-webpack-fallback",
+    "nextVersion": "16.3.0",
+    "command": "PAX_BUILD_DIST_DIR=.next-prompt18-build node node_modules/next/dist/bin/next build --webpack",
+    "distDir": ".next-prompt18-build",
+    "developmentServerKeptRunning": true,
+    "compiledSeconds": 8.8,
+    "typecheckSeconds": 8.2,
+    "staticPagesGenerated": 11,
+    "routeTraceFiles": 14,
+    "scriptedProviderMarkerFilesInProductionServer": 0,
+    "productionAliasConditions": "The build process used PAX_E2E_BUILD=0 and PAX_OPERATIONAL_SMOKE=0; production provider code/config was not edited or invoked for a turn.",
+    "turbopack": {
+      "status": "failed",
+      "attempts": 2,
+      "permissions": ["workspace sandbox", "ordinary host permissions"],
+      "failure": "Failed to write app endpoint /page while processing globals.css: PostCSS node worker exited with code 0 before the IPC connection.",
+      "causeEstablished": false,
+      "limitation": "The successful webpack build does not establish that the default Turbopack production build passes. No application/CSS workaround or bundler configuration change was made."
+    },
+    "buildResult": "reports/verification/prompt18-04-20261029/build-result.json",
+    "temporaryConfigRestoration": "tsconfig.json and next-env.d.ts were restored byte-for-byte to their immediately pre-build contents after confirming no unrelated concurrent changes. Existing tsconfig changes remain."
+  },
+  "browserAttempt": {
+    "url": "http://127.0.0.1:3001/",
+    "mode": "Existing Next.js development scripted-provider server; same server PID 31240 and launcher PID 6868 as 18-01.",
+    "providerProof": "Existing compiled route imports src/lib/test-only/region-provider.server.ts. No turn was submitted by this verification.",
+    "navigationStartedAtUtc": "2026-10-29T03:14:38.456Z",
+    "initialLoadingObservedAtUtc": "2026-10-29T03:14:39.206Z",
+    "screenshotObservation": {
+      "startedAtUtc": "2026-10-29T03:14:57.405Z",
+      "returnedAtUtc": "2026-10-29T03:14:58.272Z",
+      "elapsedSinceNavigationMs": 19816,
+      "note": "The setup map was visible with transient incomplete country fills. A later DOM probe reported map status ready. This is not an exact startup duration or a completed responsiveness check."
+    },
+    "measuredViewportCss": {"width": 1553, "height": 780},
+    "baselineViewportCss": {"width": 1920, "height": 855},
+    "devicePixelRatio": 1,
+    "visualViewportScale": 1,
+    "viewportOverrideUsed": false,
+    "sameViewportConditionMet": false,
+    "comparisonAccepted": false,
+    "gpuProcessFlags": ["--use-gl=angle", "--use-angle=d3d11-warp-webgl"],
+    "backgroundTabs": "Existing user tabs, including an active game tab, remained untouched. Background state was not controlled.",
+    "policyInterruption": "Computer Use could not determine the current Windows browser URL confidently enough to enforce policy and stopped UI control for this turn. No further browser/computer interaction or alternative automation was attempted.",
+    "sampling": "Approximately one-second CPU/working-set samples were stopped after the interruption and retained only as an unmatched-viewport attempt. No CPU, memory, FPS or startup improvement is inferred from them.",
+    "rawSamples": "reports/verification/prompt18-04-20261029/process-samples.jsonl"
+  },
+  "structuralEvidence": {
+    "references": [
+      "reports/maintenance/20261029-prompt18-01-baseline.json",
+      "reports/maintenance/20261029-prompt18-02-front-rendering.json",
+      "reports/maintenance/20261029-prompt18-03a-source-and-interaction.json",
+      "reports/maintenance/20261029-prompt18-03b-color-cache.json"
+    ],
+    "smallFixture": "Five cells/five edges: initial writes fell from 20 before Prompt 18 to 15 after 18-02 and 5 after 18-03A. Hover on three indexed cells writes three flags and invokes zero operationalCellView calls; repeat hover writes zero.",
+    "priorFourTileProjection": "The prior sample's base-front candidates are filtered from 676904 edges to 921 c=1 edges, and the unchanged empty-detail initial write projection is 1288280 -> 203792. These sample counts were not remeasured in this browser run.",
+    "limit": "Unit/source workload evidence does not substitute for actual browser performance and play verification."
+  },
+  "unfinishedRequiredChecks": [
+    "Fresh scripted-provider tab at the same actual 1920x855 CSS viewport, scale/DPR 1, without a viewport override; record current mode and background conditions.",
+    "Initial preparation, settled idle, one zoom and map pan, country hover/selection, with actual responsiveness and separate CPU/working-set observations.",
+    "KOR start, queue [DEBUG_WORLD_EFFECT] 북한에 전쟁을 개시하여 휴전선 인근을 점령, advance 1 day, undo and redo.",
+    "After every play/history operation, verify map ready and data-map-applied-revision equals authoritative data-world-revision; verify date, turn, queue and territorial-control changes.",
+    "Measure or clearly limit map mount/replay counts, isolate remaining severe delays, and retain current approval/catalog and production DEBUG restrictions.",
+    "Resolve or separately scope the default Turbopack PostCSS worker failure; webpack fallback is documented as a limitation."
+  ],
+  "dataAndSideEffects": {
+    "externalAiCallsByThisVerification": 0,
+    "turnRequestsByThisVerification": 0,
+    "originalDataGenerationOrModification": false,
+    "trackedDataPublicAndProviderConfigurationDiff": "none",
+    "fullCatalogRehashPerformed": false,
+    "userServersOrTabsTerminated": false,
+    "commitOrPushPerformed": false
+  }
+}

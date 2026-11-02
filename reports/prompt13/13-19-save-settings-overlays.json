@@ -1,0 +1,39 @@
+{
+  "stage": "13-19",
+  "status": "pass",
+  "summary": "저장 placeholder는 성공을 오표시하지 않으며 설정은 React session state로만 유지된다. 내부 움직임 줄이기 설정과 운영체제 reduced-motion이 모두 실제 panel/tooltip CSS를 제어한다.",
+  "reduceMotion": {
+    "sessionBoundary": "GameScreen의 data-reduce-motion attribute",
+    "selectors": [
+      ".game-screen[data-reduce-motion] .game-panel",
+      ".game-screen[data-reduce-motion] .game-tooltip-popup"
+    ],
+    "effect": "panel 및 tooltip animation 제거, tooltip transition 제거, game-screen 하위 scroll behavior 제거",
+    "osPreference": "prefers-reduced-motion: reduce 경로를 그대로 유지"
+  },
+  "mapSettings": {
+    "labels": "label layer setLayoutProperty visibility만 변경",
+    "capitals": "capital layer setLayoutProperty visibility만 변경",
+    "borders": "border layer setPaintProperty line-width만 변경",
+    "sourceMutation": "map-ui-settings-adapter 단위 테스트에서 setData 호출 0회를 검증",
+    "worldMap": "settings effect는 기존 map instance에 adapter를 적용하며 WorldMap key/remount 또는 증분 source adapter 우회가 없다"
+  },
+  "persistence": "설정은 GameScreen useState에만 존재하며 localStorage, IndexedDB, URL 또는 파일 저장을 사용하지 않는다. 뉴스 알림은 미래 UI용 session 값만 유지한다.",
+  "saveBehavior": "초기 backend-pending 문구를 표시하고 클릭 후 저장되지 않았음을 알리며 성공 문구를 표시하지 않는다.",
+  "filesChanged": [
+    "src/components/game/GameChrome.test.tsx",
+    "src/components/game/WarAndSystemOverlays.test.tsx",
+    "reports/prompt13/13-19-save-settings-overlays.json"
+  ],
+  "verification": {
+    "typescriptExitCode": 0,
+    "eslintExitCode": 0,
+    "vitest": {"exitCode": 0, "files": 10, "tests": 60},
+    "productionBuildExitCode": 0
+  },
+  "knownLimitations": [
+    "서버 저장 backend가 없어 저장 버튼은 실제 데이터를 저장하지 않는다.",
+    "뉴스 알림 설정의 소비 UI는 후속 뉴스 단계 범위다."
+  ],
+  "nextStage": "13-20"
+}

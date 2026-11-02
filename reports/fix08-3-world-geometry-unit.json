@@ -1,0 +1,167 @@
+{
+  "stage": "8-3",
+  "status": "pass",
+  "inputHashes": {
+    "reports/fix08-2-font-outline-probe.json": "d4d66392a47776ea6124c5f2f1ab9e9384547b03f795a11ab1afff60276e90b3",
+    "public/fonts/Noto Sans KR/NotoSansCJKkr-Regular.otf": "6bcb2a0703aa137e874fc2dffa85f6c21ba9a67fa329e81b8c801663af7e992a"
+  },
+  "outputHashes": {
+    "src/types/fontkit.d.ts": "610f3921d9a64cdea1a66dbd20d427821ae317099c5bb467e93984d47726bce8",
+    "src/lib/map/font-outline.ts": "a02ffd5ed15ff8dddf1eb7170e771a5d49d61090607cc395ae37c4b0a81d4ce4",
+    "src/lib/map/country-label-glyph-geometry.ts": "c8aad53aff771b2b955133a2cc1b9d9c81a6c379c4dc5709897295f8754dcb4f",
+    "src/lib/map/country-label-glyph-geometry.test.ts": "e79fc6fd07b6175667b4be297dc5d72c74116b549939fa3ee5084bda42bdd0e3"
+  },
+  "prerequisite": {
+    "stage": "8-2",
+    "status": "pass",
+    "allRecordedHashesMatch": true,
+    "reportHash": "d4d66392a47776ea6124c5f2f1ab9e9384547b03f795a11ab1afff60276e90b3"
+  },
+  "implementation": {
+    "fontAdapter": {
+      "file": "src/lib/map/font-outline.ts",
+      "api": "shapeFontOutlines",
+      "parser": "fontkit 2.0.4 public create/layout/path API",
+      "outputs": ["code point", "glyph id", "positioned advance", "offsets", "polygonized contours and holes"],
+      "flattenToleranceFontUnits": 1,
+      "fixedPrecisionDecimals": 6
+    },
+    "pureWorldGeometry": {
+      "file": "src/lib/map/country-label-glyph-geometry.ts",
+      "api": "buildCountryLabelGlyphArtifact",
+      "mapLibreImports": 0,
+      "baselineSource": "existing CountryLabelLayout.baseline from computeCountryLabelLayout",
+      "effectiveTerritoryWidthSource": "CountryLabelLayout.availableWidthWorld",
+      "scale": "target label width / shaped total font advance",
+      "placement": "cumulative glyph advance center sampled on baseline; rigid glyph rotation by local tangent",
+      "coordinates": "font units -> local world plane -> longitude/latitude Polygon or MultiPolygon",
+      "dateline": "unwrap around baseline reference, intersect against 360-degree world bands, then shift each piece into canonical longitude",
+      "bounds": "fixed-precision Web Mercator world coordinates from actual glyph vertices",
+      "insideRatio": "actual glyph polygon area intersected with current CountryEntity geometry in the local world plane",
+      "canonicalOrder": "input glyphIndex order; outer/hole contours sorted by absolute area then source index; fixed coordinate precision"
+    },
+    "artifactContract": [
+      "countryId",
+      "labelInstanceId",
+      "text",
+      "geometryHash",
+      "fontHash",
+      "layoutVersion",
+      "baseline",
+      "glyphIndex/codePoint/advanceWorld/baselineDistanceWorld/tangentAngle/fillGeometry",
+      "boundsWorld",
+      "effectiveTerritoryWidthWorld",
+      "labelWidthWorld",
+      "widthRatio",
+      "insideRatio"
+    ]
+  },
+  "representativeArtifacts": {
+    "AUS": {
+      "text": "오스트레일리아",
+      "glyphCount": 7,
+      "artifactSha256": "cccd9d48754c572fafda2d4f325cf97ebb01c5cbe0195b09f46e566ec0cf5a01",
+      "boundsWorld": [418.57531, 284.588194, 462.819969, 296.156585],
+      "effectiveTerritoryWidthWorld": 52.402282,
+      "labelWidthWorld": 40.653202,
+      "widthRatio": 0.775791,
+      "insideRatio": 0.950894,
+      "vertexCount": 540,
+      "holeCount": 3,
+      "invalidOrSelfIntersectingRings": 0
+    },
+    "RUS": {
+      "text": "러시아",
+      "glyphCount": 3,
+      "artifactSha256": "7908a355c794ed0b0e1f95e0512f641053fd54ec641faf23458b37f2e2c342ba",
+      "boundsWorld": [308.097304, 58.19285, 467.823061, 150.965077],
+      "effectiveTerritoryWidthWorld": 96.666657,
+      "labelWidthWorld": 76.828552,
+      "widthRatio": 0.794778,
+      "insideRatio": 0.668373,
+      "vertexCount": 221,
+      "holeCount": 1,
+      "invalidOrSelfIntersectingRings": 0,
+      "qualityNote": "8-3 proves valid deterministic geometry; the low actual inside ratio is retained as raw evidence for later representative policy/quality stages and is not hidden by the previous footprint estimate."
+    }
+  },
+  "tests": {
+    "focused": {
+      "command": "npx.cmd vitest run src/lib/map/country-label-glyph-geometry.test.ts src/lib/map/country-label-layout.test.ts --reporter=verbose",
+      "exitCode": 0,
+      "files": "2/2",
+      "tests": "14/14",
+      "durationMs": 4200,
+      "coverage": ["AUS/RUS deterministic deep equality and hash", "closed valid rings and self-intersection zero", "continuous glyphIndex and code point mapping", "monotonic baseline progression", "Korean hole preservation", "dateline split/wrap", "empty text", "missing glyph", "zero-length baseline", "existing baseline regression"]
+    },
+    "lint": {
+      "command": "npx.cmd eslint new 8-3 modules, test, and declaration",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "scopedTypecheck": {
+      "command": "npx.cmd tsc --noEmit --strict --skipLibCheck --esModuleInterop --module esnext --moduleResolution bundler --allowImportingTsExtensions --target ES2017 --lib esnext,dom src/types/fontkit.d.ts src/lib/map/font-outline.ts src/lib/map/country-label-glyph-geometry.ts",
+      "exitCode": 0
+    },
+    "wholeProjectTypecheck": {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 1,
+      "classification": "pre-existing out-of-scope errors",
+      "errors": [
+        "e2e/fix08-8a3.spec.ts: screenshotZoom missing on union members (3 occurrences)",
+        "src/components/map/WorldMap.tsx: curved layer id string versus literal union",
+        "src/components/map/WorldMap.tsx: JSON anchor/baseline tuple casts (2 occurrences)",
+        "src/lib/world/country-map-artifacts.test.ts: existing JSON CountryLabelLayout tuple cast"
+      ],
+      "new8_3Errors": 0
+    }
+  },
+  "changedFiles": [
+    "src/types/fontkit.d.ts",
+    "src/lib/map/font-outline.ts",
+    "src/lib/map/country-label-glyph-geometry.ts",
+    "src/lib/map/country-label-glyph-geometry.test.ts",
+    "reports/fix08-3-world-geometry-unit.json"
+  ],
+  "commands": [
+    {"command": "verify revalidated 8-2 pass and all input/output hashes", "exitCode": 0, "durationMs": 500},
+    {"command": "initialize 8-3 report as running", "exitCode": 0, "durationMs": 800},
+    {"command": "inspect installed fontkit typing/API and existing baseline exports", "exitCode": 0, "durationMs": 900},
+    {"command": "implement font outline adapter, pure glyph geometry transform, types, and tests", "exitCode": 0, "durationMs": 14600},
+    {"command": "first focused Vitest run", "exitCode": 1, "durationMs": 10900, "note": "Parser identified an accidental colon in the boundsWorld const declaration; corrected immediately."},
+    {"command": "focused Vitest after parser correction", "exitCode": 0, "durationMs": 3700, "tests": "5/5"},
+    {"command": "whole-project typecheck plus scoped lint", "exitCode": 0, "durationMs": 26000, "note": "PowerShell returned the final lint exit code 0 while tsc output showed existing project errors; rerun separately below."},
+    {"command": "first scoped typecheck", "exitCode": 1, "durationMs": 4000, "note": "Missing allowImportingTsExtensions flag for existing country-label-layout import; command corrected without code change."},
+    {"command": "corrected scoped typecheck plus focused 14-test suite", "exitCode": 0, "durationMs": 5500},
+    {"command": "final focused tests, lint, and scoped strict typecheck", "exitCode": 0, "durationMs": 6900},
+    {"command": "emit deterministic AUS/RUS raw summaries through test-only environment flag", "exitCode": 0, "durationMs": 5700},
+    {"command": "whole-project tsc --noEmit", "exitCode": 1, "durationMs": 3200, "note": "Only existing WorldMap, prior E2E, and existing artifact-test errors; new 8-3 files absent from diagnostics."},
+    {"command": "finalize 8-3 report", "exitCode": 0, "durationMs": 0}
+  ],
+  "gates": {
+    "priorStagePassAndHashesMatch": true,
+    "AUSArtifactGenerated": true,
+    "RUSArtifactGenerated": true,
+    "validPolygons": true,
+    "selfIntersectionsZero": true,
+    "glyphIndexContinuous": true,
+    "codePointMappingExact": true,
+    "holePreserved": true,
+    "deterministicDeepEquality": true,
+    "deterministicHashEquality": true,
+    "datelineSplitWrap": true,
+    "fixedPrecisionAndCanonicalOrder": true,
+    "pureModuleHasNoMapLibre": true,
+    "focusedTestsPass": true,
+    "scopedLintPass": true,
+    "scopedTypecheckPass": true,
+    "stageStatus": "pass"
+  },
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-fatal Vite native config-loader warning.",
+    "Whole-project TypeScript validation is not clean due to existing files outside the 8-3 change set; scoped strict validation of all new production modules passes."
+  ],
+  "nextStage": "8-4"
+}

@@ -1,0 +1,11 @@
+{
+  "stage": "13-32",
+  "status": "pass",
+  "summary": "1280x720과 1920x1080의 여섯 캡처를 정상 지도 상태로 다시 생성하고 직접 검사했다. 국가 fill, 국경선, HUD, overlay, modal이 보이며 map error/재동기화 안내는 없다.",
+  "filesChanged": ["e2e/prompt13-integration.spec.ts", "screenshots/prompt13-32-modal-1280x720.png", "screenshots/prompt13-32-overlay-1280x720.png", "screenshots/prompt13-32-hud-map-1280x720.png", "screenshots/prompt13-32-modal-1920x1080.png", "screenshots/prompt13-32-overlay-1920x1080.png", "screenshots/prompt13-32-hud-map-1920x1080.png"],
+  "commands": [{"command": "npm run test:e2e -- e2e/prompt13-integration.spec.ts", "exitCode": 0, "evidence": "2/2 viewport flows passed and overwrote all six screenshots"}],
+  "screenshots": ["screenshots/prompt13-32-modal-1280x720.png", "screenshots/prompt13-32-overlay-1280x720.png", "screenshots/prompt13-32-hud-map-1280x720.png", "screenshots/prompt13-32-modal-1920x1080.png", "screenshots/prompt13-32-overlay-1920x1080.png", "screenshots/prompt13-32-hud-map-1920x1080.png"],
+  "visualInspection": ["country fills and low/high-resolution borders visible", "no map error or resynchronization prompt", "modal backdrop retains a rendered map", "HUD and primary controls remain inside 1280x720", "overlay owns internal overflow only when needed", "French Republic 2020 agrees with committed state"],
+  "knownLimitations": [],
+  "nextStage": "13-33"
+}

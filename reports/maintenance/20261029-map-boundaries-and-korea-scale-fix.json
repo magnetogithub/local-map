@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-29",
+  "scope": "Fix peacetime borders, hide operational subdivisions, and reduce KOR subdivision density to PRK ADM2 scale.",
+  "catalog": {
+    "previous": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+    "current": "catalog-v3-prompt19-korea-416fa2c3b263ab7a13be",
+    "cellsBefore": 9280,
+    "cellsAfter": 6530,
+    "edgesAfter": 21908
+  },
+  "changes": {
+    "borders": "Black country/coast borders. Different controllers alone do not imply a front; the pair requires valid owners/controllers and at least one occupied side. No gold default for tile c=1.",
+    "hiddenBoundaries": "Both vector and exact administrative/operational/residual subdivision layers remain hidden, including country selection and detail closing. Polygon fills, hit selection and occupation fronts remain operational.",
+    "koreaScale": {
+      "beforeTotalCells": 4377,
+      "afterTotalCells": 1181,
+      "reductionPercent": 73.02,
+      "beforeFineCells": 4170,
+      "afterFineCells": 538,
+      "coarseResidualCells": 643,
+      "averageFineAreaKm2": 179.26233633996753,
+      "prkAverageFineAreaKm2": 183.67737762641278,
+      "source": "geoBoundaries KOR ADM2 2020 actual 228 features; metadata reports 229, discrepancy retained."
+    },
+    "sourceIntegrity": "Strict original interior membership prevents source holes and source-free faces from acquiring inferred administrative ownership. Explicit coarse residual land preserves the fixed country envelope.",
+    "prk": "Original ADM2 source and country outline retained; previous inferred source-free fine faces become explicit coarse residuals. Runtime fine/coarse partition changes from 653/48 to 659/488; not a byte-identical PRK subdivision.",
+    "preparation": "Source lock and joined input can be selected explicitly; npm data:korea/data:world target the new versioned ADM2 recipe. Old source inputs/snapshots retained."
+  },
+  "validation": {
+    "renderSuites": {
+      "files": 6,
+      "passed": 82
+    },
+    "additionalRootSuites": {
+      "files": 4,
+      "passed": 33,
+      "notes": "Attribution test updated for the new source, rerun 13/13 passed. Some suites overlap with render and independent checks."
+    },
+    "sourceTests": {
+      "passed": 11
+    },
+    "strictGeometryRegression": {
+      "passed": 16,
+      "notes": "Includes source-hole, actual country-hole, overlap, default legacy behavior and candidate fixtures."
+    },
+    "independentCatalogTests": {
+      "files": 4,
+      "passed": 14
+    },
+    "typecheck": "passed; separate tsc and production build TypeScript",
+    "lint": "passed for changed renderer/projection/UI/packaging files",
+    "diffCheck": "passed",
+    "package": "5977 pinned artifacts, 245 other countries unchanged, KOR/PRK all polygons valid, fixed country component/hole/area/bbox preserved, adjacency complete, z0–6 no interior land omissions",
+    "build": {
+      "status": "passed",
+      "dist": ".next-map-boundary-fix-build",
+      "bundler": "webpack",
+      "retry": "Initial sandbox EPERM creating static output directory; same build passed with workspace access.",
+      "configsRestored": true
+    },
+    "browser": {
+      "url": "http://127.0.0.1:3030/game",
+      "mapStatus": "ready",
+      "consoleErrors": 0,
+      "korPanelTerritories": 1181,
+      "prkPanelTerritories": 1147,
+      "verified": "Black KOR/PRK/CHN borders; no administrative lines with country detail open or closed."
+    },
+    "externalAiRequests": 0
+  },
+  "runningApps": {
+    "updated": {
+      "url": "http://127.0.0.1:3030/",
+      "pid": 20552,
+      "productionRealProvider": true
+    },
+    "preserved": {
+      "url": "http://127.0.0.1:3029/",
+      "pid": 33636,
+      "catalog": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+      "note": "Existing game preserved; use 3030 for new map. Old catalog session cannot migrate automatically."
+    }
+  },
+  "evidence": {
+    "screen": "reports/verification/map-boundary-fix-20261029/korea-boundaries-fixed.png",
+    "selectionScreen": "reports/verification/map-boundary-fix-20261029/korea-selected.png",
+    "source": "reports/maintenance/20261029-kor-adm2-source-verification.json",
+    "geometry": "reports/maintenance/20261029-kor-adm2-independent-geometry-comparison.json",
+    "size": "reports/maintenance/20261029-korea-adm2-size-and-source-containment.json",
+    "independent": "reports/maintenance/20261029-kor-adm2-independent-verification.json",
+    "buildLog": ".tmp/map-boundary-fix-20261029/build.log",
+    "serverChecks": "reports/verification/map-boundary-fix-20261029/server-checks.json"
+  },
+  "limits": [
+    "Actual military outcomes were not re-tested through an external AI request.",
+    "Original metadata and coarse residual coverage are explicit; this is not a certification of complete administrative coverage."
+  ]
+}

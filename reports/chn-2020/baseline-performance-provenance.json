@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "chn-2020-baseline-performance-provenance-v1",
+  "measurements": {
+    "path": "reports/chn-2020/baseline-play-performance.json",
+    "sha256": "aeb6f3364493b49be153267c3672b08d7920b2d804739b881220408bebc9c9c8",
+    "byteLength": 13819
+  },
+  "beforeProbeArchive": {
+    "path": "reports/chn-2020/baseline-verify-play-performance.test.ts",
+    "sha256": "58a197bbfdf0ec490db25968080b6954f6032b783455431aeaa75fca6ccff486",
+    "byteLength": 18076
+  },
+  "beforeProbeMatchesRecordedDigest": true,
+  "beforeOperationalCatalogServer": {
+    "path": "reports/chn-2020/baseline-operational-catalog.server.ts",
+    "sha256": "4d3ab875389ac1716dfbd5d19506f2245dd5d27209d21bb2754a620f985d3887",
+    "byteLength": 13728
+  },
+  "baselinePointer": {
+    "path": "reports/chn-2020/baseline-runtime-pointer.json",
+    "sha256": "652a233e6b26397fdb32bc56781e2fbc6dcc67a1545774a7ed7d571a3e5ad8df",
+    "byteLength": 241
+  },
+  "measurementReportUnmodified": true,
+  "method": "Original observed baseline timings are retained. The exact pre-change probe source was reconstructed and accepted only after matching its recorded SHA-256 and byte length. The original catalog server source bytes are independently archived by the root before the binary-incidence optimization. Candidate timings use the current explicitly pinned runtime code."
+}

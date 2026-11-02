@@ -1,0 +1,14 @@
+{
+  "pass": false,
+  "outcome": "stopped-after-prolonged-compile-with-growing-memory",
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "command": "npm run build",
+  "bundler": "Turbopack",
+  "startedAt": "2026-10-30T05:33:31.9080608Z",
+  "stoppedAt": "2026-10-30T05:38:47.7384820Z",
+  "workingSetBytes": 7605374976,
+  "cpuSeconds": 76.84375,
+  "stage": "compile",
+  "log": "reports/chn-2020/build-output.log",
+  "fallback": "npm run build -- --webpack"
+}

@@ -1,0 +1,646 @@
+{
+  "status": "pass",
+  "stages": [
+    {
+      "zoom": 3.4,
+      "snapshot": {
+        "worldSchema": 3,
+        "simulationSchema": 2,
+        "date": "2020-01-01",
+        "worldRevision": 0,
+        "catalogRef": {
+          "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+          "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+          "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+          "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+          "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+        },
+        "pairNotifications": 0,
+        "simulationRevision": 0,
+        "playerCountryId": "KOR",
+        "uiPlayerCountryId": null,
+        "canUndo": false,
+        "canRedo": false,
+        "authorityOrder": [],
+        "eventCount": 0,
+        "projectionBuilds": 1,
+        "fullProjectionBuilds": 1,
+        "colorProjectionUpdates": 0,
+        "fullBuilds": 1,
+        "countryRebuilds": 247,
+        "territoryRebuilds": 4231,
+        "territoryUpdates": 0,
+        "edgeUpdates": 13734,
+        "indexedEdges": 13734,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
+        "verifiedRequests": 13,
+        "cacheHits": 0,
+        "cachedTiles": 8,
+        "cachedBytes": 3132905
+      },
+      "fill": {
+        "id": "catalog-territory-fill",
+        "type": "fill",
+        "source": "world-territory-catalog",
+        "source-layer": "territories",
+        "paint": {
+          "fill-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-outline-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-antialias": true
+        }
+      },
+      "admin": {
+        "id": "catalog-administrative-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "minzoom": 4,
+        "filter": [
+          "==",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "line-color": "#FFFFFF",
+          "line-opacity": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0,
+            3,
+            0.22,
+            5,
+            0.52
+          ],
+          "line-width": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0.25,
+            5,
+            0.85,
+            7,
+            1
+          ]
+        }
+      },
+      "country": {
+        "id": "catalog-territory-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "filter": [
+          "!=",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "paint": {
+          "line-color": "#53615F",
+          "line-width": [
+            "case",
+            [
+              "==",
+              [
+                "get",
+                "boundaryClass"
+              ],
+              "administrative"
+            ],
+            0.3,
+            [
+              "case",
+              [
+                "==",
+                [
+                  "get",
+                  "boundaryClass"
+                ],
+                "country"
+              ],
+              0.8,
+              0.8
+            ]
+          ]
+        }
+      },
+      "visibility": "none",
+      "renderedAdmin": 0
+    },
+    {
+      "zoom": 4.2,
+      "snapshot": {
+        "worldSchema": 3,
+        "simulationSchema": 2,
+        "date": "2020-01-01",
+        "worldRevision": 0,
+        "catalogRef": {
+          "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+          "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+          "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+          "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+          "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+        },
+        "pairNotifications": 0,
+        "simulationRevision": 0,
+        "playerCountryId": "KOR",
+        "uiPlayerCountryId": null,
+        "canUndo": false,
+        "canRedo": false,
+        "authorityOrder": [],
+        "eventCount": 0,
+        "projectionBuilds": 1,
+        "fullProjectionBuilds": 1,
+        "colorProjectionUpdates": 0,
+        "fullBuilds": 1,
+        "countryRebuilds": 247,
+        "territoryRebuilds": 4231,
+        "territoryUpdates": 0,
+        "edgeUpdates": 13748,
+        "indexedEdges": 13748,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
+        "verifiedRequests": 19,
+        "cacheHits": 0,
+        "cachedTiles": 14,
+        "cachedBytes": 3366212
+      },
+      "fill": {
+        "id": "catalog-territory-fill",
+        "type": "fill",
+        "source": "world-territory-catalog",
+        "source-layer": "territories",
+        "paint": {
+          "fill-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-outline-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-antialias": true
+        }
+      },
+      "admin": {
+        "id": "catalog-administrative-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "minzoom": 4,
+        "filter": [
+          "==",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "layout": {
+          "visibility": "visible"
+        },
+        "paint": {
+          "line-color": "#FFFFFF",
+          "line-opacity": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0,
+            3,
+            0.22,
+            5,
+            0.52
+          ],
+          "line-width": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0.25,
+            5,
+            0.85,
+            7,
+            1
+          ]
+        }
+      },
+      "country": {
+        "id": "catalog-territory-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "filter": [
+          "!=",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "paint": {
+          "line-color": "#53615F",
+          "line-width": [
+            "case",
+            [
+              "==",
+              [
+                "get",
+                "boundaryClass"
+              ],
+              "administrative"
+            ],
+            0.3,
+            [
+              "case",
+              [
+                "==",
+                [
+                  "get",
+                  "boundaryClass"
+                ],
+                "country"
+              ],
+              0.8,
+              0.8
+            ]
+          ]
+        }
+      },
+      "visibility": "visible",
+      "renderedAdmin": 224
+    },
+    {
+      "zoom": 3.9,
+      "snapshot": {
+        "worldSchema": 3,
+        "simulationSchema": 2,
+        "date": "2020-01-01",
+        "worldRevision": 0,
+        "catalogRef": {
+          "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+          "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+          "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+          "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+          "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+        },
+        "pairNotifications": 0,
+        "simulationRevision": 0,
+        "playerCountryId": "KOR",
+        "uiPlayerCountryId": null,
+        "canUndo": false,
+        "canRedo": false,
+        "authorityOrder": [],
+        "eventCount": 0,
+        "projectionBuilds": 1,
+        "fullProjectionBuilds": 1,
+        "colorProjectionUpdates": 0,
+        "fullBuilds": 1,
+        "countryRebuilds": 247,
+        "territoryRebuilds": 4231,
+        "territoryUpdates": 0,
+        "edgeUpdates": 13748,
+        "indexedEdges": 13748,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
+        "verifiedRequests": 19,
+        "cacheHits": 0,
+        "cachedTiles": 14,
+        "cachedBytes": 3366212
+      },
+      "fill": {
+        "id": "catalog-territory-fill",
+        "type": "fill",
+        "source": "world-territory-catalog",
+        "source-layer": "territories",
+        "paint": {
+          "fill-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-outline-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-antialias": true
+        }
+      },
+      "admin": {
+        "id": "catalog-administrative-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "minzoom": 4,
+        "filter": [
+          "==",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "line-color": "#FFFFFF",
+          "line-opacity": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0,
+            3,
+            0.22,
+            5,
+            0.52
+          ],
+          "line-width": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0.25,
+            5,
+            0.85,
+            7,
+            1
+          ]
+        }
+      },
+      "country": {
+        "id": "catalog-territory-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "filter": [
+          "!=",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "paint": {
+          "line-color": "#53615F",
+          "line-width": [
+            "case",
+            [
+              "==",
+              [
+                "get",
+                "boundaryClass"
+              ],
+              "administrative"
+            ],
+            0.3,
+            [
+              "case",
+              [
+                "==",
+                [
+                  "get",
+                  "boundaryClass"
+                ],
+                "country"
+              ],
+              0.8,
+              0.8
+            ]
+          ]
+        }
+      },
+      "visibility": "none",
+      "renderedAdmin": 0
+    },
+    {
+      "zoom": 3.4,
+      "snapshot": {
+        "worldSchema": 3,
+        "simulationSchema": 2,
+        "date": "2020-01-01",
+        "worldRevision": 0,
+        "catalogRef": {
+          "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+          "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+          "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+          "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+          "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+        },
+        "pairNotifications": 0,
+        "simulationRevision": 0,
+        "playerCountryId": "KOR",
+        "uiPlayerCountryId": null,
+        "canUndo": false,
+        "canRedo": false,
+        "authorityOrder": [],
+        "eventCount": 0,
+        "projectionBuilds": 1,
+        "fullProjectionBuilds": 1,
+        "colorProjectionUpdates": 0,
+        "fullBuilds": 1,
+        "countryRebuilds": 247,
+        "territoryRebuilds": 4231,
+        "territoryUpdates": 0,
+        "edgeUpdates": 13748,
+        "indexedEdges": 13748,
+        "labelLayoutRequests": 0,
+        "labelCountryUpdates": 0,
+        "labelFailures": [],
+        "verifiedRequests": 19,
+        "cacheHits": 0,
+        "cachedTiles": 14,
+        "cachedBytes": 3366212
+      },
+      "fill": {
+        "id": "catalog-territory-fill",
+        "type": "fill",
+        "source": "world-territory-catalog",
+        "source-layer": "territories",
+        "paint": {
+          "fill-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-outline-color": [
+            "coalesce",
+            [
+              "feature-state",
+              "mapColor"
+            ],
+            "#D6D3C7"
+          ],
+          "fill-antialias": true
+        }
+      },
+      "admin": {
+        "id": "catalog-administrative-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "minzoom": 4,
+        "filter": [
+          "==",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "layout": {
+          "visibility": "none"
+        },
+        "paint": {
+          "line-color": "#FFFFFF",
+          "line-opacity": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0,
+            3,
+            0.22,
+            5,
+            0.52
+          ],
+          "line-width": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "zoom"
+            ],
+            2.2,
+            0.25,
+            5,
+            0.85,
+            7,
+            1
+          ]
+        }
+      },
+      "country": {
+        "id": "catalog-territory-edges",
+        "type": "line",
+        "source": "world-territory-catalog",
+        "source-layer": "edges",
+        "filter": [
+          "!=",
+          [
+            "get",
+            "boundaryClass"
+          ],
+          "administrative"
+        ],
+        "paint": {
+          "line-color": "#53615F",
+          "line-width": [
+            "case",
+            [
+              "==",
+              [
+                "get",
+                "boundaryClass"
+              ],
+              "administrative"
+            ],
+            0.3,
+            [
+              "case",
+              [
+                "==",
+                [
+                  "get",
+                  "boundaryClass"
+                ],
+                "country"
+              ],
+              0.8,
+              0.8
+            ]
+          ]
+        }
+      },
+      "visibility": "none",
+      "renderedAdmin": 0
+    }
+  ],
+  "errors": []
+}

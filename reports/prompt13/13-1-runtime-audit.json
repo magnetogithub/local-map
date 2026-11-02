@@ -1,0 +1,23 @@
+{
+  "stage": "13-1",
+  "status": "pass",
+  "summary": "Documented the existing server/client boundary, authoritative state owners, map and player lifecycles, turn lifecycle, presentation coupling, and responsive constraints.",
+  "filesChanged": [
+    "docs/game-ui/prompt13-runtime-audit.md",
+    "reports/prompt13/13-1-runtime-audit.json"
+  ],
+  "commands": [
+    {
+      "command": "rg/Get-Content audit of the route, shell, map, stores, and simulation runtime",
+      "exitCode": 0,
+      "evidence": "The audit identifies WorldStateStoreController and ApplicationTurnRuntime as reusable owners and SimulationPanel/side-stack as presentation coupling to remove."
+    }
+  ],
+  "screenshots": [],
+  "tests": [],
+  "knownLimitations": [
+    "This design stage does not yet extract the turn controller or replace the side-stack UI."
+  ],
+  "nextStage": "13-2"
+}
+

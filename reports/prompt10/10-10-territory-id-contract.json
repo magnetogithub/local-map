@@ -1,0 +1,65 @@
+{
+  "stage": "10-10",
+  "status": "pass",
+  "objective": "Define a deterministic TerritoryId derivation contract and explicit collision rejection rules for seed and partition inputs.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-9-country-presentation-override.json": "93e77b89a66e7fd22eb48494246ac7935536beba9471ba1f33595d247c3fac14"
+  },
+  "outputHashes": {
+    "src/lib/world/territory-id.ts": "bdc4c2b023a9ae3378bb1aa06a464b85f68f2d26e55761b13f7b9751b7ce89fd",
+    "src/lib/world/territory-id.test.ts": "10f9c844cbbbd2f2df005814883ba069c84ae454f7f5bab027facdde858db357"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-10-territory-id-contract.json",
+    "src/lib/world/territory-id.test.ts",
+    "src/lib/world/territory-id.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-9 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add deterministic TerritoryId and collision targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-id.test.ts", "exitCode": 1, "note": "Expected red test: territory-id module did not exist."},
+    {"command": "Implement branded TerritoryId derivation and registry collision rules", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-id.test.ts src/lib/world/country-presentation-override.test.ts src/lib/world/country-entity.test.ts src/lib/world/country-names.test.ts src/lib/world/country-id.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/territory-id.ts src/lib/world/territory-id.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "territoryIdDerivationKinds": 2,
+    "sameSeedInputMismatches": 0,
+    "samePartitionInputMismatches": 0,
+    "acceptedKnownRegistryCollisions": 0,
+    "delimiterCollisionRegressions": 0,
+    "targetedTestFilesPassed": 5,
+    "targetedTestsPassed": 53,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "territoryIdBranded": true,
+    "seedDerivationDeterministic": true,
+    "partitionDerivationDeterministic": true,
+    "seedAndPartitionNamespacesDistinct": true,
+    "lengthPrefixedEncodingCollisionSafe": true,
+    "registryCollisionRejected": true,
+    "duplicateRegistryIdRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true,
+    "territoryEntityNotStarted": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-11"
+}

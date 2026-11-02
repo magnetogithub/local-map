@@ -1,0 +1,320 @@
+{
+  "subtask": "7O",
+  "status": "pass",
+  "generatedAt": "2026-08-14T04:16:41.793Z",
+  "commands": {
+    "dataPrepare": {
+      "exitCode": 0
+    },
+    "unitTest": {
+      "exitCode": 0,
+      "testFiles": 7,
+      "tests": 39
+    },
+    "lint": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 3
+    },
+    "productionBuild": {
+      "exitCode": 0
+    },
+    "playwright": {
+      "configuration": "production server via PLAYWRIGHT_BASE_URL, one worker to avoid large-map resource contention",
+      "consecutiveRuns": [
+        {
+          "exitCode": 0,
+          "passed": 9,
+          "failed": 0,
+          "durationSeconds": 393.9
+        },
+        {
+          "exitCode": 0,
+          "passed": 9,
+          "failed": 0,
+          "durationSeconds": 316.8
+        }
+      ]
+    }
+  },
+  "artifacts": {
+    "reports": [
+      {
+        "path": "reports/fix07-baseline-audit.json",
+        "exists": true,
+        "bytes": 5516,
+        "pass": true,
+        "historicalBaseline": true,
+        "status": null,
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-five-country-baseline.json",
+        "exists": true,
+        "bytes": 3804,
+        "pass": true,
+        "historicalBaseline": true,
+        "status": null,
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-coordinate-preprocessing.json",
+        "exists": true,
+        "bytes": 3503,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "pass",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-component-selection.json",
+        "exists": true,
+        "bytes": 4013,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "pass",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-candidate-search.json",
+        "exists": true,
+        "bytes": 3983,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "pass",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-footprint-validation.json",
+        "exists": true,
+        "bytes": 4150,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "passed",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-font-metrics.json",
+        "exists": true,
+        "bytes": 2123,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "passed",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-border-recomputation.json",
+        "exists": true,
+        "bytes": 7402,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "passed",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-render-prototype.json",
+        "exists": true,
+        "bytes": 4472,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "passed",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-render-evidence.json",
+        "exists": true,
+        "bytes": 12223,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "passed",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-fifteen-country-quality.json",
+        "exists": true,
+        "bytes": 37754,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "passed",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-all-country-quality.json",
+        "exists": true,
+        "bytes": 99550,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "pass",
+        "reportPassed": true
+      },
+      {
+        "path": "reports/fix07-country-label-performance.json",
+        "exists": true,
+        "bytes": 7896,
+        "pass": true,
+        "historicalBaseline": false,
+        "status": "pass",
+        "reportPassed": true
+      }
+    ],
+    "screenshots": [
+      {
+        "path": "screenshots/fix07-russia-z1.png",
+        "exists": true,
+        "bytes": 254947,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-russia-z2.png",
+        "exists": true,
+        "bytes": 262165,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-russia-z3.png",
+        "exists": true,
+        "bytes": 120873,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-usa.png",
+        "exists": true,
+        "bytes": 200412,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-china.png",
+        "exists": true,
+        "bytes": 278979,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-chile.png",
+        "exists": true,
+        "bytes": 170729,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-indonesia.png",
+        "exists": true,
+        "bytes": 260940,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-border-change-before.png",
+        "exists": true,
+        "bytes": 209952,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-border-change-after.png",
+        "exists": true,
+        "bytes": 207887,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/arg.png",
+        "exists": true,
+        "bytes": 150109,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/aus.png",
+        "exists": true,
+        "bytes": 172811,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/bra.png",
+        "exists": true,
+        "bytes": 222030,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/can.png",
+        "exists": true,
+        "bytes": 217842,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/fra.png",
+        "exists": true,
+        "bytes": 371591,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/gbr.png",
+        "exists": true,
+        "bytes": 365554,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/ind.png",
+        "exists": true,
+        "bytes": 347527,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/jpn.png",
+        "exists": true,
+        "bytes": 203576,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/kaz.png",
+        "exists": true,
+        "bytes": 315825,
+        "pass": true
+      },
+      {
+        "path": "screenshots/fix07-7l/nor.png",
+        "exists": true,
+        "bytes": 327138,
+        "pass": true
+      }
+    ]
+  },
+  "cleanup": {
+    "port3000Listener": false,
+    "workerProcesses": []
+  },
+  "regressions": {
+    "searchSelectionConfirmation": "covered by Playwright searches, restores, and replaces the player country",
+    "playableCountries": [
+      {
+        "countryId": "PSX",
+        "playable": true,
+        "labelPresent": true
+      },
+      {
+        "countryId": "SDS",
+        "playable": true,
+        "labelPresent": true
+      },
+      {
+        "countryId": "SOL",
+        "playable": true,
+        "labelPresent": true
+      }
+    ],
+    "borderRefinement": "covered by dissolved seams test for Siachen, Baykonur, and Chukotka",
+    "worldWrapping": "covered by world-copy mouse drag and raw-label tests",
+    "admin1": "covered by dynamic labels/global Admin 1 E2E and map-data unit tests",
+    "pointLabels": {
+      "labels": 256,
+      "uniqueLabels": 256,
+      "baselines": 256,
+      "uniqueBaselines": 256
+    }
+  },
+  "gates": {
+    "allReportsPresentAndPassed": true,
+    "allScreenshotsPresent": true,
+    "playwrightLastRunPassed": true,
+    "noDevelopmentServer": true,
+    "noPlaywrightWorkers": true,
+    "playableCountriesPreserved": true,
+    "onePointAndBaselinePerCountry": true,
+    "status": "pass"
+  }
+}

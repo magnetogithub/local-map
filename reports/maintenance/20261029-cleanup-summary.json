@@ -1,0 +1,19 @@
+{
+  "status": "third-cleanup-complete",
+  "sourceCommit": "ee9a6fb5cf51141cc094522e14683b90d90b0ca5",
+  "beforeGiB": 10.271,
+  "afterGiB": 7.164,
+  "netReductionGiB": 3.107,
+  "removedFileTargets": 10,
+  "removedVerifiedLfsCacheObjects": 1187,
+  "removedVerifiedLfsCacheGiB": 1.45,
+  "trackedDuplicateFilesRemoved": 10970,
+  "protectedIdentityChecksPassed": 75,
+  "publicAssetChecksPassed": 5485,
+  "currentHeadLfsObjectsRetained": 5104,
+  "unverifiedRemoteLfsObjectsPreserved": 15,
+  "coreTestsPassed": 4,
+  "inventoryErrors": 0,
+  "historyRewritten": false,
+  "evidencePolicy": "Detailed execution records and compact evidence remain local. Only aggregate statistics are published."
+}

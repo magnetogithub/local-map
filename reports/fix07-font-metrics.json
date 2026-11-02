@@ -1,0 +1,77 @@
+{
+  "subtask": "7G",
+  "status": "passed",
+  "strategy": "Align the calculator to MapLibre's actual hybrid glyph stack",
+  "calculationFont": {
+    "family": "MapLibre Open Sans Regular + local Noto Sans KR",
+    "unitsPerEm": 24,
+    "hangul": {
+      "font": "Noto Sans KR Local",
+      "file": "public/fonts/Noto Sans KR/NotoSansCJKkr-Regular.otf",
+      "metricSource": "OpenType hmtx advance"
+    },
+    "nonIdeograph": {
+      "font": "Open Sans Regular",
+      "files": [
+        "public/fonts/Open Sans Regular/0-255.pbf",
+        "public/fonts/Open Sans Regular/256-511.pbf"
+      ],
+      "metricSource": "MapLibre glyph PBF advance / 24 em"
+    },
+    "missingGlyphPolicy": "explicit error; no unverified fallback"
+  },
+  "mapLibre": {
+    "declaredTextFont": [
+      "Open Sans Regular"
+    ],
+    "glyphSource": "/fonts/{fontstack}/{range}.pbf",
+    "localIdeographFontFamily": "Noto Sans KR Local",
+    "hangulProvider": "MapLibre GlyphManager local TinySDF path using Noto Sans KR Local; Hangul is not loaded from the Open Sans PBF",
+    "latinAndNumberProvider": "Open Sans Regular glyph PBF",
+    "observedGlyphRequests": [
+      {
+        "url": "http://localhost:3000/fonts/Open%20Sans%20Regular/0-255.pbf",
+        "status": 200
+      }
+    ],
+    "openSansGlyphRequestObserved": true,
+    "configurationMatches": true
+  },
+  "browserComparison": {
+    "tolerance": 0.015,
+    "fixtures": [
+      {
+        "text": "대한민국",
+        "build": 3.68,
+        "browser": 3.68,
+        "relativeError": 0,
+        "pass": true
+      },
+      {
+        "text": "미국",
+        "build": 1.84,
+        "browser": 1.84,
+        "relativeError": 0,
+        "pass": true
+      },
+      {
+        "text": "콩고 민주 공화국",
+        "build": 6.9399999999999995,
+        "browser": 6.9399999999999995,
+        "relativeError": 0,
+        "pass": true
+      },
+      {
+        "text": "KOR 2020",
+        "build": 4.333333333333333,
+        "browser": 4.333333333333333,
+        "relativeError": 0,
+        "pass": true
+      }
+    ]
+  },
+  "mismatch": {
+    "exists": false,
+    "details": null
+  }
+}

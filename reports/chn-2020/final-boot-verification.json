@@ -1,0 +1,15 @@
+{
+  "pass": true,
+  "url": "http://127.0.0.1:3002",
+  "checkedAtUtc": "2026-10-30T05:47:31.4064478Z",
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "counts": {
+    "countries": 247,
+    "cells": 8005,
+    "edges": 26273,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "activePointerSha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+  "externalAiCalls": 0
+}

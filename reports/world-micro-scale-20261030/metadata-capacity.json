@@ -1,0 +1,495 @@
+{
+  "schemaVersion": "world-micro-metadata-capacity-v1",
+  "createdAt": "2026-10-30T06:44:41.201Z",
+  "code": {
+    "path": "reports/world-micro-scale-20261030/metadata-capacity.mjs",
+    "sha256": "1759231a1711269502a5fe7d39186a84c95c1d47cfc0bda218fc79aeb11bfeee",
+    "byteLength": 7539
+  },
+  "measured": true,
+  "geographicBenchmark": false,
+  "productionGameBenchmark": false,
+  "environment": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpuModel": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
+    "logicalProcessors": 16,
+    "hostMemoryBytes": 34065707008,
+    "worker": "fresh sequential Node process per size; --expose-gc, explicit GC outside timing series"
+  },
+  "limitations": [
+    "Algorithms mirror selected current JS data-structure costs; they do not call the full production game or validators.",
+    "No geometry, real spatial adjacency, rendering, browser, network, AI provider, revision checking or military constraints are benchmarked.",
+    "Global eligibility measures only the all-world prefix; actual target adjacency and traversal add work.",
+    "Already sorted IDs and cached synthetic leaf identities make root rebuilding a lower-bound analogue, not the production canonical serializer.",
+    "Three or five within-process samples characterize this host only; GC/JIT/cache effects remain and no concurrent-work exclusion is asserted.",
+    "500k is deliberately not allocated or benchmarked. Any 500k planning figures elsewhere are extrapolations."
+  ],
+  "scenarios": [
+    {
+      "count": 10000,
+      "source": "deterministic synthetic metadata; CHN3320/PRK194/OTHER remainder; no coordinates, geometry, real source hierarchy or authority claims",
+      "constructionMs": 47.27250000000001,
+      "retainedStateHeapBytes": 2262864,
+      "retainedAdditionalFullMapCopyHeapBytes": 393320,
+      "memory": {
+        "before": {
+          "rss": 59031552,
+          "heapTotal": 8101888,
+          "heapUsed": 5277768,
+          "external": 2528973,
+          "arrayBuffers": 145627
+        },
+        "built": {
+          "rss": 65269760,
+          "heapTotal": 17674240,
+          "heapUsed": 7540632,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "withOneRetainedCopy": {
+          "rss": 65622016,
+          "heapTotal": 17809408,
+          "heapUsed": 7933952,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "afterOperations": {
+          "rss": 83787776,
+          "heapTotal": 34639872,
+          "heapUsed": 16297968,
+          "external": 4069408,
+          "arrayBuffers": 573913
+        }
+      },
+      "timings": {
+        "fullRecordCopyOneChangedCell": {
+          "samplesMs": [
+            6.944199999999995,
+            5.143599999999992,
+            8.390999999999991,
+            8.068700000000007,
+            6.584599999999995
+          ],
+          "minimumMs": 5.143599999999992,
+          "medianMs": 6.944199999999995,
+          "maximumMs": 8.390999999999991
+        },
+        "globalFrontierEligibilityPrefix": {
+          "samplesMs": [
+            2.3336999999999932,
+            1.6188999999999965,
+            1.6092000000000155,
+            1.7606999999999857,
+            1.662700000000001
+          ],
+          "minimumMs": 1.6092000000000155,
+          "medianMs": 1.662700000000001,
+          "maximumMs": 2.3336999999999932
+        },
+        "globalOneCellDeltaScan": {
+          "samplesMs": [
+            2.4986999999999853,
+            1.9858000000000118,
+            1.9133999999999958,
+            1.7768999999999835,
+            1.7883999999999958
+          ],
+          "minimumMs": 1.7768999999999835,
+          "medianMs": 1.9133999999999958,
+          "maximumMs": 2.4986999999999853
+        },
+        "cachedLeafRootSortEncodeShaLowerBound": {
+          "samplesMs": [
+            11.330600000000004,
+            11.409700000000015,
+            11.164699999999982
+          ],
+          "minimumMs": 11.164699999999982,
+          "medianMs": 11.330600000000004,
+          "maximumMs": 11.409700000000015
+        },
+        "fullIdOrderJsonEncode": {
+          "samplesMs": [
+            1.7410999999999888,
+            1.7132000000000005,
+            1.9145000000000039
+          ],
+          "minimumMs": 1.7132000000000005,
+          "medianMs": 1.7410999999999888,
+          "maximumMs": 1.9145000000000039
+        },
+        "fullStateRecordJsonEncode": {
+          "samplesMs": [
+            6.264899999999955,
+            7.24430000000001,
+            7.651399999999967
+          ],
+          "minimumMs": 6.264899999999955,
+          "medianMs": 7.24430000000001,
+          "maximumMs": 7.651399999999967
+        }
+      },
+      "byteSizes": {
+        "fullIdOrderJson": 850001,
+        "fullIdOrderGzip": 362742,
+        "fullStateRecordJson": 2558917,
+        "sourceOwnerControllerUint16ColumnsOnly": 60000
+      },
+      "invariants": {
+        "changedCells": 1,
+        "eligibleCells": 3320,
+        "hashLength": 64
+      }
+    },
+    {
+      "count": 50000,
+      "source": "deterministic synthetic metadata; CHN3320/PRK194/OTHER remainder; no coordinates, geometry, real source hierarchy or authority claims",
+      "constructionMs": 181.81060000000002,
+      "retainedStateHeapBytes": 12313312,
+      "retainedAdditionalFullMapCopyHeapBytes": 3140464,
+      "memory": {
+        "before": {
+          "rss": 59064320,
+          "heapTotal": 8364032,
+          "heapUsed": 5277696,
+          "external": 2528973,
+          "arrayBuffers": 145627
+        },
+        "built": {
+          "rss": 88858624,
+          "heapTotal": 52809728,
+          "heapUsed": 17591008,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "withOneRetainedCopy": {
+          "rss": 92196864,
+          "heapTotal": 55959552,
+          "heapUsed": 20731472,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "afterOperations": {
+          "rss": 159883264,
+          "heapTotal": 134709248,
+          "heapUsed": 65834384,
+          "external": 4393790,
+          "arrayBuffers": 2010440
+        }
+      },
+      "timings": {
+        "fullRecordCopyOneChangedCell": {
+          "samplesMs": [
+            37.220200000000006,
+            31.62439999999998,
+            35.61099999999999,
+            31.76139999999998,
+            35.358000000000004
+          ],
+          "minimumMs": 31.62439999999998,
+          "medianMs": 35.358000000000004,
+          "maximumMs": 37.220200000000006
+        },
+        "globalFrontierEligibilityPrefix": {
+          "samplesMs": [
+            11.245499999999993,
+            10.17779999999999,
+            10.672500000000014,
+            11.023000000000025,
+            10.994500000000016
+          ],
+          "minimumMs": 10.17779999999999,
+          "medianMs": 10.994500000000016,
+          "maximumMs": 11.245499999999993
+        },
+        "globalOneCellDeltaScan": {
+          "samplesMs": [
+            16.698800000000006,
+            17.284299999999973,
+            17.553299999999922,
+            19.729900000000043,
+            18.073499999999967
+          ],
+          "minimumMs": 16.698800000000006,
+          "medianMs": 17.553299999999922,
+          "maximumMs": 19.729900000000043
+        },
+        "cachedLeafRootSortEncodeShaLowerBound": {
+          "samplesMs": [
+            64.5806,
+            62.197900000000004,
+            61.32129999999995
+          ],
+          "minimumMs": 61.32129999999995,
+          "medianMs": 62.197900000000004,
+          "maximumMs": 64.5806
+        },
+        "fullIdOrderJsonEncode": {
+          "samplesMs": [
+            12.214200000000005,
+            11.731200000000058,
+            9.415500000000065
+          ],
+          "minimumMs": 9.415500000000065,
+          "medianMs": 11.731200000000058,
+          "maximumMs": 12.214200000000005
+        },
+        "fullStateRecordJsonEncode": {
+          "samplesMs": [
+            36.96080000000006,
+            32.563999999999965,
+            33.31949999999995
+          ],
+          "minimumMs": 32.563999999999965,
+          "medianMs": 33.31949999999995,
+          "maximumMs": 36.96080000000006
+        }
+      },
+      "byteSizes": {
+        "fullIdOrderJson": 4250001,
+        "fullIdOrderGzip": 1799269,
+        "fullStateRecordJson": 12878917,
+        "sourceOwnerControllerUint16ColumnsOnly": 300000
+      },
+      "invariants": {
+        "changedCells": 1,
+        "eligibleCells": 3320,
+        "hashLength": 64
+      }
+    },
+    {
+      "count": 100000,
+      "source": "deterministic synthetic metadata; CHN3320/PRK194/OTHER remainder; no coordinates, geometry, real source hierarchy or authority claims",
+      "constructionMs": 344.7293,
+      "retainedStateHeapBytes": 25321040,
+      "retainedAdditionalFullMapCopyHeapBytes": 6285936,
+      "memory": {
+        "before": {
+          "rss": 58855424,
+          "heapTotal": 8364032,
+          "heapUsed": 5277696,
+          "external": 2528973,
+          "arrayBuffers": 145627
+        },
+        "built": {
+          "rss": 108851200,
+          "heapTotal": 73134080,
+          "heapUsed": 30598736,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "withOneRetainedCopy": {
+          "rss": 117280768,
+          "heapTotal": 105906176,
+          "heapUsed": 36884672,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "afterOperations": {
+          "rss": 256839680,
+          "heapTotal": 256233472,
+          "heapUsed": 118211872,
+          "external": 6178567,
+          "arrayBuffers": 3795217
+        }
+      },
+      "timings": {
+        "fullRecordCopyOneChangedCell": {
+          "samplesMs": [
+            101.44709999999998,
+            100.91089999999997,
+            94.10910000000001,
+            87.36830000000009,
+            96.79430000000002
+          ],
+          "minimumMs": 87.36830000000009,
+          "medianMs": 96.79430000000002,
+          "maximumMs": 101.44709999999998
+        },
+        "globalFrontierEligibilityPrefix": {
+          "samplesMs": [
+            29.03480000000002,
+            27.05899999999997,
+            29.47289999999998,
+            29.075700000000097,
+            29.603399999999965
+          ],
+          "minimumMs": 27.05899999999997,
+          "medianMs": 29.075700000000097,
+          "maximumMs": 29.603399999999965
+        },
+        "globalOneCellDeltaScan": {
+          "samplesMs": [
+            42.67000000000007,
+            50.16520000000014,
+            43.25849999999991,
+            44.337200000000166,
+            40.10929999999985
+          ],
+          "minimumMs": 40.10929999999985,
+          "medianMs": 43.25849999999991,
+          "maximumMs": 50.16520000000014
+        },
+        "cachedLeafRootSortEncodeShaLowerBound": {
+          "samplesMs": [
+            140.30820000000017,
+            139.95000000000005,
+            141.22820000000002
+          ],
+          "minimumMs": 139.95000000000005,
+          "medianMs": 140.30820000000017,
+          "maximumMs": 141.22820000000002
+        },
+        "fullIdOrderJsonEncode": {
+          "samplesMs": [
+            29.702199999999948,
+            26.048500000000104,
+            28.400800000000118
+          ],
+          "minimumMs": 26.048500000000104,
+          "medianMs": 28.400800000000118,
+          "maximumMs": 29.702199999999948
+        },
+        "fullStateRecordJsonEncode": {
+          "samplesMs": [
+            82.58690000000001,
+            86.07140000000027,
+            88.00880000000006
+          ],
+          "minimumMs": 82.58690000000001,
+          "medianMs": 86.07140000000027,
+          "maximumMs": 88.00880000000006
+        }
+      },
+      "byteSizes": {
+        "fullIdOrderJson": 8500001,
+        "fullIdOrderGzip": 3584046,
+        "fullStateRecordJson": 25778917,
+        "sourceOwnerControllerUint16ColumnsOnly": 600000
+      },
+      "invariants": {
+        "changedCells": 1,
+        "eligibleCells": 3320,
+        "hashLength": 64
+      }
+    },
+    {
+      "count": 250000,
+      "source": "deterministic synthetic metadata; CHN3320/PRK194/OTHER remainder; no coordinates, geometry, real source hierarchy or authority claims",
+      "constructionMs": 1049.6418,
+      "retainedStateHeapBytes": 58622480,
+      "retainedAdditionalFullMapCopyHeapBytes": 12573216,
+      "memory": {
+        "before": {
+          "rss": 59105280,
+          "heapTotal": 8364032,
+          "heapUsed": 5277696,
+          "external": 2528973,
+          "arrayBuffers": 145627
+        },
+        "built": {
+          "rss": 199184384,
+          "heapTotal": 211959808,
+          "heapUsed": 63900176,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "withOneRetainedCopy": {
+          "rss": 211972096,
+          "heapTotal": 212750336,
+          "heapUsed": 76473392,
+          "external": 2528977,
+          "arrayBuffers": 145627
+        },
+        "afterOperations": {
+          "rss": 506052608,
+          "heapTotal": 344854528,
+          "heapUsed": 205505688,
+          "external": 11444300,
+          "arrayBuffers": 9060950
+        }
+      },
+      "timings": {
+        "fullRecordCopyOneChangedCell": {
+          "samplesMs": [
+            267.5519999999999,
+            252.44209999999998,
+            241.23900000000003,
+            265.64829999999984,
+            272.25610000000006
+          ],
+          "minimumMs": 241.23900000000003,
+          "medianMs": 265.64829999999984,
+          "maximumMs": 272.25610000000006
+        },
+        "globalFrontierEligibilityPrefix": {
+          "samplesMs": [
+            106.54610000000002,
+            101.00390000000016,
+            104.82249999999976,
+            99.4394000000002,
+            95.64759999999978
+          ],
+          "minimumMs": 95.64759999999978,
+          "medianMs": 101.00390000000016,
+          "maximumMs": 106.54610000000002
+        },
+        "globalOneCellDeltaScan": {
+          "samplesMs": [
+            130.17439999999988,
+            126.8481999999999,
+            127.74980000000005,
+            126.69949999999972,
+            127.77460000000019
+          ],
+          "minimumMs": 126.69949999999972,
+          "medianMs": 127.74980000000005,
+          "maximumMs": 130.17439999999988
+        },
+        "cachedLeafRootSortEncodeShaLowerBound": {
+          "samplesMs": [
+            414.7584999999999,
+            436.3842999999997,
+            459.72260000000006
+          ],
+          "minimumMs": 414.7584999999999,
+          "medianMs": 436.3842999999997,
+          "maximumMs": 459.72260000000006
+        },
+        "fullIdOrderJsonEncode": {
+          "samplesMs": [
+            74.15880000000016,
+            81.28510000000006,
+            73.77999999999975
+          ],
+          "minimumMs": 73.77999999999975,
+          "medianMs": 74.15880000000016,
+          "maximumMs": 81.28510000000006
+        },
+        "fullStateRecordJsonEncode": {
+          "samplesMs": [
+            261.1116000000002,
+            298.66939999999977,
+            270.22299999999996
+          ],
+          "minimumMs": 261.1116000000002,
+          "medianMs": 270.22299999999996,
+          "maximumMs": 298.66939999999977
+        }
+      },
+      "byteSizes": {
+        "fullIdOrderJson": 21250001,
+        "fullIdOrderGzip": 8915323,
+        "fullStateRecordJson": 64478917,
+        "sourceOwnerControllerUint16ColumnsOnly": 1500000
+      },
+      "invariants": {
+        "changedCells": 1,
+        "eligibleCells": 3320,
+        "hashLength": 64
+      }
+    }
+  ]
+}

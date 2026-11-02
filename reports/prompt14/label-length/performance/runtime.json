@@ -1,0 +1,43 @@
+{
+  "status": "pass",
+  "environment": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "cpu": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
+    "totalMemory": 34065707008
+  },
+  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+  "totalTerritories": 4231,
+  "target": "GBR",
+  "occupiedTerritories": 234,
+  "occupation": {
+    "effects": 1,
+    "planMs": 129.2623000000001,
+    "commitMs": 13.3282999999999,
+    "affectedTerritoryCalls": 234
+  },
+  "color": {
+    "effects": 1,
+    "planMs": 6.962400000000116,
+    "commitMs": 5.576099999999997,
+    "affectedTerritoryCalls": 320
+  },
+  "stats": {
+    "fullProjectionBuilds": 1,
+    "colorProjectionUpdates": 1,
+    "fullBuilds": 1,
+    "countryRebuilds": 247,
+    "territoryRebuilds": 4465,
+    "territoryUpdates": 554,
+    "edgeUpdates": 0,
+    "indexedEdges": 0
+  },
+  "wholeSourceSetDataCalls": 0,
+  "sourceUpdateDataCalls": 0,
+  "context": {
+    "bytes": 149674,
+    "listedTerritories": 839,
+    "containsGeometry": false
+  },
+  "sharedCollectionsVerified": true
+}

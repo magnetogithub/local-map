@@ -1,0 +1,17 @@
+{
+  "stage": "10-57",
+  "status": "pass",
+  "objective": "Provide a dry-run planner boundary that never mutates input state or cache-bearing runtime state.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {"reports/prompt10/10-56-plan-result-planning-error.json": "54403b5ba144a26348943bccd84afbdf7c1758cb04efe9be43ca9d93cc060ff3"},
+  "outputHashes": {
+    "src/lib/planning/planner-boundary.ts": "495458622dfec0ede63b1f43ccc779afc1bc7a44c207a5a388af76087495b00b",
+    "src/lib/planning/planner-boundary.test.ts": "fa4358e11da1251238e84d49f7424121a8759191c5710d048cfc0663a6cc25b8"
+  },
+  "measurements": {"inputStateMutations": 0, "inputIdentityChanges": 0, "inputContentHashChanges": 0, "runtimeCacheImports": 0},
+  "gates": {"dryRunBoundary": true, "inputStateUnchanged": true, "contentHashUnchanged": true, "cacheStateUnchanged": true, "targetedTestsPass": true, "lintPass": true, "typecheckPass": true},
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "10-58"
+}

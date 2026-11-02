@@ -1,0 +1,50 @@
+{
+  "stage": "13-23",
+  "status": "pass",
+  "summary": "streaming phase, draft, Stop, Retry와 stale/error 상태를 HUD와 action overlay에 연결하고 동기 중복 advance를 controller 경계에서 차단했다.",
+  "stateConnections": {
+    "hud": ["current phase", "stream draft", "Stop", "Retry", "error code"],
+    "actionOverlay": ["current phase", "stream draft", "Stop", "Retry", "stale explanation", "failure/cancel recovery guidance"],
+    "controller": "GameScreen에 유지되므로 overlay close/reopen과 무관하게 실행 상태가 보존됨"
+  },
+  "recoveryGuarantees": [
+    "abortRef synchronous in-flight guard prevents two advances before React publishes running=true",
+    "Stop aborts only through the explicit control",
+    "Retry reuses the last validated preset or custom selection",
+    "failed request leaves the previous AtomicTurnSnapshot and WorldState identity unchanged",
+    "stale revision failure is shown separately from a generic network/provider failure",
+    "unmounting the overlay does not abort or retry the shared controller"
+  ],
+  "prompt12Regressions": [
+    "IME-safe action queue",
+    "frozen request and NDJSON client state",
+    "atomic runtime commit/undo/redo",
+    "failed gameplay action behavior"
+  ],
+  "filesChanged": [
+    "src/components/game/GameActionOverlay.tsx",
+    "src/components/game/GameActionOverlay.test.tsx",
+    "src/components/game/GameHud.tsx",
+    "src/components/game/GameChrome.test.tsx",
+    "src/components/game/GameScreen.tsx",
+    "src/lib/simulation/client/use-simulation-turn-controller.ts",
+    "src/lib/simulation/client/use-simulation-turn-controller.test.tsx",
+    "e2e/prompt13-shell.spec.ts",
+    "reports/prompt13/13-23-streaming-recovery.json"
+  ],
+  "verification": {
+    "typescriptExitCode": 0,
+    "eslintExitCode": 0,
+    "vitest": {"exitCode": 0, "files": 7, "tests": 42},
+    "productionBuildExitCode": 0,
+    "playwright": {"exitCode": 0, "tests": 2, "resolutions": ["1280x720", "1920x1080"]}
+  },
+  "screenshots": [
+    "screenshots/prompt13-23-action-1280x720.png",
+    "screenshots/prompt13-23-action-1920x1080.png"
+  ],
+  "knownLimitations": [
+    "뉴스 projection과 major-event acknowledgment는 13-24 이후 범위이므로 구현하지 않았다."
+  ],
+  "nextStage": "13-24"
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "administrative-temporal-facts-v1",
+  "corrections": [
+    {
+      "scenarioDate": "2020-01-01",
+      "parentName": "Gyeongsangbuk-do",
+      "parentNameKo": "경상북도",
+      "transferEffectiveDate": "2023-07-01",
+      "laterParent": "Daegu",
+      "law": "Act No.19155, enacted 2023-01-03, effective 2023-07-01",
+      "sources": [
+        "https://www.law.go.kr/LSW/lsInfoP.do?efYd=20230701&lsiSeq=247229",
+        "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=97607",
+        "https://mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000052&nttId=101209"
+      ],
+      "meaning": "The source-represented 2020 county retains Gyeongsangbuk-do membership; current web table Daegu membership must not be copied back in time."
+    }
+  ],
+  "sources": [
+    {
+      "name": "mois-gunwi-announcement.html",
+      "url": "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=97607",
+      "status": 200,
+      "bytes": 166162,
+      "sha256": "7608ba8108bc79f0eb5e2d31f5835ab448ae7e5b0496ba2964d5f1573989e93f",
+      "retrievedAt": "2026-10-30T01:25:35.836Z",
+      "rawHtmlRedistributed": false
+    },
+    {
+      "name": "mois-gunwi-code-change.html",
+      "url": "https://mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000052&nttId=101209",
+      "status": 200,
+      "bytes": 175483,
+      "sha256": "024bd75b82cef731980b70352ea09e2017810eb2c422568edbf8e70ba280b12a",
+      "retrievedAt": "2026-10-30T01:25:35.990Z",
+      "rawHtmlRedistributed": false
+    }
+  ],
+  "publisherCaveat": "A contemporary web hierarchy cannot be treated as an unmodified 2020 hierarchy."
+}

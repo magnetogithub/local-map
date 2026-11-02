@@ -1,0 +1,19 @@
+{
+  "version": "country-label-typography-v2",
+  "defaults": {
+    "glyphHeightRatio": 0.19,
+    "adaptiveGlyphReferenceCount": 7,
+    "adaptiveGlyphHeightRatioMax": 0.5,
+    "twoGlyphHeightRatioMax": 0.32,
+    "adaptiveGlyphLengthExponent": 0.75,
+    "targetWidthRatio": 0.68,
+    "trackingEmMin": 0,
+    "trackingEmMax": 0.8,
+    "maxAbsoluteGlyphAngle": 90,
+    "maxAdjacentAngleDelta": 12,
+    "baselineSampleCount": 25,
+    "baselineSmoothingPasses": 0,
+    "minimumLabelSpan": "naturalGlyphSpan"
+  },
+  "overrides": {}
+}

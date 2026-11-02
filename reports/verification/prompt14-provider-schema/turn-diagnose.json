@@ -1,0 +1,143 @@
+{
+  "trace": [
+    {
+      "toolChoice": "required",
+      "events": [
+        {
+          "type": "response.output_item.done",
+          "item": {
+            "id": "fc_0736f73ec0b46f1e016ac4a4b48e4087d094736efcaa405c1d",
+            "type": "function_call",
+            "status": "completed",
+            "arguments": "{\"contractVersion\":\"turn-resolution.v1\",\"baseSimulationRevision\":0,\"baseWorldRevision\":0,\"period\":{\"startDate\":\"2020-01-01\",\"endDate\":\"2020-01-08\"},\"playerActionOutcomes\":[{\"outcomeId\":\"outcome.action.live-check\",\"actionId\":\"action.live-check\",\"status\":\"succeeded\",\"evidenceEventId\":\"event.live-check-2020-01-01\",\"summary\":\"대한민국은 휴전선 인근 지역 일부를 점령하는 군사행동을 개시·실행했고, 해당 구역은 즉시 한국 측 통제하에 놓였다.\",\"remainingConditions\":[]}],\"events\":[{\"eventId\":\"event.live-check-2020-01-01\",\"date\":\"2020-01-01\",\"title\":\"대한민국의 휴전선 인근 지역 점령 개시\",\"publicNarrative\":\"대한민국은 휴전선 인근에서 제한된 군사행동을 실시해 일부 지역을 점령했다. 이번 행동은 국지적·제한적으로 전개되었으며, 즉각적인 통제 변화가 확인되었다.\",\"actorCountryIds\":[\"KOR\"],\"relatedFactIds\":[],\"relatedSituationIds\":[],\"causes\":[{\"kind\":\"queued-action\",\"id\":\"action.live-check\"}],\"outcomeCategory\":\"military\",\"significance\":\"notable\"}],\"factMutations\":[{\"operation\":\"upsert\",\"mutationId\":\"factmut.live-check\",\"causedByEventId\":\"event.live-check-2020-01-01\",\"factId\":null,\"fact\":{\"factId\":\"fact.live-check\",\"kind\":\"military-or-occupation\",\"actorCountryIds\":[\"KOR\"],\"publicSummary\":\"대한민국은 2020-01-01에 휴전선 인근의 제한된 지역을 점령했다.\",\"startDate\":\"2020-01-01\",\"status\":\"active\",\"sourceEventId\":\"event.live-check-2020-01-01\"}}],\"situationMutations\":[],\"scheduledConsequences\":[],\"worldEffects\":[{\"type\":\"territory.occupy\",\"effectId\":\"we.live-check-occupy\",\"causedByEventId\":\"event.live-check-2020-01-01\",\"actorCountryId\":\"KOR\",\"targetCountryId\":null,\"authorityId\":\"tca:invalid\",\"territoryIds\":[],\"regionRefs\":null}],\"advisorSummary\":\"주어진 DEBUG_WORLD_EFFECT 문구는 구체적 점령 대상이 없어, 사건은 성립하되 지도상 영토 식별 효과는 비워 두었습니다.\",\"unresolvedQuestions\":[\"휴전선 인근의 정확한 점령 대상 지역이 특정되지 않아 territorialAuthority 및 territoryIds를 확정할 수 없었습니다.\"]}",
+            "call_id": "call_1ffsmfZyvYebCj9Wvs65oDAx",
+            "name": "submit_turn_resolution"
+          },
+          "output_index": 0,
+          "sequence_number": 565
+        }
+      ]
+    },
+    {
+      "toolChoice": "required",
+      "events": [
+        {
+          "type": "response.output_item.done",
+          "item": {
+            "id": "fc_0736f73ec0b46f1e016ac4a4b877c087d09fbf6fb7fb1a87bb",
+            "type": "function_call",
+            "status": "completed",
+            "arguments": "{\"countryId\":\"KOR\",\"query\":\"휴전선 인근\"}",
+            "call_id": "call_sYtN8T9Ol33219WMZwZxFLME",
+            "name": "find_region"
+          },
+          "output_index": 0,
+          "sequence_number": 19
+        }
+      ]
+    },
+    {
+      "toolChoice": "required",
+      "events": [
+        {
+          "type": "response.output_item.done",
+          "item": {
+            "id": "fc_0736f73ec0b46f1e016ac4a4bb4a0487d0b80b3a02cb8ad243",
+            "type": "function_call",
+            "status": "completed",
+            "arguments": "{\"limit\":5}",
+            "call_id": "call_PAdLczLLvbGGseGG4EwW33Y9",
+            "name": "inspect_recent_events"
+          },
+          "output_index": 0,
+          "sequence_number": 9
+        }
+      ]
+    },
+    {
+      "toolChoice": "required",
+      "events": [
+        {
+          "type": "error",
+          "error": {
+            "type": "tokens",
+            "code": "rate_limit_exceeded",
+            "headers": {
+              "retry-after": "13",
+              "retry-after-ms": "12407",
+              "x-ratelimit-limit-requests": "500",
+              "x-ratelimit-limit-tokens": "200000",
+              "x-ratelimit-remaining-requests": "499",
+              "x-ratelimit-remaining-tokens": "24457",
+              "x-ratelimit-reset-requests": "120ms",
+              "x-ratelimit-reset-tokens": "52.662s"
+            },
+            "message": "Rate limit reached for gpt-5.4-mini in organization org-VD7uPPfykQZeFgcVMgSLJHIt on tokens per min (TPM): Limit 200000, Used 175543, Requested 65815. Please try again in 12.407s. Visit https://platform.openai.com/account/rate-limits to learn more.",
+            "param": null
+          },
+          "sequence_number": 2
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "type": "phase.changed",
+      "phase": "requesting"
+    },
+    {
+      "type": "tool.started",
+      "callId": "call_1ffsmfZyvYebCj9Wvs65oDAx",
+      "name": "submit_turn_resolution"
+    },
+    {
+      "type": "tool.ready",
+      "callId": "call_1ffsmfZyvYebCj9Wvs65oDAx",
+      "name": "submit_turn_resolution"
+    },
+    {
+      "type": "tool.invalid",
+      "callId": "call_1ffsmfZyvYebCj9Wvs65oDAx",
+      "name": "submit_turn_resolution",
+      "code": "INVALID_RESOLUTION"
+    },
+    {
+      "type": "phase.changed",
+      "phase": "repairing"
+    },
+    {
+      "type": "tool.started",
+      "callId": "call_sYtN8T9Ol33219WMZwZxFLME",
+      "name": "find_region"
+    },
+    {
+      "type": "tool.ready",
+      "callId": "call_sYtN8T9Ol33219WMZwZxFLME",
+      "name": "find_region"
+    },
+    {
+      "type": "phase.changed",
+      "phase": "looking_up"
+    },
+    {
+      "type": "tool.started",
+      "callId": "call_PAdLczLLvbGGseGG4EwW33Y9",
+      "name": "inspect_recent_events"
+    },
+    {
+      "type": "tool.ready",
+      "callId": "call_PAdLczLLvbGGseGG4EwW33Y9",
+      "name": "inspect_recent_events"
+    },
+    {
+      "type": "phase.changed",
+      "phase": "looking_up"
+    },
+    {
+      "type": "turn.failed",
+      "code": "PROVIDER_ERROR",
+      "message": "Simulation provider request failed",
+      "retryable": true
+    }
+  ]
+}

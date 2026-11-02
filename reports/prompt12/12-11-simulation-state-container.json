@@ -1,0 +1,38 @@
+{
+  "stage": "12-11",
+  "status": "pass",
+  "objective": "Implement an immutable SimulationStateV1 container and world-linked invariant validation.",
+  "filesRead": [
+    "src/lib/simulation/simulation-clock.ts",
+    "src/lib/simulation/queued-player-action.ts",
+    "src/lib/simulation/narrative-state.ts",
+    "src/lib/simulation/simulation-event.ts",
+    "src/lib/simulation/turn-resolution.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/lib/world/immutable-readonly-set.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-state.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-11-simulation-state-container.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts",
+    "npx tsc --noEmit"
+  ],
+  "gates": {
+    "immutableSnapshot": "pass",
+    "activeAndRetiredCountryReferences": "pass",
+    "canonicalOrders": "pass",
+    "clockInvariant": "pass",
+    "factSituationEventLinkage": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Simulation input passes the prototype-safe data boundary before parsing."
+  ],
+  "notes": [
+    "Historical events may reference known retired countries; the current player and pending actions must reference active countries."
+  ],
+  "nextStage": "12-12"
+}

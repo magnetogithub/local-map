@@ -1,0 +1,11 @@
+{
+  "stage": "10-65", "status": "pass", "objective": "Regression-test atomic dissolve-transfer semantics without merge metadata succession.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {"reports/prompt10/10-64-dissolve-unclaim-planner.json": "6f344cd4b53c56b07936f66dd5b5f03dd524640129570183c61871c8c2432346"},
+  "outputHashes": {"src/lib/planning/country-dissolve-planner.ts": "75ed5f2e9ba42e8c94fbb9682f69ce52384ae11819d134d9c108fd412ca87747", "src/lib/planning/country-dissolve-planner.test.ts": "669bfd791ce40a48edb822d23d4525b4b785266eae656ba31587b039b33442c2"},
+  "changedFiles": ["src/lib/planning/country-dissolve-planner.test.ts", "reports/prompt10/10-65-dissolve-transfer-planner.json"],
+  "commands": [{"command": "targeted GREEN", "exitCode": 0, "result": "6 files; 38 tests passed"}, {"command": "npm.cmd test -- --run src/lib/planning", "exitCode": 0, "result": "18 files; 103 tests passed"}, {"command": "related ESLint", "exitCode": 0}, {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}, {"command": "npm.cmd test -- --maxWorkers=1", "exitCode": 0, "result": "95 files; 860 tests passed"}],
+  "measurements": {"sourceTerritoriesTransferred": 2, "metadataMergeSuccessions": 0, "invalidCasesRejected": 6, "revisionIncrements": 1, "inputStateMutations": 0},
+  "gates": {"allSourceTerritoriesTransferred": true, "sourceDeletedAndRetired": true, "unknownRetiredSelfTargetsRejected": true, "missingDuplicateForeignRejected": true, "mergeSuccessionSkipped": true, "singleRevision": true, "allValidationPass": true},
+  "firstFailedGate": null, "nextStage": "10-66"
+}

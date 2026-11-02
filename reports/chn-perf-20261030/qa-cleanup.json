@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "qaPid": 35180,
+  "qaUrl": "http://127.0.0.1:3001",
+  "stoppedOwnedIds": [
+    35180,
+    29620,
+    35272,
+    22368
+  ],
+  "normalAppRetained": true,
+  "previousServerRetained": true,
+  "stoppedAtUtc": "2026-10-30T06:25:11.6890635Z"
+}

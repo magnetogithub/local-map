@@ -1,0 +1,18 @@
+﻿{
+    "smoke":  true,
+    "apiKeyPolicy":  "whitespace-trims-empty",
+    "disabledExternalAI":  true,
+    "url":  "http://127.0.0.1:3001",
+    "pid":  35180,
+    "catalogVersion":  "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "environment":  {
+                        "PAX_OPERATIONAL_SMOKE":  "1",
+                        "OPENAI_API_KEY":  " ",
+                        "OPENAI_MODEL":  "disabled-for-local-qa"
+                    },
+    "launchCodeArtifact":  {
+                               "path":  "scripts/chn-2020/start-performance-qa.ps1",
+                               "sha256":  "1d5a83eaf5ac0624d3d5fa81bf71e7595cbcf4c4535e8e57f58e05ad74ac59ff",
+                               "byteLength":  2282
+                           }
+}

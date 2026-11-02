@@ -1,0 +1,23 @@
+{
+  "stage": "13-27",
+  "status": "pass",
+  "summary": "긴 turn report를 action panel에서 제거하고 compact summary와 뉴스 상세 결과로 분리했다.",
+  "preservedInformation": [
+    "action outcomes",
+    "events",
+    "non-duplicated reactions",
+    "map changes",
+    "continuing situations",
+    "advisor summary"
+  ],
+  "deduplication": "event narrative와 정확히 같은 reaction만 결과 요약에서 제거하며 사건 본문은 뉴스에 유지한다.",
+  "files": [
+    "src/lib/simulation/client/turn-report.ts",
+    "src/lib/game-ui/news-projection.ts",
+    "src/components/game/GameActionOverlay.tsx",
+    "src/components/game/NewsOverlay.tsx",
+    "src/components/game/GameScreen.tsx"
+  ],
+  "verification": {"targetedTests": "pass"},
+  "nextStage": "13-28"
+}

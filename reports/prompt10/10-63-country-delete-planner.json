@@ -1,0 +1,11 @@
+{
+  "stage": "10-63", "status": "pass", "objective": "Delete and retire only empty non-final active countries with typed semantic failures.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {"reports/prompt10/10-62-country-establish-planner.json": "b65e439a804b78cb94e8b34a9c534b4d5b7e68f2d65ea36a7d42aee1712c6ea3"},
+  "outputHashes": {"src/lib/planning/country-delete-planner.ts": "7a219ab0f7f9940ca2b25ebfa4b7dc23a19b621f11bbd73099a0a14d42b00fb8", "src/lib/planning/country-delete-planner.test.ts": "f510ab449d7f099622f83e04b926416129f6b05b7a8aae5b7af6c7862c66535a", "src/lib/planning/plan-result.ts": "b90e8959e6ce2af14a86a02be7ce1a7deca9caea83858122c50905fb4d0607da"},
+  "changedFiles": ["src/lib/planning/country-delete-planner.ts", "src/lib/planning/country-delete-planner.test.ts", "src/lib/planning/plan-result.ts", "src/lib/planning/plan-result.test.ts", "src/lib/planning/command-batch-planner.ts", "reports/prompt10/10-63-country-delete-planner.json"],
+  "commands": [{"command": "targeted RED", "exitCode": 1, "result": "planner module absent"}, {"command": "targeted GREEN", "exitCode": 0, "result": "6 files; 38 tests passed"}, {"command": "planning suite / ESLint / tsc / full suite", "exitCode": 0, "result": "103 planning tests and 860 total tests passed"}],
+  "measurements": {"typedCountryHasTerritoriesCodeAdded": 1, "inputStateMutations": 0, "unrelatedDomainReferenceChanges": 0, "fullTestsPassed": 860},
+  "gates": {"activeOnly": true, "ownedTerritoryGuard": true, "lastCountryGuard": true, "retiredRegistryUpdated": true, "countryOrderUpdated": true, "hashRootsCorrect": true, "batchRouted": true, "allValidationPass": true},
+  "firstFailedGate": null, "nextStage": "10-64"
+}

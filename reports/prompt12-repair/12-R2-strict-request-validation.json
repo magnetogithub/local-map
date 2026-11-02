@@ -1,0 +1,33 @@
+{
+  "stage": "12-R2",
+  "status": "pass",
+  "objective": "Replace shallow Route assertions with strict recursive SimulationContext parsing.",
+  "filesRead": [
+    "src/app/api/simulation/turn/route.ts",
+    "src/lib/simulation/simulation-context.ts",
+    "src/lib/simulation/simulation-contract-primitives.ts",
+    "src/lib/simulation/server/provider-route.test.ts"
+  ],
+  "changedFiles": [
+    "src/app/api/simulation/turn/route.ts",
+    "src/lib/simulation/simulation-context.ts",
+    "src/lib/simulation/server/provider-route.test.ts"
+  ],
+  "commands": [
+    "npx.cmd tsc --noEmit",
+    "npx.cmd vitest run src/lib/simulation/server/provider-route.test.ts"
+  ],
+  "gates": {
+    "nestedExtraFieldRejected": "pass",
+    "invalidDateRejected": "pass",
+    "negativeRevisionRejected": "pass",
+    "oversizedDirectoryRejected": "pass",
+    "prototypeKeyRejected": "pass",
+    "invalidRequestProviderCreations": 0,
+    "validCanonicalContext": "pass",
+    "targetedTests": "9 passed"
+  },
+  "firstFailedGate": null,
+  "notes": ["Malformed responses contain only a typed error code and bounded generic message."],
+  "nextStage": "12-R3"
+}

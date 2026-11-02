@@ -1,0 +1,123 @@
+{
+  "stage": "9-13",
+  "status": "pass",
+  "objective": "Define and apply a strict territory.replace command that deterministically normalizes valid polygon geometry and rejects malformed or self-intersecting input.",
+  "inputHashes": {
+    "prompts/PROMPT_09_DYNAMIC_WORLD_COMMAND_RUNTIME.txt": "42c8696ea8cbb2b555de6575913f10e43e0822746758d404e87ee7405a06abe5",
+    "reports/prompt09/9-12-country-rename-schema.json": "dfed2d7e46b912d96dbdd8de45b099ef3c3664155cc44bd7a885b47702bdf3d3",
+    "src/lib/commands/country-rename.ts": "5b880c50b30b00a00698f729023a954d9b22ba4aa1dd1ad1b9d3d232f8b72a1f",
+    "src/lib/commands/country-rename.test.ts": "2e2b2600c188f41c4f4c91a88c29229832845e0866578547319dd8e69c8c7cf6",
+    "src/lib/commands/map-command.ts": "41eb874fea39c60586a3f54e43295fe6bbf2dd53cc19f7869878016aeab19aec",
+    "src/lib/world/world-state.ts": "3083e848d5453117061cb7643b796e12216cf5fe284c8cc7066a219948d251ad",
+    "package-lock.json": "fc7842b373ceeed78eb75bc3f640c1e262d08b3ff185ef9d88035336d426f8dd"
+  },
+  "outputHashes": {
+    "src/lib/commands/territory-replace.ts": "5fd63b71c3ebaef579dfa653694fc2d3d479d0d2c081e8832fe79aa4a4a85cd6",
+    "src/lib/commands/territory-replace.test.ts": "f55db903b0710bc339ca810176e5fcfaae3d4f57045a31fc22c6445095837e8d"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-13-territory-replace-schema.json",
+    "src/lib/commands/territory-replace.test.ts",
+    "src/lib/commands/territory-replace.ts"
+  ],
+  "commands": [
+    {
+      "command": "Read AGENTS.md, installed Next.js client guide, current on-disk 9-13 prompt, existing polygon invariants, and verify 9-12 status plus LF-normalized output hashes; create running report",
+      "exitCode": 0,
+      "durationMs": 1200
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/commands/territory-replace.test.ts src/lib/commands/country-rename.test.ts src/lib/commands/country-delete.test.ts src/lib/commands/country-create.test.ts src/lib/commands/map-command.test.ts",
+      "exitCode": 0,
+      "durationMs": 4402
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 4386
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/commands/territory-replace.ts src/lib/commands/territory-replace.test.ts",
+      "exitCode": 0,
+      "durationMs": 4623
+    },
+    {
+      "command": "After locale-independent canonical sorting and hole-order coverage: npm.cmd test -- --run src/lib/commands/territory-replace.test.ts src/lib/commands/country-rename.test.ts src/lib/commands/country-delete.test.ts src/lib/commands/country-create.test.ts src/lib/commands/map-command.test.ts",
+      "exitCode": 0,
+      "durationMs": 4130
+    },
+    {
+      "command": "After deterministic sorting refinement: npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 4298
+    },
+    {
+      "command": "After deterministic sorting refinement: npm.cmd run lint -- src/lib/commands/territory-replace.ts src/lib/commands/territory-replace.test.ts",
+      "exitCode": 0,
+      "durationMs": 4386
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 28335
+    },
+    {
+      "command": "Scan normalization for locale, clock, and random dependencies; compute LF-normalized output hashes; restore test-generated fix07 timestamps",
+      "exitCode": 0,
+      "durationMs": 1000
+    }
+  ],
+  "measurements": {
+    "windingNormalizationCases": 1,
+    "canonicalEquivalenceCases": 4,
+    "selfIntersectionCasesRejected": 2,
+    "emptyGeometryCasesRejected": 2,
+    "nonFiniteCoordinateCasesRejected": 2,
+    "openZeroAreaOrInvalidHoleCasesRejected": 3,
+    "unknownGeometryOrPayloadFieldCasesRejected": 2,
+    "unknownCountryCasesRejected": 1,
+    "castOnlyInvalidInputsRejected": 1,
+    "localeClockOrRandomDependencies": 0,
+    "territoryReplaceTestsPassed": 17,
+    "targetedTestFilesPassed": 5,
+    "targetedTestsPassed": 75,
+    "fullTestFilesPassed": 23,
+    "fullTestsPassed": 183,
+    "typecheckErrors": 0,
+    "lintErrors": 0
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "currentPromptNineThirteenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageHashesMatchCurrentOutputs": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "strictTerritoryReplaceCommandDefined": true,
+    "singleCountryGeometryReplacementDefined": true,
+    "runtimeSchemaValidatorUsedOnApply": true,
+    "selfIntersectionRejected": true,
+    "emptyPolygonRejected": true,
+    "nonFiniteCoordinatesRejected": true,
+    "invalidRingRelationsRejected": true,
+    "windingNormalizedToRightHandRule": true,
+    "ringStartsCanonicalized": true,
+    "holesAndMultiPolygonComponentsCanonicalized": true,
+    "normalizationIsLocaleIndependent": true,
+    "normalizationIsDeterministic": true,
+    "unknownCountryRejectedWithoutMutation": true,
+    "targetedUnitTestsPass": true,
+    "fullUnitSuitePass": true,
+    "typecheckPass": true,
+    "lintPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [
+    "The first passing implementation used localeCompare for canonical array ordering. It was replaced before final validation with direct code-point string comparison, and an additional hole-order equivalence test was added to remove locale-dependent normalization risk."
+  ],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": true,
+  "nextStage": "9-14"
+}

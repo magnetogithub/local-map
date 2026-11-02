@@ -1,0 +1,196 @@
+{
+  "stage": "9-8",
+  "status": "pass",
+  "objective": "Implement a countryOrder-driven iteration selector that memoizes one array reference per WorldState snapshot and verify deterministic create, delete, and rollback updates in a real React subscriber without snapshot-cache warnings or render loops.",
+  "inputHashes": {
+    "reports/prompt09/9-7-dynamic-country-by-id-selector.json": "3bb0d72e9ffea61bda1189a928bbd90d7738b41e69a8e375bc78f10c3bed728b",
+    "prompts/PROMPT_09_DYNAMIC_WORLD_COMMAND_RUNTIME.txt": "42c8696ea8cbb2b555de6575913f10e43e0822746758d404e87ee7405a06abe5",
+    "src/stores/world-state-store.ts": "6e23cad0d673ff071c6ec8d9d5ddca7a8a4eefc9227caf500b5dee4334b7de00",
+    "src/stores/world-state-iteration-selector.test.ts": "cf1710ce704726d42a2c24cc4a2482efd823e2e5bf8c4bcfdd9c9c75664fbc2f",
+    "src/lib/world/world-state.ts": "3083e848d5453117061cb7643b796e12216cf5fe284c8cc7066a219948d251ad",
+    "src/stores/world-state-country-selector.test.ts": "9de0c20e97cead109afb9c888069d720a2b10cea37a0ce84056513501695d180"
+  },
+  "outputHashes": {
+    "src/stores/world-state-store.ts": "00cc1ba17af68ffc618fd3d48a8f263a31dee57de2731fa74b0dce4f7b0bf8a1",
+    "src/stores/world-state-iteration-selector.test.ts": "45020792eae39e24b2ff0df273bf73cb5b2784f570bce2bde4f335c5209c189c"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-8-deterministic-country-iteration-selector.json",
+    "src/stores/world-state-iteration-selector.test.ts",
+    "src/stores/world-state-store.ts"
+  ],
+  "commands": [
+    {
+      "command": "Verify 9-7 status and LF-normalized output hashes; read AGENTS.md, installed Next.js client guide, current selectors, and replacement order behavior",
+      "exitCode": 0,
+      "durationMs": 800
+    },
+    {
+      "command": "npm.cmd test -- --run src/stores/world-state-iteration-selector.test.ts src/stores/world-state-country-selector.test.ts src/stores/world-state-store.test.tsx",
+      "exitCode": 0,
+      "durationMs": 6920
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 8457
+    },
+    {
+      "command": "npm.cmd run lint -- src/stores/world-state-store.ts src/stores/world-state-iteration-selector.test.ts",
+      "exitCode": 0,
+      "durationMs": 8620
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 30380
+    },
+    {
+      "command": "Scan iteration selector for Object.keys, Object.values, Object.entries, or for-in traversal of countriesById",
+      "exitCode": 0,
+      "durationMs": 800
+    },
+    {
+      "command": "Rerun: verify existing 9-8 report status and LF-normalized output hashes; set report to running",
+      "exitCode": 0,
+      "durationMs": 700
+    },
+    {
+      "command": "Rerun: npm.cmd test -- --run src/stores/world-state-iteration-selector.test.ts src/stores/world-state-country-selector.test.ts src/stores/world-state-store.test.tsx",
+      "exitCode": 0,
+      "durationMs": 3572
+    },
+    {
+      "command": "Rerun: npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 5816
+    },
+    {
+      "command": "Rerun: npm.cmd run lint -- src/stores/world-state-store.ts src/stores/world-state-iteration-selector.test.ts",
+      "exitCode": 0,
+      "durationMs": 4571
+    },
+    {
+      "command": "Rerun: scan iteration selector for implicit countriesById record traversal",
+      "exitCode": 0,
+      "durationMs": 100
+    },
+    {
+      "command": "Rerun: npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 30050
+    },
+    {
+      "command": "Updated-prompt rerun: read the current on-disk 9-8 action, verification, and branch text; verify existing 9-8 output hashes; set report to running",
+      "exitCode": 0,
+      "durationMs": 1000
+    },
+    {
+      "command": "Updated-prompt rerun before fix: npm.cmd test -- --run src/stores/world-state-iteration-selector.test.ts",
+      "exitCode": 1,
+      "durationMs": 2711
+    },
+    {
+      "command": "Updated-prompt rerun after WeakMap memoization: npm.cmd test -- --run src/stores/world-state-iteration-selector.test.ts src/stores/world-state-country-selector.test.ts src/stores/world-state-store.test.tsx",
+      "exitCode": 0,
+      "durationMs": 3155
+    },
+    {
+      "command": "Updated-prompt rerun: npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 3454
+    },
+    {
+      "command": "Updated-prompt rerun: npm.cmd run lint -- src/stores/world-state-store.ts src/stores/world-state-iteration-selector.test.ts",
+      "exitCode": 0,
+      "durationMs": 3536
+    },
+    {
+      "command": "Updated-prompt rerun: scan iteration selector for implicit countriesById record traversal",
+      "exitCode": 0,
+      "durationMs": 101
+    },
+    {
+      "command": "Updated-prompt rerun: npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 31180
+    }
+  ],
+  "measurements": {
+    "recordInsertionOrdersCompared": 2,
+    "transitionOrderStatesCompared": 4,
+    "initialOrderHash": "7ef16e7a59c5fa66fc95eb3ea8a35ae230a52937dada7db2b0e900201584b5ff",
+    "createdOrderHash": "1bbd3bd5a47be0789d51775aafec585316dca0521471a0c025807bee0bc1fc6c",
+    "deletedOrderHash": "f8b7b326ec1af44892cf05bd3097f820f41f20c4451dace96ae1ca386b4e6ee2",
+    "rollbackOrderHash": "1bbd3bd5a47be0789d51775aafec585316dca0521471a0c025807bee0bc1fc6c",
+    "uniqueHashSequencesAcrossInsertionOrders": 1,
+    "implicitRecordIterationReferences": 0,
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 9,
+    "fullTestFilesPassed": 18,
+    "fullTestsPassed": 108,
+    "typecheckErrors": 0,
+    "lintErrors": 0,
+    "rerunCount": 2,
+    "rerunTargetedTestFilesPassed": 3,
+    "rerunTargetedTestsPassed": 9,
+    "rerunFullTestFilesPassed": 18,
+    "rerunFullTestsPassed": 108,
+    "rerunTypecheckErrors": 0,
+    "rerunLintErrors": 0,
+    "rerunImplicitRecordIterationReferences": 0,
+    "updatedPromptHash": "42c8696ea8cbb2b555de6575913f10e43e0822746758d404e87ee7405a06abe5",
+    "preFixSameSnapshotObjectIs": false,
+    "preFixReactMaximumUpdateDepthErrors": 1,
+    "sameSnapshotQueries": 2,
+    "sameSnapshotObjectIs": true,
+    "memoizedSnapshotArrays": 1,
+    "reactListStatesVerified": 4,
+    "reactListRenders": 4,
+    "reactGetSnapshotCacheWarnings": 0,
+    "reactMaximumUpdateDepthErrors": 0
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "previousStageStatusPass": true,
+    "previousStageHashesMatchCurrentOutputs": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "getCountriesInOrderDefined": true,
+    "reactIterationSelectorDefined": true,
+    "countryOrderIsSoleIterationAuthority": true,
+    "recordInsertionOrderIgnored": true,
+    "createOrderDeterministic": true,
+    "deleteOrderDeterministic": true,
+    "rollbackOrderDeterministic": true,
+    "rollbackRestoresCreatedStateReference": true,
+    "implicitObjectIterationAbsent": true,
+    "targetedUnitTestsPass": true,
+    "fullUnitSuitePass": true,
+    "typecheckPass": true,
+    "lintPass": true,
+    "currentPromptNineEightReadFromDisk": true,
+    "sameSnapshotReturnsSameArrayReference": true,
+    "selectorMemoizedPerWorldStateSnapshot": true,
+    "reactComponentInitialListRendered": true,
+    "reactComponentCreateListUpdated": true,
+    "reactComponentDeleteListUpdated": true,
+    "reactComponentRollbackListUpdated": true,
+    "reactGetSnapshotCacheWarningAbsent": true,
+    "reactMaximumUpdateDepthErrorAbsent": true,
+    "rerunOutputHashesMatchedBeforeExecution": true,
+    "rerunTargetedUnitTestsPass": true,
+    "rerunFullUnitSuitePass": true,
+    "rerunTypecheckPass": true,
+    "rerunLintPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [
+    "The initial implementation and first rerun were based on the earlier 9-8 text and created a new array with map() for every selector read. Reading the updated prompt reproduced Object.is(first, second) === false and a real React Maximum update depth exceeded failure. The selector now memoizes one ordered array per WorldState snapshot in a WeakMap."
+  ],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": true,
+  "nextStage": "9-9"
+}

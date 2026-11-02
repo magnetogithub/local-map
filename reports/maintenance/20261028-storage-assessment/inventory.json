@@ -1,0 +1,544 @@
+{
+  "measuredAt": "2026-10-28T06:26:13.3962188Z",
+  "root": "D:\\gen",
+  "status": "assessment only; no project data deleted",
+  "measurement": "Logical file sizes; junctions and symlinks excluded. Concurrent build output may change. This report itself was created after measurement.",
+  "totalBytes": 352609891649,
+  "fileCount": 2545321,
+  "directoryCount": 495306,
+  "errors": [],
+  "topLevel": [
+    {
+      "Path": "reports",
+      "Bytes": 314396046853,
+      "Files": 1955300
+    },
+    {
+      "Path": ".tmp",
+      "Bytes": 17527556560,
+      "Files": 487435
+    },
+    {
+      "Path": "data",
+      "Bytes": 12112537868,
+      "Files": 64627
+    },
+    {
+      "Path": ".git",
+      "Bytes": 6779834605,
+      "Files": 2325
+    },
+    {
+      "Path": ".next",
+      "Bytes": 729890252,
+      "Files": 1030
+    },
+    {
+      "Path": "node_modules",
+      "Bytes": 576585792,
+      "Files": 27754
+    },
+    {
+      "Path": ".next-e2e",
+      "Bytes": 203446373,
+      "Files": 311
+    },
+    {
+      "Path": ".next-e2e-review-g",
+      "Bytes": 139371256,
+      "Files": 98
+    },
+    {
+      "Path": "public",
+      "Bytes": 102825770,
+      "Files": 5490
+    },
+    {
+      "Path": "screenshots",
+      "Bytes": 28271199,
+      "Files": 129
+    },
+    {
+      "Path": "checkpoints",
+      "Bytes": 5148383,
+      "Files": 72
+    },
+    {
+      "Path": "src",
+      "Bytes": 4085266,
+      "Files": 452
+    },
+    {
+      "Path": "scripts",
+      "Bytes": 1889480,
+      "Files": 208
+    },
+    {
+      "Path": "prompts",
+      "Bytes": 587874,
+      "Files": 17
+    },
+    {
+      "Path": "e2e",
+      "Bytes": 102993,
+      "Files": 16
+    },
+    {
+      "Path": "docs",
+      "Bytes": 96211,
+      "Files": 18
+    },
+    {
+      "Path": "automation",
+      "Bytes": 40007,
+      "Files": 7
+    },
+    {
+      "Path": ".codex-remote-attachments",
+      "Bytes": 32108,
+      "Files": 1
+    },
+    {
+      "Path": "tools",
+      "Bytes": 18591,
+      "Files": 4
+    },
+    {
+      "Path": ".github",
+      "Bytes": 6740,
+      "Files": 1
+    },
+    {
+      "Path": "test-results",
+      "Bytes": 45,
+      "Files": 1
+    }
+  ],
+  "rootFilesBytes": 1517423,
+  "largestGroups": [
+    {
+      "Path": "reports",
+      "Bytes": 314396046853,
+      "Files": 1955300
+    },
+    {
+      "Path": "reports/prompt15",
+      "Bytes": 311078524126,
+      "Files": 1912481
+    },
+    {
+      "Path": "reports/prompt15/orchestration",
+      "Bytes": 273360252092,
+      "Files": 1739593
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B",
+      "Bytes": 74018357087,
+      "Files": 461215
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification",
+      "Bytes": 74017928087,
+      "Files": 461211
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B",
+      "Bytes": 72639608813,
+      "Files": 450851
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B/implementation",
+      "Bytes": 72011564031,
+      "Files": 450019
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B",
+      "Bytes": 53816233794,
+      "Files": 341951
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0015-B",
+      "Bytes": 47325144020,
+      "Files": 297498
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0015-B/verification",
+      "Bytes": 47324935527,
+      "Files": 297496
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/implementation",
+      "Bytes": 46572683867,
+      "Files": 296465
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0015-B/verification/cli-negatives",
+      "Bytes": 44464506849,
+      "Files": 282259
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/implementation/negative-fixtures",
+      "Bytes": 41314230791,
+      "Files": 266611
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B/implementation/negative-fixtures",
+      "Bytes": 41314230791,
+      "Files": 266611
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/negative-fixtures-resumed-v9",
+      "Bytes": 34229183129,
+      "Files": 220879
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/role-negative-fixtures",
+      "Bytes": 23864890622,
+      "Files": 152464
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B/implementation/role-negative-fixtures",
+      "Bytes": 23864890582,
+      "Files": 152464
+    },
+    {
+      "Path": ".tmp",
+      "Bytes": 17527556560,
+      "Files": 487435
+    },
+    {
+      "Path": "data",
+      "Bytes": 12112537868,
+      "Files": 64627
+    },
+    {
+      "Path": ".tmp/prompt15-transfer-20261019",
+      "Bytes": 11953787471,
+      "Files": 149519
+    },
+    {
+      "Path": "reports/prompt15/review-c-r6",
+      "Bytes": 10057562544,
+      "Files": 49942
+    },
+    {
+      "Path": "reports/prompt15/review-c-r3",
+      "Bytes": 9991192864,
+      "Files": 51666
+    },
+    {
+      "Path": "data/derived",
+      "Bytes": 9598394788,
+      "Files": 48871
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0013-B-handoff",
+      "Bytes": 9169918334,
+      "Files": 45856
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0013-B-handoff/implementer-handoff-16",
+      "Bytes": 9169803371,
+      "Files": 45848
+    },
+    {
+      "Path": "reports/prompt15/review-c-r6/first-final",
+      "Bytes": 8490195763,
+      "Files": 38233
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/negative-fixtures",
+      "Bytes": 8265881333,
+      "Files": 53354
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/verification",
+      "Bytes": 7243193678,
+      "Files": 45474
+    },
+    {
+      "Path": ".git",
+      "Bytes": 6779834605,
+      "Files": 2325
+    },
+    {
+      "Path": "reports/prompt15/review-c-r3/first",
+      "Bytes": 4871620169,
+      "Files": 25828
+    },
+    {
+      "Path": "reports/prompt15/review-c-r3/second",
+      "Bytes": 4855384558,
+      "Files": 25770
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/verification/aggregate-negative-fixtures-v2",
+      "Bytes": 4722786400,
+      "Files": 30487
+    },
+    {
+      "Path": "reports/prompt15/review-c-r4",
+      "Bytes": 3879978954,
+      "Files": 23723
+    },
+    {
+      "Path": ".git/objects",
+      "Bytes": 3516725947,
+      "Files": 33
+    },
+    {
+      "Path": "reports/prompt15/15-22-component-repair",
+      "Bytes": 3468170937,
+      "Files": 3794
+    },
+    {
+      "Path": ".git/lfs",
+      "Bytes": 3256052362,
+      "Files": 2250
+    },
+    {
+      "Path": "reports/prompt15/15-22-component-repair/20261027-generation-f13f77acee",
+      "Bytes": 3199142870,
+      "Files": 3160
+    },
+    {
+      "Path": "reports/prompt15/review-c-r5",
+      "Bytes": 3105863602,
+      "Files": 23229
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0011-B-handoff",
+      "Bytes": 2465221464,
+      "Files": 8668
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0011-B-handoff/implementer-handoff-15",
+      "Bytes": 2465145550,
+      "Files": 8663
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B/implementation/extra-negative-fixtures",
+      "Bytes": 2362103671,
+      "Files": 15244
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/implementation/extra-negative-fixtures",
+      "Bytes": 2362103671,
+      "Files": 15244
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/extra-negative-fixtures",
+      "Bytes": 2362103671,
+      "Files": 15244
+    },
+    {
+      "Path": "data/catalogs",
+      "Bytes": 2346579917,
+      "Files": 15690
+    },
+    {
+      "Path": "reports/maintenance",
+      "Bytes": 2252953973,
+      "Files": 11212
+    },
+    {
+      "Path": "reports/maintenance/20261014-prompt14-rollback",
+      "Bytes": 2252942063,
+      "Files": 11210
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0006-B",
+      "Bytes": 2219827441,
+      "Files": 8811
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0017-B",
+      "Bytes": 2037298449,
+      "Files": 8857
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0017-B/verification",
+      "Bytes": 2037089956,
+      "Files": 8855
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0007-B-handoff",
+      "Bytes": 1947089943,
+      "Files": 10074
+    },
+    {
+      "Path": ".tmp/prompt15-relocation",
+      "Bytes": 1669536738,
+      "Files": 6578
+    },
+    {
+      "Path": "reports/prompt15/15-20-sliver-adoption/20261028-indices-6084b5f890",
+      "Bytes": 1632564317,
+      "Files": 2651
+    },
+    {
+      "Path": "reports/prompt15/15-20-sliver-adoption",
+      "Bytes": 1632564317,
+      "Files": 2651
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0003-C-handoff",
+      "Bytes": 1528802379,
+      "Files": 7440
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0003-C-handoff/implementer-handoff-2",
+      "Bytes": 1528759712,
+      "Files": 7431
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0006-B/implementer-handoff-5",
+      "Bytes": 1477813428,
+      "Files": 5054
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0015-B/verification/contract-boundary",
+      "Bytes": 1444707398,
+      "Files": 8075
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0017-B/verification/contract-boundary",
+      "Bytes": 1429705113,
+      "Files": 8060
+    },
+    {
+      "Path": "reports/prompt15/15-22-country-batches",
+      "Bytes": 1371361206,
+      "Files": 562
+    },
+    {
+      "Path": "reports/prompt15/15-22-sliver-adoption-audit",
+      "Bytes": 1336902366,
+      "Files": 475
+    },
+    {
+      "Path": "reports/prompt15/15-22-sliver-adoption-audit/20261028-e16a54f859dcfd8e75f4",
+      "Bytes": 1335567937,
+      "Files": 356
+    },
+    {
+      "Path": "reports/prompt15/review-c-r6/second-final",
+      "Bytes": 1330348531,
+      "Files": 11267
+    },
+    {
+      "Path": "reports/prompt15/review-c-r5/second-final",
+      "Bytes": 1328146043,
+      "Files": 11245
+    },
+    {
+      "Path": "reports/prompt15/review-c-r5/first-final",
+      "Bytes": 1328143641,
+      "Files": 11245
+    },
+    {
+      "Path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0002-C-handoff",
+      "Bytes": 1326252467,
+      "Files": 4102
+    }
+  ],
+  "historicalNegativeFixtureBytes": 228404043989,
+  "historicalNegativeFixtureFiles": 1470724,
+  "historicalNegativeFixtureTrees": [
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/implementation/negative-fixtures",
+      "bytes": 41314230791,
+      "files": 266611,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0015-B/verification/cli-negatives/negative-fixtures",
+      "bytes": 41314230791,
+      "files": 266611,
+      "method": "targeted-current-scan",
+      "errors": []
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B/implementation/negative-fixtures",
+      "bytes": 41314230791,
+      "files": 266611,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/negative-fixtures-resumed-v9",
+      "bytes": 34229183129,
+      "files": 220879,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/role-negative-fixtures",
+      "bytes": 23864890622,
+      "files": 152464,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B/implementation/role-negative-fixtures",
+      "bytes": 23864890582,
+      "files": 152464,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/negative-fixtures",
+      "bytes": 8265881333,
+      "files": 53354,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/implementation/extra-negative-fixtures",
+      "bytes": 2362103671,
+      "files": 15244,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0015-B/verification/cli-negatives/extra-negative-fixtures",
+      "bytes": 2362103671,
+      "files": 15244,
+      "method": "targeted-current-scan",
+      "errors": []
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0018-B/implementation/extra-negative-fixtures",
+      "bytes": 2362103671,
+      "files": 15244,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0019-B/verification/extra-negative-fixtures",
+      "bytes": 2362103671,
+      "files": 15244,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/verification/aggregate-negative-fixtures-v2",
+      "bytes": 4722786400,
+      "files": 30487,
+      "method": "full-current-scan"
+    },
+    {
+      "path": "reports/prompt15/orchestration/20261012T174318-KST-e35a6937/rounds/0014-B/verification/aggregate-negative-fixtures",
+      "bytes": 65304866,
+      "files": 267,
+      "method": "full-current-scan"
+    }
+  ],
+  "protectedRuntimePaths": [
+    "data/derived/prompt15/15-19-operational-catalog-v3-ae59d85d8dedbafc44f6",
+    "data/derived/prompt15/15-20-topology-membership-v1-22406931e1665b6ede05",
+    "data/derived/prompt15/15-21-world-delivery-v1-56fc6c79c216e6bd1a11",
+    "reports/prompt15/15-21-final-join/20261027T122926152KST-receipt-intake/final-admission.json",
+    "reports/prompt15/15-21-final-join/20261027T122926152KST-receipt-intake/admitted/verdict.json",
+    "reports/prompt14/14-08-immutable-catalog-checkpoint.json"
+  ],
+  "notes": [
+    "Negative fixtures are historical full copies with selected mutations; retain verdicts, commands, hashes, mutation evidence and pristine baseline before pruning.",
+    "Some staging paths are already tracked by Git; 2267384470 current bytes across 1683 tracked files.",
+    "Do not remove all reports, data or public: current runtime and migration read them.",
+    "Git/LFS storage is separate from working-tree copies; remote LFS availability was not verified.",
+    "Retain one validated transfer package with manifest/checksums/receipts before removing transfer sandbox copies."
+  ]
+}

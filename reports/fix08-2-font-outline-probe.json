@@ -1,0 +1,168 @@
+{
+  "stage": "8-2",
+  "status": "pass",
+  "inputHashes": {
+    "reports/fix08-1-current-boundary-audit.json": "b06155c502223545f1f6de47d810dd3bfee65914616620891d5180b4a41523db",
+    "package.json": "fd2258c1f8f73a9eddda91465e1a5f309e9e087a4b88157e5439545cc9f333d4",
+    "package-lock.json": "fc7842b373ceeed78eb75bc3f640c1e262d08b3ff185ef9d88035336d426f8dd",
+    "public/fonts/Noto Sans KR/NotoSansCJKkr-Regular.otf": "6bcb2a0703aa137e874fc2dffa85f6c21ba9a67fa329e81b8c801663af7e992a"
+  },
+  "outputHashes": {
+    "scripts/probe-font-outlines.cjs": "2c72537c9e39e931bbc99c15a26e106086936a1f820bc0d5d38a9ac384abe723",
+    "reports/fix08-2-font-outline-probe.raw.json": "128e541e53971ad37f925a1beb54bffcf86cfc709572f361a2a6988b9652718f",
+    "screenshots/fix08-2-font-outline-probe.svg": "b2569f80eba8edc364030b27ae2f3d2875faa4ba2afce76ca6f8cabc4479a332"
+  },
+  "prerequisite": {
+    "stage": "8-1",
+  "status": "running",
+    "inputHashesMatch": true,
+    "reportHash": "b06155c502223545f1f6de47d810dd3bfee65914616620891d5180b4a41523db"
+  },
+  "font": {
+    "path": "public/fonts/Noto Sans KR/NotoSansCJKkr-Regular.otf",
+    "byteLength": 16433112,
+    "format": "OpenType/CFF",
+    "postscriptName": "NotoSansCJKkr-Regular",
+    "fullName": "Noto Sans CJK KR",
+    "version": "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603",
+    "unitsPerEm": 1000,
+    "numGlyphs": 65535,
+    "embeddedCopyright": "© 2014-2021 Adobe (http://www.adobe.com/).",
+    "license": "SIL Open Font License 1.1",
+    "licenseEvidence": [
+      "https://github.com/notofonts/noto-cjk/blob/main/Sans/NEWS.md",
+      "https://github.com/adobe-fonts/source-han-sans/blob/master/LICENSE.txt"
+    ],
+    "repositoryLicenseFilePresent": false,
+    "licenseRisk": "The authoritative upstream identifies Noto Sans CJK as OFL-1.1, but this repository does not include an OFL/license file beside the distributed font. A later packaging/compliance change should add the applicable license text without changing the font bytes."
+  },
+  "dependencyAudit": {
+    "lockfileVersion": 3,
+    "nextVersion": "16.3.0",
+    "standaloneFontkitInstalled": true,
+    "standaloneFontkitVersion": "2.0.4",
+    "standaloneFontkitLicense": "MIT",
+    "standaloneOpentypeJsInstalled": false,
+    "currentProjectFontCode": {
+      "file": "src/lib/map/font-metrics.ts",
+      "supports": ["cmap", "advance widths", "MapLibre PBF advances", "letter spacing measurement"],
+      "doesNotSupport": ["glyph contours", "CFF charstrings", "kerning/shaping"]
+    },
+    "probeChoice": {
+      "implementation": "fontkit 2.0.4 public package API",
+      "module": "fontkit",
+      "supports": ["OpenType/CFF glyph paths", "layout/shaping", "advance widths", "positioned advances including kerning when present"],
+      "lockfileChangedSinceOriginal8_2": true,
+      "dependencyPresentAtRevalidationStart": true,
+      "scope": "Supported parser selected for subsequent pure geometry work; 8-2 still performs no product integration.",
+      "productDecision": "Use fontkit's public create/layout/glyph path APIs behind a project-owned adapter; do not depend on the private Next.js bundle."
+    },
+    "alternatives": [
+      {"name": "existing src/lib/map/font-metrics.ts", "result": "insufficient", "reason": "advance-only; no contours or kerning"},
+      {"name": "standalone fontkit", "result": "selected", "reason": "fontkit 2.0.4 is now explicitly pinned by package-lock and reproduces the prior probe byte-for-byte"},
+      {"name": "opentype.js", "result": "not installed", "reason": "would require lockfile change; unnecessary for the probe"},
+      {"name": "Next bundled fontkit", "result": "rejected for product use", "reason": "private implementation path; standalone fontkit now provides the supported API"}
+    ]
+  },
+  "probe": {
+    "script": "scripts/probe-font-outlines.cjs",
+    "strings": ["호주", "러시아"],
+    "canonicalOutlineHash": "ecbb5699f53d83ab8eb119b9979e13f733dac7396d617acf828eedba7f3a7ffd",
+    "flattening": {
+      "algorithm": "recursive cubic subdivision; quadratic commands are converted to cubic; maximum control-point distance to chord is the stop criterion",
+      "fixedPrecisionDecimals": 6,
+      "tolerancesFontUnits": [1, 4],
+      "normalizedErrorBoundsEm": [0.001, 0.004],
+      "zoomDependent": false,
+      "visualEvidence": "screenshots/fix08-2-font-outline-probe.svg",
+      "fillRule": "evenodd"
+    },
+    "samples": {
+      "호주": {
+        "glyphCount": 2,
+        "missingGlyphs": 0,
+        "glyphIds": [58419, 55031],
+        "codePoints": [54840, 51452],
+        "advances": [920, 920],
+        "tolerance1": {"contours": 5, "holes": 1, "vertices": 195},
+        "tolerance4": {"contours": 5, "holes": 1, "vertices": 119}
+      },
+      "러시아": {
+        "glyphCount": 3,
+        "missingGlyphs": 0,
+        "glyphIds": [50663, 53463, 54079],
+        "codePoints": [47084, 49884, 50500],
+        "advances": [920, 920, 920],
+        "tolerance1": {"contours": 7, "holes": 1, "vertices": 221},
+        "tolerance4": {"contours": 7, "holes": 1, "vertices": 131}
+      }
+    },
+    "comparison": {
+      "tolerance1TotalVertices": 416,
+      "tolerance4TotalVertices": 250,
+      "vertexReductionPercent": 39.903846,
+      "contourCountStable": true,
+      "holeCountStable": true,
+      "missingGlyphs": 0,
+      "sampleKerningAdjustmentFontUnits": 0,
+      "kerningNote": "The shaping API returns positioned advances and can expose kerning; these Hangul samples have zero pair adjustment in this font."
+    }
+  },
+  "determinism": {
+    "runs": 2,
+    "canonicalOutlineHashEqual": true,
+    "rawJsonHashEqual": true,
+    "diagnosticSvgHashEqual": true,
+    "rawJsonSha256": "128e541e53971ad37f925a1beb54bffcf86cfc709572f361a2a6988b9652718f",
+    "diagnosticSvgSha256": "b2569f80eba8edc364030b27ae2f3d2875faa4ba2afce76ca6f8cabc4479a332"
+  },
+  "changedFiles": [
+    "scripts/probe-font-outlines.cjs",
+    "reports/fix08-2-font-outline-probe.raw.json",
+    "screenshots/fix08-2-font-outline-probe.svg",
+    "reports/fix08-2-font-outline-probe.json"
+  ],
+  "commands": [
+    {"command": "verify 8-1 pass and all recorded input hashes", "exitCode": 0, "durationMs": 400},
+    {"command": "initialize reports/fix08-2-font-outline-probe.json as running", "exitCode": 0, "durationMs": 800},
+    {"command": "search font files, licenses, installed parsers and lockfile", "exitCode": 1, "durationMs": 3000, "note": "Discovery succeeded; rg returned 1 because no standalone parser/license file matched."},
+    {"command": "inspect Next bundled fontkit and repository license references", "exitCode": 0, "durationMs": 1000},
+    {"command": "initial bundled fontkit create API probe", "exitCode": 1, "durationMs": 500, "note": "The bundled export is a font-from-buffer function, not public fontkit.create; invocation corrected."},
+    {"command": "inspect bundled export and @next/font loader usage", "exitCode": 0, "durationMs": 500},
+    {"command": "load actual OTF and inspect representative glyphs", "exitCode": 0, "durationMs": 1200},
+    {"command": "generate raw JSON and SVG twice inside sandbox", "exitCode": 1, "durationMs": 900, "note": "Raw JSON wrote successfully; screenshot SVG write failed with EPERM."},
+    {"command": "inspect screenshots ACL and generated raw artifact", "exitCode": 0, "durationMs": 500},
+    {"command": "generate probe artifacts twice with approved workspace permission and compare hashes", "exitCode": 0, "durationMs": 4700},
+    {"command": "inspect embedded font metadata, lockfile, and artifact hashes", "exitCode": 0, "durationMs": 900, "note": "Font metadata and hashes succeeded; PowerShell ConvertFrom-Json could not parse package-lock and was replaced with Node."},
+    {"command": "check script syntax, lockfile dependencies, contours, holes, glyph coverage, and raw JSON", "exitCode": 0, "durationMs": 500},
+    {"command": "finalize original 8-2 report", "exitCode": 0, "durationMs": 1400},
+    {"command": "detect package.json/package-lock hash mismatch before 8-3", "exitCode": 1, "durationMs": 400, "note": "Correctly blocked 8-3 because fontkit had been added after the original report."},
+    {"command": "inspect current lockfile and explicit fontkit 2.0.4 dependency", "exitCode": 0, "durationMs": 600},
+    {"command": "reinitialize 8-2 report and switch probe to public fontkit API", "exitCode": 0, "durationMs": 8800},
+    {"command": "run public-fontkit probe twice and compare raw/SVG hashes", "exitCode": 0, "durationMs": 4700},
+    {"command": "audit package and lock hashes, fontkit license/version, and npm dependency tree", "exitCode": 0, "durationMs": 1300},
+    {"command": "re-finalize 8-2 report for changed dependency inputs", "exitCode": 0, "durationMs": 0}
+  ],
+  "gates": {
+    "priorStagePassAndHashesMatch": true,
+    "actualRepositoryFontUsed": true,
+    "fontFormatAndHashRecorded": true,
+    "licenseIdentified": true,
+    "dependencyCompatibilityAudited": true,
+    "representativeMissingGlyphsZero": true,
+    "contoursExtracted": true,
+    "holesPreservedAcrossTolerances": true,
+    "twoTolerancesCompared": true,
+    "diagnosticImageGenerated": true,
+    "deterministicOutlineHashEqual": true,
+    "productIntegrationNotStarted": true,
+    "stageStatus": "pass"
+  },
+  "implementationErrors": [],
+  "environmentErrors": [
+    "The first sandboxed SVG write to screenshots failed with EPERM; the exact generation command succeeded under approved workspace permission.",
+    "The repository does not contain a local OFL/license file adjacent to the distributed Noto font; upstream license evidence is recorded as a packaging risk.",
+    "package.json and package-lock.json changed after the original 8-2 pass to add fontkit 2.0.4. The stage was reinitialized and all evidence regenerated with the new inputs; canonical raw and SVG hashes remained identical."
+  ],
+  "nextStage": "8-3"
+}

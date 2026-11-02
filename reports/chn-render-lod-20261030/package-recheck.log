@@ -1,0 +1,11 @@
+file:///D:/gen/scripts/chn-2020/package-internal-line-lod.mjs:47
+if (existsSync(resolve(root, path))) throw Error('IMMUTABLE_OUTPUT_EXISTS');
+                                           ^
+
+Error: IMMUTABLE_OUTPUT_EXISTS
+    at file:///D:/gen/scripts/chn-2020/package-internal-line-lod.mjs:47:44
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.18.0

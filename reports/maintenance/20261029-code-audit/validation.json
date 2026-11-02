@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-28T16:27:06.157Z",
+  "commands": {
+    "typecheckExitCode": 0,
+    "lintExitCode": 0,
+    "applicationTestExitCode": 0,
+    "reproductionExitCode": 0,
+    "uiReproductionExitCode": 0,
+    "pipelineUnitExitCode": 0
+  },
+  "typecheck": {
+    "passed": true,
+    "noEmit": true,
+    "incremental": false
+  },
+  "lint": {
+    "files": 734,
+    "errors": 0,
+    "warnings": 10
+  },
+  "application": {
+    "files": 178,
+    "passedFiles": 177,
+    "skippedFiles": 1,
+    "passed": 1433,
+    "failed": 0,
+    "skipped": 4,
+    "durationSeconds": 713.53
+  },
+  "pipelineUnits": {
+    "passed": 9,
+    "failed": 0
+  },
+  "auditProbes": {
+    "passed": 8,
+    "failed": 0,
+    "meaning": "These temporary probes pass when the currently suspected defect is observed; they are diagnostic evidence, not regression tests asserting corrected behavior."
+  },
+  "notRun": [
+    "Full production build or deployment package",
+    "Browser E2E / actual Next navigation remount",
+    "External AI API or live Codex/Discord automation",
+    "Whole Prompt15 regeneration, historical world audit or all node-test.mjs suites"
+  ]
+}

@@ -1,0 +1,1420 @@
+# 프롬프트 12 — GPT API 기반 대체역사 턴 시뮬레이션
+
+## 0. 위치와 목적
+
+이 문서는 저장소 루트를 기준으로 실행한다. 특정 개발 머신의 절대 경로를 코드나 보고서에 기록하지 않는다.
+
+Pax Local은 2020년 1월 1일의 실제 세계를 출발점으로 하는 대체역사 시뮬레이션이다. 플레이어는 국가 하나를 선택하고 그 국가가 취할 행동을 자연어로 입력한다. 플레이어가 지도를 편집하거나 `country.merge` 같은 내부 명령을 직접 내리는 게임이 아니다.
+
+프롬프트 10은 국가와 영토를 분리한 `WorldStateV2`, 구조화 명령, planner, atomic commit, history, projection을 만들었다. 프롬프트 11은 그 상태를 실제 지도·검색·선택·국가 패널·국경·수도·라벨 런타임에 연결했다.
+
+프롬프트 12의 목적은 그 기반 위에 다음 게임 흐름을 구현하는 것이다.
+
+```text
+플레이어가 플레이 국가의 행동을 입력
+→ 행동을 현재 시뮬레이션 날짜에 대기열로 등록
+→ 플레이어가 시간 진행
+→ GPT가 현재 세계·최근 사건·지속 중 상황·대기 행동을 바탕으로 기간을 시뮬레이션
+→ 플레이어 행동의 성공·부분 성공·실패·지연 결과 판정
+→ 타국의 반응과 독립적인 세계 사건 생성
+→ 하나의 구조화된 TurnResolution 생성
+→ host가 인과관계·날짜·actor·world effect를 검증
+→ world effect를 내부 MapCommand v2 batch로 compile
+→ 전체 턴 dry-run
+→ 시뮬레이션 기록과 WorldStateV2를 원자적으로 commit
+→ 사건 보고서와 변경된 지도를 함께 공개
+```
+
+예를 들어 플레이어가 다음과 같이 입력할 수 있다.
+
+```text
+오스트리아 정부에 공동 국민투표와 단계적 통일 협상을 제안한다.
+```
+
+GPT는 이 문장을 `country.merge` 명령으로 번역하지 않는다. 현재 관계, 국내외 상황, 이전 협상, 시간 범위를 고려해 협상 시작, 거절, 조건부 합의, 국민투표 실시, 통일 성립 같은 사건을 판정한다. 실제 통일이 성립한 사건이 발생한 경우에만 그 사건의 결과로 내부 `country.merge` command가 만들어진다.
+
+다음 입력은 일반 gameplay에서 관리자 명령으로 취급하지 않는다.
+
+```text
+오스트리아를 독일에 합쳐.
+미국을 50개 국가로 분할해.
+중국 국경을 없애.
+```
+
+이런 문장은 플레이 국가가 현실에서 무엇을 시도하려는지 해석되어야 한다. 플레이 국가에 권한·능력·인과관계가 없다면 그대로 실행하지 않는다. 지도 편집 검증이 필요할 때에는 Prompt 10의 별도 development/debug command 경로를 사용한다.
+
+## 1. Pax Historia에서 참고할 범위
+
+이 프롬프트는 Pax Historia의 비공개 prompt나 내부 판정 규칙을 복제하지 않는다. 공개 Creator Docs에서 확인되는 다음 구조만 참고한다.
+
+- gameplay effect는 typed command와 runtime validation을 통과한다.
+- 모델 event는 provider 형식 그대로 UI에 노출하지 않고 host event로 정규화한다.
+- AI가 반환한 tool call은 그 자체로 게임 효과를 만들지 않는다.
+- 기다리는 동안 무엇을 처리하는지 명시적인 loading 상태를 제공한다.
+- Stop은 플레이어 권리이며 진행 중 AI 작업과 후속 비용 발생을 중단한다.
+- jump-forward 결과가 commit된 뒤 advisor나 report가 그 결과를 설명한다.
+- 장기 memory에는 authoritative outcome을 남기고 private reasoning과 폐기된 생성을 남기지 않는다.
+- effect 실행 권한, persistence, provider credential은 신뢰 가능한 host가 소유한다.
+
+참고 문서:
+
+- `https://www.paxhistoria.co/docs/workflows`
+- `https://www.paxhistoria.co/docs/workflows/compression`
+- `https://www.paxhistoria.co/docs/bundles`
+- `https://developers.openai.com/api/docs/guides/function-calling`
+- `https://developers.openai.com/api/docs/guides/structured-outputs`
+- `node_modules/next/dist/docs/01-app/01-getting-started/15-route-handlers.md`
+- `node_modules/next/dist/docs/01-app/02-guides/environment-variables.md`
+
+공개 자료에서 확인되지 않은 Pax Historia의 동작을 사실처럼 보고서나 source comment에 적지 않는다.
+
+## 2. 절대 원칙
+
+### 2.1 플레이어는 행동을 제출한다
+
+플레이어 입력은 다음 의미를 가진다.
+
+- 플레이 국가가 시도할 정책, 외교, 군사, 경제, 정보, 국내 행동
+- 다른 국가에 전달할 제안이나 요구
+- 현재 상황에 대한 대응 방침
+- 아무 행동 없이 시간만 진행하는 선택
+
+플레이어 입력은 다음 의미를 자동으로 갖지 않는다.
+
+- 세계를 편집할 관리자 권한
+- 행동의 성공 보장
+- 상대국의 동의
+- 영토나 국가의 즉시 변경
+- 모델 판정을 건너뛸 권한
+
+플레이어가 통제하는 국가는 정확히 하나다. GPT는 플레이어가 제출하지 않은 추가 결정을 플레이 국가가 내렸다고 꾸며서는 안 된다. 필요한 추가 결정이 있으면 다음 turn의 선택지나 clarification으로 남긴다.
+
+### 2.2 GPT는 시뮬레이터이며 편집기가 아니다
+
+GPT가 담당하는 일:
+
+- 주어진 기간 동안 발생할 사건을 판정한다.
+- 플레이어 행동의 성공, 부분 성공, 실패, 지연 중 하나를 판정한다.
+- 관련 국가와 비국가 actor의 반응을 생성한다.
+- 이전 사건의 지연된 결과와 제한된 독립 사건을 생성한다.
+- 결과를 자연어 사건 보고서와 strict `TurnResolutionV1`로 반환한다.
+
+GPT가 담당하지 않는 일:
+
+- `WorldStateV2` 직접 수정
+- MapCommand v2 작성
+- `commandId`, `expectedRevision`, `CountryId` 발급
+- raw GeoJSON, 좌표, polygon, topology 생성
+- commit, undo, redo 실행
+- API secret, 저장소, MapLibre 객체 접근
+- 성공 여부를 플레이어 요구대로 보장
+
+### 2.3 국가 병합과 국경 변경은 사건의 결과다
+
+모든 지도 변화는 반드시 같은 resolution 안의 원인 사건을 참조해야 한다.
+
+허용되는 인과 예:
+
+- 비준된 통일 조약 → 국가 통합
+- 독립 국민투표와 승인 → 신생국 수립
+- 평화 조약 → 영토 양도
+- 항복·병합 조약 → 국가 소멸과 영토 승계
+- 국가 붕괴와 후계 정부 수립 → 분할 또는 승계
+
+허용되지 않는 인과 예:
+
+- 협상 제안만 했는데 즉시 합병
+- 전쟁을 선포했다는 이유만으로 전 영토 획득
+- 시위가 발생했다는 이유만으로 즉시 독립
+- 모델이 지도를 흥미롭게 만들고 싶다는 이유로 국경 변경
+- 원인 사건 없이 `mapEffects`만 반환
+
+다음 불변식을 지킨다.
+
+```text
+player action ≠ successful outcome
+narrated attempt ≠ committed event
+event without legal/physical outcome ≠ map effect
+model tool call ≠ game effect
+validated resolution ≠ committed turn
+```
+
+### 2.4 시간 진행이 판정을 시작한다
+
+행동 제출과 시간 진행을 분리한다.
+
+1. 플레이어가 행동을 입력하면 `QueuedPlayerActionV1`으로 저장한다.
+2. 아직 세계와 날짜는 변하지 않는다.
+3. 플레이어가 진행 기간을 선택하고 `시간 진행`을 실행한다.
+4. 그 시점의 대기 행동과 세계 상태를 하나의 turn request로 고정한다.
+5. AI 판정과 전체 검증이 성공하면 턴을 commit한다.
+
+초기 지원 진행 기간:
+
+- 1일
+- 1주
+- 1개월
+- 다음 주요 사건까지
+
+`다음 주요 사건까지`에도 최대 진행 기간을 둔다. 모델이 무제한으로 미래를 건너뛰지 못하게 한다.
+
+모든 생성 사건 날짜는 `startDate < eventDate <= targetDate` 범위 안에 있어야 한다. 같은 날짜의 사건은 resolution 내 stable order를 가진다.
+
+### 2.5 행동 제출은 결과 판정에 대한 승인이다
+
+일반 gameplay에는 지도 변경을 선택적으로 승인·거절하는 버튼을 두지 않는다. 플레이어가 행동을 제출하고 시간을 진행한 것이 그 행동의 불확실한 결과를 판정하고 반영할 권한이다.
+
+결과를 본 뒤 불리한 부분만 거절할 수 있게 하면 시뮬레이션이 아니라 결과 선택기가 된다.
+
+- Stop은 commit 이전에만 generation 전체를 취소한다.
+- Stop된 turn은 날짜, 사건 기록, world state를 전혀 변경하지 않는다.
+- valid resolution이 완성되고 atomic turn commit이 시작되면 부분 취소하지 않는다.
+- development 환경에는 전체 turn dry-run inspector를 둘 수 있지만 gameplay 승인 UI로 노출하지 않는다.
+
+### 2.6 원자적 turn commit
+
+한 turn은 다음을 하나의 transaction처럼 취급한다.
+
+- simulation clock
+- queued action 소비
+- player action outcome
+- dated events
+- fact·situation 변화
+- scheduled consequence 변화
+- 내부 MapCommand batch
+- `WorldStateV2` revision
+- turn history entry
+
+하나라도 검증·planning·commit에 실패하면 모두 반영하지 않는다. 사건 서술만 저장되고 지도 변경은 실패하거나, 지도만 바뀌고 사건 기록이 없는 상태를 허용하지 않는다.
+
+### 2.7 지도 command는 내부 구현이다
+
+`country.rename`, `country.merge`, `country.split`, `country.dissolve`, `territory.transfer` 등의 Prompt 10 command는 `TurnResolutionV1.worldEffects`를 반영하기 위한 내부 compiler target이다.
+
+- player prompt에 command 이름을 가르치지 않는다.
+- assistant 응답에 command JSON을 표시하지 않는다.
+- 모델 tool surface에 `merge_country`, `apply_transfer` 같은 직접 effect tool을 제공하지 않는다.
+- effect compiler만 command를 생성한다.
+- command ID, revision, 신규 3글자 국가 코드는 host가 발급한다.
+
+### 2.8 지리 정보의 진실 원본
+
+GPT가 국경 좌표를 생성하지 않는다.
+
+분할·독립·영토 양도는 다음 reference만 사용할 수 있다.
+
+- 현재 `WorldStateV2`에 존재하는 `TerritoryId`
+- versioned `SubdivisionCatalog`가 제공한 stable subdivision reference
+- 현재 turn 안에서 host compiler가 만든 local result reference
+
+`SubdivisionCatalog`의 정적 boundary asset은 새 명령의 versioned 입력 자료일 뿐 현재 세계의 runtime truth가 아니다. effect가 commit된 뒤에는 `WorldStateV2`와 그 projection이 유일한 현재 상태다.
+
+catalog에 필요한 geometry가 없으면 map effect를 만들지 않는다. 사건은 협상·선언·봉기 같은 비지도 상태로 남을 수 있지만, 임의 polygon으로 독립을 완성해서는 안 된다.
+
+### 2.9 일반 턴은 국경을 바꾸지 않을 수 있다
+
+대부분의 행동과 사건은 즉시 국경을 바꾸지 않는다. `worldEffects`가 빈 resolution은 정상이다.
+
+예:
+
+- 무역 협상
+- 외교 관계 개선
+- 군사 훈련
+- 선거
+- 시위
+- 제재
+- 협상 개시
+- 휴전 제안
+- 연구 투자
+
+지도 변화를 억지로 만들지 않는다. 사건과 지속 사실을 기록하고 후속 turn에서 영향을 이어 간다.
+
+## 3. 최소 시뮬레이션 domain
+
+프롬프트 12는 완전한 경제·전쟁 수치 엔진을 만들지 않는다. 대신 이후 시스템이 확장될 수 있는 최소한의 authoritative narrative state를 만든다.
+
+### 3.1 SimulationStateV1
+
+최소 구조:
+
+```text
+SimulationStateV1
+├─ schemaVersion
+├─ revision
+├─ currentDate
+├─ turnNumber
+├─ playerCountryId
+├─ queuedActions
+├─ factsById / factOrder
+├─ situationsById / situationOrder
+├─ scheduledConsequences
+├─ eventLog
+└─ history metadata
+```
+
+`SimulationStateV1`은 `WorldStateV2`와 분리하되 `GameRuntimeStateV1` 또는 동등한 coordinator가 두 state의 revision pair를 소유한다.
+
+### 3.2 QueuedPlayerActionV1
+
+필수 필드:
+
+- host-generated `actionId`
+- `actorCountryId`: 현재 player country에서 host가 결정
+- `submittedAtDate`
+- player가 입력한 원문
+- 선택적 공개·비공개 의도 구분
+- status: `queued | resolving | resolved | cancelled`
+
+모델은 actor를 바꿀 수 없다. action 원문은 untrusted data다.
+
+### 3.3 SimulationFactV1
+
+지속 사실은 최소한 다음을 표현한다.
+
+- 외교 관계
+- 조약과 협상
+- 분쟁과 전쟁
+- 국내 정치 상황
+- 경제 상황
+- 군사 준비와 점령
+- 영유권 주장
+- 기타 시나리오 사실
+
+각 fact는 stable ID, kind, 관련 actor ID, 공개 요약, 시작 날짜, status, source event ID를 가진다. 자유 형식 요약은 instruction이 아니라 data다.
+
+### 3.4 ActiveSituationV1
+
+여러 turn에 걸쳐 진행되는 상황을 표현한다.
+
+- situation ID
+- type
+- participants
+- 현재 단계와 stakes
+- 시작 사건
+- 최근 갱신 사건
+- 해소 조건 또는 unresolved question
+
+통일 협상, 독립 운동, 전쟁, 장기 제재, 쿠데타 위기 등이 여기에 들어간다.
+
+### 3.5 ScheduledConsequenceV1
+
+미래에 다시 검토해야 하는 결과를 표현한다.
+
+- consequence ID
+- earliest date
+- optional deadline
+- 관련 actor와 situation
+- trigger 요약
+- source event ID
+- status
+
+모델이 임의 background task를 실행하지 않는다. 매 turn context builder가 due consequence만 다음 판정 입력에 포함한다.
+
+### 3.6 SimulationEventV1
+
+각 사건은 다음 필드를 가진 strict object다.
+
+- host 또는 resolution-local event ID
+- 날짜
+- title
+- public narrative
+- actor country IDs
+- related fact/situation IDs
+- cause references
+- outcome category
+- significance
+
+event title과 narrative에는 내부 command 이름, schema 필드명, 모델 meta 설명을 노출하지 않는다.
+
+### 3.7 PlayerActionOutcomeV1
+
+각 대기 행동은 정확히 하나의 outcome과 연결된다.
+
+- `succeeded`
+- `partially_succeeded`
+- `failed`
+- `delayed`
+- `superseded`
+
+outcome은 근거 event ID, 짧은 설명, 다음에 남은 조건을 가진다. 단순히 플레이어 입력을 그대로 반복해 성공으로 처리하지 않는다.
+
+### 3.8 WorldEffectV1
+
+초기 semantic effect 범위:
+
+- `country.renamed`
+- `countries.unified`
+- `country.established`
+- `country.dissolved`
+- `territories.transferred`
+- `country.partitionedBySubdivisions`
+
+모든 effect는 다음을 포함한다.
+
+- resolution-local effect ID
+- `causedByEventId`
+- 관련 기존 국가·영토·subdivision reference
+- 표시 이름처럼 결과에 필요한 최소 semantic data
+
+다음 값은 포함하지 않는다.
+
+- raw geometry
+- command ID
+- expected revision
+- 신규 최종 CountryId
+- planner patch
+- content hash
+- projection data
+
+## 4. TurnResolutionV1 계약
+
+GPT가 생성하는 유일한 effect-bearing 결과는 하나의 `submit_turn_resolution` strict function call이다.
+
+```text
+TurnResolutionV1
+├─ contractVersion
+├─ baseSimulationRevision
+├─ baseWorldRevision
+├─ period { startDate, endDate }
+├─ playerActionOutcomes[]
+├─ events[]
+├─ factMutations[]
+├─ situationMutations[]
+├─ scheduledConsequences[]
+├─ worldEffects[]
+├─ advisorSummary
+└─ unresolvedQuestions[]
+```
+
+### 4.1 구조 규칙
+
+- root는 JSON Schema object다.
+- `strict: true`와 `additionalProperties: false`를 사용한다.
+- 모든 array와 string은 명시적 상한을 가진다.
+- 날짜는 ISO calendar date로 정규화한다.
+- resolution당 event, fact mutation, situation mutation, world effect 수에 상한을 둔다.
+- tool schema를 Zod root discriminated union의 자동 변환에 맡겨 root `anyOf` 제한을 위반하지 않는다.
+- server parsing과 host parsing에서 같은 contract version을 검증한다.
+
+### 4.2 의미 규칙
+
+- 모든 queued action은 outcome 하나와 연결된다.
+- 모든 outcome은 같은 resolution의 event를 근거로 가진다.
+- 모든 world effect는 같은 resolution의 event를 원인으로 가진다.
+- event cause는 이전 authoritative event, queued action, due consequence 또는 같은 resolution의 앞선 event만 참조한다.
+- 미래 event가 과거 event의 원인이 될 수 없다.
+- 존재하지 않는 country, fact, situation, territory reference를 거부한다.
+- player country의 새 행동을 queued action 없이 생성하지 않는다.
+- NPC는 현재 사실과 사건에 근거한 반응과 독립 행동을 할 수 있다.
+- map effect가 없는 resolution은 정상이다.
+
+### 4.3 판정 실패와 repair
+
+잘못된 resolution을 부분 적용하지 않는다.
+
+1. strict schema validation
+2. semantic reference validation
+3. causality validation
+4. date/order validation
+5. world effect compilation
+6. complete turn dry-run
+
+실패 시 bounded repair request를 모델에 한 번 보낼 수 있다. repair에는 validation code와 안전한 최소 설명만 보내며 raw world geometry를 보내지 않는다. repair도 실패하면 turn 전체를 실패시키고 state를 보존한다.
+
+## 5. GPT 입력 컨텍스트
+
+API에 전체 state나 전체 대화 기록을 보내지 않는다. `SimulationContextV1`은 해당 turn 판정에 필요한 최소 요약이다.
+
+필수 항목:
+
+- scenario identity와 시작 기준
+- simulation/world revision
+- start/end date
+- player country ID와 이름
+- queued player actions
+- active country의 ID와 최소 이름 정보
+- 관련 국가의 현재 영토 요약
+- active facts와 situations
+- due scheduled consequences
+- 최근 authoritative events
+- 해당 요청에 필요한 subdivision catalog 요약
+- simulation rules와 capability 목록
+- locale
+
+제외 항목:
+
+- GeoJSON coordinate
+- topology edge
+- MapLibre source
+- projection artifact
+- undo before-image
+- API secret
+- private reasoning
+- 폐기된 draft
+- 무관한 전체 과거 기록
+
+동일 state와 동일 turn request는 byte-equivalent canonical context를 만들어야 한다. 배열 정렬, clipping, 최근 event 선택 규칙을 고정한다.
+
+장기 memory compression은 프롬프트 12의 필수 범위가 아니다. 초기 구현은 canonical facts, active situations, scheduled consequences, 제한된 최근 events로 continuity를 유지한다.
+
+## 6. GPT 판정 정책
+
+server-owned instruction은 다음 원칙을 강제한다.
+
+### 6.1 인과성과 현실성
+
+중요한 결과 전 최소한 다음을 검토한다.
+
+- 누가 행동하는가
+- 그 actor에게 동기와 능력이 있는가
+- 상대 actor가 왜 동의하거나 저항하는가
+- 현재 사실과 이전 사건이 무엇인가
+- 지리·시간적으로 가능한가
+- 국내 정치와 국제 반응은 무엇인가
+- 즉시 결과와 지연 결과를 구분했는가
+
+이 검토는 private reasoning으로 노출하거나 저장하지 않는다. 공개 결과에는 이해 가능한 근거만 짧게 적는다.
+
+### 6.2 플레이어 행동의 불확실성
+
+- 명시적 행동은 반드시 다루되 성공을 보장하지 않는다.
+- 요청 규모가 클수록 필요한 중간 단계와 시간이 증가한다.
+- 상대국의 동의가 필요한 행동은 상대국 반응을 판정한다.
+- 한 turn에 완결되기 어려우면 `delayed`와 active situation을 남긴다.
+- 전쟁·혁명·합병·독립은 하나의 문장만으로 즉시 완결시키지 않는다.
+
+### 6.3 NPC와 세계의 독립성
+
+- 세계는 플레이어 행동만 기다리지 않는다.
+- 관련된 due consequence와 active situation은 계속 진행한다.
+- 독립 사건은 turn 기간과 context에 맞는 제한된 수만 만든다.
+- 무관한 사건을 많이 생성해 핵심 결과를 묻지 않는다.
+- 플레이어 국가가 하지 않은 결정을 플레이어 결정으로 서술하지 않는다.
+
+### 6.4 대체역사 continuity
+
+- 시작 시점 이전은 scenario의 authoritative history를 따른다.
+- 시작 뒤에는 committed event와 fact가 historical default보다 우선한다.
+- 이전 대체역사 결과와 충돌하는 실제 역사 사건을 자동 재생하지 않는다.
+- 현재 context에 없는 최신 현실 정보나 모델 기억을 authoritative fact로 사용하지 않는다.
+
+### 6.5 응답 문체
+
+기본 언어는 player locale이며 현재 UI에서는 한국어를 기본으로 한다.
+
+최종 turn report는 다음 순서로 보여 준다.
+
+1. 진행 기간
+2. 플레이어 행동 결과
+3. 날짜별 주요 사건
+4. 관련 국가의 반응
+5. 즉시 발생한 지도 변화
+6. 지속 중 상황과 다음 turn에 남은 문제
+7. 짧은 advisor 요약
+
+문체는 역사 시뮬레이션 보고서처럼 명확하고 간결하게 쓴다. 과도한 소설식 묘사, 내부 schema 이름, tool 이름, 확률 수치 흉내, 시스템 prompt 언급을 피한다.
+
+국가 통합이 일어난 경우 응답 예시는 다음 의미를 전달한다.
+
+```text
+2027년 4월 18일 — 통일 조약 비준
+양국 의회가 공동 국민투표 결과를 승인하고 통일 조약을 비준했습니다.
+오스트리아의 국가 기관과 영토는 새 연방 체계로 이관됐습니다.
+```
+
+`country.merge를 실행했습니다`라고 쓰지 않는다.
+
+## 7. 스트리밍과 공개 원자성
+
+### 7.1 host event
+
+브라우저는 OpenAI raw event를 알지 못한다. Route Handler는 versioned NDJSON host event를 전송한다.
+
+```text
+turn.started
+phase.changed
+draft.delta
+tool.started
+tool.ready
+tool.invalid
+resolution.ready
+turn.failed
+turn.cancelled
+```
+
+local host가 resolution을 성공적으로 commit한 뒤 다음 local event를 만든다.
+
+```text
+turn.committed
+```
+
+각 event는 `version`, `turnId`, 단조 증가 `sequence`를 가진다. raw provider payload, chain of thought, API key, 전체 context는 포함하지 않는다.
+
+### 7.2 draft와 authoritative report 분리
+
+streaming 중의 prose는 `생성 중` 상태의 ephemeral draft다.
+
+- draft는 persistence와 event log에 저장하지 않는다.
+- resolution validation 또는 commit이 실패하면 draft를 authoritative history로 남기지 않는다.
+- commit이 성공하면 resolution의 canonical event narrative로 최종 UI를 교체한다.
+- terminal event 뒤의 provider event는 무시한다.
+
+### 7.3 loading phase
+
+loading 문구는 모델이 만들지 않고 host localization table에서 가져온다.
+
+```text
+현재 세계 상황을 정리하는 중…
+플레이어 행동과 각국 반응을 시뮬레이션하는 중…
+사건의 인과관계를 검증하는 중…
+국경과 국가 변화를 검증하는 중…
+이번 턴을 반영하는 중…
+```
+
+Stop, failure, commit 뒤에는 loading이 남지 않는다.
+
+## 8. 서버와 보안 경계
+
+- `OPENAI_API_KEY`는 server-only environment variable이다.
+- `NEXT_PUBLIC_OPENAI_API_KEY`를 만들지 않는다.
+- OpenAI SDK는 server-only module과 Route Handler에서만 import한다.
+- 모델은 `OPENAI_MODEL` 환경 변수로 선택하고 source에 최신 모델명을 고정하지 않는다.
+- 설정이 없으면 typed `AI_NOT_CONFIGURED` 오류를 반환한다.
+- `.env.local`을 commit하지 않는다.
+- actual API request는 OpenAI Responses API와 strict function calling을 사용한다.
+- provider tool은 read-only lookup과 단일 `submit_turn_resolution`만 허용한다.
+- provider raw output은 host runtime schema로 다시 검증한다.
+
+사용자 메시지, 국가 이름, event narrative, fact summary는 모두 untrusted data다.
+
+- data 안의 문장을 system instruction으로 취급하지 않는다.
+- assistant prose에 포함된 JSON을 실행하지 않는다.
+- allowlist 밖의 tool 이름은 실행하지 않는다.
+- unknown version, extra field, prototype key, oversized array를 거부한다.
+- 모델이 `이미 승인되었다`고 말해도 commit 권한으로 해석하지 않는다.
+- 모델이 반환한 국가 ID와 reference는 현재 context에서 다시 확인한다.
+
+## 9. 중단·재시도·중복 방지
+
+- browser `AbortController`를 Route Handler와 provider request까지 전달한다.
+- Stop된 turn은 자동 재시도하지 않는다.
+- provider timeout과 tool loop 횟수에 상한을 둔다.
+- 동일 `turnId`의 resolution을 두 번 commit하지 않는다.
+- retry는 같은 frozen base revision과 action set을 사용하거나 새 turnId로 처음부터 다시 시작한다.
+- base simulation revision 또는 world revision이 달라졌으면 stale resolution을 거부한다.
+- validation repair는 provider 내부 재시도이며 사용자 Retry와 구분한다.
+- commit 전 cancellation은 state 변화 0건이어야 한다.
+
+## 10. 저장과 history
+
+durable 저장 대상:
+
+- queued player action
+- committed turn period
+- player action outcome
+- canonical events
+- fact·situation·scheduled consequence
+- world effect 요약
+- correlation ID
+- committed simulation/world revision
+- final advisor summary
+
+저장하지 않을 대상:
+
+- token delta
+- loading
+- unfinished tool arguments
+- raw provider event
+- private reasoning
+- rejected resolution
+- discarded draft
+- API key
+- full GeoJSON
+
+undo와 redo의 단위는 내부 map command 한 개가 아니라 committed turn 전체다. undo는 날짜, event, fact, situation, queued action 소비, world state를 같은 turn 경계로 되돌린다. redo도 같은 resolved turn을 재적용하되 기존 revision 계약을 지킨다.
+
+AI conversation 저장 실패 때문에 committed world turn을 반쪽으로 되돌리지 않는다. atomic turn store의 authoritative state와 선택적 UI conversation cache를 구분한다.
+
+## 11. 실행 규칙과 컨텍스트 절약
+
+각 `12-N`은 하나의 독립 작업 세션이다. 한 세션에서는 해당 번호 범위만 구현한다. 후속 단계의 제품 코드, 테스트, 보고서를 미리 만들지 않는다.
+
+각 단계 시작 시:
+
+1. `AGENTS.md`를 읽는다.
+2. Next.js 코드를 수정하면 관련 `node_modules/next/dist/docs/` 문서를 먼저 읽는다.
+3. OpenAI API 코드를 수정하면 현재 공식 OpenAI 문서를 먼저 확인한다.
+4. 명시된 파일과 직접 import된 최소 파일만 읽는다.
+5. 바로 이전 `reports/prompt12/12-(N-1)-*.json`만 확인한다.
+6. 프롬프트 10·11 전체를 반복해서 읽지 않는다. 실제 source와 12-1 보고서를 사용한다.
+7. checkpoint 외에는 전체 unit 또는 E2E suite를 실행하지 않는다.
+8. network와 API key 없이 deterministic provider fake로 테스트한다.
+9. 보고서에 key, prompt 전문, response 전문, player 원문, raw context를 기록하지 않는다.
+
+일반 context 상한:
+
+- audit 단계: source 최대 14개
+- 구현 단계: source 최대 10개
+- checkpoint: source 최대 18개와 test output
+
+## 12. 비목표
+
+- 플레이어용 자연어 지도 편집기를 만들지 않는다.
+- 플레이어에게 MapCommand, CountryId, TerritoryId를 요구하지 않는다.
+- GPT가 geometry를 생성하게 하지 않는다.
+- 완전한 경제·인구·군수 수치 엔진을 만들지 않는다.
+- battle simulator를 만들지 않는다.
+- 실제 역사 web search를 turn마다 실행하지 않는다.
+- provider built-in web/file/code tool을 추가하지 않는다.
+- background autonomous simulation을 실행하지 않는다.
+- vector database나 범용 RAG를 추가하지 않는다.
+- 여러 AI provider를 동시에 지원하지 않는다.
+- billing UI, model picker, client API key UI를 만들지 않는다.
+- 장기 memory compression을 필수 범위에 넣지 않는다.
+- 실제 API key 테스트를 기본 CI gate로 만들지 않는다.
+- Pax Historia의 UI와 비공개 prompt를 복제하지 않는다.
+
+## 13. 최종 완료 조건
+
+- 플레이어가 현재 선택 국가의 행동을 한국어로 입력하고 대기열에 넣을 수 있다.
+- 행동 입력만으로 날짜와 지도는 변하지 않는다.
+- 플레이어가 기간을 정해 시간을 진행할 수 있다.
+- GPT가 행동을 성공·부분 성공·실패·지연으로 판정한다.
+- 타국 반응과 due consequence가 같은 기간 안에서 처리된다.
+- 대부분의 일반 사건은 빈 `worldEffects`로 정상 commit될 수 있다.
+- 국가 병합과 국경 변경은 원인 사건이 있을 때만 만들어진다.
+- 모델은 MapCommand, commandId, revision, 신규 CountryId, geometry를 만들지 않는다.
+- semantic world effect는 기존 MapCommand v2와 planner로 compile·dry-run된다.
+- 사건·simulation state·world state가 한 turn으로 원자 commit된다.
+- gameplay에는 결과별 승인·거절 UI가 없다.
+- Stop은 commit 전 모든 변경을 취소한다.
+- stale·invalid·cancelled resolution은 state를 변경하지 않는다.
+- turn 전체 undo/redo가 사건 기록과 지도를 함께 되돌린다.
+- assistant 최종 응답에는 내부 command나 schema가 보이지 않는다.
+- server-only Responses API, strict function calling, normalized stream이 동작한다.
+- fake provider E2E가 성공·실패·지연·병합·독립·Stop을 재현한다.
+- 실제 API smoke는 설정이 있을 때만 opt-in으로 실행한다.
+- typecheck, lint, unit, build, 전체 E2E가 통과한다.
+
+## 14. 보고서 형식
+
+각 단계는 `reports/prompt12/`에 보고서 하나를 쓴다.
+
+```json
+{
+  "stage": "12-N",
+  "status": "running | pass | fail | blocked",
+  "objective": "",
+  "filesRead": [],
+  "changedFiles": [],
+  "commands": [],
+  "gates": {},
+  "firstFailedGate": null,
+  "securityChecks": [],
+  "notes": [],
+  "nextStage": "12-(N+1) | null"
+}
+```
+
+실제 API smoke 보고서에는 실행 상태, latency, usage 숫자 요약, 마스킹된 response ID suffix, schema validation 결과만 기록한다.
+
+## 15. 단계 목록
+
+### A. 현재 기반과 simulation contract
+
+### 12-1. Prompt 10·11 runtime 감사
+
+읽을 파일:
+
+- `src/lib/world/world-state-v2.ts`
+- `src/lib/commands/command-batch-v2.ts`
+- `src/lib/planning/command-ui-runtime.ts`
+- `src/lib/planning/history-persistence-checkpoint.ts`
+- `src/stores/world-state-store.ts`
+- `src/stores/game-setup-store.ts`
+- `src/components/layout/GameSetupShell.tsx`
+- `package.json`
+
+작업: current state owner, player country owner, dry-run, commit, history, persistence, projection subscriber를 표로 정리한다. production 함수와 demo/test helper를 구분한다.
+
+통과 조건: AI 전용 world executor를 새로 만들지 않고 재사용할 실제 진입점과 부족한 atomic turn coordinator가 명확해야 한다.
+
+### 12-2. 시뮬레이션 아키텍처 ADR
+
+읽을 파일:
+
+- `AGENTS.md`
+- 이 프롬프트
+- 설치된 Next Route Handler와 environment 문서
+- 공식 Pax Historia와 OpenAI 참고 문서
+
+작업: `docs/simulation/gpt-turn-runtime-v1.md`를 작성한다. action, time advance, draft, resolution, world effect, turn plan, commit의 차이와 trust boundary를 동결한다.
+
+통과 조건: 문서가 직접 지도 명령을 gameplay에서 금지하고, action submission이 결과 판정 권한이며, no-separate-approval, atomic turn commit을 명시해야 한다.
+
+### 12-3. SimulationClock과 revision pair
+
+읽을 파일:
+
+- `src/lib/world/world-state-v2.ts`
+- current player country selector
+- persistence entry
+
+작업: ISO date 기반 clock, turn number, simulation revision, world revision pair type과 validator를 만든다. 초기 날짜는 scenario seed에서 가져오고 기본 2020-01-01을 명시한다.
+
+통과 조건: invalid date, 역방향 진행, 과도한 jump, stale revision pair를 거부하는 targeted test가 통과한다.
+
+### 12-4. QueuedPlayerActionV1
+
+읽을 파일:
+
+- simulation clock/revision type
+- game setup player country state
+
+작업: action schema, ID 발급, queue/cancel pure functions를 구현한다. actorCountryId는 host가 player country에서 주입한다.
+
+통과 조건: empty/oversized input, player country mismatch, duplicate action ID, resolving action cancel 오류를 검증한다. enqueue만으로 world/simulation date가 변하지 않는다.
+
+### 12-5. fact·situation·scheduled consequence schema
+
+읽을 파일:
+
+- simulation clock
+- plain data validation helper
+- world country ID type
+
+작업: 3.3~3.5의 strict versioned schema와 deterministic order를 구현한다.
+
+통과 조건: dangling country/event reference, invalid date window, extra field, prototype key를 거부한다. 같은 input은 같은 canonical serialization을 만든다.
+
+### 12-6. event와 player action outcome schema
+
+읽을 파일:
+
+- queued action schema
+- fact/situation schema
+- country ID type
+
+작업: `SimulationEventV1`과 `PlayerActionOutcomeV1`을 구현한다.
+
+통과 조건: 모든 outcome이 action과 근거 event를 참조하며, 날짜·actor·cause 오류 fixture를 거부한다.
+
+### 12-7. semantic WorldEffectV1
+
+읽을 파일:
+
+- Prompt 10 command schema
+- country/territory ID type
+- subdivision scenario 또는 fixture
+
+작업: 3.8의 effect schema를 MapCommand와 분리해 구현한다. 신규 국가는 resolution-local ref를 쓰고 host ID를 받게 한다.
+
+통과 조건: raw geometry, commandId, expectedRevision, 최종 신규 CountryId, unknown effect, extra field를 거부한다.
+
+### 12-8. TurnResolutionV1
+
+읽을 파일:
+
+- 12-3~12-7 schema
+- OpenAI Structured Outputs 제약
+
+작업: strict root object resolution schema와 array/string limit을 구현한다.
+
+통과 조건: valid no-map-change turn과 map-change turn이 parse되고, root anyOf 의존 없이 OpenAI strict function schema로 변환된다.
+
+### 12-9. causality와 semantic validator
+
+읽을 파일:
+
+- TurnResolution schema
+- SimulationState schema
+- WorldStateV2
+
+작업: action→outcome→event, cause order, event→effect, country/fact/situation reference를 검증하는 pure validator를 만든다.
+
+통과 조건: 협상 제안 직후 이유 없는 합병, 원인 없는 transfer, future cause, player의 미제출 행동을 거부한다. empty world effect turn은 허용한다.
+
+### 12-10. contract checkpoint
+
+작업:
+
+```text
+npx tsc --noEmit
+npx eslint <12-3~12-9 변경 파일>
+npx vitest run <simulation contract targeted tests>
+```
+
+통과 조건: 세 명령이 종료 코드 0이고 보고서가 contract version, limits, supported effects를 고정한다.
+
+### B. 결정적 turn runtime
+
+### 12-11. SimulationStateV1 container
+
+읽을 파일:
+
+- 12-3~12-8 schema
+- `src/lib/world/world-state-v2.ts`
+- existing immutable collection helpers
+
+작업: 3.1의 immutable state container와 invariant validator를 구현한다.
+
+통과 조건: active/retired country reference, order, clock, fact/situation/event linkage invariant가 test로 증명된다.
+
+### 12-12. 최소 initial simulation seed
+
+읽을 파일:
+
+- SimulationStateV1
+- initial WorldStateV2
+- game setup player country state
+
+작업: 2020-01-01 clock, 선택한 player country, empty turn history를 가진 initial state builder를 만든다. 국가 선택 이후 simulation start 경계를 명확히 한다.
+
+통과 조건: 모든 playable country로 초기화할 수 있고 국가별 allowlist가 simulation core에 없다.
+
+### 12-13. SimulationContextV1 builder
+
+읽을 파일:
+
+- SimulationStateV1
+- WorldStateV2
+- country search projection
+- subdivision catalog
+
+작업: 5절의 compact canonical context builder를 구현한다.
+
+통과 조건: geometry, topology, projection, undo image가 포함되지 않으며 동일 input은 byte-equivalent output을 만든다. clipping된 항목과 이유를 metadata에 기록한다.
+
+### 12-14. SubdivisionCatalog boundary
+
+읽을 파일:
+
+- current territory model
+- map data preparation script
+- China/USA subdivision fixture
+
+작업: stable subdivision ref, localized name, source version, materialization 가능 여부를 제공하는 catalog port와 test adapter를 만든다.
+
+통과 조건: 자유 형식 GeoJSON 입력 API가 없고 중국 행정구역과 미국 50개 주 fixture를 결정적으로 조회한다.
+
+### 12-15. 단순 world effect compiler
+
+읽을 파일:
+
+- WorldEffect schema
+- rename/transfer/assign/unclaim command schema와 planner
+- command ID allocator
+
+작업: rename과 territory transfer 계열 effect를 internal MapCommand v2로 compile한다.
+
+통과 조건: host가 commandId와 expectedRevision을 주입하고 stale/unknown reference는 typed error다.
+
+### 12-16. 통합·소멸 effect compiler
+
+읽을 파일:
+
+- merge/dissolve/establish command schema와 planner
+- CountryId allocator
+- WorldEffect schema
+
+작업: `countries.unified`, `country.dissolved`, 기존 territory 기반 establishment를 high-level command로 compile한다.
+
+통과 조건: 모델이 신규 3글자 ID를 정하지 않으며 active/retired 충돌, 자기 병합, 빈 영토를 거부한다.
+
+### 12-17. subdivision 기반 독립·분할 compiler
+
+읽을 파일:
+
+- SubdivisionCatalog
+- partition/split/establish command schema와 planner
+- batch local reference resolver
+
+작업: stable subdivision ref를 geometry로 materialize하고 internal batch를 만든다.
+
+통과 조건: source version 불일치나 경계 누락 시 부분 command 없이 전체 실패한다. 미국 50개 주 fixture는 정확히 50개 결과를 만든다.
+
+### 12-18. ResolvedTurnPlan dry-run
+
+읽을 파일:
+
+- semantic validator
+- effect compiler
+- `src/lib/planning/command-ui-runtime.ts`
+
+작업: 전체 resolution의 모든 effect를 하나의 internal batch로 compile하고 기존 planner에서 dry-run한다. 다음 SimulationState도 pure하게 계획한다.
+
+통과 조건: dry-run 전후 live state identity/hash가 같고 plan에 next simulation state, next world state, bounded change summary가 있다.
+
+### 12-19. atomic turn commit coordinator
+
+읽을 파일:
+
+- ResolvedTurnPlan
+- world state store
+- simulation state store
+- history persistence
+
+작업: simulation state와 world state를 한 turn commit으로 publish한다. subscriber는 완성된 revision pair만 보게 한다.
+
+통과 조건: failure injection에서 양쪽 모두 미변경이며 정상 commit은 clock·event·map을 함께 한 번 갱신한다.
+
+### 12-20. turn 단위 undo·redo
+
+읽을 파일:
+
+- atomic turn coordinator
+- existing world history
+- simulation persistence
+
+작업: 내부 command가 아닌 turn 전체를 undo/redo한다.
+
+통과 조건: 통일 발생 turn을 undo하면 두 국가와 이전 사건·날짜·fact가 함께 복원되고 redo하면 동일 content 결과가 새 revision으로 재적용된다.
+
+### 12-21. simulation persistence와 migration
+
+읽을 파일:
+
+- existing game setup/world persistence
+- SimulationStateV1
+- turn history
+
+작업: versioned serialization, corrupt fallback, retention limit을 구현한다.
+
+통과 조건: reload 후 clock, action, committed event, fact, situation, world linkage가 복원된다. corrupt simulation save가 기존 map seed를 손상시키지 않는다.
+
+### 12-22. turn runtime checkpoint
+
+작업: provider 없이 다음 fixture를 통합 검증한다.
+
+- 외교 제안 실패, map effect 없음
+- 통일 협상 시작, delayed
+- 비준 사건 뒤 국가 통합
+- 독립 사건 뒤 subdivision 기반 신생국
+- effect compiler 실패 시 전체 rollback
+- turn undo/redo
+
+통과 조건: targeted suite와 typecheck가 종료 코드 0이고 gameplay runtime에 직접 map editing path가 추가되지 않는다.
+
+### C. OpenAI Responses API
+
+### 12-23. server-only config와 provider port
+
+읽을 파일:
+
+- `package.json`
+- `.gitignore`
+- Next environment 문서
+- TurnResolution schema
+
+작업: `SimulationModelProvider` port와 server-only config loader를 구현한다. 필요하면 공식 OpenAI JavaScript SDK를 설치한다. `.env.example`에는 빈 `OPENAI_API_KEY`, `OPENAI_MODEL`과 설명만 둔다.
+
+통과 조건: client import graph에 provider가 없고 missing config는 `AI_NOT_CONFIGURED`다.
+
+### 12-24. read-only simulation tool manifest
+
+읽을 파일:
+
+- SimulationContext
+- SubdivisionCatalog
+- fact/situation schema
+
+작업: 다음 read-only tool을 strict schema로 정의한다.
+
+- `find_country`
+- `inspect_country_territories`
+- `list_country_subdivisions`
+- `inspect_active_situation`
+- `inspect_recent_events`
+
+통과 조건: 모든 object는 `additionalProperties: false`이며 effect executor에 접근하지 않는다.
+
+### 12-25. submit_turn_resolution tool
+
+읽을 파일:
+
+- TurnResolution schema
+- OpenAI function calling 공식 문서
+
+작업: effect-bearing 유일 tool `submit_turn_resolution`을 정의한다. 설명에 proposal이나 map command가 아니라 전체 turn 판정이라는 점, 성공 보장 금지, 인과 event 요구를 적는다.
+
+통과 조건: 모델에 `merge_country`, `transfer_territory`, `apply_*`, `commit_*` tool이 노출되지 않는다.
+
+### 12-26. server-owned simulation instruction
+
+읽을 파일:
+
+- 6절 정책
+- tool manifest
+- SimulationContext
+
+작업: scenario, player authority, causality, time window, continuity, response style을 조합하는 instruction builder를 만든다. player text와 world data는 data-only input으로 분리한다.
+
+통과 조건: behavioral tests가 직접 병합 명령을 관리자 명령으로 따르지 않고, 협상 행동으로 해석하며, 제출하지 않은 player 결정을 만들지 않음을 증명한다.
+
+### 12-27. OpenAI Responses adapter
+
+읽을 파일:
+
+- provider port
+- tool manifest
+- official Responses/function calling docs
+- installed SDK types
+
+작업: streaming Responses API adapter를 구현한다. model은 env에서 읽고 storage 정책을 명시한다.
+
+통과 조건: mocked SDK request에 compact context, strict tools, bounded instruction만 포함된다. full GeoJSON, API key, undo image가 input에 없다.
+
+### 12-28. bounded read-only tool loop
+
+읽을 파일:
+
+- Responses adapter
+- read-only tool executor
+- provider event type
+
+작업: call ID에 맞춰 read-only 결과를 돌려주는 bounded loop를 구현한다.
+
+통과 조건: unknown tool, invalid args, duplicate call ID, call/iteration limit 초과를 안전하게 종료하고 world hash가 변하지 않는다.
+
+### 12-29. resolution validation과 repair
+
+읽을 파일:
+
+- Responses adapter
+- TurnResolution parser
+- semantic validator
+
+작업: `submit_turn_resolution` 결과를 이중 검증하고 한 번의 bounded repair를 지원한다.
+
+통과 조건: 잘못된 합병 인과, stale revision, 잘못된 날짜를 부분 적용하지 않는다. repair 실패 시 typed terminal failure다.
+
+### 12-30. provider event normalizer
+
+읽을 파일:
+
+- OpenAI streaming event type
+- host event schema
+
+작업: raw event를 7절 host event로 변환한다.
+
+통과 조건: recorded fixture replay가 deterministic하고 sequence가 단조 증가하며 terminal event가 정확히 하나다. raw payload와 reasoning은 노출하지 않는다.
+
+### 12-31. Next Route Handler
+
+읽을 파일:
+
+- installed Next Route Handler 문서
+- provider adapter
+- event normalizer
+- request schema
+
+작업: `src/app/api/simulation/turn/route.ts` POST handler와 NDJSON stream을 구현한다.
+
+통과 조건: malformed body, size limit, missing config, valid stream, provider failure status를 route test가 검증한다.
+
+### 12-32. abort·timeout·retry
+
+읽을 파일:
+
+- Route Handler
+- provider adapter
+- event normalizer
+
+작업: browser abort를 provider까지 전달하고 timeout과 retry limit을 구현한다.
+
+통과 조건: Stop 뒤 tool call, repair, resolution event가 추가되지 않고 state 변화가 없다.
+
+### 12-33. server checkpoint
+
+작업:
+
+```text
+npx tsc --noEmit
+npx eslint <Prompt 12 server 파일>
+npx vitest run <simulation provider/route tests>
+npm run build
+```
+
+통과 조건: text draft, lookup, valid resolution, invalid resolution repair, refusal, timeout, cancel fixture가 network 없이 통과한다.
+
+### D. gameplay UI와 전체 흐름
+
+### 12-34. player action composer
+
+읽을 파일:
+
+- `src/components/layout/GameSetupShell.tsx`
+- player country store
+- action queue
+
+작업: 현재 플레이 국가가 취할 행동을 입력하고 queue/cancel할 수 있는 UI를 만든다. 문구는 지도 변경 명령 입력기가 아니라 국가 행동 입력기임을 분명히 한다.
+
+통과 조건: Korean IME, keyboard submit, max length, empty state, focus, queued display component test가 통과한다. enqueue만으로 API를 호출하거나 지도를 바꾸지 않는다.
+
+### 12-35. time advance control
+
+읽을 파일:
+
+- simulation clock
+- action queue UI
+- turn request builder
+
+작업: 1일·1주·1개월·다음 주요 사건 진행 UI와 현재 날짜를 표시한다.
+
+통과 조건: 진행 버튼이 frozen action set과 revision pair를 만들며, 진행 중 중복 클릭은 한 turn만 시작한다.
+
+### 12-36. streaming phase와 Stop UI
+
+읽을 파일:
+
+- host event schema
+- turn Route client
+- action/time UI
+
+작업: NDJSON chunk parser, turn state machine, loading phase, ephemeral draft, Stop을 구현한다.
+
+통과 조건: split chunk, multiple lines, malformed event, out-of-order sequence, disconnect, cancel을 test한다. draft는 authoritative event list에 들어가지 않는다.
+
+### 12-37. resolution plan과 local atomic commit
+
+읽을 파일:
+
+- turn stream client
+- ResolvedTurnPlan
+- atomic coordinator
+
+작업: `resolution.ready`를 local current state에 다시 검증하고 dry-run한 뒤 자동 atomic commit한다. separate approval UI를 만들지 않는다.
+
+통과 조건: 정상 turn은 exactly once commit, stale turn은 0 commit, effect plan 실패는 0 commit이다. commit 후에만 `turn.committed`가 발생한다.
+
+### 12-38. 최종 turn report UI
+
+읽을 파일:
+
+- committed simulation event projection
+- player action outcome
+- world effect summary
+
+작업: 6.5의 순서로 canonical committed report를 표시한다. draft를 최종 내용으로 사용하지 않는다.
+
+통과 조건: command 이름, internal ID, schema 이름 없이 성공·실패·지연·국가 반응·지도 변화를 설명한다.
+
+### 12-39. 지도 변화와 사건 linkage
+
+읽을 파일:
+
+- Prompt 11 world map projection
+- committed event projection
+- turn history
+
+작업: 국경·국가 변화가 생긴 사건 카드에서 관련 국가로 이동하거나 변경 요약을 볼 수 있게 한다.
+
+통과 조건: 지도는 동일 committed world revision을 표시하고 사건 카드가 stale/retired country reference로 깨지지 않는다.
+
+### 12-40. failure·retry·no-action UX
+
+읽을 파일:
+
+- turn state machine
+- typed errors
+- action queue
+
+작업: API 미설정, network, refusal, invalid resolution, missing boundary, stale state, Stop, 행동 없이 시간 진행을 구분한다.
+
+통과 조건: 실패한 turn은 날짜와 action queue를 보존하고 Retry가 원문을 자동 변조하지 않는다. 행동 없는 turn도 독립 사건 또는 조용한 기간으로 정상 처리된다.
+
+### 12-41. gameplay behavior tests
+
+작업: fake provider로 다음을 검증한다.
+
+- `오스트리아와 통일 협상을 시작한다` → delayed, map 변화 없음
+- 후속 turn의 비준 사건 → 두 국가 통합
+- `미국을 50개 국가로 분할한다`를 권한 없는 국가가 입력 → 즉시 지도 편집 안 됨
+- 독립 운동과 국민투표가 여러 turn 뒤 독립으로 연결
+- 무역 행동 → map effect 없음
+- model이 player에게 유리한 성공을 보장하지 않음
+
+통과 조건: 모든 scenario가 action→event→effect 인과를 증명하고 직접 command 해석 경로가 없다.
+
+### 12-42. 실제 API opt-in smoke
+
+읽을 파일:
+
+- provider adapter
+- smoke script
+- `.env.example`
+
+작업: key와 model이 있을 때만 외교 행동 하나를 판정하는 smoke script를 만든다. commit은 하지 않는다.
+
+통과 조건: key가 없으면 `SKIPPED_NO_API_KEY`이며 기본 test/build에서 실행되지 않는다. console/report에 prompt 전문, player 원문, raw context, secret을 남기지 않는다.
+
+### 12-43. 보안·bundle·권한 감사
+
+작업: client bundle, env, logs, provider payload persistence, gameplay direct command reachability를 감사한다.
+
+통과 조건:
+
+- client artifact에 API key와 server provider code가 없다.
+- player text가 system instruction privilege를 얻지 않는다.
+- gameplay UI에서 MapCommand JSON을 제출할 수 없다.
+- `submit_turn_resolution` 외 effect-bearing AI tool이 없다.
+- local commit은 validated full resolution에서만 호출된다.
+
+### 12-44. 최종 type·lint·unit·build checkpoint
+
+실행:
+
+```text
+npx tsc --noEmit
+npm run lint
+npm test
+npm run build
+```
+
+통과 조건: 모두 종료 코드 0이다. 기존 warning은 Prompt 12 이전 증거와 분리하고 새 warning은 허용하지 않는다.
+
+### 12-45. 최종 E2E와 완료 판정
+
+E2E 흐름:
+
+1. 국가를 선택해 simulation을 시작한다.
+2. 통일 협상 행동을 queue한다.
+3. queue만으로 지도가 변하지 않음을 확인한다.
+4. 시간을 진행하고 loading·Stop 가능 상태를 확인한다.
+5. 첫 turn이 delayed로 commit되고 지도 변화가 없음을 확인한다.
+6. 후속 turn에서 조약 비준과 통합이 함께 commit됨을 확인한다.
+7. 사건 카드·검색·패널·국경·라벨이 같은 revision을 반영하는지 확인한다.
+8. turn undo로 사건·날짜·지도를 함께 복원한다.
+9. Stop fixture에서 아무 state도 바뀌지 않음을 확인한다.
+
+실행:
+
+```text
+npm run test:e2e
+```
+
+통과 조건: 전체 E2E 종료 코드가 0이고 최종 보고서가 13절의 모든 완료 조건을 `pass | fail | blocked`로 판정한다. 하나라도 fail 또는 blocked면 Prompt 12를 완료로 판정하지 않는다.
+
+## 16. AI tool 허용 목록
+
+Read-only:
+
+- `find_country`
+- `inspect_country_territories`
+- `list_country_subdivisions`
+- `inspect_active_situation`
+- `inspect_recent_events`
+
+Effect-bearing output:
+
+- `submit_turn_resolution`
+
+금지:
+
+- `merge_country`
+- `split_country`
+- `transfer_territory`
+- `apply_*`
+- `commit_*`
+- `set_world_state`
+- `write_geojson`
+- 임의 URL fetch
+- 임의 JavaScript 또는 shell
+
+## 17. 필수 behavioral fixture
+
+### 17.1 통일
+
+```text
+Turn A:
+player action = 공동 국민투표와 통일 협상 제안
+valid outcome = 협상 시작 또는 거절 또는 조건부 합의
+map effect = 보통 없음
+
+Turn B 이후:
+committed facts = 협상, 비준 조건, 국민투표 결과
+event = 통일 조약 비준
+world effect = countries.unified
+```
+
+### 17.2 독립
+
+```text
+초기 turn = 독립 운동 또는 국민투표 추진
+중간 turn = 정부 반응, 협상, 승인/탄압
+성립 turn = 독립을 실제로 성립시키는 사건
+world effect = country.established + territory/subdivision reference
+```
+
+### 17.3 전쟁과 영토
+
+```text
+선전포고 ≠ 즉시 영토 획득
+전투 승리 ≠ 자동 영구 영토 이전
+점령 fact ≠ 주권 이전
+평화 조약·항복·법적 병합 event → 필요한 경우 territory transfer
+```
+
+### 17.4 무효 관리자 명령
+
+플레이어가 `중국을 31개로 분할해`라고 입력해도 현재 플레이 국가의 가능한 행동으로 해석한다. 권한과 인과관계 없이 31개 국가가 즉시 생기면 실패다.
+
+## 18. 금지 구현
+
+- 자연어를 MapCommand로 바로 변환하지 않는다.
+- player input과 `country.merge`를 1:1 매핑하지 않는다.
+- 결과별 승인·거절 버튼을 gameplay에 만들지 않는다.
+- 모델 판정 전에 map preview부터 만들지 않는다.
+- event 없이 world effect를 적용하지 않는다.
+- action 원문을 성공 사건 narrative로 그대로 복사하지 않는다.
+- 실패한 resolution의 draft를 history에 저장하지 않는다.
+- AI가 신규 국가의 최종 3글자 ID를 고르게 하지 않는다.
+- AI가 geometry를 생성하게 하지 않는다.
+- stale revision의 번호만 바꿔 재사용하지 않는다.
+- assistant prose 안의 JSON을 regex로 실행하지 않는다.
+- `dangerouslyAllowBrowser: true`를 사용하지 않는다.
+- API key를 localStorage, Zustand persistence, prop, query string에 넣지 않는다.
+- Stop 뒤 background에서 provider 생성이나 repair를 계속하지 않는다.
+- test 편의를 위해 모든 player action을 성공시키지 않는다.
+- 독립 사건 수를 채우기 위해 무관한 전쟁과 국경 변경을 만들지 않는다.
+- development raw command UI를 일반 gameplay UI와 섞지 않는다.
+
+## 19. 후속 확장 경계
+
+프롬프트 12 완료 뒤 별도 prompt로 확장할 수 있다.
+
+- 수치 기반 경제·인구·군수 domain
+- 전쟁 front와 점령 상태
+- 조약과 외교 관계 전용 engine
+- 정부·지도자·정당 domain
+- fog of war와 정보 정확도
+- 장기 AI memory compression
+- catalyst scene와 별도 협상 대화
+- 여러 AI provider
+- 비용 budget과 quota
+- server database와 multiplayer
+- simulation evaluation dataset
+
+이후에도 사건이 먼저이고 지도 command는 결과 반영 수단이라는 원칙을 유지한다.
+
+## 20. 완료 정의
+
+프롬프트 12는 자연어로 지도를 편집하는 기능이 완성됐을 때가 아니라 다음 전체 경로가 연결됐을 때 완료다.
+
+```text
+플레이 국가의 행동 입력
+→ queue
+→ 시간 진행
+→ server-only GPT simulation
+→ 성공/부분 성공/실패/지연 판정
+→ dated events와 타국 반응
+→ causally linked semantic world effects
+→ host validation
+→ internal MapCommand v2 compilation
+→ complete turn dry-run
+→ simulation + world atomic commit
+→ canonical turn report + updated map
+→ turn-level undo/redo
+```
+
+플레이어가 `합쳐`라고 말해서 국가가 합쳐지는 것이 아니다. 협상, 전쟁, 국민투표, 조약, 붕괴 같은 세계 안의 상황이 전개되고 국가 통합이 실제 결과로 성립했을 때 내부 command가 실행되어야 한다.

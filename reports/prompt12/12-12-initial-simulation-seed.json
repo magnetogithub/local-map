@@ -1,0 +1,31 @@
+{
+  "stage": "12-12",
+  "status": "pass",
+  "objective": "Build the initial simulation state after player-country selection.",
+  "filesRead": [
+    "src/lib/simulation/simulation-state.ts",
+    "src/lib/world/initial-world-state-v2.ts",
+    "src/stores/game-setup-store.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/initial-simulation-state.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-12-initial-simulation-seed.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "startDate20200101": "pass",
+    "selectedPlayerCountryRequired": "pass",
+    "emptyTurnHistory": "pass",
+    "allActiveCountriesSupported": "pass",
+    "coreAllowlistAbsent": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Initialization rejects inactive or unknown player countries."
+  ],
+  "notes": [],
+  "nextStage": "12-13"
+}

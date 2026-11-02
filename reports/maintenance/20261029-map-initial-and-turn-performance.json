@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "status": "additional-optimizations-implemented-and-verified-with-measurement-limits",
+  "userPriority": "Initial map preparation and turn progression; the user reported rotation resolved after refresh.",
+  "changes": {
+    "countryDetailLifetime": "OperationalWorldMap keeps the same selected-country geometry through world syncing, occupation, undo and redo. The authoritative world/apply revision readiness guard is unchanged. Selection changes, clear, retry and remount still invalidate obsolete detail.",
+    "detailCancellation": "Country/cell detail shares a dedicated request cancellation channel, independently of edge detail. Supersede, clear and dispose abort obsolete requests, preserve the parent signal and reject late publication. Cancelled edge conversion is skipped before materializing features. Authoritative changed-cell/front loads are not cancelled by selection changes.",
+    "emptyCellDelta": "A zero-cell response reuses the frozen territory dictionary without enumerating/copying its 923443 keys. Real cell changes still copy and validate the dictionary to preserve immutable snapshots.",
+    "labels": "Initial default-color feature-state writes and the initial redundant points setData are removed. Only changed country palettes update glyph state. Label filters update at actual seed minZoom thresholds or changed hidden/renamed conditions, preserving fractional thresholds and current country semantics.",
+    "initialSnapshotLifetime": "Long-lived consumer callbacks capture callbacks rather than the entire input/initial world. Initial changed-cell hints and initial label colors use loops that do not capture the initial world in retained closure contexts. No heap/GC reduction was independently measured.",
+    "serverContext": "A session-local one-slot cache reuses the canonical expected context for the same authoritative pair identity and target date. The actual prepare -> HTTP resolver -> provider resolver path builds it once instead of three times.",
+    "contextSafety": "The cache stores a private canonical string. prepare returns a fresh parsed object. Both resolvers still check turnId, current pair identity and the submitted canonical value. Runtime changes clear the slot; different dates rebuild it. Busy and atomic commit guards remain in place."
+  },
+  "files": [
+    "src/components/map/OperationalWorldMap.tsx",
+    "src/components/map/OperationalWorldMap.test.tsx",
+    "src/lib/map/operational-map-consumer.ts",
+    "src/lib/map/operational-map-consumer.test.ts",
+    "src/lib/map/operational-map-sources.ts",
+    "src/lib/map/operational-map-sources.test.ts",
+    "src/lib/map/operational-country-labels.ts",
+    "src/lib/map/operational-country-labels.test.ts",
+    "src/lib/simulation/client/operational-game-client.ts",
+    "src/lib/simulation/client/operational-game-integration.test.tsx",
+    "src/lib/simulation/server/operational-game-session.ts"
+  ],
+  "validation": {
+    "relatedRegressionTests": {
+      "uniquePassed": 108,
+      "failed": 0,
+      "breakdown": {
+        "consumer": 40,
+        "component": 12,
+        "sourceCancellation": 6,
+        "labels": 5,
+        "clientAndActualServerIntegration": 35,
+        "existingDelivery": 10
+      },
+      "execution": "The first combined six-file run passed 99 tests. After the additional server context change, the changed integration suite passed 35 tests, replacing its prior 26 in the unique total; unchanged passing groups were reused.",
+      "regressions": [
+        "Loaded/pending same-country detail survives three occupation/undo/redo updates with one load and no clear; actual selection changes still invalidate obsolete work.",
+        "Both detail cancellation channels, parent cancellation, stale completions and source failures preserve publication/recovery semantics.",
+        "Empty cell deltas perform zero territory key enumerations while revision/color updates, immutable snapshots and invalid revisions/deltas remain checked.",
+        "Label fractional thresholds, hidden/retired/renamed/owned-zero cases, palette undo/redo, visibility and disposal.",
+        "One context build across real preparation/HTTP/provider validation, forged/mutated contexts, same-revision player changes, handler/provider races, date replacement, history/restart and failed/cancelled/exception retries.",
+        "Existing fronts, exact geometry, selection/controller identity and state-write reduction regressions remain passing."
+      ]
+    },
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit --incremental false: passed, including the final server context changes.",
+    "changedCodeLint": "Passed; server/integration files were checked again after their final change.",
+    "gitDiffCheck": "Passed.",
+    "productionBuild": {
+      "status": "passed",
+      "bundler": "webpack",
+      "command": "PAX_BUILD_DIST_DIR=.next-map-turn-perf-build node node_modules/next/dist/bin/next build --webpack",
+      "compiledSeconds": 7.8,
+      "typecheckSeconds": 8.5,
+      "modeNote": "Used the official webpack mode already verified in 18-04. The earlier default Turbopack PostCSS worker failure was not claimed fixed or retried as a matrix.",
+      "evidence": "reports/verification/map-turn-performance-20261029/build-result.json",
+      "configCleanup": "Only temporary generated type paths were removed by restoring the immediately pre-build tsconfig/next-env bytes after concurrent-change checks. Existing user changes remain."
+    }
+  },
+  "workReductionEvidence": {
+    "sameCountryAcrossThreeWorldUpdates": {"countryGeometryLoadsBefore": 4, "countryGeometryLoadsAfter": 1, "clearsDuringThoseUpdatesAfter": 0, "source": "component regression"},
+    "unchangedLabelPreparation": {"defaultLabelStateWritesAfter": 0, "redundantInitialPointsSetDataAfter": 0, "sameZoomBucketFilterWritesAfter": 0, "source": "label regressions"},
+    "emptyCellDelta": {"wholeTerritoryDictionaryCopiesAfter": 0, "keyEnumerationsAfter": 0, "source": "integration regression with a key-enumeration probe"},
+    "sameTurnContext": {"fullContextBuildsBefore": 3, "fullContextBuildsAfter": 1, "requestValidationsPreserved": 2, "source": "integration regression through HTTP and provider resolvers"},
+    "limit": "These are code-path and small-fixture workload counts, not percentages of total browser/server performance."
+  },
+  "actualScriptedBrowser": {
+    "provider": "Existing development scripted provider on http://127.0.0.1:3001; compiled alias confirmed, and the coded scripted-result summary was visible.",
+    "originalUserTabPreserved": true,
+    "temporaryViewportOverrideUsed": false,
+    "testViewportCss": {"width": 1553, "height": 724},
+    "original18_01ViewportCss": {"width": 1920, "height": 855},
+    "scenarios": [
+      "Fresh setup -> KOR selection -> start -> queue the approved DEBUG_WORLD_EFFECT action -> 1 day -> undo -> redo after the frontend/client changes.",
+      "Fresh KOR game -> the same queued action -> 1 day -> undo -> redo after server context reuse."
+    ],
+    "latestChecks": {
+      "initial": {"date": "2020-01-01", "worldRevision": 0, "appliedRevision": 0},
+      "committed": {"date": "2020-01-02", "turn": 1, "queuedActions": 0, "worldRevision": 1, "appliedRevision": 1, "mapStatus": "ready"},
+      "undo": {"date": "2020-01-01", "turn": 0, "queuedActions": 1, "worldRevision": 2, "appliedRevision": 2, "mapStatus": "ready"},
+      "redo": {"date": "2020-01-02", "turn": 1, "queuedActions": 0, "worldRevision": 3, "appliedRevision": 3, "mapStatus": "ready"},
+      "turnResult": "One action outcome, one event and one map change; local scripted-provider summary visible.",
+      "consoleWarnings": 0,
+      "consoleErrors": 0
+    },
+    "sampledTimings": {
+      "initialSetupReadyObservedByMs": 25113,
+      "beforeServerContextReuse": {"stillProcessingAtMs": 18327, "resultAndMapReadyObservedByMs": 46463},
+      "afterServerContextReuse": {"resultCommittedObservedByMs": 11133, "mapReadyObservedByMs": 25344},
+      "limits": "Sampled wall-clock upper bounds include tool scheduling and observation gaps. Runs were sequential with warmed server/catalog caches and uncontrolled background tabs. These are not exact latencies, a controlled before/after benchmark, or proof that cache reuse alone caused the timing difference. No FPS/CPU/heap/VRAM ratio is claimed."
+    },
+    "evidenceDirectory": "reports/verification/map-turn-performance-20261029",
+    "finalScreenshot": "reports/verification/map-turn-performance-20261029/final-redo.jpg"
+  },
+  "remainingCostsAndLimits": [
+    "Initial creation/validation of the 923443-cell client world still runs; this change does not replace the client storage model or move that work to a worker.",
+    "Real cell-changing deltas still clone the immutable territory dictionary. The first context build, frontier resolution, planning and commit costs remain.",
+    "Already-running synchronous JSON parsing/Zod validation cannot be interrupted by AbortController. Cancellation primarily saves obsolete requests and prevents downstream publication/conversion.",
+    "A large country still loads complete exact geometry for an actual new selection; no coverage or authoritative detail was hidden to gain speed.",
+    "The existing low-zoom coverage/culling defect documented in the map-separation analysis is unchanged. Catalog geometry, tiles and approval data were not regenerated.",
+    "The earlier 18-04 real gameplay gap is now covered by current scripted-browser checks. Its original same-viewport performance comparison and default Turbopack build gap are still not claimed complete."
+  ],
+  "sideEffects": {"externalAiCalls": 0, "scriptedTurns": 2, "originalDataModified": false, "userServersStopped": false, "userTabsClosed": false, "commitOrPushPerformed": false}
+}

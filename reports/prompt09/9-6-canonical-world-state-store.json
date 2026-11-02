@@ -1,0 +1,101 @@
+{
+  "stage": "9-6",
+  "status": "pass",
+  "objective": "Create the canonical Zustand WorldState store with read-only selectors while leaving the existing selection UI unchanged.",
+  "inputHashes": {
+    "reports/prompt09/9-5-seed-world-state-initialization.json": "7f641294be16c09549c39e621f8d56b0ad60557c72ad65c5ec8fa312007b9dbd",
+    "src/lib/world/world-state.ts": "3083e848d5453117061cb7643b796e12216cf5fe284c8cc7066a219948d251ad",
+    "src/lib/world/initial-world-state.ts": "a6f98ef3ae8883e6fba4a480683157c25b564375bc2691a8fa0e339a68f4179d",
+    "src/stores/game-setup-store.ts": "cdd2e7df8d2614910e5123d8ebdf14987f4f2429c34697833346a8ed4b54ce74",
+    "package-lock.json": "fc7842b373ceeed78eb75bc3f640c1e262d08b3ff185ef9d88035336d426f8dd"
+  },
+  "outputHashes": {
+    "src/stores/world-state-store.ts": "637260c6ad0aca9b19670c40877ceb4653947db65307a822554d12a009c3dc65",
+    "src/stores/world-state-store.test.tsx": "97d4cd52bc158a0858bc7f8e59a903f1daec5c172eaa7b922f982332cc7d8eca"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-6-canonical-world-state-store.json",
+    "src/stores/world-state-store.test.tsx",
+    "src/stores/world-state-store.ts"
+  ],
+  "commands": [
+    {
+      "command": "Verify 9-5 status and LF-normalized output hashes; read AGENTS.md, installed Next.js client guide, existing Zustand store, and installed Zustand type definitions",
+      "exitCode": 0,
+      "durationMs": 1500
+    },
+    {
+      "command": "npm.cmd test -- --run src/stores/world-state-store.test.tsx src/lib/world/world-state-invariants.test.ts src/lib/world/initial-world-state.test.ts",
+      "exitCode": 0,
+      "durationMs": 7025
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 5101
+    },
+    {
+      "command": "npm.cmd run lint -- src/stores/world-state-store.ts src/stores/world-state-store.test.tsx",
+      "exitCode": 0,
+      "durationMs": 5942
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 34520
+    },
+    {
+      "command": "Verify no diff in existing selection store and selection UI consumers",
+      "exitCode": 0,
+      "durationMs": 900
+    }
+  ],
+  "measurements": {
+    "worldStateStoreTests": 4,
+    "countryRevisionSubscriberNotifications": 1,
+    "sameSnapshotRepublishNotifications": 0,
+    "revisionSelectorInitialRenders": 1,
+    "revisionSelectorChangeRenders": 1,
+    "unrelatedCountryOrderSelectorInitialRenders": 1,
+    "unrelatedCountryOrderSelectorChangeRenders": 0,
+    "readOnlyStoreMethods": [
+      "getInitialState",
+      "getState",
+      "subscribe"
+    ],
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 17,
+    "fullTestFilesPassed": 16,
+    "fullTestsPassed": 103,
+    "typecheckErrors": 0,
+    "lintErrors": 0,
+    "existingSelectionUiFilesChanged": 0
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "previousStageStatusPass": true,
+    "previousStageHashesMatchCurrentOutputs": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "canonicalWorldStateStoreDefined": true,
+    "initialWorldStateValidated": true,
+    "readOnlyStoreSurfaceExposed": true,
+    "readOnlySelectorsDefined": true,
+    "singleRevisionSingleNotification": true,
+    "sameSnapshotRepublishNoOp": true,
+    "unrelatedUiSelectorDoesNotRerender": true,
+    "distinctSameRevisionStateRejected": true,
+    "existingSelectionUiUnchanged": true,
+    "targetedUnitTestsPass": true,
+    "fullUnitSuitePass": true,
+    "typecheckPass": true,
+    "lintPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": true,
+  "nextStage": "9-7"
+}

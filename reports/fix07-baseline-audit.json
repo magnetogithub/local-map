@@ -1,0 +1,43 @@
+{
+  "subtask": "7A",
+  "auditedAt": "2026-08-13T14:45:00+09:00",
+  "scope": "read-only product audit; only this report was added",
+  "implementation": {
+    "layoutModule": {"path":"src/lib/map/country-label-layout.ts","publicApi":["computeCountryLabelLayout","recomputeCountryLabels","measureLabelText","screenFontSize"],"flow":["longitude unwrap and latitude-scaled projection","component selection","PCA plus sampled angle candidates","grid and centroid candidates","ray extent and sampled footprint scoring","canonical coordinate output"],"knownLimitations":["stride thinning","sampled rather than area-intersection footprint","heuristic glyph widths","synthetic-border-change unit fixtures"]},
+    "generator": {"path":"scripts/prepare-map-data.mjs","connectedToAllCountries":true,"countryCount":256,"pointFeatureCount":256},
+    "renderer": {"path":"src/components/map/WorldMap.tsx","worldSpaceExpression":"exponential base 2 interpolation using fontSizeWorldUnits","layers":["country-labels-territory","country-labels-small","country-labels-ultra-small"],"filtersIntendedExclusive":true,"rawApi":"queryRenderedFeatures output without countryId deduplication","deduplicatedApi":"countryId + inferred worldCopy Map"},
+    "baselineGeoJson": {"path":"public/data/maps/country-label-baselines-2020.geojson","bytes":43,"empty":true},
+    "layoutPerformance": {"countryCount":256,"totalMilliseconds":2320.3614,"averageMilliseconds":8.98659,"maxSingleMilliseconds":64.4777}
+  },
+  "representativeCountries": [
+    {"countryId":"RUS","anchor":[98.672081,61.493732],"angle":2.241478,"insideRatio":0.895425,"coverageRatio":0.796252,"confidence":0.798349},
+    {"countryId":"CAN","anchor":[-116.659591,58.938254],"angle":-31.493435,"insideRatio":0.882353,"coverageRatio":0.771227,"confidence":0.842687},
+    {"countryId":"USA","anchor":[-91.800713,39.27852],"angle":14.163212,"insideRatio":0.810458,"coverageRatio":0.771561,"confidence":0.803374},
+    {"countryId":"CHN","anchor":[99.78551,33.537218],"angle":31.410337,"insideRatio":0.699346,"coverageRatio":0.783458,"confidence":0.792392},
+    {"countryId":"BRA","anchor":[-57.216743,-17.893138],"angle":-52.96559,"insideRatio":0.69281,"coverageRatio":0.778562,"confidence":0.775165},
+    {"countryId":"AUS","anchor":[130.423309,-27.79879],"angle":-5.138209,"insideRatio":1,"coverageRatio":0.77597,"confidence":0.930741},
+    {"countryId":"IND","anchor":[76.484763,24.65826],"angle":2.983356,"insideRatio":0.888889,"coverageRatio":0.748921,"confidence":0.924778},
+    {"countryId":"KAZ","anchor":[69.583846,49.466576],"angle":0,"insideRatio":0.928105,"coverageRatio":0.744122,"confidence":0.872407},
+    {"countryId":"ARG","anchor":[-62.232214,-34.018594],"angle":50.0169,"insideRatio":0.862745,"coverageRatio":0.743524,"confidence":0.85357},
+    {"countryId":"CHL","anchor":[-72.303761,-46.532912],"angle":90,"insideRatio":0.522876,"coverageRatio":0.295803,"confidence":0.605424},
+    {"countryId":"NOR","anchor":[8.572021,60.644576],"angle":90,"insideRatio":0.993464,"coverageRatio":0.672221,"confidence":0.931454},
+    {"countryId":"GBR","anchor":[-1.684086,53.486202],"angle":-59.586596,"insideRatio":0.816993,"coverageRatio":0.526339,"confidence":0.7966},
+    {"countryId":"FRA","anchor":[2.448091,46.602909],"angle":-18.283474,"insideRatio":0.96732,"coverageRatio":0.699093,"confidence":0.975758},
+    {"countryId":"JPN","anchor":[138.844197,36.802138],"angle":47.078985,"insideRatio":0.856209,"coverageRatio":0.614577,"confidence":0.81309},
+    {"countryId":"IDN","anchor":[114.005869,-0.191763],"angle":16.757027,"insideRatio":1,"coverageRatio":0.69424,"confidence":0.929814}
+  ],
+  "fix06Artifacts": {
+    "layoutReport":{"path":"public/data/maps/country-label-layout-report-2020.json","exists":true},
+    "screenshots":{"required":12,"present":0,"missing":["fix06-russia-z1.png","fix06-russia-z2.png","fix06-russia-z3.png","fix06-usa-canada.png","fix06-china.png","fix06-chile-norway.png","fix06-japan-indonesia.png","fix06-europe.png","fix06-world-copy-before.png","fix06-world-copy-after.png","fix06-border-change-before.png","fix06-border-change-after.png"]}
+  },
+  "verification": {
+    "lint":{"command":"npm.cmd run lint","status":"pass-with-warnings","exitCode":0,"warnings":3},
+    "unit":{"command":"npm.cmd test","status":"pass","exitCode":0,"files":5,"tests":27},
+    "build":{"command":"npm.cmd run build","status":"pass","exitCode":0,"traceEpermReproduced":false,"traceEpermAssessment":"environment/file-lock likely; not reproduced after prior workers were stopped"},
+    "playwright":{"command":"npx.cmd playwright test -g \"renders one HOI4 point label per country\" --reporter=line","status":"blocked","exitCode":null,"reason":"no result for more than 90 seconds; terminated per 7A operational rule","knownPriorFailure":"RUS rendered label count was 0 at zoom 1.25"},
+    "fullPlaywright":{"status":"not-run","reason":"7A baseline targeted test blocked; full suite was not represented as passing"}
+  },
+  "auditFindings": ["Chile is below the later 0.75 narrow-country insideRatio target (0.522876).","China and Brazil are below 0.70 insideRatio.","Raw API does not deduplicate countryId, but world-copy inference and raw-count behavior still require 7J browser validation.","All twelve mandatory fix06 screenshots are absent.","The baseline GeoJSON is intentionally empty, so calculated baselines are not currently emitted as features.","Playwright is not passing at this baseline."],
+  "gateStatus":"pass",
+  "nextRecommendedSubtask":"7B"
+}

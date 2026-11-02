@@ -1,0 +1,51 @@
+{
+  "stage": "11-11",
+  "status": "pass",
+  "objective": "Replace the China province debug scenario's direct GeoJSON source mutation with a test-only WorldStateV2 split and rollback commit flow.",
+  "filesRead": [
+    "reports/prompt11/11-10-world-map-runtime-connection.json",
+    "src/components/map/WorldMap.tsx",
+    "src/lib/planning/command-ui-runtime.ts",
+    "src/lib/planning/country-split-planner.ts",
+    "src/lib/planning/country-merge-planner.ts",
+    "src/lib/planning/atomic-world-commit.ts",
+    "e2e/game-setup.spec.ts"
+  ],
+  "changedFiles": [
+    "src/components/map/WorldMap.tsx",
+    "src/lib/test-only/china-province-debug-scenario.ts",
+    "src/lib/test-only/china-province-debug-scenario.test.ts",
+    "src/types/map-debug.ts",
+    "e2e/game-setup.spec.ts",
+    "reports/prompt11/11-11-china-debug-scenario-replacement.json"
+  ],
+  "commands": [
+    "npm.cmd test -- --run src/lib/test-only/china-province-debug-scenario.test.ts",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint -- src/components/map/WorldMap.tsx src/lib/test-only/china-province-debug-scenario.ts src/lib/test-only/china-province-debug-scenario.test.ts src/types/map-debug.ts e2e/game-setup.spec.ts",
+    "npm.cmd run test:e2e -- e2e/game-setup.spec.ts --grep \"splits China\"",
+    "rg -n 'fetch\\(\"/data/maps/countries|fetch\\(\"/data/maps/country-borders|chinaScenarioSnapshot|setEvidenceSourceData|setSourceData\\(S\\.(countries|borders|labels|glyph)' src/components/map/WorldMap.tsx",
+    "git diff --check -- src/components/map/WorldMap.tsx src/types/map-debug.ts e2e/game-setup.spec.ts"
+  ],
+  "gates": {
+    "debugScenarioDirectStaticSourceMutationCount": 0,
+    "testOnlyScenarioModule": true,
+    "v2SplitPlannerUsed": true,
+    "atomicV2PrepareSplitRollbackCommits": true,
+    "mapProjectionRevisionAfterSplit": 2,
+    "mapProjectionRevisionAfterRollback": 3,
+    "targetedUnitTest": "pass: 1 test",
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "focusedE2EAssertions": "pass: 1 test",
+    "diffCheck": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "WorldMap no longer fetches static country/border files or snapshots and replaces MapLibre sources for the China debug scenario. It dynamically loads a test-only v2 scenario helper only outside production.",
+    "The helper prepares 31 fixture Territories in a committed v2 state, runs the actual country.split planner and atomic commit, then restores the original v2 snapshot with a new committed revision. The fixture-preparation and rollback transitions are test-only state migrations, not production map commands.",
+    "The first browser run exposed a MapLibre loaded() gate that skipped committed projections while sources were updating. The gate now applies only before initial source readiness; the rerun passed split and rollback revision checks.",
+    "The focused Playwright test printed 'ok 1'. As in 11-10, its runner hung during web-server teardown and was manually interrupted after the test passed."
+  ],
+  "nextStage": "11-12"
+}

@@ -1,0 +1,42 @@
+{
+  "stage": "11-13",
+  "status": "pass",
+  "objective": "Fail a targeted test if production runtime reintroduces static country truth, V1 state, or direct static map projection data paths.",
+  "filesRead": [
+    "reports/prompt11/11-12-v1-runtime-store-removal.json",
+    "eslint.config.mjs",
+    "src/components/map/map-search-projection.test.ts",
+    "src/components/country/CountryPanel.test.tsx",
+    "src/components/map/WorldMap.tsx",
+    "src/lib/projection/country-label-runtime-projection.ts",
+    "src/lib/world/initial-world-state-v2.ts",
+    "src/lib/test-only/legacy-v1-isolation.test.ts"
+  ],
+  "changedFiles": [
+    "src/lib/test-only/static-runtime-source-guard.test.ts",
+    "reports/prompt11/11-13-static-runtime-data-guardrail.json"
+  ],
+  "commands": [
+    "rg -n 'countries-2020|countryById|/data/maps/|world-state' src/app src/components src/stores src/lib -g '*.ts' -g '*.tsx'",
+    "npm.cmd test -- --run src/lib/test-only/static-runtime-source-guard.test.ts src/lib/test-only/legacy-v1-isolation.test.ts src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.test.tsx",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint -- src/lib/test-only/static-runtime-source-guard.test.ts",
+    "git diff --check -- src/lib/test-only/static-runtime-source-guard.test.ts"
+  ],
+  "gates": {
+    "sampleViolationsRejected": 6,
+    "directStaticMapSourceSampleRejected": true,
+    "productionSourceFindings": 0,
+    "targetedTests": "pass: 4 files, 9 tests",
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "diffCheck": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "The guard scans non-test src files and rejects static country metadata imports outside the V2 seed bootstrap and unused legacy lookup module, all production country-index/V1 imports, and static country geometry or capital runtime URLs.",
+    "WorldMap's three existing label GeoJSON URLs remain permitted only as a named seed cache consumed through projectLabelMapSources and its revisioned output. Directly applying seed label data to MapLibre is rejected.",
+    "This stage adds a guard only; it does not redesign label projection or rewrite map rendering."
+  ],
+  "nextStage": "11-14"
+}

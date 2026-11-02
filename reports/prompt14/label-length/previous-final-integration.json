@@ -1,0 +1,1604 @@
+{
+  "schemaVersion": "prompt14-final-integration-review-g-v1",
+  "status": "pass",
+  "generatedAt": "2026-10-06T05:34:30.628Z",
+  "previousExecution": {
+    "path": "reports/prompt14/review-g/previous-final-integration.json",
+    "sha256": "9077b35b10ed7271d379765f10259b86743573f08463c2f8913fecbe867e7f65",
+    "status": "historical only; previous V2 fixture results do not count as current V3 evidence"
+  },
+  "currentExecution": {
+    "startedAt": "2026-10-06T04:40:30.804Z",
+    "finishedAt": "2026-10-06T05:34:30.630Z",
+    "head": "d56fba5f4eb928477a17cb640bb5b662ae9719cc",
+    "baselinePath": "reports/prompt14/review-g/baseline.json",
+    "existingDirtyStatus": " M e2e/fix08-12.spec.ts\n M e2e/fix08-5.spec.ts\n M e2e/fix08-6.spec.ts\n M e2e/fix08-7.spec.ts\n M e2e/fix08-aus-diag.spec.ts\n M e2e/game-setup.spec.ts\n M e2e/prompt11-10.spec.ts\n M e2e/prompt12-simulation.spec.ts\n M e2e/prompt13-integration.spec.ts\n M e2e/prompt13-shell.spec.ts\n M eslint.config.mjs\n M next.config.ts\n M playwright.config.ts\n M src/app/api/world/catalog/route.ts\n M src/app/game/page.tsx\n M src/app/page.tsx\n M src/components/game/GameActionOverlay.tsx\n M src/components/layout/WorldAppPage.tsx\n M src/lib/game-ui/country-management-projection.ts\n M src/lib/game-ui/country-view-projection.ts\n M src/lib/game-ui/game-hud-projection.ts\n M src/lib/game-ui/news-projection.ts\n M src/lib/map/catalog-consumer.test.ts\n M src/lib/map/catalog-map-consumer.ts\n M src/lib/map/catalog-vector-delivery.ts\n M src/lib/map/map-source-incremental-adapter.ts\n M src/lib/projection/catalog-map-consumer-projection.ts\n M src/lib/simulation/client/turn-report.ts\n M src/lib/simulation/client/turn-request.ts\n M src/lib/simulation/debug-world-effect.ts\n M src/lib/simulation/semantic-validator.ts\n M src/lib/simulation/server/context-resolution-validator.ts\n M src/lib/simulation/server/provider-config.ts\n M src/lib/simulation/server/simulation-instruction.ts\n M src/lib/simulation/simulation-context.ts\n M src/lib/simulation/simulation-event.ts\n M src/lib/simulation/turn-resolution.ts\n M src/lib/simulation/world-effect-compiler.ts\n M src/lib/simulation/world-effect.ts\n M src/lib/test-only/world-v2-to-v3-migration.test.ts\n M src/lib/world/world-state-v3.ts\n M vitest.config.ts\n?? e2e/legacy-fixture.ts\n?? e2e/prompt14-benchmark.spec.ts\n?? e2e/prompt14-catalog.spec.ts\n?? scripts/audit-prompt14-final.mjs\n?? scripts/collect-prompt14-first-e2e.mjs\n?? scripts/report-prompt14-country-colors.mjs\n?? scripts/report-prompt14-final.mjs\n?? scripts/report-prompt14-review-f.mjs\n?? scripts/run-prompt14-occupation-smoke.mjs\n?? scripts/run-prompt14-production-cutover-smoke.mjs\n?? scripts/run-prompt14-review-e-smoke.mjs\n?? scripts/smoke-prompt14-country-colors.mjs\n?? scripts/smoke-prompt14-occupation.mjs\n?? scripts/smoke-prompt14-production-cutover.mjs\n?? scripts/smoke-prompt14-review-e.mjs\n?? scripts/start-prompt14-review-g.mjs\n?? scripts/supplement-prompt14-final-baseline.mjs\n?? scripts/update-prompt14-review-e-evidence.mjs\n?? scripts/verify-prompt14-final.mjs\n?? scripts/verify-prompt14-review-f.mjs\n?? scripts/write-prompt14-occupation-checkpoint.mjs\n?? src/components/game/CatalogGameScreen.tsx\n?? src/components/layout/CatalogGameSetupShell.test.tsx\n?? src/components/layout/CatalogGameSetupShell.tsx\n?? src/components/map/CatalogWorldMap.tsx\n?? src/lib/commands/country-change-map-color.test.ts\n?? src/lib/commands/country-change-map-color.ts\n?? src/lib/commands/territorial-control-v3.ts\n?? src/lib/game-ui/catalog-map-ui-settings-adapter.test.ts\n?? src/lib/game-ui/catalog-map-ui-settings-adapter.ts\n?? src/lib/game-ui/runtime-view.ts\n?? src/lib/planning/country-map-color-planner.ts\n?? src/lib/planning/territorial-control-planner.test.ts\n?? src/lib/planning/territorial-control-planner.ts\n?? src/lib/projection/catalog-color-projection.ts\n?? src/lib/simulation/catalog-authority-lifecycle.ts\n?? src/lib/simulation/catalog-occupation-browser-contract.test.ts\n?? src/lib/simulation/catalog-occupation-lifecycle.test.ts\n?? src/lib/simulation/catalog-runtime.test.ts\n?? src/lib/simulation/catalog-runtime.ts\n?? src/lib/simulation/catalog-turn-plan.ts\n?? src/lib/simulation/client/use-catalog-simulation-turn-controller.ts\n?? src/lib/simulation/consequence-causality.ts\n?? src/lib/simulation/country-color-authority.ts\n?? src/lib/simulation/country-color-intent.ts\n?? src/lib/simulation/country-color-runtime.test.ts\n?? src/lib/simulation/presentation-grant-validation.ts\n?? src/lib/simulation/prompt14-performance.test.ts\n?? src/lib/simulation/review-e-regression.test.ts\n?? src/lib/test-only/legacy-regression-page.tsx\n?? src/lib/test-only/regression-page.server.tsx\n?? src/lib/world/country-map-color.test.ts\n?? src/lib/world/country-map-color.ts\n?? src/lib/world/production-catalog-seed.server.ts\n?? src/lib/world/regression-page.server.ts\n?? src/lib/world/world-v3-runtime-hash.ts\n",
+    "changedFiles": [
+      {
+        "path": "src/app/api/simulation/turn/route.ts",
+        "startSha256": "9774a830dd487f3cc13d1faea701d8cc2c1ec10eec749a042c895a1e6f26f03d",
+        "endSha256": "77d502214b578568b8ad31e43217dc4bb8044b87203021f031de9d6ea84c7ff6"
+      },
+      {
+        "path": "src/app/api/world/labels/route.ts",
+        "startSha256": null,
+        "endSha256": "abe1664359e17dc05cc613c009978c1e8639ff36377a5e7fd57c1ac780eb481c"
+      },
+      {
+        "path": "src/app/api/world/regions/route.ts",
+        "startSha256": null,
+        "endSha256": "317ca502a6e1279e7891acac6d1be7b706e4af9d2fbf6bdb82ea3659ebc560e7"
+      },
+      {
+        "path": "src/components/layout/CatalogGameSetupShell.test.tsx",
+        "startSha256": "8b4bb664ecf4198afc3187d2733cdfe29185348415ccc8cc16a83915c58f25ed",
+        "endSha256": "23b3465e8d065ce3655347a9e8a99db2cd25a8550f185b040e59951f6ff99a93"
+      },
+      {
+        "path": "src/components/layout/CatalogGameSetupShell.tsx",
+        "startSha256": "15aaa96b75cf3996deee25121d2098567e4beae6336e0f5132b0ae736cefe038",
+        "endSha256": "8f25a30bf4ee688b06817eac1c085d14a7dc20e897e8a00231c857936b43ba78"
+      },
+      {
+        "path": "src/components/map/CatalogWorldMap.tsx",
+        "startSha256": "1524453f1688ede34edcaa4893355893c6b5f0089c374e5440a9f54beecf1efc",
+        "endSha256": "a3d776a4309418b72289998ad81a5f713fc2a3e6133087048de3588991903c18"
+      },
+      {
+        "path": "src/lib/map/catalog-label-renderer.test.ts",
+        "startSha256": null,
+        "endSha256": "e467b8fa1e024bc0eea139fe89a03fb9c17f2ab453e426a3f0994a096a8f70fe"
+      },
+      {
+        "path": "src/lib/map/catalog-label-renderer.ts",
+        "startSha256": null,
+        "endSha256": "74d823c165774500edefca06b30136b66aa7801bec882481e6a31d236337443e"
+      },
+      {
+        "path": "src/lib/map/catalog-labels.server.test.ts",
+        "startSha256": null,
+        "endSha256": "1e161046d3e278eea400d225940847a137c0365a809bf26f9ddf93c83f0a5897"
+      },
+      {
+        "path": "src/lib/map/catalog-labels.server.ts",
+        "startSha256": null,
+        "endSha256": "a7b391272b29fb27136e65f3b8529be652d0a498117fd070841fdfebbe3567f0"
+      },
+      {
+        "path": "src/lib/map/country-label-border-changes.test.ts",
+        "startSha256": "9af31c698ef71272b8af1fb2fcdd3730a179749d1c475585b6ba7140d5ddb39f",
+        "endSha256": "d6c40b8705d2e0109c7cf304bbd47cc003d14861b61c4dafe1dc1000f6ba2731"
+      },
+      {
+        "path": "src/lib/simulation/catalog-occupation-lifecycle.test.ts",
+        "startSha256": "0691091819b9b7cf27483536e6e77994220867745e753631f59941b289baad59",
+        "endSha256": "021e80253456f310cf369f2e89bf956a39b6f7baf795420f63ca7bc5d46e84ae"
+      },
+      {
+        "path": "src/lib/simulation/catalog-region-integration.test.ts",
+        "startSha256": null,
+        "endSha256": "bf954327e673a4843e134281661fef807f8ee28be96014cb19041db712a421fa"
+      },
+      {
+        "path": "src/lib/simulation/catalog-region.server.ts",
+        "startSha256": null,
+        "endSha256": "f3efe5310f0230497a9242a66274f104f1bb697579831eb81eccb98f5c704820"
+      },
+      {
+        "path": "src/lib/simulation/catalog-region.test.ts",
+        "startSha256": null,
+        "endSha256": "d283743e9a64de447ae3a56dc5e08f1fa82a10018fd711856e03c8bca49a5709"
+      },
+      {
+        "path": "src/lib/simulation/catalog-region.ts",
+        "startSha256": null,
+        "endSha256": "482a93e286c9648ed708a20330b79810f10485b7d0d3a4d94b77a5bf70cb1217"
+      },
+      {
+        "path": "src/lib/simulation/catalog-turn-plan.ts",
+        "startSha256": "82f707fc3fe46287d4ee6fa29f7b20bf653a7e5046fcd4ed0de7e721fee6e3fd",
+        "endSha256": "b167d105cb9229c3f3d6a934f875a803f1932cceb4ae2f668e406d66439c12ff"
+      },
+      {
+        "path": "src/lib/simulation/client/catalog-region-client.ts",
+        "startSha256": null,
+        "endSha256": "5236b0df3c0d8978eecd1989deb7b845edfd9156dc8e902873359a2dcbe3df8a"
+      },
+      {
+        "path": "src/lib/simulation/client/use-catalog-simulation-turn-controller.ts",
+        "startSha256": "97bd4cc68c64b68a0549146d081c8ae02cde5cb3c7503ecdd7171b4624e5f410",
+        "endSha256": "6139ea347731b74689ff137a78945e9e9e2e19fa9fcdd2c0a7f45ac8b6a6d5ee"
+      },
+      {
+        "path": "src/lib/simulation/server/context-resolution-validator.ts",
+        "startSha256": "460af77d63a07a67f111c446b14958a0657c864e4ea88a0552f0934c843b2ed3",
+        "endSha256": "a0197bca843dc2d883be97d13982382fa9ba006923a609c3043c73ea8017092e"
+      },
+      {
+        "path": "src/lib/simulation/server/openai-responses-provider.ts",
+        "startSha256": "ea05eaf4ca67ba7b1c5f32909f671111e11cf38c4fe95e52490bb10fccfc485d",
+        "endSha256": "8e9d1d2e7dc9accf23dda7ab172f4e38ad16357f359b930224878dd5101e1f23"
+      },
+      {
+        "path": "src/lib/simulation/server/production-provider.server.ts",
+        "startSha256": null,
+        "endSha256": "7fc6998e32d9cb763eeff43f0eb3c2a0b6ffa4ac6402d815437bb26fbf990c4f"
+      },
+      {
+        "path": "src/lib/simulation/server/provider-route.test.ts",
+        "startSha256": "d19f2eeb17aa7d99ccc6e566d445b6f93c5ea507a1b33db24d13a6a6c6ee67a5",
+        "endSha256": "9c1b9b21dc021d9367a591b254ce801ccfdf105eafcd853f5aa3d7a1c4b6619c"
+      },
+      {
+        "path": "src/lib/simulation/server/simulation-instruction.ts",
+        "startSha256": "7df1cad59c8cc1c3c35f51dae32da805c759602f2a43ec03a56eb14f652ca12a",
+        "endSha256": "b2d5fb06389005e13f2e6e99f4f7660a3311be77ef0b1d8f1bb6a07a6dbe06a7"
+      },
+      {
+        "path": "src/lib/simulation/server/simulation-tools.ts",
+        "startSha256": "4bc3a8fd1ff7d5035dc9056b37df183160f2fc512bfffaaf5fd93a3d93a6c15e",
+        "endSha256": "26f5d84081070484cd6933dbd0f847fa8e710401a674dda4d6bcea416b745874"
+      },
+      {
+        "path": "src/lib/simulation/simulation-context.ts",
+        "startSha256": "97115071cf1c2c81d46ffafde24bc1c86c187f98b92922b3819fb37ea6743961",
+        "endSha256": "278a7c8c9f5d4df7e6b13b5a6363af10d2e734a20f2bdab258a2e8eb1e0f5e4c"
+      },
+      {
+        "path": "src/lib/simulation/turn-resolution.ts",
+        "startSha256": "88d9f448ac5f997a1102759726acafb0a9135dd4c2c554eb1c957d456bf4b928",
+        "endSha256": "46c80fde0d2d0c473633a972e67f0ef2c76aa21d15b764a61c33e6ac728a0511"
+      },
+      {
+        "path": "src/lib/simulation/world-effect.ts",
+        "startSha256": "758afe54cdd61d2992190f714afe4b0c9909fb53d1333c94119fde0a06429847",
+        "endSha256": "45f1d0c6353ca498773d10015857c3e19913674ead72b8bfa978aa71a74f773b"
+      },
+      {
+        "path": "src/lib/test-only/region-provider.server.ts",
+        "startSha256": null,
+        "endSha256": "50313b5dd04e29775c387f45ad7c4e485391e7f0e28b3932b1592d4c18ae4be8"
+      },
+      {
+        "path": "scripts/approve-prompt14-label-assets.mjs",
+        "startSha256": null,
+        "endSha256": "2f7d2431ebb0fbb6fc708b0b53cf491bfd5dfa06ef4b944edddd765debec4df8"
+      },
+      {
+        "path": "scripts/audit-prompt14-review-g.mjs",
+        "startSha256": null,
+        "endSha256": "577222404a0d000255c89da57ac5fa81aaa575f9490af7a00798b2a84f7a2624"
+      },
+      {
+        "path": "scripts/convert-prompt14-common-e2e.mjs",
+        "startSha256": null,
+        "endSha256": "797fbfb8442867165ba753c3a4e602976a2a15f6989f0e3b07a268cf39e28445"
+      },
+      {
+        "path": "scripts/isolate-prompt14-border-report.mjs",
+        "startSha256": null,
+        "endSha256": "c1e7ce1dd702e7f61818fc89adce507b22b8e5705792cfed66cb8f72ba938eec"
+      },
+      {
+        "path": "scripts/isolate-prompt14-review-g-runner.mjs",
+        "startSha256": null,
+        "endSha256": "2435275a2ff7b4a2ef30c01f6aba5fe571cf60623a0e1f27640b9c21658fb16f"
+      },
+      {
+        "path": "scripts/repair-prompt14-benchmark-output.mjs",
+        "startSha256": null,
+        "endSha256": "5037204fad7dfe11dcb007c02552c098a27252d377bdcce802182579d7ee806d"
+      },
+      {
+        "path": "scripts/repair-prompt14-game-e2e.mjs",
+        "startSha256": null,
+        "endSha256": "297ca338ec810077a771782b02dfa331481f2fe8a34668e159c99a95abadf38a"
+      },
+      {
+        "path": "scripts/repair-prompt14-region-tool-schema.mjs",
+        "startSha256": null,
+        "endSha256": "c25ce8eb37cff7ec7725acb15e84474e090d6fb0deeff4ca9c3a089a825dd6f2"
+      },
+      {
+        "path": "scripts/repair-prompt14-v3-e2e.mjs",
+        "startSha256": null,
+        "endSha256": "a185122562702e21803a46822a703eb92fccca9bcd422ce4c34b537d10a7f8be"
+      },
+      {
+        "path": "scripts/report-prompt14-review-g.mjs",
+        "startSha256": null,
+        "endSha256": "391ec27cf4319a48b1bab17c1da7d3e40f2f410fd192c891b999c439aeb13ab5"
+      },
+      {
+        "path": "scripts/run-playwright-e2e.mjs",
+        "startSha256": "0d05bc9eec16b0b09f2325407af8310409ec6ba73767d1d4343d6b08e10d65a4",
+        "endSha256": "f8edb4237005d4cb6d746d33e0942dcd7818703bb7587a3126e070faa37e3e4a"
+      },
+      {
+        "path": "scripts/smoke-prompt14-country-colors.mjs",
+        "startSha256": "c8c2abd2a3343b7c95cbdc093a25df6ee2bbc081eab94d249ef19af0848db747",
+        "endSha256": "08d8d648878330d53b55aa5fb21595717011e35b2f90ed09ac9d4bd4d5242f04"
+      },
+      {
+        "path": "scripts/validate-border-recomputation.mjs",
+        "startSha256": "fdadefd62efc2278ded1448065d5f086677a802d38fb1be0055b7d797ee0fb95",
+        "endSha256": "449556f0b7c162e357c78d691b7dad0d3767f62ff1d8e9e95e101b987bcc3cd9"
+      },
+      {
+        "path": "scripts/verify-prompt14-review-g.mjs",
+        "startSha256": null,
+        "endSha256": "7c9391c7cf66e3fbd413198a6cacdd2b9499a7978e626026263a8853d7c5a2d6"
+      },
+      {
+        "path": "scripts/wire-prompt14-regions.mjs",
+        "startSha256": null,
+        "endSha256": "ae9a1cc9cf72bdf744390a766102fa27c712f10dd8b198da10cf5e2894b21ea7"
+      },
+      {
+        "path": "e2e/catalog-fixture.ts",
+        "startSha256": null,
+        "endSha256": "7e8f151dc8efe5e379ccbd3e72368032374fde05c42a1c3f8ec1529741ba7a0a"
+      },
+      {
+        "path": "e2e/game-setup.spec.ts",
+        "startSha256": "9810dd08f083c37e6f767c30b2a02f1b6f98ca2bb665b60160752a4c66470eee",
+        "endSha256": "df6f8d839c279d2747fb8765cfd181f06525ee1bdb50589f50ded46ff0fe1e7c"
+      },
+      {
+        "path": "e2e/legacy-fixture.ts",
+        "startSha256": "e7527b59fac86052ef76cd51d56821b76f3f2e306741740b6b08765b33af0227",
+        "endSha256": "bfd7ddcd60c45e4736aff6c175088997bd1c0290834ced7f3fccf2e931ce36d0"
+      },
+      {
+        "path": "e2e/prompt11-10.spec.ts",
+        "startSha256": "91445df283f863e2aa74f0fe594883d70b8fb3fd939525de0373c9b9c059e511",
+        "endSha256": "4de106c3f6b95ddb7623aabb38679efaa6ad9ff6e2d3b1d10e557a4d0cb7ee68"
+      },
+      {
+        "path": "e2e/prompt12-simulation.spec.ts",
+        "startSha256": "732abf5fc8374faf21dabd06d82fd62e43e22862f07317d9d0dfd2c7345f84ea",
+        "endSha256": "6173c194d7ee6d9e48e15962616037e6b85cd950c913b0543de6e1e80f0f3121"
+      },
+      {
+        "path": "e2e/prompt13-integration.spec.ts",
+        "startSha256": "b94bddcdbdabe58d383f9a4eec42e2363f699ae54d3d27d069a5f7bf8075ae45",
+        "endSha256": "613402f69b3d6f8a8688c17398fdc98b72201c2f88af2fffa97168a3f519a43f"
+      },
+      {
+        "path": "e2e/prompt13-shell.spec.ts",
+        "startSha256": "5cbebe188df0e188012a16f236d62573e74000b7b1d724811500abb9231297b3",
+        "endSha256": "2a93d30cb669c76686731db6fa512b9843cf4fa95f8c5983aab3d01d094f7969"
+      },
+      {
+        "path": "e2e/prompt14-benchmark.spec.ts",
+        "startSha256": "3c2161ad33187bf4dc1af077cb0a165ef072488128cbb919eef1c390eaa702c1",
+        "endSha256": "af2f5318aa16dde0fef90b3a9ec1f893df040f37206b2688e503a414689df7b5"
+      },
+      {
+        "path": "e2e/prompt14-catalog.spec.ts",
+        "startSha256": "45a102460669463256b71f32d3e1f51684a3c3642f4b48422855556f5e6270db",
+        "endSha256": "27f1fd468db7f0b14032d0c381f3e568fe04695196e0c6573eb98cb35e183009"
+      },
+      {
+        "path": "e2e/prompt14-review-g.spec.ts",
+        "startSha256": null,
+        "endSha256": "4f688925954e25f17d5cddf4da8715eb48edbd598fd3e2b220a04c83dd2edf80"
+      },
+      {
+        "path": "next.config.ts",
+        "startSha256": "e59405821051b9b9cb7b4f06ac488f034d7667b7ce045dd02b1aa63863268044",
+        "endSha256": "80dbd40e45cb7863287255f789a1fbfe14cd034cc60068f219322238ac0bd66b"
+      },
+      {
+        "path": "eslint.config.mjs",
+        "startSha256": "743f0fa687d45c39ad8821476d685e128fac88c40f29d70f12abe88c1a147642",
+        "endSha256": "35d1412e8043443e503c18ffd53141b0ca8acb60c1a1cee1d00083ce6b432478"
+      },
+      {
+        "path": "data/catalog-consumers/prompt14/catalog-v1-73e30c25c9637d6376cb65afa82483c6/label-approval.json",
+        "startSha256": null,
+        "endSha256": "d826b56ed6ca58421367c4df83276d31570080ef20a843969fb2ebb9029ec9de"
+      }
+    ],
+    "endHashesPath": "reports/prompt14/review-g/end-hashes.json",
+    "checkpointIdentity": {
+      "path": "reports/prompt14/14-20-final-integration.json",
+      "startSha256": "9077b35b10ed7271d379765f10259b86743573f08463c2f8913fecbe867e7f65",
+      "endSha256Reference": {
+        "path": "reports/prompt14/review-g/end-hashes.json",
+        "key": "reports/prompt14/14-20-final-integration.json"
+      }
+    },
+    "commands": [
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T04:51:09.575Z",
+        "finishedAt": "2026-10-06T04:51:17.275Z",
+        "durationMs": 7699,
+        "exitCode": 2,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T04:52:43.962Z",
+        "finishedAt": "2026-10-06T04:52:53.734Z",
+        "durationMs": 9771,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T04:54:36.483Z",
+        "finishedAt": "2026-10-06T04:54:39.329Z",
+        "durationMs": 2845,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T04:54:56.385Z",
+        "finishedAt": "2026-10-06T04:55:07.530Z",
+        "durationMs": 11143,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node scripts/verify-prompt14-catalog-consumer.mjs reports/prompt14/review-g/catalog-audit",
+        "stage": "audit",
+        "startedAt": "2026-10-06T04:57:24.835Z",
+        "finishedAt": "2026-10-06T04:57:30.519Z",
+        "durationMs": 5683,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/audit.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T04:58:02.005Z",
+        "finishedAt": "2026-10-06T04:58:13.989Z",
+        "durationMs": 11982,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node scripts/run-playwright-e2e.mjs e2e/prompt14-review-g.spec.ts --reporter=line,json",
+        "stage": "review",
+        "startedAt": "2026-10-06T04:57:13.728Z",
+        "finishedAt": "2026-10-06T05:00:19.145Z",
+        "durationMs": 185416,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/review.log"
+      },
+      {
+        "command": "node --test scripts/prompt14-source-gate.test.mjs scripts/prompt14-catalog-core.node-test.mjs scripts/prompt14-catalog-topology.node-test.mjs scripts/prompt14-boundary-arrangement.node-test.mjs scripts/prompt14-checkpoint.node-test.mjs",
+        "stage": "sourceTests",
+        "startedAt": "2026-10-06T05:00:46.032Z",
+        "finishedAt": "2026-10-06T05:01:04.362Z",
+        "durationMs": 18329,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/sourceTests.log"
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run --maxWorkers=2 --reporter=json --outputFile=reports/prompt14/review-g/tests.json",
+        "stage": "tests",
+        "startedAt": "2026-10-06T04:55:18.242Z",
+        "finishedAt": "2026-10-06T05:01:47.467Z",
+        "durationMs": 389223,
+        "exitCode": 1,
+        "log": "reports/prompt14/review-g/tests.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T05:01:53.862Z",
+        "finishedAt": "2026-10-06T05:02:02.765Z",
+        "durationMs": 8902,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:02:04.402Z",
+        "finishedAt": "2026-10-06T05:02:19.141Z",
+        "durationMs": 14738,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node node_modules/next/dist/bin/next build",
+        "stage": "build",
+        "startedAt": "2026-10-06T05:04:51.340Z",
+        "finishedAt": "2026-10-06T05:05:49.772Z",
+        "durationMs": 58430,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/build.log"
+      },
+      {
+        "command": "node scripts/audit-prompt14-review-g.mjs",
+        "stage": "sourceAudit",
+        "startedAt": "2026-10-06T05:06:16.085Z",
+        "finishedAt": "2026-10-06T05:06:17.539Z",
+        "durationMs": 1452,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/sourceAudit.log"
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/catalog-region-integration.test.ts src/lib/map/catalog-label-renderer.test.ts src/lib/map/catalog-labels.server.test.ts src/components/layout/CatalogGameSetupShell.test.tsx src/lib/map/country-label-border-changes.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/simulation-context-production.test.ts src/lib/simulation/simulation-contract.test.ts src/lib/simulation/server/provider-route.test.ts --maxWorkers=2 --reporter=json --outputFile=reports/prompt14/review-g/regressions.json",
+        "stage": "regressions",
+        "startedAt": "2026-10-06T05:03:09.650Z",
+        "finishedAt": "2026-10-06T05:06:29.427Z",
+        "durationMs": 199776,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/regressions.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T05:08:50.848Z",
+        "finishedAt": "2026-10-06T05:09:06.291Z",
+        "durationMs": 15442,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:09:02.294Z",
+        "finishedAt": "2026-10-06T05:09:19.456Z",
+        "durationMs": 17161,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node scripts/run-playwright-e2e.mjs --reporter=line,json",
+        "stage": "e2e",
+        "startedAt": "2026-10-06T05:00:34.826Z",
+        "finishedAt": "2026-10-06T05:11:58.139Z",
+        "durationMs": 683311,
+        "exitCode": 1,
+        "log": "reports/prompt14/review-g/e2e.log"
+      },
+      {
+        "command": "node scripts/smoke-prompt14-country-colors.mjs --review-f --output reports/prompt14/review-g/production-color-smoke",
+        "stage": "productionSmoke",
+        "startedAt": "2026-10-06T05:12:50.139Z",
+        "finishedAt": "2026-10-06T05:13:39.359Z",
+        "durationMs": 49219,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/productionSmoke.log"
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/catalog-region.test.ts src/lib/simulation/catalog-region-integration.test.ts src/lib/map/catalog-label-renderer.test.ts src/lib/map/catalog-labels.server.test.ts --maxWorkers=2 --reporter=json --outputFile=reports/prompt14/review-g/focused.json",
+        "stage": "focused",
+        "startedAt": "2026-10-06T05:14:13.362Z",
+        "finishedAt": "2026-10-06T05:14:23.593Z",
+        "durationMs": 10231,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/focused.log"
+      },
+      {
+        "command": "node scripts/run-playwright-e2e.mjs --reporter=line,json",
+        "stage": "e2e",
+        "startedAt": "2026-10-06T05:14:25.094Z",
+        "finishedAt": "2026-10-06T05:14:27.183Z",
+        "durationMs": 2087,
+        "exitCode": 1,
+        "log": "reports/prompt14/review-g/e2e.log"
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run --maxWorkers=2 --reporter=json --outputFile=reports/prompt14/review-g/tests.json",
+        "stage": "tests",
+        "startedAt": "2026-10-06T05:06:27.449Z",
+        "finishedAt": "2026-10-06T05:15:44.612Z",
+        "durationMs": 557162,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/tests.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T05:16:58.394Z",
+        "finishedAt": "2026-10-06T05:17:06.969Z",
+        "durationMs": 8574,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:17:08.230Z",
+        "finishedAt": "2026-10-06T05:17:18.427Z",
+        "durationMs": 10196,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node node_modules/next/dist/bin/next build",
+        "stage": "build",
+        "startedAt": "2026-10-06T05:18:18.269Z",
+        "finishedAt": "2026-10-06T05:18:52.930Z",
+        "durationMs": 34659,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/build.log"
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/catalog-region.test.ts src/lib/simulation/catalog-region-integration.test.ts src/lib/map/catalog-label-renderer.test.ts src/lib/map/catalog-labels.server.test.ts --maxWorkers=2 --reporter=json --outputFile=reports/prompt14/review-g/focused.json",
+        "stage": "focused",
+        "startedAt": "2026-10-06T05:20:03.370Z",
+        "finishedAt": "2026-10-06T05:20:09.705Z",
+        "durationMs": 6334,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/focused.log"
+      },
+      {
+        "command": "node scripts/audit-prompt14-review-g.mjs",
+        "stage": "sourceAudit",
+        "startedAt": "2026-10-06T05:20:10.870Z",
+        "finishedAt": "2026-10-06T05:20:11.082Z",
+        "durationMs": 211,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/sourceAudit.log"
+      },
+      {
+        "command": "node scripts/run-playwright-e2e.mjs e2e/prompt14-review-g.spec.ts --reporter=line,json",
+        "stage": "review",
+        "startedAt": "2026-10-06T05:19:52.125Z",
+        "finishedAt": "2026-10-06T05:22:31.357Z",
+        "durationMs": 159231,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/review.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T05:23:38.079Z",
+        "finishedAt": "2026-10-06T05:23:41.434Z",
+        "durationMs": 3354,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:23:42.746Z",
+        "finishedAt": "2026-10-06T05:23:57.908Z",
+        "durationMs": 15161,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node scripts/audit-prompt14-review-g.mjs",
+        "stage": "sourceAudit",
+        "startedAt": "2026-10-06T05:24:09.361Z",
+        "finishedAt": "2026-10-06T05:24:09.643Z",
+        "durationMs": 281,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/sourceAudit.log"
+      },
+      {
+        "command": "node scripts/smoke-prompt14-country-colors.mjs --review-f --output reports/prompt14/review-g/production-color-smoke",
+        "stage": "productionSmoke",
+        "startedAt": "2026-10-06T05:25:44.985Z",
+        "finishedAt": "2026-10-06T05:26:32.725Z",
+        "durationMs": 47739,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/productionSmoke.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:26:56.654Z",
+        "finishedAt": "2026-10-06T05:27:12.731Z",
+        "durationMs": 16076,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run --maxWorkers=2 --reporter=json --outputFile=reports/prompt14/review-g/tests.json",
+        "stage": "tests",
+        "startedAt": "2026-10-06T05:20:41.227Z",
+        "finishedAt": "2026-10-06T05:28:28.620Z",
+        "durationMs": 467391,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/tests.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:30:17.811Z",
+        "finishedAt": "2026-10-06T05:30:30.419Z",
+        "durationMs": 12607,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:31:59.195Z",
+        "finishedAt": "2026-10-06T05:32:11.995Z",
+        "durationMs": 12799,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node scripts/run-playwright-e2e.mjs --reporter=line,json",
+        "stage": "e2e",
+        "startedAt": "2026-10-06T05:23:20.984Z",
+        "finishedAt": "2026-10-06T05:33:38.253Z",
+        "durationMs": 617268,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/e2e.log"
+      },
+      {
+        "command": "node node_modules/eslint/bin/eslint.js . --format=json --output-file reports/prompt14/review-g/lint.json",
+        "stage": "lint",
+        "startedAt": "2026-10-06T05:33:27.461Z",
+        "finishedAt": "2026-10-06T05:33:38.957Z",
+        "durationMs": 11495,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/lint.log"
+      },
+      {
+        "command": "node node_modules/typescript/bin/tsc --noEmit",
+        "stage": "typecheck",
+        "startedAt": "2026-10-06T05:33:38.720Z",
+        "finishedAt": "2026-10-06T05:33:41.074Z",
+        "durationMs": 2353,
+        "exitCode": 0,
+        "log": "reports/prompt14/review-g/typecheck.log"
+      }
+    ],
+    "interruptedFirstCommonRun": {
+      "exitCode": null,
+      "status": "cancelled, not pass",
+      "reason": "Known label seed reference comparison failure and unconverted V2 source APIs; replaced by full suite after remediation."
+    },
+    "firstUnitFailure": {
+      "path": "reports/prompt14/review-g/tests-first-failed.json",
+      "status": "fail",
+      "correctedBy": "regressions and latest full tests; not counted as pass"
+    },
+    "verificationHistory": {
+      "firstFullE2E": {
+        "path": "reports/prompt14/review-g/history/first-e2e/e2e.json",
+        "status": "fail",
+        "reason": "27 passed, one failed: obsolete V2 subdivision count; corrected against the approved V3 index."
+      },
+      "interruptedSecondFullE2E": {
+        "status": "cancelled, not pass",
+        "exitCode": null,
+        "reason": "Stopped after discovering that string glyph IDs were not bound to MapLibre rendered feature state. Fixed with a stable promoted source ID and rerun."
+      },
+      "firstColorSmoke": {
+        "path": "reports/prompt14/review-g/history/first-color-smoke/evidence.json",
+        "status": "insufficient for glyph paint validation",
+        "reproduction": "reports/prompt14/review-g/history/first-color-smoke/AUT-FFFFFF-before-promote.png",
+        "reason": "Cached state assertions passed while actual glyph paint did not receive contrast state. Current smoke additionally checks native rendered IDs and state."
+      }
+    },
+    "unit": {
+      "total": 1355,
+      "passed": 1354,
+      "failed": 0,
+      "skipped": 1,
+      "skipPolicy": "Unchanged catalog generation/migration deliberately not rerun. Three archived-browser contract assertions validate prior captures, not fresh browser behavior."
+    },
+    "regressions": {
+      "total": 55,
+      "passed": 55,
+      "failed": 0
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "e2eStats": {
+      "startTime": "2026-10-06T05:24:18.226Z",
+      "duration": 559932.5530000001,
+      "expected": 28,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "v3Tests": [
+      {
+        "file": "game-setup.spec.ts",
+        "title": "searches and resets the player country on reload",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 9873,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "preserves canonical playable countries and removes technical map units",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 8216,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "uses feature minZoom for point labels and crosses world copies by mouse drag",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 23602,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "renders geometry labels and preserves Point fallback",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 22619,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "desktop layout 1280x720",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 2358,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "desktop layout 1920x1080",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 2293,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "desktop layout 2560x1440",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 2305,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt11-10.spec.ts",
+        "title": "V3 catalog source, selection, focus, and revision agree",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 2751,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt12-simulation.spec.ts",
+        "title": "queues, adjudicates, unifies, links the report, undoes, and stops atomically",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 10014,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt12-simulation.spec.ts",
+        "title": "sends production CHN and USA subdivision summaries and resets the player lifecycle",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 8995,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt13-integration.spec.ts",
+        "title": "13-29 through 13-33 deterministic integration 1280x720",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 34568,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt13-integration.spec.ts",
+        "title": "13-29 through 13-33 deterministic integration 1920x1080",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 51787,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt13-shell.spec.ts",
+        "title": "13-13 full-screen game shell 1280x720",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 4849,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt13-shell.spec.ts",
+        "title": "13-13 full-screen game shell 1920x1080",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 5064,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt14-catalog.spec.ts",
+        "title": "catalog production selection, map interaction, turn/news/major event, history and fresh reload",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 8412,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt14-catalog.spec.ts",
+        "title": "catalog rejects GPT coordinates/polygons and production debug without atomic publication",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 8517,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt14-review-g.spec.ts",
+        "title": "V3 named region lookup, provider tools, server validation, planner and atomic partial occupation",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 8275,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "prompt14-review-g.spec.ts",
+        "title": "V3 glyph fill and outline, shape size at zooms, world wrap and small-country fallback",
+        "runtime": "production World V3 / Simulation V2; no legacy cookie",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 71724,
+            "errors": []
+          }
+        ]
+      }
+    ],
+    "legacyOnlyTests": [
+      {
+        "file": "fix08-12.spec.ts",
+        "title": "8-12 captures fixed-camera representative typography",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 49106,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "fix08-5.spec.ts",
+        "title": "8-5 geometry renderer integration",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 11675,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "fix08-6.spec.ts",
+        "title": "8-6 reports projected polygon bounds and settled render state",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 13409,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "fix08-7.spec.ts",
+        "title": "8-7 representative zoom continuity",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 38979,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "fix08-aus-diag.spec.ts",
+        "title": "AUS zoom diagnostics",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 19227,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "renders dynamic labels, global Admin 1, high-resolution interaction, and world copies",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 15077,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "dissolved seams select parents and do not render border layers",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 18366,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "splits China, merges 31 countries, and rolls back atomically",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 35012,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "file": "game-setup.spec.ts",
+        "title": "splits the USA into 50 state countries, merges them, and rolls back atomically",
+        "runtime": "historical World V2 geometry/source regression only; excluded from V3 evidence",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 31384,
+            "errors": []
+          }
+        ]
+      }
+    ],
+    "comparisonTests": [
+      {
+        "file": "prompt14-benchmark.spec.ts",
+        "title": "reference machine legacy/catalog camera benchmark and bounded catalog caches",
+        "runtime": "comparison only: historical V2 camera baseline and production World V3 / Simulation V2",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration": 39328,
+            "errors": []
+          }
+        ]
+      }
+    ],
+    "otherTests": [],
+    "performance": {
+      "status": "pass",
+      "environment": {
+        "platform": "win32",
+        "cpu": "11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz",
+        "browser": "154.0.8037.95",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "buildMode": "Next production E2E build, single worker; isolated legacy fixture vs default V3",
+        "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6"
+      },
+      "measurements": [
+        {
+          "mode": "legacy",
+          "loadMs": 7241.353899999987,
+          "coldHeap": {
+            "usedSize": 185805536,
+            "totalSize": 190115840,
+            "embedderHeapUsedSize": 1217528,
+            "backingStorageSize": 17910097
+          },
+          "warmHeap": {
+            "usedSize": 321126432,
+            "totalSize": 324595712,
+            "embedderHeapUsedSize": 1360768,
+            "backingStorageSize": 47088998
+          },
+          "warmupMs": 7945.159600000014,
+          "samples": [
+            {
+              "durationMs": 5626,
+              "frames": 78,
+              "frameTimeP50": 16.699999999254942,
+              "frameTimeP95": 693.6000000014901,
+              "maxFrameMs": 1543.300000000745,
+              "fps": 13.864201919658727,
+              "worldSerializations": 0
+            },
+            {
+              "durationMs": 1555.7000000029802,
+              "frames": 94,
+              "frameTimeP50": 16.600000001490116,
+              "frameTimeP95": 19,
+              "maxFrameMs": 38.30000000074506,
+              "fps": 60.42296072495978,
+              "worldSerializations": 0
+            },
+            {
+              "durationMs": 1567.8999999985099,
+              "frames": 95,
+              "frameTimeP50": 16.600000001490116,
+              "frameTimeP95": 17.899999998509884,
+              "maxFrameMs": 22.699999999254942,
+              "fps": 60.59059889029293,
+              "worldSerializations": 0
+            }
+          ],
+          "heap": [
+            {
+              "usedSize": 320778304,
+              "totalSize": 323547136,
+              "embedderHeapUsedSize": 1291432,
+              "backingStorageSize": 47127589
+            },
+            {
+              "usedSize": 321305020,
+              "totalSize": 323284992,
+              "embedderHeapUsedSize": 1291744,
+              "backingStorageSize": 48164185
+            },
+            {
+              "usedSize": 321474028,
+              "totalSize": 323547136,
+              "embedderHeapUsedSize": 1288888,
+              "backingStorageSize": 49239500
+            }
+          ],
+          "browserErrors": []
+        },
+        {
+          "mode": "catalog",
+          "loadMs": 1620.9549000000115,
+          "coldHeap": {
+            "usedSize": 30696796,
+            "totalSize": 31825920,
+            "embedderHeapUsedSize": 1691208,
+            "backingStorageSize": 30294689
+          },
+          "warmHeap": {
+            "usedSize": 32773880,
+            "totalSize": 36020224,
+            "embedderHeapUsedSize": 1937392,
+            "backingStorageSize": 73157555
+          },
+          "warmupMs": 3871.9372999999905,
+          "samples": [
+            {
+              "durationMs": 1803.800000000745,
+              "frames": 32,
+              "frameTimeP50": 16.599999997764826,
+              "frameTimeP95": 383.70000000298023,
+              "maxFrameMs": 474.5,
+              "fps": 17.739342535631927,
+              "worldSerializations": 0,
+              "before": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              },
+              "after": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              }
+            },
+            {
+              "durationMs": 1777.8999999985099,
+              "frames": 31,
+              "frameTimeP50": 16.5,
+              "frameTimeP95": 374.69999999925494,
+              "maxFrameMs": 476.6000000014901,
+              "fps": 17.43630125430338,
+              "worldSerializations": 0,
+              "before": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              },
+              "after": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              }
+            },
+            {
+              "durationMs": 1821.6000000014901,
+              "frames": 23,
+              "frameTimeP50": 16.599999997764826,
+              "frameTimeP95": 414.30000000074506,
+              "maxFrameMs": 490.9000000022352,
+              "fps": 12.626262626252299,
+              "worldSerializations": 0,
+              "before": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              },
+              "after": {
+                "worldSchema": 3,
+                "simulationSchema": 2,
+                "date": "2020-01-01",
+                "worldRevision": 0,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                  "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                  "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                  "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                  "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+                },
+                "pairNotifications": 0,
+                "simulationRevision": 0,
+                "playerCountryId": "KOR",
+                "uiPlayerCountryId": null,
+                "canUndo": false,
+                "canRedo": false,
+                "authorityOrder": [],
+                "eventCount": 0,
+                "projectionBuilds": 1,
+                "fullProjectionBuilds": 1,
+                "colorProjectionUpdates": 0,
+                "fullBuilds": 1,
+                "countryRebuilds": 247,
+                "territoryRebuilds": 4231,
+                "territoryUpdates": 0,
+                "edgeUpdates": 14918,
+                "indexedEdges": 14918,
+                "labelLayoutRequests": 0,
+                "labelCountryUpdates": 0,
+                "labelFailures": [],
+                "verifiedRequests": 31,
+                "cacheHits": 3,
+                "cachedTiles": 26,
+                "cachedBytes": 8002678
+              }
+            }
+          ],
+          "heap": [
+            {
+              "usedSize": 32913972,
+              "totalSize": 34185216,
+              "embedderHeapUsedSize": 1832256,
+              "backingStorageSize": 73338828
+            },
+            {
+              "usedSize": 33075892,
+              "totalSize": 34447360,
+              "embedderHeapUsedSize": 1809696,
+              "backingStorageSize": 73520101
+            },
+            {
+              "usedSize": 33143644,
+              "totalSize": 34447360,
+              "embedderHeapUsedSize": 1874376,
+              "backingStorageSize": 73600341
+            }
+          ],
+          "updates": {
+            "target": "GBR",
+            "occupiedTerritories": 234,
+            "occupationMs": 154.92320000001928,
+            "colorMs": 134.30520000000251,
+            "before": {
+              "worldSchema": 3,
+              "simulationSchema": 2,
+              "date": "2020-01-02",
+              "worldRevision": 0,
+              "catalogRef": {
+                "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+              },
+              "pairNotifications": 1,
+              "simulationRevision": 1,
+              "playerCountryId": "RUS",
+              "uiPlayerCountryId": "RUS",
+              "canUndo": true,
+              "canRedo": false,
+              "authorityOrder": [],
+              "eventCount": 1,
+              "projectionBuilds": 1,
+              "fullProjectionBuilds": 1,
+              "colorProjectionUpdates": 0,
+              "fullBuilds": 1,
+              "countryRebuilds": 247,
+              "territoryRebuilds": 4231,
+              "territoryUpdates": 0,
+              "edgeUpdates": 13546,
+              "indexedEdges": 13546,
+              "labelLayoutRequests": 0,
+              "labelCountryUpdates": 0,
+              "labelFailures": [],
+              "verifiedRequests": 11,
+              "cacheHits": 0,
+              "cachedTiles": 4,
+              "cachedBytes": 2719824
+            },
+            "after": {
+              "worldSchema": 3,
+              "simulationSchema": 2,
+              "date": "2020-01-04",
+              "worldRevision": 2,
+              "catalogRef": {
+                "catalogVersion": "catalog-v1-73e30c25c9637d6376cb65afa82483c6",
+                "geometryRoot": "515e0763a41374a188a464e58f82e74cadd37843efa54221d0da6e256cb9f550",
+                "topologyRoot": "84e48ce05355573bd4a52edf108288143376d903551a587c05f86246cc53af42",
+                "renderArtifactRoot": "c3b023509022be5887efc35350c20876945e3bd4c28ea3744d850a0a40591d2b",
+                "manifestPath": "/data/territory-catalog/catalog-v1-73e30c25c9637d6376cb65afa82483c6/manifest.json"
+              },
+              "pairNotifications": 4,
+              "simulationRevision": 3,
+              "playerCountryId": "RUS",
+              "uiPlayerCountryId": "RUS",
+              "canUndo": true,
+              "canRedo": false,
+              "authorityOrder": [
+                "tca:benchmark"
+              ],
+              "eventCount": 5,
+              "projectionBuilds": 1,
+              "fullProjectionBuilds": 1,
+              "colorProjectionUpdates": 1,
+              "fullBuilds": 1,
+              "countryRebuilds": 247,
+              "territoryRebuilds": 4465,
+              "territoryUpdates": 554,
+              "edgeUpdates": 13559,
+              "indexedEdges": 13546,
+              "labelLayoutRequests": 0,
+              "labelCountryUpdates": 0,
+              "labelFailures": [],
+              "verifiedRequests": 11,
+              "cacheHits": 0,
+              "cachedTiles": 4,
+              "cachedBytes": 2719824
+            },
+            "featureStateCalls": 574,
+            "wholeSourceSetData": 0,
+            "sourceUpdateData": 0
+          },
+          "browserErrors": []
+        }
+      ],
+      "interpretation": "Frame-time and FPS are reference-machine observations, not universal acceptance thresholds. 5-second frames and unbounded retained growth are structural failures."
+    },
+    "providerFixtureBoundary": {
+      "region": "Actual production route, Responses tool loop, approved server index, server validator, HTTP client receipt, local planner and atomic runtime. Only provider transport responses replaced through explicit E2E build alias.",
+      "commonUi": "Existing browser NDJSON fixtures replace the turn endpoint and bypass provider/server validation; UI/local planner/atomic runtime and label endpoint remain actual. These do not establish resolver/server coverage.",
+      "productionColorSmoke": "Ordinary production build, real UI and local atomic runtime; turn endpoint is a deterministic browser fixture. This alone is not server validation evidence."
+    },
+    "visualInspection": {
+      "inspected": [
+        "review-g-AUS-z2.8.png",
+        "review-g-RUS-z1.8.png"
+      ],
+      "directory": "reports/prompt14/review-g/screenshots/v3",
+      "productionWhiteCountry": {
+        "path": "reports/prompt14/review-g/production-color-smoke/AUT-FFFFFF.png",
+        "inspectedAt": "2026-10-06T05:26:50Z",
+        "result": "Actual ordinary production screenshot shows dark Austria glyphs on white territories; native rendered feature IDs and contrast state also asserted by smoke."
+      },
+      "result": "Actual V3 screenshots show existing curved glyph geometry, white fill and contrasting outline. All four representative countries also asserted actual rendered fill/outline at two zooms."
+    },
+    "sourceAudit": "reports/prompt14/review-g/source-label-audit.json",
+    "catalogGeneration": {
+      "rerun": false,
+      "reason": "Approved catalog/source/policy/tool/artifact identities unchanged."
+    }
+  },
+  "findings": {
+    "regionResolver": {
+      "status": "resolved",
+      "implementation": "Full approved server Admin 1 index with canonical version/root-bound references; bounded ambiguity, region/operation/request cap checks, exact reference membership, authority validation and original source classification survive ownership changes."
+    },
+    "labels": {
+      "status": "resolved",
+      "implementation": "Approved exact seed glyphs + bounded server affected-country layout using existing font/layout/typography; stable promoted native feature IDs for actual contrast paint; incremental updateData; exact seed restoration on undo; zero layout for controller/color/camera."
+    },
+    "commonE2E": {
+      "status": "resolved",
+      "implementation": "Common actions use schema-asserting V3 fixture without legacy cookie. Historical source/geometry and comparative camera benchmark remain explicitly isolated."
+    }
+  },
+  "hardGate": {
+    "pass": true,
+    "checks": {
+      "regressions": true,
+      "focused": true,
+      "tests": true,
+      "typecheck": true,
+      "lint": true,
+      "build": true,
+      "e2e": true,
+      "review": true,
+      "audit": true,
+      "sourceAudit": true,
+      "sourceTests": true,
+      "productionSmoke": true,
+      "lintNoErrors": true,
+      "performance": true,
+      "unitNoFailures": true,
+      "e2eNoFailures": true,
+      "runtimeAnnotations": true
+    }
+  },
+  "remainingLimitations": [
+    "Live paid GPT responses not exercised; deterministic provider fixtures are explicitly identified.",
+    "Changed-country geometry/layout work is server-side and cached (32 entries); expensive union/layout remains synchronous and is outside camera callbacks.",
+    "Camera frame-time/FPS figures are reference-machine observations; passing structural gates is not a 60 FPS guarantee.",
+    "Region references identify original source classification, while the full local state remains the definitive current owner/controller validator. A clipped authority scope cannot authorize omitted territories.",
+    "Unchanged high-cost catalog generation is retained from approval; its skipped test is not a new production pass."
+  ]
+}

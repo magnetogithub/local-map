@@ -1,0 +1,64 @@
+{
+  "stage": "10-13",
+  "status": "pass",
+  "objective": "Finalize ownerCountryId as the sole effective-control representation and reject multiple-owner or overlapping control inputs.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-12-territory-owner-reference.json": "45a889fad6bfb6aa9c2677611d94c6bbb7ab62b7fd4a261da48ebdd3c868bebb"
+  },
+  "outputHashes": {
+    "src/lib/world/territory-control-invariant.ts": "88cd6aef5e41a1a63ca5b55f13d724e8f1341fc763acb1bce3e880a44592c435",
+    "src/lib/world/territory-control-invariant.test.ts": "739e0e1679441563caa442d34fe6b542098178a1c33a587384fdb4d9eca7797f",
+    "src/lib/world/territory-entity.ts": "d52fe15a0a441c91975c14e04a5619c08ea3fbc7682ba17a827ff149c8a0b465"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-13-single-effective-control.json",
+    "src/lib/world/territory-control-invariant.test.ts",
+    "src/lib/world/territory-control-invariant.ts",
+    "src/lib/world/territory-entity.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-12 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add single effective-control targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-control-invariant.test.ts", "exitCode": 1, "note": "Expected red test: territory-control-invariant module did not exist."},
+    {"command": "Implement ownerCountryId-only control validation and integrate it into TerritoryEntity creation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-control-invariant.test.ts src/lib/world/territory-owner-invariants.test.ts src/lib/world/territory-entity.test.ts src/lib/world/territory-id.test.ts src/lib/world/country-id.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/territory-control-invariant.ts src/lib/world/territory-control-invariant.test.ts src/lib/world/territory-entity.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "effectiveOwnerFields": 1,
+    "multipleOwnerInputsAccepted": 0,
+    "overlappingRootControlFieldsAccepted": 0,
+    "overlappingPropertiesControlFieldsAccepted": 0,
+    "targetedTestFilesPassed": 5,
+    "targetedTestsPassed": 60,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 2,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "ownerCountryIdSoleEffectiveOwnerField": true,
+    "ownerCountryIdScalarOrNull": true,
+    "multipleOwnerArrayRejected": true,
+    "overlappingControlFieldsRejected": true,
+    "propertiesControlDuplicationRejected": true,
+    "territoryFactoryRunsControlValidator": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-14"
+}

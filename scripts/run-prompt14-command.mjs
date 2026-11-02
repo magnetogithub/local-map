@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
+const [log,executable,...args]=process.argv.slice(2);
+if(!log||!executable)throw new Error('Usage: node run-prompt14-command.mjs <log.json> <executable> <args...>');
+const result=spawnSync(executable,args,{encoding:'utf8',maxBuffer:64*1024*1024});
+const prior=fs.existsSync(log)?JSON.parse(fs.readFileSync(log,'utf8')):[];
+prior.push({command:[executable,...args].join(' '),exitCode:result.status??1,stdout:(result.stdout??'').slice(-12000),stderr:(result.stderr??'').slice(-12000),error:result.error?.message??null});
+fs.mkdirSync(path.dirname(log),{recursive:true});fs.writeFileSync(log,JSON.stringify(prior,null,2)+'\n');
+process.stdout.write(result.stdout??'');process.stderr.write(result.stderr??'');process.exitCode=result.status??1;

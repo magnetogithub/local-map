@@ -1,0 +1,63 @@
+{
+  "dateKst": "2026-10-29",
+  "scope": "Analysis only. No application source, Prompt18, catalog artifact, or provider was changed by this investigation. No external AI was called.",
+  "deliveryRoot": "data/derived/prompt15/15-21-world-delivery-v1-56fc6c79c216e6bd1a11",
+  "finding": "Low-zoom overview tile generation independently simplifies/culls operational cell polygons and leaves uncovered land. This defect was reproduced from the admitted exact MNG geometry and actual PBF files.",
+  "screenshotLimit": "The supplied screenshot's exact camera, loaded tile zooms and session history were not captured. The data defect is established; parent-tile fallback and the reason CHN appears more complete remain conditional explanations for this particular frame.",
+  "reproduction": {
+    "script": ".tmp/map-separation-20261029/probe-overview.mjs",
+    "result": ".tmp/map-separation-20261029/probe-result.json",
+    "country": "MNG",
+    "exactCellCount": 11191,
+    "zoom1ActualPbfCellCount": 532,
+    "zoom1RebuiltTolerance3CellCount": 532,
+    "zoom1RebuiltTolerance3IdsIdenticalToActual": true,
+    "zoom1RebuiltTolerance0CellCount": 10842,
+    "zoom2ActualPbfCellCount": 10156,
+    "zoom3ActualPbfCellCount": 10673,
+    "interiorSamples": 10,
+    "samplesCoveredByExactSource": 10,
+    "samplesAbsentFromZoom1Pbf": 8,
+    "samplesAbsentFromZoom2Or3Pbf": 0,
+    "example": {"longitude": 102, "latitude": 46, "exactSourceContains": true, "zoom1Contains": false, "zoom2Contains": true, "zoom3Contains": true}
+  },
+  "countryCensus": [
+    {"country": "MNG", "exactCells": 11191, "zoom1Cells": 532},
+    {"country": "KAZ", "exactCells": 16177, "zoom1Cells": 1872},
+    {"country": "RUS", "exactCells": 93438, "zoom1Cells": 59530},
+    {"country": "CHN", "exactCells": 50142, "zoom1Cells": 7198}
+  ],
+  "mechanism": [
+    "POLICY uses geojson-vt tolerance 3 and extent 4096. Each cell polygon is an independent feature.",
+    "geojson-vt removes sub-threshold rings and simplifies vertices; the project additionally removes degenerate tile polygons.",
+    "Neighbor cells do not expand to cover a removed cell, so source land becomes an empty region in the overview PBF.",
+    "The map has a sea-colored background and no coverage-preserving country underlay in this rendering path, so empty regions show sea color.",
+    "Missing feature-state alone uses a gray fill fallback and does not explain the sea-colored holes.",
+    "MapLibre can retain loaded parent tiles while desired child tiles are unavailable. This can enlarge low-zoom defects during delayed loading, but occurrence in the supplied frame is unverified."
+  ],
+  "verificationGap": "Generation and verification accumulate surviving cell IDs across all zooms. A cell appearing at a higher zoom satisfies that aggregate coverage check even when lower zooms omit it. Per-zoom land coverage is not established by the current check.",
+  "sourceReferences": [
+    "scripts/prompt15-world-delivery-core.mjs:17",
+    "scripts/prompt15-world-delivery-core.mjs:85",
+    "scripts/prompt15-world-delivery.mjs:40",
+    "scripts/prompt15-world-delivery.mjs:53",
+    "scripts/prompt15-world-delivery.mjs:116",
+    "scripts/verify-prompt15-world-delivery.mjs:80",
+    "node_modules/geojson-vt/src/tile.js:114",
+    "node_modules/maplibre-gl/src/source/source_cache.ts:678",
+    "src/lib/map/operational-map-consumer.ts",
+    "src/components/map/OperationalWorldMap.tsx"
+  ],
+  "recommendedFix": {
+    "preferred": "Use coverage-preserving country/land overview geometry at low zoom, plus authoritative exact overlays for changed ownership/control and detail. Preserve runtime ownership/control semantics and avoid loading the whole world's exact cells.",
+    "alternative": "Use shared-boundary, coverage-preserving mesh simplification and explicit tiny-face handling instead of deleting independent land cells.",
+    "avoidAsFinalFix": "Setting tolerance to zero alone: it retains substantially more work, can worsen the performance problem, and still does not preserve every cell after quantization/degeneracy filtering.",
+    "validation": [
+      "Compare land coverage at each supported zoom against the pinned reference with documented geometric tolerances, not merely an all-zoom ID union.",
+      "Check low zoom, zoom transitions, delayed tile loads, country selection and detail replacement.",
+      "Check authoritative ownership/control updates and undo/redo over the overview underlay.",
+      "Measure performance alongside correctness using the existing scripted provider."
+    ],
+    "relationshipToPlannedWork": "This belongs with the Prompt18 rendering/performance design and its regression checks. Replacing KOR/PRK natural subdivision boundaries later does not repair the worldwide overview culling defect. No prompt or implementation was modified here."
+  }
+}

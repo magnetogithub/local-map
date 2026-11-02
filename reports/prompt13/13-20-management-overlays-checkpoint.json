@@ -1,0 +1,51 @@
+{
+  "stage": "13-20",
+  "status": "pass",
+  "summary": "13-16, 13-17, 13-19 보완 사항과 13-20 loading/empty/populated fixture matrix를 현재 작업 트리에서 재검증했다.",
+  "countryProjection": {
+    "path": "current WorldState → CountryCapitalProjection/CountryPanelProjection → Zustand session store → createCountryViewProjection → CountryOverlay",
+    "fields": ["capitalKo", "capitalEn", "region"],
+    "unavailable": "empty, whitespace and ?? values become null and render as 데이터 연결 예정",
+    "revisionSafety": "projection appliedRevision must match world.revision; inactive target throws and overlay reducer reconciles retired IDs"
+  },
+  "diplomacy": {
+    "states": ["disconnected", "connecting", "ready", "sending", "error"],
+    "transcript": "test-only populated fixture covers player, foreign and system roles plus ISO time dateTime; production remains empty",
+    "sendBoundary": "ready + canSend + counterpart + non-empty draft + optional handler is required; request and AbortSignal are verified",
+    "productionPort": null,
+    "fakeResponse": false
+  },
+  "relationships": "direction labels and -100/0/100/null meter behavior are covered; invalid boundaries are rejected by the contract.",
+  "motion": {
+    "internalSetting": "data-reduce-motion CSS removes panel/tooltip animation and tooltip transition immediately",
+    "operatingSystem": "prefers-reduced-motion: reduce remains active"
+  },
+  "mapSettingsEvidence": "map-ui-settings-adapter.test.ts verifies exact setLayoutProperty and setPaintProperty calls and asserts setData is never called.",
+  "productionFixtureEvidence": "populated politics, economy, relationship, diplomacy transcript and war data are declared inside *.test.ts(x) files only. Production projections retain unavailable/null/empty domain values.",
+  "fixtureMatrix": {
+    "politics": ["loading", "unavailable/empty", "populated test fixture"],
+    "economy": ["loading", "unavailable/empty", "populated event fixture"],
+    "country": ["player", "foreign", "capital/region available", "capital/region unavailable", "relationship unavailable", "relationship populated"],
+    "diplomacy": ["no target", "disconnected", "connecting", "ready", "sending", "error", "empty transcript", "populated transcript", "local draft", "optional send boundary"],
+    "wars": ["loading", "production-equivalent empty", "populated injected fixture", "local view-layer toggle"],
+    "save": ["backend-pending", "not-saved after click", "no success wording", "no browser persistence"],
+    "settings": ["controlled checkbox", "label/marker/border layer updates", "internal reduced motion", "no browser persistence"]
+  },
+  "commands": [
+    {"command": "npx.cmd tsc --noEmit", "exitCode": 0},
+    {"command": "npx.cmd eslint src/components/game src/components/map/WorldMap.tsx src/lib/game-ui", "exitCode": 0},
+    {"command": "npx.cmd vitest run src/components/game/CountryManagementOverlays.test.tsx src/components/game/DiplomacyOverlays.test.tsx src/components/game/WarAndSystemOverlays.test.tsx src/lib/game-ui/country-management-projection.test.ts src/lib/game-ui/country-view-projection.test.ts src/lib/game-ui/war-view-projection.test.ts src/lib/game-ui/contracts.test.ts src/lib/game-ui/overlay-reducer.test.ts src/components/game/GameChrome.test.tsx src/lib/game-ui/map-ui-settings-adapter.test.ts", "exitCode": 0, "testFiles": 10, "tests": 60},
+    {"command": "npm.cmd run build", "exitCode": 0, "result": "Next.js production build passed; / and /game statically prerendered, /api/simulation/turn remains dynamic."}
+  ],
+  "regressions": [
+    "full-screen map, HUD and single overlay reducer unchanged",
+    "shared simulation turn controller and Prompt 10-12 runtime unchanged",
+    "incremental map source update path unchanged",
+    "no fake war, military, relationship, diplomacy response or save success data introduced"
+  ],
+  "knownLimitations": [
+    "정치·경제·관계·전쟁·외교·저장 backend/domain은 후속 typed port 연결이 필요하다.",
+    "Vite는 기존 CommonJS configLoader migration warning을 출력하지만 10개 파일 60개 테스트는 통과한다."
+  ],
+  "nextStage": "13-21"
+}

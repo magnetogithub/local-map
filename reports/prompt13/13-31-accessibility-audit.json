@@ -1,0 +1,12 @@
+{
+  "stage": "13-31",
+  "status": "pass",
+  "summary": "keyboard navigation, accessible names, management/modal focus containment and restoration, live announcements, reduced motion, and semantic contrast were audited.",
+  "filesChanged": ["src/components/game/GamePanel.tsx", "src/components/game/GameChrome.test.tsx", "src/components/game/MapCountryPicker.tsx", "src/app/globals.css"],
+  "commands": [{"command": "npx vitest run src/components/game/GameChrome.test.tsx src/components/game/MapCountryPicker.test.tsx src/components/game/NewsAndMajorEvents.test.tsx", "exitCode": 0, "evidence": "keyboard flow and both focus traps passed"}],
+  "screenshots": [],
+  "tests": ["menu Enter activation", "native keyboard country selection", "panel Tab loop and focus restore", "modal Tab loop/Escape policy/focus restore", "aria-live/aria-atomic", "reduced motion CSS"],
+  "contrastRatios": {"primaryTextOnSurface": 14.56, "mutedTextOnSurface": 4.88, "accentTextOnSelected": 8.5, "danger": 8.15, "success": 6.09, "warning": 5.96, "tooltip": 13.46},
+  "knownLimitations": [],
+  "nextStage": "13-32"
+}

@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "prompt19-country-branch-handoff-v1",
+  "stage": "19-02A",
+  "owner": "A",
+  "countryId": "KOR",
+  "date": "2026-10-29",
+  "status": "incomplete-candidate-generation-needs-coordinator-fix",
+  "sourcePreparation": "complete",
+  "countryCandidateReady": false,
+  "source": {
+    "boundaryId": "KOR-ADM3-71637012",
+    "level": "ADM3",
+    "representedYear": "2018",
+    "upstreamSource": "Justin Meyers, KoStat",
+    "units": 3504,
+    "components": 4767,
+    "holes": 10,
+    "vertices": 777212,
+    "rawGeometry": {
+      "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/source.geojson",
+      "sha256": "689809545ead8bac64dc4ced9b08320bbf1707339373c6fad8856e368a78de8d",
+      "byteLength": 35604017
+    },
+    "normalizedGeometry": {
+      "path": "data/raw/prompt19/KOR/normalized-boundaries.geojson",
+      "sha256": "142f3e4c8465eba7e3cf93b082c0e05fdfb3bdfaf97397a5c4313da92f64e277",
+      "byteLength": 31247806
+    },
+    "sourceLock": {
+      "path": "data/source-locks/prompt19/KOR.json",
+      "sha256": "b6ddc037f737ea90a0f293a38241f68064f310a26bcfb71271433912e601ee56",
+      "byteLength": 3062
+    },
+    "fixedRevision": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "upstreamBuildDate": "Dec 12, 2023",
+    "publicationDate": null,
+    "temporalCaveat": "The game starts 2020-01-01. This acquired layer represents 2018, not an exact reconstruction of administrative changes through 2020. Source feature IDs are geoBoundaries shapeID, not guessed Korean administrative codes. Existing country envelope/coast/islands/shared border remain authoritative and alignment is independently tested.",
+    "license": {
+      "name": "KOGL Type 1 (KoStat source); CC BY 4.0 (geoBoundaries derivative/distribution)",
+      "url": "https://www.kogl.or.kr/info/license.do",
+      "attribution": "Statistics Korea (KoStat), SGIS; Justin Meyers / southkorea-maps (2018 data); geoBoundaries / William & Mary geoLab, https://www.geoboundaries.org ; Runfola et al. (2020), doi:10.1371/journal.pone.0231866. Adapted to the game schema; no institutional endorsement implied.",
+      "redistributionAllowed": true
+    },
+    "additionalLicenseEvidence": {
+      "path": "data/raw/prompt19/KOR/geoboundaries-9469f095/additional-license-receipt.json",
+      "sha256": "db6b2d47aa6d948605c8c6125647e46cdad0b9de20cac39763c92d9efd02d795",
+      "byteLength": 445
+    }
+  },
+  "countryEvidence": {
+    "sourceValidityPassed": true,
+    "allOriginalCoordinatesPreservedInNormalizedInput": true,
+    "administrativeParentsWithMultipleRealSourceFeatures": 17,
+    "sejongRealSourceFeatures": 25,
+    "sourceInternalAdjacencyPairs": 9738,
+    "sourceGraph": {
+      "path": "reports/verification/prompt19/KOR/source-internal-adjacency.json.gz",
+      "sha256": "94533213f116f08b732ad4d9a552c1eac936f3b7be7beeba62feaf30d3ca4516",
+      "byteLength": 5478665
+    },
+    "graphScope": "Original ADM3 source-feature graph, not final connected clipped-cell adjacency",
+    "sharedBorderFinalAlignment": "not-validated",
+    "islandOutlineComparison": {
+      "path": "reports/verification/prompt19/KOR/island-outline-comparison.geojson",
+      "sha256": "e25ec93f5f0f3391a4a7ac8eb2f498c9f99b9f4caf8836150413d21b10ae1ef3",
+      "byteLength": 5672
+    },
+    "detachedPinnedIslandCovered": false
+  },
+  "commonGeneratorFailure": {
+    "reproduction": {
+      "path": "reports/verification/prompt19/KOR/common-boolean-reproduction.json",
+      "sha256": "9b615e65d73cefdcdad17c6ee9dac2af05cbcb31e6009f3ed45ae9f744961195",
+      "byteLength": 2007
+    },
+    "sequence": {
+      "path": "reports/verification/prompt19/KOR/common-failure-sequence.json",
+      "sha256": "e6c3cb41849eb9bf89bb81a3cc5f4529e5bbc5dce872ec368c56640d45888481",
+      "byteLength": 1500
+    },
+    "intersectionErrors": [
+      {
+        "operation": "intersection",
+        "error": "Infinite loop when passing sweep line over endpoints (queue size too big).",
+        "counts": {
+          "intersection": 91269,
+          "difference": 3504,
+          "union": 3
+        },
+        "argumentCount": 2,
+        "inputVertices": 70
+      },
+      {
+        "operation": "intersection",
+        "error": "Infinite loop when passing sweep line over endpoints (too many sweep line segments).",
+        "counts": {
+          "intersection": 94344,
+          "difference": 3504,
+          "union": 12
+        },
+        "argumentCount": 2,
+        "inputVertices": 688
+      }
+    ],
+    "wholeCountryUnionErrors": [
+      {
+        "operation": "union",
+        "error": "Infinite loop when putting segment endpoints in a priority queue (queue size too big).",
+        "counts": {
+          "intersection": 98919,
+          "difference": 3504,
+          "union": 16
+        },
+        "argumentCount": 4241,
+        "inputVertices": 605583
+      },
+      {
+        "operation": "union",
+        "error": "Infinite loop when putting segment endpoints in a priority queue (queue size too big).",
+        "counts": {
+          "intersection": 98919,
+          "difference": 3504,
+          "union": 17
+        },
+        "argumentCount": 4241,
+        "inputVertices": 605580
+      }
+    ],
+    "clippedPolygonArgumentsObservedBeforeFailure": 4241,
+    "finalCellCount": null,
+    "finalEdgeCount": null,
+    "officialCandidatePath": null,
+    "directNonSnappingOverlayInvestigation": {
+      "path": "reports/verification/prompt19/KOR/direct-overlay-investigation.json",
+      "sha256": "709dbbb6442abc26000fac5bf5092b038ef8efccea538a829bbdb2471df8c883",
+      "byteLength": 2762
+    },
+    "investigatedAlternativeInstalled": false
+  },
+  "requiredCoordinatorWork": [
+    {
+      "owner": "C",
+      "change": "Replace unbounded whole-country union/residual operations with deterministic bounded aggregation and validate full coverage without dropping geometry."
+    },
+    {
+      "owner": "C",
+      "change": "Resolve the valid 25/45-vertex and 688-vertex boolean intersection degeneracies. Direct JSTS OverlayOp.overlayOp succeeds for the saved first reproduction; verify a no-snap, fail-closed approach before pinning shared changes."
+    },
+    {
+      "owner": "C",
+      "change": "Validate post-clipping cells, then reconcile fixed country coast/islands and national seam. The detached residual has zero source overlap; do not nearest-assign or move source/baseline independently."
+    },
+    {
+      "owner": "C",
+      "change": "After shared fixes, refresh common code pins and rerun the same KOR source via the common CLI; final global IDs/catalog/seed/runtime and 19-03 remain separate."
+    }
+  ],
+  "validation": {
+    "tests": {
+      "command": "node --max-old-space-size=6144 --test scripts/prompt19/KOR/source.node-test.mjs",
+      "passed": 6,
+      "failed": 0,
+      "scope": "Source identity/geometry/precision/source adjacency and faithful failure evidence; does not claim full candidate pass"
+    },
+    "lint": {
+      "command": "npx eslint scripts/prompt19/KOR/*.mjs",
+      "errors": 0,
+      "warnings": 0
+    },
+    "sourceInspection": {
+      "path": "reports/verification/prompt19/KOR/source-inspection.json",
+      "sha256": "35697faf04a0bfa1545680ab973c9aea73df7914254ee95edba65af3b7efaf31",
+      "byteLength": 522
+    },
+    "parentPrecision": {
+      "path": "reports/verification/prompt19/KOR/parent-precision.json",
+      "sha256": "9b9c44126a10f18724684a3e33ef192b796ae4879a651a6d1f01309911e071e1",
+      "byteLength": 683134
+    },
+    "candidateStatus": "FAIL before publication",
+    "offlineObservedRuns": {
+      "uninstrumentedMs": 97166.872,
+      "instrumentedMs": 94189.5124,
+      "maximumRssBytes": 2235879424
+    },
+    "mapPerformanceAndGameplay": "not-run"
+  },
+  "unchanged": {
+    "allSharedAndPreservedPinsVerified": true,
+    "baselineAndSharedBorderCoordinates": true,
+    "commonGeneratorAndHandoffContract": true,
+    "runtimePointer": true,
+    "coarseWorld": true
+  },
+  "scope": {
+    "downloadedCountries": [
+      "KOR"
+    ],
+    "runtimePublished": false,
+    "globalOrdinalsAssigned": false,
+    "browserServerBuildRun": false,
+    "externalAiCodexDiscordCalls": false,
+    "gridRegenerated": false,
+    "noWritesByThisBranchToPRKOrOtherCountries": true,
+    "concurrentPRKPathsObserved": true,
+    "concurrentPRKNote": "PRK raw/source-lock paths exist from work outside this branch. A did not write, revert, validate or integrate them."
+  },
+  "sourceChoice": {
+    "ADM2": {
+      "representedYear": "2020",
+      "unitCount": 229,
+      "geometryAcquired": false,
+      "reasonsNotSelected": [
+        "Sejong ADM2 single-unit precision risk",
+        "Original City Population spatial license scope needs separate resolution; ADM3 has explicit KoStat KOGL Type1 lineage"
+      ]
+    },
+    "ADM3": "Consistent finer source across all 17 coarse ADM1 parents; explicitly retain 2018-vs-2020 caveat"
+  },
+  "evidenceFiles": [
+    {
+      "path": "reports/verification/prompt19/KOR/19-02A-result.md",
+      "sha256": "3264bf50de01ab8ee5322b72a0499c5884165f900cd1069d68d57bbd5b63c5b8",
+      "byteLength": 6725
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/boundary-evidence.json",
+      "sha256": "b6864ba45e4facea4768e426c1e42e787143b0347506fdf0804b8eacb3bb0276",
+      "byteLength": 1824
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/candidate-run-20261029045406661.json",
+      "sha256": "8204592427c5df47c6002733ab3b3c3ee375e315cc395d998b6f3a453e0b66e4",
+      "byteLength": 376
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/common-boolean-failure.json",
+      "sha256": "e07c166d176fce187f41011384f314ac0aa2ecb97038cb37d20176eed31bcb5e",
+      "byteLength": 732
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/common-boolean-reproduction.json",
+      "sha256": "9b615e65d73cefdcdad17c6ee9dac2af05cbcb31e6009f3ed45ae9f744961195",
+      "byteLength": 2007
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/common-failure-sequence.json",
+      "sha256": "e6c3cb41849eb9bf89bb81a3cc5f4529e5bbc5dce872ec368c56640d45888481",
+      "byteLength": 1500
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/direct-overlay-investigation.json",
+      "sha256": "709dbbb6442abc26000fac5bf5092b038ef8efccea538a829bbdb2471df8c883",
+      "byteLength": 2762
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/island-outline-comparison.geojson",
+      "sha256": "e25ec93f5f0f3391a4a7ac8eb2f498c9f99b9f4caf8836150413d21b10ae1ef3",
+      "byteLength": 5672
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/parent-precision.json",
+      "sha256": "9b9c44126a10f18724684a3e33ef192b796ae4879a651a6d1f01309911e071e1",
+      "byteLength": 683134
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/source-adjacency-verification.json",
+      "sha256": "c96fa9798494d466c5d3b5b1beea1f0a11139fbc5be71d547a387c2e75b4ee1b",
+      "byteLength": 867
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/source-inspection.json",
+      "sha256": "35697faf04a0bfa1545680ab973c9aea73df7914254ee95edba65af3b7efaf31",
+      "byteLength": 522
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/source-internal-adjacency.json.gz",
+      "sha256": "94533213f116f08b732ad4d9a552c1eac936f3b7be7beeba62feaf30d3ca4516",
+      "byteLength": 5478665
+    },
+    {
+      "path": "reports/verification/prompt19/KOR/source-lock-before-publication-date-correction.json",
+      "sha256": "b899634569200f80eb9878a875b7349a2b5f932f4d7296414d3596e4151f37a4",
+      "byteLength": 3070
+    }
+  ],
+  "adapterAndVerificationCode": [
+    {
+      "path": "scripts/prompt19/KOR/acquire-source.mjs",
+      "sha256": "f6ab94d96fa79659602f64ead54081215295a57ce1b2cbc683fcef77c8e43f32",
+      "byteLength": 2002
+    },
+    {
+      "path": "scripts/prompt19/KOR/check-common-reproduction.mjs",
+      "sha256": "fee6ccb313548b2a35a9799d1b4cdaf7d4e3c0874e80b99116b4a2251fec3696",
+      "byteLength": 1985
+    },
+    {
+      "path": "scripts/prompt19/KOR/inspect-boundary-evidence.mjs",
+      "sha256": "55cd691ea289d1e2cd0cbd2b86c78967a3e35dd2903fd2449a9fcb6078687a63",
+      "byteLength": 2157
+    },
+    {
+      "path": "scripts/prompt19/KOR/inspect-source.mjs",
+      "sha256": "82ec9391ddcf0380734f35191c05941d09db03ba6d656b831b68b4486c3848e5",
+      "byteLength": 1452
+    },
+    {
+      "path": "scripts/prompt19/KOR/normalize-source.mjs",
+      "sha256": "5c29068a5ee03a645e42b2a98a253bbca5477476dd62cc6a281f4a0041c7258a",
+      "byteLength": 4412
+    },
+    {
+      "path": "scripts/prompt19/KOR/reproduce-common-failure.mjs",
+      "sha256": "c680413f22211f94a07283354951d2126141c72da756af13fe956aae8e405d35",
+      "byteLength": 2713
+    },
+    {
+      "path": "scripts/prompt19/KOR/run-candidate.mjs",
+      "sha256": "e70eaa55ed48332621620fd7a48e15cd2cb0d53b430a5943a26f5b8e51f7180c",
+      "byteLength": 1190
+    },
+    {
+      "path": "scripts/prompt19/KOR/source.node-test.mjs",
+      "sha256": "86c8f62ab0ec3e4ccf98357449cc02b5cc61f9e5b486c28ccda4c8d86c6c6be8",
+      "byteLength": 5692
+    },
+    {
+      "path": "scripts/prompt19/KOR/verify-parent-precision.mjs",
+      "sha256": "46e799e32c944b29151b341ad39725f0f30678f685e68824d9e7d6e55b1080f8",
+      "byteLength": 2607
+    },
+    {
+      "path": "scripts/prompt19/KOR/verify-source-adjacency.mjs",
+      "sha256": "ab85421ba93b6a87897400d6f8359bbe35d69d37e31232eafc2c183fbf5a6b02",
+      "byteLength": 4352
+    }
+  ],
+  "resultReport": "reports/verification/prompt19/KOR/19-02A-result.md"
+}

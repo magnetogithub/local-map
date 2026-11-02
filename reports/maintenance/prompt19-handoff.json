@@ -1,0 +1,490 @@
+{
+  "schemaVersion": "prompt19-handoff-v1",
+  "contractVersion": "prompt19-02-joint-arrangement-v2",
+  "preparedDate": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "stage": "19-02-connected-with-source-limits",
+  "coordinator": "C",
+  "maximumConcurrentWorkersIncludingCoordinator": 3,
+  "predecessor": {
+    "stage": "19-01",
+    "status": "complete",
+    "report": "reports/maintenance/20261029-prompt19-01.md",
+    "deletionRecord": "reports/maintenance/20261029-prompt19-01-deletion.json",
+    "oldGridRootsConfirmedAbsent": true
+  },
+  "coarseWorld": {
+    "catalogVersion": "catalog-v3-prompt19-coarse-v1",
+    "runtimePointer": "data/runtime/operational-catalog/current.json",
+    "root": "data/derived/prompt19/coarse-world-v1",
+    "artifactIndex": {
+      "path": "data/derived/prompt19/coarse-world-v1/artifact-index.json",
+      "sha256": "66c1791b985ff5e012c6900a9bec97c22959a7acc7df47ad3645948fc4e24b25",
+      "byteLength": 748788
+    },
+    "counts": {
+      "countries": 247,
+      "cells": 4231,
+      "edges": 15955,
+      "administrativeParents": 4231,
+      "previousParents": 4231
+    },
+    "policy": "Keep runtime pointer and existing coarse output unchanged during A/B. New catalog and sessions belong to C integration."
+  },
+  "baseline": {
+    "root": "data/derived/prompt19/baseline-v1",
+    "artifactIndex": {
+      "path": "data/derived/prompt19/baseline-v1/artifact-index.json",
+      "sha256": "a787f630041d7dbfb7c1cb13e0b7dde0d705c5720fae541f74ca171b919fc1f6",
+      "byteLength": 581
+    },
+    "artifacts": [
+      {
+        "byteLength": 111251,
+        "path": "data/derived/prompt19/baseline-v1/country-envelopes.geojson",
+        "sha256": "1b8d204c973b878eb438d9235c92d79fe24350de3036fe2566dd7c4487ce9a8a"
+      },
+      {
+        "byteLength": 216445,
+        "path": "data/derived/prompt19/baseline-v1/coarse-parents.geojson",
+        "sha256": "57ccaf347ca0d61129f041be38942a45dddd872e46bd5220411f06fa5e3dbbf2"
+      },
+      {
+        "byteLength": 16446,
+        "path": "data/derived/prompt19/baseline-v1/national-boundaries.geojson",
+        "sha256": "794ee3dc542ff9428ef50a799b3b02ba9c5dde19b54f69f736078935fc6857d5"
+      },
+      {
+        "byteLength": 47195,
+        "path": "data/derived/prompt19/baseline-v1/baseline.json",
+        "sha256": "8a420a30338eddc7fa2f5dbe62ab4b80a5ec00962b2a2b364012203ba6d7059b"
+      }
+    ],
+    "coordinateSystem": "EPSG:4326",
+    "axisOrder": "longitude,latitude",
+    "dimensions": 2,
+    "countries": {
+      "KOR": {
+        "area": 9.898048074225994,
+        "bbox": [
+          124.613617,
+          33.197577,
+          131.862522,
+          38.624335
+        ],
+        "centroid": [
+          127.81909396778246,
+          36.37335348788258
+        ],
+        "coarseTerritories": 18,
+        "components": 53,
+        "holes": 0,
+        "vertices": 3067
+      },
+      "PRK": {
+        "area": 12.938046093470511,
+        "bbox": [
+          124.211316,
+          37.675605,
+          130.699962,
+          43.01027
+        ],
+        "centroid": [
+          127.1837778019318,
+          40.15064273863009
+        ],
+        "coarseTerritories": 11,
+        "components": 10,
+        "holes": 0,
+        "vertices": 1789
+      }
+    },
+    "sharedBorder": {
+      "chains": 3,
+      "identities": [
+        {
+          "geometrySha256": "f1c5d2679eaebbb98eab3823197b8f28e915fdfa4ef7313438be207ef35af165",
+          "id": "edge:operational:03df0099e7744af44964154ecd137581ca8d4459463f015033d24921a03e3a80"
+        },
+        {
+          "geometrySha256": "dfaa43509b75d08c4838b58ed7d00d45600a3cbed5589712717a9bb71484f167",
+          "id": "edge:operational:1100612625b7a023da8f0a6af385395d93987e09abf35c5f7173a603e93391d5"
+        },
+        {
+          "geometrySha256": "832444017aae95027fb6641db2cec4fd560fcb56a003300371700d7b6d81f44c",
+          "id": "edge:operational:71adb30569579e5d5541f40ee83e31786eea8e65ee4d2afab26e43371bd1a53e"
+        }
+      ],
+      "lengthKm": 203.70223384284085
+    },
+    "geometryIdentityEncoding": "SHA-256 of canonical JSON plus newline; file identities are SHA-256 of exact bytes."
+  },
+  "preservedInputs": [
+    {
+      "path": "data/raw/ne_10m_admin_0_countries.geojson",
+      "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+      "byteLength": 13287235
+    },
+    {
+      "path": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+      "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+      "byteLength": 40726852
+    },
+    {
+      "path": "data/derived/prompt14/shared-game-p0.geojson",
+      "sha256": "cee6320bc50d3de1406e81959bc5c5204f5517d48408aa18e61cdb62c9592586",
+      "byteLength": 12432016
+    },
+    {
+      "path": "data/derived/prompt14/shared-admin1-input.geojson",
+      "sha256": "52be089a840b44217f3268dc4817b7764161b099afb47f08df2b85e24faf642e",
+      "byteLength": 40725848
+    },
+    {
+      "path": "data/derived/prompt14/selected-game-input.geojson",
+      "sha256": "8a439a2999b7c5cce54da7a537219ec9c757604ebc3fb4e879a75864ca98db25",
+      "byteLength": 29160978
+    },
+    {
+      "path": "data/source-locks/prompt14-derived-game-input-lock.json",
+      "sha256": "c0fcc776e0e9abd25dfb2ccbfd7884101c3e8aa59f481a6c23bb8cc8bcb740a3",
+      "byteLength": 12870
+    },
+    {
+      "path": "data/source-locks/prompt14-production-polygon-sources.json",
+      "sha256": "b5f5ec99e0f10dc07069c49723e9f7efa6a3942f8bb68f0f7641ea1bcc749669",
+      "byteLength": 10301
+    }
+  ],
+  "preservedTrees": [
+    "public/data/maps/**",
+    "data/catalogs/prompt14/**",
+    "data/derived/prompt15/15-18-administrative-input-v1-161260049c9100b09cb5/**",
+    "data/source-locks/**",
+    "reports/prompt14/**",
+    "reports/prompt15/**",
+    "checkpoints/**"
+  ],
+  "sourceReadiness": {
+    "KOR": {
+      "localFineSource": "not-acquired",
+      "existingLevel": "Natural Earth ADM1: 17 units plus one existing country-source residual in coarse world"
+    },
+    "PRK": {
+      "localFineSource": "not-acquired",
+      "existingLevel": "Natural Earth ADM1: 11 units"
+    },
+    "rule": "Acquire only assigned-country official/public sources, confirm level/date/rights, record identity; do not call ADM1 or retired synthetic cells fine."
+  },
+  "commonGenerator": {
+    "entrypoint": "scripts/prepare-prompt19-joined-candidates.mjs",
+    "core": "scripts/prompt19-source-arrangement.mjs",
+    "candidateSchemaVersion": "prompt19-country-arrangement-candidate-v2",
+    "files": [
+      {
+        "path": "scripts/prepare-prompt19-joined-candidates.mjs",
+        "sha256": "cfbe41f2ef1d6ca3e1e0388f818e41aa7ef53281e1afec062b52b52b1cd83190",
+        "byteLength": 7722
+      },
+      {
+        "path": "scripts/prompt19-source-arrangement.mjs",
+        "sha256": "941ea3f50ce7471f11eb0583251459d088b69de0a45b5d2639e9495098130227",
+        "byteLength": 17043
+      },
+      {
+        "path": "scripts/prompt19-joined-topology.mjs",
+        "sha256": "59547b84268203e6ec91a5dc86f18482ba5ffc3c740c4a0265ebbe86d398c0fe",
+        "byteLength": 4977
+      },
+      {
+        "path": "scripts/publish-prompt19-joined-candidates.mjs",
+        "sha256": "293f42ee2b5dabb497e9540712f65b7f66d32e8e74cb3214dac9468314300fe5",
+        "byteLength": 4631
+      },
+      {
+        "path": "scripts/prepare-prompt19-mixed-world.mjs",
+        "sha256": "3c2314e5ec2ec2142ef8f1632b966af13971d057f5a6742d80f389fcbc0e2201",
+        "byteLength": 13356
+      },
+      {
+        "path": "scripts/verify-prompt19-mixed-world.mjs",
+        "sha256": "158cbdd044a803748bf18499d60553837067eed9323d192b74a50d73bb93af35",
+        "byteLength": 8165
+      },
+      {
+        "path": "scripts/prompt19-country-core.mjs",
+        "sha256": "99eefbd814ccd37716fa2178e880480d1a95a33ccc320b869e14a2e1376ca8b9",
+        "byteLength": 11234
+      },
+      {
+        "path": "scripts/prompt19-country-files.mjs",
+        "sha256": "694326ae6acb6f90af4fc4801b27da93a894fd33ec7ef4bffe809863f9f9d2f9",
+        "byteLength": 2200
+      },
+      {
+        "path": "scripts/prompt14-catalog-core.mjs",
+        "sha256": "39d397229635cfa0fd0166dd6858ef4275b8bde86447b9c444d56e76539ce63c",
+        "byteLength": 12241
+      },
+      {
+        "path": "scripts/prompt14-catalog-topology.mjs",
+        "sha256": "b499dec261c08e75f41afee419e0a844d01b659de68fb12cb25265507cb848b9",
+        "byteLength": 10659
+      },
+      {
+        "path": "scripts/prompt14-boundary-arrangement.mjs",
+        "sha256": "ce96b5bc3eb59fe7309349ced44e39c7729f52db8a9b26486be88f12e0337f43",
+        "byteLength": 20654
+      },
+      {
+        "path": "scripts/prompt14-source-gate.mjs",
+        "sha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+        "byteLength": 38582
+      },
+      {
+        "path": "scripts/prompt14-exact-ring.mjs",
+        "sha256": "c21476d3da4de7867811e578df3ca2c17755ae740bb0dcdff29e11ba1bb9fe70",
+        "byteLength": 4898
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "22908144c69e75dc1ae90633b58fe933c7b6d6629ec2e8a775156c32fb004d14",
+        "byteLength": 337285
+      }
+    ],
+    "sourceLockSchemaVersion": "prompt19-country-source-lock-v1",
+    "method": "One exact source/coarse/P0 noding and polygonized face arrangement. No independent polygon clipping, global union, source snapping, extrapolated line, nearest-owner fill or grid.",
+    "outputFiles": [
+      "cells.geojson",
+      "topology.json",
+      "validation.json",
+      "manifest.json",
+      "artifact-index.json"
+    ],
+    "runtimePublication": "C only, one shared catalog",
+    "inputHandling": "Read only hash-checked normalized bytes; raw/adapter identities and physical country paths checked; baseline artifact pins checked."
+  },
+  "localIdentityAndMembership": {
+    "cellId": "<COUNTRY>:cell:<sha256 of country/source version+artifact+feature/coarse parent/geometry>",
+    "edgeId": "<COUNTRY>:edge:<sha256>",
+    "globalTerritoryIdAndOrdinalAssignedBy": "C after both branches are handed off",
+    "coarseParent": "Explicit coarseParentTerritoryId and administrativeParentKey from baseline; geometric intersection, never centroid/name guessing",
+    "sourceParent": "Keep original sourceParentId separately; do not confuse external admin code with Natural Earth ne_id",
+    "membership": "Explicit local ID lists; no contiguous-country or rectangular/ordinal-range assumptions",
+    "components": "Separate connected clipped polygons, preserving original sourceComponentHash and hole lineage"
+  },
+  "boundaryRules": {
+    "authority": "country-envelopes.geojson and exact national-boundaries.geojson chains",
+    "branchesMayChangeCountryOutline": false,
+    "branchesMaySnapSimplifyOrMoveSharedBorder": false,
+    "coordinatorMayNodeExistingChainsAtNewIntersections": true,
+    "coastIslandsAndHoles": "All fixed P0 components, holes and external boundaries are preserved. Node existing chains only.",
+    "internalAdjacency": "Positive-length shared land boundary only; symmetric, no self/point/sea adjacency",
+    "residuals": "C amendment: zero original interior membership faces of existing P0 land may retain explicit canonical-country-residual/coarse provenance. Retain each geometry/hash/area/contact list. Never hide source overlap or claim an ADM2/3 identity. Fine assignment remains incomplete.",
+    "newAdministrativeExtrapolation": false,
+    "worldCoverageComplete": true,
+    "fineAssignmentComplete": false
+  },
+  "branches": {
+    "KOR": {
+      "owner": "A",
+      "countryId": "KOR",
+      "status": "not-started",
+      "writePaths": [
+        "data/raw/prompt19/KOR/**",
+        "data/source-locks/prompt19/KOR.json",
+        "data/derived/prompt19/candidates/KOR/**",
+        "reports/verification/prompt19/KOR/**",
+        "scripts/prompt19/KOR/**"
+      ],
+      "sourceLock": "data/source-locks/prompt19/KOR.json",
+      "commandAfterSourceAcquisition": "node scripts/prepare-prompt19-country.mjs KOR"
+    },
+    "PRK": {
+      "owner": "B",
+      "countryId": "PRK",
+      "status": "not-started",
+      "writePaths": [
+        "data/raw/prompt19/PRK/**",
+        "data/source-locks/prompt19/PRK.json",
+        "data/derived/prompt19/candidates/PRK/**",
+        "reports/verification/prompt19/PRK/**",
+        "scripts/prompt19/PRK/**"
+      ],
+      "sourceLock": "data/source-locks/prompt19/PRK.json",
+      "commandAfterSourceAcquisition": "node scripts/prepare-prompt19-country.mjs PRK"
+    }
+  },
+  "requiredBranchEvidence": [
+    "Original URL/version/release date/retrieval timestamp, administrative level or documented natural basis, license and attribution",
+    "Temporal coverage and explicit caveat relative to 2020-01-01 scenario",
+    "Original/normalized/adapter byte identities and transformation notes",
+    "Country and per-parent gap/overlap/outside coverage, source-component/hole correspondence, island preservation",
+    "Full boundary pairing and symmetric positive-length internal adjacency; shared seam mismatch locations and cause",
+    "Distinct source fine units within existing ADM1; observed cell/edge/vertex/component/hole/byte totals",
+    "Manifest status, checks, candidate paths, unresolved items; one-country success is not whole 19-02/19-03 completion"
+  ],
+  "integration": {
+    "owner": "C",
+    "status": "connected-with-explicit-source-limits",
+    "required": [
+      "Reconcile exact shared/country boundary topology with both candidates",
+      "Keep other 245 countries coarse; build one new version/global ID/ordinal/hash/membership system",
+      "Connect fresh seed/owner/controller/region/frontier/API/vector/exact geometry to that catalog",
+      "Preserve low-zoom continuous land coverage; measure area rather than ID unions",
+      "Use existing scripted development provider for 19-03; no external AI/Codex/Discord calls"
+    ],
+    "transportNote": "Version/root/pointer, explicit memberships, coarse-parent seed inheritance, API, vector/exact geometry and current-frontier selection share the same catalog.",
+    "runtime": {
+      "catalogVersion": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+      "root": "data/derived/prompt19/mixed-world-v2-7bb8d40b5113b6cff987",
+      "index": {
+        "sha256": "0575d6d0480bdfbf3144bf1808f8cbce5978ea56a14a456bf45471d4369a2df8",
+        "byteLength": 749750
+      }
+    },
+    "candidates": {
+      "KOR": {
+        "artifactIndex": {
+          "byteLength": 564,
+          "path": "data/derived/prompt19/candidates/KOR/joined-v2-652d25d95ef0a040c72e/artifact-index.json",
+          "sha256": "b420b63f9cf192d60a7e6a55c8da423baf7694e3fdd2d98374da45fdc5c48c82"
+        },
+        "cells": 4377,
+        "coarseResidualCells": 207,
+        "fineAssignmentComplete": false,
+        "root": "data/derived/prompt19/candidates/KOR/joined-v2-652d25d95ef0a040c72e",
+        "worldCoverageComplete": true
+      },
+      "PRK": {
+        "artifactIndex": {
+          "byteLength": 561,
+          "path": "data/derived/prompt19/candidates/PRK/joined-v2-982801207a60f262ad74/artifact-index.json",
+          "sha256": "999926274b0935e36d32aeb0e5bd51e2714fc1df311a0c946a2ca86b6cf068e6"
+        },
+        "cells": 701,
+        "coarseResidualCells": 48,
+        "fineAssignmentComplete": false,
+        "root": "data/derived/prompt19/candidates/PRK/joined-v2-982801207a60f262ad74",
+        "worldCoverageComplete": true
+      }
+    },
+    "counts": {
+      "countries": 247,
+      "cells": 9280,
+      "edges": 29744,
+      "administrativeParents": 4231,
+      "previousParents": 4231
+    },
+    "verification": "reports/maintenance/prompt19-C/mixed-verification.json",
+    "result": "reports/maintenance/20261029-prompt19-02-C.md"
+  },
+  "preparationValidation": {
+    "tests": {
+      "command": "node --test scripts/prompt19-country-candidate.node-test.mjs scripts/prompt19-baseline.node-test.mjs scripts/prompt19-country-files.node-test.mjs",
+      "passed": 13,
+      "failed": 0,
+      "scope": "8 artificial geometry/contract cases, 2 read-only real baseline checks, 3 filesystem scope/overwrite cases. Junction tests run outside sandbox only within .tmp."
+    },
+    "lint": {
+      "scope": "Seven new common scripts/tests",
+      "errors": 0,
+      "warnings": 0
+    },
+    "downloadedFineSources": false,
+    "countryCandidatesGenerated": false,
+    "runtimeChanged": false,
+    "serverOrBrowserOrBuildStarted": false,
+    "independentReadReview": {
+      "KOR": "No actionable issues",
+      "PRK": "Verified-buffer reuse and physical country/output path isolation gaps fixed and tested"
+    }
+  },
+  "guide": "docs/automation/prompt19-02-preparation.md",
+  "stopAt": "Preparation complete. A/B source acquisition, final integration and 19-03 require their requested execution; no automatic continuation.",
+  "preparationContract": {
+    "contractVersion": "prompt19-02-country-candidate-v1",
+    "stage": "19-02-prepared",
+    "commonGenerator": {
+      "entrypoint": "scripts/prepare-prompt19-country.mjs",
+      "core": "scripts/prompt19-country-core.mjs",
+      "files": [
+        {
+          "path": "scripts/prepare-prompt19-country.mjs",
+          "sha256": "5ef969073334d8407ae105ba8dba3e642bd7961671d95837013cdb3bf3bc5303",
+          "byteLength": 5347
+        },
+        {
+          "path": "scripts/prompt19-country-core.mjs",
+          "sha256": "99eefbd814ccd37716fa2178e880480d1a95a33ccc320b869e14a2e1376ca8b9",
+          "byteLength": 11234
+        },
+        {
+          "path": "scripts/prompt19-country-files.mjs",
+          "sha256": "694326ae6acb6f90af4fc4801b27da93a894fd33ec7ef4bffe809863f9f9d2f9",
+          "byteLength": 2200
+        },
+        {
+          "path": "scripts/prompt14-catalog-core.mjs",
+          "sha256": "39d397229635cfa0fd0166dd6858ef4275b8bde86447b9c444d56e76539ce63c",
+          "byteLength": 12241
+        },
+        {
+          "path": "scripts/prompt14-catalog-topology.mjs",
+          "sha256": "4b4759221bc4cbb19d143e11d62e0b247dadc52c4829b5e5d4fc849ec2a12fde",
+          "byteLength": 10344
+        },
+        {
+          "path": "scripts/prompt14-source-gate.mjs",
+          "sha256": "fb76bb1007ad33db65a6b39e4052192a950f97a89daf3c3f9162bf34584b9130",
+          "byteLength": 38582
+        },
+        {
+          "path": "scripts/prompt14-exact-ring.mjs",
+          "sha256": "c21476d3da4de7867811e578df3ca2c17755ae740bb0dcdff29e11ba1bb9fe70",
+          "byteLength": 4898
+        },
+        {
+          "path": "package-lock.json",
+          "sha256": "22908144c69e75dc1ae90633b58fe933c7b6d6629ec2e8a775156c32fb004d14",
+          "byteLength": 337285
+        }
+      ],
+      "sourceLockSchemaExport": "prompt19SourceLockSchema",
+      "sourceLockSchemaVersion": "prompt19-country-source-lock-v1",
+      "candidateSchemaVersion": "prompt19-country-candidate-v1",
+      "normalizedFeatureProperties": [
+        "countryId",
+        "sourceId",
+        "sourceFeatureId",
+        "sourceParentId",
+        "name",
+        "boundaryEvidenceRef"
+      ],
+      "method": "Normalize actual source polygons; intersect connected source components with pinned coarse parents; retain lineage; reuse robust source noding. No random/Voronoi/grid subdivisions or inferred boundary fill.",
+      "outputFiles": [
+        "cells.geojson",
+        "topology.json",
+        "residuals.geojson",
+        "validation.json",
+        "manifest.json",
+        "artifact-index.json"
+      ],
+      "readyStatus": "ready-for-coordinator-integration",
+      "failureStatus": "needs-source-or-alignment",
+      "failureExitCode": 2,
+      "runtimePublication": false,
+      "verifiedInputHandling": "Parse the already hash-checked normalized input Buffer; do not reopen it for generation.",
+      "pathIsolation": "Resolve raw/adapter inputs inside their assigned physical country roots; validate existing output ancestors before any mkdir."
+    },
+    "boundaryRules": {
+      "authority": "country-envelopes.geojson and exact national-boundaries.geojson chains",
+      "branchesMayChangeCountryOutline": false,
+      "branchesMaySnapSimplifyOrMoveSharedBorder": false,
+      "coordinatorMayNodeExistingChainsAtNewIntersections": true,
+      "coastIslandsAndHoles": "Preserve all components, including KOR country-envelope-residual; ambiguous source gaps remain diagnostic geometry",
+      "internalAdjacency": "Positive-length shared land boundary only; symmetric, no self/point/sea adjacency",
+      "residuals": "Diagnostic only. No automatic filler, nearest-parent assignment, retired grid or ADM1 relabel fallback."
+    }
+  }
+}

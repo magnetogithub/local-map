@@ -1,0 +1,1418 @@
+{
+  "subtask": "7L",
+  "status": "passed",
+  "generatedAt": "2026-08-14T03:26:41.902Z",
+  "source": "Natural Earth 1:10m generated label metrics plus actual MapLibre render",
+  "countries": [
+    {
+      "countryId": "RUS",
+      "nameKo": "러시아",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        94.300599,
+        61.661028
+      ],
+      "angle": 6.462657,
+      "insideRatio": 0.8989,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.794778,
+      "confidence": 0.801849,
+      "componentIds": [
+        "component-8"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 176.50566259840832,
+          "territoryWidthPx": 222.08165975792522,
+          "ratio": 0.7947782036157515,
+          "fontSizePx": 61.28668712589361
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 353.0113251968167,
+          "territoryWidthPx": 444.1633195158505,
+          "ratio": 0.7947782036157515,
+          "fontSizePx": 122.57337425178723
+        }
+      ],
+      "occupancyDrift": 0,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-russia-z2.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            94.300599,
+            61.661028
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "RUS",
+            "layerId": "country-labels-prototype",
+            "anchor": [
+              94.3011474609375,
+              61.66120280305205
+            ],
+            "angle": 6.462657,
+            "fontSize": 180,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.507168184054,
+              399.995187105344
+            ],
+            "estimatedWidth": 518.4000107959865
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "CAN",
+      "nameKo": "캐나다",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        -108.984674,
+        56.835615
+      ],
+      "angle": -43.068737,
+      "insideRatio": 0.900127,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.771676,
+      "confidence": 0.910657,
+      "componentIds": [
+        "component-0"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 95.9362172873478,
+          "territoryWidthPx": 124.32193667214395,
+          "ratio": 0.7716756982345468,
+          "fontSizePx": 33.311186302840575
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 191.87243457469566,
+          "territoryWidthPx": 248.64387334428795,
+          "ratio": 0.771675698234547,
+          "fontSizePx": 66.62237260568116
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/can.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            -108.984674,
+            56.835615
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "CAN",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              -108.984375,
+              56.83695435196054
+            ],
+            "angle": -43.068737,
+            "fontSize": 133.24474521136233,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5039078207504,
+              399.96800040528586
+            ],
+            "estimatedWidth": 383.7448691493913
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "USA",
+      "nameKo": "미국",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        -99.145071,
+        39.527716
+      ],
+      "angle": 6.448672,
+      "insideRatio": 0.944573,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.772219,
+      "confidence": 0.905952,
+      "componentIds": [
+        "component-186"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 89.07128117453625,
+          "territoryWidthPx": 115.34459023242705,
+          "ratio": 0.7722189744230888,
+          "fontSizePx": 46.8796227590491
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 178.14256234907253,
+          "territoryWidthPx": 230.68918046485413,
+          "ratio": 0.772218974423089,
+          "fontSizePx": 93.75924551809821
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-usa.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            -99.145071,
+            39.527716
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "USA",
+            "layerId": "country-labels-prototype",
+            "anchor": [
+              -99.1461181640625,
+              39.52946653645165
+            ],
+            "angle": 6.448672,
+            "fontSize": 180,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.4863139483193,
+              399.97033753157905
+            ],
+            "estimatedWidth": 341.99999206097993
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "CHN",
+      "nameKo": "중국",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        104.18742,
+        31.348817
+      ],
+      "angle": -6.563063,
+      "insideRatio": 0.916765,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.724235,
+      "confidence": 0.875646,
+      "componentIds": [
+        "component-0"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 87.3377735948201,
+          "territoryWidthPx": 120.59309180446704,
+          "ratio": 0.7242352964665005,
+          "fontSizePx": 45.967248414022315
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 174.67554718964024,
+          "territoryWidthPx": 241.1861836089341,
+          "ratio": 0.7242352964665006,
+          "fontSizePx": 91.93449682804464
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-china.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            104.18742,
+            31.348817
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "CHN",
+            "layerId": "country-labels-prototype",
+            "anchor": [
+              104.1888427734375,
+              31.34894581557998
+            ],
+            "angle": -6.563063,
+            "fontSize": 180,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5185951289714,
+              399.99802863886464
+            ],
+            "estimatedWidth": 342.00000629735297
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "BRA",
+      "nameKo": "브라질",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        -53.180263,
+        -7.73594
+      ],
+      "angle": 0.052804,
+      "insideRatio": 0.960602,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.778828,
+      "confidence": 0.971391,
+      "componentIds": [
+        "component-0"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 97.44555638308628,
+          "territoryWidthPx": 125.11812707075292,
+          "ratio": 0.7788284452818087,
+          "fontSizePx": 33.83526154813429
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 194.89111276617263,
+          "territoryWidthPx": 250.23625414150587,
+          "ratio": 0.7788284452818088,
+          "fontSizePx": 67.6705230962686
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/bra.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            -53.180263,
+            -7.73594
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "BRA",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              -53.1793212890625,
+              -7.738208239129648
+            ],
+            "angle": 0.052804,
+            "fontSize": 135.3410461925372,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5123078178678,
+              400.0299174159967
+            ],
+            "estimatedWidth": 389.78222553234525
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "AUS",
+      "nameKo": "호주",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        129.5994,
+        -24.916315
+      ],
+      "angle": -8.579252,
+      "insideRatio": 0.989243,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.775791,
+      "confidence": 0.913681,
+      "componentIds": [
+        "component-3"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 93.39653252552434,
+          "territoryWidthPx": 120.38883026298146,
+          "ratio": 0.775790680260833,
+          "fontSizePx": 13.734784059789066
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 186.79306505104873,
+          "territoryWidthPx": 240.77766052596297,
+          "ratio": 0.775790680260833,
+          "fontSizePx": 27.46956811957814
+        }
+      ],
+      "occupancyDrift": 0,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/aus.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            129.5994,
+            -24.916315
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "AUS",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              129.6002197265625,
+              -24.916331404599077
+            ],
+            "angle": -8.579252,
+            "fontSize": 54.93913623915628,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.510713526657,
+              400.00023640581793
+            ],
+            "estimatedWidth": 373.58613010209746
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "IND",
+      "nameKo": "인도",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        78.663248,
+        22.922362
+      ],
+      "angle": -5.329758,
+      "insideRatio": 0.9565,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.748981,
+      "confidence": 0.968725,
+      "componentIds": [
+        "component-0"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 47.83802544716062,
+          "territoryWidthPx": 63.870780566121255,
+          "ratio": 0.7489813812066541,
+          "fontSizePx": 25.177908009168917
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 95.67605089432125,
+          "territoryWidthPx": 127.74156113224252,
+          "ratio": 0.7489813812066541,
+          "fontSizePx": 50.35581601833784
+        }
+      ],
+      "occupancyDrift": 0,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/ind.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            78.663248,
+            22.922362
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "IND",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              78.662109375,
+              22.922982395362837
+            ],
+            "angle": -5.329758,
+            "fontSize": 100.71163203667568,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.4851185872836,
+              399.9911964552966
+            ],
+            "estimatedWidth": 191.3521017886425
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "KAZ",
+      "nameKo": "카자흐스탄",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        67.289053,
+        48.774477
+      ],
+      "angle": 0,
+      "insideRatio": 0.992714,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.743972,
+      "confidence": 0.914029,
+      "componentIds": [
+        "component-0"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 65.0224701316347,
+          "territoryWidthPx": 87.39904746247235,
+          "ratio": 0.7439722974046626,
+          "fontSizePx": 13.434394845163922
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 130.04494026326944,
+          "territoryWidthPx": 174.79809492494473,
+          "ratio": 0.7439722974046626,
+          "fontSizePx": 26.86878969032785
+        }
+      ],
+      "occupancyDrift": 0,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/kaz.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            67.289053,
+            48.774477
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "KAZ",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              67.291259765625,
+              48.77429274267507
+            ],
+            "angle": 0,
+            "fontSize": 53.7375793806557,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5288416204031,
+              400.0036541452591
+            ],
+            "estimatedWidth": 260.0898805265389
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "ARG",
+      "nameKo": "아르헨티나",
+      "shapeClass": "vertical",
+      "anchor": [
+        -66.106044,
+        -35.813686
+      ],
+      "angle": 79.343449,
+      "insideRatio": 0.963852,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.743688,
+      "confidence": 0.843209,
+      "componentIds": [
+        "component-0"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 74.16275024342109,
+          "territoryWidthPx": 99.72294965992643,
+          "ratio": 0.7436878922688276,
+          "fontSizePx": 15.322882509539568
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 148.3255004868422,
+          "territoryWidthPx": 199.44589931985288,
+          "ratio": 0.7436878922688277,
+          "fontSizePx": 30.645765019079143
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.75,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/arg.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            -66.106044,
+            -35.813686
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "ARG",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              -66.104736328125,
+              -35.81335872633349
+            ],
+            "angle": 79.343449,
+            "fontSize": 61.291530038158285,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5170907936051,
+              399.99472535273486
+            ],
+            "estimatedWidth": 296.6510009736844
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "CHL",
+      "nameKo": "칠레",
+      "shapeClass": "vertical",
+      "anchor": [
+        -69.18833,
+        -23.569825
+      ],
+      "angle": 86,
+      "insideRatio": 0.946645,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.334168,
+      "confidence": 0.895068,
+      "componentIds": [
+        "component-6"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 3,
+          "labelWidthPx": 35.85344,
+          "territoryWidthPx": 107.291672,
+          "ratio": 0.33416796785495145,
+          "fontSizePx": 18.870232
+        },
+        {
+          "zoom": 4,
+          "labelWidthPx": 71.70688,
+          "territoryWidthPx": 214.583344,
+          "ratio": 0.33416796785495145,
+          "fontSizePx": 37.740464
+        }
+      ],
+      "occupancyDrift": 0,
+      "threshold": 0.75,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-chile.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            -69.18833,
+            -23.569825
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "CHL",
+            "layerId": "country-labels-prototype",
+            "anchor": [
+              -69.1864013671875,
+              -23.569022144054955
+            ],
+            "angle": 86,
+            "fontSize": 21.676204456812414,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5252065261692,
+              399.9885519247719
+            ],
+            "estimatedWidth": 41.1847875489849
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "NOR",
+      "nameKo": "노르웨이",
+      "shapeClass": "vertical",
+      "anchor": [
+        11.464328,
+        62.371133
+      ],
+      "angle": 80.530154,
+      "insideRatio": 0.774013,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.672406,
+      "confidence": 0.696745,
+      "componentIds": [
+        "component-8"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 17.116336061609598,
+          "territoryWidthPx": 25.455346230661224,
+          "ratio": 0.672406334862293,
+          "fontSizePx": 4.434283501447694
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 34.2326721232192,
+          "territoryWidthPx": 50.910692461322455,
+          "ratio": 0.672406334862293,
+          "fontSizePx": 8.86856700289539
+        }
+      ],
+      "occupancyDrift": 0,
+      "threshold": 0.75,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/nor.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            11.464328,
+            62.371133
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "NOR",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              11.4642333984375,
+              62.36999628130772
+            ],
+            "angle": 80.530154,
+            "fontSize": 17.73713400579078,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.4987635921442,
+              400.0320354884019
+            ],
+            "estimatedWidth": 68.4653442464384
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "GBR",
+      "nameKo": "영국",
+      "shapeClass": "vertical",
+      "anchor": [
+        -1.231669,
+        52.86511
+      ],
+      "angle": -67.603435,
+      "insideRatio": 0.768405,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.557133,
+      "confidence": 0.779212,
+      "componentIds": [
+        "component-23"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 14.726595490857315,
+          "territoryWidthPx": 26.432801229688717,
+          "ratio": 0.5571333648253951,
+          "fontSizePx": 7.750839852945783
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 29.453190981714634,
+          "territoryWidthPx": 52.86560245937745,
+          "ratio": 0.557133364825395,
+          "fontSizePx": 15.501679705891569
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.75,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/gbr.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            -1.231669,
+            52.86511
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "GBR",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              -1.23046875,
+              52.86581372042818
+            ],
+            "angle": -67.603435,
+            "fontSize": 31.003359411783137,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5156868289492,
+              399.9847647149919
+            ],
+            "estimatedWidth": 58.90638196342927
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "FRA",
+      "nameKo": "프랑스",
+      "shapeClass": "separated-territory",
+      "anchor": [
+        1.707495,
+        46.341522
+      ],
+      "angle": -24.250617,
+      "insideRatio": 0.959796,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.699089,
+      "confidence": 0.970868,
+      "componentIds": [
+        "component-9"
+      ],
+      "selectedComponentCount": 1,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 22.765763225700773,
+          "territoryWidthPx": 32.56489306337597,
+          "ratio": 0.6990891442939893,
+          "fontSizePx": 7.904779216895645
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 45.531526451401554,
+          "territoryWidthPx": 65.12978612675195,
+          "ratio": 0.6990891442939893,
+          "fontSizePx": 15.809558433791294
+        }
+      ],
+      "occupancyDrift": 0,
+      "threshold": 0.85,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/fra.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            1.707495,
+            46.341522
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "FRA",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              1.7083740234375,
+              46.34313560260196
+            ],
+            "angle": -24.250617,
+            "fontSize": 31.619116867582587,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.5114885151476,
+              399.9694513592685
+            ],
+            "estimatedWidth": 91.06305290280311
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "JPN",
+      "nameKo": "일본",
+      "shapeClass": "archipelago",
+      "anchor": [
+        137.68855,
+        35.842263
+      ],
+      "angle": 25.618218,
+      "insideRatio": 0.918653,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.669522,
+      "confidence": 0.875888,
+      "componentIds": [
+        "component-50",
+        "component-88",
+        "component-32",
+        "component-53"
+      ],
+      "selectedComponentCount": 4,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 12.271914407303633,
+          "territoryWidthPx": 18.329363821883177,
+          "ratio": 0.6695221136181695,
+          "fontSizePx": 6.458903407874038
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 24.54382881460727,
+          "territoryWidthPx": 36.65872764376636,
+          "ratio": 0.6695221136181694,
+          "fontSizePx": 12.917806815748078
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.75,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-7l/jpn.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            137.68855,
+            35.842263
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "JPN",
+            "layerId": "country-labels-territory",
+            "anchor": [
+              137.6861572265625,
+              35.84008157153468
+            ],
+            "angle": 25.618218,
+            "fontSize": 25.835613631496155,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.4687273254517,
+              400.0351701843013
+            ],
+            "estimatedWidth": 49.08765762921454
+          }
+        ]
+      }
+    },
+    {
+      "countryId": "IDN",
+      "nameKo": "인도네시아",
+      "shapeClass": "archipelago",
+      "anchor": [
+        114.018504,
+        -0.859635
+      ],
+      "angle": 29.575455,
+      "insideRatio": 0.999069,
+      "baselineInsideRatio": 1,
+      "coverageRatio": 0.694354,
+      "confidence": 0.945779,
+      "componentIds": [
+        "component-73",
+        "component-2",
+        "component-222",
+        "component-102",
+        "component-56",
+        "component-261",
+        "component-139",
+        "component-161",
+        "component-192",
+        "component-180",
+        "component-92",
+        "component-55",
+        "component-103",
+        "component-107"
+      ],
+      "selectedComponentCount": 14,
+      "componentSelectionReasons": [
+        "highest area-width-compactness score",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster",
+        "joined nearby significant archipelago cluster"
+      ],
+      "occupancy": [
+        {
+          "zoom": 1.2,
+          "labelWidthPx": 20.8615682600189,
+          "territoryWidthPx": 30.044573058421047,
+          "ratio": 0.6943539593474672,
+          "fontSizePx": 4.310242458281694
+        },
+        {
+          "zoom": 2.2,
+          "labelWidthPx": 41.723136520037805,
+          "territoryWidthPx": 60.0891461168421,
+          "ratio": 0.6943539593474674,
+          "fontSizePx": 8.62048491656339
+        }
+      ],
+      "occupancyDrift": 1.1102230246251565e-16,
+      "threshold": 0.75,
+      "gates": {
+        "anchorContained": true,
+        "baselineContained": true,
+        "footprintContained": true,
+        "angleAppropriate": true,
+        "coverage": true,
+        "confidence": true,
+        "componentSelection": true,
+        "zoomPairBeforeCap": true,
+        "zoomOccupancyStable": true
+      },
+      "pass": true,
+      "screenEvidence": {
+        "screenshot": "screenshots/fix07-indonesia.png",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "camera": {
+          "center": [
+            114.018504,
+            -0.859635
+          ],
+          "zoom": 3.2,
+          "bearing": 0,
+          "pitch": 0
+        },
+        "targetVisible": true,
+        "rawLabelCount": 1,
+        "rawPerWorldCopy": {
+          "0": 1
+        },
+        "rawLabels": [
+          {
+            "countryId": "IDN",
+            "layerId": "country-labels-prototype",
+            "anchor": [
+              114.01611328125,
+              -0.8569016474398126
+            ],
+            "angle": 29.575455,
+            "fontSize": 17.24096983312678,
+            "letterSpacing": 0.06,
+            "worldCopy": 0,
+            "screenAnchor": [
+              525.4687541794646,
+              399.96427207235985
+            ],
+            "estimatedWidth": 83.44627304007561
+          }
+        ]
+      }
+    }
+  ],
+  "gates": {
+    "countryCount": 15,
+    "allNumericPassed": true,
+    "allScreenEvidencePresent": true,
+    "allTargetsVisible": true,
+    "oneRawLabelPerWorldCopy": true,
+    "coordinateOverridesAdded": false,
+    "status": "pass"
+  },
+  "limitations": [
+    "Screen occupancy is evaluated before the independent render cap at zoom 2 and 3; the actual render is additionally recorded at zoom 3.2.",
+    "Reused 7K screenshots retain their original camera while 7L performs a fresh raw-label and visibility assertion at the common zoom 3.2."
+  ]
+}

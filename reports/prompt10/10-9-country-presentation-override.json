@@ -1,0 +1,65 @@
+{
+  "stage": "10-9",
+  "status": "pass",
+  "objective": "Define one provenance-bearing CountryPresentationOverride path that remains distinct from geometry-derived automatic presentation.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-8-country-entity-core.json": "5de23c1e76d6d3d93a8733bf59d8d8e9ce53160aa8c02e78cbddc71b641b1144"
+  },
+  "outputHashes": {
+    "src/lib/world/country-presentation-override.ts": "f8b86e7bebdc051016c6da6762e986b39ab6dc58a973bfcf7c646d2ba16cef40",
+    "src/lib/world/country-presentation-override.test.ts": "d26815eae551f749c93156737caa3a57a6eda039f99076dfb78290a6c42c1269",
+    "src/lib/world/country-entity.ts": "c7417c968f5913de9417771d6f4ca69182c01c99ff36118d51b111ddfc87fdb9",
+    "src/lib/world/country-entity.test.ts": "aa2f660ac952f9f658b90c7b19bd733c839fb33894e8ea9b0afba88b7e3ce5b7"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-9-country-presentation-override.json",
+    "src/lib/world/country-entity.test.ts",
+    "src/lib/world/country-entity.ts",
+    "src/lib/world/country-presentation-override.test.ts",
+    "src/lib/world/country-presentation-override.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-8 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add CountryPresentationOverride targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-presentation-override.test.ts", "exitCode": 1, "note": "Expected red test: country-presentation-override module did not exist."},
+    {"command": "Implement the single presentationOverride contract and integrate it with the v2 CountryEntity core", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-presentation-override.test.ts src/lib/world/country-entity.test.ts src/lib/world/country-names.test.ts src/lib/world/country-id.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/country-presentation-override.ts src/lib/world/country-presentation-override.test.ts src/lib/world/country-entity.ts src/lib/world/country-entity.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "countryPresentationOverrideFields": 6,
+    "manualValueFields": 4,
+    "duplicatePresentationInputPathsAccepted": 0,
+    "targetedTestFilesPassed": 4,
+    "targetedTestsPassed": 43,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 2,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "overrideDistinctFromAutomaticPresentation": true,
+    "overrideRequiresReason": true,
+    "overrideRequiresPolicyVersion": true,
+    "singleCountryEntityOverridePath": true,
+    "presentationInputRejected": true,
+    "initialPresentationInputRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-10"
+}

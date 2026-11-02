@@ -1,0 +1,16 @@
+{
+  "stage": "12-R6",
+  "status": "PASS",
+  "summary": "The server validator now covers narrative references, causality, all six world-effect families, territory ownership, and subdivision provenance before a resolution can leave the provider boundary.",
+  "evidence": {
+    "implementation": [
+      "src/lib/simulation/server/context-resolution-validator.ts",
+      "src/lib/simulation/semantic-validator.ts"
+    ],
+    "tests": [
+      "src/lib/simulation/server/provider-route.test.ts",
+      "src/lib/simulation/simulation-contract.test.ts"
+    ],
+    "result": "27 tests passed; server-pass/local-fail reference fixtures: 0"
+  }
+}

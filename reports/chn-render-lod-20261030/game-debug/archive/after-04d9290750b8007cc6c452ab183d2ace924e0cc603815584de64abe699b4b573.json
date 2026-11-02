@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "actual-game-debug-scope-browser-v1",
+  "label": "after",
+  "pass": false,
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "code": [
+    {
+      "path": "scripts/chn-2020/verify-game-debug-scope.mjs",
+      "sha256": "aef6b1707b3fb98986d1fe394598032b57473e8f5ef91594dd0dc3d66a9d0630",
+      "byteLength": 31668
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "8f99aaf06f0b54d311a2f42492e3d3eea8b926868ddfb763e4927f626ed62c1c",
+      "byteLength": 25825
+    },
+    {
+      "path": "src/components/layout/OperationalGameSetupShell.tsx",
+      "sha256": "eaec0a919045664f712af8a782e1a68983c7e97bdc768fc46c604ea01c2377f3",
+      "byteLength": 5815
+    },
+    {
+      "path": "src/components/game/CatalogGameScreen.tsx",
+      "sha256": "e938d8841620ddf409db0772ca1e1c095092666e7db2f9df965a94cd5d65940a",
+      "byteLength": 16178
+    },
+    {
+      "path": "src/components/game/WarAndSystemOverlays.tsx",
+      "sha256": "49d224d3ca83a65f50a194fec28fa4ff2e4fa047b3bee98a8542152ab157fc04",
+      "byteLength": 5906
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "69f310197982f063c8ad706b9d7663383e831de2468b6b443f16fab5ee70bcc7",
+      "byteLength": 35395
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "8714a385b3f2e544d3da64de2e819585feb5139487a8d2f3ccb1ce35d36437c5",
+      "byteLength": 7700
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "7ae5bb3888113f90f9180fe60ff780fc112aa3c81577d57aacaae8851e95f451",
+      "byteLength": 37131
+    },
+    {
+      "path": "src/lib/map/operational-debug-boundary-scope.ts",
+      "sha256": "3f2e2e09c128ff213435f2a1816522b79c42ade2b6b5d52d3cf5ea2776e04e93",
+      "byteLength": 6390
+    },
+    {
+      "path": "src/lib/map/operational-pointer-hover.ts",
+      "sha256": "3f92904a4a2d9cba57dc34dd892faf4c10ce106160ec8ecbdd8510cabb3a5c20",
+      "byteLength": 1412
+    },
+    {
+      "path": "src/lib/map/operational-delivery.server.ts",
+      "sha256": "0ab3b5467ad4d14e860d1aaf3e9415e87cb7e268079723d58e18afc3f851f03a",
+      "byteLength": 4736
+    }
+  ],
+  "conditions": {
+    "url": "http://127.0.0.1:3001",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "browser": "fresh isolated Chromium; software WebGL permitted",
+    "actualGameEntry": "search CHN, confirm play country, wait for /game",
+    "debugToggle": "HUD settings checkbox click and keyboard Space; no debug bridge setter",
+    "hover": "real mouse pointer; geometry/camera diagnostic bridge only",
+    "httpCache": "disabled by interception; immutable application caches remain enabled",
+    "externalAiCalls": 0,
+    "turnsSubmitted": 0,
+    "permittedGamePosts": [
+      "start",
+      "select-player"
+    ],
+    "existingUserSessionsTouched": 0,
+    "limitation": "Presentation/scope regression only. No turn is advanced; exact authoritative fills and base PBF byte count are unchanged by stroke LOD."
+  },
+  "expectedScopes": {
+    "PRK": [
+      "CHN",
+      "KOR",
+      "PRK",
+      "RUS"
+    ],
+    "CHN": [
+      "AFG",
+      "BTN",
+      "CHN",
+      "HKG",
+      "IND",
+      "KAZ",
+      "KGZ",
+      "LAO",
+      "MMR",
+      "MNG",
+      "NPL",
+      "PAK",
+      "PRK",
+      "RUS",
+      "TJK",
+      "VNM"
+    ],
+    "USA": [
+      "CAN",
+      "CUB",
+      "MEX",
+      "USA"
+    ]
+  },
+  "sourceCellCounts": {
+    "total": 8005,
+    "CHN": 3320
+  },
+  "views": [],
+  "screenshots": [],
+  "requests": [],
+  "commands": [],
+  "failures": [
+    {
+      "message": "browserType.launch: Executable doesn't exist at C:\\Users\\SSAFY\\AppData\\Local\\Packages\\sandbox.{13659112-019f-4e31-bc96-fb181f0ab4b7}\\AC\\ms-playwright\\chromium_headless_shell-1234\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝",
+      "stack": "browserType.launch: Executable doesn't exist at C:\\Users\\SSAFY\\AppData\\Local\\Packages\\sandbox.{13659112-019f-4e31-bc96-fb181f0ab4b7}\\AC\\ms-playwright\\chromium_headless_shell-1234\\chrome-headless-shell-win64\\chrome-headless-shell.exe\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝\n    at D:\\gen\\scripts\\chn-2020\\verify-game-debug-scope.mjs:146:28\n    at async node:internal/modules/esm/loader:643:26"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "cleanup": [],
+  "fullCountryGeometryRequests": [],
+  "microLodRequests": [],
+  "elapsedMs": 10.84190000000001
+}

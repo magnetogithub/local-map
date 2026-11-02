@@ -1,0 +1,431 @@
+# Pax Local 6차 작업: 국경 형상 기반 동적 국가명 배치 시스템
+
+당신은 기존 `pax-local` 프로젝트를 이어서 수정하는 GIS·MapLibre·계산기하·프런트엔드 개발자다. 새 프로젝트를 만들지 말고 현재 작업 중인 파일을 보존하며 구현하라.
+
+이번 작업의 중심은 **현재 국가 Polygon 형상으로부터 국가명 위치·방향·크기·자간을 자동 계산하는 동적 라벨 알고리즘**이다. 2020년 OTL 지도에서 먼저 완성하되, 향후 전쟁·조약·분할·합병으로 국경이 바뀌어도 동일 알고리즘에 새 Polygon을 넣으면 라벨이 다시 배치되는 구조여야 한다.
+
+모바일은 지원하지 않는다. 1280×720 이상 PC 환경만 대상으로 한다.
+
+---
+
+## 1. 작업 시작 전 현재 상태 확인
+
+다음을 먼저 읽고 현재 5차 작업의 미완성 변경을 파악하라.
+
+- `prompts/PROMPT_05_HOI4_COUNTRY_LABEL_SYSTEM_AND_VALIDATION.txt`
+- `scripts/prepare-map-data.mjs`
+- `src/components/map/WorldMap.tsx`
+- `src/lib/map/map-config.ts`
+- `src/lib/map/map-data.test.ts`
+- `src/types/map-debug.ts`
+- `src/data/country-label-overrides-2020.json`
+- `src/data/country-label-metrics-2020.json`
+- `public/data/maps/country-labels-2020.geojson`
+- `e2e/game-setup.spec.ts`
+- `scripts/capture-fix05.mjs`
+- `screenshots/fix05-*.png`
+- `package.json`
+
+이 폴더는 Git 저장소가 아닐 수 있으므로 Git 명령 실패를 작업 실패로 오인하지 마라. 기존 파일을 임의로 원복하지 말고 현재 상태 위에서 수정한다.
+
+현재 확인된 5차 구현 상태:
+
+- 국가별 최종 라벨을 Point 하나로 생성해 line-center 타일 분할 중복을 피하는 구조가 들어갔다.
+- 주요국·일반국을 하나의 `territory-point` 레이어 계열로 정리했다.
+- 확대 시 동일 국가명이 2~3개 생기는 문제를 검사하는 E2E가 추가됐다.
+- Admin 1 최종 boundary 피처 수를 별도로 계산하는 수정이 들어갔다.
+- 하지만 라벨 배치는 아직 `largestPolygon`, Natural Earth 선호 좌표, 단일 PCA 방향에 크게 의존한다.
+- 글자 크기는 `fontSizeWorld`, `fontSizeMid`, `fontSizeClose`의 56~60px 부근 고정 픽셀 보간이다.
+- 이 방식은 국경 변경을 입력으로 받아 라벨을 일반적으로 재계산하는 독립 알고리즘이 아니다.
+
+보존할 부분:
+
+- 국가당 단일 최종 Point 라벨 피처 원칙
+- 레이어 중복 방지
+- KAS→IND, KAB→KAZ dissolve 및 기존 경계 수정
+- PSX, SDS, SOL 플레이 가능 상태
+- 검색·선택·플레이 국가 확정
+- Admin 1 검증 수정 중 올바른 부분
+
+교체할 부분:
+
+- 국가별 고정 선호 좌표 중심 배치
+- largest polygon만 고르는 단순 정책
+- 단일 PCA 축만으로 방향을 정하는 로직
+- 고정 px 상한 중심의 글자 크기 계산
+- 실제 텍스트 상자가 국토 내부에 들어가는지 검증하지 않는 방식
+
+---
+
+## 2. 목표 구조
+
+MapLibre 컴포넌트에서 계산기하를 수행하지 마라. 순수 계산 모듈로 분리한다.
+
+최소한 다음과 동등한 인터페이스를 구현하라.
+
+```ts
+type CountryLabelLayoutInput = {
+  countryId: string;
+  geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon;
+  label: string;
+  previousLayout?: CountryLabelLayout;
+  policy?: CountryLabelPolicy;
+};
+
+type CountryLabelLayout = {
+  countryId: string;
+  anchor: [number, number];
+  angle: number;
+  baseline: GeoJSON.LineString;
+  availableWidthWorld: number;
+  availableHeightWorld: number;
+  targetTextWidthWorld: number;
+  fontSizeWorldUnits: number;
+  letterSpacing: number;
+  coverageRatio: number;
+  insideRatio: number;
+  confidence: number;
+  componentIds: string[];
+};
+
+function computeCountryLabelLayout(
+  input: CountryLabelLayoutInput
+): CountryLabelLayout;
+```
+
+요구사항:
+
+- 입력 geometry만 바뀌면 같은 함수로 새 결과를 계산할 수 있어야 한다.
+- DOM, MapLibre map 객체, React state에 의존하지 않는 순수 함수여야 한다.
+- 빌드 시 2020년 전체 국가를 계산하는 데 사용한다.
+- 런타임에는 변경된 국가만 재계산할 수 있어야 한다.
+- Web Worker로 이동 가능한 데이터 구조와 직렬화 가능한 입출력을 사용한다.
+- 결정적 알고리즘이어야 한다. 같은 입력에서 같은 결과가 나와야 한다.
+
+---
+
+## 3. 좌표계와 날짜변경선 처리
+
+위·경도 좌표에서 거리와 PCA를 그대로 계산하지 마라.
+
+- 국가별 로컬 투영 좌표계를 사용하거나 Web Mercator/world coordinate로 변환한다.
+- 고위도 국가의 경도 축척 왜곡을 고려한다.
+- 러시아처럼 날짜변경선에 걸친 geometry는 longitude unwrap 후 계산한다.
+- 레이아웃 결과를 다시 정규 지도 좌표로 변환한다.
+- 월드 복사본마다 계산 결과를 따로 생성하지 않는다. canonical layout 하나를 렌더러가 복사한다.
+- antimeridian 폐합선을 실제 국토 장축으로 오인하면 실패다.
+
+---
+
+## 4. 유효 라벨 영토 선택
+
+MultiPolygon 전체 bounding box 또는 무조건 가장 큰 Polygon만 사용하지 마라.
+
+각 연결 성분의 다음 요소를 평가한다.
+
+- 면적
+- 다른 주요 성분과의 거리
+- 인구·수도 정보가 있으면 보조 정보
+- 전체 국가 형상에서 차지하는 비율
+- 라벨을 수용할 수 있는 내부 폭
+- 해외 영토·작은 섬·멀리 떨어진 부속 영토 여부
+
+미국은 연속 본토가 기본 라벨 영역이 되어야 하며 알래스카·하와이 때문에 축이 틀어지면 안 된다. 프랑스는 유럽 본토가 기본 영역이어야 한다. 인도네시아·일본처럼 군도 자체가 국가 본체인 경우에는 서로 가까운 주요 성분 묶음을 사용할 수 있어야 한다.
+
+국가 ID별 고정 anchor를 넣지 말고, 필요하면 일반화된 `CountryLabelPolicy`로 다음 정도만 보정한다.
+
+- 포함할 성분의 최소 면적 비율
+- 가까운 성분을 묶는 거리
+- 최대 허용 회전각
+- 직선형/군도형/세로형 후보 전략 우선순위
+
+정책은 알고리즘의 보조 입력이어야 하며 결과 좌표를 직접 지정해서는 안 된다.
+
+---
+
+## 5. Polygon 내부 최대 라벨 영역 탐색
+
+핵심 알고리즘은 국가 Polygon 안에 국가명 종횡비를 수용하는 큰 회전 사각형 또는 이에 준하는 내부 라벨 corridor를 찾는 것이다.
+
+권장 절차:
+
+1. 유효 라벨 영토를 단순화한 계산용 geometry로 만든다.
+2. polylabel 또는 동등한 방식으로 안전한 내부 후보점을 구한다.
+3. PCA, minimum rotated rectangle, 주요 skeleton/corridor 방향 및 고정 각도 샘플로 후보 각도를 만든다.
+4. 내부 grid 또는 adaptive sampling으로 여러 후보 중심점을 만든다.
+5. 각 중심·각도에서 국경까지의 전후·상하 가용 거리를 측정한다.
+6. 국가명의 실제 종횡비를 수용하는 최대 회전 사각형을 추정한다.
+7. 회전 사각형 또는 텍스트 footprint를 Polygon과 교차시켜 내부 비율을 계산한다.
+8. 가장 큰 글자 크기뿐 아니라 중앙성·국경 이탈·이전 레이아웃과의 안정성을 포함해 점수화한다.
+9. 상위 후보에 대해 더 촘촘한 탐색을 수행한다.
+
+정확한 straight skeleton 구현이 과도하면 adaptive rotated-rectangle search로 시작해도 된다. 그러나 단순 PCA 직선 한 번으로 완료 처리하지 마라.
+
+권장 점수 개념:
+
+```ts
+score =
+  readableTextSize
+  + territoryCoverage
+  + centrality
+  + interiorClearance
+  + previousLayoutStability
+  - outsidePenalty
+  - fragmentationPenalty
+  - excessiveRotationPenalty;
+```
+
+필수 산출 지표:
+
+- 라벨 footprint의 자국 영토 내부 비율 `insideRatio`
+- 유효 장축 대비 라벨 폭 `coverageRatio`
+- 후보 신뢰도 `confidence`
+- 가용 폭과 높이
+
+---
+
+## 6. 실제 한글 텍스트 크기 측정
+
+문자 수에 `.92`를 곱하는 현재 근사만으로 최종 크기를 정하지 마라.
+
+- 실제 사용 폰트와 동일하거나 재현 가능한 font metrics를 사용한다.
+- 빌드 스크립트와 브라우저 결과가 크게 다르지 않도록 측정 방식을 고정한다.
+- Canvas `measureText`, OpenType glyph advance 또는 검증된 동등 방식을 사용할 수 있다.
+- 폰트 로딩 전 fallback 측정 결과를 최종값으로 캐시하지 않는다.
+- 한글, 공백, 긴 이름, 두 글자 이름을 각각 검증한다.
+
+국가명 목표 폭:
+
+```ts
+targetTextWidthWorld = availableWidthWorld * widthUsage;
+```
+
+기본 `widthUsage`는 대형국 0.70~0.88, 중형국 0.50~0.75 범위에서 형상과 confidence에 따라 정한다.
+
+---
+
+## 7. 줌과 함께 커지고 작아지는 렌더링
+
+현재처럼 줌 1·3·6에서 56px→58px→60px 정도로만 변하는 방식은 폐기한다. 라벨 크기는 국토와 동일한 world-space 기준을 가져야 한다.
+
+기준 관계:
+
+```ts
+screenFontSizePx = fontSizeWorldUnits * pixelsPerWorldUnit(currentZoom, latitude)
+```
+
+또는 기준 줌을 사용한다면 다음과 동등한 지수 관계를 사용한다.
+
+```ts
+screenFontSizePx = baseFontSizePx * 2 ** (zoom - referenceZoom)
+```
+
+MapLibre expression은 지수 확대를 반영해야 한다. 몇 개 줌 단계의 거의 동일한 고정 px 값으로 흉내 내지 마라.
+
+요구사항:
+
+- 확대하면 국가명도 국토와 함께 명확히 커진다.
+- 축소하면 국가명도 함께 작아진다.
+- 같은 국가에서 `라벨 화면 폭 / 유효 국토 화면 폭` 비율이 줌 변화에도 대체로 일정해야 한다.
+- 최소 가독성 크기 미만에서는 억지로 크게 만들지 말고 라벨을 숨긴다.
+- 최대 크기는 화면 폭주 방지용 안전장치일 뿐 주 계산 기준이 아니다.
+- 최대 크기에 도달했을 때 국토 점유율이 깨지는 경우 라벨 표시 정책을 명시한다.
+- 확대 중 위치·각도·크기가 갑자기 튀지 않아야 한다.
+
+MapLibre symbol text가 이 요구를 안정적으로 충족하지 못하면, 국가명 전용 Canvas/WebGL custom layer 또는 다른 단일 인스턴스 렌더링 방식을 비교 검토하라. 기술 선택과 이유를 최종 보고에 적는다.
+
+---
+
+## 8. 국경 변경에 대한 동적 재계산
+
+현재 실제 게임 편집 UI를 만들 필요는 없지만, 알고리즘 수준의 국경 변경 시뮬레이션을 구현한다.
+
+필수 시나리오:
+
+1. Polygon 동쪽 일부 제거
+2. 인접 영토 일부 합병
+3. 한 국가를 떨어진 두 영역으로 분할
+4. 두 Polygon을 하나로 합병
+5. 가늘고 긴 corridor 추가 또는 제거
+
+각 변경 후:
+
+- 고정 override 좌표 없이 새 anchor·angle·크기를 계산한다.
+- anchor가 새 영토 안에 있어야 한다.
+- 라벨 footprint 대부분이 새 영토 안에 있어야 한다.
+- 제거된 영토 위에 기존 라벨이 남지 않아야 한다.
+- `previousLayout`이 있으면 비슷한 후보 중 급격한 점프가 적은 결과를 선택한다.
+
+향후 런타임 호출을 위한 API를 마련한다.
+
+```ts
+recomputeCountryLabels(changedCountries, previousLayouts)
+```
+
+전체 세계를 매번 다시 계산하지 말고 영향받은 국가만 계산할 수 있어야 한다.
+
+---
+
+## 9. 렌더 중복 방지
+
+5차 작업의 국가당 단일 Point 렌더링 원칙은 유지한다.
+
+- 한 월드 복사본에서 동일 `countryId` 라벨은 하나만 보인다.
+- 확대할수록 두 개, 세 개로 늘어나지 않는다.
+- 일반국·대형국·소국가 레이어 집합은 상호 배타적이다.
+- 선택·hover·플레이 강조가 텍스트를 복제하지 않는다.
+- 디버그 함수가 국가별 결과를 임의로 Map에서 deduplicate해 실제 중복을 숨기면 안 된다.
+
+현재 `getRenderedCountryLabels()`는 `Map`으로 같은 `countryId`를 먼저 제거하므로 실제 중복 검증에 사용할 수 없다. raw rendered label instance를 반환하는 함수와 논리적으로 deduplicate한 함수를 분리하라.
+
+```ts
+getRawRenderedCountryLabels()
+getRenderedCountryLabels()
+getRenderedCountryLabelCount(countryId, { raw: true })
+```
+
+E2E 중복 검증은 반드시 raw 결과를 사용한다.
+
+---
+
+## 10. 대표 국가 검증
+
+다음 국가를 반드시 시각·수치 검증한다.
+
+- 러시아, 캐나다, 미국, 중국, 브라질, 호주, 인도
+- 카자흐스탄, 아르헨티나
+- 칠레, 노르웨이
+- 영국, 프랑스
+- 일본, 인도네시아
+
+각 국가별 검증 항목:
+
+- anchor가 선택된 자국 라벨 영토 내부인가
+- 기준선과 라벨 footprint 대부분이 자국 영토 내부인가
+- angle이 실제 국토의 유효 방향과 일치하는가
+- `insideRatio`가 허용 기준 이상인가
+- `coverageRatio`가 목표 범위인가
+- 확대·축소 시 화면상 점유 비율이 안정적인가
+- raw 렌더 라벨이 한 월드 복사본당 하나인가
+
+칠레·노르웨이는 세로 또는 사선 배치를 허용한다. 일본·인도네시아는 군도형 정책을 검증한다. 러시아는 날짜변경선 unwrap을 검증한다.
+
+---
+
+## 11. 자동 테스트
+
+단위 테스트:
+
+- 순수 함수의 결정성
+- anchor polygon containment
+- rotated footprint insideRatio
+- coverageRatio 범위
+- angle upright 정규화
+- antimeridian unwrap
+- MultiPolygon 성분 선택
+- 실제 한글 text metric
+- 줌 1→2→3에서 화면 크기가 world-space 배율과 함께 증가
+- 줌별 라벨/국토 폭 비율 안정성
+- 5가지 가상 국경 변경 후 자동 재배치
+- 국가별 고정 좌표 override 없이 대표 국가 통과
+
+E2E 테스트:
+
+- 러시아를 여러 줌에서 캡처하고 화면 글자 폭이 실제로 증가하는지 측정
+- 같은 구간에서 러시아 국토 폭 대비 글자 폭 비율이 허용 오차 내인지 확인
+- 대표 대형국 raw 라벨 개수 1
+- 날짜변경선 드래그 후 월드 복사본당 raw 라벨 개수 1
+- 소국가 minZoom
+- 검색·선택·플레이 회귀
+- 시아첸·바이코누르·추코트카 회귀
+
+단순히 GeoJSON Point 수가 하나라는 테스트만으로 렌더 중복 통과 처리하지 마라.
+
+---
+
+## 12. 단계적 구현과 중간 보고
+
+전체 256개 라벨에 바로 적용하기 전에 다음 순서를 지켜라.
+
+1. 순수 알고리즘 및 테스트 작성
+2. 러시아·미국·중국·칠레·인도네시아 5개국 프로토타입
+3. 수치 결과와 스크린샷 확인
+4. 알고리즘이 형상 변경 테스트를 통과하는지 확인
+5. 전체 국가로 확장
+6. 성능 및 회귀 검증
+
+5개국 프로토타입이 실패하면 국가별 좌표 override를 대량 추가해 우회하지 말고 원인과 알고리즘 수정 방향을 보고하라.
+
+---
+
+## 13. 필수 스크린샷
+
+render-settled 이후 동일 viewport 조건으로 생성한다.
+
+```text
+screenshots/fix06-russia-z1.png
+screenshots/fix06-russia-z2.png
+screenshots/fix06-russia-z3.png
+screenshots/fix06-usa-canada.png
+screenshots/fix06-china.png
+screenshots/fix06-chile-norway.png
+screenshots/fix06-japan-indonesia.png
+screenshots/fix06-europe.png
+screenshots/fix06-world-copy-before.png
+screenshots/fix06-world-copy-after.png
+screenshots/fix06-border-change-before.png
+screenshots/fix06-border-change-after.png
+```
+
+각 이미지에 대응하는 center, zoom, viewport, 계산된 layout 수치도 JSON 보고서로 저장한다.
+
+---
+
+## 14. 성능 기준
+
+- 2020년 전체 라벨 사전 계산 시간을 측정한다.
+- 대표 단일 국가 재계산 시간을 측정한다.
+- 런타임 재계산은 Web Worker로 옮길 수 있게 UI 스레드 의존성을 없앤다.
+- 계산용 geometry는 적절히 단순화하되 최종 containment 검증은 충분한 해상도 geometry로 수행한다.
+- 결과를 geometry hash 또는 버전과 함께 캐시할 수 있게 한다.
+- 정확도를 희생하는 성능 최적화는 전후 지표를 보고한다.
+
+---
+
+## 15. 완료 조건
+
+1. 라벨이 고정 좌표·고정 각도·고정 px 중심 방식이 아니라 현재 Polygon에서 계산된다.
+2. 확대·축소 시 국가명은 국토와 함께 커지고 작아진다.
+3. 라벨/국토 화면 폭 비율이 줌 변화에도 안정적이다.
+4. 대표 국가의 방향과 위치가 실제 국토 형상에 적합하다.
+5. 가상 국경 변경 후 별도 좌표 수정 없이 라벨이 재배치된다.
+6. 한 월드 복사본에서 국가명은 하나만 렌더링된다.
+7. raw 렌더 결과로 중복을 검증한다.
+8. 기존 지도·경계·검색·선택·플레이 기능이 유지된다.
+9. 데이터 생성, lint, unit test, production build가 통과한다.
+10. 전체 Playwright가 2회 연속 통과한다.
+11. 필수 스크린샷과 layout 수치 보고서가 생성된다.
+
+실패한 항목이 있으면 전체 완료라고 보고하지 마라. 구현이 장시간 걸릴 경우에도 고정 좌표 방식으로 되돌아가지 말고, 완료된 단계와 미완료 단계를 구분해 보고한다.
+
+---
+
+## 16. 최종 보고 형식
+
+1. 변경한 파일
+2. 5차 구현에서 보존한 부분과 교체한 부분
+3. 계산 모듈 구조와 공개 인터페이스
+4. 좌표계 및 antimeridian 처리
+5. MultiPolygon 라벨 영토 선택 방법
+6. 후보 중심·각도·회전 사각형 탐색 방법
+7. 실제 한글 텍스트 측정 방법
+8. world-space 크기와 줌 렌더링 공식
+9. 대표 15개국의 anchor, angle, insideRatio, coverageRatio, confidence
+10. 가상 국경 변경 테스트 결과
+11. 전체/단일 국가 계산 시간
+12. raw 중복 검증 결과
+13. 모든 실행 명령과 결과
+14. 스크린샷 및 JSON 보고서 경로
+15. 남아 있는 제한사항
+
+“국가당 데이터 피처 하나”, “화면상 라벨 하나”, “국경 형상에 맞는 배치”는 서로 다른 조건이다. 세 조건을 각각 증명하라.

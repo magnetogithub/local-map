@@ -1,0 +1,93 @@
+{
+  "required": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/planning/territorial-control-planner.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/catalog-occupation-browser-contract.test.ts src/lib/world/world-state-v3.test.ts src/lib/simulation/simulation-state-v2.test.ts src/lib/simulation/simulation-contract.test.ts src/lib/simulation/turn-runtime.test.ts src/lib/simulation/server/provider-route.test.ts src/lib/simulation/client/turn-request.test.ts src/lib/map/catalog-consumer.test.ts src/lib/game-ui/catalog-map-ui-settings-adapter.test.ts src/lib/game-ui/news-projection.test.ts --reporter=default --reporter=json --outputFile=.tmp/prompt14-occupation/14-14-regression-tests.json",
+      "exitCode": 0,
+      "evidence": "14-14-regression-tests.json",
+      "passed": 168,
+      "skipped": 1
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/country-color-runtime.test.ts src/lib/map/catalog-consumer.test.ts --reporter=default --reporter=json --outputFile=.tmp/prompt14-occupation/14-14-revision-tests.json",
+      "exitCode": 0,
+      "evidence": "14-14-revision-tests.json",
+      "passed": 37,
+      "skipped": 0
+    },
+    {
+      "command": "PROMPT14_OCCUPATION_EVIDENCE=.tmp/prompt14-occupation/browser-complete/occupation-smoke-evidence.json node node_modules/vitest/vitest.mjs run src/lib/simulation/catalog-occupation-browser-contract.test.ts --reporter=default --reporter=json --outputFile=.tmp/prompt14-occupation/14-14-browser-complete-contract-tests.json",
+      "exitCode": 0,
+      "evidence": "14-14-browser-complete-contract-tests.json",
+      "passed": 2,
+      "skipped": 0
+    },
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "npx.cmd eslint (all 29 occupation/shared source, test and smoke files listed in changedFiles)",
+      "exitCode": 0,
+      "additionalWriterLint": "npx.cmd eslint scripts/write-prompt14-occupation-checkpoint.mjs scripts/smoke-prompt14-occupation.mjs src/lib/projection/catalog-color-projection.ts src/lib/simulation/country-color-runtime.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts"
+    },
+    {
+      "command": "npm.cmd run build",
+      "exitCode": 0,
+      "toolSession": 49932
+    },
+    {
+      "command": "node scripts/run-prompt14-occupation-smoke.mjs 3141 .tmp/prompt14-occupation/browser-complete",
+      "exitCode": 0,
+      "evidence": "browser-complete/occupation-smoke-evidence.json"
+    },
+    {
+      "command": "node scripts/run-prompt14-production-cutover-smoke.mjs 3140 .tmp/prompt14-occupation/cutover-complete",
+      "exitCode": 0,
+      "evidence": "cutover-complete/runtime-smoke-evidence.json"
+    },
+    {
+      "command": "node scripts/verify-prompt14-catalog-consumer.mjs .tmp/prompt14-occupation/browser-boundary-final .tmp/prompt14-review-c/catalog-first",
+      "exitCode": 0
+    },
+    {
+      "command": "verifyCatalogArtifactBytes(data/catalogs/prompt14/frozen version)",
+      "exitCode": 0,
+      "evidence": "frozen-artifact-verification.json"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "failures": [
+    {
+      "command": "14-13 initial/second tests",
+      "exitCode": 1,
+      "evidence": [
+        "14-13-first-tests.json",
+        "14-13-second-tests.json"
+      ]
+    },
+    {
+      "command": "npx.cmd tsc --noEmit (intermediate branded-ID and protocol closure fixes)",
+      "exitCode": 1
+    },
+    {
+      "command": "node scripts/run-prompt14-occupation-smoke.mjs 3141 .tmp/prompt14-occupation/browser-first",
+      "exitCode": 1
+    },
+    {
+      "command": "node scripts/run-prompt14-occupation-smoke.mjs 3141 .tmp/prompt14-occupation/browser-final",
+      "exitCode": 1
+    },
+    {
+      "command": "node scripts/run-prompt14-production-cutover-smoke.mjs 3140 .tmp/prompt14-occupation/cutover-regression",
+      "exitCode": 1
+    },
+    {
+      "command": "node scripts/run-prompt14-production-cutover-smoke.mjs 3140 .tmp/prompt14-occupation/cutover-final",
+      "exitCode": 1
+    }
+  ],
+  "recording": "Actual local tool exit codes; browser result and Vitest JSON evidence retained. Aggregate regression skipped captured-browser case was separately executed with evidence and passed."
+}

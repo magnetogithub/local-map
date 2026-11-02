@@ -1,0 +1,61 @@
+{
+  "stage": "10-12",
+  "status": "pass",
+  "objective": "Enforce that every Territory ownerCountryId references an active country or is null.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-11-territory-entity.json": "392f9d7a02a531c49ef106d46972911631d0585bdfd1b31843351173d926e76d"
+  },
+  "outputHashes": {
+    "src/lib/world/territory-owner-invariants.ts": "d4e53294272efbabf320ee183c0f2d3eaf800959277cb9bb97b706ed5b5c7a4d",
+    "src/lib/world/territory-owner-invariants.test.ts": "2a4e12cbf3233c10bd787f4bb82f8f54958e9e1d53764cf51ae9336e093bf6a0"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-12-territory-owner-reference.json",
+    "src/lib/world/territory-owner-invariants.test.ts",
+    "src/lib/world/territory-owner-invariants.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-11 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add Territory owner reference targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-owner-invariants.test.ts", "exitCode": 1, "note": "Expected red test: territory-owner-invariants module did not exist."},
+    {"command": "Implement active/null owner reference validation with distinct unknown and retired errors", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-owner-invariants.test.ts src/lib/world/territory-entity.test.ts src/lib/world/territory-id.test.ts src/lib/world/country-id.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/territory-owner-invariants.ts src/lib/world/territory-owner-invariants.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "activeOwnerReferenceFailures": 0,
+    "nullOwnerReferenceFailures": 0,
+    "unknownOwnerReferencesAccepted": 0,
+    "retiredOwnerReferencesAccepted": 0,
+    "targetedTestFilesPassed": 4,
+    "targetedTestsPassed": 46,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "activeOwnerAccepted": true,
+    "nullOwnerAccepted": true,
+    "unknownOwnerRejected": true,
+    "retiredOwnerRejected": true,
+    "errorIdentifiesTerritory": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-13"
+}

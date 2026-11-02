@@ -1,0 +1,62 @@
+{
+  "stage": "10-11",
+  "status": "pass",
+  "objective": "Define TerritoryEntity with only id, nullable ownerCountryId, geometry, and territory-scoped properties.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-10-territory-id-contract.json": "bdbab2e22397f4f3023695295c970f013f9f3a54f08b64c15335997d511840c0"
+  },
+  "outputHashes": {
+    "src/lib/world/territory-entity.ts": "43b4e1cecc95f8528ca19fc67842e4a6acea7753b1eccb41a96574ac9609b7f7",
+    "src/lib/world/territory-entity.test.ts": "822527cdb7a6720877dcd6007cc1053fb7101b3f3d1247cefdc9b2ef83ccecb9"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-11-territory-entity.json",
+    "src/lib/world/territory-entity.test.ts",
+    "src/lib/world/territory-entity.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-10 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add TerritoryEntity targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-entity.test.ts", "exitCode": 1, "note": "Expected red test: territory-entity module did not exist."},
+    {"command": "Implement the four-field TerritoryEntity and country-metadata exclusion rules", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-entity.test.ts src/lib/world/territory-id.test.ts src/lib/world/country-entity.test.ts src/lib/world/country-id.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/territory-entity.ts src/lib/world/territory-entity.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "territoryEntityFields": 4,
+    "topLevelCountryMetadataFieldsAccepted": 0,
+    "propertiesCountryMetadataFieldsAccepted": 0,
+    "nullableOwnerAccepted": true,
+    "targetedTestFilesPassed": 4,
+    "targetedTestsPassed": 54,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "territoryEntityHasExactFourFields": true,
+    "territoryIdTyped": true,
+    "ownerCountryIdNullable": true,
+    "geometryOwnedByTerritory": true,
+    "propertiesTerritoryScoped": true,
+    "countryMetadataNotDuplicated": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-12"
+}

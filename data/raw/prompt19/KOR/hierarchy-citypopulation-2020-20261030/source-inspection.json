@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "fine-source-hierarchy-inspection-v1",
+  "sourceLock": {
+    "path": "data/source-locks/prompt19/KOR-ADM2-2020.json",
+    "sha256": "9ca1908aaf24670f00dd6756bbab9594c2b52fba86715c2b33d7fb400df55e12",
+    "byteLength": 3371
+  },
+  "publishedFeatures": 228,
+  "publishedProperties": [
+    "shapeName",
+    "shapeISO",
+    "shapeID",
+    "shapeGroup",
+    "shapeType"
+  ],
+  "nativeParentCodeAvailable": false,
+  "sameReleaseAdm1": {
+    "boundaryID": "KOR-ADM1-68945753",
+    "boundaryISO": "KOR",
+    "boundaryYear": "2021",
+    "boundaryType": "ADM1",
+    "boundarySource": "Natural Earth",
+    "boundaryCanonical": "Province",
+    "boundaryLicense": "Public Domain",
+    "licenseDetail": "",
+    "licenseSource": "https//www.naturalearthdata.com/about/terms-of-use/",
+    "boundarySourceURL": "https//www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-details/",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "admUnitCount": "17",
+    "meanVertices": "262.0",
+    "minVertices": "11",
+    "maxVertices": "1470",
+    "meanPerimeterLengthKM": "600.3087985240273",
+    "maxPerimeterLengthKM": "2337.6991630328953",
+    "minPerimeterLengthKM": "51.24625059572322",
+    "meanAreaSqKM": "5796.700453996686",
+    "minAreaSqKM": "133.0237106818151",
+    "maxAreaSqKM": "19171.038611090447"
+  },
+  "sameReleaseAdm1SuitableForCoherentHierarchy": false,
+  "originalArchive": {
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen/KOR_ADM2.zip",
+    "sha256": "117c794aadaa4e8fd8f690da90b9d129c9a1329f61a4882d2b6b16f22707a6d0",
+    "byteLength": 313364,
+    "dbfRecords": 229,
+    "dbfFields": [
+      "Shape_Leng",
+      "Shape_Area",
+      "Name",
+      "Level"
+    ],
+    "duplicatedNames": [
+      [
+        "Goseong-gun",
+        2
+      ],
+      [
+        "Buk-gu",
+        2
+      ],
+      [
+        "Dong-gu",
+        2
+      ],
+      [
+        "Gwangsan-gu",
+        2
+      ],
+      [
+        "Nam-gu [South District]",
+        4
+      ],
+      [
+        "Dong-gu [East District]",
+        4
+      ],
+      [
+        "Seo-gu [West District]",
+        4
+      ],
+      [
+        "Jung-gu [Central District]",
+        5
+      ],
+      [
+        "Buk-gu [North Distrikt]",
+        2
+      ],
+      [
+        "Gangseo-gu",
+        2
+      ]
+    ],
+    "note": "The original DBF has 229 rows but no Yeonggwang-gun name and duplicate Gwangsan-gu naming. The fixed release has 228 features. No missing geometry or identity is fabricated."
+  }
+}

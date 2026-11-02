@@ -1,0 +1,63 @@
+{
+  "stage": "10-14",
+  "status": "pass",
+  "objective": "Define deterministic active-country iteration order creation and deletion rules independent of record insertion order.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-13-single-effective-control.json": "3f619e317467bef29746c5c25fa36d0520b97a491b466e846e6e06ff220c7595"
+  },
+  "outputHashes": {
+    "src/lib/world/country-order.ts": "37ce3b7cbe482b2602dda3ba4272305582e3255e884e3c6716becfcc8dc5b6e0",
+    "src/lib/world/country-order.test.ts": "3af0e57239e0afc2f7abe7101fb827fa5eae4a5deda354d8003fc1501de1da73"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-14-deterministic-country-order.json",
+    "src/lib/world/country-order.test.ts",
+    "src/lib/world/country-order.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-13 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add deterministic countryOrder targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-order.test.ts", "exitCode": 1, "note": "Expected red test: country-order module did not exist."},
+    {"command": "Implement canonical countryOrder creation, addition, and deletion rules", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-order.test.ts src/lib/world/country-id.test.ts src/lib/world/country-entity.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/country-order.ts src/lib/world/country-order.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "canonicalComparatorCount": 1,
+    "recordInsertionOrderMismatches": 0,
+    "creationSequenceMismatches": 0,
+    "duplicateOrderIdsAccepted": 0,
+    "missingDeletionIdsAccepted": 0,
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 34,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "countryOrderCanonical": true,
+    "recordInsertionOrderIndependent": true,
+    "creationRuleDeterministic": true,
+    "deletionRuleDeterministic": true,
+    "duplicateCreationRejected": true,
+    "absentDeletionRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-15"
+}

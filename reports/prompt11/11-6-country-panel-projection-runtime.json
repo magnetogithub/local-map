@@ -1,0 +1,98 @@
+{
+  "stage": "11-6",
+  "status": "pass",
+  "objective": "Build CountryPanel view data from WorldStateV2 country, playable policy, and capital projections without a static country data fallback.",
+  "filesRead": [
+    "reports/prompt11/11-5-selection-projection-runtime.json",
+    "src/components/country/CountryPanel.tsx",
+    "src/lib/projection/country-panel-projection.ts",
+    "src/lib/projection/country-capital-projection.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/stores/game-setup-store.ts",
+    "src/components/country/CountryPanel.test.tsx",
+    "src/stores/game-setup-selection-projection.test.ts",
+    "src/stores/game-setup-player-policy-projection.test.ts",
+    "src/lib/world/initial-world-state-v2.ts",
+    "src/app/page.tsx"
+  ],
+  "changedFiles": [
+    "src/lib/projection/country-panel-projection.ts",
+    "src/lib/projection/country-panel-projection.test.ts",
+    "src/lib/world/initial-world-state-v2.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/stores/game-setup-store.ts",
+    "src/components/country/CountryPanel.test.tsx",
+    "src/stores/game-setup-selection-projection.test.ts",
+    "src/stores/game-setup-player-policy-projection.test.ts",
+    "reports/prompt11/11-6-country-panel-projection-runtime.json"
+  ],
+  "commands": [
+    "Get-Content -LiteralPath 'src\\components\\layout\\GameSetupShell.tsx'",
+    "Get-Content -LiteralPath 'src\\stores\\game-setup-store.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\projection\\country-panel-projection.ts'",
+    "Get-Content -LiteralPath 'src\\app\\page.tsx'",
+    "rg \"committedCountryPanelProjection|countryPanelProjection\" src\\stores src\\components src\\lib -n",
+    "Get-Content -LiteralPath 'src\\components\\country\\CountryPanel.test.tsx'",
+    "Get-Content -LiteralPath 'src\\stores\\game-setup-selection-projection.test.ts'",
+    "Get-Content -LiteralPath 'src\\stores\\game-setup-player-policy-projection.test.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\projection\\country-capital-projection.test.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\planning\\planner-test-fixture.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\projection\\country-capital-projection.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\world\\world-state-v2.ts'",
+    "Get-Content -LiteralPath 'src\\lib\\projection\\country-search-index-patch.ts'",
+    "Get-Content -LiteralPath 'src\\components\\country\\CountryPanel.tsx'",
+    "npm.cmd test -- --run src/lib/projection/country-panel-projection.test.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/components/country/CountryPanel.test.tsx",
+    "npm.cmd exec tsc -- --noEmit --incremental false",
+    "npm.cmd run lint -- src/app/page.tsx src/components/layout/GameSetupShell.tsx src/components/country/CountryPanel.test.tsx src/lib/projection/country-panel-projection.ts src/lib/projection/country-panel-projection.test.ts src/lib/world/initial-world-state-v2.ts src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts",
+    "rg \"committedCountryPanelProjection|countries-2020.json|country-index|countryById\" src\\components\\country\\CountryPanel.tsx src\\lib\\projection\\country-panel-projection.ts src\\stores\\game-setup-store.ts src\\app\\page.tsx src\\components\\layout\\GameSetupShell.tsx",
+    "git status --short",
+    "git diff -- src/app/page.tsx src/components/layout/GameSetupShell.tsx src/components/country/CountryPanel.test.tsx src/lib/projection/country-panel-projection.ts src/lib/projection/country-panel-projection.test.ts src/lib/world/initial-world-state-v2.ts src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts"
+  ],
+  "gates": {
+    "countryPanelProjectionImportsStaticCountryData": false,
+    "gameSetupStoreUsesEmptyInitialPanelProjection": true,
+    "serverBuildsPanelProjectionFromWorldStateV2": true,
+    "gameSetupShellHydratesSerializedPanelProjection": true,
+    "panelViewUsesV2CountryNames": true,
+    "panelViewUsesCapitalProjection": true,
+    "panelViewUsesV2PlayablePolicy": true,
+    "renameUpdatesPanel": true,
+    "dissolveRemovesPanelWithoutStaticFallback": true,
+    "capitalOwnershipChangeUpdatesPanel": true,
+    "staticPanelFallbackCount": 0,
+    "targetedTests": "pass",
+    "typecheck": "pass",
+    "scopedLint": "pass"
+  },
+  "firstFailedGate": null,
+  "notes": [
+    "country-panel-projection now exposes pure runtime builders, serializers, deserializers, and an empty projection instead of a committed static singleton.",
+    "The page server component builds capital and panel projections from the production WorldStateV2 snapshot, then serializes them into GameSetupShell.",
+    "GameSetupShell hydrates both search and panel projections before persisted player-country restoration.",
+    "game-setup-store no longer imports a committed panel projection and starts with an empty panel projection until hydration.",
+    "The dedicated 11-6 projection test proves country rename, country dissolution, and capital ownership changes are reflected by rebuilt panel views."
+  ],
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/lib/projection/country-panel-projection.test.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/components/country/CountryPanel.test.tsx",
+      "status": "pass",
+      "result": "4 test files passed, 13 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit --incremental false",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/app/page.tsx src/components/layout/GameSetupShell.tsx src/components/country/CountryPanel.test.tsx src/lib/projection/country-panel-projection.ts src/lib/projection/country-panel-projection.test.ts src/lib/world/initial-world-state-v2.ts src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts",
+      "status": "pass"
+    },
+    {
+      "command": "rg \"committedCountryPanelProjection|countries-2020.json|country-index|countryById\" src\\components\\country\\CountryPanel.tsx src\\lib\\projection\\country-panel-projection.ts src\\stores\\game-setup-store.ts src\\app\\page.tsx src\\components\\layout\\GameSetupShell.tsx",
+      "status": "pass",
+      "result": "No matches"
+    }
+  ],
+  "nextStage": "11-7"
+}

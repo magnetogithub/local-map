@@ -1,0 +1,122 @@
+{
+  "stage": "10-77",
+  "status": "pass",
+  "objective": "Verify immutable next states preserve unaffected entity and topology edge references, report zero unnecessary deep clones, and pass the full unit suite checkpoint.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-76-affected-set-calculation.json": "cc4e452132e984c8d4cffee38beb663d4fcbf6c336caa28f84fb10086a6a911b",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "reports/prompt09/9-2-benchmark.test.ts": "9e29267e07b2dccb4f7f2ee086330e7e4e06720f0f2033c9142402f42b6731df",
+    "src/lib/planning/next-state-structural-sharing.test.ts": "4b490046d72b3667f07e476facf66269cfea2ec3217231a9fd1120c8ae293695",
+    "src/lib/planning/next-state-structural-sharing.ts": "44325dfe2a565ec89df39ccbde0007de451f08f67a4734ce33846590640df510",
+    "src/lib/world/initial-world-state-v2.test.ts": "7d94dd92ce12d5bff94bdb17a804cdf120b12c6b2ebebd9cdb43a4eae4cb357a",
+    "src/lib/world/seed-topology-audit.test.ts": "41aa274d2ead4f7550496ece547314a14fdf6870e66ff580f10651320423936d"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-77-next-state-structural-sharing.json",
+    "reports/prompt09/9-2-benchmark.test.ts",
+    "src/lib/planning/next-state-structural-sharing.test.ts",
+    "src/lib/planning/next-state-structural-sharing.ts",
+    "src/lib/world/initial-world-state-v2.test.ts",
+    "src/lib/world/seed-topology-audit.test.ts"
+  ],
+  "commands": [
+    {
+      "command": "Read AGENTS.md, the local Next.js 16.3 Vitest guide, and inspect 10-77 prompt plus affected-set/world-state/planner structural sharing contracts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/next-state-structural-sharing.test.ts",
+      "exitCode": 1,
+      "note": "Expected red test: the next-state structural sharing test file did not exist."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/next-state-structural-sharing.test.ts src/lib/planning/affected-set.test.ts",
+      "exitCode": 0,
+      "result": "2 files passed; 4 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run next-state structural sharing, affected set, batch planner, and all Prompt 10 patch-producing planner tests",
+      "exitCode": 0,
+      "result": "12 files passed; 68 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 1,
+      "result": "90 files passed; 831 tests passed; 2 timeout failures in long-running seed/topology tests under existing file-level timeouts"
+    },
+    {
+      "command": "Increase only long-running seed/topology test timeouts to match observed full-suite runtime",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run reports/prompt09/9-2-benchmark.test.ts src/lib/world/initial-world-state-v2.test.ts src/lib/world/seed-topology-audit.test.ts",
+      "exitCode": 0,
+      "result": "3 files passed; 3 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 0,
+      "result": "92 files passed; 833 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- structural sharing and timeout-adjusted test files",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "note": "Only LF-to-CRLF working-copy warnings were reported."
+    }
+  ],
+  "measurements": {
+    "structuralSharingTargetedFilesPassed": 2,
+    "structuralSharingTargetedTestsPassed": 4,
+    "plannerStructuralSharingFilesPassed": 12,
+    "plannerStructuralSharingTestsPassed": 68,
+    "fullUnitSuiteFilesPassed": 92,
+    "fullUnitSuiteTestsPassed": 833,
+    "unaffectedCountryReferenceChanges": 0,
+    "unaffectedTerritoryReferenceChanges": 0,
+    "unaffectedTopologyEdgeReferenceChanges": 0,
+    "deepCloneCount": 0,
+    "intentionalCloneDetectionCount": 1,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": true
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "affectedSetDrivenSharingInspectorImplemented": true,
+    "unaffectedCountryReferencesStable": true,
+    "unaffectedTerritoryReferencesStable": true,
+    "unaffectedTopologyEdgeReferencesStable": true,
+    "unnecessaryDeepCloneCountZero": true,
+    "intentionalUnrelatedCloneDetected": true,
+    "immutableReportReturned": true,
+    "longRunningCheckpointTimeoutsAdjustedOnly": true,
+    "targetedTestsPass": true,
+    "fullUnitSuitePass": true,
+    "lintPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    {
+      "command": "npm.cmd test -- --run",
+      "issue": "The first full-suite run hit existing per-test timeouts in long-running benchmark/topology tests before timeout constants were adjusted.",
+      "resolved": true
+    }
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-78"
+}

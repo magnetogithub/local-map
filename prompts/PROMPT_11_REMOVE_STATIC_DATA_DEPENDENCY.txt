@@ -1,0 +1,354 @@
+# 프롬프트 11 — 정적 런타임 데이터 의존성 제거
+
+## 0. 위치와 목적
+
+이 문서는 저장소 루트를 기준으로 실행한다. 특정 개발 머신의 절대 경로를 전제로 하지 않는다.
+
+프롬프트 11은 프롬프트 10에서 만든 `WorldStateV2`, 명령 계획기, 원자적 커밋, projection 구조를 실제 앱 실행 경로에 연결하는 단계다.
+
+이 단계의 목표는 체크인된 국가 JSON과 지도 GeoJSON을 더 이상 런타임의 진실 원본으로 사용하지 않는 것이다. 정적 파일은 seed, fixture, 빌드 산출물, 원본 자료로 남길 수 있다. 그러나 일반 앱 상태, 검색, 선택, 국가 패널, 지도 source, 국경, 수도, 작은 국가 marker, 라벨은 모두 커밋된 `WorldStateV2`와 그 revision에서 파생된 projection을 기준으로 동작해야 한다.
+
+최종 실행 흐름은 다음과 같다.
+
+```text
+seed files
+→ initial WorldStateV2
+→ MapCommand planner
+→ atomic commit
+→ WorldPatchV2
+→ projection coordinator
+→ UI / search / panel / map / border / capital / label artifact
+```
+
+프롬프트 11은 새로운 국가 생성·삭제·분할·병합 규칙을 추가하지 않는다. 이미 프롬프트 10에서 만든 domain/projection 구조를 실제 사용자 화면과 store, 검색, 패널, 지도 렌더링에 연결하고 legacy 정적 fallback을 제거한다.
+
+## 1. 절대 원칙
+
+1. production runtime은 `countries-2020.json`을 국가 진실 원본으로 읽지 않는다.
+2. production runtime은 `countryById`를 국가 진실 원본으로 사용하지 않는다.
+3. production runtime은 v1 `src/lib/world/world-state.ts`를 사용하지 않는다.
+4. 검색, 선택, 플레이어 국가 검증, 국가 패널, 지도 source, 수도, marker, 라벨은 같은 committed revision에서 파생되어야 한다.
+5. `WorldMap.tsx`는 정적 지도 파일을 live mutable state처럼 fetch하거나 직접 수정하지 않는다.
+6. 정적 파일은 seed, fixture, build artifact, raw attribution 자료로만 허용한다.
+7. 모든 projection은 자신이 반영한 `appliedRevision`을 기록한다.
+8. stale patch, stale worker result, stale projection result는 적용하지 않는다.
+9. 삭제된 국가 ID는 선택, 검색, 패널, 수도, 라벨, owner 참조에 남지 않아야 한다.
+10. undo/redo는 정적 fallback 없이 visible projection을 갱신해야 한다.
+11. MapLibre 객체는 domain/projection 함수 안으로 들어오면 안 된다.
+12. 기존 정적 runtime 경로를 이름만 바꿔 유지하지 않는다.
+
+## 2. 실행 규칙과 토큰 절약
+
+각 `11-N`은 하나의 독립 작업 세션이다. 한 세션에서는 해당 번호의 범위만 구현한다. 다음 번호의 제품 코드, 테스트, 보고서를 미리 만들지 않는다.
+
+각 단계 시작 시 다음 규칙을 따른다.
+
+1. `AGENTS.md`를 읽는다.
+2. 해당 단계에 명시된 파일만 읽는다.
+3. 이해에 필요한 직접 import는 읽을 수 있지만, 범위를 넓게 확장하지 않는다.
+4. 단계가 명시하지 않는 한 프롬프트 09와 프롬프트 10을 다시 읽지 않는다.
+5. 모든 보고서를 열지 않는다. 바로 이전 `reports/prompt11/11-(N-1)-*.json`만 확인한다.
+6. checkpoint 단계가 아니면 전체 unit suite를 실행하지 않는다.
+7. 가능한 한 migration 경계를 직접 증명하는 targeted test를 작성하고 실행한다.
+8. report JSON에는 긴 로그, 거대한 파일 목록, 불필요한 설명을 넣지 않는다.
+
+일반 context 상한은 다음과 같다.
+
+- Audit 단계: source file 최대 12개.
+- 구현 단계: source file 최대 8개.
+- Checkpoint 단계: source file 최대 15개와 test output.
+
+더 많은 context가 필요하면 프로젝트 전체를 넓게 스캔하지 않는다. 해당 단계를 `blocked`로 기록하고, 어떤 결정이나 파일 범위가 더 필요한지 report에 남긴다.
+
+## 3. 비목표
+
+- 지도 시각 스타일을 재설계하지 않는다.
+- 자연어 명령 해석기나 LLM 연결을 추가하지 않는다.
+- migration을 막는 결함이 아닌 한 프롬프트 10의 command 의미를 바꾸지 않는다.
+- seed data file을 삭제하지 않는다.
+- 유용한 test fixture를 삭제하지 않는다.
+- 두 번째 v2 domain model을 만들지 않는다.
+- legacy 정적 runtime path를 다른 이름으로 유지하지 않는다.
+- 전체 세계 재계산으로 모든 문제를 우회하지 않는다.
+
+## 4. 최종 완료 조건
+
+최종 checkpoint까지 다음 조건이 모두 참이어야 한다.
+
+- `src/lib/world/world-state.ts`는 production runtime에서 사용되지 않는다.
+- production runtime은 `countryById`를 국가 진실 원본으로 import하지 않는다.
+- production 검색은 `countries-2020.json`을 직접 읽지 않고 committed search projection을 읽는다.
+- 국가 패널은 정적 country record를 직접 읽지 않고 committed panel/capital projection을 읽는다.
+- 선택과 플레이어 국가 검증은 committed projection 또는 `WorldStateV2`의 active country id를 기준으로 한다.
+- 지도 fill, border, capital, label, small-country artifact는 `WorldStateV2` projection에서 파생된다.
+- `WorldMap.tsx`는 정적 country map file을 runtime truth로 fetch하지 않고 projection artifact를 받거나 구독한다.
+- `public/data/maps` 아래 정적 파일은 seed, build output, test 용도로만 허용된다.
+- 중국 분할·성 scenario debug helper는 v2 command/projection 흐름을 통과하거나 production runtime에서 제거된다.
+- 모든 projection은 `appliedRevision`을 기록하고 stale patch를 거부한다.
+- undo/redo는 정적 fallback 없이 visible UI projection을 갱신한다.
+
+## 5. 보고서 형식
+
+각 단계는 짧은 보고서 하나를 작성한다.
+
+```json
+{
+  "stage": "11-N",
+  "status": "running | pass | fail | blocked",
+  "objective": "",
+  "filesRead": [],
+  "changedFiles": [],
+  "commands": [],
+  "gates": {},
+  "firstFailedGate": null,
+  "notes": [],
+  "nextStage": "11-(N+1) | null"
+}
+```
+
+보고서는 `reports/prompt11/`에 둔다.
+
+## 6. 단계 목록
+
+### 11-1. 런타임 정적 의존성 감사
+
+읽을 파일:
+
+- `src/components/map/WorldMap.tsx`
+- `src/lib/country/country-index.ts`
+- `src/lib/projection/committed-country-search-projection.ts`
+- `src/lib/projection/country-panel-projection.ts`
+- `src/stores/game-setup-store.ts`
+- `src/stores/world-state-store.ts`
+- `src/lib/world/world-state.ts`
+- `src/lib/world/world-state-v2.ts`
+
+작업: 각 정적 의존성을 `seed-only`, `test-only`, `runtime-read`, `runtime-mutation`으로 분류한다.
+
+통과 조건: 보고서는 production runtime에 존재하는 모든 `countries-2020.json` import, `countryById` import, public map GeoJSON fetch, v1 `WorldState` 사용을 빠짐없이 나열해야 한다.
+
+### 11-2. Seed에서 V2로 이어지는 runtime entry
+
+읽을 파일:
+
+- `src/lib/world/initial-world-state-v2.ts`
+- `src/lib/world/seed-v1-to-v2.ts`
+- `src/lib/world/world-state-v2.ts`
+- `src/app/page.tsx`
+- `src/components/layout/GameSetupShell.tsx`
+
+작업: 앱 레벨에서 사용할 단일 initial `WorldStateV2` entrypoint를 노출한다. 일반 runtime은 v1 state를 생성하지 않는다.
+
+통과 조건: targeted test는 앱 initial state가 `schemaVersion: 2`, territory ownership, topology, hash root를 가진다는 것을 증명해야 한다.
+
+### 11-3. V2 store 경계
+
+읽을 파일:
+
+- `src/stores/world-state-store.ts`
+- `src/lib/world/world-state-v2.ts`
+- `src/lib/planning/atomic-world-commit.ts`
+
+작업: store를 `WorldStateV2`를 사용하는 v2 store controller로 교체하거나 병렬화한다. selector는 read-only로 유지한다.
+
+통과 조건: test는 revision이 단조 증가하고, stale replacement가 거부되며, 외부에서 직접 mutation할 수 없다는 것을 증명해야 한다.
+
+### 11-4. 검색 projection runtime
+
+읽을 파일:
+
+- `src/components/map/MapSearch.tsx`
+- `src/lib/projection/committed-country-search-projection.ts`
+- `src/lib/country/country-index.ts`
+- `src/lib/world/world-state-v2.ts`
+
+작업: 검색 UI가 committed v2 search projection을 읽도록 한다. 정적 country index는 seed/test 전용이어야 한다.
+
+통과 조건: test는 국가 이름 변경이 geometry나 map artifact를 바꾸지 않고 projection을 통해 검색 결과만 바꾼다는 것을 증명해야 한다.
+
+### 11-5. 선택 projection runtime
+
+읽을 파일:
+
+- `src/stores/game-setup-store.ts`
+- `src/lib/projection/country-search-index-patch.ts`
+- `src/lib/world/world-state-v2.ts`
+
+작업: selection과 player-country validation은 active v2 country id를 사용한다. 삭제되었거나 retired 된 id는 patch 적용 과정에서 정리한다.
+
+통과 조건: test는 삭제된 국가 선택이 clear되고 retired id 선택이 거부된다는 것을 증명해야 한다.
+
+### 11-6. 국가 패널 projection runtime
+
+읽을 파일:
+
+- `src/components/country/CountryPanel.tsx`
+- `src/lib/projection/country-panel-projection.ts`
+- `src/lib/projection/country-capital-projection.ts`
+- `src/lib/world/world-state-v2.ts`
+
+작업: 패널 view는 country core, names, playable policy, capital projection을 v2 projection에서 조합한다.
+
+통과 조건: test는 rename, dissolve, capital ownership change 이후 패널이 정적 fallback 없이 갱신된다는 것을 증명해야 한다.
+
+### 11-7. 지도 source projection adapter
+
+읽을 파일:
+
+- `src/components/map/WorldMap.tsx`
+- `src/lib/projection/map-projection-checkpoint.ts`
+- `src/lib/projection/territory-polygon-index.ts`
+- `src/lib/projection/topology-border-artifact.ts`
+
+작업: v2 projection artifact로 map fill과 border source data를 만든다. MapLibre 객체는 domain/projection 함수 밖에 둔다.
+
+통과 조건: unit test는 변경된 territory만 source data를 갱신하고, 영향을 받지 않은 territory feature reference는 안정적으로 유지된다는 것을 증명해야 한다.
+
+### 11-8. 수도와 작은 국가 marker projection
+
+읽을 파일:
+
+- `src/components/map/WorldMap.tsx`
+- `src/lib/projection/country-capital-projection.ts`
+- `src/lib/world/world-state-v2.ts`
+
+작업: 수도 점, 수도 label, 작은 국가 marker는 `appliedRevision`에 연결된 projection artifact에서 읽는다.
+
+통과 조건: test는 dissolve된 국가의 수도가 사라지고, 이전된 territory의 수도가 dangling 상태로 남지 않는다는 것을 증명해야 한다.
+
+### 11-9. 라벨 projection runtime
+
+읽을 파일:
+
+- `src/components/map/WorldMap.tsx`
+- `src/lib/projection/label-projection-checkpoint.ts`
+- `src/lib/map/country-label-layout.ts`
+- `src/lib/map/country-label-glyph-geometry.ts`
+
+작업: 렌더링되는 국가 라벨은 v2 label projection job/result를 사용한다. 정적 label GeoJSON은 seed/cache input으로만 사용한다.
+
+통과 조건: test는 rename이 label text cache만 바꾸고, territory geometry change가 geometry label cache만 바꾸며, stale worker result가 거부된다는 것을 증명해야 한다.
+
+### 11-10. WorldMap runtime 연결
+
+읽을 파일:
+
+- `src/components/map/WorldMap.tsx`
+- 11-7부터 11-9까지 수정한 projection adapter
+- 11-3에서 만든 v2 store file
+
+작업: `WorldMap.tsx`는 projection artifact를 소비하고 patch를 MapLibre source에 적용한다. country truth GeoJSON의 runtime fetch를 제거한다.
+
+통과 조건: component 또는 e2e test는 initial map, selection, focus, projection revision이 서로 일치한다는 것을 증명해야 한다.
+
+### 11-11. 중국 debug scenario 교체
+
+읽을 파일:
+
+- `src/components/map/WorldMap.tsx`
+- `src/lib/planning/command-ui-runtime.ts`
+- scenario에 필요한 split/merge planner
+- 관련 e2e test file
+
+작업: GeoJSON source를 직접 mutation하는 debug helper를 v2 command/projection 흐름으로 교체한다. 제품 코드에 남길 필요가 없다면 production runtime 밖의 test-only helper로 이동한다.
+
+통과 조건: E2E split/rollback scenario는 v2 state를 통과해야 하며, production `WorldMap.tsx`에 정적 source mutation path가 남아 있으면 안 된다.
+
+### 11-12. v1 runtime store 사용 제거
+
+읽을 파일:
+
+- `src/lib/world/world-state.ts`
+- `src/stores/world-state-store.ts`
+- `src`에서 `rg "world-state"`로 찾은 모든 파일
+
+작업: production import에서 v1 `world-state.ts`를 제거한다. test가 legacy behavior를 필요로 하면 test fixture로 이동하거나 legacy seed migration support임을 명확히 표시한다.
+
+통과 조건: `rg` 결과 production runtime file이 v1 `world-state.ts`를 import하지 않는다는 것을 증명해야 한다.
+
+### 11-13. 정적 데이터 guardrail
+
+읽을 파일:
+
+- `eslint.config.mjs`
+- search, panel, map, world state 관련 기존 test
+
+작업: production에서 금지된 runtime static source를 import하면 실패하는 가벼운 test 또는 lint-style guard를 추가한다.
+
+이 단계 이후 production runtime에서 금지되는 항목:
+
+- `@/data/countries-2020.json`
+- runtime truth로서의 `@/lib/country/country-index`
+- mutable state로서의 `/data/maps/countries-*.geojson` 직접 fetch
+- committed runtime projection으로서의 정적 label/capital GeoJSON 직접 fetch
+- `src/lib/world/world-state.ts`
+
+통과 조건: guard test는 의도적으로 삽입한 sample violation에는 실패하고, 현재 code에는 통과해야 한다.
+
+### 11-14. 통합 checkpoint
+
+읽을 파일:
+
+- `11-1`부터 `11-13`까지의 report
+- 변경된 production file
+- 변경된 test
+
+작업: targeted integration test, typecheck, lint, production build를 실행한다.
+
+필수 명령:
+
+```powershell
+npm.cmd exec tsc -- --noEmit --incremental false
+npm.cmd run lint
+npm.cmd test -- --run
+npm.cmd run build
+```
+
+통과 조건: 모든 명령이 통과해야 한다. 전체 unit suite가 느리더라도 skip하지 말고 소요 시간을 기록한다.
+
+### 11-15. 최종 runtime E2E
+
+읽을 파일:
+
+- `e2e`
+- `src/components/map/WorldMap.tsx`
+- 최종 projection/store file
+
+작업: 전체 Playwright E2E를 실행한다. v2 projection-driven map update를 증명하는 기존 test가 없다면 focused E2E 하나를 추가한다.
+
+필수 명령:
+
+```powershell
+npm.cmd run test:e2e
+```
+
+최종 통과 조건:
+
+- static runtime country truth count: 0
+- production v1 world-state import count: 0
+- stale projection application count: 0
+- deletion 이후 dangling selected country: 0
+- dangling ownerCountryId: 0
+- map source revision mismatch: 0
+- label revision mismatch: 0
+- undo/redo projection mismatch: 0
+- full test, lint, build, E2E pass
+
+모든 조건이 통과한 경우에만 `reports/prompt11/11-15-final.json`에 `status: "pass"`를 기록한다.
+
+## 7. 프롬프트 11 이후 허용되는 정적 데이터 사용
+
+체크인된 정적 파일은 다음 용도로만 계속 사용할 수 있다.
+
+- seed generation
+- 프롬프트 09 save migration
+- deterministic fixture
+- visual regression fixture
+- build-time prepared artifact
+- attribution과 raw Natural Earth data
+
+앱 초기화 이후에는 mutable runtime truth로 사용하면 안 된다.
+
+## 8. 완료 정의
+
+프롬프트 11은 보이는 앱과 모든 사용자-facing runtime flow가 `WorldStateV2`와 projection을 source of truth로 사용하고, 정적 country/map data가 seed/build/test input으로 축소되었을 때 완료된다.

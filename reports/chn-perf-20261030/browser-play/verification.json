@@ -1,0 +1,3045 @@
+{
+  "schemaVersion": "chn-performance-browser-play-verification-v1",
+  "pass": true,
+  "launchProof": {
+    "path": "reports/chn-perf-20261030/local-qa-launch.json",
+    "sha256": "bcb7bc94a0c6c91eab7d649fd73676f5d2e667fab42055ebd28a94fa1494fe12",
+    "byteLength": 781
+  },
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "conditions": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "mode": "actual Chromium UI and production host validation with the existing in-process scripted provider alias",
+    "selectionGeometry": "normal selection uses verified vector tiles; optional exact viewport inspection is debug only",
+    "player": "CHN",
+    "target": "PRK",
+    "period": "two successive one-day turns",
+    "externalAiCalls": 0
+  },
+  "turns": [
+    {
+      "condition": "cold-turn",
+      "committedMs": 1502.0791000000027,
+      "renderedMs": 2144.679400000001,
+      "revisionBefore": 0,
+      "revisionAfter": 1,
+      "changedCellIds": [
+        "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29"
+      ],
+      "areaKm2": 1695.2306113685627,
+      "ownershipPreserved": true,
+      "currentControlAdjacency": true,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3001/api/simulation/game",
+          "transferSize": 186151,
+          "encodedBodySize": 185851,
+          "decodedBodySize": 185851,
+          "duration": 106
+        },
+        {
+          "name": "http://127.0.0.1:3001/api/simulation/turn",
+          "transferSize": 3062,
+          "encodedBodySize": 2762,
+          "decodedBodySize": 2762,
+          "duration": 1167.2999999821186
+        },
+        {
+          "name": "http://127.0.0.1:3001/api/simulation/game",
+          "transferSize": 94704,
+          "encodedBodySize": 94404,
+          "decodedBodySize": 94404,
+          "duration": 19
+        },
+        {
+          "name": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/countries/PRK.json.gz",
+          "transferSize": 8457,
+          "encodedBodySize": 8157,
+          "decodedBodySize": 8157,
+          "duration": 21.900000005960464
+        },
+        {
+          "name": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/countries/PRK.geojson.gz",
+          "transferSize": 195163,
+          "encodedBodySize": 194863,
+          "decodedBodySize": 194863,
+          "duration": 14.800000011920929
+        },
+        {
+          "name": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/010.json.gz",
+          "transferSize": 899562,
+          "encodedBodySize": 899262,
+          "decodedBodySize": 899262,
+          "duration": 19.30000001192093
+        }
+      ],
+      "longTasks": [
+        {
+          "startTime": 25748.5,
+          "duration": 56
+        },
+        {
+          "startTime": 25804.69999998808,
+          "duration": 75
+        },
+        {
+          "startTime": 25988.29999998212,
+          "duration": 61
+        },
+        {
+          "startTime": 26050.09999999404,
+          "duration": 71
+        },
+        {
+          "startTime": 26127.40000000596,
+          "duration": 72
+        },
+        {
+          "startTime": 26204.19999998808,
+          "duration": 141
+        },
+        {
+          "startTime": 26346,
+          "duration": 71
+        },
+        {
+          "startTime": 26417.40000000596,
+          "duration": 71
+        },
+        {
+          "startTime": 26489,
+          "duration": 72
+        }
+      ],
+      "longTaskTotalMs": 690,
+      "memory": {
+        "usedJSHeapSize": 164195684,
+        "totalJSHeapSize": 230350536,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "updateStats": {
+        "fullProjectionBuilds": 1,
+        "updates": 1,
+        "cellsUpdated": 14373,
+        "edgesExamined": 8,
+        "exactCellsAdded": 1,
+        "exactFrontsAdded": 6,
+        "exactFrontsRemoved": 0,
+        "exactCells": 1,
+        "exactFronts": 6,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "resyncRequired": false
+      },
+      "controlCounts": {
+        "CHN": {
+          "owned": 3320,
+          "controlled": 3321,
+          "occupied": 0
+        },
+        "PRK": {
+          "owned": 194,
+          "controlled": 193,
+          "occupied": 1
+        }
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "changedExactCells": {
+        "count": 1,
+        "sha256": "07240ffb64ccff8eb8c52627409ba03451b1e66d1299f4fe04bb8b587fe89e53",
+        "sample": [
+          7058
+        ]
+      },
+      "frontIds": {
+        "count": 6,
+        "sha256": "595966d3edb3ad34397505730080bb6339a04a5c307c38895d54026be35cff2b",
+        "sample": [
+          22033,
+          22134,
+          22218,
+          22252,
+          22351,
+          22440
+        ]
+      },
+      "front": {
+        "camera": [
+          129.794331761761,
+          42.48927432839155
+        ],
+        "sourceIds": {
+          "count": 6,
+          "sha256": "595966d3edb3ad34397505730080bb6339a04a5c307c38895d54026be35cff2b",
+          "sample": [
+            22033,
+            22134,
+            22218,
+            22252,
+            22351,
+            22440
+          ]
+        },
+        "renderedIds": {
+          "count": 6,
+          "sha256": "595966d3edb3ad34397505730080bb6339a04a5c307c38895d54026be35cff2b",
+          "sample": [
+            22033,
+            22134,
+            22218,
+            22252,
+            22351,
+            22440
+          ]
+        },
+        "layer": {
+          "id": "operational-detail-front",
+          "type": "line",
+          "source": "world-operational-front-detail",
+          "sourceLayer": null,
+          "paint": {
+            "line-color": "#D9A43C",
+            "line-width": 2,
+            "line-dasharray": [
+              3,
+              2
+            ]
+          },
+          "filter": null,
+          "visibility": "visible"
+        }
+      }
+    },
+    {
+      "condition": "warm-followup-turn",
+      "committedMs": 578.1075999999994,
+      "renderedMs": 809.4303999999975,
+      "revisionBefore": 1,
+      "revisionAfter": 2,
+      "changedCellIds": [
+        "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f"
+      ],
+      "areaKm2": 1894.9140083993673,
+      "ownershipPreserved": true,
+      "currentControlAdjacency": true,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3001/api/simulation/game",
+          "transferSize": 186544,
+          "encodedBodySize": 186244,
+          "decodedBodySize": 186244,
+          "duration": 65.40000000596046
+        },
+        {
+          "name": "http://127.0.0.1:3001/api/simulation/turn",
+          "transferSize": 3062,
+          "encodedBodySize": 2762,
+          "decodedBodySize": 2762,
+          "duration": 138.10000002384186
+        },
+        {
+          "name": "http://127.0.0.1:3001/api/simulation/game",
+          "transferSize": 95373,
+          "encodedBodySize": 95073,
+          "decodedBodySize": 95073,
+          "duration": 15.099999994039536
+        }
+      ],
+      "longTasks": [
+        {
+          "startTime": 29070.79999998212,
+          "duration": 105
+        },
+        {
+          "startTime": 29176.5,
+          "duration": 54
+        },
+        {
+          "startTime": 29255.59999999404,
+          "duration": 66
+        },
+        {
+          "startTime": 29324.90000000596,
+          "duration": 65
+        },
+        {
+          "startTime": 29391.59999999404,
+          "duration": 64
+        },
+        {
+          "startTime": 29456.19999998808,
+          "duration": 65
+        },
+        {
+          "startTime": 29522,
+          "duration": 69
+        }
+      ],
+      "longTaskTotalMs": 488,
+      "memory": {
+        "usedJSHeapSize": 87783690,
+        "totalJSHeapSize": 164325342,
+        "jsHeapSizeLimit": 4395630592
+      },
+      "updateStats": {
+        "fullProjectionBuilds": 1,
+        "updates": 2,
+        "cellsUpdated": 14374,
+        "edgesExamined": 15,
+        "exactCellsAdded": 2,
+        "exactFrontsAdded": 11,
+        "exactFrontsRemoved": 1,
+        "exactCells": 2,
+        "exactFronts": 10,
+        "selectedDetailCells": 0,
+        "detailSourceWrites": 0,
+        "resyncRequired": false
+      },
+      "controlCounts": {
+        "CHN": {
+          "owned": 3320,
+          "controlled": 3322,
+          "occupied": 0
+        },
+        "PRK": {
+          "owned": 194,
+          "controlled": 192,
+          "occupied": 2
+        }
+      },
+      "exactCells": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "sample": []
+      },
+      "changedExactCells": {
+        "count": 2,
+        "sha256": "398338fed8b099882ffabb1fb9737f2db7e56264fb1005cc64f720630a46e1c7",
+        "sample": [
+          1633,
+          7058
+        ]
+      },
+      "frontIds": {
+        "count": 10,
+        "sha256": "4335768039430dde955053e015547a521b036195edf36dfa284a47e731abc27c",
+        "sample": [
+          22033,
+          22081,
+          22134,
+          22138,
+          22218,
+          22252,
+          22265,
+          22299,
+          22351,
+          22452
+        ]
+      },
+      "front": {
+        "camera": [
+          129.820319931208,
+          42.012955324904844
+        ],
+        "sourceIds": {
+          "count": 10,
+          "sha256": "4335768039430dde955053e015547a521b036195edf36dfa284a47e731abc27c",
+          "sample": [
+            22033,
+            22081,
+            22134,
+            22138,
+            22218,
+            22252,
+            22265,
+            22299,
+            22351,
+            22452
+          ]
+        },
+        "renderedIds": {
+          "count": 10,
+          "sha256": "4335768039430dde955053e015547a521b036195edf36dfa284a47e731abc27c",
+          "sample": [
+            22033,
+            22081,
+            22134,
+            22138,
+            22218,
+            22252,
+            22265,
+            22299,
+            22351,
+            22452
+          ]
+        },
+        "layer": {
+          "id": "operational-detail-front",
+          "type": "line",
+          "source": "world-operational-front-detail",
+          "sourceLayer": null,
+          "paint": {
+            "line-color": "#D9A43C",
+            "line-width": 2,
+            "line-dasharray": [
+              3,
+              2
+            ]
+          },
+          "filter": null,
+          "visibility": "visible"
+        }
+      }
+    }
+  ],
+  "screens": [
+    {
+      "name": "fresh-chn-game",
+      "path": "reports/chn-perf-20261030/browser-play/fresh-chn-game.png"
+    },
+    {
+      "name": "turn-1-gold-front-normal",
+      "path": "reports/chn-perf-20261030/browser-play/turn-1-gold-front-normal.png"
+    },
+    {
+      "name": "turn-1-gold-front-debug",
+      "path": "reports/chn-perf-20261030/browser-play/turn-1-gold-front-debug.png"
+    },
+    {
+      "name": "turn-2-gold-front-normal",
+      "path": "reports/chn-perf-20261030/browser-play/turn-2-gold-front-normal.png"
+    },
+    {
+      "name": "turn-2-gold-front-debug",
+      "path": "reports/chn-perf-20261030/browser-play/turn-2-gold-front-debug.png"
+    }
+  ],
+  "failures": [],
+  "consoleErrors": [],
+  "warnings": [
+    {
+      "text": "[.WebGL-0x1464001b3e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "material": false,
+      "performanceWarning": true
+    },
+    {
+      "text": "[.WebGL-0x1464001b3e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "material": false,
+      "performanceWarning": true
+    },
+    {
+      "text": "[.WebGL-0x1464001b3e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "material": false,
+      "performanceWarning": true
+    },
+    {
+      "text": "[.WebGL-0x1464001b3e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "material": false,
+      "performanceWarning": true
+    }
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "runtimeCode": [
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "b502d7ded16d5c9eb303d0ed036d5e58ad24d02c19afc1602c2edc23d3fc3381",
+      "byteLength": 20771
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "1d5f754daaf9cecf482024de214697daed5f2abefe4527cc43f8917abeb7e739",
+      "byteLength": 25646
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "8714a385b3f2e544d3da64de2e819585feb5139487a8d2f3ccb1ce35d36437c5",
+      "byteLength": 7700
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "01692966f51b843d9bc0e90a5eada7e0e77e94f58567b6665a3532897fd5519d",
+      "byteLength": 34770
+    },
+    {
+      "path": "src/lib/map/operational-country-labels.ts",
+      "sha256": "1b018d46f5f65a7aef3e98e61991f69f5faed42b047ec0d805b55cc7abbabdfd",
+      "byteLength": 8838
+    }
+  ],
+  "safety": {
+    "url": "http://127.0.0.1:3001",
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "sourcePins": [
+      {
+        "path": "next.config.ts",
+        "sha256": "e93056f5be299f965b6945db9841e11c51949894688d197493783c8a6d1abdc8",
+        "byteLength": 2359
+      },
+      {
+        "path": "src/lib/simulation/server/provider-config.ts",
+        "sha256": "7f1d6fde68a8d363737dfe6ff64f103a3d6e05edf809eb3546330c00e45b2482",
+        "byteLength": 976
+      },
+      {
+        "path": "src/lib/test-only/region-provider.server.ts",
+        "sha256": "f46cb5e9fea09731957c9161481ddc54e06335e0d093b305942be9864346d770",
+        "byteLength": 6466
+      }
+    ]
+  },
+  "initial": {
+    "state": {
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+        "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+        "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+        "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+      },
+      "revision": 0,
+      "simulationRevision": 0,
+      "counts": {
+        "countries": 247,
+        "cells": 8005,
+        "edges": 26273
+      },
+      "controlCounts": {
+        "ABW": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "AFG": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "AGO": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "AIA": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "ALB": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "ALD": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "AND": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "ARE": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "ARG": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "ARM": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "ASM": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "ATA": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "ATC": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "ATF": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "ATG": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "AUS": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "AUT": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "AZE": {
+          "owned": 78,
+          "controlled": 78,
+          "occupied": 0
+        },
+        "BDI": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "BEL": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "BEN": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "BFA": {
+          "owned": 45,
+          "controlled": 45,
+          "occupied": 0
+        },
+        "BGD": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "BGR": {
+          "owned": 28,
+          "controlled": 28,
+          "occupied": 0
+        },
+        "BHR": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "BHS": {
+          "owned": 30,
+          "controlled": 30,
+          "occupied": 0
+        },
+        "BIH": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "BLM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "BLR": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "BLZ": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "BMU": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "BOL": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "BRA": {
+          "owned": 27,
+          "controlled": 27,
+          "occupied": 0
+        },
+        "BRB": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "BRN": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "BTN": {
+          "owned": 20,
+          "controlled": 20,
+          "occupied": 0
+        },
+        "BWA": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "CAF": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "CAN": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "CHE": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "CHL": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CHN": {
+          "owned": 3320,
+          "controlled": 3320,
+          "occupied": 0
+        },
+        "CIV": {
+          "owned": 19,
+          "controlled": 19,
+          "occupied": 0
+        },
+        "CLP": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CMR": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "CNM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "COD": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "COG": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "COK": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "COL": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "COM": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "CPV": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "CRI": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "CSI": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CUB": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "CUW": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CYM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CYN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CYP": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CZE": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "DEU": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "DJI": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "DMA": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "DNK": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "DOM": {
+          "owned": 32,
+          "controlled": 32,
+          "occupied": 0
+        },
+        "DZA": {
+          "owned": 48,
+          "controlled": 48,
+          "occupied": 0
+        },
+        "ECU": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "EGY": {
+          "owned": 27,
+          "controlled": 27,
+          "occupied": 0
+        },
+        "ERI": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "ESH": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "ESP": {
+          "owned": 57,
+          "controlled": 57,
+          "occupied": 0
+        },
+        "EST": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "ETH": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "FIN": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "FJI": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "FLK": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "FRA": {
+          "owned": 101,
+          "controlled": 101,
+          "occupied": 0
+        },
+        "FRO": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "FSM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "GAB": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "GBR": {
+          "owned": 234,
+          "controlled": 234,
+          "occupied": 0
+        },
+        "GEO": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "GGY": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "GHA": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "GIB": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "GIN": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "GMB": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "GNB": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "GNQ": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "GRC": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "GRD": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "GRL": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "GTM": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "GUM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "GUY": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "HKG": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "HMD": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "HND": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "HRV": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "HTI": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "HUN": {
+          "owned": 43,
+          "controlled": 43,
+          "occupied": 0
+        },
+        "IDN": {
+          "owned": 33,
+          "controlled": 33,
+          "occupied": 0
+        },
+        "IMN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "IND": {
+          "owned": 37,
+          "controlled": 37,
+          "occupied": 0
+        },
+        "IOA": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "IOT": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "IRL": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "IRN": {
+          "owned": 31,
+          "controlled": 31,
+          "occupied": 0
+        },
+        "IRQ": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "ISL": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "ISR": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "ITA": {
+          "owned": 110,
+          "controlled": 110,
+          "occupied": 0
+        },
+        "JAM": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "JEY": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "JOR": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "JPN": {
+          "owned": 47,
+          "controlled": 47,
+          "occupied": 0
+        },
+        "KAZ": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "KEN": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "KGZ": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "KHM": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "KIR": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "KNA": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "KOR": {
+          "owned": 322,
+          "controlled": 322,
+          "occupied": 0
+        },
+        "KWT": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "LAO": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "LBN": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "LBR": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "LBY": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "LCA": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "LIE": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "LKA": {
+          "owned": 25,
+          "controlled": 25,
+          "occupied": 0
+        },
+        "LSO": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "LTU": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "LUX": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "LVA": {
+          "owned": 119,
+          "controlled": 119,
+          "occupied": 0
+        },
+        "MAC": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "MAF": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "MAR": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "MCO": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "MDA": {
+          "owned": 40,
+          "controlled": 40,
+          "occupied": 0
+        },
+        "MDG": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "MDV": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "MEX": {
+          "owned": 33,
+          "controlled": 33,
+          "occupied": 0
+        },
+        "MHL": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "MKD": {
+          "owned": 84,
+          "controlled": 84,
+          "occupied": 0
+        },
+        "MLI": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "MLT": {
+          "owned": 68,
+          "controlled": 68,
+          "occupied": 0
+        },
+        "MMR": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "MNE": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "MNG": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "MNP": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "MOZ": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "MRT": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "MSR": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "MUS": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "MWI": {
+          "owned": 28,
+          "controlled": 28,
+          "occupied": 0
+        },
+        "MYS": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "NAM": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "NCL": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "NER": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "NFK": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "NGA": {
+          "owned": 37,
+          "controlled": 37,
+          "occupied": 0
+        },
+        "NIC": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "NIU": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "NLD": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "NOR": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "NPL": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "NRU": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "NZL": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "OMN": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "PAK": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "PAN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PCN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PER": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "PGA": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "PHL": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PLW": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "PNG": {
+          "owned": 20,
+          "controlled": 20,
+          "occupied": 0
+        },
+        "POL": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "PRI": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PRK": {
+          "owned": 194,
+          "controlled": 194,
+          "occupied": 0
+        },
+        "PRT": {
+          "owned": 20,
+          "controlled": 20,
+          "occupied": 0
+        },
+        "PRY": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "PSX": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "PYF": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "QAT": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "ROU": {
+          "owned": 42,
+          "controlled": 42,
+          "occupied": 0
+        },
+        "RUS": {
+          "owned": 86,
+          "controlled": 86,
+          "occupied": 0
+        },
+        "RWA": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "SAU": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "SDN": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "SDS": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "SEN": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "SGP": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "SGS": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SHN": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "SLB": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "SLE": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "SLV": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "SMR": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "SOL": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SOM": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "SPM": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "SRB": {
+          "owned": 25,
+          "controlled": 25,
+          "occupied": 0
+        },
+        "STP": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "SUR": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "SVK": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "SVN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SWE": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "SWZ": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "SXM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SYC": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "SYR": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "TCA": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "TCD": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "TGO": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "THA": {
+          "owned": 77,
+          "controlled": 77,
+          "occupied": 0
+        },
+        "TJK": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "TKM": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "TLS": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "TON": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "TTO": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "TUN": {
+          "owned": 23,
+          "controlled": 23,
+          "occupied": 0
+        },
+        "TUR": {
+          "owned": 81,
+          "controlled": 81,
+          "occupied": 0
+        },
+        "TUV": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "TWN": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "TZA": {
+          "owned": 30,
+          "controlled": 30,
+          "occupied": 0
+        },
+        "UGA": {
+          "owned": 112,
+          "controlled": 112,
+          "occupied": 0
+        },
+        "UKR": {
+          "owned": 25,
+          "controlled": 25,
+          "occupied": 0
+        },
+        "UMI": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "URY": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "USA": {
+          "owned": 52,
+          "controlled": 52,
+          "occupied": 0
+        },
+        "UZB": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "VAT": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "VCT": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "VEN": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "VGB": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "VIR": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "VNM": {
+          "owned": 63,
+          "controlled": 63,
+          "occupied": 0
+        },
+        "VUT": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "WLF": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "WSM": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "XKX": {
+          "owned": 30,
+          "controlled": 30,
+          "occupied": 0
+        },
+        "YEM": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "ZAF": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "ZMB": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "ZWE": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        }
+      },
+      "selectedCountryId": null,
+      "debugBoundaries": false,
+      "baseStatus": "ready",
+      "worldStatus": "ready",
+      "detailStatus": "idle",
+      "appliedRevision": 0
+    },
+    "stats": {
+      "fullProjectionBuilds": 1,
+      "updates": 0,
+      "cellsUpdated": 14372,
+      "edgesExamined": 0,
+      "exactCellsAdded": 0,
+      "exactFrontsAdded": 0,
+      "exactFrontsRemoved": 0,
+      "exactCells": 0,
+      "exactFronts": 0,
+      "selectedDetailCells": 0,
+      "detailSourceWrites": 0,
+      "resyncRequired": false
+    }
+  },
+  "final": {
+    "state": {
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+        "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+        "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+        "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+      },
+      "revision": 2,
+      "simulationRevision": 2,
+      "counts": {
+        "countries": 247,
+        "cells": 8005,
+        "edges": 26273
+      },
+      "controlCounts": {
+        "ABW": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "AFG": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "AGO": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "AIA": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "ALB": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "ALD": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "AND": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "ARE": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "ARG": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "ARM": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "ASM": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "ATA": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "ATC": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "ATF": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "ATG": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "AUS": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "AUT": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "AZE": {
+          "owned": 78,
+          "controlled": 78,
+          "occupied": 0
+        },
+        "BDI": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "BEL": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "BEN": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "BFA": {
+          "owned": 45,
+          "controlled": 45,
+          "occupied": 0
+        },
+        "BGD": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "BGR": {
+          "owned": 28,
+          "controlled": 28,
+          "occupied": 0
+        },
+        "BHR": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "BHS": {
+          "owned": 30,
+          "controlled": 30,
+          "occupied": 0
+        },
+        "BIH": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "BLM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "BLR": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "BLZ": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "BMU": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "BOL": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "BRA": {
+          "owned": 27,
+          "controlled": 27,
+          "occupied": 0
+        },
+        "BRB": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "BRN": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "BTN": {
+          "owned": 20,
+          "controlled": 20,
+          "occupied": 0
+        },
+        "BWA": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "CAF": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "CAN": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "CHE": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "CHL": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CHN": {
+          "owned": 3320,
+          "controlled": 3322,
+          "occupied": 0
+        },
+        "CIV": {
+          "owned": 19,
+          "controlled": 19,
+          "occupied": 0
+        },
+        "CLP": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CMR": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "CNM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "COD": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "COG": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "COK": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "COL": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "COM": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "CPV": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "CRI": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "CSI": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CUB": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "CUW": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CYM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CYN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CYP": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "CZE": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "DEU": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "DJI": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "DMA": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "DNK": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "DOM": {
+          "owned": 32,
+          "controlled": 32,
+          "occupied": 0
+        },
+        "DZA": {
+          "owned": 48,
+          "controlled": 48,
+          "occupied": 0
+        },
+        "ECU": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "EGY": {
+          "owned": 27,
+          "controlled": 27,
+          "occupied": 0
+        },
+        "ERI": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "ESH": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "ESP": {
+          "owned": 57,
+          "controlled": 57,
+          "occupied": 0
+        },
+        "EST": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "ETH": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "FIN": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "FJI": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "FLK": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "FRA": {
+          "owned": 101,
+          "controlled": 101,
+          "occupied": 0
+        },
+        "FRO": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "FSM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "GAB": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "GBR": {
+          "owned": 234,
+          "controlled": 234,
+          "occupied": 0
+        },
+        "GEO": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "GGY": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "GHA": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "GIB": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "GIN": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "GMB": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "GNB": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "GNQ": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "GRC": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "GRD": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "GRL": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "GTM": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "GUM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "GUY": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "HKG": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "HMD": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "HND": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "HRV": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "HTI": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "HUN": {
+          "owned": 43,
+          "controlled": 43,
+          "occupied": 0
+        },
+        "IDN": {
+          "owned": 33,
+          "controlled": 33,
+          "occupied": 0
+        },
+        "IMN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "IND": {
+          "owned": 37,
+          "controlled": 37,
+          "occupied": 0
+        },
+        "IOA": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "IOT": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "IRL": {
+          "owned": 34,
+          "controlled": 34,
+          "occupied": 0
+        },
+        "IRN": {
+          "owned": 31,
+          "controlled": 31,
+          "occupied": 0
+        },
+        "IRQ": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "ISL": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "ISR": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "ITA": {
+          "owned": 110,
+          "controlled": 110,
+          "occupied": 0
+        },
+        "JAM": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "JEY": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "JOR": {
+          "owned": 12,
+          "controlled": 12,
+          "occupied": 0
+        },
+        "JPN": {
+          "owned": 47,
+          "controlled": 47,
+          "occupied": 0
+        },
+        "KAZ": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "KEN": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "KGZ": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "KHM": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "KIR": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "KNA": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "KOR": {
+          "owned": 322,
+          "controlled": 322,
+          "occupied": 0
+        },
+        "KWT": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "LAO": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "LBN": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "LBR": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "LBY": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "LCA": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "LIE": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "LKA": {
+          "owned": 25,
+          "controlled": 25,
+          "occupied": 0
+        },
+        "LSO": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "LTU": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "LUX": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "LVA": {
+          "owned": 119,
+          "controlled": 119,
+          "occupied": 0
+        },
+        "MAC": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "MAF": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "MAR": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "MCO": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "MDA": {
+          "owned": 40,
+          "controlled": 40,
+          "occupied": 0
+        },
+        "MDG": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "MDV": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "MEX": {
+          "owned": 33,
+          "controlled": 33,
+          "occupied": 0
+        },
+        "MHL": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "MKD": {
+          "owned": 84,
+          "controlled": 84,
+          "occupied": 0
+        },
+        "MLI": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "MLT": {
+          "owned": 68,
+          "controlled": 68,
+          "occupied": 0
+        },
+        "MMR": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "MNE": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "MNG": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "MNP": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "MOZ": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "MRT": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "MSR": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "MUS": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "MWI": {
+          "owned": 28,
+          "controlled": 28,
+          "occupied": 0
+        },
+        "MYS": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "NAM": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "NCL": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "NER": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "NFK": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "NGA": {
+          "owned": 37,
+          "controlled": 37,
+          "occupied": 0
+        },
+        "NIC": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "NIU": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "NLD": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "NOR": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "NPL": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "NRU": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "NZL": {
+          "owned": 24,
+          "controlled": 24,
+          "occupied": 0
+        },
+        "OMN": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "PAK": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "PAN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PCN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PER": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "PGA": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "PHL": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PLW": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "PNG": {
+          "owned": 20,
+          "controlled": 20,
+          "occupied": 0
+        },
+        "POL": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "PRI": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "PRK": {
+          "owned": 194,
+          "controlled": 192,
+          "occupied": 2
+        },
+        "PRT": {
+          "owned": 20,
+          "controlled": 20,
+          "occupied": 0
+        },
+        "PRY": {
+          "owned": 18,
+          "controlled": 18,
+          "occupied": 0
+        },
+        "PSX": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "PYF": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "QAT": {
+          "owned": 7,
+          "controlled": 7,
+          "occupied": 0
+        },
+        "ROU": {
+          "owned": 42,
+          "controlled": 42,
+          "occupied": 0
+        },
+        "RUS": {
+          "owned": 86,
+          "controlled": 86,
+          "occupied": 0
+        },
+        "RWA": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "SAU": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "SDN": {
+          "owned": 17,
+          "controlled": 17,
+          "occupied": 0
+        },
+        "SDS": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "SEN": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "SGP": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "SGS": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SHN": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "SLB": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "SLE": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "SLV": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "SMR": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "SOL": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SOM": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "SPM": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "SRB": {
+          "owned": 25,
+          "controlled": 25,
+          "occupied": 0
+        },
+        "STP": {
+          "owned": 2,
+          "controlled": 2,
+          "occupied": 0
+        },
+        "SUR": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "SVK": {
+          "owned": 8,
+          "controlled": 8,
+          "occupied": 0
+        },
+        "SVN": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SWE": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "SWZ": {
+          "owned": 4,
+          "controlled": 4,
+          "occupied": 0
+        },
+        "SXM": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "SYC": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "SYR": {
+          "owned": 15,
+          "controlled": 15,
+          "occupied": 0
+        },
+        "TCA": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "TCD": {
+          "owned": 22,
+          "controlled": 22,
+          "occupied": 0
+        },
+        "TGO": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "THA": {
+          "owned": 77,
+          "controlled": 77,
+          "occupied": 0
+        },
+        "TJK": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "TKM": {
+          "owned": 5,
+          "controlled": 5,
+          "occupied": 0
+        },
+        "TLS": {
+          "owned": 13,
+          "controlled": 13,
+          "occupied": 0
+        },
+        "TON": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "TTO": {
+          "owned": 16,
+          "controlled": 16,
+          "occupied": 0
+        },
+        "TUN": {
+          "owned": 23,
+          "controlled": 23,
+          "occupied": 0
+        },
+        "TUR": {
+          "owned": 81,
+          "controlled": 81,
+          "occupied": 0
+        },
+        "TUV": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "TWN": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "TZA": {
+          "owned": 30,
+          "controlled": 30,
+          "occupied": 0
+        },
+        "UGA": {
+          "owned": 112,
+          "controlled": 112,
+          "occupied": 0
+        },
+        "UKR": {
+          "owned": 25,
+          "controlled": 25,
+          "occupied": 0
+        },
+        "UMI": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "URY": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "USA": {
+          "owned": 52,
+          "controlled": 52,
+          "occupied": 0
+        },
+        "UZB": {
+          "owned": 14,
+          "controlled": 14,
+          "occupied": 0
+        },
+        "VAT": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "VCT": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "VEN": {
+          "owned": 26,
+          "controlled": 26,
+          "occupied": 0
+        },
+        "VGB": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "VIR": {
+          "owned": 3,
+          "controlled": 3,
+          "occupied": 0
+        },
+        "VNM": {
+          "owned": 63,
+          "controlled": 63,
+          "occupied": 0
+        },
+        "VUT": {
+          "owned": 6,
+          "controlled": 6,
+          "occupied": 0
+        },
+        "WLF": {
+          "owned": 1,
+          "controlled": 1,
+          "occupied": 0
+        },
+        "WSM": {
+          "owned": 11,
+          "controlled": 11,
+          "occupied": 0
+        },
+        "XKX": {
+          "owned": 30,
+          "controlled": 30,
+          "occupied": 0
+        },
+        "YEM": {
+          "owned": 21,
+          "controlled": 21,
+          "occupied": 0
+        },
+        "ZAF": {
+          "owned": 9,
+          "controlled": 9,
+          "occupied": 0
+        },
+        "ZMB": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        },
+        "ZWE": {
+          "owned": 10,
+          "controlled": 10,
+          "occupied": 0
+        }
+      },
+      "selectedCountryId": null,
+      "debugBoundaries": false,
+      "baseStatus": "ready",
+      "worldStatus": "ready",
+      "detailStatus": "idle",
+      "appliedRevision": 2
+    }
+  },
+  "elapsedMs": 31234.9392,
+  "code": {
+    "path": "scripts/chn-2020/verify-performance-play.mjs",
+    "sha256": "205353e5b7c7be5c73de1c47e807cad1d63b05bc2c927e5e4b1fc6588127a3d1",
+    "byteLength": 17608
+  }
+}

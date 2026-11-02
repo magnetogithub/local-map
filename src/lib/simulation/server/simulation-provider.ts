@@ -1,0 +1,49 @@
+import type {SimulationContextV1} from "../simulation-context";
+import type {TurnResolutionV1} from "../turn-resolution";
+import type {OperationalWorldView} from '../../world/operational-catalog';
+import type {TerritorialControlAuthority} from '../simulation-state-v2';
+
+export type SimulationProviderFailureCode =
+  | "AI_NOT_CONFIGURED"
+  | "PROVIDER_ERROR"
+  | "PROVIDER_RATE_LIMIT"
+  | "PROVIDER_REFUSAL"
+  | "PROVIDER_TIMEOUT"
+  | "TOOL_PROTOCOL_ERROR"
+  | "TOOL_LIMIT_EXCEEDED"
+  | "INVALID_RESOLUTION"
+  | "REPAIR_FAILED";
+
+export type SimulationProviderEvent =
+  | Readonly<{type: "phase.changed"; phase: "requesting" | "looking_up" | "repairing"}>
+  | Readonly<{type: "draft.delta"; delta: string}>
+  | Readonly<{type: "tool.started"; callId: string; name: string}>
+  | Readonly<{type: "tool.ready"; callId: string; name: string}>
+  | Readonly<{type: "tool.invalid"; callId: string; name: string; code: string}>
+  | Readonly<{type: "resolution.ready"; resolution: TurnResolutionV1}>
+  | Readonly<{type: "turn.failed"; code: SimulationProviderFailureCode; message: string; retryable: boolean}>
+  | Readonly<{type: "turn.cancelled"}>;
+
+export type SimulationProviderRequest = Readonly<{
+  turnId: string;
+  context: SimulationContextV1;
+  /** Host-only current state. The HTTP request schema never accepts this field. */
+  operationalWorld?: OperationalWorldView;
+  /** Full current host scopes; model context may contain only clipped summaries. */
+  operationalTerritorialAuthorities?: readonly TerritorialControlAuthority[];
+}>;
+
+export interface SimulationModelProvider {
+  streamTurn(request: SimulationProviderRequest, signal: AbortSignal): AsyncIterable<SimulationProviderEvent>;
+}
+
+export class SimulationProviderError extends Error {
+  constructor(
+    readonly code: SimulationProviderFailureCode,
+    message: string,
+    readonly retryable = false,
+  ) {
+    super(message);
+    this.name = "SimulationProviderError";
+  }
+}

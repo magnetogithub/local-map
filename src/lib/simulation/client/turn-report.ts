@@ -1,0 +1,64 @@
+import type {WorldStateV2} from "../../world/world-state-v2";
+import type {ResolvedTurnPlan} from "../resolved-turn-plan";
+import type {SimulationEventV1} from "../simulation-event";
+
+export type TurnReport = Readonly<{
+  turnId: string;
+  period: string;
+  outcomes: readonly string[];
+  events: readonly Readonly<{
+    eventId: string;
+    date: string;
+    title: string;
+    narrative: string;
+    countryIds: readonly string[];
+    category: SimulationEventV1["outcomeCategory"];
+    significance: SimulationEventV1["significance"];
+    hasMapChanges: boolean;
+  }>[];
+  reactions: readonly string[];
+  mapChanges: readonly string[];
+  continuing: readonly string[];
+  advisorSummary: string;
+}>;
+
+const countryName = (world: Pick<WorldStateV2,'countriesById'>, id: string) => world.countriesById[id]?.names.shortKo ?? "변경된 국가";
+
+export function createCommittedTurnReport(plan: Pick<ResolvedTurnPlan,'resolution'|'turnId'> & Readonly<{baseWorldState:Pick<WorldStateV2,'countriesById'>;baseSimulationState:Readonly<{playerCountryId:string}>}>): TurnReport {
+  const {resolution} = plan;
+  const status = {succeeded: "성공", partially_succeeded: "부분 성공", failed: "실패", delayed: "지연", superseded: "대체됨"} as const;
+  const mapChanges = resolution.worldEffects.map((effect) => {
+    if(effect.type==='territory.occupy')return `${countryName(plan.baseWorldState,effect.actorCountryId)}이(가) ${effect.territoryIds.length}개 영토를 점령했습니다. 법적 소유국은 유지됩니다.`;
+    if(effect.type==='territory.liberate')return `${effect.territoryIds.length}개 영토의 점령을 해제하고 소유국 통제를 복원했습니다.`;
+    if(effect.type==='territory.transferOwnership')return `${effect.territoryIds.length}개 영토의 소유권이 ${countryName(plan.baseWorldState,effect.newOwnerCountryId)}으로 이전됐습니다.`;
+    if(effect.type==='countries.merged')return `${effect.absorbedCountryIds.map(id=>countryName(plan.baseWorldState,id)).join('·')}을(를) ${countryName(plan.baseWorldState,effect.initiatorCountryId)}에 합병했습니다. 합병 주도국의 정체성은 유지됩니다.`;
+    if(effect.type==='territorialAuthority.granted')return `검증된 ${effect.authority.allowedTerritoryIds.length}개 영토 범위의 통제 권한을 등록했습니다.`;
+    if (effect.type === "countries.unified") return `${effect.countryIds.map((id) => countryName(plan.baseWorldState, id)).join("·")}의 통합이 지도에 반영되었습니다.`;
+    if (effect.type === "territories.transferred") return `${countryName(plan.baseWorldState, effect.fromCountryId)}에서 ${countryName(plan.baseWorldState, effect.toCountryId)}로 영토가 이전되었습니다.`;
+    if (effect.type === "country.established") return "새 국가의 성립이 지도에 반영되었습니다.";
+    if (effect.type === "country.dissolved") return `${countryName(plan.baseWorldState, effect.countryId)}의 해체가 지도에 반영되었습니다.`;
+    if (effect.type === "country.renamed") return `${countryName(plan.baseWorldState, effect.countryId)}의 국호 변경이 반영되었습니다.`;
+    if (effect.type === 'country.changeMapColor') return `${countryName(plan.baseWorldState,effect.countryId)}의 지도 색상이 ${effect.mapColor}로 변경되었습니다.`;
+    if(effect.type==='country.partitionedBySubdivisions')return `${countryName(plan.baseWorldState, effect.sourceCountryId)}의 행정 구역 분할이 지도에 반영되었습니다.`;
+    return '검증된 영토 변경이 반영되었습니다.';
+  });
+  return Object.freeze({
+    turnId: plan.turnId,
+    period: `${resolution.period.startDate} – ${resolution.period.endDate}`,
+    outcomes: Object.freeze(resolution.playerActionOutcomes.map((outcome) => `${status[outcome.status]} — ${outcome.summary}`)),
+    events: Object.freeze(resolution.events.map((event) => Object.freeze({
+      eventId: event.eventId,
+      date: event.date,
+      title: event.title,
+      narrative: event.publicNarrative,
+      countryIds: Object.freeze([...event.actorCountryIds]),
+      category: event.outcomeCategory,
+      significance: event.significance,
+      hasMapChanges: resolution.worldEffects.some((effect) => effect.causedByEventId === event.eventId),
+    }))),
+    reactions: Object.freeze(resolution.events.filter((event) => event.actorCountryIds.some((id) => id !== plan.baseSimulationState.playerCountryId)).map((event) => event.publicNarrative)),
+    mapChanges: Object.freeze(mapChanges),
+    continuing: Object.freeze([...resolution.unresolvedQuestions]),
+    advisorSummary: resolution.advisorSummary,
+  });
+}

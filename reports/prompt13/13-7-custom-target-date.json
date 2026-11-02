@@ -1,0 +1,41 @@
+{
+  "stage": "13-7",
+  "status": "pass",
+  "summary": "Added a pure custom target-date validator and routed validated dates through the same frozen turn request, stream, validation, and atomic commit path used by presets.",
+  "filesChanged": [
+    "src/lib/simulation/client/turn-request.ts",
+    "src/lib/simulation/client/turn-request.test.ts",
+    "src/lib/simulation/client/use-simulation-turn-controller.ts",
+    "src/lib/simulation/client/use-simulation-turn-controller.test.tsx",
+    "reports/prompt13/13-7-custom-target-date.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "evidence": "TypeScript completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd eslint src/components/simulation/SimulationPanel.tsx src/lib/simulation/client/use-simulation-turn-controller.ts src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.ts src/lib/simulation/client/turn-request.test.ts",
+      "exitCode": 0,
+      "evidence": "ESLint completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd vitest run src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.test.ts src/lib/simulation/client/turn-client.test.tsx src/lib/simulation/client/application-turn-runtime.test.ts src/lib/simulation/client/gameplay-behavior.test.ts",
+      "exitCode": 0,
+      "evidence": "5 test files and 24 tests passed."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "Invalid and non-canonical ISO dates are rejected",
+    "Current and past dates are rejected",
+    "The 366-day maximum boundary is accepted and day 367 is rejected",
+    "Leap-day input remains canonical and locale-independent",
+    "The custom date reaches the frozen request and committed simulation clock unchanged"
+  ],
+  "knownLimitations": [
+    "Resolved in 13-22: the game action overlay now exposes a validated date input connected to the same frozen request path."
+  ],
+  "nextStage": "13-8"
+}

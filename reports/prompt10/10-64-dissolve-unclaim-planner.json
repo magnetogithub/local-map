@@ -1,0 +1,11 @@
+{
+  "stage": "10-64", "status": "pass", "objective": "Regression-test atomic dissolve-unclaim semantics for all source Territories.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {"reports/prompt10/10-63-country-delete-planner.json": "caa58d4a3da0e132d4d2d2f125d3fc626ee25e64db2d8d74eaf78424b870f5ea"},
+  "outputHashes": {"src/lib/planning/country-dissolve-planner.ts": "75ed5f2e9ba42e8c94fbb9682f69ce52384ae11819d134d9c108fd412ca87747", "src/lib/planning/country-dissolve-planner.test.ts": "669bfd791ce40a48edb822d23d4525b4b785266eae656ba31587b039b33442c2"},
+  "changedFiles": ["src/lib/planning/country-dissolve-planner.test.ts", "reports/prompt10/10-64-dissolve-unclaim-planner.json"],
+  "commands": [{"command": "targeted GREEN", "exitCode": 0, "result": "6 files; 38 tests passed"}, {"command": "planning suite / ESLint / tsc / full suite", "exitCode": 0, "result": "103 planning tests and 860 total tests passed"}],
+  "measurements": {"sourceTerritoriesUnclaimed": 2, "revisionIncrements": 1, "invalidDispositionClassesRejected": 3, "inputStateMutations": 0},
+  "gates": {"allSourceTerritoriesUnclaimed": true, "sourceDeletedAndRetiredAtomically": true, "missingDuplicateForeignRejected": true, "singleRevision": true, "inputImmutable": true, "allValidationPass": true},
+  "firstFailedGate": null, "nextStage": "10-65"
+}

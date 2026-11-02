@@ -1,0 +1,46 @@
+{
+  "subtask":"7C",
+  "generatedAt":"2026-08-13T14:55:00+09:00",
+  "changes":{
+    "longitudeUnwrap":"Each closed ring is unwrapped sequentially, then shifted by a whole-world multiple toward one canonical country reference.",
+    "projection":"Country-local equirectangular coordinates use longitude delta times cos(mean latitude), with latitude centered at the country mean.",
+    "simplification":"Fixed-stride vertex dropping was replaced by deterministic Douglas-Peucker simplification of two closed-ring arcs.",
+    "topology":"Exterior rings and every hole remain separate closed rings.",
+    "worldCopies":"The calculation returns one canonical longitude in [-180,180]; the renderer remains responsible for copies."
+  },
+  "actualGeometryAfter":[
+    {"countryId":"RUS","geometryHash":"98d6e782","anchor":[99.071606,61.661031],"angle":2.462757,"insideRatio":0.888889,"coverageRatio":0.796784,"availableWidthWorld":94.88516,"componentCount":1,"milliseconds":793.0056},
+    {"countryId":"USA","geometryHash":"1a595793","anchor":[-91.734821,39.670258],"angle":14.696639,"insideRatio":0.836601,"coverageRatio":0.772219,"availableWidthWorld":49.34164,"componentCount":1,"milliseconds":489.3061},
+    {"countryId":"CHN","geometryHash":"87eb9497","anchor":[103.806824,36.617133],"angle":30.956038,"insideRatio":0.72549,"coverageRatio":0.783425,"availableWidthWorld":59.295097,"componentCount":1,"milliseconds":296.4771},
+    {"countryId":"CHL","geometryHash":"fbbe79fe","anchor":[-73.226427,-46.610118],"angle":85.38349,"insideRatio":0.666667,"coverageRatio":0.594972,"availableWidthWorld":8.975096,"componentCount":1,"milliseconds":76.1641},
+    {"countryId":"IDN","geometryHash":"46fdc2e2","anchor":[114.018504,-0.191744],"angle":15.201865,"insideRatio":1,"coverageRatio":0.694354,"availableWidthWorld":12.965499,"componentCount":13,"milliseconds":214.9568}
+  ],
+  "comparisonTo7B":{
+    "RUS":{"insideRatioBefore":0.895425,"insideRatioAfter":0.888889,"delta":-0.006536},
+    "USA":{"insideRatioBefore":0.810458,"insideRatioAfter":0.836601,"delta":0.026143},
+    "CHN":{"insideRatioBefore":0.699346,"insideRatioAfter":0.72549,"delta":0.026144},
+    "CHL":{"insideRatioBefore":0.522876,"insideRatioAfter":0.666667,"delta":0.143791},
+    "IDN":{"insideRatioBefore":1,"insideRatioAfter":1,"delta":0}
+  },
+  "verification":{
+    "focused":{"command":"npx.cmd vitest run src/lib/map/country-label-layout.test.ts src/lib/map/country-label-real-geometry.test.ts --reporter=verbose","exitCode":0,"tests":"14/14"},
+    "fullUnit":{"command":"npm.cmd test","exitCode":0,"tests":"34/34"},
+    "lint":{"command":"npm.cmd run lint","exitCode":0,"warnings":3,"newWarnings":0},
+    "build":{"command":"npm.cmd run build","exitCode":0}
+  },
+  "gates":{
+    "russiaNo360DegreeWidth":true,
+    "canonicalAnchorLongitude":true,
+    "holesRemainExcluded":true,
+    "deterministic":true,
+    "narrowCorridorRepresented":true,
+    "status":"pass"
+  },
+  "limitations":[
+    "Douglas-Peucker preprocessing is materially slower than the removed stride thinning; performance optimization is deferred to 7N.",
+    "The simplifier is topology-aware at ring structure level but does not perform global self-intersection repair.",
+    "China and Chile still miss later insideRatio quality thresholds; candidate and footprint work belongs to 7E and 7F.",
+    "Generated 2020 label data was not regenerated in this scoped step, so checked-in metrics still represent the prior generator run."
+  ],
+  "nextRecommendedSubtask":"7D"
+}

@@ -1,0 +1,353 @@
+{
+  "schemaVersion": "actual-game-debug-scope-browser-v1",
+  "label": "after",
+  "pass": false,
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "code": [
+    {
+      "path": "scripts/chn-2020/verify-game-debug-scope.mjs",
+      "sha256": "aef6b1707b3fb98986d1fe394598032b57473e8f5ef91594dd0dc3d66a9d0630",
+      "byteLength": 31668
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "8f99aaf06f0b54d311a2f42492e3d3eea8b926868ddfb763e4927f626ed62c1c",
+      "byteLength": 25825
+    },
+    {
+      "path": "src/components/layout/OperationalGameSetupShell.tsx",
+      "sha256": "eaec0a919045664f712af8a782e1a68983c7e97bdc768fc46c604ea01c2377f3",
+      "byteLength": 5815
+    },
+    {
+      "path": "src/components/game/CatalogGameScreen.tsx",
+      "sha256": "e938d8841620ddf409db0772ca1e1c095092666e7db2f9df965a94cd5d65940a",
+      "byteLength": 16178
+    },
+    {
+      "path": "src/components/game/WarAndSystemOverlays.tsx",
+      "sha256": "49d224d3ca83a65f50a194fec28fa4ff2e4fa047b3bee98a8542152ab157fc04",
+      "byteLength": 5906
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "69f310197982f063c8ad706b9d7663383e831de2468b6b443f16fab5ee70bcc7",
+      "byteLength": 35395
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "8714a385b3f2e544d3da64de2e819585feb5139487a8d2f3ccb1ce35d36437c5",
+      "byteLength": 7700
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "7ae5bb3888113f90f9180fe60ff780fc112aa3c81577d57aacaae8851e95f451",
+      "byteLength": 37131
+    },
+    {
+      "path": "src/lib/map/operational-debug-boundary-scope.ts",
+      "sha256": "3f2e2e09c128ff213435f2a1816522b79c42ade2b6b5d52d3cf5ea2776e04e93",
+      "byteLength": 6390
+    },
+    {
+      "path": "src/lib/map/operational-pointer-hover.ts",
+      "sha256": "3f92904a4a2d9cba57dc34dd892faf4c10ce106160ec8ecbdd8510cabb3a5c20",
+      "byteLength": 1412
+    },
+    {
+      "path": "src/lib/map/operational-delivery.server.ts",
+      "sha256": "0ab3b5467ad4d14e860d1aaf3e9415e87cb7e268079723d58e18afc3f851f03a",
+      "byteLength": 4736
+    }
+  ],
+  "conditions": {
+    "url": "http://127.0.0.1:3001",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "browser": "fresh isolated Chromium; software WebGL permitted",
+    "actualGameEntry": "search CHN, confirm play country, wait for /game",
+    "debugToggle": "HUD settings checkbox click and keyboard Space; no debug bridge setter",
+    "hover": "real mouse pointer; geometry/camera diagnostic bridge only",
+    "httpCache": "disabled by interception; immutable application caches remain enabled",
+    "externalAiCalls": 0,
+    "turnsSubmitted": 0,
+    "permittedGamePosts": [
+      "start",
+      "select-player"
+    ],
+    "existingUserSessionsTouched": 0,
+    "limitation": "Presentation/scope regression only. No turn is advanced; exact authoritative fills and base PBF byte count are unchanged by stroke LOD."
+  },
+  "expectedScopes": {
+    "PRK": [
+      "CHN",
+      "KOR",
+      "PRK",
+      "RUS"
+    ],
+    "CHN": [
+      "AFG",
+      "BTN",
+      "CHN",
+      "HKG",
+      "IND",
+      "KAZ",
+      "KGZ",
+      "LAO",
+      "MMR",
+      "MNG",
+      "NPL",
+      "PAK",
+      "PRK",
+      "RUS",
+      "TJK",
+      "VNM"
+    ],
+    "USA": [
+      "CAN",
+      "CUB",
+      "MEX",
+      "USA"
+    ]
+  },
+  "sourceCellCounts": {
+    "total": 8005,
+    "CHN": 3320
+  },
+  "views": [],
+  "screenshots": [],
+  "requests": [
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_0j_9op0._.css",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_1anvha4._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/turbopack-_08bm286._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/_219uq1s._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_lib_0ijmf9r._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_components_03h2rfc._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/src_stores_game-setup-store_ts_0vcke35._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/data_runtime_operational-catalog_current_json_%5Bjson%5D_cjs_14uxah9._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_maplibre-gl_dist_maplibre-gl_1w0u9x2.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_zod_v4_06yv92s._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/node_modules_0jbk0j2._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/simulation/game",
+      "method": "POST"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/cells",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/map",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/__nextjs_original-stack-frames",
+      "method": "POST"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/__nextjs_font/geist-latin.woff2",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/?_rsc=bFe_VC0g8VplWXKP",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/?_rsc=bFe_VC0g8VplWXKP",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/?_rsc=bFe_VC0g8VplWXKP",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/map",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/__nextjs_original-stack-frames",
+      "method": "POST"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/?_rsc=bFe_VC0g8VplWXKP",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/api/world/catalog/operational/map",
+      "method": "GET"
+    },
+    {
+      "case": "initial",
+      "url": "http://127.0.0.1:3001/__nextjs_original-stack-frames",
+      "method": "POST"
+    }
+  ],
+  "commands": [
+    {
+      "case": "initial",
+      "operation": "start",
+      "countryId": null
+    }
+  ],
+  "failures": [
+    {
+      "message": "page.waitForFunction: Timeout 180000ms exceeded.",
+      "stack": "page.waitForFunction: Timeout 180000ms exceeded.\n    at settled (D:\\gen\\scripts\\chn-2020\\verify-game-debug-scope.mjs:63:38)\n    at D:\\gen\\scripts\\chn-2020\\verify-game-debug-scope.mjs:168:89"
+    },
+    {
+      "message": "BROWSER_ERRORS",
+      "pageErrors": 0,
+      "consoleErrors": 6
+    },
+    {
+      "message": "SOURCE_CHANGED_DURING_VERIFICATION",
+      "path": "src/components/map/OperationalWorldMap.tsx"
+    },
+    {
+      "message": "SOURCE_CHANGED_DURING_VERIFICATION",
+      "path": "src/lib/map/operational-map-consumer.ts"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+    "Operational map failed Error: OPERATIONAL_MAP_NOT_READY\n    at fetchOperationalVectorDelivery (http://127.0.0.1:3001/_next/static/chunks/src_lib_0ijmf9r._.js:6366:52)\n    at async OperationalWorldMap.useEffect (http://127.0.0.1:3001/_next/static/chunks/src_components_03h2rfc._.js:6584:44)",
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+    "Operational map failed Error: OPERATIONAL_MAP_NOT_READY\n    at fetchOperationalVectorDelivery (http://127.0.0.1:3001/_next/static/chunks/src_lib_0ijmf9r._.js:6366:52)\n    at async OperationalWorldMap.useEffect (http://127.0.0.1:3001/_next/static/chunks/src_components_03h2rfc._.js:6584:44)",
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+    "Operational map failed Error: OPERATIONAL_MAP_NOT_READY\n    at fetchOperationalVectorDelivery (http://127.0.0.1:3001/_next/static/chunks/src_lib_0ijmf9r._.js:6366:52)\n    at async OperationalWorldMap.useEffect (http://127.0.0.1:3001/_next/static/chunks/src_components_03h2rfc._.js?id=%255Bproject%255D/src/components/map/OperationalWorldMap.tsx+%255Bapp-client%255D+(ecmascript):416:44)"
+  ],
+  "failedRequests": [
+    {
+      "url": "http://127.0.0.1:3001/?_rsc=bFe_VC0g8VplWXKP",
+      "reason": "net::ERR_ABORTED"
+    }
+  ],
+  "cleanup": [
+    {
+      "sessionIdSha256": "66a25614f2acc069bf47f528e008a476b68ef7b9feecbc7ccaa7baa9cf3f6828",
+      "status": 204
+    }
+  ],
+  "fullCountryGeometryRequests": [],
+  "microLodRequests": [],
+  "elapsedMs": 180418.7853
+}

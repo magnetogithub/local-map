@@ -1,0 +1,26 @@
+{
+  "stage": "13-13-repair",
+  "status": "pass",
+  "scope": ["13-10 semantic token completion", "13-13 global tooltip layer repair"],
+  "result": "All completion conditions were verified in the current worktree.",
+  "layerOrder": "management overlay (40) < tooltip/toast (50) < major modal (60) < fatal (70)",
+  "testEvidence": {
+    "typescriptExitCode": 0,
+    "eslintExitCode": 0,
+    "vitest": "6 files, 39 tests passed",
+    "build": "passed",
+    "playwright": "2 tests passed"
+  },
+  "screenshots": [
+    "screenshots/prompt13-13-shell-repair-1280x720.png",
+    "screenshots/prompt13-13-shell-repair-1920x1080.png",
+    "screenshots/prompt13-13-hud-tooltip-1280x720.png",
+    "screenshots/prompt13-13-hud-tooltip-1920x1080.png",
+    "screenshots/prompt13-13-tooltip-1280x720.png",
+    "screenshots/prompt13-13-tooltip-1920x1080.png"
+  ],
+  "remainingLimitations": [
+    "13-14 이후의 정치·경제·외교·전쟁·뉴스 세부 기능은 구현하지 않았다."
+  ],
+  "nextStage": "13-14"
+}

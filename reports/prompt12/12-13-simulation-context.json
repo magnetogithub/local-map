@@ -1,0 +1,35 @@
+{
+  "stage": "12-13",
+  "status": "pass",
+  "objective": "Build a compact canonical SimulationContextV1 with explicit clipping metadata.",
+  "filesRead": [
+    "src/lib/simulation/simulation-state.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/lib/projection/country-search-index-patch.ts",
+    "src/lib/simulation/subdivision-catalog.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-context.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-13-simulation-context.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "canonicalByteEquivalentOutput": "pass",
+    "geometryExcluded": "pass",
+    "topologyExcluded": "pass",
+    "projectionArtifactsExcluded": "pass",
+    "undoImagesExcluded": "pass",
+    "clippingMetadataRecorded": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Context contains bounded summaries and references, never raw map geometry."
+  ],
+  "notes": [
+    "Recent events are capped at 20 and all other compact sections have explicit limits."
+  ],
+  "nextStage": "12-14"
+}

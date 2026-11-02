@@ -1,0 +1,29 @@
+{
+  "subtask":"7D",
+  "generatedAt":"2026-08-13T14:58:00+09:00",
+  "algorithm":{
+    "mainlandScore":"0.65 * areaRatio + 0.25 * internalWidthRatio + 0.10 * compactness",
+    "mainlandPolicy":"Select the highest scored component; detached, overseas, and sub-threshold components remain excluded.",
+    "archipelagoPolicy":"Starting from the highest scored component, repeatedly include significant components within join distance of any selected component.",
+    "coordinateOverrides":false,
+    "diagnostics":["area","areaRatio","internalWidth","compactness","nearestDistance","score","selected","reason"]
+  },
+  "countries":[
+    {"countryId":"USA","anchor":[-91.734821,39.670258],"angle":14.696639,"selected":["component-186"],"totalComponents":344,"selectedSummary":{"areaRatio":1,"internalWidth":24.24808,"compactness":0.59597,"score":0.959597},"excluded":{"detached or overseas component excluded by mainland strategy":1,"below minimum area ratio":342},"result":"contiguous mainland selected; Alaska and Hawaii do not control the axis"},
+    {"countryId":"FRA","anchor":[2.452413,46.620269],"angle":-20.301368,"selected":["component-9"],"totalComponents":21,"selectedSummary":{"areaRatio":1,"internalWidth":8.76188,"compactness":0.55646,"score":0.955646},"excluded":{"detached or overseas component excluded by mainland strategy":1,"below minimum area ratio":19},"result":"European mainland selected"},
+    {"countryId":"RUS","anchor":[99.071606,61.661031],"angle":2.462757,"selected":["component-8"],"totalComponents":214,"excluded":{"below minimum area ratio":213},"result":"main contiguous territory selected"},
+    {"countryId":"JPN","anchor":[138.850894,36.810078],"angle":44.618034,"selected":["component-50","component-88","component-32","component-53"],"totalComponents":109,"excluded":{"below minimum area ratio":105},"result":"four-island significant cluster selected, not only the largest island"},
+    {"countryId":"IDN","anchor":[114.018504,-0.191744],"angle":14.908219,"selected":["component-73","component-2","component-222","component-102","component-56","component-261","component-139","component-161","component-192","component-180","component-92","component-55","component-103","component-107"],"totalComponents":264,"excluded":{"below minimum area ratio":250},"result":"14-component chained archipelago cluster selected"},
+    {"countryId":"GBR","anchor":[-1.660646,53.446306],"angle":-58.603434,"selected":["component-23"],"totalComponents":57,"excluded":{"detached or overseas component excluded by mainland strategy":1,"below minimum area ratio":55},"result":"Great Britain main component selected"},
+    {"countryId":"CAN","anchor":[-116.608694,59.86892],"angle":-41.169483,"selected":["component-0"],"totalComponents":412,"excluded":{"detached or overseas component excluded by mainland strategy":3,"below minimum area ratio":408},"result":"mainland component selected; Arctic islands do not control the axis"}
+  ],
+  "verification":{
+    "actualGeometry":{"command":"npx.cmd vitest run src/lib/map/country-label-real-geometry.test.ts --reporter=verbose","exitCode":0,"tests":"9/9"},
+    "fullUnit":{"command":"npm.cmd test","exitCode":0,"tests":"38/38"},
+    "lint":{"command":"npm.cmd run lint","exitCode":0,"warnings":3,"newWarnings":0},
+    "build":{"command":"npm.cmd run build","exitCode":0}
+  },
+  "gates":{"componentIdsExplainable":true,"usaContiguousMainland":true,"franceEuropeanMainland":true,"japanMultipleComponents":true,"indonesiaMultipleComponents":true,"coordinateOverridesAdded":false,"status":"pass"},
+  "limitations":["Population and capital metadata are not yet supplied to the pure layout input, so they are not part of component scoring.","Internal width is currently a projected bounding-box minimum dimension, not a medial-axis clearance measure.","Canada still receives a steep -41.17 degree candidate angle; candidate-angle refinement belongs to 7E.","Generated 2020 label data was not regenerated in this scoped step."],
+  "nextRecommendedSubtask":"7E"
+}

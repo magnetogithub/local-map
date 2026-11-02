@@ -1,0 +1,53 @@
+{
+  "stage": "10-27",
+  "status": "pass",
+  "objective": "Build insertion-order-independent countries, presentation, territories, and topology roots from sorted keyed leaf hashes.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-26-topology-edge-leaf-hash.json": "098afa904d8c9ab7e5e337fe26e3e01c017d66008f1cb0b195208a831b15a326",
+    "src/lib/world/canonical-serializer.ts": "35516101e2e86fe2750175c4eae35accb49837d257e3a778b958753be379c5df",
+    "src/lib/world/sha256.ts": "d21ad4ad6ab297d4518d0066485fe2b88ec1adc623ddde8a3d1e242fdf8744c8"
+  },
+  "outputHashes": {
+    "src/lib/world/domain-hash-root.ts": "4a7144d970f509ba4a4c1c1db3213a790719205f6a6f0331bf87f991f58d0447",
+    "src/lib/world/domain-hash-root.test.ts": "3398bec59b71c45d62f4025ca995e7c649ca4fb671a415557a2dfa962cfde5da"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-27-domain-root-builder.json",
+    "src/lib/world/domain-hash-root.test.ts",
+    "src/lib/world/domain-hash-root.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-26 status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/domain-hash-root.test.ts", "exitCode": 1, "note": "Expected red test: domain-hash-root module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/domain-hash-root.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/domain-hash-root.ts src/lib/world/domain-hash-root.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 8,
+    "domainRootsBuilt": 4,
+    "singleLeafIsolationCases": 5,
+    "nonOwningRootChanges": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "leafOrderIndependent": true,
+    "leafKeysCommitted": true,
+    "singleLeafChangesOnlyOwningRoot": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-28"
+}

@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "hover-neighbor-debug-implementation-v1",
+  "pass": true,
+  "activeURL": "http://127.0.0.1:3002",
+  "pointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "catalogUnchanged": true,
+  "geometryUnchanged": true,
+  "militaryRulesUnchanged": true,
+  "behavior": {
+    "enabled": "debug mode only",
+    "scope": "hovered current map owner (controller only if owner is absent), plus direct positive-land neighbors",
+    "selectionIndependent": true,
+    "noHoverOrSea": "all debug micro lines hidden",
+    "coastAndPointContacts": "not used as adjacency",
+    "vectorAndExactScopeIdentical": true,
+    "normalProvinceAndOccupationFrontsPreserved": true
+  },
+  "implementation": {
+    "scopeIndex": "metadata only, lazy first debug hover, eight-scope LRU; ownership changes update only affected incident edges",
+    "sameCountryHover": "no scope/filter rebuild",
+    "exactInspection": "120ms settled hover viewport debounce, cancellation, bounded cell-shard capability only; otherwise existing fine PBF",
+    "simulationStateChanges": 0
+  },
+  "limitations": [
+    "Base PBF tiles still contain fine cell/edge geometry outside the displayed hover scope; this is not a transport LOD rewrite.",
+    "Bounded optional exact hover inspection is available only where the current catalog has cell shards; other countries retain existing fine PBF precision."
+  ],
+  "checks": {
+    "unit": {
+      "passed": 102,
+      "files": 5,
+      "logs": [
+        {
+          "path": "reports/hover-debug-20261030/tests.log",
+          "sha256": "3e112db9eb3cff6040cbabf344b474dc81151501b2625c17b652e1dc8b474077",
+          "byteLength": 1341
+        },
+        {
+          "path": "reports/hover-debug-20261030/settings-tests.log",
+          "sha256": "ba9bcc864a7304d99f4c7be289adb730c6ab56b7d26bd3ca62f91658136bc4f7",
+          "byteLength": 1338
+        }
+      ]
+    },
+    "types": {
+      "pass": true,
+      "log": {
+        "path": "reports/hover-debug-20261030/types.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": 0
+      }
+    },
+    "lint": {
+      "pass": true,
+      "log": {
+        "path": "reports/hover-debug-20261030/lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byteLength": 0
+      }
+    },
+    "build": {
+      "pass": true,
+      "mode": "Next webpack production",
+      "log": {
+        "path": "reports/hover-debug-20261030/build.log",
+        "sha256": "493c1fd83dc1035b6d26a353daf8d3781e7e482a9ae15e602ed40dec13a14032",
+        "byteLength": 1594
+      }
+    },
+    "browser": {
+      "pass": true,
+      "views": 13,
+      "actualMouse": true,
+      "fullNationalGeometryRequests": 0,
+      "externalAiCalls": 0,
+      "artifact": {
+        "path": "reports/hover-debug-20261030/verification.json",
+        "sha256": "74a8601c9fbf265b7000021f0296c39a9ec7f278544e1290e36618408c6c0c62",
+        "byteLength": 70230
+      }
+    }
+  },
+  "preservation": {
+    "pass": true,
+    "sessionsBefore": 8,
+    "sessionsAfter": 8,
+    "unchangedPayloadHashes": 8,
+    "receipts": [
+      {
+        "path": "reports/hover-debug-20261030/user-game-before.json",
+        "sha256": "5aefa0cc6491539589a9e89a13ca470b2b07292c12a973e4bd86d325a17cdfe3",
+        "byteLength": 7679
+      },
+      {
+        "path": "reports/hover-debug-20261030/user-game-after.json",
+        "sha256": "61a867c9b8eea210d7192c92da5cb0252e85ef55b1b2bd9d15d4dd6bb219b0af",
+        "byteLength": 7517
+      },
+      {
+        "path": "reports/hover-debug-20261030/user-game-after-unlocked.json",
+        "sha256": "d524facb95a6944f0d1c1df2f75f193286feb97eadbf1bf6925a54a72142e016",
+        "byteLength": 133
+      }
+    ]
+  },
+  "code": [
+    {
+      "path": "scripts/chn-2020/verify-hover-debug-browser.mjs",
+      "sha256": "1b44bf67b4ebdced6274cea40d349eacb5a1444f966597518d331159b67c838a",
+      "byteLength": 19744
+    },
+    {
+      "path": "src/components/map/OperationalWorldMap.tsx",
+      "sha256": "28144206591957f5d52da1e8bea1f833d0c915bd2a02c84fd5ceeb02c98b62fd",
+      "byteLength": 21763
+    },
+    {
+      "path": "src/lib/map/operational-map-consumer.ts",
+      "sha256": "88555a6eaa0e4fe2c4c61da284ae14c0720cf70a7f2ae401d1f156cb3191b773",
+      "byteLength": 27762
+    },
+    {
+      "path": "src/lib/map/operational-map-sources.ts",
+      "sha256": "8714a385b3f2e544d3da64de2e819585feb5139487a8d2f3ccb1ce35d36437c5",
+      "byteLength": 7700
+    },
+    {
+      "path": "src/lib/map/operational-vector-delivery.ts",
+      "sha256": "16f540f050e611af10823eebedb634fa559b5572c2954f5fbd23df88fdeb3635",
+      "byteLength": 35052
+    },
+    {
+      "path": "src/lib/map/operational-debug-boundary-scope.ts",
+      "sha256": "3f2e2e09c128ff213435f2a1816522b79c42ade2b6b5d52d3cf5ea2776e04e93",
+      "byteLength": 6390
+    },
+    {
+      "path": "src/components/game/WarAndSystemOverlays.tsx",
+      "sha256": "49d224d3ca83a65f50a194fec28fa4ff2e4fa047b3bee98a8542152ab157fc04",
+      "byteLength": 5906
+    },
+    {
+      "path": "scripts/chn-2020/write-hover-debug-report.mjs",
+      "sha256": "1404ae62ca2016123d3390b2c91c51f2cb1e510c13f396b01f476628782960be",
+      "byteLength": 4947
+    }
+  ]
+}

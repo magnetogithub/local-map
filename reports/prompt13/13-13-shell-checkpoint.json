@@ -1,0 +1,70 @@
+{
+  "stage": "13-13",
+  "status": "pass",
+  "summary": "Prompt 13 shell 보완 검증을 통과했다. semantic token, 전역 tooltip layer, reduced motion, 단일 overlay, 공용 turn controller와 full-screen map 동작을 현재 작업 트리에서 재검증했다.",
+  "tooltipRepair": {
+    "rootCause": "기존 tooltip popup이 HUD 또는 edge navigation의 자식으로 렌더링되어 부모 stacking context의 z-index에 갇혔고 management overlay 위로 올라갈 수 없었다.",
+    "architecture": "GameScreen 내부의 공용 GameTooltipProvider가 단 하나의 fixed .game-tooltip-layer를 HUD/navigation의 형제 위치에 렌더링한다. trigger는 hover/focus anchor rect를 provider에 전달하고 blur, mouseleave, unmount에서 소유 tooltip을 제거한다.",
+    "viewportClamping": "popup 실측 크기와 8px margin을 사용해 left/top을 viewport 내부로 clamp한다.",
+    "pointerInteraction": "tooltip layer와 popup 모두 pointer-events:none이다.",
+    "layerOrder": {
+      "managementOverlay": 40,
+      "tooltip": 50,
+      "majorEventModal": 60,
+      "fatal": 70
+    }
+  },
+  "verification": {
+    "typeScript": {"exitCode": 0},
+    "eslint": {"exitCode": 0},
+    "vitest": {"exitCode": 0, "testFiles": 6, "tests": 39},
+    "productionBuild": {"status": "passed"},
+    "playwright": {"exitCode": 0, "tests": 2, "passed": 2}
+  },
+  "commands": [
+    {
+      "command": "npx.cmd tsc --noEmit",
+      "exitCode": 0,
+      "evidence": "TypeScript completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd eslint src/components/game src/components/layout/GameSetupShell.tsx src/components/simulation/SimulationPanel.tsx src/lib/game-ui src/lib/simulation/client/use-simulation-turn-controller.ts src/lib/simulation/client/turn-request.ts",
+      "exitCode": 0,
+      "evidence": "ESLint completed with no diagnostics."
+    },
+    {
+      "command": "npx.cmd vitest run src/components/game/GameChrome.test.tsx src/lib/game-ui/overlay-reducer.test.ts src/lib/game-ui/game-hud-projection.test.ts src/lib/game-ui/contracts.test.ts src/lib/simulation/client/use-simulation-turn-controller.test.tsx src/lib/simulation/client/turn-request.test.ts",
+      "exitCode": 0,
+      "evidence": "6 test files and 39 tests passed."
+    },
+    {
+      "command": "npm.cmd run test:e2e -- e2e/prompt13-shell.spec.ts",
+      "exitCode": 0,
+      "evidence": "Production build passed, then both 1280x720 and 1920x1080 Playwright tests ran and passed."
+    }
+  ],
+  "screenshots": [
+    "screenshots/prompt13-13-shell-entry-1280x720.png",
+    "screenshots/prompt13-13-shell-entry-1920x1080.png",
+    "screenshots/prompt13-13-shell-repair-1280x720.png",
+    "screenshots/prompt13-13-shell-repair-1920x1080.png",
+    "screenshots/prompt13-13-hud-tooltip-1280x720.png",
+    "screenshots/prompt13-13-hud-tooltip-1920x1080.png",
+    "screenshots/prompt13-13-tooltip-1280x720.png",
+    "screenshots/prompt13-13-tooltip-1920x1080.png"
+  ],
+  "regressions": {
+    "singleOverlay": "same-menu close, cross-menu replacement, retired-country cleanup tests passed",
+    "hud": "player name/code/map color, unavailable-value em dash, date/turn/phase projection tests passed",
+    "input": "8 menus support mouse and keyboard; Enter toggle and Escape close passed",
+    "turnRuntime": "action overlay still receives the shared useSimulationTurnController instance; targeted controller and request tests passed",
+    "worldMap": "overlay changes do not remount WorldMap; both viewport sizes measured full-screen",
+    "prompt11And12": "incremental map update path and queue/Stop/Retry/commit/undo/redo implementations were not changed"
+  },
+  "visualReview": "At 1280x720 and 1920x1080 the HUD, all eight menu buttons, overlay, and tooltips remain inside the viewport. Tooltip is visibly above the open overlay and the panel body remains the scroll owner.",
+  "knownLimitations": [
+    "Politics, economy, diplomacy, wars, news, save, and settings retain intentional empty shells; 13-14+ domain content is outside this repair.",
+    "Vite prints its existing CommonJS configLoader migration warning during Vitest; all targeted tests pass."
+  ],
+  "nextStage": "13-14"
+}

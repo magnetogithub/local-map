@@ -1,0 +1,382 @@
+{
+  "schemaVersion": "chn-2020-performance-comparison-v1",
+  "candidateVerificationPass": true,
+  "before": {
+    "path": "reports/chn-2020/baseline-play-performance.json",
+    "sha256": "aeb6f3364493b49be153267c3672b08d7920b2d804739b881220408bebc9c9c8",
+    "byteLength": 13819
+  },
+  "after": {
+    "path": "reports/chn-2020/candidate-play-performance.json",
+    "sha256": "ae505417d44c2268a375a512de2b44e39ed9fb6b24c8f6ab6dd166b09c4c134c",
+    "byteLength": 31057
+  },
+  "originalRuntimeProvenance": {
+    "path": "reports/chn-2020/baseline-performance-provenance.json",
+    "sha256": "82d0f71fb67c026091e119bc85aaba6dcffa4e8138b0a817b13b2da0386cc726",
+    "byteLength": 1345
+  },
+  "method": {
+    "cold": "Fresh Vitest process and module caches; operating-system page cache was not flushed.",
+    "warm": "Five repeated operations in the same process, with immutable metadata caches retained.",
+    "isolation": "Root held heavy delivery and build work during the final candidate measurement.",
+    "limitations": [
+      "One cold sample per recorded run; timings are observations, not a statistical regression threshold.",
+      "Garbage collection was not forced; process memory includes Vite and runtime caches.",
+      "Candidate after-turn memory includes two additional genuine followup commits; baseline has one actual commit.",
+      "Total artifact bytes describe the immutable package, not the bytes transferred by one map view. Browser transfer evidence is separate.",
+      "PRK-to-CHN had no successful coarse baseline, so its new north-direction route has no comparable baseline turn timing."
+    ]
+  },
+  "counts": {
+    "countries": {
+      "before": 247,
+      "after": 247,
+      "delta": 0,
+      "ratio": 1
+    },
+    "cells": {
+      "before": 4718,
+      "after": 8005,
+      "delta": 3287,
+      "ratio": 1.6966935142009325
+    },
+    "edges": {
+      "before": 17238,
+      "after": 26273,
+      "delta": 9035,
+      "ratio": 1.5241327300150829
+    },
+    "administrativeParents": {
+      "before": 4232,
+      "after": 4231,
+      "delta": -1,
+      "ratio": 0.9997637051039697
+    },
+    "previousParents": {
+      "before": 4231,
+      "after": 4231,
+      "delta": 0,
+      "ratio": 1
+    }
+  },
+  "countryCells": {
+    "CHN": {
+      "before": 33,
+      "after": 3320,
+      "delta": 3287,
+      "ratio": 100.60606060606061
+    },
+    "PRK": {
+      "before": 194,
+      "after": 194,
+      "delta": 0,
+      "ratio": 1
+    },
+    "KOR": {
+      "before": 322,
+      "after": 322,
+      "delta": 0,
+      "ratio": 1
+    }
+  },
+  "initialization": {
+    "catalogColdMs": {
+      "before": 25.571399999999812,
+      "after": 21.5945999999999,
+      "delta": -3.976799999999912,
+      "ratio": 0.844482507801687
+    },
+    "chnMetadataColdMs": {
+      "before": 1.0419999999999163,
+      "after": 9.580600000000004,
+      "delta": 8.538600000000088,
+      "ratio": 9.194433781190762
+    },
+    "chnMetadataWarmMs": {
+      "before": 0.013099999999667489,
+      "after": 0.024800000000141154,
+      "delta": 0.011700000000473665,
+      "ratio": 1.8931297710511938
+    },
+    "newGameColdMs": {
+      "before": 1987.3424,
+      "after": 1807.891,
+      "delta": -179.45139999999992,
+      "ratio": 0.9097028272531196
+    },
+    "regionsColdMs": {
+      "before": 74.55400000000009,
+      "after": 81.03510000000006,
+      "delta": 6.481099999999969,
+      "ratio": 1.0869316200338004
+    }
+  },
+  "newGameWarmMs": {
+    "before": {
+      "samples": [
+        0.1184000000002925,
+        0.09719999999924767,
+        0.12480000000050495,
+        0.09829999999965366,
+        0.1587999999992462
+      ],
+      "minimum": 0.09719999999924767,
+      "maximum": 0.1587999999992462,
+      "mean": 0.119499999999789
+    },
+    "after": {
+      "samples": [
+        0.16420000000016444,
+        0.1613999999999578,
+        0.10649999999986903,
+        0.08530000000018845,
+        0.13740000000007058
+      ],
+      "minimum": 0.08530000000018845,
+      "maximum": 0.16420000000016444,
+      "mean": 0.13096000000005006
+    }
+  },
+  "bytes": {
+    "artifactIndex": {
+      "before": 748935,
+      "after": 757545,
+      "delta": 8610,
+      "ratio": 1.0114963247811892
+    },
+    "metadata": {
+      "before": 627368,
+      "after": 785199,
+      "delta": 157831,
+      "ratio": 1.2515764272325014
+    },
+    "detail": {
+      "before": 18639541,
+      "after": 79108724,
+      "delta": 60469183,
+      "ratio": 4.244134767052472
+    },
+    "tiles": {
+      "before": 11376430,
+      "after": 19978712,
+      "delta": 8602282,
+      "ratio": 1.7561495126326976
+    },
+    "overviewZ0": {
+      "before": 399916,
+      "after": 831486,
+      "delta": 431570,
+      "ratio": 2.0791516218405866
+    },
+    "overviewZ2": {
+      "before": 893389,
+      "after": 1686174,
+      "delta": 792785,
+      "ratio": 1.8873905991678877
+    },
+    "total": {
+      "before": 44500200,
+      "after": 108943102,
+      "delta": 64442902,
+      "ratio": 2.448148592590595
+    },
+    "adjacencyDecoded": {
+      "before": 130809,
+      "after": 235905,
+      "delta": 105096,
+      "ratio": 1.803430956585556
+    }
+  },
+  "memory": {
+    "before": {
+      "before": {
+        "rss": 84332544,
+        "heapTotal": 55631872,
+        "heapUsed": 27682608,
+        "external": 3348445,
+        "arrayBuffers": 751992
+      },
+      "afterInitialization": {
+        "rss": 353615872,
+        "heapTotal": 189628416,
+        "heapUsed": 65631056,
+        "external": 115733955,
+        "arrayBuffers": 80859885
+      },
+      "afterTurns": {
+        "rss": 452743168,
+        "heapTotal": 281649152,
+        "heapUsed": 201823840,
+        "external": 115737001,
+        "arrayBuffers": 91765866
+      }
+    },
+    "after": {
+      "before": {
+        "rss": 84152320,
+        "heapTotal": 55418880,
+        "heapUsed": 27834152,
+        "external": 3348445,
+        "arrayBuffers": 751992
+      },
+      "afterInitialization": {
+        "rss": 350720000,
+        "heapTotal": 191631360,
+        "heapUsed": 63779928,
+        "external": 122829631,
+        "arrayBuffers": 74201952
+      },
+      "afterTurns": {
+        "rss": 466206720,
+        "heapTotal": 284946432,
+        "heapUsed": 178579336,
+        "external": 122546270,
+        "arrayBuffers": 96092384
+      }
+    },
+    "initializationRssIncrease": {
+      "before": 269283328,
+      "after": 266567680,
+      "delta": -2715648,
+      "ratio": 0.9899152761510731
+    },
+    "initializationHeapIncrease": {
+      "before": 37948448,
+      "after": 35945776,
+      "delta": -2002672,
+      "ratio": 0.9472265110815599
+    }
+  },
+  "matchedCHNtoPRK": {
+    "sameFirstCellIds": true,
+    "sameCentroidDistanceMetrics": true,
+    "firstTurn": {
+      "contextMs": {
+        "before": 11.014599999999518,
+        "after": 10.64719999999943,
+        "delta": -0.36740000000008877,
+        "ratio": 0.966644272147867
+      },
+      "providerMs": {
+        "before": 31.449800000000323,
+        "after": 20.388500000000022,
+        "delta": -11.061300000000301,
+        "ratio": 0.6482871115237557
+      },
+      "planMs": {
+        "before": 148.96249999999964,
+        "after": 193.0536000000002,
+        "delta": 44.09110000000055,
+        "ratio": 1.2959879164219228
+      },
+      "commitMs": {
+        "before": 5.153800000000047,
+        "after": 10.716300000000047,
+        "delta": 5.5625,
+        "ratio": 2.0793007101556036
+      }
+    },
+    "warmPlanMs": {
+      "before": {
+        "samples": [
+          27.19589999999971,
+          31.98820000000069,
+          26.944500000000517,
+          26.312300000000505,
+          26.593300000000454
+        ],
+        "minimum": 26.312300000000505,
+        "maximum": 31.98820000000069,
+        "mean": 27.806840000000374
+      },
+      "after": {
+        "samples": [
+          59.422599999999875,
+          41.28690000000006,
+          40.35239999999976,
+          39.58879999999954,
+          38.312300000000505
+        ],
+        "minimum": 38.312300000000505,
+        "maximum": 59.422599999999875,
+        "mean": 43.79259999999995
+      }
+    },
+    "warmCommitMs": {
+      "before": {
+        "samples": [
+          5.423899999999776,
+          3.46979999999985,
+          3.8383999999996377,
+          3.5742999999993117,
+          5.052400000000489
+        ],
+        "minimum": 3.46979999999985,
+        "maximum": 5.423899999999776,
+        "mean": 4.271759999999813
+      },
+      "after": {
+        "samples": [
+          5.294600000000173,
+          5.576100000000224,
+          4.912700000000768,
+          8.708599999999933,
+          3.897899999999936
+        ],
+        "minimum": 3.897899999999936,
+        "maximum": 8.708599999999933,
+        "mean": 5.677980000000207
+      }
+    }
+  },
+  "actualTwoTurnChecks": [
+    {
+      "actor": "CHN",
+      "target": "PRK",
+      "direction": null,
+      "actionText": "PRK 접경 인근을 점령한다",
+      "authorityCells": 194,
+      "initialAuthorityUnchanged": true,
+      "firstChangedCells": 1,
+      "followupChangedCells": 1,
+      "followupBaseWorldRevision": 1,
+      "followupCommittedWorldRevision": 2
+    },
+    {
+      "actor": "PRK",
+      "target": "CHN",
+      "direction": "north",
+      "actionText": "CHN 북부 접경 인근을 점령한다",
+      "authorityCells": 2,
+      "initialAuthorityUnchanged": true,
+      "firstChangedCells": 1,
+      "followupChangedCells": 1,
+      "followupBaseWorldRevision": 1,
+      "followupCommittedWorldRevision": 2
+    }
+  ],
+  "defaultCountyGranularityLimitation": {
+    "diagnosis": {
+      "path": "reports/chn-2020/frontier-seed-diagnosis.json",
+      "sha256": "be01a163e8180e2f30c0691e42265f0d9a529123f344745a334a1d9be6ec5c0f",
+      "byteLength": 147627
+    },
+    "failedBeforeSeedGuard": {
+      "path": "reports/chn-2020/candidate-initial-failed-play-performance.json",
+      "sha256": "b046390c5d67d0d2e035d3347c0e0b3e5ba59178732efe3e50b601b3977e2132",
+      "byteLength": 15258
+    },
+    "failedDefaultFollowup": {
+      "path": "reports/chn-2020/candidate-area-guard-failed-play-performance.json",
+      "sha256": "2d8fdb4cbc3b7e4552c3283572ee740157f6187786790657de5b4e24913f09c5",
+      "byteLength": 15306
+    },
+    "explanation": "The default PRK-to-CHN first entry is 2270.52 km2 but both adjacent unoccupied county cells exceed the unchanged 2800 km2 near limit. Supported north requests instead select a 779.58 km2 entry and a connected 1734.85 km2 followup. No distance, width, area, parent, lookup, or authority cap was raised."
+  },
+  "comparisonCode": {
+    "path": "scripts/chn-2020/compare-performance.mjs",
+    "sha256": "67922fa63cc0d0a2b66b4cfac49bc0a4965f1292df533a975fda39db86f6cb6b",
+    "byteLength": 6024
+  }
+}

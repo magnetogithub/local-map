@@ -1,0 +1,55 @@
+{
+  "stage": "10-40",
+  "status": "pass",
+  "objective": "Define a strict territory.replace v2 payload for replacing one Territory geometry while checking only basic GeoJSON structure and finite coordinates.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-39-territory-unclaim-schema.json": "1cfcf23f3fc15261addc97ef2761effd11f8e09a1afff3b92167a6c730d43073",
+    "src/lib/commands/territory-partition-v2.ts": "5de2e4de3982679d06892ba65f7320d0ccc4846eb4c4fe42e84713f931f127ae"
+  },
+  "outputHashes": {
+    "src/lib/commands/territory-replace-v2.ts": "84f2a7233095dad6cfad9900337e4d6ed38b06e1629250ccb99b1dec1787b34e",
+    "src/lib/commands/territory-replace-v2.test.ts": "715a56b177e6e286ce905e8eac46adc70d2aa2573a2eb1b35cba23e3e08468a8"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-40-territory-replace-schema.json",
+    "src/lib/commands/territory-replace-v2.test.ts",
+    "src/lib/commands/territory-replace-v2.ts"
+  ],
+  "commands": [
+    {"command": "Verify reports/prompt10/10-39-territory-unclaim-schema.json status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/commands/territory-replace-v2.test.ts", "exitCode": 1, "note": "Expected red test: territory-replace-v2 module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/commands/territory-replace-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/commands/territory-replace-v2.ts src/lib/commands/territory-replace-v2.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 8,
+    "supportedGeometryTypes": 2,
+    "semanticGeometryChecks": 0,
+    "worldStateReads": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-45"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "singleTerritoryGeometryReplacement": true,
+    "basicGeoJsonStructureChecked": true,
+    "finiteCoordinatesChecked": true,
+    "semanticGeometryChecksDeferred": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-41"
+}

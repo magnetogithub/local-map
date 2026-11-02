@@ -1,0 +1,47 @@
+
+> pax-local@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.3.0 (webpack)
+- Environments: .env.local
+✓ Running next.config.ts took 156ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 35.7s
+  Running TypeScript ...
+
+  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+  	- include was updated to add '.next-chn-internal-lod-20261030/types/**/*.ts'
+  	- include was updated to add '.next-chn-internal-lod-20261030/dev/types/**/*.ts'
+
+  Finished TypeScript in 11.1s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/12) ...
+  Generating static pages using 15 workers (3/12) 
+  Generating static pages using 15 workers (6/12) 
+  Generating static pages using 15 workers (9/12) 
+✓ Generating static pages using 15 workers (12/12) in 988ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /api/local-maintenance/operational-games/checkpoint
+├ ƒ /api/simulation/game
+├ ƒ /api/simulation/turn
+├ ƒ /api/world/catalog
+├ ƒ /api/world/catalog/operational
+├ ƒ /api/world/catalog/operational/cells
+├ ƒ /api/world/catalog/operational/map
+├ ƒ /api/world/labels
+├ ƒ /api/world/regions
+├ ƒ /data/territory-catalog/[version]/[...asset]
+└ ƒ /game
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

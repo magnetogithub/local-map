@@ -1,0 +1,66 @@
+{
+  "stage": "10-2",
+  "status": "pass",
+  "objective": "Record that Prompt 09 stages 9-15 through 9-64 are replaced by Prompt 10 and verify that no execution path treats those replaced stages as future work.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-1-prompt09-report-chain-audit.json": "b6ce8c3cd5298d96c0a0b66d29cd0d43438da36d8def3236d80b6cbaea1fa733"
+  },
+  "outputHashes": {
+    "replacementFreezeAudit": "73d85f27e0722f07124749bf6f6ef8ceda4fcd2d3fd13ea4bc64294575991439",
+    "reports/prompt09/9-14-territory-transfer-schema.json": "71b47a132d902f405744293abd1cf90983be5e49061083be9d82f8a8c3373b1a"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-14-territory-transfer-schema.json",
+    "reports/prompt10/10-2-replaced-stage-freeze.json"
+  ],
+  "commands": [
+    {"command": "Verify 10-1 status and both direct audit hashes", "exitCode": 0, "durationMs": 60},
+    {"command": "Search reports, prompts, runtime, scripts, E2E, and package metadata for replaced-stage execution paths", "exitCode": 0, "durationMs": 80},
+    {"command": "Freeze reports/prompt09/9-14-territory-transfer-schema.json nextStage at null", "exitCode": 0},
+    {"command": "Run targeted replacement-freeze audit", "exitCode": 0, "durationMs": 96},
+    {"command": "npm.cmd run lint -- reports/prompt09/9-14-territory-transfer-schema.json reports/prompt10/10-2-replaced-stage-freeze.json", "exitCode": 0, "durationMs": 2544, "note": "ESLint emitted two ignored-JSON warnings and zero errors."},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0, "durationMs": 2580}
+  ],
+  "measurements": {
+    "replacedStageFirst": "9-15",
+    "replacedStageLast": "9-64",
+    "replacedStageCount": 50,
+    "replacedStageReportsPresent": 0,
+    "replacedStageFutureLinks": 0,
+    "runtimeOrScriptNextStageConsumers": 0,
+    "promptTenReplacementDeclarationPresent": true,
+    "lintErrors": 0,
+    "lintWarnings": 2,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 0,
+    "auditTable": [
+      {"surface": "Prompt 10 replacement declaration", "classification": "authoritative-documentation", "executionTarget": false},
+      {"surface": "Prompt 09 stages 9-15..9-64", "classification": "superseded-historical-specification", "executionTarget": false},
+      {"surface": "Prompt 09 stage 9-14 nextStage", "classification": "frozen-null", "executionTarget": false},
+      {"surface": "runtime/scripts nextStage consumers", "classification": "none", "executionTarget": false}
+    ]
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "currentPromptTenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeAudit": true,
+    "replacementRangeRecorded": true,
+    "replacedStageReportsAbsent": true,
+    "replacedStageFutureLinksAbsent": true,
+    "noReplacementExecutionPath": true,
+    "productCodeUnmodified": true,
+    "targetedAuditPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "The repository ESLint configuration does not include JSON files, so the target-lint command completed with two ignored-file warnings."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-3"
+}

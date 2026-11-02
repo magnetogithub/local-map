@@ -1,0 +1,119 @@
+{
+  "stage": "9-10",
+  "status": "pass",
+  "objective": "Define a strict runtime-validated country.create command payload with a complete CountryEntity, optional initial presentation, and context-aware collision rejection.",
+  "inputHashes": {
+    "prompts/PROMPT_09_DYNAMIC_WORLD_COMMAND_RUNTIME.txt": "42c8696ea8cbb2b555de6575913f10e43e0822746758d404e87ee7405a06abe5",
+    "reports/prompt09/9-9-map-command-envelope.json": "59d8ee28674ddc0e5500018f4e18ab4b8757aaa866bbdd711901bc8c411744f1",
+    "src/lib/commands/map-command.ts": "41eb874fea39c60586a3f54e43295fe6bbf2dd53cc19f7869878016aeab19aec",
+    "src/lib/commands/map-command.test.ts": "118543f7de7f9b1990b17696fb5c41906e14b5b93d0c8491c3d442c0d0103512",
+    "src/lib/world/world-state.ts": "3083e848d5453117061cb7643b796e12216cf5fe284c8cc7066a219948d251ad",
+    "src/types/country.ts": "e77734a18c5effbb6e0958d10fffef51a8408bfc6e1d9b4df33c5179c0a596ba",
+    "package-lock.json": "fc7842b373ceeed78eb75bc3f640c1e262d08b3ff185ef9d88035336d426f8dd"
+  },
+  "outputHashes": {
+    "src/lib/commands/country-create.ts": "ba1dfc40d31988fd218bed207c06b426207f16c153030595dc78f355fd105b3f",
+    "src/lib/commands/country-create.test.ts": "4eeefa9c59421e9b2a660992b367393e92d00b2ffc3c23b140940fcf0575551f"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-10-country-create-schema.json",
+    "src/lib/commands/country-create.test.ts",
+    "src/lib/commands/country-create.ts"
+  ],
+  "commands": [
+    {
+      "command": "Read AGENTS.md, installed Next.js client guide, current on-disk 9-10 prompt, domain invariants, and verify 9-9 status plus LF-normalized output hashes; create running report",
+      "exitCode": 0,
+      "durationMs": 1000
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/commands/country-create.test.ts src/lib/commands/map-command.test.ts",
+      "exitCode": 0,
+      "durationMs": 3350
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 1,
+      "durationMs": 4266
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/commands/country-create.ts src/lib/commands/country-create.test.ts",
+      "exitCode": 0,
+      "durationMs": 3563
+    },
+    {
+      "command": "After fixture type correction: npm.cmd test -- --run src/lib/commands/country-create.test.ts src/lib/commands/map-command.test.ts",
+      "exitCode": 0,
+      "durationMs": 3372
+    },
+    {
+      "command": "After fixture type correction: npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 3532
+    },
+    {
+      "command": "After fixture type correction: npm.cmd run lint -- src/lib/commands/country-create.ts src/lib/commands/country-create.test.ts",
+      "exitCode": 0,
+      "durationMs": 3529
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 26752
+    },
+    {
+      "command": "Inspect runtime-schema and collision guards; compute LF-normalized output hashes; restore test-generated fix07 timestamps",
+      "exitCode": 0,
+      "durationMs": 900
+    }
+  ],
+  "measurements": {
+    "payloadFields": 2,
+    "countryEntityFields": 9,
+    "allowedUnitTypes": 6,
+    "malformedGeometryCasesRejected": 5,
+    "emptyNameCasesRejected": 4,
+    "collisionCasesRejected": 2,
+    "collisionStateMutations": 0,
+    "unsupportedUnitTypeCasesRejected": 1,
+    "incompleteOrUnknownFieldCasesRejected": 2,
+    "countryCreateTestsPassed": 15,
+    "targetedTestFilesPassed": 2,
+    "targetedTestsPassed": 32,
+    "fullTestFilesPassed": 20,
+    "fullTestsPassed": 140,
+    "typecheckErrors": 0,
+    "lintErrors": 0
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "currentPromptNineTenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageHashesMatchCurrentOutputs": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "strictCountryCreateCommandDefined": true,
+    "completeCountryEntityRequired": true,
+    "optionalInitialPresentationDefined": true,
+    "runtimeSchemaValidatorUsed": true,
+    "existingIdCollisionRejected": true,
+    "existingCountryNotOverwritten": true,
+    "malformedPolygonRejected": true,
+    "emptyNamesRejected": true,
+    "unsupportedUnitTypeRejected": true,
+    "unknownPayloadFieldsRejected": true,
+    "targetedUnitTestsPass": true,
+    "fullUnitSuitePass": true,
+    "typecheckPass": true,
+    "lintPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [
+    "The first typecheck found that the test command fixture inferred a payload type without optional initialPresentation. Annotating the fixture as CountryCreateCommand resolved both TypeScript errors; product schema behavior and tests were already passing."
+  ],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": true,
+  "nextStage": "9-11"
+}

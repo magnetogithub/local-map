@@ -1,0 +1,133 @@
+{
+  "subtask": "7F",
+  "status": "passed",
+  "generatedAt": "2026-08-13T07:23:24.857Z",
+  "source": "Natural Earth 1:10m actual geometry",
+  "implementation": {
+    "coarseSearch": "153-point sampling",
+    "preciseSearch": "polygon-clipping intersection area for the top 16 adaptive-search candidates",
+    "holesAndComponents": "intersection preserves Polygon/MultiPolygon components and subtracts hole rings",
+    "exactInsideRatio": "intersection area / rotated footprint area",
+    "baselineInsideRatio": "65-point independent line containment metric"
+  },
+  "results": [
+    {
+      "countryId": "RUS",
+      "exactInsideRatio": 0.898907,
+      "sampledInsideRatio": 0.856209,
+      "difference": 0.042698,
+      "baselineInsideRatio": 1,
+      "anchor": [
+        94.300607,
+        61.661031
+      ],
+      "anchorContainedInSelectedTerritory": true,
+      "threshold": 0.85,
+      "generatedLayoutMatch": false,
+      "milliseconds": 3044.2503,
+      "pass": true
+    },
+    {
+      "countryId": "USA",
+      "exactInsideRatio": 0.944715,
+      "sampledInsideRatio": 0.901961,
+      "difference": 0.042754,
+      "baselineInsideRatio": 1,
+      "anchor": [
+        -99.145117,
+        39.527697
+      ],
+      "anchorContainedInSelectedTerritory": true,
+      "threshold": 0.85,
+      "generatedLayoutMatch": false,
+      "milliseconds": 1459.7791,
+      "pass": true
+    },
+    {
+      "countryId": "CHN",
+      "exactInsideRatio": 0.916766,
+      "sampledInsideRatio": 0.888889,
+      "difference": 0.027877,
+      "baselineInsideRatio": 1,
+      "anchor": [
+        104.18742,
+        31.348817
+      ],
+      "anchorContainedInSelectedTerritory": true,
+      "threshold": 0.85,
+      "generatedLayoutMatch": false,
+      "milliseconds": 1451.6283,
+      "pass": true
+    },
+    {
+      "countryId": "CHL",
+      "exactInsideRatio": 0.94664,
+      "sampledInsideRatio": 0.862745,
+      "difference": 0.083895,
+      "baselineInsideRatio": 1,
+      "anchor": [
+        -69.18833,
+        -23.569825
+      ],
+      "anchorContainedInSelectedTerritory": true,
+      "threshold": 0.75,
+      "generatedLayoutMatch": false,
+      "milliseconds": 303.0755,
+      "pass": true
+    },
+    {
+      "countryId": "IDN",
+      "exactInsideRatio": 0.999069,
+      "sampledInsideRatio": 1,
+      "difference": -0.000931,
+      "baselineInsideRatio": 1,
+      "anchor": [
+        114.018504,
+        -0.859635
+      ],
+      "anchorContainedInSelectedTerritory": true,
+      "threshold": 0.75,
+      "generatedLayoutMatch": false,
+      "milliseconds": 609.5416,
+      "pass": true
+    },
+    {
+      "countryId": "NOR",
+      "exactInsideRatio": 0.774018,
+      "sampledInsideRatio": 0.751634,
+      "difference": 0.022384,
+      "baselineInsideRatio": 1,
+      "anchor": [
+        11.464328,
+        62.371133
+      ],
+      "anchorContainedInSelectedTerritory": true,
+      "threshold": 0.75,
+      "generatedLayoutMatch": false,
+      "milliseconds": 331.7313,
+      "pass": true
+    }
+  ],
+  "generatedLayoutReport": {
+    "path": "public/data/maps/country-label-layout-report-2020.json",
+    "generatedAt": "2026-08-13T07:22:22.191Z",
+    "algorithm": "shape-aware-v1",
+    "regeneratedWithLatestAlgorithm": true,
+    "directRawGeometryValuesMatchGenerated": false,
+    "valueDifferenceReason": "prepare-map-data applies an additional cleanGeometry pass before layout; this independent audit intentionally recomputes from the persisted 1:10m geometry without that second pass"
+  },
+  "gates": {
+    "representativeCountries": true,
+    "chileRecovered": true,
+    "allAnchorsContained": true,
+    "allThresholdsMet": true,
+    "exactSampleDifferenceValidated": true,
+    "latestAlgorithmDataRegenerated": true,
+    "status": "pass"
+  },
+  "limitations": [
+    "The precision calculation operates on the shape-preserving simplified projected geometry used by the label search, rather than every raw Natural Earth vertex.",
+    "Baseline containment remains dense line sampling because a line has zero intersection area.",
+    "Exact intersection of the top candidates adds computation cost; performance optimization remains a later subtask."
+  ]
+}

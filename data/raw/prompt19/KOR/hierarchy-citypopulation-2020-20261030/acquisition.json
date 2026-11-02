@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "hierarchy-acquisition-receipts-v1",
+  "rawResearchLocation": ".tmp/fine-to-macro-hierarchy-20261030",
+  "rawResponsesRedistributed": false,
+  "responses": [
+    {
+      "name": "adm1-metadata.json",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM1/geoBoundaries-KOR-ADM1-metaData.json",
+      "status": 200,
+      "bytes": 829,
+      "sha256": "0ca1426407d6acc6b9bbc258f3defb65f17a37b424abc93d629a16af189549e4",
+      "retrievedAt": "2026-10-30T01:20:11.819Z"
+    },
+    {
+      "name": "adm1-source.geojson",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM1/geoBoundaries-KOR-ADM1.geojson",
+      "status": 200,
+      "bytes": 208196,
+      "sha256": "6683cd1ad991676d96493fd0aae068215426497ccf82c8b0eb5683cad341cddc",
+      "retrievedAt": "2026-10-30T01:20:12.271Z"
+    },
+    {
+      "name": "citypopulation-admin.html",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/",
+      "status": 200,
+      "bytes": 189715,
+      "sha256": "9c45be2b098189d30101bc6e35fd775e5b0c62e1712f80df94ece4314663996f",
+      "retrievedAt": "2026-10-30T01:20:13.788Z"
+    },
+    {
+      "id": "22050",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daegu/22050__buk_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/22050.html",
+      "bytes": 11630,
+      "sha256": "24ed28ecc42ee69325de3393a6252af190b74a488550965778acf8854c208123",
+      "retrievedAt": "2026-10-30T01:22:16.424Z",
+      "representative": [
+        128.582,
+        35.93
+      ],
+      "name": "child-22050.html"
+    },
+    {
+      "id": "32400",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/gangwon_do/32400__goseong_gun/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/32400.html",
+      "bytes": 11575,
+      "sha256": "037fc36437cd9758a51e589d408cc6c8cbcaab25d641a3aad8f8301441629ccf",
+      "retrievedAt": "2026-10-30T01:22:16.443Z",
+      "representative": [
+        128.388,
+        38.374
+      ],
+      "name": "child-32400.html"
+    },
+    {
+      "id": "38340",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/gyeongsangnam_do/38340__goseong_gun/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/38340.html",
+      "bytes": 11627,
+      "sha256": "b0ef39947ab6fc40a3dba0082f7addd4aa4d175ba546a10af275702735be5194",
+      "retrievedAt": "2026-10-30T01:22:16.461Z",
+      "representative": [
+        128.276,
+        35.033
+      ],
+      "name": "child-38340.html"
+    },
+    {
+      "id": "21080",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/busan/21080__buk_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/21080.html",
+      "bytes": 11629,
+      "sha256": "3bd3b77a3a969b1aed6ed5959d20f3ba6389afee41939d504aa4a222c1ca1a63",
+      "retrievedAt": "2026-10-30T01:22:16.478Z",
+      "representative": [
+        129.023,
+        35.221
+      ],
+      "name": "child-21080.html"
+    },
+    {
+      "id": "24040",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24040__buk_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/24040.html",
+      "bytes": 11648,
+      "sha256": "2a07fa9d110f5e54df4eb3e9f5bca05fabec6d066c5d47b8113f9721d9ffe6da",
+      "retrievedAt": "2026-10-30T01:22:16.773Z",
+      "representative": [
+        126.905,
+        35.206
+      ],
+      "name": "child-24040.html"
+    },
+    {
+      "id": "26040",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26040__buk_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/26040.html",
+      "bytes": 11622,
+      "sha256": "32175b4418b760c2dbacbab427b34ad3f3aa5d92a2b98e570b2ad3ca4a720417",
+      "retrievedAt": "2026-10-30T01:22:16.789Z",
+      "representative": [
+        129.394,
+        35.612
+      ],
+      "name": "child-26040.html"
+    },
+    {
+      "id": "21030",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/busan/21030__dong_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/21030.html",
+      "bytes": 11603,
+      "sha256": "fa33ddfa9cf9d25de7fbeb2d147ecf82d1665a8a144e93100c307dc742647bc7",
+      "retrievedAt": "2026-10-30T01:22:16.807Z",
+      "representative": [
+        129.039,
+        35.126
+      ],
+      "name": "child-21030.html"
+    },
+    {
+      "id": "22020",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daegu/22020__dong_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/22020.html",
+      "bytes": 11639,
+      "sha256": "e97bb1918ace6a7bebee1396f88f48db843feac25e7a7b89ca1c7bfec79c0628",
+      "retrievedAt": "2026-10-30T01:22:16.828Z",
+      "representative": [
+        128.684,
+        35.945
+      ],
+      "name": "child-22020.html"
+    },
+    {
+      "id": "25010",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25010__dong_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/25010.html",
+      "bytes": 11651,
+      "sha256": "2f13471922b112bb22ec98d87679814ce0109f7b7716d09abbbfe2e7bc8d16d6",
+      "retrievedAt": "2026-10-30T01:22:17.107Z",
+      "representative": [
+        127.491,
+        36.379
+      ],
+      "name": "child-25010.html"
+    },
+    {
+      "id": "24010",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24010__dong_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/24010.html",
+      "bytes": 11624,
+      "sha256": "a7039a9f45fe71c00c474da269cafbc5e922d8fb37856bd42b49460af75bf112",
+      "retrievedAt": "2026-10-30T01:22:17.125Z",
+      "representative": [
+        126.952,
+        35.11
+      ],
+      "name": "child-24010.html"
+    },
+    {
+      "id": "23020",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/incheon/23020__dong_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/23020.html",
+      "bytes": 11610,
+      "sha256": "8fc37fecf7ff09c16cd76d8bd7e5daaf49b4d0886e9c5be969399a25c1d63e7e",
+      "retrievedAt": "2026-10-30T01:22:17.146Z",
+      "representative": [
+        126.642,
+        37.482
+      ],
+      "name": "child-23020.html"
+    },
+    {
+      "id": "26030",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26030__dong_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/26030.html",
+      "bytes": 11623,
+      "sha256": "5fae4538b8c977f5ff1c9406cc11040a0eaf729c74245acaafcd16f91a350b9a",
+      "retrievedAt": "2026-10-30T01:22:17.163Z",
+      "representative": [
+        129.431,
+        35.545
+      ],
+      "name": "child-26030.html"
+    },
+    {
+      "id": "21010",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/busan/21010__jung_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/21010.html",
+      "bytes": 11589,
+      "sha256": "8101f5eda98bab7721e057e06b2f688ffe94272c300fbe53258b7cf42fe92340",
+      "retrievedAt": "2026-10-30T01:22:17.438Z",
+      "representative": [
+        129.031,
+        35.104
+      ],
+      "name": "child-21010.html"
+    },
+    {
+      "id": "22010",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daegu/22010__jung_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/22010.html",
+      "bytes": 11605,
+      "sha256": "895ccfbc709a9cf57b1d8d1e4ed842a55d82370f5cadeed40ac4294e6d47a522",
+      "retrievedAt": "2026-10-30T01:22:17.455Z",
+      "representative": [
+        128.591,
+        35.867
+      ],
+      "name": "child-22010.html"
+    },
+    {
+      "id": "25020",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25020__jung_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/25020.html",
+      "bytes": 11653,
+      "sha256": "5128ca7383db6f5b42a93d50f8517bde1a5dad34a8135b1ae3d7476d73bc931e",
+      "retrievedAt": "2026-10-30T01:22:17.477Z",
+      "representative": [
+        127.408,
+        36.297
+      ],
+      "name": "child-25020.html"
+    },
+    {
+      "id": "23010",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/incheon/23010__jung_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/23010.html",
+      "bytes": 11637,
+      "sha256": "087218c240ae10742c5e155739c7a4f7d47235f6e8fe69eceb7cf56f705a8099",
+      "retrievedAt": "2026-10-30T01:22:17.493Z",
+      "representative": [
+        126.44,
+        37.464
+      ],
+      "name": "child-23010.html"
+    },
+    {
+      "id": "11020",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/seoul/11020__jung_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/11020.html",
+      "bytes": 11619,
+      "sha256": "9ec7b98013e0afc4dac2fdf9f4c30ac4ab20aada14eb2e9b3eab692318aeb37b",
+      "retrievedAt": "2026-10-30T01:22:17.764Z",
+      "representative": [
+        127.004,
+        37.559
+      ],
+      "name": "child-11020.html"
+    },
+    {
+      "id": "26010",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26010__jung_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/26010.html",
+      "bytes": 11631,
+      "sha256": "04f53fefb8972b25ee519bbf024653709e83ed75faec037d8ce772c9732e68bc",
+      "retrievedAt": "2026-10-30T01:22:17.783Z",
+      "representative": [
+        129.326,
+        35.572
+      ],
+      "name": "child-26010.html"
+    },
+    {
+      "id": "21020",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/busan/21020__seo_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/21020.html",
+      "bytes": 11599,
+      "sha256": "123bdfc21975573c8cac31a7b670805cf417708846148be250440d62d3ff3aa6",
+      "retrievedAt": "2026-10-30T01:22:17.805Z",
+      "representative": [
+        129.013,
+        35.122
+      ],
+      "name": "child-21020.html"
+    },
+    {
+      "id": "22030",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daegu/22030__seo_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/22030.html",
+      "bytes": 11614,
+      "sha256": "10116ddc85b01e22c0298580e61766eeccf3a4a550bc5d52e416ba8a3a5cee08",
+      "retrievedAt": "2026-10-30T01:22:17.820Z",
+      "representative": [
+        128.55,
+        35.874
+      ],
+      "name": "child-22030.html"
+    },
+    {
+      "id": "25030",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daejeon/25030__seo_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/25030.html",
+      "bytes": 11644,
+      "sha256": "17096b52b18776aa1707eb2748669bd4bf7ca6e4b919bdb74e70cf7d44049829",
+      "retrievedAt": "2026-10-30T01:22:18.096Z",
+      "representative": [
+        127.33,
+        36.251
+      ],
+      "name": "child-25030.html"
+    },
+    {
+      "id": "24020",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24020__seo_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/24020.html",
+      "bytes": 11644,
+      "sha256": "6bbaf26047e10767fb9dabba1324c83d48628b41234ade97253bf624ac901dc0",
+      "retrievedAt": "2026-10-30T01:22:18.116Z",
+      "representative": [
+        126.856,
+        35.141
+      ],
+      "name": "child-24020.html"
+    },
+    {
+      "id": "23080",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/incheon/23080__seo_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/23080.html",
+      "bytes": 11650,
+      "sha256": "94d5fa52c4767bd6bacdabc12c663085f6d1086286543f2cd536d3515fe15b41",
+      "retrievedAt": "2026-10-30T01:22:18.133Z",
+      "representative": [
+        126.646,
+        37.557
+      ],
+      "name": "child-23080.html"
+    },
+    {
+      "id": "21070",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/busan/21070__nam_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/21070.html",
+      "bytes": 11630,
+      "sha256": "0e9fb91eb4c82bcc6abc60f4437eaa2e8a88be375dd7ff22ca4db8d150ae3f91",
+      "retrievedAt": "2026-10-30T01:22:18.148Z",
+      "representative": [
+        129.091,
+        35.129
+      ],
+      "name": "child-21070.html"
+    },
+    {
+      "id": "22040",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/daegu/22040__nam_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/22040.html",
+      "bytes": 11610,
+      "sha256": "66f8ec70ce7e8bfa10d1cb38abca65aa2ef5eff875aa72d0628ee6a679ce8d0d",
+      "retrievedAt": "2026-10-30T01:22:18.427Z",
+      "representative": [
+        128.586,
+        35.835
+      ],
+      "name": "child-22040.html"
+    },
+    {
+      "id": "24030",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/gwangju/24030__nam_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/24030.html",
+      "bytes": 11643,
+      "sha256": "f572371b31eff6cda21128ecda0e235fcd675acb94dbb4a2195e46c5863fb73d",
+      "retrievedAt": "2026-10-30T01:22:18.440Z",
+      "representative": [
+        126.895,
+        35.099
+      ],
+      "name": "child-24030.html"
+    },
+    {
+      "id": "26020",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/ulsan/26020__nam_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/26020.html",
+      "bytes": 11629,
+      "sha256": "4c0099b1a8ecae3fd70f68368a8db795805ebd863276803c5d93c7e9143a6aef",
+      "retrievedAt": "2026-10-30T01:22:18.461Z",
+      "representative": [
+        129.331,
+        35.519
+      ],
+      "name": "child-26020.html"
+    },
+    {
+      "id": "21120",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/busan/21120__gangseo_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/21120.html",
+      "bytes": 11594,
+      "sha256": "ec8cf86f3c7d326bfa8404fdd5fa029d0086cc458bfac2bc7f651df02cebf79e",
+      "retrievedAt": "2026-10-30T01:22:18.487Z",
+      "representative": [
+        128.921,
+        35.164
+      ],
+      "name": "child-21120.html"
+    },
+    {
+      "id": "11160",
+      "url": "https://www.citypopulation.de/en/southkorea/admin/seoul/11160__gangseo_gu/",
+      "path": ".tmp/fine-to-macro-hierarchy-20261030/children/11160.html",
+      "bytes": 11626,
+      "sha256": "4649f9b03c378f82605d5ffc075e0d2a89af3d9b61a2ca5fdeb384203fdb6877",
+      "retrievedAt": "2026-10-30T01:22:18.752Z",
+      "representative": [
+        126.816,
+        37.566
+      ],
+      "name": "child-11160.html"
+    },
+    {
+      "name": "mois-gunwi-announcement.html",
+      "url": "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=97607",
+      "status": 200,
+      "bytes": 166162,
+      "sha256": "7608ba8108bc79f0eb5e2d31f5835ab448ae7e5b0496ba2964d5f1573989e93f",
+      "retrievedAt": "2026-10-30T01:25:35.836Z"
+    },
+    {
+      "name": "mois-gunwi-code-change.html",
+      "url": "https://mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000052&nttId=101209",
+      "status": 200,
+      "bytes": 175483,
+      "sha256": "024bd75b82cef731980b70352ea09e2017810eb2c422568edbf8e70ba280b12a",
+      "retrievedAt": "2026-10-30T01:25:35.990Z"
+    }
+  ],
+  "sourceArchive": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/sourceData/gbOpen",
+  "distribution": "Factual extraction with source attribution. Referenced boundary files retain their existing source-lock licenses; no new boundary geometry or population data is included."
+}

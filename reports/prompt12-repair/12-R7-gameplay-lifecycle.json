@@ -1,0 +1,20 @@
+{
+  "stage": "12-R7",
+  "status": "PASS",
+  "summary": "Gameplay initialization is effect-driven, saves are isolated per player country, restored undo/redo pairs survive reload, and player changes start or restore the selected country's own simulation with an explicit notice.",
+  "evidence": {
+    "implementation": [
+      "src/components/simulation/SimulationPanel.tsx",
+      "src/lib/simulation/client/application-turn-runtime.ts",
+      "src/lib/simulation/client/game-runtime-storage.ts",
+      "src/lib/simulation/simulation-persistence.ts"
+    ],
+    "tests": [
+      "src/lib/simulation/client/application-turn-runtime.test.ts",
+      "src/lib/simulation/game-runtime-persistence.test.ts",
+      "src/lib/simulation/client/turn-client.test.tsx"
+    ],
+    "result": "23 targeted tests passed"
+  },
+  "playerChangePolicy": "Each player country has an independent save key. Selecting another country restores that country's save when present; otherwise it starts from the immutable seed world and keeps the previous country's save."
+}

@@ -1,0 +1,20 @@
+{
+  "stage": "13-24",
+  "status": "pass",
+  "summary": "확정 event log와 최신 turn report를 뉴스 목록/상세 view model로 투영했다.",
+  "guarantees": [
+    "날짜 내림차순과 동일 날짜 원본 순서를 함께 보장한다.",
+    "날짜, 분류, 중요도, 관련 국가, 확인 상태를 보존한다.",
+    "중요도 필터 뒤에도 상세 항목이 필터 결과 안에서 선택된다.",
+    "관련 국가 버튼으로 국가 overlay를 열 수 있다.",
+    "현재 report의 사건별 지도 변화 연결을 표시한다."
+  ],
+  "files": [
+    "src/lib/game-ui/news-projection.ts",
+    "src/lib/game-ui/news-projection.test.ts",
+    "src/components/game/NewsOverlay.tsx",
+    "src/components/game/NewsAndMajorEvents.test.tsx"
+  ],
+  "verification": {"targetedTests": "pass"},
+  "nextStage": "13-25"
+}

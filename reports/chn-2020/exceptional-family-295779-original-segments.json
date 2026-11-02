@@ -1,0 +1,43 @@
+{
+  "point": [
+    90.34137029840059,
+    28.294247851856937
+  ],
+  "existingCountryBorderSegments": [],
+  "originalRawFamilies": [
+    {
+      "sourceFeatureId": "62558664B29577970904240",
+      "name": "Nagarz\u00ea County",
+      "polygonCoversPoint": false,
+      "boundaryDistance": 8.593242224903522e-11,
+      "nearestSegment": [
+        [
+          90.3405847999486,
+          28.292415000252106
+        ],
+        [
+          90.34415389978273,
+          28.300743000289287
+        ]
+      ],
+      "pointExistsInRawCoordinates": false
+    },
+    {
+      "sourceFeatureId": "62558664B55975392964671",
+      "name": "Lozhag County",
+      "polygonCoversPoint": true,
+      "boundaryDistance": 0.0,
+      "nearestSegment": [
+        [
+          90.34137029840059,
+          28.294247851856937
+        ],
+        [
+          90.3405847999486,
+          28.292415000252106
+        ]
+      ],
+      "pointExistsInRawCoordinates": true
+    }
+  ]
+}

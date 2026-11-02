@@ -1,0 +1,149 @@
+﻿{
+    "baselineHead":  "d56fba5f4eb928477a17cb640bb5b662ae9719cc",
+    "stages":  {
+                   "14-16":  {
+                                 "status":  "not-complete",
+                                 "prepared":  "pure color delta projection port and color planner",
+                                 "remaining":  "runtime effect, incremental map paint and label contrast, undo/redo integration"
+                             },
+                   "14-17":  {
+                                 "status":  "not-run"
+                             },
+                   "14-15":  {
+                                 "relatedTests":  112,
+                                 "domainTests":  51,
+                                 "validation":  "domain and related tests pass; current shared typecheck blocked by concurrent occupation effects",
+                                 "implementation":  "complete"
+                             }
+               },
+    "filesChangedByThisRun":  [
+                                  {
+                                      "path":  "src/lib/world/country-map-color.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "ce0d5147160484123380912d08640761ffdf65ca35d07d5ca4063b326cb12a47"
+                                  },
+                                  {
+                                      "path":  "src/lib/world/country-map-color.test.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "40b306a9dc945108c8ed6276364ba81dff4082daa39441c25b5befdf62ff3261"
+                                  },
+                                  {
+                                      "path":  "src/lib/commands/country-change-map-color.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "7c7edafbe9a22a351b87d25cb03a16c4543e6d43cad6e994352f1f83808ed25c"
+                                  },
+                                  {
+                                      "path":  "src/lib/commands/country-change-map-color.test.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "6765adffec90a8dccecd465fa2990bce990b2dd0d512f4dfb0ba6d59b60ae308"
+                                  },
+                                  {
+                                      "path":  "src/lib/planning/country-map-color-planner.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "5c87fcc5a6feee530fa4575eca882d5448c8b9bd82ec160e5b3c5a5d1781d5a3"
+                                  },
+                                  {
+                                      "path":  "src/lib/projection/catalog-color-projection.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "828f967124459061830a2b5d2742b2606e7b6070e801f59341d7e4773d94f7f4"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/debug-world-effect.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "3bf0c86c69e8d5eff3cffaeaac1208cdfd339d4a9dccc2fc65f33756416480ad"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/semantic-validator.ts",
+                                      "startHash":  "7f3047549b9b4c710b3ca3834ad912030cf4c04ca2fa4a22aaadc58b004889ae",
+                                      "wasDirtyAtStart":  true,
+                                      "currentHash":  "721127e27552e3f95fdffeae781742665cd739abc8b081032448bb30b729c22f"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/world-effect.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "77f89b6da08020524b6b1570c13cda2a793c89d6cb1f9cd532f0eecbf6a43d91"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/world-effect-compiler.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "9fd26ac94ac22ff63a57cd94bb0e0effc5989e394bd2d0ff44a4816df4678409"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/simulation-context.ts",
+                                      "startHash":  "5f7873a0481796308e9ae577daa2733a090b9877c2c8324883aba72f411787de",
+                                      "wasDirtyAtStart":  true,
+                                      "currentHash":  "ed3f1884b1c6a3b58dc916121b69e5be85f147f6140be46a796cb021fc9ededd"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/server/context-resolution-validator.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "cb918fc938979422370799d160a46000a617880c65213a5846429809f1ea9d63"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/server/provider-config.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "d8f187e9c02a41308c234fa0dd9b691291847e48697a2309718008e1d9f704a9"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/server/simulation-instruction.ts",
+                                      "startHash":  null,
+                                      "wasDirtyAtStart":  false,
+                                      "currentHash":  "831733bb8aa08114cb18b4f01205ca35926d2d0496993e8d60157851f9d5e431"
+                                  },
+                                  {
+                                      "path":  "src/lib/simulation/client/turn-report.ts",
+                                      "startHash":  "56c12cbf6b1a50c13d1c4fd4a684f93d096e98463d47b05ba65b2a4767ec6d36",
+                                      "wasDirtyAtStart":  true,
+                                      "currentHash":  "f519aff1e02623a54e392fb494bbcb3b72f4985f6848dc49e5a3ba641e9dffce"
+                                  }
+                              ],
+    "resumeCondition":  "Other writer finishes or pauses shared-file changes; integrate current shared code, rerun task 14-15 typecheck, then execute 14-16 and 14-17 in order",
+    "unresolved":  [
+                       "Concurrent writer modifies occupation effects and shared files. Prompt section 12.2 prohibits simultaneous edits to common files. User coordination requested.",
+                       "Color effects are parsed and authority-validated but not committed to the production catalog runtime yet.",
+                       "Red/white real map, merge integration and undo/redo scenarios have not been executed."
+                   ],
+    "baselineEvidence":  "reports/prompt14/14-17-country-color/baseline.json",
+    "commands":  [
+                     {
+                         "evidence":  "reports/prompt14/14-17-country-color/task-15-domain-tests.json",
+                         "exitCode":  0,
+                         "command":  "npx.cmd vitest run color policy, command, WorldV3 suites"
+                     },
+                     {
+                         "evidence":  "reports/prompt14/14-17-country-color/task-15-tests.json",
+                         "exitCode":  0,
+                         "command":  "npx.cmd vitest run color, WorldV3, SimulationV2, catalog runtime, simulation contract, provider route suites"
+                     },
+                     {
+                         "exitCode":  1,
+                         "command":  "npx.cmd tsc --noEmit",
+                         "reason":  "concurrent occupation effect variants are not handled by shared turn-report.ts"
+                     }
+                 ],
+    "sharedConcurrentFiles":  [
+                                  "src/lib/simulation/world-effect.ts"
+                              ],
+    "concurrentChanges":  [
+                              "src/lib/world/world-state-v3.ts",
+                              "src/lib/world/world-v3-runtime-hash.ts",
+                              "src/lib/simulation/simulation-event.ts",
+                              "src/lib/commands/territorial-control-v3.ts",
+                              "src/lib/planning/territorial-control-planner.ts",
+                              "src/lib/planning/territorial-control-planner.test.ts"
+                          ],
+    "nextStage":  "resolve shared-file collision before 14-16; no later production stages authorized or executed",
+    "status":  "blocked",
+    "schemaVersion":  "prompt14-country-color-checkpoint-v1"
+}

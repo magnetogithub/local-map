@@ -1,0 +1,116 @@
+{
+  "stage": "9-4",
+  "status": "pass",
+  "objective": "Define the canonical WorldState shape with revision, countriesById, countryOrder, and schemaVersion, and reject empty IDs, duplicate IDs, entity/key mismatches, and invalid geometry.",
+  "inputHashes": {
+    "reports/prompt09/9-3-static-country-dependency-classification.json": "f382adf5efe6551141816e3f7b630d160c062cf062aceb52a1d6eda628ba054a",
+    "src/lib/world/world-state.ts": "157da7013c68a0d2b6d0f019339e62aecd4d2cec4077da38901ce1315bdba489",
+    "src/types/country.ts": "e77734a18c5effbb6e0958d10fffef51a8408bfc6e1d9b4df33c5179c0a596ba",
+    "src/lib/map/country-label-layout.ts": "2dd5e22987a7eb4c2c4734623be25e8fce948ba04dfe0c2f9f61177786840628"
+  },
+  "outputHashes": {
+    "src/lib/world/world-state.ts": "3083e848d5453117061cb7643b796e12216cf5fe284c8cc7066a219948d251ad",
+    "src/lib/world/world-state-invariants.test.ts": "1d324364486ae06664f0acae2c30dbe03777954f66b862e180c8e1baa5bbed24",
+    "src/lib/world/world-state.test.ts": "25f869d24ac6966d8d094b1bdecd3ab7ededafe2eb98150b339d6cb5fbcf9c42",
+    "src/lib/world/country-map-artifacts.test.ts": "8fc3d4189b0794030ddf0a3afa0d28cf6d8daf97cbd93eee834f1d85515d4f81",
+    "reports/prompt09/9-2-benchmark.test.ts": "3b1432236aaf77706ab54a916e4d42e6b1015d059c6a22b5751f242622fc2af5"
+  },
+  "changedFiles": [
+    "reports/prompt09/9-2-benchmark.test.ts",
+    "reports/prompt09/9-4-world-state-invariants.json",
+    "src/lib/world/country-map-artifacts.test.ts",
+    "src/lib/world/world-state-invariants.test.ts",
+    "src/lib/world/world-state.test.ts",
+    "src/lib/world/world-state.ts"
+  ],
+  "commands": [
+    {
+      "command": "Verify 9-3 status and LF-normalized input hashes; read AGENTS.md and installed Next.js server/client guide",
+      "exitCode": 0,
+      "durationMs": 600
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/world/world-state-invariants.test.ts src/lib/world/world-state.test.ts src/lib/world/country-map-artifacts.test.ts",
+      "exitCode": 0,
+      "durationMs": 6799
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit (initial assertion-function declaration check)",
+      "exitCode": 1,
+      "durationMs": 4571
+    },
+    {
+      "command": "npm.cmd test -- --run (initial full-state validation performance check)",
+      "exitCode": 1,
+      "durationMs": 92350
+    },
+    {
+      "command": "npm.cmd test -- --run reports/prompt09/9-2-benchmark.test.ts",
+      "exitCode": 0,
+      "durationMs": 16162
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "exitCode": 0,
+      "durationMs": 29960
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0,
+      "durationMs": 8296
+    },
+    {
+      "command": "npm.cmd run lint -- <9-4 changed TypeScript files>",
+      "exitCode": 0,
+      "durationMs": 15571
+    }
+  ],
+  "measurements": {
+    "canonicalWorldStateFields": [
+      "schemaVersion",
+      "revision",
+      "countriesById",
+      "countryOrder"
+    ],
+    "schemaVersion": 1,
+    "seedCountriesValidated": 247,
+    "invariantUnitTests": 9,
+    "malformedGeometryCases": 5,
+    "relatedTestFilesPassed": 3,
+    "relatedTestsPassed": 23,
+    "fullTestFilesPassed": 14,
+    "fullTestsPassed": 95,
+    "typecheckErrors": 0,
+    "lintErrors": 0
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "installedNextDocsRead": true,
+    "previousStageStatusPass": true,
+    "previousStageHashesMatchCurrentInputs": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "canonicalFourFieldShapeDefined": true,
+    "schemaVersionValidated": true,
+    "revisionValidated": true,
+    "emptyCountryIdRejected": true,
+    "duplicateCountryIdRejected": true,
+    "entityIdKeyMismatchRejected": true,
+    "malformedGeometryRejected": true,
+    "countriesByIdAndCountryOrderSetEqualityValidated": true,
+    "existingWorldStateConsumersMigrated": true,
+    "relatedUnitTestsPass": true,
+    "fullUnitSuitePass": true,
+    "typecheckPass": true,
+    "lintPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [
+    "The first typecheck required assertion helpers to use function declarations; the declarations were corrected without changing validation behavior.",
+    "The first full-suite run exposed a performance regression from revalidating every stored geometry on each replacement. Full validation remains at construction and explicit validation boundaries, while transitions validate only changed entities."
+  ],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": true,
+  "nextStage": "9-5"
+}

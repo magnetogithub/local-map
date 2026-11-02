@@ -1,0 +1,1105 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "status": "read-only-bottleneck-audit-complete-runtime-attribution-pending",
+  "userRequest": "더 줄여야돼. 렉을 줄일 수 있는 모든 병목 지점을 찾아서 보고해",
+  "scope": {
+    "applicationSourceEdited": false,
+    "existingChangesPreserved": true,
+    "reportOnly": true,
+    "newTestsOrBuildsRun": false,
+    "newBrowserOrTurnRuns": 0,
+    "newExternalAiCalls": 0,
+    "catalogRegeneratedOrModified": false,
+    "fullCatalogRehashOrTileScan": false,
+    "reviewed": [
+      "initial server/bootstrap/transport",
+      "client world creation and delta application",
+      "map protocol, source lifecycle, exact geometry, worker/render",
+      "prepare/context/frontier/validation/plan/hash/commit/delta/history",
+      "UI publication, retained memory, environment and external-provider limits"
+    ]
+  },
+  "summary": {
+    "findingCount": 28,
+    "mainConclusion": "큰 비용은 작은 변경에도 923,443셀 또는3,125,743간선 전체를 동기 처리·복사·정렬하는 경로, 그리고 소량 geometry 요청을 위해 큰 국가/샤드 전체를 파싱하는 경로에 집중되어 있다.",
+    "confidence": "작업량과 호출 경로는 소스/설치 라이브러리/자산 메타로 확인했다. 개별 함수의 실제 ms·FPS·CPU/GC 비율과 비용 순위는 새 profile로 확정하지 않았다.",
+    "priorityMeaning": "high 등급은 작업량/발생 조건에 따른 개선 잠재력이며 장애 심각도나 측정된 시간 순위가 아니다.",
+    "initialFocus": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B12"
+    ],
+    "turnFocus": [
+      "B07",
+      "B08",
+      "B09",
+      "B15",
+      "B16",
+      "B17",
+      "B18",
+      "B19",
+      "B20",
+      "B21"
+    ],
+    "doNotConflate": [
+      "서버 응답 대기와 브라우저 long task",
+      "최초 cold 준비와 warm 반복 비용",
+      "전체 자료 크기와 실제 한 턴 전송량",
+      "working set와 JS heap/VRAM",
+      "React rerender와 MapLibre remount",
+      "합법적 snapshot 보관과 memory leak"
+    ]
+  },
+  "measuredMetadata": {
+    "catalog": {
+      "cells": 923443,
+      "edges": 3125743,
+      "countries": 247,
+      "administrativeParents": 4761,
+      "previousParents": 4231
+    },
+    "ids": {
+      "charactersPerId": 82,
+      "arrayJsonBytes": 78492656,
+      "calculation": "923443 * (82 + 3) + 1; fixed ASCII IDs, excludes catalogRef wrapper; decoded JSON bytes, not compressed transfer or heap"
+    },
+    "assets": {
+      "registeredAllBytes": 523293560,
+      "incidence": {
+        "compressedBytes": 18543081,
+        "decodedBytes": 25005944
+      },
+      "z1FourTiles": {
+        "compressedBytes": 6517508,
+        "decodedBytes": 21991704,
+        "previousUniqueCells": 203792,
+        "previousUniqueEdges": 676904,
+        "previousBaseFrontCandidates": 921
+      },
+      "countries": [
+        {
+          "id": "KOR",
+          "cells": 1250,
+          "detailCompressedBytes": 87897,
+          "detailDecodedBytes": 451527
+        },
+        {
+          "id": "PRK",
+          "cells": 1283,
+          "detailCompressedBytes": 88491,
+          "detailDecodedBytes": 467102
+        },
+        {
+          "id": "CHN",
+          "cells": 50142,
+          "detailCompressedBytes": 2820724,
+          "detailDecodedBytes": 16293077
+        },
+        {
+          "id": "RUS",
+          "cells": 93438,
+          "detailCompressedBytes": 5510629,
+          "detailDecodedBytes": 30802366
+        }
+      ],
+      "edgeDetail": {
+        "shards": 256,
+        "compressedBytes": 229182973,
+        "decodedTrailerBytesSum": 1202005698,
+        "minDecodedShardBytes": 4459517,
+        "maxDecodedShardBytes": 5084352
+      },
+      "label": {
+        "placementsBytes": 1421763,
+        "placementsFeatures": 247,
+        "fillsBytes": 1185058,
+        "fillsFeatures": 738,
+        "fillsPositions": 41807,
+        "outlinesBytes": 42,
+        "outlinesFeatures": 0,
+        "fontBytes": 16433112
+      }
+    },
+    "method": "Existing pinned small manifest/index JSON projected to counts and sizes; selected asset stat + last four gzip bytes, and 256 edge-detail gzip trailers only. No full topology/geometry decode, tile census, catalog regeneration or full rehash in this audit. Gzip ISIZE is modulo 2^32 and interpreted for current single-member generated files. These sizes do not measure JS heap or actual turn requests."
+  },
+  "previousObservations": {
+    "source": "reports/maintenance/20261029-map-initial-and-turn-performance.json",
+    "latestScripted": {
+      "viewportCss": {
+        "width": 1553,
+        "height": 724
+      },
+      "committedObservedByMs": 11133,
+      "mapReadyObservedByMs": 25344,
+      "initialSetupReadyObservedByMs": 25113
+    },
+    "limits": "과거 관측 상한이며 tool scheduling/관측 공백을 포함한다. warmed caches와 배경 탭이 통제되지 않았다. commit→map 차이를 정확한14.211초 구간으로 해석하거나 전후 성능 향상률을 계산할 수 없다. 이번 감사의 새 시간 측정은 아니다.",
+    "baseline": "18-01의1920x855 viewport와 직접 비교하지 않는다. scripted provider 비용은 실제 외부 AI 지연을 포함하지 않는다."
+  },
+  "alreadyCompletedExcluded": [
+    "초기 전체 edge feature-state 쓰기 제거와 sparse front override",
+    "실제 source membership만 paint state 적용, 국가별 interaction/controller indexes",
+    "동일 hover no-op 및 old/new flag-only 갱신",
+    "512-entry color-only presentation cache",
+    "같은 국가 상세를 턴/undo/redo 때 유지",
+    "obsolete detail 요청 취소와 late publication 차단",
+    "0셀 delta의 전체 dictionary 복사 제거",
+    "label zoom bucket·palette·초기 중복 state/setData 제거",
+    "같은 authoritative pair/date context build3회→1회와 두 resolver 검증 유지",
+    "loader lease 공유/실패 session 정리"
+  ],
+  "findings": [
+    {
+      "id": "B01",
+      "title": "초기 정적 셀 ID를 거대한 JSON 배열로 전달",
+      "priority": "high",
+      "phase": [
+        "initial",
+        "refresh"
+      ],
+      "evidenceKind": "code-and-exact-size-calculation",
+      "cost": "고정 82자 ID 923,443개의 JSON 배열만 78,492,656 bytes(74.856 MiB). 서버 gzip 결과는 캐시하지만 API는 no-store이고 새 탭은 응답 JSON을 다시 복원한다. 압축 전 크기이며 실제 네트워크 bytes나 heap 크기가 아니다.",
+      "improvement": "catalogRef에 묶인 immutable 브라우저 캐시와 바이너리 hash/ordinal 전달, 필요한 ID의 지연 물질화를 검토.",
+      "risk": "medium-to-high: ID 순서·catalogRef·입력 검증과 공개 schema를 유지해야 한다.",
+      "refs": [
+        {
+          "path": "src/app/api/world/catalog/operational/cells/route.ts",
+          "line": 10
+        },
+        {
+          "path": "src/lib/simulation/client/operational-game-loader.ts",
+          "line": 56
+        },
+        {
+          "path": "src/lib/world/world-geometry-catalog-ref.ts",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "title": "브라우저가 최초 92만 셀 객체를 동기 생성·검증",
+      "priority": "high",
+      "phase": [
+        "initial"
+      ],
+      "evidenceKind": "code",
+      "cost": "RLE를 N개 entity로 전개하고 셀마다 prototype/symbol/descriptor·키 검사/정렬·ID/국가 검증·freeze를 수행한다. 이후 큰 dictionary와 배열을 freeze한다.",
+      "improvement": "run 공통 검증을 재사용하는 내부 생성 경로와 ordinal 기반 compact 저장소/어댑터를 검토. Worker 사용 시 거대 객체 structured clone까지 포함해 비교.",
+      "risk": "high for storage redesign; typed forged input·중복 ID·순서·immutable snapshot 계약 유지.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/client/operational-game-client.ts",
+          "line": 18
+        },
+        {
+          "path": "src/lib/world/territory-entity-v3.ts",
+          "line": 13
+        },
+        {
+          "path": "src/lib/world/world-v3-validation.ts",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "id": "B03",
+      "title": "cold 서버 catalog·migration과 세션별 seed 전개",
+      "priority": "high",
+      "phase": [
+        "cold-server",
+        "new-session"
+      ],
+      "evidenceKind": "code",
+      "cost": "cold 모듈은 247국 metadata를 읽고 N개 mapping·membership·contract·world를 생성·검증한다. 세션별로 counts와 seed runs를 각각 N개 순회한다. RLE는 hash-ID 순서라 국가별 연속 구간을 보장하지 않으며 실제 run 개수는 미측정이다. cold materialization은 모듈 캐시되어 매 턴 반복되는 비용이 아니다.",
+      "improvement": "승인 입력에 묶인 runtime-ready compact seed/전송 결과 재사용과 단계별 cold 준비 분리.",
+      "risk": "high: 원본 catalog 변경·재생성이나 검증 삭제로 해결할 수 없다. country ordinal 연속 구간 가정 금지.",
+      "refs": [
+        {
+          "path": "src/lib/world/operational-catalog.server.ts",
+          "line": 108
+        },
+        {
+          "path": "src/lib/world/operational-catalog.server.ts",
+          "line": 261
+        },
+        {
+          "path": "src/lib/world/operational-game.server.ts",
+          "line": 12
+        },
+        {
+          "path": "src/lib/world/operational-state-migration.ts",
+          "line": 18
+        },
+        {
+          "path": "src/lib/simulation/server/operational-game.server.ts",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "id": "B04",
+      "title": "초기 지도 준비의 직렬 자산 로딩과 incidence 선행 의존",
+      "priority": "high",
+      "phase": [
+        "initial-map"
+      ],
+      "evidenceKind": "code-and-asset-metadata",
+      "cost": "manifest→tile index→detail index→incidence 순으로 await한다. incidence는 압축18,543,081/해제25,005,944 bytes이며 delivery 완료 전 필요하다. consumer 후 label 준비와 idle까지 초기 ready 경로에 들어간다.",
+      "improvement": "manifest 검증 뒤 독립된 index 읽기 병렬화, incidence 사용 시점 분리/worker 준비, 지도 필수 준비와 label 준비의 UI 상태 분리를 검토.",
+      "risk": "medium: 검증 순서·취소·복원된 변경 geometry·applied revision readiness를 유지해야 한다. 표시 상태만 먼저 ready로 바꾸는 것은 성능 개선이 아니다.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 61
+        },
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 94
+        },
+        {
+          "path": "src/components/map/OperationalWorldMap.tsx",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "id": "B05",
+      "title": "custom protocol의 타일 인덱싱과 state 기록이 메인 스레드에서 실행",
+      "priority": "high",
+      "phase": [
+        "initial-map",
+        "pan",
+        "zoom",
+        "remount"
+      ],
+      "evidenceKind": "app-and-installed-library-source",
+      "cost": "매 loadTile은 cache hit에도 PBF feature header/edge incidence를 검사하고 observer state 적용을 완료한 후 worker에 bytes를 반환한다. MapLibre worker는 이후 PBF와 geometry/bucket을 다시 처리한다. 이전 z1 네 타일 표본은 고유 cells203,792/edges676,904이며 현재 viewport의 실제 수로 재측정한 값은 아니다.",
+      "improvement": "검증/index worker 이동, 이미 검증된 타일별 인덱싱 결과 재사용, 렌더와 원자적 revision 적용을 보존하는 작업 분할.",
+      "risk": "medium-to-high: source membership·취소·feature identity·오류 회복 유지. 단순 frame 분할은 총 작업량 감소와 구분.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 217
+        },
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 235
+        },
+        {
+          "path": "src/lib/map/catalog-vector-delivery.ts",
+          "line": 73
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/source/protocol_crud.ts",
+          "line": 8
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/source/vector_tile_worker_source.ts",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "id": "B06",
+      "title": "저배율도 다수 셀·edge를 전달·처리하는 렌더 자료 구조",
+      "priority": "high",
+      "phase": [
+        "initial-map",
+        "pan",
+        "zoom"
+      ],
+      "evidenceKind": "code-existing-sample-and-separate-geometry-investigation",
+      "cost": "현재 sparse edge 수정 뒤에도 관측된 셀의 paint state와 거대한 PBF feature 처리가 남는다. z1 네 타일 원시 해제 크기는21,991,704 bytes. fill/occupation/hover/selected의 draw·paint 비용도 남지만 같은 layout은 bucket을 공유하므로 geometry 4배 복제로 계산하면 안 된다.",
+      "improvement": "저배율 coverage-preserving 국가/육지 overview와 authoritative changed/detail overlay를 검토. 더 높은 배율에서만 필요한 셀/edge 세부정보를 전달하는 파생 렌더 구조가 큰 개선 후보.",
+      "risk": "high: 현 저배율은 독립 polygon culling으로 육지 누락이 이미 확인됐다. tolerance 증가·그냥 셀 제거·tolerance0만 적용하는 해법은 부적절. per-zoom 면적 coverage·현재 control·정확한 front·null/retired·undo/redo 검증 필요.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-map-consumer.ts",
+          "line": 57
+        },
+        {
+          "path": "scripts/prompt15-world-delivery-core.mjs",
+          "line": 17
+        },
+        {
+          "path": "reports/maintenance/20261029-map-separation-analysis.json",
+          "line": 5
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/render/draw_fill.ts",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "id": "B07",
+      "title": "첫 nonempty 변경에서 전세계 reverse incidence를 동기 구축",
+      "priority": "high",
+      "phase": [
+        "first-occupation",
+        "restored-changes"
+      ],
+      "evidenceKind": "code-and-exact-operation-count",
+      "cost": "E 전체2회+N prefix1회. 두 pass에서 edgeIncidence의 frozen pair 객체6,251,486개가 생성된다. typed-array peak 상한 약32.39MB와 기존 incidence25.01MB는 별도다. pristine 초기 지도에서는 실행되지 않고 같은 delivery에서는 재사용한다.",
+      "improvement": "검증된 raw incidence 순회, worker CSR 구축 또는 승인된 별도 CSR 전달 자료를 검토.",
+      "risk": "medium-to-high: ordinal 범위·정확한 incident edge·현재 revision의 원자 적용·오류 복구를 유지.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 99
+        },
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 108
+        }
+      ]
+    },
+    {
+      "id": "B08",
+      "title": "소수 변경 셀도 국가 전체 exact geometry를 파싱·검증",
+      "priority": "high",
+      "phase": [
+        "country-selection",
+        "cell-change",
+        "undo",
+        "redo"
+      ],
+      "evidenceKind": "code-and-asset-metadata",
+      "cost": "loadCellDetail은 국가 전체 loadCountryDetail 후 subset을 고른다. RUS93,438셀 detail은 해제30,802,366 bytes, CHN50,142셀은16,293,077 bytes. 국가 전체 JSON.parse·geometry Zod object graph 생성 비용이 남는다. 같은 국가 상세를 매 턴 다시 지우던 이전 버그는 이미 수정됐다.",
+      "improvement": "검증된 immutable parsed geometry의 유한 캐시, ordinal별 lookup과 subset만 반환하는 전달 경로.",
+      "risk": "medium-to-high: 반환 객체 mutation isolation·원본 hash·완전 geometry·stale publish 방지를 유지.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 156
+        },
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 162
+        }
+      ]
+    },
+    {
+      "id": "B09",
+      "title": "새 전선 geometry가 공간과 무관한 거대 shard를 과다 조회",
+      "priority": "high",
+      "phase": [
+        "new-front",
+        "occupation",
+        "undo",
+        "redo"
+      ],
+      "evidenceKind": "code-and-bounded-gzip-metadata",
+      "cost": "edge1개여도 해당 shard 전체 JSON.parse/Zod/모든 edge incidence 검증. 256 FNV hash bucket이라 인접 edge도 여러 shard에 분산될 수 있다. shard당 decoded4.46~5.08MB; 전체 decoded 합1,202,005,698 bytes. 이것은 전체 자료 크기이며 실제 턴이 모두 읽었다는 뜻이 아니다.",
+      "improvement": "요청 edge만 전달하는 ordinal geometry 경로, bounded verified parsed-shard 캐시, 공간/범위 기반 파생 전달을 검토.",
+      "risk": "medium-to-high: 원본 geometry identity·완전 edge·좌우 incidence 검증 유지. 실제 requested shard 수·cache miss를 먼저 기록해야 한다.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 171
+        },
+        {
+          "path": "scripts/prompt15-world-indices-core.mjs",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "id": "B10",
+      "title": "공유 byte cache의 thrash·복사·재파싱과 중복 resolve",
+      "priority": "medium-high",
+      "phase": [
+        "detail",
+        "changed-geometry",
+        "pan"
+      ],
+      "evidenceKind": "code-and-asset-size-comparison",
+      "cost": "32MiB LRU는 decoded bytes만 저장하며 hit도 slice(0), TextDecoder, JSON.parse를 반복한다. RUS detail+shard000=35,538,193 bytes로32MiB를 넘는다. resolveCells는 국가 전체 byId Map을 매번 만들고 caller와 loadCellDetail에서 중복될 수 있다. in-flight request dedup도 없다.",
+      "improvement": "타일/geometry 별도 예산, immutable parsed cache·in-flight dedup과 재사용 가능한 ID/ordinal index.",
+      "risk": "medium: 캐시 확대만 하면 총 메모리 증가. consumer별 mutation/cancel 격리와 검증 실패 재시도 유지.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 41
+        },
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 60
+        },
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 146
+        },
+        {
+          "path": "src/lib/map/operational-map-consumer.ts",
+          "line": 214
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "title": "GeoJSON setData/updateData 뒤에도 serialization·worker index 재구축",
+      "priority": "medium-high",
+      "phase": [
+        "country-selection",
+        "accumulated-changes"
+      ],
+      "evidenceKind": "app-and-installed-library-source",
+      "cost": "상세는 setData, changed source는 updateData를 사용한다. object setData는 main JSON.stringify 후 worker JSON.parse. diff도 worker에서 현재 전체 feature 목록으로 geojson-vt 인덱스를 다시 만든다. changed source가 누적되면 작은 update도 비용이 커질 수 있다.",
+      "improvement": "bounded spatial source 분할이나 인덱스 재사용, 직렬화/worker 자료 전달 경로를 검토.",
+      "risk": "high for source redesign: exact overlays·mask·front·revision 적용 순서·source failure 복구 유지.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-map-sources.ts",
+          "line": 51
+        },
+        {
+          "path": "src/lib/map/operational-map-consumer.ts",
+          "line": 128
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/source/geojson_source.ts",
+          "line": 398
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/source/geojson_worker_source.ts",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "title": "지도 remount와 방문 feature 재생",
+      "priority": "medium-high",
+      "phase": [
+        "setup-to-game",
+        "restart",
+        "retry"
+      ],
+      "evidenceKind": "code-conditional-runtime-count-unmeasured",
+      "cost": "preparing early return과 setup/game subtree 전환이 지도 host를 제거할 수 있다. generation/Retry도 새 map을 만든다. 같은 client의 delivery는 재사용돼도 새 consumer는 전체 seen cell/edge replay를 받고 cell states를 다시 기록한다. 실제 mount 횟수는 미측정.",
+      "improvement": "route 전환에 지속되는 지도 host와 UI 분리, replay를 현재 필요한 membership으로 제한하는 설계 검토.",
+      "risk": "medium-to-high: restart·실패 복구의 의도된 초기화와 source/protocol 소유권을 유지.",
+      "refs": [
+        {
+          "path": "src/components/layout/OperationalGameSetupShell.tsx",
+          "line": 43
+        },
+        {
+          "path": "src/components/layout/OperationalGameSetupShell.tsx",
+          "line": 53
+        },
+        {
+          "path": "src/components/map/OperationalWorldMap.tsx",
+          "line": 14
+        },
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 243
+        }
+      ]
+    },
+    {
+      "id": "B13",
+      "title": "메모리 예산 밖의 방문 feature·정확 geometry 보관",
+      "priority": "medium-high",
+      "phase": [
+        "long-session",
+        "many-zoom-levels",
+        "many-changes"
+      ],
+      "evidenceKind": "code-retention-not-leak-proof",
+      "cost": "delivery seenCells/seenEdges, consumer vectorCells·국가 index와 변경 exact geometry는 방문/변경을 누적한다. byte LRU와 MapLibre의 source별256 tile 개수 제한이 이를 제한하지 않는다. frontOverrides는 현재 예외 subset이며 원복 시 제거되므로 전체 방문 edge 보관으로 과장하면 안 된다.",
+      "improvement": "viewport membership·현재 예외와 재로드 가능한 cache를 구분하고 여러 캐시를 합친 실제 메모리 예산 수립.",
+      "risk": "medium-to-high: 재진입·색상/선택·undo/redo·replay 정확성을 보존. 유한 catalog/세션 보관은 누수로 확정할 수 없다.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-vector-delivery.ts",
+          "line": 216
+        },
+        {
+          "path": "src/lib/map/operational-map-consumer.ts",
+          "line": 51
+        },
+        {
+          "path": "src/components/map/OperationalWorldMap.tsx",
+          "line": 43
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/source/source_cache.ts",
+          "line": 483
+        }
+      ]
+    },
+    {
+      "id": "B14",
+      "title": "마우스 이동마다 레이어별 hit query 중복",
+      "priority": "medium",
+      "phase": [
+        "hover",
+        "pan-interaction"
+      ],
+      "evidenceKind": "app-and-installed-library-source",
+      "cost": "3 fill layer에 mousemove와 mouseleave를 각각 등록. 설치 MapLibre는 둘 다 내부 mousemove에서 queryRenderedFeatures하므로 delivered move당 최대6 query 진입, click당3회. 같은 hover의 feature-state write는 이미0회지만 그 이전 query 비용은 남는다.",
+      "improvement": "레이어 배열을 묶은 단일 hit query와 hover publication 재사용.",
+      "risk": "medium: vector/detail/changed 우선순위·투명 mask·owner 우선/controller fallback·leave 의미 유지.",
+      "refs": [
+        {
+          "path": "src/lib/map/operational-map-consumer.ts",
+          "line": 204
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/ui/map.ts",
+          "line": 1344
+        },
+        {
+          "path": "node_modules/maplibre-gl/src/ui/map.ts",
+          "line": 1364
+        }
+      ]
+    },
+    {
+      "id": "B15",
+      "title": "context에 쓸 요약을 위해 전체 행정 membership을 준비",
+      "priority": "high",
+      "phase": [
+        "first-prepare-turn"
+      ],
+      "evidenceKind": "code-cold-path",
+      "cost": "listCountry(id).slice(0,128)에서 slice 전에 모든 region lookup이 전체 membership을 만든다. 247국 directory를 만들면서 cold 첫 prepare에4,761 parent/N개 membership ID를 물질화할 수 있다. warm cache는 재구축을 줄인다.",
+      "improvement": "ref/name summary directory와 실제 lookup의 full membership 준비를 분리.",
+      "risk": "medium: source region identity·전체 membership·clipping·명칭을 유지.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/server/operational-game-session.ts",
+          "line": 72
+        },
+        {
+          "path": "src/lib/simulation/operational-region.server.ts",
+          "line": 31
+        },
+        {
+          "path": "src/lib/simulation/operational-region.server.ts",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "id": "B16",
+      "title": "context가 이미 만든 owner index를 쓰지 않고 관련국마다 N개 재검색",
+      "priority": "high",
+      "phase": [
+        "prepare-turn"
+      ],
+      "evidenceKind": "code",
+      "cost": "territoryIdsByCountry를 N개 순회해 만들고 정렬한 뒤, 관련국 R개마다 territoryOrder.filter/sort를 다시 한다. 상한R≤64에서 (1+R)×N 순회가 가능하다. context3→1 캐시는 완료됐지만 한 번 생성의 이 비용은 남는다.",
+      "improvement": "이미 생성한 owner별 ID 배열을 count·첫 ID·clipped 목록에 재사용.",
+      "risk": "low-to-medium: owner 기준·null 제외·canonical 정렬·territoryCount·omittedCount 동등성을 확인.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/simulation-context.ts",
+          "line": 245
+        },
+        {
+          "path": "src/lib/simulation/simulation-context.ts",
+          "line": 280
+        }
+      ]
+    },
+    {
+      "id": "B17",
+      "title": "frontier selector와 anchor boundary 전체 탐색",
+      "priority": "high",
+      "phase": [
+        "frontier-lookup",
+        "occupation-validation"
+      ],
+      "evidenceKind": "code",
+      "cost": "selector마다 현재 owner/controller를 N개 검색하고 eligible adjacency를 확인한다. sharedBoundary는 anchor 한 쌍을 찾기 위해 E개 incidence를 매번 순회한 뒤 shard geometry를 다시 read/hash/gunzip/JSON.parse한다. incidence/adjacency 첫 decode cache와 반복 전체 탐색은 별개다.",
+      "improvement": "현재 owner/controller의 증분 index, immutable ordinal-pair boundary index/유한 cache, 검증된 geometry 재사용.",
+      "risk": "medium-to-high: sourceCountryId를 현재 control 대신 사용하면 안 됨. 양의 길이 육상 접촉·가장 긴 edge/segment 결정 규칙 유지.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/operational-frontier.server.ts",
+          "line": 82
+        },
+        {
+          "path": "src/lib/world/operational-catalog.server.ts",
+          "line": 234
+        }
+      ]
+    },
+    {
+      "id": "B18",
+      "title": "동일 frontier scope를 lookup→submit→host에서 재계산",
+      "priority": "high",
+      "phase": [
+        "frontier-lookup",
+        "turn-validation"
+      ],
+      "evidenceKind": "code-path",
+      "cost": "성공한 동일 lookup/submit scope도 selector가3회 실행될 수 있다. 각각 B17의 N+E 탐색을 다시 수행한다. 현재 verified Map은 한 검증 호출 안에서만 중복을 제거한다.",
+      "improvement": "authoritative world identity+완전 canonical scope에 묶인 host-private selection 결과 재사용.",
+      "risk": "medium: 검증 자체를 생략하지 않고 issued scope·revision·exact IDs·effect binding·aggregate cap·stale guard 유지.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/server/openai-responses-provider.ts",
+          "line": 72
+        },
+        {
+          "path": "src/lib/simulation/server/context-resolution-validator.ts",
+          "line": 47
+        },
+        {
+          "path": "src/lib/simulation/catalog-turn-plan.ts",
+          "line": 26
+        },
+        {
+          "path": "src/lib/simulation/operational-frontier-validation.ts",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "id": "B19",
+      "title": "실제 변경 시 서버 effect별·클라이언트 전체 dictionary 복사",
+      "priority": "high",
+      "phase": [
+        "occupation",
+        "annexation",
+        "undo",
+        "redo"
+      ],
+      "evidenceKind": "code",
+      "cost": "서버는 effect별로 전체 territory dictionary를 얕게 복사할 수 있고 worldEffects 상한은32. client도 nonempty delta면 변경 셀이1개라도 N키 spread 후 freeze한다. 0셀 delta 복사는 이미 제거됐다. 복사 중 old/new가 공존하고 unchanged entity는 공유한다.",
+      "improvement": "effect 순서 검증용 private overlay와 최종1회 materialization, immutable chunk/persistent 내부 저장소·schema adapter.",
+      "risk": "high: 같은 셀 연속 effect·authority/date frame·immutable snapshot·before/after·duplicate/stale·atomic semantics 유지.",
+      "refs": [
+        {
+          "path": "src/lib/world/world-state-v3.ts",
+          "line": 119
+        },
+        {
+          "path": "src/lib/simulation/catalog-turn-plan.ts",
+          "line": 64
+        },
+        {
+          "path": "src/lib/simulation/client/operational-game-client.ts",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "id": "B20",
+      "title": "새 territory root의 전체 정렬·canonical serialization·동기 JS SHA",
+      "priority": "high",
+      "phase": [
+        "first-hash",
+        "changed-world-commit"
+      ],
+      "evidenceKind": "code-and-size-lower-bound",
+      "cost": "entity leaf cache가 있어도 새 dictionary는 N개 ID/hash record를 생성·정렬·직렬화하고 UTF8/padding 배열을 만든다. hash64자만59,100,352자이며 ID/JSON은 추가다. cold seed hash는 N개 leaf도 계산한다. 동일 world의 plan→commit hash 재확인은 WeakMap을 재사용하므로 또 전체 계산한다고 집계하면 안 된다.",
+      "improvement": "동일 canonical bytes/결과를 보존하는 서버 native/streaming SHA와 중간 배열 감소, 변경 dictionary materialization 횟수 감소.",
+      "risk": "medium-to-high: 공용 browser SHA를 Node 전용으로 바꾸거나 root 검증을 제거하지 말 것. Merkle 방식은 root 의미를 바꾸는 별도 버전 설계.",
+      "refs": [
+        {
+          "path": "src/lib/world/world-v3-runtime-hash.ts",
+          "line": 5
+        },
+        {
+          "path": "src/lib/world/domain-hash-root.ts",
+          "line": 47
+        },
+        {
+          "path": "src/lib/world/sha256.ts",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "id": "B21",
+      "title": "runtime publication과 응답에서 같은 전체 delta 재계산",
+      "priority": "high",
+      "phase": [
+        "commit-read",
+        "undo",
+        "redo"
+      ],
+      "evidenceKind": "code",
+      "cost": "새 dictionary diff는 N개 비교와 N개 Object.keys 배열3개를 만든다. runtime publish 후 read/명령 응답이 같은 pair diff를 다시 계산할 수 있다.",
+      "improvement": "published previous/next pair가 요청 base/current identity와 일치할 때 last change 재사용; 오래된 base·restart는 검증된 fallback.",
+      "risk": "low-to-medium: stale base·catalog identity·preflight 실패 시 world/history 함께 rollback 유지.",
+      "refs": [
+        {
+          "path": "src/lib/world/operational-state-change.ts",
+          "line": 8
+        },
+        {
+          "path": "src/lib/simulation/catalog-runtime.ts",
+          "line": 52
+        },
+        {
+          "path": "src/lib/simulation/server/operational-game-session.ts",
+          "line": 63
+        },
+        {
+          "path": "src/lib/simulation/server/operational-game-session.ts",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "id": "B22",
+      "title": "effect별 simulation parse·reconciliation·freeze·hash 반복",
+      "priority": "medium",
+      "phase": [
+        "many-effects",
+        "longer-history-content"
+      ],
+      "evidenceKind": "code",
+      "cost": "effect마다 frame/reconciliation과 simulation 생성·invariant parse가 반복된다. simulation hash도 parse/canonical/SHA를 수행하며 object hash cache가 없다. eventLog는 최대2,048개로 제한되며 무상한으로 보고하면 안 된다.",
+      "improvement": "검증된 immutable simulation 결과를 world identity에 결합해 재사용하고 hash WeakMap을 검토.",
+      "risk": "medium-to-high: forged input·다른 world의 inactive country/authority·freeze·stale plan/content hash 검증 보존.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/catalog-turn-plan.ts",
+          "line": 33
+        },
+        {
+          "path": "src/lib/simulation/simulation-state-v2.ts",
+          "line": 201
+        },
+        {
+          "path": "src/lib/simulation/simulation-state-v2.ts",
+          "line": 242
+        },
+        {
+          "path": "src/lib/simulation/atomic-turn-runtime.ts",
+          "line": 240
+        }
+      ]
+    },
+    {
+      "id": "B23",
+      "title": "동기 자산 read/hash와 304 이전 작업 및 응답 복사",
+      "priority": "medium",
+      "phase": [
+        "asset-cache-miss",
+        "revalidation",
+        "many-tiles"
+      ],
+      "evidenceKind": "code",
+      "cost": "asset request는 fs.readFileSync+SHA를 거친 bytes를 얻은 다음 If-None-Match를 검사한다. 따라서304도 read/hash를 먼저 한다. 응답 new Uint8Array(Buffer)는 별도 복사를 만든다. cold 작업과 같은 Node event loop에서 요청이 대기할 수 있으며 실제 대기 ms는 미측정.",
+      "improvement": "admitted immutable identity로 조건부 요청을 먼저 처리하고 검증된 byte cache/async read/stream 전달을 설계.",
+      "risk": "medium: 원본 bytes 변경 탐지·등록 asset allowlist·ETag·gzip payload hash identity를 유지. Content-Encoding을 단순 추가하면 현재 hash 계약이 깨진다.",
+      "refs": [
+        {
+          "path": "src/app/data/territory-catalog/[version]/[...asset]/route.ts",
+          "line": 7
+        },
+        {
+          "path": "src/app/data/territory-catalog/[version]/[...asset]/route.ts",
+          "line": 13
+        },
+        {
+          "path": "src/lib/map/operational-delivery.server.ts",
+          "line": 16
+        },
+        {
+          "path": "src/lib/world/operational-catalog.server.ts",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "id": "B24",
+      "title": "최초 label seed의 반복 read/hash·큰 font와 중복 GeoJSON source",
+      "priority": "medium",
+      "phase": [
+        "cold-label",
+        "map-mount"
+      ],
+      "evidenceKind": "code-and-small-asset-metadata",
+      "cost": "cold label loader는 approval assets를 모두 읽어 검증한 뒤 collection/font를 다시 읽는다. font는16,433,112 bytes. placements1.42MB+fills1.19MB를 응답 직렬화하고 브라우저가 파싱한다. outlines가 비어 fills738feature/41,807positions를 별도 outline source로도 처리한다. label color/zoom/초기 state 반복은 이미 수정됐다.",
+      "improvement": "동일 verified bytes 재사용, seed 응답의 필요한 render 속성만 전달, fill/outline source 통합과 버전별 전달 캐시 검토.",
+      "risk": "medium: 승인 glyph geometry·draw order·halo·이름/퇴역/소유0 의미 유지. 실제 font 다운로드와 FPS 영향은 별도 측정.",
+      "refs": [
+        {
+          "path": "src/lib/map/catalog-labels.server.ts",
+          "line": 18
+        },
+        {
+          "path": "src/app/api/world/labels/route.ts",
+          "line": 7
+        },
+        {
+          "path": "src/lib/map/operational-country-labels.ts",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "id": "B25",
+      "title": "서버 undo history와 snapshot 보관으로 증가하는 메모리·GC 압력",
+      "priority": "medium-high",
+      "phase": [
+        "many-territory-changing-turns",
+        "multiple-local-sessions"
+      ],
+      "evidenceKind": "code-retention-not-leak-proof",
+      "cost": "server history는 before/after world·simulation·plan을 보관하며 turn 수 상한이 없다. 변경 턴 H개에서 dictionary entry 참조 보관은 O(H*N) 가능. versions64pair, sessions최대8/비실행6시간 정책은 별도다. client는 현재 snapshot만 보관한다. unchanged entity 공유를 포함해 해석해야 한다.",
+      "improvement": "persistent/chunk snapshot, 검증된 delta/checkpoint 보관을 검토. 제품 계약 변경 없이 history를 임의로 줄이는 방식은 제외.",
+      "risk": "high: undo/redo·기록 보존·재연결 semantics 유지. 현재 증거로 memory leak나 retained heap bytes를 확정하지 않는다.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/atomic-turn-runtime.ts",
+          "line": 258
+        },
+        {
+          "path": "src/lib/simulation/server/operational-game-session.ts",
+          "line": 27
+        },
+        {
+          "path": "src/lib/simulation/server/operational-game.server.ts",
+          "line": 29
+        },
+        {
+          "path": "src/lib/simulation/client/operational-game-client.ts",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "id": "B26",
+      "title": "순차 턴 왕복·full simulation 응답·넓은 React/뉴스 재계산",
+      "priority": "medium",
+      "phase": [
+        "streaming-turn",
+        "queue",
+        "commit-read",
+        "older-event-log"
+      ],
+      "evidenceKind": "code-with-runtime-impact-unmeasured",
+      "cost": "prepare→stream→read가 순차며 commit 뒤 authoritative snapshot/delta read를 한 번 더 기다린다. snapshot은 simulation 전체를 포함한다. Shell/turn hook는 전체 snapshot을 구독하고 매 stream event setTurn한다. news overlay가 닫혀도 eventLog 전체 map/sort, 국가 presentation도 world 변경마다 재생성한다. eventLog 상한2,048/국가247 규모로 N셀 처리보다 후순위.",
+      "improvement": "필요 slice 구독·draft publication 분리·revision별/lazy projection, commit 이벤트에 검증된 snapshot/delta 포함 가능성 검토.",
+      "risk": "medium: atomic commit 확인·연결 끊김 후 reconciliation·취소/재시도·접근 제어 유지. React rerender와 MapLibre remount를 혼동하지 않는다.",
+      "refs": [
+        {
+          "path": "src/lib/simulation/client/use-operational-turn-controller.ts",
+          "line": 13
+        },
+        {
+          "path": "src/lib/simulation/client/use-operational-turn-controller.ts",
+          "line": 35
+        },
+        {
+          "path": "src/lib/simulation/server/operational-game-session.ts",
+          "line": 61
+        },
+        {
+          "path": "src/components/game/CatalogGameScreen.tsx",
+          "line": 177
+        },
+        {
+          "path": "src/lib/game-ui/news-projection.ts",
+          "line": 39
+        },
+        {
+          "path": "src/lib/projection/operational-game-presentation.ts",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "id": "B27",
+      "title": "후순위 반복 작업: neighbors 복사·parent area 재합계·작은 국가 projection",
+      "priority": "low-to-medium",
+      "phase": [
+        "near-frontier",
+        "many-country-metrics",
+        "ui-world-change"
+      ],
+      "evidenceKind": "code-conditional",
+      "cost": "neighbors는 호출마다 slice/검증/freeze, near cap 검사는 parent 전체 면적을 재합산, metrics cache는4국가라 복잡한 병합에서 재로딩 가능. 국가 presentation/search/panel/capital과 setup-store publication도 반복되지만 주로247국가 규모.",
+      "improvement": "검증된 adjacency iterator·parent area cache, 실제 country entity 변경 시 projection 재사용과 publication 묶기.",
+      "risk": "low-to-medium: 양의 육상 인접성·parent 면적 cap·현재 control 판정·UI 정합성 유지. 큰 N/E 경로보다 먼저 주 병목으로 단정하지 않는다.",
+      "refs": [
+        {
+          "path": "src/lib/world/operational-catalog.server.ts",
+          "line": 133
+        },
+        {
+          "path": "src/lib/world/operational-catalog.server.ts",
+          "line": 227
+        },
+        {
+          "path": "src/lib/simulation/operational-frontier.server.ts",
+          "line": 166
+        },
+        {
+          "path": "src/lib/projection/operational-game-presentation.ts",
+          "line": 9
+        },
+        {
+          "path": "src/components/layout/OperationalGameSetupShell.tsx",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "id": "B28",
+      "title": "환경·외부 지연: dev 준비, software GPU 가능성, 실제 AI 왕복",
+      "priority": "measure-separately",
+      "phase": [
+        "cold-dev",
+        "gpu-render",
+        "real-provider"
+      ],
+      "evidenceKind": "previous-observations-and-conditional-hypotheses",
+      "cost": "기존 browser 증거는 dev/scripted provider이며 GPU 프로세스에 d3d11-warp-webgl flags가 관측됐다. 실제 hardware acceleration은 확인하지 않았다. 이전 renderer 후보 peak4278.117MiB/shared GPU process2305.02MiB는 다른 탭과 격리되지 않은 working set이다. 실제 AI는 모델/네트워크/tool/retry 지연이 별도다.",
+      "improvement": "동일 viewport/DPR/camera/데이터/배경 탭 조건의 production과 dev 비교, GPU 상태/CPU profile/long task/heap·GC를 분리 측정.",
+      "risk": "measurement-only: 브라우저 보안/가속 설정을 임의 변경하지 말 것. scripted 결과로 실제 AI 지연이나 GPU/VRAM 누수를 주장하지 않는다.",
+      "refs": [
+        {
+          "path": "reports/maintenance/20261029-prompt18-01-baseline.json",
+          "line": 23
+        },
+        {
+          "path": "reports/maintenance/20261029-map-initial-and-turn-performance.json",
+          "line": 79
+        },
+        {
+          "path": "src/lib/simulation/server/openai-responses-transport.ts",
+          "line": 26
+        }
+      ]
+    }
+  ],
+  "recommendedSequence": [
+    {
+      "stage": 1,
+      "name": "기존 계산 재사용부터 줄이기",
+      "ids": [
+        "B16",
+        "B18",
+        "B21",
+        "B17"
+      ],
+      "reason": "이미 생성한 owner index와 정확한 pair/scope에 결합된 host-private 결과를 재사용하면 전체 N/E 재탐색을 줄일 수 있다. API/geometry 저장 구조 변경보다 구현 범위를 좁힐 수 있다.",
+      "validation": "owner/null/canonical order, forged/stale scope, two resolvers, delta rollback, undo/redo/restart 계약을 작은 fixture와 기존 회귀로 확인."
+    },
+    {
+      "stage": 2,
+      "name": "첫 변경·geometry 전달 비용 축소",
+      "ids": [
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B05"
+      ],
+      "reason": "첫 CSR의6.25m 임시 pair, whole-country/shard parse와 main-thread tile indexing을 우선 분리 계측하고 불필요한 물질화·재파싱을 제거.",
+      "validation": "실제 요청된 cell/edge 수·shard 수·decoded/parsed bytes·cache hits·index time·worker 완료를 함께 측정."
+    },
+    {
+      "stage": 3,
+      "name": "초기 데이터·snapshot·hash 구조 개선",
+      "ids": [
+        "B01",
+        "B02",
+        "B03",
+        "B19",
+        "B20",
+        "B25"
+      ],
+      "reason": "큰 개선 잠재력이 있지만 저장 형식/공개 schema/immutable history/hash 계약을 함께 설계해야 한다. 우선 동일 canonical 결과의 native/streaming server hash와 final materialization 횟수 축소부터 검토.",
+      "validation": "공개 WorldV3/SimulationV2와 pinned identity, equivalent hashes, atomic state/history, delta/stale/undo/redo를 보존."
+    },
+    {
+      "stage": 4,
+      "name": "coverage를 보존하는 저배율 지도와 지속되는 지도 host",
+      "ids": [
+        "B06",
+        "B12",
+        "B11",
+        "B13"
+      ],
+      "reason": "셀·edge 자체를 모든 배율에 과하게 처리하는 구조와 재마운트 replay를 줄이는 큰 렌더 개선. 현재 육지 누락 정확성 문제를 함께 해결해야 한다.",
+      "validation": "각 zoom의 면적 coverage, 현재 controller 색/owner interaction, fronts/labels/detail/undo/redo, 동일 조건 CPU/long task/메모리."
+    },
+    {
+      "stage": 5,
+      "name": "후순위 UI·자산·환경",
+      "ids": [
+        "B14",
+        "B22",
+        "B23",
+        "B24",
+        "B26",
+        "B27",
+        "B28"
+      ],
+      "reason": "hit query·반복 serialization·좁은 publication을 정리하되 작은 국가 반복문을 N/E 경로보다 큰 원인으로 단정하지 않는다. dev/GPU/실제 provider는 별도로 비교."
+    }
+  ],
+  "measurementPlan": {
+    "conditions": "동일 실제 viewport/DPR/camera/player/catalog/action/turn range/provider와 배경 탭 조건을 기록한다. cold server, 새 client, warm 반복 turn을 구분한다. 현재 scripted provider를 사용하며 외부 AI를 새로 호출하지 않아도 local 비용을 측정할 수 있다.",
+    "initialStages": [
+      "HTTP bytes/response decode·JSON parse",
+      "RLE world generation·validation/freeze",
+      "manifest/index/incidence fetch/decompress",
+      "main tile index/observer state writes",
+      "MapLibre worker parse/bucket",
+      "label/source preparation and actual render/idle"
+    ],
+    "turnStages": [
+      "context region directory/owner index",
+      "frontier selector call count·N/E scan·shared boundary",
+      "plan effects/clone·simulation parse",
+      "world root sort/canonical/SHA",
+      "atomic commit/runtime delta",
+      "read response/diff/serialization",
+      "client nonempty copy",
+      "first CSR",
+      "country/edge geometry requested/decoded/parsed bytes and shard cache",
+      "source serialization/worker rebuild/actual applied revision/render"
+    ],
+    "metrics": [
+      "wall+CPU time per stage",
+      "browser long-task duration and input latency",
+      "requested geometry vs whole payload ratio",
+      "full-N/E scan/copy counts",
+      "cache miss/hit and retained sizes",
+      "heap/GC and process working set separately",
+      "map mount/replay count and same-condition FPS"
+    ],
+    "constraints": "ready 관측시각만으로 개별 단계의 시간을 역산하지 않는다. 광범위한 새 진단 시스템·원본 catalog 재생성·전체 재해시 없이 기존 경로 주변의 좁은 계측과 관련 회귀를 사용한다."
+  },
+  "crossCuttingConstraints": [
+    "source bytes/hash/catalog ordinal identity와 admission 보존",
+    "owner 우선/controller fallback interaction 및 현재 controller 색상",
+    "null/retired/renamed/owned-zero 국가 의미",
+    "정확한 changed cell/front geometry와 저배율 면적 coverage",
+    "immutable snapshots·atomic commit/history·stale/delta/revision guards",
+    "undo/redo/restart·취소/재시도·source failure recovery",
+    "숨기기·검증 삭제·history 축소만으로 성능을 얻었다고 처리하지 않음"
+  ],
+  "verification": {
+    "method": "병렬 읽기 감사3개와 부모 통합, 설치 라이브러리 소스 확인, 작고 고정된 manifest/index 및 gzip trailer 메타 조사. 앱 실행을 새로 변경하거나 benchmark하지 않았다.",
+    "artifactValidation": "JSON parse·28개 고유 ID·98개 근거 파일/line 범위 확인과 git diff --check를 통과했다. 이 검증은 성능 측정이나 앱 회귀 테스트가 아니다.",
+    "notClaimed": [
+      "모든 런타임/드라이버 내부 병목이 소스 감사만으로 완전히 증명됨",
+      "ms 절감량/개선율/FPS 향상",
+      "새 regression/build 성공",
+      "현재 memory leak/VRAM leak 확정",
+      "실제 한 턴의1.20GB geometry 다운로드",
+      "실제 GPU 가속/소프트웨어 렌더러 확정"
+    ]
+  }
+}

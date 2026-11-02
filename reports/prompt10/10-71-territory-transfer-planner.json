@@ -1,0 +1,103 @@
+{
+  "stage": "10-71",
+  "status": "pass",
+  "objective": "Plan Territory ownership transfer to an active target while preserving total area, geometry hashes, topology, and every non-ownership domain.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-70-territory-replace-planner.json": "6008bc9761a9ac66c1367cd524e4fb4c2aeccf289821e17e45ac3ae7d17b4480",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/plan-result.test.ts": "75452858fbb52a334c35174ecc1b88fe8bf96572fc661a5298aca4e91840693a",
+    "src/lib/planning/plan-result.ts": "b90e8959e6ce2af14a86a02be7ce1a7deca9caea83858122c50905fb4d0607da",
+    "src/lib/planning/territory-transfer-planner.test.ts": "8d0962702a68f161873657acfe2562b2acdac3fac0186aedefc5c517b1b1771e",
+    "src/lib/planning/territory-transfer-planner.ts": "c3e72542a0de0e4e1589a517a7a544a397c5953968c22a75a15f048a5bc0f4f7"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-71-territory-transfer-planner.json",
+    "src/lib/planning/plan-result.test.ts",
+    "src/lib/planning/plan-result.ts",
+    "src/lib/planning/territory-transfer-planner.test.ts",
+    "src/lib/planning/territory-transfer-planner.ts"
+  ],
+  "commands": [
+    {
+      "command": "Verify 10-70 status and every recorded output hash",
+      "exitCode": 0
+    },
+    {
+      "command": "Read the local Next.js 16.3 Vitest guide and inspect transfer references plus Territory ownership/hash contracts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/territory-transfer-planner.test.ts",
+      "exitCode": 1,
+      "note": "Expected red test: the territory-transfer planner module did not exist."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/territory-transfer-planner.test.ts src/lib/planning/plan-result.test.ts src/lib/planning/planner-boundary.test.ts",
+      "exitCode": 0,
+      "result": "3 files passed; 12 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run transfer schema/planners/ownership/hash/world-state targeted files",
+      "exitCode": 0,
+      "result": "15 files passed; 94 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/territory-transfer-planner.ts src/lib/planning/territory-transfer-planner.test.ts src/lib/planning/plan-result.ts src/lib/planning/plan-result.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "measurements": {
+    "successfulAreaBefore": 20,
+    "successfulAreaAfter": 20,
+    "successfulAreaDifference": 0,
+    "successfulGeometryHashChanges": 0,
+    "successfulOwnershipHashChanges": 1,
+    "topologyHashChanges": 0,
+    "partitionResultReferencesExecutedBeforeResolution": 0,
+    "targetedTestFilesPassed": 15,
+    "targetedTestsPassed": 94,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-77"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "ownershipTransferred": true,
+    "totalAreaPreserved": true,
+    "geometryHashPreserved": true,
+    "ownershipHashChanged": true,
+    "topologyShared": true,
+    "countryDomainsShared": true,
+    "unclaimedTerritoryRejected": true,
+    "selfTargetRejected": true,
+    "unknownTargetRejected": true,
+    "retiredTargetRejected": true,
+    "partitionResultDeferredToStage74": true,
+    "territoriesRootUpdated": true,
+    "singleRevisionNextState": true,
+    "inputStateUnchanged": true,
+    "targetedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-72"
+}

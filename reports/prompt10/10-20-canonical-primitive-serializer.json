@@ -1,0 +1,51 @@
+{
+  "stage": "10-20",
+  "status": "pass",
+  "objective": "Implement a locale-independent canonical UTF-8 serializer for strings, finite numbers, booleans, null, arrays, and plain objects with insertion-order-independent object keys.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-6-19-hardening.json": "6e3f5b508bc6b8629eac2b8f7eb2ebd09994e530220d75ba8d624e6b427a74af"
+  },
+  "outputHashes": {
+    "src/lib/world/canonical-serializer.ts": "35516101e2e86fe2750175c4eae35accb49837d257e3a778b958753be379c5df",
+    "src/lib/world/canonical-serializer.test.ts": "5933857643d2421df47389ce45ead2fca2e0d95ad872aba2b5eb60582b089081"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-20-canonical-primitive-serializer.json",
+    "src/lib/world/canonical-serializer.test.ts",
+    "src/lib/world/canonical-serializer.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-6~10-19 hardening status and every recorded output hash", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/canonical-serializer.test.ts", "exitCode": 1, "note": "Expected red test: canonical-serializer module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/canonical-serializer.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/canonical-serializer.ts src/lib/world/canonical-serializer.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 11,
+    "unsupportedRuntimeValueCasesRejected": 9,
+    "localeApiCalls": 0,
+    "insertionOrderMismatches": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousAuditStatusPass": true,
+    "previousAuditOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "localeIndependent": true,
+    "objectInsertionOrderIndependent": true,
+    "unsupportedRuntimeValuesRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-21"
+}

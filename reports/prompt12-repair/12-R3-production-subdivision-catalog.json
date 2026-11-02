@@ -1,0 +1,43 @@
+{
+  "stage": "12-R3",
+  "status": "pass",
+  "objective": "Replace the production empty catalog with a validated, versioned CHN/USA subdivision catalog.",
+  "filesRead": [
+    "src/lib/simulation/subdivision-catalog.ts",
+    "src/components/simulation/SimulationPanel.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/app/page.tsx",
+    "scripts/prepare-usa-state-test.mjs"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/subdivision-catalog.ts",
+    "src/lib/simulation/production-subdivision-catalog.server.ts",
+    "src/lib/simulation/world-effect-compiler.ts",
+    "src/app/page.tsx",
+    "src/components/layout/GameSetupShell.tsx",
+    "src/components/simulation/SimulationPanel.tsx",
+    "scripts/prepare-production-subdivision-catalog.mjs",
+    "public/data/simulation/china-admin1-v1.geojson",
+    "public/data/simulation/usa-admin1-v1.geojson",
+    "src/lib/simulation/production-subdivision-catalog.test.ts"
+  ],
+  "commands": [
+    "npm.cmd run data:simulation",
+    "npx.cmd tsc --noEmit",
+    "npx.cmd vitest run src/lib/simulation/production-subdivision-catalog.test.ts src/lib/simulation/client/turn-client.test.tsx src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "productionChinaSubdivisions": 31,
+    "productionUnitedStatesSubdivisions": 50,
+    "productionEffectCompilation": "pass",
+    "sourceVersionMismatchAtomicFailure": "pass",
+    "partialGeometryRejected": "pass",
+    "geometryInApiContext": false,
+    "emptyCatalogProductionUses": 0,
+    "unsupportedCode": "SUBDIVISION_DATA_UNAVAILABLE",
+    "targetedTests": "20 passed"
+  },
+  "firstFailedGate": null,
+  "notes": ["Production assets are boundary inputs for new commands, not authoritative current-world state."],
+  "nextStage": "12-R4"
+}

@@ -1,0 +1,5585 @@
+{
+  "schemaVersion": "chn-2020-final-report-v1",
+  "pass": true,
+  "createdAt": "2026-10-30T05:50:22.969Z",
+  "timezone": "Asia/Seoul",
+  "countryId": "CHN",
+  "scenarioDate": "2020-01-01",
+  "status": "experimental-country-implementation-accepted-locally",
+  "evidence": {
+    "pointer": {
+      "path": "reports/chn-2020/candidate-runtime-pointer.json",
+      "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+      "byteLength": 251
+    },
+    "geometry": {
+      "path": "reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json",
+      "sha256": "79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf",
+      "byteLength": 65964710
+    },
+    "delivery": {
+      "path": "reports/chn-2020/delivery-verification.json",
+      "sha256": "bafcfafe717ebe81e7e5ee9970042788e9c48e8894fb5330d9032e64bd90db79",
+      "byteLength": 7702369
+    },
+    "play": {
+      "path": "reports/chn-2020/candidate-play-performance.json",
+      "sha256": "ae505417d44c2268a375a512de2b44e39ed9fb6b24c8f6ab6dd166b09c4c134c",
+      "byteLength": 31057
+    },
+    "transport": {
+      "path": "reports/chn-2020/candidate-cell-detail-performance.json",
+      "sha256": "1c041e2d731182f4f8e62e48e473f7729647dd6f7f64a8b7e25de88914600446",
+      "byteLength": 4839
+    },
+    "browser": {
+      "path": "reports/chn-2020/browser-candidate/verification.json",
+      "sha256": "5ccbe622f6797cfcd85708b8c755011c2af3c2434b87eeea6c3f97e99dbdfc6b",
+      "byteLength": 808076
+    },
+    "browserPlay": {
+      "path": "reports/chn-2020/browser-play-candidate/verification.json",
+      "sha256": "c15cbd2873b4b0164d74afdc87dda7cc1543473eddda86752dfb17adb06b06d2",
+      "byteLength": 65312
+    },
+    "build": {
+      "path": "reports/chn-2020/build-summary.json",
+      "sha256": "f47e0bf03ebf91911235f0d905dcad7ce090dca7496aedaaca0b00dd1810cefe",
+      "byteLength": 1740
+    },
+    "preservation": {
+      "path": "reports/chn-2020/live-game-preservation.json",
+      "sha256": "0b34b7842df5cdeaeac30d3556a16ec1bd41f387da7ba2d8f4acec4de9d7b65d",
+      "byteLength": 4313
+    },
+    "baselineAudit": {
+      "path": "reports/chn-2020/baseline-audit.json",
+      "sha256": "4090de6f55b7597b04e8d6baf07ac31857a4987b8ed835bc59a64121d9103c6c",
+      "byteLength": 376457
+    },
+    "baselinePlay": {
+      "path": "reports/chn-2020/baseline-play-performance.json",
+      "sha256": "aeb6f3364493b49be153267c3672b08d7920b2d804739b881220408bebc9c9c8",
+      "byteLength": 13819
+    },
+    "baselineBrowser": {
+      "path": "reports/chn-2020/browser-baseline/verification.json",
+      "sha256": "0c344dc8ee9458ddab2aeb8837eb8667ddafdb234ac5001a76f09359df7772ca",
+      "byteLength": 794249
+    },
+    "subdivision": {
+      "path": "reports/chn-2020/delivery-subdivision-recheck.json",
+      "sha256": "a2eb07c2cec0330043b0d51d2c9bef1295d428bb58c8d07cad93c8c1fead3494",
+      "byteLength": 9512746
+    }
+  },
+  "activePointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "reproducibility": {
+    "candidateInput": {
+      "path": "data/derived/chn-2020/candidate-df4f04ceeb9cecb0b5b3/joined-world-input.json",
+      "sha256": "df4f04ceeb9cecb0b5b3320f0e819c40064317f2f03dcc42f0a5746396f793d0",
+      "byteLength": 169444234
+    },
+    "baselineInput": {
+      "path": "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json",
+      "sha256": "ce438f6027baa0a0ff8831b224b32ceadd7377791604395d89b5a8b3d491aa3d",
+      "byteLength": 75275879
+    },
+    "baselinePointer": {
+      "path": "reports/chn-2020/baseline-runtime-pointer.json",
+      "sha256": "652a233e6b26397fdb32bc56781e2fbc6dcc67a1545774a7ed7d571a3e5ad8df",
+      "byteLength": 241
+    },
+    "exactReplay": {
+      "path": "data/derived/chn-2020/replay-v12/joined-world-input.json",
+      "sha256": "df4f04ceeb9cecb0b5b3320f0e819c40064317f2f03dcc42f0a5746396f793d0",
+      "byteLength": 169444234
+    },
+    "geometryArtifact": {
+      "byteLength": 123996651,
+      "path": "data/derived/chn-2020/geometry-v12/geometry.json",
+      "sha256": "ef33c6341da4125c34ac7c390816bff0cda339f9f12be1fcc81fb90761e0689e"
+    },
+    "residualGainLedger": {
+      "byteLength": 123996651,
+      "path": "data/derived/chn-2020/geometry-v12/geometry.json",
+      "sha256": "ef33c6341da4125c34ac7c390816bff0cda339f9f12be1fcc81fb90761e0689e"
+    },
+    "numericExceptions": {
+      "byteLength": 6759997,
+      "path": "data/derived/chn-2020/geometry-v12/numeric-exceptions.json",
+      "sha256": "3d7e550fb3b6c1bcbceb6792d3d43dd64e36e22bed88fb743d63ce530a3c86b5"
+    },
+    "macroSource": {
+      "byteLength": 17277078,
+      "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+      "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72"
+    },
+    "generationCode": [
+      {
+        "byteLength": 63063,
+        "path": "scripts/chn-2020/prepare-china.py",
+        "sha256": "20e7b9fbe91dc043a83834480fba02d17373398dcfb0bd10eb1bc93038b9c824"
+      },
+      {
+        "byteLength": 11292,
+        "path": "scripts/chn-2020/incremental-coordinator.mjs",
+        "sha256": "30ebb5141af16e9c4d11679b88eff6a230e57bcce11db5484c4f1aaa8ab70985"
+      },
+      {
+        "byteLength": 42,
+        "path": "scripts/chn-2020/requirements.txt",
+        "sha256": "09a92982dac522481e80a20e5a02556a0db882fa6e76ba79790e536d22cd8b82"
+      }
+    ],
+    "packagingCode": [
+      {
+        "path": "scripts/chn-2020/prepare-china.py",
+        "sha256": "20e7b9fbe91dc043a83834480fba02d17373398dcfb0bd10eb1bc93038b9c824",
+        "byteLength": 63063
+      },
+      {
+        "path": "scripts/chn-2020/incremental-coordinator.mjs",
+        "sha256": "30ebb5141af16e9c4d11679b88eff6a230e57bcce11db5484c4f1aaa8ab70985",
+        "byteLength": 11292
+      },
+      {
+        "path": "scripts/prepare-prompt19-mixed-world.mjs",
+        "sha256": "90cedef52430ab353bd99f1b10b45ba03d4ba372f862a9f0e7ed22f0236f6abd",
+        "byteLength": 31934
+      },
+      {
+        "path": "scripts/prompt14-catalog-core.mjs",
+        "sha256": "39d397229635cfa0fd0166dd6858ef4275b8bde86447b9c444d56e76539ce63c",
+        "byteLength": 12241
+      },
+      {
+        "path": "scripts/chn-2020/requirements.txt",
+        "sha256": "09a92982dac522481e80a20e5a02556a0db882fa6e76ba79790e536d22cd8b82",
+        "byteLength": 42
+      }
+    ],
+    "inheritedKoreaNationalProof": {
+      "byteLength": 370222,
+      "path": "reports/maintenance/20261030-western-sector-independent-verification.json",
+      "sha256": "62be6912793b6137125f15b74f74f81b26a9db6c0890cdd4f01fb4c072081bb3"
+    },
+    "packageIndex": {
+      "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/artifact-index.json",
+      "sha256": "f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+      "byteLength": 757545
+    },
+    "manifest": {
+      "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/manifest.json",
+      "sha256": "bb16e7ebfcf29251a6337d190a5ed0442b05bfa4f4a4eaf6d03c4c181237b799",
+      "byteLength": 3152
+    },
+    "provenance": {
+      "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/provenance.json",
+      "sha256": "8dfd4ed45ca5f65333f47d12b08e7396fc9a16df711aa60d4e9ad28799a513cd",
+      "byteLength": 6100740
+    },
+    "verificationCode": [
+      {
+        "path": "scripts/chn-2020/verify-incremental.py",
+        "sha256": "c221ee763d626de86283fe1f481c3fc8e1c30e7e702a68c8be18d38042f11250",
+        "byteLength": 79278
+      },
+      {
+        "path": "scripts/chn-2020/verify-delivery.mjs",
+        "sha256": "a6dae2a9dabaebdc73deff40eb6f9743832aa70534ac8720ba44695bb2946ce2",
+        "byteLength": 23297
+      },
+      {
+        "path": "scripts/chn-2020/mesh-subdivision.mjs",
+        "sha256": "729aa04802294a619cdfe5b94a22429ed023c9f249e90f3597c1ed246b75645a",
+        "byteLength": 5585
+      },
+      {
+        "path": "scripts/chn-2020/verify-play-performance.test.ts",
+        "sha256": "bd95d65895af5d4a5c896484c98346fc08e3e8d636ea0a81ad041ddb0b80636d",
+        "byteLength": 23411
+      },
+      {
+        "path": "scripts/chn-2020/measure-cell-detail.test.ts",
+        "sha256": "9f3dcdd88793294c586aa9fe56e1426ca7e77d788f2db5af66d4982abf91337c",
+        "byteLength": 7646
+      },
+      {
+        "path": "scripts/chn-2020/verify-browser.mjs",
+        "sha256": "454eef9378b9c928a98d519640d67bbb14f1161ef0acc423688058ff6f588626",
+        "byteLength": 18665
+      },
+      {
+        "path": "scripts/chn-2020/verify-browser-play.mjs",
+        "sha256": "f644147ea79d37002a07c200c95b7b0f3c38e578f9309dcc130df3b53459f197",
+        "byteLength": 16633
+      },
+      {
+        "path": "src/lib/simulation/operational-frontier.server.ts",
+        "sha256": "0c6701d9bb1e44f6d9e77187b4c5235ef5c9ba8684ed109490a29682ed57049f",
+        "byteLength": 13984
+      },
+      {
+        "path": "src/lib/simulation/server/operational-game-checkpoint.ts",
+        "sha256": "44ddbda4c054595390245b1be7efefdabd016063866496fcdff73a3b21d2cb75",
+        "byteLength": 13798
+      }
+    ]
+  },
+  "source": {
+    "publisher": "geoBoundaries / William & Mary geoLab; original OpenStreetMap, Lee Beryman / Wambacher",
+    "sourceId": "geoboundaries-gbOpen-CHN-ADM3-62558664",
+    "revision": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "sourceUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM3/geoBoundaries-CHN-ADM3.geojson",
+    "originalDistributorUrl": "https://wambachers-osm.website/boundaries/",
+    "apiMetadataUrl": "https://www.geoboundaries.org/api/current/gbOpen/CHN/ADM3/",
+    "administrativeLevel": "ADM3; canonical County, City",
+    "featureCountActual": 2864,
+    "featureCountApi": 2867,
+    "originalShapefileRecordCount": 2867,
+    "recordDifference": "Published GeoJSON omits Bayuquan District, Lanzhou New Area and Qingshuihe County from the source archive; source names Zhijiang City and Jiangshan City have leading whitespace normalized. No missing feature is fabricated.",
+    "stableIdPolicy": "Preserve published shapeID and fixed revision. Original archive has NAME/Level/Shape_Leng/Shape_Area only, no OSM relation ID, official administrative code or parent code. shapeID is explicitly a distributor identifier.",
+    "crs": "OGC CRS84 / WGS84 longitude,latitude degrees",
+    "axisOrder": "longitude,latitude",
+    "coordinateTransformationAtAcquisition": "none",
+    "reportedRepresentedYear": 2017,
+    "observedProcessDates": [
+      "2017-10-20",
+      "2021-08-03",
+      "2021-08-04",
+      "2021-08-11"
+    ],
+    "scenarioDateExactMatch": false,
+    "temporalLimitation": "The original metadata claims 2017, but original shapefile XML records append/dissolve processing in August 2021. The fixed file is mixed or uncertified vintage. It is used as an experimental county geometry reference for the 2020-01-01 game scenario, not certified 2020 or untouched 2017 administrative truth. No unverified change is backdated.",
+    "license": {
+      "id": "ODbL-1.0",
+      "redistributionAllowed": true,
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; geoBoundaries / William & Mary geoLab; Lee Beryman / Wambacher. Contains information available under ODbL 1.0.",
+      "conditions": "Retain notices and attribution; include ODbL URI; distribute publicly used derivative database under ODbL and offer machine-readable derivative data or alterations. Local internal use is allowed. This does not license program code.",
+      "evidence": [
+        {
+          "path": "data/raw/chn-2020/references/ADM3-source/license.PNG",
+          "sha256": "55663d8345f40f7bd328f82e9c0edcd4898f26a976cedccfbba09fc134e92207",
+          "byteLength": 28417
+        },
+        {
+          "path": "data/raw/chn-2020/references/OSM-copyright.html",
+          "sha256": "961fe339449a7a583224b12ce666fa7472129d4cf40229208278d85d5c2d46c5",
+          "byteLength": 21314
+        },
+        {
+          "path": "data/raw/chn-2020/references/ODbL-1.0.html",
+          "sha256": "85bc21fb2c00b2effb9202b2aa785934ce5a05df954e17cbd2a1f7c10c04c633",
+          "byteLength": 51543
+        }
+      ]
+    },
+    "adoptionReason": "Actual whole-country county polygons, clear source-archive ODbL license and fixed revision; actual current partition has better validity/overlap/coverage than the available 2020-published historical OSM edition. County polygons are used rather than relabelled provinces or synthetic nationwide subdivision. Large western counties and tiny city districts remain granularity risks to check against unchanged gameplay limits.",
+    "alternatives": [
+      {
+        "name": "Official NGCC 2019 DLG",
+        "url": "https://search.ngcc.cn/xwzx/bnyw/202401/t20240110_2036.html",
+        "evidence": {
+          "path": "data/raw/chn-2020/references/NGCC-2019-announcement.html",
+          "sha256": "a4cd7b389a54ee8317b76de27772f9bffd74ae411705cd1b90523ba87c4996de",
+          "byteLength": 22835
+        },
+        "observed": "Official announcement dated 2019-07-23; 1:50,000 data current to 2018; 1:250,000 and 1:1,000,000 current to 2017; CGCS2000. Provided/used under surveying-results management provisions; free for government decision, national defence and public services.",
+        "decision": "not-adopted",
+        "reason": "No confirmed general redistribution grant or directly acquired redistributable county polygon snapshot; public availability is not a redistribution license."
+      },
+      {
+        "name": "National Bureau of Statistics hierarchy/2019 and 2020 statistical codes",
+        "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202104/t20210401_1815920.html",
+        "rulesUrl": "https://www.stats.gov.cn/zt_18555/zdtjgz/zgjjpc/dycjjpc/pcfa/202303/t20230306_1935317.htm",
+        "observed": "Official reply identifies 2020 statistical codes as of 2020-06-30 and based on county-and-above administrative codes. Official coding rules distinguish province, prefecture, county and lower statistical units.",
+        "decision": "reference-only",
+        "reason": "A hierarchy/code table is not a polygon source; post-January-2020 table cannot silently certify January boundaries. No code-to-English-distributor-ID crosswalk was fabricated."
+      },
+      {
+        "name": "geoBoundaries 3.0.0 CHN ADM3/ADM2/ADM1",
+        "url": "https://www.geoboundaries.org/data/geoBoundaries-3_0_0/CHN/ADM3/",
+        "artifacts": [
+          {
+            "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+            "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72",
+            "byteLength": 17277078
+          },
+          {
+            "path": "data/raw/chn-2020/references/gb3-CHN-ADM2.geojson",
+            "sha256": "9f7457ffafe1ccaad7f27259b2c9b6b3773f173eb4082ddc85e12ac232bc872d",
+            "byteLength": 29217250
+          },
+          {
+            "path": "data/raw/chn-2020/references/gb3-CHN-ADM3.geojson",
+            "sha256": "fde51c1e70771302b0301fc64b2c5cab21badbeea892ad6119d684a1790bd2cf",
+            "byteLength": 33151588
+          }
+        ],
+        "actualFeatureCounts": {
+          "ADM1": 31,
+          "ADM2": 340,
+          "ADM3": 2852
+        },
+        "reportedRepresentedYear": 2017,
+        "updateDate": "2020-05-25",
+        "license": "ODbL-1.0",
+        "decision": "ADM3-not-adopted; ADM1-retained-as-exact-containment-evidence-only",
+        "reason": "Publication in May 2020 does not mean January-2020 boundaries. Actual historical ADM3 has material overlap and larger omissions versus active CHN territory, measured in historical-source-metrics.json. Historical ADM1 is the compatible original OSM/Wambacher 2017 source family; only exact whole containment or individually bounded machine-scale remnants support parents.",
+        "actualCandidateMetrics": {
+          "path": "reports/chn-2020/historical-source-metrics.json",
+          "sha256": "851666bcd87d06404ae8485583ce5601ff626ddc3be9d5455efa18fdf4d23657",
+          "byteLength": 205
+        }
+      },
+      {
+        "name": "geoBoundaries fixed current CHN ADM2",
+        "artifact": {
+          "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM2.geojson",
+          "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+          "byteLength": 7618692
+        },
+        "featureCountActual": 2391,
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+        "decision": "not-adopted",
+        "reason": "Older 2,391 county features versus ADM3 2,864. Metadata PDDL proof references a 2014 prefecture/province post, while actual county source points to a different 2017 post; licensing provenance and missing detail are weaker."
+      },
+      {
+        "name": "geoBoundaries current CHN ADM1",
+        "artifact": {
+          "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM1.geojson",
+          "sha256": "3a00467a0db9b4136facb5f2f3d0edbfd96adb15651cfdf63991da9281030e85",
+          "byteLength": 270578
+        },
+        "featureCountActual": 34,
+        "decision": "not-used-as-parent-source",
+        "reason": "2019 Wikimedia-derived boundaries differ from OSM county original source and include Taiwan/Hong Kong/Macao; cannot infer official parents by largest overlap or enlarge CHN ownership."
+      },
+      {
+        "name": "OCHA HDX China COD-AB 2020",
+        "url": "https://data.humdata.org/dataset/cod-ab-chn",
+        "decision": "not-adopted",
+        "reason": "Primary dataset access returned HTTP 403 during research. Metadata-only summaries indicate coarse ADM2 prefecture-scale units, not the county precision sought; actual source file not acquired, so no polygon/ID/license claim is made from the inaccessible file."
+      }
+    ],
+    "pins": {
+      "sourceLock": {
+        "byteLength": 2159,
+        "countryId": "CHN",
+        "path": "data/source-locks/chn-2020/CHN-093b45f9a696d17968a8.json",
+        "sha256": "093b45f9a696d17968a889dc9becf994c7a28b6d1143c6921f33f7bbe056dc13"
+      },
+      "sourceDecision": {
+        "byteLength": 11811,
+        "path": "reports/chn-2020/source-decision.json",
+        "sha256": "6208e958ad8e3f813e4419f03fce01f853fe03fdd6e34ec7a5ea1ed09ee48e27"
+      },
+      "hierarchy": {
+        "byteLength": 1142103,
+        "countryId": "CHN",
+        "path": "data/source-locks/chn-2020/CHN-hierarchy.json",
+        "sha256": "072ddaf551d5aec7061d9f5301c213820d554f77daa5d489f654b123d15fcfc2"
+      },
+      "raw": [
+        {
+          "byteLength": 88780624,
+          "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+          "sha256": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e"
+        }
+      ],
+      "normalized": {
+        "byteLength": 77987491,
+        "path": "data/raw/chn-2020/normalized-boundaries.geojson",
+        "sha256": "69fba4066901bd212b9c9696c91c6cc90a4c120ed89adf75cc07df11856e1697"
+      },
+      "preprocessing": [
+        {
+          "byteLength": 63063,
+          "path": "scripts/chn-2020/prepare-china.py",
+          "sha256": "20e7b9fbe91dc043a83834480fba02d17373398dcfb0bd10eb1bc93038b9c824"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "data/raw/chn-2020/references/ADM3-source/license.PNG",
+          "sha256": "55663d8345f40f7bd328f82e9c0edcd4898f26a976cedccfbba09fc134e92207",
+          "byteLength": 28417
+        },
+        {
+          "path": "data/raw/chn-2020/references/OSM-copyright.html",
+          "sha256": "961fe339449a7a583224b12ce666fa7472129d4cf40229208278d85d5c2d46c5",
+          "byteLength": 21314
+        },
+        {
+          "path": "data/raw/chn-2020/references/ODbL-1.0.html",
+          "sha256": "85bc21fb2c00b2effb9202b2aa785934ce5a05df954e17cbd2a1f7c10c04c633",
+          "byteLength": 51543
+        }
+      ]
+    }
+  },
+  "implementation": {
+    "scopePolicy": "Clip only to currently active CHN game territory, preserve all non-CHN territory and existing KOR/PRK fine IDs/geometry/admin lineage. Hong Kong/Macao/Taiwan and disputed source areas are not acquired because a source labels them CHN.",
+    "baselineCatalog": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+    "candidateCatalog": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "incremental": true,
+    "geometryAdjusted": true,
+    "rawSourceArtifactGeometryUnmodified": true,
+    "administrativeTruthClaim": false,
+    "method": "Replace only active CHN cells. Preserve all other IDs, records, macro and seed lineage. GEOS common offline source/residual/baseline-neighbor partition; boundaries and adjacency from these exact fills. Source-free gameplay gains are separately contact-ledgered, not administrative facts.",
+    "hierarchy": {
+      "summary": {
+        "sourceFineFeatures": 2864,
+        "sourceMacroFeatures": 31,
+        "exactContained": 1660,
+        "individualFloatingExceptions": 3,
+        "assigned": 1663,
+        "unresolved": 1201
+      },
+      "policy": "Only same-original-source whole polygon containment is used. Unknown parents retain the existing supported country-envelope-residual contract. Native shapeID is a distributor ID, not an official code. Source hierarchy is experimental and does not certify 2020 legal boundaries.",
+      "administrativeFactsAsOf2020Certified": false,
+      "missingInEnvelopeSourceCount": 0,
+      "individualFloatingParentExceptions": 3,
+      "unknownParentsRemainExplicitFallback": true
+    },
+    "countrySummary": [
+      {
+        "arrangedFaceArea": 9.898048074226002,
+        "cells": 322,
+        "coarseResidualArea": 0.04600488717934568,
+        "coarseResidualCells": 33,
+        "countryId": "KOR",
+        "envelopeArea": 9.898048074225994,
+        "fineCells": 289,
+        "sourceFeatures": 228,
+        "unresolvedArea": 0
+      },
+      {
+        "arrangedFaceArea": 12.938046093470422,
+        "cells": 194,
+        "coarseResidualArea": 0.00034051376836949175,
+        "coarseResidualCells": 2,
+        "countryId": "PRK",
+        "envelopeArea": 12.938046093470511,
+        "fineCells": 192,
+        "sourceFeatures": 179,
+        "unresolvedArea": 0
+      },
+      {
+        "cells": 3320,
+        "coarseResidualCells": 7,
+        "confirmedMacroFamilies": 1663,
+        "countryId": "CHN",
+        "fineCells": 3313,
+        "sourceFeatures": 2864,
+        "sourceVintage": "Metadata 2017 with source processing in 2021; not certified exact 2020",
+        "unconfirmedMacroFamilies": 1201
+      }
+    ]
+  },
+  "scale": {
+    "baseline": {
+      "countries": 247,
+      "cells": 4718,
+      "edges": 17238,
+      "administrativeParents": 4232,
+      "previousParents": 4231,
+      "polygonCoordinateCount": 1302004,
+      "edgeCoordinateCount": 868637,
+      "bytes": {
+        "artifactIndex": 748935,
+        "total": 44500200,
+        "metadata": 627368,
+        "exactDetail": 18639541,
+        "cellShards": 0,
+        "tiles": 11376430,
+        "overviewZ0": 399916,
+        "overviewZ2": 893389
+      }
+    },
+    "candidate": {
+      "countries": 247,
+      "cells": 8005,
+      "edges": 26273,
+      "administrativeParents": 4231,
+      "previousParents": 4231,
+      "polygonCoordinateCount": 2830632,
+      "edgeCoordinateCount": 1646359,
+      "polygonComponents": 11804,
+      "polygonHoles": 388,
+      "bytes": {
+        "artifactIndex": 757545,
+        "total": 108943102,
+        "metadata": 785199,
+        "exactDetail": 79108724,
+        "cellShards": 24571679,
+        "tiles": 19978712,
+        "overviewZ0": 831486,
+        "overviewZ2": 1686174
+      }
+    },
+    "selectedCountries": {
+      "CHN": {
+        "before": {
+          "cells": 33,
+          "fineCells": 0,
+          "polygonCoordinateCount": 53276,
+          "edges": 243,
+          "edgeCoordinateCount": 34157
+        },
+        "cells": 3320,
+        "polygonCoordinateCount": 1573550,
+        "components": 3320,
+        "holes": 277,
+        "detailCompressedBytes": 23664164,
+        "incidentEdges": 9278,
+        "incidentEdgeCoordinateCount": 811879
+      },
+      "KOR": {
+        "before": {
+          "cells": 322,
+          "fineCells": 289,
+          "polygonCoordinateCount": 20042,
+          "edges": 865,
+          "edgeCoordinateCount": 12924
+        },
+        "cells": 322,
+        "polygonCoordinateCount": 20042,
+        "components": 322,
+        "holes": 0,
+        "detailCompressedBytes": 201618,
+        "incidentEdges": 865,
+        "incidentEdgeCoordinateCount": 12924
+      },
+      "PRK": {
+        "before": {
+          "cells": 194,
+          "fineCells": 192,
+          "polygonCoordinateCount": 17518,
+          "edges": 568,
+          "edgeCoordinateCount": 10667
+        },
+        "cells": 194,
+        "polygonCoordinateCount": 18055,
+        "components": 194,
+        "holes": 2,
+        "detailCompressedBytes": 194863,
+        "incidentEdges": 582,
+        "incidentEdgeCoordinateCount": 11218
+      }
+    },
+    "vertexDefinition": "Polygon coordinate count includes each stored closed ring and repeats shared nodes across cells. Edge coordinate count includes stored polyline endpoints. Country incident edge counts include internal edges once and shared national edges once for each incident country. These are actual delivered representation counts, not invented unique mesh node totals."
+  },
+  "preservation": {
+    "countriesOutsideTarget": 246,
+    "cellsOutsideTarget": 4685,
+    "korea": {
+      "KOR": {
+        "cellsBefore": 322,
+        "cellsAfter": 322,
+        "fineCellsRetained": 289,
+        "identicalIdSet": true,
+        "administrativeMembershipPreserved": true,
+        "seedLineagePreserved": true,
+        "physicalPreservationProof": {
+          "path": "reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json",
+          "sha256": "79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf",
+          "byteLength": 65964710
+        },
+        "representationProof": {
+          "path": "reports/chn-2020/delivery-verification.json",
+          "sha256": "bafcfafe717ebe81e7e5ee9970042788e9c48e8894fb5330d9032e64bd90db79",
+          "byteLength": 7702369
+        }
+      },
+      "PRK": {
+        "cellsBefore": 194,
+        "cellsAfter": 194,
+        "fineCellsRetained": 192,
+        "identicalIdSet": true,
+        "administrativeMembershipPreserved": true,
+        "seedLineagePreserved": true,
+        "physicalPreservationProof": {
+          "path": "reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json",
+          "sha256": "79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf",
+          "byteLength": 65964710
+        },
+        "representationProof": {
+          "path": "reports/chn-2020/delivery-verification.json",
+          "sha256": "bafcfafe717ebe81e7e5ee9970042788e9c48e8894fb5330d9032e64bd90db79",
+          "byteLength": 7702369
+        }
+      }
+    },
+    "idMappedPhysicalAndAdministrativeAcceptance": true,
+    "koreanAdjacencyPairsBefore": 13,
+    "koreanAdjacencyPairsAfter": 13,
+    "representationChanges": 80,
+    "packageSubdivisionEquivalentCells": 80,
+    "bordersGeodesic": {
+      "CHN|PRK": {
+        "edges": 39,
+        "segments": 1330,
+        "lengthDegrees": 10.691795685215004,
+        "lengthKm": 1004.9202934915287,
+        "bothFineLengthKm": 1004.9202934915287
+      },
+      "CHN|KGZ": {
+        "edges": 8,
+        "segments": 415,
+        "lengthDegrees": 9.026650124334772,
+        "lengthKm": 838.7133955965924,
+        "bothFineLengthKm": 0
+      },
+      "CHN|RUS": {
+        "edges": 30,
+        "segments": 2621,
+        "lengthDegrees": 40.98643599401904,
+        "lengthKm": 3544.427589484423,
+        "bothFineLengthKm": 0
+      },
+      "CHN|IND": {
+        "edges": 44,
+        "segments": 1184,
+        "lengthDegrees": 23.033124792042084,
+        "lengthKm": 2347.512548595943,
+        "bothFineLengthKm": 0
+      },
+      "CHN|VNM": {
+        "edges": 21,
+        "segments": 1082,
+        "lengthDegrees": 9.857832239285727,
+        "lengthKm": 1048.9914349196047,
+        "bothFineLengthKm": 0
+      },
+      "CHN|NPL": {
+        "edges": 16,
+        "segments": 1125,
+        "lengthDegrees": 10.809160590289276,
+        "lengthKm": 1111.759160492699,
+        "bothFineLengthKm": 0
+      },
+      "CHN|PAK": {
+        "edges": 1,
+        "segments": 193,
+        "lengthDegrees": 3.5721685047561045,
+        "lengthKm": 351.4117057998958,
+        "bothFineLengthKm": 0
+      },
+      "CHN|MNG": {
+        "edges": 38,
+        "segments": 2382,
+        "lengthDegrees": 49.68667655881025,
+        "lengthKm": 4377.764935461971,
+        "bothFineLengthKm": 0
+      },
+      "CHN|LAO": {
+        "edges": 4,
+        "segments": 197,
+        "lengthDegrees": 3.3673456367838526,
+        "lengthKm": 361.51615871158333,
+        "bothFineLengthKm": 0
+      },
+      "CHN|MMR": {
+        "edges": 21,
+        "segments": 2159,
+        "lengthDegrees": 15.988705957938283,
+        "lengthKm": 1699.3431886472404,
+        "bothFineLengthKm": 0
+      },
+      "CHN|KAZ": {
+        "edges": 19,
+        "segments": 1271,
+        "lengthDegrees": 16.3936757707042,
+        "lengthKm": 1503.2721789573657,
+        "bothFineLengthKm": 0
+      },
+      "BTN|CHN": {
+        "edges": 11,
+        "segments": 203,
+        "lengthDegrees": 4.08403528446143,
+        "lengthKm": 419.7839244452474,
+        "bothFineLengthKm": 0
+      },
+      "CHN|HKG": {
+        "edges": 3,
+        "segments": 37,
+        "lengthDegrees": 0.17204170774728883,
+        "lengthKm": 18.01094912304692,
+        "bothFineLengthKm": 0
+      },
+      "CHN|TJK": {
+        "edges": 2,
+        "segments": 312,
+        "lengthDegrees": 4.071568723591737,
+        "lengthKm": 403.69246662110334,
+        "bothFineLengthKm": 0
+      },
+      "AFG|CHN": {
+        "edges": 1,
+        "segments": 56,
+        "lengthDegrees": 0.8760748476118596,
+        "lengthKm": 84.11945285781111,
+        "bothFineLengthKm": 0
+      },
+      "KOR|PRK": {
+        "lengthKm": 203.88520678495138,
+        "bothFineLengthKm": 203.88520678495138
+      }
+    },
+    "bordersPackageHaversine": [
+      {
+        "countries": [
+          "CHN",
+          "PRK"
+        ],
+        "edges": 39,
+        "lengthKm": 1004.0872426899182
+      },
+      {
+        "countries": [
+          "KOR",
+          "PRK"
+        ],
+        "edges": 13,
+        "lengthKm": 203.70224004355558
+      }
+    ]
+  },
+  "existingGames": {
+    "checkpointProof": {
+      "path": "reports/chn-2020/live-game-preservation.json",
+      "sha256": "0b34b7842df5cdeaeac30d3556a16ec1bd41f387da7ba2d8f4acec4de9d7b65d",
+      "byteLength": 4313
+    },
+    "sessionCount": 4,
+    "catalogPools": [
+      {
+        "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+        "sessionCount": 4,
+        "checkpoints": [
+          {
+            "artifact": {
+              "path": "data/runtime/operational-game-checkpoints/b368907daf575bbf5fcaf31c40dad6554fe044d0240e9e0af0e9991efadc13e8.json.gz",
+              "sha256": "b1f04361c7d638969b5f7273f0116f4032ee62e5a2a6138d7065aea679ba0e4a",
+              "byteLength": 1135068
+            },
+            "payloadHash": "b368907daf575bbf5fcaf31c40dad6554fe044d0240e9e0af0e9991efadc13e8",
+            "sessionIdHash": "a3b3531bd18472453e9fe0965948dd5bffc09d8955037ab3eac0646dce843611",
+            "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+            "revisions": {
+              "simulationRevision": 0,
+              "worldRevision": 0
+            },
+            "historyEntries": 0,
+            "historyPointer": 0,
+            "completeInitialCurrentAndHistory": true,
+            "roundtripValidated": true
+          },
+          {
+            "artifact": {
+              "path": "data/runtime/operational-game-checkpoints/35b6bd91e4a90bc844f1f652dcb7e87acfbb7f63ebbc42406a7f72639c267f6e.json.gz",
+              "sha256": "c76a47b229c03c2a72822e3322090d15a71df7273534f31b02553346e01c3665",
+              "byteLength": 1135058
+            },
+            "payloadHash": "35b6bd91e4a90bc844f1f652dcb7e87acfbb7f63ebbc42406a7f72639c267f6e",
+            "sessionIdHash": "ba9bd953320a19a06eaed0663223280d75c7f9a0f9346a64a91c0c90e7bb19f0",
+            "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+            "revisions": {
+              "simulationRevision": 0,
+              "worldRevision": 0
+            },
+            "historyEntries": 0,
+            "historyPointer": 0,
+            "completeInitialCurrentAndHistory": true,
+            "roundtripValidated": true
+          },
+          {
+            "artifact": {
+              "path": "data/runtime/operational-game-checkpoints/e2b90bf488d1819f0999ad60e2c3150184f7228f1e7906d7cd37e7ce61899170.json.gz",
+              "sha256": "48b5058afcf98e326acad69624a7b298308e9cf3c064be114ace4af1966f0ce6",
+              "byteLength": 1135062
+            },
+            "payloadHash": "e2b90bf488d1819f0999ad60e2c3150184f7228f1e7906d7cd37e7ce61899170",
+            "sessionIdHash": "243a7baa9753a836d5347611eec7a5c3a8da7157e1cd60a1ef1f06362101ad7c",
+            "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+            "revisions": {
+              "simulationRevision": 0,
+              "worldRevision": 0
+            },
+            "historyEntries": 0,
+            "historyPointer": 0,
+            "completeInitialCurrentAndHistory": true,
+            "roundtripValidated": true
+          },
+          {
+            "artifact": {
+              "path": "data/runtime/operational-game-checkpoints/6e11cac15793c3bc7e613f02a333c1b7fd1a8c058c0c4578d5e6a80d789a5d83.json.gz",
+              "sha256": "d6265ed3405ec9e13234101ab7371a50c18091c100627bb0cdf180c1e49d1cea",
+              "byteLength": 1135398
+            },
+            "payloadHash": "6e11cac15793c3bc7e613f02a333c1b7fd1a8c058c0c4578d5e6a80d789a5d83",
+            "sessionIdHash": "47d37d8a1d64d5e5803bbb964212665e310ac160c709fdf272e3c541dabce0ec",
+            "catalogVersion": "catalog-v3-prompt19-korea-bd5f69398db196fa244d",
+            "revisions": {
+              "simulationRevision": 0,
+              "worldRevision": 0
+            },
+            "historyEntries": 0,
+            "historyPointer": 0,
+            "completeInitialCurrentAndHistory": true,
+            "roundtripValidated": true
+          }
+        ]
+      }
+    ],
+    "checkpointCode": [
+      {
+        "path": "src/lib/simulation/server/operational-game.server.ts",
+        "sha256": "05b33b4edb8b15a48fd479746d9ad9f237d4d0dac7d9728bd52e79decd3e3c7c",
+        "byteLength": 8166
+      },
+      {
+        "path": "src/lib/simulation/server/operational-game-checkpoint.ts",
+        "sha256": "44ddbda4c054595390245b1be7efefdabd016063866496fcdff73a3b21d2cb75",
+        "byteLength": 13798
+      },
+      {
+        "path": "src/app/api/local-maintenance/operational-games/checkpoint/route.ts",
+        "sha256": "f0312f7e29398e0cf536470fdae6ff99af93a6e7478627378c7d3e7824c060d4",
+        "byteLength": 1668
+      }
+    ],
+    "privateDirectory": "data/runtime/operational-game-checkpoints",
+    "ignoredByGit": true,
+    "initialCurrentSimulationWorldAndFullUndoRedoHistoryPreserved": true,
+    "retainedOriginalGlobalPools": true,
+    "recoveryHelper": "readOperationalGameCheckpoint / stepOperationalGameRecovery in src/lib/simulation/server/operational-game-checkpoint.ts",
+    "automaticLiveRehydration": false,
+    "continuedOldGameplayClaimed": false,
+    "limitation": "Original-catalog pools and validated lossless private checkpoints are retained. Late old-catalog assets and ongoing commands are not promised under the new active catalog. Existing IDs are never silently interpreted as new catalog IDs."
+  },
+  "geometry": {
+    "acceptance": {
+      "nonTargetPreservation": true,
+      "sourcePins": true,
+      "hierarchy": true,
+      "topology": true,
+      "coverage": true,
+      "residualAudit": true,
+      "reproducibility": true
+    },
+    "coverage": {
+      "missingAreaDegreesSquared": 0,
+      "extraAreaDegreesSquared": 0,
+      "overlaps": [],
+      "invalid": [],
+      "duplicateGeometries": [],
+      "beforeComponents": 70,
+      "afterComponents": 70,
+      "nationalGeometryMethod": "Independent exact directed shared-segment cancellation and boundary-cycle reconstruction, without overlay",
+      "geosOverlayComponentCountsForComparison": {
+        "before": 70,
+        "after": 70
+      },
+      "originalCountryComponents": {
+        "count": 70,
+        "sample": [
+          {
+            "index": 0,
+            "originalGeometrySha256WKB": "ac0130aa19f228104204681174ced607754b2e024298c014e574a913f5902676",
+            "originalAreaDegreesSquared": 947.7637471636501,
+            "retainedIntersectionAreaDegreesSquared": 947.7637471636488
+          },
+          {
+            "index": 1,
+            "originalGeometrySha256WKB": "8e13d6ecad0e3c29017005c461d406d1c554eba765008339d5f8998c1307767d",
+            "originalAreaDegreesSquared": 2.9070091622679977,
+            "retainedIntersectionAreaDegreesSquared": 2.9070091622680017
+          },
+          {
+            "index": 2,
+            "originalGeometrySha256WKB": "890ff119b235db9e22bbc2e62cb2e9d9adda0823fba135357119e443232414c5",
+            "originalAreaDegreesSquared": 0.0013357050350001607,
+            "retainedIntersectionAreaDegreesSquared": 0.0013357050350001605
+          }
+        ]
+      }
+    },
+    "overlapCount": 0,
+    "invalidCount": 0,
+    "duplicateGeometryCount": 0,
+    "outlineCoverage": {
+      "AFG|CHN": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 84.11945261110341,
+        "afterLengthKm": 84.11945285781111,
+        "individualSubdivisionExceptions": 27,
+        "failures": 0
+      },
+      "BTN|CHN": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 419.7839239838564,
+        "afterLengthKm": 419.7839244452474,
+        "individualSubdivisionExceptions": 141,
+        "failures": 0
+      },
+      "CHN:coast": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 16358.912810978456,
+        "afterLengthKm": 16358.91286792617,
+        "individualSubdivisionExceptions": 20613,
+        "failures": 0
+      },
+      "CHN|HKG": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 18.010949119828215,
+        "afterLengthKm": 18.010949123046917,
+        "individualSubdivisionExceptions": 20,
+        "failures": 0
+      },
+      "CHN|IND": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 2347.512534729606,
+        "afterLengthKm": 2347.512548595942,
+        "individualSubdivisionExceptions": 864,
+        "failures": 0
+      },
+      "CHN|KAZ": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 1503.2720532607095,
+        "afterLengthKm": 1503.272178957366,
+        "individualSubdivisionExceptions": 1166,
+        "failures": 0
+      },
+      "CHN|KGZ": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 838.7133778109645,
+        "afterLengthKm": 838.7133955965922,
+        "individualSubdivisionExceptions": 279,
+        "failures": 0
+      },
+      "CHN|LAO": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 361.5161584107262,
+        "afterLengthKm": 361.5161587115833,
+        "individualSubdivisionExceptions": 85,
+        "failures": 0
+      },
+      "CHN|MMR": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 1699.3431794734163,
+        "afterLengthKm": 1699.3431886472404,
+        "individualSubdivisionExceptions": 2497,
+        "failures": 0
+      },
+      "CHN|MNG": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 4377.764175546313,
+        "afterLengthKm": 4377.76493546197,
+        "individualSubdivisionExceptions": 2189,
+        "failures": 0
+      },
+      "CHN|NPL": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 1111.759158360175,
+        "afterLengthKm": 1111.759160492699,
+        "individualSubdivisionExceptions": 1128,
+        "failures": 0
+      },
+      "CHN|PAK": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 351.41170505803444,
+        "afterLengthKm": 351.4117057998958,
+        "individualSubdivisionExceptions": 130,
+        "failures": 0
+      },
+      "CHN|PRK": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 1004.9202915331526,
+        "afterLengthKm": 1004.9202934915285,
+        "individualSubdivisionExceptions": 1010,
+        "failures": 0
+      },
+      "CHN|RUS": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 3544.4274941329595,
+        "afterLengthKm": 3544.4275894844236,
+        "individualSubdivisionExceptions": 2113,
+        "failures": 0
+      },
+      "CHN|TJK": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 403.6924599881597,
+        "afterLengthKm": 403.6924666211033,
+        "individualSubdivisionExceptions": 246,
+        "failures": 0
+      },
+      "CHN|VNM": {
+        "pass": true,
+        "exact": false,
+        "beforeLengthKm": 1048.9914322887864,
+        "afterLengthKm": 1048.9914349196047,
+        "individualSubdivisionExceptions": 1181,
+        "failures": 0
+      }
+    },
+    "mesh": {
+      "checkedEdges": 10673,
+      "checkedSegments": 823851,
+      "exactBothIncidentCellRings": true,
+      "pass": true
+    },
+    "adjacency": {
+      "pass": true,
+      "phantomNeighbors": 0,
+      "symmetric": true
+    },
+    "residuals": {
+      "remainingCount": 7,
+      "remainingGeodesicAreaKm2": 21.88565004548664,
+      "remaining": [
+        {
+          "cellId": "territory:catalog:0eceab47c872e01dc0a57c9d93c52c2ce77150c66870cd707f837a7375e7b9ee",
+          "areaKm2": 0.7693958251080737,
+          "bounds": [
+            111.599864,
+            16.524237,
+            111.60963,
+            16.533515
+          ],
+          "effectiveWidthKm": 0.4791108273865273,
+          "originalFinePositiveContactCount": 0,
+          "classification": {
+            "cellId": "territory:catalog:0eceab47c872e01dc0a57c9d93c52c2ce77150c66870cd707f837a7375e7b9ee",
+            "disposition": "preserved-baseline-land-with-country-envelope-residual-parent",
+            "geometryHash": "fa96a552031f59310c42101f2a61831c3f395830dab2e122670932cfe1b93231",
+            "reason": "Baseline source-free detached island or bounded contact remainder; no invented administrative family"
+          }
+        },
+        {
+          "cellId": "territory:catalog:1b8d081feb524a166657271dc6fd41dc1d881ec5365f01597100b3532fda4717",
+          "areaKm2": 0.5905625766802282,
+          "bounds": [
+            112.333669,
+            16.92357,
+            112.341075,
+            16.933254
+          ],
+          "effectiveWidthKm": 0.3792871850413106,
+          "originalFinePositiveContactCount": 0,
+          "classification": {
+            "cellId": "territory:catalog:1b8d081feb524a166657271dc6fd41dc1d881ec5365f01597100b3532fda4717",
+            "disposition": "preserved-baseline-land-with-country-envelope-residual-parent",
+            "geometryHash": "a7f399a6ec41073130580d09fff2ba28182bb2fb80bddda39292993fc2579866",
+            "reason": "Baseline source-free detached island or bounded contact remainder; no invented administrative family"
+          }
+        },
+        {
+          "cellId": "territory:catalog:319a92b614f96bfc166568d8a46c09e2a4971abda5738d69e0e0a8ef302a640c",
+          "areaKm2": 1.278504786523342,
+          "bounds": [
+            108.06337565798961,
+            21.483808075211687,
+            108.080577,
+            21.494344262328763
+          ],
+          "effectiveWidthKm": 0.5152896841342933,
+          "originalFinePositiveContactCount": 0,
+          "classification": {
+            "cellId": "territory:catalog:319a92b614f96bfc166568d8a46c09e2a4971abda5738d69e0e0a8ef302a640c",
+            "disposition": "preserved-baseline-land-with-country-envelope-residual-parent",
+            "geometryHash": "147d79c963cf3b01bb7e3f5b126b8a3614e60c38974a5a18a28065c593ad038c",
+            "reason": "Baseline source-free detached island or bounded contact remainder; no invented administrative family"
+          }
+        },
+        {
+          "cellId": "territory:catalog:8e0bf7b3a41f31e4e8fc214ad1ed17672324bdfbee08ad4cd9c7cc66402a740b",
+          "areaKm2": 0.04087826080089808,
+          "bounds": [
+            111.678884,
+            16.578152,
+            111.681651,
+            16.581122
+          ],
+          "effectiveWidthKm": 0.08675012540018306,
+          "originalFinePositiveContactCount": 0,
+          "classification": {
+            "cellId": "territory:catalog:8e0bf7b3a41f31e4e8fc214ad1ed17672324bdfbee08ad4cd9c7cc66402a740b",
+            "disposition": "preserved-baseline-land-with-country-envelope-residual-parent",
+            "geometryHash": "c995c763de8ca5f6f3d392935f3f28dd59c598e135f990249d88f1f3d70f1002",
+            "reason": "Baseline source-free detached island or bounded contact remainder; no invented administrative family"
+          }
+        },
+        {
+          "cellId": "territory:catalog:ae8ab27924929fad74b04d0eb6577b4dbb597cd5f4fda115b026db3501c389ed",
+          "areaKm2": 3.3051954921018276,
+          "bounds": [
+            107.963878,
+            21.431627,
+            107.99590592640548,
+            21.452888485318958
+          ],
+          "effectiveWidthKm": 0.7171630764323045,
+          "originalFinePositiveContactCount": 0,
+          "classification": {
+            "cellId": "territory:catalog:ae8ab27924929fad74b04d0eb6577b4dbb597cd5f4fda115b026db3501c389ed",
+            "disposition": "preserved-baseline-land-with-country-envelope-residual-parent",
+            "geometryHash": "8539649eebba56b5c8ad2491d17fb6d5e9e191aa26fd6da97c682378f7e865ea",
+            "reason": "Baseline source-free detached island or bounded contact remainder; no invented administrative family"
+          }
+        },
+        {
+          "cellId": "territory:catalog:c5fd5fe99079344edd1367f4f490406447ba4cd51157b393934132df75dbc13d",
+          "areaKm2": 15.371302207383394,
+          "bounds": [
+            109.090505,
+            21.021186,
+            109.136241,
+            21.065416
+          ],
+          "effectiveWidthKm": 2.0520465276038236,
+          "originalFinePositiveContactCount": 0,
+          "classification": {
+            "cellId": "territory:catalog:c5fd5fe99079344edd1367f4f490406447ba4cd51157b393934132df75dbc13d",
+            "disposition": "preserved-baseline-land-with-country-envelope-residual-parent",
+            "geometryHash": "b8598e709f3625bbe2fee05873b97668c8f2003d0654bfa25c25cb11ebac1624",
+            "reason": "Baseline source-free detached island or bounded contact remainder; no invented administrative family"
+          }
+        },
+        {
+          "cellId": "territory:catalog:e5c0e64f244d56a23d3ee76ac4c2cfc8c4f86e537da96c4d53798e71674c63ea",
+          "areaKm2": 0.5298108968888745,
+          "bounds": [
+            111.753103,
+            16.043443,
+            111.76588,
+            16.048651
+          ],
+          "effectiveWidthKm": 0.32879027157037716,
+          "originalFinePositiveContactCount": 0,
+          "classification": {
+            "cellId": "territory:catalog:e5c0e64f244d56a23d3ee76ac4c2cfc8c4f86e537da96c4d53798e71674c63ea",
+            "disposition": "preserved-baseline-land-with-country-envelope-residual-parent",
+            "geometryHash": "38d34d416a2bd735b6072bfc65ca5acd80040b12b72e388732d064a24a5c25f7",
+            "reason": "Baseline source-free detached island or bounded contact remainder; no invented administrative family"
+          }
+        }
+      ],
+      "assignedPartCount": 4435,
+      "assignedPartAreaDegreesSquared": 1.856803057872582,
+      "rawOverlayFamilyLossCount": 145,
+      "rawOverlayFamilyLossAreaDegreesSquared": 1.3564023251691117e-14,
+      "rawOverlayFamilyGainCount": 353,
+      "rawOverlayFamilyGainAreaDegreesSquared": 1.856803057872606,
+      "originalSourceComponentsAudited": 3473,
+      "numericalFaceCount": 103,
+      "policy": "Source polygons and source IDs remain source facts; contact-ledger residual additions are explicit game geometry. Source-plus-ledger physical equations and the shared-partition degree² certificates are authoritative. Raw floating overlay differences remain visible in the independent proof.",
+      "classification": {
+        "proof": {
+          "path": "reports/chn-2020/final-fallback-classification.json",
+          "sha256": "12aa967367716e960d73723a4091803e9caac9386d58f1857b62dcce5ec905ab",
+          "byteLength": 123753
+        },
+        "summary": {
+          "fallbackCells": 7,
+          "totalAreaKm2": 21.88565004548664,
+          "wholeOriginalCoastOnlyGameIslandComponents": 5,
+          "islandAreaKm2": 17.30194976686147,
+          "boundedCoastalMainlandRemainders": 2,
+          "coastalRemainderAreaKm2": 4.5837002786251695,
+          "originalSourcePositiveContactComponents": 0,
+          "currentFineContactComponents": 2,
+          "wholeRemainingComponentsAssignableWithinTenKm": 0,
+          "newCountryLandAddedOrOriginalIslandsDeleted": false,
+          "officialAdministrativeAssignmentsInferred": 0
+        },
+        "coastalApproximation": "Two coastal remainder pieces extend beyond the unchanged 10 km original-contact bound. Some inner land remains due to conservative 1 km contact sampling and an inscribed 32-sided distance boundary. Residual-strip-free coverage is not claimed."
+      }
+    },
+    "numericExceptionCount": 1044,
+    "granularity": {
+      "areaKm2Quantiles": {
+        "0": 0.00030428179460950195,
+        "1": 198329.20306595005,
+        "0.1": 5.785619680277718,
+        "0.5": 1301.9339690274896,
+        "0.9": 4878.185237204884,
+        "0.95": 9586.952403158888,
+        "0.99": 31087.261121137362
+      },
+      "largest": {
+        "count": 15,
+        "sample": [
+          {
+            "cellId": "territory:catalog:19cd7764c49725f5d4402c4fbdcca6f8c737a147af5351c8e969e372ac9da217",
+            "areaKm2": 198329.20306595005,
+            "bounds": [
+              86.6853598999395,
+              36.02101139975633,
+              93.81836229968047,
+              41.37673020043843
+            ]
+          },
+          {
+            "cellId": "territory:catalog:328d75b217a994e42b93343217f3fb31ab7090e259da642096ec0e1a0c475201",
+            "areaKm2": 137947.70513231598,
+            "bounds": [
+              83.42158530002166,
+              35.64111519990661,
+              87.97313499998035,
+              40.280608900380514
+            ]
+          },
+          {
+            "cellId": "territory:catalog:d1f47ac56940385ff4c42bc7a50b51e04b4fedab81c821e6b21b710e012a8130",
+            "areaKm2": 134849.46450337284,
+            "bounds": [
+              81.95293479990113,
+              31.481395400277563,
+              86.32438170015541,
+              35.86121589979399
+            ]
+          }
+        ]
+      }
+    },
+    "replay": {
+      "path": "data/derived/chn-2020/replay-v12/joined-world-input.json",
+      "sha256": "df4f04ceeb9cecb0b5b3320f0e819c40064317f2f03dcc42f0a5746396f793d0",
+      "byteLength": 169444234
+    },
+    "environment": {
+      "shapely": "2.2.0",
+      "axisOrder": "GeoJSON longitude,latitude; no coordinate transformation in verification",
+      "areaBasis": "GEOS planar degrees squared for exact coverage; WGS84 ellipsoidal geodesic km² for size reporting",
+      "globalToleranceChanged": false
+    },
+    "negativeControls": {
+      "decodedEmptyChnFillRejected": true,
+      "oldMesh": {
+        "path": "reports/chn-2020/baseline-delivery-negative-control.json",
+        "sha256": "062f86d6f680082bc688a8a5a2b0a8d502e48a7d578008a4f7c6d66aa5665a65",
+        "byteLength": 347
+      }
+    },
+    "deliveredFiniteSegments": {
+      "proof": {
+        "path": "reports/chn-2020/delivery-subdivision-recheck.json",
+        "sha256": "a2eb07c2cec0330043b0d51d2c9bef1295d428bb58c8d07cad93c8c1fead3494",
+        "byteLength": 9512746
+      },
+      "method": "Supplemental strict per-coordinate finite-segment and cyclic coverage recheck of the same actual hashed delivery; original full PBF fill/edge validation remains independent evidence."
+    }
+  },
+  "renderedDelivery": {
+    "renderedArea": [
+      {
+        "countries": [
+          {
+            "actualArea": 155522,
+            "checkedTiles": 1,
+            "countryId": "CHN",
+            "extraArea": 74.13333333333503,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 68.26666666666279,
+            "referenceArea": 155516.13333333333
+          },
+          {
+            "actualArea": 1632,
+            "checkedTiles": 1,
+            "countryId": "KOR",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 1632
+          },
+          {
+            "actualArea": 2248,
+            "checkedTiles": 1,
+            "countryId": "PRK",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 2248
+          }
+        ],
+        "decodedTiles": 1,
+        "quantizationCoastToleranceUnits": 1.5,
+        "samplingStepUnits": 8,
+        "zoom": 0
+      },
+      {
+        "countries": [
+          {
+            "actualArea": 623527.3982683984,
+            "checkedTiles": 1,
+            "countryId": "CHN",
+            "extraArea": 201.65714285714057,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 190.89523809523962,
+            "referenceArea": 623516.6363636365
+          },
+          {
+            "actualArea": 6229.333333333332,
+            "checkedTiles": 1,
+            "countryId": "KOR",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 6229.333333333332
+          },
+          {
+            "actualArea": 8786.666666666668,
+            "checkedTiles": 1,
+            "countryId": "PRK",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 8786.666666666668
+          }
+        ],
+        "decodedTiles": 1,
+        "quantizationCoastToleranceUnits": 1.5,
+        "samplingStepUnits": 8,
+        "zoom": 1
+      },
+      {
+        "countries": [
+          {
+            "actualArea": 2494214.0089426916,
+            "checkedTiles": 2,
+            "countryId": "CHN",
+            "extraArea": 546.9028083028097,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 550.270684870683,
+            "referenceArea": 2494217.37681926
+          },
+          {
+            "actualArea": 25349.733333333337,
+            "checkedTiles": 1,
+            "countryId": "KOR",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 25349.733333333337
+          },
+          {
+            "actualArea": 35188.00000000001,
+            "checkedTiles": 1,
+            "countryId": "PRK",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 35188.00000000001
+          }
+        ],
+        "decodedTiles": 2,
+        "quantizationCoastToleranceUnits": 1.5,
+        "samplingStepUnits": 8,
+        "zoom": 2
+      },
+      {
+        "countries": [
+          {
+            "actualArea": 9978058.863156712,
+            "checkedTiles": 5,
+            "countryId": "CHN",
+            "extraArea": 1229.5447307386332,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 1378.2247489167662,
+            "referenceArea": 9978207.543174889
+          },
+          {
+            "actualArea": 101932.96507936507,
+            "checkedTiles": 1,
+            "countryId": "KOR",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 101932.96507936507
+          },
+          {
+            "actualArea": 140417.93535353534,
+            "checkedTiles": 2,
+            "countryId": "PRK",
+            "extraArea": 40,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 2.6666666666678793,
+            "referenceArea": 140380.60202020203
+          }
+        ],
+        "decodedTiles": 5,
+        "quantizationCoastToleranceUnits": 1.5,
+        "samplingStepUnits": 8,
+        "zoom": 3
+      },
+      {
+        "countries": [
+          {
+            "actualArea": 39907073.35570535,
+            "checkedTiles": 9,
+            "countryId": "CHN",
+            "extraArea": 2593.0727292854003,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 3157.331447076599,
+            "referenceArea": 39907637.61442316
+          },
+          {
+            "actualArea": 406893.67747747444,
+            "checkedTiles": 1,
+            "countryId": "KOR",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 406893.67747747444
+          },
+          {
+            "actualArea": 561000.0943617785,
+            "checkedTiles": 2,
+            "countryId": "PRK",
+            "extraArea": 63.20000000000073,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 39.57411477411006,
+            "referenceArea": 560976.4684765525
+          }
+        ],
+        "decodedTiles": 9,
+        "quantizationCoastToleranceUnits": 1.5,
+        "samplingStepUnits": 8,
+        "zoom": 4
+      },
+      {
+        "countries": [
+          {
+            "actualArea": 159638087.8806836,
+            "checkedTiles": 23,
+            "countryId": "CHN",
+            "extraArea": 5380.2350882030505,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 6151.637152717783,
+            "referenceArea": 159638859.28274783
+          },
+          {
+            "actualArea": 1630521.3740704353,
+            "checkedTiles": 1,
+            "countryId": "KOR",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 1630521.3740704353
+          },
+          {
+            "actualArea": 2245541.365868466,
+            "checkedTiles": 2,
+            "countryId": "PRK",
+            "extraArea": 79.94311588794153,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 75.18967775519263,
+            "referenceArea": 2245536.6124303336
+          }
+        ],
+        "decodedTiles": 23,
+        "quantizationCoastToleranceUnits": 1.5,
+        "samplingStepUnits": 8,
+        "zoom": 5
+      },
+      {
+        "countries": [
+          {
+            "actualArea": 638553346.2159234,
+            "checkedTiles": 65,
+            "countryId": "CHN",
+            "extraArea": 11081.252911906666,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 12149.451681473995,
+            "referenceArea": 638554414.4146893
+          },
+          {
+            "actualArea": 6519315.038107145,
+            "checkedTiles": 4,
+            "countryId": "KOR",
+            "extraArea": 0,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 0,
+            "referenceArea": 6519315.038107145
+          },
+          {
+            "actualArea": 8980087.977440247,
+            "checkedTiles": 4,
+            "countryId": "PRK",
+            "extraArea": 265.7903569704033,
+            "interiorExtraSamples": 0,
+            "interiorMissingSamples": 0,
+            "missingArea": 140.50075562848133,
+            "referenceArea": 8979962.687838903
+          }
+        ],
+        "decodedTiles": 68,
+        "quantizationCoastToleranceUnits": 1.5,
+        "samplingStepUnits": 8,
+        "zoom": 6
+      }
+    ],
+    "tileEdgeReports": [
+      {
+        "decodedTiles": 1,
+        "edgeSamples": 394782,
+        "maxEdgeDeviationUnits": 0,
+        "quantizationToleranceUnits": 1.5,
+        "zoom": 0
+      },
+      {
+        "decodedTiles": 1,
+        "edgeSamples": 748977,
+        "maxEdgeDeviationUnits": 0,
+        "quantizationToleranceUnits": 1.5,
+        "zoom": 1
+      },
+      {
+        "decodedTiles": 2,
+        "edgeSamples": 1350663,
+        "maxEdgeDeviationUnits": 0,
+        "quantizationToleranceUnits": 1.5,
+        "zoom": 2
+      },
+      {
+        "decodedTiles": 5,
+        "edgeSamples": 2225837,
+        "maxEdgeDeviationUnits": 0,
+        "quantizationToleranceUnits": 1.5,
+        "zoom": 3
+      },
+      {
+        "decodedTiles": 9,
+        "edgeSamples": 3114199,
+        "maxEdgeDeviationUnits": 0,
+        "quantizationToleranceUnits": 1.5,
+        "zoom": 4
+      },
+      {
+        "decodedTiles": 23,
+        "edgeSamples": 3757474,
+        "maxEdgeDeviationUnits": 0,
+        "quantizationToleranceUnits": 1.5,
+        "zoom": 5
+      },
+      {
+        "decodedTiles": 68,
+        "edgeSamples": 4205980,
+        "maxEdgeDeviationUnits": 0,
+        "quantizationToleranceUnits": 1.5,
+        "zoom": 6
+      }
+    ],
+    "subpixelExceptionCount": 0,
+    "cellDetailShards": {
+      "allIndexedCountryOrdinalsCoveredExactly": true,
+      "countries": [
+        {
+          "cells": 3320,
+          "countryId": "CHN",
+          "exactFullCountryGeometryMatches": true,
+          "maximumDecodedBytes": 2087140,
+          "oversizeSingleCellOrdinals": [],
+          "shards": 55,
+          "totalCompressedBytes": 23463385,
+          "totalDecodedBytes": 61704795
+        },
+        {
+          "cells": 86,
+          "countryId": "RUS",
+          "exactFullCountryGeometryMatches": true,
+          "maximumDecodedBytes": 1710904,
+          "oversizeSingleCellOrdinals": [],
+          "shards": 2,
+          "totalCompressedBytes": 1108294,
+          "totalDecodedBytes": 3023068
+        }
+      ],
+      "optionalBackwardCompatible": true,
+      "pass": true,
+      "totalShards": 57
+    },
+    "method": "Actual hashed candidate PBF decoding at zooms 0–6. Separate CHN/KOR/PRK scanline fill coverage against the immutable predecessor union, 8-unit row sampling and unchanged 1.5-unit quantization coast bound. Edge vertices and segment midpoints checked against both incident decoded fill boundaries; per-coordinate subpixel exceptions recorded. Exact detail mesh segments, symmetric adjacency, ID-mapped non-target geometry and administrative/seed parent semantics independently checked.",
+    "browserViews": [
+      {
+        "name": "world",
+        "mode": "normal",
+        "center": [
+          15,
+          20
+        ],
+        "zoom": 1,
+        "fillIds": {
+          "count": 7732,
+          "sha256": "f29d9084cdca3a685d4c35dd22dd16afa922f545a05e7d767ab1516804b41edc",
+          "sample": [
+            "world-operational-catalog/territories/1",
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/100",
+            "world-operational-catalog/territories/1000",
+            "world-operational-catalog/territories/1001",
+            "world-operational-catalog/territories/1002",
+            "world-operational-catalog/territories/1003",
+            "world-operational-catalog/territories/1004",
+            "world-operational-catalog/territories/1005",
+            "world-operational-catalog/territories/1006",
+            "world-operational-catalog/territories/1007",
+            "world-operational-catalog/territories/1008",
+            "world-operational-catalog/territories/1009",
+            "world-operational-catalog/territories/101",
+            "world-operational-catalog/territories/1010",
+            "world-operational-catalog/territories/1011",
+            "world-operational-catalog/territories/1012",
+            "world-operational-catalog/territories/1013",
+            "world-operational-catalog/territories/1014",
+            "world-operational-catalog/territories/1015",
+            "world-operational-catalog/territories/1016",
+            "world-operational-catalog/territories/1017",
+            "world-operational-catalog/territories/1018",
+            "world-operational-catalog/territories/1019"
+          ]
+        },
+        "microIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "world",
+        "mode": "debug",
+        "center": [
+          15,
+          20
+        ],
+        "zoom": 1,
+        "fillIds": {
+          "count": 7732,
+          "sha256": "f29d9084cdca3a685d4c35dd22dd16afa922f545a05e7d767ab1516804b41edc",
+          "sample": [
+            "world-operational-catalog/territories/1",
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/100",
+            "world-operational-catalog/territories/1000",
+            "world-operational-catalog/territories/1001",
+            "world-operational-catalog/territories/1002",
+            "world-operational-catalog/territories/1003",
+            "world-operational-catalog/territories/1004",
+            "world-operational-catalog/territories/1005",
+            "world-operational-catalog/territories/1006",
+            "world-operational-catalog/territories/1007",
+            "world-operational-catalog/territories/1008",
+            "world-operational-catalog/territories/1009",
+            "world-operational-catalog/territories/101",
+            "world-operational-catalog/territories/1010",
+            "world-operational-catalog/territories/1011",
+            "world-operational-catalog/territories/1012",
+            "world-operational-catalog/territories/1013",
+            "world-operational-catalog/territories/1014",
+            "world-operational-catalog/territories/1015",
+            "world-operational-catalog/territories/1016",
+            "world-operational-catalog/territories/1017",
+            "world-operational-catalog/territories/1018",
+            "world-operational-catalog/territories/1019"
+          ]
+        },
+        "microIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "china",
+        "mode": "normal",
+        "center": [
+          104.5,
+          35
+        ],
+        "zoom": 3.3,
+        "fillIds": {
+          "count": 4305,
+          "sha256": "1c370862b2d6756652fe1d6cdc87f15bcce4ab8781e05cae1748a8a48e006062",
+          "sample": [
+            "world-operational-catalog/territories/1",
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/100",
+            "world-operational-catalog/territories/1000",
+            "world-operational-catalog/territories/1001",
+            "world-operational-catalog/territories/1002",
+            "world-operational-catalog/territories/1005",
+            "world-operational-catalog/territories/1008",
+            "world-operational-catalog/territories/1009",
+            "world-operational-catalog/territories/101",
+            "world-operational-catalog/territories/1010",
+            "world-operational-catalog/territories/1012",
+            "world-operational-catalog/territories/1015",
+            "world-operational-catalog/territories/1017",
+            "world-operational-catalog/territories/1018",
+            "world-operational-catalog/territories/1019",
+            "world-operational-catalog/territories/1021",
+            "world-operational-catalog/territories/1025",
+            "world-operational-catalog/territories/1026",
+            "world-operational-catalog/territories/1027",
+            "world-operational-catalog/territories/1031",
+            "world-operational-catalog/territories/1032",
+            "world-operational-catalog/territories/1033",
+            "world-operational-catalog/territories/1034"
+          ]
+        },
+        "microIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "china",
+        "mode": "debug",
+        "center": [
+          104.5,
+          35
+        ],
+        "zoom": 3.3,
+        "fillIds": {
+          "count": 4305,
+          "sha256": "1c370862b2d6756652fe1d6cdc87f15bcce4ab8781e05cae1748a8a48e006062",
+          "sample": [
+            "world-operational-catalog/territories/1",
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/100",
+            "world-operational-catalog/territories/1000",
+            "world-operational-catalog/territories/1001",
+            "world-operational-catalog/territories/1002",
+            "world-operational-catalog/territories/1005",
+            "world-operational-catalog/territories/1008",
+            "world-operational-catalog/territories/1009",
+            "world-operational-catalog/territories/101",
+            "world-operational-catalog/territories/1010",
+            "world-operational-catalog/territories/1012",
+            "world-operational-catalog/territories/1015",
+            "world-operational-catalog/territories/1017",
+            "world-operational-catalog/territories/1018",
+            "world-operational-catalog/territories/1019",
+            "world-operational-catalog/territories/1021",
+            "world-operational-catalog/territories/1025",
+            "world-operational-catalog/territories/1026",
+            "world-operational-catalog/territories/1027",
+            "world-operational-catalog/territories/1031",
+            "world-operational-catalog/territories/1032",
+            "world-operational-catalog/territories/1033",
+            "world-operational-catalog/territories/1034"
+          ]
+        },
+        "microIds": {
+          "count": 9408,
+          "sha256": "9854cff42cb69c339267ddb510c6666b7ff1f6251c2d7871ce401c81132b6130",
+          "sample": [
+            "world-operational-catalog/10000",
+            "world-operational-catalog/10001",
+            "world-operational-catalog/10002",
+            "world-operational-catalog/10003",
+            "world-operational-catalog/10004",
+            "world-operational-catalog/10005",
+            "world-operational-catalog/10006",
+            "world-operational-catalog/10007",
+            "world-operational-catalog/10008",
+            "world-operational-catalog/10009",
+            "world-operational-catalog/10010",
+            "world-operational-catalog/10011",
+            "world-operational-catalog/10012",
+            "world-operational-catalog/10013",
+            "world-operational-catalog/10014",
+            "world-operational-catalog/10015",
+            "world-operational-catalog/10016",
+            "world-operational-catalog/10017",
+            "world-operational-catalog/10018",
+            "world-operational-catalog/10019",
+            "world-operational-catalog/10020",
+            "world-operational-catalog/10021",
+            "world-operational-catalog/10022",
+            "world-operational-catalog/10023"
+          ]
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "chn-prk-border",
+        "mode": "normal",
+        "center": [
+          124.4,
+          40.6
+        ],
+        "zoom": 6.2,
+        "fillIds": {
+          "count": 425,
+          "sha256": "ed555a8681d3060b927e9de811662d3a8c16c18e62d99ff80d5455ac38291397",
+          "sample": [
+            "world-operational-catalog/territories/1026",
+            "world-operational-catalog/territories/1031",
+            "world-operational-catalog/territories/104",
+            "world-operational-catalog/territories/1043",
+            "world-operational-catalog/territories/1061",
+            "world-operational-catalog/territories/1086",
+            "world-operational-catalog/territories/1134",
+            "world-operational-catalog/territories/1146",
+            "world-operational-catalog/territories/115",
+            "world-operational-catalog/territories/1171",
+            "world-operational-catalog/territories/1198",
+            "world-operational-catalog/territories/121",
+            "world-operational-catalog/territories/1217",
+            "world-operational-catalog/territories/1220",
+            "world-operational-catalog/territories/1225",
+            "world-operational-catalog/territories/1244",
+            "world-operational-catalog/territories/1250",
+            "world-operational-catalog/territories/1286",
+            "world-operational-catalog/territories/1337",
+            "world-operational-catalog/territories/1341",
+            "world-operational-catalog/territories/1384",
+            "world-operational-catalog/territories/1387",
+            "world-operational-catalog/territories/1399",
+            "world-operational-catalog/territories/1419"
+          ]
+        },
+        "microIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "chn-prk-border",
+        "mode": "debug",
+        "center": [
+          124.4,
+          40.6
+        ],
+        "zoom": 6.2,
+        "fillIds": {
+          "count": 425,
+          "sha256": "ed555a8681d3060b927e9de811662d3a8c16c18e62d99ff80d5455ac38291397",
+          "sample": [
+            "world-operational-catalog/territories/1026",
+            "world-operational-catalog/territories/1031",
+            "world-operational-catalog/territories/104",
+            "world-operational-catalog/territories/1043",
+            "world-operational-catalog/territories/1061",
+            "world-operational-catalog/territories/1086",
+            "world-operational-catalog/territories/1134",
+            "world-operational-catalog/territories/1146",
+            "world-operational-catalog/territories/115",
+            "world-operational-catalog/territories/1171",
+            "world-operational-catalog/territories/1198",
+            "world-operational-catalog/territories/121",
+            "world-operational-catalog/territories/1217",
+            "world-operational-catalog/territories/1220",
+            "world-operational-catalog/territories/1225",
+            "world-operational-catalog/territories/1244",
+            "world-operational-catalog/territories/1250",
+            "world-operational-catalog/territories/1286",
+            "world-operational-catalog/territories/1337",
+            "world-operational-catalog/territories/1341",
+            "world-operational-catalog/territories/1384",
+            "world-operational-catalog/territories/1387",
+            "world-operational-catalog/territories/1399",
+            "world-operational-catalog/territories/1419"
+          ]
+        },
+        "microIds": {
+          "count": 777,
+          "sha256": "382b44408204ee8bb5ba6b509ac8d8ce4daa2fc8570a6c410be38ae3d0042135",
+          "sample": [
+            "world-operational-catalog/10002",
+            "world-operational-catalog/10007",
+            "world-operational-catalog/10013",
+            "world-operational-catalog/10015",
+            "world-operational-catalog/10035",
+            "world-operational-catalog/10039",
+            "world-operational-catalog/10050",
+            "world-operational-catalog/10063",
+            "world-operational-catalog/10093",
+            "world-operational-catalog/10126",
+            "world-operational-catalog/10135",
+            "world-operational-catalog/10136",
+            "world-operational-catalog/10159",
+            "world-operational-catalog/10201",
+            "world-operational-catalog/10203",
+            "world-operational-catalog/10208",
+            "world-operational-catalog/10211",
+            "world-operational-catalog/10243",
+            "world-operational-catalog/10260",
+            "world-operational-catalog/10263",
+            "world-operational-catalog/10281",
+            "world-operational-catalog/10338",
+            "world-operational-catalog/10342",
+            "world-operational-catalog/10357"
+          ]
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "shanghai-coast",
+        "mode": "normal",
+        "center": [
+          121.2,
+          31.1
+        ],
+        "zoom": 6.2,
+        "fillIds": {
+          "count": 404,
+          "sha256": "98aced12b997f19afac68a3ec3a3fb45779191b16ccf47b250ff2eb6d30b469c",
+          "sample": [
+            "world-operational-catalog/territories/1036",
+            "world-operational-catalog/territories/1078",
+            "world-operational-catalog/territories/1082",
+            "world-operational-catalog/territories/1101",
+            "world-operational-catalog/territories/1105",
+            "world-operational-catalog/territories/1154",
+            "world-operational-catalog/territories/1223",
+            "world-operational-catalog/territories/1255",
+            "world-operational-catalog/territories/1267",
+            "world-operational-catalog/territories/1283",
+            "world-operational-catalog/territories/1292",
+            "world-operational-catalog/territories/1297",
+            "world-operational-catalog/territories/1305",
+            "world-operational-catalog/territories/1320",
+            "world-operational-catalog/territories/1328",
+            "world-operational-catalog/territories/1340",
+            "world-operational-catalog/territories/1461",
+            "world-operational-catalog/territories/1490",
+            "world-operational-catalog/territories/1494",
+            "world-operational-catalog/territories/1516",
+            "world-operational-catalog/territories/1533",
+            "world-operational-catalog/territories/1541",
+            "world-operational-catalog/territories/1569",
+            "world-operational-catalog/territories/1573"
+          ]
+        },
+        "microIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "shanghai-coast",
+        "mode": "debug",
+        "center": [
+          121.2,
+          31.1
+        ],
+        "zoom": 6.2,
+        "fillIds": {
+          "count": 404,
+          "sha256": "98aced12b997f19afac68a3ec3a3fb45779191b16ccf47b250ff2eb6d30b469c",
+          "sample": [
+            "world-operational-catalog/territories/1036",
+            "world-operational-catalog/territories/1078",
+            "world-operational-catalog/territories/1082",
+            "world-operational-catalog/territories/1101",
+            "world-operational-catalog/territories/1105",
+            "world-operational-catalog/territories/1154",
+            "world-operational-catalog/territories/1223",
+            "world-operational-catalog/territories/1255",
+            "world-operational-catalog/territories/1267",
+            "world-operational-catalog/territories/1283",
+            "world-operational-catalog/territories/1292",
+            "world-operational-catalog/territories/1297",
+            "world-operational-catalog/territories/1305",
+            "world-operational-catalog/territories/1320",
+            "world-operational-catalog/territories/1328",
+            "world-operational-catalog/territories/1340",
+            "world-operational-catalog/territories/1461",
+            "world-operational-catalog/territories/1490",
+            "world-operational-catalog/territories/1494",
+            "world-operational-catalog/territories/1516",
+            "world-operational-catalog/territories/1533",
+            "world-operational-catalog/territories/1541",
+            "world-operational-catalog/territories/1569",
+            "world-operational-catalog/territories/1573"
+          ]
+        },
+        "microIds": {
+          "count": 936,
+          "sha256": "0ab42f23cbededdbcc6e1da0273f309d57625764bd1d296e22a10b3eab343c95",
+          "sample": [
+            "world-operational-catalog/10001",
+            "world-operational-catalog/10008",
+            "world-operational-catalog/10034",
+            "world-operational-catalog/10041",
+            "world-operational-catalog/10056",
+            "world-operational-catalog/10057",
+            "world-operational-catalog/10064",
+            "world-operational-catalog/10073",
+            "world-operational-catalog/10076",
+            "world-operational-catalog/10077",
+            "world-operational-catalog/10084",
+            "world-operational-catalog/10089",
+            "world-operational-catalog/10106",
+            "world-operational-catalog/10117",
+            "world-operational-catalog/10131",
+            "world-operational-catalog/10149",
+            "world-operational-catalog/10162",
+            "world-operational-catalog/10175",
+            "world-operational-catalog/10190",
+            "world-operational-catalog/10197",
+            "world-operational-catalog/10198",
+            "world-operational-catalog/10200",
+            "world-operational-catalog/10209",
+            "world-operational-catalog/10214"
+          ]
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "hainan-island",
+        "mode": "normal",
+        "center": [
+          109.7,
+          19.15
+        ],
+        "zoom": 6,
+        "fillIds": {
+          "count": 286,
+          "sha256": "446b7b965fa465bf05146c4e3093123d01a339a37e79c4ea1c3f2f649294b8ce",
+          "sample": [
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/1076",
+            "world-operational-catalog/territories/1090",
+            "world-operational-catalog/territories/1106",
+            "world-operational-catalog/territories/1120",
+            "world-operational-catalog/territories/1149",
+            "world-operational-catalog/territories/1151",
+            "world-operational-catalog/territories/1191",
+            "world-operational-catalog/territories/1195",
+            "world-operational-catalog/territories/1214",
+            "world-operational-catalog/territories/1227",
+            "world-operational-catalog/territories/123",
+            "world-operational-catalog/territories/1232",
+            "world-operational-catalog/territories/1235",
+            "world-operational-catalog/territories/1307",
+            "world-operational-catalog/territories/1309",
+            "world-operational-catalog/territories/1310",
+            "world-operational-catalog/territories/1349",
+            "world-operational-catalog/territories/1390",
+            "world-operational-catalog/territories/1404",
+            "world-operational-catalog/territories/1405",
+            "world-operational-catalog/territories/1410",
+            "world-operational-catalog/territories/1430",
+            "world-operational-catalog/territories/1431"
+          ]
+        },
+        "microIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "hainan-island",
+        "mode": "debug",
+        "center": [
+          109.7,
+          19.15
+        ],
+        "zoom": 6,
+        "fillIds": {
+          "count": 286,
+          "sha256": "446b7b965fa465bf05146c4e3093123d01a339a37e79c4ea1c3f2f649294b8ce",
+          "sample": [
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/1076",
+            "world-operational-catalog/territories/1090",
+            "world-operational-catalog/territories/1106",
+            "world-operational-catalog/territories/1120",
+            "world-operational-catalog/territories/1149",
+            "world-operational-catalog/territories/1151",
+            "world-operational-catalog/territories/1191",
+            "world-operational-catalog/territories/1195",
+            "world-operational-catalog/territories/1214",
+            "world-operational-catalog/territories/1227",
+            "world-operational-catalog/territories/123",
+            "world-operational-catalog/territories/1232",
+            "world-operational-catalog/territories/1235",
+            "world-operational-catalog/territories/1307",
+            "world-operational-catalog/territories/1309",
+            "world-operational-catalog/territories/1310",
+            "world-operational-catalog/territories/1349",
+            "world-operational-catalog/territories/1390",
+            "world-operational-catalog/territories/1404",
+            "world-operational-catalog/territories/1405",
+            "world-operational-catalog/territories/1410",
+            "world-operational-catalog/territories/1430",
+            "world-operational-catalog/territories/1431"
+          ]
+        },
+        "microIds": {
+          "count": 372,
+          "sha256": "62e8849660a17c65687c2748acbcac65dbac54f052fe69d1975cfb7a27a58afe",
+          "sample": [
+            "world-operational-catalog/10006",
+            "world-operational-catalog/10040",
+            "world-operational-catalog/10042",
+            "world-operational-catalog/10045",
+            "world-operational-catalog/10053",
+            "world-operational-catalog/10072",
+            "world-operational-catalog/10083",
+            "world-operational-catalog/10100",
+            "world-operational-catalog/10132",
+            "world-operational-catalog/10188",
+            "world-operational-catalog/10192",
+            "world-operational-catalog/10219",
+            "world-operational-catalog/10221",
+            "world-operational-catalog/10259",
+            "world-operational-catalog/10282",
+            "world-operational-catalog/10289",
+            "world-operational-catalog/10311",
+            "world-operational-catalog/10323",
+            "world-operational-catalog/10337",
+            "world-operational-catalog/10365",
+            "world-operational-catalog/10369",
+            "world-operational-catalog/10377",
+            "world-operational-catalog/10406",
+            "world-operational-catalog/10408"
+          ]
+        },
+        "exactCellIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "settled": true
+      },
+      {
+        "name": "china-selected-detail",
+        "mode": "normal",
+        "center": [
+          104.5,
+          35
+        ],
+        "zoom": 3.3,
+        "fillIds": {
+          "count": 7625,
+          "sha256": "4bc7ab7cd4d202b1740085940520d902798dd0538b321338bda0ae94ecf051e0",
+          "sample": [
+            "world-operational-catalog/territories/1",
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/100",
+            "world-operational-catalog/territories/1000",
+            "world-operational-catalog/territories/1001",
+            "world-operational-catalog/territories/1002",
+            "world-operational-catalog/territories/1005",
+            "world-operational-catalog/territories/1008",
+            "world-operational-catalog/territories/1009",
+            "world-operational-catalog/territories/101",
+            "world-operational-catalog/territories/1010",
+            "world-operational-catalog/territories/1012",
+            "world-operational-catalog/territories/1015",
+            "world-operational-catalog/territories/1017",
+            "world-operational-catalog/territories/1018",
+            "world-operational-catalog/territories/1019",
+            "world-operational-catalog/territories/1021",
+            "world-operational-catalog/territories/1025",
+            "world-operational-catalog/territories/1026",
+            "world-operational-catalog/territories/1027",
+            "world-operational-catalog/territories/1031",
+            "world-operational-catalog/territories/1032",
+            "world-operational-catalog/territories/1033",
+            "world-operational-catalog/territories/1034"
+          ]
+        },
+        "microIds": {
+          "count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sample": []
+        },
+        "exactCellIds": {
+          "count": 3320,
+          "sha256": "b77184879b0ea57594eb640d0f584da9f23f0340ed683ec8b86298c582d37a9c",
+          "sample": [
+            1,
+            10,
+            1000,
+            1001,
+            1002,
+            1009,
+            1010,
+            1012,
+            1015,
+            1019,
+            1025,
+            1026,
+            1027,
+            1031,
+            1032,
+            1033,
+            1034,
+            1036,
+            104,
+            1041,
+            1042,
+            1044,
+            1047,
+            1048
+          ]
+        },
+        "settled": true
+      },
+      {
+        "name": "china-selected-detail",
+        "mode": "debug",
+        "center": [
+          104.5,
+          35
+        ],
+        "zoom": 3.3,
+        "fillIds": {
+          "count": 7625,
+          "sha256": "4bc7ab7cd4d202b1740085940520d902798dd0538b321338bda0ae94ecf051e0",
+          "sample": [
+            "world-operational-catalog/territories/1",
+            "world-operational-catalog/territories/10",
+            "world-operational-catalog/territories/100",
+            "world-operational-catalog/territories/1000",
+            "world-operational-catalog/territories/1001",
+            "world-operational-catalog/territories/1002",
+            "world-operational-catalog/territories/1005",
+            "world-operational-catalog/territories/1008",
+            "world-operational-catalog/territories/1009",
+            "world-operational-catalog/territories/101",
+            "world-operational-catalog/territories/1010",
+            "world-operational-catalog/territories/1012",
+            "world-operational-catalog/territories/1015",
+            "world-operational-catalog/territories/1017",
+            "world-operational-catalog/territories/1018",
+            "world-operational-catalog/territories/1019",
+            "world-operational-catalog/territories/1021",
+            "world-operational-catalog/territories/1025",
+            "world-operational-catalog/territories/1026",
+            "world-operational-catalog/territories/1027",
+            "world-operational-catalog/territories/1031",
+            "world-operational-catalog/territories/1032",
+            "world-operational-catalog/territories/1033",
+            "world-operational-catalog/territories/1034"
+          ]
+        },
+        "microIds": {
+          "count": 17970,
+          "sha256": "d810d75dfefdb4aeea82741361c2527fa19e1b3c84c14829a03b9777424f839b",
+          "sample": [
+            "world-operational-catalog/10000",
+            "world-operational-catalog/10001",
+            "world-operational-catalog/10002",
+            "world-operational-catalog/10003",
+            "world-operational-catalog/10004",
+            "world-operational-catalog/10005",
+            "world-operational-catalog/10006",
+            "world-operational-catalog/10007",
+            "world-operational-catalog/10008",
+            "world-operational-catalog/10009",
+            "world-operational-catalog/10010",
+            "world-operational-catalog/10011",
+            "world-operational-catalog/10012",
+            "world-operational-catalog/10013",
+            "world-operational-catalog/10014",
+            "world-operational-catalog/10015",
+            "world-operational-catalog/10016",
+            "world-operational-catalog/10017",
+            "world-operational-catalog/10018",
+            "world-operational-catalog/10019",
+            "world-operational-catalog/10020",
+            "world-operational-catalog/10021",
+            "world-operational-catalog/10022",
+            "world-operational-catalog/10023"
+          ]
+        },
+        "exactCellIds": {
+          "count": 3320,
+          "sha256": "b77184879b0ea57594eb640d0f584da9f23f0340ed683ec8b86298c582d37a9c",
+          "sample": [
+            1,
+            10,
+            1000,
+            1001,
+            1002,
+            1009,
+            1010,
+            1012,
+            1015,
+            1019,
+            1025,
+            1026,
+            1027,
+            1031,
+            1032,
+            1033,
+            1034,
+            1036,
+            104,
+            1041,
+            1042,
+            1044,
+            1047,
+            1048
+          ]
+        },
+        "settled": true
+      }
+    ],
+    "staleCountryDetail": {
+      "pass": true,
+      "delayedChnRequests": 1
+    },
+    "screenshots": [
+      {
+        "kind": "browser",
+        "name": "world-normal",
+        "path": "reports/chn-2020/browser-candidate/world-normal.png",
+        "sha256": "5e92c531072f34e46858b3abf0f04c643894c4ae6462f034ba164d5e11ba7805",
+        "byteLength": 321838
+      },
+      {
+        "kind": "browser",
+        "name": "world-debug",
+        "path": "reports/chn-2020/browser-candidate/world-debug.png",
+        "sha256": "5e92c531072f34e46858b3abf0f04c643894c4ae6462f034ba164d5e11ba7805",
+        "byteLength": 321838
+      },
+      {
+        "kind": "browser",
+        "name": "china-normal",
+        "path": "reports/chn-2020/browser-candidate/china-normal.png",
+        "sha256": "577e9337c582436393f1640e36bbf9aa9464c5cd5d6b566134dcb91a115e12c5",
+        "byteLength": 310766
+      },
+      {
+        "kind": "browser",
+        "name": "china-debug",
+        "path": "reports/chn-2020/browser-candidate/china-debug.png",
+        "sha256": "7024f904c4c322ea4a891931f52e402018438d74322c37173447287ef94dacd9",
+        "byteLength": 556166
+      },
+      {
+        "kind": "browser",
+        "name": "chn-prk-border-normal",
+        "path": "reports/chn-2020/browser-candidate/chn-prk-border-normal.png",
+        "sha256": "8f8cc9525d2915a37c56d279946debfc4a7e8034cd2a0e1ce61db2f586e028fb",
+        "byteLength": 122104
+      },
+      {
+        "kind": "browser",
+        "name": "chn-prk-border-debug",
+        "path": "reports/chn-2020/browser-candidate/chn-prk-border-debug.png",
+        "sha256": "94a255826afa16be03ff9d0640d3ef70cca61b16e67948a1621ca6a79ad00f4f",
+        "byteLength": 290375
+      },
+      {
+        "kind": "browser",
+        "name": "shanghai-coast-normal",
+        "path": "reports/chn-2020/browser-candidate/shanghai-coast-normal.png",
+        "sha256": "2abbc1670cd196cb781a148b82cb26dd06f619c86e0d13bfe39dd6022c80afa6",
+        "byteLength": 80595
+      },
+      {
+        "kind": "browser",
+        "name": "shanghai-coast-debug",
+        "path": "reports/chn-2020/browser-candidate/shanghai-coast-debug.png",
+        "sha256": "ef445035d5f04743d5499073d0e6ca5167e7fc6c51886481f57bf5b0c7d39f7f",
+        "byteLength": 278221
+      },
+      {
+        "kind": "browser",
+        "name": "hainan-island-normal",
+        "path": "reports/chn-2020/browser-candidate/hainan-island-normal.png",
+        "sha256": "3276f76412761515d9a526d6cc340f5a65fa717e0720c1839ee1db302ed296fc",
+        "byteLength": 167090
+      },
+      {
+        "kind": "browser",
+        "name": "hainan-island-debug",
+        "path": "reports/chn-2020/browser-candidate/hainan-island-debug.png",
+        "sha256": "d87a86482e878560b164c6bc6e6f2aa355830b9e8e50b1a8aaf92a32fa00933f",
+        "byteLength": 237957
+      },
+      {
+        "kind": "browser",
+        "name": "stale-detail-cleared",
+        "path": "reports/chn-2020/browser-candidate/stale-detail-cleared.png",
+        "sha256": "0e8e1b4d58dc0a4965fcca9c0d23230ee02ea11a5195f8fbce78e4ab0fe22c51",
+        "byteLength": 326871
+      },
+      {
+        "kind": "browser",
+        "name": "china-selected-detail-normal",
+        "path": "reports/chn-2020/browser-candidate/china-selected-detail-normal.png",
+        "sha256": "8ed59fcfd503607bbf2dab45cfd75f1a02aac13d35787115caf6f14b7d249ce3",
+        "byteLength": 323009
+      },
+      {
+        "kind": "browser",
+        "name": "china-selected-detail-debug",
+        "path": "reports/chn-2020/browser-candidate/china-selected-detail-debug.png",
+        "sha256": "0cadd6cf1714e76be3104ec3d9fdd3f58f5ca767f4cd78e0909e4a47709064db",
+        "byteLength": 546892
+      },
+      {
+        "kind": "browser",
+        "name": "china-detail-cleared",
+        "path": "reports/chn-2020/browser-candidate/china-detail-cleared.png",
+        "sha256": "577e9337c582436393f1640e36bbf9aa9464c5cd5d6b566134dcb91a115e12c5",
+        "byteLength": 310766
+      },
+      {
+        "kind": "browser",
+        "name": "new-china-game",
+        "path": "reports/chn-2020/browser-candidate/new-china-game.png",
+        "sha256": "9087fa27133e9fe3aa22bf81a3cd9e40479e97bb5304e50208593c7df801bf41",
+        "byteLength": 437839
+      },
+      {
+        "kind": "browserPlay",
+        "name": "fresh-chn-game",
+        "path": "reports/chn-2020/browser-play-candidate/fresh-chn-game.png",
+        "sha256": "a4d285a422e504d64f25d8edb0ab0b9d9068a56d1e91644189d7aa64d3a7f584",
+        "byteLength": 201761
+      },
+      {
+        "kind": "browserPlay",
+        "name": "turn-1-gold-front-normal",
+        "path": "reports/chn-2020/browser-play-candidate/turn-1-gold-front-normal.png",
+        "sha256": "ea0c89b2010491b352483866515caf52d7936a14fc3593589d0525742d356ade",
+        "byteLength": 185242
+      },
+      {
+        "kind": "browserPlay",
+        "name": "turn-1-gold-front-debug",
+        "path": "reports/chn-2020/browser-play-candidate/turn-1-gold-front-debug.png",
+        "sha256": "d5144e233f293c93206524374c481f1029b5c4ff03e2384ef6ba065c6ffd49ac",
+        "byteLength": 274166
+      },
+      {
+        "kind": "browserPlay",
+        "name": "turn-2-gold-front-normal",
+        "path": "reports/chn-2020/browser-play-candidate/turn-2-gold-front-normal.png",
+        "sha256": "e5328386ad8877d86272de2594cc573d84574cc9c10a454a31b0d58c3b1a9e5f",
+        "byteLength": 199973
+      },
+      {
+        "kind": "browserPlay",
+        "name": "turn-2-gold-front-debug",
+        "path": "reports/chn-2020/browser-play-candidate/turn-2-gold-front-debug.png",
+        "sha256": "84f0fdd519f463d0a5e158974a2842fccbff390fcb0b5fdb1f92930450ef673e",
+        "byteLength": 277337
+      }
+    ],
+    "visualReview": {
+      "path": "reports/chn-2020/visual-review.json",
+      "sha256": "57ea3fb6a3c77151a292405450165eeab3121590814245410dacf25a255a0809",
+      "byteLength": 2094
+    }
+  },
+  "play": {
+    "baselinePass": false,
+    "baselineLimitations": [
+      {
+        "actor": "PRK",
+        "target": "CHN",
+        "error": "FRONTIER_SCOPE_EMPTY",
+        "interpretation": "Expected predecessor limitation: coarse CHN cannot provide a valid bounded first entry under unchanged caps."
+      }
+    ],
+    "candidatePass": true,
+    "directions": [
+      {
+        "actor": "CHN",
+        "target": "PRK",
+        "pass": true,
+        "first": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 1695.2306113685627,
+            "maximumGraphDepthKm": 7.240346541375061,
+            "maximumForwardDepthKm": 3.950332598381271,
+            "maximumLateralKm": 6.069377158582811,
+            "maximumCellDiameterKm": 89.05975967345964
+          },
+          "frontier": {
+            "kind": "land-border",
+            "cellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+            "supportCellId": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+            "edgeOrdinal": 12154
+          },
+          "ms": 165.39509999999973
+        },
+        "followup": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 1894.9140083993673,
+            "maximumGraphDepthKm": 28.309123700576727,
+            "maximumForwardDepthKm": 24.027447564932704,
+            "maximumLateralKm": 14.966866999087314,
+            "maximumCellDiameterKm": 99.16416247496656
+          },
+          "frontier": {
+            "kind": "current-controller",
+            "cellId": "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f",
+            "supportCellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+            "edgeOrdinal": 22440
+          },
+          "ms": 52.904199999999946
+        },
+        "warmSelectionMs": [
+          2.5333999999998014,
+          2.442399999999907,
+          3.041200000000117,
+          2.544600000000173,
+          2.745300000000043
+        ],
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "ownerControllerSeparated": true,
+        "staleRevisionRejected": true,
+        "staleCatalogRejected": true,
+        "direction": null
+      },
+      {
+        "actor": "PRK",
+        "target": "CHN",
+        "pass": true,
+        "first": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 779.581911574682,
+            "maximumGraphDepthKm": 16.526627741037007,
+            "maximumForwardDepthKm": 11.78194523712654,
+            "maximumLateralKm": 11.59418916764328,
+            "maximumCellDiameterKm": 56.66367877297908
+          },
+          "frontier": {
+            "kind": "land-border",
+            "cellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+            "supportCellId": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+            "edgeOrdinal": 12155
+          },
+          "ms": 9.136600000000271
+        },
+        "followup": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 1734.8470112138746,
+            "maximumGraphDepthKm": 22.162296055693275,
+            "maximumForwardDepthKm": 20.048328134727637,
+            "maximumLateralKm": 9.44531627696193,
+            "maximumCellDiameterKm": 86.89289273526848
+          },
+          "frontier": {
+            "kind": "current-controller",
+            "cellId": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+            "supportCellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+            "edgeOrdinal": 3843
+          },
+          "ms": 138.66600000000017
+        },
+        "warmSelectionMs": [
+          9.066299999999956,
+          8.593400000000202,
+          6.027900000000045,
+          6.1129000000000815,
+          6.811500000000251
+        ],
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "ownerControllerSeparated": true,
+        "staleRevisionRejected": true,
+        "staleCatalogRejected": true,
+        "direction": "north"
+      },
+      {
+        "actor": "KOR",
+        "target": "PRK",
+        "pass": true,
+        "first": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 976.1545415033592,
+            "maximumGraphDepthKm": 26.391207904700302,
+            "maximumForwardDepthKm": 25.56694736341646,
+            "maximumLateralKm": 6.585706200634716,
+            "maximumCellDiameterKm": 64.40831621595648
+          },
+          "frontier": {
+            "kind": "land-border",
+            "cellId": "territory:catalog:d8d84a9ec249d4e748a2715ea5b1e162e3a27683ee059c2fad2f58cc61dc867d",
+            "supportCellId": "territory:catalog:729162b8e6648961fd3f034da3c0a240fb626ce91bc260dec146153de289afb2",
+            "edgeOrdinal": 18622
+          },
+          "ms": 16.910399999999754
+        },
+        "followup": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 954.2926613370805,
+            "maximumGraphDepthKm": 13.738430162200327,
+            "maximumForwardDepthKm": 11.695048000813271,
+            "maximumLateralKm": 7.20047558613219,
+            "maximumCellDiameterKm": 72.67684181166261
+          },
+          "frontier": {
+            "kind": "current-controller",
+            "cellId": "territory:catalog:5e393aaf64d1b2a032f1db00046fc9a2c188077a2c4e6cf0b1540a232c6cb758",
+            "supportCellId": "territory:catalog:d8d84a9ec249d4e748a2715ea5b1e162e3a27683ee059c2fad2f58cc61dc867d",
+            "edgeOrdinal": 22253
+          },
+          "ms": 1.4681000000000495
+        },
+        "warmSelectionMs": [
+          1.7155000000002474,
+          1.4794000000001688,
+          1.497200000000248,
+          1.4067000000000007,
+          1.9722000000001572
+        ],
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "ownerControllerSeparated": true,
+        "staleRevisionRejected": true,
+        "staleCatalogRejected": true,
+        "direction": null
+      },
+      {
+        "actor": "PRK",
+        "target": "KOR",
+        "pass": true,
+        "first": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 1011.520445103096,
+            "maximumGraphDepthKm": 19.610681618294965,
+            "maximumForwardDepthKm": 19.106145809810783,
+            "maximumLateralKm": 4.417701468382638,
+            "maximumCellDiameterKm": 54.820584710868225
+          },
+          "frontier": {
+            "kind": "land-border",
+            "cellId": "territory:catalog:d99eb6693f2d434215efc95d5ee9a2a74c86e5a4e4bce92c22fe88331a4f7940",
+            "supportCellId": "territory:catalog:5444ff78935a4bcfc82db908db9cccdf16781342b94b9153f11c9e44f1924bb6",
+            "edgeOrdinal": 18626
+          },
+          "ms": 1.518500000000131
+        },
+        "followup": {
+          "cellCount": 1,
+          "metrics": {
+            "count": 1,
+            "areaKm2": 1125.6158082020477,
+            "maximumGraphDepthKm": 21.37458485200617,
+            "maximumForwardDepthKm": 18.23040017641597,
+            "maximumLateralKm": 11.14496866444595,
+            "maximumCellDiameterKm": 64.87880857416815
+          },
+          "frontier": {
+            "kind": "current-controller",
+            "cellId": "territory:catalog:9e81fcb0bcb2da0183204d6189ed96fc0a3086c31cf9eef9a2770b63bf8d08b2",
+            "supportCellId": "territory:catalog:d99eb6693f2d434215efc95d5ee9a2a74c86e5a4e4bce92c22fe88331a4f7940",
+            "edgeOrdinal": 18429
+          },
+          "ms": 22.622799999999643
+        },
+        "warmSelectionMs": [
+          1.3912000000000262,
+          10.681300000000192,
+          1.8996999999999389,
+          1.5060999999996056,
+          1.396600000000035
+        ],
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "ownerControllerSeparated": true,
+        "staleRevisionRejected": true,
+        "staleCatalogRejected": true,
+        "direction": null
+      }
+    ],
+    "scriptedProviderTurns": [
+      {
+        "actor": "CHN",
+        "target": "PRK",
+        "direction": null,
+        "actionText": "PRK 접경 인근을 점령한다",
+        "pass": true,
+        "scriptedCalls": 2,
+        "externalAiCalls": 0,
+        "contextMs": 10.64719999999943,
+        "contextBytes": 149435,
+        "providerMs": 20.388500000000022,
+        "planMs": 193.0536000000002,
+        "commitMs": 10.716300000000047,
+        "followupAfterActualCommit": {
+          "ms": 3.35110000000077,
+          "ids": [
+            "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f"
+          ],
+          "metrics": {
+            "count": 1,
+            "areaKm2": 1894.9140083993673,
+            "maximumGraphDepthKm": 28.309123700576727,
+            "maximumForwardDepthKm": 24.027447564932704,
+            "maximumLateralKm": 14.966866999087314,
+            "maximumCellDiameterKm": 99.16416247496656
+          },
+          "frontier": {
+            "kind": "current-controller",
+            "cellId": "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f",
+            "supportCellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+            "edgeOrdinal": 22440
+          },
+          "limits": {
+            "depthKm": 36,
+            "widthKm": 36,
+            "maximumAreaKm2": 2800
+          }
+        },
+        "secondActualTurn": {
+          "pass": true,
+          "actionText": "PRK 기점령지와 연결된 다음 접경을 점령한다",
+          "baseWorldRevision": 1,
+          "committedWorldRevision": 2,
+          "contextMs": 7.774900000000343,
+          "providerMs": 10.930299999999988,
+          "planMs": 43.14040000000023,
+          "commitMs": 5.12119999999959,
+          "scriptedCalls": 2,
+          "changedIds": [
+            "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f"
+          ],
+          "atomicNotifications": 1,
+          "initialAuthorityUnchanged": true,
+          "priorCapturedCellsRetained": true,
+          "toolOutputs": [
+            {
+              "ok": true,
+              "data": {
+                "ok": true,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+                  "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+                  "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+                  "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+                  "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+                },
+                "baseWorldRevision": 1,
+                "actorCountryId": "CHN",
+                "targetCountryId": "PRK",
+                "operation": "occupy",
+                "frontier": {
+                  "kind": "current-controller",
+                  "cellId": "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f",
+                  "supportCellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+                  "edgeOrdinal": 22440
+                },
+                "metrics": {
+                  "count": 1,
+                  "areaKm2": 1894.9140083993673,
+                  "maximumGraphDepthKm": 28.309123700576727,
+                  "maximumForwardDepthKm": 24.027447564932704,
+                  "maximumLateralKm": 14.966866999087314,
+                  "maximumCellDiameterKm": 99.16416247496656
+                },
+                "limits": {
+                  "depthKm": 36,
+                  "widthKm": 36,
+                  "maximumAreaKm2": 2800
+                },
+                "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band.",
+                "effectTarget": {
+                  "territoryIds": {
+                    "detail": "see pinned original proof"
+                  },
+                  "regionRefs": null,
+                  "frontierScope": {
+                    "detail": "see pinned original proof"
+                  }
+                },
+                "usage": "Copy the entire effectTarget unchanged into the matching territorial effect. Do not replace it with regionRefs, a subset, or additional IDs. This selection grants no authority."
+              }
+            }
+          ]
+        },
+        "warmTurnSamples": [
+          {
+            "planMs": 59.422599999999875,
+            "commitMs": 5.294600000000173
+          },
+          {
+            "planMs": 41.28690000000006,
+            "commitMs": 5.576100000000224
+          },
+          {
+            "planMs": 40.35239999999976,
+            "commitMs": 4.912700000000768
+          },
+          {
+            "planMs": 39.58879999999954,
+            "commitMs": 8.708599999999933
+          },
+          {
+            "planMs": 38.312300000000505,
+            "commitMs": 3.897899999999936
+          }
+        ],
+        "changedCells": 1,
+        "authorityCells": 194,
+        "newGrantCap": 512,
+        "atomicNotifications": 1,
+        "undoRedo": true,
+        "staleCommitAtomic": true,
+        "toolOutputs": [
+          {
+            "ok": true,
+            "data": {
+              "ok": true,
+              "catalogRef": {
+                "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+                "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+                "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+                "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+                "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+              },
+              "baseWorldRevision": 0,
+              "actorCountryId": "CHN",
+              "targetCountryId": "PRK",
+              "operation": "occupy",
+              "frontier": {
+                "kind": "land-border",
+                "cellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+                "supportCellId": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+                "edgeOrdinal": 12154
+              },
+              "metrics": {
+                "count": 1,
+                "areaKm2": 1695.2306113685627,
+                "maximumGraphDepthKm": 7.240346541375061,
+                "maximumForwardDepthKm": 3.950332598381271,
+                "maximumLateralKm": 6.069377158582811,
+                "maximumCellDiameterKm": 89.05975967345964
+              },
+              "limits": {
+                "depthKm": 36,
+                "widthKm": 36,
+                "maximumAreaKm2": 2800
+              },
+              "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band.",
+              "effectTarget": {
+                "territoryIds": [
+                  "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29"
+                ],
+                "regionRefs": null,
+                "frontierScope": {
+                  "catalogRef": {
+                    "detail": "see pinned original proof"
+                  },
+                  "baseWorldRevision": 0,
+                  "actorCountryId": "CHN",
+                  "targetCountryId": "PRK",
+                  "operation": "occupy",
+                  "extent": "near",
+                  "direction": null,
+                  "reference": null,
+                  "regionQuery": null,
+                  "cap": 512
+                }
+              },
+              "usage": "Copy the entire effectTarget unchanged into the matching territorial effect. Do not replace it with regionRefs, a subset, or additional IDs. This selection grants no authority."
+            }
+          }
+        ]
+      },
+      {
+        "actor": "PRK",
+        "target": "CHN",
+        "direction": "north",
+        "actionText": "CHN 북부 접경 인근을 점령한다",
+        "pass": true,
+        "scriptedCalls": 2,
+        "externalAiCalls": 0,
+        "contextMs": 6.5065999999997075,
+        "contextBytes": 148161,
+        "providerMs": 24.713200000000143,
+        "planMs": 45.845000000000255,
+        "commitMs": 3.2034999999996217,
+        "followupAfterActualCommit": {
+          "ms": 10.260699999999815,
+          "ids": [
+            "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45"
+          ],
+          "metrics": {
+            "count": 1,
+            "areaKm2": 1734.8470112138746,
+            "maximumGraphDepthKm": 22.162296055693275,
+            "maximumForwardDepthKm": 20.048328134727637,
+            "maximumLateralKm": 9.44531627696193,
+            "maximumCellDiameterKm": 86.89289273526848
+          },
+          "frontier": {
+            "kind": "current-controller",
+            "cellId": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+            "supportCellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+            "edgeOrdinal": 3843
+          },
+          "limits": {
+            "depthKm": 36,
+            "widthKm": 36,
+            "maximumAreaKm2": 2800
+          }
+        },
+        "secondActualTurn": {
+          "pass": true,
+          "actionText": "CHN 북부 기점령지와 연결된 다음 접경을 점령한다",
+          "baseWorldRevision": 1,
+          "committedWorldRevision": 2,
+          "contextMs": 5.9476000000004206,
+          "providerMs": 23.996399999999994,
+          "planMs": 45.65049999999974,
+          "commitMs": 4.4648000000006505,
+          "scriptedCalls": 2,
+          "changedIds": [
+            "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45"
+          ],
+          "atomicNotifications": 1,
+          "initialAuthorityUnchanged": true,
+          "priorCapturedCellsRetained": true,
+          "toolOutputs": [
+            {
+              "ok": true,
+              "data": {
+                "ok": true,
+                "catalogRef": {
+                  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+                  "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+                  "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+                  "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+                  "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+                },
+                "baseWorldRevision": 1,
+                "actorCountryId": "PRK",
+                "targetCountryId": "CHN",
+                "operation": "occupy",
+                "frontier": {
+                  "kind": "current-controller",
+                  "cellId": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+                  "supportCellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+                  "edgeOrdinal": 3843
+                },
+                "metrics": {
+                  "count": 1,
+                  "areaKm2": 1734.8470112138746,
+                  "maximumGraphDepthKm": 22.162296055693275,
+                  "maximumForwardDepthKm": 20.048328134727637,
+                  "maximumLateralKm": 9.44531627696193,
+                  "maximumCellDiameterKm": 86.89289273526848
+                },
+                "limits": {
+                  "depthKm": 36,
+                  "widthKm": 36,
+                  "maximumAreaKm2": 2800
+                },
+                "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band.",
+                "effectTarget": {
+                  "territoryIds": {
+                    "detail": "see pinned original proof"
+                  },
+                  "regionRefs": null,
+                  "frontierScope": {
+                    "detail": "see pinned original proof"
+                  }
+                },
+                "usage": "Copy the entire effectTarget unchanged into the matching territorial effect. Do not replace it with regionRefs, a subset, or additional IDs. This selection grants no authority."
+              }
+            }
+          ]
+        },
+        "warmTurnSamples": [
+          {
+            "planMs": 40.587000000000444,
+            "commitMs": 3.4162999999998647
+          },
+          {
+            "planMs": 34.946500000000015,
+            "commitMs": 5.642699999999422
+          },
+          {
+            "planMs": 35.05500000000029,
+            "commitMs": 3.0770000000002256
+          },
+          {
+            "planMs": 37.81829999999991,
+            "commitMs": 4.5318999999999505
+          },
+          {
+            "planMs": 50.112200000000485,
+            "commitMs": 4.143099999999322
+          }
+        ],
+        "changedCells": 1,
+        "authorityCells": 2,
+        "newGrantCap": 512,
+        "atomicNotifications": 1,
+        "undoRedo": true,
+        "staleCommitAtomic": true,
+        "toolOutputs": [
+          {
+            "ok": true,
+            "data": {
+              "ok": true,
+              "catalogRef": {
+                "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+                "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+                "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+                "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+                "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+              },
+              "baseWorldRevision": 0,
+              "actorCountryId": "PRK",
+              "targetCountryId": "CHN",
+              "operation": "occupy",
+              "frontier": {
+                "kind": "land-border",
+                "cellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+                "supportCellId": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+                "edgeOrdinal": 12155
+              },
+              "metrics": {
+                "count": 1,
+                "areaKm2": 779.581911574682,
+                "maximumGraphDepthKm": 16.526627741037007,
+                "maximumForwardDepthKm": 11.78194523712654,
+                "maximumLateralKm": 11.59418916764328,
+                "maximumCellDiameterKm": 56.66367877297908
+              },
+              "limits": {
+                "depthKm": 36,
+                "widthKm": 36,
+                "maximumAreaKm2": 2800
+              },
+              "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band.",
+              "effectTarget": {
+                "territoryIds": [
+                  "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5"
+                ],
+                "regionRefs": null,
+                "frontierScope": {
+                  "catalogRef": {
+                    "detail": "see pinned original proof"
+                  },
+                  "baseWorldRevision": 0,
+                  "actorCountryId": "PRK",
+                  "targetCountryId": "CHN",
+                  "operation": "occupy",
+                  "extent": "near",
+                  "direction": "north",
+                  "reference": null,
+                  "regionQuery": null,
+                  "cap": 512
+                }
+              },
+              "usage": "Copy the entire effectTarget unchanged into the matching territorial effect. Do not replace it with regionRefs, a subset, or additional IDs. This selection grants no authority."
+            }
+          }
+        ]
+      }
+    ],
+    "browserTurns": [
+      {
+        "condition": "cold-turn",
+        "changedCells": 1,
+        "areaKm2": 1695.2306113685627,
+        "ownershipPreserved": true,
+        "currentControlAdjacency": true,
+        "revisionBefore": 0,
+        "revisionAfter": 1,
+        "goldFront": {
+          "camera": [
+            129.794331761761,
+            42.48927432839155
+          ],
+          "sourceIds": {
+            "count": 6,
+            "sha256": "595966d3edb3ad34397505730080bb6339a04a5c307c38895d54026be35cff2b",
+            "sample": [
+              22033,
+              22134,
+              22218,
+              22252,
+              22351,
+              22440
+            ]
+          },
+          "renderedIds": {
+            "count": 6,
+            "sha256": "595966d3edb3ad34397505730080bb6339a04a5c307c38895d54026be35cff2b",
+            "sample": [
+              22033,
+              22134,
+              22218,
+              22252,
+              22351,
+              22440
+            ]
+          },
+          "layer": {
+            "id": "operational-detail-front",
+            "type": "line",
+            "source": "world-operational-front-detail",
+            "sourceLayer": null,
+            "paint": {
+              "line-color": "#D9A43C",
+              "line-width": 2,
+              "line-dasharray": [
+                3,
+                2
+              ]
+            },
+            "filter": null,
+            "visibility": "visible"
+          }
+        },
+        "committedMs": 1377.4484999999986,
+        "renderedMs": 2111.410299999996,
+        "resources": [
+          {
+            "name": "http://127.0.0.1:3001/api/simulation/game",
+            "transferSize": 186151,
+            "encodedBodySize": 185851,
+            "decodedBodySize": 185851,
+            "duration": 89.19999998807907
+          },
+          {
+            "name": "http://127.0.0.1:3001/api/simulation/turn",
+            "transferSize": 3062,
+            "encodedBodySize": 2762,
+            "decodedBodySize": 2762,
+            "duration": 1004.5999999940395
+          },
+          {
+            "name": "http://127.0.0.1:3001/api/simulation/game",
+            "transferSize": 94704,
+            "encodedBodySize": 94404,
+            "decodedBodySize": 94404,
+            "duration": 13.699999988079071
+          },
+          {
+            "name": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/metadata/countries/PRK.json.gz",
+            "transferSize": 8457,
+            "encodedBodySize": 8157,
+            "decodedBodySize": 8157,
+            "duration": 22.30000001192093
+          },
+          {
+            "name": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/countries/PRK.geojson.gz",
+            "transferSize": 195163,
+            "encodedBodySize": 194863,
+            "decodedBodySize": 194863,
+            "duration": 17.19999998807907
+          },
+          {
+            "name": "http://127.0.0.1:3001/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/detail/topology/010.json.gz",
+            "transferSize": 899562,
+            "encodedBodySize": 899262,
+            "decodedBodySize": 899262,
+            "duration": 16.299999982118607
+          }
+        ],
+        "longTaskTotalMs": 834,
+        "memory": {
+          "usedJSHeapSize": 108359747,
+          "totalJSHeapSize": 177420975,
+          "jsHeapSizeLimit": 4395630592
+        },
+        "updateStats": {
+          "fullProjectionBuilds": 1,
+          "updates": 1,
+          "cellsUpdated": 14373,
+          "edgesExamined": 8,
+          "exactCellsAdded": 1,
+          "exactFrontsAdded": 6,
+          "exactFrontsRemoved": 0,
+          "exactCells": 1,
+          "exactFronts": 6,
+          "resyncRequired": false
+        }
+      },
+      {
+        "condition": "warm-followup-turn",
+        "changedCells": 1,
+        "areaKm2": 1894.9140083993673,
+        "ownershipPreserved": true,
+        "currentControlAdjacency": true,
+        "revisionBefore": 1,
+        "revisionAfter": 2,
+        "goldFront": {
+          "camera": [
+            129.820319931208,
+            42.012955324904844
+          ],
+          "sourceIds": {
+            "count": 10,
+            "sha256": "4335768039430dde955053e015547a521b036195edf36dfa284a47e731abc27c",
+            "sample": [
+              22033,
+              22081,
+              22134,
+              22138,
+              22218,
+              22252,
+              22265,
+              22299,
+              22351,
+              22452
+            ]
+          },
+          "renderedIds": {
+            "count": 10,
+            "sha256": "4335768039430dde955053e015547a521b036195edf36dfa284a47e731abc27c",
+            "sample": [
+              22033,
+              22081,
+              22134,
+              22138,
+              22218,
+              22252,
+              22265,
+              22299,
+              22351,
+              22452
+            ]
+          },
+          "layer": {
+            "id": "operational-detail-front",
+            "type": "line",
+            "source": "world-operational-front-detail",
+            "sourceLayer": null,
+            "paint": {
+              "line-color": "#D9A43C",
+              "line-width": 2,
+              "line-dasharray": [
+                3,
+                2
+              ]
+            },
+            "filter": null,
+            "visibility": "visible"
+          }
+        },
+        "committedMs": 745.0675999999949,
+        "renderedMs": 945.969299999997,
+        "resources": [
+          {
+            "name": "http://127.0.0.1:3001/api/simulation/game",
+            "transferSize": 186544,
+            "encodedBodySize": 186244,
+            "decodedBodySize": 186244,
+            "duration": 88.5
+          },
+          {
+            "name": "http://127.0.0.1:3001/api/simulation/turn",
+            "transferSize": 3062,
+            "encodedBodySize": 2762,
+            "decodedBodySize": 2762,
+            "duration": 185.30000001192093
+          },
+          {
+            "name": "http://127.0.0.1:3001/api/simulation/game",
+            "transferSize": 95373,
+            "encodedBodySize": 95073,
+            "decodedBodySize": 95073,
+            "duration": 16.900000005960464
+          }
+        ],
+        "longTaskTotalMs": 545,
+        "memory": {
+          "usedJSHeapSize": 134721692,
+          "totalJSHeapSize": 202834740,
+          "jsHeapSizeLimit": 4395630592
+        },
+        "updateStats": {
+          "fullProjectionBuilds": 1,
+          "updates": 2,
+          "cellsUpdated": 14374,
+          "edgesExamined": 15,
+          "exactCellsAdded": 2,
+          "exactFrontsAdded": 11,
+          "exactFrontsRemoved": 1,
+          "exactCells": 2,
+          "exactFronts": 10,
+          "resyncRequired": false
+        }
+      }
+    ],
+    "newGame": {
+      "pass": true,
+      "path": "/game",
+      "selectedCountryName": "중화인민공화국",
+      "startButtonName": "중화인민공화국을(를) 플레이 국가로 선택",
+      "state": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "revision": 0,
+        "simulationRevision": 0,
+        "counts": {
+          "countries": 247,
+          "cells": 8005,
+          "edges": 26273
+        },
+        "controlCounts": {
+          "ABW": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "AFG": {
+            "owned": 34,
+            "controlled": 34,
+            "occupied": 0
+          },
+          "AGO": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "AIA": {
+            "owned": 15,
+            "controlled": 15,
+            "occupied": 0
+          },
+          "ALB": {
+            "owned": 12,
+            "controlled": 12,
+            "occupied": 0
+          },
+          "ALD": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "AND": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "ARE": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "ARG": {
+            "owned": 24,
+            "controlled": 24,
+            "occupied": 0
+          },
+          "ARM": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "ASM": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "ATA": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "ATC": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "ATF": {
+            "owned": 4,
+            "controlled": 4,
+            "occupied": 0
+          },
+          "ATG": {
+            "owned": 8,
+            "controlled": 8,
+            "occupied": 0
+          },
+          "AUS": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "AUT": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "AZE": {
+            "owned": 78,
+            "controlled": 78,
+            "occupied": 0
+          },
+          "BDI": {
+            "owned": 17,
+            "controlled": 17,
+            "occupied": 0
+          },
+          "BEL": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "BEN": {
+            "owned": 12,
+            "controlled": 12,
+            "occupied": 0
+          },
+          "BFA": {
+            "owned": 45,
+            "controlled": 45,
+            "occupied": 0
+          },
+          "BGD": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "BGR": {
+            "owned": 28,
+            "controlled": 28,
+            "occupied": 0
+          },
+          "BHR": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "BHS": {
+            "owned": 30,
+            "controlled": 30,
+            "occupied": 0
+          },
+          "BIH": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "BLM": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "BLR": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "BLZ": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "BMU": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "BOL": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "BRA": {
+            "owned": 27,
+            "controlled": 27,
+            "occupied": 0
+          },
+          "BRB": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "BRN": {
+            "owned": 4,
+            "controlled": 4,
+            "occupied": 0
+          },
+          "BTN": {
+            "owned": 20,
+            "controlled": 20,
+            "occupied": 0
+          },
+          "BWA": {
+            "owned": 15,
+            "controlled": 15,
+            "occupied": 0
+          },
+          "CAF": {
+            "owned": 17,
+            "controlled": 17,
+            "occupied": 0
+          },
+          "CAN": {
+            "owned": 13,
+            "controlled": 13,
+            "occupied": 0
+          },
+          "CHE": {
+            "owned": 26,
+            "controlled": 26,
+            "occupied": 0
+          },
+          "CHL": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "CHN": {
+            "owned": 3320,
+            "controlled": 3320,
+            "occupied": 0
+          },
+          "CIV": {
+            "owned": 19,
+            "controlled": 19,
+            "occupied": 0
+          },
+          "CLP": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "CMR": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "CNM": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "COD": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "COG": {
+            "owned": 12,
+            "controlled": 12,
+            "occupied": 0
+          },
+          "COK": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "COL": {
+            "owned": 34,
+            "controlled": 34,
+            "occupied": 0
+          },
+          "COM": {
+            "owned": 3,
+            "controlled": 3,
+            "occupied": 0
+          },
+          "CPV": {
+            "owned": 22,
+            "controlled": 22,
+            "occupied": 0
+          },
+          "CRI": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "CSI": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "CUB": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "CUW": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "CYM": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "CYN": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "CYP": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "CZE": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "DEU": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "DJI": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "DMA": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "DNK": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "DOM": {
+            "owned": 32,
+            "controlled": 32,
+            "occupied": 0
+          },
+          "DZA": {
+            "owned": 48,
+            "controlled": 48,
+            "occupied": 0
+          },
+          "ECU": {
+            "owned": 24,
+            "controlled": 24,
+            "occupied": 0
+          },
+          "EGY": {
+            "owned": 27,
+            "controlled": 27,
+            "occupied": 0
+          },
+          "ERI": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "ESH": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "ESP": {
+            "owned": 57,
+            "controlled": 57,
+            "occupied": 0
+          },
+          "EST": {
+            "owned": 15,
+            "controlled": 15,
+            "occupied": 0
+          },
+          "ETH": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "FIN": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "FJI": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "FLK": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "FRA": {
+            "owned": 101,
+            "controlled": 101,
+            "occupied": 0
+          },
+          "FRO": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "FSM": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "GAB": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "GBR": {
+            "owned": 234,
+            "controlled": 234,
+            "occupied": 0
+          },
+          "GEO": {
+            "owned": 12,
+            "controlled": 12,
+            "occupied": 0
+          },
+          "GGY": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "GHA": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "GIB": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "GIN": {
+            "owned": 34,
+            "controlled": 34,
+            "occupied": 0
+          },
+          "GMB": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "GNB": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "GNQ": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "GRC": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "GRD": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "GRL": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "GTM": {
+            "owned": 22,
+            "controlled": 22,
+            "occupied": 0
+          },
+          "GUM": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "GUY": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "HKG": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "HMD": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "HND": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "HRV": {
+            "owned": 21,
+            "controlled": 21,
+            "occupied": 0
+          },
+          "HTI": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "HUN": {
+            "owned": 43,
+            "controlled": 43,
+            "occupied": 0
+          },
+          "IDN": {
+            "owned": 33,
+            "controlled": 33,
+            "occupied": 0
+          },
+          "IMN": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "IND": {
+            "owned": 37,
+            "controlled": 37,
+            "occupied": 0
+          },
+          "IOA": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "IOT": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "IRL": {
+            "owned": 34,
+            "controlled": 34,
+            "occupied": 0
+          },
+          "IRN": {
+            "owned": 31,
+            "controlled": 31,
+            "occupied": 0
+          },
+          "IRQ": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "ISL": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "ISR": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "ITA": {
+            "owned": 110,
+            "controlled": 110,
+            "occupied": 0
+          },
+          "JAM": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "JEY": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "JOR": {
+            "owned": 12,
+            "controlled": 12,
+            "occupied": 0
+          },
+          "JPN": {
+            "owned": 47,
+            "controlled": 47,
+            "occupied": 0
+          },
+          "KAZ": {
+            "owned": 17,
+            "controlled": 17,
+            "occupied": 0
+          },
+          "KEN": {
+            "owned": 8,
+            "controlled": 8,
+            "occupied": 0
+          },
+          "KGZ": {
+            "owned": 8,
+            "controlled": 8,
+            "occupied": 0
+          },
+          "KHM": {
+            "owned": 24,
+            "controlled": 24,
+            "occupied": 0
+          },
+          "KIR": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "KNA": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "KOR": {
+            "owned": 322,
+            "controlled": 322,
+            "occupied": 0
+          },
+          "KWT": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "LAO": {
+            "owned": 17,
+            "controlled": 17,
+            "occupied": 0
+          },
+          "LBN": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "LBR": {
+            "owned": 15,
+            "controlled": 15,
+            "occupied": 0
+          },
+          "LBY": {
+            "owned": 22,
+            "controlled": 22,
+            "occupied": 0
+          },
+          "LCA": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "LIE": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "LKA": {
+            "owned": 25,
+            "controlled": 25,
+            "occupied": 0
+          },
+          "LSO": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "LTU": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "LUX": {
+            "owned": 3,
+            "controlled": 3,
+            "occupied": 0
+          },
+          "LVA": {
+            "owned": 119,
+            "controlled": 119,
+            "occupied": 0
+          },
+          "MAC": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "MAF": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "MAR": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "MCO": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "MDA": {
+            "owned": 40,
+            "controlled": 40,
+            "occupied": 0
+          },
+          "MDG": {
+            "owned": 22,
+            "controlled": 22,
+            "occupied": 0
+          },
+          "MDV": {
+            "owned": 21,
+            "controlled": 21,
+            "occupied": 0
+          },
+          "MEX": {
+            "owned": 33,
+            "controlled": 33,
+            "occupied": 0
+          },
+          "MHL": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "MKD": {
+            "owned": 84,
+            "controlled": 84,
+            "occupied": 0
+          },
+          "MLI": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "MLT": {
+            "owned": 68,
+            "controlled": 68,
+            "occupied": 0
+          },
+          "MMR": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "MNE": {
+            "owned": 21,
+            "controlled": 21,
+            "occupied": 0
+          },
+          "MNG": {
+            "owned": 22,
+            "controlled": 22,
+            "occupied": 0
+          },
+          "MNP": {
+            "owned": 4,
+            "controlled": 4,
+            "occupied": 0
+          },
+          "MOZ": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "MRT": {
+            "owned": 13,
+            "controlled": 13,
+            "occupied": 0
+          },
+          "MSR": {
+            "owned": 3,
+            "controlled": 3,
+            "occupied": 0
+          },
+          "MUS": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "MWI": {
+            "owned": 28,
+            "controlled": 28,
+            "occupied": 0
+          },
+          "MYS": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "NAM": {
+            "owned": 13,
+            "controlled": 13,
+            "occupied": 0
+          },
+          "NCL": {
+            "owned": 4,
+            "controlled": 4,
+            "occupied": 0
+          },
+          "NER": {
+            "owned": 8,
+            "controlled": 8,
+            "occupied": 0
+          },
+          "NFK": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "NGA": {
+            "owned": 37,
+            "controlled": 37,
+            "occupied": 0
+          },
+          "NIC": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "NIU": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "NLD": {
+            "owned": 15,
+            "controlled": 15,
+            "occupied": 0
+          },
+          "NOR": {
+            "owned": 21,
+            "controlled": 21,
+            "occupied": 0
+          },
+          "NPL": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "NRU": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "NZL": {
+            "owned": 24,
+            "controlled": 24,
+            "occupied": 0
+          },
+          "OMN": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "PAK": {
+            "owned": 8,
+            "controlled": 8,
+            "occupied": 0
+          },
+          "PAN": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "PCN": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "PER": {
+            "owned": 26,
+            "controlled": 26,
+            "occupied": 0
+          },
+          "PGA": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "PHL": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "PLW": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "PNG": {
+            "owned": 20,
+            "controlled": 20,
+            "occupied": 0
+          },
+          "POL": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "PRI": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "PRK": {
+            "owned": 194,
+            "controlled": 194,
+            "occupied": 0
+          },
+          "PRT": {
+            "owned": 20,
+            "controlled": 20,
+            "occupied": 0
+          },
+          "PRY": {
+            "owned": 18,
+            "controlled": 18,
+            "occupied": 0
+          },
+          "PSX": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "PYF": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "QAT": {
+            "owned": 7,
+            "controlled": 7,
+            "occupied": 0
+          },
+          "ROU": {
+            "owned": 42,
+            "controlled": 42,
+            "occupied": 0
+          },
+          "RUS": {
+            "owned": 86,
+            "controlled": 86,
+            "occupied": 0
+          },
+          "RWA": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "SAU": {
+            "owned": 13,
+            "controlled": 13,
+            "occupied": 0
+          },
+          "SDN": {
+            "owned": 17,
+            "controlled": 17,
+            "occupied": 0
+          },
+          "SDS": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "SEN": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "SGP": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "SGS": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "SHN": {
+            "owned": 3,
+            "controlled": 3,
+            "occupied": 0
+          },
+          "SLB": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "SLE": {
+            "owned": 4,
+            "controlled": 4,
+            "occupied": 0
+          },
+          "SLV": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "SMR": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "SOL": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "SOM": {
+            "owned": 13,
+            "controlled": 13,
+            "occupied": 0
+          },
+          "SPM": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "SRB": {
+            "owned": 25,
+            "controlled": 25,
+            "occupied": 0
+          },
+          "STP": {
+            "owned": 2,
+            "controlled": 2,
+            "occupied": 0
+          },
+          "SUR": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "SVK": {
+            "owned": 8,
+            "controlled": 8,
+            "occupied": 0
+          },
+          "SVN": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "SWE": {
+            "owned": 21,
+            "controlled": 21,
+            "occupied": 0
+          },
+          "SWZ": {
+            "owned": 4,
+            "controlled": 4,
+            "occupied": 0
+          },
+          "SXM": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "SYC": {
+            "owned": 26,
+            "controlled": 26,
+            "occupied": 0
+          },
+          "SYR": {
+            "owned": 15,
+            "controlled": 15,
+            "occupied": 0
+          },
+          "TCA": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "TCD": {
+            "owned": 22,
+            "controlled": 22,
+            "occupied": 0
+          },
+          "TGO": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "THA": {
+            "owned": 77,
+            "controlled": 77,
+            "occupied": 0
+          },
+          "TJK": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "TKM": {
+            "owned": 5,
+            "controlled": 5,
+            "occupied": 0
+          },
+          "TLS": {
+            "owned": 13,
+            "controlled": 13,
+            "occupied": 0
+          },
+          "TON": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "TTO": {
+            "owned": 16,
+            "controlled": 16,
+            "occupied": 0
+          },
+          "TUN": {
+            "owned": 23,
+            "controlled": 23,
+            "occupied": 0
+          },
+          "TUR": {
+            "owned": 81,
+            "controlled": 81,
+            "occupied": 0
+          },
+          "TUV": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "TWN": {
+            "owned": 21,
+            "controlled": 21,
+            "occupied": 0
+          },
+          "TZA": {
+            "owned": 30,
+            "controlled": 30,
+            "occupied": 0
+          },
+          "UGA": {
+            "owned": 112,
+            "controlled": 112,
+            "occupied": 0
+          },
+          "UKR": {
+            "owned": 25,
+            "controlled": 25,
+            "occupied": 0
+          },
+          "UMI": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "URY": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "USA": {
+            "owned": 52,
+            "controlled": 52,
+            "occupied": 0
+          },
+          "UZB": {
+            "owned": 14,
+            "controlled": 14,
+            "occupied": 0
+          },
+          "VAT": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "VCT": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "VEN": {
+            "owned": 26,
+            "controlled": 26,
+            "occupied": 0
+          },
+          "VGB": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "VIR": {
+            "owned": 3,
+            "controlled": 3,
+            "occupied": 0
+          },
+          "VNM": {
+            "owned": 63,
+            "controlled": 63,
+            "occupied": 0
+          },
+          "VUT": {
+            "owned": 6,
+            "controlled": 6,
+            "occupied": 0
+          },
+          "WLF": {
+            "owned": 1,
+            "controlled": 1,
+            "occupied": 0
+          },
+          "WSM": {
+            "owned": 11,
+            "controlled": 11,
+            "occupied": 0
+          },
+          "XKX": {
+            "owned": 30,
+            "controlled": 30,
+            "occupied": 0
+          },
+          "YEM": {
+            "owned": 21,
+            "controlled": 21,
+            "occupied": 0
+          },
+          "ZAF": {
+            "owned": 9,
+            "controlled": 9,
+            "occupied": 0
+          },
+          "ZMB": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          },
+          "ZWE": {
+            "owned": 10,
+            "controlled": 10,
+            "occupied": 0
+          }
+        },
+        "selectedCountryId": "CHN",
+        "debugBoundaries": false,
+        "baseStatus": "ready",
+        "worldStatus": "ready",
+        "detailStatus": "ready",
+        "appliedRevision": 0
+      },
+      "updateStats": {
+        "fullProjectionBuilds": 1,
+        "updates": 0,
+        "cellsUpdated": 14409,
+        "edgesExamined": 0,
+        "exactCellsAdded": 0,
+        "exactFrontsAdded": 0,
+        "exactFrontsRemoved": 0,
+        "exactCells": 0,
+        "exactFronts": 0,
+        "resyncRequired": false
+      },
+      "date": "2020-01-01"
+    },
+    "externalAiCalls": 0
+  },
+  "performance": {
+    "baselineServer": {
+      "conditions": {
+        "mode": "Vitest Node production runtime; fresh process module caches for cold, same process immutable metadata cache for warm",
+        "osPageCache": "not flushed",
+        "player": "CHN/PRK",
+        "scenario": "2020-01-01 to 2020-01-02",
+        "viewport": null,
+        "browserMeasurement": "separate root-owned browser evidence",
+        "externalAiCalls": 0
+      },
+      "initialization": {
+        "catalogColdMs": 25.571399999999812,
+        "chnMetadataColdMs": 1.0419999999999163,
+        "chnMetadataWarmMs": 0.013099999999667489,
+        "newGameColdMs": 1987.3424,
+        "newGameWarmMs": [
+          0.1184000000002925,
+          0.09719999999924767,
+          0.12480000000050495,
+          0.09829999999965366,
+          0.1587999999992462
+        ],
+        "regionsColdMs": 74.55400000000009
+      },
+      "bytes": {
+        "artifactIndex": 748935,
+        "metadata": 627368,
+        "detail": 18639541,
+        "tiles": 11376430,
+        "overviewZ0": 399916,
+        "overviewZ2": 893389,
+        "total": 44500200,
+        "adjacencyDecoded": 130809
+      },
+      "memory": {
+        "before": {
+          "rss": 84332544,
+          "heapTotal": 55631872,
+          "heapUsed": 27682608,
+          "external": 3348445,
+          "arrayBuffers": 751992
+        },
+        "afterInitialization": {
+          "rss": 353615872,
+          "heapTotal": 189628416,
+          "heapUsed": 65631056,
+          "external": 115733955,
+          "arrayBuffers": 80859885
+        },
+        "afterTurns": {
+          "rss": 452743168,
+          "heapTotal": 281649152,
+          "heapUsed": 201823840,
+          "external": 115737001,
+          "arrayBuffers": 91765866
+        }
+      },
+      "turns": [
+        {
+          "actor": "CHN",
+          "target": "PRK",
+          "contextMs": 11.014599999999518,
+          "providerMs": 31.449800000000323,
+          "planMs": 148.96249999999964,
+          "commitMs": 5.153800000000047,
+          "warmTurnSamples": [
+            {
+              "planMs": 27.19589999999971,
+              "commitMs": 5.423899999999776
+            },
+            {
+              "planMs": 31.98820000000069,
+              "commitMs": 3.46979999999985
+            },
+            {
+              "planMs": 26.944500000000517,
+              "commitMs": 3.8383999999996377
+            },
+            {
+              "planMs": 26.312300000000505,
+              "commitMs": 3.5742999999993117
+            },
+            {
+              "planMs": 26.593300000000454,
+              "commitMs": 5.052400000000489
+            }
+          ]
+        }
+      ]
+    },
+    "candidateServer": {
+      "conditions": {
+        "mode": "Vitest Node production runtime; fresh process module caches for cold, same process immutable metadata cache for warm",
+        "osPageCache": "not flushed",
+        "player": "CHN/PRK",
+        "scenario": "2020-01-01 to 2020-01-02",
+        "requests": {
+          "CHNtoPRK": {
+            "extent": "near",
+            "direction": null
+          },
+          "PRKtoCHN": {
+            "extent": "near",
+            "direction": "north"
+          }
+        },
+        "viewport": null,
+        "browserMeasurement": "separate root-owned browser evidence",
+        "externalAiCalls": 0
+      },
+      "initialization": {
+        "catalogColdMs": 21.5945999999999,
+        "chnMetadataColdMs": 9.580600000000004,
+        "chnMetadataWarmMs": 0.024800000000141154,
+        "newGameColdMs": 1807.891,
+        "newGameWarmMs": [
+          0.16420000000016444,
+          0.1613999999999578,
+          0.10649999999986903,
+          0.08530000000018845,
+          0.13740000000007058
+        ],
+        "regionsColdMs": 81.03510000000006
+      },
+      "bytes": {
+        "artifactIndex": 757545,
+        "metadata": 785199,
+        "detail": 79108724,
+        "tiles": 19978712,
+        "overviewZ0": 831486,
+        "overviewZ2": 1686174,
+        "total": 108943102,
+        "adjacencyDecoded": 235905
+      },
+      "memory": {
+        "before": {
+          "rss": 84152320,
+          "heapTotal": 55418880,
+          "heapUsed": 27834152,
+          "external": 3348445,
+          "arrayBuffers": 751992
+        },
+        "afterInitialization": {
+          "rss": 350720000,
+          "heapTotal": 191631360,
+          "heapUsed": 63779928,
+          "external": 122829631,
+          "arrayBuffers": 74201952
+        },
+        "afterTurns": {
+          "rss": 466206720,
+          "heapTotal": 284946432,
+          "heapUsed": 178579336,
+          "external": 122546270,
+          "arrayBuffers": 96092384
+        }
+      },
+      "turns": [
+        {
+          "actor": "CHN",
+          "target": "PRK",
+          "contextMs": 10.64719999999943,
+          "providerMs": 20.388500000000022,
+          "planMs": 193.0536000000002,
+          "commitMs": 10.716300000000047,
+          "warmTurnSamples": [
+            {
+              "planMs": 59.422599999999875,
+              "commitMs": 5.294600000000173
+            },
+            {
+              "planMs": 41.28690000000006,
+              "commitMs": 5.576100000000224
+            },
+            {
+              "planMs": 40.35239999999976,
+              "commitMs": 4.912700000000768
+            },
+            {
+              "planMs": 39.58879999999954,
+              "commitMs": 8.708599999999933
+            },
+            {
+              "planMs": 38.312300000000505,
+              "commitMs": 3.897899999999936
+            }
+          ]
+        },
+        {
+          "actor": "PRK",
+          "target": "CHN",
+          "contextMs": 6.5065999999997075,
+          "providerMs": 24.713200000000143,
+          "planMs": 45.845000000000255,
+          "commitMs": 3.2034999999996217,
+          "warmTurnSamples": [
+            {
+              "planMs": 40.587000000000444,
+              "commitMs": 3.4162999999998647
+            },
+            {
+              "planMs": 34.946500000000015,
+              "commitMs": 5.642699999999422
+            },
+            {
+              "planMs": 35.05500000000029,
+              "commitMs": 3.0770000000002256
+            },
+            {
+              "planMs": 37.81829999999991,
+              "commitMs": 4.5318999999999505
+            },
+            {
+              "planMs": 50.112200000000485,
+              "commitMs": 4.143099999999322
+            }
+          ]
+        }
+      ]
+    },
+    "baselineBrowser": {
+      "conditions": {
+        "baseURL": "http://127.0.0.1:3000",
+        "mode": "Next development server; actual Chromium WebGL",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "deviceScaleFactor": 1,
+        "cold": "new browser context with empty browser cache; server and OS caches are not flushed",
+        "warm": "reload in the same context before any interception; normal HTTP cache remains enabled",
+        "reducedMotion": "reduce",
+        "externalAiCalls": 0
+      },
+      "loads": [
+        {
+          "condition": "cold",
+          "mapReadyFromNavigationMs": 2456.9000000059605,
+          "wallMs": 2477.722,
+          "resourceCategories": {
+            "applicationAndOther": {
+              "requests": 21,
+              "transferBytes": 4028185,
+              "encodedBodyBytes": 4021885,
+              "decodedBodyBytes": 9622156,
+              "zeroTransferRequests": 0
+            },
+            "indexAndMetadata": {
+              "requests": 8,
+              "transferBytes": 1303439,
+              "encodedBodyBytes": 1301039,
+              "decodedBodyBytes": 2144532,
+              "zeroTransferRequests": 0
+            },
+            "overviewTiles": {
+              "requests": 6,
+              "transferBytes": 623989,
+              "encodedBodyBytes": 839921,
+              "decodedBodyBytes": 839921,
+              "zeroTransferRequests": 2
+            }
+          },
+          "longTaskCount": 11,
+          "longTaskTotalMs": 1226,
+          "maximumLongTaskMs": 224,
+          "memory": {
+            "usedJSHeapSize": 83498816,
+            "totalJSHeapSize": 146273868,
+            "jsHeapSizeLimit": 4395630592
+          },
+          "stateCounts": {
+            "countries": 247,
+            "cells": 4718,
+            "edges": 17238
+          },
+          "updateStats": {
+            "fullProjectionBuilds": 1,
+            "updates": 0,
+            "cellsUpdated": 4443,
+            "edgesExamined": 0,
+            "exactCellsAdded": 0,
+            "exactFrontsAdded": 0,
+            "exactFrontsRemoved": 0,
+            "exactCells": 0,
+            "exactFronts": 0,
+            "resyncRequired": false
+          }
+        },
+        {
+          "condition": "warm",
+          "mapReadyFromNavigationMs": 2214.5,
+          "wallMs": 2236.9574000000002,
+          "resourceCategories": {
+            "applicationAndOther": {
+              "requests": 21,
+              "transferBytes": 2925143,
+              "encodedBodyBytes": 4021885,
+              "decodedBodyBytes": 9622156,
+              "zeroTransferRequests": 0
+            },
+            "indexAndMetadata": {
+              "requests": 8,
+              "transferBytes": 222098,
+              "encodedBodyBytes": 1301039,
+              "decodedBodyBytes": 2144532,
+              "zeroTransferRequests": 4
+            },
+            "overviewTiles": {
+              "requests": 6,
+              "transferBytes": 0,
+              "encodedBodyBytes": 839921,
+              "decodedBodyBytes": 839921,
+              "zeroTransferRequests": 6
+            }
+          },
+          "longTaskCount": 10,
+          "longTaskTotalMs": 1080,
+          "maximumLongTaskMs": 202,
+          "memory": {
+            "usedJSHeapSize": 97991209,
+            "totalJSHeapSize": 167746905,
+            "jsHeapSizeLimit": 4395630592
+          },
+          "stateCounts": {
+            "countries": 247,
+            "cells": 4718,
+            "edges": 17238
+          },
+          "updateStats": {
+            "fullProjectionBuilds": 1,
+            "updates": 0,
+            "cellsUpdated": 4443,
+            "edgesExamined": 0,
+            "exactCellsAdded": 0,
+            "exactFrontsAdded": 0,
+            "exactFrontsRemoved": 0,
+            "exactCells": 0,
+            "exactFronts": 0,
+            "resyncRequired": false
+          }
+        }
+      ],
+      "materialWarnings": 0,
+      "readbackPerformanceWarnings": 4
+    },
+    "candidateBrowser": {
+      "conditions": {
+        "baseURL": "http://127.0.0.1:3002",
+        "mode": "Next development server; actual Chromium WebGL",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "deviceScaleFactor": 1,
+        "cold": "new browser context with empty browser cache; server and OS caches are not flushed",
+        "warm": "reload in the same context before any interception; normal HTTP cache remains enabled",
+        "reducedMotion": "reduce",
+        "externalAiCalls": 0
+      },
+      "loads": [
+        {
+          "condition": "cold",
+          "mapReadyFromNavigationMs": 2807.5999999940395,
+          "wallMs": 2824.439,
+          "resourceCategories": {
+            "applicationAndOther": {
+              "requests": 21,
+              "transferBytes": 4071497,
+              "encodedBodyBytes": 4065197,
+              "decodedBodyBytes": 9669732,
+              "zeroTransferRequests": 0
+            },
+            "indexAndMetadata": {
+              "requests": 8,
+              "transferBytes": 1478712,
+              "encodedBodyBytes": 1476312,
+              "decodedBodyBytes": 2480339,
+              "zeroTransferRequests": 0
+            },
+            "overviewTiles": {
+              "requests": 6,
+              "transferBytes": 1203047,
+              "encodedBodyBytes": 1414756,
+              "decodedBodyBytes": 1414756,
+              "zeroTransferRequests": 2
+            }
+          },
+          "longTaskCount": 11,
+          "longTaskTotalMs": 1261,
+          "maximumLongTaskMs": 212,
+          "memory": {
+            "usedJSHeapSize": 148942754,
+            "totalJSHeapSize": 192663458,
+            "jsHeapSizeLimit": 4395630592
+          },
+          "stateCounts": {
+            "countries": 247,
+            "cells": 8005,
+            "edges": 26273
+          },
+          "updateStats": {
+            "fullProjectionBuilds": 1,
+            "updates": 0,
+            "cellsUpdated": 7732,
+            "edgesExamined": 0,
+            "exactCellsAdded": 0,
+            "exactFrontsAdded": 0,
+            "exactFrontsRemoved": 0,
+            "exactCells": 0,
+            "exactFronts": 0,
+            "resyncRequired": false
+          }
+        },
+        {
+          "condition": "warm",
+          "mapReadyFromNavigationMs": 2381.199999988079,
+          "wallMs": 2400.1321,
+          "resourceCategories": {
+            "applicationAndOther": {
+              "requests": 21,
+              "transferBytes": 2967804,
+              "encodedBodyBytes": 4065197,
+              "decodedBodyBytes": 9669732,
+              "zeroTransferRequests": 0
+            },
+            "indexAndMetadata": {
+              "requests": 8,
+              "transferBytes": 344825,
+              "encodedBodyBytes": 1476312,
+              "decodedBodyBytes": 2480339,
+              "zeroTransferRequests": 4
+            },
+            "overviewTiles": {
+              "requests": 6,
+              "transferBytes": 0,
+              "encodedBodyBytes": 1414756,
+              "decodedBodyBytes": 1414756,
+              "zeroTransferRequests": 6
+            }
+          },
+          "longTaskCount": 10,
+          "longTaskTotalMs": 1103,
+          "maximumLongTaskMs": 188,
+          "memory": {
+            "usedJSHeapSize": 137963672,
+            "totalJSHeapSize": 210408536,
+            "jsHeapSizeLimit": 4395630592
+          },
+          "stateCounts": {
+            "countries": 247,
+            "cells": 8005,
+            "edges": 26273
+          },
+          "updateStats": {
+            "fullProjectionBuilds": 1,
+            "updates": 0,
+            "cellsUpdated": 7732,
+            "edgesExamined": 0,
+            "exactCellsAdded": 0,
+            "exactFrontsAdded": 0,
+            "exactFrontsRemoved": 0,
+            "exactCells": 0,
+            "exactFronts": 0,
+            "resyncRequired": false
+          }
+        }
+      ],
+      "materialWarnings": 0,
+      "readbackPerformanceWarnings": 4
+    },
+    "actualCellTransport": {
+      "conditions": {
+        "mode": "actual immutable package through production vector loader and checked local-file fetch adapter",
+        "cold": "fresh vector delivery byte cache; metadata initialized; OS file cache not flushed",
+        "warm": "five repeated same-cell detail loads from the bounded decoded-byte LRU",
+        "full": "separate fresh vector delivery; explicit whole CHN selection measured separately",
+        "timingScope": "includes byte verification/read, gzip decode, JSON/schema validation and returned geometry; local read time reported within each request",
+        "externalAiCalls": 0
+      },
+      "cell": {
+        "id": "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e",
+        "ordinal": 7784,
+        "sourceCountryId": "CHN",
+        "shard": {
+          "countryId": "CHN",
+          "cellOrdinals": [
+            525,
+            555,
+            728,
+            913,
+            1220,
+            1250,
+            1384,
+            1536,
+            1700,
+            2048,
+            2158,
+            2176,
+            2235,
+            2284,
+            2295,
+            2400,
+            2710,
+            2714,
+            2794,
+            2835,
+            2877,
+            3036,
+            3058,
+            3104,
+            3246,
+            3427,
+            3463,
+            3584,
+            3621,
+            3643,
+            3791,
+            4057,
+            4063,
+            4186,
+            4219,
+            4222,
+            4276,
+            4303,
+            4409,
+            4548,
+            5035,
+            5051,
+            5108,
+            5499,
+            5704,
+            5754,
+            5845,
+            5871,
+            6183,
+            6189,
+            6267,
+            6421,
+            6465,
+            7108,
+            7198,
+            7264,
+            7349,
+            7578,
+            7734,
+            7784,
+            7795,
+            7796,
+            7823,
+            7909
+          ],
+          "bbox": [
+            121.13845830041032,
+            39.768785,
+            129.69497409997484,
+            45.26516340027075
+          ],
+          "artifact": {
+            "path": "detail/cells/CHN/0050.geojson.gz",
+            "sha256": "6e35c8719bd174095956f3d9c4634d502ec351dc5f402b99b7699948fe35e039",
+            "byteLength": 386688
+          }
+        }
+      },
+      "changedCell": {
+        "coldMs": 31.734199999999987,
+        "warmMs": [
+          13.90790000000004,
+          15.63519999999994,
+          12.856499999999983,
+          12.69240000000002,
+          13.668800000000033
+        ],
+        "coldRequests": [
+          {
+            "path": "detail/cells/CHN/0050.geojson.gz",
+            "bytes": 386688,
+            "readMs": 1.0974999999999682
+          }
+        ],
+        "coldLocalReadAndDigestMs": 1.0974999999999682,
+        "coldVerificationDecodeParseSelectionMs": 30.63670000000002,
+        "coldCompressedBytes": 386688,
+        "selectedDecodedJsonBytes": 14159,
+        "cache": {
+          "verifiedRequests": 7,
+          "cacheHits": 5,
+          "cachedEntries": 7,
+          "cachedBytes": 2379721,
+          "cachedCountries": 2,
+          "countryMetadataBuilds": 2
+        },
+        "wholeCountryRequested": false
+      },
+      "fullCountry": {
+        "initializationMs": 51.10159999999996,
+        "selectionMs": 1327.8123,
+        "requests": [
+          {
+            "path": "metadata/countries/CHN.json.gz",
+            "bytes": 138130,
+            "readMs": 0.6186999999999898
+          },
+          {
+            "path": "detail/countries/CHN.geojson.gz",
+            "bytes": 23664164,
+            "readMs": 22.06490000000008
+          }
+        ],
+        "localReadAndDigestMs": 22.68360000000007,
+        "verificationDecodeParseSelectionMs": 1305.1287,
+        "compressedBytes": 23802294,
+        "decodedJsonBytes": 61702526,
+        "cache": {
+          "verifiedRequests": 6,
+          "cacheHits": 0,
+          "cachedEntries": 5,
+          "cachedBytes": 1347402,
+          "cachedCountries": 1,
+          "countryMetadataBuilds": 1
+        }
+      },
+      "memory": {
+        "before": {
+          "rss": 117321728,
+          "heapTotal": 57749504,
+          "heapUsed": 34356792,
+          "external": 10033939,
+          "arrayBuffers": 6227070
+        },
+        "afterSmall": {
+          "rss": 157601792,
+          "heapTotal": 98566144,
+          "heapUsed": 43205552,
+          "external": 9320567,
+          "arrayBuffers": 4888179
+        },
+        "afterFull": {
+          "rss": 628043776,
+          "heapTotal": 533274624,
+          "heapUsed": 417917368,
+          "external": 9147022,
+          "arrayBuffers": 29618718
+        }
+      }
+    },
+    "cellDetailSharding": {
+      "maximumCellsPerShard": 64,
+      "targetDecodedBytes": 2097152,
+      "shardedCountries": [
+        {
+          "countryId": "CHN",
+          "cells": 3320,
+          "shards": 55,
+          "fullDecodedBytes": 61702527
+        },
+        {
+          "countryId": "RUS",
+          "cells": 86,
+          "shards": 2,
+          "fullDecodedBytes": 3023026
+        }
+      ],
+      "oversizeSingleCellOrdinals": [],
+      "maximumDecodedShardBytes": 2087140
+    }
+  },
+  "build": {
+    "pass": true,
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "command": "npm run build -- --webpack",
+    "exitCode": 0,
+    "distDir": ".next-chn-2020-webpack",
+    "nextVersion": "16.3.0",
+    "bundler": "webpack",
+    "checks": {
+      "productionCompilation": true,
+      "typeScript": true,
+      "pageDataAndStaticGeneration": true,
+      "buildTraces": true
+    },
+    "log": {
+      "path": "reports/chn-2020/build-webpack-output.log",
+      "sha256": "c5889f90e29f402700fa0477140782cc3e663c9c1b969ebde5271ae2010aa9ab",
+      "byteLength": 1585
+    },
+    "priorAttempt": {
+      "path": "reports/chn-2020/build-turbopack-attempt.json",
+      "sha256": "469016ffaf63c5f228592a36f82945a01461661b04d9421e45f985db42948b23",
+      "byteLength": 503
+    },
+    "priorAttemptLog": {
+      "path": "reports/chn-2020/build-output.log",
+      "sha256": "573a6ce3b6361fafdf639c5b55e408df04aa262af93a3dd3d909eeb1a5551ba6",
+      "byteLength": 189
+    },
+    "limitation": "The default Turbopack production build was stopped during prolonged compilation with increasing memory. The supported Webpack production build completed successfully; the local application uses the normal Turbopack development server.",
+    "completedAt": "2026-10-30T05:40:28.914Z",
+    "postBuildChecks": {
+      "typeScriptAfterTemporaryConfigCleanup": true,
+      "scopedEslint": true,
+      "gitDiffCheck": true,
+      "temporaryConfigCleanup": {
+        "path": "reports/chn-2020/temporary-config-cleanup.json",
+        "sha256": "68e06664b01cafe3e287a531cbe0a5d0eebfd25e944c028ff7d54d78191d7de8",
+        "byteLength": 688
+      },
+      "commands": [
+        "npx tsc --noEmit",
+        "npx eslint <changed runtime and CHN verification source> --max-warnings 0",
+        "git diff --check"
+      ]
+    }
+  },
+  "commands": {
+    "reproduction": [
+      "$env:PYTHONPATH='.tmp/chn-python'; $env:PYTHONUTF8='1'; python scripts/chn-2020/prepare-china.py --output data/derived/chn-2020/geometry-v12",
+      "node scripts/chn-2020/incremental-coordinator.mjs --geometry data/derived/chn-2020/geometry-v12/geometry.json",
+      "python scripts/chn-2020/verify-incremental.py --baseline reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json --candidate data/derived/chn-2020/candidate-df4f04ceeb9cecb0b5b3/joined-world-input.json --baseline-pointer reports/chn-2020/baseline-runtime-pointer.json --normalized data/raw/chn-2020/normalized-boundaries.geojson --hierarchy data/source-locks/chn-2020/CHN-hierarchy.json --macro-source data/raw/chn-2020/references/gb3-CHN-ADM1.geojson --numeric-exceptions data/derived/chn-2020/geometry-v12/numeric-exceptions.json --replay data/derived/chn-2020/replay-v12/joined-world-input.json --output reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json",
+      "node scripts/prepare-prompt19-mixed-world.mjs --input data/derived/chn-2020/candidate-df4f04ceeb9cecb0b5b3/joined-world-input.json --incremental-verification reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json --no-activate --pointer-output reports/chn-2020/candidate-runtime-pointer.json",
+      "node --max-old-space-size=8192 scripts/chn-2020/verify-delivery.mjs --pointer reports/chn-2020/candidate-runtime-pointer.json --baseline-pointer reports/chn-2020/baseline-runtime-pointer.json --output-report reports/chn-2020/delivery-verification.json",
+      "$env:CHN_CATALOG_POINTER='reports/chn-2020/candidate-runtime-pointer.json'; $env:CHN_VERIFY_PHASE='candidate'; $env:CHN_VERIFY_STRICT='1'; npx vitest run scripts/chn-2020/verify-play-performance.test.ts scripts/chn-2020/measure-cell-detail.test.ts",
+      "node scripts/chn-2020/verify-browser.mjs --phase candidate --expected-catalog catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7 --url http://127.0.0.1:3002",
+      "node scripts/chn-2020/verify-browser-play.mjs --launch-proof reports/chn-2020/local-qa-launch.json --pointer reports/chn-2020/candidate-runtime-pointer.json"
+    ],
+    "reportedBuildExecution": "npm run build -- --webpack",
+    "note": "Reproduction commands are assembled from exact executed evidence paths; build-summary contains the recorded build/test commands. The aggregator executes none of these commands."
+  },
+  "execution": {
+    "url": "http://127.0.0.1:3002",
+    "verifiedBrowserUrl": "http://127.0.0.1:3002",
+    "qaUrl": "http://127.0.0.1:3001",
+    "newGamesOnly": true,
+    "previousCatalog": {
+      "path": "reports/chn-2020/baseline-runtime-pointer.json",
+      "sha256": "652a233e6b26397fdb32bc56781e2fbc6dcc67a1545774a7ed7d571a3e5ad8df",
+      "byteLength": 241
+    },
+    "oldSessionsNotMigrated": true,
+    "remoteDeployment": false,
+    "push": false,
+    "normalAppLaunch": {
+      "path": "reports/chn-2020/local-app-launch.json",
+      "sha256": "e2eca66429564f193746106abb212fa0930ff5ecbdbbca9ae14cc3d13ea4101c",
+      "byteLength": 637
+    },
+    "finalBoot": {
+      "path": "reports/chn-2020/final-boot-verification.json",
+      "sha256": "84b4954c8653cd11e222cff619761a64d7623921c603d7aae56af44f23b49354",
+      "byteLength": 458
+    },
+    "qaServerStoppedAfterVerification": {
+      "path": "reports/chn-2020/qa-server-cleanup.json",
+      "sha256": "da29ddadf378a01be5955426f22fb6e644f0d482cfda84c37c569628a0636c94",
+      "byteLength": 334
+    },
+    "temporaryConfigCleanup": {
+      "path": "reports/chn-2020/temporary-config-final-cleanup.json",
+      "sha256": "8d23c4f7cfc98147290df6b842b9429ac2ceab3f44af1c1c41bd955017d27b66",
+      "byteLength": 261
+    }
+  },
+  "knownLimits": [
+    {
+      "kind": "uncertified-source-vintage",
+      "detail": "The original metadata claims 2017, but original shapefile XML records append/dissolve processing in August 2021. The fixed file is mixed or uncertified vintage. It is used as an experimental county geometry reference for the 2020-01-01 game scenario, not certified 2020 or untouched 2017 administrative truth. No unverified change is backdated."
+    },
+    {
+      "kind": "unconfirmed-macro-parents",
+      "families": 1201,
+      "detail": "These source fine families retain explicit supported fallback macro membership; no centroid/name/largest-overlap guess is presented as an official parent."
+    },
+    {
+      "kind": "large-natural-western-counties",
+      "areaKm2Quantiles": {
+        "0": 0.00030428179460950195,
+        "1": 198329.20306595005,
+        "0.1": 5.785619680277718,
+        "0.5": 1301.9339690274896,
+        "0.9": 4878.185237204884,
+        "0.95": 9586.952403158888,
+        "0.99": 31087.261121137362
+      },
+      "largest": [
+        {
+          "cellId": "territory:catalog:19cd7764c49725f5d4402c4fbdcca6f8c737a147af5351c8e969e372ac9da217",
+          "areaKm2": 198329.20306595005,
+          "bounds": [
+            86.6853598999395,
+            36.02101139975633,
+            93.81836229968047,
+            41.37673020043843
+          ]
+        },
+        {
+          "cellId": "territory:catalog:328d75b217a994e42b93343217f3fb31ab7090e259da642096ec0e1a0c475201",
+          "areaKm2": 137947.70513231598,
+          "bounds": [
+            83.42158530002166,
+            35.64111519990661,
+            87.97313499998035,
+            40.280608900380514
+          ]
+        },
+        {
+          "cellId": "territory:catalog:d1f47ac56940385ff4c42bc7a50b51e04b4fedab81c821e6b21b710e012a8130",
+          "areaKm2": 134849.46450337284,
+          "bounds": [
+            81.95293479990113,
+            31.481395400277563,
+            86.32438170015541,
+            35.86121589979399
+          ]
+        },
+        {
+          "cellId": "territory:catalog:f4cec54fe72191e2126e11a029074a0c4a83c05eea1118939187d318d803e3b6",
+          "areaKm2": 115638.11359413751,
+          "bounds": [
+            86.06723859968167,
+            31.64274310041378,
+            90.3751941998525,
+            36.48407400031493
+          ]
+        },
+        {
+          "cellId": "territory:catalog:57dcd8ab7dcc359daaf1e5fd56521cc5a3d0fc634c2cb334be811fe480f0cd74",
+          "areaKm2": 84829.32506936946,
+          "bounds": [
+            97.17785023525606,
+            40.17868790012653,
+            102.99198929986636,
+            42.78726
+          ]
+        }
+      ],
+      "detail": "Natural county units remain intact. Very large western counties may exceed the unchanged local frontier caps; no arbitrary subdivision or cap relaxation is claimed."
+    },
+    {
+      "kind": "residual-baseline-land",
+      "cells": 7,
+      "geodesicAreaKm2": 21.88565004548664,
+      "detail": "Classified source-free baseline components remain explicitly represented; see the residual ledger and its locations."
+    },
+    {
+      "kind": "area-method-nonadditivity",
+      "detail": "Raw WGS84 Geod areas of differently subdivided source unions, residuals and envelopes are diagnostic and can be non-additive because a new geodesic segment set is implied. They are not an exact additive national territory ledger. Shared-partition planar/exact degree² coverage and ledger certificates establish missing/extra/overlap; geodesic areas of actual shared cells report size."
+    },
+    {
+      "kind": "full-country-selection-cost",
+      "detail": "Explicit full CHN detail selection still loads the full immutable country geometry. Small changed-cell turns use bounded exact shards; their actual timing is measured separately. Viewport-only explicit selection is not implemented."
+    },
+    {
+      "kind": "old-game-continuation",
+      "detail": "Lossless original-catalog snapshots/history and live pool objects are preserved, with validated readback and undo/redo recovery preview. Automatic process-restart session rehydration and full continued old-version asset delivery are not implemented."
+    },
+    {
+      "kind": "bounded-coastal-remainder-approximation",
+      "proof": {
+        "path": "reports/chn-2020/final-fallback-classification.json",
+        "sha256": "12aa967367716e960d73723a4091803e9caac9386d58f1857b62dcce5ec905ab",
+        "byteLength": 123753
+      },
+      "detail": "Two coastal remainder pieces extend beyond the unchanged 10 km original-contact bound. Some inner land remains due to conservative 1 km contact sampling and an inscribed 32-sided distance boundary. Residual-strip-free coverage is not claimed."
+    },
+    {
+      "kind": "local-source-county-dead-end",
+      "detail": "The default PRK→CHN first captured county has only neighboring Chinese counties larger than the unchanged 2800 km² cap. The verified same-front chain uses the supported north direction. No arbitrary county splitting or cap relaxation was used."
+    },
+    {
+      "kind": "production-build-bundler",
+      "detail": "The default Turbopack production build was stopped during prolonged compilation with increasing memory. The supported Webpack production build completed successfully; the local application uses the normal Turbopack development server."
+    }
+  ]
+}

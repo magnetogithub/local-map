@@ -1,0 +1,109 @@
+{
+  "checkpoint": "10-96~10-99",
+  "title": "map projection synchronization checkpoint",
+  "status": "pass",
+  "createdAt": "2026-09-21T09:23:00+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousCheckpointInput": {
+    "prompt": "10-95",
+    "reportPath": "reports/prompt10/10-95-capital-projection.json",
+    "reportSha256": "6d62fa8bbb68c0c361b5370cbd58cc8db9d471657a9e0b8c2efbf2d217705331",
+    "status": "pass"
+  },
+  "coveredStages": {
+    "10-96": "low/high map sources are generated from the same committed Territory-owner set",
+    "10-97": "WorldPatch delivery is represented by a projection coordinator instead of projection code mutating the domain store",
+    "10-98": "projection records track appliedRevision and artifactHash; stale patch application is rejected",
+    "10-99": "projection failure keeps the last good projection and retries against the latest committed revision"
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/map-projection-checkpoint.ts",
+        "sha256": "6d14c097f175d1b6bc36408bf0a5caf89f08c397cd1bebebb78dc5089ddf390b"
+      },
+      {
+        "path": "src/lib/projection/map-projection-checkpoint.test.ts",
+        "sha256": "39cd23c88cc94410b184a389082b7a16343d800b8d3ac48d9f5f7cf8a2b1c0a2"
+      }
+    ],
+    "notes": [
+      "Runtime map source features keep legacy countryId for compatibility, but primary identity is territoryId plus ownerCountryId plus projectionRevision.",
+      "Low and high sources share the same artifactHash because both are generated from the same committed Territory-owner set.",
+      "Projection coordinator functions return new coordinator records and do not write to the domain WorldState.",
+      "A failed projection record retains its previous value and revision until retryFailedProjections rebuilds it from the latest committed state."
+    ]
+  },
+  "measurements": {
+    "lowHighSourceSynchronization": {
+      "lowAppliedRevision": 30,
+      "highAppliedRevision": 30,
+      "sameArtifactHash": true,
+      "sameTerritoryOwnerSignature": true,
+      "retiredOwnerReappearanceCount": 0
+    },
+    "stalePatchGuard": {
+      "projectionRevision": 30,
+      "stalePatchBeforeRevision": 29,
+      "stalePatchRejected": true,
+      "appliedProjectionCount": 0
+    },
+    "failureRecovery": {
+      "failedProjection": "ui",
+      "mapProjectionConvergedRevision": 31,
+      "failedProjectionKeptLastGoodRevision": 30,
+      "retryRevision": 31,
+      "domainRollbackUsed": false,
+      "finalConverged": true
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/map-projection-checkpoint.test.ts src/lib/projection/territory-polygon-index.test.ts src/lib/projection/topology-border-artifact.test.ts src/lib/projection/country-capital-projection.test.ts",
+        "status": "pass",
+        "testFiles": 4,
+        "tests": 10
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/lib/projection/map-projection-checkpoint.ts src/lib/projection/map-projection-checkpoint.test.ts src/lib/projection/territory-polygon-index.ts src/lib/projection/territory-polygon-index.test.ts",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd test -- --run",
+        "status": "pass",
+        "testFiles": 106,
+        "tests": 895
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "lowHighSameCommittedRevision": true,
+      "lowHighSameTerritoryOwnerSet": true,
+      "staticCountryIdNotRuntimeTruth": true,
+      "projectionCoordinatorNoDomainMutation": true,
+      "appliedRevisionTracked": true,
+      "artifactHashTracked": true,
+      "stalePatchApplicationCount": 0,
+      "lastGoodProjectionRetainedOnFailure": true,
+      "latestRevisionRetryConverged": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "fullUnitSuitePass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextCheckpoint": "10-100~10-106 label projection checkpoint"
+}

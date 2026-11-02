@@ -1,0 +1,38 @@
+{
+  "stage": "12-9",
+  "status": "pass",
+  "objective": "Validate action, event, cause, world effect, and authoritative reference semantics without mutation.",
+  "filesRead": [
+    "src/lib/simulation/turn-resolution.ts",
+    "src/lib/world/world-state-v2.ts",
+    "src/stores/world-state-store-v2-fixture.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-state.ts",
+    "src/lib/simulation/semantic-validator.ts",
+    "src/lib/simulation/simulation-contract.test.ts",
+    "reports/prompt12/12-9-semantic-validator.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts",
+    "npx eslint src/lib/simulation/*.ts"
+  ],
+  "gates": {
+    "proposalDoesNotInstantlyUnify": "pass",
+    "originlessTransferRejected": "pass",
+    "futureCauseRejected": "pass",
+    "unsubmittedPlayerActionRejected": "pass",
+    "danglingReferencesRejected": "pass",
+    "emptyWorldEffectAllowed": "pass",
+    "groundedUnificationAllowed": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Validation is pure and does not expose a commit or executor capability.",
+    "Country and territory references are checked against current WorldStateV2."
+  ],
+  "notes": [
+    "Unification requires a treaty outcome grounded in prior negotiation state or a due consequence."
+  ],
+  "nextStage": "12-10"
+}

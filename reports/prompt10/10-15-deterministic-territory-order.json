@@ -1,0 +1,64 @@
+{
+  "stage": "10-15",
+  "status": "pass",
+  "objective": "Define deterministic Territory iteration order rules for creation, partition, and merge independent of geometry feature order.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-14-deterministic-country-order.json": "5971f27170a2a9d7732a35b0e4a0a680f4f820929cc1505a2c423c3912d63e30"
+  },
+  "outputHashes": {
+    "src/lib/world/territory-order.ts": "2c393b7f79548a02445334d931ce566b32a2ef3f58c3da1e8acb1e8c23b1732e",
+    "src/lib/world/territory-order.test.ts": "51695adcb962345750eeaa7100a7f4833590de3c329ce3759824ee63f5df3def"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-15-deterministic-territory-order.json",
+    "src/lib/world/territory-order.test.ts",
+    "src/lib/world/territory-order.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-14 status and all direct output hashes", "exitCode": 0},
+    {"command": "Add deterministic territoryOrder targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-order.test.ts", "exitCode": 1, "note": "Expected red test: territory-order module did not exist."},
+    {"command": "Implement canonical territoryOrder creation, partition, and merge rules", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/territory-order.test.ts src/lib/world/territory-id.test.ts src/lib/world/territory-entity.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/territory-order.ts src/lib/world/territory-order.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "canonicalComparatorCount": 1,
+    "geometryFeatureOrderMismatches": 0,
+    "partitionResultOrderMismatches": 0,
+    "mergeSourceOrderMismatches": 0,
+    "territoryOrderCollisionsAccepted": 0,
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 30,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 1,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "territoryOrderCanonical": true,
+    "geometryFeatureOrderIndependent": true,
+    "partitionRuleDeterministic": true,
+    "mergeRuleDeterministic": true,
+    "retainedMergeSourceIdSupported": true,
+    "missingSourcesRejected": true,
+    "collisionsRejected": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-16"
+}

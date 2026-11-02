@@ -1,0 +1,20 @@
+{
+  "subtask": "8A-R3",
+  "status": "fail",
+  "failedGate": "zoomBandExclusive",
+  "reason": "At the first fractional zoom-band boundary (AUS zoom 1.25), MapLibre returned raw label count 0 instead of exactly 1 after renderer settlement. The report was initialized atomically before the E2E, so no stale PASS remains.",
+  "reproduction": {
+    "command": "npx.cmd playwright test e2e/fix08-8ar3.spec.ts --workers=1",
+    "exitCode": 1,
+    "expectedRawPerWorldCopy": 1,
+    "actualRaw": 0,
+    "environmentErrors": [],
+    "implementationOrTestErrors": ["fractional zoom-band boundary placement gap"]
+  },
+  "boundsMethodVerifiedBeforeFailure": "MapLibre placement collisionIndex grid/circle bounds resolved through retainedQueryData featureIndex; estimatedWidth was not used",
+  "alternativesCompared": [
+    {"order": 1, "option": "dedicated GeoJSON source tile/maxzoom/buffer/baseline tuning", "result": "maxzoom 9 clipped long baselines; maxzoom 0 retained"},
+    {"order": 2, "option": "exclusive zoom-band line rendering", "result": "actual bounds passed at normal zooms, but exact fractional boundary produced raw 0; rejected as incomplete"},
+    {"order": 3, "option": "country-name Canvas/WebGL renderer", "result": "not implemented because the mandatory stop-on-failure rule was reached"}
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "pass": true,
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "command": "npm run build -- --webpack",
+  "exitCode": 0,
+  "distDir": ".next-chn-2020-webpack",
+  "nextVersion": "16.3.0",
+  "bundler": "webpack",
+  "checks": {
+    "productionCompilation": true,
+    "typeScript": true,
+    "pageDataAndStaticGeneration": true,
+    "buildTraces": true
+  },
+  "log": {
+    "path": "reports/chn-2020/build-webpack-output.log",
+    "sha256": "c5889f90e29f402700fa0477140782cc3e663c9c1b969ebde5271ae2010aa9ab",
+    "byteLength": 1585
+  },
+  "priorAttempt": {
+    "path": "reports/chn-2020/build-turbopack-attempt.json",
+    "sha256": "469016ffaf63c5f228592a36f82945a01461661b04d9421e45f985db42948b23",
+    "byteLength": 503
+  },
+  "priorAttemptLog": {
+    "path": "reports/chn-2020/build-output.log",
+    "sha256": "573a6ce3b6361fafdf639c5b55e408df04aa262af93a3dd3d909eeb1a5551ba6",
+    "byteLength": 189
+  },
+  "limitation": "The default Turbopack production build was stopped during prolonged compilation with increasing memory. The supported Webpack production build completed successfully; the local application uses the normal Turbopack development server.",
+  "completedAt": "2026-10-30T05:40:28.914Z",
+  "postBuildChecks": {
+    "typeScriptAfterTemporaryConfigCleanup": true,
+    "scopedEslint": true,
+    "gitDiffCheck": true,
+    "temporaryConfigCleanup": {
+      "path": "reports/chn-2020/temporary-config-cleanup.json",
+      "sha256": "68e06664b01cafe3e287a531cbe0a5d0eebfd25e944c028ff7d54d78191d7de8",
+      "byteLength": 688
+    },
+    "commands": [
+      "npx tsc --noEmit",
+      "npx eslint <changed runtime and CHN verification source> --max-warnings 0",
+      "git diff --check"
+    ]
+  }
+}

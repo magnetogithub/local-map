@@ -1,0 +1,31 @@
+{
+  "stage": "13-34-repair",
+  "status": "pass",
+  "rootCause": [
+    "Runtime country features omitted the country display name, so country.renamed advanced the world/controller revision while structurally reusing countries-low and countries-high features; no property-only updateData diff existed.",
+    "WorldMap allowed verification for different revisions to overlap, and an older verification's finally handler could clear the sentinel for a newer verification. Rapid commit/undo/redo therefore lacked a single ordered latest-revision verification schedule.",
+    "The MapLibre error handler treated any post-load non-runtime error occurring while map.loaded() was temporarily false as a fatal world-source error. Fatal classification is now limited to the four runtime sources, while pre-style errors remain initial-load failures."
+  ],
+  "historicalFailureScope": {"countrySources": ["countries-low", "countries-high"], "borderSources": ["borders-low", "borders-high"], "note": "The missing rename property affected both country sources; border data was unchanged. The previous E2E did not persist the historical controller snapshot/sourceId, so the old screenshot alone cannot identify a narrower emitted source. The repaired run verifies every source explicitly."},
+  "fixes": [
+    "Added displayName to runtime country features and change detection, producing updateData property diffs without geometry replacement.",
+    "Serialized idle verification and discarded stale revision results without setting resyncRequired; a new render schedules the latest revision.",
+    "Stopped unrelated post-load MapLibre errors from changing the world map status.",
+    "Added debug accessors for world/projection revisions, source identities, displayName, and source feature revisions.",
+    "Strengthened deterministic E2E and regenerated/inspected all six visual artifacts."
+  ],
+  "incrementalEvidence": {"normalPath": "updateData", "fullSetData": "initial source load, source recreation, or explicit manual resynchronization only", "propertyOnlyDiff": "FRA territory IDs only; newGeometry absent; removeAllProperties plus addOrUpdateProperties includes displayName", "settingsMutation": "none"},
+  "revisionEvidence": {"initial": 0, "commit": 1, "undo": 2, "redo": 3},
+  "sourceVerification": {"countries-low": "features present, revision matched, FRA name matched", "countries-high": "features present, revision matched, FRA name matched", "borders-low": "features present, revision matched", "borders-high": "features present, revision matched", "finalResyncRequired": false, "finalError": null},
+  "commands": [
+    {"command": "npx tsc --noEmit", "exitCode": 0},
+    {"command": "npm run lint", "exitCode": 0},
+    {"command": "npm test", "exitCode": 0, "evidence": "146 files, 1149 tests"},
+    {"command": "npm run build", "exitCode": 0},
+    {"command": "npm run test:e2e", "exitCode": 0, "evidence": "23 tests"}
+  ],
+  "warnings": {"existing": ["Vite configLoader CommonJS/ESM warning", "Playwright NO_COLOR/FORCE_COLOR warning"], "new": []},
+  "screenshots": ["screenshots/prompt13-32-modal-1280x720.png", "screenshots/prompt13-32-overlay-1280x720.png", "screenshots/prompt13-32-hud-map-1280x720.png", "screenshots/prompt13-32-modal-1920x1080.png", "screenshots/prompt13-32-overlay-1920x1080.png", "screenshots/prompt13-32-hud-map-1920x1080.png"],
+  "knownLimitations": ["The reserved war source remains intentionally empty until an authoritative war-data port is connected."],
+  "nextStage": "13-35"
+}

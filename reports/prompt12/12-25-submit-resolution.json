@@ -1,0 +1,1 @@
+{"stage":"12-25","status":"pass","changedFiles":["src/lib/simulation/server/simulation-tools.ts"],"gates":{"onlyEffectBearingTool":"submit_turn_resolution","fullTurnContract":"pass","forbiddenAdministrativeToolsExposed":false}}

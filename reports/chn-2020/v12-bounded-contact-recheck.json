@@ -1,0 +1,262 @@
+[
+  {
+    "id": "CHN:bounded-connected-remainder:e827eefd6fc0cbd58c69b76fe19837fe5060abd01d859fd4a725ab2921d8759e",
+    "pass": true,
+    "proof": {
+      "method": "bounded completion through positively contacting accepted family; distance seed remains the pinned original raw contact",
+      "originalResidualId": "CHN:residual:2417e0987c06b9cb6eee554249348255b82a19a928e336d0d37b3b2fd9209ca9",
+      "originalContactCoordinates": [
+        [
+          128.08444530021052,
+          42.02038459986943
+        ],
+        [
+          128.05639599957578,
+          42.00726119974462
+        ]
+      ],
+      "originalProjection": {
+        "latitude": 42.013822899807025,
+        "method": "local affine longitude*cos(latitude), latitude",
+        "xKmPerDegree": 82.61603612419192,
+        "yKmPerDegree": 111.195
+      },
+      "maximumWholePartDistanceKm": 1.240183851360922,
+      "unchangedMaximumDistanceKm": 10,
+      "wholePartProof": "Distance to a finite segment is convex; polygon vertex maximum bounds the entire polygon and its convex hull",
+      "originalRawSourceTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [],
+        "failures": []
+      },
+      "originalScopeTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [],
+        "failures": []
+      },
+      "existingFamilyContactCoordinates": [
+        [
+          128.06585270112117,
+          41.99850531592253
+        ],
+        [
+          128.06431752514735,
+          41.99847938898188
+        ]
+      ],
+      "partContactTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [
+          {
+            "direction": "reference-to-actual",
+            "originalSegment": [
+              [
+                128.06585270112117,
+                41.99850531592253
+              ],
+              [
+                128.06431752514735,
+                41.99847938898188
+              ]
+            ],
+            "matchingSegment": [
+              [
+                128.0609229967802,
+                41.99842206022151
+              ],
+              [
+                128.06585270112117,
+                41.99850531592253
+              ]
+            ],
+            "maximumPerpendicularDistanceDegrees": 3.0626924003964567e-15
+          }
+        ],
+        "failures": []
+      },
+      "priorFamilyContactTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [
+          {
+            "direction": "reference-to-actual",
+            "originalSegment": [
+              [
+                128.06585270112117,
+                41.99850531592253
+              ],
+              [
+                128.06431752514735,
+                41.99847938898188
+              ]
+            ],
+            "matchingSegment": [
+              [
+                128.06999927242785,
+                41.998575345619464
+              ],
+              [
+                128.06049001509115,
+                41.99841474777607
+              ]
+            ],
+            "maximumPerpendicularDistanceDegrees": 2.8300074993404607e-15
+          }
+        ],
+        "failures": []
+      },
+      "priorReceivingComponentOriginalCoreAreaDegreesSquared": 0.8231853347641338,
+      "lengthDegrees": 0.001535394892811077,
+      "gameplayGainsUsedAsNewDistanceSeeds": false
+    }
+  },
+  {
+    "id": "CHN:bounded-connected-remainder:cebaf28a36906ffbc29b18059636fe08b4dcc06326e33c4e509aed404eddde84",
+    "pass": true,
+    "proof": {
+      "method": "bounded completion through positively contacting accepted family; distance seed remains the pinned original raw contact",
+      "originalResidualId": "CHN:residual:2417e0987c06b9cb6eee554249348255b82a19a928e336d0d37b3b2fd9209ca9",
+      "originalContactCoordinates": [
+        [
+          128.08444530021052,
+          42.02038459986943
+        ],
+        [
+          128.05639599957578,
+          42.00726119974462
+        ]
+      ],
+      "originalProjection": {
+        "latitude": 42.013822899807025,
+        "method": "local affine longitude*cos(latitude), latitude",
+        "xKmPerDegree": 82.61603612419192,
+        "yKmPerDegree": 111.195
+      },
+      "maximumWholePartDistanceKm": 1.9383762187395797,
+      "unchangedMaximumDistanceKm": 10,
+      "wholePartProof": "Distance to a finite segment is convex; polygon vertex maximum bounds the entire polygon and its convex hull",
+      "originalRawSourceTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [],
+        "failures": []
+      },
+      "originalScopeTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [],
+        "failures": []
+      },
+      "existingFamilyContactCoordinates": [
+        [
+          128.08230623796806,
+          41.99878319277878
+        ],
+        [
+          128.07651259241197,
+          41.99868534633833
+        ]
+      ],
+      "partContactTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [
+          {
+            "direction": "reference-to-actual",
+            "originalSegment": [
+              [
+                128.08230623796806,
+                41.99878319277878
+              ],
+              [
+                128.07651259241197,
+                41.99868534633833
+              ]
+            ],
+            "matchingSegment": [
+              [
+                128.0751262645966,
+                41.998661933231546
+              ],
+              [
+                128.0779219355619,
+                41.998709148141394
+              ]
+            ],
+            "maximumPerpendicularDistanceDegrees": 7.105427357601002e-15
+          },
+          {
+            "direction": "reference-to-actual",
+            "originalSegment": [
+              [
+                128.08230623796806,
+                41.99878319277878
+              ],
+              [
+                128.07651259241197,
+                41.99868534633833
+              ]
+            ],
+            "matchingSegment": [
+              [
+                128.0779219355619,
+                41.998709148141394
+              ],
+              [
+                128.08230623796806,
+                41.99878319277878
+              ]
+            ],
+            "maximumPerpendicularDistanceDegrees": 7.104414254757359e-15
+          }
+        ],
+        "failures": []
+      },
+      "priorFamilyContactTrace": {
+        "pass": true,
+        "exact": false,
+        "existingRepresentationPolicyDegrees": 1e-12,
+        "subdivisionExceptions": [
+          {
+            "direction": "reference-to-actual",
+            "originalSegment": [
+              [
+                128.08230623796806,
+                41.99878319277878
+              ],
+              [
+                128.07651259241197,
+                41.99868534633833
+              ]
+            ],
+            "matchingSegment": [
+              [
+                128.08230623796806,
+                41.99878319277878
+              ],
+              [
+                128.06999927242785,
+                41.998575345619464
+              ]
+            ],
+            "maximumPerpendicularDistanceDegrees": 1.6200758919756767e-15
+          }
+        ],
+        "failures": []
+      },
+      "priorReceivingComponentOriginalCoreAreaDegreesSquared": 0.8231853347641339,
+      "lengthDegrees": 0.00579447174084223,
+      "gameplayGainsUsedAsNewDistanceSeeds": false
+    }
+  }
+]

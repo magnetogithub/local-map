@@ -1,0 +1,183 @@
+{
+  "stage": "13-37",
+  "status": "pass",
+  "summary": "Prompt 13 is complete after the final stability repair. Stages 13-1 through 13-37 pass, the five fresh verification commands pass, canonical E2E passes 23/23 twice consecutively with one worker, production and E2E fixtures are isolated, browser persistence and fake domain data are absent from production, and the final secret scan is clean after generated Turbopack caches containing environment values were removed.",
+  "filesChanged": [
+    "src/app/globals.css",
+    "e2e/prompt12-simulation.spec.ts",
+    "playwright.config.ts",
+    "docs/game-ui/prompt13-runtime-audit.md",
+    "debug.log",
+    "reports/prompt13/13-35-dead-ui-cleanup.json",
+    "reports/prompt13/13-36-backend-port-handoff.json",
+    "reports/prompt13/13-37-final.json"
+  ],
+  "stageMatrix": [
+    {"stage": "13-1", "status": "pass", "report": "reports/prompt13/13-1-runtime-audit.json", "evidence": ["docs/game-ui/prompt13-runtime-audit.md"]},
+    {"stage": "13-2", "status": "pass", "report": "reports/prompt13/13-2-information-architecture.json", "evidence": ["docs/game-ui/internal-game-interface-v1.md"]},
+    {"stage": "13-3", "status": "pass", "report": "reports/prompt13/13-3-visual-specification.json", "evidence": ["docs/game-ui/internal-game-interface-visual-spec.md"]},
+    {"stage": "13-4", "status": "pass", "report": "reports/prompt13/13-4-ui-contracts.json", "evidence": ["src/lib/game-ui/contracts.ts", "src/lib/game-ui/contracts.test.ts"]},
+    {"stage": "13-5", "status": "pass", "report": "reports/prompt13/13-5-design-checkpoint.json", "evidence": ["docs/game-ui/internal-game-interface-v1.md"]},
+    {"stage": "13-6", "status": "pass", "report": "reports/prompt13/13-6-turn-controller.json", "evidence": ["src/lib/simulation/client/use-simulation-turn-controller.ts", "src/lib/simulation/client/use-simulation-turn-controller.test.tsx"]},
+    {"stage": "13-7", "status": "pass", "report": "reports/prompt13/13-7-custom-target-date.json", "evidence": ["src/lib/simulation/client/turn-request.ts", "src/lib/simulation/client/turn-request.test.ts"]},
+    {"stage": "13-8", "status": "pass", "report": "reports/prompt13/13-8-game-overlay-reducer.json", "evidence": ["src/lib/game-ui/overlay-reducer.ts", "src/lib/game-ui/overlay-reducer.test.ts"]},
+    {"stage": "13-9", "status": "pass", "report": "reports/prompt13/13-9-full-screen-game-screen.json", "evidence": ["src/components/game/GameScreen.tsx", "src/components/layout/GameSetupShell.tsx"]},
+    {"stage": "13-10", "status": "pass", "report": "reports/prompt13/13-10-design-tokens-common-panel.json", "evidence": ["src/components/game/GamePanel.tsx", "src/app/globals.css"]},
+    {"stage": "13-11", "status": "pass", "report": "reports/prompt13/13-11-hud-player-badge.json", "evidence": ["src/components/game/GameHud.tsx", "src/lib/game-ui/game-hud-projection.test.ts"]},
+    {"stage": "13-12", "status": "pass", "report": "reports/prompt13/13-12-edge-navigation.json", "evidence": ["src/components/game/GameEdgeNavigation.tsx", "src/components/game/GameChrome.test.tsx"]},
+    {"stage": "13-13", "status": "pass", "report": "reports/prompt13/13-13-shell-checkpoint-repair.json", "evidence": ["e2e/prompt13-shell.spec.ts", "screenshots/prompt13-13-shell-repair-1280x720.png", "screenshots/prompt13-13-shell-repair-1920x1080.png"]},
+    {"stage": "13-14", "status": "pass", "report": "reports/prompt13/13-14-politics-overlay.json", "evidence": ["src/components/game/CountryManagementOverlays.tsx", "src/lib/game-ui/country-management-projection.test.ts"]},
+    {"stage": "13-15", "status": "pass", "report": "reports/prompt13/13-15-economy-overlay.json", "evidence": ["src/components/game/CountryManagementOverlays.tsx", "src/lib/game-ui/game-hud-projection.test.ts"]},
+    {"stage": "13-16", "status": "pass", "report": "reports/prompt13/13-16-country-relationship.json", "evidence": ["src/components/game/DiplomacyOverlays.tsx", "src/lib/game-ui/country-view-projection.test.ts"]},
+    {"stage": "13-17", "status": "pass", "report": "reports/prompt13/13-17-diplomacy-channel-shell.json", "evidence": ["src/components/game/DiplomacyOverlays.test.tsx", "src/lib/game-ui/contracts.ts"]},
+    {"stage": "13-18", "status": "pass", "report": "reports/prompt13/13-18-wars-overlay.json", "evidence": ["src/components/game/WarAndSystemOverlays.test.tsx", "src/lib/game-ui/war-view-projection.test.ts"]},
+    {"stage": "13-19", "status": "pass", "report": "reports/prompt13/13-19-save-settings-overlays.json", "evidence": ["src/components/game/WarAndSystemOverlays.tsx", "src/components/game/WarAndSystemOverlays.test.tsx"]},
+    {"stage": "13-20", "status": "pass", "report": "reports/prompt13/13-20-management-overlays-checkpoint-repair.json", "evidence": ["src/components/game/CountryManagementOverlays.test.tsx", "src/components/game/DiplomacyOverlays.test.tsx", "src/components/game/WarAndSystemOverlays.test.tsx"]},
+    {"stage": "13-21", "status": "pass", "report": "reports/prompt13/13-21-action-overlay.json", "evidence": ["src/components/game/GameActionOverlay.tsx", "src/components/game/GameActionOverlay.test.tsx"]},
+    {"stage": "13-22", "status": "pass", "report": "reports/prompt13/13-22-custom-date-ux.json", "evidence": ["src/components/game/GameActionOverlay.test.tsx"]},
+    {"stage": "13-23", "status": "pass", "report": "reports/prompt13/13-23-streaming-recovery.json", "evidence": ["src/components/game/GameActionOverlay.test.tsx", "screenshots/prompt13-23-action-1280x720.png", "screenshots/prompt13-23-action-1920x1080.png"]},
+    {"stage": "13-24", "status": "pass", "report": "reports/prompt13/13-24-news-projection-list.json", "evidence": ["src/components/game/NewsOverlay.tsx", "src/lib/game-ui/news-projection.test.ts"]},
+    {"stage": "13-25", "status": "pass", "report": "reports/prompt13/13-25-major-event-queue.json", "evidence": ["src/lib/game-ui/major-event-queue.ts", "src/lib/game-ui/major-event-queue.test.ts"]},
+    {"stage": "13-26", "status": "pass", "report": "reports/prompt13/13-26-major-event-modal.json", "evidence": ["src/components/game/MajorEventModal.tsx", "src/components/game/NewsAndMajorEvents.test.tsx"]},
+    {"stage": "13-27", "status": "pass", "report": "reports/prompt13/13-27-turn-result-integration.json", "evidence": ["src/components/game/GameScreen.tsx", "src/components/game/NewsAndMajorEvents.test.tsx"]},
+    {"stage": "13-28", "status": "pass", "report": "reports/prompt13/13-28-action-news-checkpoint.json", "evidence": ["src/components/game/GameActionOverlay.test.tsx", "src/components/game/NewsAndMajorEvents.test.tsx"]},
+    {"stage": "13-29", "status": "pass", "report": "reports/prompt13/13-29-map-selection-overlay.json", "evidence": ["src/components/game/MapCountryPicker.tsx", "src/components/game/MapCountryPicker.test.tsx"]},
+    {"stage": "13-30", "status": "pass", "report": "reports/prompt13/13-30-map-settings-war-slot.json", "evidence": ["src/lib/game-ui/map-ui-settings-adapter.ts", "src/lib/game-ui/map-integration-checkpoint.test.ts"]},
+    {"stage": "13-31", "status": "pass", "report": "reports/prompt13/13-31-accessibility-audit.json", "evidence": ["src/components/game/GameOverlayEscapeHandler.tsx", "e2e/prompt13-integration.spec.ts"]},
+    {"stage": "13-32", "status": "pass", "report": "reports/prompt13/13-32-viewport-visual-regression.json", "evidence": ["screenshots/prompt13-32-hud-map-1280x720.png", "screenshots/prompt13-32-overlay-1920x1080.png", "screenshots/prompt13-32-modal-1920x1080.png"]},
+    {"stage": "13-33", "status": "pass", "report": "reports/prompt13/13-33-deterministic-integration-e2e.json", "evidence": ["e2e/prompt13-integration.spec.ts", "23/23 final E2E pass"]},
+    {"stage": "13-34", "status": "pass", "report": "reports/prompt13/13-34-integration-checkpoint-repair.json", "evidence": ["Prompt 11 incremental source repair and full checkpoint"]},
+    {"stage": "13-35", "status": "pass", "report": "reports/prompt13/13-35-dead-ui-cleanup.json", "evidence": ["src/app/globals.css", "debug.log deleted", "production/E2E fixture audit"]},
+    {"stage": "13-36", "status": "pass", "report": "reports/prompt13/13-36-backend-port-handoff.json", "evidence": ["docs/game-ui/backend-port-plan.md", "docs/game-ui/prompt13-runtime-audit.md"]},
+    {"stage": "13-37", "status": "pass", "report": "reports/prompt13/13-37-final.json", "evidence": ["145/145 Vitest files and 1146/1146 tests", "canonical Playwright 23/23 twice consecutively", "production/E2E/secret/storage audits"]}
+  ],
+  "decisionCoverage": [
+    {"id": "D01", "status": "pass", "decision": "Map fills the game viewport.", "evidence": "GameScreen plus 1280x720 and 1920x1080 visual/E2E evidence."},
+    {"id": "D02", "status": "pass", "decision": "Management views open above the map.", "evidence": "GamePanel overlays the still-mounted WorldMap."},
+    {"id": "D03", "status": "pass", "decision": "Only one management overlay is open.", "evidence": "Discriminated GameOverlay reducer and overlay-reducer.test.ts."},
+    {"id": "D04", "status": "pass", "decision": "Player country appears at top-left.", "evidence": "GameHud player badge component tests and screenshots."},
+    {"id": "D05", "status": "pass", "decision": "Current date appears at top-right.", "evidence": "GameHud currentDate/turn/phase projection and E2E."},
+    {"id": "D06", "status": "pass", "decision": "Population appears in the HUD.", "evidence": "HUD reads the same nullable EconomyViewModel.population as Economy."},
+    {"id": "D07", "status": "pass", "decision": "Economy has its own menu and overlay.", "evidence": "GameEdgeNavigation, EconomyOverlay, projection tests."},
+    {"id": "D08", "status": "pass", "decision": "Regime and leader appear in Politics.", "evidence": "Nullable PoliticsViewModel fields render honest unavailable states."},
+    {"id": "D09", "status": "pass", "decision": "No exact aggregate military-strength number is shown.", "evidence": "War contracts and UI contain no troop/strength aggregate field."},
+    {"id": "D10", "status": "pass", "decision": "Bilateral opinions are directional and bounded -100..100.", "evidence": "Relationship contract, assertion, meter, and boundary/direction tests."},
+    {"id": "D11", "status": "pass", "decision": "Ongoing wars are listed in War.", "evidence": "WarsOverlay supports list/detail and truthful unavailable production state."},
+    {"id": "D12", "status": "pass", "decision": "Country actions use a separate menu.", "evidence": "GameActionOverlay uses the single shared turn controller."},
+    {"id": "D13", "status": "pass", "decision": "Recent international events use a news presentation.", "evidence": "News projection/list/detail/filter tests."},
+    {"id": "D14", "status": "pass", "decision": "Every major/transformative event blocks until acknowledgement.", "evidence": "FIFO major-event queue, modal, advanceBlocked, unit and E2E tests."},
+    {"id": "D15", "status": "pass", "decision": "Diplomacy reserves a future API channel UI.", "evidence": "Nullable DiplomacyChannelPort; disconnected send is disabled and no fake reply exists."},
+    {"id": "D16", "status": "pass", "decision": "Save is a button/status placeholder only.", "evidence": "Nullable GameSavePort plan, server-pending UI, no browser persistence."},
+    {"id": "D17", "status": "pass", "decision": "War/front map-layer controls are reserved.", "evidence": "Empty war source/layer slots and UI-settings adapter tests."},
+    {"id": "D18", "status": "pass", "decision": "Real calculations and server save remain follow-up work.", "evidence": "Null/empty projections and backend-port-plan.md."},
+    {"id": "D19", "status": "pass", "decision": "Existing actions, GPT turn, atomic commit, Stop/Retry, undo/redo are preserved.", "evidence": "Single extracted controller; Prompt 12 unit and E2E regressions pass."},
+    {"id": "D20", "status": "pass", "decision": "Canonical owners remain and missing domain data is never manufactured.", "evidence": "WorldStateV2/SimulationStateV1 ownership audit and null fixtures."}
+  ],
+  "commands": [
+    {"command": "npx.cmd tsc --noEmit", "canonicalCommand": "npx tsc --noEmit", "exitCode": 0, "evidence": "No TypeScript diagnostics."},
+    {"command": "npm.cmd run lint", "canonicalCommand": "npm run lint", "exitCode": 0, "evidence": "ESLint completed with no diagnostics."},
+    {"command": "npm.cmd test", "canonicalCommand": "npm test", "exitCode": 0, "evidence": "145 test files passed; 1146 tests passed; duration 236.19s."},
+    {"command": "npm.cmd run build", "canonicalCommand": "npm run build", "exitCode": 0, "evidence": "Next.js 16.3.0 optimized production build compiled and generated 6/6 static pages; /game is static and /api/simulation/turn is dynamic."},
+    {"command": "npm.cmd run test:e2e", "canonicalCommand": "npm run test:e2e", "exitCode": 0, "evidence": "First canonical run: 23 tests passed in 10.3 minutes using 1 worker. Second unchanged canonical run: 23 tests passed in 10.1 minutes using 1 worker. Both include Prompt 11, Prompt 12, Prompt 13 integration, and both supported Prompt 13 viewports."}
+  ],
+  "e2eReproducibility": [
+    {"run": 1, "command": "npm.cmd run test:e2e", "exitCode": 0, "workers": 1, "result": "23/23 passed", "duration": "10.3m"},
+    {"run": 2, "command": "npm.cmd run test:e2e", "exitCode": 0, "workers": 1, "result": "23/23 passed", "duration": "10.1m"}
+  ],
+  "e2eStabilityRepair": {
+    "rootCause": [
+      "The Prompt 12 Stop assertion depended on a fixed 250ms response delay, so the request could finish before the Stop control was observed.",
+      "Two parallel Chromium workers ran MapLibre/WebGL and full-viewport screenshot cases concurrently; the failing parallel run recorded V8 JavaScript OOM and the 1920x1080 integration test exhausted its 300-second budget."
+    ],
+    "changes": [
+      "The first-turn and cancellation handlers now wait on test-owned Promise gates. Tests confirm route arrival, visible Stop UI, and requesting phase before releasing or cancelling, with finally cleanup for both gates and pending route handlers.",
+      "playwright.config.ts sets fullyParallel=false and workers=1, serializing the GPU-heavy canonical suite without skipping tests or increasing the timeout."
+    ]
+  },
+  "environmentNotes": [
+    "A preliminary PowerShell invocation of npx tsc --noEmit exited 1 because the host execution policy blocked npx.ps1 before TypeScript started. The Windows executable npx.cmd then ran the canonical command and exited 0.",
+    "Vitest emitted its existing future configLoader native warning; Playwright emitted the existing NO_COLOR/FORCE_COLOR warning. Neither introduced a test failure."
+  ],
+  "audits": {
+    "productionBundle": {
+      "status": "pass",
+      "evidence": "Across .next/static/chunks and .next/server/app: 0 browser-storage matches, 0 E2E scenario markers, 0 world-state-store-v2-fixture markers, and 0 fake-diplomacy markers."
+    },
+    "e2eBundle": {
+      "status": "pass",
+      "evidence": "The PAX_E2E_BUILD-only scenario marker exists in exactly one .next-e2e client chunk as intended; no browser-storage or fake-diplomacy marker exists."
+    },
+    "e2eStability": {
+      "status": "pass",
+      "evidence": "The unchanged canonical npm run test:e2e command completed 23/23 twice consecutively with one worker; no skip/fixme, V8 OOM, or timeout occurred."
+    },
+    "secretLeak": {
+      "status": "pass",
+      "evidence": "Post-verification inspection found actual environment values only in generated Turbopack cache files (1 production-cache file and 3 E2E-cache files). Exactly .next/cache and .next-e2e/cache were removed; the application bundles remain available. The final audit checked 3 complete environment assignments across 791 source/report/doc/log/application-bundle files and found 0 assignment leaks; the raw OPENAI_API_KEY and OPENAI_MODEL values also matched 0 files. No value was printed."
+    },
+    "browserStorage": {
+      "status": "pass",
+      "evidence": "0 localStorage/sessionStorage/IndexedDB matches in production source and production application output. Three E2E specs contain only assertions that storage remains empty."
+    },
+    "fixtureIsolation": {
+      "status": "pass",
+      "evidence": "scenario-debug-bridge.ts is a production no-op; next.config.ts aliases it only when PAX_E2E_BUILD=1. Production has 0 scenario markers and .next-e2e has the intentional deterministic fixture."
+    },
+    "authoritativeEmptyStates": {
+      "status": "pass",
+      "evidence": "Population/economy metrics and opinions remain null/unavailable, wars remain empty/unavailable, and diplomacy remains disconnected when authoritative ports are absent."
+    },
+    "militaryNumbers": {
+      "status": "pass",
+      "evidence": "No exact aggregate troop, strength, or military-rank field exists in the war contract or production overlay."
+    },
+    "singleOverlay": {
+      "status": "pass",
+      "evidence": "One discriminated overlay state is reduced in GameScreen; reducer, component, and E2E tests pass."
+    },
+    "majorEventAcknowledgement": {
+      "status": "pass",
+      "evidence": "Major/transformative events enter a FIFO queue and advanceBlocked remains true until explicit acknowledgement; unit and E2E tests pass."
+    },
+    "prompt11IncrementalMap": {
+      "status": "pass",
+      "evidence": "map-source-incremental-adapter.test.ts verifies updateData on normal changed-ID/property revisions and setData only for initial load, source recreation, or explicit resynchronization; prompt11-10 E2E passed."
+    },
+    "prompt12AtomicTurn": {
+      "status": "pass",
+      "evidence": "Atomic commit, failure rollback, undo, and redo tests passed in the 1146-test suite; the gated Prompt 12 E2E and both consecutive Prompt 13 integrations passed with matching world/simulation/map revisions."
+    }
+  },
+  "remainingAuthoritativeConnections": [
+    "PoliticsViewPort backed by an authoritative political read model.",
+    "EconomyViewPort backed by authoritative economy and one shared nullable population value.",
+    "RelationshipViewPort backed by revisioned ordered country-pair scores.",
+    "WarsViewPort plus separately versioned front and occupation geometry.",
+    "DiplomacyViewPort and a nullable DiplomacyChannelPort that renders server responses only.",
+    "Nullable GameSavePort that reports success only after durable server persistence."
+  ],
+  "screenshots": [
+    "screenshots/prompt13-13-shell-repair-1280x720.png",
+    "screenshots/prompt13-13-shell-repair-1920x1080.png",
+    "screenshots/prompt13-23-action-1280x720.png",
+    "screenshots/prompt13-23-action-1920x1080.png",
+    "screenshots/prompt13-32-hud-map-1280x720.png",
+    "screenshots/prompt13-32-hud-map-1920x1080.png",
+    "screenshots/prompt13-32-overlay-1280x720.png",
+    "screenshots/prompt13-32-overlay-1920x1080.png",
+    "screenshots/prompt13-32-modal-1280x720.png",
+    "screenshots/prompt13-32-modal-1920x1080.png"
+  ],
+  "tests": [
+    "145/145 Vitest files and 1146/1146 tests passed.",
+    "Canonical 23/23 Playwright tests passed twice consecutively using the repository's one-worker configuration.",
+    "All production/E2E bundle, secret, browser-storage, fixture, authoritative-empty-state, overlay, acknowledgement, Prompt 11, and Prompt 12 audits passed."
+  ],
+  "knownLimitations": [
+    "The authoritative political, economy/population, relationship, war/front, diplomacy, and server-save providers are future backend/domain work by design.",
+    "The E2E artifact intentionally contains deterministic scenario tooling and must never be deployed as the production .next output.",
+    "Screens below 1280x720 continue to use the explicit unsupported-screen layer.",
+    "Generated Turbopack cache directories were removed after verification because they retained environment values; future local builds may recreate them and require the same pre-handoff purge."
+  ],
+  "nextStage": null
+}

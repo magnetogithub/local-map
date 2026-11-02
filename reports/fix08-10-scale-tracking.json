@@ -1,0 +1,118 @@
+{
+  "stage": "8-10",
+  "status": "pass",
+  "inputHashes": {
+    "reports/fix08-9-representative-glyphs.json": "276d1c1c7f803fc05b8c0127e14de1a39ae92f014d5586c0f4459a6b9a9f71a7"
+  },
+  "outputHashes": {
+    "src/lib/map/font-outline.ts": "41f0a0a34d2f721571dd765971eb27efa3ef77d142c7428f9839d7f1404791ff",
+    "src/lib/map/country-label-glyph-geometry.ts": "e535915db2165ee6dad99fa5d2d222fab716192764afe7fc2c71a5ae263814be",
+    "src/lib/map/country-label-glyph-geometry.test.ts": "54357dcf1bec039eec623c461f7856c455a64aec63646f7b44386210e6feb0ca",
+    "src/lib/world/country-map-artifacts.test.ts": "dc8348c0afc407a754df084bc094448623602ff2dd3f7c4a7872ebe12f42f1b4",
+    "public/data/maps/country-label-glyph-fills-2020.geojson": "367fc5c4569681c3bacb7fdc8ab4175224ac5c316b931a0377a2e6946ffed16a",
+    "public/data/maps/country-label-glyph-outlines-2020.geojson": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c"
+  },
+  "changedFiles": [
+    "src/lib/map/font-outline.ts",
+    "src/lib/map/country-label-glyph-geometry.ts",
+    "src/lib/map/country-label-glyph-geometry.test.ts",
+    "src/lib/world/country-map-artifacts.test.ts",
+    "public/data/maps/country-label-glyph-fills-2020.geojson",
+    "public/data/maps/country-label-glyph-outlines-2020.geojson",
+    "reports/fix08-10-scale-tracking.json"
+  ],
+  "oldSingleScaleAudit": {
+    "removedFormula": "targetWidth / totalAdvance",
+    "formerOwner": "buildCountryLabelGlyphArtifact",
+    "callSites": [
+      "src/lib/map/country-label-glyph-export.test.ts",
+      "src/lib/map/country-label-glyph-geometry.test.ts",
+      "src/lib/world/country-map-artifacts.test.ts"
+    ],
+    "derivedFields": [
+      "advanceWorld",
+      "baselineDistanceWorld",
+      "labelWidthWorld",
+      "widthRatio",
+      "boundsWorld",
+      "insideRatio",
+      "geometry",
+      "artifactHash"
+    ],
+    "remainingSourceMatches": 0
+  },
+  "algorithm": {
+    "availableThicknessWorld": "layout.availableHeightWorld",
+    "glyphScale": "availableThicknessWorld * glyphHeightRatio / glyphOutlineHeightFontUnits",
+    "naturalGlyphSpan": "sum(shaped natural advances) * glyphScale",
+    "targetLabelSpan": "corridorLength * targetSpanRatio",
+    "trackingWorld": "(targetLabelSpan - naturalGlyphSpan) / (glyphCount - 1), or 0 for one glyph",
+    "trackingEm": "trackingWorld / (glyphScale * unitsPerEm)",
+    "layoutVersion": "world-glyph-v2"
+  },
+  "representatives": {
+    "AUS": {
+      "text": "오스트레일리아",
+      "glyphCount": 7,
+      "artifactHash": "aa490e7aec6a5cf82ab575a5ba16b67a5dd4942db1d09b18d1bb5afcfa3bb556",
+      "availableThicknessWorld": 28.241526,
+      "glyphScale": 0.006234,
+      "glyphHeightWorld": 5.648305,
+      "naturalGlyphSpan": 40.149101,
+      "targetLabelSpan": 40.653202,
+      "trackingWorld": 0.084017,
+      "trackingEm": 0.013476,
+      "insideRatio": 0.951422,
+      "holeCount": 3
+    },
+    "RUS": {
+      "text": "러시아",
+      "glyphCount": 3,
+      "artifactHash": "16c0e7480ee5d3d664e1e582ac528eb01dabaef60f7876dc91a73165a6801a08",
+      "availableThicknessWorld": 37.050806,
+      "glyphScale": 0.008179,
+      "glyphHeightWorld": 7.410161,
+      "naturalGlyphSpan": 22.574001,
+      "targetLabelSpan": 76.828552,
+      "trackingWorld": 27.127275,
+      "trackingEm": 3.316704,
+      "insideRatio": 1,
+      "holeCount": 1
+    }
+  },
+  "syntheticCoverage": [
+    {"text": "가", "bucket": "1-character"},
+    {"text": "가나", "bucket": "2-3-character"},
+    {"text": "가나다라", "bucket": "4-6-character"},
+    {"text": "가나다라마바사", "bucket": "7+-character"}
+  ],
+  "commands": [
+    {"command": "$env:PAX_FIX08_5_EXPORT='1'; npm.cmd test -- src/lib/map/country-label-glyph-export.test.ts", "exitCode": 0},
+    {"command": "npm.cmd test -- src/lib/map/country-label-glyph-geometry.test.ts src/lib/world/country-map-artifacts.test.ts src/lib/map/country-label-glyph-export.test.ts", "exitCode": 0, "result": "3 files, 19 tests passed"},
+    {"command": "$env:PAX_FIX08_3_SUMMARY='1'; npx.cmd vitest run src/lib/map/country-label-glyph-geometry.test.ts --reporter=verbose", "exitCode": 0, "result": "10 tests passed"},
+    {"command": "npx.cmd eslint src/lib/map/font-outline.ts src/lib/map/country-label-glyph-geometry.ts src/lib/map/country-label-glyph-geometry.test.ts src/lib/world/country-map-artifacts.test.ts", "exitCode": 0},
+    {"command": "npx.cmd tsc --noEmit --pretty false", "exitCode": 0},
+    {"command": "npm.cmd run build", "exitCode": 0, "result": "production compile, type checking, and static generation passed after approved retry"},
+    {"command": "npx.cmd playwright test e2e/fix08-5.spec.ts e2e/fix08-6.spec.ts e2e/fix08-7.spec.ts --workers=1 --timeout=180000", "exitCode": 0, "result": "3 tests passed"},
+    {"command": "npm.cmd run lint", "exitCode": 0, "result": "0 errors, 2 pre-existing warnings in scripts/prepare-map-data.mjs"}
+  ],
+  "gates": {
+    "glyphSizeAndLabelSpanSeparated": true,
+    "rusGlyphHeightWithinTerritoryThickness": true,
+    "ausAboveReadabilityFloor": true,
+    "glyphOrderPreserved": true,
+    "holesPreserved": true,
+    "datelinePreserved": true,
+    "deterministicGeometryAndHash": true,
+    "noZoomBandOrPixelCap": true
+  },
+  "implementationErrors": [],
+  "environmentErrors": [
+    {
+      "command": "npm.cmd run build (sandboxed first attempt)",
+      "error": ".next cache EPERM",
+      "resolution": "approved retry passed"
+    }
+  ],
+  "nextStage": "8-11"
+}

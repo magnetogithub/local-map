@@ -1,0 +1,23 @@
+{
+  "pass": true,
+  "file": "tsconfig.json",
+  "removed": [
+    ".next-chn-2020-dev/types/**/*.ts",
+    ".next-chn-2020-dev/dev/types/**/*.ts",
+    ".next-chn-2020-app/types/**/*.ts",
+    ".next-chn-2020-app/dev/types/**/*.ts",
+    ".next-chn-2020-qa/types/**/*.ts",
+    ".next-chn-2020-qa/dev/types/**/*.ts",
+    ".next-chn-2020-webpack/types/**/*.ts",
+    ".next-chn-2020-webpack/dev/types/**/*.ts"
+  ],
+  "otherSettingsPreserved": true,
+  "before": {
+    "sha256": "05cb91a8ed4133c78f51e036264dc3f1d10e85a7c1fc412b74f8b9ff9fbb994e",
+    "byteLength": 1751
+  },
+  "after": {
+    "sha256": "5ff57473858449e98053cd5aebf23fdaf8093cdbf6182fd3565604ce3e370c2e",
+    "byteLength": 1471
+  }
+}

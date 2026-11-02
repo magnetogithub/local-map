@@ -1,0 +1,73 @@
+{
+  "stage": "10-3",
+  "status": "pass",
+  "objective": "Inventory runtime country-data ownership across CountryEntity, static countryById, Zustand, and selection stores, classified as runtime-read, seed-only, or test-only.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-2-replaced-stage-freeze.json": "aebfc210660778c5a27a8810749f9060cbf9a950e0c7e0bf750d569b7a416b39"
+  },
+  "outputHashes": {
+    "runtimeCountryOwnerAudit": "17a1965586c7f4d248c3f4926942cabf98f232b1acddc9748701f87f16864856"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-3-runtime-country-owner-audit.json"
+  ],
+  "commands": [
+    {"command": "Verify 10-2 status and direct output hashes", "exitCode": 0, "durationMs": 50},
+    {"command": "Scan CountryEntity, static countryById, WorldState store, selection store, product consumers, seeds, and tests", "exitCode": 0, "durationMs": 70},
+    {"command": "Run initial targeted ownership classification audit", "exitCode": 1, "durationMs": 44, "note": "GameSetupShell.tsx was detected as an unclassified interaction-store consumer."},
+    {"command": "Classify GameSetupShell.tsx and rerun the targeted ownership audit", "exitCode": 0, "durationMs": 54},
+    {"command": "npm.cmd run lint -- reports/prompt10/10-3-runtime-country-owner-audit.json", "exitCode": 0, "durationMs": 2361, "note": "ESLint emitted one ignored-JSON warning and zero errors."},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0, "durationMs": 2518}
+  ],
+  "measurements": {
+    "ownershipSurfaceCount": 9,
+    "discoveredProductFiles": 11,
+    "runtimeReadClassifications": 6,
+    "seedOnlyClassifications": 1,
+    "testOnlyClassifications": 2,
+    "unclassifiedRuntimeOwnerPaths": 0,
+    "staticCountryIndexRuntimeConsumers": 5,
+    "worldStateStoreProductConsumers": 0,
+    "lintErrors": 0,
+    "lintWarnings": 1,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 0,
+    "auditTable": [
+      {"surface": "src/data/countries-2020.json", "classification": "runtime-read", "owner": "generated seed file", "role": "Static metadata imported into the product bundle through country-index."},
+      {"surface": "src/lib/country/country-index.ts", "classification": "runtime-read", "owner": "module-scoped countries and countryById", "role": "Current product UI metadata/search authority."},
+      {"surface": "src/lib/world/world-state.ts", "classification": "runtime-read", "owner": "caller-owned immutable WorldState snapshots", "role": "CountryEntity and countriesById domain model used by pure commands; no singleton owner."},
+      {"surface": "src/lib/world/initial-world-state.ts", "classification": "seed-only", "owner": "seed constructor", "role": "Builds WorldState from metadata, geometry, and capitals; currently imported only by tests."},
+      {"surface": "src/stores/world-state-store.ts", "classification": "test-only", "owner": "per-controller Zustand vanilla store", "role": "Runtime-capable canonical store implementation with no non-test product importer."},
+      {"surface": "src/stores/game-setup-store.ts", "classification": "runtime-read", "owner": "Zustand interaction state", "role": "Owns hovered/selected/player IDs only and validates them against static countryById."},
+      {"surface": "src/lib/commands/*.ts", "classification": "runtime-read", "owner": "pure transition callers", "role": "Read or return caller-owned WorldState; do not own persistent country data."},
+      {"surface": "src/components/map/MapSearch.tsx; src/components/map/WorldMap.tsx; src/components/country/CountryPanel.tsx; src/components/layout/GameSetupShell.tsx; src/lib/storage/game-setup-storage.ts", "classification": "runtime-read", "owner": "none (consumers)", "role": "Read static country-index data or interaction IDs; GameSetupShell only triggers persisted-ID restoration."},
+      {"surface": "src/**/*.test.ts(x); reports/prompt09/9-2-benchmark.test.ts", "classification": "test-only", "owner": "test fixtures", "role": "Construct or inspect isolated WorldState and store instances."}
+    ]
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "currentPromptTenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeAudit": true,
+    "allRuntimeCountryOwnersInventoried": true,
+    "allRuntimeOwnerPathsClassified": true,
+    "unclassifiedRuntimeOwnerPathsZero": true,
+    "staticAndDynamicOwnershipDistinguished": true,
+    "interactionIdsSeparatedFromCountryEntities": true,
+    "productCodeUnmodified": true,
+    "targetedAuditPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [
+    "The first audit omitted GameSetupShell.tsx, which restores persisted interaction state through useGameSetupStore; the consumer was added before final validation."
+  ],
+  "environmentErrors": [
+    "The repository ESLint configuration does not include JSON files, so the target-lint command completed with one ignored-file warning."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-4"
+}

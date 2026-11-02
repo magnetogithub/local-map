@@ -1,0 +1,81 @@
+{
+  "head": "3d156a4d116d9ddfd71ff8c90e9771588035d3f5",
+  "status": "",
+  "files": [
+    {
+      "repositoryPath": "AGENTS.md",
+      "sha256": "ec1b6e023814ae1a510b02ea62229e5eb035d75e39e3335d5ea7f5ce5654d567",
+      "byteLength": 687
+    },
+    {
+      "repositoryPath": "prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt",
+      "sha256": "036daea0289fc7c2e909cffe19910227249fcb4bf5d8e60fe145584c30bce632",
+      "byteLength": 46538
+    },
+    {
+      "repositoryPath": "scripts/prompt14-source-gate.mjs",
+      "sha256": "41dff2cccae7c082693e9ed32b14bf245e5df10e051fba4fbed1ffaf2caeeda5",
+      "byteLength": 39654
+    },
+    {
+      "repositoryPath": "scripts/prompt14-source-gate.test.mjs",
+      "sha256": "3fd500d19a33798abfc9eb08833e072ea791cb89f676c7d79d472d678a505536",
+      "byteLength": 17280
+    },
+    {
+      "repositoryPath": "scripts/audit-prompt14-stage-1-2.mjs",
+      "sha256": "6bc98015ac10b6ce4c494ad43646335f724c27bd5e15b119e03818d3eafba008",
+      "byteLength": 23329
+    },
+    {
+      "repositoryPath": "reports/prompt14/14-01-baseline-runtime-data-audit.json",
+      "sha256": "19bcd5a01a5a209abfd565c144c47eb90ea75d7125ca18176735831413fe7d2d",
+      "byteLength": 164521
+    },
+    {
+      "repositoryPath": "reports/prompt14/14-02-source-generation-delivery-decision.json",
+      "sha256": "2d8a4db8eb40e5dcc08164977a3862370b27f1600abfd1ca3cf3c0a11ddab88e",
+      "byteLength": 228965
+    },
+    {
+      "repositoryPath": "reports/prompt14/14-02-admin1-parent-resolution.json",
+      "sha256": "c74eb871c284ca57207853f052279fd242f62f1fa4f760f94fc2d9fccd7a59c9",
+      "byteLength": 1657245
+    },
+    {
+      "repositoryPath": "data/source-locks/prompt14-production-polygon-sources.json",
+      "sha256": "405a23b6aff5e0fe56cde3b0f1b738b11034ac180e179bb60e393721ccc57863",
+      "byteLength": 9913
+    },
+    {
+      "repositoryPath": "data/raw/ne_10m_admin_0_countries.geojson",
+      "sha256": "c7c969a764055d98b041549e264f60285e07f7d5221265c517cbc22e16222464",
+      "byteLength": 13287235
+    },
+    {
+      "repositoryPath": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+      "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+      "byteLength": 40726852
+    },
+    {
+      "repositoryPath": "public/data/maps/countries-10m.geojson",
+      "sha256": "ad94231dd8b5b0d7647a64c160833eccb289afa5b636c13fd1a02fcf8345cba8",
+      "byteLength": 11241685
+    },
+    {
+      "repositoryPath": "src/data/countries-2020.json",
+      "sha256": "2abf1bf755ea9225e0ff83dfb7a9692bd121dc50c7ea69ab45cc8f6da7bded3f",
+      "byteLength": 78492
+    },
+    {
+      "repositoryPath": "package.json",
+      "sha256": "7a48ecc55f30509a51edd62ff61c2ebfeda88b76fb51d03bb1d69bbd89fdbce8",
+      "byteLength": 1399
+    },
+    {
+      "repositoryPath": "package-lock.json",
+      "sha256": "5aeba8ebe7bae4d2b876dbe5cacac675ef328f62e9cb858c954c9d9ea811cfb5",
+      "byteLength": 344913
+    }
+  ]
+}

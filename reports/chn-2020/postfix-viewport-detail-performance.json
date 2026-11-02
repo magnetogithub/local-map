@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "chn-2020-viewport-detail-performance-v1",
+  "pass": true,
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+  "pointer": {
+    "path": "reports/chn-2020/candidate-runtime-pointer.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251
+  },
+  "conditions": {
+    "transport": "actual checked local files through production vector loader",
+    "cold": "fresh loader caches; OS file cache not flushed",
+    "warm": "same viewport and loader",
+    "browserRenderMeasured": false,
+    "externalAiCalls": 0
+  },
+  "results": [
+    {
+      "name": "chn-prk",
+      "bounds": [
+        124.1,
+        39.9,
+        124.6,
+        40.4
+      ],
+      "coldMs": 1242.2836000000002,
+      "warmMs": 7.309499999999844,
+      "cells": 6,
+      "edges": 31,
+      "returnedJsonBytes": 253969,
+      "compressedBytes": 14432648,
+      "requests": [
+        {
+          "path": "metadata/countries/CHN.json.gz",
+          "bytes": 138130
+        },
+        {
+          "path": "detail/cells/CHN/0050.geojson.gz",
+          "bytes": 386688
+        },
+        {
+          "path": "detail/topology/001.json.gz",
+          "bytes": 2084990
+        },
+        {
+          "path": "detail/topology/002.json.gz",
+          "bytes": 3004844
+        },
+        {
+          "path": "detail/topology/003.json.gz",
+          "bytes": 3072999
+        },
+        {
+          "path": "detail/topology/004.json.gz",
+          "bytes": 2912070
+        },
+        {
+          "path": "detail/topology/005.json.gz",
+          "bytes": 2832927
+        }
+      ],
+      "warmRequests": [],
+      "cache": {
+        "verifiedRequests": 11,
+        "cacheHits": 0,
+        "cachedEntries": 4,
+        "cachedBytes": 31486553,
+        "cachedCountries": 1,
+        "countryMetadataBuilds": 1,
+        "parsedShardBuilds": 6,
+        "parsedShardHits": 0,
+        "parsedShardEntries": 1,
+        "parsedShardBytes": 1012459,
+        "exactCellCacheHits": 6,
+        "cachedExactCells": 6,
+        "cachedExactCellEstimatedBytes": 260696,
+        "cachedCellShardBounds": 1,
+        "exactEdgeCacheHits": 31,
+        "cachedExactEdges": 31,
+        "cachedExactEdgeEstimatedBytes": 225216
+      }
+    },
+    {
+      "name": "shanghai",
+      "bounds": [
+        121.2,
+        31,
+        121.7,
+        31.4
+      ],
+      "coldMs": 1409.672,
+      "warmMs": 14.754500000000007,
+      "cells": 16,
+      "edges": 49,
+      "returnedJsonBytes": 772259,
+      "compressedBytes": 16085552,
+      "requests": [
+        {
+          "path": "metadata/countries/CHN.json.gz",
+          "bytes": 138130
+        },
+        {
+          "path": "detail/cells/CHN/0026.geojson.gz",
+          "bytes": 608444
+        },
+        {
+          "path": "detail/cells/CHN/0027.geojson.gz",
+          "bytes": 550153
+        },
+        {
+          "path": "detail/cells/CHN/0028.geojson.gz",
+          "bytes": 393178
+        },
+        {
+          "path": "detail/cells/CHN/0031.geojson.gz",
+          "bytes": 487817
+        },
+        {
+          "path": "detail/topology/001.json.gz",
+          "bytes": 2084990
+        },
+        {
+          "path": "detail/topology/002.json.gz",
+          "bytes": 3004844
+        },
+        {
+          "path": "detail/topology/003.json.gz",
+          "bytes": 3072999
+        },
+        {
+          "path": "detail/topology/004.json.gz",
+          "bytes": 2912070
+        },
+        {
+          "path": "detail/topology/005.json.gz",
+          "bytes": 2832927
+        }
+      ],
+      "warmRequests": [],
+      "cache": {
+        "verifiedRequests": 14,
+        "cacheHits": 0,
+        "cachedEntries": 4,
+        "cachedBytes": 31486553,
+        "cachedCountries": 1,
+        "countryMetadataBuilds": 1,
+        "parsedShardBuilds": 9,
+        "parsedShardHits": 0,
+        "parsedShardEntries": 3,
+        "parsedShardBytes": 3794467,
+        "exactCellCacheHits": 16,
+        "cachedExactCells": 16,
+        "cachedExactCellEstimatedBytes": 818368,
+        "cachedCellShardBounds": 4,
+        "exactEdgeCacheHits": 49,
+        "cachedExactEdges": 49,
+        "cachedExactEdgeEstimatedBytes": 546624
+      }
+    },
+    {
+      "name": "hainan",
+      "bounds": [
+        109.2,
+        18.1,
+        109.8,
+        18.6
+      ],
+      "coldMs": 1180.0046000000002,
+      "warmMs": 2.9606000000003405,
+      "cells": 8,
+      "edges": 27,
+      "returnedJsonBytes": 182117,
+      "compressedBytes": 14640505,
+      "requests": [
+        {
+          "path": "metadata/countries/CHN.json.gz",
+          "bytes": 138130
+        },
+        {
+          "path": "detail/cells/CHN/0002.geojson.gz",
+          "bytes": 289507
+        },
+        {
+          "path": "detail/cells/CHN/0003.geojson.gz",
+          "bytes": 305038
+        },
+        {
+          "path": "detail/topology/001.json.gz",
+          "bytes": 2084990
+        },
+        {
+          "path": "detail/topology/002.json.gz",
+          "bytes": 3004844
+        },
+        {
+          "path": "detail/topology/003.json.gz",
+          "bytes": 3072999
+        },
+        {
+          "path": "detail/topology/004.json.gz",
+          "bytes": 2912070
+        },
+        {
+          "path": "detail/topology/005.json.gz",
+          "bytes": 2832927
+        }
+      ],
+      "warmRequests": [],
+      "cache": {
+        "verifiedRequests": 12,
+        "cacheHits": 0,
+        "cachedEntries": 4,
+        "cachedBytes": 31486553,
+        "cachedCountries": 1,
+        "countryMetadataBuilds": 1,
+        "parsedShardBuilds": 7,
+        "parsedShardHits": 0,
+        "parsedShardEntries": 2,
+        "parsedShardBytes": 1558002,
+        "exactCellCacheHits": 8,
+        "cachedExactCells": 8,
+        "cachedExactCellEstimatedBytes": 191584,
+        "cachedCellShardBounds": 2,
+        "exactEdgeCacheHits": 27,
+        "cachedExactEdges": 27,
+        "cachedExactEdgeEstimatedBytes": 172480
+      }
+    },
+    {
+      "name": "west",
+      "bounds": [
+        79.7,
+        35,
+        80.3,
+        35.5
+      ],
+      "coldMs": 1218.8512,
+      "warmMs": 5.46730000000025,
+      "cells": 3,
+      "edges": 18,
+      "returnedJsonBytes": 261908,
+      "compressedBytes": 14729543,
+      "requests": [
+        {
+          "path": "metadata/countries/CHN.json.gz",
+          "bytes": 138130
+        },
+        {
+          "path": "detail/cells/CHN/0000.geojson.gz",
+          "bytes": 683583
+        },
+        {
+          "path": "detail/topology/001.json.gz",
+          "bytes": 2084990
+        },
+        {
+          "path": "detail/topology/002.json.gz",
+          "bytes": 3004844
+        },
+        {
+          "path": "detail/topology/003.json.gz",
+          "bytes": 3072999
+        },
+        {
+          "path": "detail/topology/004.json.gz",
+          "bytes": 2912070
+        },
+        {
+          "path": "detail/topology/005.json.gz",
+          "bytes": 2832927
+        }
+      ],
+      "warmRequests": [],
+      "cache": {
+        "verifiedRequests": 11,
+        "cacheHits": 0,
+        "cachedEntries": 4,
+        "cachedBytes": 31486553,
+        "cachedCountries": 1,
+        "countryMetadataBuilds": 1,
+        "parsedShardBuilds": 6,
+        "parsedShardHits": 0,
+        "parsedShardEntries": 1,
+        "parsedShardBytes": 1696606,
+        "exactCellCacheHits": 3,
+        "cachedExactCells": 3,
+        "cachedExactCellEstimatedBytes": 238284,
+        "cachedCellShardBounds": 1,
+        "exactEdgeCacheHits": 18,
+        "cachedExactEdges": 18,
+        "cachedExactEdgeEstimatedBytes": 240000
+      }
+    }
+  ]
+}

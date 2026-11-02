@@ -1,0 +1,53 @@
+{
+  "stage": "10-29",
+  "status": "pass",
+  "objective": "Define separate, namespaced input contracts for commitHash, artifactHash, and historyHash.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-28-world-content-hash.json": "f357108be889a64f6a126224225e5ba1621129037b7ca731f41917fa92e7ee0a",
+    "src/lib/world/world-content-hash.ts": "f86905fee216ce3d8b4e5f6fa05539fcd2ded2a15a4dc39488d1bf4ae108dbac"
+  },
+  "outputHashes": {
+    "src/lib/world/purpose-hashes.ts": "fe134b835b6a24c07e617e5139992d808d3a3b62fa0dcfcc9cfe2e550c14b640",
+    "src/lib/world/purpose-hashes.test.ts": "32da8399ea5fb016886509b5d38388aca2457ab16265b3cea2b9e22ad438ecd8"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-29-purpose-hash-contracts.json",
+    "src/lib/world/purpose-hashes.test.ts",
+    "src/lib/world/purpose-hashes.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-28 status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/purpose-hashes.test.ts", "exitCode": 1, "note": "Expected red test: purpose-hashes module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/purpose-hashes.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/purpose-hashes.ts src/lib/world/purpose-hashes.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 1,
+    "targetedTestsPassed": 6,
+    "explicitPurposeContracts": 3,
+    "implicitSharedInputSets": 0,
+    "purposeNamespaceCollisions": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "commitContractExplicit": true,
+    "artifactContractExplicit": true,
+    "historyContractExplicit": true,
+    "purposeNamespacesDistinct": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-30"
+}

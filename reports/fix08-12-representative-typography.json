@@ -1,0 +1,22 @@
+{
+  "stage":"8-12",
+  "status":"fail",
+  "reason":"The visual overflow defect is fixed, but the corrected 0.23 common height ratio does not satisfy the prompt's original 0.30 minimum. The stage is not being falsely marked pass.",
+  "inputHashes":{"reports/fix08-11-angle-curvature.json":"7674fce3be0930f6df55dce57cb972928eaaabf707d89c07557137b3f3b82eb5"},
+  "correctedPolicy":{"version":"country-label-typography-v2","sha256":"2c8502f759dc2eeee7c2625047342f77e33b27a4d430944f220931fcf160786e","commonGlyphHeightRatio":0.23,"CHLGlyphHeightRatio":0.72,"maxScreenWidthToTerritoryRatio":1.15,"minimumInsideRatio":0.85},
+  "typographyTable":[
+    {"countryId":"RUS","glyphHeightRatio":0.23,"labelSpanRatio":0.781306,"trackingEm":2.70409,"maxAbsoluteAngle":7.32295,"maxAdjacentAngleDelta":1.299212,"insideRatio":0.998017},
+    {"countryId":"CHN","glyphHeightRatio":0.23,"labelSpanRatio":0.752091,"trackingEm":3.292974,"maxAbsoluteAngle":7.686448,"maxAdjacentAngleDelta":2.285148,"insideRatio":0.998954},
+    {"countryId":"AUS","glyphHeightRatio":0.23,"labelSpanRatio":0.922307,"trackingEm":0,"maxAbsoluteAngle":10.083855,"maxAdjacentAngleDelta":0.619068,"insideRatio":0.89109},
+    {"countryId":"USA","glyphHeightRatio":0.23,"labelSpanRatio":0.695611,"trackingEm":3.210694,"maxAbsoluteAngle":6.436585,"maxAdjacentAngleDelta":1.724684,"insideRatio":0.994956},
+    {"countryId":"CHL","glyphHeightRatio":0.72,"labelSpanRatio":0.785626,"trackingEm":0,"maxAbsoluteAngle":35,"maxAdjacentAngleDelta":0,"insideRatio":0.940519},
+    {"countryId":"IDN","glyphHeightRatio":0.23,"labelSpanRatio":0.823992,"trackingEm":0,"maxAbsoluteAngle":30.693233,"maxAdjacentAngleDelta":0.615645,"insideRatio":1}
+  ],
+  "visualCorrection":{"AUS":{"previousScreenWidthRatio":1.456862758,"correctedScreenWidthRatio":1.11668195,"previousInsideRatio":0.80254,"correctedInsideRatio":0.89109,"visualOverflowFixed":true},"RUS":{"screenWidthRatio":0.902901315},"zoomDrift":{"AUS":0,"RUS":0}},
+  "gates":{"visualOverflowFixed":true,"screenWidthRatioWithin1_15":true,"insideRatioAtLeast0_85":true,"trackingWithin0To3_5":true,"anglesWithinPolicy":true,"viewportClippingAbsent":true,"oneInstancePerWorldCopy":true,"originalGlyphHeightRatio030To072":false},
+  "firstFailedGate":"originalGlyphHeightRatio030To072",
+  "outputHashes":{"src/data/country-label-typography-policy-v1.json":"2c8502f759dc2eeee7c2625047342f77e33b27a4d430944f220931fcf160786e","src/lib/map/country-label-glyph-geometry.test.ts":"6ae8f2ced122bea26255075616bf9ccba047e61d6fd7b429051bdb59a43f772d","src/lib/map/country-label-glyph-export.test.ts":"cf3571f7fc82201a8030adefd20a96709a232a11c595801adb460ac098be832d","e2e/fix08-7.spec.ts":"3c0f521b96d211f43b6fa8fbecd036948736ebbe283936073b08f28b95648941","public/data/maps/country-label-glyph-fills-2020.geojson":"11c21ec45d03ff57c82b81c6180b541e30b37f7ee22abb4d0a1e36b81d8132cc","screenshots/fix08-12-aus-after.png":"6317df379376f71e322e28412977db5884a5eaa9c9d69268d66daf16f7d8599b"},
+  "commands":[{"command":"corrected representative summary","exitCode":0,"result":"24 tests passed after assertion correction"},{"command":"focused unit suite","exitCode":0,"result":"3 files, 33 tests passed"},{"command":"8-7 visual width and zoom continuity E2E","exitCode":0,"result":"AUS ratio 1.116682; RUS ratio 0.902901; drift 0"},{"command":"8-12 fixed-camera E2E","exitCode":0},{"command":"typecheck/lint/build","exitCode":0,"result":"0 lint errors, build passed"}],
+  "invalidatesLaterReport":"reports/fix08-13-typography-policy.json",
+  "nextStage":"8-12"
+}

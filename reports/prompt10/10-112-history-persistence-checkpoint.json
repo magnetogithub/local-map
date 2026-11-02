@@ -1,0 +1,91 @@
+{
+  "checkpoint": "10-107~10-112",
+  "name": "history and persistence checkpoint",
+  "status": "pass",
+  "completedAt": "2026-09-21T09:32:00+09:00",
+  "policy": {
+    "promptFileModified": false,
+    "promptFile": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "promptFileSha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+    "reportingMode": "checkpoint-only",
+    "repeatedPastChainValidation": false
+  },
+  "inputCheckpoint": {
+    "file": "reports/prompt10/10-106-label-projection-checkpoint.json",
+    "sha256": "882808dca052f91b8dac28959cbe994dfc2d73e53921081c6d9c8473e5260fb4"
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/planning/history-persistence-checkpoint.ts",
+        "sha256": "81898feadeccc64f1c32392db99a88affc0d09336a65d74b8c992780787e640d",
+        "purpose": "Domain-scoped before/after history image capture, undo/redo commits, history pointer/hash tracking, WorldState v2 serialization, and Prompt 09 save migration."
+      },
+      {
+        "path": "src/lib/planning/history-persistence-checkpoint.test.ts",
+        "sha256": "cb3ad24abbaf829ec8df4c81f3d4df850e4e78df4ed13191147ca9116cf745d7",
+        "purpose": "Targeted checkpoint tests for before-image scope, undo/redo content hashes, history pointer continuity, v2 persistence filtering, and Prompt 09 migration safety."
+      }
+    ]
+  },
+  "stageCoverage": {
+    "10-107": {
+      "status": "pass",
+      "evidence": "Before-image capture is limited to affected domain modules: countries, territories, topology edges, and retired country ids."
+    },
+    "10-108": {
+      "status": "pass",
+      "evidence": "Undo applies the stored before-image as a new committed WorldState revision and restores the prior domain content hash."
+    },
+    "10-109": {
+      "status": "pass",
+      "evidence": "Redo applies the stored after-image as a new committed WorldState revision and restores the originally applied content hash."
+    },
+    "10-110": {
+      "status": "pass",
+      "evidence": "History pointer truncation, undo, redo, currentRevision, and historyHash are tracked continuously without store revision mismatch."
+    },
+    "10-111": {
+      "status": "pass",
+      "evidence": "WorldState v2 serialization contains only domain modules and hash roots; transient projection, MapLibre, worker, function, and cache fields are rejected."
+    },
+    "10-112": {
+      "status": "pass",
+      "evidence": "Prompt 09 migration accepts legacy saves, ignores unknown/deleted country ids safely, and preserves the fallback committed WorldState v2 domain state."
+    }
+  },
+  "gates": {
+    "fullArtifactSnapshotCount": 0,
+    "booleanInverseCommandCount": 0,
+    "undoRevisionDecreaseCount": 0,
+    "historyHashStoreRevisionMismatchCount": 0,
+    "serializedTransientFieldCount": 0,
+    "unknownLegacyCountryIdCrashCount": 0
+  },
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/history-persistence-checkpoint.test.ts src/lib/planning/atomic-world-commit.test.ts",
+      "status": "pass",
+      "result": "2 test files passed, 14 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/history-persistence-checkpoint.ts src/lib/planning/history-persistence-checkpoint.test.ts",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "status": "pass",
+      "result": "108 test files passed, 907 tests passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "pass",
+      "result": "No whitespace errors; existing LF-to-CRLF working-copy warnings only."
+    }
+  ],
+  "nextCheckpoint": "10-113~10-118 performance and resilience checkpoint"
+}

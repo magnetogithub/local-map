@@ -1,0 +1,45 @@
+{
+  "stage": "19-01",
+  "state": "deleted",
+  "roots": [
+    {
+      "path": "data/derived/prompt15/15-19-operational-catalog-v1-683e84a4bcd2dc8a1276",
+      "files": 745,
+      "bytes": 220483368,
+      "deleted": true
+    },
+    {
+      "path": "data/derived/prompt15/15-19-operational-catalog-v2-2aec1da86420bc4aebe0",
+      "files": 745,
+      "bytes": 220484355,
+      "deleted": true
+    },
+    {
+      "path": "data/derived/prompt15/15-19-operational-catalog-v3-ae59d85d8dedbafc44f6",
+      "files": 745,
+      "bytes": 220492138,
+      "deleted": true
+    },
+    {
+      "path": "data/derived/prompt15/15-20-topology-membership-v1-22406931e1665b6ede05",
+      "files": 265,
+      "bytes": 391814685,
+      "deleted": true
+    },
+    {
+      "path": "data/derived/prompt15/15-21-world-delivery-v1-56fc6c79c216e6bd1a11",
+      "files": 6221,
+      "bytes": 524081048,
+      "deleted": true
+    },
+    {
+      "path": "data/runtime/operational-catalog/catalog-v3-56fc6c79c216e6bd1a11",
+      "files": 3,
+      "bytes": 799539,
+      "deleted": true
+    }
+  ],
+  "publicCopies": [
+    "catalog-v1-73e30c25c9637d6376cb65afa82483c6"
+  ]
+}

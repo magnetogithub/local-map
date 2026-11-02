@@ -1,0 +1,151 @@
+{
+  "prompt": "10-90",
+  "title": "country panel projection transition",
+  "status": "pass",
+  "createdAt": "2026-09-18T16:17:00+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-89",
+    "reportPath": "reports/prompt10/10-89-deletion-selection-cleanup.json",
+    "reportSha256": "da4073b349c218cbd68369e872dbe5c2eef4471d40b3e0ef399429283aef4dcf",
+    "status": "pass"
+  },
+  "objective": {
+    "action": "Render the country panel from a composition of Country core projection and independent input-module projection.",
+    "verification": "Giant CountryEntity fallback count is zero in the panel runtime."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/country-panel-projection.ts",
+        "sha256": "b77b695f5cf25d102791b014fe12df7b554d05d17dd231420981214ecd2c2176"
+      },
+      {
+        "path": "src/components/country/CountryPanel.tsx",
+        "sha256": "8f3848629d77d2970e249e72a7d801aad2b06476fffc43d887c43741a921072a"
+      },
+      {
+        "path": "src/components/country/CountryPanel.test.tsx",
+        "sha256": "ffcd7973bce75a128dd9cceb9dddf2258ac8c50e373fefa6458d733ab167f823"
+      },
+      {
+        "path": "src/stores/game-setup-store.ts",
+        "sha256": "38f7f7873e407dabda0a437bc4677b1d5dbba4f36ca11e6a86fccf9901984fa9"
+      }
+    ],
+    "projectionChanges": [
+      "Added CountryPanelProjection with separate coreById and inputById maps.",
+      "Added getCountryPanelView to compose panel display data only when both projections contain the selected active country.",
+      "Stored the committed country panel projection in the game setup store."
+    ],
+    "panelChanges": [
+      "CountryPanel now reads selected and player country display data through getCountryPanelView.",
+      "CountryPanel no longer imports the static country index or reads Country-shaped seed objects directly.",
+      "Player confirmation uses the projected countryId from the composed panel view."
+    ]
+  },
+  "measurements": {
+    "panelRuntimeFallbackAudit": {
+      "file": "src/components/country/CountryPanel.tsx",
+      "countryEntityReferences": 0,
+      "countryByIdReferences": 0,
+      "countryIndexReferences": 0,
+      "usesProjectionAdapter": true
+    },
+    "renderScenario": {
+      "selectedCountryId": "FRA",
+      "renderedNameKo": "프랑스",
+      "renderedCapitalKo": "파리",
+      "confirmedPlayerCountryId": "FRA",
+      "singlePlayerCountryAfterSecondConfirm": "JPN"
+    }
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/components/country/CountryPanel.test.tsx src/components/map/map-search-projection.test.ts src/stores/game-setup-selection-projection.test.ts src/lib/projection/country-search-index-patch.test.ts src/lib/storage/game-setup-storage.test.ts src/stores/world-state-country-selector.test.ts",
+        "status": "pass",
+        "testFiles": 6,
+        "tests": 16
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/components/country/CountryPanel.tsx src/components/country/CountryPanel.test.tsx src/lib/projection/country-panel-projection.ts src/stores/game-setup-store.ts",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "previousStageOutputHashRecorded": true,
+      "countryPanelComposesCoreAndInputProjection": true,
+      "countryPanelStaticCountryByIdFallbackZero": true,
+      "countryPanelCountryEntityFallbackZero": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-91",
+  "stage": "10-90",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-89-deletion-selection-cleanup.json": "da4073b349c218cbd68369e872dbe5c2eef4471d40b3e0ef399429283aef4dcf",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/components/country/CountryPanel.test.tsx": "ffcd7973bce75a128dd9cceb9dddf2258ac8c50e373fefa6458d733ab167f823",
+    "src/components/country/CountryPanel.tsx": "8f3848629d77d2970e249e72a7d801aad2b06476fffc43d887c43741a921072a",
+    "src/lib/projection/country-panel-projection.ts": "4d422956ed60f3c408526a3fc5d3c3d0d2606c0c9ec666956b057128723afb72",
+    "src/stores/game-setup-store.ts": "d6b1439444e7c13d35f224c3f041700a37d981c5959f104bc0a6b7cf8ef6bf47"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-90-country-panel-projection.json",
+    "src/components/country/CountryPanel.test.tsx",
+    "src/components/country/CountryPanel.tsx",
+    "src/lib/projection/country-panel-projection.ts",
+    "src/stores/game-setup-store.ts"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/projection/country-search-index-patch.test.ts src/components/map/map-search-projection.test.ts src/stores/game-setup-selection-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-player-policy-projection.test.ts",
+      "exitCode": 0,
+      "result": "5 files passed; 14 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/projection src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.test.ts",
+      "exitCode": 0,
+      "result": "6 files passed; 17 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/projection/country-search-index-patch.ts src/lib/projection/country-search-index-patch.test.ts src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-panel-projection.ts src/components/map/MapSearch.tsx src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.tsx src/components/country/CountryPanel.test.tsx src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "result": "102 files passed; 885 tests passed"
+    },
+    {
+      "command": "Get-FileHash -Algorithm SHA256 prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+      "exitCode": 0,
+      "result": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+    }
+  ],
+  "firstFailedGate": null
+}

@@ -1,0 +1,1 @@
+{"stage":"12-31","status":"pass","changedFiles":["src/app/api/simulation/turn/route.ts","src/lib/simulation/server/provider-route.test.ts"],"gates":{"malformedBodyStatus":400,"sizeLimitStatus":413,"missingConfigStatus":503,"validStreamStatus":200,"providerFailure":"typed terminal NDJSON event","contentType":"application/x-ndjson"}}

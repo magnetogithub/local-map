@@ -1,0 +1,4389 @@
+{
+  "pointerPath": "reports/chn-2020/candidate-runtime-pointer.json",
+  "contacts": [
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:cda22aab39246a4143f0691a6371553cd8e2b3b16fd0253e4906882c706326dd",
+        "ordinal": 6421,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+        "ordinal": 56,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:cda22aab39246a4143f0691a6371553cd8e2b3b16fd0253e4906882c706326dd",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.42257684629092,
+          42.68740583668574
+        ],
+        "areaKm2": 7503.864102065566,
+        "diameterKm": 192.72583533020247
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12180,
+        "start": [
+          128.363772,
+          42.02648
+        ],
+        "end": [
+          128.261969,
+          42.032862
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:123a5a699f80a24f83d6d68b1e8ac599f2fcb3dd2dbb461c5aeac7e6241f26ac",
+        "ordinal": 609,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12166,
+        "start": [
+          125.644816,
+          40.810585
+        ],
+        "end": [
+          125.668070121317,
+          40.788974302527
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:699f7fc9fb7ad073b77a4fd8cb2959bdb9e922d774920e066c6d1badd0d182f4",
+        "ordinal": 3328,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12167,
+        "start": [
+          125.216418,
+          40.602639
+        ],
+        "end": [
+          125.181537,
+          40.593957
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:6c2d5908b11fc8104b1713b2947b53247e018c41964a654e820dbbd4402e68d7",
+        "ordinal": 3420,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12189,
+        "start": [
+          125.533092,
+          40.721805
+        ],
+        "end": [
+          125.499642864296,
+          40.721095582934
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:dba248cfa7e9d41992f9608286a3488fd63cf4d1a0c68a237ce8cfe42acc1916",
+        "ordinal": 6892,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12170,
+        "start": [
+          124.572208067799,
+          40.253079878789
+        ],
+        "end": [
+          124.611184,
+          40.272168
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:faf579ad0d0c865bdd273aa005c0825ff4bb16bce26ff407e7271d7877e8fcc3",
+        "ordinal": 7844,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12181,
+        "start": [
+          124.849878,
+          40.43159
+        ],
+        "end": [
+          124.88368803487,
+          40.46540003487
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:fe19aedbdba4096e342ae53fdb42f2c9c7efccba945ae61169ca1796f667f96e",
+        "ordinal": 7935,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12185,
+        "start": [
+          125.05002,
+          40.541816
+        ],
+        "end": [
+          125.073585,
+          40.548017
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:fa49ace0acdc696285ad9419a2663ccc869f0bd469985516f3148aa166fd709b",
+        "ordinal": 7823,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+        "ordinal": 56,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:fa49ace0acdc696285ad9419a2663ccc869f0bd469985516f3148aa166fd709b",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.61054684209957,
+          42.27265360652659
+        ],
+        "areaKm2": 6097.410720094557,
+        "diameterKm": 150.42242733036767
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12157,
+        "start": [
+          128.020433,
+          41.965062
+        ],
+        "end": [
+          128.039967,
+          41.87959
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:21c755da37bd355ee40ceddfa0282632a943955a31c754281c0db8b9df4ba4a7",
+        "ordinal": 1118,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12186,
+        "start": [
+          130.336748352936,
+          42.642568291407
+        ],
+        "end": [
+          130.366882156826,
+          42.623106977631
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:2be5e65b70abadbf2e8b610660497dfc436d4ff05a17df50fe7537d0b4229ac3",
+        "ordinal": 1420,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12160,
+        "start": [
+          130.15231779942002,
+          42.90736585382644
+        ],
+        "end": [
+          130.193841,
+          42.908209
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:4a808e8401db947b4834ab6b263eafb209271dae3f7aa6c2be4b377acf4481ae",
+        "ordinal": 2356,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12158,
+        "start": [
+          130.471033,
+          42.569754
+        ],
+        "end": [
+          130.455117,
+          42.585154
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+        "ordinal": 7290,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12169,
+        "start": [
+          130.047286,
+          42.961901
+        ],
+        "end": [
+          130.094312,
+          42.976939
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "ordinal": 2176,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+        "ordinal": 56,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.89803313278688,
+          42.45846441676968
+        ],
+        "areaKm2": 4995.394309061831,
+        "diameterKm": 135.68756490350216
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12176,
+        "start": [
+          128.543709,
+          42.008057
+        ],
+        "end": [
+          128.516051632554,
+          42.000053684
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "ordinal": 2176,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:a80b38ff37554fa199f798cf8ff9620ecfc72ac66e79f917fa1b3f89383f6e06",
+        "ordinal": 5222,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.89803313278688,
+          42.45846441676968
+        ],
+        "areaKm2": 4995.394309061831,
+        "diameterKm": 135.68756490350216
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12171,
+        "start": [
+          128.817077,
+          42.043869
+        ],
+        "end": [
+          128.883172,
+          42.030409
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "ordinal": 2176,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:d365de97befd95eaec3e6fa8d13ebbcd9bb38895e696087acf60fa294b3d1519",
+        "ordinal": 6606,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.89803313278688,
+          42.45846441676968
+        ],
+        "areaKm2": 4995.394309061831,
+        "diameterKm": 135.68756490350216
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12177,
+        "start": [
+          129.03361318856213,
+          42.10739311655859
+        ],
+        "end": [
+          129.053342,
+          42.122856
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:123a5a699f80a24f83d6d68b1e8ac599f2fcb3dd2dbb461c5aeac7e6241f26ac",
+        "ordinal": 609,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12159,
+        "start": [
+          125.821963,
+          40.869755
+        ],
+        "end": [
+          125.79953339687037,
+          40.87755619084296
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:473d9f8fd0979fa5fda041692569bc2263ed6f28d7382e4fb9f3dcf14cbc1297",
+        "ordinal": 2240,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12179,
+        "start": [
+          126.542229,
+          41.488993
+        ],
+        "end": [
+          126.507606,
+          41.447239
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:a9e0c974aee3a7a860f01881c4bd2b61b38a4dd3d458af03cb060d16a92eaba7",
+        "ordinal": 5277,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12190,
+        "start": [
+          126.185711071029,
+          41.109461701053
+        ],
+        "end": [
+          126.260696,
+          41.143123
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:e94768f0cadac2f460253e7b0e13838d7d58f3dc92ef6433fa721b5feeb562c7",
+        "ordinal": 7316,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12182,
+        "start": [
+          125.96428,
+          40.891304
+        ],
+        "end": [
+          125.987653601597,
+          40.893460815992
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "ordinal": 555,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:0ffe00d85f52c3cac4f66bba0f4826cf3e46f2356d7b97c93dbabf85aa108ae0",
+        "ordinal": 538,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.19402488394812,
+          41.80304523270509
+        ],
+        "areaKm2": 2877.2301721367194,
+        "diameterKm": 117.8065324264995
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12163,
+        "start": [
+          126.769837194,
+          41.70574717983
+        ],
+        "end": [
+          126.741545,
+          41.729185
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "ordinal": 555,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:473d9f8fd0979fa5fda041692569bc2263ed6f28d7382e4fb9f3dcf14cbc1297",
+        "ordinal": 2240,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.19402488394812,
+          41.80304523270509
+        ],
+        "areaKm2": 2877.2301721367194,
+        "diameterKm": 117.8065324264995
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12178,
+        "start": [
+          126.633955,
+          41.668621
+        ],
+        "end": [
+          126.664925044021,
+          41.667307581339
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "ordinal": 555,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:523ece8da062943404e363c926de810338adb54c5174fb233bbed611a5aa7e7e",
+        "ordinal": 2594,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.19402488394812,
+          41.80304523270509
+        ],
+        "areaKm2": 2877.2301721367194,
+        "diameterKm": 117.8065324264995
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12188,
+        "start": [
+          127.120493779131,
+          41.608428490462
+        ],
+        "end": [
+          127.15836019867952,
+          41.59723430742009
+        ]
+      }
+    },
+    {
+      "stage": "default:first",
+      "cell": {
+        "id": "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e",
+        "ordinal": 7784,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+        "ordinal": 56,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.8618532264071,
+          41.58110553852252
+        ],
+        "areaKm2": 2270.5199843125097,
+        "diameterKm": 103.43658171837943
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12173,
+        "start": [
+          128.186005,
+          41.692908
+        ],
+        "end": [
+          128.224142,
+          41.669447
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:fa49ace0acdc696285ad9419a2663ccc869f0bd469985516f3148aa166fd709b",
+        "ordinal": 7823,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e",
+        "ordinal": 7784,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:fa49ace0acdc696285ad9419a2663ccc869f0bd469985516f3148aa166fd709b",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.61054684209957,
+          42.27265360652659
+        ],
+        "areaKm2": 6097.410720094557,
+        "diameterKm": 150.42242733036767
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 8579,
+        "start": [
+          128.04693579984735,
+          41.82325339982458
+        ],
+        "end": [
+          128.02116380026928,
+          41.818034900190526
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "ordinal": 555,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e",
+        "ordinal": 7784,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.19402488394812,
+          41.80304523270509
+        ],
+        "areaKm2": 2877.2301721367194,
+        "diameterKm": 117.8065324264995
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 10093,
+        "start": [
+          127.66416180002716,
+          41.672145900313126
+        ],
+        "end": [
+          127.70924379976157,
+          41.67542639960868
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:cda22aab39246a4143f0691a6371553cd8e2b3b16fd0253e4906882c706326dd",
+        "ordinal": 6421,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+        "ordinal": 56,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:cda22aab39246a4143f0691a6371553cd8e2b3b16fd0253e4906882c706326dd",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.42257684629092,
+          42.68740583668574
+        ],
+        "areaKm2": 7503.864102065566,
+        "diameterKm": 192.72583533020247
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12180,
+        "start": [
+          128.363772,
+          42.02648
+        ],
+        "end": [
+          128.261969,
+          42.032862
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:123a5a699f80a24f83d6d68b1e8ac599f2fcb3dd2dbb461c5aeac7e6241f26ac",
+        "ordinal": 609,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12166,
+        "start": [
+          125.644816,
+          40.810585
+        ],
+        "end": [
+          125.668070121317,
+          40.788974302527
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:699f7fc9fb7ad073b77a4fd8cb2959bdb9e922d774920e066c6d1badd0d182f4",
+        "ordinal": 3328,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12167,
+        "start": [
+          125.216418,
+          40.602639
+        ],
+        "end": [
+          125.181537,
+          40.593957
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:6c2d5908b11fc8104b1713b2947b53247e018c41964a654e820dbbd4402e68d7",
+        "ordinal": 3420,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12189,
+        "start": [
+          125.533092,
+          40.721805
+        ],
+        "end": [
+          125.499642864296,
+          40.721095582934
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:dba248cfa7e9d41992f9608286a3488fd63cf4d1a0c68a237ce8cfe42acc1916",
+        "ordinal": 6892,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12170,
+        "start": [
+          124.572208067799,
+          40.253079878789
+        ],
+        "end": [
+          124.611184,
+          40.272168
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:faf579ad0d0c865bdd273aa005c0825ff4bb16bce26ff407e7271d7877e8fcc3",
+        "ordinal": 7844,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12181,
+        "start": [
+          124.849878,
+          40.43159
+        ],
+        "end": [
+          124.88368803487,
+          40.46540003487
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "ordinal": 5035,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:fe19aedbdba4096e342ae53fdb42f2c9c7efccba945ae61169ca1796f667f96e",
+        "ordinal": 7935,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:a0e42345e3f817f7184069785f97786b7295c696fffa16634e12ea72ab1ad3ea",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.91910903687724,
+          40.75644246265159
+        ],
+        "areaKm2": 6260.7489360292075,
+        "diameterKm": 156.15684548976986
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12185,
+        "start": [
+          125.05002,
+          40.541816
+        ],
+        "end": [
+          125.073585,
+          40.548017
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:fa49ace0acdc696285ad9419a2663ccc869f0bd469985516f3148aa166fd709b",
+        "ordinal": 7823,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+        "ordinal": 56,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:fa49ace0acdc696285ad9419a2663ccc869f0bd469985516f3148aa166fd709b",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.61054684209957,
+          42.27265360652659
+        ],
+        "areaKm2": 6097.410720094557,
+        "diameterKm": 150.42242733036767
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12157,
+        "start": [
+          128.020433,
+          41.965062
+        ],
+        "end": [
+          128.039967,
+          41.87959
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:21c755da37bd355ee40ceddfa0282632a943955a31c754281c0db8b9df4ba4a7",
+        "ordinal": 1118,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12186,
+        "start": [
+          130.336748352936,
+          42.642568291407
+        ],
+        "end": [
+          130.366882156826,
+          42.623106977631
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:2be5e65b70abadbf2e8b610660497dfc436d4ff05a17df50fe7537d0b4229ac3",
+        "ordinal": 1420,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12160,
+        "start": [
+          130.15231779942002,
+          42.90736585382644
+        ],
+        "end": [
+          130.193841,
+          42.908209
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:4a808e8401db947b4834ab6b263eafb209271dae3f7aa6c2be4b377acf4481ae",
+        "ordinal": 2356,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12158,
+        "start": [
+          130.471033,
+          42.569754
+        ],
+        "end": [
+          130.455117,
+          42.585154
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+        "ordinal": 7290,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12169,
+        "start": [
+          130.047286,
+          42.961901
+        ],
+        "end": [
+          130.094312,
+          42.976939
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "ordinal": 2176,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+        "ordinal": 56,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.89803313278688,
+          42.45846441676968
+        ],
+        "areaKm2": 4995.394309061831,
+        "diameterKm": 135.68756490350216
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12176,
+        "start": [
+          128.543709,
+          42.008057
+        ],
+        "end": [
+          128.516051632554,
+          42.000053684
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "ordinal": 2176,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:a80b38ff37554fa199f798cf8ff9620ecfc72ac66e79f917fa1b3f89383f6e06",
+        "ordinal": 5222,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.89803313278688,
+          42.45846441676968
+        ],
+        "areaKm2": 4995.394309061831,
+        "diameterKm": 135.68756490350216
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12171,
+        "start": [
+          128.817077,
+          42.043869
+        ],
+        "end": [
+          128.883172,
+          42.030409
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "ordinal": 2176,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:d365de97befd95eaec3e6fa8d13ebbcd9bb38895e696087acf60fa294b3d1519",
+        "ordinal": 6606,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:451774193ffb437137931f0491d66ad83526689dc6fe8aafe80c66c5dc5523e6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          128.89803313278688,
+          42.45846441676968
+        ],
+        "areaKm2": 4995.394309061831,
+        "diameterKm": 135.68756490350216
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12177,
+        "start": [
+          129.03361318856213,
+          42.10739311655859
+        ],
+        "end": [
+          129.053342,
+          42.122856
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:123a5a699f80a24f83d6d68b1e8ac599f2fcb3dd2dbb461c5aeac7e6241f26ac",
+        "ordinal": 609,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12159,
+        "start": [
+          125.821963,
+          40.869755
+        ],
+        "end": [
+          125.79953339687037,
+          40.87755619084296
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:473d9f8fd0979fa5fda041692569bc2263ed6f28d7382e4fb9f3dcf14cbc1297",
+        "ordinal": 2240,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12179,
+        "start": [
+          126.542229,
+          41.488993
+        ],
+        "end": [
+          126.507606,
+          41.447239
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:a9e0c974aee3a7a860f01881c4bd2b61b38a4dd3d458af03cb060d16a92eaba7",
+        "ordinal": 5277,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12190,
+        "start": [
+          126.185711071029,
+          41.109461701053
+        ],
+        "end": [
+          126.260696,
+          41.143123
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "ordinal": 3463,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:e94768f0cadac2f460253e7b0e13838d7d58f3dc92ef6433fa721b5feeb562c7",
+        "ordinal": 7316,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4188
+      },
+      "metrics": {
+        "id": "territory:catalog:6ded09aaefb98bc31aba15215e443405e4dcbd6a5e2a0da0140373ffc813c907",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          125.98736272494334,
+          41.24196143660171
+        ],
+        "areaKm2": 3330.3887748296447,
+        "diameterKm": 116.34723893467194
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12182,
+        "start": [
+          125.96428,
+          40.891304
+        ],
+        "end": [
+          125.987653601597,
+          40.893460815992
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "ordinal": 555,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:0ffe00d85f52c3cac4f66bba0f4826cf3e46f2356d7b97c93dbabf85aa108ae0",
+        "ordinal": 538,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.19402488394812,
+          41.80304523270509
+        ],
+        "areaKm2": 2877.2301721367194,
+        "diameterKm": 117.8065324264995
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12163,
+        "start": [
+          126.769837194,
+          41.70574717983
+        ],
+        "end": [
+          126.741545,
+          41.729185
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "ordinal": 555,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:473d9f8fd0979fa5fda041692569bc2263ed6f28d7382e4fb9f3dcf14cbc1297",
+        "ordinal": 2240,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4191,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.19402488394812,
+          41.80304523270509
+        ],
+        "areaKm2": 2877.2301721367194,
+        "diameterKm": 117.8065324264995
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12178,
+        "start": [
+          126.633955,
+          41.668621
+        ],
+        "end": [
+          126.664925044021,
+          41.667307581339
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "ordinal": 555,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:523ece8da062943404e363c926de810338adb54c5174fb233bbed611a5aa7e7e",
+        "ordinal": 2594,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4187,
+        "previousParentOrdinal": 4170
+      },
+      "metrics": {
+        "id": "territory:catalog:1074a04da35069ef4380c77106512261f808831102418ae9082943136dd2dcb0",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          127.19402488394812,
+          41.80304523270509
+        ],
+        "areaKm2": 2877.2301721367194,
+        "diameterKm": 117.8065324264995
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12188,
+        "start": [
+          127.120493779131,
+          41.608428490462
+        ],
+        "end": [
+          127.15836019867952,
+          41.59723430742009
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+        "ordinal": 2319,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:d365de97befd95eaec3e6fa8d13ebbcd9bb38895e696087acf60fa294b3d1519",
+        "ordinal": 6606,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.43088423492492,
+          42.6998018150236
+        ],
+        "areaKm2": 2172.0535977362365,
+        "diameterKm": 103.4708063882267
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12183,
+        "start": [
+          129.331161543762,
+          42.421705124431
+        ],
+        "end": [
+          129.337872,
+          42.414415
+        ]
+      }
+    },
+    {
+      "stage": "default:followup",
+      "cell": {
+        "id": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+        "ordinal": 2319,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+        "ordinal": 7058,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.43088423492492,
+          42.6998018150236
+        ],
+        "areaKm2": 2172.0535977362365,
+        "diameterKm": 103.4708063882267
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12154,
+        "start": [
+          129.703328,
+          42.442372
+        ],
+        "end": [
+          129.728856,
+          42.475858
+        ]
+      }
+    },
+    {
+      "stage": "north:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:21c755da37bd355ee40ceddfa0282632a943955a31c754281c0db8b9df4ba4a7",
+        "ordinal": 1118,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12186,
+        "start": [
+          130.336748352936,
+          42.642568291407
+        ],
+        "end": [
+          130.366882156826,
+          42.623106977631
+        ]
+      }
+    },
+    {
+      "stage": "north:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:2be5e65b70abadbf2e8b610660497dfc436d4ff05a17df50fe7537d0b4229ac3",
+        "ordinal": 1420,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12160,
+        "start": [
+          130.15231779942002,
+          42.90736585382644
+        ],
+        "end": [
+          130.193841,
+          42.908209
+        ]
+      }
+    },
+    {
+      "stage": "north:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:4a808e8401db947b4834ab6b263eafb209271dae3f7aa6c2be4b377acf4481ae",
+        "ordinal": 2356,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12158,
+        "start": [
+          130.471033,
+          42.569754
+        ],
+        "end": [
+          130.455117,
+          42.585154
+        ]
+      }
+    },
+    {
+      "stage": "north:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+        "ordinal": 7290,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12169,
+        "start": [
+          130.047286,
+          42.961901
+        ],
+        "end": [
+          130.094312,
+          42.976939
+        ]
+      }
+    },
+    {
+      "stage": "north:first",
+      "cell": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+        "ordinal": 7058,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.72935024498162,
+          43.00627525567217
+        ],
+        "areaKm2": 779.581911574682,
+        "diameterKm": 56.66367877297908
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12174,
+        "start": [
+          129.789524,
+          42.79248
+        ],
+        "end": [
+          129.79479590792,
+          42.80595714467
+        ]
+      }
+    },
+    {
+      "stage": "north:first",
+      "cell": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+        "ordinal": 7290,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.72935024498162,
+          43.00627525567217
+        ],
+        "areaKm2": 779.581911574682,
+        "diameterKm": 56.66367877297908
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12155,
+        "start": [
+          129.799033,
+          42.836663
+        ],
+        "end": [
+          129.834173,
+          42.907485
+        ]
+      }
+    },
+    {
+      "stage": "north:followup",
+      "cell": {
+        "id": "territory:catalog:6112a5e9e7247e66553e922625f48d2f81ac6262ddd0f3430b52afa268cc9ebd",
+        "ordinal": 3042,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:6112a5e9e7247e66553e922625f48d2f81ac6262ddd0f3430b52afa268cc9ebd",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.93202202324173,
+          43.53289961314457
+        ],
+        "areaKm2": 8746.846343557374,
+        "diameterKm": 179.29636939086913
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 5945,
+        "start": [
+          129.8220368000583,
+          43.15165340018433
+        ],
+        "end": [
+          129.80058279995626,
+          43.146293400320246
+        ]
+      }
+    },
+    {
+      "stage": "north:followup",
+      "cell": {
+        "id": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+        "ordinal": 4303,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4206,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.3271588642812,
+          43.09747821643454
+        ],
+        "areaKm2": 1734.8470112138746,
+        "diameterKm": 86.89289273526848
+      },
+      "parent": {
+        "adminId": "fine-macro:CHN:macro:CHN:CN-22",
+        "boundaryBasis": "union-of-whole-fine-families-with-source-containment-evidence",
+        "count": 27,
+        "kind": "administrative",
+        "macroId": "macro:CHN:CN-22",
+        "name": "Jilin",
+        "parentKey": "fine-macro:CHN:macro:CHN:CN-22",
+        "residualId": null,
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": "CHN:CHN-ADM1-3_0_0-B22",
+        "sourceVersion": "geoBoundaries-3_0_0/CHN/ADM1",
+        "start": 329,
+        "ordinal": 4206
+      },
+      "parentAreaKm2": 52167.30948623078,
+      "boundary": {
+        "edgeOrdinal": 3843,
+        "start": [
+          129.60838330034915,
+          43.112991399733346
+        ],
+        "end": [
+          129.59181999969326,
+          43.086538199678216
+        ]
+      }
+    },
+    {
+      "stage": "south:first",
+      "cell": {
+        "id": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+        "ordinal": 2048,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:88a3d2856e6e4d6274d2850a9fd7756ed64ef7b67f3b14a909eb511b4f2964ba",
+        "ordinal": 4278,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.28176474147351,
+          40.02735023329939
+        ],
+        "areaKm2": 231.62386227277688,
+        "diameterKm": 38.53253376121445
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12165,
+        "start": [
+          124.373574436554,
+          40.101111137002
+        ],
+        "end": [
+          124.382231830268,
+          40.107870563632
+        ]
+      }
+    },
+    {
+      "stage": "south:followup",
+      "cell": {
+        "id": "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6",
+        "ordinal": 5754,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+        "ordinal": 2048,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "metrics": {
+        "id": "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          123.82837183912854,
+          39.976193606561154
+        ],
+        "areaKm2": 2040.3133990397964,
+        "diameterKm": 92.56928552465354
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 4736,
+        "start": [
+          124.21090539956458,
+          39.919444799937594
+        ],
+        "end": [
+          124.20103490034046,
+          39.901035499588716
+        ]
+      }
+    },
+    {
+      "stage": "east:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:21c755da37bd355ee40ceddfa0282632a943955a31c754281c0db8b9df4ba4a7",
+        "ordinal": 1118,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12186,
+        "start": [
+          130.336748352936,
+          42.642568291407
+        ],
+        "end": [
+          130.366882156826,
+          42.623106977631
+        ]
+      }
+    },
+    {
+      "stage": "east:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:2be5e65b70abadbf2e8b610660497dfc436d4ff05a17df50fe7537d0b4229ac3",
+        "ordinal": 1420,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12160,
+        "start": [
+          130.15231779942002,
+          42.90736585382644
+        ],
+        "end": [
+          130.193841,
+          42.908209
+        ]
+      }
+    },
+    {
+      "stage": "east:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:4a808e8401db947b4834ab6b263eafb209271dae3f7aa6c2be4b377acf4481ae",
+        "ordinal": 2356,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4181
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12158,
+        "start": [
+          130.471033,
+          42.569754
+        ],
+        "end": [
+          130.455117,
+          42.585154
+        ]
+      }
+    },
+    {
+      "stage": "east:first",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+        "ordinal": 7290,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12169,
+        "start": [
+          130.047286,
+          42.961901
+        ],
+        "end": [
+          130.094312,
+          42.976939
+        ]
+      }
+    },
+    {
+      "stage": "east:first",
+      "cell": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+        "ordinal": 7058,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.72935024498162,
+          43.00627525567217
+        ],
+        "areaKm2": 779.581911574682,
+        "diameterKm": 56.66367877297908
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12174,
+        "start": [
+          129.789524,
+          42.79248
+        ],
+        "end": [
+          129.79479590792,
+          42.80595714467
+        ]
+      }
+    },
+    {
+      "stage": "east:first",
+      "cell": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+        "ordinal": 7290,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4188,
+        "previousParentOrdinal": 4198
+      },
+      "metrics": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.72935024498162,
+          43.00627525567217
+        ],
+        "areaKm2": 779.581911574682,
+        "diameterKm": 56.66367877297908
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12155,
+        "start": [
+          129.799033,
+          42.836663
+        ],
+        "end": [
+          129.834173,
+          42.907485
+        ]
+      }
+    },
+    {
+      "stage": "east:followup",
+      "cell": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "ordinal": 675,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:1487b54b1092e1d7706f3a22e224802da8645583d9aadb5972aed696726b28e2",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          130.63515312374892,
+          43.076912966691566
+        ],
+        "areaKm2": 5326.4709497654985,
+        "diameterKm": 158.25568878044746
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 5893,
+        "start": [
+          129.9076382995679,
+          43.137553900192415
+        ],
+        "end": [
+          129.8965302999335,
+          43.12377939989943
+        ]
+      }
+    },
+    {
+      "stage": "east:followup",
+      "cell": {
+        "id": "territory:catalog:6112a5e9e7247e66553e922625f48d2f81ac6262ddd0f3430b52afa268cc9ebd",
+        "ordinal": 3042,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4217
+      },
+      "support": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:6112a5e9e7247e66553e922625f48d2f81ac6262ddd0f3430b52afa268cc9ebd",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.93202202324173,
+          43.53289961314457
+        ],
+        "areaKm2": 8746.846343557374,
+        "diameterKm": 179.29636939086913
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 5945,
+        "start": [
+          129.8220368000583,
+          43.15165340018433
+        ],
+        "end": [
+          129.80058279995626,
+          43.146293400320246
+        ]
+      }
+    },
+    {
+      "stage": "east:followup",
+      "cell": {
+        "id": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+        "ordinal": 2319,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.43088423492492,
+          42.6998018150236
+        ],
+        "areaKm2": 2172.0535977362365,
+        "diameterKm": 103.4708063882267
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 11457,
+        "start": [
+          129.76466089978078,
+          42.79084959962938
+        ],
+        "end": [
+          129.78656049956749,
+          42.78876630032454
+        ]
+      }
+    },
+    {
+      "stage": "east:followup",
+      "cell": {
+        "id": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+        "ordinal": 4303,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4206,
+        "previousParentOrdinal": 4223
+      },
+      "support": {
+        "id": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+        "ordinal": 2079,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4223
+      },
+      "metrics": {
+        "id": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          129.3271588642812,
+          43.09747821643454
+        ],
+        "areaKm2": 1734.8470112138746,
+        "diameterKm": 86.89289273526848
+      },
+      "parent": {
+        "adminId": "fine-macro:CHN:macro:CHN:CN-22",
+        "boundaryBasis": "union-of-whole-fine-families-with-source-containment-evidence",
+        "count": 27,
+        "kind": "administrative",
+        "macroId": "macro:CHN:CN-22",
+        "name": "Jilin",
+        "parentKey": "fine-macro:CHN:macro:CHN:CN-22",
+        "residualId": null,
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": "CHN:CHN-ADM1-3_0_0-B22",
+        "sourceVersion": "geoBoundaries-3_0_0/CHN/ADM1",
+        "start": 329,
+        "ordinal": 4206
+      },
+      "parentAreaKm2": 52167.30948623078,
+      "boundary": {
+        "edgeOrdinal": 3843,
+        "start": [
+          129.60838330034915,
+          43.112991399733346
+        ],
+        "end": [
+          129.59181999969326,
+          43.086538199678216
+        ]
+      }
+    },
+    {
+      "stage": "west:first",
+      "cell": {
+        "id": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+        "ordinal": 2048,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:88a3d2856e6e4d6274d2850a9fd7756ed64ef7b67f3b14a909eb511b4f2964ba",
+        "ordinal": 4278,
+        "sourceCountryId": "PRK",
+        "administrativeOrdinal": 4192,
+        "previousParentOrdinal": 4192
+      },
+      "metrics": {
+        "id": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          124.28176474147351,
+          40.02735023329939
+        ],
+        "areaKm2": 231.62386227277688,
+        "diameterKm": 38.53253376121445
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 12165,
+        "start": [
+          124.373574436554,
+          40.101111137002
+        ],
+        "end": [
+          124.382231830268,
+          40.107870563632
+        ]
+      }
+    },
+    {
+      "stage": "west:followup",
+      "cell": {
+        "id": "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6",
+        "ordinal": 5754,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "support": {
+        "id": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+        "ordinal": 2048,
+        "sourceCountryId": "CHN",
+        "administrativeOrdinal": 4231,
+        "previousParentOrdinal": 4209
+      },
+      "metrics": {
+        "id": "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6",
+        "sourceCountryId": "CHN",
+        "centroid": [
+          123.82837183912854,
+          39.976193606561154
+        ],
+        "areaKm2": 2040.3133990397964,
+        "diameterKm": 92.56928552465354
+      },
+      "parent": {
+        "adminId": null,
+        "count": 1375,
+        "kind": "country-envelope-residual",
+        "name": "CHN administrative parent unconfirmed / source-free baseline land",
+        "parentKey": "fine-macro-residual:CHN",
+        "residualId": "73ec6586990bb0d6a003359aab1d1f54f93a2fddea6d0059be37f1b0319d29a3",
+        "restorationId": null,
+        "sourceCountryId": "CHN",
+        "sourceFeatureId": null,
+        "sourceVersion": null,
+        "start": 2,
+        "ordinal": 4231
+      },
+      "parentAreaKm2": 5814805.992843364,
+      "boundary": {
+        "edgeOrdinal": 4736,
+        "start": [
+          124.21090539956458,
+          39.919444799937594
+        ],
+        "end": [
+          124.20103490034046,
+          39.901035499588716
+        ]
+      }
+    }
+  ],
+  "result": [
+    {
+      "direction": null,
+      "first": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 0,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 0,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": null,
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e",
+          "supportCellId": "territory:catalog:01ae03b7194101dbce782c43998dca6c4e753a38da17645ef0c94fd087e9eb51",
+          "edgeOrdinal": 12173
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 2270.5199843125097,
+          "maximumGraphDepthKm": 30.61900539929038,
+          "maximumForwardDepthKm": 26.710852395121897,
+          "maximumLateralKm": 14.926229000247773,
+          "maximumCellDiameterKm": 103.43658171837943
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      },
+      "followup": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 1,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 1,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": null,
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f",
+          "supportCellId": "territory:catalog:e168c8ca9cf5906fa556ba032c570957e92c8979746054b9dc687b9565892d29",
+          "edgeOrdinal": 12154
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:49769e19ba4ea0c0c1be7571757718a7ef8073088ba689bc0544dd580de0676f"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 2172.0535977362365,
+          "maximumGraphDepthKm": 35.518777278743755,
+          "maximumForwardDepthKm": 33.512638993269526,
+          "maximumLateralKm": 11.85725446580146,
+          "maximumCellDiameterKm": 103.4708063882267
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      }
+    },
+    {
+      "direction": "north",
+      "first": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 0,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 0,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "north",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+          "supportCellId": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+          "edgeOrdinal": 12155
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 779.581911574682,
+          "maximumGraphDepthKm": 16.526627741037007,
+          "maximumForwardDepthKm": 11.78194523712654,
+          "maximumLateralKm": 11.59418916764328,
+          "maximumCellDiameterKm": 56.66367877297908
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      },
+      "followup": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 1,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 1,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "north",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+          "supportCellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+          "edgeOrdinal": 3843
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 1734.8470112138746,
+          "maximumGraphDepthKm": 22.162296055693275,
+          "maximumForwardDepthKm": 20.048328134727637,
+          "maximumLateralKm": 9.44531627696193,
+          "maximumCellDiameterKm": 86.89289273526848
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      }
+    },
+    {
+      "direction": "south",
+      "first": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 0,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 0,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "south",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+          "supportCellId": "territory:catalog:88a3d2856e6e4d6274d2850a9fd7756ed64ef7b67f3b14a909eb511b4f2964ba",
+          "edgeOrdinal": 12165
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 231.62386227277688,
+          "maximumGraphDepthKm": 11.853610411053149,
+          "maximumForwardDepthKm": 0.1617532731358038,
+          "maximumLateralKm": 11.849310239271846,
+          "maximumCellDiameterKm": 38.53253376121445
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      },
+      "followup": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 1,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 1,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "south",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6",
+          "supportCellId": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+          "edgeOrdinal": 4736
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 2040.3133990397964,
+          "maximumGraphDepthKm": 33.01548422868716,
+          "maximumForwardDepthKm": 32.57499991028978,
+          "maximumLateralKm": 5.467381624306314,
+          "maximumCellDiameterKm": 92.56928552465354
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      }
+    },
+    {
+      "direction": "east",
+      "first": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 0,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 0,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "east",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+          "supportCellId": "territory:catalog:e865413db1e201a10a3a12bcc4f42f35fc12fdc2d5052570f11b64ad1839daf3",
+          "edgeOrdinal": 12155
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 779.581911574682,
+          "maximumGraphDepthKm": 16.526627741037007,
+          "maximumForwardDepthKm": 11.78194523712654,
+          "maximumLateralKm": 11.59418916764328,
+          "maximumCellDiameterKm": 56.66367877297908
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      },
+      "followup": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 1,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 1,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "east",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45",
+          "supportCellId": "territory:catalog:41d20387d29ca9ef827ff2674da96d6dc52dea69d6b8c20087ed28a1866a9ea5",
+          "edgeOrdinal": 3843
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:8945fc930b2748c5a883eeb20ffd772370d186cbc6ab10d55e16667568654d45"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 1734.8470112138746,
+          "maximumGraphDepthKm": 22.162296055693275,
+          "maximumForwardDepthKm": 20.048328134727637,
+          "maximumLateralKm": 9.44531627696193,
+          "maximumCellDiameterKm": 86.89289273526848
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      }
+    },
+    {
+      "direction": "west",
+      "first": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 0,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 0,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "west",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "land-border",
+          "cellId": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+          "supportCellId": "territory:catalog:88a3d2856e6e4d6274d2850a9fd7756ed64ef7b67f3b14a909eb511b4f2964ba",
+          "edgeOrdinal": 12165
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 231.62386227277688,
+          "maximumGraphDepthKm": 11.853610411053149,
+          "maximumForwardDepthKm": 0.1617532731358038,
+          "maximumLateralKm": 11.849310239271846,
+          "maximumCellDiameterKm": 38.53253376121445
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      },
+      "followup": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+          "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+          "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+          "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+        },
+        "baseWorldRevision": 1,
+        "actorCountryId": "PRK",
+        "targetCountryId": "CHN",
+        "operation": "occupy",
+        "cellIds": [
+          "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6"
+        ],
+        "scope": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+            "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+          },
+          "baseWorldRevision": 1,
+          "actorCountryId": "PRK",
+          "targetCountryId": "CHN",
+          "operation": "occupy",
+          "extent": "near",
+          "direction": "west",
+          "cap": 512,
+          "reference": null,
+          "regionQuery": null
+        },
+        "limits": {
+          "depthKm": 36,
+          "widthKm": 36,
+          "maximumAreaKm2": 2800
+        },
+        "frontier": {
+          "kind": "current-controller",
+          "cellId": "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6",
+          "supportCellId": "territory:catalog:408cefc16d1e5bafa278bb4b30e2283e4f0d002db579eb7f493d64938af55bab",
+          "edgeOrdinal": 4736
+        },
+        "effectTarget": {
+          "territoryIds": [
+            "territory:catalog:b9b5490dae78fd6bca134994836a9c3142d7de480fb40b0f1bdc109dcd63edd6"
+          ],
+          "regionRefs": null
+        },
+        "metrics": {
+          "count": 1,
+          "areaKm2": 2040.3133990397964,
+          "maximumGraphDepthKm": 33.01548422868716,
+          "maximumForwardDepthKm": 32.57499991028978,
+          "maximumLateralKm": 5.467381624306314,
+          "maximumCellDiameterKm": 92.56928552465354
+        },
+        "approximation": "Centroid great-circle graph distances in a local corridor anchored on an existing shared land edge. Whole cells can extend beyond the centroid limits by their diameter; this is not an exact geodesic band."
+      }
+    }
+  ]
+}

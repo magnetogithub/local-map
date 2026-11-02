@@ -1,0 +1,94 @@
+{
+  "checkpoint": "10-113~10-118",
+  "name": "performance and resilience checkpoint",
+  "status": "pass",
+  "completedAt": "2026-09-21T10:38:00+09:00",
+  "policy": {
+    "promptFileModified": false,
+    "promptFile": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "promptFileSha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+    "reportingMode": "checkpoint-only",
+    "benchmarkMode": "bounded-smoke",
+    "productionBuildSkipped": "Deferred to 10-119~10-124 final integration checkpoint"
+  },
+  "inputCheckpoint": {
+    "file": "reports/prompt10/10-112-history-persistence-checkpoint.json",
+    "sha256": "cb554b987ca7b45a6ebec76885f97bef3a676f985ca9664f023d74184ac81a98"
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/planning/performance-resilience-checkpoint.ts",
+        "sha256": "cd18e21ed870cf525faabc931ea2b01e015690f8ba7a0f7936f8ef6b0a008d5f",
+        "purpose": "Bounded checkpoint timing, incremental hash delta summary, undo/redo revision race guards, projection failure retry guard, and label worker failure guard."
+      },
+      {
+        "path": "src/lib/planning/performance-resilience-checkpoint.test.ts",
+        "sha256": "d2c0eb20c1a14aaf6d9c3961c0cd8501e3d55f7e254a81f08eacfbcbb58b5f29",
+        "purpose": "Targeted performance/resilience tests for incremental hashes, establish/split/dissolve planner smoke timing, undo race rejection, projection failure injection, and worker failure injection."
+      }
+    ]
+  },
+  "stageCoverage": {
+    "10-113": {
+      "status": "pass",
+      "evidence": "Incremental hash delta summaries count changed roots/leaves and verify touched leaves are less than total leaves for ownership-only changes."
+    },
+    "10-114": {
+      "status": "pass",
+      "evidence": "country.split, country.establish, and country.dissolve planners are measured through bounded one-iteration smoke timing without long-running benchmarks."
+    },
+    "10-115": {
+      "status": "pass",
+      "evidence": "Undo/redo revision guards reject stale race attempts and preserve the original history/state references when rejected."
+    },
+    "10-116": {
+      "status": "pass",
+      "evidence": "Projection failure injection keeps the last good projection revision/artifact hash and recovers through latest revision retry."
+    },
+    "10-117": {
+      "status": "pass",
+      "evidence": "Worker failure injection keeps point fallback labels and accepts a later successful glyph result."
+    },
+    "10-118": {
+      "status": "pass",
+      "evidence": "Targeted tests, typecheck, lint, full unit suite, and diff whitespace checks all pass for the checkpoint."
+    }
+  },
+  "gates": {
+    "longBenchmarkCount": 0,
+    "plannerSmokeIterationsPerOperation": 1,
+    "failedPlannerOperationCount": 0,
+    "incrementalHashFullLeafRebuildCount": 0,
+    "staleUndoRedoMutationCount": 0,
+    "projectionRollbackToDomainCount": 0,
+    "projectionLastGoodRetentionFailures": 0,
+    "workerFallbackLossCount": 0
+  },
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/performance-resilience-checkpoint.test.ts src/lib/planning/history-persistence-checkpoint.test.ts src/lib/projection/map-projection-checkpoint.test.ts src/lib/projection/label-projection-checkpoint.test.ts",
+      "status": "pass",
+      "result": "4 test files passed, 20 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/performance-resilience-checkpoint.ts src/lib/planning/performance-resilience-checkpoint.test.ts",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "status": "pass",
+      "result": "109 test files passed, 912 tests passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "pass",
+      "result": "No whitespace errors; existing LF-to-CRLF working-copy warnings only."
+    }
+  ],
+  "nextCheckpoint": "10-119~10-124 command UI and final integration checkpoint"
+}

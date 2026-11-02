@@ -1,0 +1,55 @@
+{
+  "stage": "10-26",
+  "status": "pass",
+  "objective": "Build a topology edge leaf hash from canonical edge ID, classification, Territory sides, and line geometry independent of side order and coordinate direction.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-25-territory-ownership-leaf-hash.json": "8cb933edfd1e8ed8e25bd0f42c64630ef36e95024b4dbce03df8d2d404599a62",
+    "src/lib/world/topology-state.ts": "d451771da756c4679c27fc7ded39bbbd369ef5647614f24d7f2b95b5a13e1924",
+    "src/lib/world/canonical-serializer.ts": "35516101e2e86fe2750175c4eae35accb49837d257e3a778b958753be379c5df"
+  },
+  "outputHashes": {
+    "src/lib/world/topology-edge-hash.ts": "a36eb0b7dc0bfbbe3b6603b855507392fc35775679c17bfd196ed6e0c3c9bc70",
+    "src/lib/world/topology-edge-hash.test.ts": "5181b1c33cf11fb6285df5a5e992dcbba6c7ed3d91bb51f8a1f9ed1fcbe47913"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-26-topology-edge-leaf-hash.json",
+    "src/lib/world/topology-edge-hash.test.ts",
+    "src/lib/world/topology-edge-hash.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-25 status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/topology-edge-hash.test.ts", "exitCode": 1, "note": "Expected red test: topology-edge-hash module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/topology-edge-hash.test.ts src/lib/world/topology-state.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/topology-edge-hash.ts src/lib/world/topology-edge-hash.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 2,
+    "targetedTestsPassed": 11,
+    "sideOrderHashMismatches": 0,
+    "coordinateDirectionHashMismatches": 0,
+    "distinctEdgeMutationHashes": 4,
+    "countryOwnershipReads": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "sideOrderIndependent": true,
+    "coordinateDirectionIndependent": true,
+    "edgeInputsDetected": true,
+    "countryOwnershipExcluded": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-27"
+}

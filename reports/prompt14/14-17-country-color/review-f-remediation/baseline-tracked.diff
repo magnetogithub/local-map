@@ -1,0 +1,1176 @@
+diff --git a/.github/workflows/prompt14-catalog.yml b/.github/workflows/prompt14-catalog.yml
+index baa4f0a..7e42f8e 100644
+--- a/.github/workflows/prompt14-catalog.yml
++++ b/.github/workflows/prompt14-catalog.yml
+@@ -10,6 +10,19 @@ on:
+       - 'src/lib/map/**'
+       - 'src/lib/projection/**'
+       - 'src/app/api/world/catalog/**'
++      - 'src/components/layout/**'
++      - 'src/components/map/CatalogWorldMap.tsx'
++      - 'src/components/game/CatalogGameScreen.tsx'
++      - 'src/lib/simulation/**'
++      - 'src/lib/commands/territorial-control-v3.ts'
++      - 'src/lib/planning/territorial-control-planner*'
++      - 'src/lib/world/world-state-v3*'
++      - 'src/lib/world/world-v3-runtime-hash.ts'
++      - 'src/lib/game-ui/**'
++      - 'src/app/page.tsx'
++      - 'src/app/game/page.tsx'
++      - 'src/components/game/GameActionOverlay.tsx'
++      - 'src/lib/world/production-catalog-seed.server.ts'
+       - 'data/catalog-consumers/prompt14/**'
+       - 'public/data/territory-catalog/**'
+       - 'vitest.config.ts'
+@@ -53,10 +66,20 @@ jobs:
+         env:
+           NODE_OPTIONS: --max-old-space-size=8192
+       - run: npx.cmd tsc --noEmit
++      - run: npx.cmd vitest run src/lib/simulation/catalog-runtime.test.ts
++      - run: npx.cmd vitest run src/lib/planning/territorial-control-planner.test.ts src/lib/simulation/catalog-occupation-lifecycle.test.ts src/lib/simulation/catalog-occupation-browser-contract.test.ts src/lib/world/world-state-v3.test.ts src/lib/simulation/simulation-state-v2.test.ts
++      - run: npx.cmd eslint src/lib/commands/territorial-control-v3.ts src/lib/planning/territorial-control-planner.ts src/lib/simulation/catalog-authority-lifecycle.ts src/lib/world/world-v3-runtime-hash.ts src/lib/projection/catalog-map-consumer-projection.ts src/lib/projection/catalog-color-projection.ts src/lib/map/catalog-vector-delivery.ts scripts/run-prompt14-occupation-smoke.mjs scripts/smoke-prompt14-occupation.mjs scripts/write-prompt14-occupation-checkpoint.mjs
++      - run: npx.cmd eslint src/components/layout/CatalogGameSetupShell.tsx src/components/layout/WorldAppPage.tsx src/components/game/CatalogGameScreen.tsx src/components/map/CatalogWorldMap.tsx src/lib/simulation/catalog-runtime.ts src/lib/simulation/catalog-turn-plan.ts src/lib/simulation/client/use-catalog-simulation-turn-controller.ts src/lib/world/production-catalog-seed.server.ts scripts/run-prompt14-production-cutover-smoke.mjs scripts/smoke-prompt14-production-cutover.mjs
+       - run: npm.cmd run build
+         env:
+           NODE_OPTIONS: --max-old-space-size=8192
+       - run: node scripts/run-prompt14-catalog-consumer-http-smoke.mjs 3139 .tmp/prompt14-consumer/ci-http
++      - run: npx.cmd playwright install chromium
++      - run: node scripts/run-prompt14-production-cutover-smoke.mjs 3140 .tmp/prompt14-cutover/ci-browser
++      - run: node scripts/run-prompt14-occupation-smoke.mjs 3141 .tmp/prompt14-occupation/ci-browser
++      - run: npx.cmd vitest run src/lib/simulation/catalog-occupation-browser-contract.test.ts
++        env:
++          PROMPT14_OCCUPATION_EVIDENCE: .tmp/prompt14-occupation/ci-browser/occupation-smoke-evidence.json
+       - uses: actions/upload-artifact@v4
+         if: always()
+         with:
+@@ -65,5 +88,7 @@ jobs:
+           path: |
+             .tmp/prompt14-catalog/ci-*
+             .tmp/prompt14-consumer/ci-*
++            .tmp/prompt14-cutover/ci-*
++            .tmp/prompt14-occupation/ci-*
+             reports/prompt14/14-02-boundary-observation-resolution.json
+             reports/prompt14/14-02-construction-tail-proof.json
+diff --git a/src/app/api/world/catalog/route.ts b/src/app/api/world/catalog/route.ts
+index a0ad429..58dc33a 100644
+--- a/src/app/api/world/catalog/route.ts
++++ b/src/app/api/world/catalog/route.ts
+@@ -1,6 +1,7 @@
+ import {loadCatalogConsumerBootstrap} from '@/lib/map/catalog-consumer.server';
++import {loadProductionCatalogSeed} from '@/lib/world/production-catalog-seed.server';
+ export const runtime='nodejs';
+ export async function GET(){
+-  try{return Response.json(loadCatalogConsumerBootstrap(),{headers:{'Cache-Control':'no-store'}});}
++  try{loadCatalogConsumerBootstrap();return Response.json(loadProductionCatalogSeed().bootstrap,{headers:{'Cache-Control':'no-store'}});}
+   catch{return Response.json({error:'catalog_not_ready',message:'지도 catalog를 불러올 수 없습니다.'},{status:503,headers:{'Cache-Control':'no-store'}});}
+ }
+diff --git a/src/app/game/page.tsx b/src/app/game/page.tsx
+index a2ee848..eb76f39 100644
+--- a/src/app/game/page.tsx
++++ b/src/app/game/page.tsx
+@@ -1,4 +1,5 @@
+ import {WorldAppPage} from "@/components/layout/WorldAppPage";
++export const dynamic='force-dynamic';
+ 
+ export default function GamePage() {
+   return <WorldAppPage mode="game" />;
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index b9110fe..ee77f34 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -1,4 +1,5 @@
+ import {WorldAppPage} from "@/components/layout/WorldAppPage";
++export const dynamic='force-dynamic';
+ 
+ export default function Home() {
+   return <WorldAppPage mode="setup" />;
+diff --git a/src/components/game/GameActionOverlay.tsx b/src/components/game/GameActionOverlay.tsx
+index 3df4bce..aecc5b1 100644
+--- a/src/components/game/GameActionOverlay.tsx
++++ b/src/components/game/GameActionOverlay.tsx
+@@ -36,7 +36,7 @@ function customDateError(currentDate: string, targetDate: string): string | null
+ }
+ 
+ export function GameActionOverlay({controller, advanceBlocked = false, onOpenNews}: Readonly<{
+-  controller: SimulationTurnController;
++  controller: Omit<SimulationTurnController,'snapshot'> & Readonly<{snapshot:Readonly<{simulation:import('@/lib/game-ui/runtime-view').SimulationPresentation}>|null}>;
+   advanceBlocked?: boolean;
+   onOpenNews?(eventId?: string): void;
+ }>) {
+diff --git a/src/components/layout/WorldAppPage.tsx b/src/components/layout/WorldAppPage.tsx
+index 6148431..fd4c49e 100644
+--- a/src/components/layout/WorldAppPage.tsx
++++ b/src/components/layout/WorldAppPage.tsx
+@@ -1,52 +1,11 @@
+-import {GameSetupShell} from "@/components/layout/GameSetupShell";
+-import {createCountryCapitalProjection} from "@/lib/projection/country-capital-projection";
+-import {
+-  createCountryPanelProjection,
+-  serializeCountryPanelProjection,
+-} from "@/lib/projection/country-panel-projection";
+-import {createCommittedCountrySearchProjection} from "@/lib/projection/committed-country-search-projection";
+-import {createLabelProjection, serializeLabelProjection} from "@/lib/projection/label-projection-checkpoint";
+-import {serializeCountrySearchProjection} from "@/lib/projection/country-search-index-patch";
+-import {loadProductionSubdivisionCatalog} from "@/lib/simulation/production-subdivision-catalog.server";
+-import {
+-  createInitialWorldStateV2Bootstrap,
+-  createProductionCountryMapColorSeeds,
+-  createProductionCountryPanelPresentationEntries,
+-  createProductionInitialWorldStateV2,
+-  createProductionSmallCountryMarkerSeeds,
+-} from "@/lib/world/initial-world-state-v2";
+-import {serializeWorldStateV2} from "@/lib/world/world-state-v2";
++import {CatalogGameSetupShell} from './CatalogGameSetupShell';
++import {loadProductionCatalogSeed} from '@/lib/world/production-catalog-seed.server';
+ 
+ type Props = Readonly<{mode: "setup" | "game"}>;
+ 
+ export function WorldAppPage({mode}: Props) {
+-  const initial = createProductionInitialWorldStateV2();
+-  const initialWorldState = initial.worldState;
+-  const panelPresentationEntries = createProductionCountryPanelPresentationEntries();
+-  const capitalProjection = createCountryCapitalProjection(
+-    initialWorldState,
+-    initial.countryCapitalsById,
+-  );
+-
+-  return <GameSetupShell
+-    mode={mode}
+-    initialWorldState={createInitialWorldStateV2Bootstrap(initialWorldState)}
+-    initialWorldSnapshot={serializeWorldStateV2(initialWorldState)}
+-    capitalSeeds={initial.countryCapitalsById}
+-    smallCountryMarkerSeeds={createProductionSmallCountryMarkerSeeds()}
+-    panelPresentationEntries={panelPresentationEntries}
+-    countryMapColorSeeds={createProductionCountryMapColorSeeds()}
+-    initialCountrySearchProjection={serializeCountrySearchProjection(
+-      createCommittedCountrySearchProjection(initialWorldState),
+-    )}
+-    initialCountryPanelProjection={serializeCountryPanelProjection(
+-      createCountryPanelProjection(
+-        initialWorldState,
+-        capitalProjection,
+-        panelPresentationEntries,
+-      ),
+-    )}
+-    initialLabelProjection={serializeLabelProjection(createLabelProjection(initialWorldState))}
+-    subdivisionCatalog={loadProductionSubdivisionCatalog()}
+-  />;
++  let initial:ReturnType<typeof loadProductionCatalogSeed>|undefined;
++  try{initial=loadProductionCatalogSeed();}catch{initial=undefined;}
++  if(!initial)return <main className="route-loading" role="alert">지도와 시뮬레이션 데이터를 불러올 수 없습니다. 잠시 후 다시 시도하세요.</main>;
++  return <CatalogGameSetupShell mode={mode} {...initial}/>;
+ }
+diff --git a/src/lib/game-ui/country-management-projection.ts b/src/lib/game-ui/country-management-projection.ts
+index 86e7ca7..5cec18b 100644
+--- a/src/lib/game-ui/country-management-projection.ts
++++ b/src/lib/game-ui/country-management-projection.ts
+@@ -1,3 +1,5 @@
++import {presentationMapColor} from './runtime-view';
++import type {GameWorldView as WorldStateV2, SimulationPresentation as SimulationStateV1, MapPresentation as WorldMapRuntimeProjection} from './runtime-view';
+ import type {
+   CountrySummaryViewModel,
+   EconomyMetricViewModel,
+@@ -5,21 +7,12 @@ import type {
+   NewsItemViewModel,
+   PoliticsViewModel,
+ } from "./contracts";
+-import type {WorldMapRuntimeProjection} from "@/lib/projection/world-map-runtime-projection";
+-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
+ import type {ActiveCountryId, CountryId} from "@/lib/world/country-id";
+-import type {WorldStateV2} from "@/lib/world/world-state-v2";
+-
+-type MapCountryFeature = Readonly<{
+-  properties?: Readonly<{ownerCountryId?: string | null; mapColor?: string}>;
+-}>;
+ 
+ const countryMapColor = (
+   mapProjection: WorldMapRuntimeProjection,
+   countryId: ActiveCountryId,
+-) => (mapProjection.countriesLow.features as readonly MapCountryFeature[])
+-  .find((feature) => feature.properties?.ownerCountryId === countryId)
+-  ?.properties?.mapColor ?? null;
++) => presentationMapColor(mapProjection, countryId);
+ 
+ export const createCountrySummaryProjection = (
+   world: WorldStateV2,
+diff --git a/src/lib/game-ui/country-view-projection.ts b/src/lib/game-ui/country-view-projection.ts
+index 8569072..4106e93 100644
+--- a/src/lib/game-ui/country-view-projection.ts
++++ b/src/lib/game-ui/country-view-projection.ts
+@@ -1,3 +1,4 @@
++import type {GameWorldView as WorldStateV2, SimulationPresentation as SimulationStateV1, MapPresentation as WorldMapRuntimeProjection} from './runtime-view';
+ import type {
+   BilateralRelationshipViewModel,
+   CountryViewModel,
+@@ -7,12 +8,9 @@ import {
+   createCountrySummaryProjection,
+   projectCountryEvents,
+ } from "./country-management-projection";
+-import type {WorldMapRuntimeProjection} from "@/lib/projection/world-map-runtime-projection";
+ import {getCountryPanelView, type CountryPanelProjection} from "@/lib/projection/country-panel-projection";
+-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
+ import type {ActiveCountryId} from "@/lib/world/country-id";
+ import type {CountryPoliticalStatus} from "@/lib/world/country-entity";
+-import type {WorldStateV2} from "@/lib/world/world-state-v2";
+ 
+ const politicalStatusLabel: Record<CountryPoliticalStatus, string> = {
+   sovereign: "주권 국가",
+diff --git a/src/lib/game-ui/game-hud-projection.ts b/src/lib/game-ui/game-hud-projection.ts
+index 804cae4..3d6c5a0 100644
+--- a/src/lib/game-ui/game-hud-projection.ts
++++ b/src/lib/game-ui/game-hud-projection.ts
+@@ -1,20 +1,13 @@
++import {presentationMapColor} from './runtime-view';
++import type {GameWorldView as WorldStateV2, SimulationPresentation as SimulationStateV1, MapPresentation as WorldMapRuntimeProjection} from './runtime-view';
+ import type {EconomyViewModel, GameHudViewModel} from "@/lib/game-ui/contracts";
+-import type {WorldMapRuntimeProjection} from "@/lib/projection/world-map-runtime-projection";
+ import type {TurnClientPhase} from "@/lib/simulation/client/turn-state-machine";
+-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
+ import type {ActiveCountryId} from "@/lib/world/country-id";
+-import type {WorldStateV2} from "@/lib/world/world-state-v2";
+-
+-type MapCountryFeature = Readonly<{
+-  properties?: Readonly<{ownerCountryId?: string | null; mapColor?: string}>;
+-}>;
+ 
+ const playerMapColor = (
+   mapProjection: WorldMapRuntimeProjection,
+   playerCountryId: ActiveCountryId,
+-) => (mapProjection.countriesLow.features as readonly MapCountryFeature[])
+-  .find((feature) => feature.properties?.ownerCountryId === playerCountryId)
+-  ?.properties?.mapColor ?? null;
++) => presentationMapColor(mapProjection, playerCountryId);
+ 
+ export function createGameHudProjection(input: Readonly<{
+   world: WorldStateV2;
+diff --git a/src/lib/game-ui/news-projection.ts b/src/lib/game-ui/news-projection.ts
+index 0cfcea9..c38e4d8 100644
+--- a/src/lib/game-ui/news-projection.ts
++++ b/src/lib/game-ui/news-projection.ts
+@@ -1,6 +1,6 @@
++import type {SimulationPresentation as SimulationStateV1} from './runtime-view';
+ import type {NewsItemViewModel, NewsViewModel} from "./contracts";
+ import type {TurnReport} from "@/lib/simulation/client/turn-report";
+-import type {SimulationStateV1} from "@/lib/simulation/simulation-state";
+ import type {CountryId} from "@/lib/world/country-id";
+ 
+ export type NewsFilter = "all" | NewsItemViewModel["significance"];
+diff --git a/src/lib/map/catalog-consumer.test.ts b/src/lib/map/catalog-consumer.test.ts
+index 914d5d1..662d883 100644
+--- a/src/lib/map/catalog-consumer.test.ts
++++ b/src/lib/map/catalog-consumer.test.ts
+@@ -13,7 +13,7 @@ import {catalogArtifactIdentity,readCatalogConsumerMetadata,readCatalogConsumerB
+ import {fetchCatalogVectorDelivery,loadCatalogVectorDelivery,registerCatalogTileProtocol,verifyCatalogResponse,type CatalogFetch,type CatalogVectorDelivery} from './catalog-vector-delivery';
+ import {createCatalogMapConsumer,mountCatalogMapConsumer,type CatalogMapPort,CATALOG_MAP_LAYER_IDS} from './catalog-map-consumer';
+ import {mapLibreFeatureTarget} from './render-feature-ref';
+-import {catalogContractForConsumer,createCatalogMapConsumerProjection,catalogHitTerritory,CATALOG_MAP_SOURCE_ID} from '../projection/catalog-map-consumer-projection';
++import {catalogContractForConsumer,createCatalogMapConsumerProjection,updateCatalogMapConsumerProjection,catalogHitTerritory,CATALOG_MAP_SOURCE_ID} from '../projection/catalog-map-consumer-projection';
+ import {deserializeMigratedSchemaPair} from '../test-only/world-simulation-schema-checkpoint';
+ import {createWorldStateV3,serializeWorldStateV3,type WorldStateV3} from '../world/world-state-v3';
+ import {createWorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
+@@ -39,15 +39,15 @@ beforeAll(async()=>{
+ });
+ 
+ function mockMap(){
+-  const sources=new Map<string,{spec:SourceSpecification;setData:ReturnType<typeof vi.fn>}>(),layers=new Map<string,LayerSpecification>();
++  const sources=new Map<string,{spec:SourceSpecification;setData:ReturnType<typeof vi.fn>;updateData:ReturnType<typeof vi.fn>}>(),layers=new Map<string,LayerSpecification>();
+   const listeners=new Map<string,(event:{features?:Parameters<typeof catalogHitTerritory>[1][]})=>void>();
+-  const states=vi.fn();
++  const states=vi.fn(),edgeStates=vi.fn();
+   const map:CatalogMapPort={
+-    addSource:(id,spec)=>sources.set(id,{spec,setData:vi.fn()}),removeSource:id=>sources.delete(id),
++    addSource:(id,spec)=>sources.set(id,{spec,setData:vi.fn(),updateData:vi.fn()}),removeSource:id=>sources.delete(id),
+     addLayer:layer=>layers.set(layer.id,layer),removeLayer:id=>layers.delete(id),getSource:id=>sources.get(id),getLayer:id=>layers.get(id),
+-    setFeatureState:states,on:(event,layer,fn)=>listeners.set(`${event}:${layer}`,fn),off:(event,layer)=>listeners.delete(`${event}:${layer}`),
++    setFeatureState:(target,state)=>target.sourceLayer==='edges'?edgeStates(target,state):states(target,state),on:(event,layer,fn)=>listeners.set(`${event}:${layer}`,fn),off:(event,layer)=>listeners.delete(`${event}:${layer}`),
+   };
+-  return {map,sources,layers,listeners,states};
++  return {map,sources,layers,listeners,states,edgeStates};
+ }
+ const changedWorld=(id:string,ownerCountryId:string|null,controllerCountryId:string|null)=>createWorldStateV3({...world,revision:world.revision+1,
+   territoriesById:{...world.territoriesById,[id]:{...world.territoriesById[id],ownerCountryId,controllerCountryId}}},catalogContractForConsumer(delivery.metadata));
+@@ -136,6 +136,30 @@ describe('frozen catalog consumer: actual delivery and immutable contracts',()=>
+ });
+ 
+ describe('catalog projection and MapLibre consumer before production cutover',()=>{
++  it('updates partial occupation/controller color and adjacent fronts only, then restores both through undo/redo',async()=>{
++    const local=await loadCatalogVectorDelivery(bootstrap,ref,fetcher),incidences=new Map<string,import('./catalog-vector-delivery').CatalogEdgeIncidence>();
++    const stop=local.observeEdges(batch=>batch.forEach(e=>incidences.set(e.id,e)));
++    await local.loadTile(`${base}tiles/0/0/0.pbf`);
++    const m=mockMap(),consumer=createCatalogMapConsumer({map:m.map,delivery:local,world}),ids=world.territoryOrder.filter(id=>world.territoriesById[id].ownerCountryId==='CHN').slice(0,3);
++    const initialProjection=consumer.getProjection(),territories={...world.territoriesById};for(const id of ids)territories[id]={...territories[id],controllerCountryId:'KOR' as never};
++    const occupied=createWorldStateV3({...world,revision:world.revision+1,territoriesById:territories},catalogContractForConsumer(local.metadata));
++    for(const next of [occupied,createWorldStateV3({...world,revision:world.revision+2},catalogContractForConsumer(local.metadata)),createWorldStateV3({...occupied,revision:world.revision+3},catalogContractForConsumer(local.metadata))]){
++      m.states.mockClear();m.edgeStates.mockClear();consumer.updateWorld(next);const p=consumer.getProjection();
++      expect(m.states.mock.calls.map(([t])=>t.id)).toEqual(ids);expect(p.projectionStats.fullBuilds).toBe(1);expect(p.projectionStats.countryRebuilds).toBe(247);
++      for(const id of ids){expect(p.featuresById[id].ownerCountryId).toBe('CHN');expect(p.featuresById[id].mapColor).toBe(next.countriesById[next.territoriesById[id].controllerCountryId!].mapColor);}
++      expect(p.labels.pointFallbacksByLabelId.get('catalog-label:CHN')).toBe(initialProjection.labels.pointFallbacksByLabelId.get('catalog-label:CHN'));expect(p.capitals.featuresByCountryId.get('CHN' as never)).toBe(initialProjection.capitals.featuresByCountryId.get('CHN' as never));
++      for(const [target,state]of m.edgeStates.mock.calls){const e=incidences.get(target.id)!;const affected=new Set<string>(ids);expect(affected.has(e.left??'')||affected.has(e.right??'')).toBe(true);expect(target.sourceLayer).toBe('edges');
++        const a=e.left?next.territoriesById[e.left]:null,b=e.right?next.territoriesById[e.right]:null;expect(state.front).toBe(!!(a&&b&&((a.controllerCountryId!==a.ownerCountryId)||(b.controllerCountryId!==b.ownerCountryId))&&a.controllerCountryId!==b.controllerCountryId));}
++      expect(m.edgeStates.mock.calls.length).toBeGreaterThan(0);for(const s of m.sources.values()){expect(s.setData).not.toHaveBeenCalled();expect(s.updateData).not.toHaveBeenCalled();}
++    }
++    expect(consumer.getCountryPanel('CHN')?.ownedTerritoryCount).toBe(initialProjection.ownedByCountry.CHN.length);expect(consumer.getCountryPanel('KOR')?.controlledTerritoryCount).toBe(initialProjection.controlledByCountry.KOR.length+3);consumer.dispose();stop();
++  });
++  it('incremental ownership transfer matches a full projection and retains unaffected label/search objects',()=>{
++    const p=createCatalogMapConsumerProjection(world,delivery.metadata),id=p.ownedByCountry.CHN[0],next=changedWorld(id,'KOR','KOR'),incremental=updateCatalogMapConsumerProjection(p,next).projection,full=createCatalogMapConsumerProjection(next,delivery.metadata);
++    for(const key of ['ownedByCountry','controlledByCountry','presentedByCountry','featuresById','focusByCountryId'] as const)expect(incremental[key]).toEqual(full[key]);
++    expect(incremental.capitals.featuresByCountryId).toEqual(full.capitals.featuresByCountryId);expect(incremental.panel.inputById).toEqual(full.panel.inputById);expect(incremental.search.entriesById).toEqual(full.search.entriesById);
++    expect(incremental.labels.pointFallbacksByLabelId.get('catalog-label:USA')).toBe(p.labels.pointFallbacksByLabelId.get('catalog-label:USA'));expect(incremental.search.entriesById.get('USA' as never)).toBe(p.search.entriesById.get('USA' as never));expect(incremental.projectionStats.countryRebuilds).toBe(249);
++  });
+   it('mounts from the server bootstrap through browser delivery and registers the actual vector protocol',async()=>{
+     const m=mockMap(),api={addProtocol:vi.fn(),removeProtocol:vi.fn()};
+     const consumer=await mountCatalogMapConsumer({map:m.map,world,protocolApi:api,fetcher});
+@@ -162,7 +186,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
+     for(const [o,c,expected]of [[other,owner,other],[null,other,other],[null,null,null]] as const){
+       const p=createCatalogMapConsumerProjection(changedWorld(id,o,c),delivery.metadata);
+       expect(catalogHitTerritory(p,hit(id))?.countryId).toBe(expected);
+-      expect(p.featuresById[id].mapColor).toBe(o?world.countriesById[o].mapColor:'#D6D3C7');
++      expect(p.featuresById[id].mapColor).toBe(c?world.countriesById[c].mapColor:o?world.countriesById[o].mapColor:'#D6D3C7');
+       expect(p.ownedByCountry[owner]).not.toContain(id);
+       expect(catalogHitTerritory(p,{...hit(id),sourceLayer:'edges'})).toBeNull();
+       expect(catalogHitTerritory(p,{...hit(id),properties:{territoryId:'unknown'}})).toBeNull();
+@@ -170,7 +194,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
+   });
+   it('mounts real catalog sources, handles selection/hover, applies mutable changes without vector setData, and disposes',()=>{
+     const m=mockMap(),onSelect=vi.fn(),onHover=vi.fn(),consumer=createCatalogMapConsumer({map:m.map,delivery,world,onSelect,onHover});
+-    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.spec.type).toBe('vector');expect(m.states).toHaveBeenCalledTimes(4231);
++    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.spec.type).toBe('vector');expect(m.states).toHaveBeenCalledTimes(4231+world.countryOrder.length);
+     expect(m.listeners.size).toBe(3);expect([...m.listeners.keys()].some(k=>/moveend|zoom|render/.test(k))).toBe(false);
+     const id=world.territoryOrder[0],owner=world.territoriesById[id].ownerCountryId!,other=world.countryOrder.find(c=>c!==owner)!;
+     const initial=consumer.getProjection(),requests=delivery.counters().verifiedRequests;
+@@ -183,7 +207,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
+     consumer.updateWorld(changedWorld(id,other,owner));expect(m.states).toHaveBeenCalledTimes(1);
+     expect(m.states.mock.calls[0][0]).toEqual({source:CATALOG_MAP_SOURCE_ID,sourceLayer:'territories',id});
+     expect(m.states.mock.calls[0][1]).toMatchObject({ownerCountryId:other,controllerCountryId:owner,occupied:true});
+-    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.setData).not.toHaveBeenCalled();expect(m.sources.get('catalog-country-labels')?.setData).toHaveBeenCalledTimes(1);
++    expect(m.sources.get(CATALOG_MAP_SOURCE_ID)?.setData).not.toHaveBeenCalled();expect(m.sources.get('catalog-country-labels')?.setData).not.toHaveBeenCalled();
+     expect(()=>consumer.updateWorld(world)).toThrow(/Stale/);expect(()=>consumer.selectCountry('unknown')).toThrow(/active/);
+     m.listeners.get(`click:${CATALOG_MAP_LAYER_IDS.fill}`)!({features:[hit(id)]});expect(onSelect).toHaveBeenLastCalledWith(other);
+     consumer.dispose();consumer.dispose();expect(m.sources.size).toBe(0);expect(m.layers.size).toBe(0);expect(m.listeners.size).toBe(0);
+@@ -194,7 +218,7 @@ describe('catalog projection and MapLibre consumer before production cutover',()
+     consumer.updateWorld(next);expect(consumer.getProjection().catalogRef).toEqual(ref);
+     expect(consumer.getCountryPanel(id)?.nameKo).toBe('변경 국가');expect(consumer.getProjection().search.entriesById.get(id)?.mapKo).toBe('변경 라벨');
+     expect(consumer.getProjection().labels.jobs.find(j=>j.countryId===id)?.text).toBe('변경 라벨');
+-    expect(m.states).toHaveBeenCalledTimes(consumer.getProjection().ownedByCountry[id].length);for(const [,state]of m.states.mock.calls)expect(state.mapColor).toBe('#123456');consumer.dispose();
++    expect(m.states).toHaveBeenCalledTimes(consumer.getProjection().ownedByCountry[id].length+1);for(const [,state]of m.states.mock.calls)expect(state.mapColor).toBe('#123456');consumer.dispose();
+   });
+   it('clears retired-country interactions and removes its labels and panel while preserving source identity',()=>{
+     const old=world.countryOrder[0],nextOwner=world.countryOrder[1],m=mockMap(),onSelect=vi.fn(),onHover=vi.fn();
+@@ -202,7 +226,25 @@ describe('catalog projection and MapLibre consumer before production cutover',()
+     const next=createWorldStateV3({...world,revision:world.revision+1,countryOrder:world.countryOrder.filter(id=>id!==old),countriesById:Object.fromEntries(Object.entries(world.countriesById).filter(([id])=>id!==old)),
+       retiredCountryIds:new Set([...world.retiredCountryIds,old]),territoriesById:Object.fromEntries(Object.entries(world.territoriesById).map(([id,t])=>[id,{...t,ownerCountryId:t.ownerCountryId===old?nextOwner:t.ownerCountryId,controllerCountryId:t.controllerCountryId===old?nextOwner:t.controllerCountryId}]))},catalogContractForConsumer(delivery.metadata));
+     consumer.updateWorld(next);expect(onSelect).toHaveBeenLastCalledWith(null);expect(onHover).toHaveBeenLastCalledWith(null);expect(consumer.getCountryPanel(old)).toBeNull();
+-    expect(consumer.getProjection().labels.jobs.some(j=>j.countryId===old)).toBe(false);expect(consumer.getProjection().catalogRef).toEqual(ref);consumer.dispose();
++    expect(consumer.getProjection().labels.jobs.some(j=>j.countryId===old)).toBe(false);expect(consumer.getProjection().catalogRef).toEqual(ref);
++    expect(m.sources.get('catalog-country-labels')?.updateData.mock.calls[0][0].remove).toContain(`catalog-label:${old}`);
++    consumer.updateWorld(createWorldStateV3({...world,revision:next.revision+1},catalogContractForConsumer(delivery.metadata)));
++    expect(m.sources.get('catalog-country-labels')?.updateData.mock.calls[1][0].add.some((f:{id:string})=>f.id===`catalog-label:${old}`)).toBe(true);
++    for(const source of m.sources.values())expect(source.setData).not.toHaveBeenCalled();consumer.dispose();
++  });
++  it('updates only the renamed label through rename, undo and redo, with no capital or whole-source updates',()=>{
++    const m=mockMap(),consumer=createCatalogMapConsumer({map:m.map,delivery,world}),id='KOR',country=world.countriesById[id];
++    for(const [index,text]of ['새 대한민국',country.names.mapKo,'새 대한민국'].entries()){
++      const next=createWorldStateV3({...world,revision:world.revision+index+1,countriesById:{...world.countriesById,[id]:{...country,names:{...country.names,mapKo:text}}}},catalogContractForConsumer(delivery.metadata));
++      consumer.updateWorld(next);
++      const calls=m.sources.get('catalog-country-labels')!.updateData.mock.calls;expect(calls).toHaveLength(index+1);
++      const diff=calls.at(-1)![0];expect(diff.remove).toBeUndefined();expect(diff.add).toBeUndefined();expect(diff.update).toHaveLength(1);
++      expect(diff.update[0].id).toBe('catalog-label:KOR');expect(diff.update[0].newGeometry).toBeUndefined();
++      expect(diff.update[0].addOrUpdateProperties).toContainEqual({key:'text',value:text});
++      expect(m.sources.get('catalog-capitals')!.updateData).not.toHaveBeenCalled();for(const source of m.sources.values())expect(source.setData).not.toHaveBeenCalled();
++    }
++    const last=consumer.getProjection().world;consumer.updateWorld(createWorldStateV3({...last,revision:last.revision+1},catalogContractForConsumer(delivery.metadata)));
++    expect(m.sources.get('catalog-country-labels')!.updateData).toHaveBeenCalledTimes(3);expect(m.states).toHaveBeenCalledTimes(world.territoryOrder.length+world.countryOrder.length);consumer.dispose();
+   });
+   it('rejects incompatible world/catalog input before mounting or applying any source mutation',()=>{
+     const bad={...world,catalogRef:{...ref,renderArtifactRoot:'0'.repeat(64)}},m=mockMap();
+diff --git a/src/lib/map/catalog-map-consumer.ts b/src/lib/map/catalog-map-consumer.ts
+index 694b63d..3942a72 100644
+--- a/src/lib/map/catalog-map-consumer.ts
++++ b/src/lib/map/catalog-map-consumer.ts
+@@ -1,13 +1,14 @@
+-import type {FeatureCollection} from 'geojson';
+ import type {LayerSpecification,SourceSpecification} from 'maplibre-gl';
+ import type {WorldStateV3} from '../world/world-state-v3';
+-import {createCatalogMapConsumerProjection,catalogHitTerritory,catalogCountryPanelView,CATALOG_MAP_SOURCE_ID} from '../projection/catalog-map-consumer-projection';
++import {createCatalogMapConsumerProjection,updateCatalogMapConsumerProjection,catalogHitTerritory,catalogCountryPanelView,CATALOG_MAP_SOURCE_ID} from '../projection/catalog-map-consumer-projection';
+ import {mapLibreFeatureTarget} from './render-feature-ref';
+-import type {CatalogVectorDelivery} from './catalog-vector-delivery';
++import {diffMapSourceFeatures,type IdFeatureCollection} from './map-source-incremental-adapter';
++import type {CatalogVectorDelivery,CatalogEdgeIncidence} from './catalog-vector-delivery';
+ import {fetchCatalogVectorDelivery,registerCatalogTileProtocol,type CatalogFetch} from './catalog-vector-delivery';
++import {updateCatalogColorProjection,catalogColorFeatureState} from '../projection/catalog-color-projection';
+ type HitFeature=Parameters<typeof catalogHitTerritory>[1];
+ type MapEvent={features?:HitFeature[]};
+-export const CATALOG_MAP_LAYER_IDS={fill:'catalog-territory-fill',edges:'catalog-territory-edges',hover:'catalog-territory-hover',selected:'catalog-territory-selected',labels:'catalog-country-labels',capitals:'catalog-capitals'} as const;
++export const CATALOG_MAP_LAYER_IDS={fill:'catalog-territory-fill',edges:'catalog-territory-edges',occupation:'catalog-territory-occupation',front:'catalog-occupation-front',hover:'catalog-territory-hover',selected:'catalog-territory-selected',labels:'catalog-country-labels',capitals:'catalog-capitals'} as const;
+ const labelSource='catalog-country-labels',capitalSource='catalog-capitals';
+ export type CatalogMapPort={
+   addSource:(id:string,source:SourceSpecification)=>unknown;removeSource:(id:string)=>unknown;
+@@ -17,42 +18,67 @@ export type CatalogMapPort={
+   on:(event:string,layer:string,listener:(event:MapEvent)=>void)=>unknown;off:(event:string,layer:string,listener:(event:MapEvent)=>void)=>unknown;
+ };
+ /** Explicit opt-in consumer; production's V2 store/bootstrap is not mounted here. */
+-export function createCatalogMapConsumer(input:{map:CatalogMapPort;delivery:CatalogVectorDelivery;world:WorldStateV3;onSelect?:(countryId:string|null)=>void;onHover?:(countryId:string|null)=>void}){
++export function createCatalogMapConsumer(input:{map:CatalogMapPort;delivery:CatalogVectorDelivery;world:WorldStateV3;onSelect?:(countryId:string|null)=>void;onHover?:(countryId:string|null)=>void;onTerritorySelect?:(id:string|null)=>void}){
+   const {map,delivery}=input;let currentInput=input.world,projection=createCatalogMapConsumerProjection(input.world,delivery.metadata),selected:string|null=null,hovered:string|null=null,disposed=false;
++  const fullProjectionBuilds=1;let colorProjectionUpdates=0;
+   for(const id of [CATALOG_MAP_SOURCE_ID,labelSource,capitalSource])if(map.getSource(id))throw new Error('Catalog consumer source already exists');
+   for(const id of Object.values(CATALOG_MAP_LAYER_IDS))if(map.getLayer(id))throw new Error('Catalog consumer layer already exists');
+-  const collections=()=>({labels:{type:'FeatureCollection',features:[...projection.labels.pointFallbacksByLabelId.values()]} as unknown as FeatureCollection,
+-    capitals:{type:'FeatureCollection',features:projection.capitals.features} as unknown as FeatureCollection});
+-  const initial=collections();map.addSource(CATALOG_MAP_SOURCE_ID,delivery.source);map.addSource(labelSource,{type:'geojson',data:initial.labels});map.addSource(capitalSource,{type:'geojson',data:initial.capitals});
++  const collections=(p:typeof projection)=>({labels:{type:'FeatureCollection',features:[...p.labels.pointFallbacksByLabelId.values()].map(f=>{
++    const properties:Record<string,unknown>={...f.properties};delete properties.projectionRevision;
++    return {...f,properties};
++  })} as unknown as IdFeatureCollection,
++    capitals:{type:'FeatureCollection',features:p.capitals.features} as unknown as IdFeatureCollection});
++  const initial=collections(projection);map.addSource(CATALOG_MAP_SOURCE_ID,delivery.source);map.addSource(labelSource,{type:'geojson',data:initial.labels});map.addSource(capitalSource,{type:'geojson',data:initial.capitals});
+   const L=CATALOG_MAP_LAYER_IDS;
+-  map.addLayer({id:L.fill,type:'fill',source:CATALOG_MAP_SOURCE_ID,'source-layer':'territories',paint:{'fill-color':['coalesce',['feature-state','mapColor'],'#D6D3C7']}});
++  map.addLayer({id:L.fill,type:'fill',source:CATALOG_MAP_SOURCE_ID,'source-layer':'territories',paint:{'fill-color':['coalesce',['feature-state','mapColor'],'#D6D3C7'],'fill-outline-color':['coalesce',['feature-state','outlineColor'],'#53615F']}});
+   map.addLayer({id:L.edges,type:'line',source:CATALOG_MAP_SOURCE_ID,'source-layer':'edges',paint:{'line-color':'#53615F','line-width':['case',['==',['get','boundaryClass'],'administrative'],0.3,0.8]}});
+-  for(const [id,key,color]of [[L.hover,'hover','#FFFFFF'],[L.selected,'selected','#FFE9A6']] as const)map.addLayer({id,type:'fill',source:CATALOG_MAP_SOURCE_ID,'source-layer':'territories',paint:{'fill-color':color,'fill-opacity':['case',['boolean',['feature-state',key],false],0.35,0]}});
+-  map.addLayer({id:L.labels,type:'symbol',source:labelSource,layout:{'text-field':['get','text'],'text-font':['Open Sans Regular'],'text-size':12},paint:{'text-color':'#FFFFFF','text-halo-color':'#53615F','text-halo-width':1}});
++  map.addLayer({id:L.occupation,type:'fill',source:CATALOG_MAP_SOURCE_ID,'source-layer':'territories',paint:{'fill-color':'#40285E','fill-opacity':['case',['boolean',['feature-state','occupied'],false],0.18,0]}});
++  map.addLayer({id:L.front,type:'line',source:CATALOG_MAP_SOURCE_ID,'source-layer':'edges',paint:{'line-color':'#D9A43C','line-width':2,'line-dasharray':[3,2],'line-opacity':['case',['boolean',['feature-state','front'],false],1,0]}});
++  for(const [id,key]of [[L.hover,'hover'],[L.selected,'selected']] as const)map.addLayer({id,type:'fill',source:CATALOG_MAP_SOURCE_ID,'source-layer':'territories',paint:{'fill-color':['coalesce',['feature-state','selectionColor'],'#FFFFFF'],'fill-opacity':['case',['boolean',['feature-state',key],false],0.18,0]}});
++  map.addLayer({id:L.labels,type:'symbol',source:labelSource,layout:{'text-field':['get','text'],'text-font':['Open Sans Regular'],'text-size':12},paint:{'text-color':['coalesce',['feature-state','labelColor'],'#FFFFFF'],'text-halo-color':['coalesce',['feature-state','labelHaloColor'],'#53615F'],'text-halo-width':1.5}});
+   map.addLayer({id:L.capitals,type:'circle',source:capitalSource,paint:{'circle-radius':2,'circle-color':'#34464D'}});
+   const apply=(ids:readonly string[],state:Record<string,unknown>)=>{for(const id of ids)map.setFeatureState(mapLibreFeatureTarget(projection.featuresById[id].ref),state);};
+-  const featureState=(id:string)=>{const {ref,...state}=projection.featuresById[id];void ref;return {...state,hover:projection.featuresById[id].countryId===hovered&&hovered!==null,selected:projection.featuresById[id].countryId===selected&&selected!==null};};
++  const featureState=(id:string)=>{const {ref,...state}=projection.featuresById[id];void ref;return {...state,...catalogColorFeatureState(state.mapColor),hover:projection.featuresById[id].countryId===hovered&&hovered!==null,selected:projection.featuresById[id].countryId===selected&&selected!==null};};
+   for(const id of projection.world.territoryOrder)apply([id],featureState(id));
++  const labelColors=(ids:readonly string[])=>{for(const id of ids){const country=projection.world.countriesById[id];if(country)map.setFeatureState({source:labelSource,id:`catalog-label:${id}`},catalogColorFeatureState(country.mapColor));}};
++  labelColors(projection.world.countryOrder);
++  const edgesByTerritory=new Map<string,Set<string>>(),edges=new Map<string,CatalogEdgeIncidence>(),edgeStates=new Map<string,boolean>();
++  let edgeUpdates=0,territoryUpdates=0;
++  const applyEdges=(ids:Iterable<string>)=>{for(const id of ids){const e=edges.get(id)!;const a=e.left?projection.featuresById[e.left]:null,b=e.right?projection.featuresById[e.right]:null;
++    const front=!!(a&&b&&(a.occupied||b.occupied)&&((a.controllerCountryId??a.ownerCountryId)!==(b.controllerCountryId??b.ownerCountryId)));
++    if(edgeStates.get(id)===front)continue;edgeStates.set(id,front);map.setFeatureState({source:CATALOG_MAP_SOURCE_ID,sourceLayer:'edges',id},{front});edgeUpdates++;
++  }};
++  const stopEdges=delivery.observeEdges(batch=>{for(const e of batch){edges.set(e.id,e);for(const t of [e.left,e.right])if(t){const ids=edgesByTerritory.get(t)??new Set();ids.add(e.id);edgesByTerritory.set(t,ids);}}applyEdges(batch.map(e=>e.id));});
+   const setInteraction=(kind:'hover'|'selected',id:string|null)=>{
+     if(disposed)throw new Error('Catalog consumer is disposed');if(id!==null&&!projection.world.countriesById[id])throw new Error('Country is not active');
+     const old=kind==='hover'?hovered:selected;if(old===id)return;
+     if(old)apply(projection.presentedByCountry[old]??[],{[kind]:false});if(id)apply(projection.presentedByCountry[id]??[],{[kind]:true});
+     if(kind==='hover')hovered=id;else selected=id;
+   };
+-  const click=(event:MapEvent)=>{const hit=event.features?.map(f=>catalogHitTerritory(projection,f)).find(Boolean);setInteraction('selected',hit?.countryId??null);input.onSelect?.(hit?.countryId??null);};
++  const click=(event:MapEvent)=>{const hit=event.features?.map(f=>catalogHitTerritory(projection,f)).find(Boolean);setInteraction('selected',hit?.countryId??null);input.onSelect?.(hit?.countryId??null);input.onTerritorySelect?.(hit?.territoryId??null);};
+   const move=(event:MapEvent)=>{const hit=event.features?.map(f=>catalogHitTerritory(projection,f)).find(Boolean);setInteraction('hover',hit?.countryId??null);input.onHover?.(hit?.countryId??null);};
+   const leave=()=>{setInteraction('hover',null);input.onHover?.(null);};
+   map.on('click',L.fill,click);map.on('mousemove',L.fill,move);map.on('mouseleave',L.fill,leave);
+   return Object.freeze({
++    getUpdateStats:()=>({fullProjectionBuilds,colorProjectionUpdates,...projection.projectionStats,territoryUpdates,edgeUpdates,indexedEdges:edges.size}),
+     getProjection:()=>projection,getCountryPanel:(id:string|null)=>catalogCountryPanelView(projection,id),selectCountry:(id:string|null)=>setInteraction('selected',id),hoverCountry:(id:string|null)=>setInteraction('hover',id),
+     updateWorld:(world:WorldStateV3)=>{
+       if(disposed)throw new Error('Catalog consumer is disposed');if(world===currentInput||world===projection.world)return;if(world.revision<=projection.appliedRevision)throw new Error('Stale catalog projection revision');
+-      const previous=projection,next=createCatalogMapConsumerProjection(world,delivery.metadata);projection=next;currentInput=world;
++      const color=updateCatalogColorProjection(projection,world);
++      if(color){projection=color.projection;currentInput=world;colorProjectionUpdates++;for(const id of color.changedFeatureIds)apply([id],featureState(id));territoryUpdates+=color.changedFeatureIds.length;labelColors(color.changedCountryIds);return;}
++      const previous=projection,update=updateCatalogMapConsumerProjection(previous,world),next=update.projection;projection=next;currentInput=world;
+       if(selected&&!next.world.countriesById[selected]){selected=null;input.onSelect?.(null);}if(hovered&&!next.world.countriesById[hovered]){hovered=null;input.onHover?.(null);}
+-      for(const id of next.world.territoryOrder){const a=previous.featuresById[id],b=next.featuresById[id];if(a.ownerCountryId!==b.ownerCountryId||a.controllerCountryId!==b.controllerCountryId||a.mapColor!==b.mapColor)apply([id],featureState(id));}
+-      const values=collections();for(const [source,data]of [[labelSource,values.labels],[capitalSource,values.capitals]] as const){const port=map.getSource(source) as {setData:(data:FeatureCollection)=>unknown}|undefined;if(!port)throw new Error('Catalog presentation source is missing');port.setData(data);}
++      for(const id of update.changedFeatureIds)apply([id],featureState(id));territoryUpdates+=update.changedFeatureIds.length;
++      applyEdges(new Set(update.changedFeatureIds.flatMap(id=>[...edgesByTerritory.get(id)??[]])));
++      const old=collections(previous),values=collections(next);
++      for(const [source,a,b]of [[labelSource,old.labels,values.labels],[capitalSource,old.capitals,values.capitals]] as const){
++        const {diff,changedIds}=diffMapSourceFeatures(a,b,source);if(!changedIds.length)continue;
++        const port=map.getSource(source) as {updateData:(diff:import('maplibre-gl').GeoJSONSourceDiff)=>unknown}|undefined;
++        if(!port||typeof port.updateData!=='function')throw new Error('Catalog incremental presentation source is missing');port.updateData(diff);
++      }
++      labelColors(next.world.countryOrder.filter(id=>previous.world.countriesById[id]?.mapColor!==next.world.countriesById[id].mapColor));
+     },
+-    dispose:()=>{if(disposed)return;map.off('click',L.fill,click);map.off('mousemove',L.fill,move);map.off('mouseleave',L.fill,leave);for(const id of Object.values(L).reverse())if(map.getLayer(id))map.removeLayer(id);for(const id of [capitalSource,labelSource,CATALOG_MAP_SOURCE_ID])if(map.getSource(id))map.removeSource(id);disposed=true;},
++    dispose:()=>{if(disposed)return;stopEdges();map.off('click',L.fill,click);map.off('mousemove',L.fill,move);map.off('mouseleave',L.fill,leave);for(const id of Object.values(L).reverse())if(map.getLayer(id))map.removeLayer(id);for(const id of [capitalSource,labelSource,CATALOG_MAP_SOURCE_ID])if(map.getSource(id))map.removeSource(id);disposed=true;},
+   });
+ }
+ 
+diff --git a/src/lib/map/catalog-vector-delivery.ts b/src/lib/map/catalog-vector-delivery.ts
+index 9d26aa7..b0a6c27 100644
+--- a/src/lib/map/catalog-vector-delivery.ts
++++ b/src/lib/map/catalog-vector-delivery.ts
+@@ -1,4 +1,6 @@
+ import type {AddProtocolAction,VectorSourceSpecification} from 'maplibre-gl';
++import {VectorTile} from '@mapbox/vector-tile';
++import {PbfReader} from 'pbf';
+ import {assertWorldGeometryCatalogRefMatches,createWorldGeometryCatalogRef,type WorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
+ import {catalogArtifactIdentity,readCatalogConsumerBootstrap,readCatalogConsumerMetadata,type CatalogArtifactIdentity,type CatalogConsumerBootstrap,type CatalogConsumerMetadata} from './catalog-consumer-contract';
+ export type CatalogFetch=(path:string,init?:RequestInit)=>Promise<Response>;
+@@ -10,7 +12,9 @@ export async function verifyCatalogResponse(response:Response,identity:CatalogAr
+   signal?.throwIfAborted();const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(n=>n.toString(16).padStart(2,'0')).join('');
+   if(hash!==identity.sha256)throw new Error('Catalog asset SHA-256 mismatch');return bytes;
+ }
++export type CatalogEdgeIncidence=Readonly<{id:string;left:string|null;right:string|null;boundaryClass:string}>;
+ export type CatalogVectorDelivery=Readonly<{bootstrap:CatalogConsumerBootstrap;metadata:CatalogConsumerMetadata;source:VectorSourceSpecification;protocol:string;
++  observeEdges:(listener:(edges:readonly CatalogEdgeIncidence[])=>void)=>()=>void;
+   loadTile:(path:string,signal?:AbortSignal)=>Promise<ArrayBuffer>;counters:()=>Readonly<{verifiedRequests:number;cacheHits:number;cachedTiles:number;cachedBytes:number}>}>;
+ export async function loadCatalogVectorDelivery(value:unknown,expected:WorldGeometryCatalogRef,fetcher:CatalogFetch=fetch,signal?:AbortSignal):Promise<CatalogVectorDelivery>{
+   const bootstrap=readCatalogConsumerBootstrap(value,expected);let verifiedRequests=0,cacheHits=0;
+@@ -26,10 +30,21 @@ export async function loadCatalogVectorDelivery(value:unknown,expected:WorldGeom
+   }
+   const metadata=readCatalogConsumerMetadata(JSON.parse(decoder.decode(await read(bootstrap.metadata))),expected);
+   const cache=new Map<string,ArrayBuffer>();let cachedBytes=0;
++  const edges=new Map<string,CatalogEdgeIncidence>(),listeners=new Set<(edges:readonly CatalogEdgeIncidence[])=>void>(),territoryIds=new Set(metadata.territories.map(t=>t.id));
++  const indexEdges=(bytes:ArrayBuffer)=>{
++    const tile=new VectorTile(new PbfReader(new Uint8Array(bytes)) as unknown as ConstructorParameters<typeof VectorTile>[0]),layer=tile.layers.edges,newEdges:CatalogEdgeIncidence[]=[];
++    for(let i=0;i<(layer?.length??0);i++){const p=layer.feature(i).properties,id=String(p.edgeId),left=String(p.leftTerritoryId)||null,right=String(p.rightTerritoryId)||null,boundaryClass=String(p.boundaryClass);
++      if(!/^edge:catalog:[a-f0-9]{64}$/.test(id)||(!left&&!right)||(left&&!territoryIds.has(left as never))||(right&&!territoryIds.has(right as never))||!['country','administrative','coast'].includes(boundaryClass))throw Error('Invalid approved edge incidence');
++      const old=edges.get(id);if(old){if(old.left!==left||old.right!==right||old.boundaryClass!==boundaryClass)throw Error('Inconsistent approved edge incidence');continue;}
++      if(edges.size>=15955)throw Error('Catalog edge cap exceeded');const edge=Object.freeze({id,left,right,boundaryClass});edges.set(id,edge);newEdges.push(edge);
++    }
++    if(newEdges.length)for(const listener of listeners)listener(newEdges);
++  };
+   const loadTile=async(path:string,s?:AbortSignal)=>{
+     s?.throwIfAborted();const a=tiles.get(path);if(!a)throw new Error('Unregistered catalog request');
+     const old=cache.get(path);if(old){cache.delete(path);cache.set(path,old);cacheHits++;return old.slice(0);}
+     const bytes=await read(a,s);
++    if(listeners.size)indexEdges(bytes);
+     if(bytes.byteLength<=8*1024*1024){
+       const replaced=cache.get(path);if(replaced){cachedBytes-=replaced.byteLength;cache.delete(path);}
+       cache.set(path,bytes);cachedBytes+=bytes.byteLength;
+@@ -39,26 +54,29 @@ export async function loadCatalogVectorDelivery(value:unknown,expected:WorldGeom
+   };
+   const protocol=`pax-catalog-${expected.catalogVersion.replace(/^catalog-v1-/,'')}`;
+   const source:VectorSourceSpecification={type:'vector',tiles:[`${protocol}://${template}`],minzoom:0,maxzoom:6,promoteId:{territories:'territoryId',edges:'edgeId'},attribution:manifest.attribution};
+-  return Object.freeze({bootstrap,metadata,source,protocol,loadTile,counters:()=>({verifiedRequests,cacheHits,cachedTiles:cache.size,cachedBytes})});
++  const observeEdges=(listener:(edges:readonly CatalogEdgeIncidence[])=>void)=>{listeners.add(listener);listener([...edges.values()]);for(const bytes of cache.values())indexEdges(bytes);return()=>{listeners.delete(listener);};};
++  return Object.freeze({bootstrap,metadata,source,protocol,loadTile,observeEdges,counters:()=>({verifiedRequests,cacheHits,cachedTiles:cache.size,cachedBytes})});
+ }
+ export async function fetchCatalogVectorDelivery(expected:WorldGeometryCatalogRef,fetcher:CatalogFetch=fetch,signal?:AbortSignal){
+   const response=await fetcher('/api/world/catalog',{signal,cache:'no-store'});if(!response.ok)throw new Error('Catalog server readiness failed');
+   return loadCatalogVectorDelivery(await response.json(),expected,fetcher,signal);
+ }
+ type CatalogProtocolApi={addProtocol:(name:string,handler:AddProtocolAction)=>void;removeProtocol:(name:string)=>void};
+-const protocolRegistrations=new WeakMap<CatalogProtocolApi,Map<string,{users:number;manifestHash:string;tileIndexHash:string}>>();
++const protocolRegistrations=new WeakMap<CatalogProtocolApi,Map<string,{users:number;manifestHash:string;tileIndexHash:string;deliveries:Map<CatalogVectorDelivery,number>}>>();
+ export function registerCatalogTileProtocol(api:CatalogProtocolApi,delivery:CatalogVectorDelivery){
+   let registrations=protocolRegistrations.get(api);if(!registrations){registrations=new Map();protocolRegistrations.set(api,registrations);}
+   let entry=registrations.get(delivery.protocol);
+   if(entry){
+-    if(entry.manifestHash!==delivery.bootstrap.manifest.sha256||entry.tileIndexHash!==delivery.bootstrap.tileIndex.sha256)throw new Error('Catalog protocol identity conflict');entry.users++;
++    if(entry.manifestHash!==delivery.bootstrap.manifest.sha256||entry.tileIndexHash!==delivery.bootstrap.tileIndex.sha256)throw new Error('Catalog protocol identity conflict');entry.users++;entry.deliveries.set(delivery,(entry.deliveries.get(delivery)??0)+1);
+   }else{
+     api.addProtocol(delivery.protocol,async(params,abort)=>{
+       const prefix=`${delivery.protocol}://`;if(!params.url.startsWith(prefix))throw new Error('Unexpected catalog protocol request');
+-      return {data:await delivery.loadTile(params.url.slice(prefix.length),abort.signal)};
++      // Each active consumer indexes verified edges in its own immutable delivery.
++      const values=await Promise.all([...entry!.deliveries.keys()].map(d=>d.loadTile(params.url.slice(prefix.length),abort.signal)));
++      return {data:values[0]};
+     });
+-    entry={users:1,manifestHash:delivery.bootstrap.manifest.sha256,tileIndexHash:delivery.bootstrap.tileIndex.sha256};registrations.set(delivery.protocol,entry);
++    entry={users:1,manifestHash:delivery.bootstrap.manifest.sha256,tileIndexHash:delivery.bootstrap.tileIndex.sha256,deliveries:new Map([[delivery,1]])};registrations.set(delivery.protocol,entry);
+   }
+   let removed=false;
+-  return ()=>{if(removed)return;removed=true;if(--entry.users===0){api.removeProtocol(delivery.protocol);registrations.delete(delivery.protocol);}};
++  return ()=>{if(removed)return;removed=true;const count=entry.deliveries.get(delivery)!;if(count===1)entry.deliveries.delete(delivery);else entry.deliveries.set(delivery,count-1);if(--entry.users===0){api.removeProtocol(delivery.protocol);registrations.delete(delivery.protocol);}};
+ }
+diff --git a/src/lib/map/map-source-incremental-adapter.ts b/src/lib/map/map-source-incremental-adapter.ts
+index 71a5d4c..749fbcd 100644
+--- a/src/lib/map/map-source-incremental-adapter.ts
++++ b/src/lib/map/map-source-incremental-adapter.ts
+@@ -76,7 +76,7 @@ const geometrySignature = (geometry: Geometry): string => {
+   return canonicalStringify(geometry);
+ };
+ 
+-export function assertUniqueMapSourceIds(collection: IdFeatureCollection, sourceId: RuntimeMapSourceId): void {
++export function assertUniqueMapSourceIds(collection: IdFeatureCollection, sourceId: string): void {
+   const seen = new Set<string>();
+   for (const feature of collection.features) {
+     if (typeof feature.id !== "string" || !feature.id || seen.has(feature.id)) {
+@@ -89,7 +89,7 @@ export function assertUniqueMapSourceIds(collection: IdFeatureCollection, source
+ export function diffMapSourceFeatures(
+   previous: IdFeatureCollection,
+   next: IdFeatureCollection,
+-  sourceId: RuntimeMapSourceId,
++  sourceId: string,
+ ): Readonly<{diff: GeoJSONSourceDiff; changedIds: readonly string[]}> {
+   assertUniqueMapSourceIds(previous, sourceId);
+   assertUniqueMapSourceIds(next, sourceId);
+diff --git a/src/lib/projection/catalog-map-consumer-projection.ts b/src/lib/projection/catalog-map-consumer-projection.ts
+index 937f1c7..600b053 100644
+--- a/src/lib/projection/catalog-map-consumer-projection.ts
++++ b/src/lib/projection/catalog-map-consumer-projection.ts
+@@ -1,5 +1,5 @@
+ import {createWorldGeometryCatalogContract,assertWorldGeometryCatalogRefMatches} from '../world/world-geometry-catalog-ref';
+-import {createWorldStateV3,type WorldStateV3} from '../world/world-state-v3';
++import {createWorldStateV3,isValidatedWorldStateV3,type WorldStateV3} from '../world/world-state-v3';
+ import type {TerritoryId} from '../world/territory-id';
+ import type {ActiveCountryId} from '../world/country-id';
+ import type {CatalogConsumerMetadata,CatalogTerritoryMetadata} from '../map/catalog-consumer-contract';
+@@ -8,25 +8,27 @@ import {createCountrySearchProjection} from './country-search-index-patch';
+ import {createCountryPanelProjection,getCountryPanelView,type CountryPanelPresentationEntry} from './country-panel-projection';
+ import type {CountryCapitalFeature,CountryCapitalProjection} from './country-capital-projection';
+ import {deserializeLabelProjection,labelTextHash,type LabelJob} from './label-projection-checkpoint';
+-import {canonicalSerialize} from '../world/canonical-serializer';
++import {canonicalSerialize,canonicalStringify} from '../world/canonical-serializer';
+ import {sha256Hex} from '../world/sha256';
+ export const CATALOG_MAP_SOURCE_ID='world-territory-catalog';
+-export function catalogContractForConsumer(metadata:CatalogConsumerMetadata){return createWorldGeometryCatalogContract({ref:metadata.catalogRef,
+-  territoryOrder:metadata.territories.map(t=>t.id),territoriesById:Object.fromEntries(metadata.territories.map(t=>[t.id,{id:t.id,sourceCountryId:t.sourceCountryId}]))});}
++const contracts=new WeakMap<CatalogConsumerMetadata,ReturnType<typeof createWorldGeometryCatalogContract>>();
++export function catalogContractForConsumer(metadata:CatalogConsumerMetadata){let contract=contracts.get(metadata);if(!contract){contract=createWorldGeometryCatalogContract({ref:metadata.catalogRef,
++  territoryOrder:metadata.territories.map(t=>t.id),territoriesById:Object.fromEntries(metadata.territories.map(t=>[t.id,{id:t.id,sourceCountryId:t.sourceCountryId}]))});contracts.set(metadata,contract);}return contract;}
+ export function catalogTerritoryRenderRef(id:TerritoryId):RenderFeatureRef{return {sourceType:'vector',sourceId:CATALOG_MAP_SOURCE_ID,sourceLayer:'territories',featureId:id};}
+-export function createCatalogMapConsumerProjection(input:WorldStateV3,metadata:CatalogConsumerMetadata){
++export function createCatalogMapConsumerProjection(input:WorldStateV3,metadata:CatalogConsumerMetadata,scope?:{countryIds:readonly string[];territoryIds:readonly TerritoryId[]}){
+   assertWorldGeometryCatalogRefMatches(input.catalogRef,metadata.catalogRef);
+-  const world=createWorldStateV3(input,catalogContractForConsumer(metadata)),territoryById=new Map(metadata.territories.map(t=>[t.id,t]));
++  const contract=catalogContractForConsumer(metadata),world=isValidatedWorldStateV3(input,contract)?input:createWorldStateV3(input,contract),territoryById=new Map(metadata.territories.map(t=>[t.id,t]));
++  const countryOrder=scope?world.countryOrder.filter(id=>scope.countryIds.includes(id)):world.countryOrder,territoryOrder=scope?.territoryIds??world.territoryOrder;
+   const presentedByCountry:Record<string,TerritoryId[]>={},ownedByCountry:Record<string,TerritoryId[]>={},controlledByCountry:Record<string,TerritoryId[]>={};
+-  for(const id of world.countryOrder){presentedByCountry[id]=[];ownedByCountry[id]=[];controlledByCountry[id]=[];}
++  for(const id of countryOrder){presentedByCountry[id]=[];ownedByCountry[id]=[];controlledByCountry[id]=[];}
+   const featuresById:Record<string,{ref:RenderFeatureRef;ownerCountryId:string|null;controllerCountryId:string|null;countryId:string|null;mapColor:string;occupied:boolean}>={};
+-  for(const id of world.territoryOrder){const t=world.territoriesById[id],countryId=t.ownerCountryId??t.controllerCountryId;
+-    if(t.ownerCountryId)ownedByCountry[t.ownerCountryId].push(id);if(t.controllerCountryId)controlledByCountry[t.controllerCountryId].push(id);if(countryId)presentedByCountry[countryId].push(id);
++  for(const id of territoryOrder){const t=world.territoriesById[id],countryId=t.ownerCountryId??t.controllerCountryId;
++    if(t.ownerCountryId)ownedByCountry[t.ownerCountryId]?.push(id);if(t.controllerCountryId)controlledByCountry[t.controllerCountryId]?.push(id);if(countryId)presentedByCountry[countryId]?.push(id);
+     featuresById[id]={ref:catalogTerritoryRenderRef(id),ownerCountryId:t.ownerCountryId,controllerCountryId:t.controllerCountryId,countryId,
+-      mapColor:t.ownerCountryId?world.countriesById[t.ownerCountryId].mapColor:'#D6D3C7',occupied:t.controllerCountryId!==null&&t.controllerCountryId!==t.ownerCountryId};
++      mapColor:(t.controllerCountryId??t.ownerCountryId)?world.countriesById[(t.controllerCountryId??t.ownerCountryId)!].mapColor:'#D6D3C7',occupied:t.controllerCountryId!==null&&t.controllerCountryId!==t.ownerCountryId};
+   }
+   const sourceCountries=new Map(metadata.countries.map(c=>[c.countryId,c])),focusByCountryId:Record<string,{center:readonly[number,number];zoom:number}>={},jobs:LabelJob[]=[];
+-  for(const countryId of world.countryOrder){const ids=presentedByCountry[countryId],country=world.countriesById[countryId],seed=sourceCountries.get(countryId),override=country.presentationOverride;
++  for(const countryId of countryOrder){const ids=presentedByCountry[countryId],country=world.countriesById[countryId],seed=sourceCountries.get(countryId),override=country.presentationOverride;
+     const largest=ids.map(id=>territoryById.get(id)!).sort((a,b)=>b.area-a.area||(a.id<b.id?-1:1))[0];if(!largest)continue;
+     const anchor=override?.labelAnchor??(seed&&ids.includes(seed.label.territoryId)?seed.label.anchor:largest.anchor);
+     const bounds=ids.reduce((box,id)=>{const b=territoryById.get(id)!.bbox;return [Math.min(box[0],b[0]),Math.min(box[1],b[1]),Math.max(box[2],b[2]),Math.max(box[3],b[3])];},[Infinity,Infinity,-Infinity,-Infinity]);
+@@ -36,15 +38,53 @@ export function createCatalogMapConsumerProjection(input:WorldStateV3,metadata:C
+       hashes:{territoryGeometryHash:sha256Hex(canonicalSerialize({geometryRoot:metadata.catalogRef.geometryRoot,territoryIds:ids,anchor})),textHash:labelTextHash(country.names.mapKo),fontHash:'font:runtime-default',policyHash:'catalog-country-label-v1'}});
+   }
+   const capitalFeatures:CountryCapitalFeature[]=[],presentation:Record<string,CountryPanelPresentationEntry>={};
+-  for(const c of metadata.countries){presentation[c.countryId]={countryId:c.countryId as ActiveCountryId,iso3:c.iso3,flagCode:c.flagCode,region:c.region};
++  for(const c of metadata.countries){if(!countryOrder.includes(c.countryId as ActiveCountryId))continue;presentation[c.countryId]={countryId:c.countryId as ActiveCountryId,iso3:c.iso3,flagCode:c.flagCode,region:c.region};
+     const p=c.capital;if(p&&world.countriesById[c.countryId]&&world.territoriesById[p.territoryId]?.ownerCountryId===c.countryId)capitalFeatures.push({type:'Feature',id:c.countryId as ActiveCountryId,
+       properties:{countryId:c.countryId as ActiveCountryId,territoryId:p.territoryId,nameKo:p.nameKo,nameEn:p.nameEn,capitalType:p.capitalType,labelRank:p.labelRank},geometry:{type:'Point',coordinates:p.coordinates}});
+   }
+-  const capitals:CountryCapitalProjection={revision:world.revision,appliedRevision:world.revision,features:capitalFeatures,featuresByCountryId:new Map(capitalFeatures.map(f=>[f.id,f])),omittedCountryIds:world.countryOrder.filter(id=>!capitalFeatures.some(f=>f.id===id))};
+-  const panel=createCountryPanelProjection(world,capitals,presentation),search=createCountrySearchProjection(world),labels=deserializeLabelProjection({revision:world.revision,jobs});
+-  return Object.freeze({catalogRef:metadata.catalogRef,appliedRevision:world.revision,world,metadata,featuresById,territoryById:territoryById as ReadonlyMap<TerritoryId,CatalogTerritoryMetadata>,presentedByCountry,ownedByCountry,controlledByCountry,focusByCountryId,labels,capitals,panel,search});
++  const capitals:CountryCapitalProjection={revision:world.revision,appliedRevision:world.revision,features:capitalFeatures,featuresByCountryId:new Map(capitalFeatures.map(f=>[f.id,f])),omittedCountryIds:countryOrder.filter(id=>!capitalFeatures.some(f=>f.id===id))};
++  const selectedWorld={...world,countryOrder,countriesById:Object.fromEntries(countryOrder.map(id=>[id,world.countriesById[id]]))};
++  const panel=createCountryPanelProjection(selectedWorld,capitals,presentation),search=createCountrySearchProjection(selectedWorld),labels=deserializeLabelProjection({revision:world.revision,jobs});
++  return Object.freeze({catalogRef:metadata.catalogRef,appliedRevision:world.revision,world,metadata,featuresById,territoryById:territoryById as ReadonlyMap<TerritoryId,CatalogTerritoryMetadata>,presentedByCountry,ownedByCountry,controlledByCountry,focusByCountryId,labels,capitals,panel,search,projectionStats:{fullBuilds:scope?0:1,countryRebuilds:countryOrder.length,territoryRebuilds:territoryOrder.length}});
+ }
+ export type CatalogMapConsumerProjection=ReturnType<typeof createCatalogMapConsumerProjection>;
++/** Rebuild presentation only for changed legal owners/names. Controller changes have no label/capital work. */
++export function updateCatalogMapConsumerProjection(previous:CatalogMapConsumerProjection,input:WorldStateV3){
++  assertWorldGeometryCatalogRefMatches(previous.catalogRef,input.catalogRef);
++  const contract=catalogContractForConsumer(previous.metadata),world=isValidatedWorldStateV3(input,contract)?input:createWorldStateV3(input,contract);
++  const countries=new Set([...previous.world.countryOrder,...world.countryOrder].filter(id=>{const a=previous.world.countriesById[id],b=world.countriesById[id];return a!==b&&(!a||!b||canonicalStringify(a)!==canonicalStringify(b));}));
++  const changedIds=world.territoryOrder.filter(id=>{const a=previous.world.territoriesById[id],b=world.territoriesById[id];return a.ownerCountryId!==b.ownerCountryId||a.controllerCountryId!==b.controllerCountryId;});
++  const affected=new Set<TerritoryId>(changedIds),presentationCountries=new Set(countries);
++  const groups={presentedByCountry:{...previous.presentedByCountry},ownedByCountry:{...previous.ownedByCountry},controlledByCountry:{...previous.controlledByCountry}};
++  for(const country of countries)for(const id of [...previous.ownedByCountry[country]??[],...previous.controlledByCountry[country]??[]])affected.add(id);
++  const bucket=(group:Record<string,TerritoryId[]>,id:TerritoryId,a:string|null,b:string|null)=>{
++    if(a===b)return;if(a)group[a]=(group[a]??[]).filter(t=>t!==id);if(b)group[b]=[...(group[b]??[]),id].sort();
++  };
++  for(const id of changedIds){const a=previous.world.territoriesById[id],b=world.territoriesById[id];
++    bucket(groups.ownedByCountry,id,a.ownerCountryId,b.ownerCountryId);bucket(groups.controlledByCountry,id,a.controllerCountryId,b.controllerCountryId);
++    const old=a.ownerCountryId??a.controllerCountryId,next=b.ownerCountryId??b.controllerCountryId;bucket(groups.presentedByCountry,id,old,next);
++    if(old!==next){if(old)presentationCountries.add(old);if(next)presentationCountries.add(next);}
++    if(a.ownerCountryId!==b.ownerCountryId){if(a.ownerCountryId)presentationCountries.add(a.ownerCountryId);if(b.ownerCountryId)presentationCountries.add(b.ownerCountryId);}
++  }
++  for(const country of countries)for(const group of Object.values(groups)){if(!world.countriesById[country])delete group[country];else group[country]??=[];}
++  const featuresById={...previous.featuresById},changedFeatureIds:TerritoryId[]=[];
++  for(const id of [...affected].sort()){const t=world.territoriesById[id],a=featuresById[id],presented=t.controllerCountryId??t.ownerCountryId;
++    const b={...a,ownerCountryId:t.ownerCountryId,controllerCountryId:t.controllerCountryId,countryId:t.ownerCountryId??t.controllerCountryId,mapColor:presented?world.countriesById[presented].mapColor:'#D6D3C7',occupied:t.controllerCountryId!==null&&t.controllerCountryId!==t.ownerCountryId};
++    if(a.ownerCountryId!==b.ownerCountryId||a.controllerCountryId!==b.controllerCountryId||a.mapColor!==b.mapColor){featuresById[id]=b;changedFeatureIds.push(id);}
++  }
++  const scope=[...presentationCountries].sort(),scopeIds=[...new Set(scope.flatMap(id=>groups.presentedByCountry[id]??[]))].sort();
++  const partial=createCatalogMapConsumerProjection(world,previous.metadata,{countryIds:scope,territoryIds:scopeIds});
++  const mergeMap=<K,V>(old:ReadonlyMap<K,V>,next:ReadonlyMap<K,V>,key:(id:string)=>K)=>{const merged=new Map(old);for(const id of scope)merged.delete(key(id));for(const [id,v]of next)merged.set(id,v);return merged;};
++  const pointFallbacksByLabelId=mergeMap(previous.labels.pointFallbacksByLabelId,partial.labels.pointFallbacksByLabelId,id=>`catalog-label:${id}`);
++  const jobs=[...previous.labels.jobs.filter(j=>!presentationCountries.has(j.countryId)),...partial.labels.jobs].sort((a,b)=>a.countryId<b.countryId?-1:1);
++  const labels={...previous.labels,revision:world.revision,appliedRevision:world.revision,pointFallbacksByLabelId,jobs};
++  const capitalMap=mergeMap(previous.capitals.featuresByCountryId,partial.capitals.featuresByCountryId,id=>id as ActiveCountryId);
++  const capitals={...previous.capitals,revision:world.revision,appliedRevision:world.revision,featuresByCountryId:capitalMap,features:[...capitalMap.values()].sort((a,b)=>a.id<b.id?-1:1),omittedCountryIds:world.countryOrder.filter(id=>!capitalMap.has(id))};
++  const panel={...previous.panel,revision:world.revision,appliedRevision:world.revision,coreById:mergeMap(previous.panel.coreById,partial.panel.coreById,id=>id as ActiveCountryId),inputById:mergeMap(previous.panel.inputById,partial.panel.inputById,id=>id as ActiveCountryId),playableById:mergeMap(previous.panel.playableById,partial.panel.playableById,id=>id as ActiveCountryId)};
++  const search={...previous.search,revision:world.revision,entriesById:mergeMap(previous.search.entriesById,partial.search.entriesById,id=>id as ActiveCountryId)};
++  const focusByCountryId={...previous.focusByCountryId};for(const id of scope)delete focusByCountryId[id];Object.assign(focusByCountryId,partial.focusByCountryId);
++  return Object.freeze({projection:Object.freeze({...previous,world,appliedRevision:world.revision,featuresById,...groups,labels,capitals,panel,search,focusByCountryId,projectionStats:{fullBuilds:previous.projectionStats.fullBuilds,countryRebuilds:previous.projectionStats.countryRebuilds+scope.length,territoryRebuilds:previous.projectionStats.territoryRebuilds+affected.size}}),changedFeatureIds,changedCountryIds:[...countries].sort()});
++}
+ export function catalogCountryPanelView(projection:CatalogMapConsumerProjection,id:string|null){const view=getCountryPanelView(projection.panel,id);return view?Object.freeze({...view,catalogRef:projection.catalogRef,ownedTerritoryCount:projection.ownedByCountry[view.countryId].length,controlledTerritoryCount:projection.controlledByCountry[view.countryId].length}):null;}
+ export function catalogHitTerritory(projection:CatalogMapConsumerProjection,feature:{id?:string|number;source?:string;sourceLayer?:string;properties?:Record<string,unknown>}){
+   if(feature.source!==CATALOG_MAP_SOURCE_ID||feature.sourceLayer!=='territories'||typeof feature.id!=='string'||feature.properties?.territoryId!==feature.id)return null;
+diff --git a/src/lib/simulation/client/turn-report.ts b/src/lib/simulation/client/turn-report.ts
+index c06090a..9cbbd46 100644
+--- a/src/lib/simulation/client/turn-report.ts
++++ b/src/lib/simulation/client/turn-report.ts
+@@ -22,18 +22,25 @@ export type TurnReport = Readonly<{
+   advisorSummary: string;
+ }>;
+ 
+-const countryName = (world: WorldStateV2, id: string) => world.countriesById[id]?.names.shortKo ?? "변경된 국가";
++const countryName = (world: Pick<WorldStateV2,'countriesById'>, id: string) => world.countriesById[id]?.names.shortKo ?? "변경된 국가";
+ 
+-export function createCommittedTurnReport(plan: ResolvedTurnPlan): TurnReport {
++export function createCommittedTurnReport(plan: Pick<ResolvedTurnPlan,'resolution'|'turnId'> & Readonly<{baseWorldState:Pick<WorldStateV2,'countriesById'>;baseSimulationState:Readonly<{playerCountryId:string}>}>): TurnReport {
+   const {resolution} = plan;
+   const status = {succeeded: "성공", partially_succeeded: "부분 성공", failed: "실패", delayed: "지연", superseded: "대체됨"} as const;
+   const mapChanges = resolution.worldEffects.map((effect) => {
++    if(effect.type==='territory.occupy')return `${countryName(plan.baseWorldState,effect.actorCountryId)}이(가) ${effect.territoryIds.length}개 영토를 점령했습니다. 법적 소유국은 유지됩니다.`;
++    if(effect.type==='territory.liberate')return `${effect.territoryIds.length}개 영토의 점령을 해제하고 소유국 통제를 복원했습니다.`;
++    if(effect.type==='territory.transferOwnership')return `${effect.territoryIds.length}개 영토의 소유권이 ${countryName(plan.baseWorldState,effect.newOwnerCountryId)}으로 이전됐습니다.`;
++    if(effect.type==='countries.merged')return `${effect.absorbedCountryIds.map(id=>countryName(plan.baseWorldState,id)).join('·')}을(를) ${countryName(plan.baseWorldState,effect.initiatorCountryId)}에 합병했습니다. 합병 주도국의 정체성은 유지됩니다.`;
++    if(effect.type==='territorialAuthority.granted')return `검증된 ${effect.authority.allowedTerritoryIds.length}개 영토 범위의 통제 권한을 등록했습니다.`;
+     if (effect.type === "countries.unified") return `${effect.countryIds.map((id) => countryName(plan.baseWorldState, id)).join("·")}의 통합이 지도에 반영되었습니다.`;
+     if (effect.type === "territories.transferred") return `${countryName(plan.baseWorldState, effect.fromCountryId)}에서 ${countryName(plan.baseWorldState, effect.toCountryId)}로 영토가 이전되었습니다.`;
+     if (effect.type === "country.established") return "새 국가의 성립이 지도에 반영되었습니다.";
+     if (effect.type === "country.dissolved") return `${countryName(plan.baseWorldState, effect.countryId)}의 해체가 지도에 반영되었습니다.`;
+     if (effect.type === "country.renamed") return `${countryName(plan.baseWorldState, effect.countryId)}의 국호 변경이 반영되었습니다.`;
+-    return `${countryName(plan.baseWorldState, effect.sourceCountryId)}의 행정 구역 분할이 지도에 반영되었습니다.`;
++    if (effect.type === 'country.changeMapColor') return `${countryName(plan.baseWorldState,effect.countryId)}의 지도 색상이 ${effect.mapColor}로 변경되었습니다.`;
++    if(effect.type==='country.partitionedBySubdivisions')return `${countryName(plan.baseWorldState, effect.sourceCountryId)}의 행정 구역 분할이 지도에 반영되었습니다.`;
++    return '검증된 영토 변경이 반영되었습니다.';
+   });
+   return Object.freeze({
+     turnId: plan.turnId,
+diff --git a/src/lib/simulation/client/turn-request.ts b/src/lib/simulation/client/turn-request.ts
+index 1e06037..ab56be2 100644
+--- a/src/lib/simulation/client/turn-request.ts
++++ b/src/lib/simulation/client/turn-request.ts
+@@ -18,7 +18,7 @@ const addUtcDays = (date: string, days: number) => {
+   return value.toISOString().slice(0, 10);
+ };
+ 
+-export function targetDateForPreset(state: SimulationStateV1, preset: TimeAdvancePreset): string {
++export function targetDateForPreset(state: Pick<SimulationStateV1,'currentDate'|'scheduledConsequences'>, preset: TimeAdvancePreset): string {
+   if (preset === "day") return addUtcDays(state.currentDate, 1);
+   if (preset === "week") return addUtcDays(state.currentDate, 7);
+   if (preset === "month") return addUtcDays(state.currentDate, 30);
+diff --git a/src/lib/simulation/debug-world-effect.ts b/src/lib/simulation/debug-world-effect.ts
+index 4accb8e..f471621 100644
+--- a/src/lib/simulation/debug-world-effect.ts
++++ b/src/lib/simulation/debug-world-effect.ts
+@@ -1,2 +1,7 @@
+ export const DEBUG_WORLD_EFFECT_PREFIX = "[DEBUG_WORLD_EFFECT]";
+ 
++/** A marked, validated causal action may waive narrative authority only in development. */
++export function allowsDevelopmentWorldEffect(marked: boolean): boolean {
++  return process.env.NODE_ENV !== 'production' && marked;
++}
++
+diff --git a/src/lib/simulation/semantic-validator.ts b/src/lib/simulation/semantic-validator.ts
+index e43c486..4509e6c 100644
+--- a/src/lib/simulation/semantic-validator.ts
++++ b/src/lib/simulation/semantic-validator.ts
+@@ -1,4 +1,10 @@
+ import type {WorldStateV2} from "../world/world-state-v2";
++import type {WorldStateV3} from '../world/world-state-v3';
++import type {SimulationStateV2} from './simulation-state-v2';
++import {validateCountryChangeMapColorCommand} from '../commands/country-change-map-color';
++import {allowsDevelopmentWorldEffect} from './debug-world-effect';
++import {prepareCountryColorAuthorities} from './country-color-authority';
++import {isConsequenceAvailableAt} from './consequence-causality';
+ import type {SimulationFactV1} from "./narrative-state";
+ import type {SimulationEventV1} from "./simulation-event";
+ import type {SimulationStateV1} from "./simulation-state";
+@@ -41,8 +47,8 @@ const hasNegotiationFact = (
+ 
+ export function validateTurnResolution(
+   rawResolution: unknown,
+-  simulation: SimulationStateV1,
+-  world: WorldStateV2,
++  simulation: SimulationStateV1|SimulationStateV2,
++  world: WorldStateV2|WorldStateV3,
+   options: ResolutionValidationOptions = {},
+ ): ResolutionValidationResult {
+   const parsed = parseTurnResolutionV1(rawResolution);
+@@ -156,8 +162,8 @@ export function validateTurnResolution(
+       } else {
+         const consequence = consequenceById.get(cause.id);
+         if (!consequence) add("DANGLING_REFERENCE", path, `Unknown consequence ${cause.id}`);
+-        else if (consequence.earliestDate > parsed.period.endDate) {
+-          add("INVALID_CAUSALITY", path, `Consequence ${cause.id} is not due`);
++        else if (!isConsequenceAvailableAt(consequence,event.date)) {
++          add("INVALID_CAUSALITY", path, `Consequence ${cause.id} is unavailable on the event date`);
+         }
+       }
+     }
+@@ -222,6 +228,34 @@ export function validateTurnResolution(
+     }
+ 
+     switch (effect.type) {
++      case 'countryPresentationAuthority.granted':
++        if (world.schemaVersion !== 3 || simulation.schemaVersion !== 2) add('INVALID_WORLD_EFFECT',path,'Color grants require V3/V2');
++        else try {prepareCountryColorAuthorities(simulation,world,{...parsed,worldEffects:parsed.worldEffects.slice(0,index+1)},cause.date);}catch(error){add('INVALID_WORLD_EFFECT',path,String(error));}
++        break;
++      case 'territorialAuthority.granted':
++      case 'territory.occupy':
++      case 'territory.liberate':
++      case 'territory.transferOwnership':
++      case 'countries.merged': {
++        if(world.schemaVersion!==3||simulation.schemaVersion!==2){add('INVALID_WORLD_EFFECT',path,'Catalog effects require World V3 / Simulation V2');break;}
++        const ids=effect.type==='countries.merged'?[effect.initiatorCountryId,...effect.absorbedCountryIds]:effect.type==='territorialAuthority.granted'?[effect.authority.actorCountryId,effect.authority.targetCountryId]:[effect.actorCountryId,effect.targetCountryId];
++        validateCountries(ids.filter((id):id is string=>id!==null),path);
++        if(cause.authorityLifecycle)add('INVALID_CAUSALITY',path,'Lifecycle history is not a grant or operation cause');
++        if(!['military','territorial','treaty'].includes(cause.outcomeCategory))add('INVALID_CAUSALITY',path,'Catalog operation requires a territorial, military or treaty outcome');
++        if(effect.type==='countries.merged'&&(!cause.causes.some(c=>c.kind==='authoritative-event'||c.kind==='scheduled-consequence')&&!hasNegotiationFact(Object.values(simulation.factsById),ids.filter((id):id is string=>id!==null))))add('INVALID_CAUSALITY',path,'Merge requires an earlier treaty/negotiation or due consequence');
++        break;
++      }
++      case 'country.changeMapColor':
++        try {
++          if(simulation.schemaVersion===2&&!simulation.countryPresentationAuthoritiesById[effect.authorityId] && parsed.worldEffects.slice(index).some(e=>e.type==='countryPresentationAuthority.granted'&&e.authority.id===effect.authorityId))throw new Error('Color authority must be granted before use');
++          if (world.schemaVersion !== 3 || simulation.schemaVersion !== 2) throw new Error('Color effects require V3/V2');
++          const colorSimulation=prepareCountryColorAuthorities(simulation,world,{...parsed,worldEffects:parsed.worldEffects.slice(0,index)},cause.date);
++          validateCountryChangeMapColorCommand({commandId:effect.effectId,type:effect.type,expectedRevision:world.revision,
++            payload:{actorCountryId:effect.actorCountryId,countryId:effect.countryId,mapColor:effect.mapColor,authorityId:effect.authorityId}},
++            world, colorSimulation as SimulationStateV2, {date:cause.date,debugDirective:allowsDevelopmentWorldEffect(hasDebugWorldEffectCause(cause.eventId))});
++          if (!cause.actorCountryIds.includes(effect.actorCountryId)) throw new Error('Color actor must participate in the causal event');
++        } catch (error) { add('INVALID_WORLD_EFFECT',path,String(error)); }
++        break;
+       case "country.renamed":
+         validateCountries([effect.countryId], path);
+         break;
+@@ -305,8 +339,8 @@ export function validateTurnResolution(
+ 
+ export function assertValidTurnResolution(
+   rawResolution: unknown,
+-  simulation: SimulationStateV1,
+-  world: WorldStateV2,
++  simulation: SimulationStateV1|SimulationStateV2,
++  world: WorldStateV2|WorldStateV3,
+ ): TurnResolutionV1 {
+   const result = validateTurnResolution(rawResolution, simulation, world);
+   if (!result.ok || result.resolution === null) {
+diff --git a/src/lib/simulation/server/context-resolution-validator.ts b/src/lib/simulation/server/context-resolution-validator.ts
+index 4509faf..052e735 100644
+--- a/src/lib/simulation/server/context-resolution-validator.ts
++++ b/src/lib/simulation/server/context-resolution-validator.ts
+@@ -1,5 +1,9 @@
+ import type {SimulationContextV1} from "../simulation-context";
+ import {parseTurnResolutionV1, type TurnResolutionV1} from "../turn-resolution";
++import {isAuthorityActiveAt} from '../simulation-state-v2';
++import {allowsDevelopmentWorldEffect} from '../debug-world-effect';
++import {isConsequenceAvailableAt} from '../consequence-causality';
++import type {ScheduledConsequenceV1} from '../narrative-state';
+ 
+ export type ContextValidationResult = Readonly<{
+   ok: boolean;
+@@ -89,6 +93,7 @@ export function validateResolutionAgainstContext(
+     if (!countryIds.has(id)) add("DANGLING_REFERENCE", path, `Unknown country ${id}`);
+   });
+   resolution.events.forEach((event, index) => {
++    if(event.authorityLifecycle||event.referenceLifecycle)add('INVALID_WORLD_EFFECT',`events[${index}]`,'Host-owned lifecycle events cannot be supplied');
+     if (!(context.period.startDate < event.date && event.date <= context.period.endDate)) add("INVALID_EVENT_ORDER", `events[${index}].date`, "Event is outside the turn period");
+     if (index > 0 && resolution.events[index - 1].date > event.date) add("INVALID_EVENT_ORDER", `events[${index}]`, "Events are not chronological");
+     validateCountries(event.actorCountryIds, `events[${index}].actorCountryIds`);
+@@ -104,7 +109,7 @@ export function validateResolutionAgainstContext(
+       if (cause.kind === "scheduled-consequence") {
+         const consequence = consequences.get(cause.id);
+         if (!consequence) add("DANGLING_REFERENCE", `events[${index}].causes`, `Unknown consequence ${cause.id}`);
+-        else if (typeof field(consequence, "earliestDate") === "string" && (field(consequence, "earliestDate") as string) > context.period.endDate) add("INVALID_CAUSALITY", `events[${index}].causes`, `Consequence ${cause.id} is not due`);
++        else if (!isConsequenceAvailableAt(consequence as ScheduledConsequenceV1,event.date)) add("INVALID_CAUSALITY", `events[${index}].causes`, `Consequence ${cause.id} is unavailable on the event date`);
+       }
+       if (cause.kind === "resolution-event") {
+         const sourceIndex = eventIndex.get(cause.id);
+@@ -162,6 +167,51 @@ export function validateResolutionAgainstContext(
+       return;
+     }
+     switch (effect.type) {
++      case 'territorialAuthority.granted': {
++        const a=effect.authority;validateCountries([a.actorCountryId,...a.targetCountryId?[a.targetCountryId]:[]],path);
++        const participants=[a.actorCountryId,...a.targetCountryId?[a.targetCountryId]:[]];
++        const grounded=event.causes.some(c=>{const prior=c.kind==='authoritative-event'?recentEvents.get(c.id):c.kind==='scheduled-consequence'?consequences.get(c.id):null;return prior&&!field(prior,'authorityLifecycle')&&!field(prior,'referenceLifecycle')&&(c.kind==='scheduled-consequence'||['military','territorial','treaty'].includes(String(field(prior,'outcomeCategory'))))&&participants.every(id=>(field(prior,'actorCountryIds') as string[]).includes(id));})
++          ||context.facts.some(f=>field(f,'status')==='active'&&['scenario','conflict-or-war','treaty-or-negotiation','military-or-occupation'].includes(String(field(f,'kind')))&&[a.actorCountryId,...a.targetCountryId?[a.targetCountryId]:[]].every(id=>(field(f,'actorCountryIds') as string[]).includes(id)));
++        if(!grounded||a.sourceEventId!==event.eventId||a.validFrom<event.date||!event.actorCountryIds.includes(a.actorCountryId)||!['military','territorial','treaty'].includes(event.outcomeCategory))add('INVALID_WORLD_EFFECT',path,'INVALID_AUTHORITY_GRANT');
++        if(context.territorialControlAuthorities?.some(v=>v.id===a.id)||resolution.worldEffects.slice(0,index).some(e=>e.type==='territorialAuthority.granted'&&e.authority.id===a.id))add('INVALID_WORLD_EFFECT',path,'DUPLICATE_AUTHORITY_ID');
++        for(const id of a.allowedTerritoryIds)if(!territoryOwners.has(id))add('DANGLING_REFERENCE',path,'Grant territory is absent from the supplied bounded directory');
++        break;
++      }
++      case 'territory.occupy':case 'territory.liberate':case 'territory.transferOwnership': {
++        validateCountries([effect.actorCountryId,...effect.targetCountryId?[effect.targetCountryId]:[],...effect.type==='territory.transferOwnership'?[effect.newOwnerCountryId]:[]],path);
++        const a=context.territorialControlAuthorities?.find(a=>a.id===effect.authorityId)??resolution.worldEffects.slice(0,index).filter(e=>e.type==='territorialAuthority.granted').find(e=>e.authority.id===effect.authorityId)?.authority;
++        const operation=effect.type==='territory.transferOwnership'?'transfer':effect.type.slice('territory.'.length);
++        if(!a||a.actorCountryId!==effect.actorCountryId||a.targetCountryId!==effect.targetCountryId||!a.allowedOperations.includes(operation as never)||!isAuthorityActiveAt(a,event.date)||effect.territoryIds.some(id=>!a.allowedTerritoryIds.includes(id as never)))add('INVALID_WORLD_EFFECT',path,'TERRITORIAL_AUTHORITY_REQUIRED');
++        if(!event.actorCountryIds.includes(effect.actorCountryId)||!['military','territorial','treaty'].includes(event.outcomeCategory))add('INVALID_WORLD_EFFECT',path,'INVALID_TERRITORIAL_CAUSE');
++        break;
++      }
++      case 'countries.merged': {
++        validateCountries([effect.initiatorCountryId,...effect.absorbedCountryIds],path);
++        if(effect.absorbedCountryIds.includes(effect.initiatorCountryId)||!event.actorCountryIds.includes(effect.initiatorCountryId)||event.outcomeCategory!=='treaty'||!event.causes.some(c=>c.kind==='authoritative-event'||c.kind==='scheduled-consequence'))add('INVALID_WORLD_EFFECT',path,'INVALID_MERGE_CAUSE');
++        break;
++      }
++      case 'country.changeMapColor': {
++        validateCountries([effect.actorCountryId,effect.countryId],path);
++        const authority=context.countryPresentationAuthorities?.find(a=>a.id===effect.authorityId)
++          ?? resolution.worldEffects.slice(0,index).filter(e=>e.type==='countryPresentationAuthority.granted').find(e=>e.authority.id===effect.authorityId)?.authority;
++        if (!event.actorCountryIds.includes(effect.actorCountryId)) add('INVALID_WORLD_EFFECT',path,'Color actor must participate in the causal event');
++        if (!allowsDevelopmentWorldEffect(hasDebugWorldEffectCause(event.eventId)) && (!authority
++          || authority.actorCountryId!==effect.actorCountryId || authority.targetCountryId!==effect.countryId
++          || !authority.allowedMapColors.includes(effect.mapColor) || !isAuthorityActiveAt(authority,event.date))) {
++          add('INVALID_WORLD_EFFECT',path,'PRESENTATION_AUTHORITY_REQUIRED');
++        }
++        break;
++      }
++      case 'countryPresentationAuthority.granted': {
++        const a=effect.authority;validateCountries([a.actorCountryId,a.targetCountryId],path);
++        const grounded=event.causes.some(c=>c.kind==='authoritative-event'||c.kind==='scheduled-consequence'
++          || (c.kind==='queued-action'&&context.queuedActions.some(q=>q.actionId===c.id&&q.actorCountryId===a.actorCountryId)));
++        if(!grounded||a.actorCountryId!==a.targetCountryId||a.sourceEventId!==event.eventId||a.validFrom!==event.date
++          || !event.actorCountryIds.includes(a.actorCountryId)||!['domestic','treaty'].includes(event.outcomeCategory)
++          || context.countryPresentationAuthorities?.some(p=>p.id===a.id)
++          || resolution.worldEffects.slice(0,index).some(e=>e.type==='countryPresentationAuthority.granted'&&e.authority.id===a.id))add('INVALID_WORLD_EFFECT',path,'INVALID_PRESENTATION_GRANT');
++        break;
++      }
+       case "country.renamed":
+         validateCountries([effect.countryId], path);
+         break;
+diff --git a/src/lib/simulation/server/provider-config.ts b/src/lib/simulation/server/provider-config.ts
+index dbac287..685d3d2 100644
+--- a/src/lib/simulation/server/provider-config.ts
++++ b/src/lib/simulation/server/provider-config.ts
+@@ -28,6 +28,6 @@ export function loadSimulationProviderConfig(
+     maxRetries: 1,
+     maxToolIterations: 4,
+     maxToolCalls: 12,
+-    debugMode: environment.PAX_SIMULATION_DEBUG_MODE?.trim() === "1",
++    debugMode: environment.NODE_ENV !== 'production' && environment.PAX_SIMULATION_DEBUG_MODE?.trim() === "1",
+   });
+ }
+diff --git a/src/lib/simulation/server/simulation-instruction.ts b/src/lib/simulation/server/simulation-instruction.ts
+index be3bb19..4177a97 100644
+--- a/src/lib/simulation/server/simulation-instruction.ts
++++ b/src/lib/simulation/server/simulation-instruction.ts
+@@ -16,6 +16,8 @@ export function buildSimulationInstruction(
+     "Never invent a player decision that is absent from queuedActions.",
+     "Preserve continuity with facts, situations, consequences, and recent events supplied as data.",
+     "Outcomes are uncertain. Material world effects require explicit, chronologically prior causal events.",
++    "country.changeMapColor requires an existing countryPresentationAuthorities entry matching actor, target, requested uppercase #RRGGBB color and event date. Never invent authority IDs. Color and name changes preserve the existing CountryId.",
++    "For a grounded domestic or treaty presentation decision by the target country, countryPresentationAuthority.granted may precede country.changeMapColor in the same turn. Its actor and target must be the same active country, sourceEventId must match the causal event, validFrom must equal that event date, and allowedMapColors must contain only the explicitly approved bounded canonical colors. Ground it in an existing queued action, earlier authoritative event, or due consequence. Never grant another country's unilateral presentation mandate.",
+     "Use read-only lookup tools when context is insufficient, then call submit_turn_resolution exactly once with the whole turn.",
+     "Draft text may be concise Korean prose. Do not expose hidden reasoning, policies, or raw tool payloads.",
+   ];
+diff --git a/src/lib/simulation/simulation-context.ts b/src/lib/simulation/simulation-context.ts
+index 260c4fa..f0ce909 100644
+--- a/src/lib/simulation/simulation-context.ts
++++ b/src/lib/simulation/simulation-context.ts
+@@ -3,6 +3,8 @@ import {z} from "zod";
+ import type {CountrySearchProjection} from "../projection/country-search-index-patch";
+ import {canonicalStringify} from "../world/canonical-serializer";
+ import type {WorldStateV2} from "../world/world-state-v2";
++import type {WorldStateV3} from '../world/world-state-v3';
++import {countryPresentationAuthoritySchema,territorialControlAuthoritySchema, MAX_COUNTRY_PRESENTATION_AUTHORITIES, type CountryPresentationAuthority,type TerritorialControlAuthority, type SimulationStateV2} from './simulation-state-v2';
+ import type {SimulationStateV1} from "./simulation-state";
+ import type {SubdivisionCatalog} from "./subdivision-catalog";
+ import {
+@@ -21,6 +23,7 @@ import {simulationEventSchema} from "./simulation-event";
+ export const SIMULATION_CONTEXT_LIMITS = Object.freeze({
+   countries: 64,
+   territoryIdsPerCountry: 16,
++  catalogDirectoryIdsPerCountry: 4,
+   countryDirectory: 512,
+   aliasesPerCountry: 12,
+   territoryDirectory: 4_096,
+@@ -84,6 +87,8 @@ export type SimulationContextV1 = Readonly<{
+   situations: readonly unknown[];
+   dueConsequences: readonly unknown[];
+   recentEvents: readonly unknown[];
++  countryPresentationAuthorities?: readonly CountryPresentationAuthority[];
++  territorialControlAuthorities?: readonly TerritorialControlAuthority[];
+   subdivisions: readonly Readonly<{
+     catalogId: string;
+     sourceVersion: string;
+@@ -139,6 +144,8 @@ export const simulationContextSchema = z.strictObject({
+   situations: z.array(activeSituationSchema).max(SIMULATION_CONTEXT_LIMITS.situations),
+   dueConsequences: z.array(scheduledConsequenceSchema).max(SIMULATION_CONTEXT_LIMITS.dueConsequences),
+   recentEvents: z.array(simulationEventSchema).max(SIMULATION_CONTEXT_LIMITS.recentEvents),
++  countryPresentationAuthorities: z.array(countryPresentationAuthoritySchema).max(MAX_COUNTRY_PRESENTATION_AUTHORITIES).optional(),
++  territorialControlAuthorities: z.array(territorialControlAuthoritySchema).max(8).optional(),
+   subdivisions: z.array(z.strictObject({
+     catalogId: simulationIdSchema,
+     sourceVersion: simulationIdSchema,
+@@ -191,8 +198,8 @@ const clip = <Value>(
+ };
+ 
+ export function buildSimulationContext(input: Readonly<{
+-  simulation: SimulationStateV1;
+-  world: WorldStateV2;
++  simulation: SimulationStateV1|SimulationStateV2;
++  world: WorldStateV2|WorldStateV3;
+   countrySearchProjection: CountrySearchProjection;
+   subdivisionCatalog: SubdivisionCatalog;
+   scenarioId: string;
+@@ -235,7 +242,7 @@ export function buildSimulationContext(input: Readonly<{
+   }
+   const ownedTerritoryCount = [...territoryIdsByCountry.values()]
+     .reduce((total, ids) => total + ids.length, 0);
+-  if (ownedTerritoryCount > SIMULATION_CONTEXT_LIMITS.territoryDirectory) {
++  if (world.schemaVersion===2 && ownedTerritoryCount > SIMULATION_CONTEXT_LIMITS.territoryDirectory) {
+     throw new SimulationContextError(
+       "SIMULATION_CONTEXT_TOO_LARGE",
+       `Territory directory exceeds ${SIMULATION_CONTEXT_LIMITS.territoryDirectory} entries`,
+@@ -243,8 +250,7 @@ export function buildSimulationContext(input: Readonly<{
+   }
+   const territoryDirectory = countryDirectory.map(({countryId}) => Object.freeze({
+     countryId,
+-    territoryIds: Object.freeze((territoryIdsByCountry.get(countryId) ?? [])
+-      .sort(compareCanonicalText)),
++    territoryIds: Object.freeze(world.schemaVersion===3?clip((territoryIdsByCountry.get(countryId)??[]).sort(compareCanonicalText),SIMULATION_CONTEXT_LIMITS.catalogDirectoryIdsPerCountry,`directory:${countryId}`,clipped):(territoryIdsByCountry.get(countryId) ?? []).sort(compareCanonicalText)),
+   }));
+   const relevantCountryIds = new Set<string>([simulation.playerCountryId]);
+   simulation.queuedActions.forEach((action) => relevantCountryIds.add(action.actorCountryId));
+@@ -358,10 +364,12 @@ export function buildSimulationContext(input: Readonly<{
+       clipped,
+     )),
+     recentEvents: Object.freeze(recentEvents),
++    ...(simulation.schemaVersion === 2 ? {countryPresentationAuthorities:Object.freeze(simulation.countryPresentationAuthorityOrder.map(id => simulation.countryPresentationAuthoritiesById[id]))} : {}),
++    ...(simulation.schemaVersion === 2 ? {territorialControlAuthorities:Object.freeze(clip(simulation.territorialControlAuthorityOrder.map(id=>simulation.territorialControlAuthoritiesById[id]).filter(a=>a.actorCountryId===simulation.playerCountryId||a.targetCountryId===simulation.playerCountryId),8,'territorialControlAuthorities',clipped).map(a=>Object.freeze({...a,allowedTerritoryIds:Object.freeze(clip(a.allowedTerritoryIds,SIMULATION_CONTEXT_LIMITS.territoryIdsPerCountry,`authority:${a.id}`,clipped))})))} : {}),
+     subdivisions: Object.freeze(subdivisions),
+     rules: Object.freeze({
+       locale: input.locale ?? "ko-KR",
+-      capabilities: Object.freeze([
++      capabilities: Object.freeze(world.schemaVersion===3?['narrative-events','facts-and-situations','scheduled-consequences','country-rename','country-map-color','bounded-territorial-authority','territory-occupy','territory-liberate','territory-transfer-ownership','countries-merge']:[
+         "narrative-events",
+         "facts-and-situations",
+         "scheduled-consequences",
+diff --git a/src/lib/simulation/simulation-event.ts b/src/lib/simulation/simulation-event.ts
+index 5429835..7b17dc3 100644
+--- a/src/lib/simulation/simulation-event.ts
++++ b/src/lib/simulation/simulation-event.ts
+@@ -20,6 +20,8 @@ export const eventCauseReferenceSchema = z.strictObject({
+ });
+ 
+ export const simulationEventSchema = z.strictObject({
++  referenceLifecycle:z.strictObject({referenceId:simulationIdSchema,kind:z.enum(['queued-action','fact','situation','consequence']),operation:z.enum(['rewritten','ended','cancelled']),reason:z.enum(['country-successor','retired-actor','collapsed-relation'])}).optional(),
++  authorityLifecycle:z.strictObject({authorityId:simulationIdSchema,operation:z.enum(['granted','expired','rewritten','invalidated']),reason:z.enum(['validated-turn-grant','date-expired','country-successor','self-reference','no-successor','operation-scope-invalid']),previousActorCountryId:z.union([countryIdSchema,z.null()]),previousTargetCountryId:z.union([countryIdSchema,z.null()])}).optional(),
+   eventId: simulationIdSchema,
+   date: isoCalendarDateSchema,
+   title: boundedTitleSchema,
+diff --git a/src/lib/simulation/turn-resolution.ts b/src/lib/simulation/turn-resolution.ts
+index 7c1f232..9494528 100644
+--- a/src/lib/simulation/turn-resolution.ts
++++ b/src/lib/simulation/turn-resolution.ts
+@@ -13,6 +13,10 @@ import {
+   SIMULATION_CONTRACT_VERSION,
+ } from "./simulation-contract-primitives";
+ import {worldEffectSchema} from "./world-effect";
++import type {SimulationEventV1} from './simulation-event';
++
++// Lifecycle metadata is written by the host; GPT's submit schema must never request it.
++const turnResolutionEventSchema:z.ZodType<SimulationEventV1>=simulationEventSchema.omit({authorityLifecycle:true,referenceLifecycle:true});
+ 
+ export const TURN_RESOLUTION_LIMITS = Object.freeze({
+   playerActionOutcomes: 32,
+@@ -36,7 +40,7 @@ export const turnResolutionSchema = z.strictObject({
+   period: turnPeriodSchema,
+   playerActionOutcomes: z.array(playerActionOutcomeSchema)
+     .max(TURN_RESOLUTION_LIMITS.playerActionOutcomes),
+-  events: z.array(simulationEventSchema).max(TURN_RESOLUTION_LIMITS.events),
++  events: z.array(turnResolutionEventSchema).max(TURN_RESOLUTION_LIMITS.events),
+   factMutations: z.array(factMutationSchema).max(TURN_RESOLUTION_LIMITS.factMutations),
+   situationMutations: z.array(situationMutationSchema)
+     .max(TURN_RESOLUTION_LIMITS.situationMutations),
+@@ -52,6 +56,8 @@ export type TurnResolutionV1 = z.infer<typeof turnResolutionSchema>;
+ 
+ export const parseTurnResolutionV1 = (input: unknown): TurnResolutionV1 => {
+   assertSafeSimulationData(input);
++  if(input&&typeof input==='object'&&'events' in input&&Array.isArray(input.events)
++    &&input.events.some(e=>e&&typeof e==='object'&&(Object.hasOwn(e,'authorityLifecycle')||Object.hasOwn(e,'referenceLifecycle'))))throw new Error('HOST_OWNED_LIFECYCLE_EVENT');
+   return turnResolutionSchema.parse(input);
+ };
+ 
+@@ -72,7 +78,7 @@ function normalizeFunctionSchema(value: unknown): unknown {
+  */
+ export function createTurnResolutionFunctionParametersSchema(): JsonSchemaObject {
+   const schema = normalizeFunctionSchema(
+-    z.toJSONSchema(turnResolutionSchema, {target: "draft-7"}),
++    z.toJSONSchema(turnResolutionSchema, {target: "draft-7",io:'input'}),
+   ) as JsonSchemaObject;
+   if (schema.type !== "object" || "anyOf" in schema || schema.additionalProperties !== false) {
+     throw new Error("TurnResolution tool schema must be a strict root object without root anyOf");
+diff --git a/src/lib/simulation/world-effect-compiler.ts b/src/lib/simulation/world-effect-compiler.ts
+index a510268..8aa0ac1 100644
+--- a/src/lib/simulation/world-effect-compiler.ts
++++ b/src/lib/simulation/world-effect-compiler.ts
+@@ -598,6 +598,11 @@ export function compileWorldEffects(input: Readonly<{
+   try {
+     for (const effect of input.effects) {
+       switch (effect.type) {
++        case 'territorialAuthority.granted':case 'territory.occupy':case 'territory.liberate':case 'territory.transferOwnership':case 'countries.merged':
++          throw new Error('Catalog effects require the World V3 planner');
++        case 'country.changeMapColor':
++        case 'countryPresentationAuthority.granted':
++          throw new WorldEffectCompileError('UNSUPPORTED_EFFECT_COMBINATION','Color effects require the catalog V3 planner',effect.effectId);
+         case "country.renamed":
+           requireCountry(input.world, effect.countryId, effect.effectId);
+           cursor.commands.push({
+diff --git a/src/lib/simulation/world-effect.ts b/src/lib/simulation/world-effect.ts
+index 286d060..8e064af 100644
+--- a/src/lib/simulation/world-effect.ts
++++ b/src/lib/simulation/world-effect.ts
+@@ -1,6 +1,8 @@
+ import {z} from "zod";
+ 
+ import {readTerritoryId} from "../world/territory-id";
++import {territorialControlAuthorityIdSchema,territorialControlAuthoritySchema,MAX_AUTHORITY_TERRITORIES,authorityTerritoryIdSchema} from './simulation-state-v2';
++import {authorityMapColorSchema, countryPresentationAuthorityIdSchema, countryPresentationAuthoritySchema} from './simulation-state-v2';
+ import {
+   boundedTitleSchema,
+   countryIdSchema,
+@@ -85,6 +87,14 @@ const countryPartitionedEffectSchema = z.strictObject({
+ });
+ 
+ export const worldEffectSchema = z.discriminatedUnion("type", [
++  z.strictObject({...effectBase,type:z.literal('countryPresentationAuthority.granted'),authority:countryPresentationAuthoritySchema}),
++  z.strictObject({...effectBase,type:z.literal('territorialAuthority.granted'),authority:territorialControlAuthoritySchema}),
++  z.strictObject({...effectBase,type:z.literal('territory.occupy'),actorCountryId:countryIdSchema,targetCountryId:nullableCountryIdSchema,authorityId:territorialControlAuthorityIdSchema,territoryIds:z.array(authorityTerritoryIdSchema).min(1).max(MAX_AUTHORITY_TERRITORIES).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id))}),
++  z.strictObject({...effectBase,type:z.literal('territory.liberate'),actorCountryId:countryIdSchema,targetCountryId:nullableCountryIdSchema,authorityId:territorialControlAuthorityIdSchema,territoryIds:z.array(authorityTerritoryIdSchema).min(1).max(MAX_AUTHORITY_TERRITORIES).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id))}),
++  z.strictObject({...effectBase,type:z.literal('territory.transferOwnership'),actorCountryId:countryIdSchema,targetCountryId:nullableCountryIdSchema,authorityId:territorialControlAuthorityIdSchema,territoryIds:z.array(authorityTerritoryIdSchema).min(1).max(MAX_AUTHORITY_TERRITORIES).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id)),newOwnerCountryId:countryIdSchema,controllerPolicy:z.enum(['new-owner','preserve'])}),
++  z.strictObject({...effectBase,type:z.literal('countries.merged'),initiatorCountryId:countryIdSchema,absorbedCountryIds:z.array(countryIdSchema).min(1).max(15).refine(ids=>ids.every((id,i)=>i===0||ids[i-1]<id))}),
++  z.strictObject({...effectBase, type:z.literal('country.changeMapColor'), countryId:countryIdSchema,
++    actorCountryId:countryIdSchema, mapColor:authorityMapColorSchema, authorityId:countryPresentationAuthorityIdSchema}),
+   countryRenamedEffectSchema,
+   countriesUnifiedEffectSchema,
+   countryEstablishedEffectSchema,
+diff --git a/src/lib/world/world-state-v3.ts b/src/lib/world/world-state-v3.ts
+index 7c5f44a..dcfabe2 100644
+--- a/src/lib/world/world-state-v3.ts
++++ b/src/lib/world/world-state-v3.ts
+@@ -33,6 +33,10 @@ export type WorldStateV3 = Readonly<{
+ export type SerializedWorldStateV3 = Omit<WorldStateV3, "retiredCountryIds"> & Readonly<{
+   retiredCountryIds: readonly RetiredCountryId[];
+ }>;
++const validatedWorlds=new WeakSet<object>();
++export function isValidatedWorldStateV3(state:WorldStateV3,catalog:WorldGeometryCatalogContract):boolean{
++  assertWorldGeometryCatalogRefMatches(state.catalogRef,catalog.ref);return validatedWorlds.has(state);
++}
+ 
+ function readWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract, serialized: boolean): WorldStateV3 {
+   const input = readWorldV3Record(value, "WorldStateV3");
+@@ -93,11 +97,30 @@ function readWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract,
+ 
+ /** No production bootstrap uses V3 until catalog/consumer readiness and atomic cutover. */
+ export function createWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract): WorldStateV3 {
+-  return readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), false);
++  const state=readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), false);validatedWorlds.add(state);return state;
+ }
+ 
+ export function deserializeWorldStateV3(value: unknown, catalog: WorldGeometryCatalogContract): WorldStateV3 {
+-  return readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), true);
++  const state=readWorldStateV3(value, createWorldGeometryCatalogContract(catalog), true);validatedWorlds.add(state);return state;
++}
++
++/** Validated immutable delta: untouched records, orders and catalog identity remain shared. */
++export function transitionWorldStateV3(base:WorldStateV3,catalog:WorldGeometryCatalogContract,changes:Readonly<{
++  territories?:Readonly<Record<string,TerritoryEntityV3>>;countries?:Readonly<Record<string,CountryEntityV3|null>>;
++}>,revision=base.revision+1):WorldStateV3{
++  if(!isValidatedWorldStateV3(base,catalog))base=createWorldStateV3(base,catalog);
++  if(!Number.isSafeInteger(revision)||revision<0)throw Error('Invalid world revision');
++  let countries=base.countriesById,territories=base.territoriesById,order=base.countryOrder,retired=base.retiredCountryIds;
++  if(changes.countries&&Object.keys(changes.countries).length){const next={...countries},removed:string[]=[];
++    for(const [id,value]of Object.entries(changes.countries)){if(!Object.hasOwn(countries,id))throw Error('Country transition requires an existing active identity');
++      if(value===null){delete next[id];removed.push(id);}else{const country=createCountryEntityV3(value);if(country.id!==id)throw Error('Country transition key mismatch');next[id]=country;}}
++    countries=Object.freeze(next);if(removed.length){order=Object.freeze(order.filter(id=>!removed.includes(id)));retired=createImmutableReadonlySet([...retired,...removed].sort() as RetiredCountryId[]);}
++  }
++  if(changes.territories&&Object.keys(changes.territories).length){const next={...territories};for(const [id,value]of Object.entries(changes.territories)){
++    const t=createTerritoryEntityV3(value);if(t.id!==id||!Object.hasOwn(base.territoriesById,id)||t.sourceCountryId!==base.territoriesById[id].sourceCountryId)throw Error('Invalid immutable territory transition');next[id]=t;}territories=Object.freeze(next);}
++  const checkIds=changes.countries&&Object.values(changes.countries).some(c=>c===null)?base.territoryOrder:Object.keys(changes.territories??{});
++  for(const id of checkIds){const t=territories[id];for(const country of [t.ownerCountryId,t.controllerCountryId])if(country!==null&&!Object.hasOwn(countries,country))throw Error('Territory transition references inactive country');}
++  const state=Object.freeze({...base,revision,countriesById:countries,countryOrder:order,retiredCountryIds:retired,territoriesById:territories});validatedWorlds.add(state);return state;
+ }
+ 
+ export function serializeWorldStateV3(state: WorldStateV3): SerializedWorldStateV3 {

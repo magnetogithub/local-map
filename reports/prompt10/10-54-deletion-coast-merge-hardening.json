@@ -1,0 +1,121 @@
+{
+  "stage": "10-54-deletion-coast-merge-hardening",
+  "status": "pass",
+  "objective": "Canonically merge newly exposed coast after Territory deletion or complete contact removal.",
+  "defect": {
+    "summary": "A fully exposed former internal segment was queued as new coast, but the same Territory's existing coast edges remained preserved and were excluded from canonical path merging.",
+    "redReproduction": {
+      "testFiles": 1,
+      "tests": 8,
+      "failed": 6,
+      "passed": 2,
+      "deletionIncrementalCoastEdges": 2,
+      "deletionFullBuildCoastEdges": 1,
+      "deletionEqualsFullBuild": false
+    }
+  },
+  "implementation": {
+    "productionFullRebuildFallback": false,
+    "changes": [
+      "Marks every surviving Territory with a newly exposed former-internal segment as requiring coast reconstruction, including complete contact removal where no new shared overlap exists.",
+      "Includes all existing coast segments for that direct candidate in the same reconstruction input instead of preserving them beside a separate exposed coast edge.",
+      "Atomizes and deduplicates the combined coast segment set before canonical path merging, preserving disconnected components and dateline normalization.",
+      "Restores preserved edge object references by edge ID after topology validation so non-direct, unaffected edges keep identity as well as ID and leaf hash.",
+      "Updates the existing 10-54 correctness assertion for complete contact removal from obsolete prior-coast-hash retention to exact full-build topology equality while retaining the unaffected B-C internal hash assertion."
+    ]
+  },
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "src/lib/world/incremental-topology.ts": "42c98eca3eca41fcf87958ee43fd60d1ff3fab15a60ac470b5f364a2b0ae281c",
+    "src/lib/world/shared-segment.ts": "b6ec002b467a675ffedbe01b2b1a6ddec85a724e3a98308d2ebe11e2831e6fc4",
+    "reports/prompt10/10-54-partial-coast-transition-hardening.json": "79424d8d3791796e79f8da10ebb2e6d66032eb855ea1e4de00094efd330f0a25",
+    "reports/prompt10/10-54-direct-candidate-access-hardening.json": "b0fc57303d9c0f9ba47cd90af7257ac36f1a33d111f229f4b53b96a6fc1b7e7f"
+  },
+  "outputHashes": {
+    "src/lib/world/incremental-topology.ts": "94b6aba540927f2d5d151af9d9ec947caf8e6bb8c444d2dcffef1667531ed4a9",
+    "src/lib/world/shared-segment.ts": "b6ec002b467a675ffedbe01b2b1a6ddec85a724e3a98308d2ebe11e2831e6fc4",
+    "src/lib/world/incremental-topology-deletion-coast-merge.test.ts": "72889b4736b400a1ff3b6ed0c8e6f1bceafa623708b7d819bbe786cdbe77e7a6",
+    "src/lib/world/topology-correctness-hardening.test.ts": "1a3e9455b562a5bab4d76e051cbf69b0ad6ab6c1ec87357288df20dce425534f"
+  },
+  "protectedHashes": {
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+    "reports/prompt10/10-54-partial-coast-transition-hardening.json": "79424d8d3791796e79f8da10ebb2e6d66032eb855ea1e4de00094efd330f0a25",
+    "reports/prompt10/10-54-direct-candidate-access-hardening.json": "b0fc57303d9c0f9ba47cd90af7257ac36f1a33d111f229f4b53b96a6fc1b7e7f",
+    "reports/prompt10/10-48-55-topology-correctness-hardening.json": "89d5624c526d054973b0cbd98c252e6c6cc45292d03502adedaf72ba62d96aa8",
+    "reports/prompt10/10-54-incremental-topology-recalculation.json": "aea50d43749961dc0cf9edcfbf46d544ccc71ee9c1f1fd6196943ee109a4657a"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/world/incremental-topology-deletion-coast-merge.test.ts",
+      "result": "RED before implementation: 1 file failed; 6 failed, 2 passed"
+    },
+    {
+      "command": "npm.cmd test -- --run <deletion merge, partial transition, direct access, correctness, and base incremental tests>",
+      "result": "5 files passed; 30 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run <13 topology and 10-54 related test files>",
+      "result": "13 files passed; 52 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- <8 related source and test files>",
+      "result": "passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "result": "passed"
+    },
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "result": "77 files passed; 757 tests passed"
+    },
+    {
+      "command": "Recalculate Prompt/protected report hashes; inspect 10-56-or-later report names and forbidden runtime dependencies",
+      "result": "protected hashes unchanged; no 10-56-or-later report; no forbidden runtime dependency"
+    }
+  ],
+  "measurements": {
+    "deletionBeforeInternalEdgeCount": 1,
+    "deletionIncrementalCoastEdgeCountAfterFix": 1,
+    "deletionFullBuildCoastEdgeCount": 1,
+    "deletionEqualsFullBuildAfterFix": true,
+    "completeContactRemovalEqualsFullBuild": true,
+    "partialContactRemovalEqualsFullBuild": true,
+    "disconnectedCoastComponentCount": 2,
+    "multiCandidateTerritoriesMergedIndependently": true,
+    "datelineWorldSpanningEdgeCount": 0,
+    "edgeIdClassificationTerritoryIdsCoordinatesEqualFullBuild": true,
+    "leafHashesEqualFullBuild": true,
+    "neighborIndexEqualsFullBuild": true,
+    "duplicateAtomicSegmentCount": 0,
+    "coastInternalDuplicateAtomicSegmentCount": 0,
+    "nonDirectCandidateGeometryAccessCount": 0,
+    "unaffectedEdgeIdChanges": 0,
+    "unaffectedEdgeLeafHashChanges": 0,
+    "unaffectedEdgeReferenceChanges": 0,
+    "inputTopologyMutationCount": 0,
+    "inputBBoxIndexMutationCount": 0,
+    "inputTerritoryMutationCount": 0
+  },
+  "gates": {
+    "runningReportCreatedBeforeRedTests": true,
+    "redReproductionConfirmed": true,
+    "deletionRegressionGreen": true,
+    "completeAndPartialReleaseGreen": true,
+    "multiCandidateAndDatelineGreen": true,
+    "incrementalEqualsFullBuild": true,
+    "directCandidateAccessBoundary": true,
+    "unaffectedEdgesPreserved": true,
+    "inputsUnchanged": true,
+    "relatedTests": true,
+    "eslint": true,
+    "typescript": true,
+    "fullUnitTests": true,
+    "promptAndExistingReportsUnchanged": true,
+    "noStage10_56Artifacts": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "10-56"
+}

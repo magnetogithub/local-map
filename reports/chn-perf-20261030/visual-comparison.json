@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "chn-interaction-visual-comparison-v1",
+  "pass": true,
+  "baseline": {
+    "path": "reports/chn-perf-20261030/baseline-china.png",
+    "sha256": "8ed59fcfd503607bbf2dab45cfd75f1a02aac13d35787115caf6f14b7d249ce3",
+    "byteLength": 323009
+  },
+  "optimized": {
+    "path": "reports/chn-perf-20261030/optimized-china.png",
+    "sha256": "f37496d59afd5649f0dc90f8d670b375394dccc3d968a36d7c7857ef443d4475",
+    "byteLength": 321978
+  },
+  "regions": [
+    {
+      "name": "map",
+      "bounds": [
+        0,
+        60,
+        1051,
+        800
+      ],
+      "baselineWhitePixels": 28620,
+      "optimizedWhitePixels": 28620,
+      "ratio": 1.0,
+      "pass": true
+    },
+    {
+      "name": "large-china-label",
+      "bounds": [
+        100,
+        300,
+        900,
+        550
+      ],
+      "baselineWhitePixels": 12525,
+      "optimizedWhitePixels": 12525,
+      "ratio": 1.0,
+      "pass": true
+    }
+  ],
+  "method": "Count near-white pixels in the exact same fixed-camera normal selection screenshots, excluding the UI/attribution. A missing large white country label fails. Separate root inspection checks appearance."
+}

@@ -1,0 +1,41 @@
+{
+  "stage": "12-1",
+  "status": "pass",
+  "objective": "Audit the Prompt 10 and 11 runtime ownership and identify reusable production entrypoints.",
+  "filesRead": [
+    "src/lib/world/world-state-v2.ts",
+    "src/lib/commands/command-batch-v2.ts",
+    "src/lib/planning/command-ui-runtime.ts",
+    "src/lib/planning/history-persistence-checkpoint.ts",
+    "src/lib/planning/atomic-world-commit.ts",
+    "src/stores/world-state-store.ts",
+    "src/stores/game-setup-store.ts",
+    "src/lib/storage/game-setup-storage.ts",
+    "src/components/layout/GameSetupShell.tsx",
+    "package.json"
+  ],
+  "changedFiles": [
+    "docs/simulation/prompt10-11-runtime-audit.md",
+    "reports/prompt12/12-1-runtime-audit.json"
+  ],
+  "commands": [
+    "rg --files",
+    "Get-Content of the audited runtime sources"
+  ],
+  "gates": {
+    "productionAndDemoSeparated": "pass",
+    "existingWorldEntrypointsIdentified": "pass",
+    "missingAtomicTurnCoordinatorIdentified": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "No AI-only world executor was introduced.",
+    "Gameplay command JSON remains a development-only surface."
+  ],
+  "notes": [
+    "WorldStateStoreController owns the authoritative world.",
+    "planRuntimeCommand and existing planners are the reusable dry-run seam.",
+    "commitVerifiedWorldPatch is atomic only for the world half; a turn coordinator is still required."
+  ],
+  "nextStage": "12-2"
+}

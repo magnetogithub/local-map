@@ -1,0 +1,52 @@
+{
+  "stage": "10-28",
+  "status": "pass",
+  "objective": "Build worldContentHash from only complete domain roots and schema, seed, and policy versions.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-27-domain-root-builder.json": "7d33413ef2dcf0787b9471564b8d23edbdc3ac4ddc4e16cb12e9dde522234da0",
+    "src/lib/world/domain-hash-root.ts": "4a7144d970f509ba4a4c1c1db3213a790719205f6a6f0331bf87f991f58d0447"
+  },
+  "outputHashes": {
+    "src/lib/world/world-content-hash.ts": "f86905fee216ce3d8b4e5f6fa05539fcd2ded2a15a4dc39488d1bf4ae108dbac",
+    "src/lib/world/world-content-hash.test.ts": "821d10dc8d7f61f20bb1f238cb4771b3f26e0eb89007e7735cf57b6ea751863d"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-28-world-content-hash.json",
+    "src/lib/world/world-content-hash.test.ts",
+    "src/lib/world/world-content-hash.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-27 status and output hashes", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/world-content-hash.test.ts", "exitCode": 1, "note": "Expected red test: world-content-hash module did not exist."},
+    {"command": "npm.cmd test -- --run src/lib/world/world-content-hash.test.ts src/lib/world/domain-hash-root.test.ts", "exitCode": 0},
+    {"command": "npm.cmd run lint -- src/lib/world/world-content-hash.ts src/lib/world/world-content-hash.test.ts", "exitCode": 0},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0}
+  ],
+  "measurements": {
+    "targetedTestFilesPassed": 2,
+    "targetedTestsPassed": 17,
+    "ignoredMetadataFieldsTested": 4,
+    "versionMutationCases": 3,
+    "domainRootMutationCases": 4,
+    "lintErrors": 0,
+    "typecheckErrors": 0
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "versionsIncluded": true,
+    "domainRootsIncluded": true,
+    "revisionAndMetadataIgnored": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-29"
+}

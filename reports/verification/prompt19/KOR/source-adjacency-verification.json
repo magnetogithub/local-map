@@ -1,0 +1,22 @@
+{
+  "stage": "19-02A",
+  "sourceFeatures": 3504,
+  "positiveLengthAdjacencyPairs": 9738,
+  "oneSidedSegments": 239297,
+  "ambiguousSegments": 0,
+  "ambiguitySamples": [],
+  "p0OnlySegments": 5554,
+  "symmetric": true,
+  "selfEdges": 0,
+  "pointContactUsedAsAdjacency": false,
+  "seaConnectionsInvented": false,
+  "graph": {
+    "path": "reports/verification/prompt19/KOR/source-internal-adjacency.json.gz",
+    "sha256": "94533213f116f08b732ad4d9a552c1eac936f3b7be7beeba62feaf30d3ca4516",
+    "byteLength": 5478665
+  },
+  "elapsedMs": 5400.9769,
+  "maximumRssBytes": 1347760128,
+  "candidateCoverageOrTopologyPass": false,
+  "limitations": "One-sided and ambiguous segments remain diagnostics. Country envelope differs from the source. Recompute on connected clipped cells after C fixes the shared generator; this graph confers no gameplay/candidate-ready status."
+}

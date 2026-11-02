@@ -1,0 +1,35 @@
+{
+  "stage": "8-6",
+  "status": "pass",
+  "inputHashes": {"reports/fix08-5-map-integration.json":"7066acb5b9e9ae14c809de138bca8c7f506860b6f225a8d749f33d62bb2e4003"},
+  "outputHashes": {
+    "src/components/map/WorldMap.tsx":"9e906c4ec6c8dc650bdf028667e6cd2a4f92220d8dc2cdd8d421236d7156d895",
+    "src/types/map-debug.ts":"175e98a995c556b95fb143e5704792712c80bbcb9257cd501d40bc5c62989382",
+    "e2e/fix08-6.spec.ts":"c4dd60c1fbf29231fef23aca2909c183b0bc748a033bb291f75ba9f9a347a895"
+  },
+  "changedFiles": ["src/components/map/WorldMap.tsx","src/types/map-debug.ts","e2e/fix08-6.spec.ts","reports/fix08-6-renderer-bounds.json"],
+  "commands": [
+    {"command":"npx playwright test e2e/fix08-5.spec.ts e2e/fix08-6.spec.ts --workers=1 --timeout=60000","status":"pass","result":"2 tests passed"},
+    {"command":"npm test -- src/lib/map/country-label-glyph-export.test.ts src/lib/world/country-map-artifacts.test.ts","status":"pass","result":"2 files, 9 tests passed"},
+    {"command":"npx eslint src/components/map/WorldMap.tsx src/types/map-debug.ts e2e/fix08-5.spec.ts e2e/fix08-6.spec.ts","status":"pass","result":"no diagnostics"},
+    {"command":"npx tsc --noEmit --pretty false","status":"fail-pre-existing","result":"existing screenshotZoom union errors in e2e/fix08-8a3.spec.ts and JSON tuple cast in country-map-artifacts.test.ts; no 8-6 diagnostic"}
+  ],
+  "gates": {
+    "separateFeatureAndLogicalInstanceCounts":true,
+    "boundsFromActualProjectedGlyphVertices":true,
+    "collisionIndexUsedForGeometryRenderer":false,
+    "baselineOrTerritoryEstimateUsedForGeometryBounds":false,
+    "resultFields":["renderer","layerId","worldCopy","labelInstanceId","glyphIndices","vertexCount","primitiveCount","source"],
+    "renderSettledRequires":["camera idle","glyph evidence data ready","glyph source loaded","all map tiles loaded","detail source ready when required"],
+    "diagnosticOutlineExcludedFromPass":true,
+    "representativeBounds": {
+      "AUS":{"features":7,"instances":1,"worldCopy":0,"glyphIndices":[0,1,2,3,4,5,6],"vertexCount":540,"width":176.979,"height":46.274},
+      "RUS":{"features":3,"instances":1,"worldCopy":0,"glyphIndices":[0,1,2],"vertexCount":221,"width":638.903,"height":371.089},
+      "USA":{"features":2,"instances":1,"worldCopy":0,"glyphIndices":[0,1],"vertexCount":45,"width":186.261,"height":111.493},
+      "CHN":{"features":2,"instances":1,"worldCopy":0,"glyphIndices":[0,1],"vertexCount":198,"width":170.126,"height":104.570}
+    }
+  },
+  "implementationErrors": [],
+  "environmentErrors": ["In-app Browser runtime bootstrap remained unavailable because its trusted RPC dependency was not configured; project Playwright is used for browser evidence."],
+  "nextStage": "8-7"
+}

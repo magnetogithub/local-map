@@ -1,0 +1,36 @@
+{
+  "stage": "12-3",
+  "status": "pass",
+  "objective": "Implement the ISO-date simulation clock and simulation/world revision pair validation.",
+  "filesRead": [
+    "src/lib/world/world-state-v2.ts",
+    "src/stores/game-setup-store.ts",
+    "src/lib/storage/game-setup-storage.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/simulation-contract-primitives.ts",
+    "src/lib/simulation/simulation-clock.ts",
+    "src/lib/simulation/simulation-contract.test.ts",
+    "reports/prompt12/12-3-clock-revision-pair.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/simulation-contract.test.ts",
+    "npx tsc --noEmit"
+  ],
+  "gates": {
+    "defaultScenarioDate": "pass",
+    "invalidDateRejected": "pass",
+    "backwardAdvanceRejected": "pass",
+    "excessiveJumpRejected": "pass",
+    "staleRevisionPairRejected": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Clock and revision validation are pure and do not access ambient time."
+  ],
+  "notes": [
+    "Default start date is 2020-01-01.",
+    "A single turn is bounded to 366 days."
+  ],
+  "nextStage": "12-4"
+}

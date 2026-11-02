@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "prompt15-sliver-evaluation-rule-v2",
+  "status": "SEPARATE_EVALUATION_RULE_NOT_FROZEN_V6_APPROVAL",
+  "authority": "2026-10-28 user-authorized sliver investigation and separately versioned evaluation rule",
+  "basePolicy": "prompt15-cell-experiment-v6",
+  "classification": {"areaKm2LessThan": 1, "aspectRatioGreaterThan": 64},
+  "sourceTiny": {
+    "maximumSourceComponentAreaKm2": 1,
+    "maximumSourceComponentDiameterKm": 8,
+    "evidence": "Independent pinned generation parent geometry, parent identity/hash, component index/hash and recomputed physical size. A small cell or a stored true flag alone is never evidence. Administrative and residual original parent components follow the same rule."
+  },
+  "count": {"numerator": "non-sourceTiny sliver cells", "denominator": "all non-sourceTiny cells", "maximum": 0.35},
+  "area": {"numerator": "area of non-sourceTiny sliver cells", "denominator": "area of all non-sourceTiny cells", "maximum": 0.01},
+  "zeroEligibleDenominator": "NOT_APPLICABLE only when every positive valid cell has independent proven sourceTiny lineage; report ratio 0 and reason ALL_SOURCE_COMPONENTS_TINY. Empty or invalid input fails.",
+  "rawStatistics": "Always retain all-cell count/area, all sliver count/area and the frozen-v6 ratios including sourceTiny area.",
+  "rationale": "Frozen-v6 count excludes physically intrinsic tiny source components, while its area ratio includes them. Frozen text and approval samples do not establish an area exception. This version applies the same independently proved eligibility population to both numerators and denominators, distinguishing intrinsic source geometry from synthetic fragmentation. It is a policy interpretation change, not a retrospective correction of frozen-v6 approval.",
+  "unchanged": "No country exemptions, threshold increases, loss of positive geometry, physical cap waiver, ownership change or sourceTiny inference from cell size.",
+  "acceptance": "Passing only this rule is NEW_RULE_ONLY, never frozen-v6 PASS, whole-country preservation PASS or task15-22 overall PASS. Adoption into an approved world candidate remains separate."
+}

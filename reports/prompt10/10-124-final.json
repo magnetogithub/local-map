@@ -1,0 +1,123 @@
+{
+  "checkpoint": "10-119~10-124",
+  "name": "command UI and final integration checkpoint",
+  "status": "pass",
+  "completedAt": "2026-09-21T12:12:00+09:00",
+  "policy": {
+    "promptFileModified": false,
+    "promptFile": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "promptFileSha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+    "reportingMode": "checkpoint-only",
+    "productionBuild": "executed",
+    "e2eMode": "executed"
+  },
+  "inputCheckpoint": {
+    "file": "reports/prompt10/10-118-performance-resilience-checkpoint.json",
+    "sha256": "3e65ceccd1c1d5056242a9ae060994fb390057a5425ac0b9db79f5ad9afdcc38"
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/planning/command-ui-runtime.ts",
+        "sha256": "fa0ee8161ab29d6044ba7558f49f8b8c4efc08ddad207adb5b1019164ce2a629",
+        "purpose": "JSON command dry-run, patch preview, apply, undo, redo, and Prompt 09 migration runtime for the command UI surface."
+      },
+      {
+        "path": "src/lib/planning/command-ui-runtime.test.ts",
+        "sha256": "971af33c992105bac3eade2f2fcbc6474a690621616c03cb764ac4c2f7ccfc96",
+        "purpose": "Final checkpoint tests for command preview/apply, duplicate command rejection, establish/dissolve flows, undo/redo hash consistency, migration, and projection alignment."
+      },
+      {
+        "path": "src/lib/planning/affected-set.ts",
+        "sha256": "607cce0960ba4f2bfde3713a89822ac9d894c410b98e6f4374bd74acf22ee19f",
+        "purpose": "Includes country.establish country and territory effects in WorldPatch affected-set calculation."
+      },
+      {
+        "path": "src/lib/planning/history-persistence-checkpoint.ts",
+        "sha256": "ace6d788a3e90599b2da480c030e738914e5f4e4fb3d1e6c67bed96690002966",
+        "purpose": "Records retiredCountryIds in domain before-images so dissolve undo/redo preserves CountryId lifecycle invariants."
+      },
+      {
+        "path": "src/components/map/WorldMap.tsx",
+        "sha256": "6035993aaf6383ef65ce31e3ba13b792d35b80665b1f9b65a328ab701e0a3c3a",
+        "purpose": "Filters debug-rendered label IDs to playable countries and adds robust source-geometry fallback selection for dissolved seam clicks."
+      }
+    ]
+  },
+  "stageCoverage": {
+    "10-119": {
+      "status": "pass",
+      "evidence": "Command UI runtime parses JSON commands, returns dry-run patch previews, applies plans, and exposes undo/redo session commands."
+    },
+    "10-120": {
+      "status": "pass",
+      "evidence": "country.establish preview/apply path creates the new country, assigns unclaimed territory, and aligns map/label projection revisions and TerritoryId sets."
+    },
+    "10-121": {
+      "status": "pass",
+      "evidence": "country.dissolve transfer flow removes the source country, leaves no dangling selected artifact, and keeps source geometry selection stable at dissolved seams."
+    },
+    "10-122": {
+      "status": "pass",
+      "evidence": "Rename plus dissolve flow verifies undo/redo worldContentHash consistency; E2E split-China flow still applies and rolls back atomically."
+    },
+    "10-123": {
+      "status": "pass",
+      "evidence": "Prompt 09 style migration ignores stale UI country ids without persisting transient MapLibre/worker cache state."
+    },
+    "10-124": {
+      "status": "pass",
+      "evidence": "Targeted tests, full unit suite, typecheck, lint, production build, full E2E, and diff whitespace checks pass."
+    }
+  },
+  "gates": {
+    "prompt10ReportChainPass": true,
+    "countryEntityGeometryOwnershipCount": 0,
+    "danglingOwnerCountryIdCount": 0,
+    "overlappingEffectiveControlTerritoryCount": 0,
+    "retiredCountryIdReuseCount": 0,
+    "partialDomainCommitCount": 0,
+    "staticCountryByIdRuntimeDependencyCount": 0,
+    "projectionRevisionMismatchCount": 0,
+    "staleLabelCount": 0,
+    "fullDomainDeepClonePathCount": 0,
+    "emptyWorldViaGeneralCommandCount": 0,
+    "undoRedoWorldContentHashMismatchCount": 0
+  },
+  "verification": [
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/command-ui-runtime.test.ts src/lib/planning/history-persistence-checkpoint.test.ts src/lib/planning/performance-resilience-checkpoint.test.ts",
+      "status": "pass",
+      "result": "3 test files passed, 16 tests passed"
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit --incremental false",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd run lint -- src/components/map/WorldMap.tsx src/lib/planning/command-ui-runtime.ts src/lib/planning/command-ui-runtime.test.ts src/lib/planning/affected-set.ts src/lib/planning/history-persistence-checkpoint.ts",
+      "status": "pass"
+    },
+    {
+      "command": "npm.cmd test -- --run",
+      "status": "pass",
+      "result": "110 test files passed, 917 tests passed"
+    },
+    {
+      "command": "npm.cmd run build",
+      "status": "pass",
+      "result": "Next.js production build completed successfully"
+    },
+    {
+      "command": "npm.cmd run test:e2e",
+      "status": "pass",
+      "result": "15 Playwright tests passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "pass",
+      "result": "No whitespace errors; existing LF-to-CRLF working-copy warnings only."
+    }
+  ],
+  "nextCheckpoint": null
+}

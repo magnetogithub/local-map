@@ -1,0 +1,101 @@
+{
+  "stage": "8-11",
+  "status": "pass",
+  "inputHashes": {
+    "reports/fix08-10-scale-tracking.json": "a8ad527b622145ffadb1e22673ff0170c20d9502c1c8e0877b2d8a868a66fc15"
+  },
+  "outputHashes": {
+    "src/lib/map/country-label-glyph-geometry.ts": "42cde7b22c220cfede5509eefcba60398ae0db44f7429b3fed2f95a92c558843",
+    "src/lib/map/country-label-glyph-geometry.test.ts": "7742d0eefd33cf81d083fa2465bab365aae254f66630d7298f90aef493e2a99c",
+    "src/lib/world/country-map-artifacts.test.ts": "846fe10ebc669434c6a5404f13dd37b7b03f9e8b5211e75c59c24897a0de0886",
+    "public/data/maps/country-label-glyph-fills-2020.geojson": "e369eb233284e60a326f6861545e66dfadf55c101f20f6376eafddb2de73a48c",
+    "public/data/maps/country-label-glyph-outlines-2020.geojson": "ed778c73ea51338d6576fb5992b189f2b94d9f3d5e199f46c1af520d6b0b3e6c"
+  },
+  "changedFiles": [
+    "src/lib/map/country-label-glyph-geometry.ts",
+    "src/lib/map/country-label-glyph-geometry.test.ts",
+    "src/lib/world/country-map-artifacts.test.ts",
+    "public/data/maps/country-label-glyph-fills-2020.geojson",
+    "reports/fix08-11-angle-curvature.json"
+  ],
+  "policy": {
+    "baselineResampling": "25 equally spaced cumulative-length samples",
+    "smoothing": "two endpoint-preserving [1,2,1]/4 passes in local projected coordinates",
+    "maxAbsoluteGlyphAngleDegrees": 35,
+    "maxAdjacentAngleDeltaDegrees": 12,
+    "transform": "uniform scale, rotation, and translation only",
+    "layoutVersion": "world-glyph-v3-angle-stable"
+  },
+  "angleTable": [
+    {
+      "countryId": "RUS",
+      "tangentAngles": [7.32295, 6.023738, 4.874345],
+      "maxAbsoluteAngle": 7.32295,
+      "maxAdjacentDelta": 1.299212,
+      "insideRatioBeforeSmoothing": 1,
+      "insideRatioAfterSmoothing": 1,
+      "artifactHash": "ecf19fe757f0731dca1436b79829769e30842ef6cdfc3675fa719e9c337748a8"
+    },
+    {
+      "countryId": "AUS",
+      "tangentAngles": [-7.32043, -7.780944, -8.241595, -8.702298, -9.004638, -9.465234, -9.925659],
+      "maxAbsoluteAngle": 9.925659,
+      "maxAdjacentDelta": 0.460703,
+      "insideRatioBeforeSmoothing": 0.951422,
+      "insideRatioAfterSmoothing": 0.951422,
+      "artifactHash": "da8d8e93c79c2bdb63fbbf44ad816dcc2603d09463448d68639d24d16ff8bb62"
+    },
+    {
+      "countryId": "CHL",
+      "tangentAngles": [35, 35],
+      "maxAbsoluteAngle": 35,
+      "maxAdjacentDelta": 0,
+      "insideRatioBeforeSmoothing": 1,
+      "insideRatioAfterSmoothing": 1,
+      "artifactHash": "c49f858c765c35515cc48138fcb243e5a9395ae80d1c94f7d97b917f702ca323"
+    },
+    {
+      "countryId": "IDN",
+      "tangentAngles": [30.693233, 30.084889, 29.469244, 29.011084, 28.402814],
+      "maxAbsoluteAngle": 30.693233,
+      "maxAdjacentDelta": 0.615645,
+      "insideRatioBeforeSmoothing": 1,
+      "insideRatioAfterSmoothing": 1,
+      "artifactHash": "a14686e7f630deac6455efa9cc3236dbc85820721d62a11ec741b11b8b0ec1c2"
+    }
+  ],
+  "commands": [
+    {"command": "npm.cmd test -- src/lib/map/country-label-glyph-geometry.test.ts src/lib/world/country-map-artifacts.test.ts", "exitCode": 1, "resolution": "synthetic baseline fixture received an explicit targetSpanRatio; final tests pass"},
+    {"command": "$env:PAX_FIX08_5_EXPORT='1'; npm.cmd test -- src/lib/map/country-label-glyph-export.test.ts", "exitCode": 0, "result": "approved retry regenerated deterministic GeoJSON"},
+    {"command": "$env:PAX_FIX08_11_SUMMARY='1'; npx.cmd vitest run src/lib/map/country-label-glyph-geometry.test.ts --reporter=verbose", "exitCode": 0, "result": "17 tests passed and angle table emitted"},
+    {"command": "npm.cmd test -- src/lib/map/country-label-glyph-geometry.test.ts src/lib/world/country-map-artifacts.test.ts src/lib/map/country-label-glyph-export.test.ts", "exitCode": 0, "result": "3 files, 26 tests passed"},
+    {"command": "npx.cmd tsc --noEmit --pretty false", "exitCode": 0},
+    {"command": "npm.cmd run lint", "exitCode": 0, "result": "0 errors; two pre-existing warnings in scripts/prepare-map-data.mjs"},
+    {"command": "npm.cmd run build", "exitCode": 0, "result": "production build passed after approved cache-write retry"},
+    {"command": "npx.cmd playwright test e2e/fix08-5.spec.ts e2e/fix08-6.spec.ts e2e/fix08-7.spec.ts --workers=1 --timeout=180000", "exitCode": 0, "result": "3 tests passed"}
+  ],
+  "gates": {
+    "adjacentGlyphAngleWithinPolicy": true,
+    "baselineDistanceAndGlyphIndexMonotonic": true,
+    "noFlippedVerticalOrIntersectingGlyphs": true,
+    "corridorDepartureNotWorsened": true,
+    "insideRatioNotWorsened": true,
+    "uniformScaleAndRigidTransformOnly": true,
+    "curvedCountryRegressionCovered": true,
+    "deterministicGeometryAndHash": true
+  },
+  "implementationErrors": [],
+  "environmentErrors": [
+    {
+      "operation": "first sandboxed GeoJSON export",
+      "error": "EPERM opening representative fill GeoJSON",
+      "resolution": "approved retry passed"
+    },
+    {
+      "operation": "first sandboxed production build",
+      "error": ".next cache access denied / EPERM",
+      "resolution": "approved retry passed"
+    }
+  ],
+  "nextStage": "8-12"
+}

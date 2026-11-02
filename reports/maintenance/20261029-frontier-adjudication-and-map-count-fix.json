@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "scope": "Frontier lookup guidance and tool failure semantics; correct zero-map-change reporting. No production debug waiver or forced military success.",
+  "reported": {
+    "period": "2020-01-01 – 2020-01-31",
+    "summary": "The model reported that it could not verify a frontier and emitted no territorial effect.",
+    "displayedMapChangeCount": 1
+  },
+  "diagnosis": {
+    "pastModelToolTraceAvailable": false,
+    "actualPastCause": "Not proven: the completed turn did not retain the model's lookup names/arguments/results.",
+    "offlineActualCatalog": {
+      "cells": 9280,
+      "KORtoPRKDefault": {
+        "success": true,
+        "cells": 1,
+        "areaKm2": 976.013
+      },
+      "PRKtoKORDefault": {
+        "success": true,
+        "cells": 5
+      },
+      "regionQueryArmistice": "UNKNOWN_REGION",
+      "regionQueryKaesong": "UNKNOWN_REGION",
+      "directionVariants": "north/east/south/west all returned valid bounded selections",
+      "interpretation": "An ordinary current-frontier lookup works. General border wording must not be mistaken for an administrative region query."
+    },
+    "productionLimits": "At scenario start authority/facts/events may be empty. Verified geography does not grant territorial authority or guarantee military success. Production DEBUG restrictions remain."
+  },
+  "changes": [
+    {
+      "path": "src/lib/simulation/server/simulation-instruction.ts",
+      "description": "Require the current-frontier lookup before technical geographic inability is claimed; explain null region/reference/direction fields with a concrete armistice example; retain explicitly named region restrictions and separate geographic failure, authority prerequisites and military adjudication."
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-tools.ts",
+      "description": "Return conditional retry guidance for unknown/ambiguous region interpretation without inventing IDs or automatically clearing a user's explicit restriction."
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-provider.ts",
+      "description": "Propagate domain lookup failure in the outer ok flag; add bounded structured lookup/accepted-resolution logs containing names, status codes and counts, without prompts, IDs, geometry or credentials."
+    },
+    {
+      "path": "src/lib/simulation/client/turn-report.ts",
+      "description": "Preserve mapChanges:[] when there are no world effects. Do not count a placeholder explanation as one change."
+    },
+    {
+      "path": "src/components/game/NewsOverlay.tsx",
+      "description": "Render the no-map-change explanation in the UI only."
+    }
+  ],
+  "validation": {
+    "providerSuites": {
+      "files": 2,
+      "passed": 34,
+      "failed": 0,
+      "command": "node node_modules/vitest/vitest.mjs run --configLoader native src/lib/simulation/server/operational-provider.test.ts src/lib/simulation/server/provider-route.test.ts",
+      "coverage": [
+        "UNKNOWN_REGION outer-failure response, unchanged retry scope, valid default frontier recovery and exact effectTarget submission",
+        "Ordinary grounded military failure without forced territorial effects",
+        "Existing production debug rejection, scope/stale/cap and provider behavior"
+      ]
+    },
+    "reportAndUiSuites": {
+      "files": 3,
+      "passed": 27,
+      "failed": 0,
+      "coverage": [
+        "Zero effects -> zero map-change entries/count",
+        "One actual effect -> one map-change entry/count",
+        "No-change explanatory text remains visible"
+      ]
+    },
+    "uniqueTestsPassed": 61,
+    "typecheck": "passed",
+    "scopedLint": "passed",
+    "diffCheck": "passed",
+    "productionBuild": {
+      "status": "passed",
+      "bundler": "webpack",
+      "dist": ".next-frontier-adjudication-build",
+      "compiledSeconds": 12.3,
+      "typecheckSeconds": 12.9
+    },
+    "buildConfigCleanup": "tsconfig.json and next-env.d.ts restored byte-for-byte to immediately pre-build snapshots after checking only the generated build-path differences.",
+    "externalAiRequestsThisWork": 0
+  },
+  "runningApps": {
+    "fixed": {
+      "url": "http://127.0.0.1:3030/",
+      "pid": 10468,
+      "mode": "production real provider",
+      "httpRoot": 200,
+      "httpCatalog": 200,
+      "catalog": "catalog-v3-prompt19-korea-7bb8d40b5113b6cff987",
+      "compiledNewGuidance": true,
+      "compiledLookupLogs": true,
+      "scriptedFixture": false
+    },
+    "existing": {
+      "url": "http://127.0.0.1:3029/",
+      "httpCatalog": 200,
+      "preserved": true,
+      "reason": "Do not discard the user's already committed in-memory game to apply a new build."
+    }
+  },
+  "limits": [
+    "No additional actual AI request was made; earlier two-request permission is exhausted.",
+    "This fixes deterministic reporting and tool/protocol guidance; it does not prove how the previous model produced its explanation or guarantee a future military outcome.",
+    "Existing3029 session/result was not modified or retroactively adjudicated.",
+    "Full19-03 bidirectional/undo-redo/performance verification remains separate."
+  ],
+  "evidence": {
+    "buildLog": ".tmp/frontier-adjudication-build-20261029/build.log",
+    "runtimeStdout": ".tmp/frontier-adjudication-build-20261029/server.stdout.log",
+    "runtimeStderr": ".tmp/frontier-adjudication-build-20261029/server.stderr.log"
+  }
+}

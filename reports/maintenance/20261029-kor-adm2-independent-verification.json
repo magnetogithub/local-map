@@ -1,0 +1,117 @@
+{
+  "date": "2026-10-29",
+  "scope": "Independent verification of KOR ADM2 scale and strict source membership catalog",
+  "catalogVersion": "catalog-v3-prompt19-korea-416fa2c3b263ab7a13be",
+  "externalAiRequests": 0,
+  "package": {
+    "pass": true,
+    "artifactsVerified": 5977,
+    "checkedBytes": 35394038,
+    "unchangedOtherCountries": 245,
+    "cells": 6530,
+    "edges": 21908,
+    "fixedEnvelopes": {
+      "KOR": {
+        "components": 53,
+        "holes": 0
+      },
+      "PRK": {
+        "components": 10,
+        "holes": 0
+      }
+    },
+    "allZoomsZeroInteriorMissingSamples": true,
+    "zoomRange": [
+      0,
+      6
+    ]
+  },
+  "geometry": {
+    "KOR": {
+      "cells": 1181,
+      "invalidPolygons": 0,
+      "polygonHoles": 0
+    },
+    "PRK": {
+      "cells": 1147,
+      "invalidPolygons": 0,
+      "polygonHoles": 2
+    },
+    "symmetricAdjacency": true,
+    "noPhantomNeighbors": true,
+    "sharedBorderLengthDifferenceKm": -6.757351798114541e-7,
+    "currentFineCellsWithinOriginalSource": {
+      "KOR": {
+        "checked": 538,
+        "maximumOutsideSourceAreaDegreesSquared": 2.1735601898937843e-16
+      },
+      "PRK": {
+        "checked": 659,
+        "maximumOutsideSourceAreaDegreesSquared": 2.769998173595504e-16
+      }
+    }
+  },
+  "prkComparison": {
+    "rawSourceLockUnchanged": true,
+    "priorCells": 701,
+    "newCells": 1147,
+    "priorFine": 653,
+    "priorCoarse": 48,
+    "newFine": 659,
+    "newCoarse": 488,
+    "fineAreaReturnedToExplicitCoarseDegreesSquared": 0.07674946221481349,
+    "changedSourceParentGroupCellCounts": 14,
+    "explanation": "PRK raw source and country envelope are preserved. Strict source membership intentionally separates previously inferred fine coverage into coarse residuals; this changes cell partitioning and classification, beyond coordinate noding."
+  },
+  "scale": {
+    "originalKORADM3Features": 3504,
+    "newKORADM2Features": 228,
+    "PRKADM2Features": 179,
+    "KORRuntimeCellsBefore": 4377,
+    "KORRuntimeCellsAfter": 1181,
+    "KORFineAverageAreaKm2": 179.26233633996753,
+    "PRKFineAverageAreaKm2": 183.67737762641278,
+    "areaCaveat": "Runtime metrics use a spherical ring approximation that changes slightly with partitioning/noding. Exact fixed-envelope checks use boundary cancellation, planar area, components, holes and bbox."
+  },
+  "tests": {
+    "vitest": {
+      "files": 4,
+      "passed": 14,
+      "failed": 0,
+      "paths": [
+        "src/lib/world/operational-catalog.test.ts",
+        "src/lib/simulation/prompt19-mixed-frontier.test.ts",
+        "src/lib/simulation/operational-frontier-catalog.test.ts",
+        "src/lib/simulation/catalog-region-integration.test.ts"
+      ],
+      "durationSeconds": 9.15
+    },
+    "node": {
+      "passed": 8,
+      "failed": 0,
+      "path": "scripts/prompt19-joined-arrangement.node-test.mjs",
+      "includes": "Strict source hole, actual country hole, overlapping source rejection"
+    }
+  },
+  "verifierChange": {
+    "path": "scripts/verify-prompt19-mixed-world.mjs",
+    "option": "--output-report PATH",
+    "existingDefaultPreserved": true,
+    "syntaxCheck": "passed",
+    "missingValueCheck": "passed",
+    "diffCheck": "passed"
+  },
+  "evidence": {
+    "finalPackage": "reports/maintenance/prompt19-C/kor-adm2-2020-416fa2c3b263ab7a13be-mixed-verification.json",
+    "latestPackage": "reports/maintenance/prompt19-C/mixed-verification.json",
+    "previousPackageArchive": "reports/maintenance/prompt19-C/mixed-verification-catalog-v3-prompt19-korea-7bb8d40b5113b6cff987.json",
+    "baseline": "reports/maintenance/20261029-kor-adm2-prk-comparison-baseline.json",
+    "geometryComparison": "reports/maintenance/20261029-kor-adm2-independent-geometry-comparison.json",
+    "scaleAndKORContainment": "reports/maintenance/20261029-korea-adm2-size-and-source-containment.json"
+  },
+  "limits": [
+    "No actual AI turn was called.",
+    "This validates the prepared data; browser rendering is verified by the parent task.",
+    "No existing game save/session migration is provided between different catalog versions."
+  ]
+}

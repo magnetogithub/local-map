@@ -1,0 +1,17 @@
+{
+  "stage": "10-58",
+  "status": "pass",
+  "objective": "Reject stale commands before semantic planning without retry or implicit merge.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {"reports/prompt10/10-57-dry-run-purity.json": "e43e85c9d606e52e74acfbc8f5a4ae03e9e6e707d11653a264ef374cb29b280a"},
+  "outputHashes": {
+    "src/lib/planning/planner-boundary.ts": "495458622dfec0ede63b1f43ccc779afc1bc7a44c207a5a388af76087495b00b",
+    "src/lib/planning/planner-boundary.test.ts": "fa4358e11da1251238e84d49f7424121a8759191c5710d048cfc0663a6cc25b8"
+  },
+  "measurements": {"staleCommandsAccepted": 0, "plannerCallsAfterStaleGate": 0, "automaticRetries": 0, "implicitMerges": 0},
+  "gates": {"revisionCheckedFirst": true, "typedStaleError": true, "noRetry": true, "noImplicitMerge": true, "targetedTestsPass": true, "lintPass": true, "typecheckPass": true},
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "10-59"
+}

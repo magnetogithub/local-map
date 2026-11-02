@@ -1,0 +1,99 @@
+{
+  "task": "18-03A",
+  "date": "2026-10-29",
+  "timezone": "Asia/Seoul",
+  "status": "completed",
+  "scope": "Actual cell source membership, minimal paint state, indexed hover/selection and directly necessary recovery wiring after 18-02.",
+  "changedFiles": [
+    "src/lib/map/operational-map-consumer.ts",
+    "src/lib/map/operational-map-consumer.test.ts",
+    "src/lib/map/operational-map-sources.ts",
+    "src/components/map/OperationalWorldMap.tsx",
+    "src/components/map/OperationalWorldMap.test.tsx"
+  ],
+  "implementation": {
+    "membership": "Cell state is written only to observed vector cells, current selected-country exact cells, and authoritative changed geometry actually present in each source. First vector observation writes only that source; repeated observation skips duplicate writes.",
+    "payload": {
+      "allCellSources": ["mapColor", "selectionColor", "occupied", "hover", "selected"],
+      "vectorOnly": ["exactCell"],
+      "identity": "Cell IDs, source/owner/controller countries, outlines and label colors are not copied into paint state. Authoritative hit resolution still uses world and ordinal."
+    },
+    "interaction": "Consumer-local country indexes contain numeric members of the union of current source memberships. Interaction uses owner first and controller fallback; color updates use a separate controller index. Only old/new country flags are written, without operationalCellView or a copied/scanned union of all historical cells. Equal hover/selection values remain no-ops.",
+    "worldChanges": "Changed cells leave their prior country indexes after successful staging/publication and rejoin from the latest world. Color changes touch indexed controller members. Null control, retired countries, undo/redo and owner/controller differences are preserved.",
+    "detailLifetime": "New exact detail receives current world colors, occupation and interaction flags when loading completes. Removed exact features lose only that source's state; vector masking is restored while changed geometry/state remains. Detail-only cells leave both indexes. Stale completions after clear/replacement cannot revive membership.",
+    "indexLifetime": "Indexes are per consumer, contain at most catalog membership plus currently loaded detail references, delete empty country entries and clear on disposal. Historical vector membership remains necessary for the existing delivery replay contract; viewport eviction was not introduced.",
+    "recovery": "Source setData failures are distinguished from retryable fetch errors with OperationalMapSourceWriteError. Partial source/state writes, state removal and retirement callback failures require resynchronization. The component routes these failures to map retry while ordinary detail fetch failures retain detail retry.",
+    "preserved": "18-02 base c=1 filtering, false overrides, sparse front state and authoritative exact front geometry remain intact. Catalog, tiles, geometry, IDs, approval bytes, validation and production DEBUG restrictions are unchanged."
+  },
+  "validation": {
+    "consumer": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/map/operational-map-consumer.test.ts --configLoader native",
+      "passed": 40,
+      "failed": 0,
+      "coverage": [
+        "Existing 18-02 default/dynamic/restored fronts, null control, liberation/transfer, undo/redo, delta rejection and failure recovery.",
+        "A fake-map guard rejects state writes to missing GeoJSON features; unchanged initial sources have only five vector writes.",
+        "Minimal paint payload and authoritative hit IDs with owner-first/controller-fallback behavior.",
+        "Indexed hover/selection uses flag-only writes and zero operationalCellView calls; equal hover emits no writes.",
+        "Latest world/color/occupation/hover/selection after pending detail loading; cleanup preserves changed source state.",
+        "Detail-only index pruning, replacement, clear, stale completion, fetch retry and reopening.",
+        "Owner/controller index updates, null-controller transitions, color restoration and country retirement.",
+        "Partial state/source writes, cleanup and retirement callbacks require resynchronization."
+      ]
+    },
+    "component": {
+      "command": "node node_modules/vitest/vitest.mjs run src/components/map/OperationalWorldMap.test.tsx --configLoader native",
+      "passed": 10,
+      "failed": 0,
+      "newRegression": "A partial detail publication failure offers map retry, disposes the prior consumer, remounts the same authoritative world and restores selected-country detail. Existing detail retry and stale request cases also pass."
+    },
+    "existingSourceConnection": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/map/operational-delivery.test.ts -t 'mounts stable vector/exact sources' --configLoader native",
+      "passed": 1,
+      "skippedByNameFilter": 9,
+      "failed": 0
+    },
+    "changedCodeLint": "Passed for all five changed code/test files; consumer and its test were checked again after their last edit.",
+    "gitDiffCheck": "Passed for changed code/test files.",
+    "readOnlyPeerReview": "Final membership/index and failure-boundary review found no remaining defect.",
+    "testEnvironment": "TEMP/TMP were scoped to separate task-owned workspace cache directories. No elevation, external provider or runtime configuration change was needed.",
+    "fullTypecheck": "Deferred to the grouped 18-04 integration checks.",
+    "productionBuild": "Deferred to the single final 18-04 build.",
+    "browserPerformanceComparison": "Not executed in this step; remains 18-04.",
+    "externalAiCalls": 0
+  },
+  "workReduction": {
+    "fiveCellFixture": {
+      "initialCellStateWritesAfter18_02": 15,
+      "initialCellStateWritesNow": 5,
+      "initialEmptyExactOrChangedSourceWritesNow": 0,
+      "hoverNullToBBB": {
+        "affectedCells": 3,
+        "expectedWritesFromPriorCode": 9,
+        "observedWritesNow": 3,
+        "observedOperationalCellViewCallsNow": 0,
+        "payloadNow": {"hover": true}
+      },
+      "repeatedSameHoverWrites": 0,
+      "note": "Current counts are verified by the small fake-map regressions. Prior counts follow the confirmed previous three-source code path, not a fresh pre-edit browser run."
+    },
+    "priorFourZoom1TileSample": {
+      "source": "reports/maintenance/20261029-prompt17-completion-and-performance-summary.json",
+      "remeasuredThisStep": false,
+      "uniqueCells": 203792,
+      "expectedInitialStateWritesBeforePrompt18": 1288280,
+      "expectedInitialStateWritesAfter18_02": 611376,
+      "expectedInitialStateWritesAfter18_03A": 203792,
+      "condition": "Unchanged initial world, empty exact/changed sources; excludes restored/selected geometry and additional consumer mounts.",
+      "limit": "Structural workload projection only. It does not establish browser startup, FPS, CPU, working-set or GPU improvement."
+    }
+  },
+  "integrationNotes": [
+    "Projection/color-cache files from 18-03B were read but not modified. operationalCellView retains its existing arguments, fields and validation.",
+    "The component edit is limited to routing invalid partial publication to map recovery; no setup-shell, layout, map persistence, generation or Retry lifecycle changes were made.",
+    "Presentation/hover changes do not themselves recreate the map effect. Setup preparing and setup-to-game subtree changes remain possible remount causes; actual mount/replay counts are unmeasured.",
+    "Keep the 18-01 actual viewport/mode conditions for the later 18-04 comparison; remaining lag has not yet been reassessed.",
+    "Existing prompt, projection/color-cache, tsconfig and earlier maintenance report changes were preserved."
+  ],
+  "commitOrPushPerformed": false
+}

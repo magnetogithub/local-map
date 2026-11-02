@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "chn-source-sample-validation-v1",
+  "checkedDate": "2026-10-30",
+  "stage": "source-reference-samples-before-full-candidate-acceptance",
+  "countryId": "CHN",
+  "scenarioDate": "2020-01-01",
+  "source": {
+    "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+    "sha256": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e",
+    "byteLength": 88780624
+  },
+  "baselineInput": {
+    "path": "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json",
+    "sha256": "ce438f6027baa0a0ff8831b224b32ceadd7377791604395d89b5a8b3d491aa3d",
+    "byteLength": 75275879
+  },
+  "hierarchy": {
+    "path": "data/source-locks/chn-2020/CHN-hierarchy.json",
+    "sha256": "072ddaf551d5aec7061d9f5301c213820d554f77daa5d489f654b123d15fcfc2",
+    "byteLength": 1142103
+  },
+  "sourceDecision": {
+    "path": "reports/chn-2020/source-decision.json",
+    "sha256": "6208e958ad8e3f813e4419f03fce01f853fe03fdd6e34ec7a5ea1ed09ee48e27",
+    "byteLength": 11811
+  },
+  "crs": "OGC CRS84; WGS84 longitude,latitude",
+  "axisOrder": [
+    "longitude",
+    "latitude"
+  ],
+  "sourceCoordinateTransformation": "none",
+  "areaMethod": "WGS84 ellipsoid pyproj.Geod on CCW polygon shells and CW holes; sum absolute polygon areas in km2",
+  "tools": {
+    "shapely": "2.2.0",
+    "geos": "3.14.1"
+  },
+  "sourceSamplesPass": true,
+  "visualInspectionPerformed": false,
+  "fullCandidateAcceptedByThisReport": false,
+  "samples": [
+    {
+      "windowType": "inland",
+      "sourceName": "Zitong County",
+      "sourceFeatureId": "62558664B710028702050",
+      "bboxLongitudeLatitude": [
+        104.95597669996476,
+        31.432273900420228,
+        105.45472729962523,
+        31.913082699706877
+      ],
+      "representativePointLongitudeLatitude": [
+        105.18413557593377,
+        31.67239865002773
+      ],
+      "sourceGeometrySha256WKB": "97070b71403835ab91afd604d97efd570dc28922218174e1080d882d453b97c7",
+      "raw": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 409,
+        "geodesicAreaKm2": 1436.4081954489272
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 409,
+        "geodesicAreaKm2": 1436.4081954489272,
+        "outsideCurrentCHNAreaKm2": 0,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": "macro:CHN:CN-51",
+        "method": "unique-exact-polygon-containment",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "county size and retained natural outline"
+    },
+    {
+      "windowType": "city",
+      "sourceName": "Dongcheng District",
+      "sourceFeatureId": "62558664B68263371825694",
+      "bboxLongitudeLatitude": [
+        116.37227470031723,
+        39.85654099996725,
+        116.44467660014504,
+        39.97264649963631
+      ],
+      "representativePointLongitudeLatitude": [
+        116.40756284562761,
+        39.91443599972166
+      ],
+      "sourceGeometrySha256WKB": "d7b32f376cad5f5ff3d88de1f45c147958e05f43d1a20fdd650831e8207a8e0d",
+      "raw": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 521,
+        "geodesicAreaKm2": 41.79756818613011
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 521,
+        "geodesicAreaKm2": 41.79756818613011,
+        "outsideCurrentCHNAreaKm2": 0,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": "macro:CHN:CN-11",
+        "method": "unique-exact-polygon-containment",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "small urban district without artificial further subdivision"
+    },
+    {
+      "windowType": "coast",
+      "sourceName": "Jinzhou District",
+      "sourceFeatureId": "62558664B11806921667834",
+      "bboxLongitudeLatitude": [
+        121.58386010006359,
+        38.941437899739356,
+        122.26254170013942,
+        39.38283000010449
+      ],
+      "representativePointLongitudeLatitude": [
+        121.87049465181249,
+        39.16213269761596
+      ],
+      "sourceGeometrySha256WKB": "7ace48478ef2f6f7bc873b974769972459b01788186d720dbf652756da7f400a",
+      "raw": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 4310,
+        "geodesicAreaKm2": 1412.3494334583518
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 3,
+        "holes": 0,
+        "vertices": 2148,
+        "geodesicAreaKm2": 1356.2679945459565,
+        "outsideCurrentCHNAreaKm2": 56.08179372188476,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": null,
+        "method": "unconfirmed-country-envelope-residual",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "clip displacement, parallel coast strip and fine junctions"
+    },
+    {
+      "windowType": "small-islands",
+      "sourceName": "Changhai County",
+      "sourceFeatureId": "62558664B94145630009393",
+      "bboxLongitudeLatitude": [
+        122.27848120044712,
+        39.00841940033513,
+        123.19770990009192,
+        39.56314090023244
+      ],
+      "representativePointLongitudeLatitude": [
+        122.98523748800767,
+        39.52839144980561
+      ],
+      "sourceGeometrySha256WKB": "3b29d1ed3c022314bf3d9ffb3de5f1e8069065cf44b94ec6b9cf1d124dc538ea",
+      "raw": {
+        "valid": true,
+        "components": 18,
+        "holes": 0,
+        "vertices": 5339,
+        "geodesicAreaKm2": 154.22788098848307
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 11,
+        "holes": 0,
+        "vertices": 1564,
+        "geodesicAreaKm2": 88.41555888928802,
+        "outsideCurrentCHNAreaKm2": 65.81232242409358,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": null,
+        "method": "unconfirmed-country-envelope-residual",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "retain all in-scope source components; distinguish absent baseline islands without acquiring foreign land"
+    },
+    {
+      "windowType": "large-island",
+      "sourceName": "Wenchang City",
+      "sourceFeatureId": "62558664B70987262312955",
+      "bboxLongitudeLatitude": [
+        110.4643214002125,
+        19.352237900059094,
+        111.04148999996357,
+        20.161629999724767
+      ],
+      "representativePointLongitudeLatitude": [
+        110.81499902828742,
+        19.757430049657103
+      ],
+      "sourceGeometrySha256WKB": "4fca91178a808c8dd25e5546aa59a3b9ecbcdea158e9d64b63d4bbfce6b8bb01",
+      "raw": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 3677,
+        "geodesicAreaKm2": 2393.8420786714128
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 2,
+        "holes": 0,
+        "vertices": 1501,
+        "geodesicAreaKm2": 2317.7959494757406,
+        "outsideCurrentCHNAreaKm2": 76.04612935006796,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": null,
+        "method": "unconfirmed-country-envelope-residual",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "Hainan coast, source-to-P0 residual and unchanged national outline"
+    },
+    {
+      "windowType": "china-dprk-border",
+      "sourceName": "Changbai Korean Autonomous County",
+      "sourceFeatureId": "62558664B1084377049126",
+      "bboxLongitudeLatitude": [
+        127.20570609985668,
+        41.36064349999759,
+        128.31211839964453,
+        41.959532999748205
+      ],
+      "representativePointLongitudeLatitude": [
+        127.92826340013951,
+        41.660132750126365
+      ],
+      "sourceGeometrySha256WKB": "1b2fe01f4d4a3b8fc5210fdf532f84bf13a30a0823e77a2fc59275076406cc90",
+      "raw": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 1818,
+        "geodesicAreaKm2": 2504.496138148529
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 2,
+        "holes": 0,
+        "vertices": 588,
+        "geodesicAreaKm2": 2261.0935830945627,
+        "outsideCurrentCHNAreaKm2": 243.40254946058408,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": null,
+        "method": "unconfirmed-country-envelope-residual",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "both sides positive-length shared mesh and bounded first/follow-up entry"
+    },
+    {
+      "windowType": "china-dprk-russia-border",
+      "sourceName": "Hunchun City",
+      "sourceFeatureId": "62558664B16444330647714",
+      "bboxLongitudeLatitude": [
+        129.85687230031647,
+        42.41833230029545,
+        131.31136500009472,
+        43.50115589992487
+      ],
+      "representativePointLongitudeLatitude": [
+        130.6318004958579,
+        42.959861699957514
+      ],
+      "sourceGeometrySha256WKB": "e1cf22e1b798bead419f39f5af0ba4d6fd07508b36918dbbdf733602e1472ee8",
+      "raw": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 2384,
+        "geodesicAreaKm2": 5494.875993989671
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 1059,
+        "geodesicAreaKm2": 5241.60279024663,
+        "outsideCurrentCHNAreaKm2": 253.2722272988852,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": null,
+        "method": "unconfirmed-country-envelope-residual",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "three-country junction and strict CHN ownership mask"
+    },
+    {
+      "windowType": "oversized-western-county",
+      "sourceName": "Ruoqiang County",
+      "sourceFeatureId": "62558664B88009171419954",
+      "bboxLongitudeLatitude": [
+        86.6853598999395,
+        36.02101139975633,
+        93.81836229968047,
+        41.37673020043843
+      ],
+      "representativePointLongitudeLatitude": [
+        88.97689238555739,
+        38.699968499996345
+      ],
+      "sourceGeometrySha256WKB": "5fdec2b6e2ddec8cf51a8bcd8974da747975ca106e21985004002b8b0b6162f4",
+      "raw": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 1883,
+        "geodesicAreaKm2": 198329.20306595005
+      },
+      "intersectionWithCurrentCHNOnly": {
+        "valid": true,
+        "components": 1,
+        "holes": 0,
+        "vertices": 1883,
+        "geodesicAreaKm2": 198329.20306595005,
+        "outsideCurrentCHNAreaKm2": 0,
+        "positiveInScopeLand": true
+      },
+      "hierarchy": {
+        "macroId": null,
+        "method": "unconfirmed-country-envelope-residual",
+        "official2020ParentClaim": false
+      },
+      "candidateAndTileAcceptance": "pending; this is a source-reference sample scan, not acceptance of generated geometry or delivered tiles",
+      "inspectionFocus": "large county granularity limitation; no gameplay area/distance/width cap relaxation"
+    }
+  ],
+  "distributionAndTimeCaveat": "See pinned source-decision. Raw metadata represented2017; source XML has2021 processing. Samples do not certify 2020 legal boundaries. Source components outside current CHN are excluded; P0 land missing from source requires separately audited gameplay residual handling.",
+  "distributorLicenseSupplement": {
+    "artifact": {
+      "path": "data/raw/chn-2020/references/licenses/geoboundaries-9469f095-LICENSE.txt",
+      "sha256": "f3e5a21600528018a566fe0020a8b433f542bd67920c6804aac8929b598035bd",
+      "byteLength": 14362
+    },
+    "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/LICENSE",
+    "summary": "geoBoundaries code and derivative works CC BY4.0; final paragraph reserves individual data file licenses identified by boundary metadata. This CHN ADM3 source metadata and original archive license are ODbL1.0; CC BY4.0 does not replace those source obligations."
+  }
+}

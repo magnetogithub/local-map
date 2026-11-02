@@ -1,0 +1,66 @@
+{
+  "stage": "10-7",
+  "status": "pass",
+  "objective": "Separate country names and search aliases into an independent module that can be updated without core identity or geometry.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-6-country-id-lifecycle.json": "174a31efc4f5dbe8b4e6bdddd08532f143f411f137924b599306e508eba13343"
+  },
+  "outputHashes": {
+    "src/lib/world/country-names.ts": "41999c8a0b9b128246756c279482dc6af080e029c28b53477f1f69d7008589fd",
+    "src/lib/world/country-names.test.ts": "6d02dbe4b18c10fab4f07fb4703eaf9b088b8d8e2b22ce2190c7107f88a11374",
+    "src/lib/world/world-state.ts": "a9ef3604cb60f00679aea98d0fdc5aace51bf96481402b545dabab814deca066"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-7-country-names-module.json",
+    "src/lib/world/country-names.test.ts",
+    "src/lib/world/country-names.ts",
+    "src/lib/world/world-state.ts"
+  ],
+  "commands": [
+    {"command": "Verify 10-6 status and both direct output hashes", "exitCode": 0, "durationMs": 70},
+    {"command": "Add CountryNames targeted tests before implementation", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-names.test.ts", "exitCode": 1, "durationMs": 2201, "note": "Expected red test: country-names module did not exist."},
+    {"command": "Implement independent CountryNames factory, patch, and module-replacement helper; re-export the type from legacy WorldState", "exitCode": 0},
+    {"command": "npm.cmd test -- --run src/lib/world/country-names.test.ts src/lib/world/world-state.test.ts src/lib/commands/country-rename.test.ts", "exitCode": 0, "durationMs": 3944},
+    {"command": "npm.cmd run lint -- src/lib/world/country-names.ts src/lib/world/country-names.test.ts src/lib/world/world-state.ts", "exitCode": 0, "durationMs": 2783},
+    {"command": "npm.cmd exec tsc -- --noEmit", "exitCode": 0, "durationMs": 3621}
+  ],
+  "measurements": {
+    "countryNamesFields": 5,
+    "countryNamesTargetedTestsPassed": 8,
+    "targetedTestFilesPassed": 3,
+    "targetedTestsPassed": 29,
+    "emptyNameOrAliasCasesRejected": 5,
+    "coreIdentityReferenceChanges": 0,
+    "geometryReferenceChanges": 0,
+    "lintErrors": 0,
+    "typecheckErrors": 0,
+    "productFilesChangedByStage": 2,
+    "fullUnitSuiteRun": false,
+    "fullUnitSuiteDeferredToCheckpoint": "10-19"
+  },
+  "gates": {
+    "agentsInstructionsRead": true,
+    "currentPromptTenReadFromDisk": true,
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "targetedFailureCapturedBeforeImplementation": true,
+    "countryNamesModuleIndependent": true,
+    "searchAliasesOwnedByNamesModule": true,
+    "namesUpdateWithoutCoreIdentity": true,
+    "namesUpdateWithoutGeometry": true,
+    "legacyWorldStateUsesSharedCountryNamesType": true,
+    "targetedUnitTestsPass": true,
+    "targetLintCommandPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [
+    "Vitest emits a non-failing warning that vitest.config.ts uses ESM syntax while loaded as CommonJS under the future native config loader."
+  ],
+  "rollbackVerified": null,
+  "nextStage": "10-8"
+}

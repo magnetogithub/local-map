@@ -1,0 +1,24 @@
+{
+  "stage": "13-28",
+  "status": "pass",
+  "summary": "행동, custom date, 뉴스, 중요 사건과 Prompt 12 turn client/runtime 회귀를 검증했다.",
+  "verification": {
+    "typescript": {"command": "npx tsc --noEmit", "exitCode": 0},
+    "eslint": {"command": "npx eslint <13-21~13-27 changed files>", "exitCode": 0},
+    "vitest": {
+      "command": "npx vitest run <action, custom date, news, major event, Prompt 12 client/runtime tests>",
+      "exitCode": 0,
+      "files": 10,
+      "tests": 48
+    },
+    "productionBuild": {"command": "npm run build", "exitCode": 0}
+  },
+  "coveredFixtures": [
+    "minor/notable only",
+    "one major",
+    "multiple major and transformative",
+    "major with map change",
+    "overlay unmount during active request"
+  ],
+  "nextStage": "13-29"
+}

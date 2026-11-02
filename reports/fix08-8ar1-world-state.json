@@ -1,0 +1,89 @@
+{
+  "subtask": "8A-R1",
+  "status": "pass",
+  "scope": {
+    "implemented": [
+      "CountryEntity and WorldState serializable domain boundary",
+      "lossless 2020 OTL initializer from metadata, country geometry, and capital features",
+      "CountryEntity to pure CountryLabelLayoutInput adapter",
+      "immutable name and geometry replacement operations with revision increments",
+      "geometry hash and label cache identity helpers",
+      "legacy Country compatibility projection"
+    ],
+    "notImplemented": [
+      "war or treaty events",
+      "territory union or difference",
+      "country creation UI",
+      "runtime persistence",
+      "MapLibre source updates",
+      "8A-R2 artifact pipeline"
+    ]
+  },
+  "initialization": {
+    "metadataInput": "src/data/countries-2020.json",
+    "geometryInput": "public/data/maps/countries-10m.geojson",
+    "capitalInput": "public/data/maps/capitals-2020.geojson",
+    "expectedCountries": 256,
+    "actualCountries": 256,
+    "uniqueCountryIds": 256,
+    "missingGeometry": 0,
+    "extraGeometry": 0,
+    "legacyMetadataRoundTripEqual": true,
+    "revision": 0
+  },
+  "ownership": {
+    "namesAndGeometryCoLocated": true,
+    "mapLibreOrReactObjectsInEntity": false,
+    "labelInputFields": ["countryId", "geometry", "label", "previousLayout"],
+    "searchSelectionCompatibilityPreserved": true
+  },
+  "syntheticCountry": {
+    "countryId": "SYN-NEW",
+    "presentInFixed2020Ids": false,
+    "convertedToLabelInput": true,
+    "layoutComputed": true,
+    "geometryHashComputed": true
+  },
+  "changeContracts": {
+    "nameOnly": {
+      "worldRevisionIncremented": true,
+      "geometryHashStable": true,
+      "labelCacheKeyChanged": true,
+      "textLayoutMetricChanged": true
+    },
+    "geometryOnly": {
+      "worldRevisionIncremented": true,
+      "geometryHashChanged": true,
+      "layoutChanged": true,
+      "unrelatedEntityReferenceStable": true
+    }
+  },
+  "verification": {
+    "focusedTests": {
+      "command": "npx.cmd vitest run src/lib/world/world-state.test.ts src/lib/world/country-map-artifacts.test.ts src/lib/country/country-index.test.ts src/lib/map/country-label-size.test.ts --reporter=verbose",
+      "exitCode": 0,
+      "files": "4/4",
+      "tests": "22/22",
+      "durationMilliseconds": 5350,
+      "nameChangeTestMilliseconds": 1383,
+      "defaultTimeoutStable": true,
+      "stabilization": "Reuse the already computed Australia layout through previousLayout so the name-change contract does not repeat the same expensive geometry search. No timeout was increased."
+    },
+    "lint": {
+      "command": "npm.cmd run lint -- src/lib/world/world-state.ts src/lib/world/world-state.test.ts src/lib/world/country-map-artifacts.ts src/lib/world/country-map-artifacts.test.ts src/lib/map/country-label-size.ts src/lib/map/country-label-size.test.ts src/components/map/WorldMap.tsx src/types/map-debug.ts e2e/fix08-8ar3.spec.ts",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "gate": {
+    "all256InitializedLosslessly": true,
+    "singleCountryOwnershipProved": true,
+    "syntheticIdWithoutAllowlist": true,
+    "nameChangeContract": true,
+    "geometryChangeContract": true,
+    "searchAndSelectionRegression": true,
+    "status": "pass"
+  },
+  "nextStep": "R1 stabilized. R3 remains failed at the fractional zoom-band boundary; stop before R4."
+}

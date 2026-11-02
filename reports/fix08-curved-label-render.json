@@ -1,0 +1,88 @@
+{
+  "subtask": "8A",
+  "status": "pending-e2e",
+  "source": "country-label-baselines-2020.geojson",
+  "symbolPlacement": "line",
+  "rawDuplicateEvidence": "requires Playwright",
+  "samples": [
+    {
+      "countryId": "AUS",
+      "coordinateCount": 17,
+      "curvature": 0.28349826066911415,
+      "insideRatio": 0.989243,
+      "baselineInsideRatio": 0.91358,
+      "componentIds": [
+        "component-3"
+      ],
+      "placementMode": "territory-point"
+    },
+    {
+      "countryId": "RUS",
+      "coordinateCount": 17,
+      "curvature": 0.5246776300570807,
+      "insideRatio": 0.8989,
+      "baselineInsideRatio": 0.950617,
+      "componentIds": [
+        "component-8"
+      ],
+      "placementMode": "territory-point"
+    },
+    {
+      "countryId": "CAN",
+      "coordinateCount": 17,
+      "curvature": 0.3698396390387318,
+      "insideRatio": 0.900127,
+      "baselineInsideRatio": 1,
+      "componentIds": [
+        "component-0"
+      ],
+      "placementMode": "territory-point"
+    },
+    {
+      "countryId": "USA",
+      "coordinateCount": 17,
+      "curvature": 0.2720686738420769,
+      "insideRatio": 0.944573,
+      "baselineInsideRatio": 0.962963,
+      "componentIds": [
+        "component-186"
+      ],
+      "placementMode": "territory-point"
+    },
+    {
+      "countryId": "CHL",
+      "coordinateCount": 17,
+      "curvature": 0.049964313821330854,
+      "insideRatio": 0.946645,
+      "baselineInsideRatio": 1,
+      "componentIds": [
+        "component-6"
+      ],
+      "placementMode": "territory-point"
+    },
+    {
+      "countryId": "IDN",
+      "coordinateCount": 17,
+      "curvature": 0.06897575928161397,
+      "insideRatio": 0.999069,
+      "baselineInsideRatio": 1,
+      "componentIds": [
+        "component-73",
+        "component-2",
+        "component-222",
+        "component-102",
+        "component-56",
+        "component-261",
+        "component-139",
+        "component-161",
+        "component-192",
+        "component-180",
+        "component-92",
+        "component-55",
+        "component-103",
+        "component-107"
+      ],
+      "placementMode": "territory-point"
+    }
+  ]
+}

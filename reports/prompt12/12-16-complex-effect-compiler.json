@@ -1,0 +1,36 @@
+{
+  "stage": "12-16",
+  "status": "pass",
+  "objective": "Compile unification, dissolution, and existing-territory establishment effects.",
+  "filesRead": [
+    "src/lib/commands/country-merge-v2.ts",
+    "src/lib/commands/country-dissolve-v2.ts",
+    "src/lib/commands/country-establish-v2.ts",
+    "src/lib/planning/country-merge-planner.ts",
+    "src/lib/planning/country-dissolve-planner.ts",
+    "src/lib/planning/country-establish-planner.ts",
+    "src/lib/world/country-id.ts",
+    "src/lib/simulation/world-effect.ts"
+  ],
+  "changedFiles": [
+    "src/lib/simulation/world-effect-compiler.ts",
+    "src/lib/simulation/turn-runtime.test.ts",
+    "reports/prompt12/12-16-complex-effect-compiler.json"
+  ],
+  "commands": [
+    "npx vitest run src/lib/simulation/turn-runtime.test.ts"
+  ],
+  "gates": {
+    "hostAllocatesCountryId": "pass",
+    "activeAndRetiredCollisionsRejected": "pass",
+    "selfMergeRejected": "pass",
+    "emptyTerritoryRejected": "pass",
+    "modelLocalRefNotEmittedToCommand": "pass"
+  },
+  "firstFailedGate": null,
+  "securityChecks": [
+    "Allocated three-character country IDs are host-owned and never read from model final IDs."
+  ],
+  "notes": [],
+  "nextStage": "12-17"
+}

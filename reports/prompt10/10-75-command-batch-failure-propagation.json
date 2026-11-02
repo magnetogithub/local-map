@@ -1,0 +1,110 @@
+{
+  "stage": "10-75",
+  "status": "pass",
+  "objective": "Make any single command failure fail the entire batch plan, returning no partial next state and no partial patch.",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-74-batch-local-reference-resolver.json": "acbc67d4390bd0426ddf5d144ee46586ffe2d30038ea894b14dd49e21716fb04",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/command-batch-planner.test.ts": "c725fb44632a6cbee8c70ab69007134c9ef4b889ffa5f7e3d1ac9829077b9de7",
+    "src/lib/planning/command-batch-planner.ts": "ee016c589b098468ce3b739d21ce6a07c12645cc1b08df7d629a696e989b0baa",
+    "src/lib/planning/plan-result.test.ts": "75452858fbb52a334c35174ecc1b88fe8bf96572fc661a5298aca4e91840693a",
+    "src/lib/planning/plan-result.ts": "b90e8959e6ce2af14a86a02be7ce1a7deca9caea83858122c50905fb4d0607da"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-75-command-batch-failure-propagation.json",
+    "src/lib/planning/command-batch-planner.test.ts",
+    "src/lib/planning/command-batch-planner.ts",
+    "src/lib/planning/plan-result.test.ts",
+    "src/lib/planning/plan-result.ts"
+  ],
+  "commands": [
+    {
+      "command": "Read AGENTS.md, the local Next.js 16.3 Vitest guide, and inspect 10-75 prompt plus command.batch, resolver, and leaf planner contracts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/command-batch-planner.test.ts",
+      "exitCode": 1,
+      "note": "Expected red test: the command-batch planner test file did not exist."
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/planning/command-batch-planner.test.ts src/lib/planning/plan-result.test.ts",
+      "exitCode": 0,
+      "result": "2 files passed; 4 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run command batch, batch planner, local resolver, selected leaf planners, plan-result, and planner-boundary targeted files",
+      "exitCode": 0,
+      "result": "10 files passed; 55 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/planning/command-batch-planner.ts src/lib/planning/command-batch-planner.test.ts src/lib/planning/plan-result.ts src/lib/planning/plan-result.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "note": "Only existing LF-to-CRLF working-copy warnings were reported."
+    }
+  ],
+  "measurements": {
+    "successfulBatchLeafCommandCount": 2,
+    "successfulBatchPatchCount": 2,
+    "successfulBatchRevisionDelta": 2,
+    "failedBatchLeafCommandsBeforeFailure": 1,
+    "failedBatchReturnedPlan": false,
+    "failedBatchReturnedPartialPatch": false,
+    "inputStateRevisionAfterFailedBatch": 7,
+    "inputStateCountryCountAfterFailedBatch": 1,
+    "registeredLeafPlannerTypes": [
+      "country.create",
+      "country.dissolve",
+      "territory.partition",
+      "territory.assign",
+      "territory.unclaim",
+      "territory.replace",
+      "territory.transfer",
+      "country.split",
+      "country.merge"
+    ],
+    "targetedTestFilesPassed": 10,
+    "targetedTestsPassed": 55,
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "typecheckErrors": 0,
+    "fullUnitSuiteRun": false,
+    "nextFullUnitSuiteCheckpoint": "10-77"
+  },
+  "gates": {
+    "previousStageStatusPass": true,
+    "previousStageOutputHashesMatch": true,
+    "runningReportCreatedBeforeImplementation": true,
+    "batchRootSemanticGuardsApplied": true,
+    "localReferencesResolvedBeforeLeafPlanning": true,
+    "leafCommandsPlannedInOrder": true,
+    "batchInternalRevisionCursorUsed": true,
+    "successfulBatchReturnsAggregatePatch": true,
+    "singleLeafFailureFailsWholeBatch": true,
+    "failedBatchReturnsNoPlan": true,
+    "failedBatchReturnsNoPartialNextState": true,
+    "failedBatchReturnsNoPartialPatch": true,
+    "inputStateUnchangedAfterFailure": true,
+    "duplicateCommandIdsAcrossBatchRejectedBySeenContext": true,
+    "unsupportedRegisteredLeafPlannerFailureExplicit": true,
+    "targetedTestsPass": true,
+    "lintPass": true,
+    "typecheckPass": true
+  },
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "rollbackVerified": null,
+  "nextStage": "10-76"
+}

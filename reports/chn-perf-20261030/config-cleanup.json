@@ -1,0 +1,10 @@
+{
+  "pass": true,
+  "removed": [
+    ".next-chn-perf-20261030/types/**/*.ts",
+    ".next-chn-perf-20261030/dev/types/**/*.ts",
+    ".next-chn-perf-qa/types/**/*.ts",
+    ".next-chn-perf-qa/dev/types/**/*.ts"
+  ],
+  "otherIncludesPreserved": true
+}

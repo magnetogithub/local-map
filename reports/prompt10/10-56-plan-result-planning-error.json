@@ -1,0 +1,19 @@
+{
+  "stage": "10-56",
+  "status": "pass",
+  "objective": "Define discriminated successful plans and typed semantic planning errors.",
+  "promptHash": "9ac63ea599305dfdf1a6b7cd4fed9972925b3f89237bd99e65829f87530790cf",
+  "directInputHashes": {
+    "reports/prompt10/10-54-deletion-coast-merge-hardening.json": "b7ae662cb88db8d17587a6f1ca0400eb4ae1fe58654e0903b584917a752b747d"
+  },
+  "outputHashes": {
+    "src/lib/planning/plan-result.ts": "cc2f0e7d246f0a4f0d6ef950739aa518f7b26edfa3d23f7bd23126e6e58c3730",
+    "src/lib/planning/plan-result.test.ts": "d1672ea889199bf4f3ea5c3ef653f0864227a238d2fccf3799ff81aec05e41ae"
+  },
+  "measurements": {"typedErrorCodes": 4, "stringOnlyConflictPaths": 0},
+  "gates": {"discriminatedResult": true, "typedSemanticErrors": true, "targetedTestsPass": true, "lintPass": true, "typecheckPass": true},
+  "firstFailedGate": null,
+  "implementationErrors": [],
+  "environmentErrors": [],
+  "nextStage": "10-57"
+}

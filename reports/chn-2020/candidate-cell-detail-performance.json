@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "chn-2020-cell-detail-performance-v1",
+  "pass": true,
+  "pointer": {
+    "path": "reports/chn-2020/candidate-runtime-pointer.json",
+    "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "byteLength": 251,
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+    "root": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7",
+    "index": {
+      "sha256": "f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+      "byteLength": 757545
+    }
+  },
+  "conditions": {
+    "mode": "actual immutable package through production vector loader and checked local-file fetch adapter",
+    "cold": "fresh vector delivery byte cache; metadata initialized; OS file cache not flushed",
+    "warm": "five repeated same-cell detail loads from the bounded decoded-byte LRU",
+    "full": "separate fresh vector delivery; explicit whole CHN selection measured separately",
+    "timingScope": "includes byte verification/read, gzip decode, JSON/schema validation and returned geometry; local read time reported within each request",
+    "externalAiCalls": 0
+  },
+  "counts": {
+    "countries": 247,
+    "cells": 8005,
+    "edges": 26273,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "chnCells": 3320,
+  "cell": {
+    "id": "territory:catalog:f8eb3799a3254250875eb1187ac443d3ed26122626cff33ef0c62c6ac5e32a3e",
+    "ordinal": 7784,
+    "sourceCountryId": "CHN",
+    "shard": {
+      "countryId": "CHN",
+      "cellOrdinals": [
+        525,
+        555,
+        728,
+        913,
+        1220,
+        1250,
+        1384,
+        1536,
+        1700,
+        2048,
+        2158,
+        2176,
+        2235,
+        2284,
+        2295,
+        2400,
+        2710,
+        2714,
+        2794,
+        2835,
+        2877,
+        3036,
+        3058,
+        3104,
+        3246,
+        3427,
+        3463,
+        3584,
+        3621,
+        3643,
+        3791,
+        4057,
+        4063,
+        4186,
+        4219,
+        4222,
+        4276,
+        4303,
+        4409,
+        4548,
+        5035,
+        5051,
+        5108,
+        5499,
+        5704,
+        5754,
+        5845,
+        5871,
+        6183,
+        6189,
+        6267,
+        6421,
+        6465,
+        7108,
+        7198,
+        7264,
+        7349,
+        7578,
+        7734,
+        7784,
+        7795,
+        7796,
+        7823,
+        7909
+      ],
+      "bbox": [
+        121.13845830041032,
+        39.768785,
+        129.69497409997484,
+        45.26516340027075
+      ],
+      "artifact": {
+        "path": "detail/cells/CHN/0050.geojson.gz",
+        "sha256": "6e35c8719bd174095956f3d9c4634d502ec351dc5f402b99b7699948fe35e039",
+        "byteLength": 386688
+      }
+    }
+  },
+  "initializationMs": 92.25290000000007,
+  "changedCell": {
+    "coldMs": 31.734199999999987,
+    "warmMs": [
+      13.90790000000004,
+      15.63519999999994,
+      12.856499999999983,
+      12.69240000000002,
+      13.668800000000033
+    ],
+    "coldRequests": [
+      {
+        "path": "detail/cells/CHN/0050.geojson.gz",
+        "bytes": 386688,
+        "readMs": 1.0974999999999682
+      }
+    ],
+    "coldLocalReadAndDigestMs": 1.0974999999999682,
+    "coldVerificationDecodeParseSelectionMs": 30.63670000000002,
+    "coldCompressedBytes": 386688,
+    "selectedDecodedJsonBytes": 14159,
+    "cache": {
+      "verifiedRequests": 7,
+      "cacheHits": 5,
+      "cachedEntries": 7,
+      "cachedBytes": 2379721,
+      "cachedCountries": 2,
+      "countryMetadataBuilds": 2
+    },
+    "wholeCountryRequested": false
+  },
+  "fullCountry": {
+    "initializationMs": 51.10159999999996,
+    "selectionMs": 1327.8123,
+    "requests": [
+      {
+        "path": "metadata/countries/CHN.json.gz",
+        "bytes": 138130,
+        "readMs": 0.6186999999999898
+      },
+      {
+        "path": "detail/countries/CHN.geojson.gz",
+        "bytes": 23664164,
+        "readMs": 22.06490000000008
+      }
+    ],
+    "localReadAndDigestMs": 22.68360000000007,
+    "verificationDecodeParseSelectionMs": 1305.1287,
+    "compressedBytes": 23802294,
+    "decodedJsonBytes": 61702526,
+    "cache": {
+      "verifiedRequests": 6,
+      "cacheHits": 0,
+      "cachedEntries": 5,
+      "cachedBytes": 1347402,
+      "cachedCountries": 1,
+      "countryMetadataBuilds": 1
+    }
+  },
+  "memory": {
+    "before": {
+      "rss": 117321728,
+      "heapTotal": 57749504,
+      "heapUsed": 34356792,
+      "external": 10033939,
+      "arrayBuffers": 6227070
+    },
+    "afterSmall": {
+      "rss": 157601792,
+      "heapTotal": 98566144,
+      "heapUsed": 43205552,
+      "external": 9320567,
+      "arrayBuffers": 4888179
+    },
+    "afterFull": {
+      "rss": 628043776,
+      "heapTotal": 533274624,
+      "heapUsed": 417917368,
+      "external": 9147022,
+      "arrayBuffers": 29618718
+    }
+  }
+}

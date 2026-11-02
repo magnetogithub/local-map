@@ -1,0 +1,97 @@
+{
+  "reportedTurfFailures": {
+    "Admin0": 3,
+    "Admin1": 5,
+    "P0": 2
+  },
+  "independentValidator": {
+    "name": "jsts/IsValidOp",
+    "version": "2.12.1",
+    "license": "(EDL-1.0 OR EPL-1.0)",
+    "selfTouchingRingFormingHoleValid": false
+  },
+  "primaryResult": {
+    "rawAdmin0": {
+      "counts": {
+        "features": 258,
+        "polygons": 4274,
+        "rings": 4293,
+        "vertices": 548469,
+        "polygon": 107,
+        "multiPolygon": 151
+      },
+      "diagnostics": [
+        {
+          "featureIndex": 161,
+          "sourceFeatureId": "1159320575",
+          "countryId": "EGY",
+          "category": "geometry-defect-non-simple-ring",
+          "topologyWitness": {
+            "confirmedNonSimpleRing": true,
+            "cause": "non-adjacent repeated vertex / ring self-touch",
+            "polygonIndex": 0,
+            "ringIndex": 0,
+            "vertexIndices": [
+              765,
+              770
+            ],
+            "coordinate": [
+              35.621087,
+              23.139293
+            ],
+            "repair": "topology alteration requires external justification; blocked"
+          },
+          "message": "derived.features[161]: JSTS OGC invalid: Ring Self-intersection at {\"x\":35.621087,\"y\":23.139293,\"z\":null}"
+        }
+      ]
+    },
+    "rawAdmin1": {
+      "counts": {
+        "features": 4596,
+        "polygons": 8535,
+        "rings": 8646,
+        "vertices": 1295269,
+        "polygon": 3945,
+        "multiPolygon": 651
+      },
+      "diagnostics": [
+        {
+          "featureIndex": 3813,
+          "sourceFeatureId": "1159309897",
+          "countryId": "BRA",
+          "category": "geometry-defect-non-simple-ring",
+          "topologyWitness": {
+            "confirmedNonSimpleRing": true,
+            "cause": "non-adjacent repeated vertex / ring self-touch",
+            "polygonIndex": 0,
+            "ringIndex": 0,
+            "vertexIndices": [
+              263,
+              348
+            ],
+            "coordinate": [
+              -47.302482,
+              -16.040054
+            ],
+            "repair": "topology alteration requires external justification; blocked"
+          },
+          "message": "derived.features[3813]: JSTS OGC invalid: Ring Self-intersection at {\"x\":-47.302482,\"y\":-16.040054,\"z\":null}"
+        }
+      ]
+    },
+    "canonicalP0": {
+      "counts": {
+        "features": 247,
+        "polygons": 4266,
+        "rings": 4286,
+        "vertices": 543585,
+        "polygon": 97,
+        "multiPolygon": 150
+      },
+      "diagnostics": []
+    }
+  },
+  "decision": "Full JSTS OGC check accepts USA/CAN/CHE/BMU point contacts. EGY reference Admin0 and BRA candidate P1 retain actual ring self-intersections. EGY raw has a source self-touch; same-country source union produces independently valid derived P0 with bounded area/boundary and no component/hole loss; BRA source self-touch is tested by area/boundary-preserving noding before selection; applied repair details and any remaining exclusions are in p1TopologyNoding and the country selection report. No erroneous feature is deleted within a selected P1 partition.",
+  "reference": "https://github.com/bjornharrtell/jsts",
+  "standardReference": "https://locationtech.github.io/jts/javadoc/org/locationtech/jts/geom/MultiPolygon.html"
+}

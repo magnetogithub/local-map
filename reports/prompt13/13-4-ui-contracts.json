@@ -1,0 +1,29 @@
+{
+  "stage": "13-4",
+  "status": "pass",
+  "summary": "Added strict read-only view models and connection ports for HUD, politics, economy, directional relations, wars, diplomacy, and news, plus range and blocking-event helpers.",
+  "filesChanged": [
+    "src/lib/game-ui/contracts.ts",
+    "src/lib/game-ui/contracts.test.ts",
+    "reports/prompt13/13-4-ui-contracts.json"
+  ],
+  "commands": [
+    {
+      "command": "npx.cmd vitest run src/lib/game-ui/contracts.test.ts",
+      "exitCode": 0,
+      "evidence": "1 test file and 14 tests passed, covering null data, relationship boundaries/direction, and event blocking severity."
+    }
+  ],
+  "screenshots": [],
+  "tests": [
+    "Unavailable politics/economy/war data remains null or empty.",
+    "Relationship scores accept -100, 0, 100, and null and reject invalid values.",
+    "Directional relationship labels cannot be silently swapped in the fixture.",
+    "Only unacknowledged major/transformative news items block."
+  ],
+  "knownLimitations": [
+    "Ports define the connection boundary only; production domain adapters are intentionally deferred."
+  ],
+  "nextStage": "13-5"
+}
+

@@ -1,0 +1,11 @@
+﻿{
+    "url":  "http://127.0.0.1:3001",
+    "externalAI":  "disabled; browser blocks turns",
+    "pid":  26952,
+    "smoke":  false,
+    "launchCode":  {
+                       "path":  "scripts/chn-2020/start-province-line-lod-qa.ps1",
+                       "sha256":  "ef5ca16f1be8328011ae634f1f1e708aae6db1cc4c8bc5f4075d3a32bf4d3b42",
+                       "byteLength":  1464
+                   }
+}

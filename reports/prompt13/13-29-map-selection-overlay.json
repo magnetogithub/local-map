@@ -1,0 +1,11 @@
+{
+  "stage": "13-29",
+  "status": "pass",
+  "summary": "지도 선택과 국가 overlay를 mouse 및 keyboard 경로로 연결하고 active/player/foreign/retired 분기를 안전하게 처리했다.",
+  "filesChanged": ["src/components/game/MapCountryPicker.tsx", "src/components/game/GameScreen.tsx", "src/components/game/NewsOverlay.tsx", "src/components/game/MajorEventModal.tsx"],
+  "commands": [{"command": "npx vitest run src/components/game/MapCountryPicker.test.tsx src/lib/game-ui/overlay-reducer.test.ts", "exitCode": 0, "evidence": "active foreign selection and retired selection cleanup passed"}],
+  "screenshots": [],
+  "tests": ["keyboard country selection", "retired option exclusion", "stale overlay reconciliation", "retired news target disabled"],
+  "knownLimitations": [],
+  "nextStage": "13-30"
+}

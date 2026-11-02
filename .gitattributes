@@ -1,0 +1,114 @@
+.gitattributes text eol=lf
+data/source-locks/prompt14-*.json text eol=lf
+reports/prompt14/14-02-*.json text eol=lf
+data/derived/prompt14/*.geojson -text
+# Archived evidence and frozen delivery must retain their exact digest bytes.
+data/derived/prompt14/history/** -text
+data/catalogs/prompt14/** -text
+# PROMPT 15 immutable artifacts and hash-backed evidence retain exact bytes.
+data/catalogs/prompt15/** -text
+data/runtime/operational-catalog/**/*.json -text
+reports/prompt15/** -text
+reports/maintenance/20261028-cleanup/** -text -whitespace
+# Source checkpoints carry manifests of the original source bytes.
+checkpoints/prompt15-20261016/** -text
+# Large immutable JSON remains byte-exact locally and is stored through Git LFS.
+data/catalogs/prompt15/**/world/catalog.json filter=lfs diff=lfs merge=lfs -text
+data/catalogs/prompt15/**/world/metadata.json filter=lfs diff=lfs merge=lfs -text
+data/catalogs/prompt15/**/world/inheritance-state-fixture.json filter=lfs diff=lfs merge=lfs -text
+reports/prompt15/**/world/catalog.json filter=lfs diff=lfs merge=lfs -text
+reports/prompt15/**/world/metadata.json filter=lfs diff=lfs merge=lfs -text
+reports/prompt15/**/world/inheritance-state-fixture.json filter=lfs diff=lfs merge=lfs -text
+# One-time committed Prompt 15 generated snapshots stay in LFS even though
+# their working directories remain ignored for future untracked outputs.
+data/derived/prompt15/** filter=lfs diff=lfs merge=lfs -text
+data/operational-cells/** filter=lfs diff=lfs merge=lfs -text
+scripts/*prompt15* -text
+prompts/PROMPT_15_OPERATIONAL_MICRO_TERRITORIES_AND_PARTIAL_FRONTS.txt -text
+data/catalog-consumers/prompt14/** -text
+public/data/territory-catalog/** -text
+scripts/prepare-prompt14-catalog-consumer.mjs text eol=lf
+scripts/generate-prompt14-*.mjs text eol=lf
+scripts/regenerate-prompt14-*.mjs text eol=lf
+scripts/publish-prompt14-*.mjs text eol=lf
+scripts/verify-prompt14-*.mjs text eol=lf
+scripts/resolve-prompt14-*.mjs text eol=lf
+scripts/prompt14-*.mjs text eol=lf
+scripts/audit-prompt14-*.mjs text eol=lf
+# Preserve the existing source/seed digest identities on Windows and CI.
+scripts/prepare-map-data.mjs text eol=crlf
+src/data/countries-2020.json text eol=crlf
+public/data/maps/countries-10m.geojson text eol=crlf
+data/raw/ne_10m_admin_0_countries.geojson -text
+data/raw/ne_10m_admin_1_states_provinces.geojson -text
+prompts/PROMPT_14_MICRO_TERRITORY_OCCUPATION_AND_COUNTRY_COLORS.txt text eol=lf
+package.json text eol=lf
+package-lock.json text eol=lf
+
+# Prompt 19 manifests and source locks verify original bytes on every platform.
+data/raw/prompt19/** -text
+data/source-locks/prompt19/** -text
+data/derived/prompt19/** -text
+scripts/*prompt19* -text whitespace=cr-at-eol,-blank-at-eof
+scripts/prompt19/** -text whitespace=cr-at-eol,-blank-at-eof
+reports/maintenance/prompt19-C/** -text
+# Independent reports are pinned by runtime provenance and must survive checkout byte-exact.
+reports/maintenance/20261030-*.json -text
+
+# Local game-preservation code is pinned by activation maintenance evidence.
+src/lib/simulation/server/operational-game.server.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/simulation/server/operational-game-checkpoint.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/app/api/local-maintenance/operational-games/checkpoint/route.ts -text whitespace=cr-at-eol,-blank-at-eof
+# Required historical source evidence is explicitly tracked despite the general QA-output ignore.
+reports/verification/prompt19/KOR/** -text
+# Immutable joint snapshots exceed normal GitHub blob limits.
+reports/maintenance/prompt19-C/*joined-world-input.json filter=lfs diff=lfs merge=lfs -text
+# CHN experimental source and immutable incremental candidates retain exact bytes.
+data/raw/chn-2020/** -text
+data/raw/chn-2020/**/*.geojson filter=lfs diff=lfs merge=lfs -text
+data/raw/chn-2020/**/*.zip filter=lfs diff=lfs merge=lfs -text
+data/source-locks/chn-2020/** -text
+data/derived/chn-2020/** -text
+data/derived/chn-2020/**/joined-world-input.json filter=lfs diff=lfs merge=lfs -text
+data/derived/chn-2020/**/geometry.json filter=lfs diff=lfs merge=lfs -text
+data/derived/chn-2020/**/*.geojson filter=lfs diff=lfs merge=lfs -text
+reports/chn-2020/** -text
+scripts/chn-2020/** -text
+# Runtime and QA code identities recorded by the CHN acceptance proofs.
+src/components/map/OperationalWorldMap.tsx -text
+src/lib/map/operational-delivery.server.ts -text
+src/lib/map/operational-vector-delivery.ts -text
+src/lib/world/operational-catalog.server.ts -text
+src/lib/world/operational-game.server.ts -text
+src/lib/simulation/operational-frontier-policy.ts -text
+src/lib/simulation/operational-frontier.server.ts -text
+src/lib/simulation/catalog-turn-plan.ts -text
+src/lib/simulation/catalog-runtime.ts -text
+src/lib/simulation/server/provider-config.ts -text
+src/lib/test-only/region-provider.server.ts -text
+next.config.ts -text
+# Runtime performance evidence preserves the measured code and screenshot bytes.
+reports/chn-perf-20261030/** -text
+src/lib/map/operational-map-consumer.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/map/operational-map-sources.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/map/operational-country-labels.ts -text whitespace=cr-at-eol,-blank-at-eof
+src/lib/map/operational-fill-paint.ts -text whitespace=cr-at-eol,-blank-at-eof
+reports/chn-province-20261030/** -text
+reports/world-micro-scale-20261030/** -text
+src/lib/map/chn-province-presentation.server.ts -text
+src/lib/map/province-presentation.server.ts -text
+src/lib/map/operational-delivery-contract.ts -text
+reports/hover-debug-20261030/** -text
+reports/chn-render-lod-20261030/** -text
+reports/chn-internal-render-lod-20261030/** -text
+src/lib/map/chn-boundary-display-lod.server.ts -text
+src/lib/map/operational-pointer-hover.ts -text
+src/lib/map/operational-debug-boundary-scope.ts -text
+src/components/game/WarAndSystemOverlays.tsx text eol=crlf
+
+# Large CHN source/proof payloads retain exact checkout bytes through Git LFS.
+data/raw/chn-2020/references/ADM3-source/*.shp filter=lfs diff=lfs merge=lfs -text
+data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz filter=lfs diff=lfs merge=lfs -text
+reports/chn-2020/independent-*.json filter=lfs diff=lfs merge=lfs -text
+reports/chn-2020/proofs/geometry-*.json filter=lfs diff=lfs merge=lfs -text
+reports/chn-render-lod-20261030/game-debug/archive/after-0fa7ab903c6cddeba90e2d5795a93a7684a192b2b34df095c2ab08901ddf128f.json filter=lfs diff=lfs merge=lfs -text

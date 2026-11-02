@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "prompt19-country-source-lock-v1",
+  "countryId": "KOR",
+  "normalizedCrs": "EPSG:4326",
+  "sources": [
+    {
+      "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KOR/ADM2/geoBoundaries-KOR-ADM2.geojson",
+      "version": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+      "publishedAt": null,
+      "retrievedAt": "2026-10-29T07:32:36.958Z",
+      "boundaryBasis": "administrative",
+      "adminLevel": 2,
+      "temporalCoverage": "2020 as represented by geoBoundaries KOR ADM2; Si/Kun districts and city districts. Fixed GeoJSON has 228 features although its metadata states 229.",
+      "scenarioDateCaveat": "Year 2020 is the source-represented year, not certification of exact boundaries on 2020-01-01. Metadata reports 229 units but the fixed published GeoJSON contains 228; no missing polygon or parent identity is guessed. Fixed game country/coast/island/shared-border envelopes remain authoritative. Source outside the envelope and uncovered baseline residuals require independent reporting.",
+      "originalCrs": "OGC:CRS84 (longitude,latitude); equivalent 2D positions to EPSG:4326 under the contract axis order",
+      "license": {
+        "name": "CC BY 3.0 as designated in geoBoundaries dataset metadata; CC BY 4.0 geoBoundaries derivative/distribution",
+        "url": "https://creativecommons.org/licenses/by/3.0/",
+        "attribution": "geoBoundaries / William & Mary geoLab, https://www.geoboundaries.org ; source credited as geoBoundaries and Thomas Brinkhoff / City Population, https://www.citypopulation.de/en/southkorea/admin/ ; Runfola et al. (2020), doi:10.1371/journal.pone.0231866. Adapted to the game schema; no institutional endorsement implied.",
+        "redistributionAllowed": true
+      },
+      "artifact": {
+        "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+        "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8",
+        "byteLength": 1203660
+      }
+    }
+  ],
+  "normalizedInput": {
+    "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/normalized-boundaries.geojson",
+    "sha256": "2bd78b22bd1363ed20425ae1068626b46f7cf852431ccb9ce99f80daddc835e2",
+    "byteLength": 1064265
+  },
+  "preprocessing": {
+    "description": "Fixed geoBoundaries KOR ADM2 2020 source, 228 actual features versus 229 in upstream metadata. Preserve all source coordinates/components/holes and IDs. Only property names and CRS labels are normalized. Source parent codes are absent, so sourceParentId is null. No dissolve, clipping, simplification, snapping, filling, repair or invented boundary. Shared candidate engine performs alignment separately. Distribution license is from geoBoundaries citation/metadata, not inferred from City Population population-data terms.",
+    "code": [
+      {
+        "path": "scripts/prompt19/KOR/acquire-adm2-source.mjs",
+        "sha256": "9210e01613cf826dd772718cc8756c726b76c773bc5acbdc9e65e216e1ff4761",
+        "byteLength": 2103
+      },
+      {
+        "path": "scripts/prompt19/KOR/normalize-adm2-source.mjs",
+        "sha256": "b7e115eee3ab23cbde9bf0b24f545087050406eaf3531a55f09a8359aa0b9986",
+        "byteLength": 8309
+      }
+    ]
+  }
+}

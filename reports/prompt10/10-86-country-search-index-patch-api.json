@@ -1,0 +1,172 @@
+{
+  "prompt": "10-86",
+  "title": "country search index patch API",
+  "status": "pass",
+  "createdAt": "2026-09-18T11:10:32.1929945+09:00",
+  "promptFile": {
+    "path": "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+    "sha256": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "previousStage": {
+    "prompt": "10-85",
+    "reportPath": "reports/prompt10/10-85-executor-failure-atomicity.json",
+    "reportSha256": "04bad61cb631364d540412de3e41f3ca1c6d7481576364f5af8f888743d561d0",
+    "status": "pass"
+  },
+  "objective": {
+    "action": "Patch committed country search projection entries from country module deltas.",
+    "verification": "Add, update, and delete country search entries without full index regeneration."
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "src/lib/projection/country-search-index-patch.ts",
+        "sha256": "46e518f282b272e4c782f76a41ef6d7e8bf556447620046f3e5ac7fc585eb82f"
+      },
+      {
+        "path": "src/lib/projection/country-search-index-patch.test.ts",
+        "sha256": "31e53f124cad7ffcafafa8eecd4840c115531496c7006c1da59a2bad33b231dd"
+      },
+      {
+        "path": "src/lib/planning/affected-set.ts",
+        "sha256": "a594b4b86b81d7452e21a593d3eae1930b6fe2774efcf35007995efa36340ad2"
+      }
+    ],
+    "exportsAdded": [
+      "CountrySearchEntry",
+      "CountrySearchProjection",
+      "CountrySearchIndexPatchOperation",
+      "CountrySearchIndexPatchResult",
+      "createCountrySearchProjection",
+      "applyCountrySearchIndexPatch",
+      "searchCountryProjection"
+    ],
+    "affectedSetCoverageAdded": [
+      "country.rename",
+      "country.delete"
+    ],
+    "patchInputs": [
+      "WorldPatchV2.entityChangeSets.countries",
+      "WorldPatchV2.moduleLeafHashDeltas.countryCore",
+      "WorldPatchV2.moduleLeafHashDeltas.countryPresentation",
+      "committed WorldStateV2"
+    ],
+    "fullRebuildBehavior": {
+      "createCountrySearchProjection": "initial projection creation only",
+      "applyCountrySearchIndexPatch": "incremental patch only",
+      "fullRebuildCountDelta": 0
+    }
+  },
+  "measurements": {
+    "countryCreate": {
+      "operation": "add",
+      "countryId": "BBB",
+      "fullRebuildCountDelta": 0,
+      "searchableAfterPatch": true
+    },
+    "countryRename": {
+      "operation": "update",
+      "countryId": "BBB",
+      "fullRebuildCountDelta": 0,
+      "searchAliasUpdated": true
+    },
+    "countryDelete": {
+      "operation": "delete",
+      "countryId": "AAA",
+      "fullRebuildCountDelta": 0,
+      "entryRemoved": true
+    },
+    "fullIndexRegenerationCount": 0
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/country-search-index-patch.test.ts src/lib/planning/affected-set.test.ts src/lib/planning/world-patch-v2.test.ts",
+        "status": "pass",
+        "testFiles": 3,
+        "tests": 7
+      },
+      {
+        "command": "npm.cmd test -- --run src/lib/projection/country-search-index-patch.test.ts src/lib/planning/affected-set.test.ts src/lib/planning/world-patch-v2.test.ts src/lib/planning/country-create-planner.test.ts src/lib/planning/country-rename-planner.test.ts src/lib/planning/country-delete-planner.test.ts",
+        "status": "pass",
+        "testFiles": 6,
+        "tests": 20
+      },
+      {
+        "command": "npm.cmd exec tsc -- --noEmit",
+        "status": "pass"
+      },
+      {
+        "command": "npm.cmd run lint -- src/lib/projection/country-search-index-patch.ts src/lib/projection/country-search-index-patch.test.ts src/lib/planning/affected-set.ts",
+        "status": "pass"
+      },
+      {
+        "command": "git diff --check",
+        "status": "pass",
+        "notes": "No whitespace errors; existing CRLF conversion warnings were reported for unrelated dirty files."
+      }
+    ],
+    "gates": {
+      "previousStageStatusPass": true,
+      "previousStageOutputHashRecorded": true,
+      "countryModuleDeltaAddSupported": true,
+      "countryModuleDeltaUpdateSupported": true,
+      "countryModuleDeltaDeleteSupported": true,
+      "fullIndexRegenerationZero": true,
+      "projectionRevisionAdvancesToPatchAfterRevision": true,
+      "targetedTestsPass": true,
+      "typecheckPass": true,
+      "lintPass": true,
+      "diffCheckPass": true
+    }
+  },
+  "nextStage": "10-87",
+  "stage": "10-86",
+  "promptHash": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab",
+  "directInputHashes": {
+    "reports/prompt10/10-85-executor-failure-atomicity.json": "04bad61cb631364d540412de3e41f3ca1c6d7481576364f5af8f888743d561d0",
+    "prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+  },
+  "outputHashes": {
+    "src/lib/planning/affected-set.ts": "a594b4b86b81d7452e21a593d3eae1930b6fe2774efcf35007995efa36340ad2",
+    "src/lib/projection/country-search-index-patch.test.ts": "31e53f124cad7ffcafafa8eecd4840c115531496c7006c1da59a2bad33b231dd",
+    "src/lib/projection/country-search-index-patch.ts": "0e13ad7f486f669b6b666698cc35b9588edb41dca6d93134434ce129506f1c99"
+  },
+  "changedFiles": [
+    "reports/prompt10/10-86-country-search-index-patch-api.json",
+    "src/lib/planning/affected-set.ts",
+    "src/lib/projection/country-search-index-patch.test.ts",
+    "src/lib/projection/country-search-index-patch.ts"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd test -- --run src/lib/projection/country-search-index-patch.test.ts src/components/map/map-search-projection.test.ts src/stores/game-setup-selection-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-player-policy-projection.test.ts",
+      "exitCode": 0,
+      "result": "5 files passed; 14 tests passed"
+    },
+    {
+      "command": "npm.cmd test -- --run src/lib/projection src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.test.tsx src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.test.ts",
+      "exitCode": 0,
+      "result": "6 files passed; 17 tests passed"
+    },
+    {
+      "command": "npm.cmd run lint -- src/lib/projection/country-search-index-patch.ts src/lib/projection/country-search-index-patch.test.ts src/lib/projection/committed-country-search-projection.ts src/lib/projection/country-panel-projection.ts src/components/map/MapSearch.tsx src/components/map/map-search-projection.test.ts src/components/country/CountryPanel.tsx src/components/country/CountryPanel.test.tsx src/stores/game-setup-store.ts src/stores/game-setup-selection-projection.test.ts src/stores/game-setup-player-policy-projection.test.ts src/lib/storage/game-setup-storage.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd exec tsc -- --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test -- --maxWorkers=1",
+      "exitCode": 0,
+      "result": "102 files passed; 885 tests passed"
+    },
+    {
+      "command": "Get-FileHash -Algorithm SHA256 prompts/PROMPT_10_COUNTRY_TERRITORY_DOMAIN_RUNTIME.txt",
+      "exitCode": 0,
+      "result": "b6f714cbd6ec5eac0874376bd04780fb29a05fae476659527a12089fb6ce68ab"
+    }
+  ],
+  "firstFailedGate": null
+}
