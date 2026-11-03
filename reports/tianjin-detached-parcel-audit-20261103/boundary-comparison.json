@@ -1,0 +1,51 @@
+[
+  {
+    "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM1.geojson",
+    "sha256": "3a00467a0db9b4136facb5f2f3d0edbfd96adb15651cfdf63991da9281030e85",
+    "byteLength": 270578,
+    "assignments": [
+      {
+        "name": "Hebei Province",
+        "shapeId": "43563684B58229551045164",
+        "intersectionKm2": 1.9566434619780182,
+        "parcelCoverageFraction": 1.0,
+        "containsRepresentativePoint": true
+      }
+    ]
+  },
+  {
+    "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+    "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72",
+    "byteLength": 17277078,
+    "assignments": [
+      {
+        "name": "Hebei",
+        "shapeId": "CHN-ADM1-3_0_0-B13",
+        "intersectionKm2": 2.669700132741326e-08,
+        "parcelCoverageFraction": 1.3644285147598948e-08,
+        "containsRepresentativePoint": false
+      },
+      {
+        "name": "Tianjin",
+        "shapeId": "CHN-ADM1-3_0_0-B24",
+        "intersectionKm2": 1.9566424922718109,
+        "parcelCoverageFraction": 0.9999995044032159,
+        "containsRepresentativePoint": true
+      }
+    ]
+  },
+  {
+    "path": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+    "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+    "byteLength": 40726852,
+    "assignments": [
+      {
+        "name": "Hebei",
+        "shapeId": "CHN-1811",
+        "intersectionKm2": 1.9566434619780182,
+        "parcelCoverageFraction": 1.0,
+        "containsRepresentativePoint": true
+      }
+    ]
+  }
+]

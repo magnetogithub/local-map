@@ -1,12 +1,12 @@
 import 'server-only';
 import {createHash} from 'node:crypto';
-import index from '../../../data/derived/chn-2020/province-render-f1c91c059cdb06f5234f/index.json';
+import index from '../../../data/derived/chn-2020/province-render-8b7fa995667410d4d2be/index.json';
 import type {OperationalCatalog} from '../world/operational-catalog.server';
 import {readProvincePresentation} from './province-presentation.server';
 
 export const CHN_PROVINCE_PRESENTATION_IDENTITY = Object.freeze({
-  path: 'data/derived/chn-2020/province-render-f1c91c059cdb06f5234f/index.json',
-  sha256: 'f1c91c059cdb06f5234f22843e4739991f0036048ef8fb5da433ae345d70cd3f', byteLength: 631021,
+  path: 'data/derived/chn-2020/province-render-8b7fa995667410d4d2be/index.json',
+  sha256: '8b7fa995667410d4d2be83b04d5147f3600162167740f1c28e873b609d9d9615', byteLength: 630925,
 });
 
 /** The Node writer emits JSON.stringify + LF. Check the exact accepted bytes of

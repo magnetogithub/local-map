@@ -128,19 +128,15 @@ beforeEach(() => {
   });
   mocks.createConsumer.mockImplementation(async (input: Parameters<typeof createOperationalMapConsumer>[0]) => {
     for (const id of ['operational-country-border', 'operational-detail-country-border']) input.map.addLayer({id, type: 'line', source: 'fixture'});
-    let projection = {world: input.world, appliedRevision: input.world.revision}, selectedDetailCells = 0, detailSourceWrites = 0, provinceLodReady = false, provinceLodActive = false, microLodReady = false, microLodActive = false;
+    let projection = {world: input.world, appliedRevision: input.world.revision}, selectedDetailCells = 0, detailSourceWrites = 0;
     const consumer: OperationalMapConsumer = {
       getProjection: () => projection, getUpdateStats: () => ({fullProjectionBuilds: 1, updates: 0, cellsUpdated: 0, edgesExamined: 0,
         exactCellsAdded: 0, exactFrontsAdded: 0, exactFrontsRemoved: 0, exactCells: 0, exactFronts: 0, selectedDetailCells, detailSourceWrites,
         debugBoundaryScopeBuilds: 0, debugBoundaryFilterWrites: 0, debugBoundaryCountryIds: [], debugBoundaryEdgeCount: 0,
-        provinceDisplayLodReady: provinceLodReady, provinceDisplayLodActive: provinceLodActive, provinceDisplayLodVertexCount: 0, provinceDisplayLodSourceWrites: 0,
-        microDisplayLodReady: microLodReady, microDisplayLodActive: microLodActive, microDisplayLodInScope: false, microDisplayLodVertexCount: 0, microDisplayLodSourceWrites: 0, resyncRequired: false}),
+        provinceDisplayLodReady: false, provinceDisplayLodActive: false, provinceDisplayLodVertexCount: 0, provinceDisplayLodSourceWrites: 0,
+        microDisplayLodReady: false, microDisplayLodActive: false, microDisplayLodInScope: false, microDisplayLodVertexCount: 0, microDisplayLodSourceWrites: 0, resyncRequired: false}),
       selectCountry: vi.fn(), hoverCountry: vi.fn(), setDebugBoundaries: vi.fn(),
       supportsCountryViewportDetail: vi.fn(() => true),
-      loadProvinceBoundaryLod: vi.fn(async () => {provinceLodReady = true;}),
-      setProvinceBoundaryLodEnabled: vi.fn(enabled => {provinceLodActive = enabled && provinceLodReady;}),
-      loadMicroBoundaryLod: vi.fn(async () => {microLodReady = true;}),
-      setMicroBoundaryLodEnabled: vi.fn(enabled => {microLodActive = enabled && microLodReady;}),
       updateWorld: vi.fn(async world => {projection = {world, appliedRevision: world.revision};}),
       showCountryDetail: vi.fn(async () => empty()),
       showCountryViewportDetail: vi.fn(async (_id, _bounds, signal) => {signal?.throwIfAborted(); selectedDetailCells = 1; detailSourceWrites++; return empty();}),
@@ -162,33 +158,13 @@ async function mount(options: {debug?: boolean; zoom?: number; sourceReady?: boo
 }
 
 describe('F06 operational map recovery', () => {
-  it('waits for province display source readiness, restores originals at high zoom, and reuses the loaded LOD', async () => {
-    mocks.delivery.mockResolvedValueOnce({bootstrap: {provinceBoundaryLod: {bounds: [73, 18, 135, 54], minZoom: 2.2, maxZoom: 7}}});
-    const f = await mount({zoom: 5, sourceReady: false}), snapshot = f.client.getSnapshot();
-    await waitFor(() => expect(f.consumer.loadProvinceBoundaryLod).toHaveBeenCalledOnce());
-    expect(f.consumer.getUpdateStats().provinceDisplayLodActive).toBe(false);
-    act(() => {f.map.sourceReady = true; f.map.fire('sourcedata', {sourceId: 'world-operational-province-display-lod'});});
-    await waitFor(() => expect(f.consumer.getUpdateStats().provinceDisplayLodActive).toBe(true));
-    act(() => {f.map.zoom = 7.3; f.map.fire('move');});
-    expect(f.consumer.getUpdateStats().provinceDisplayLodActive).toBe(false);
-    act(() => {f.map.zoom = 5; f.map.fire('moveend');});
-    expect(f.consumer.getUpdateStats().provinceDisplayLodActive).toBe(true);
+  it('does not switch boundary presentation on zoom or viewport changes', async () => {
+    const f = await mount({zoom: 5}), snapshot = f.client.getSnapshot();
+    act(() => {f.map.zoom = 7.3; f.map.fire('move'); f.map.fire('moveend');});
     act(() => {f.map.bounds = [-110, 30, -100, 40]; f.map.fire('move');});
-    expect(f.consumer.getUpdateStats().provinceDisplayLodActive).toBe(false);
-    expect(f.consumer.loadProvinceBoundaryLod).toHaveBeenCalledOnce(); expect(f.client.getSnapshot()).toBe(snapshot);
-    f.unmount(); expect(f.map.listenerCount('sourcedata')).toBe(0); expect(f.map.listenerCount('move')).toBe(0);
-  });
+    expect(f.map.listenerCount('move')).toBe(0);
 
-  it('does not activate a late province response after moving outside China', async () => {
-    mocks.delivery.mockResolvedValueOnce({bootstrap: {provinceBoundaryLod: {bounds: [73, 18, 135, 54], minZoom: 2.2, maxZoom: 7}}});
-    const f = await mount(), pending = deferred<void>();
-    vi.mocked(f.consumer.loadProvinceBoundaryLod).mockReturnValueOnce(pending.promise);
-    act(() => {f.map.zoom = 5; f.map.fire('moveend');});
-    expect(f.consumer.loadProvinceBoundaryLod).toHaveBeenCalledOnce();
-    act(() => {f.map.bounds = [-110, 30, -100, 40]; f.map.fire('move');});
-    vi.spyOn(f.consumer, 'getUpdateStats').mockReturnValue({...f.consumer.getUpdateStats(), provinceDisplayLodReady: true});
-    await act(async () => pending.resolve());
-    expect(f.consumer.setProvinceBoundaryLodEnabled).toHaveBeenLastCalledWith(false);
+    expect(f.client.getSnapshot()).toBe(snapshot);
   });
 
   it('uses hovered country independently of selection, clears detail on sea, and skips unsharded countries', async () => {

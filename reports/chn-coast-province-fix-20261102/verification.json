@@ -1,0 +1,61 @@
+{
+  "pass": true,
+  "cause": "Binhai source family was unresolved in the province display classification, omitting five Tianjin/Hebei contacts.",
+  "repair": {
+    "rawTopProvinceShare": 0.9999999774263751,
+    "rawSecondProvinceShare": 9.226075644104205e-9,
+    "changedCells": [
+      254,
+      6150
+    ],
+    "promotedEdges": [
+      3549,
+      4050,
+      6750,
+      7473,
+      9565
+    ],
+    "provinceEdges": 999,
+    "interiorDanglingEndpointsBefore": [
+      [
+        117.80375509971816,
+        39.27813999986114
+      ],
+      [
+        117.83064079993301,
+        39.305072599720745
+      ],
+      [
+        117.14363169984313,
+        38.616729199792815
+      ],
+      [
+        117.84062629996379,
+        39.32756739961587
+      ]
+    ],
+    "interiorDanglingEndpointsAfter": [],
+    "existingProvinceEdgesPreserved": true,
+    "unrelatedFamiliesAndCellsUnchanged": true
+  },
+  "all8562DisplayGeometriesByteEquivalent": true,
+  "tests": {
+    "vitestFiles": 4,
+    "vitestTests": 108,
+    "typescript": true,
+    "eslint": true
+  },
+  "proofs": {
+    "province": "reports/chn-coast-province-fix-20261102/province-verification.json",
+    "fullNetwork": "reports/chn-internal-render-lod-20261030/verification/coast-repair-20261102.json",
+    "browser": "reports/chn-coast-province-fix-20261102/browser-verification.json"
+  },
+  "sourceReference": "data/source-locks/chn-2020/binhai-province-display-reference.json",
+  "reproduce": [
+    "node scripts/chn-2020/build-province-coast-repair.mjs",
+    "python scripts/chn-2020/verify-province-coast-repair.py --artifact data/derived/chn-2020/province-presentation-80ebe4dae00144806f1c/presentation.json --output reports/chn-coast-province-fix-20261102/province-verification.json",
+    "node scripts/chn-2020/write-province-runtime-index.mjs --artifact data/derived/chn-2020/province-presentation-80ebe4dae00144806f1c/presentation.json --verification reports/chn-coast-province-fix-20261102/province-verification.json",
+    "python scripts/chn-2020/build-chn-internal-line-lod.py --tolerance 2000 --province-index data/derived/chn-2020/province-render-36da1312a1dd69777275/index.json"
+  ],
+  "limitations": "Display membership correction only. Existing game geometry and authoritative administrative parents retain the accepted catalog identity; source evidence does not certify the exact 2020 geometry of existing gameplay adjustments."
+}

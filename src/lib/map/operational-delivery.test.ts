@@ -140,8 +140,8 @@ describe('16-04 operational map transport', () => {
     const seen: string[] = [];
     const local = await fetchOperationalVectorDelivery(ref, isolatedFetch(seen));
     const bootstrap = local.bootstrap, macro = bootstrap.provincePresentationBoundaryOrdinals!;
-    expect(macro).toHaveLength(994);
-    expect(bootstrap.microBoundaryLod!.edgeOrdinals).toHaveLength(7568);
+    expect(macro).toHaveLength(1001);
+    expect(bootstrap.microBoundaryLod!.edgeOrdinals).toHaveLength(7560);
     const micro = bootstrap.microBoundaryLod!.edgeOrdinals;
     expect([...micro]).toEqual([...new Set(micro)].sort((a, b) => a - b));
     expect(micro.every(n => n > 0 && n <= catalog.descriptor.counts.edges && !macro.includes(n))).toBe(true);
@@ -258,7 +258,7 @@ describe('16-04 operational map transport', () => {
     }));
     await expect(loadLod(local, kind)).rejects.toThrow('SHA-256');
     corrupt = false;
-    expect((await loadLod(local, kind)).features.length).toBe(kind === 'province' ? 994 : 7568);
+    expect((await loadLod(local, kind)).features.length).toBe(kind === 'province' ? 1001 : 7560);
     expect(seen.filter(value => value === path)).toHaveLength(2);
   });
 

@@ -1,0 +1,420 @@
+{
+  "schemaVersion": "province-independence-parallelism-evidence.v1",
+  "auditDate": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "scope": "Read-only source/catalog inspection. Isolated fresh seed and development-authority planner probes. Actual catalog frontier and atomic runtime used. No live game, pointer, catalog or application source modified.",
+  "catalog": {
+    "pointer": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+      "root": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7",
+      "index": {
+        "sha256": "f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+        "byteLength": 757545
+      }
+    },
+    "pointerSha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+    "fineCountries": [
+      "CHN",
+      "KOR",
+      "PRK"
+    ],
+    "counts": {
+      "countries": 247,
+      "cells": 8005,
+      "edges": 26273,
+      "administrativeParents": 4231,
+      "previousParents": 4231
+    },
+    "summary": [
+      {
+        "arrangedFaceArea": 9.898048074226002,
+        "cells": 322,
+        "coarseResidualArea": 0.04600488717934568,
+        "coarseResidualCells": 33,
+        "countryId": "KOR",
+        "envelopeArea": 9.898048074225994,
+        "fineCells": 289,
+        "sourceFeatures": 228,
+        "unresolvedArea": 0
+      },
+      {
+        "arrangedFaceArea": 12.938046093470422,
+        "cells": 194,
+        "coarseResidualArea": 0.00034051376836949175,
+        "coarseResidualCells": 2,
+        "countryId": "PRK",
+        "envelopeArea": 12.938046093470511,
+        "fineCells": 192,
+        "sourceFeatures": 179,
+        "unresolvedArea": 0
+      },
+      {
+        "cells": 3320,
+        "coarseResidualCells": 7,
+        "confirmedMacroFamilies": 1663,
+        "countryId": "CHN",
+        "fineCells": 3313,
+        "sourceFeatures": 2864,
+        "sourceVintage": "Metadata 2017 with source processing in 2021; not certified exact 2020",
+        "unconfirmedMacroFamilies": 1201
+      }
+    ]
+  },
+  "worldIdentity": {
+    "entityCount": 8005,
+    "uniqueEntityReferences": 8005
+  },
+  "countries": [
+    {
+      "countryId": "KOR",
+      "cellCount": 322,
+      "regionCount": 18,
+      "administrativeRegionCount": 17,
+      "residualParentCells": 33,
+      "detail": {
+        "path": "detail/countries/KOR.geojson.gz",
+        "featureCount": 322,
+        "oneFeaturePerCell": true,
+        "geometryTypes": [
+          "Polygon"
+        ]
+      },
+      "membershipComplete": true,
+      "sample": {
+        "cellId": "territory:catalog:00fb9cc2693f7e8c26286c50f62bdaf9f7b5a29d55d3a723b95130c9a1d86602",
+        "siblingId": "territory:catalog:037c832a85dff0dede7b670209710aa45d15714248d40380d5dcd3777d733dac",
+        "parentKey": "fine-macro:KOR:KOR:macro:citypopulation:31",
+        "parentMembers": 37
+      },
+      "singleCellOperations": {
+        "occupationChanges": 1,
+        "occupationOwnerPreserved": true,
+        "occupationControllerChanged": true,
+        "allOtherCellsRetainReferences": true,
+        "sameParentSiblingUnchanged": true,
+        "liberationRestoresOwnerController": true,
+        "transferChangesOwnerController": true,
+        "immutableSourcePreserved": true,
+        "serializationRoundtrip": true,
+        "mapMarksOccupation": true,
+        "mapClearsOccupationAfterTransfer": true,
+        "baseEntityUnchanged": true
+      }
+    },
+    {
+      "countryId": "PRK",
+      "cellCount": 194,
+      "regionCount": 12,
+      "administrativeRegionCount": 11,
+      "residualParentCells": 2,
+      "detail": {
+        "path": "detail/countries/PRK.geojson.gz",
+        "featureCount": 194,
+        "oneFeaturePerCell": true,
+        "geometryTypes": [
+          "Polygon"
+        ]
+      },
+      "membershipComplete": true,
+      "sample": {
+        "cellId": "territory:catalog:016df317a6906c346ec1366bd74702391f805bbd2380b50e36988accfb41ddc5",
+        "siblingId": "territory:catalog:055ca7e0bf9d8a6984b03f7047685cb1cf31c0f3246a735cca2d3bf3303ef3e1",
+        "parentKey": "fine-macro:PRK:macro:PRK:KP03",
+        "parentMembers": 20
+      },
+      "singleCellOperations": {
+        "occupationChanges": 1,
+        "occupationOwnerPreserved": true,
+        "occupationControllerChanged": true,
+        "allOtherCellsRetainReferences": true,
+        "sameParentSiblingUnchanged": true,
+        "liberationRestoresOwnerController": true,
+        "transferChangesOwnerController": true,
+        "immutableSourcePreserved": true,
+        "serializationRoundtrip": true,
+        "mapMarksOccupation": true,
+        "mapClearsOccupationAfterTransfer": true,
+        "baseEntityUnchanged": true
+      }
+    },
+    {
+      "countryId": "CHN",
+      "cellCount": 3320,
+      "regionCount": 32,
+      "administrativeRegionCount": 31,
+      "residualParentCells": 1375,
+      "detail": {
+        "path": "detail/countries/CHN.geojson.gz",
+        "featureCount": 3320,
+        "oneFeaturePerCell": true,
+        "geometryTypes": [
+          "Polygon"
+        ]
+      },
+      "membershipComplete": true,
+      "sample": {
+        "cellId": "territory:catalog:000115e6dd80896b1a47ba926b1aeffecf9054deb58e17fb27e5a133bcb38fb7",
+        "siblingId": "territory:catalog:03aef456695d2fefa5d8f702e4d3c9637cf6e90cf79fdc8971613c1bbdc37373",
+        "parentKey": "fine-macro:CHN:macro:CHN:CN-54",
+        "parentMembers": 43
+      },
+      "singleCellOperations": {
+        "occupationChanges": 1,
+        "occupationOwnerPreserved": true,
+        "occupationControllerChanged": true,
+        "allOtherCellsRetainReferences": true,
+        "sameParentSiblingUnchanged": true,
+        "liberationRestoresOwnerController": true,
+        "transferChangesOwnerController": true,
+        "immutableSourcePreserved": true,
+        "serializationRoundtrip": true,
+        "mapMarksOccupation": true,
+        "mapClearsOccupationAfterTransfer": true,
+        "baseEntityUnchanged": true
+      }
+    }
+  ],
+  "actualCatalogTurnProbes": [
+    {
+      "actor": "PRK",
+      "target": "KOR",
+      "attempts": [
+        {
+          "extent": "near",
+          "ok": true,
+          "count": 1
+        }
+      ],
+      "committed": true,
+      "selectedCount": 1,
+      "changedCount": 1,
+      "exactSelectionOnly": true,
+      "otherCellsRetainReferences": true,
+      "preservesLegalOwner": true,
+      "deltaCellCount": 1,
+      "undoRestoresWorld": true,
+      "redoRestoresWorld": true,
+      "commitNotifications": 1,
+      "changeNotifications": 3
+    },
+    {
+      "actor": "KOR",
+      "target": "PRK",
+      "attempts": [
+        {
+          "extent": "near",
+          "ok": true,
+          "count": 1
+        }
+      ],
+      "committed": true,
+      "selectedCount": 1,
+      "changedCount": 1,
+      "exactSelectionOnly": true,
+      "otherCellsRetainReferences": true,
+      "preservesLegalOwner": true,
+      "deltaCellCount": 1,
+      "undoRestoresWorld": true,
+      "redoRestoresWorld": true,
+      "commitNotifications": 1,
+      "changeNotifications": 3
+    },
+    {
+      "actor": "PRK",
+      "target": "CHN",
+      "attempts": [
+        {
+          "extent": "near",
+          "ok": true,
+          "count": 1
+        }
+      ],
+      "committed": true,
+      "selectedCount": 1,
+      "changedCount": 1,
+      "exactSelectionOnly": true,
+      "otherCellsRetainReferences": true,
+      "preservesLegalOwner": true,
+      "deltaCellCount": 1,
+      "undoRestoresWorld": true,
+      "redoRestoresWorld": true,
+      "commitNotifications": 1,
+      "changeNotifications": 3
+    }
+  ],
+  "checks": [
+    {
+      "name": "all IDs globally unique",
+      "ok": true
+    },
+    {
+      "name": "all state entity references distinct",
+      "ok": true
+    },
+    {
+      "name": "all state entities frozen",
+      "ok": true
+    },
+    {
+      "name": "KOR exact geometry mapping",
+      "ok": true
+    },
+    {
+      "name": "KOR runtime memberships",
+      "ok": true
+    },
+    {
+      "name": "KOR cell operations isolated",
+      "ok": true
+    },
+    {
+      "name": "PRK exact geometry mapping",
+      "ok": true
+    },
+    {
+      "name": "PRK runtime memberships",
+      "ok": true
+    },
+    {
+      "name": "PRK cell operations isolated",
+      "ok": true
+    },
+    {
+      "name": "CHN exact geometry mapping",
+      "ok": true
+    },
+    {
+      "name": "CHN runtime memberships",
+      "ok": true
+    },
+    {
+      "name": "CHN cell operations isolated",
+      "ok": true
+    },
+    {
+      "name": "KOR actual frontier turn isolation",
+      "ok": true
+    },
+    {
+      "name": "PRK actual frontier turn isolation",
+      "ok": true
+    },
+    {
+      "name": "CHN actual frontier turn isolation",
+      "ok": true
+    }
+  ],
+  "sourceSnapshots": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "016d634a0376eaed2df10ca3858bba8118e1640bc5253bd0deb55e5cbea19a68",
+      "byteLength": 1495
+    },
+    {
+      "path": "prompts/COUNTRY_MICRO_BOUNDARY_GUIDE.txt",
+      "sha256": "3d3356af4cb0e32cc77765130c90527e408b29d28f6094a45ec955c2292c82ff",
+      "byteLength": 24655
+    },
+    {
+      "path": "data/runtime/operational-catalog/current.json",
+      "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+      "byteLength": 251
+    },
+    {
+      "path": "src/lib/world/territory-entity-v3.ts",
+      "sha256": "98480e883aecf0bd4db69a904fe430b0257322f20c41dfa8e497904a3fd87fd4",
+      "byteLength": 1401
+    },
+    {
+      "path": "src/lib/world/world-state-v3.ts",
+      "sha256": "52f534aa132e74303a9465040c63663e880be5b6c057b2c50e35c67955cfe68a",
+      "byteLength": 9188
+    },
+    {
+      "path": "src/lib/world/operational-catalog.server.ts",
+      "sha256": "f60600c11d5677f9b818aeb7bfb35221c566f8b3cd82b48a091f6b86eac95f7f",
+      "byteLength": 15907
+    },
+    {
+      "path": "src/lib/world/operational-game.server.ts",
+      "sha256": "be76fcbde3c2e8f69958a9306d2c34fae82d9bca4de0130165a150f623f3fa9e",
+      "byteLength": 3492
+    },
+    {
+      "path": "src/lib/world/world-geometry-catalog-ref.ts",
+      "sha256": "4e69b24d6de50d089632f85c4dfe2fdc242a0fcac48e8181bb57b2f29f8bf5cc",
+      "byteLength": 3975
+    },
+    {
+      "path": "src/lib/simulation/catalog-turn-plan.ts",
+      "sha256": "19b628c57da4f6e8b4130ee73d20920979ae4c560b8f975887c4ae4c4d17f88d",
+      "byteLength": 13892
+    },
+    {
+      "path": "src/lib/simulation/operational-region.server.ts",
+      "sha256": "c4169d153f3b34238bc6995e7a2c7f56f9dfde8a2e48fb61e208e6223130fe01",
+      "byteLength": 5113
+    },
+    {
+      "path": "src/lib/planning/territorial-control-planner.ts",
+      "sha256": "dcbd2eb4fc2f54f139368a75dd622e78fd77b0852df2f20cbbbe7a89a676e113",
+      "byteLength": 5028
+    },
+    {
+      "path": "src/lib/map/operational-delivery.server.ts",
+      "sha256": "0ab3b5467ad4d14e860d1aaf3e9415e87cb7e268079723d58e18afc3f851f03a",
+      "byteLength": 4736
+    },
+    {
+      "path": "src/lib/map/chn-province-presentation.server.ts",
+      "sha256": "00876f9d85b33abd271218b4c76add399ce2074c075cac0f4a45e8bffca3e393",
+      "byteLength": 1786
+    },
+    {
+      "path": "src/lib/map/chn-boundary-display-lod.server.ts",
+      "sha256": "4802b8a15d0dfade49d7fe59e759d6a4c28794e7e0cc936e3016ecb0d4e04c7e",
+      "byteLength": 3210
+    },
+    {
+      "path": "src/lib/simulation/server/operational-game.server.ts",
+      "sha256": "05b33b4edb8b15a48fd479746d9ad9f237d4d0dac7d9728bd52e79decd3e3c7c",
+      "byteLength": 8166
+    },
+    {
+      "path": "scripts/prompt19-country-core.mjs",
+      "sha256": "99eefbd814ccd37716fa2178e880480d1a95a33ccc320b869e14a2e1376ca8b9",
+      "byteLength": 11234
+    },
+    {
+      "path": "scripts/prompt19-country-files.mjs",
+      "sha256": "694326ae6acb6f90af4fc4801b27da93a894fd33ec7ef4bffe809863f9f9d2f9",
+      "byteLength": 2200
+    },
+    {
+      "path": "scripts/prepare-prompt19-country.mjs",
+      "sha256": "5ef969073334d8407ae105ba8dba3e642bd7961671d95837013cdb3bf3bc5303",
+      "byteLength": 5347
+    },
+    {
+      "path": "scripts/chn-2020/incremental-coordinator.mjs",
+      "sha256": "30ebb5141af16e9c4d11679b88eff6a230e57bcce11db5484c4f1aaa8ab70985",
+      "byteLength": 11292
+    },
+    {
+      "path": "scripts/prepare-prompt19-mixed-world.mjs",
+      "sha256": "90cedef52430ab353bd99f1b10b45ba03d4ba372f862a9f0e7ed22f0236f6abd",
+      "byteLength": 31934
+    },
+    {
+      "path": "src/lib/world/operational-mixed-membership.test.ts",
+      "sha256": "31b2cee6fcd3ce9a5b11cad70284fa201bca4e4f37719830777c3e7087a90a6c",
+      "byteLength": 7705
+    },
+    {
+      "path": "reports/province-independence-parallelism-20261103/audit.cjs",
+      "sha256": "23c2df56a6e3758b64628bad4e1f02db293272554eac984824fc2548bad2fe90",
+      "byteLength": 15217
+    }
+  ],
+  "pointerUnchanged": true
+}

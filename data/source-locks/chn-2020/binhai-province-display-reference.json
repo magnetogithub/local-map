@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "chn-province-display-reference-v1",
+  "sourceFeatureId": "62558664B17454932046206",
+  "sourceName": "Binhai New Area",
+  "localName": "滨海新区",
+  "renderProvinceId": "macro:CHN:CN-12",
+  "provinceName": "Tianjin",
+  "reference": {
+    "publisher": "National Bureau of Statistics of China",
+    "url": "https://www.stats.gov.cn/fw/bgthyb/202302/t20230215_1904787.html",
+    "publicationDate": "2018-11-28",
+    "tableDate": "2018-11-07",
+    "accessedDate": "2026-11-02",
+    "observation": "The first table row lists Binhai New Area under Tianjin. This corroborates the parent identity of the pinned raw feature; it supplies no replacement polygon."
+  },
+  "scope": "Correct the display membership of the existing complete source family, including its existing gameplay adjustments. Preserve all game polygons, administrative parents, and other display memberships.",
+  "administrativeTruthClaimForAdjustedGeometry": false
+}

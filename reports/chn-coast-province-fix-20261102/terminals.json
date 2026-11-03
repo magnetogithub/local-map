@@ -1,0 +1,383 @@
+[
+  {
+    "node": [
+      117.84981991527013,
+      38.265932059189325
+    ],
+    "coastDistanceMercatorMeters": 0.0,
+    "incident": [
+      {
+        "ordinal": 3221,
+        "class": "coast",
+        "left": {
+          "ordinal": 6417,
+          "id": "territory:catalog:cd77a205ccdd3ef9427a18f1ecf005804927f5d5a9db6d15f03888eb341cf416",
+          "sourceFeatureId": "62558664B9090922381654",
+          "renderProvinceId": "macro:CHN:CN-13"
+        },
+        "right": {
+          "ordinal": 0
+        }
+      },
+      {
+        "ordinal": 3425,
+        "class": "coast",
+        "left": {
+          "ordinal": 7068,
+          "id": "territory:catalog:e1c0b814b1072a6671607288e16c631f65a24454d90545c538435256efebcb5a",
+          "sourceFeatureId": "62558664B73824452126495",
+          "renderProvinceId": "macro:CHN:CN-37"
+        },
+        "right": {
+          "ordinal": 0
+        }
+      },
+      {
+        "ordinal": 4525,
+        "class": "residual",
+        "left": {
+          "ordinal": 6417,
+          "id": "territory:catalog:cd77a205ccdd3ef9427a18f1ecf005804927f5d5a9db6d15f03888eb341cf416",
+          "sourceFeatureId": "62558664B9090922381654",
+          "renderProvinceId": "macro:CHN:CN-13"
+        },
+        "right": {
+          "ordinal": 7068,
+          "id": "territory:catalog:e1c0b814b1072a6671607288e16c631f65a24454d90545c538435256efebcb5a",
+          "sourceFeatureId": "62558664B73824452126495",
+          "renderProvinceId": "macro:CHN:CN-37"
+        }
+      }
+    ]
+  },
+  {
+    "node": [
+      117.80375509971816,
+      39.27813999986114
+    ],
+    "coastDistanceMercatorMeters": 14336.81414723329,
+    "incident": [
+      {
+        "ordinal": 6750,
+        "class": "residual",
+        "left": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        },
+        "right": {
+          "ordinal": 6163,
+          "id": "territory:catalog:c5902a0494ac48ef444fc9215b66a271940a588f4e525016e8c757f935f9384b",
+          "sourceFeatureId": "62558664B27418699179982",
+          "renderProvinceId": "macro:CHN:CN-13"
+        }
+      },
+      {
+        "ordinal": 6245,
+        "class": "residual",
+        "left": {
+          "ordinal": 5061,
+          "id": "territory:catalog:a1f145dfdec5de171d0dc72c187d14bd97093b0c5ff1449c63183189aab0b2aa",
+          "sourceFeatureId": "62558664B92081702465764",
+          "renderProvinceId": "macro:CHN:CN-12"
+        },
+        "right": {
+          "ordinal": 6163,
+          "id": "territory:catalog:c5902a0494ac48ef444fc9215b66a271940a588f4e525016e8c757f935f9384b",
+          "sourceFeatureId": "62558664B27418699179982",
+          "renderProvinceId": "macro:CHN:CN-13"
+        }
+      },
+      {
+        "ordinal": 7065,
+        "class": "residual",
+        "left": {
+          "ordinal": 5061,
+          "id": "territory:catalog:a1f145dfdec5de171d0dc72c187d14bd97093b0c5ff1449c63183189aab0b2aa",
+          "sourceFeatureId": "62558664B92081702465764",
+          "renderProvinceId": "macro:CHN:CN-12"
+        },
+        "right": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        }
+      }
+    ]
+  },
+  {
+    "node": [
+      117.83064079993301,
+      39.305072599720745
+    ],
+    "coastDistanceMercatorMeters": 16147.76860576649,
+    "incident": [
+      {
+        "ordinal": 6750,
+        "class": "residual",
+        "left": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        },
+        "right": {
+          "ordinal": 6163,
+          "id": "territory:catalog:c5902a0494ac48ef444fc9215b66a271940a588f4e525016e8c757f935f9384b",
+          "sourceFeatureId": "62558664B27418699179982",
+          "renderProvinceId": "macro:CHN:CN-13"
+        }
+      },
+      {
+        "ordinal": 6245,
+        "class": "residual",
+        "left": {
+          "ordinal": 5061,
+          "id": "territory:catalog:a1f145dfdec5de171d0dc72c187d14bd97093b0c5ff1449c63183189aab0b2aa",
+          "sourceFeatureId": "62558664B92081702465764",
+          "renderProvinceId": "macro:CHN:CN-12"
+        },
+        "right": {
+          "ordinal": 6163,
+          "id": "territory:catalog:c5902a0494ac48ef444fc9215b66a271940a588f4e525016e8c757f935f9384b",
+          "sourceFeatureId": "62558664B27418699179982",
+          "renderProvinceId": "macro:CHN:CN-13"
+        }
+      },
+      {
+        "ordinal": 11913,
+        "class": "residual",
+        "left": {
+          "ordinal": 5061,
+          "id": "territory:catalog:a1f145dfdec5de171d0dc72c187d14bd97093b0c5ff1449c63183189aab0b2aa",
+          "sourceFeatureId": "62558664B92081702465764",
+          "renderProvinceId": "macro:CHN:CN-12"
+        },
+        "right": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        }
+      }
+    ]
+  },
+  {
+    "node": [
+      119.84791046614698,
+      39.9855415184815
+    ],
+    "coastDistanceMercatorMeters": 0.0,
+    "incident": [
+      {
+        "ordinal": 3208,
+        "class": "coast",
+        "left": {
+          "ordinal": 4030,
+          "id": "territory:catalog:804d5ed9e7ca6e757129f1b4b151af11d9fd7bc66ea984f60b5dd999dedee78f",
+          "sourceFeatureId": "62558664B62914150462248",
+          "renderProvinceId": "macro:CHN:CN-21"
+        },
+        "right": {
+          "ordinal": 0
+        }
+      },
+      {
+        "ordinal": 3222,
+        "class": "coast",
+        "left": {
+          "ordinal": 7153,
+          "id": "territory:catalog:e46cc3953a17f7041df8805c9efc68601f5a31d4c50145f0236930bbdec8b150",
+          "sourceFeatureId": "62558664B68866375499351",
+          "renderProvinceId": "macro:CHN:CN-13"
+        },
+        "right": {
+          "ordinal": 0
+        }
+      },
+      {
+        "ordinal": 7449,
+        "class": "residual",
+        "left": {
+          "ordinal": 4030,
+          "id": "territory:catalog:804d5ed9e7ca6e757129f1b4b151af11d9fd7bc66ea984f60b5dd999dedee78f",
+          "sourceFeatureId": "62558664B62914150462248",
+          "renderProvinceId": "macro:CHN:CN-21"
+        },
+        "right": {
+          "ordinal": 7153,
+          "id": "territory:catalog:e46cc3953a17f7041df8805c9efc68601f5a31d4c50145f0236930bbdec8b150",
+          "sourceFeatureId": "62558664B68866375499351",
+          "renderProvinceId": "macro:CHN:CN-13"
+        }
+      }
+    ]
+  },
+  {
+    "node": [
+      117.14363169984313,
+      38.616729199792815
+    ],
+    "coastDistanceMercatorMeters": 44523.403374329006,
+    "incident": [
+      {
+        "ordinal": 4050,
+        "class": "residual",
+        "left": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        },
+        "right": {
+          "ordinal": 6417,
+          "id": "territory:catalog:cd77a205ccdd3ef9427a18f1ecf005804927f5d5a9db6d15f03888eb341cf416",
+          "sourceFeatureId": "62558664B9090922381654",
+          "renderProvinceId": "macro:CHN:CN-13"
+        }
+      },
+      {
+        "ordinal": 9027,
+        "class": "residual",
+        "left": {
+          "ordinal": 5186,
+          "id": "territory:catalog:a6c44afc6380d0b459641b521e8e4579cbf2be25a3c04ed4fd2710f9d580c77d",
+          "sourceFeatureId": "62558664B75592474598540",
+          "renderProvinceId": "macro:CHN:CN-12"
+        },
+        "right": {
+          "ordinal": 6417,
+          "id": "territory:catalog:cd77a205ccdd3ef9427a18f1ecf005804927f5d5a9db6d15f03888eb341cf416",
+          "sourceFeatureId": "62558664B9090922381654",
+          "renderProvinceId": "macro:CHN:CN-13"
+        }
+      },
+      {
+        "ordinal": 7286,
+        "class": "residual",
+        "left": {
+          "ordinal": 5186,
+          "id": "territory:catalog:a6c44afc6380d0b459641b521e8e4579cbf2be25a3c04ed4fd2710f9d580c77d",
+          "sourceFeatureId": "62558664B75592474598540",
+          "renderProvinceId": "macro:CHN:CN-12"
+        },
+        "right": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        }
+      }
+    ]
+  },
+  {
+    "node": [
+      119.29489858732138,
+      35.08074888342711
+    ],
+    "coastDistanceMercatorMeters": 0.0,
+    "incident": [
+      {
+        "ordinal": 3012,
+        "class": "coast",
+        "left": {
+          "ordinal": 5842,
+          "id": "territory:catalog:bc31c73375a6c3296f6d7bd48154abe3bd0c8fdd2d42009ddf1819e6278b5304",
+          "sourceFeatureId": "62558664B17556938763254",
+          "renderProvinceId": "macro:CHN:CN-32"
+        },
+        "right": {
+          "ordinal": 0
+        }
+      },
+      {
+        "ordinal": 10660,
+        "class": "residual",
+        "left": {
+          "ordinal": 1314,
+          "id": "territory:catalog:28174bcc349cc936637ab604e0cb2266eb4a563a001a1a9de5cb5607817eeac7",
+          "sourceFeatureId": "62558664B44203574661486",
+          "renderProvinceId": "macro:CHN:CN-37"
+        },
+        "right": {
+          "ordinal": 5842,
+          "id": "territory:catalog:bc31c73375a6c3296f6d7bd48154abe3bd0c8fdd2d42009ddf1819e6278b5304",
+          "sourceFeatureId": "62558664B17556938763254",
+          "renderProvinceId": "macro:CHN:CN-32"
+        }
+      },
+      {
+        "ordinal": 3281,
+        "class": "coast",
+        "left": {
+          "ordinal": 1314,
+          "id": "territory:catalog:28174bcc349cc936637ab604e0cb2266eb4a563a001a1a9de5cb5607817eeac7",
+          "sourceFeatureId": "62558664B44203574661486",
+          "renderProvinceId": "macro:CHN:CN-37"
+        },
+        "right": {
+          "ordinal": 0
+        }
+      }
+    ]
+  },
+  {
+    "node": [
+      117.84062629996379,
+      39.32756739961587
+    ],
+    "coastDistanceMercatorMeters": 18847.217573114995,
+    "incident": [
+      {
+        "ordinal": 3549,
+        "class": "residual",
+        "left": {
+          "ordinal": 4477,
+          "id": "territory:catalog:8f9deb33b04c08d84ec363fc614b3b491e9754cb65c045b886a8b98099e758cb",
+          "sourceFeatureId": "62558664B27418699179982",
+          "renderProvinceId": "macro:CHN:CN-13"
+        },
+        "right": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        }
+      },
+      {
+        "ordinal": 11913,
+        "class": "residual",
+        "left": {
+          "ordinal": 5061,
+          "id": "territory:catalog:a1f145dfdec5de171d0dc72c187d14bd97093b0c5ff1449c63183189aab0b2aa",
+          "sourceFeatureId": "62558664B92081702465764",
+          "renderProvinceId": "macro:CHN:CN-12"
+        },
+        "right": {
+          "ordinal": 6150,
+          "id": "territory:catalog:c52ffe41e959f713f66bbbe06889511e6767fcec682aa67105adc3b45104a969",
+          "sourceFeatureId": "62558664B17454932046206",
+          "renderProvinceId": null
+        }
+      },
+      {
+        "ordinal": 11329,
+        "class": "residual",
+        "left": {
+          "ordinal": 4477,
+          "id": "territory:catalog:8f9deb33b04c08d84ec363fc614b3b491e9754cb65c045b886a8b98099e758cb",
+          "sourceFeatureId": "62558664B27418699179982",
+          "renderProvinceId": "macro:CHN:CN-13"
+        },
+        "right": {
+          "ordinal": 5061,
+          "id": "territory:catalog:a1f145dfdec5de171d0dc72c187d14bd97093b0c5ff1449c63183189aab0b2aa",
+          "sourceFeatureId": "62558664B92081702465764",
+          "renderProvinceId": "macro:CHN:CN-12"
+        }
+      }
+    ]
+  }
+]

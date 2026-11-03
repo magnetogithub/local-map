@@ -1,7 +1,7 @@
 """Build a combined CHN internal render network, delivered as two separate layers.
 
 No game polygons, authoritative edges, parents, catalog or runtime pointers change.
-Any simplified arc that changes an original topology contact is restored in full.
+Rejected arcs are retried locally at smaller budgets while preserving contacts.
 """
 import argparse
 import bisect
@@ -160,9 +160,9 @@ def cyclic_signature(ports):
     return tuple(labels) if len(labels) >= 3 else tuple(sorted(labels)), tuple(sorted(ties))
 
 
-def main(tolerance):
-    if not 0 < tolerance <= 300:
-        raise ValueError("RENDER_ONLY_TOLERANCE_MUST_NOT_EXCEED_300_METERS")
+def main(tolerance, province_index, previous_delivery=None):
+    if not 0 < tolerance <= 6000:
+        raise ValueError("RENDER_ONLY_TOLERANCE_MUST_NOT_EXCEED_6000_MERCATOR_METERS")
     pointer_pin = pin("data/runtime/operational-catalog/current.json")
     pointer = json.loads(checked(pointer_pin))
     index_pin = {"path": pointer["root"] + "/artifact-index.json", **pointer["index"]}
@@ -173,12 +173,12 @@ def main(tolerance):
     provenance_pin, descriptor_pin = artifact("provenance.json"), artifact("catalog.json")
     provenance = json.loads(checked(provenance_pin))
     descriptor = json.loads(checked(descriptor_pin))
-    province_pin = pin(PROVINCE_INDEX)
+    province_pin = pin(province_index)
     province = json.loads(checked(province_pin))
     if province["catalogRef"] != descriptor["catalogRef"]:
         raise ValueError("PROVINCE_PRESENTATION_CATALOG_MISMATCH")
     selected_ordinals = set(province["addedBoundaryOrdinals"])
-    if len(selected_ordinals) != 994:
+    if not selected_ordinals or len(selected_ordinals) != len(province["addedBoundaryOrdinals"]):
         raise ValueError("UNEXPECTED_ACCEPTED_PROVINCE_EDGE_SCOPE")
     province_ordinals = selected_ordinals
     metadata_pin = artifact("metadata/countries/CHN.json.gz")
@@ -199,6 +199,31 @@ def main(tolerance):
         "provenance": provenance_pin, "catalog": descriptor_pin, "detailIndex": detail_pin,
         "sourceDecision": source_decision_pin, "gameGeometry": game_geometry_pin,
         "selectedSource": decision["selected"]["artifact"], "previousProvinceGeometry": pin(PREVIOUS_PROVINCE_LOD), "topologyShards": []}
+    previous_display = {}
+    if previous_delivery:
+        delivery_pin = pin(previous_delivery)
+        delivery = json.loads(checked(delivery_pin))
+        previous_producer = json.loads(checked(delivery["producer"]))
+        previous_proof = json.loads(checked(delivery["verification"]))
+        if (previous_proof.get("pass") is not True or previous_producer.get("pass") is not True
+                or previous_proof["producer"] != delivery["producer"]
+                or previous_producer["catalogRef"] != descriptor["catalogRef"]
+                or previous_proof["baseCatalogRef"] != descriptor["catalogRef"]
+                or previous_producer["policy"]["toleranceMeters"] > tolerance):
+            raise ValueError("PREVIOUS_DISPLAY_NOT_ACCEPTED_FOR_COARSENING")
+        inputs.update({"previousDisplayDelivery": delivery_pin, "previousDisplayProducer": delivery["producer"],
+            "previousDisplayProof": delivery["verification"]})
+        for category in ("province", "micro"):
+            geometry_pin = previous_producer[category + "Geometry"]
+            if previous_proof["artifacts"][category] != geometry_pin:
+                raise ValueError("PREVIOUS_DISPLAY_PROOF_GEOMETRY_MISMATCH")
+            inputs["previousDisplay" + category.title() + "Geometry"] = geometry_pin
+            for feature in json.loads(checked(geometry_pin))["features"]:
+                if feature["id"] in previous_display:
+                    raise ValueError("DUPLICATE_PREVIOUS_DISPLAY_EDGE")
+                previous_display[feature["id"]] = feature["geometry"]["coordinates"]
+        if set(previous_display) != selected_ordinals:
+            raise ValueError("PREVIOUS_DISPLAY_NETWORK_SCOPE_CHANGED")
     for key, value in inputs.items():
         if key != "topologyShards":
             checked(value)
@@ -232,6 +257,10 @@ def main(tolerance):
     native_arrays = [np.asarray(g.coords, dtype=float) for g in originals]
     projected_arrays = [np.asarray(g.coords, dtype=float) for g in projected_originals]
     node_keys = {tuple(a[j]) for a in native_arrays[:len(selected)] for j in [0, -1]}
+    native_anchors = [Point(node) for node in sorted(node_keys)]
+    projected_anchors = [Point(project.transform(*node)) for node in sorted(node_keys)]
+    nesting_spaces = [("native", native_anchors, shapely.STRtree(native_anchors)),
+        ("3857", projected_anchors, shapely.STRtree(projected_anchors))]
     node_ports, locked_by_edge = {}, {}
     for i, coordinates in enumerate(native_arrays):
         locked = set()
@@ -274,35 +303,55 @@ def main(tolerance):
     baseline_stars_projected = star_signatures(projected_arrays)
     print("baseline contacts", len(baseline_native), "degree>=3", sum(len(p) >= 3 for p in node_ports.values()), flush=True)
     displays, projected_displays, reports = [], [], []
+    def fallback(i):
+        if previous_display:
+            coordinates = previous_display[selected[i]["ordinal"]]
+            indices = chain_indices(native_arrays[i], coordinates)
+            geometry = LineString(coordinates)
+            projected = shapely.transform(geometry, project.transform, interleaved=False)
+            deviation, witness = maximum_chain_deviation(projected_arrays[i], indices)
+            return indices, geometry, projected, deviation, witness, "previous-display-retained"
+        return list(range(len(native_arrays[i]))), originals[i], projected_originals[i], 0.0, None, "reverted"
+    def validate_candidate(i, indices):
+        old_native, old_projected = native_arrays[i], projected_arrays[i]
+        native_coordinates = old_native[indices]
+        display = LineString(native_coordinates)
+        projected_display = shapely.transform(display, project.transform, interleaved=False)
+        if not display.is_valid or display.length <= 0 or originals[i].is_closed != display.is_closed:
+            raise ValueError("INVALID_OR_CHANGED_CLOSURE")
+        if (originals[i].is_simple and not display.is_simple) or (projected_originals[i].is_simple and not projected_display.is_simple):
+            raise ValueError("NEW_SELF_INTERSECTION")
+        if originals[i].is_closed:
+            if len(set(map(tuple, native_coordinates))) < 3 or not Polygon(native_coordinates).is_valid:
+                raise ValueError("CLOSED_RING_COLLAPSED")
+            for space, before, after in [("native", old_native, native_coordinates), ("3857", old_projected, list(projected_display.coords))]:
+                old_area, new_area = ring_signed_area(before), ring_signed_area(after)
+                if old_area == 0 or new_area == 0 or (old_area > 0) != (new_area > 0):
+                    raise ValueError("CLOSED_RING_AREA_OR_WINDING_CHANGED:" + space)
+            for name, anchors, tree in nesting_spaces:
+                before = Polygon(old_native if name == "native" else old_projected)
+                after = Polygon(native_coordinates if name == "native" else list(projected_display.coords))
+                for anchor in set(map(int, tree.query(before))) | set(map(int, tree.query(after))):
+                    point = anchors[anchor]
+                    if (before.contains(point), before.covers(point)) != (after.contains(point), after.covers(point)):
+                        raise ValueError("CLOSED_LOOP_NESTING_CHANGED:" + name)
+        deviation, witness = maximum_chain_deviation(old_projected, indices)
+        if deviation > tolerance:
+            raise ValueError("FINITE_CHORD_DEVIATION_EXCEEDS_TOLERANCE")
+        return display, projected_display, deviation, witness
     for i, edge in enumerate(selected):
         original = originals[i]
         old_native = native_arrays[i]
         old_projected = projected_arrays[i]
-        reasons = []
+        reasons, fallback_decision = [], None
         try:
             indices = simplify_locked(old_projected, locked_by_edge[i], tolerance)
-            native_coordinates = [edge["geometry"]["coordinates"][n] for n in indices]
-            display = LineString(native_coordinates)
-            projected_display = shapely.transform(display, project.transform, interleaved=False)
-            if not display.is_valid or display.length <= 0 or original.is_closed != display.is_closed:
-                raise ValueError("INVALID_OR_CHANGED_CLOSURE")
-            if (original.is_simple and not display.is_simple) or (projected_originals[i].is_simple and not projected_display.is_simple):
-                raise ValueError("NEW_SELF_INTERSECTION")
-            if original.is_closed:
-                if len(set(tuple(p) for p in native_coordinates)) < 3 or not Polygon(native_coordinates).is_valid:
-                    raise ValueError("CLOSED_RING_COLLAPSED")
-                for space, before, after in [("native", old_native, native_coordinates), ("3857", old_projected, list(projected_display.coords))]:
-                    old_area, new_area = ring_signed_area(before), ring_signed_area(after)
-                    if old_area == 0 or new_area == 0 or (old_area > 0) != (new_area > 0):
-                        raise ValueError("CLOSED_RING_AREA_OR_WINDING_CHANGED:" + space)
-            deviation, witness = maximum_chain_deviation(old_projected, indices)
-            if deviation > tolerance:
-                raise ValueError("FINITE_CHORD_DEVIATION_EXCEEDS_TOLERANCE")
+            display, projected_display, deviation, witness = validate_candidate(i, indices)
+            if previous_display and len(indices) >= len(previous_display[edge["ordinal"]]):
+                raise ValueError("NO_FURTHER_VERTEX_REDUCTION")
         except ValueError as error:
             reasons.append({"code": str(error)})
-            indices = list(range(len(old_native)))
-            display, projected_display = original, projected_originals[i]
-            deviation, witness = 0.0, None
+            indices, display, projected_display, deviation, witness, fallback_decision = fallback(i)
         displays.append(display)
         projected_displays.append(projected_display)
         reports.append({"ordinal": edge["ordinal"], "category": "province" if edge["ordinal"] in province_ordinals else "micro", "originalEdgeId": edge["id"],
@@ -310,7 +359,7 @@ def main(tolerance):
             "displayVertices": len(indices), "retainedOriginalVertexIndices": indices,
             "protectedNetworkVertexIndices": locked_by_edge[i], "closed": bool(original.is_closed),
             "maximumOriginalChainVertexToFiniteChordMeters": deviation, "maximumDeviationWitness": witness,
-            "decision": "reverted" if reasons else "original-unchanged" if len(indices) == len(old_native) else "simplified",
+            "decision": fallback_decision or ("original-unchanged" if len(indices) == len(old_native) else "simplified"),
             "reasons": reasons})
     iterations = []
     print("DP candidates ready", len(selected), flush=True)
@@ -349,13 +398,103 @@ def main(tolerance):
         if not changed:
             break
         for n in sorted(changed):
-            displays[n], projected_displays[n] = originals[n], projected_originals[n]
-            reports[n].update({"decision": "reverted", "displayVertices": reports[n]["originalVertices"],
-                "retainedOriginalVertexIndices": list(range(reports[n]["originalVertices"])),
-                "maximumOriginalChainVertexToFiniteChordMeters": 0.0, "maximumDeviationWitness": None})
+            indices, displays[n], projected_displays[n], deviation, witness, fallback_decision = fallback(n)
+            reports[n].update({"decision": fallback_decision, "displayVertices": len(indices),
+                "retainedOriginalVertexIndices": indices,
+                "maximumOriginalChainVertexToFiniteChordMeters": deviation, "maximumDeviationWitness": witness})
             reports[n]["reasons"].extend(changed[n])
     else:
         raise ValueError("TOPOLOGY_REVERSION_DID_NOT_CONVERGE")
+    # Whole-arc rollback can leave thousands of vertices around a single tiny
+    # junction conflict. Retry each retained arc against the accepted network,
+    # with smaller budgets and, when needed, fixed original junction rays.
+    # Original envelopes index every possible chord because coordinates always
+    # remain an ordered original-vertex subsequence. No mutable-tree staleness.
+    native_tree, projected_tree = shapely.STRtree(originals), shapely.STRtree(projected_originals)
+    contact_neighbors = {i: set() for i in range(len(selected))}
+    for a, b in set(baseline_native) | set(baseline_projected):
+        if a < len(selected):
+            contact_neighbors[a].add(b)
+        if b < len(selected):
+            contact_neighbors[b].add(a)
+    affected_nodes = {i: set() for i in range(len(selected))}
+    for node, ports in node_ports.items():
+        for i, *_ in ports:
+            if i < len(selected):
+                affected_nodes[i].add(node)
+    retained_positions = [{j: at for at, j in enumerate(r["retainedOriginalVertexIndices"])} for r in reports]
+    current_native_arrays = [np.asarray(g.coords) for g in displays] + native_arrays[len(selected):]
+    current_projected_arrays = [np.asarray(g.coords) for g in projected_displays] + projected_arrays[len(selected):]
+    def local_network_matches(i, indices, display, projected_display):
+        candidate_positions = {j: at for at, j in enumerate(indices)}
+        for baseline, candidate, current, tree in [(baseline_native, display, displays, native_tree),
+                (baseline_projected, projected_display, projected_displays, projected_tree)]:
+            neighbors = contact_neighbors[i] | set(map(int, tree.query(candidate)))
+            for j in sorted(neighbors - {i}):
+                other = current[j] if j < len(selected) else (originals[j] if tree is native_tree else projected_originals[j])
+                pair = (min(i, j), max(i, j))
+                actual = intersection_signature(candidate, other) if i < j else intersection_signature(other, candidate)
+                if actual != baseline.get(pair):
+                    return False
+        for baseline, arrays, candidate in [(baseline_stars_native, current_native_arrays, np.asarray(display.coords)),
+                (baseline_stars_projected, current_projected_arrays, np.asarray(projected_display.coords))]:
+            for node in affected_nodes[i]:
+                rays = []
+                for edge_index, j, direction, original_other, label in node_ports[node]:
+                    coordinates = candidate if edge_index == i else arrays[edge_index]
+                    if edge_index < len(selected):
+                        positions = candidate_positions if edge_index == i else retained_positions[edge_index]
+                        at = positions[j]
+                        other = at + direction
+                        while 0 <= other < len(coordinates) and np.array_equal(coordinates[other], coordinates[at]):
+                            other += direction
+                        if not 0 <= other < len(coordinates):
+                            return False
+                        rays.append((label, coordinates[at], coordinates[other]))
+                    else:
+                        rays.append((label, coordinates[j], coordinates[original_other]))
+                if cyclic_signature(rays) != baseline[node]:
+                    return False
+        return True
+    refinements = []
+    for i, report in enumerate(reports):
+        if report["decision"] not in ("previous-display-retained", "reverted") or report["displayVertices"] <= len(locked_by_edge[i]):
+            continue
+        tried, seen, accepted = 0, set(), None
+        # Use the same nationwide sequence, never a region-specific exception.
+        for budget in [tolerance / 2 ** n for n in range(7)]:
+            for keep_rays in (False, True):
+                locks = set(locked_by_edge[i])
+                if keep_rays:
+                    for node in affected_nodes[i]:
+                        locks.update(port[3] for port in node_ports[node] if port[0] == i)
+                try:
+                    indices = simplify_locked(projected_arrays[i], sorted(locks), budget)
+                    signature = tuple(indices)
+                    if signature in seen or len(indices) >= report["displayVertices"]:
+                        continue
+                    seen.add(signature)
+                    tried += 1
+                    display, projected_display, deviation, witness = validate_candidate(i, indices)
+                    if local_network_matches(i, indices, display, projected_display):
+                        accepted = (indices, display, projected_display, deviation, witness, budget, keep_rays)
+                        break
+                except ValueError:
+                    continue
+            if accepted:
+                break
+        report["localRetryCandidates"] = tried
+        if accepted:
+            indices, displays[i], projected_displays[i], deviation, witness, budget, keep_rays = accepted
+            refinements.append({"ordinal": report["ordinal"], "beforeVertices": report["displayVertices"],
+                "afterVertices": len(indices), "toleranceMeters": budget, "originalJunctionRaysFixed": keep_rays})
+            report.update({"decision": "simplified", "displayVertices": len(indices), "retainedOriginalVertexIndices": indices,
+                "maximumOriginalChainVertexToFiniteChordMeters": deviation, "maximumDeviationWitness": witness,
+                "localRefinement": refinements[-1]})
+            retained_positions[i] = {j: at for at, j in enumerate(indices)}
+            current_native_arrays[i] = np.asarray(displays[i].coords)
+            current_projected_arrays[i] = np.asarray(projected_displays[i].coords)
+    print("local retained-arc refinements", len(refinements), "vertices removed", sum(r["beforeVertices"] - r["afterVertices"] for r in refinements), flush=True)
     features = []
     for edge, geometry, report in zip(selected, displays, reports):
         output_geometry = mapping(geometry)
@@ -365,7 +504,9 @@ def main(tolerance):
         features.append({"type": "Feature", "id": edge["ordinal"], "properties": {}, "geometry": output_geometry})
     province_features = [f for f in features if f["id"] in province_ordinals]
     micro_features = [f for f in features if f["id"] not in province_ordinals]
-    if len(province_features) != 994 or len(micro_features) != 7568:
+    if previous_display and any(len(f["geometry"]["coordinates"]) > len(previous_display[f["id"]]) for f in features):
+        raise ValueError("DISPLAY_VERTEX_COUNT_REGRESSION")
+    if len(province_features) != len(province_ordinals) or len(province_features) + len(micro_features) != len(selected_ordinals):
         raise ValueError("OUTPUT_LAYER_PARTITION_CHANGED")
     province_bytes = encoded({"type": "FeatureCollection", "features": province_features})
     micro_bytes = encoded({"type": "FeatureCollection", "features": micro_features})
@@ -374,9 +515,9 @@ def main(tolerance):
     for r in reports:
         if r["category"] != "province":
             continue
-        previous_geometry = previous_province[r["ordinal"]]
-        r["previousProvinceGeometrySha256"] = geometry_hash(previous_geometry)
-        r["previousProvinceVertices"] = len(previous_geometry["coordinates"])
+        previous_geometry = previous_province.get(r["ordinal"])
+        r["previousProvinceGeometrySha256"] = geometry_hash(previous_geometry) if previous_geometry else None
+        r["previousProvinceVertices"] = len(previous_geometry["coordinates"]) if previous_geometry else None
         r["sameAsPreviousProvinceGeometry"] = r["displayGeometrySha256"] == r["previousProvinceGeometrySha256"]
         if not r["sameAsPreviousProvinceGeometry"]:
             previous_changed.append(r["ordinal"])
@@ -387,11 +528,14 @@ def main(tolerance):
         "toleranceMeters": tolerance, "maximumDeviationMeters": tolerance, "simplify": "Douglas-Peucker/preserve_topology=True",
         "allOriginalCatalogEdgeEndpointsFixed": True, "allOriginalSharedNetworkVerticesFixed": True,
         "retainedNativeCoordinates": "exact ordered original vertex subsequence; never inverse-projected",
-        "tileSizeCSSPixels": 512, "worldWidthMeters": WORLD_WIDTH, "maximumApplicableZoomExclusive": 7,
+        "tileSizeCSSPixels": 512, "worldWidthMeters": WORLD_WIDTH, "displayUse": "single simplified representation at every zoom",
         "continuousDeviationBasis": "For each retained chord, every original subchain vertex is within the finite-segment distance bound. Identical endpoints, convexity along each original segment and continuous longitudinal projection bound both continuous polyline directions. IEEE-double measured values are independently rechecked; no gameplay numeric tolerance changes.",
         "topologyGuard": "Exact normalized intersection geometry of every selected-selected and selected-protected country/coast pair is identical to baseline in both CRS84 and EPSG3857. Related simplified arcs revert in full until stable.",
         "endpointStarGuard": "Cyclic port order and exact ray-tie sets at every original internal-edge endpoint are identical in native and EPSG3857 coordinates. Protected country/coast edge interior vertices contribute both ray ports. Angular predicates use exact dyadic Fraction arithmetic; no angular epsilon.",
         "closedLoopGuard": "Original closed individual-edge rings retain validity, nonzero exact-dyadic signed shoelace area and winding in native and EPSG3857 coordinates.",
+        "closedLoopNestingGuard": "Every fixed original internal endpoint retains its interior/boundary/exterior relationship to each changed closed arc in native and EPSG3857 coordinates.",
+        "previousAcceptedDisplayFallback": bool(previous_display), "noEdgeVertexIncreaseFromPreviousDisplay": bool(previous_display),
+        "retainedArcRetry": "Each rejected arc retries seven halved budgets, with optional fixed original junction rays, against the current accepted network. Every accepted retry preserves all original pair contacts, endpoint stars, loop nesting and the global deviation bound.",
         "unchanged": ["authoritative-game-cells", "game-edges", "administrative-parents", "catalog", "country-coast-lines", "KOR", "PRK"]}
     for key, value in inputs.items():
         for a in value if key == "topologyShards" else [value]:
@@ -408,13 +552,14 @@ def main(tolerance):
             "displayVertices": sum(r["displayVertices"] for r in selected_reports),
             "simplifiedEdges": sum(r["decision"] == "simplified" for r in selected_reports),
             "unchangedEdges": sum(r["decision"] == "original-unchanged" for r in selected_reports),
+            "previousDisplayRetainedEdges": sum(r["decision"] == "previous-display-retained" for r in selected_reports),
             "revertedEdges": sum(r["decision"] == "reverted" for r in selected_reports),
             "maximumChainDeviationMercatorMeters": max(r["maximumOriginalChainVertexToFiniteChordMeters"] for r in selected_reports)}
     report = {"schemaVersion": "chn-internal-line-lod-producer-v1", "pass": True, "countryId": "CHN", "administrativeTruthClaim": False,
         "catalogRef": descriptor["catalogRef"], "inputs": inputs, "code": code, "policy": policy,
         "provinceGeometry": province_geometry_pin, "microGeometry": micro_geometry_pin,
         "sourceBasis": {"selectedSourceRevision": decision["selected"]["revision"], "license": decision["selected"]["license"]["id"],
-            "temporalLimitation": decision["selected"]["temporalLimitation"], "method": "All 8562 accepted CHN internal arcs share one offline simplification/topology pass; source identities and resolution are unchanged. Delivery is separated into province994 and debugmicro7568."},
+            "temporalLimitation": decision["selected"]["temporalLimitation"], "method": "All accepted CHN internal arcs share one offline simplification/topology pass; source identities and resolution are unchanged. Province membership follows the pinned presentation index, with remaining arcs delivered as debug micro boundaries."},
         "runtime": {"shapely": shapely.__version__, "GEOS": shapely.geos_version_string, "pyproj": pyproj.__version__, "PROJ": pyproj.proj_version_str},
         "topology": {"protectedCountryCoastEdges": len(protected), "originalNativeContactPairs": len(baseline_native),
             "originalProjectedContactPairs": len(baseline_projected), "finalNativeIntersectionSetsIdentical": True,
@@ -422,9 +567,11 @@ def main(tolerance):
             "degreeThreePlusEndpointStars": sum(len(p) >= 3 for p in node_ports.values()),
             "finalNativeEndpointStarOrderAndTiesIdentical": True, "finalProjectedEndpointStarOrderAndTiesIdentical": True,
             "iterations": iterations, "newCrossingsContactsOrOverlaps": 0},
+        "retainedArcRefinements": refinements,
         "summary": {"edges": len(selected), "originalVertices": sum(r["originalVertices"] for r in reports),
             "displayVertices": sum(r["displayVertices"] for r in reports), "simplifiedEdges": sum(r["decision"] == "simplified" for r in reports),
             "unchangedEdges": sum(r["decision"] == "original-unchanged" for r in reports), "revertedEdges": sum(r["decision"] == "reverted" for r in reports),
+            "previousDisplayRetainedEdges": sum(r["decision"] == "previous-display-retained" for r in reports),
             "maximumChainDeviationMercatorMeters": max_error,
             "categoryProvince": category_summary("province"), "categoryMicro": category_summary("micro"),
             "CSSPixelDeviationAtPitchZero": [{"zoom": z, "maximumObserved": max_error * 512 * 2 ** z / WORLD_WIDTH,
@@ -435,8 +582,8 @@ def main(tolerance):
         "provinceEdgeOrdinals": sorted(province_ordinals), "microEdgeOrdinals": sorted(selected_ordinals - province_ordinals),
         "edges": reports, "geometryHashEncoding": "SHA256 of JSON sorted keys, compact separators, UTF8 and trailing LF",
         "limitations": ["Display line LOD only; it does not change or claim exact fine polygon fill boundaries.",
-            "300m DP budget excludes later vector-tile quantization and pitched-view perspective; delivery verifier must audit those separately.",
-            "Exact lines remain available at zoom>=7. Province loading and debug-micro loading must remain separate. No auxiliary line replaces operational fronts or national/coast geometry."]}
+            "The configured Mercator DP budget excludes vector-tile quantization and pitched-view perspective; delivery verifier audits those separately.",
+            "Simplified province and micro lines are the only internal boundary presentation at every zoom. Operational fronts and national/coast geometry remain authoritative."]}
     report_pin = immutable(out + "/producer-report.json", encoded(report))
     print(json.dumps({"provinceGeometry": province_geometry_pin, "microGeometry": micro_geometry_pin, "report": report_pin,
         "summary": report["summary"], "topology": report["topology"], "provinceChangeFromPrevious": report["provinceChangeFromPrevious"]}), flush=True)
@@ -445,4 +592,7 @@ def main(tolerance):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tolerance", type=float, default=300)
-    main(parser.parse_args().tolerance)
+    parser.add_argument("--province-index", default=PROVINCE_INDEX)
+    parser.add_argument("--previous-delivery")
+    args = parser.parse_args()
+    main(args.tolerance, args.province_index, args.previous_delivery)

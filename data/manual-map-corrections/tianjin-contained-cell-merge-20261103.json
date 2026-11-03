@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "manual-contained-cell-merges-v1",
+  "operations": [
+    {
+      "id": "tianjin-southern-detached-parcel-20261103",
+      "countryId": "CHN",
+      "removeCellId": "territory:catalog:0719d07c04a63bb0c1dd4d7fe26bccc8972a767facb8d9ef02552dd4dacb99a3",
+      "mergeIntoCellId": "territory:catalog:cd77a205ccdd3ef9427a18f1ecf005804927f5d5a9db6d15f03888eb341cf416",
+      "expectedRemoveGeometrySha256": "4de62d5d445cb4deeb76bca395d207cbb2b94e9a0cc0ee5ee7ec61055c23c2fa",
+      "expectedRecipientGeometrySha256": "36343cbcf87906acf3c0dad0f74fdb50ff9efe892e34aebcd4796d31a53e7231",
+      "maximumRemovedAreaKm2": 2,
+      "reason": "User requested merging the suspected detached Binhai source parcel into the surrounding Huanghua cell after official-map comparison. This is a game correction, not a certified historical administrative finding.",
+      "evidenceReport": "reports/tianjin-detached-parcel-audit-20261103/comparison-report.json"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "chn-province-link-references-v1",
+  "accessedDate": "2026-11-02",
+  "scope": "Display membership corrections for two existing source families. Preserve all accepted country outlines, game polygons, authoritative administrative parents, and unrelated presentation memberships.",
+  "administrativeTruthClaimForAdjustedGeometry": false,
+  "families": [
+    {
+      "sourceFeatureId": "62558664B63578283386767",
+      "sourceName": "Zayü County",
+      "localName": "察隅县",
+      "renderProvinceId": "macro:CHN:CN-54",
+      "provinceName": "Tibet Autonomous Region",
+      "cellOrdinals": [3747],
+      "references": [
+        {
+          "publisher": "Chayu County People's Government",
+          "url": "https://chayu.gov.cn/chyx/xwzx/201901/5d621c5db5474e37b74a9ace3bb59276.shtml",
+          "publicationDate": "2021-05-18",
+          "observation": "The administrative history places Chayu under Nyingchi since 1986 and records its continuation under Nyingchi City in 2015."
+        },
+        {
+          "publisher": "Chayu County People's Government",
+          "url": "https://chayu.gov.cn/chyx/xwzx/zjcy.shtml",
+          "observation": "The county profile places it in southeastern Tibet, bordering Deqin and Gongshan in Yunnan and Myanmar to the south. This corroborates the requested gap location."
+        }
+      ],
+      "geometryLimitation": "Raw county and ADM1 polygons have different country-outline coverage. Use corroborated parent identity for the existing whole gameplay family; do not import the raw county outline or change any country boundary."
+    },
+    {
+      "sourceFeatureId": "62558664B94418753148767",
+      "sourceName": "Junshan District",
+      "localName": "君山区",
+      "renderProvinceId": "macro:CHN:CN-43",
+      "provinceName": "Hunan",
+      "cellOrdinals": [5174],
+      "references": [
+        {
+          "publisher": "Yueyang Municipal Government",
+          "url": "https://www.yueyang.gov.cn/tzcjswj/28873/28879/content_666648.html",
+          "publicationDate": "2021-06-16",
+          "observation": "The district profile identifies Junshan as part of Yueyang in Hunan, established in 1996."
+        },
+        {
+          "publisher": "Junshan District People's Government",
+          "url": "https://www.junshan.gov.cn/32415/32443/54804/content_1806685.html",
+          "publicationDate": "2021-04-12",
+          "representedYear": 2020,
+          "observation": "The district publishes its 2020 statistical bulletin, corroborating the district identity at the scenario period."
+        }
+      ],
+      "geometryLimitation": "The raw family is almost entirely within the Hunan source polygon. Its existing game adjustments narrowly exceed the previous overlap-only classification cap; official parent evidence resolves display identity without changing those polygons."
+    }
+  ]
+}

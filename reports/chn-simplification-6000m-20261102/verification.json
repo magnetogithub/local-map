@@ -1,0 +1,86 @@
+{
+  "pass": true,
+  "scope": "All 8562 internal China boundaries, including all 1002 province and 7560 micro edges. No region-specific rendering or simplification exceptions.",
+  "toleranceMercatorMeters": {
+    "previous": 2000,
+    "current": 6000
+  },
+  "vertices": {
+    "previous": 61807,
+    "current": 32758,
+    "reductionPercent": 46.99953079748248,
+    "province": {
+      "previous": 6753,
+      "current": 3192
+    },
+    "micro": {
+      "previous": 55054,
+      "current": 29566
+    }
+  },
+  "edgeChanges": {
+    "reduced": 6573,
+    "retained": 1989,
+    "increased": 0
+  },
+  "previousAcceptedDisplayFallback": true,
+  "authorityUnchanged": {
+    "allPublishedArtifactsRechecked": 6036,
+    "catalogOrderAdministrativeParentsCountryGeometryAndMilitaryInputsUnchanged": true,
+    "originalCatalogLedgerSha256": "437fc172fef4d3c7fdfd47f81dda9e4dc1ab0c1f1c9becb6dbca07f5f685723e",
+    "packageBytes": 108943102
+  },
+  "checks": {
+    "independentWholeNetwork": {
+      "path": "reports/chn-internal-render-lod-20261030/verification/simplified-6000m-preserved-20261102.json",
+      "sha256": "164d0ebd13fa885af98b0cf032eaf0adcf607662e06d63fbc258eb264290f7f8",
+      "byteLength": 6508140
+    },
+    "negativeControls": {
+      "closedLoopInversion": true,
+      "forgedPreviousDisplayFallback": true,
+      "hiddenInteriorDistancePeak": true,
+      "inventedCoordinate": true,
+      "movedEndpoint": true,
+      "newProtectedContact": true,
+      "overBudgetChord": true,
+      "previousDisplayVertexIncrease": true,
+      "sharedNodeSectorFlip": true
+    },
+    "previousDisplayComparison": {
+      "currentVertices": 32758,
+      "edgesChecked": 8562,
+      "edgesWithMoreVertices": 0,
+      "previousVertices": 61807
+    },
+    "browser": {
+      "path": "reports/chn-simplification-6000m-20261102/browser-verification.json",
+      "views": 16,
+      "koreaCloseScreenshotsIdentical": true
+    },
+    "vitest": {
+      "files": 4,
+      "tests": 109,
+      "pass": true
+    },
+    "typescript": true,
+    "eslint": true
+  },
+  "delivery": {
+    "path": "data/derived/chn-2020/internal-line-delivery-c0833a8e47165cdfabd6/delivery.json",
+    "sha256": "c0833a8e47165cdfabd66bdb8b7819ac4d1bf7a3b5b104ca1f3f1f74f144e2e2",
+    "byteLength": 831582
+  },
+  "reproduce": [
+    "python scripts/chn-2020/build-chn-internal-line-lod.py --tolerance 6000 --province-index data/derived/chn-2020/province-render-9cc4238ba7e460d4620f/index.json --previous-delivery data/derived/chn-2020/internal-line-delivery-5eda5f6bb9cdc93a7ded/delivery.json",
+    "python scripts/chn-2020/verify-chn-internal-line-lod.py --producer-report data/derived/chn-2020/internal-line-lod-8e41cbf1d60f8d83fc0a/producer-report.json --tolerance 6000 --output reports/chn-internal-render-lod-20261030/verification/simplified-6000m-preserved-20261102.json",
+    "node scripts/chn-2020/package-internal-line-lod.mjs --producer data/derived/chn-2020/internal-line-lod-8e41cbf1d60f8d83fc0a/producer-report.json --verification reports/chn-internal-render-lod-20261030/verification/simplified-6000m-preserved-20261102.json"
+  ],
+  "rejectedInitialCandidate": {
+    "producer": "data/derived/chn-2020/internal-line-lod-ce4fed29737a894a68f0/producer-report.json",
+    "proof": "reports/chn-internal-render-lod-20261030/verification/simplified-6000m-20261102.json",
+    "published": false,
+    "reason": "Changed closed-loop containment in the independent check; also allowed more vertices on some topology reverts. The accepted version protects loop containment and falls back to the previous accepted simplified arc."
+  },
+  "limitations": "Auxiliary internal line display only. Graph IDs, endpoints, connectivity, original game geometry, country/coast lines and other countries retain the accepted baseline. The 6000m budget is measured in EPSG:3857 and is not a geographic survey accuracy claim."
+}

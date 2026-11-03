@@ -101,6 +101,23 @@ src/lib/map/operational-delivery-contract.ts -text
 reports/hover-debug-20261030/** -text
 reports/chn-render-lod-20261030/** -text
 reports/chn-internal-render-lod-20261030/** -text
+reports/chn-coast-province-fix-20261102/** -text
+reports/chn-province-links-20261102/** -text
+reports/chn-simplification-6000m-20261102/** -text
+reports/chn-simplification-middle-20261102/** -text
+reports/chn-curved-boundaries-20261102/** -text
+reports/chn-source-rebuild-20261103/** -text
+reports/tianjin-detached-parcel-audit-20261103/** -text
+data/manual-map-corrections/** -text
+data/derived/manual-cell-merges/** -text
+data/derived/manual-cell-merges/**/joined-world-input.json filter=lfs diff=lfs merge=lfs -text
+data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/** -text
+data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/detail/countries/CHN.geojson.gz filter=lfs diff=lfs merge=lfs -text
+scripts/apply-contained-cell-merges.py -text
+scripts/verify-contained-cell-merges.py -text
+scripts/catalog-cell-merge-gate.mjs -text
+scripts/rebase-contained-merge-display.mjs -text
+scripts/verify-contained-merge-display.mjs -text
 src/lib/map/chn-boundary-display-lod.server.ts -text
 src/lib/map/operational-pointer-hover.ts -text
 src/lib/map/operational-debug-boundary-scope.ts -text

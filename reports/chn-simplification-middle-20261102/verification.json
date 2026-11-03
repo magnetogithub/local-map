@@ -1,0 +1,116 @@
+{
+  "pass": true,
+  "scope": "All 8562 internal China arcs: 1002 province boundaries and 7560 micro boundaries. The same global rule and retained-arc retry apply nationwide.",
+  "resolutionChoice": {
+    "target": "Approximately midway between the two previous displays, with remaining detailed rollback arcs simplified safely.",
+    "toleranceMercatorMeters": 2500,
+    "vertices": {
+      "beforeLastChange": {
+        "all": 61807,
+        "province": 6753,
+        "micro": 55054
+      },
+      "tooCoarse": {
+        "all": 32758,
+        "province": 3192,
+        "micro": 29566
+      },
+      "middle": {
+        "all": 45607,
+        "province": 5692,
+        "micro": 39915
+      }
+    },
+    "removedDetailRestoredFraction": 0.4423215945471445
+  },
+  "retainedArcRepair": {
+    "method": "Each rejected arc retries seven halved budgets, with optional fixed original junction rays, against the current accepted network. Every accepted retry preserves all original pair contacts, endpoint stars, loop nesting and the global deviation bound.",
+    "refinedArcs": 301,
+    "verticesRemovedFromWholeArcRollbacks": 6943,
+    "unchangedOriginalArcsWithMoreThan10Vertices": [],
+    "exampleWuhanArc": {
+      "afterVertices": 16,
+      "beforeVertices": 1491,
+      "ordinal": 10186,
+      "originalJunctionRaysFixed": true,
+      "toleranceMeters": 2500
+    },
+    "limitation": "Fixed junctions, exact contacts and closed-loop containment can require different retained vertex densities; vertex counts are a display-complexity proxy."
+  },
+  "authorityUnchanged": {
+    "allPublishedArtifactsRechecked": 6036,
+    "catalogOrderAdministrativeParentsCountryGeometryAndMilitaryInputsUnchanged": true,
+    "originalCatalogLedgerSha256": "437fc172fef4d3c7fdfd47f81dda9e4dc1ab0c1f1c9becb6dbca07f5f685723e",
+    "packageBytes": 108943102
+  },
+  "checks": {
+    "wholeNetwork": {
+      "path": "reports/chn-internal-render-lod-20261030/verification/simplified-middle-2500m-20261102.json",
+      "sha256": "d8ea50df289fe15448a221318f83ad2393998b92ecd23c6f5f823a349b67c37f",
+      "byteLength": 6607109
+    },
+    "independentChecks": {
+      "closedLoopOrientationAndDimension": true,
+      "continuousDPWithinConfiguredBudgetAllArcs": true,
+      "exactAll8562IdsAndSourceIdentity": true,
+      "exactPinnedProvinceMicroPartition": true,
+      "individualClosedLoopNestingAgainstAllFixedEndpoints": true,
+      "nativeCoordinateSubsetEndpointsAllArcs": true,
+      "originalCatalogFilesUnchanged": true,
+      "representativeActualPBFDistanceAndFillRingBudgets": true,
+      "sharedNodeCyclicOrders": true,
+      "wholeNetworkNoNewSelfCrossOrInternalCountryCoastContacts": true
+    },
+    "negativeControls": {
+      "closedLoopInversion": true,
+      "forgedPreviousDisplayFallback": true,
+      "hiddenInteriorDistancePeak": true,
+      "inventedCoordinate": true,
+      "movedEndpoint": true,
+      "newProtectedContact": true,
+      "overBudgetChord": true,
+      "previousDisplayVertexIncrease": true,
+      "sharedNodeSectorFlip": true
+    },
+    "browser": {
+      "report": {
+        "path": "reports/chn-simplification-middle-20261102/browser-verification.json",
+        "sha256": "5d856c488e4658a6062c971bfd9023d6b62f38c99a7558503242ce84bd5400c7",
+        "byteLength": 111565
+      },
+      "views": 18,
+      "koreaCloseScreenshotsIdentical": true
+    },
+    "vitest": {
+      "files": 4,
+      "tests": 109,
+      "pass": true
+    },
+    "typescript": true,
+    "eslint": true
+  },
+  "delivery": {
+    "path": "data/derived/chn-2020/internal-line-delivery-27d1f5131d82e9dd4b66/delivery.json",
+    "sha256": "27d1f5131d82e9dd4b66b3f7e22589d9de612272f8e0dfc1d3ab6ac3ed1bdf30",
+    "byteLength": 1134050
+  },
+  "inputs": {
+    "earlier": {
+      "path": "data/derived/chn-2020/internal-line-delivery-5eda5f6bb9cdc93a7ded/delivery.json",
+      "sha256": "5eda5f6bb9cdc93a7ded143839378a9a1ba898311f180e8b1f36b91ce98a9c23",
+      "byteLength": 1474562
+    },
+    "tooCoarse": {
+      "path": "data/derived/chn-2020/internal-line-delivery-c0833a8e47165cdfabd6/delivery.json",
+      "sha256": "c0833a8e47165cdfabd66bdb8b7819ac4d1bf7a3b5b104ca1f3f1f74f144e2e2",
+      "byteLength": 831582
+    }
+  },
+  "reproduce": [
+    "python scripts/chn-2020/build-chn-internal-line-lod.py --tolerance 2500 --province-index data/derived/chn-2020/province-render-9cc4238ba7e460d4620f/index.json --previous-delivery data/derived/chn-2020/internal-line-delivery-5eda5f6bb9cdc93a7ded/delivery.json",
+    "python scripts/chn-2020/verify-chn-internal-line-lod.py --producer-report data/derived/chn-2020/internal-line-lod-3446075fcbd4b5ce9d30/producer-report.json --tolerance 2500 --output reports/chn-internal-render-lod-20261030/verification/simplified-middle-2500m-20261102.json",
+    "node scripts/chn-2020/package-internal-line-lod.mjs --producer data/derived/chn-2020/internal-line-lod-3446075fcbd4b5ce9d30/producer-report.json --verification reports/chn-internal-render-lod-20261030/verification/simplified-middle-2500m-20261102.json",
+    "node reports/chn-simplification-middle-20261102/verify-browser.cjs http://127.0.0.1:3192",
+    "node reports/chn-simplification-middle-20261102/finalize-verification.cjs"
+  ]
+}

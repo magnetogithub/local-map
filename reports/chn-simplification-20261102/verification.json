@@ -1,0 +1,67 @@
+{
+  "pass": true,
+  "change": "Simplify China internal display lines at every zoom",
+  "toleranceMercatorMeters": {
+    "previous": 300,
+    "current": 2000
+  },
+  "vertices": {
+    "previous": 207862,
+    "current": 61807,
+    "reductionPercent": 70.26536836939893
+  },
+  "producer": "data/derived/chn-2020/internal-line-lod-f96472e07d274aebd49a/producer-report.json",
+  "independentProof": "reports/chn-internal-render-lod-20261030/verification/simplified-2000m-20261102.json",
+  "browser": {
+    "report": "reports/chn-simplification-20261102/after.json",
+    "errors": [],
+    "zooms": [
+      {
+        "label": "province",
+        "zoom": 4.8,
+        "provinceVertices": 6703,
+        "microVertices": 55104,
+        "writes": [
+          1,
+          1
+        ],
+        "microActive": false,
+        "edgeCount": 0
+      },
+      {
+        "label": "micro",
+        "zoom": 5.7,
+        "provinceVertices": 6703,
+        "microVertices": 55104,
+        "writes": [
+          1,
+          1
+        ],
+        "microActive": true,
+        "edgeCount": 10318
+      },
+      {
+        "label": "high-zoom",
+        "zoom": 7.2,
+        "provinceVertices": 6703,
+        "microVertices": 55104,
+        "writes": [
+          1,
+          1
+        ],
+        "microActive": true,
+        "edgeCount": 10318
+      }
+    ]
+  },
+  "checks": {
+    "vitest": {
+      "files": 3,
+      "tests": 103,
+      "pass": true
+    },
+    "typescript": true,
+    "eslint": true
+  },
+  "scope": "China internal display lines only; base catalog artifacts and game geometry are byte-identical to the accepted baseline."
+}

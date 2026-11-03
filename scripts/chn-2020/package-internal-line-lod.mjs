@@ -14,7 +14,14 @@ const readPin = expected => {
 };
 const producerPin = pin(option('--producer')), verificationPin = pin(option('--verification'));
 const producer = JSON.parse(readPin(producerPin)), verification = JSON.parse(readPin(verificationPin));
-if (!producer.pass || producer.schemaVersion !== 'chn-internal-line-lod-producer-v1' || !verification.pass || verification.schemaVersion !== 'chn-internal-line-lod-independent-v1') throw Error('UNACCEPTED_LOD');
+const acceptedProofSchemas = {
+  'chn-internal-line-lod-producer-v1': 'chn-internal-line-lod-independent-v1',
+  'chn-internal-line-curves-producer-v1': 'chn-internal-line-curves-independent-v1',
+  'chn-internal-line-source-producer-v1': 'chn-internal-line-source-independent-v1',
+  'chn-internal-line-rebase-producer-v1': 'chn-internal-line-rebase-independent-v1',
+};
+const expectedProofSchema = acceptedProofSchemas[producer.schemaVersion];
+if (!producer.pass || !verification.pass || !expectedProofSchema || expectedProofSchema !== verification.schemaVersion) throw Error('UNACCEPTED_LOD');
 for (const [key, identity] of Object.entries(producer.inputs)) {
   for (const entry of Array.isArray(identity) ? identity : [identity]) readPin(entry);
 }

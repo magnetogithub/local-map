@@ -1,0 +1,458 @@
+# PROMPT 20 — 공통 state·province 지리 데이터 계약과 조회 기반
+
+작성 기준: 2026-11-03, 현재 저장소 루트.
+
+이 문서는 메인 프로젝트의 GPT 프롬프트·조회 도구 개선과 국가별 세부 프로빈스 추가가 같은 데이터 계약을 사용하도록 만드는 실행 프롬프트다. 앞선 계획의 1번인 “state·province 공통 데이터 계약 확정”을 코드·메타데이터·기존 조회 경로까지 연결하는 범위다.
+
+프롬프트 작성 요청에는 이 문서만 작성한다. 애플리케이션 구현·데이터 생성·다운로드·카탈로그 변경·서버 실행을 시작하지 않는다.
+“20 실행”은 5절의 의존관계에 따라 20-01부터 20-09까지 수행한다. 공통 계약 이후 독립된 분기는 병렬로 진행할 수 있다. “20-XX만 실행”은 해당 태스크만 수행하고 검증된 선행 산출물을 재사용한다.
+“20번 다음 태스크”는 실제 완료 근거를 확인한 뒤 실행 가능한 첫 미완료 태스크 하나를 수행한다. 이 문서가 있다는 사실만으로 선행 구현을 완료 처리하지 않는다.
+
+태스크의 순서·의존관계·산출물은 이 문서 5절의 다이어그램을 따른다. 각 태스크의 상세 지시와 완료 조건은 6절에 있다.
+이번 작업에서는 기존 영토 ID와 geometry를 유지한다. 새 국가 추가와 카탈로그 발행 파이프라인 범용화는 후속 작업으로 남긴다.
+
+## 1. 목표와 용어
+
+목표는 다음 네 가지다.
+
+1. 국가 → state(광역 구역) → province(게임의 세부 영토)를 같은 계약으로 식별한다.
+2. 이름·한영 표기·별칭·상위 소속·원본 근거·미확정 여부를 조회 가능한 정적 메타데이터로 제공한다.
+3. GPT가 등록된 지명을 찾고 향후 공간 의도를 해석할 때 사용할 공통 읽기 기반을 연결한다.
+4. 다음 국가의 데이터 작업자가 메인 조회 코드를 국가별로 수정하지 않고 동일한 계약에 맞는 자료를 인계할 수 있게 한다.
+
+용어:
+
+- Country: 기존 국가 identity. 국가 이름이나 ISO 표기만으로 새 CountryId를 발급하지 않는다.
+- State: 이 프로젝트의 광역 지리 분류. 실제 나라의 도·주·성 등 검증된 원본 계층에 대응한다. 실제 행정 체계의 단계와 명칭은 국가별로 다를 수 있다.
+- Province: 이번 계약에서는 기존 TerritoryId를 가진 최소 게임 영토, 즉 operational cell 하나다. ProvinceId는 기존 TerritoryId와 같은 identity를 사용한다.
+- 원본 하위 지역: 도시·시군구·현 등 원본 feature 하나. 원본 지역 하나가 게임 province 여러 개에 대응할 수 있다.
+- 이름 묶음: 하나의 검증된 원본 지역을 검색해 그에 연결된 province 집합을 반환하는 보조 인덱스다. 새 게임 영토나 새 polygon을 뜻하지 않는다.
+- 소속 미확정: 영토는 존재하지만 공식 state 부모를 입증하지 못한 상태다. 기존 residual 묶음을 공식 state로 재분류하지 않는다.
+- coarse: 해당 국가에 세부 원본을 추가하지 않아 현재 게임 영토의 정밀도가 낮은 상태다. 메타데이터를 붙였다고 fine 구현으로 보고하지 않는다.
+
+모든 province는 안정적인 표시 이름을 제공한다. 원본에서 확인한 이름과 게임용 대체 표시 이름은 구별하며, 실제 지명이 없는 조각에 공식 지명을 만들어 붙이지 않는다.
+이름은 표시와 검색에 사용하고 identity와 membership은 ID 및 검증된 연결로 결정한다.
+
+## 2. 시작 전 확인과 범위 경계
+
+- AGENTS.md와 현재 git status를 먼저 확인한다. Next 관련 코드를 작성하기 전 설치된 node_modules/next/dist/docs/의 관련 문서를 읽는다.
+- 기준 카탈로그는 항상 data/runtime/operational-catalog/current.json에서 읽는다. 과거 보고서의 버전·셀 개수·국가별 요약을 실행 상수나 합격 개수로 복사하지 않는다.
+- 작성 중에도 다른 작업이 활성 카탈로그를 갱신할 수 있다. descriptor와 실제 국가 metadata를 대조하고, 기준선 변경 시 영향 범위만 다시 연결한다.
+- 기존 사용자 변경을 reset/checkout으로 덮어쓰지 않는다. 이미 진행 중인 국가별 경계·중국 표시 자료 작업을 대신 수정하거나 원복하지 않는다.
+- World V3 + Simulation V2, TerritoryEntityV3의 소유권·통제권, 원자적 commit, revision/delta/stale 검사, undo/redo를 유지한다.
+- 이름과 행정 소속 메타데이터를 게임의 mutable 영토 상태와 분리한다. TerritoryEntityV3에 정적 이름을 중복 저장하거나 state ID를 소유국으로 해석하지 않는다.
+- cell/edge ID와 ordinal, 좌표, polygon, topology, 기존 행정 membership과 seed lineage를 변경하지 않는다.
+- previousParentOrdinal과 seedParentIds는 초기 상태 연결 근거다. 이를 공식 state 부모나 도시 이름의 근거로 사용하지 않는다.
+- 중국의 표시용 광역 묶음은 공식 행정 소속 검증과 구별한다. 화면상 경계가 그려진다는 이유만으로 미확정 부모를 확정하지 않는다.
+- 국가명을 예시로 언급한 이 문서를 해당 국가의 새 미세 경계 생성 요청으로 해석하지 않는다.
+- 외부 AI 호출·유료 API·메신저 전송·원격 배포·push는 이번 기본 실행 범위에 포함하지 않는다.
+- 문서 작성만 요청받은 세션에서는 아래 구현 산출물·검증 결과·완료 보고를 미리 생성하거나 PASS로 기록하지 않는다.
+
+## 3. 현재 연결과 참고 파일
+
+다음 파일에서 실제 연결을 좁혀 확인한다. 목록은 전부 수정하라는 의미가 아니다.
+
+- src/lib/world/territory-entity-v3.ts, world-state-v3.ts, world-geometry-catalog-ref.ts
+- src/lib/world/operational-catalog.ts, operational-catalog.server.ts, operational-game.server.ts
+- src/lib/simulation/catalog-region.ts, catalog-region.server.ts, operational-region.server.ts
+- src/lib/simulation/subdivision-reference.ts
+- src/lib/simulation/server/simulation-tools.ts, model-simulation-context.ts, context-resolution-validator.ts
+- src/lib/simulation/server/operational-game-session.ts, openai-responses-provider.ts
+- src/app/api/world/regions/route.ts
+- src/lib/projection/operational-map-projection.ts
+- data/runtime/operational-catalog/current.json과 그 실제 artifact index·provenance
+- 실제 source-lock과 계층 자료, 원본 fine feature를 현재 TerritoryId에 연결하는 고정 입력
+- prompts/COUNTRY_MICRO_BOUNDARY_GUIDE.txt
+- reports/simulation-territorial-issues-20261103/report.md
+- reports/province-independence-parallelism-20261103/report.md
+
+기존 보고서의 진단은 문제와 재현 조건을 이해하는 근거다. 그 후 카탈로그나 코드가 바뀌었으면 현재 구현을 우선한다. 과거 전체 감사를 다시 수행하거나 세 나라의 특정 셀 개수를 맞추는 일을 착수 조건으로 삼지 않는다.
+
+현재 핵심은 다음과 같다.
+
+- 영토 상태 객체는 이미 개별 ID로 존재한다.
+- 기존 지역 인덱스는 주로 광역 부모를 읽으므로 원본 도시·하위 지역 이름이 검색에서 빠질 수 있다.
+- 한 지역의 이름이 검색돼도 소속 자료가 전체 범위를 보장하는지는 별도 정보가 필요하다.
+- 국가별 원본 feature와 게임 cell의 관계는 일대일이라고 가정할 수 없다.
+- 기존 API와 모델용 compact 응답에서 새 품질 정보가 사라지지 않도록 연결해야 한다.
+
+## 4. 공통 데이터 계약
+
+20-02에서 실제 TypeScript 타입·런타임 schema·계약 문서를 함께 확정한다. 아래 정보의 의미를 충족하되 기존 코드와 호환되는 구체적인 필드명과 저장 위치를 선택한다.
+
+### 4.1 State와 province
+
+| 대상 | 필수 정보 | 규칙 |
+| --- | --- | --- |
+| 공통 envelope | schemaVersion, 전체 catalogRef, metadataRef, 원본·생성 근거 | geometry 버전과 이름 metadata 버전을 구분하고 서로의 참조를 검사 |
+| State | stateId, sourceCountryId, 이름 정보, 원본 참조, 범위 완전성 | 기존 검증된 부모 identity를 우선 재사용하며 이름·ordinal로 ID를 만들지 않음 |
+| Province | provinceId, sourceCountryId, stateId 또는 null, 부모 검증 상태, 이름 정보, 원본 참조, 정밀도 | provinceId는 기존 TerritoryId. 알려진 state 하나 또는 명시적 미확정 상태 |
+| 원본 지역 이름 묶음 | 원본 기반 지역 ID, 이름 정보, sourceCountryId, provinceIds, coverage, provenance | 같은 원본 개체의 조각은 묶고 서로 다른 원본의 동명 지역은 구분 |
+| 국가별 요약 | 국가 ID, 실제 province 수, 정밀도와 이름·부모 지원 상태 | 원본 개체 수, 게임 cell 수, fallback 수, 부모 미확정 수를 구별 |
+
+- province 하나가 여러 state에 소속된 것처럼 확정돼서는 안 된다. 근거가 충돌하면 명확한 미확정 상태 또는 계약 오류로 처리한다.
+- 원본 지역 이름 묶음과 state의 집합은 서로 포함될 수 있다. 이런 정상적인 중첩을 province ID 중복 객체 생성으로 해결하지 않는다.
+- sourceCountryId는 원본 지리 분류다. 현재 ownerCountryId와 controllerCountryId는 전달받은 최신 world에서만 읽는다.
+- 부모가 미확정이어도 province 객체와 실제 영토는 보존한다. 검색과 요약에 그 상태를 노출한다.
+- coarse와 residual province도 계약으로 표현하되 실제 세부 행정 자료가 있는 것처럼 표시하지 않는다.
+- State의 province 목록과 Province의 stateId를 둘 다 물리 저장하면 한쪽을 기준으로 정하고 일치 검증한다. 서로 독립적으로 수정할 수 있는 두 authoritative membership을 만들지 않는다.
+
+### 4.2 이름과 별칭
+
+이름 정보는 최소한 다음을 구분한다.
+
+- displayName: 비어 있지 않은 기본 표시 이름.
+- 검증된 원본 이름과 존재하는 한국어·영어 이름. 없는 언어 값은 null 또는 동등한 명시적 부재다.
+- 검색용 aliases와 그 출처 또는 검증 수준.
+- 이름의 근거: 원본, 검증된 번역·별칭, 게임용 파생 표시 등.
+- 원본 sourceId, sourceFeatureId, version 및 시점 한계.
+
+규칙:
+
+1. 같은 이름이 다른 국가나 state에 존재할 수 있다. 이름의 전역 유일성을 강제하지 않는다.
+2. 이름 변경과 별칭 추가는 기존 TerritoryId·StateId와 geometry를 바꾸지 않는다.
+3. 원본 이름이 없는 셀에는 상위 표시명과 안정적인 짧은 ID 등을 이용한 게임용 표시 이름을 사용할 수 있다. 이를 공식 행정명으로 저장하지 않는다.
+4. 하나의 원본 지역이 여러 셀로 나뉘었다면 원본 이름을 공유할 수 있다. 셀 구분이 필요하면 안정적인 표시 suffix를 사용하고 원본 지역 검색은 전체 연결 집합을 반환한다.
+5. 영어 이름을 nameKo에 복사해 한국어 검증 완료처럼 표시하지 않는다. displayName의 언어 fallback과 언어별 사실을 구별한다.
+6. 한영 별칭 정규화는 공백, NFKC, 대소문자 등 확인 가능한 규칙을 사용한다. 과도한 문자 제거로 다른 지명을 하나로 합치지 않는다.
+7. 이름 유사도, 가까운 중심점, 가장 넓은 겹침만으로 공식 state 부모나 원본 지역 소속을 결정하지 않는다.
+8. “북한 북부”, “휴전선 인근”, “현재 전선” 같은 공간 표현을 공식 state나 province 이름으로 등록하지 않는다.
+
+### 4.3 완전성과 provenance
+
+이름, 부모 소속, 지역 범위의 품질을 한 개의 무조건 true 값으로 합치지 않는다.
+
+- 이름: 원본 확인, 번역·별칭 확인, 파생 표시, 부재를 구분한다.
+- 부모: verified와 unassigned 등 의미가 명확한 상태를 구분한다.
+- 지역 범위: complete, partial, unsupported 또는 동등한 상태로 표현한다.
+- 모르는 개수는 0으로 추정하지 않고 알 수 없음으로 표시한다. known member 수와 공식 전체 개수는 다른 항목이다.
+- 미확정 셀을 특정 state에 넣어 complete를 만드는 것은 금지한다.
+- 원본 자료의 시나리오 시점 일치 여부와 게임 형상 정합을 공식 행정 사실과 구별한다.
+- coverage는 선언만 읽고 신뢰하지 않는다. complete를 만들 때 사용한 대상 집합과 검증 근거를 남긴다.
+- 출력의 각 province와 이름 묶음에서 필요한 원본 identity와 현 catalog membership까지 추적할 수 있어야 한다.
+
+### 4.4 버전과 읽기 경계
+
+- catalogRef 전체를 기존 geometry 계약과 대조한다. 버전 문자열만 같다고 다른 root를 허용하지 않는다.
+- metadataRef는 이름·계층·집합 내용에 연결된 별도 identity다. 별칭만 바뀔 때 geometry 재생성이나 영토 ID 재발급이 필요하지 않게 한다.
+- metadataRef를 런타임에서 선택하는 경로도 현재 catalogRef와 묶는다. 맞는 자료가 없으면 명시적인 unavailable 또는 stale 결과를 반환한다.
+- 캐시는 catalogRef와 metadataRef를 기준으로 구분하고 제한된 수명과 크기를 사용한다.
+- 한 prepared turn 또는 조회 묶음은 동일한 metadata snapshot을 읽어야 한다. 이름 자료 갱신 중 새 집합과 옛 참조가 섞이지 않게 한다.
+- 필요한 경우 기존 prepared-context 캐시의 metadata 의존성을 추가한다. 잘못된 조합을 조용히 최신으로 해석하지 않는다.
+- 정적 metadata에 mutable owner/controller나 사용자 게임 snapshot을 저장하지 않는다.
+- 원본과 큰 geometry 입력의 해석은 오프라인 생성 단계에서 수행한다. 지도 렌더·행동 조회·턴마다 전체 polygon을 파싱하지 않는다.
+
+## 5. 작업 소유권과 진행 순서
+
+20-01과 20-02는 공통 선행 작업이다. 공통 schema와 입출력 인터페이스를 확정한 뒤 A 데이터·지명, B 조회·API, C 국가 인계 계약을 분리해 병렬 진행할 수 있다. 분기 구현을 마치면 20-08에서 실제 데이터로 합류하고 20-09에서 최종 확인한다.
+
+- 공통 담당: 20-01·20-02의 schema·입출력 계약·대표 fixture·파일 소유권. 이후 공통 계약 변경과 합류를 조정한다.
+- A 데이터·지명: 20-03 → 20-04. builder·국가별 원본 adapter·정적 이름과 별칭·원본 묶음 레코드 및 전용 테스트.
+- B 조회·API: 20-05 → 20-06. runtime loader·검색 index·기존 region adapter·API·모델용 읽기 경로 및 전용 테스트.
+- C 국가 인계: 20-07. 국가별 인계 문서·공통 schema를 사용하는 입력 검증 helper·전용 작은 fixture.
+- 별도 국가 작업: 자기 원본·정규화·계층·후보·검증 근거. 현재 계약에 필요한 자료를 인계하되 공통 schema를 각자 복제하지 않는다.
+- 최종 metadata 연결, 공용 코드 합류, 실제 build·서버·브라우저 검증은 한 담당자가 소유한다.
+- 동일 파일·현재 catalog 포인터·중국 표시 자료·실행 서버를 여러 작업이 동시에 수정하지 않는다.
+- 별도 오케스트레이터, 승인 시스템, 전 국가 생성 runner를 이번 작업의 선행 조건으로 만들지 않는다.
+
+### 5.1 태스크 의존관계와 산출물
+
+```text
+                                      20-01 현재 기준선 확인
+                                                 ↓
+                                      20-02 공통 schema·계약
+                                                 │
+                 ┌───────────────────────────────┼───────────────────────────────┐
+                 ↓                               ↓                               ↓
+          [A 데이터·지명]                  [B 조회·API]                    [C 국가 인계]
+        20-03 metadata 생성              20-05 loader·조회                20-07 인계 계약
+                 ↓                               ↓                               │
+          20-04 이름·별칭                 20-06 API 연결                         │
+                 │                               │                               │
+                 └───────────────────────────────┼───────────────────────────────┘
+                                                 ↓
+                                   20-08 분기 합류·실데이터 검증
+                                                 ↓
+                                     20-09 통합 확인·결과 인계
+```
+
+각 태스크에 들어오는 모든 화살표가 선행 조건이다. 20-05와 20-07은 20-03·20-04를 기다리지 않고 시작할 수 있다. 20-08은 20-04·20-06·20-07이 모두 준비된 뒤 실제 자료로 합류한다. 산출물의 상세 경로는 6절에서 정한다. 현재 없는 파일과 생성 명령은 해당 태스크에서 만들 예정이며, 이 다이어그램 작성으로 구현을 완료한 것이 아니다.
+
+### 5.2 태스크 사이의 핵심 인계
+
+1. 20-01 → 20-02: 실제 기준 catalogRef, 입력 identity, 기존 지역·부모·이름 API, 미확정 자료.
+2. 20-02 → A·B·C: 기존 TerritoryId와 ProvinceId의 관계, StateId, 이름·coverage·metadataRef의 확정 schema, builder 출력 manifest와 loader 입출력 인터페이스, 대표 fixture, 파일 소유권.
+3. 20-03 → 20-04: 실제 province와 원본 feature의 연결, verified 부모와 null 부모, coarse·residual 분류.
+4. 20-05 → 20-06: 버전 고정 조회, 제한과 pagination, stale/unavailable 결과, mutable world를 읽는 경계. A의 실제 출력 전에는 20-02의 fixture와 주입 가능한 loader로 구현한다.
+5. A의 20-04 → 20-08: 실제 metadata와 별칭, canonical 원본 묶음, 동명 후보 및 coverage 근거.
+6. B의 20-06 → 20-08: 모델·API의 읽기 연결, 참조 호환 방식, fixture로 확인한 코드와 실제 자료로 확인할 항목.
+7. C의 20-07 → 20-08: 국가별 인계 문서, 공통 schema 기반 검증 helper와 대표 fixture.
+8. 20-08 → 20-09: 통과한 검사, 미확정 데이터, 변경한 파일과 미실행 확인.
+
+### 5.3 실행과 다른 작업의 병행
+
+- 분기별 파일 소유권이 분리된 실행 환경에서는 A·B·C를 병렬 진행한다. 병렬 환경이 없으면 같은 선행 관계를 지키며 순차 수행한다.
+- A는 생성 입력·산출물과 정적 이름 자료를 맡고 runtime 검색 index나 API를 수정하지 않는다. B는 생성기를 복제하거나 A의 작성 중 산출물을 수정하지 않는다.
+- B는 20-02의 공통 schema·대표 fixture·주입 인터페이스로 loader와 consumer를 구현한다. A의 실제 metadata를 기다리는 최종 연결과 검증은 20-08에서 수행한다.
+- C의 검증 helper는 20-02의 schema에 의존하고 A의 builder나 B의 runtime loader 내부 구현에 의존하지 않는다. 국가별 인계 규약을 먼저 확정하고 실데이터 적용을 20-08에서 확인한다.
+- 같은 schema·fixture·기존 region 파일·루트 설정 파일을 동시에 수정하지 않는다. 공통 담당자가 변경을 조정하고, 합류 때 필요한 공유 파일은 소유권을 인계받아 수정한다.
+- 분기 완료는 코드와 전용 확인 및 인계까지다. 실제 생산 데이터 연결이나 전체 완료를 선언하지 않는다. 별도 PASS 접수·사용자 승인 대기를 분기마다 추가하지 않는다.
+- 한 분기에 문제가 생기면 해당 분기와 직접 의존하는 합류만 조정하고 독립된 분기는 계속 진행한다.
+- 역할 분리는 별도 에이전트·작업 채팅·오케스트레이터를 반드시 생성하라는 요구가 아니다. 실행 세션에 제공된 병렬 작업 방식을 사용한다.
+- 20-02 계약이 확정되면 별도 요청으로 진행하는 국가 조사·정규화 작업이 그 형식을 사용할 수 있다.
+- 국가 담당자가 공통 schema·loader·현재 catalog 포인터를 각자 수정하지 않게 한다.
+- 다른 작업이 current를 바꾸면 20-01 기준선과 metadata의 호환성을 다시 확인한다.
+- 계약 변경은 관련 builder와 consumer에 함께 반영하고, 후속 국가 자료의 구체적인 누락을 반환한다.
+
+선행 태스크의 인터페이스가 없으면 필요한 현재 자료를 읽어 확인한다. 사용자가 특정 태스크만 요청했을 때 미완료 선행 구현 전체를 몰래 실행하지 않는다. 이미 요청 범위 안에서 확인된 계약·형식 선택마다 사용자 승인을 반복해서 요구하지 않는다.
+
+## 6. 구현 태스크
+
+### 20-01. 현재 연결과 기준선 확인
+
+담당: 공통. 선행: 없음.
+
+주요 위치: 3절의 파일과 실제 current 포인터·국가 metadata·source-lock.
+
+실행 내용:
+
+1. 현재 카탈로그와 코드 변경 범위를 확인한다. 입력으로 사용할 실제 국가별 metadata, 이름, 부모, 원본 feature 연결과 source-lock을 찾는다.
+2. cell·state·원본 시군구·seed 부모·표시용 묶음의 관계를 짧게 정리한다.
+3. 실제 국가 행 수와 descriptor, provenance 요약을 대조한다. 오래된 보고서 수치의 불일치는 기록하고 실제 등록 집합을 기준으로 한다.
+4. 이번 작업에서 수정 가능한 공통 파일과 병행 작업이 소유한 파일을 구분한다.
+5. reports/maintenance/prompt20-baseline.json에 기준 catalogRef, 실제 집계, 관련 입력 identity, 사용 가능한 소속 근거와 미확정 항목을 남긴다. 사용자 게임이나 비밀값은 넣지 않는다.
+
+완료 조건:
+
+- 현재 데이터를 읽는 공통 경로와 필요한 연결 근거가 확인됐다.
+- 후속 태스크가 참조할 실제 기준선과 수정 범위가 명확하다.
+- 원본 자료나 활성 geometry, 기존 사용자 게임을 변경하지 않았다.
+
+### 20-02. State·province 공통 schema와 identity 계약
+
+담당: 공통. 선행: 20-01.
+
+주요 위치: 기존 catalog·region 타입을 재사용할 공통 지리 metadata 모듈, 런타임 validation, docs/geography/state-province-contract-v1.md.
+
+실행 내용:
+
+1. 4절의 State, Province, 이름 묶음, 이름·coverage·provenance, envelope와 metadataRef를 타입과 런타임 schema로 확정한다.
+2. ProvinceId는 기존 TerritoryId를 재사용하고 state identity는 검증된 source identity와 기존 부모 연결에 근거한다.
+3. 같은 이름, null 부모, coarse·residual, 한 원본 지역의 여러 셀, 변경된 owner/controller를 계약으로 표현한다.
+4. geometry 버전과 metadata 버전의 역할, 참조 검증, 캐시 key와 prepared 읽기 경계를 문서화한다.
+5. 기존 RegionRecord 및 subdivision reference와의 변환 관계를 명시한다. stateId나 sourceFeatureId를 기존 subdivisionId 자리에 임의로 넣지 않는다.
+6. 이름·부모·범위 오류를 구분할 최소한의 진단 코드와 보완 가능한 조건을 정한다.
+7. 분기에서 사용할 builder 출력 manifest, loader·조회의 최소 입출력 인터페이스, 주입 방식과 대표 fixture를 확정한다. A·B·C의 수정 파일을 나누고 각 분기가 상대 구현 없이 시작할 수 있게 한다.
+
+완료 조건:
+
+- 코드 schema와 계약 문서가 같은 필드를 설명한다.
+- 이름 변경으로 영토 identity가 바뀌지 않는다.
+- 미확정 부모와 부분 지역을 거짓 complete 없이 표현한다.
+- 새로운 canonical membership과 기존 운영 membership의 권한 경계가 분명하다.
+- builder 구현을 기다리지 않고 loader·API와 국가 인계 helper를 같은 계약의 fixture로 구현할 수 있다.
+
+### 20-03. 현재 카탈로그에서 metadata 생성
+
+담당: A 데이터·지명. 선행: 20-02. B의 20-05 및 C의 20-07과 병렬 가능.
+
+주요 위치: 공통 metadata builder와 필요한 국가별 입력 adapter. 출력 경로와 생성 명령은 이 단계에서 실제로 구현한 뒤 기록한다.
+
+실행 내용:
+
+1. 현재 카탈로그의 모든 기존 TerritoryId를 metadata의 province 한 개에 대응시킨다. 작은 메타데이터 생성이며 전 세계 fine geometry 생성이 아니다.
+2. 현재 fine 국가의 원본 feature와 게임 cell 연결을 고정 입력과 provenance에서 추출한다. 그 연결을 임의의 위치 근사로 대체하지 않는다.
+3. 검증된 광역 부모만 State로 연결하고 미확정 province는 stateId null과 해당 품질 정보를 보존한다.
+4. 나머지 국가에는 현재 coarse 자료의 지원 수준을 그대로 표현한다. 없는 시군구를 생성하지 않는다.
+5. raw·고정 입력·코드·출력을 identity로 연결하고 같은 입력에 대해 결정적인 metadata를 만든다.
+6. 새 출력은 기존 catalog와 구별되는 작은 불변 metadata 산출물로 둔다. 기존 카탈로그·타일·표시 자료를 덮어쓰지 않는다.
+
+완료 조건:
+
+- 실제 catalog의 province ID와 metadata의 province ID가 누락·중복 없이 일치한다.
+- 각 province의 sourceCountryId가 catalog와 같다.
+- verified 부모와 미확정 부모를 구분하고 기준선의 geometry·topology·운영 부모를 바꾸지 않았다.
+- builder를 통하지 않는 임의의 수동 PASS 산출물이 없다.
+
+### 20-04. 실제 지명·한영 별칭과 원본 지역 묶음
+
+담당: A 데이터·지명. 선행: 20-03. B·C 분기와 병렬 가능.
+
+주요 위치: 정적 이름·별칭 자료, 원본 이름 adapter, 원본 묶음 레코드 생성 코드. B가 맡은 runtime 검색 index와 API 파일을 동시에 수정하지 않는다.
+
+실행 내용:
+
+1. 실제 원본 이름을 보존하고 확인된 한국어·영어·검색 별칭을 연결한다. 모든 나라의 모든 이름을 수동 번역하는 작업으로 확대하지 않는다.
+2. 원본 지역 하나에 연결된 여러 province를 같은 이름 묶음으로 찾을 수 있게 한다.
+3. 같은 이름이 다른 원본 feature를 뜻하면 국가·state·source identity로 구분할 후보를 반환한다.
+4. 청진과 Chongjin City, 내몽골과 Inner Mongolia 사례를 현재 실제 원본과 연결해 확인한다.
+5. 청진 원본 이름을 찾았다는 사실과 그에 대응하는 게임 영토 전체를 찾았다는 사실을 구분한다. 연결이 부족하면 구체적인 부족 조건과 coverage를 반환한다.
+6. 내몽골의 미확정 광역 소속을 별칭 추가로 해결된 것처럼 표시하지 않는다.
+7. 일반적인 공간 표현은 이름 사전에 억지로 추가하지 않는다.
+8. 실제 출력 레코드와 원본 연결을 전용 검사로 확인한다. B의 loader로 수행하는 최종 조회와 API 확인은 20-08에서 합류해 검증한다.
+
+완료 조건:
+
+- 실제로 지원되는 한영 표기는 같은 canonical 지역 레코드나 원본 묶음에 연결된다. 정적 출력으로 확인하고 실제 loader의 반환 결과는 20-08에서 검증한다.
+- 한 원본의 여러 셀을 동명 지역 여러 개로 오인하지 않는다.
+- 서로 다른 동명 지역을 첫 후보 하나로 고르지 않는다.
+- 확인되지 않은 공식 이름과 부모를 만들어 넣지 않았다.
+
+### 20-05. 버전 고정 loader와 제한된 조회
+
+담당: B 조회·API. 선행: 20-02. A의 20-03·20-04를 기다리지 않는다.
+
+주요 위치: 공통 metadata loader·index와 서버용 검색·목록·membership 조회.
+
+20-02의 schema, 출력 manifest와 대표 fixture를 사용해 시작한다. 실제 metadata 위치를 주입할 수 있게 하고 A의 생성기를 직접 호출하는 구조로 결합하지 않는다.
+
+실행 내용:
+
+1. schema, catalogRef, metadataRef와 필요한 artifact identity를 검사하는 loader를 만든다.
+2. 국가, state, province ID, 이름과 별칭, 원본 묶음 조회를 제공한다.
+3. 모델용 요약과 전체 집합을 읽는 host 조회를 구분한다. 결과 제한·pagination·truncated와 ambiguity를 명시한다.
+4. 조회된 알려진 셀 집합이 모두 반환됐다는 의미와 공식 지역 coverage가 complete라는 의미를 분리한다.
+5. 목록·membership 조회와 행동 실행의 상한을 구분한다. 기존 영토 효과의 합계 512개 상한을 임의로 늘리거나 조용히 자르지 않는다.
+6. 캐시는 버전으로 분리하고 같은 요청 중 읽기 대상이 바뀌지 않게 한다.
+7. sourceCountryId를 현재 소유국으로 필터링하지 않는다. 현재 owner/controller가 필요하면 일치하는 전달 world에서 조회한다.
+
+완료 조건:
+
+- 오래되거나 잘못된 metadata·catalog 조합을 명확하게 거부한다.
+- 검색·목록·membership의 제한과 부분 결과가 호출자에게 드러난다.
+- 이름 lookup이 권한 부여나 world 변경을 만들지 않는다.
+- renderer나 턴마다 원본 geometry 전체를 읽지 않는다.
+
+### 20-06. 기존 지역 API와 AI 읽기 경로 연결
+
+담당: B 조회·API. 선행: 20-05. A·C 분기와 병렬 가능.
+
+주요 위치: catalog-region adapter, operational-region.server.ts, src/app/api/world/regions/route.ts, simulation-tools.ts 및 필요한 host context 연결.
+
+실행 내용:
+
+1. 기존 지역 조회가 공통 metadata를 읽도록 좁은 adapter를 연결한다. state·province·원본 묶음을 서로 구별할 수 있게 한다.
+2. 기존 subdivision reference는 명시적인 변환으로 유지하거나 버전이 있는 새 읽기 참조로 연결한다. 기존 저장 참조를 다른 의미로 재해석하지 않는다.
+3. compact 응답에서 kind, 이름의 근거, 부모 상태, coverage와 materialization 지원 수준이 사라지지 않게 한다. 미확정 집합에 무조건 materializable true를 붙이지 않는다.
+4. countryId가 원본 분류인지 현재 actor인지 입력과 응답에서 분명하게 한다.
+5. 기존 AI 함수 schema와 host validation을 일치시킨다. 필수·nullable 필드를 엄격하게 유지하고 모델이 임의 ID를 발급하지 않게 한다.
+6. prepared 요청에서 metadata snapshot을 고정하고 캐시·모델 뷰·실제 도구가 같은 자료를 읽게 한다.
+7. “북한 북부”, “휴전선 인근”은 공간 해석이 필요한 표현으로 남긴다. 이번 태스크가 새 공간 판정기나 새로운 전쟁·양도 정책을 구현하는 단계는 아니다.
+8. 공통 fixture와 주입 loader로 API·scripted provider를 검증한다. A의 출력이 아직 없으면 실제 자료의 활성 연결을 완료했다고 보고하지 않고 20-08 인계 항목으로 남긴다.
+
+완료 조건:
+
+- 공통 fixture에서 기존 API와 scripted provider가 같은 canonical metadata를 읽는다. A의 실제 metadata를 이용한 생산 연결은 20-08에서 확인한다.
+- context에서 생략된 지명도 제한된 조회로 확인할 수 있다.
+- 부분 coverage와 애매한 후보가 모델 경계에서 사실대로 전달된다.
+- 점령·해방·양도 권한, 현재 전선 및 원자적 commit 검증은 유지된다.
+
+### 20-07. 후속 국가 추가용 metadata 인계 계약
+
+담당: C 국가 인계. 선행: 20-02. A·B 분기와 병렬 가능.
+
+주요 위치: docs/geography/country-metadata-handoff-v1.md와 기존 schema를 사용하는 검증 helper.
+
+국가별 producer의 입력과 공통 schema 검증에 집중한다. helper는 A의 builder와 B의 loader가 완성되기 전에도 실행할 수 있게 하고, 실제 metadata와 consumer의 일치 여부는 20-08에서 확인한다.
+
+실행 내용:
+
+1. 다음 국가 작업이 제출할 원본·이름·state 부모·원본 지역과 province 연결·coverage·카탈로그 기준선을 정리한다.
+2. CountryId는 실제 catalog와 원본 매핑을 검사한다. 공통 metadata schema를 현재 세 fine 국가만 허용하도록 하드코딩하지 않는다.
+3. 현재 미세 경계 생성기의 국가 제한과 metadata 계약의 입력 범위를 구분한다. 이 태스크를 이유로 국가 생성기·발행 제한을 일괄 삭제하지 않는다.
+4. 국가별 입력은 공통 schema와 같은 helper로 검증한다. 국가마다 서로 다른 임시 schema를 복제하지 않는다.
+5. 실제 나라를 추가하지 않는 작은 fixture로 동일 계약의 재사용과 잘못된 국가·catalog·부모 참조 거부를 확인한다. 예제 데이터를 실제 채택 source-lock이나 PASS 국가 자료처럼 기록하지 않는다.
+6. 메인 작업자와 국가 자료 작업자의 파일 경계, 입력 변경 시 재검증할 부분을 문서화한다.
+
+완료 조건:
+
+- 다음 국가 작업자가 필요한 필드와 품질 정보, 입력 근거를 알 수 있다.
+- 같은 형식으로 검증할 수 있지만 새 국가 추가 CLI가 이미 완성됐다고 주장하지 않는다.
+- 최신 기준선에 연결하는 후속 통합 작업과 metadata 준비의 경계가 명확하다.
+
+### 20-08. 분기 합류와 실제 데이터 회귀 검증
+
+담당: 합류. 선행: 20-04·20-06·20-07 모두 완료.
+
+A의 실제 metadata·이름 묶음, B의 loader·API 연결, C의 인계 helper를 합친다. 실제 출력의 catalogRef·metadataRef·manifest를 사용해 생산 읽기 경로를 연결하고 분기에서 fixture로 확인한 항목을 실제 자료로 검증한다. 완료된 분기를 처음부터 재구현하지 않는다.
+
+기존 작은 fixture와 실제 카탈로그의 metadata를 함께 사용한다. 공통 schema·기존 region 파일·루트 설정의 합류 수정은 한 담당자가 수행한다.
+
+필수 사례:
+
+- 존재하지 않는 province, state, catalogRef, metadataRef와 잘못된 sourceCountryId 거부.
+- province 누락·중복, 부모 충돌, 잘못된 원본 묶음과 거짓 complete 거부.
+- 동명 지역 후보, 공백·NFKC·대소문자, 한영 별칭의 일관된 조회.
+- 이름이 없는 셀의 명시적인 게임용 표시와 null 부모 보존.
+- 한 원본 지역의 복수 셀, coarse·residual 정밀도, 부분 coverage.
+- 현재 fine 국가 모두와 현재 coarse 국가의 작은 대표 입력.
+- owner/controller 변경 후 원본 identity와 이름 index 보존.
+- 별칭만 갱신할 때 TerritoryId·geometry·상태·history 불변과 metadata 캐시 분리.
+- prepared 조회 중 버전 변경에서 혼합 자료를 쓰지 않음.
+- API와 모델용 compact 응답에서 coverage·kind·미확정 정보 보존.
+- 결과 제한과 실제 ambiguity를 구분하고 행동 상한을 유지함.
+
+기존 fixture가 현재 loader의 필수 계약을 누락해 관련 검증을 막으면 해당 입력만 고친다. 테스트를 삭제하거나 운영 검증을 약화시켜 녹색으로 만들지 않는다. 본 작업과 무관한 전체 테스트 실패를 일괄 수정하지 않는다.
+
+완료 조건:
+
+- 계약 위반을 잡는 의미 있는 양성·음성 사례가 있다.
+- 실제 카탈로그 기준 ID 집합과 metadata가 일치하고 운영 상태를 변경하지 않았다.
+- 검증하지 못한 이름·부모·범위는 실제 제한으로 남겼다.
+
+### 20-09. 통합 확인과 결과 인계
+
+담당: 합류. 선행: 20-08.
+
+실행 내용:
+
+1. 변경 코드의 관련 lint, 타입 검사, 관련 테스트를 묶어서 실행한다.
+2. runtime/API가 바뀌었으면 production build를 한 번 확인한다. 실행 중인 dev 서버와 충돌하지 않도록 기존 분리 출력 방식을 사용한다.
+3. 기존 작은 API 또는 scripted provider로 이름 조회, 동명 후보, 부분 coverage, 잘못된 참조, 점령 후 이름 identity 유지를 확인한다. 외부 AI 호출은 기본 0회다.
+4. 실제 UI에 영향을 준 변경이 있으면 기존 로컬 화면의 부팅·국가 선택·기존 영토 표시를 짧게 확인한다. 새 지명 검색 화면이나 모든 province 라벨을 만드는 작업으로 확대하지 않는다.
+5. 기준 catalogRef·영토 ID·geometry·운영 부모·seed lineage·소유/통제 상태를 변경하지 않았음을 관련 입력과 출력으로 확인한다.
+6. 필요한 계약 문서, 실제 생성 명령, loader·조회 방법, 국가별 인계 형식과 결과를 정리한다.
+7. reports/maintenance/prompt20-completion.md에 실제 완료 범위, 검사, 미확정 자료와 후속 작업을 짧게 남긴다.
+
+완료 조건:
+
+- 공통 계약이 코드와 현재 metadata 및 실제 읽기 경로에 연결됐다.
+- 기존 세부 국가와 coarse 국가가 같은 계약으로 표현된다.
+- 이름·state 소속·지역 범위의 사실과 한계를 구분해 읽을 수 있다.
+- 기존 카탈로그와 사용자 게임을 바꾸지 않고 후속 개발자가 계약을 재사용할 수 있다.
+- 결과를 기록한 뒤 종료한다. 다음 국가 추가나 별도 프롬프트 전체 실행을 자동으로 시작하지 않는다.
+
+## 7. 필요한 확인만 수행
+
+- 기본 마무리: 관련 타입 검사, 변경 파일 lint, 관련 계약·loader·API·scripted provider 테스트.
+- runtime/API 변경이 있으면 production build와 기존 앱 smoke를 한 번 수행한다. 이미 같은 변경에 유효한 검사는 재사용한다.
+- 전 국가 polygon 재생성·공유 국경 정합·타일 decode 전수 감사·성능 전면 benchmark는 필수 검사가 아니다.
+- 모든 국가 metadata의 ID 누락·중복과 참조를 검사하는 것은 작은 데이터 계약 검증이다. 이를 전 세계 geometry 재검증으로 확대하지 않는다.
+- 공용 schema 영향으로 범위를 정하기 어려울 때만 관련 전체 테스트를 마지막에 추가한다.
+- 실제 실행하지 않은 검사와 이름·소속이 미확정인 지역을 PASS로 표시하지 않는다.
+- 큰 원본을 fixture로 반복 복제하지 않는다. 기존 hash로 고정된 입력을 재사용하고 필요한 작은 음성 사례만 만든다.
+
+## 8. 이번에 하지 않는 작업
+
+- 네 번째 국가의 실제 원본 수집·미세 경계 생성·국경 재정합·카탈로그 활성화.
+- 현재 국가 추가 coordinator의 범용화, 여러 국가 동시 발행, 배타 발행 잠금·새 오케스트레이터.
+- 새로운 전쟁 도메인, 종전 정산, 조약 양도 전용 실행기, 디버그 성공 강제 정책.
+- “북한 북부” 같은 표현의 완전한 공간 추론기, NPC 전략 판단 또는 모델·공급자 교체.
+- 모든 province 이름을 지도 위에 상시 표시하는 UI와 새 국가·도시 검색 화면.
+- 영토 ID 재발급, geometry·topology·부모·seed 변경, 기존 save migration과 사용자 게임 초기화.
+- 전 세계 공식 지명·번역·행정 계층을 완성하는 자료 수집 사업.
+- 취소된 이전 요청을 근거로 국가 제한·중국 표시 바인딩·테스트를 삭제하는 작업.
+
+이번 기반으로 향후 프롬프트와 공간 조회, 작업별 실행기, 국가별 추가 도구를 개선할 수 있게 인계한다. 후속 기능의 완성을 이번 계약 작업의 완료 조건으로 삼지 않는다.
+
+## 9. 완료 보고
+
+최종 답변은 다음만 간단히 포함한다.
+
+- 구현된 State·Province·원본 이름 묶음의 역할과 실제 조회 방법.
+- 사용한 catalogRef와 metadataRef, 현재 지원 수준과 미확정 상태의 의미.
+- 변경한 주요 연결과 실행한 관련 확인.
+- 기존 영토·게임 상태 보존 결과와 후속 국가 작업자가 사용할 계약 문서.
+- 남은 데이터 공백과 다음에 구현할 기능.
+
+단계별 기록은 실제 수행한 태스크와 검증 결과를 기준으로 남긴다. 이 프롬프트와 내부 다이어그램의 작성 자체를 구현 완료로 보고하지 않는다.

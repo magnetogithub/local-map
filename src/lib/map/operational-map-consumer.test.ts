@@ -119,40 +119,34 @@ describe('16-05 authoritative operational map projection', () => {
     f.listeners.get(`click:${L.fill}`)!({features: [{id: 1, source: OPERATIONAL_MAP_SOURCE_ID, sourceLayer: 'territories'}]});
     expect(onSelect).toHaveBeenLastCalledWith('BBB'); consumer.dispose();
   });
-  it('keeps simplified micro lines in the same hover scope and restores original vector/exact lines when disabled', async () => {
+  it('uses simplified micro lines exclusively with the common hover scope at every zoom', async () => {
     const input = fixture(); input.delivery.bootstrap.microBoundaryLod = {artifact: {path: '/lod-micro', sha256: 'd'.repeat(64), byteLength: 10}, bounds: [0, 0, 5, 1], minZoom: 2.2, maxZoom: 7, edgeOrdinals: [1]};
     const f = await mount(input); f.consumer.setDebugBoundaries(true); f.consumer.hoverCountry('BBB');
-    await f.consumer.loadMicroBoundaryLod(); f.consumer.setMicroBoundaryLodEnabled(true);
-    expect(f.consumer.getUpdateStats()).toMatchObject({microDisplayLodReady: true, microDisplayLodActive: true, microDisplayLodInScope: true, microDisplayLodSourceWrites: 1});
-    for (const id of [L.microOriginal, L.detailMicroOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
+    expect(f.delivery.loadMicroBoundaryLod).toHaveBeenCalledOnce();
+    expect(f.consumer.getUpdateStats()).toMatchObject({microDisplayLodReady: true, microDisplayLodActive: true, microDisplayLodSourceWrites: 1});
+    expect(f.layers.has('operational-micro-original')).toBe(false);
+    expect(f.layers.has('operational-detail-micro-original')).toBe(false);
     expect(f.layers.get(L.microDisplayLod)).toMatchObject({layout: {visibility: 'visible'}});
+    expect(f.layers.get(L.microDisplayLod)).not.toHaveProperty('maxzoom');
     f.consumer.hoverCountry('CCC');
-    expect(f.consumer.getUpdateStats()).toMatchObject({microDisplayLodActive: false, microDisplayLodInScope: false});
+    expect(f.consumer.getUpdateStats().microDisplayLodInScope).toBe(false);
+    f.consumer.setDebugBoundaries(false);
     expect(f.layers.get(L.microDisplayLod)).toMatchObject({layout: {visibility: 'none'}});
-    f.consumer.hoverCountry('BBB'); f.consumer.setMicroBoundaryLodEnabled(true); f.consumer.setDebugBoundaries(false);
-    for (const id of [L.microDisplayLod, L.microOriginal, L.detailMicroOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
-    f.consumer.setDebugBoundaries(true); f.consumer.setMicroBoundaryLodEnabled(false);
-    for (const id of [L.microOriginal, L.detailMicroOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
-    await f.consumer.loadMicroBoundaryLod(); expect(f.delivery.loadMicroBoundaryLod).toHaveBeenCalledOnce(); f.consumer.dispose();
+    f.consumer.setDebugBoundaries(true); f.consumer.hoverCountry('BBB');
+    expect(f.consumer.getUpdateStats().microDisplayLodActive).toBe(true);
+    expect(f.delivery.loadMicroBoundaryLod).toHaveBeenCalledOnce(); f.consumer.dispose();
   });
-  it('swaps both original province sources only after display data is ready and reuses its geometry', async () => {
+  it('uses only simplified province lines without a zoom limit or original fallback', async () => {
     const input = fixture(); input.delivery.bootstrap.provincePresentationBoundaryOrdinals = [2];
     input.delivery.bootstrap.provinceBoundaryLod = {artifact: {path: '/lod', sha256: 'd'.repeat(64), byteLength: 10}, bounds: [0, 0, 5, 1], minZoom: 2.2, maxZoom: 7};
     const f = await mount(input), projectionBefore = f.consumer.getProjection();
-    f.consumer.setProvinceBoundaryLodEnabled(true);
-    expect(f.consumer.getUpdateStats().provinceDisplayLodActive).toBe(false);
-    await f.consumer.loadProvinceBoundaryLod();
-    expect(f.consumer.getUpdateStats()).toMatchObject({provinceDisplayLodReady: true, provinceDisplayLodActive: false, provinceDisplayLodVertexCount: 2, provinceDisplayLodSourceWrites: 1});
-    f.consumer.setProvinceBoundaryLodEnabled(true);
-    for (const id of [L.provinceOriginal, L.detailProvinceOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'none'}});
-    expect(f.layers.get(L.provinceDisplayLod)).toMatchObject({minzoom: 2.2, maxzoom: 7, layout: {visibility: 'visible', 'line-join': 'round'}});
+    expect(f.delivery.loadProvinceBoundaryLod).toHaveBeenCalledOnce();
+    expect(f.layers.has('operational-province-original')).toBe(false);
+    expect(f.layers.has('operational-detail-province-original')).toBe(false);
+    expect(f.layers.get(L.provinceDisplayLod)).toMatchObject({minzoom: 2.2, layout: {visibility: 'visible'}});
+    expect(f.layers.get(L.provinceDisplayLod)).not.toHaveProperty('maxzoom');
     expect(validateStyleMin({version: 8, sources: Object.fromEntries([...f.sources].map(([id, source]) => [id, source.spec])), layers: [...f.layers.values()]})).toEqual([]);
     await f.consumer.showCountryDetail('BBB');
-    expect(f.layers.get(L.detailProvinceOriginal)).toMatchObject({layout: {visibility: 'none'}});
-    await f.consumer.loadProvinceBoundaryLod(); expect(f.delivery.loadProvinceBoundaryLod).toHaveBeenCalledOnce();
-    f.consumer.setProvinceBoundaryLodEnabled(false);
-    expect(f.layers.get(L.provinceDisplayLod)).toMatchObject({layout: {visibility: 'none'}});
-    for (const id of [L.provinceOriginal, L.detailProvinceOriginal]) expect(f.layers.get(id)).toMatchObject({layout: {visibility: 'visible'}});
     expect(f.consumer.getProjection()).toBe(projectionBefore); f.consumer.dispose();
     expect(f.sources.size).toBe(0); expect(f.layers.size).toBe(0);
   });

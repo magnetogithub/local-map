@@ -1,0 +1,244 @@
+{
+  "pass": true,
+  "scope": "All 8562 accepted internal China arcs: 1002 provincial and 7560 micro boundaries. One offline source-generalization rule at every zoom.",
+  "change": "Rebuild from the original unsimplified shared source network. Join degree-two provincial paths, filter original short-scale bends in arclength and resample at small rendering error while fixing shared junctions.",
+  "summary": {
+    "displayVertices": 232749,
+    "edges": 8562,
+    "generalizedEdges": 8561,
+    "joinedProvincialPaths": 71,
+    "microVertices": 201460,
+    "originalContactSupportSegmentsRetained": 0,
+    "originalVertices": 775914,
+    "provinceVertices": 31289,
+    "provincialJoinsProcessedTogether": 913
+  },
+  "policy": {
+    "authoritativeGeometryChanged": false,
+    "closedLoopOrientationAndNestingPreserved": true,
+    "coordinateDerivation": "New samples from the filtered unsimplified shared source network; never read previous simplified geometries. Exact source coordinates retained at all shared junctions.",
+    "displayUse": "single source-generalized internal-boundary representation at every zoom",
+    "endpointCyclicOrderAndRayTiesPreserved": true,
+    "exactNativeAndProjectedContactSets": true,
+    "fixedSharedNodes": true,
+    "maximumOriginalSourceDeviationMercatorMeters": 2500,
+    "maximumRenderResamplingErrorMercatorMeters": 70,
+    "method": "Arclength Gaussian filtering of unsimplified source paths before small-error render resampling; degree-two provincial arcs join before filtering, with zero-derivative shared-junction corrections.",
+    "projection": "EPSG:3857",
+    "sourceGaussianSigmaMercatorMeters": 1800,
+    "sourceSamplingSpacingMercatorMeters": 600
+  },
+  "authorityUnchanged": {
+    "allPublishedArtifactsRechecked": 6036,
+    "authoritativeCellsParentsCountryCoastAndMilitaryInputsUnchanged": true,
+    "originalCatalogLedgerSha256": "437fc172fef4d3c7fdfd47f81dda9e4dc1ab0c1f1c9becb6dbca07f5f685723e",
+    "packageBytes": 108943102
+  },
+  "sourceBasis": {
+    "downloadedReference": {
+      "byteLength": 88780624,
+      "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+      "sha256": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e"
+    },
+    "admittedSourceGeometry": {
+      "byteLength": 123996651,
+      "path": "data/derived/chn-2020/geometry-v12/geometry.json",
+      "sha256": "ef33c6341da4125c34ac7c390816bff0cda339f9f12be1fcc81fb90761e0689e"
+    },
+    "activeUnsimplifiedSharedSourceShards": [
+      {
+        "byteLength": 1049370,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/000.json.gz",
+        "sha256": "b909d90e442909a9266b354377b45578ec0d725c0864d4123295930ca7fe3193"
+      },
+      {
+        "byteLength": 2084990,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/001.json.gz",
+        "sha256": "72296ca1a08c2f5d0c5a10c3f544d01378f325e680816b3afbb147cd167eea36"
+      },
+      {
+        "byteLength": 3004844,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/002.json.gz",
+        "sha256": "26f9c189ebe8612f123f462092dd1f868f3620dfbff694524ed482b56ddd7f3a"
+      },
+      {
+        "byteLength": 3072999,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/003.json.gz",
+        "sha256": "0f66a46608eacbb063c5157ddb905188de959dd343faf44b1bed52a0822de692"
+      },
+      {
+        "byteLength": 2912070,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/004.json.gz",
+        "sha256": "f93d4db2e81d3a12a38322e41879ebf1c793b419005d5f0ded9986cab6b120d8"
+      },
+      {
+        "byteLength": 2832927,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/005.json.gz",
+        "sha256": "8282bcf3fe2c048eafe2823f439898a8e16f979073bfcf93ed79d582ee3384ed"
+      },
+      {
+        "byteLength": 901473,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/006.json.gz",
+        "sha256": "3851744248fb3085f4bb977410be4c044a3e530b0bdda56446e0e91ce09286a7"
+      },
+      {
+        "byteLength": 859692,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/007.json.gz",
+        "sha256": "e0676927a653fe2e0087d0a3ba793160854a62480c2f3756ca01a7553159a4b9"
+      },
+      {
+        "byteLength": 770411,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/008.json.gz",
+        "sha256": "4db624e8e1277c495b18ef36d75dd3769ea60a12ab8489ab6d1a23a8c6af4f21"
+      },
+      {
+        "byteLength": 531655,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/009.json.gz",
+        "sha256": "ee12814193ddcfd201c7d017b92089c0366cc7364e8846e8c4eceb51e52ecc18"
+      },
+      {
+        "byteLength": 899262,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/010.json.gz",
+        "sha256": "88354f82d7ca086b86a754235f6b066bf25fcd5a869a871466cfd7f73f1797df"
+      },
+      {
+        "byteLength": 1322856,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/011.json.gz",
+        "sha256": "24aa2bdfa53c60abb9b753780f2b48fb5aad7ee13433d998cf1a4dbc0a09cbd0"
+      },
+      {
+        "byteLength": 794608,
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/topology/012.json.gz",
+        "sha256": "b1e4df3de8b29601066ec53307c71bbcebb03b66a3496a6ee8920f84a4d06944"
+      }
+    ],
+    "shapeComputationUsesPreviousSimplifiedGeometry": false
+  },
+  "junctionContinuity": {
+    "report": {
+      "path": "reports/chn-source-rebuild-20261103/junction-continuity.json",
+      "sha256": "7ef24ee85d1e717516fe0ababe7f91c7ac42c459605ec52765a2d6b8e8c9d4fc",
+      "byteLength": 384
+    },
+    "before": {
+      "degreeTwoJoins": 915,
+      "medianDirectionChangeDegrees": 47.89947311695252,
+      "p90DirectionChangeDegrees": 106.82160815997172,
+      "joinsOver30Degrees": 598
+    },
+    "after": {
+      "degreeTwoJoins": 915,
+      "medianDirectionChangeDegrees": 14.201251484622667,
+      "p90DirectionChangeDegrees": 28.908291913427885,
+      "joinsOver30Degrees": 84
+    },
+    "interpretation": "Measured direction change at corresponding degree-two provincial junctions, including rendering resampling and topology constraints. This is not a claim of exact tangent continuity at every junction."
+  },
+  "retainedOriginalArcs": [
+    {
+      "ordinal": 8774,
+      "originalVertices": 44,
+      "reasons": [
+        "CURVE_CONTACT_CHANGED"
+      ],
+      "reason": "The common contact guard retains this 44-vertex source arc; no region-specific rendering exception."
+    }
+  ],
+  "checks": {
+    "independentWholeNetworkProof": {
+      "path": "reports/chn-internal-render-lod-20261030/verification/source-rebuild-final-20261103.json",
+      "sha256": "48404c36650f18cff82743b6c191c2bbdd42864a9cc5fc26d95c2e7e59932b9a",
+      "byteLength": 4048770
+    },
+    "independentChecks": {
+      "allSharedNodeCoordinatesAndCyclicOrders": true,
+      "closedLoopWindingAndNesting": true,
+      "continuousSymmetricCurveDeviationAllChangedArcs": true,
+      "exactAll8562IdsCategoriesAndEndpoints": true,
+      "originalCatalog6036ArtifactsUnchanged": true,
+      "wholeNetworkOriginalContactSetsBothCRSs": true
+    },
+    "negativeControls": {
+      "closedLoopInversion": true,
+      "curveOutsideDistanceBudget": true,
+      "missingEdgeOrChangedCategory": true,
+      "movedEndpoint": true,
+      "newProtectedContact": true,
+      "removedSharedJunction": true,
+      "selfCrossingCurve": true,
+      "sharedNodeSectorFlip": true
+    },
+    "packager": {
+      "path": "reports/chn-source-rebuild-20261103/packager-verification.json",
+      "sha256": "69d920b52f6b6098f1b3b2def161699caa2b9379410a18e42a8986234a8ed1d6",
+      "byteLength": 315
+    },
+    "browser": {
+      "path": "reports/chn-source-rebuild-20261103/browser-verification.json",
+      "sha256": "e0889edb145fd8cbd298075783316c590901df4e5866736f098e9f7a6ebc7029",
+      "byteLength": 116190
+    },
+    "vitest": {
+      "files": 4,
+      "tests": 109,
+      "pass": true
+    },
+    "typescript": true,
+    "eslint": true,
+    "unchangedCountryScreenshots": {
+      "korea-close": [
+        {
+          "path": "reports/chn-source-rebuild-20261103/before-korea-close.png",
+          "sha256": "9c6afdaa627333def1765171aaf6b9e77d5da24a447acdf657860882282713d5",
+          "byteLength": 228197
+        },
+        {
+          "path": "reports/chn-source-rebuild-20261103/after-korea-close.png",
+          "sha256": "9c6afdaa627333def1765171aaf6b9e77d5da24a447acdf657860882282713d5",
+          "byteLength": 228197
+        }
+      ],
+      "dprk-close": [
+        {
+          "path": "reports/chn-source-rebuild-20261103/before-dprk-close.png",
+          "sha256": "eff9dbdb3cbbdd46dfb8eca7f37567c920a131fe154d65ee2a82f8494e719239",
+          "byteLength": 157046
+        },
+        {
+          "path": "reports/chn-source-rebuild-20261103/after-dprk-close.png",
+          "sha256": "eff9dbdb3cbbdd46dfb8eca7f37567c920a131fe154d65ee2a82f8494e719239",
+          "byteLength": 157046
+        }
+      ]
+    }
+  },
+  "delivery": {
+    "path": "data/derived/chn-2020/internal-line-delivery-cc56e4efba11544ae484/delivery.json",
+    "sha256": "cc56e4efba11544ae484ce6c99f8dcc3397e8073911324f1b7dd9c1cccf1536f",
+    "byteLength": 5319606
+  },
+  "performance": {
+    "baselineCompressedBytes": 2732582,
+    "currentCompressedBytes": 3950427,
+    "curveGeneration": "Offline only; each of the two static sources is published once per mount and reused across all tested views.",
+    "initializationMilliseconds": {
+      "before": 14223,
+      "after": 3151
+    },
+    "timingLimit": "Sequential local development sessions on the same server with a warm build; diagnostic initialization timings, not a controlled performance benchmark."
+  },
+  "reproduce": [
+    "python scripts/chn-2020/build-chn-source-internal-lines.py --baseline-delivery data/derived/chn-2020/internal-line-delivery-27d1f5131d82e9dd4b66/delivery.json",
+    "python scripts/chn-2020/verify-chn-source-internal-lines.py --producer-report data/derived/chn-2020/internal-line-source-018483d056aa48fa3bb0/producer-report.json --output reports/chn-internal-render-lod-20261030/verification/source-rebuild-final-20261103.json",
+    "node scripts/chn-2020/package-internal-line-lod.mjs --producer data/derived/chn-2020/internal-line-source-018483d056aa48fa3bb0/producer-report.json --verification reports/chn-internal-render-lod-20261030/verification/source-rebuild-final-20261103.json",
+    "node reports/chn-source-rebuild-20261103/verify-packager.cjs",
+    "node reports/chn-source-rebuild-20261103/verify-browser.cjs http://127.0.0.1:3192",
+    "python reports/chn-source-rebuild-20261103/audit-continuity.py",
+    "node reports/chn-source-rebuild-20261103/finalize-verification.cjs"
+  ],
+  "limitations": [
+    "Source-generalized display lines only, with explicit new derived coordinates; authoritative source files remain unchanged.",
+    "Continuous symmetric bounds apply directly between unsimplified source and delivered lines in Mercator; no geographic survey accuracy claim.",
+    "The unchanged fill/tile package retains its accepted proof; browser rendering and performance are verified separately."
+  ]
+}

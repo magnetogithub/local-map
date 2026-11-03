@@ -1,12 +1,12 @@
 import 'server-only';
 import {createHash} from 'node:crypto';
-import index from '../../../data/derived/chn-2020/internal-line-delivery-669848e00a0d5612b2aa/delivery.json';
+import index from '../../../data/derived/chn-2020/internal-line-delivery-56b7e7dee436df260de7/delivery.json';
 import type {OperationalCatalog} from '../world/operational-catalog.server';
 import {assertWorldGeometryCatalogRefMatches} from '../world/world-geometry-catalog-ref';
 
 export const CHN_BOUNDARY_DISPLAY_LOD_IDENTITY = Object.freeze({
-  path: 'data/derived/chn-2020/internal-line-delivery-669848e00a0d5612b2aa/delivery.json',
-  sha256: '669848e00a0d5612b2aa1823aa7a1be1227ad069a80ef222f5f2a967dd6ff4d2', byteLength: 4572047,
+  path: 'data/derived/chn-2020/internal-line-delivery-56b7e7dee436df260de7/delivery.json',
+  sha256: '56b7e7dee436df260de72144c5357f62192ea6e485238e1774761e53847097a1', byteLength: 5315344,
 });
 export function assertAcceptedBoundaryDisplayLod(value: unknown) {
   const bytes = Buffer.from(JSON.stringify(value) + '\n');

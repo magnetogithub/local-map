@@ -24,8 +24,8 @@ export const OPERATIONAL_MAP_LAYERS = {
   country: 'operational-country-border', administrative: 'operational-administrative-border', synthetic: 'operational-cell-grid',
   detailCountry: 'operational-detail-country-border', detailAdministrative: 'operational-detail-administrative-border', detailSynthetic: 'operational-detail-cell-grid',
   front: 'operational-front', detailFront: 'operational-detail-front',
-  provinceDisplayLod: 'operational-province-display-lod', provinceOriginal: 'operational-province-original', detailProvinceOriginal: 'operational-detail-province-original',
-  microDisplayLod: 'operational-micro-display-lod', microOriginal: 'operational-micro-original', detailMicroOriginal: 'operational-detail-micro-original',
+  provinceDisplayLod: 'operational-province-display-lod',
+  microDisplayLod: 'operational-micro-display-lod',
 } as const;
 type Hit = {id?: string | number; source?: string; sourceLayer?: string};
 type MapEvent = {features?: Hit[]};
@@ -60,9 +60,9 @@ export async function createOperationalMapConsumer(input: Input) {
   const noDebugEdges: ExpressionSpecification = ['==', ['id'], -1];
   const provinceBoundary: ExpressionSpecification = ['match', ['id'], [...delivery.bootstrap.provincePresentationBoundaryOrdinals ?? []], true, false];
   const ordinaryLegacyBoundary = provinceLod ? ['all', legacyBoundary, ['!', provinceBoundary]] : legacyBoundary;
-  const chnMicroBoundary: ExpressionSpecification = microLod ? ['match', ['id'], [...microLod.edgeOrdinals], true, false] : noDebugEdges;
-  const ordinaryMicroBoundary = microLod ? ['all', microBoundary, ['!', chnMicroBoundary]] : microBoundary;
-  const ordinaryExactMicroBoundary = microLod ? ['all', exactMicroBoundary, ['!', chnMicroBoundary]] : exactMicroBoundary;
+  const simplifiedMicroBoundary: ExpressionSpecification = microLod ? ['match', ['id'], [...microLod.edgeOrdinals], true, false] : noDebugEdges;
+  const ordinaryMicroBoundary = microLod ? ['all', microBoundary, ['!', simplifiedMicroBoundary]] : microBoundary;
+  const ordinaryExactMicroBoundary = microLod ? ['all', exactMicroBoundary, ['!', simplifiedMicroBoundary]] : exactMicroBoundary;
   let projection = createOperationalMapProjection(input.world, delivery.bootstrap.catalog.catalogRef, delivery.bootstrap.catalog.counts.cells);
   for (const country of Object.values(input.world.countriesById)) mapColorPresentation(country.mapColor);
   const ownedSources = [OPERATIONAL_CHANGED_CELL_SOURCE_ID, OPERATIONAL_FRONT_SOURCE_ID, ...(provinceLod ? [OPERATIONAL_PROVINCE_LOD_SOURCE_ID] : []), ...(microLod ? [OPERATIONAL_MICRO_LOD_SOURCE_ID] : [])];
@@ -79,8 +79,8 @@ export async function createOperationalMapConsumer(input: Input) {
   const emptyDebugScope: OperationalDebugBoundaryScope = Object.freeze({countryIds: Object.freeze([]), edgeOrdinals: Object.freeze([])});
   let debugEnabled = false, debugScope = emptyDebugScope;
   let debugIndex: ReturnType<typeof createOperationalDebugBoundaryScopeIndex> | undefined;
-  let provinceLodPublished = false, provinceLodActive = false;
-  let microLodPublished = false, microLodActive = false, microLodInScope = false;
+  let provinceLodPublished = false;
+  let microLodPublished = false, microLodInScope = false;
   const stats = {fullProjectionBuilds: 1, updates: 0, cellsUpdated: 0, edgesExamined: 0, exactCellsAdded: 0, exactFrontsAdded: 0, exactFrontsRemoved: 0,
     debugBoundaryScopeBuilds: 0, debugBoundaryFilterWrites: 0,
     provinceDisplayLodVertexCount: 0, provinceDisplayLodSourceWrites: 0, microDisplayLodVertexCount: 0, microDisplayLodSourceWrites: 0};
@@ -94,8 +94,7 @@ export async function createOperationalMapConsumer(input: Input) {
   const syncDebugVisibility = () => {
     for (const id of [L.synthetic, L.detailSynthetic]) map.setLayoutProperty(id, 'visibility', debugEnabled ? 'visible' : 'none');
     if (microLod) {
-      for (const id of [L.microOriginal, L.detailMicroOriginal]) map.setLayoutProperty(id, 'visibility', debugEnabled && !microLodActive ? 'visible' : 'none');
-      map.setLayoutProperty(L.microDisplayLod, 'visibility', debugEnabled && microLodActive ? 'visible' : 'none');
+      map.setLayoutProperty(L.microDisplayLod, 'visibility', debugEnabled ? 'visible' : 'none');
     }
   };
   const updateDebugScope = () => {
@@ -112,13 +111,10 @@ export async function createOperationalMapConsumer(input: Input) {
     map.setFilter(L.synthetic, ['all', ordinaryMicroBoundary, allowed] as unknown as import('maplibre-gl').FilterSpecification);
     map.setFilter(L.detailSynthetic, ['all', ordinaryExactMicroBoundary, allowed] as unknown as import('maplibre-gl').FilterSpecification);
     if (microLod) {
-      map.setFilter(L.microOriginal, ['all', microBoundary, chnMicroBoundary, allowed] as unknown as import('maplibre-gl').FilterSpecification);
-      map.setFilter(L.detailMicroOriginal, ['all', exactMicroBoundary, chnMicroBoundary, allowed] as unknown as import('maplibre-gl').FilterSpecification);
       map.setFilter(L.microDisplayLod, allowed as import('maplibre-gl').FilterSpecification);
     }
     debugScope = next;
     microLodInScope = next.edgeOrdinals.some(id => microLodIds.has(id));
-    if (!microLodInScope && microLodActive) {microLodActive = false; syncDebugVisibility();}
     stats.debugBoundaryFilterWrites++;
   };
   function replaceDetailEdges(ordinals: readonly number[]) {
@@ -236,7 +232,7 @@ export async function createOperationalMapConsumer(input: Input) {
     sources.dispose();
   };
   try {
-    for (const id of ownedSources) {map.addSource(id, {...OPERATIONAL_EXACT_SOURCE_OPTIONS, ...([OPERATIONAL_PROVINCE_LOD_SOURCE_ID, OPERATIONAL_MICRO_LOD_SOURCE_ID].includes(id) ? {maxzoom: 7} : {}), data: empty()}); addedSources.push(id);}
+    for (const id of ownedSources) {map.addSource(id, {...OPERATIONAL_EXACT_SOURCE_OPTIONS, data: empty()}); addedSources.push(id);}
     const fills = [[L.fill, OPERATIONAL_MAP_SOURCE_ID], [L.detailFill, OPERATIONAL_EXACT_CELL_SOURCE_ID], [L.changedFill, OPERATIONAL_CHANGED_CELL_SOURCE_ID]] as const;
     for (const [fill, source] of fills) {
       const vector = source === OPERATIONAL_MAP_SOURCE_ID, layerSource = {source, ...(vector ? {'source-layer': 'territories'} : {})};
@@ -259,27 +255,32 @@ export async function createOperationalMapConsumer(input: Input) {
         layout: {visibility: debug ? 'none' : 'visible'}, paint: id === L.detailAdministrative ? OPERATIONAL_LEGACY_BOUNDARY_PAINT : debug ? OPERATIONAL_DEBUG_BOUNDARY_PAINT : countryPaint});
     }
     if (provinceLod) {
-      // Keep original buckets as an instant fallback. Visibility swaps avoid
-      // rebuilding filters or drawing original and simplified strokes together.
-      addLayer({id: L.provinceOriginal, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', minzoom: 2.2,
-        filter: provinceBoundary as import('maplibre-gl').FilterSpecification, paint: {...OPERATIONAL_LEGACY_BOUNDARY_PAINT, 'line-opacity': vectorOpacity(OPERATIONAL_LEGACY_BOUNDARY_PAINT['line-opacity'])}});
-      addLayer({id: L.detailProvinceOriginal, type: 'line', source: OPERATIONAL_EXACT_EDGE_SOURCE_ID, minzoom: 2.2,
-        filter: provinceBoundary as import('maplibre-gl').FilterSpecification, paint: OPERATIONAL_LEGACY_BOUNDARY_PAINT});
-      addLayer({id: L.provinceDisplayLod, type: 'line', source: OPERATIONAL_PROVINCE_LOD_SOURCE_ID, minzoom: provinceLod.minZoom, maxzoom: provinceLod.maxZoom,
-        layout: {visibility: 'none', 'line-join': 'round'}, paint: OPERATIONAL_LEGACY_BOUNDARY_PAINT});
+      addLayer({id: L.provinceDisplayLod, type: 'line', source: OPERATIONAL_PROVINCE_LOD_SOURCE_ID, minzoom: 2.2,
+        layout: {visibility: 'visible', 'line-join': 'round'}, paint: OPERATIONAL_LEGACY_BOUNDARY_PAINT});
     }
     if (microLod) {
-      addLayer({id: L.microOriginal, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', minzoom: 2.2,
-        filter: ['all', microBoundary, chnMicroBoundary, noDebugEdges] as unknown as import('maplibre-gl').FilterSpecification, layout: {visibility: 'none'},
-        paint: {...OPERATIONAL_DEBUG_BOUNDARY_PAINT, 'line-opacity': vectorOpacity(OPERATIONAL_DEBUG_BOUNDARY_PAINT['line-opacity'])}});
-      addLayer({id: L.detailMicroOriginal, type: 'line', source: OPERATIONAL_EXACT_EDGE_SOURCE_ID, minzoom: 2.2,
-        filter: ['all', exactMicroBoundary, chnMicroBoundary, noDebugEdges] as unknown as import('maplibre-gl').FilterSpecification, layout: {visibility: 'none'}, paint: OPERATIONAL_DEBUG_BOUNDARY_PAINT});
-      addLayer({id: L.microDisplayLod, type: 'line', source: OPERATIONAL_MICRO_LOD_SOURCE_ID, minzoom: microLod.minZoom, maxzoom: microLod.maxZoom,
+      addLayer({id: L.microDisplayLod, type: 'line', source: OPERATIONAL_MICRO_LOD_SOURCE_ID, minzoom: 2.2,
         filter: noDebugEdges as import('maplibre-gl').FilterSpecification, layout: {visibility: 'none', 'line-join': 'round'}, paint: OPERATIONAL_DEBUG_BOUNDARY_PAINT});
     }
     addLayer({id: L.front, type: 'line', source: OPERATIONAL_MAP_SOURCE_ID, 'source-layer': 'edges', filter: ['==', ['get', 'c'], 1], paint: {'line-color': '#D9A43C', 'line-width': 2, 'line-dasharray': [3, 2],
       'line-opacity': ['case', ['all', ['boolean', ['feature-state', 'front'], false], ['!', ['boolean', ['feature-state', 'exactFront'], false]]], 1, 0]}});
     addLayer({id: L.detailFront, type: 'line', source: OPERATIONAL_FRONT_SOURCE_ID, paint: {'line-color': '#D9A43C', 'line-width': 2, 'line-dasharray': [3, 2]}});
+    // Simplified lines are loaded once and used at every zoom. Hover uses the common scope.
+    for (const [descriptor, sourceId, load] of [
+      [provinceLod, OPERATIONAL_PROVINCE_LOD_SOURCE_ID, () => delivery.loadProvinceBoundaryLod(signal)],
+      [microLod, OPERATIONAL_MICRO_LOD_SOURCE_ID, () => delivery.loadMicroBoundaryLod(signal)],
+    ] as const) {
+      if (!descriptor) continue;
+      const data = await load(); check();
+      const source = map.getSource(sourceId) as {setData: (data: FeatureCollection) => unknown};
+      source.setData(data);
+      const vertices = data.features.reduce((n, f) => n + f.geometry.coordinates.length, 0);
+      if (sourceId === OPERATIONAL_PROVINCE_LOD_SOURCE_ID) {
+        provinceLodPublished = true; stats.provinceDisplayLodVertexCount = vertices; stats.provinceDisplayLodSourceWrites++;
+      } else {
+        microLodPublished = true; stats.microDisplayLodVertexCount = vertices; stats.microDisplayLodSourceWrites++;
+      }
+    }
     // Geometry is initially lazy; restored occupied/transferred cells still need exact coverage.
     // Do not capture input/the initial world in callbacks retained for the map lifetime.
     const initialCells: {id: string; sourceCountryId: string}[] = [];
@@ -301,48 +302,12 @@ export async function createOperationalMapConsumer(input: Input) {
   return Object.freeze({
     getProjection: () => projection, getUpdateStats: () => ({...stats, exactCells: exactCells.size, exactFronts: exactFronts.size, selectedDetailCells: detailCells.size, detailSourceWrites: sources.getDetailSourceWrites(),
       debugBoundaryCountryIds: debugScope.countryIds, debugBoundaryEdgeCount: debugScope.edgeOrdinals.length,
-      provinceDisplayLodReady: provinceLodPublished, provinceDisplayLodActive: provinceLodActive,
-      microDisplayLodReady: microLodPublished, microDisplayLodActive: microLodActive, microDisplayLodInScope: debugEnabled && microLodInScope, resyncRequired: !!failed}),
-    loadProvinceBoundaryLod: async (requestSignal?: AbortSignal) => {
-      check(); if (!provinceLod || provinceLodPublished) return;
-      const currentSignal = requestSignal ? AbortSignal.any([signal, requestSignal]) : signal;
-      const data = await delivery.loadProvinceBoundaryLod(currentSignal); currentSignal.throwIfAborted(); check();
-      if (provinceLodPublished) return;
-      const source = map.getSource(OPERATIONAL_PROVINCE_LOD_SOURCE_ID) as {setData?: (data: FeatureCollection) => unknown} | undefined;
-      if (!source?.setData) throw Error('PROVINCE_BOUNDARY_LOD_SOURCE_MISSING');
-      source.setData(data); provinceLodPublished = true;
-      stats.provinceDisplayLodVertexCount = data.features.reduce((n, f) => n + f.geometry.coordinates.length, 0);
-      stats.provinceDisplayLodSourceWrites++;
-    },
-    setProvinceBoundaryLodEnabled: (enabled: boolean) => {
-      check(); const active = !!provinceLod && provinceLodPublished && enabled;
-      if (active === provinceLodActive) return;
-      map.setLayoutProperty(L.provinceOriginal, 'visibility', active ? 'none' : 'visible');
-      map.setLayoutProperty(L.detailProvinceOriginal, 'visibility', active ? 'none' : 'visible');
-      map.setLayoutProperty(L.provinceDisplayLod, 'visibility', active ? 'visible' : 'none');
-      provinceLodActive = active;
-    },
-    loadMicroBoundaryLod: async (requestSignal?: AbortSignal) => {
-      check(); if (!microLod || microLodPublished) return;
-      const currentSignal = requestSignal ? AbortSignal.any([signal, requestSignal]) : signal;
-      const data = await delivery.loadMicroBoundaryLod(currentSignal); currentSignal.throwIfAborted(); check();
-      if (microLodPublished) return;
-      const source = map.getSource(OPERATIONAL_MICRO_LOD_SOURCE_ID) as {setData?: (data: FeatureCollection) => unknown} | undefined;
-      if (!source?.setData) throw Error('MICRO_BOUNDARY_LOD_SOURCE_MISSING');
-      source.setData(data); microLodPublished = true;
-      stats.microDisplayLodVertexCount = data.features.reduce((n, f) => n + f.geometry.coordinates.length, 0);
-      stats.microDisplayLodSourceWrites++;
-    },
-    setMicroBoundaryLodEnabled: (enabled: boolean) => {
-      check(); const active = !!microLod && microLodPublished && debugEnabled && microLodInScope && enabled;
-      if (active === microLodActive) return;
-      microLodActive = active; syncDebugVisibility();
-    },
+      provinceDisplayLodReady: provinceLodPublished, provinceDisplayLodActive: provinceLodPublished,
+      microDisplayLodReady: microLodPublished, microDisplayLodActive: microLodPublished && debugEnabled && microLodInScope, microDisplayLodInScope: debugEnabled && microLodInScope, resyncRequired: !!failed}),
     setDebugBoundaries: (enabled: boolean) => {
       check();
       if (debugEnabled === enabled) return;
       debugEnabled = enabled; updateDebugScope();
-      if (!enabled) microLodActive = false;
       syncDebugVisibility();
     },
     supportsCountryViewportDetail: (id: string) => delivery.supportsCountryViewportDetail(id),

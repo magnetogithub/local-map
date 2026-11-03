@@ -537,12 +537,19 @@ def pbf_check(ctx, display, originals):
     return {"pass": True, "coverage": "representative-source-pinned-sample-only",
         "nationalAllArcPBFClaim": False, "sampledEdgeOrdinals": selected,
         "selection": ctx["deliverySampleSelection"], "zooms": reports,
-        "method": "Decode actual hashed MVT lines and both literal incident fill-ring networks including zero-area integer rings, matching the existing published delivery proof. Continuous distance-to-set bounds use adaptive 1-Lipschitz segment envelopes, not samples alone. Native/PBF-line, native/fill-ring and actual-PBF-line/fill-ring each retain their separate 1.5-grid-unit limits; display/line and display/fill have DP300m plus that original limit. The unchanged base package's full surface coverage remains the separately pinned original delivery proof.",
+        "method": "Decode actual hashed MVT lines and both literal incident fill-ring networks including zero-area integer rings, matching the existing published delivery proof. Continuous distance-to-set bounds use adaptive 1-Lipschitz segment envelopes, not samples alone. Native/PBF-line, native/fill-ring and actual-PBF-line/fill-ring each retain their separate 1.5-grid-unit limits; display/line and display/fill have the configured DP budget plus that original limit. The unchanged base package's full surface coverage remains the separately pinned original delivery proof.",
         "renderingLimitation": "Installed classifyRings skips exactly zero integer signed-area rings. Their bytes and integer-zero certificates are retained in the ledger; the literal-ring distance gate does not claim those degenerate rings enclose rendered pixels. This is an unchanged base-PBF representation effect, not an administrative or gameplay footprint modification.",
         "dpOnlyCSSPixelBoundAtZoom5": TOLERANCE / WORLD * 512 * 2 ** 5,
         "dpOnlySupremumCSSPixelBoundBelowZoom7": TOLERANCE / WORLD * 512 * 2 ** 7,
         "lodToPBFLineSupremumCSSPixelBoundBelowZoom7UsingSourceZ6": TOLERANCE / WORLD * 512 * 2 ** 7 + QUANTIZATION_UNITS * 512 / 4096 * 2,
         "lodToLiteralFillRingSupremumCSSPixelBoundBelowZoom7UsingSourceZ6": TOLERANCE / WORLD * 512 * 2 ** 7 + QUANTIZATION_UNITS * 512 / 4096 * 2}
+
+
+def check_previous_display(decision, current, previous):
+    if len(current) > len(previous):
+        raise ValueError("DISPLAY_VERTEX_COUNT_REGRESSION")
+    if decision == "previous-display-retained" and current != previous:
+        raise ValueError("PREVIOUS_DISPLAY_FALLBACK_NOT_EXACT")
 
 
 def negative_controls():
@@ -558,7 +565,9 @@ def negative_controls():
         raise ValueError("NEGATIVE_CONTROL_NODE_SECTOR_FLIP_FALSE_ACCEPT")
     return {"movedEndpoint": rejects(lambda: native_subsequence([[0, 0], [1, 0]], [[0, 0], [1.001, 0]])),
         "inventedCoordinate": rejects(lambda: native_subsequence([[0, 0], [.5, .1], [1, 0]], [[0, 0], [.6, .1], [1, 0]])),
-        "over300mChord": rejects(lambda: finite_chord_certificate([[0, 0], [.005, .01], [.01, 0]], [[0, 0], [.01, 0]])),
+        "overBudgetChord": rejects(lambda: finite_chord_certificate([[0, 0], [.005, TOLERANCE / 50000], [.01, 0]], [[0, 0], [.01, 0]])),
+        "previousDisplayVertexIncrease": rejects(lambda: check_previous_display("simplified", [[0, 0], [1, 1], [2, 0]], [[0, 0], [2, 0]])),
+        "forgedPreviousDisplayFallback": rejects(lambda: check_previous_display("previous-display-retained", [[0, 0], [1, .5], [2, 0]], [[0, 0], [1, 1], [2, 0]])),
         "hiddenInteriorDistancePeak": rejects(lambda: directed_distance_bound([[(0, 0), (2, 0)]], shapely.MultiPoint([(0, 0), (2, 0)]), .5)),
         "sharedNodeSectorFlip": True,
         "closedLoopInversion": rejects(lambda: closed_loop_orientation([[0, 0], [1, 0], [1, 1], [0, 0]], [[0, 0], [1, 1], [1, 0], [0, 0]])),
@@ -567,11 +576,17 @@ def negative_controls():
 
 
 def main():
+    global TOLERANCE
     parser = argparse.ArgumentParser()
     parser.add_argument("--producer-report", required=True)
     parser.add_argument("--pointer", default="data/runtime/operational-catalog/current.json")
     parser.add_argument("--output", default="reports/chn-internal-render-lod-20261030/verification/independent.json")
+    parser.add_argument("--tolerance", type=float, default=300)
+    parser.add_argument("--baseline-delivery", default="data/derived/chn-2020/internal-line-delivery-669848e00a0d5612b2aa/delivery.json")
     args = parser.parse_args()
+    if not 0 < args.tolerance <= 6000:
+        raise ValueError("INVALID_DISPLAY_TOLERANCE")
+    TOLERANCE = args.tolerance
     output = local(args.output)
     if not output.is_relative_to(REPORT_ROOT):
         raise ValueError("REPORT_OUTPUT_OUTSIDE_OWNED_DIRECTORY")
@@ -586,10 +601,19 @@ def main():
             raise ValueError("PRODUCER_CONTRACT_NOT_PASSING_INTERNAL_LOD")
         pins = all_pins({"inputs": producer["inputs"], "code": producer["code"],
             "provinceGeometry": producer["provinceGeometry"], "microGeometry": producer["microGeometry"]})
-        original_delivery_pin = pin("reports/chn-2020/delivery-verification.json")
+        # The accepted display package retains a hashed independent proof of the
+        # complete base ledger, including when older build reports are archived.
+        baseline_pin = pin(args.baseline_delivery)
+        baseline = decode(baseline_pin)
+        original_delivery_pin = baseline["verification"]
         original_delivery = decode(original_delivery_pin)
-        if original_delivery.get("pass") is not True or original_delivery["catalogVersion"] != producer["catalogRef"]["catalogVersion"]:
+        if (baseline.get("schemaVersion") != "chn-boundary-display-delivery-v1"
+                or original_delivery.get("schemaVersion") != "chn-internal-line-lod-independent-v1"
+                or original_delivery.get("pass") is not True
+                or baseline["catalogRef"] != producer["catalogRef"]
+                or original_delivery["baseCatalogRef"] != producer["catalogRef"]):
             raise ValueError("ORIGINAL_PUBLISHED_DELIVERY_PROOF_NOT_PASSING_THIS_CATALOG")
+        pins[baseline_pin["path"]] = baseline_pin
         pins[original_delivery_pin["path"]] = original_delivery_pin
         current_pin = pin(args.pointer)
         if current_pin != producer["inputs"]["pointer"]:
@@ -606,15 +630,18 @@ def main():
         print("Verify original catalog assets", len(ledger), flush=True)
         for p in ledger:
             checked(p)
+        if hashlib.sha256(encoded(ledger)).hexdigest() != original_delivery["authorityUnchanged"]["originalCatalogLedgerSha256"]:
+            raise ValueError("ORIGINAL_CATALOG_LEDGER_CHANGED_SINCE_ACCEPTED_PROOF")
         descriptor, detail = asset_json("catalog.json"), asset_json("detail-index.json")
         if producer["catalogRef"] != descriptor["catalogRef"] or producer.get("administrativeTruthClaim") is not False:
             raise ValueError("AUTHORITATIVE_REFERENCE_CHANGED")
         presentation = decode(producer["inputs"]["provincePresentationIndex"])
         province_ordinals = presentation["addedBoundaryOrdinals"]
-        if len(province_ordinals) != 994 or len(set(province_ordinals)) != 994:
-            raise ValueError("PROVINCE_994_SOURCE_SET")
+        province_count = len(province_ordinals)
+        if not province_count or len(set(province_ordinals)) != province_count:
+            raise ValueError("PROVINCE_SOURCE_SET")
         display, categories = {}, {}
-        for name, expected in (("province", 994), ("micro", 7568)):
+        for name, expected in (("province", province_count), ("micro", 8562 - province_count)):
             features = decode(producer[name + "Geometry"])
             if features.get("type") != "FeatureCollection" or len(features["features"]) != expected:
                 raise ValueError("DISPLAY_CATEGORY_FEATURE_COUNT:" + name)
@@ -626,13 +653,37 @@ def main():
         if sorted(n for n in categories if categories[n] == "province") != province_ordinals:
             raise ValueError("PROVINCE_ID_SET_CHANGED")
         policy = producer["policy"]
-        if policy["projection"] != "EPSG:3857" or policy["alwaysXY"] is not True or policy["toleranceMeters"] != TOLERANCE or policy["maximumDeviationMeters"] != TOLERANCE or policy["tileSizeCSSPixels"] != 512 or policy["worldWidthMeters"] != WORLD or policy["maximumApplicableZoomExclusive"] != 7:
+        if policy["projection"] != "EPSG:3857" or policy["alwaysXY"] is not True or policy["toleranceMeters"] != TOLERANCE or policy["maximumDeviationMeters"] != TOLERANCE or policy["tileSizeCSSPixels"] != 512 or policy["worldWidthMeters"] != WORLD or policy.get("displayUse") != "single simplified representation at every zoom":
             raise ValueError("DISPLAY_POLICY_CHANGED")
         rows = {row[0]: c["countryId"] for c in detail["countries"] for row in asset_json(c["metadata"]["path"])["rows"]}
         all_edges = [e for s in detail["edgeDetails"] for e in asset_json(s["artifact"]["path"])["edges"]]
         selected = sorted(e["ordinal"] for e in all_edges if rows.get(e["left"]) == "CHN" and rows.get(e["right"]) == "CHN")
         if len(selected) != 8562 or sorted(display) != selected:
             raise ValueError("ALL_CURRENT_INTERNAL_CHN_EDGE_SET_CHANGED")
+        previous_display = {}
+        if "previousDisplayDelivery" in producer["inputs"]:
+            previous_delivery = decode(producer["inputs"]["previousDisplayDelivery"])
+            previous_producer = decode(producer["inputs"]["previousDisplayProducer"])
+            previous_proof = decode(producer["inputs"]["previousDisplayProof"])
+            if (previous_proof.get("pass") is not True or previous_producer.get("pass") is not True
+                    or previous_delivery["producer"] != producer["inputs"]["previousDisplayProducer"]
+                    or previous_delivery["verification"] != producer["inputs"]["previousDisplayProof"]
+                    or previous_proof["producer"] != previous_delivery["producer"]
+                    or previous_proof["baseCatalogRef"] != descriptor["catalogRef"]
+                    or previous_producer["catalogRef"] != descriptor["catalogRef"]
+                    or previous_producer["policy"]["toleranceMeters"] > TOLERANCE):
+                raise ValueError("PREVIOUS_DISPLAY_NOT_ACCEPTED_FOR_COARSENING")
+            for category in ("province", "micro"):
+                identity = producer["inputs"]["previousDisplay" + category.title() + "Geometry"]
+                if identity != previous_producer[category + "Geometry"] or identity != previous_proof["artifacts"][category]:
+                    raise ValueError("PREVIOUS_DISPLAY_GEOMETRY_NOT_CERTIFIED")
+                for feature in decode(identity)["features"]:
+                    n = feature["id"]
+                    if n in previous_display or categories.get(n) != category:
+                        raise ValueError("PREVIOUS_DISPLAY_PARTITION_CHANGED")
+                    previous_display[n] = feature["geometry"]["coordinates"]
+            if sorted(previous_display) != selected or policy.get("noEdgeVertexIncreaseFromPreviousDisplay") is not True:
+                raise ValueError("PREVIOUS_DISPLAY_SCOPE_OR_POLICY_CHANGED")
         originals = {e["ordinal"]: e for e in all_edges if e["ordinal"] in display}
         protected_edges = [e for e in all_edges if e["boundaryClass"] in ("country", "coast") or e["flags"]["country"]]
         claims = {e["ordinal"]: e for e in producer["edges"]}
@@ -644,7 +695,7 @@ def main():
             source, feature, claim = originals[n], display[n], claims[n]
             if claim["category"] != categories[n]:
                 raise ValueError("CLAIM_CATEGORY_CHANGED")
-            if claim["decision"] not in ("simplified", "original-unchanged", "reverted"):
+            if claim["decision"] not in ("simplified", "original-unchanged", "reverted", "previous-display-retained"):
                 raise ValueError("UNKNOWN_DISPLAY_DECISION")
             if feature["type"] != "Feature" or feature["properties"] != {} or feature["geometry"]["type"] != "LineString" or rows[source["left"]] != "CHN" or rows.get(source["right"]) != "CHN":
                 raise ValueError("DISPLAY_NOT_ORIGINAL_INTERNAL_CHN_ARC")
@@ -659,6 +710,10 @@ def main():
                 raise ValueError("REVERT_OR_UNCHANGED_CLAIM_NOT_ORIGINAL")
             if claim["decision"] == "reverted" and not claim["reasons"]:
                 raise ValueError("REVERT_WITHOUT_LEDGER_REASON")
+            if previous_display:
+                check_previous_display(claim["decision"], b, previous_display[n])
+            elif claim["decision"] == "previous-display-retained":
+                raise ValueError("PREVIOUS_DISPLAY_FALLBACK_WITHOUT_CERTIFIED_BASELINE")
             old_line, new_line = LineString(a), LineString(b)
             if not new_line.is_simple and a != b:
                 raise ValueError("NEW_DISPLAY_SELF_INTERSECTION")
@@ -695,20 +750,23 @@ def main():
             "baseCatalogRef": descriptor["catalogRef"], "authorityUnchanged": {"allPublishedArtifactsRechecked": len(ledger),
               "packageBytes": sum(p["byteLength"] for p in ledger), "catalogOrderAdministrativeParentsCountryGeometryAndMilitaryInputsUnchanged": True,
               "originalCatalogLedgerSha256": hashlib.sha256(encoded(ledger)).hexdigest()}, "sourcePins": list(pins.values()),
-            "checks": {"exactAll8562IdsAndSourceIdentity": True, "exactProvince994Micro7568Partition": True,
-              "nativeCoordinateSubsetEndpointsAllArcs": True, "continuousDP300MetersAllArcs": True,
+            "checks": {"exactAll8562IdsAndSourceIdentity": True, "exactPinnedProvinceMicroPartition": True,
+              "nativeCoordinateSubsetEndpointsAllArcs": True, "continuousDPWithinConfiguredBudgetAllArcs": True,
               "wholeNetworkNoNewSelfCrossOrInternalCountryCoastContacts": True, "sharedNodeCyclicOrders": True,
               "closedLoopOrientationAndDimension": True,
               "individualClosedLoopNestingAgainstAllFixedEndpoints": True,
               "representativeActualPBFDistanceAndFillRingBudgets": True, "originalCatalogFilesUnchanged": True},
+            "previousDisplayComparison": {"edgesChecked": len(previous_display), "edgesWithMoreVertices": 0,
+                "previousVertices": sum(len(c) for c in previous_display.values()),
+                "currentVertices": sum(len(f["geometry"]["coordinates"]) for f in display.values())} if previous_display else None,
             "edges": independent, "topology": [native_topology, projected_topology], "endpointStars": star_checks, "closedLoopNesting": nesting_checks,
             "actualDelivery": delivery, "negativeControls": negative_controls(),
-            "summary": {"edges": 8562, "provinceEdges": 994, "microEdges": 7568,
+            "summary": {"toleranceMercatorMeters": TOLERANCE, "edges": 8562, "provinceEdges": province_count, "microEdges": 8562 - province_count,
               "originalVertices": sum(e["originalVertices"] for e in independent), "displayVertices": sum(e["displayVertices"] for e in independent),
               "maximumFiniteChordDeviationMeters": max(e["maximumOriginalSubchainVertexToFiniteChordMeters"] for e in independent), "decisions": dict(Counter(e["decision"] for e in independent))},
             "limitations": ["All 8562 internal arcs and complete internal/protected contact network are verified; actual PBF decoding is explicitly source-pinned representative samples only, not a national all-arc delivery claim.",
               "Verifies auxiliary display lines, not a change in administrative facts or authoritative cell footprints.",
-              "CSS conversion is for pitch-zero Mercator,512CSSpx world tile at zoom0,DPR independent. Parent owns actual browser/source masking and high-zoom return tests.",
+              "CSS conversion is for pitch-zero Mercator,512CSSpx world tile at zoom0,DPR independent. Actual browser/source masking and the single display representation across zooms are tested separately.",
               "PBF fill-ring distance is checked against literal delivered ring networks including tile clipping; the unchanged base package's complete fill coverage is a separate existing proof."]})
     except Exception as error:
         report["failures"].append({"type": type(error).__name__, "message": str(error)})

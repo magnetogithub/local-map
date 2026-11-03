@@ -1,0 +1,131 @@
+{
+  "pass": true,
+  "scope": "All 8562 accepted internal China arcs: 1002 provincial and 7560 micro boundaries. One shared offline curve rule at every zoom.",
+  "change": "Keep the accepted middle simplification; round eligible interior corners with short quadratic Bezier fillets. Derived samples represent the curves instead of restoring raw detail.",
+  "summary": {
+    "baselineVertices": 45607,
+    "curvedEdges": 6708,
+    "displayVertices": 161168,
+    "edges": 8562,
+    "microVertices": 140463,
+    "provinceVertices": 20705,
+    "roundedCorners": 28439
+  },
+  "policy": {
+    "authoritativeGeometryChanged": false,
+    "closedLoopOrientationAndNestingPreserved": true,
+    "coordinateDerivation": "New samples on local quadratic Bezier arcs in Mercator, inverse-projected once offline; all fixed junction coordinates retain exact baseline JSON numbers.",
+    "cornerFraction": 0.22,
+    "displayUse": "single curved internal-boundary representation at every zoom",
+    "endpointCyclicOrderAndRayTiesPreserved": true,
+    "exactNativeAndProjectedContactSets": true,
+    "fixedSharedNodes": true,
+    "maximumAdditionalDeviationMercatorMeters": 1200,
+    "maximumBezierChordErrorMercatorMeters": 40,
+    "maximumCutbackMercatorMeters": 3000,
+    "method": "Quadratic Bezier fillets on accepted simplified interior corners; no extrapolation or waviness on straight segments.",
+    "projection": "EPSG:3857"
+  },
+  "authorityUnchanged": {
+    "allPublishedArtifactsRechecked": 6036,
+    "authoritativeCellsParentsCountryCoastAndMilitaryInputsUnchanged": true,
+    "originalCatalogLedgerSha256": "437fc172fef4d3c7fdfd47f81dda9e4dc1ab0c1f1c9becb6dbca07f5f685723e",
+    "packageBytes": 108943102
+  },
+  "checks": {
+    "independentWholeNetworkProof": {
+      "path": "reports/chn-internal-render-lod-20261030/verification/curved-1200m-20261102.json",
+      "sha256": "49b62cd0923eaf48c5125f65463823a886148eef1f571c1732a61d3d54455a8b",
+      "byteLength": 3606450
+    },
+    "independentChecks": {
+      "allSharedNodeCoordinatesAndCyclicOrders": true,
+      "closedLoopWindingAndNesting": true,
+      "continuousSymmetricCurveDeviationAllChangedArcs": true,
+      "exactAll8562IdsCategoriesAndEndpoints": true,
+      "originalCatalog6036ArtifactsUnchanged": true,
+      "wholeNetworkOriginalContactSetsBothCRSs": true
+    },
+    "negativeControls": {
+      "closedLoopInversion": true,
+      "curveOutsideDistanceBudget": true,
+      "missingEdgeOrChangedCategory": true,
+      "movedEndpoint": true,
+      "newProtectedContact": true,
+      "removedSharedJunction": true,
+      "selfCrossingCurve": true,
+      "sharedNodeSectorFlip": true
+    },
+    "packager": {
+      "path": "reports/chn-curved-boundaries-20261102/packager-verification.json",
+      "sha256": "a0e787aa4ba4bf18c51db030cc851cc3bdbc4ac3bc5672613cb4d54bf865927f",
+      "byteLength": 263
+    },
+    "browser": {
+      "path": "reports/chn-curved-boundaries-20261102/browser-verification.json",
+      "sha256": "3ce9064209059fe4e5f2840b16c4fd760da953cbc6c21e95733f4140a4ebeb36",
+      "byteLength": 116165
+    },
+    "vitest": {
+      "files": 4,
+      "tests": 109,
+      "pass": true
+    },
+    "typescript": true,
+    "eslint": true,
+    "unchangedCountryScreenshots": {
+      "korea-close": [
+        {
+          "path": "reports/chn-curved-boundaries-20261102/before-korea-close.png",
+          "sha256": "9c6afdaa627333def1765171aaf6b9e77d5da24a447acdf657860882282713d5",
+          "byteLength": 228197
+        },
+        {
+          "path": "reports/chn-curved-boundaries-20261102/after-korea-close.png",
+          "sha256": "9c6afdaa627333def1765171aaf6b9e77d5da24a447acdf657860882282713d5",
+          "byteLength": 228197
+        }
+      ],
+      "dprk-close": [
+        {
+          "path": "reports/chn-curved-boundaries-20261102/before-dprk-close.png",
+          "sha256": "eff9dbdb3cbbdd46dfb8eca7f37567c920a131fe154d65ee2a82f8494e719239",
+          "byteLength": 157046
+        },
+        {
+          "path": "reports/chn-curved-boundaries-20261102/after-dprk-close.png",
+          "sha256": "eff9dbdb3cbbdd46dfb8eca7f37567c920a131fe154d65ee2a82f8494e719239",
+          "byteLength": 157046
+        }
+      ]
+    }
+  },
+  "delivery": {
+    "path": "data/derived/chn-2020/internal-line-delivery-d652d5fd9ade1d4263f5/delivery.json",
+    "sha256": "d652d5fd9ade1d4263f58c26123bdd9f001e656ad12c5a61509c51834b6e1519",
+    "byteLength": 3697310
+  },
+  "performance": {
+    "baselineCompressedBytes": 811083,
+    "currentCompressedBytes": 2732582,
+    "curveGeneration": "Offline only; each of the two static sources is published once per mount and reused across all tested views.",
+    "initializationMilliseconds": {
+      "before": 12606,
+      "after": 2912
+    },
+    "timingLimit": "Sequential local development sessions on the same server with a warm build; diagnostic initialization timings, not a controlled performance benchmark."
+  },
+  "reproduce": [
+    "python scripts/chn-2020/build-chn-curved-internal-lines.py --baseline-delivery data/derived/chn-2020/internal-line-delivery-27d1f5131d82e9dd4b66/delivery.json",
+    "python scripts/chn-2020/verify-chn-curved-internal-lines.py --producer-report data/derived/chn-2020/internal-line-curves-033a41b2658336ed28ff/producer-report.json --output reports/chn-internal-render-lod-20261030/verification/curved-1200m-20261102.json",
+    "node scripts/chn-2020/package-internal-line-lod.mjs --producer data/derived/chn-2020/internal-line-curves-033a41b2658336ed28ff/producer-report.json --verification reports/chn-internal-render-lod-20261030/verification/curved-1200m-20261102.json",
+    "node reports/chn-curved-boundaries-20261102/verify-packager.cjs",
+    "node reports/chn-curved-boundaries-20261102/verify-browser.cjs http://127.0.0.1:3192",
+    "node reports/chn-curved-boundaries-20261102/finalize-verification.cjs"
+  ],
+  "limitations": [
+    "Display curves only, with explicit new derived coordinates; the earlier DP original-subsequence proof is retained separately.",
+    "Continuous bounds apply to actual delivered line segments in Mercator. Bezier curves are sampled offline; no geographic survey accuracy claim.",
+    "The unchanged fill/tile package retains its accepted proof; browser rendering and performance are verified separately."
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "manual-map-correction-feasibility-v1",
+  "date": "2026-11-03",
+  "appliedFix": {
+    "operation": "Absorb the enclosed Binhai fragment into surrounding Huanghua gameplay cell",
+    "scope": "Actual gameplay geometry, IDs, adjacency, hit testing and presentation; not line suppression",
+    "beforeCounts": {
+      "cells": 8005,
+      "edges": 26273
+    },
+    "afterCounts": {
+      "cells": 8004,
+      "edges": 26272
+    },
+    "landLost": 0,
+    "unrelatedCellGeometryChanges": 0,
+    "rawSourceModified": false,
+    "administrativeTruthClaim": false,
+    "plan": {
+      "path": "data/manual-map-corrections/tianjin-contained-cell-merge-20261103.json",
+      "sha256": "f117349bf50d1650270078a6d05c98ee993851443b3d5c7760b5ef20fcd8c7d7",
+      "byteLength": 985
+    },
+    "geometryProof": {
+      "path": "reports/tianjin-detached-parcel-audit-20261103/merge-verification.json",
+      "sha256": "6d7768b4a5e237f8f77eed7e293f402a175cae7a88ee2b8528831febe77a0ad9",
+      "byteLength": 2176
+    },
+    "displayProof": {
+      "path": "reports/tianjin-detached-parcel-audit-20261103/display-verification.json",
+      "sha256": "ede2b0baab4f661db0048022becbc63218a16f0d84896d3e553e1741a853e492",
+      "byteLength": 3585
+    }
+  },
+  "feasibility": {
+    "canManuallyCorrectFoundErrors": true,
+    "currentSupportedAutomaticOperation": "Same-country Polygon cell fully enclosed by exactly one hole in exactly one neighboring Polygon; same administrative parent and compatible existing seed lineage. Removes the matching hole without changing other vertices.",
+    "identification": "Resolve clicked coordinate to stable catalog cell ID, inspect its exact polygon and all neighbors; never persist a mutable ordinal as the correction selector.",
+    "persistence": "Explicit separate correction plan pins both input geometries, area cap, target, recipient, reason and evidence. Raw source remains unchanged. Reapply the plan as an offline postprocessing stage after a source rebuild, then independently verify, package and rebase display.",
+    "sourceRebuildLimitation": "A raw-source rebuild does not automatically apply this plan. The correction stage must explicitly be rerun; changed geometry hashes or missing IDs reject the old plan and require review.",
+    "uiStatus": "No click-to-merge editor implemented. Current mechanism is a checked JSON plan plus offline CLI pipeline.",
+    "unsupportedCases": [
+      "Multiple adjacent recipients: user/editor must choose which border should remain; requires a general shared-mesh rebuild.",
+      "Different countries or authoritative administrative parents: not supported by this enclosed-cell tool.",
+      "New geometry or changed seed lineage: rejected instead of guessing.",
+      "Genuine islands, coast cells, or water gaps: no nearest-land automatic merge.",
+      "Live game migration: no automatic conversion; use a new game for the new catalog."
+    ],
+    "suggestedEditorWorkflow": [
+      "Select the suspect cell on the map and show its stable ID, source and neighbors.",
+      "Preview merging it into a selected recipient, including resulting outline and area.",
+      "Write a correction entry, validate coverage and adjacency, publish a new catalog, and keep rollback history."
+    ],
+    "implementationFiles": [
+      "scripts/apply-contained-cell-merges.py",
+      "scripts/verify-contained-cell-merges.py",
+      "scripts/catalog-cell-merge-gate.mjs",
+      "scripts/rebase-contained-merge-display.mjs",
+      "scripts/verify-contained-merge-display.mjs"
+    ]
+  },
+  "checks": {
+    "geometryIndependentVerification": true,
+    "deterministicReplay": true,
+    "displayCoordinatePreservation": true,
+    "applicationTests": 125,
+    "packageGateTests": 14,
+    "browser": {
+      "path": "reports/tianjin-detached-parcel-audit-20261103/merge-browser-verification.json",
+      "sha256": "baec3b37d1a5a6e6751aa1d46899892508cdae9bd78a11e0c5783be634598f6e",
+      "byteLength": 182072
+    },
+    "typescript": true,
+    "eslintModifiedFiles": true,
+    "productionBuild": {
+      "pass": true,
+      "command": "PAX_BUILD_DIST_DIR=.next-merge-build-20261103 next build --webpack"
+    },
+    "productionSmoke": {
+      "path": "reports/tianjin-detached-parcel-audit-20261103/production-smoke.json",
+      "sha256": "3a55aed2507f7805e3d4d42f0e224ec04baa0133825a4bf501f6b650668499b5",
+      "byteLength": 275
+    },
+    "ownedQaServersStopped": true,
+    "temporaryTsconfigIncludesRemoved": true
+  },
+  "activePointer": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+    "byteLength": 251
+  },
+  "reviewArtifacts": {
+    "screenshot": "reports/tianjin-detached-parcel-audit-20261103/merged-normal-z7.2.png",
+    "browserVerification": "reports/tianjin-detached-parcel-audit-20261103/merge-browser-verification.json"
+  }
+}

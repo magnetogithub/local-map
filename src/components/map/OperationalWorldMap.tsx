@@ -15,7 +15,7 @@ import {DEFAULT_GAME_UI_SETTINGS, type GameUiSettings} from '@/lib/game-ui/ui-se
 import {operationalCountryBorderWidth} from '@/lib/map/operational-boundary-style';
 
 // Display revisions refresh the map bootstrap while retaining the game client.
-const MAP_PRESENTATION_VERSION = 'chn-internal-lines-edc8c590e072774bd876';
+const MAP_PRESENTATION_VERSION = 'chn-contained-cell-merge-56b7e7dee436df260de7';
 const deliveries = new WeakMap<OperationalGameClient, {presentationVersion: string; delivery: Promise<OperationalVectorDelivery>}>();
 type DebugFeature = Readonly<{id: string | number | null; layerId: string; source: string; sourceLayer: string | null; properties: Record<string, unknown>}>;
 type OperationalMapDebug = Readonly<{
@@ -57,7 +57,6 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
   const [appliedRevision, setAppliedRevision] = useState<number | null>(null);
   const [debugDetailMode, setDebugDetailMode] = useState(uiSettings.debugMapBoundaries);
   const debugBoundaryOverride = useRef<boolean | null>(null);
-  const refreshDisplayLods = useRef<() => void>(() => {});
   const diagnosticStatus = useRef({baseStatus, worldStatus, detailStatus, appliedRevision});
   useEffect(() => {diagnosticStatus.current = {baseStatus, worldStatus, detailStatus, appliedRevision};}, [baseStatus, worldStatus, detailStatus, appliedRevision]);
   const [territory, setTerritory] = useState<string | null>(null);
@@ -71,7 +70,6 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
     const mounted = consumer.current;
     const debug = debugBoundaryOverride.current ?? settings.debugMapBoundaries;
     if (mounted && !mounted.getUpdateStats().resyncRequired) mounted.setDebugBoundaries(debug);
-    refreshDisplayLods.current();
     setDebugDetailMode(debug);
     for (const id of [L.country, L.detailCountry]) {
       if (map?.getLayer(id)) map.setPaintProperty(id, 'line-width', operationalCountryBorderWidth(settings.emphasizeBorders));
@@ -80,7 +78,7 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
   useEffect(() => {
     if (!container.current) return;
     const abort = new AbortController(); let disposed = false, baseFailed = false, worldRequest = 0;
-    let stopDisplayLodView = () => {}, stopPointerHover = () => {};
+    let stopPointerHover = () => {};
     let capitalCountryOrder = client.getSnapshot().world.countryOrder;
     setBaseStatus('loading'); setWorldStatus('syncing'); setDetailStatus('idle'); setAppliedRevision(null);
     const map = new maplibre.Map({container: container.current, style: {version: 8, glyphs: '/fonts/{fontstack}/{range}.pbf', sources: {}, layers: [{id: 'sea-background', type: 'background', paint: {'background-color': '#b8d2da'}}]}, ...MAP_OPTIONS, maxTileCacheSize: 256, localIdeographFontFamily: 'Noto Sans KR Local',
@@ -126,7 +124,7 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
           sourceLayer: feature.sourceLayer ?? null, properties: {...feature.properties}}));
       },
       querySourceFeatureIds: (source, sourceLayer) => [...new Set(map.querySourceFeatures(source, {sourceLayer}).flatMap(feature => feature.id === undefined ? [] : [feature.id]))],
-      setDebugBoundaries: enabled => {debugBoundaryOverride.current = enabled; consumer.current?.setDebugBoundaries(enabled); refreshDisplayLods.current(); setDebugDetailMode(enabled);},
+      setDebugBoundaries: enabled => {debugBoundaryOverride.current = enabled; consumer.current?.setDebugBoundaries(enabled); setDebugDetailMode(enabled);},
       selectCountryDetail: countryId => {
         const store = useGameSetupStore.getState();
         if (countryId === null) store.clearSelectedCountry();
@@ -150,7 +148,6 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
       const store = useGameSetupStore.getState(), countries = client.getSnapshot().world.countriesById;
       consumer.current?.selectCountry(store.selectedCountryId && countries[store.selectedCountryId] ? store.selectedCountryId : null);
       consumer.current?.hoverCountry(store.hoveredCountryId && countries[store.hoveredCountryId] ? store.hoveredCountryId : null);
-      refreshDisplayLods.current();
     };
     const synchronize = async (next: ReturnType<OperationalGameClient['getSnapshot']>, useDelta = false): Promise<void> => {
       const mounted = consumer.current;
@@ -194,50 +191,9 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
       }, id => {
         if (mounted.getUpdateStats().resyncRequired) return;
         const store = useGameSetupStore.getState();
-        if (store.hoveredCountryId !== id) {mounted.hoverCountry(id); store.setHoveredCountry(id); refreshDisplayLods.current();}
+        if (store.hoveredCountryId !== id) {mounted.hoverCountry(id); store.setHoveredCountry(id); }
         map.getCanvas().style.cursor = id ? 'pointer' : '';
       });
-      const lodViews: {synchronize: () => void; settle: () => void; load: () => void; sourceId: string}[] = [];
-      for (const kind of ['province', 'micro'] as const) {
-        const lod = kind === 'province' ? loaded.bootstrap?.provinceBoundaryLod : loaded.bootstrap?.microBoundaryLod;
-        if (!lod) continue;
-        const sourceId = kind === 'province' ? OPERATIONAL_PROVINCE_LOD_SOURCE_ID : OPERATIONAL_MICRO_LOD_SOURCE_ID;
-        const isReady = () => kind === 'province' ? mounted.getUpdateStats().provinceDisplayLodReady : mounted.getUpdateStats().microDisplayLodReady;
-        const setEnabled = (enabled: boolean) => kind === 'province' ? mounted.setProvinceBoundaryLodEnabled(enabled) : mounted.setMicroBoundaryLodEnabled(enabled);
-        let loading: Promise<void> | undefined, activationReady = false;
-        const eligible = () => {
-          if (kind === 'micro' && !mounted.getUpdateStats().microDisplayLodInScope) return false;
-          const z = map.getZoom(), bounds = map.getBounds(), [w, s, e, n] = lod.bounds;
-          if (z < lod.minZoom || z >= lod.maxZoom || bounds.getSouth() > n || bounds.getNorth() < s) return false;
-          const width = Math.abs(bounds.getEast() - bounds.getWest());
-          if (width >= 360) return true;
-          const west = ((bounds.getWest() + 180) % 360 + 360) % 360 - 180;
-          return [-360, 0, 360].some(offset => west + offset <= e && west + width + offset >= w);
-        };
-        const synchronizeLod = () => {
-          if (!disposed) setEnabled(eligible() && activationReady && isReady() && map.isSourceLoaded(sourceId));
-        };
-        const loadLod = () => {
-          synchronizeLod();
-          if (disposed || !eligible() || loading || isReady()) return;
-          loading = (kind === 'province' ? mounted.loadProvinceBoundaryLod(abort.signal) : mounted.loadMicroBoundaryLod(abort.signal)).then(() => {if (!disposed) map.triggerRepaint();}).catch(error => {
-            if (!disposed && !abort.signal.aborted) {setEnabled(false); console.warn(`${kind} display detail unavailable; original lines retained`, error);}
-          }).finally(() => {loading = undefined;});
-        };
-        // Do not change visibility reentrantly inside Style.update/sourcedata.
-        // Defer activation to idle so the next normal style/prepare pass uploads
-        // the newly visible source before drawing it.
-        const settle = () => {if (isReady() && map.isSourceLoaded(sourceId)) activationReady = true; synchronizeLod();};
-        lodViews.push({synchronize: synchronizeLod, settle, load: loadLod, sourceId});
-      }
-      const synchronizeLods = () => lodViews.forEach(view => view.synchronize());
-      const loadLods = () => lodViews.forEach(view => view.load());
-      const settleLods = () => lodViews.forEach(view => view.settle());
-      const sourceReady = (event: maplibre.MapSourceDataEvent) => {if (lodViews.some(view => view.sourceId === event.sourceId)) map.triggerRepaint();};
-      map.on('move', synchronizeLods); map.on('moveend', loadLods); map.on('sourcedata', sourceReady); map.on('idle', settleLods);
-      refreshDisplayLods.current = loadLods;
-      stopDisplayLodView = () => {refreshDisplayLods.current = () => {}; map.off('move', synchronizeLods); map.off('moveend', loadLods); map.off('sourcedata', sourceReady); map.off('idle', settleLods);};
-      loadLods();
       map.addSource('operational-capitals', {type: 'geojson', data: {type: 'FeatureCollection', features: live.current.presentation.capitals.features.map(f => ({...f, geometry: {...f.geometry, coordinates: [...f.geometry.coordinates]}}))}});
       map.addLayer({id: 'operational-capitals', type: 'circle', source: 'operational-capitals', paint: {'circle-radius': 2, 'circle-color': '#34464D'}});
       const text = await mountOperationalCountryLabels(map, client.getSnapshot().world, abort.signal);
@@ -254,7 +210,7 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
     };
     window.addEventListener('pax:focus-country', focus);
     const resize = new ResizeObserver(() => map.resize()); resize.observe(container.current);
-    return () => {disposed = true; if (debugBridge && window.__PAX_OPERATIONAL_DEBUG__ === debugBridge) delete window.__PAX_OPERATIONAL_DEBUG__; abort.abort(); stopPointerHover(); stopDisplayLodView(); unsubscribe(); resize.disconnect(); window.removeEventListener('pax:focus-country', focus); labels.current?.dispose(); labels.current = null; consumer.current?.dispose(); consumer.current = null; map.remove(); mapRef.current = null;};
+    return () => {disposed = true; if (debugBridge && window.__PAX_OPERATIONAL_DEBUG__ === debugBridge) delete window.__PAX_OPERATIONAL_DEBUG__; abort.abort(); stopPointerHover(); unsubscribe(); resize.disconnect(); window.removeEventListener('pax:focus-country', focus); labels.current?.dispose(); labels.current = null; consumer.current?.dispose(); consumer.current = null; map.remove(); mapRef.current = null;};
   }, [applySettings, client, mapAttempt]);
   useEffect(() => {
     if (!ready) return;
@@ -262,7 +218,6 @@ export function OperationalWorldMap({client, presentation, uiSettings = DEFAULT_
     try {
       consumer.current?.selectCountry(selected && countries[selected] ? selected : null);
       consumer.current?.hoverCountry(hovered && countries[hovered] ? hovered : null);
-      refreshDisplayLods.current();
     } catch (error) {console.error('Operational map interaction failed', error); setWorldStatus('error');}
   }, [client, selected, hovered, ready]);
   useEffect(() => {

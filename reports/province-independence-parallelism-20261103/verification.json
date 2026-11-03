@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "province-parallelism-verification.v1",
+  "auditDate": "2026-11-03",
+  "unitTests": {
+    "command": "npm.cmd test -- src/lib/world/world-state-v3.test.ts src/lib/world/operational-catalog-runtime.test.ts src/lib/world/operational-mixed-membership.test.ts src/lib/world/operational-game.server.test.ts src/lib/simulation/prompt19-mixed-frontier.test.ts src/lib/simulation/operational-territorial-runtime.test.ts src/lib/simulation/server/operational-game-pool-preservation.test.ts scripts/prompt19-country-files.node-test.mjs",
+    "filesRun": 7,
+    "passed": 61,
+    "failed": 4,
+    "durationSeconds": 9.14,
+    "failureFile": "src/lib/world/operational-mixed-membership.test.ts",
+    "failureMessage": "OPERATIONAL_EDGE_INDEX",
+    "diagnosis": "Fixture declares one edge but supplies no edge detail shards. Four tests fail in catalog loading before membership assertions; the real catalog and isolated actual-catalog membership probes pass. The .node-test.mjs file is not selected by the Vitest include pattern."
+  },
+  "nodeTests": {
+    "command": "node --test scripts/prompt19-country-files.node-test.mjs",
+    "passed": 3,
+    "failed": 0,
+    "durationMilliseconds": 94.4545
+  },
+  "currentMapBootstrap": {
+    "ok": true,
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7"
+  },
+  "changedGlobalRefDisplayProbe": {
+    "rejected": true,
+    "error": "Catalog ref mismatch: catalogVersion",
+    "basis": "Negative probe changes only the supplied global catalogVersion. It is not a generated new-country catalog and does not test a real publication."
+  },
+  "fineCountryAdjacency": {
+    "symmetric": true,
+    "positiveContactPairs": {
+      "CHN-PRK": 38,
+      "KOR-PRK": 13
+    }
+  },
+  "activationConcurrency": {
+    "basis": "Static inspection, no active pointer mutation or concurrent publication performed",
+    "singleGlobalPointer": true,
+    "checksBaselineBeforeRename": true,
+    "exclusiveCrossProcessLockInPublishPointer": false,
+    "atomicRenameIsNotCompareAndSwap": true,
+    "interleaving": [
+      "A validates baseline B0",
+      "B validates baseline B0",
+      "A renames its complete pointer to current",
+      "B renames its complete pointer to current using its already passed check"
+    ],
+    "recommended": "Run final integration and activation through one owner, or implement an exclusive publication lock covering baseline reread, preservation, validation and pointer replacement. Rebase later country candidates to the newest accepted catalog."
+  }
+}

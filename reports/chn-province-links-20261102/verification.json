@@ -1,0 +1,84 @@
+{
+  "pass": true,
+  "scope": "Restore existing provincial connections at the Myanmar-side Tibet/Yunnan border and Hubei/Hunan south of Wuhan.",
+  "changes": {
+    "changedCellOrdinals": [
+      3747,
+      5174
+    ],
+    "promotedEdges": [
+      3838,
+      7152,
+      7977
+    ],
+    "provinceEdges": 1002,
+    "rawContainment": {
+      "62558664B63578283386767": {
+        "topShare": 0.6235735024131404,
+        "secondShare": 3.859554005782047e-11,
+        "province": "CN-54"
+      },
+      "62558664B94418753148767": {
+        "topShare": 0.9999999993568488,
+        "secondShare": 6.431480317818943e-10,
+        "province": "CN-43"
+      }
+    },
+    "danglingEndpoints": {
+      "myanmar-side": {
+        "before": [
+          [
+            98.68352399993273,
+            28.438449600368813
+          ]
+        ],
+        "after": []
+      },
+      "south-of-wuhan": {
+        "before": [
+          [
+            113.13503979994687,
+            29.45458339990404
+          ],
+          [
+            112.91172970026548,
+            29.625399499787136
+          ]
+        ],
+        "after": []
+      }
+    },
+    "allExistingProvinceEdgesPreserved": true,
+    "unrelatedMembershipsUnchanged": true,
+    "countryOutlinesAndGameGeometryUnchanged": true
+  },
+  "all8562DisplayGeometriesIdenticalToPrevious": true,
+  "validation": {
+    "vitest": {
+      "files": 4,
+      "tests": 109,
+      "pass": true
+    },
+    "typescript": true,
+    "eslint": true,
+    "browser": "reports/chn-province-links-20261102/browser-verification.json",
+    "independentMembership": "reports/chn-province-links-20261102/province-verification.json",
+    "independentNetwork": "reports/chn-internal-render-lod-20261030/verification/province-links-20261102.json"
+  },
+  "published": {
+    "presentation": "data/derived/chn-2020/province-render-9cc4238ba7e460d4620f/index.json",
+    "display": {
+      "path": "data/derived/chn-2020/internal-line-delivery-5eda5f6bb9cdc93a7ded/delivery.json",
+      "sha256": "5eda5f6bb9cdc93a7ded143839378a9a1ba898311f180e8b1f36b91ce98a9c23",
+      "byteLength": 1474562
+    }
+  },
+  "sources": "data/source-locks/chn-2020/province-link-references.json",
+  "reproduce": [
+    "node scripts/chn-2020/build-province-link-repair.mjs",
+    "python scripts/chn-2020/verify-province-link-repair.py --artifact data/derived/chn-2020/province-presentation-2bd3440472aa6cb5dde2/presentation.json --output reports/chn-province-links-20261102/province-verification.json",
+    "node scripts/chn-2020/write-province-runtime-index.mjs --artifact data/derived/chn-2020/province-presentation-2bd3440472aa6cb5dde2/presentation.json --verification reports/chn-province-links-20261102/province-verification.json",
+    "python scripts/chn-2020/build-chn-internal-line-lod.py --tolerance 2000 --province-index data/derived/chn-2020/province-render-9cc4238ba7e460d4620f/index.json"
+  ],
+  "limitation": "Official references corroborate parent identity. Display classification inherits over existing game adjustments; exact 2020 administrative geometry is not claimed. Accepted national outlines and game geometry remain unchanged."
+}

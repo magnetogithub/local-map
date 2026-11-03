@@ -14,6 +14,8 @@ const inputBytes=fs.readFileSync(inputPath), bundle=JSON.parse(inputBytes);
 if(bundle.report.invalid.length || bundle.report.unresolved.length || !bundle.report.topology?.pass)throw Error('UNVERIFIED_JOINED_INPUT');
 const option=name=>{const i=process.argv.indexOf(name);if(i<0)return null;const value=process.argv[i+1];if(!value||value.startsWith('--'))throw Error(`MISSING_ARGUMENT:${name}`);return value;};
 const incremental=bundle.report.incremental??null;
+const manualCellMerge=bundle.report.manualCellMerge??null;
+const expectedActivePointer=manualCellMerge?.baseline.pointer??incremental?.baseline.pointer;
 if(process.argv.includes('--activate')&&process.argv.includes('--no-activate'))throw Error('CONFLICTING_ACTIVATION_ARGUMENTS');
 const activate=incremental?process.argv.includes('--activate'):!process.argv.includes('--no-activate');
 const checkedPin=(a,label)=>{
@@ -23,7 +25,14 @@ const checkedPin=(a,label)=>{
   const bytes=fs.readFileSync(physical);if(bytes.length!==a.byteLength||digest(bytes)!==a.sha256)throw Error(`PIN_CHANGED:${label}`);return bytes;
 };
 let incrementalVerification=null,baselinePointer=null,baselineBundle=null;
-if(incremental){
+if(manualCellMerge){
+  if(!incremental)throw Error('CELL_MERGE_REQUIRES_ADMITTED_INCREMENTAL_BASE');
+  const file=option('--cell-merge-verification');if(!file)throw Error('MISSING_ARGUMENT:--cell-merge-verification');
+  const bytes=fs.readFileSync(file);
+  const {acceptContainedCellMerge}=await import('./catalog-cell-merge-gate.mjs');
+  ({baselinePointer,baselineBundle}=acceptContainedCellMerge({bundle,inputBytes,proofBytes:bytes,checkedPin,digest}));
+  incrementalVerification={path:file,sha256:digest(bytes),byteLength:bytes.length};
+}else if(incremental){
   if(incremental.countryId!=='CHN')throw Error('UNSUPPORTED_INCREMENTAL_ADAPTER');
   const file=option('--incremental-verification');if(!file)throw Error('MISSING_ARGUMENT:--incremental-verification');
   const bytes=fs.readFileSync(file),verification=JSON.parse(bytes),baseline=incremental.baseline;
@@ -58,6 +67,7 @@ else if(bundle.report.nationalBoundaryReconciliation){
 }
 // Runtime version depends on geometry, topology, source locks and code, not probe timing/RSS.
 const codeInputs=(incremental?['scripts/chn-2020/prepare-china.py','scripts/chn-2020/incremental-coordinator.mjs','scripts/prepare-prompt19-mixed-world.mjs','scripts/prompt14-catalog-core.mjs']:['scripts/prepare-prompt19-joined-candidates.mjs','scripts/prompt19-source-arrangement.mjs','scripts/prompt19-joined-topology.mjs','scripts/prepare-prompt19-mixed-world.mjs',...(bundle.report.fineMacro?['scripts/prepare-prompt19-fine-macro-world.mjs','scripts/prompt19-fine-macro-topology.mjs']:[]),...(bundle.report.nationalBoundaryReconciliation?['scripts/prepare-prompt19-national-boundary-world.mjs','scripts/prompt19-national-boundary-reconciliation.mjs','scripts/prompt14-boundary-arrangement.mjs','scripts/prompt14-catalog-topology.mjs','scripts/prompt14-catalog-core.mjs']:[])]).map(file=>({path:file,sha256:digest(fs.readFileSync(file))}));
+if(manualCellMerge)for(const file of ['scripts/catalog-cell-merge-gate.mjs',...manualCellMerge.code.map(p=>p.path)])codeInputs.push({path:file,sha256:digest(fs.readFileSync(file))});
 const sourceLockArtifacts=bundle.report.sourceLockArtifacts??['KOR','PRK'].map(countryId=>({countryId,path:`data/source-locks/prompt19/${countryId}.json`}));
 if(!incremental&&bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers)codeInputs.push({path:'scripts/prepare-prompt19-boundary-cleanup-world.mjs',sha256:digest(fs.readFileSync('scripts/prepare-prompt19-boundary-cleanup-world.mjs'))});
 if(!incremental&&bundle.report.westernSectorReconciliation)for(const file of ['scripts/prepare-prompt19-western-sector-world.mjs','scripts/prompt19-western-sector-reconciliation.mjs'])codeInputs.push({path:file,sha256:digest(fs.readFileSync(file))});
@@ -94,12 +104,13 @@ if(process.argv.includes('--check-input')){
   console.log(JSON.stringify({pass:true,inputPath,incremental:!!incremental,fineCountries,activationRequested:activate,publicationGuard:activationGuard??'not-evaluated-by-input-only-check'}));process.exit(0);
 }
 if(activate)assertActiveFineCountriesPreserved();
-const key=digest(jsonBytes({features:bundle.features,records:bundle.records,edges:bundle.edges,parents:bundle.parents,regionNames:bundle.regionNames??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,...(incremental?{incremental,incrementalVerification}:{}),sourceLocks,codeInputs})).slice(0,20), version=`catalog-v3-prompt19-${incremental?'incremental-CHN':'korea'}-${key}`;
+const key=digest(jsonBytes({features:bundle.features,records:bundle.records,edges:bundle.edges,parents:bundle.parents,regionNames:bundle.regionNames??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,...(incremental?{incremental,incrementalVerification}:{}),...(manualCellMerge?{manualCellMerge}:{}),sourceLocks,codeInputs})).slice(0,20), version=`catalog-v3-prompt19-${incremental?'incremental-CHN':'korea'}-${key}`;
 const schemaVersion='operational-world-delivery-v2';
 const output=`data/derived/prompt19/mixed-world-v2-${key}`;
 const json=value=>Buffer.from(`${JSON.stringify(value)}\n`);
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const inputRoot=digest(inputBytes), identities=[{path:inputPath,sha256:inputRoot,byteLength:inputBytes.length},...(bundle.report.hierarchyArtifacts??[]),...Object.values(bundle.report.nationalBoundaryInput??{}),...Object.values(bundle.report.westernSectorInput??{}),...(incremental?[...Object.values(incremental.baseline),incrementalVerification]:[])];
+if(manualCellMerge)identities.push(...Object.values(manualCellMerge.baseline),manualCellMerge.plan,...manualCellMerge.code);
 function publishPointer(pointer){
   if(activate)assertActiveFineCountriesPreserved();
   const pointerFile=option('--pointer-output')??`${output}.pointer.json`,pointerBytes=json(pointer);
@@ -107,9 +118,9 @@ function publishPointer(pointer){
   if(fs.existsSync(pointerFile)){if(!fs.readFileSync(pointerFile).equals(pointerBytes))throw Error('IMMUTABLE_POINTER_CHANGED');}else fs.writeFileSync(pointerFile,pointerBytes,{flag:'wx'});
   if(activate){
     const currentFile='data/runtime/operational-catalog/current.json';
-    if(incremental&&digest(fs.readFileSync(currentFile))!==incremental.baseline.pointer.sha256)throw Error('CURRENT_CATALOG_CHANGED_SINCE_BASELINE');
+    if(expectedActivePointer&&digest(fs.readFileSync(currentFile))!==expectedActivePointer.sha256)throw Error('CURRENT_CATALOG_CHANGED_SINCE_BASELINE');
     const temporary=`${currentFile}.${process.pid}.tmp`;fs.mkdirSync(path.dirname(currentFile),{recursive:true});fs.writeFileSync(temporary,pointerBytes,{flag:'wx'});
-    try{assertActiveFineCountriesPreserved();if(incremental&&digest(fs.readFileSync(currentFile))!==incremental.baseline.pointer.sha256)throw Error('CURRENT_CATALOG_CHANGED_SINCE_BASELINE');}catch(error){fs.unlinkSync(temporary);throw error;}
+    try{assertActiveFineCountriesPreserved();if(expectedActivePointer&&digest(fs.readFileSync(currentFile))!==expectedActivePointer.sha256)throw Error('CURRENT_CATALOG_CHANGED_SINCE_BASELINE');}catch(error){fs.unlinkSync(temporary);throw error;}
     fs.renameSync(temporary,currentFile);
   }
   return pointerFile;
@@ -263,7 +274,7 @@ write('manifest.json', {schemaVersion, ref, counts, sourceId: 'world-operational
   edgeIncidence: {format: 'uint32-le-pairs', recordBytes: 8, recordCount: edges.length, decodedByteLength: incidence.length, artifact: edgeIncidence},
   runtimeRegeneration: false, attribution: `Natural Earth (public domain). ${sourceLocks.flatMap(lock=>lock.sources.map(s=>`${lock.countryId} ADM${s.adminLevel}: ${s.license.attribution} (${s.license.name}).`)).join(' ')} Source properties normalized, boundaries noded and limited to fixed project envelopes. ${bundle.report.nationalBoundaryReconciliation ? "Fine gameplay outlines include documented country/coast residual-strip reconciliation; unchanged raw sources remain independent evidence. Remaining residuals have no fine administrative attribution." : "Coarse residuals have no fine administrative attribution."}`});
 write('catalog.json', descriptor);
-write('provenance.json',{stage:incremental?'incremental-country-CHN':bundle.report.westernSectorReconciliation?'fine-western-sector-complete':bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers?'fine-boundary-sliver-cleanup':bundle.report.nationalBoundaryReconciliation?'fine-national-coast-reconciled':bundle.report.fineMacro?'fine-derived-macro':'19-02-C',inputRoot,inputs:identities,sourceLocks,sourceLockArtifacts,codeInputs,summary:bundle.report.summary,topology:bundle.report.topology,fineMacro:bundle.report.fineMacro??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,...(incremental?{incremental,incrementalVerification,fineCountries}:{}),cellDetailSharding,edgeOrdinalPolicy:incremental?'source-country-pair-then-original-edge-id':'retained-input-order',method:incremental?.method??bundle.report.nationalBoundaryReconciliation?.policy??bundle.report.fineMacro?.method??'Joint exact source/coarse/P0 arrangement. Zero source coordinates moved; no extrapolated lines; unmatched fixed P0 land explicitly retains coarse provenance. Other 245 countries unchanged.',worldCoverageComplete:true,fineAssignmentComplete:false,compatibility:'New games only; previous catalog sessions are rejected.'});
+write('provenance.json',{stage:manualCellMerge?'manual-contained-cell-merge':incremental?'incremental-country-CHN':bundle.report.westernSectorReconciliation?'fine-western-sector-complete':bundle.report.nationalBoundaryReconciliation?.cleanupBoundarySlivers?'fine-boundary-sliver-cleanup':bundle.report.nationalBoundaryReconciliation?'fine-national-coast-reconciled':bundle.report.fineMacro?'fine-derived-macro':'19-02-C',inputRoot,inputs:identities,sourceLocks,sourceLockArtifacts,codeInputs,summary:bundle.report.summary,topology:bundle.report.topology,fineMacro:bundle.report.fineMacro??null,hierarchyArtifacts:bundle.report.hierarchyArtifacts??[],nationalBoundaryInput:bundle.report.nationalBoundaryInput??null,nationalBoundaryReconciliation:bundle.report.nationalBoundaryReconciliation??null,westernSectorInput:bundle.report.westernSectorInput??null,westernSectorReconciliation:bundle.report.westernSectorReconciliation??null,nationalBoundaryVerification,...(incremental?{incremental,incrementalVerification,fineCountries}:{}),...(manualCellMerge?{manualCellMerge}:{}),cellDetailSharding,edgeOrdinalPolicy:incremental?'source-country-pair-then-original-edge-id':'retained-input-order',method:manualCellMerge?'Explicit user-directed contained-cell merge; unchanged outer coordinates, other cells, sources and seed lineage.':incremental?.method??bundle.report.nationalBoundaryReconciliation?.policy??bundle.report.fineMacro?.method??'Joint exact source/coarse/P0 arrangement. Zero source coordinates moved; no extrapolated lines; unmatched fixed P0 land explicitly retains coarse provenance. Other 245 countries unchanged.',worldCoverageComplete:true,fineAssignmentComplete:false,compatibility:'New games only; previous catalog sessions are rejected.'});
 artifacts.sort((a, b) => a.path.localeCompare(b.path));
 const indexBytes = json({schemaVersion, artifacts: [...artifacts], totalByteLength: artifacts.reduce((n, a) => n + a.byteLength, 0)});
 fs.writeFileSync(path.join(output, 'artifact-index.json'), indexBytes, {flag: 'wx'});

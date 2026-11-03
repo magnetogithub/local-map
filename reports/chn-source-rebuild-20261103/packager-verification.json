@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "rejectedControls": [
+    "unknown-and-missing",
+    "both-missing",
+    "source-with-old-proof",
+    "old-with-source-proof",
+    "source-with-curve-proof",
+    "curve-with-source-proof",
+    "failed-producer",
+    "failed-proof"
+  ],
+  "acceptedSourceDeliveryReproducesIdenticalBytes": true
+}

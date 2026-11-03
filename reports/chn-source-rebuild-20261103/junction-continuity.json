@@ -1,0 +1,14 @@
+{
+  "before": {
+    "degreeTwoJoins": 915,
+    "medianDirectionChangeDegrees": 47.89947311695252,
+    "p90DirectionChangeDegrees": 106.82160815997172,
+    "joinsOver30Degrees": 598
+  },
+  "after": {
+    "degreeTwoJoins": 915,
+    "medianDirectionChangeDegrees": 14.201251484622667,
+    "p90DirectionChangeDegrees": 28.908291913427885,
+    "joinsOver30Degrees": 84
+  }
+}

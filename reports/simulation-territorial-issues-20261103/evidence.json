@@ -1,0 +1,668 @@
+{
+  "schemaVersion": "simulation-territorial-issues-evidence.v1",
+  "auditDate": "2026-11-03",
+  "userTimezone": "Asia/Seoul",
+  "logTimestampTimezone": "not established; retained exactly as recorded",
+  "scope": "read-only application/data inspection and isolated in-memory probes; no live game modification or external AI calls",
+  "catalog": {
+    "ref": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+      "geometryRoot": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+      "topologyRoot": "f2aaf8f3e1f6aeff4c3df3eaf90ae5df7e4341cdd487b951a2f2b73cea77c982",
+      "renderArtifactRoot": "91f1b4bc036b0b5209265c48747ecbbf6d8fabf8eb562229ccfdf5a4f8897a69",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7/manifest.json"
+    },
+    "descriptorCounts": {
+      "countries": 247,
+      "cells": 8005,
+      "edges": 26273,
+      "administrativeParents": 4231,
+      "previousParents": 4231
+    },
+    "pointer": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+      "root": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7",
+      "index": {
+        "sha256": "f1947c89844813ec8986d8f2395ff0893308be2895b09a577c672cbf31280b98",
+        "byteLength": 757545
+      }
+    }
+  },
+  "regionIndex": {
+    "prkRecords": 12,
+    "prkAdministrativeRecords": 11,
+    "chinaRecords": 32
+  },
+  "searchProbes": [
+    {
+      "countryId": "PRK",
+      "query": "청진",
+      "results": []
+    },
+    {
+      "countryId": "PRK",
+      "query": "Chongjin",
+      "results": []
+    },
+    {
+      "countryId": "PRK",
+      "query": "Chongjin City",
+      "results": []
+    },
+    {
+      "countryId": "PRK",
+      "query": "함경북도",
+      "results": [
+        {
+          "nameKo": "함경북도",
+          "nameEn": "North Hamgyong",
+          "reference": {
+            "catalogId": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "sourceVersion": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "subdivisionId": "region:fine-macro:PRK:PRK:macro:PRK:KP02"
+          },
+          "territoryCount": 16
+        }
+      ]
+    },
+    {
+      "countryId": "PRK",
+      "query": "North Hamgyong",
+      "results": [
+        {
+          "nameKo": "함경북도",
+          "nameEn": "North Hamgyong",
+          "reference": {
+            "catalogId": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "sourceVersion": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "subdivisionId": "region:fine-macro:PRK:PRK:macro:PRK:KP02"
+          },
+          "territoryCount": 16
+        }
+      ]
+    },
+    {
+      "countryId": "CHN",
+      "query": "내몽골",
+      "results": []
+    },
+    {
+      "countryId": "CHN",
+      "query": "Inner Mongolia",
+      "results": [
+        {
+          "nameKo": "Inner Mongolia",
+          "nameEn": "Inner Mongolia",
+          "reference": {
+            "catalogId": "catalog-v3-prompt19-incremental-CHN-95ea496a8aa66910a9a7",
+            "sourceVersion": "546d218c1883c500af4bc6d167c38b38c91f360c0967b0d507686fe80b8ce1a5",
+            "subdivisionId": "region:fine-macro:CHN:CHN:CHN-ADM1-3_0_0-B18"
+          },
+          "territoryCount": 48
+        }
+      ]
+    },
+    {
+      "countryId": "CHN",
+      "query": "Nei Mongol",
+      "results": []
+    },
+    {
+      "countryId": "CHN",
+      "query": "Neimenggu",
+      "results": []
+    }
+  ],
+  "sourceChongjin": [
+    {
+      "boundaryEvidenceRef": null,
+      "countryId": "PRK",
+      "name": "Chongjin City",
+      "sourceFeatureId": "82179303B21659587132529",
+      "sourceId": "geoboundaries-gbOpen-PRK-ADM2-82179303",
+      "sourceParentId": null
+    }
+  ],
+  "frontierReproduction": {
+    "worldBasis": "All current catalog cells initialized owner=controller=sourceCountryId. Hamgyong limited occupation simulated only in local memory. This is not the user world.",
+    "hamgyongRegionCount": 16,
+    "simulatedOccupiedCount": 5,
+    "userScreenshotOccupiedCount": 7,
+    "hamgyongTransfer": [
+      {
+        "extent": "near",
+        "ok": true,
+        "selectedCount": 1,
+        "wholeRequestedRegion": false,
+        "selectedAreaKm2": 1894.9140083993673,
+        "alreadyOccupiedIncluded": 0
+      },
+      {
+        "extent": "limited",
+        "ok": true,
+        "selectedCount": 5,
+        "wholeRequestedRegion": false,
+        "selectedAreaKm2": 7097.27863959953,
+        "alreadyOccupiedIncluded": 1
+      },
+      {
+        "extent": "deeper",
+        "ok": true,
+        "selectedCount": 11,
+        "wholeRequestedRegion": false,
+        "selectedAreaKm2": 13708.603842133774,
+        "alreadyOccupiedIncluded": 1
+      }
+    ],
+    "innerMongoliaRegionCount": 48,
+    "mongoliaTransfer": [
+      {
+        "extent": "near",
+        "ok": false,
+        "error": "NO_CURRENT_LAND_FRONTIER"
+      },
+      {
+        "extent": "limited",
+        "ok": false,
+        "error": "NO_CURRENT_LAND_FRONTIER"
+      },
+      {
+        "extent": "deeper",
+        "ok": false,
+        "error": "NO_CURRENT_LAND_FRONTIER"
+      }
+    ],
+    "adjacency": {
+      "chinaCells": 3320,
+      "mongoliaCells": 22,
+      "chinaMongoliaPositiveNeighborPairs": 36,
+      "innerMongoliaMongoliaPositiveNeighborPairs": 0,
+      "chinaMongoliaContactsByAdministrativeParent": [
+        {
+          "parentKey": "fine-macro-residual:CHN",
+          "name": "CHN administrative parent unconfirmed / source-free baseline land",
+          "kind": "country-envelope-residual",
+          "contactCells": 29,
+          "contactPairs": 36
+        }
+      ]
+    }
+  },
+  "effectOmissionProbes": [
+    {
+      "status": "succeeded",
+      "worldEffectsCount": 0,
+      "accepted": true,
+      "issues": []
+    },
+    {
+      "status": "partially_succeeded",
+      "worldEffectsCount": 0,
+      "accepted": true,
+      "issues": []
+    }
+  ],
+  "clientDiagnosticProbe": {
+    "errorCode": "REPAIR_FAILED",
+    "retainsMessage": false,
+    "retainsRetryable": false
+  },
+  "logEvents": [
+    {
+      "line": 45,
+      "timestampAsRecorded": "21:07:54.349",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.1.0",
+        "name": "find_frontier_territories",
+        "ok": false,
+        "code": "UNKNOWN_REGION"
+      }
+    },
+    {
+      "line": 46,
+      "timestampAsRecorded": "21:07:56.194",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.1.0",
+        "name": "find_region",
+        "ok": false,
+        "code": "UNKNOWN_REGION"
+      }
+    },
+    {
+      "line": 47,
+      "timestampAsRecorded": "21:07:58.740",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.1.0",
+        "name": "find_region",
+        "ok": false,
+        "code": "UNKNOWN_REGION"
+      }
+    },
+    {
+      "line": 48,
+      "timestampAsRecorded": "21:08:08.810",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation resolution accepted",
+      "payload": {
+        "turnId": "turn.1.0",
+        "verifiedFrontierLookups": 0,
+        "territorialEffects": 0,
+        "outcomeStatuses": [
+          "delayed"
+        ]
+      }
+    },
+    {
+      "line": 49,
+      "timestampAsRecorded": "21:09:34.746",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.2.1",
+        "name": "find_frontier_territories",
+        "ok": true,
+        "code": null
+      }
+    },
+    {
+      "line": 50,
+      "timestampAsRecorded": "21:09:52.084",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation resolution accepted",
+      "payload": {
+        "turnId": "turn.2.1",
+        "verifiedFrontierLookups": 1,
+        "territorialEffects": 1,
+        "outcomeStatuses": [
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "line": 51,
+      "timestampAsRecorded": "21:10:55.523",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.3.2",
+        "name": "find_frontier_territories",
+        "ok": false,
+        "code": "UNKNOWN_REGION"
+      }
+    },
+    {
+      "line": 52,
+      "timestampAsRecorded": "21:10:59.165",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.3.2",
+        "name": "find_region",
+        "ok": true,
+        "code": null
+      }
+    },
+    {
+      "line": 53,
+      "timestampAsRecorded": "21:11:03.547",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.3.2",
+        "name": "resolve_region",
+        "ok": true,
+        "code": null
+      }
+    },
+    {
+      "line": 54,
+      "timestampAsRecorded": "21:11:20.012",
+      "source": "Server",
+      "level": "ERROR",
+      "kind": "Simulation resolution validation failed",
+      "payload": [
+        {
+          "code": "INVALID_SCHEMA",
+          "path": "$"
+        }
+      ]
+    },
+    {
+      "line": 55,
+      "timestampAsRecorded": "21:11:25.118",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.3.2",
+        "name": "find_frontier_territories",
+        "ok": false,
+        "code": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [],\n    \"message\": \"Use a region reference or a name, not both\"\n  }\n]"
+      }
+    },
+    {
+      "line": 56,
+      "timestampAsRecorded": "21:11:28.151",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.3.2",
+        "name": "find_frontier_territories",
+        "ok": false,
+        "code": "REGION_COUNTRY_SCOPE"
+      }
+    },
+    {
+      "line": 57,
+      "timestampAsRecorded": "21:11:38.844",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation resolution accepted",
+      "payload": {
+        "turnId": "turn.3.2",
+        "verifiedFrontierLookups": 0,
+        "territorialEffects": 0,
+        "outcomeStatuses": [
+          "partially_succeeded"
+        ]
+      }
+    },
+    {
+      "line": 58,
+      "timestampAsRecorded": "21:12:59.279",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.4.3",
+        "name": "find_frontier_territories",
+        "ok": false,
+        "code": "UNKNOWN_REGION"
+      }
+    },
+    {
+      "line": 59,
+      "timestampAsRecorded": "21:13:01.474",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.4.3",
+        "name": "find_region",
+        "ok": false,
+        "code": "UNKNOWN_REGION"
+      }
+    },
+    {
+      "line": 60,
+      "timestampAsRecorded": "21:13:03.568",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.4.3",
+        "name": "find_region",
+        "ok": true,
+        "code": null
+      }
+    },
+    {
+      "line": 61,
+      "timestampAsRecorded": "21:13:09.452",
+      "source": "Server",
+      "level": "INFO",
+      "kind": "Simulation lookup result",
+      "payload": {
+        "turnId": "turn.4.3",
+        "name": "resolve_region",
+        "ok": true,
+        "code": null
+      }
+    },
+    {
+      "line": 63,
+      "timestampAsRecorded": "21:13:31.225",
+      "source": "Server",
+      "level": "ERROR",
+      "kind": "Simulation resolution validation failed",
+      "payload": [
+        {
+          "code": "INVALID_SCHEMA",
+          "path": "$"
+        }
+      ]
+    },
+    {
+      "line": 64,
+      "timestampAsRecorded": "21:13:42.500",
+      "source": "Server",
+      "level": "ERROR",
+      "kind": "Simulation resolution validation failed",
+      "payload": [
+        {
+          "code": "INVALID_SCHEMA",
+          "path": "$"
+        }
+      ]
+    }
+  ],
+  "sourceSnapshots": [
+    {
+      "path": "data/runtime/operational-catalog/current.json",
+      "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+      "byteLength": 251,
+      "lineCount": 2
+    },
+    {
+      "path": "data/raw/prompt19/PRK/normalized-adm2.geojson",
+      "sha256": "0cf590800aebb1967975ad55175f2f64da5c683eabbc1354b1645736ee52da99",
+      "byteLength": 1488933,
+      "lineCount": 2
+    },
+    {
+      "path": "src/lib/simulation/operational-region.server.ts",
+      "sha256": "c4169d153f3b34238bc6995e7a2c7f56f9dfde8a2e48fb61e208e6223130fe01",
+      "byteLength": 5113,
+      "lineCount": 73
+    },
+    {
+      "path": "src/lib/simulation/catalog-region.ts",
+      "sha256": "39e241bc20ece0f183ee02ee1ca3c092859866bc808d9d57f3e980f2990e456e",
+      "byteLength": 4623,
+      "lineCount": 54
+    },
+    {
+      "path": "src/lib/simulation/operational-frontier.server.ts",
+      "sha256": "0c6701d9bb1e44f6d9e77187b4c5235ef5c9ba8684ed109490a29682ed57049f",
+      "byteLength": 13984,
+      "lineCount": 218
+    },
+    {
+      "path": "src/lib/simulation/operational-frontier-validation.ts",
+      "sha256": "5f979c972dee5fdee156d625a4a4c1023a0af71d636a42d921b7f85516c4f5d7",
+      "byteLength": 4098,
+      "lineCount": 58
+    },
+    {
+      "path": "src/lib/simulation/operational-frontier-contract.ts",
+      "sha256": "e3b94561c60ad1fec118e0df6b64b1d7de4cbdfb226b6bcee932b2527dba564b",
+      "byteLength": 1775,
+      "lineCount": 30
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-tools.ts",
+      "sha256": "6d3bda498a61d668b86dae70106bf97bebbadc8c054c3da769f636fcaba9ec36",
+      "byteLength": 13150,
+      "lineCount": 147
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-instruction.ts",
+      "sha256": "9b4f4024f424bd9aee99a12ee5edfc94fb3bb372800162b5048c4e9e7bb78cd3",
+      "byteLength": 12790,
+      "lineCount": 61
+    },
+    {
+      "path": "src/lib/simulation/server/context-resolution-validator.ts",
+      "sha256": "9976ce3ccdde7fb598bb52325fd9da0f4810c1f349e088098bba4a647c9dc17e",
+      "byteLength": 23662,
+      "lineCount": 304
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-provider.ts",
+      "sha256": "aa0dd3a4b8b8d0bcd03c141f3d111c66545c0dbd03542089efba1c2e4fda40fe",
+      "byteLength": 15575,
+      "lineCount": 284
+    },
+    {
+      "path": "src/lib/simulation/server/provider-config.ts",
+      "sha256": "b77b928ede7f6b6fc7e7b09ecc8729882fefff85c140d2386281915073d095dd",
+      "byteLength": 943,
+      "lineCount": 34
+    },
+    {
+      "path": "src/lib/simulation/debug-world-effect.ts",
+      "sha256": "3bf0c86c69e8d5eff3cffaeaac1208cdfd339d4a9dccc2fc65f33756416480ad",
+      "byteLength": 299,
+      "lineCount": 8
+    },
+    {
+      "path": "src/lib/simulation/catalog-turn-plan.ts",
+      "sha256": "19b628c57da4f6e8b4130ee73d20920979ae4c560b8f975887c4ae4c4d17f88d",
+      "byteLength": 13892,
+      "lineCount": 101
+    },
+    {
+      "path": "src/lib/simulation/server/operational-game-session.ts",
+      "sha256": "57fc7e15d282a37062527475328c4c0f06446e5453a47274ec8f411053225165",
+      "byteLength": 9641,
+      "lineCount": 139
+    },
+    {
+      "path": "src/lib/planning/territorial-control-planner.ts",
+      "sha256": "dcbd2eb4fc2f54f139368a75dd622e78fd77b0852df2f20cbbbe7a89a676e113",
+      "byteLength": 5028,
+      "lineCount": 51
+    },
+    {
+      "path": "src/lib/projection/operational-map-projection.ts",
+      "sha256": "1e48c21d18beb06f17fc7203566c9964e7f950b8be29fdc891a665c5a763191e",
+      "byteLength": 5978,
+      "lineCount": 83
+    },
+    {
+      "path": "src/lib/simulation/client/turn-state-machine.ts",
+      "sha256": "3f69312f9afca38b61022882eb1e84bc7b4a79e32d414789d1e13e892c517f05",
+      "byteLength": 2002,
+      "lineCount": 35
+    },
+    {
+      "path": "src/lib/simulation/client/use-operational-turn-controller.ts",
+      "sha256": "9a342c3670f4658718e7c15475f8943df2e1bb70ea944cc40f143d361790ae5e",
+      "byteLength": 5116,
+      "lineCount": 57
+    },
+    {
+      "path": "src/components/game/GameActionOverlay.tsx",
+      "sha256": "99c3f30070a3a07f7a76448f1fca3343d5f5d715ef72a1e23b6d14a0d6a8e56d",
+      "byteLength": 9767,
+      "lineCount": 122
+    },
+    {
+      "path": "src/lib/game-ui/war-view-projection.ts",
+      "sha256": "574f0ae432091a9c56f65a169f24ed9e9ec1923ffdd0be76c1025ceec57661a6",
+      "byteLength": 259,
+      "lineCount": 10
+    },
+    {
+      "path": "src/lib/simulation/operational-region.test.ts",
+      "sha256": "8ac9bfedee15ad7f0d8c13331f537a8c513e04bacb01b7acbb04323ed22fffec",
+      "byteLength": 1577,
+      "lineCount": 28
+    },
+    {
+      "path": "src/lib/simulation/operational-frontier.test.ts",
+      "sha256": "38cdd952ec2d253ab606a1c1fc272431283f6b586a17757acfd10e25abb9b1d8",
+      "byteLength": 14866,
+      "lineCount": 195
+    },
+    {
+      "path": "src/lib/simulation/operational-territorial-runtime.test.ts",
+      "sha256": "c5cd9e0f63f6fb7bfa0227d4cbf71cf62dcf70e8702c3c975925dac2df63bba4",
+      "byteLength": 17467,
+      "lineCount": 191
+    },
+    {
+      "path": "src/lib/simulation/server/operational-provider.test.ts",
+      "sha256": "84793b77dc2f1364a8518637a95f5f70ca3efd5983b1a374da6331646e51cb03",
+      "byteLength": 23738,
+      "lineCount": 222
+    },
+    {
+      "path": "src/components/game/GameActionOverlay.test.tsx",
+      "sha256": "2771c8eb5c3aaa127555f4ae5a2cde62c53ad0805f8e6d67ef1015c7979cd958",
+      "byteLength": 14469,
+      "lineCount": 278
+    },
+    {
+      "path": ".next/dev/logs/next-development.log",
+      "sha256": "6e6f14d92d7cd25aadb96ae9aa23b33f21ceb667848da688ad189cc9bb01a95c",
+      "byteLength": 20790,
+      "lineCount": 66
+    },
+    {
+      "path": "data/source-locks/chn-2020/CHN-hierarchy.json",
+      "sha256": "072ddaf551d5aec7061d9f5301c213820d554f77daa5d489f654b123d15fcfc2",
+      "byteLength": 1142103,
+      "lineCount": 29420
+    }
+  ],
+  "hierarchyInspection": {
+    "keys": [
+      "schemaVersion",
+      "countryId",
+      "scenarioDate",
+      "administrativeFactsAsOf2020Certified",
+      "sourceFine",
+      "sourceAdmin1",
+      "macroGroups",
+      "assignments",
+      "unresolved",
+      "floatingPrecisionExceptions",
+      "summary",
+      "policy"
+    ],
+    "summary": {
+      "sourceFineFeatures": 2864,
+      "sourceMacroFeatures": 31,
+      "exactContained": 1660,
+      "individualFloatingExceptions": 3,
+      "assigned": 1663,
+      "unresolved": 1201
+    },
+    "policy": "Only same-original-source whole polygon containment is used. Unknown parents retain the existing supported country-envelope-residual contract. Native shapeID is a distributor ID, not an official code. Source hierarchy is experimental and does not certify 2020 legal boundaries."
+  },
+  "existingTestVerification": {
+    "command": "npm.cmd test -- src/lib/simulation/operational-region.test.ts src/lib/simulation/operational-frontier.test.ts src/lib/simulation/operational-territorial-runtime.test.ts src/lib/simulation/server/operational-provider.test.ts src/components/game/GameActionOverlay.test.tsx",
+    "exitCode": 0,
+    "filesPassed": 5,
+    "testsPassed": 54,
+    "reportedDurationSeconds": 8.44,
+    "meaning": "Existing tests pass while the reported gaps remain reproducible. No source fix has been applied."
+  }
+}

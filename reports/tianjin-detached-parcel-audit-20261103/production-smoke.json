@@ -1,0 +1,12 @@
+{
+  "pass": true,
+  "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+  "counts": {
+    "countries": 247,
+    "cells": 8004,
+    "edges": 26272,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "displayAssetsVerified": true
+}

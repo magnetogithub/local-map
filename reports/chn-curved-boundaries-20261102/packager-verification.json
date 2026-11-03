@@ -1,0 +1,12 @@
+{
+  "pass": true,
+  "rejectedControls": [
+    "unknown-and-missing",
+    "both-missing",
+    "curve-with-old-proof",
+    "old-with-curve-proof",
+    "curve-failed-producer",
+    "curve-failed-proof"
+  ],
+  "acceptedCurvedDeliveryReproducesIdenticalBytes": true
+}

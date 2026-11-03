@@ -1,0 +1,55 @@
+{
+  "pass": true,
+  "schemaVersion": "chn-province-coast-repair-verification-v1",
+  "artifact": {
+    "path": "data/derived/chn-2020/province-presentation-80ebe4dae00144806f1c/presentation.json",
+    "sha256": "80ebe4dae00144806f1c339594feb057acdacd653eb8111b407e5788c826e965",
+    "byteLength": 4413435
+  },
+  "checks": {
+    "rawTopProvinceShare": 0.9999999774263751,
+    "rawSecondProvinceShare": 9.226075644104205e-09,
+    "changedCells": [
+      254,
+      6150
+    ],
+    "promotedEdges": [
+      3549,
+      4050,
+      6750,
+      7473,
+      9565
+    ],
+    "provinceEdges": 999,
+    "interiorDanglingEndpointsBefore": [
+      [
+        117.80375509971816,
+        39.27813999986114
+      ],
+      [
+        117.83064079993301,
+        39.305072599720745
+      ],
+      [
+        117.14363169984313,
+        38.616729199792815
+      ],
+      [
+        117.84062629996379,
+        39.32756739961587
+      ]
+    ],
+    "interiorDanglingEndpointsAfter": [],
+    "existingProvinceEdgesPreserved": true,
+    "unrelatedFamiliesAndCellsUnchanged": true
+  },
+  "negativeControls": {
+    "omitted-coastal-link": true,
+    "wrong-province": true
+  },
+  "verifier": {
+    "path": "scripts/chn-2020/verify-province-coast-repair.py",
+    "sha256": "ca18e395309cef2789b50dfddbee8a03fb2502ec1a54ecee26b18d372ab15d6c",
+    "byteLength": 7029
+  }
+}
