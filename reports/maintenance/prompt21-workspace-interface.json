@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "prompt21-workspace-interface-v1",
+  "task": {
+    "id": "21-03",
+    "status": "completed",
+    "countryId": null,
+    "laterTasksExecuted": [],
+    "completionBasis": "Actual ownership and path boundaries are defined; A/B/C have separate files and existing common helpers to begin independently."
+  },
+  "observedAt": "2026-11-04T01:01:15.462Z",
+  "clientDate": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "baseline": {
+    "B0": "b0d0c32327ceba4b57e4bda01c895a4a898631f3",
+    "sourceAndEvidenceCommit": "ee73a89db5cc19e0af6a24c82937b5cff90b362f",
+    "sharedContractVersion": "workspace-ownership-v1/workspace-layout-v1",
+    "commonInterfaceCommit": "The local commit containing this record and both documents is reported in the final response; no self-referential hash is embedded.",
+    "startRule": "Each A/B/C branch must include B0 and the 21-03 common interface commit; later branch-specific commits may differ."
+  },
+  "outputs": {
+    "documents": [
+      {
+        "path": "docs/development/workspace-ownership-v1.md",
+        "sha256": "d868ba448aae67f2b9540be5f2e1b4f9183416ee99f9c95f18a210d7b3e06a2e",
+        "byteLength": 12765
+      },
+      {
+        "path": "docs/development/workspace-layout-v1.md",
+        "sha256": "89881461bf3bf328319548598827b8528b9dab156ca8247f7abe6c9c6c25ca52",
+        "byteLength": 17526
+      }
+    ],
+    "sharedConfig": {
+      "path": ".gitattributes",
+      "before": {
+        "path": ".gitattributes",
+        "sha256": "c0c8f2720c18742629b43ef1f51716ae409852c47631a2e2a1527f05d886666e",
+        "byteLength": 10829
+      },
+      "after": {
+        "path": ".gitattributes",
+        "sha256": "f2cf4534f802960f71f2124e24fe60ca20118b2b636bdd9523d6b346bbc8f450",
+        "byteLength": 11017
+      },
+      "change": "Only two new document-specific text eol=lf rules, to preserve contract byte identity across checkouts."
+    }
+  },
+  "ownership": {
+    "main": [
+      "src/lib/geography/",
+      "src/lib/world/",
+      "src/lib/simulation/",
+      "src/app/api/",
+      "src/components/",
+      "scripts/geography/",
+      "data/geography/names/",
+      "shared dependency/configuration files"
+    ],
+    "countryPreparation": "Only its assigned country and run raw/normalization/hierarchy/names/source-lock/candidate/evidence paths. No country selected in this execution.",
+    "integrationSingleWriter": [
+      "data/runtime/operational-catalog/current.json",
+      "data/runtime/geography/current.json",
+      "final mixed-world catalog/geography assembly, shared topology and global ordinal/membership/seed/render integration"
+    ],
+    "A": [
+      "docs/development/workspace-layout-v1.md actual setup/reproduction sections",
+      ".tmp/prompt21/workspace-layout.json"
+    ],
+    "B": [
+      "docs/development/verification-baseline-v1.md",
+      "src/lib/world/operational-mixed-membership.test.ts minimal fixture fix",
+      "minimal audit output/failure accounting changes"
+    ],
+    "C": [
+      "docs/development/country-workspace-handoff-v1.md",
+      "existing country metadata handoff contract reuse"
+    ],
+    "optionalHelperReservations": {
+      "scripts/workspaces/setup-country-prep.mjs": "A/21-04",
+      "scripts/workspaces/run-verification.mjs": "A/21-04",
+      "scripts/workspaces/audit-current-frontiers.cjs": "B/21-05",
+      "scripts/workspaces/validate-country-handoff.cjs": "C/21-06"
+    },
+    "commonChangeMergeOwner": "Main common owner applies shared config/schema/registry changes sequentially."
+  },
+  "paths": {
+    "main": ".",
+    "unassignedCountryWorktree": "../local-map-worktrees/country-prep-<runId>/",
+    "assignedCountryWorktree": "../local-map-worktrees/country-<countrySlug>-<runId>/",
+    "unassignedBranch": "country-prep/<runId>",
+    "assignedBranch": "country-prep/<countrySlug>/<runId>",
+    "runRoot": ".tmp/prompt21/<workspaceKey>/<runId>/",
+    "localLayoutRecord": ".tmp/prompt21/workspace-layout.json",
+    "countryRaw": "data/raw/country-prep/<CountryId>/<runId>/",
+    "sourceLock": "data/source-locks/country-prep/<CountryId>/<runId>.json",
+    "prepared": "data/derived/country-prep/<CountryId>/<runId>/{normalized,hierarchy,names,candidate}/",
+    "handoff": "reports/country-prep/<CountryId>/<runId>/manifest.json",
+    "nextOutput": ".next-prompt21-<workspaceKey>-<runId>",
+    "status": "Reserved relative conventions, not claims of generic CLI support or created directories."
+  },
+  "installedTools": {
+    "versions": {
+      "vitest": "4.1.10",
+      "vite": "8.2.1",
+      "next": "16.3.0"
+    },
+    "evidence": ".tmp/prompt21/21-03-20261104/tools/inventory.json",
+    "rules": [
+      "Each worktree has its own lockfile-based node_modules; no writable junction/symlink.",
+      "Child-only TEMP/TMP/TMPDIR under runRoot/os-temp; observe actual os.tmpdir and writer paths.",
+      "Use supported Vite cacheDir for per-run cache; --no-cache disables Vitest results cache only.",
+      "Use --configLoader runner; --cache.dir is deprecated.",
+      "Observe root and project resolved cacheDir; installation defaults do not prove runtime isolation.",
+      "Use PAX_BUILD_DIST_DIR inside worktree and remove inherited E2E override flags only from ordinary child runs.",
+      "Root TypeScript check uses --incremental false or explicit run-local build-info.",
+      "npm internal logs remain under configured cache/_logs; captured stdout/stderr use runRoot/logs/npm."
+    ]
+  },
+  "scriptCapabilities": {
+    "inspectionOnly": true,
+    "commandsExecuted": 0,
+    "evidence": ".tmp/prompt21/21-03-20261104/io/inventory.json",
+    "rows": [
+      {
+        "tool": "scripts/geography/build-current-metadata.cjs --verify <repository-relative-manifest.json>",
+        "anchors": [
+          "scripts/geography/build-current-metadata.cjs:14",
+          "scripts/geography/verify-metadata.ts:92"
+        ],
+        "inputs": "Current operational pointer/index/descriptor/provenance/adopted sources, selected geography manifest and payloads.",
+        "outputs": "Verification JSON on stdout only; the caller may redirect it to its own run log.",
+        "activePointerWrites": false,
+        "classification": "read-only validation; suitable for independent verification after own dependencies are installed"
+      },
+      {
+        "tool": "scripts/geography/build-current-metadata.cjs (no arguments)",
+        "anchors": [
+          "scripts/geography/build-current-metadata.cjs:12",
+          "scripts/geography/metadata-builder.ts:103",
+          "scripts/geography/metadata-builder.ts:120"
+        ],
+        "inputs": "Entire current geography producer input, selected from the current operational catalog and adopted source/name evidence.",
+        "outputs": "Immutable data/derived/geography/<contentRoot>/{metadata.json.gz,admission.json.gz,generation-report.json,manifest.json}.",
+        "activePointerWrites": false,
+        "classification": "common/integration producer; fixed global adopted inputs and fixed content-root output; not a country/run output CLI",
+        "correction": "No argument generation does NOT write data/runtime/geography/current.json. It reports runtimeWrites:0."
+      },
+      {
+        "tool": "scripts/geography/current-input.ts#readCurrentGeographyInput and country-adapters.ts",
+        "anchors": [
+          "scripts/geography/current-input.ts:139",
+          "scripts/geography/current-input.ts:192",
+          "scripts/geography/country-adapters.ts:42"
+        ],
+        "inputs": "Actual current pointer -> artifact index -> catalog/manifest/detail-index/parents/provenance/country metadata; provenance fine profiles, source locks/raw/normalized/hierarchy; coarse and name evidence.",
+        "outputs": "Pinned in-memory input and source/name/parent records only.",
+        "activePointerWrites": false,
+        "classification": "reuse existing read-only shared library and byte pins; does not generate new country geometry or issue future province IDs"
+      },
+      {
+        "tool": "node scripts/prepare-prompt19-country.mjs <KOR|PRK>",
+        "anchors": [
+          "scripts/prepare-prompt19-country.mjs:11",
+          "scripts/prepare-prompt19-country.mjs:22",
+          "scripts/prompt19-country-core.mjs:10",
+          "scripts/prompt19-country-files.mjs:19"
+        ],
+        "inputs": "Fixed prompt19 handoff/coarse baseline, data/source-locks/prompt19/<country>.json, scoped raw and adapter code pins.",
+        "outputs": "New immutable data/derived/prompt19/candidates/<KOR|PRK>/<20hex>/{cells.geojson,topology.json,residuals.geojson,validation.json,manifest.json,artifact-index.json}.",
+        "activePointerWrites": false,
+        "classification": "KOR/PRK-only legacy coarse-predecessor generator; current active fine-catalog pointer differs from required handoff coarse world, so not an advertised current-country incremental command",
+        "limitations": "No --output override; candidate helper rejects non-KOR/PRK and existing output. Future country/incremental generation requires follow-up generalization."
+      },
+      {
+        "tool": "node scripts/prompt19/KOR/run-candidate.mjs",
+        "anchors": [
+          "scripts/prompt19/KOR/run-candidate.mjs:9",
+          "scripts/prompt19/KOR/run-candidate.mjs:14"
+        ],
+        "inputs": "Fixed KOR call to the legacy common candidate generator.",
+        "outputs": "Candidate outputs above plus timestamped reports/verification/prompt19/KOR/candidate-run-<digits>.json.",
+        "activePointerWrites": false,
+        "classification": "KOR-only historical runner; inherits coarse-predecessor restriction; no country/run output arguments"
+      },
+      {
+        "tool": "node scripts/prompt19/PRK/normalize-source.mjs; exported normalizeSource(bytes)/prepareSource(root)",
+        "anchors": [
+          "scripts/prompt19/PRK/normalize-source.mjs:16",
+          "scripts/prompt19/PRK/normalize-source.mjs:42"
+        ],
+        "inputs": "Pinned fixed PRK geoBoundaries ADM2 artifact under data/raw/prompt19/PRK/.",
+        "outputs": "Fixed normalized-adm2.geojson and data/source-locks/prompt19/PRK.json; identical existing outputs accepted, different ones rejected.",
+        "activePointerWrites": false,
+        "classification": "source preparation for the adopted PRK source only; pure normalizeSource may be reused in its existing tests; not a generic new-country CLI"
+      },
+      {
+        "tool": "node scripts/prompt19/KOR/normalize-adm2-source.mjs",
+        "anchors": [
+          "scripts/prompt19/KOR/normalize-adm2-source.mjs:7",
+          "scripts/prompt19/KOR/normalize-adm2-source.mjs:13",
+          "scripts/prompt19/KOR/normalize-adm2-source.mjs:74"
+        ],
+        "inputs": "Already acquired fixed data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/ metadata/source.",
+        "outputs": "Normalized source in that directory, data/source-locks/prompt19/KOR-ADM2-2020.json, reports/maintenance/20261029-kor-adm2-source-verification.json; refuses existing targets.",
+        "activePointerWrites": false,
+        "classification": "fixed KOR source adapter, no output/country arguments; acquisition/download scripts are separate and excluded for countryId:null"
+      },
+      {
+        "tool": "node scripts/chn-2020/incremental-coordinator.mjs [--geometry <path>] [--geometry-replay <path>] [--replay-output <path>]",
+        "anchors": [
+          "scripts/chn-2020/incremental-coordinator.mjs:14",
+          "scripts/chn-2020/incremental-coordinator.mjs:24",
+          "scripts/chn-2020/incremental-coordinator.mjs:118"
+        ],
+        "inputs": "Fixed reports/chn-2020/baseline-runtime-pointer.json (created by copying active pointer if absent), adopted CHN geometry/source lock/hierarchy, baseline joined bundle.",
+        "outputs": "Immutable data/derived/chn-2020/candidate-<20hex>/{joined-world-input.json,cells.geojson,numeric-exceptions.json}; optional replay output. Missing geometry starts CHN Python generation with fixed .tmp/chn-python.",
+        "activePointerWrites": false,
+        "classification": "CHN-only integration coordinator that touches neighbors/shared arrangement; not a country-preparation recipe or generic incremental publisher"
+      },
+      {
+        "tool": "node scripts/prepare-prompt19-joined-candidates.mjs [--output-prefix <prefix>] [--kor-source-lock <path>] [--prk-source-lock <path>] [--prk-probe] [--strict-source-membership]",
+        "anchors": [
+          "scripts/prepare-prompt19-joined-candidates.mjs:17",
+          "scripts/prepare-prompt19-joined-candidates.mjs:63",
+          "scripts/prepare-prompt19-joined-candidates.mjs:83"
+        ],
+        "inputs": "Fixed baseline-v1 envelopes/coarse parents plus KOR/PRK source locks; --prk-probe narrows to PRK only.",
+        "outputs": "Default reports/maintenance/prompt19-C/* arrangement/bundle files or prefix-suffixed equivalents; still writes country candidates under fixed data/derived/prompt19/candidates/<country>/joined-<key>.",
+        "activePointerWrites": false,
+        "classification": "joint topology/ID assembly owned by integration; --output-prefix does not redirect every output; not general independent country source preparation"
+      },
+      {
+        "tool": "node scripts/publish-prompt19-joined-candidates.mjs",
+        "anchors": [
+          "scripts/publish-prompt19-joined-candidates.mjs:5",
+          "scripts/publish-prompt19-joined-candidates.mjs:9",
+          "scripts/publish-prompt19-joined-candidates.mjs:33"
+        ],
+        "inputs": "Fixed reports/maintenance/prompt19-C/joined-world-input.json and joint-arrangement-cells.geojson.",
+        "outputs": "data/derived/prompt19/candidates/<KOR|PRK>/joined-v2-<key> plus reports/maintenance/prompt19-C/published-candidates.json.",
+        "activePointerWrites": false,
+        "classification": "integration-only publication of KOR/PRK candidate evidence, not activation or generic country publisher"
+      },
+      {
+        "tool": "node scripts/prepare-prompt19-mixed-world.mjs --input <bundle> [--no-activate|--activate] [--pointer-output <path>] [--check-input] [--check-activation] [verification flags]",
+        "anchors": [
+          "scripts/prepare-prompt19-mixed-world.mjs:10",
+          "scripts/prepare-prompt19-mixed-world.mjs:20",
+          "scripts/prepare-prompt19-mixed-world.mjs:102",
+          "scripts/prepare-prompt19-mixed-world.mjs:114"
+        ],
+        "inputs": "Verified joined bundle, source/hierarchy locks, required national/incremental/manual-cell-merge evidence according to bundle type.",
+        "outputs": "Fixed content-keyed data/derived/prompt19/mixed-world-v2-<key> plus pointer JSON; activated runs atomically replace data/runtime/operational-catalog/current.json.",
+        "activePointerWrites": "Conditional: nonincremental defaults to activation unless --no-activate; incremental requires --activate. --check-input exits before writes and --check-activation adds fine-country preservation guard.",
+        "classification": "global packaging/ordinal/topology/render pipeline; sequential integration owner only; --no-activate prevents active-pointer write but still generates global output; --pointer-output redirects only pointer JSON"
+      },
+      {
+        "tool": "node --test scripts/prompt19-country-files.node-test.mjs",
+        "anchors": [
+          "scripts/prompt19-country-files.node-test.mjs:7",
+          "scripts/prompt19-country-files.node-test.mjs:23"
+        ],
+        "inputs": "Synthetic per-test KOR/PRK paths only, existing file/path helpers.",
+        "outputs": "Cwd-relative .tmp/prompt19-path-fixtures-* and .tmp/prompt19-own-output-*; creates junction fixtures, never production data.",
+        "activePointerWrites": false,
+        "classification": "supported Node test runner check after dependency setup; fixed .tmp prefixes are worktree-local, not run-root configurable; exclude .node-test.mjs from claims based only on a Vitest argument"
+      }
+    ],
+    "keyLimits": [
+      "Whole-world metadata generation writes immutable derived output, not the active pointer.",
+      "KOR/PRK candidate generator requires its fixed coarse predecessor and fixed country/output schema.",
+      "CHN coordinator is country-specific and has partially fixed write paths.",
+      "Joint/global packaging remains integration-owned; --no-activate alone does not remove global output writes.",
+      "Country input helper verifies metadata against an independently supplied existing catalog, not future geometry.",
+      "Node country-file tests use a separate runner and their actual worktree-local random temp paths."
+    ]
+  },
+  "verification": {
+    "kind": "Static document/code/tool-contract checks; no application tests or runtime experiment.",
+    "relativeLinksChecked": 13,
+    "brokenLinks": [],
+    "sourceAnchorsChecked": 34,
+    "protectedInputPinsMatch": true,
+    "documentNewlines": "UTF-8 LF with explicit Git attributes",
+    "sourceReview": "Parallel read-only I/O and installed-tool reviews found no material defects; npm log location wording clarified.",
+    "testsBuildInstallAndConcurrentProcessesExecuted": false,
+    "actualResolvedCacheOrTempIsolationVerified": false,
+    "currentMainRuntimeSourceModified": false
+  },
+  "preserved": {
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "activePointers": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251
+      },
+      {
+        "path": "data/runtime/geography/current.json",
+        "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8",
+        "byteLength": 1218
+      }
+    ],
+    "geometryTopologyIdsOrdinalsMembershipAndSeedLineageChanged": false,
+    "activePointerWrites": 0,
+    "gameCheckpointOrSecretContentsRead": false,
+    "worktreesCreated": 0,
+    "dependenciesInstalled": 0,
+    "cachesRepaired": 0,
+    "generationOrDownloadCommands": 0,
+    "serversStartedOrStopped": 0,
+    "externalAICalls": 0,
+    "pushesOrDeployments": 0
+  },
+  "carriedForward": {
+    "knownFixtureFailures": {
+      "count": 4,
+      "error": "OPERATIONAL_EDGE_INDEX",
+      "assignedTask": "21-05",
+      "newlyExecuted": false
+    },
+    "lfsPolicy": "User requires repair only after an actual needed materialization failure. No proactive cache repair in 21-03.",
+    "priorLfsStatus": "21-02 repaired three actual failed required objects and deferred fourteen historical objects; recheck actual need in later checkout.",
+    "futureScope": "Actual worktree/install/path setup 21-04; fixture/three-country audit 21-05; handoff/revalidation 21-06; concurrency and related-main-change experiment 21-07."
+  },
+  "localEvidence": [
+    ".tmp/prompt21/21-03-20261104/io/inventory.json",
+    ".tmp/prompt21/21-03-20261104/tools/inventory.json"
+  ]
+}

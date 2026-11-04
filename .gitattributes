@@ -186,3 +186,7 @@ reports/province-independence-parallelism-20261103/evidence.json text eol=lf
 reports/province-independence-parallelism-20261103/report.md text eol=lf
 reports/province-independence-parallelism-20261103/verification.json text eol=lf
 reports/simulation-territorial-issues-20261103/report.md text eol=lf
+
+# Shared workspace contracts keep the same bytes in every preparation checkout.
+docs/development/workspace-ownership-v1.md text eol=lf
+docs/development/workspace-layout-v1.md text eol=lf
