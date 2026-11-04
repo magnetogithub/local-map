@@ -1,0 +1,555 @@
+{
+  "schemaVersion": "prompt21-full-review-v1",
+  "reviewedAt": "2026-11-04T02:48:37.864Z",
+  "clientDate": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "status": "verified-after-correction",
+  "initialSourceCommit": "476ad51ccc06fc5b57b9022f983075580d6dda9a",
+  "verifiedSourceCommit": "02809e38c59289a61f09aede5b00175d3dc8c659",
+  "tasks": [
+    {
+      "id": "21-01",
+      "status": "verified"
+    },
+    {
+      "id": "21-02",
+      "status": "verified"
+    },
+    {
+      "id": "21-03",
+      "status": "verified"
+    },
+    {
+      "id": "21-04",
+      "status": "verified"
+    },
+    {
+      "id": "21-05",
+      "status": "verified"
+    },
+    {
+      "id": "21-06",
+      "status": "verified"
+    },
+    {
+      "id": "21-07",
+      "status": "verified"
+    },
+    {
+      "id": "21-08",
+      "status": "verified"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "P2",
+      "file": "scripts/workspaces/run-verification.mjs",
+      "line": 75,
+      "issue": "An all-skipped or all-todo collected suite could be reported as a successful required verification.",
+      "resolution": "Require a nonempty collected suite, passed equal to total, and zero pending/todo. Observe todo count in results.",
+      "status": "fixed",
+      "fixCommit": "02809e38c59289a61f09aede5b00175d3dc8c659",
+      "originalRunnerSha256": "14274e5ae320411429434e987457cd7e14fff91fab1622e6dbe930ceffc0e2c9",
+      "currentRunner": {
+        "path": "scripts/workspaces/run-verification.mjs",
+        "sha256": "f39f112a1113c836d764f07fabb4ede1e029eab8c9ba3ab2b1d89bab12c9569e",
+        "byteLength": 9825
+      }
+    }
+  ],
+  "documentChecks": {
+    "taskCount": 8,
+    "embeddedDiagramCount": 1,
+    "existingLocalLinksChecked": 36,
+    "brokenLinks": []
+  },
+  "fullVitest": {
+    "command": "node scripts/workspaces/run-verification.mjs --workspace-key review --run-id full-20261104t023943z -- src/lib/geography scripts/geography src/lib/simulation/catalog-region.test.ts src/lib/simulation/catalog-region-integration.test.ts src/lib/simulation/operational-region.test.ts src/lib/simulation/operational-territorial-runtime.test.ts src/lib/simulation/server src/lib/world/world-state-v3.test.ts src/lib/world/operational-catalog-runtime.test.ts src/lib/world/operational-mixed-membership.test.ts src/lib/world/operational-game.server.test.ts src/lib/simulation/prompt19-mixed-frontier.test.ts",
+    "startedAt": "2026-11-04T02:39:43.775Z",
+    "finishedAt": "2026-11-04T02:42:57.069Z",
+    "exitCode": 0,
+    "counts": {
+      "total": 239,
+      "passed": 239,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "files": 25
+    },
+    "protectedPointersUnchanged": true,
+    "files": [
+      {
+        "file": "scripts/geography/metadata-builder.test.ts",
+        "tests": 12,
+        "passed": 12,
+        "failed": []
+      },
+      {
+        "file": "scripts/geography/name-enrichment.test.ts",
+        "tests": 7,
+        "passed": 7,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/country-metadata-input.test.ts",
+        "tests": 28,
+        "passed": 28,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/current-geography-expectations.test.ts",
+        "tests": 3,
+        "passed": 3,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/production-geography.integration.test.ts",
+        "tests": 8,
+        "passed": 8,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/prompt20-name-release.snapshot.test.ts",
+        "tests": 1,
+        "passed": 1,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/state-province-consumer.test.ts",
+        "tests": 8,
+        "passed": 8,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/state-province-contract.test.ts",
+        "tests": 20,
+        "passed": 20,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/state-province-identity.test.ts",
+        "tests": 5,
+        "passed": 5,
+        "failed": []
+      },
+      {
+        "file": "src/lib/geography/state-province-loader.server.test.ts",
+        "tests": 25,
+        "passed": 25,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/catalog-region-integration.test.ts",
+        "tests": 4,
+        "passed": 4,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/catalog-region.test.ts",
+        "tests": 1,
+        "passed": 1,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/operational-region.test.ts",
+        "tests": 2,
+        "passed": 2,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/operational-territorial-runtime.test.ts",
+        "tests": 7,
+        "passed": 7,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/prompt19-mixed-frontier.test.ts",
+        "tests": 2,
+        "passed": 2,
+        "failed": []
+      },
+      {
+        "file": "src/lib/world/operational-catalog-runtime.test.ts",
+        "tests": 3,
+        "passed": 3,
+        "failed": []
+      },
+      {
+        "file": "src/lib/world/operational-game.server.test.ts",
+        "tests": 2,
+        "passed": 2,
+        "failed": []
+      },
+      {
+        "file": "src/lib/world/operational-mixed-membership.test.ts",
+        "tests": 6,
+        "passed": 6,
+        "failed": []
+      },
+      {
+        "file": "src/lib/world/world-state-v3.test.ts",
+        "tests": 41,
+        "passed": 41,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/server/operational-game-allocation.test.ts",
+        "tests": 3,
+        "passed": 3,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/server/operational-game-checkpoint.test.ts",
+        "tests": 4,
+        "passed": 4,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/server/operational-game-pool-preservation.test.ts",
+        "tests": 4,
+        "passed": 4,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/server/operational-game-version.test.ts",
+        "tests": 9,
+        "passed": 9,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/server/operational-provider.test.ts",
+        "tests": 12,
+        "passed": 12,
+        "failed": []
+      },
+      {
+        "file": "src/lib/simulation/server/provider-route.test.ts",
+        "tests": 22,
+        "passed": 22,
+        "failed": []
+      }
+    ],
+    "evidence": [
+      {
+        "path": ".tmp/prompt21/review/full-20261104t023943z/execution.json",
+        "sha256": "79da20d74f9259e00f735cb46b6f2dcb596f97f76c84f2a5d9f739a4589a0c28",
+        "byteLength": 1674
+      },
+      {
+        "path": ".tmp/prompt21/review/full-20261104t023943z/results/observed-paths.json",
+        "sha256": "1a143f3126be000ee6523609e125e55b773c9a90aab9c0b57ac855de5e9f9df1",
+        "byteLength": 5222
+      },
+      {
+        "path": ".tmp/prompt21/review/full-20261104t023943z/results/vitest.json",
+        "sha256": "2171c8f67e9075296db6bbecc5d64fe49af94f3b5e09e9bc3b15e7c2de90c12a",
+        "byteLength": 93819
+      }
+    ]
+  },
+  "separateNodeAndStaticChecks": [
+    {
+      "name": "node-tests",
+      "command": "node --test --test-reporter=tap scripts/prompt19-country-files.node-test.mjs scripts/workspaces/audit-current-frontiers.node-test.cjs scripts/workspaces/validate-country-handoff.node-test.cjs",
+      "startedAt": "2026-11-04T02:40:48.197Z",
+      "finishedAt": "2026-11-04T02:41:16.807Z",
+      "exitCode": 0,
+      "counts": {
+        "tests": 23,
+        "suites": 0,
+        "pass": 23,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "stdout": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/node-tests/stdout.log",
+      "stderr": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/node-tests/stderr.log"
+    },
+    {
+      "name": "tsc-root",
+      "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "startedAt": "2026-11-04T02:41:16.809Z",
+      "finishedAt": "2026-11-04T02:41:29.811Z",
+      "exitCode": 0,
+      "counts": {},
+      "stdout": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/tsc-root/stdout.log",
+      "stderr": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/tsc-root/stderr.log"
+    },
+    {
+      "name": "tsc-geography",
+      "command": "node node_modules/typescript/bin/tsc --noEmit -p scripts/geography/tsconfig.json --incremental false",
+      "startedAt": "2026-11-04T02:41:29.813Z",
+      "finishedAt": "2026-11-04T02:41:31.488Z",
+      "exitCode": 0,
+      "counts": {},
+      "stdout": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/tsc-geography/stdout.log",
+      "stderr": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/tsc-geography/stderr.log"
+    },
+    {
+      "name": "eslint",
+      "command": "node node_modules/eslint/bin/eslint.js src/lib/world/operational-mixed-membership.test.ts scripts/workspaces/audit-current-frontiers.cjs scripts/workspaces/audit-current-frontiers.node-test.cjs scripts/workspaces/run-verification.mjs scripts/workspaces/validate-country-handoff.cjs scripts/workspaces/validate-country-handoff.node-test.cjs",
+      "startedAt": "2026-11-04T02:41:31.490Z",
+      "finishedAt": "2026-11-04T02:41:41.835Z",
+      "exitCode": 0,
+      "counts": {},
+      "stdout": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/eslint/stdout.log",
+      "stderr": ".tmp/prompt21/review-20261104/checks-20261104T024048194Z/eslint/stderr.log"
+    }
+  ],
+  "regression": {
+    "before": {
+      "evidence": {
+        "path": ".tmp/prompt21/review-isolation/skip-red-20261104-isolation/probe-review.json",
+        "sha256": "58923bf5b54d9a0117b8e2fefc76275b4cf1f45acd9492945c7ac1be32c4cf5d",
+        "byteLength": 830
+      },
+      "observedStatus": "passed",
+      "exitCode": 0,
+      "total": 1,
+      "passed": 0,
+      "pending": 1
+    },
+    "after": [
+      {
+        "case": "skip",
+        "source": "import {it} from 'vitest';\n\nit.skip('required probe executes', () => {});\n",
+        "sourceSha256": "f2f3ecc589a1402ff879a1c7b8467c007eb2bb45472e51d5a4589c3f791671d7",
+        "command": "node scripts/workspaces/run-verification.mjs --workspace-key review-isolation --run-id skip-green-20261104-isolation -- tools/prompt21-review-skip-20261104-isolation.test.mjs",
+        "exitCode": 1,
+        "status": "failed",
+        "counts": {
+          "total": 1,
+          "passed": 0,
+          "failed": 0,
+          "pending": 1,
+          "todo": 0,
+          "files": 1
+        },
+        "expectedRejectionConfirmed": true,
+        "evidenceRoot": ".tmp/prompt21/review-isolation/skip-green-20261104-isolation"
+      },
+      {
+        "case": "todo",
+        "source": "import {it} from 'vitest';\n\nit.todo('required probe executes');\n",
+        "sourceSha256": "a1d4929a5ea0081c63e3d772831f16ad17f1a97bae33cdd98a7ae15459de0e02",
+        "command": "node scripts/workspaces/run-verification.mjs --workspace-key review-isolation --run-id todo-green-20261104-isolation -- tools/prompt21-review-skip-20261104-isolation.test.mjs",
+        "exitCode": 1,
+        "status": "failed",
+        "counts": {
+          "total": 1,
+          "passed": 0,
+          "failed": 0,
+          "pending": 0,
+          "todo": 1,
+          "files": 1
+        },
+        "expectedRejectionConfirmed": true,
+        "evidenceRoot": ".tmp/prompt21/review-isolation/todo-green-20261104-isolation"
+      }
+    ],
+    "temporaryProbeRemoved": true,
+    "summary": {
+      "path": ".tmp/prompt21/review-20261104/isolation-skip-todo-regression.json",
+      "sha256": "03fb84b9bffae34a93ecb4566d142d4c070fb4837bf4f9091cba8a9e420a4cb6",
+      "byteLength": 3751
+    }
+  },
+  "workspaces": [
+    {
+      "role": "main",
+      "relativeRoot": ".",
+      "branch": "main",
+      "verifiedCommit": "02809e38c59289a61f09aede5b00175d3dc8c659",
+      "runnerSha256": "f39f112a1113c836d764f07fabb4ede1e029eab8c9ba3ab2b1d89bab12c9569e"
+    },
+    {
+      "role": "preparation",
+      "relativeRoot": "../local-map-worktrees/country-prep-20261104t011700z",
+      "branch": "country-prep/20261104t011700z",
+      "verifiedCommit": "02809e38c59289a61f09aede5b00175d3dc8c659",
+      "runnerSha256": "f39f112a1113c836d764f07fabb4ede1e029eab8c9ba3ab2b1d89bab12c9569e"
+    }
+  ],
+  "concurrency": {
+    "successfulPairs": 1,
+    "representative": "src/lib/geography/country-metadata-input.test.ts",
+    "runId": "concurrent-20261104t024445z",
+    "command": "node scripts/workspaces/run-verification.mjs --workspace-key parallel --run-id concurrent-20261104t024445z -- src/lib/geography/country-metadata-input.test.ts",
+    "overlapMilliseconds": 1709,
+    "protectedPinCountPerSpace": 307,
+    "activePointersAndAdoptedInputsUnchanged": true,
+    "spaces": [
+      {
+        "role": "main",
+        "startedAt": "2026-11-04T02:44:47.025Z",
+        "finishedAt": "2026-11-04T02:44:48.745Z",
+        "exitCode": 0,
+        "counts": {
+          "total": 28,
+          "passed": 28,
+          "failed": 0,
+          "pending": 0,
+          "todo": 0,
+          "files": 1
+        },
+        "toolWriteEvents": 35,
+        "moduleCacheEvents": 33,
+        "configuredViteCacheEvents": 0,
+        "resultWriteEvents": 1,
+        "unexpectedWrites": 0,
+        "markerSignature": "main-concurrent-20261104t024445z",
+        "relativeRunPath": ".tmp/prompt21/parallel/concurrent-20261104t024445z"
+      },
+      {
+        "role": "preparation",
+        "startedAt": "2026-11-04T02:44:47.036Z",
+        "finishedAt": "2026-11-04T02:44:48.836Z",
+        "exitCode": 0,
+        "counts": {
+          "total": 28,
+          "passed": 28,
+          "failed": 0,
+          "pending": 0,
+          "todo": 0,
+          "files": 1
+        },
+        "toolWriteEvents": 35,
+        "moduleCacheEvents": 33,
+        "configuredViteCacheEvents": 0,
+        "resultWriteEvents": 1,
+        "unexpectedWrites": 0,
+        "markerSignature": "preparation-concurrent-20261104t024445z",
+        "relativeRunPath": ".tmp/prompt21/parallel/concurrent-20261104t024445z"
+      }
+    ],
+    "persistentViteCacheWritesObserved": false,
+    "evidence": {
+      "path": ".tmp/prompt21/review-20261104/concurrency/result.json",
+      "sha256": "a5cd532a6934183b9266b76306d28eecc9059e035f7835c463189830f6520a9e",
+      "byteLength": 787039
+    }
+  },
+  "preservedReferences": {
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "pointers": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609"
+      },
+      {
+        "path": "data/runtime/geography/current.json",
+        "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8"
+      }
+    ]
+  },
+  "reusedFrontierEvidence": {
+    "summary": {
+      "required": 3,
+      "executed": 3,
+      "passed": 3,
+      "failed": 0,
+      "missingTargets": [],
+      "duplicateTargets": [],
+      "unexpected": []
+    },
+    "inputPinAudit": {
+      "total": 5828,
+      "checked": 5828,
+      "passed": 5828,
+      "bytes": 51353428,
+      "skipped": [],
+      "failures": []
+    },
+    "protectedInputAudit": {
+      "total": 308,
+      "checked": 308,
+      "passed": 308,
+      "bytes": 414377176,
+      "skipped": [],
+      "failures": [],
+      "compatibleDuplicateInputs": [
+        {
+          "path": "data/runtime/operational-catalog/current.json",
+          "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+          "byteLength": 251,
+          "compatible": true
+        }
+      ]
+    },
+    "source": {
+      "path": ".tmp/prompt21/21-05-20261104/frontiers-final.json",
+      "sha256": "bcea4970972e9e67b553f5c58eafbb37fbb5e44661d1e8be1e8d92379a010888",
+      "byteLength": 1346220
+    },
+    "audit": {
+      "path": ".tmp/prompt21/review-20261104/frontier-pin-audit.json",
+      "sha256": "b1238e3a2707b0c14dbec0d348b541e88a7cdec9194324a969f289e77f892654",
+      "byteLength": 55146
+    },
+    "newFrontierTurnsExecutedInThisReview": 0,
+    "reuseReason": "All 5,828 actually consumed input/code pins match. Original three actual-catalog turns and their commit/undo/redo checks remain reproducible."
+  },
+  "installation": {
+    "lfspayloadsPerWorkspace": 42,
+    "lfsBytesPerWorkspace": 1329106273,
+    "directPackagesPerWorkspace": 27,
+    "allPayloadsMatchOidAndSize": true,
+    "allDirectVersionsMatchLock": true,
+    "independentNodeModules": true,
+    "sharedDirectPackageFileInodes": 0,
+    "source": {
+      "path": ".tmp/prompt21/review-20261104/frontier-pin-audit.json",
+      "sha256": "b1238e3a2707b0c14dbec0d348b541e88a7cdec9194324a969f289e77f892654",
+      "byteLength": 55146
+    }
+  },
+  "reusedMainChangeExercise": {
+    "source": {
+      "path": "reports/maintenance/prompt21-integration-verification.json",
+      "sha256": "aa6fb7847efdb9fe74d51d2165f0d763804022d89f5894419004f924f316efe7",
+      "byteLength": 46330
+    },
+    "B1": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+    "B2": "ff1f5343badac48a4eda86da6f4dd9cf451b75fd",
+    "previousHandoffRejection": {
+      "ok": false,
+      "diagnostics": [
+        {
+          "code": "HANDOFF_REVALIDATION",
+          "message": "Consumed code/input pins changed or are missing; synchronize and rerun affected checks"
+        }
+      ]
+    },
+    "samePreparationBytesPreserved": true,
+    "updatedHandoffAcceptedInBothWorkspaces": true,
+    "commandsChecked": 19,
+    "newBranchExerciseExecutedInThisReview": false
+  },
+  "scope": {
+    "planSteps": [
+      2,
+      3
+    ],
+    "countryId": null,
+    "nextCountryWorkRequiresAssignment": true,
+    "nextCountryGeneratorAndGlobalActivationAreFollowup": true,
+    "buildApiBrowserEvidence": "Historical evidence remains separately recorded. This review changes the development verification success predicate.",
+    "remotePushExecuted": false
+  },
+  "reviewMarkdown": {
+    "path": "reports/maintenance/prompt21-review-20261104.md",
+    "sha256": "295bbf43bb0b014dff194587e68b5e630e0f94182a2d511229655eaed669749d",
+    "byteLength": 5304
+  }
+}
