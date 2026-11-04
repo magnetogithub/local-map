@@ -171,15 +171,15 @@ reports/maintenance/prompt21*.json -text whitespace=cr-at-eol
 
 # Prompt 21's byte-pinned source and audit inventory must survive either
 # core.autocrlf setting, including evidence originally written with LF.
-.gitignore text eol=crlf
-AGENTS.md text eol=crlf
+/.gitignore text eol=crlf
+/AGENTS.md text eol=crlf
 prompts/COUNTRY_MICRO_BOUNDARY_GUIDE.txt text eol=crlf
 "src/app/data/territory-catalog/\\[version\\]/\\[...asset\\]/route.ts" text eol=crlf
 src/lib/simulation/prompt19-mixed-frontier.test.ts text eol=crlf
 src/lib/world/operational-mixed-membership.test.ts text eol=crlf
-tsconfig.json text eol=crlf
-vitest.config.ts text eol=crlf
-vitest.setup.ts text eol=crlf
+/tsconfig.json text eol=crlf
+/vitest.config.ts text eol=crlf
+/vitest.setup.ts text eol=crlf
 prompts/PROMPT_20_STATE_PROVINCE_GEOGRAPHY_DATA_CONTRACT.txt text eol=lf
 reports/province-independence-parallelism-20261103/audit.cjs text eol=lf
 reports/province-independence-parallelism-20261103/evidence.json text eol=lf
