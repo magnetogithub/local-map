@@ -1,0 +1,391 @@
+{
+  "schemaVersion": "prompt21-baseline-commit-v1",
+  "task": {
+    "id": "21-02",
+    "status": "completed",
+    "countryId": null,
+    "laterTasksExecuted": [],
+    "completionBasis": "Committed common contract and adopted inputs restore with exact recorded bytes and valid metadata under both automatic newline settings."
+  },
+  "observedAt": "2026-11-04T00:47:57.654Z",
+  "clientDate": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "git": {
+    "branch": "main",
+    "initialHead": "2b5b6d4564bf810388d947f9ae6f76b15b060f35",
+    "B0": "b0d0c32327ceba4b57e4bda01c895a4a898631f3",
+    "tree": "44213b625c8bace01f5e81c063365e01f035562e",
+    "priorPrompt20AndPrompt21Commit": "2b5b6d4564bf810388d947f9ae6f76b15b060f35",
+    "priorRequiredChangedFiles": 85,
+    "decision": "Existing commit contained required implementation/data, but an additional committed checkout policy was needed to reproduce pinned bytes. B0 includes the prior common contract and the explicit policy.",
+    "includedChanges": [
+      ".gitattributes",
+      "reports/maintenance/prompt21-baseline.json"
+    ],
+    "includedEvidence": {
+      "path": "reports/maintenance/prompt21-baseline.json",
+      "sha256": "5cba259ff442d6162f5f24eeaf5c25ff8e0ee337db95bd63d5ec5cd4c3f74152",
+      "byteLength": 133336
+    },
+    "originalUntrackedRequiredEvidenceIncluded": true,
+    "unrelatedUserChangesAtStart": [],
+    "unrelatedUserChangesModified": false,
+    "staging": "Only explicitly named .gitattributes and task evidence files were staged; no bulk add/reset/checkout.",
+    "authorConfiguration": "Initial commit attempt lacked author config. Existing repository commit identity was supplied only with per-command -c user.name/user.email; no local/global identity config change.",
+    "reportCommit": "This evidence report is committed after B0; its final commit is recorded in the final response to avoid a self-referential hash."
+  },
+  "preserved": {
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "catalogPointer": {
+      "path": "data/runtime/operational-catalog/current.json",
+      "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+      "byteLength": 251
+    },
+    "metadataPointer": {
+      "path": "data/runtime/geography/current.json",
+      "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8",
+      "byteLength": 1218
+    },
+    "originalPointerBytesMatch": true,
+    "geographyOrCatalogRegenerated": false,
+    "geometryTopologyTerritoryIdsOrdinalsMembershipAndSeedLineageChanged": false,
+    "recordedProvenanceHashesOverwritten": false,
+    "gameStateOrCheckpointContentsRead": false,
+    "registeredWorktreesCreated": 0,
+    "serversStartedOrStopped": 0,
+    "pushesOrDeployments": 0
+  },
+  "fileIdentity": {
+    "initialAudit": {
+      "total": 6180,
+      "audited": 6180,
+      "ordinaryBlobs": 6175,
+      "lfsPayloads": 5,
+      "plainPointerReceipts": 0,
+      "missingFromCommit": 0,
+      "missingCheckout": 0,
+      "recordedPinMismatches": 0,
+      "rawStoredCheckoutDifferences": 17,
+      "lfsPayloadMismatches": 0,
+      "commitFilesPresent": 85,
+      "commitFileCount": 85,
+      "evidence": ".tmp/prompt21/21-02-20261104/bytes/audit.json"
+    },
+    "initialStoredVsCheckout": "6,175 regular blobs plus five LFS pointer/payload pairs; all 6,180 recorded checkout pins matched. Seventeen regular Git blobs differed only by LF/CRLF.",
+    "indexedActiveArtifactCount": 6036,
+    "requiredEnumeration": {
+      "source": "reports/maintenance/prompt21-baseline.json#/newWorktreeInputs",
+      "operationalIndex": {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/artifact-index.json",
+        "sha256": "184de11efa21ffaaaa80afdd0105e06716508eb170e75e0fe16596d24c9bb480",
+        "byteLength": 757545
+      },
+      "inventory": ".tmp/prompt21/21-02-20261104/bytes/audit.json#/files"
+    },
+    "intentionalPinChange": {
+      "path": ".gitattributes",
+      "before": {
+        "path": ".gitattributes",
+        "sha256": "d4dbc1d193ed3d8a04cc030ef016abac20309ac1baf64bcc3807527ea4e57b07",
+        "byteLength": 9221
+      },
+      "after": {
+        "path": ".gitattributes",
+        "sha256": "c0c8f2720c18742629b43ef1f51716ae409852c47631a2e2a1527f05d886666e",
+        "byteLength": 10829
+      },
+      "reason": "Checkout policy only; existing source/data payload bytes and expected provenance hashes remain intact."
+    }
+  },
+  "newlinePolicy": {
+    "configuration": {
+      "path": ".gitattributes",
+      "sha256": "c0c8f2720c18742629b43ef1f51716ae409852c47631a2e2a1527f05d886666e",
+      "byteLength": 10829
+    },
+    "globalCoreAutocrlfModified": false,
+    "repositoryCoreAutocrlf": "true",
+    "scopedPinnedTextPaths": 23,
+    "producerCodeCrLfPaths": [
+      "src/lib/world/canonical-serializer.ts",
+      "src/lib/world/country-id.ts",
+      "src/lib/world/domain-hash-root.ts",
+      "src/lib/world/immutable-readonly-set.ts",
+      "src/lib/world/sha256.ts",
+      "src/lib/world/territory-id.ts",
+      "src/lib/world/world-geometry-catalog-ref.ts",
+      "src/lib/world/world-v3-validation.ts"
+    ],
+    "additionalCrLfPaths": [
+      ".gitignore",
+      "AGENTS.md",
+      "prompts/COUNTRY_MICRO_BOUNDARY_GUIDE.txt",
+      "src/app/data/territory-catalog/[version]/[...asset]/route.ts",
+      "src/lib/simulation/prompt19-mixed-frontier.test.ts",
+      "src/lib/world/operational-mixed-membership.test.ts",
+      "tsconfig.json",
+      "vitest.config.ts",
+      "vitest.setup.ts"
+    ],
+    "preservedLfPaths": [
+      "prompts/PROMPT_20_STATE_PROVINCE_GEOGRAPHY_DATA_CONTRACT.txt",
+      "reports/province-independence-parallelism-20261103/audit.cjs",
+      "reports/province-independence-parallelism-20261103/evidence.json",
+      "reports/province-independence-parallelism-20261103/report.md",
+      "reports/province-independence-parallelism-20261103/verification.json",
+      "reports/simulation-territorial-issues-20261103/report.md"
+    ],
+    "rootOnlyRules": [
+      "/.gitignore",
+      "/AGENTS.md",
+      "/tsconfig.json",
+      "/vitest.config.ts",
+      "/vitest.setup.ts"
+    ],
+    "taskEvidenceJson": "reports/maintenance/prompt21*.json -text",
+    "discoveredDuringRealExport": [
+      "Six original LF prompt/evidence paths changed under core.autocrlf=true and needed explicit LF rules.",
+      "An initially unanchored tsconfig rule affected scripts/geography/tsconfig.json; root-only patterns corrected this before final B0."
+    ],
+    "noSourceContentRewrite": true
+  },
+  "lfs": {
+    "userPolicy": "Populate cache only after an actual problem; do not preemptively restore all inventoried missing objects.",
+    "probe": {
+      "command": "git lfs checkout <required LFS paths>",
+      "initialSource": "Exact committed LFS pointer bytes in temporary work tree and index",
+      "downloadPolicy": "git lfs checkout only uses the local object store; no fetch/pull/smudge or network command.",
+      "before": {
+        "tested": 5,
+        "materialized": 2,
+        "pointersRemaining": [
+          "data/raw/chn-2020/normalized-boundaries.geojson",
+          "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+          "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson"
+        ],
+        "gitExitCode": 0
+      },
+      "acceptance": "Verify every resulting payload SHA-256 and byteLength; exitCode zero alone did not establish success.",
+      "after": {
+        "tested": 5,
+        "materialized": 5,
+        "pointersRemaining": [],
+        "gitExitCode": 0
+      }
+    },
+    "repair": {
+      "trigger": "Actual local-only checkout left required input pointers, not inventory prediction.",
+      "command": "git lfs clean -- <failed required path> with binary input streamed from verified existing checkout",
+      "restoredObjects": [
+        {
+          "path": "data/raw/chn-2020/normalized-boundaries.geojson",
+          "oid": "69fba4066901bd212b9c9696c91c6cc90a4c120ed89adf75cc07df11856e1697",
+          "byteLength": 77987491,
+          "sourceVerified": true,
+          "cleanPointerMatchesGitBlob": true,
+          "restoredCacheVerified": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+          "oid": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72",
+          "byteLength": 17277078,
+          "sourceVerified": true,
+          "cleanPointerMatchesGitBlob": true,
+          "restoredCacheVerified": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+          "oid": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e",
+          "byteLength": 88780624,
+          "sourceVerified": true,
+          "cleanPointerMatchesGitBlob": true,
+          "restoredCacheVerified": true
+        }
+      ],
+      "count": 3,
+      "totalBytes": 184045193,
+      "downloads": 0
+    },
+    "deferred": {
+      "remainingMissingHistoricalCacheObjects": 14,
+      "paths": [
+        "data/derived/chn-2020/candidate-df4f04ceeb9cecb0b5b3/joined-world-input.json",
+        "data/derived/chn-2020/geometry-v12/geometry.json",
+        "data/derived/chn-2020/province-line-lod-6e0c718ffe8a5495750e/edges.geojson",
+        "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz",
+        "data/raw/chn-2020/references/ADM3-source/CHN_ADM3.shp",
+        "data/raw/chn-2020/references/CHN_ADM3-source.zip",
+        "data/raw/chn-2020/references/gb3-CHN-ADM2.geojson",
+        "data/raw/chn-2020/references/gb3-CHN-ADM3.geojson",
+        "data/raw/chn-2020/references/geoBoundaries-CHN-ADM1.geojson",
+        "data/raw/chn-2020/references/geoBoundaries-CHN-ADM2.geojson",
+        "reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json",
+        "reports/maintenance/prompt19-C/boundary-cleanup-2020-joined-world-input.json",
+        "reports/maintenance/prompt19-C/fine-macro-2020-joined-world-input.json",
+        "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json"
+      ],
+      "directlyRequiredByAuditedClosure": 0,
+      "action": "Do not restore now. If later full-worktree checkout actually needs them and fails, recover only those required objects from the verified existing files.",
+      "fullWorktreeMaterializationClaim": false
+    },
+    "preservedPointerReceipt": {
+      "path": "data/raw/prompt19/PRK/geoBoundaries-PRK-ADM2.lfs.txt",
+      "filterAttribute": "unspecified",
+      "purpose": "Historical sourceEvidence receipt referenced as identity(file) by scripts/prompt19/PRK/verify-candidate.mjs:113; not a smudged payload input.",
+      "followup": "If any later command needs original payload instead of receipt, inspect its adopted input path and pins; no automatic fetch performed."
+    }
+  },
+  "verification": {
+    "exportMethod": "Actual git checkout-index into ignored temporary directories with isolated index/work-tree and committed attributes; no registered worktree or dependency install.",
+    "verifiedSourceTree": "44213b625c8bace01f5e81c063365e01f035562e",
+    "B0TreeMatchesVerifiedTree": true,
+    "exportProfiles": [
+      {
+        "coreAutocrlf": true,
+        "exportedFiles": 6181,
+        "verifiedPins": 6181,
+        "failures": [],
+        "metadataStatus": "validated-metadata-only",
+        "metadataChecks": {
+          "exactCatalogProvinceSet": true,
+          "sourceCountryMatches": true,
+          "rawSourceAndParentJoins": true,
+          "knownSourceMembershipComplete": true,
+          "unknownParentsRemainNull": true,
+          "coarsePrecisionPreserved": true,
+          "noUnverifiedCompleteCoverage": true,
+          "commonSchemaAndContentRoot": true
+        },
+        "metadataRef": {
+          "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+          "schemaVersion": "geography-metadata-ref-v1"
+        },
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+          "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+          "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+          "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+        },
+        "startedAt": "2026-11-04T00:46:25.122Z",
+        "finishedAt": "2026-11-04T00:46:57.444Z"
+      },
+      {
+        "coreAutocrlf": false,
+        "exportedFiles": 6181,
+        "verifiedPins": 6181,
+        "failures": [],
+        "metadataStatus": "validated-metadata-only",
+        "metadataChecks": {
+          "exactCatalogProvinceSet": true,
+          "sourceCountryMatches": true,
+          "rawSourceAndParentJoins": true,
+          "knownSourceMembershipComplete": true,
+          "unknownParentsRemainNull": true,
+          "coarsePrecisionPreserved": true,
+          "noUnverifiedCompleteCoverage": true,
+          "commonSchemaAndContentRoot": true
+        },
+        "metadataRef": {
+          "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+          "schemaVersion": "geography-metadata-ref-v1"
+        },
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+          "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+          "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+          "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+        },
+        "startedAt": "2026-11-04T00:46:25.648Z",
+        "finishedAt": "2026-11-04T00:46:58.809Z"
+      }
+    ],
+    "currentMetadata": {
+      "command": "node scripts/geography/build-current-metadata.cjs --verify data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+      "exitCode": 0,
+      "status": "validated-metadata-only",
+      "countsObserved": {
+        "countries": 247,
+        "provinces": 8004,
+        "states": 4201,
+        "sourceRegions": 7399,
+        "fine": 3793,
+        "coarse": 4169,
+        "residual": 42,
+        "sourceLinked": 7935,
+        "sourceFree": 69,
+        "unassignedParents": 1436
+      }
+    },
+    "dependencyScope": "Metadata verifier uses installed main-worktree code/dependencies whose source bytes match export; no node_modules sharing/link or independent install. This is a checkout-byte check, not the 21-04/21-07 worktree experiment.",
+    "diffCheck": "git diff --check and staged diff check passed for the committed attribute changes.",
+    "currentSourceAndAdoptedInputChanges": "Only checkout policy and evidence changed; all existing common-code/data byte pins preserved.",
+    "testsNotRerun": [
+      "Full Vitest suite and historical 185 tests",
+      "Historical four fixture failures",
+      "KOR/PRK/CHN frontier audit",
+      "Node country-file suite",
+      "TypeScript/ESLint",
+      "Next build/API/browser",
+      "Independent worktree install and concurrent output isolation"
+    ]
+  },
+  "knownFailures": {
+    "assignedTask": "21-05",
+    "source": "src/lib/world/operational-mixed-membership.test.ts",
+    "count": 4,
+    "error": "OPERATIONAL_EDGE_INDEX",
+    "cause": "Fixture declares one edge while detail-index edgeDetails is empty.",
+    "latestRun": {
+      "task": "21-01",
+      "collected": 6,
+      "passed": 2,
+      "failed": 4,
+      "evidence": ".tmp/prompt21/21-01-20261104/historical/vitest-results.json"
+    },
+    "unchangedFailureSource": {
+      "path": "src/lib/world/operational-mixed-membership.test.ts",
+      "sha256": "31b2cee6fcd3ce9a5b11cad70284fa201bca4e4f37719830777c3e7087a90a6c",
+      "byteLength": 7705
+    },
+    "productionLoaderValidationRelaxed": false,
+    "baselineRole": "B0 preserves/reproduces existing failures; this is not an all-tests-pass baseline."
+  },
+  "excluded": [
+    "node_modules/",
+    ".next*/",
+    ".tmp/",
+    ".env* except template",
+    "data/runtime/operational-game-checkpoints/",
+    "unrelated ignored build/test outputs"
+  ],
+  "nextTask": {
+    "id": "21-03",
+    "action": "Define file ownership and path interfaces based on B0. Actual country worktree setup remains 21-04; fixture fixes remain 21-05."
+  },
+  "localEvidence": [
+    ".tmp/prompt21/21-02-20261104/bytes/audit.json",
+    ".tmp/prompt21/21-02-20261104/review/scope-review.json",
+    ".tmp/prompt21/21-02-20261104/lfs-checkout-before-repair.json",
+    ".tmp/prompt21/21-02-20261104/lfs-checkout-before-repair.log",
+    ".tmp/prompt21/21-02-20261104/lfs-repair.json",
+    ".tmp/prompt21/21-02-20261104/lfs-checkout-after-repair.json",
+    ".tmp/prompt21/21-02-20261104/lfs-checkout-after-repair.log",
+    ".tmp/prompt21/21-02-20261104/b0-export-verification-true.json",
+    ".tmp/prompt21/21-02-20261104/b0-export-verification-false.json",
+    ".tmp/prompt21/21-02-20261104/metadata-verification.json",
+    ".tmp/prompt21/21-02-20261104/check-b0-export.cjs",
+    ".tmp/prompt21/21-02-20261104/repair-required-lfs.cjs"
+  ]
+}
