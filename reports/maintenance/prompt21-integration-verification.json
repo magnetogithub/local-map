@@ -1,0 +1,1071 @@
+{
+  "schemaVersion": "prompt21-integration-verification-v1",
+  "task": {
+    "id": "21-07",
+    "status": "completed",
+    "countryId": null,
+    "completionBasis": "Merged baseline verified, one real concurrent representative pair proved isolated writes and normal completion, and actual committed common-rule change triggered H1 revalidation then synchronized/retested H2 acceptance.",
+    "laterTasksExecuted": []
+  },
+  "observedAt": "2026-11-04T01:45:09.525Z",
+  "clientDate": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "commits": {
+    "B0": "b0d0c32327ceba4b57e4bda01c895a4a898631f3",
+    "B1": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+    "B1Role": "Existing e75977b contains A/B/C implementation, independent workspace setup and evidence; reused as the merged preparation baseline.",
+    "B2": "ff1f5343badac48a4eda86da6f4dd9cf451b75fd",
+    "B2Parent": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+    "B2Role": "One compatible handoff validation rule plus its regression test, committed only on dedicated exercise branches.",
+    "finalEvidenceCommit": "The report commit is linked in the final response and ignored layout records; no self-referential commit/hash is embedded."
+  },
+  "workspaces": [
+    {
+      "role": "main/integration",
+      "path": ".",
+      "originalBranch": "main",
+      "verifiedBase": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d"
+    },
+    {
+      "role": "country preparation",
+      "path": "../local-map-worktrees/country-prep-20261104t011700z",
+      "originalBranch": "country-prep/20261104t011700z",
+      "verifiedBase": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d"
+    }
+  ],
+  "commonBaseline": {
+    "commonCodeLockfileAndInputIdentity": "Both spaces held B1 for baseline/concurrent checks. Worktree-specific installed dependencies and tracked input identities were verified in 21-04 and rechecked by actual execution and input hashes here.",
+    "headsDuringPair": [
+      {
+        "space": "main",
+        "before": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+        "after": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d"
+      },
+      {
+        "space": "preparation",
+        "before": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+        "after": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d"
+      }
+    ],
+    "protectedPinChecksAtEnd": [
+      {
+        "space": "main",
+        "checked": 307,
+        "failures": []
+      },
+      {
+        "space": "preparation",
+        "checked": 307,
+        "failures": []
+      }
+    ],
+    "LfsAndNewlineStatus": "No residual required LFS pointers or checkout byte mismatches were found in adopted inputs; no installation, fetch, cache repair or data generation was needed in this task.",
+    "runner": {
+      "path": "scripts/workspaces/run-verification.mjs",
+      "sha256": "14274e5ae320411429434e987457cd7e14fff91fab1622e6dbe930ceffc0e2c9",
+      "byteLength": 9625
+    },
+    "lockfile": {
+      "path": "package-lock.json",
+      "sha256": "22908144c69e75dc1ae90633b58fe933c7b6d6629ec2e8a775156c32fb004d14",
+      "byteLength": 337285
+    }
+  },
+  "mergedVerification": {
+    "status": "passed",
+    "scope": "Final relevant merged verification selected in verification-baseline-v1.md, separate Node runners, static checks, current metadata, and identity-based reuse of real frontier-turn evidence.",
+    "vitest": {
+      "command": "node scripts/workspaces/run-verification.mjs --workspace-key main --run-id merged-20261104t013300z -- src/lib/geography scripts/geography src/lib/simulation/catalog-region.test.ts src/lib/simulation/catalog-region-integration.test.ts src/lib/simulation/operational-region.test.ts src/lib/simulation/operational-territorial-runtime.test.ts src/lib/simulation/server src/lib/world/world-state-v3.test.ts src/lib/world/operational-catalog-runtime.test.ts src/lib/world/operational-mixed-membership.test.ts src/lib/world/operational-game.server.test.ts src/lib/simulation/prompt19-mixed-frontier.test.ts",
+      "startedAt": "2026-11-04T01:33:00.272Z",
+      "finishedAt": "2026-11-04T01:36:49.648Z",
+      "exitCode": 0,
+      "files": 25,
+      "total": 239,
+      "passed": 239,
+      "failed": 0,
+      "pending": 0,
+      "collectedFiles": [
+        {
+          "file": "scripts/geography/metadata-builder.test.ts",
+          "status": "passed",
+          "tests": 12,
+          "failed": []
+        },
+        {
+          "file": "scripts/geography/name-enrichment.test.ts",
+          "status": "passed",
+          "tests": 7,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/country-metadata-input.test.ts",
+          "status": "passed",
+          "tests": 28,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/current-geography-expectations.test.ts",
+          "status": "passed",
+          "tests": 3,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/production-geography.integration.test.ts",
+          "status": "passed",
+          "tests": 8,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/prompt20-name-release.snapshot.test.ts",
+          "status": "passed",
+          "tests": 1,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/state-province-consumer.test.ts",
+          "status": "passed",
+          "tests": 8,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/state-province-contract.test.ts",
+          "status": "passed",
+          "tests": 20,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/state-province-identity.test.ts",
+          "status": "passed",
+          "tests": 5,
+          "failed": []
+        },
+        {
+          "file": "src/lib/geography/state-province-loader.server.test.ts",
+          "status": "passed",
+          "tests": 25,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/catalog-region-integration.test.ts",
+          "status": "passed",
+          "tests": 4,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/catalog-region.test.ts",
+          "status": "passed",
+          "tests": 1,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/operational-region.test.ts",
+          "status": "passed",
+          "tests": 2,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/operational-territorial-runtime.test.ts",
+          "status": "passed",
+          "tests": 7,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/prompt19-mixed-frontier.test.ts",
+          "status": "passed",
+          "tests": 2,
+          "failed": []
+        },
+        {
+          "file": "src/lib/world/operational-catalog-runtime.test.ts",
+          "status": "passed",
+          "tests": 3,
+          "failed": []
+        },
+        {
+          "file": "src/lib/world/operational-game.server.test.ts",
+          "status": "passed",
+          "tests": 2,
+          "failed": []
+        },
+        {
+          "file": "src/lib/world/operational-mixed-membership.test.ts",
+          "status": "passed",
+          "tests": 6,
+          "failed": []
+        },
+        {
+          "file": "src/lib/world/world-state-v3.test.ts",
+          "status": "passed",
+          "tests": 41,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-allocation.test.ts",
+          "status": "passed",
+          "tests": 3,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-checkpoint.test.ts",
+          "status": "passed",
+          "tests": 4,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-pool-preservation.test.ts",
+          "status": "passed",
+          "tests": 4,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-version.test.ts",
+          "status": "passed",
+          "tests": 9,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/server/operational-provider.test.ts",
+          "status": "passed",
+          "tests": 12,
+          "failed": []
+        },
+        {
+          "file": "src/lib/simulation/server/provider-route.test.ts",
+          "status": "passed",
+          "tests": 22,
+          "failed": []
+        }
+      ],
+      "runCount": 1
+    },
+    "separateNodeAndStaticChecks": [
+      {
+        "name": "country-files-node",
+        "command": "node --test scripts/prompt19-country-files.node-test.mjs",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:34:31.244Z",
+        "finishedAt": "2026-11-04T01:34:31.463Z",
+        "exitCode": 0,
+        "stdout": ".tmp/prompt21/21-07-20261104/baseline/country-files-node/stdout.log",
+        "stderr": ".tmp/prompt21/21-07-20261104/baseline/country-files-node/stderr.log",
+        "childTemp": ".tmp/prompt21/21-07-20261104/baseline/country-files-node/os-temp",
+        "collected": true,
+        "reporter": "node-default-spec",
+        "counts": {
+          "tests": 3,
+          "suites": 0,
+          "pass": 3,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "frontier-accounting-node",
+        "command": "node --test scripts/workspaces/audit-current-frontiers.node-test.cjs",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:34:31.471Z",
+        "finishedAt": "2026-11-04T01:34:31.648Z",
+        "exitCode": 0,
+        "stdout": ".tmp/prompt21/21-07-20261104/baseline/frontier-accounting-node/stdout.log",
+        "stderr": ".tmp/prompt21/21-07-20261104/baseline/frontier-accounting-node/stderr.log",
+        "childTemp": ".tmp/prompt21/21-07-20261104/baseline/frontier-accounting-node/os-temp",
+        "collected": true,
+        "reporter": "node-default-spec",
+        "counts": {
+          "tests": 8,
+          "suites": 0,
+          "pass": 8,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "handoff-envelope-node",
+        "command": "node --test scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:34:31.652Z",
+        "finishedAt": "2026-11-04T01:35:03.078Z",
+        "exitCode": 0,
+        "stdout": ".tmp/prompt21/21-07-20261104/baseline/handoff-envelope-node/stdout.log",
+        "stderr": ".tmp/prompt21/21-07-20261104/baseline/handoff-envelope-node/stderr.log",
+        "childTemp": ".tmp/prompt21/21-07-20261104/baseline/handoff-envelope-node/os-temp",
+        "collected": true,
+        "reporter": "node-default-spec",
+        "counts": {
+          "tests": 12,
+          "suites": 0,
+          "pass": 12,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      },
+      {
+        "name": "tsc-root",
+        "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:35:03.081Z",
+        "finishedAt": "2026-11-04T01:35:22.092Z",
+        "exitCode": 0,
+        "stdout": ".tmp/prompt21/21-07-20261104/baseline/tsc-root/stdout.log",
+        "stderr": ".tmp/prompt21/21-07-20261104/baseline/tsc-root/stderr.log",
+        "childTemp": ".tmp/prompt21/21-07-20261104/baseline/tsc-root/os-temp"
+      },
+      {
+        "name": "tsc-geography",
+        "command": "node node_modules/typescript/bin/tsc --noEmit -p scripts/geography/tsconfig.json",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:35:22.097Z",
+        "finishedAt": "2026-11-04T01:35:24.854Z",
+        "exitCode": 0,
+        "stdout": ".tmp/prompt21/21-07-20261104/baseline/tsc-geography/stdout.log",
+        "stderr": ".tmp/prompt21/21-07-20261104/baseline/tsc-geography/stderr.log",
+        "childTemp": ".tmp/prompt21/21-07-20261104/baseline/tsc-geography/os-temp"
+      },
+      {
+        "name": "targeted-eslint",
+        "command": "node node_modules/eslint/bin/eslint.js src/lib/world/operational-mixed-membership.test.ts scripts/workspaces/audit-current-frontiers.cjs scripts/workspaces/audit-current-frontiers.node-test.cjs scripts/workspaces/run-verification.mjs scripts/workspaces/validate-country-handoff.cjs scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:35:24.858Z",
+        "finishedAt": "2026-11-04T01:35:48.443Z",
+        "exitCode": 0,
+        "stdout": ".tmp/prompt21/21-07-20261104/baseline/targeted-eslint/stdout.log",
+        "stderr": ".tmp/prompt21/21-07-20261104/baseline/targeted-eslint/stderr.log",
+        "childTemp": ".tmp/prompt21/21-07-20261104/baseline/targeted-eslint/os-temp"
+      },
+      {
+        "name": "diff-check",
+        "command": "git diff --check",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:35:48.447Z",
+        "finishedAt": "2026-11-04T01:35:48.604Z",
+        "exitCode": 0,
+        "stdout": ".tmp/prompt21/21-07-20261104/baseline/diff-check/stdout.log",
+        "stderr": ".tmp/prompt21/21-07-20261104/baseline/diff-check/stderr.log",
+        "childTemp": ".tmp/prompt21/21-07-20261104/baseline/diff-check/os-temp"
+      }
+    ],
+    "mainMetadata": {
+      "runRoot": ".tmp/prompt21/main/baseline-metadata-20261104t013500z",
+      "exitCode": 0,
+      "startedAt": "2026-11-04T01:35:17.811Z",
+      "finishedAt": "2026-11-04T01:35:35.219Z",
+      "status": "validated-metadata-only",
+      "pointersUnchanged": true,
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+        "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+        "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+        "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+      },
+      "metadataRef": {
+        "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+        "schemaVersion": "geography-metadata-ref-v1"
+      },
+      "manifest": {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+        "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+        "byteLength": 1115
+      },
+      "checks": {
+        "exactCatalogProvinceSet": true,
+        "sourceCountryMatches": true,
+        "rawSourceAndParentJoins": true,
+        "knownSourceMembershipComplete": true,
+        "unknownParentsRemainNull": true,
+        "coarsePrecisionPreserved": true,
+        "noUnverifiedCompleteCoverage": true,
+        "commonSchemaAndContentRoot": true
+      },
+      "observedCounts": {
+        "countries": 247,
+        "provinces": 8004,
+        "states": 4201,
+        "sourceRegions": 7399,
+        "fine": 3793,
+        "coarse": 4169,
+        "residual": 42,
+        "sourceLinked": 7935,
+        "sourceFree": 69,
+        "unassignedParents": 1436
+      },
+      "administrativeTruthClaim": false,
+      "execution": {
+        "path": ".tmp/prompt21/main/baseline-metadata-20261104t013500z/execution.json",
+        "sha256": "af40d820423317b2445cdcded6fc2c23ea4269b591b48294cf1b5b413188dd38",
+        "byteLength": 1136
+      },
+      "result": {
+        "path": ".tmp/prompt21/main/baseline-metadata-20261104t013500z/results/metadata.json",
+        "sha256": "a433e517cc00d4103113384fd5eaa2f8329b2602b72d45e8404cd0930e9ba2fb",
+        "byteLength": 1965
+      }
+    },
+    "preparationMetadata": {
+      "runRoot": ".tmp/prompt21/country-prep-20261104t011700z/21-07-metadata-20261104",
+      "command": "node scripts/workspaces/run-verification.mjs --workspace-key country-prep-20261104t011700z --run-id 21-07-metadata-20261104 --mode metadata",
+      "startedAt": "2026-11-04T01:35:04.422Z",
+      "finishedAt": "2026-11-04T01:35:24.689Z",
+      "exitCode": 0,
+      "status": "validated-metadata-only",
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+        "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+        "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+        "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+      },
+      "metadataRef": {
+        "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+        "schemaVersion": "geography-metadata-ref-v1"
+      },
+      "checks": {
+        "exactCatalogProvinceSet": true,
+        "sourceCountryMatches": true,
+        "rawSourceAndParentJoins": true,
+        "knownSourceMembershipComplete": true,
+        "unknownParentsRemainNull": true,
+        "coarsePrecisionPreserved": true,
+        "noUnverifiedCompleteCoverage": true,
+        "commonSchemaAndContentRoot": true
+      },
+      "artifacts": [
+        {
+          "path": ".tmp/prompt21/country-prep-20261104t011700z/21-07-metadata-20261104/execution.json",
+          "sha256": "3ea041081fdaeae41f6114865a13192b4dd5192bdfa65f44ab83f00e51bdb044",
+          "byteLength": 1315
+        },
+        {
+          "path": ".tmp/prompt21/country-prep-20261104t011700z/21-07-metadata-20261104/results/metadata.json",
+          "sha256": "a433e517cc00d4103113384fd5eaa2f8329b2602b72d45e8404cd0930e9ba2fb",
+          "byteLength": 1965
+        }
+      ]
+    },
+    "priorFixtureFailures": {
+      "file": "src/lib/world/operational-mixed-membership.test.ts",
+      "previousFailures": 4,
+      "currently": {
+        "file": "src/lib/world/operational-mixed-membership.test.ts",
+        "status": "passed",
+        "tests": 6,
+        "failed": []
+      },
+      "explanation": "21-05 repaired the edge-index fixture; the final merged B1 run executes all six membership/lineage tests successfully."
+    },
+    "evidence": ".tmp/prompt21/21-07-20261104/baseline/summary.json",
+    "noRerunsAfterPass": true
+  },
+  "actualFrontierTurns": {
+    "status": "reused-after-full-identity-verification",
+    "pinsChecked": 5828,
+    "matching": 5828,
+    "failures": [],
+    "dependencyVersions": {
+      "next": "16.3.0",
+      "typescript": "5.9.3",
+      "zod": "4.4.3",
+      "zustand": "5.0.14"
+    },
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "evidence": {
+      "path": ".tmp/prompt21/21-05-20261104/frontiers-final.json",
+      "sha256": "bcea4970972e9e67b553f5c58eafbb37fbb5e44661d1e8be1e8d92379a010888",
+      "byteLength": 1346220
+    },
+    "summary": {
+      "required": 3,
+      "executed": 3,
+      "passed": 3,
+      "failed": 0,
+      "missingTargets": [],
+      "duplicateTargets": [],
+      "unexpected": []
+    },
+    "turns": [
+      {
+        "actor": "PRK",
+        "target": "KOR",
+        "executed": true,
+        "completed": true,
+        "passed": true,
+        "selectedCount": 1,
+        "changedCount": 1,
+        "undoRestoresWorld": true,
+        "redoRestoresWorld": true,
+        "simulationRestored": true,
+        "selectedAndOutsideObjectsPreservedInAllStages": true
+      },
+      {
+        "actor": "KOR",
+        "target": "PRK",
+        "executed": true,
+        "completed": true,
+        "passed": true,
+        "selectedCount": 1,
+        "changedCount": 1,
+        "undoRestoresWorld": true,
+        "redoRestoresWorld": true,
+        "simulationRestored": true,
+        "selectedAndOutsideObjectsPreservedInAllStages": true
+      },
+      {
+        "actor": "PRK",
+        "target": "CHN",
+        "executed": true,
+        "completed": true,
+        "passed": true,
+        "selectedCount": 1,
+        "changedCount": 1,
+        "undoRestoresWorld": true,
+        "redoRestoresWorld": true,
+        "simulationRestored": true,
+        "selectedAndOutsideObjectsPreservedInAllStages": true
+      }
+    ],
+    "newActualFrontierRun": false,
+    "reason": "Task21-07 permits reuse when consumed code/input pins match; every recorded consumed byte and dependency version is unchanged.",
+    "identityAudit": {
+      "path": ".tmp/prompt21/21-07-20261104/baseline/frontier-reuse.json",
+      "sha256": "927bd5901e8de338c2ae9580f48a64a66afdb8cb5e49690bbb4636c8518eb2ea",
+      "byteLength": 2925
+    },
+    "newTurnExecutionIn21_07": false,
+    "reuseReason": "All 5,828 actually consumed source/input pins, four installed dependency versions and complete catalog/metadata refs match the 21-05 final audit. Existing three-turn evidence was linked instead of rerunning identical probes."
+  },
+  "concurrency": {
+    "status": "passed",
+    "successfulPairCount": 1,
+    "actualTestPairExecutions": 1,
+    "representative": "src/lib/geography/country-metadata-input.test.ts",
+    "command": "node scripts/workspaces/run-verification.mjs --workspace-key parallel --run-id concurrent-20261104t013440z -- src/lib/geography/country-metadata-input.test.ts",
+    "sameRelativeRunPath": ".tmp/prompt21/parallel/concurrent-20261104t013440z",
+    "sameRelativeMarkerPath": ".tmp/prompt21/parallel/concurrent-20261104t013440z.marker.json",
+    "differentMarkerSignaturesRetained": true,
+    "actualWorkerOverlapMilliseconds": 2776,
+    "protectedPinCountPerSpace": 307,
+    "pointersAndAdoptedInputsUnchanged": true,
+    "spaces": [
+      {
+        "space": "main",
+        "startedAt": "2026-11-04T01:34:42.846Z",
+        "finishedAt": "2026-11-04T01:34:45.627Z",
+        "parentExitCode": 0,
+        "workerExitCode": 0,
+        "counts": {
+          "total": 28,
+          "passed": 28,
+          "failed": 0,
+          "pending": 0,
+          "files": 1
+        },
+        "rootCacheDir": ".tmp/prompt21/parallel/concurrent-20261104t013440z/vite-cache/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "projectCacheDirs": [
+          {
+            "project": "node-tools",
+            "path": ".tmp/prompt21/parallel/concurrent-20261104t013440z/vite-cache/vitest/8af8f2d1121558fd8e45a1a86a70e26b7a3858c4"
+          },
+          {
+            "project": "application",
+            "path": ".tmp/prompt21/parallel/concurrent-20261104t013440z/vite-cache/vitest/d2005cc206ccbfdedf2be43a200cb050c538bdb5"
+          }
+        ],
+        "osTmpdir": ".tmp/prompt21/parallel/concurrent-20261104t013440z/os-temp",
+        "actualVitestModuleCacheTempRoots": [
+          ".tmp/prompt21/parallel/concurrent-20261104t013440z/os-temp/hEd5CGQnXXMB1DKtM9GMs"
+        ],
+        "actualWriterEventCounts": {
+          "allObservedEvents": 63,
+          "actualToolEvents": 35,
+          "configuredViteCacheEvents": 0,
+          "actualToolOsTempEvents": 34,
+          "actualModuleCacheTempEvents": 33,
+          "actualVitestResultEvents": 1,
+          "allowedExistingParentMkdirEvents": 1,
+          "unexpectedWrites": 0
+        },
+        "markerSignature": "main-concurrent-20261104t013440z"
+      },
+      {
+        "space": "preparation",
+        "startedAt": "2026-11-04T01:34:42.851Z",
+        "finishedAt": "2026-11-04T01:34:45.721Z",
+        "parentExitCode": 0,
+        "workerExitCode": 0,
+        "counts": {
+          "total": 28,
+          "passed": 28,
+          "failed": 0,
+          "pending": 0,
+          "files": 1
+        },
+        "rootCacheDir": ".tmp/prompt21/parallel/concurrent-20261104t013440z/vite-cache/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "projectCacheDirs": [
+          {
+            "project": "node-tools",
+            "path": ".tmp/prompt21/parallel/concurrent-20261104t013440z/vite-cache/vitest/8af8f2d1121558fd8e45a1a86a70e26b7a3858c4"
+          },
+          {
+            "project": "application",
+            "path": ".tmp/prompt21/parallel/concurrent-20261104t013440z/vite-cache/vitest/d2005cc206ccbfdedf2be43a200cb050c538bdb5"
+          }
+        ],
+        "osTmpdir": ".tmp/prompt21/parallel/concurrent-20261104t013440z/os-temp",
+        "actualVitestModuleCacheTempRoots": [
+          ".tmp/prompt21/parallel/concurrent-20261104t013440z/os-temp/Yfh8ToEX4Ijb5bZQ3OEEg"
+        ],
+        "actualWriterEventCounts": {
+          "allObservedEvents": 63,
+          "actualToolEvents": 35,
+          "configuredViteCacheEvents": 0,
+          "actualToolOsTempEvents": 34,
+          "actualModuleCacheTempEvents": 33,
+          "actualVitestResultEvents": 1,
+          "allowedExistingParentMkdirEvents": 1,
+          "unexpectedWrites": 0
+        },
+        "markerSignature": "preparation-concurrent-20261104t013440z"
+      }
+    ],
+    "writerProof": "Child-only filesystem preloads record successful write/mkdir/rename/remove paths, timestamp, PID/thread and module caller without file contents. Detailed PIDs/stacks remain local. Each space had 33 actual Vitest module-cache path operations (one mkdir, 16 writes and 16 atomic renames) inside its own OS temp, plus actual result writing; unexpected/cross-worktree writes were zero.",
+    "configuredCachePolicy": "Vitest result cache disabled; configured Vite cache path has zero observed tool writes. Actual Vitest FileSystemModuleCache writes and atomic renames occur in each child OS temp and were observed by caller/PID/time.",
+    "instrumentation": "Read-only-to-behavior local child-only NODE_OPTIONS filesystem wrappers, successful path operations/PID/thread/time/caller only; no contents or secret environment values.",
+    "initialSetupFailure": {
+      "runId": "concurrent-20261104t013405z",
+      "testCollectionStarted": false,
+      "error": "MODULE_NOT_FOUND",
+      "cause": "Windows backslashes interpreted as NODE_OPTIONS escapes",
+      "correctedBy": "Forward-slash preload paths",
+      "evidence": ".tmp/prompt21/21-07-20261104/concurrency/failure.json"
+    },
+    "analysisCorrection": "The real successful pair was not rerun. Its first analysis incorrectly rejected the runner parent mkdir of its existing own-workspace .tmp/prompt21/parallel ancestor. Only that exact setup mkdir is now distinguished; no tool/result/cache writes escaped the run.",
+    "evidence": ".tmp/prompt21/21-07-20261104/concurrency/summary.json",
+    "fullWriterEvidence": ".tmp/prompt21/21-07-20261104/concurrency/result.json",
+    "failureClassification": "The initial preload path failure occurred before test collection and was corrected locally. It is distinct from test assertion failure. The successful pair was not re-executed for the analysis-only correction."
+  },
+  "relatedMainChangeExercise": {
+    "status": "passed",
+    "countryId": null,
+    "stage": "unassigned",
+    "exerciseBranches": [
+      "prompt21-exercise/integration-20261104t013843z",
+      "prompt21-exercise/preparation-20261104t013843z"
+    ],
+    "B1": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+    "B2": "ff1f5343badac48a4eda86da6f4dd9cf451b75fd",
+    "changedDependencyPins": [
+      {
+        "path": "scripts/workspaces/validate-country-handoff.cjs",
+        "before": {
+          "path": "scripts/workspaces/validate-country-handoff.cjs",
+          "sha256": "2fa412fe677ab012bac1170557f5db90bbae5ed2bb7cc2e78572e21fa6f589bb",
+          "byteLength": 18855
+        },
+        "after": {
+          "path": "scripts/workspaces/validate-country-handoff.cjs",
+          "sha256": "70b57d7bef5336b5bda4aeb2e8f40c95b029b29760f69bcbea0c49e69d643fe5",
+          "byteLength": 19021
+        }
+      },
+      {
+        "path": "scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "before": {
+          "path": "scripts/workspaces/validate-country-handoff.node-test.cjs",
+          "sha256": "2409e6e4c8013b393d56ac9eacc4cbb6e46fa3e3447a74bad90a605dd3d9f0da",
+          "byteLength": 14103
+        },
+        "after": {
+          "path": "scripts/workspaces/validate-country-handoff.node-test.cjs",
+          "sha256": "d2b6a3abc368cf54178ed6f4b3a2e0eff19203e956ca2220e406efdf498c31b1",
+          "byteLength": 14374
+        }
+      }
+    ],
+    "changedFiles": [
+      "scripts/workspaces/validate-country-handoff.cjs",
+      "scripts/workspaces/validate-country-handoff.node-test.cjs"
+    ],
+    "ruleChange": "Reject duplicate verification.check names; existing uniquely named records and the same unassigned workspace preparation remain valid. One regression test verifies duplicate rejection.",
+    "sourceScope": "Only synthetic workspace assignment evidence under .tmp; no real country source, input/output, hierarchy, geometry or future IDs.",
+    "originalSyntheticWorkspaceArtifact": {
+      "path": ".tmp/prompt21/exercise/20261104t013843z/workspace-state.json",
+      "sha256": "841ebd2a6bb0a9b4b4f1a66e7b0367632abd6538e28a752f730a2bdb58d61909",
+      "byteLength": 154
+    },
+    "H1": {
+      "artifact": {
+        "path": ".tmp/prompt21/exercise/20261104t013843z/H1.json",
+        "sha256": "f373edf517d1430f6e09e17441fd2304bfb33c7bb550e05d7fe93ed3bfda36ca",
+        "byteLength": 14926
+      },
+      "baseCommit": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+      "dependencyCount": 30,
+      "tests": {
+        "tests": 12,
+        "pass": 12,
+        "fail": 0,
+        "skipped": 0
+      },
+      "acceptedAtB1": "accepted-unassigned",
+      "preparationHeadAtB2Rejection": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+      "headEvidence": "Driver asserts preparation HEAD remains B1 before and after the integration B2 commit; the preparation branch reflog records creation at B1 followed by later normal merge to B2."
+    },
+    "negativeEnvelopeCases": [
+      {
+        "case": "stale-ref",
+        "result": {
+          "ok": false,
+          "diagnostics": [
+            {
+              "code": "HANDOFF_STALE_REF",
+              "message": "Full active catalogRef/metadataRef changed; synchronize and revalidate"
+            }
+          ]
+        }
+      },
+      {
+        "case": "schema-mismatch",
+        "result": {
+          "ok": false,
+          "diagnostics": [
+            {
+              "code": "HANDOFF_SCHEMA",
+              "message": "Workspace/geography contract versions differ"
+            }
+          ]
+        }
+      },
+      {
+        "case": "wrong-country",
+        "result": {
+          "ok": false,
+          "diagnostics": [
+            {
+              "code": "HANDOFF_COUNTRY",
+              "message": "Submission belongs to a different assigned country"
+            }
+          ]
+        }
+      }
+    ],
+    "actualH1RejectionAfterCommittedB2": {
+      "ok": false,
+      "diagnostics": [
+        {
+          "code": "HANDOFF_REVALIDATION",
+          "message": "Consumed code/input pins changed or are missing; synchronize and rerun affected checks"
+        }
+      ]
+    },
+    "distinctionFromRefOnlyNegativeCase": "H1 refs/contracts were retained. A fresh B2 integration capture observed two real committed dependency byte changes, producing HANDOFF_REVALIDATION before any HEAD impact-review gate.",
+    "compatibleRuleProof": {
+      "duplicateWasAcceptedAtB1": "accepted-unassigned",
+      "duplicateWithRefreshedPinsRejectedByB2": "HANDOFF_EVIDENCE",
+      "integrationB2Tests": {
+        "tests": 13,
+        "pass": 13,
+        "fail": 0,
+        "skipped": 0
+      },
+      "targetedEslint": {
+        "command": "node node_modules/eslint/bin/eslint.js scripts/workspaces/validate-country-handoff.cjs scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/21-07-20261104/b2-targeted-lint.json"
+      }
+    },
+    "synchronization": {
+      "method": "Normal git merge --ff-only B2 on the preparation exercise branch",
+      "before": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+      "after": "ff1f5343badac48a4eda86da6f4dd9cf451b75fd",
+      "sourceBytesPreserved": true
+    },
+    "H2": {
+      "artifact": {
+        "path": ".tmp/prompt21/exercise/20261104t013843z/H2.json",
+        "sha256": "c0e624a0d637828892c17f473cfad1a1aed617c33e86f6c7377069f966d6de64",
+        "byteLength": 14926
+      },
+      "baseCommit": "ff1f5343badac48a4eda86da6f4dd9cf451b75fd",
+      "dependencyCount": 30,
+      "rerunTests": {
+        "tests": 13,
+        "pass": 13,
+        "fail": 0,
+        "skipped": 0
+      },
+      "acceptedInPreparation": "accepted-unassigned",
+      "acceptedInIntegration": "accepted-unassigned",
+      "actualVerificationCommand": "node --test --test-reporter=tap scripts/workspaces/validate-country-handoff.node-test.cjs",
+      "verificationCodeCommit": "ff1f5343badac48a4eda86da6f4dd9cf451b75fd"
+    },
+    "returnedToCommonDevelopment": {
+      "mainBranch": "main",
+      "preparationBranch": "country-prep/20261104t011700z",
+      "restoredSourceCommit": "e75977b1db93c6a10c1c1c8a64fd9f2c487e891d",
+      "exerciseBranchesPreserved": true,
+      "B2ProductionRuleAppliedToMain": false
+    },
+    "commands": [
+      {
+        "name": "baseline-h1",
+        "space": "preparation",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs capture --dependencies .tmp/prompt21/exercise/20261104t013843z/dependencies.json",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:38:45.309Z",
+        "finishedAt": "2026-11-04T01:38:46.128Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/baseline-h1/execution.json"
+      },
+      {
+        "name": "h1-tests",
+        "space": "preparation",
+        "command": "node --test --test-reporter=tap scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:38:46.132Z",
+        "finishedAt": "2026-11-04T01:39:12.925Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/h1-tests/execution.json"
+      },
+      {
+        "name": "h1-preparation-accepted",
+        "space": "preparation",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/H1.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-h1.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:12.931Z",
+        "finishedAt": "2026-11-04T01:39:13.920Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/h1-preparation-accepted/execution.json"
+      },
+      {
+        "name": "baseline-main-h1",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs capture --dependencies .tmp/prompt21/exercise/20261104t013843z/dependencies.json",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:13.928Z",
+        "finishedAt": "2026-11-04T01:39:14.810Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/baseline-main-h1/execution.json"
+      },
+      {
+        "name": "h1-integration-accepted",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/H1.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-main-h1.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:14.814Z",
+        "finishedAt": "2026-11-04T01:39:15.750Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/h1-integration-accepted/execution.json"
+      },
+      {
+        "name": "stale-ref",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/stale-ref.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-main-h1.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:15.754Z",
+        "finishedAt": "2026-11-04T01:39:16.582Z",
+        "exitCode": 1,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/stale-ref/execution.json"
+      },
+      {
+        "name": "schema-mismatch",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/schema-mismatch.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-main-h1.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:16.586Z",
+        "finishedAt": "2026-11-04T01:39:17.492Z",
+        "exitCode": 1,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/schema-mismatch/execution.json"
+      },
+      {
+        "name": "wrong-country",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/wrong-country.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-main-h1.json --country KOR",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:17.495Z",
+        "finishedAt": "2026-11-04T01:39:18.321Z",
+        "exitCode": 1,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/wrong-country/execution.json"
+      },
+      {
+        "name": "duplicate-before-compatible-rule",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/duplicate-verification.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-main-h1.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:18.324Z",
+        "finishedAt": "2026-11-04T01:39:19.409Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/duplicate-before-compatible-rule/execution.json"
+      },
+      {
+        "name": "baseline-b2",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs capture --dependencies .tmp/prompt21/exercise/20261104t013843z/dependencies.json",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:33.997Z",
+        "finishedAt": "2026-11-04T01:39:34.836Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/baseline-b2/execution.json"
+      },
+      {
+        "name": "h1-rejected-after-b2",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/H1.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-b2.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:34.840Z",
+        "finishedAt": "2026-11-04T01:39:35.615Z",
+        "exitCode": 1,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/h1-rejected-after-b2/execution.json"
+      },
+      {
+        "name": "duplicate-old-pins-after-b2",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/duplicate-verification.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-b2.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:35.618Z",
+        "finishedAt": "2026-11-04T01:39:36.383Z",
+        "exitCode": 1,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/duplicate-old-pins-after-b2/execution.json"
+      },
+      {
+        "name": "duplicate-new-rule",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/duplicate-refreshed-pins.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-b2.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:36.386Z",
+        "finishedAt": "2026-11-04T01:39:37.231Z",
+        "exitCode": 1,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/duplicate-new-rule/execution.json"
+      },
+      {
+        "name": "integration-b2-tests",
+        "space": "integration",
+        "command": "node --test --test-reporter=tap scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:39:37.234Z",
+        "finishedAt": "2026-11-04T01:40:06.118Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/integration-b2-tests/execution.json"
+      },
+      {
+        "name": "baseline-prep-b2",
+        "space": "preparation",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs capture --dependencies .tmp/prompt21/exercise/20261104t013843z/dependencies.json",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:40:37.312Z",
+        "finishedAt": "2026-11-04T01:40:38.093Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/baseline-prep-b2/execution.json"
+      },
+      {
+        "name": "h2-tests",
+        "space": "preparation",
+        "command": "node --test --test-reporter=tap scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:40:38.098Z",
+        "finishedAt": "2026-11-04T01:41:06.326Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/h2-tests/execution.json"
+      },
+      {
+        "name": "h2-preparation-accepted",
+        "space": "preparation",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/H2.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-prep-b2.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:41:06.334Z",
+        "finishedAt": "2026-11-04T01:41:07.396Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/h2-preparation-accepted/execution.json"
+      },
+      {
+        "name": "baseline-integration-h2",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs capture --dependencies .tmp/prompt21/exercise/20261104t013843z/dependencies.json",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:41:07.401Z",
+        "finishedAt": "2026-11-04T01:41:08.331Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/baseline-integration-h2/execution.json"
+      },
+      {
+        "name": "h2-integration-accepted",
+        "space": "integration",
+        "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/exercise/20261104t013843z/H2.json --baseline .tmp/prompt21/exercise/20261104t013843z/baseline-integration-h2.json --country null",
+        "cwd": ".",
+        "startedAt": "2026-11-04T01:41:08.336Z",
+        "finishedAt": "2026-11-04T01:41:09.442Z",
+        "exitCode": 0,
+        "evidence": ".tmp/prompt21/exercise/20261104t013843z/commands/h2-integration-accepted/execution.json"
+      }
+    ],
+    "evidence": ".tmp/prompt21/21-07-20261104/exercise-state.json",
+    "gitHistoryEvidence": ".tmp/prompt21/21-07-20261104/exercise-git-history.json",
+    "independentReview": ".tmp/prompt21/21-07-20261104/exercise-design/exercise-review.json"
+  },
+  "preserved": {
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "activePointers": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251
+      },
+      {
+        "path": "data/runtime/geography/current.json",
+        "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8",
+        "byteLength": 1218
+      }
+    ],
+    "adoptedInputAndProducerCodePinsUnchanged": true,
+    "geometryTopologyIdsOrdinalsMembershipAndSeedLineageChanged": false,
+    "activePointerWrites": 0,
+    "realGameOrCheckpointContentsRead": false,
+    "runningServersStopped": 0,
+    "serversStarted": 0,
+    "externalAICalls": 0,
+    "remotePushOrDeployment": 0,
+    "countryResearchDownloadGenerationOrActivation": false,
+    "partialUnsupportedNullParentsAndCoarseResidualPreserved": true
+  },
+  "notExecuted": [
+    "Next build/API/browser/server because no persistent runtime/build settings changed.",
+    "New country source research/candidate generation/global publication.",
+    "21-08 final completion/handoff report."
+  ],
+  "localEvidence": [
+    ".tmp/prompt21/21-07-20261104/baseline/summary.json",
+    ".tmp/prompt21/21-07-20261104/baseline/frontier-reuse.json",
+    ".tmp/prompt21/21-07-20261104/concurrency/summary.json",
+    ".tmp/prompt21/21-07-20261104/concurrency/result.json",
+    ".tmp/prompt21/21-07-20261104/exercise-state.json",
+    ".tmp/prompt21/21-07-20261104/exercise-git-history.json",
+    ".tmp/prompt21/21-07-20261104/exercise-design/exercise-review.json",
+    ".tmp/prompt21/21-07-20261104/b2-targeted-lint.json"
+  ],
+  "remaining": "21-08 records overall completion and next-work handoff. New country preparation requires an actual assigned CountryId; generator/publication generalization remains follow-up scope."
+}
