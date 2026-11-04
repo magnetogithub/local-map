@@ -16,7 +16,7 @@ const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 function fixture(changeParents?: (parents: {administrative: Record<string, unknown>[]; previous: Record<string, unknown>[]}) => void) {
   const assets = new Map<string, Buffer>(), territoryOrder = [id('1'), id('2'), id('3')];
   const pin = (file: string, value: unknown) => {
-    const raw = encode(value), bytes = file.endsWith('.gz') ? gzipSync(raw) : raw;
+    const raw = Buffer.isBuffer(value) ? value : encode(value), bytes = file.endsWith('.gz') ? gzipSync(raw) : raw;
     assets.set(`${OPERATIONAL_CATALOG_PATHS.delivery}/${file}`, bytes);
     return {path: file, sha256: sha(bytes), byteLength: bytes.length};
   };
@@ -30,13 +30,22 @@ function fixture(changeParents?: (parents: {administrative: Record<string, unkno
   const metadata = pin('metadata/countries/KOR.json.gz', {countryId: 'KOR', columns: ['cellOrdinal', 'cellId', 'administrativeOrdinal', 'previousParentOrdinal'],
     rows: [[1, territoryOrder[0], 1, 1], [2, territoryOrder[1], 2, 2], [3, territoryOrder[2], 1, 1]]});
   const detail = pin('detail/countries/KOR.geojson.gz', {type: 'FeatureCollection', features: []});
+  const edge = pin('detail/topology/000.json.gz', {schemaVersion: 'operational-world-delivery-v2', edges: [{
+    id: `edge:operational:${'f'.repeat(64)}`, ordinal: 1, left: 1, right: 2, lengthKm: 1, boundaryClass: 'administrative',
+    flags: {positiveAdjacency: true, country: false, administrative: true, previous: true, residual: false},
+    geometry: {type: 'LineString', coordinates: [[0, 0], [0, 1]]},
+  }]});
+  const incidence = Buffer.alloc(8); incidence.writeUInt32LE(1, 0); incidence.writeUInt32LE(2, 4);
+  pin('metadata/edge-incidence.bin.gz', incidence);
+  pin('adjacency.json.gz', {cellCount: 3, offsets: [0, 1, 2, 2], neighbors: [2, 1]});
   pin('metadata/parents.json.gz', parents);
   const ref = {catalogVersion: OPERATIONAL_CATALOG_VERSION, geometryRoot: 'a'.repeat(64), topologyRoot: 'b'.repeat(64), renderArtifactRoot: 'c'.repeat(64),
     manifestPath: `/data/territory-catalog/${OPERATIONAL_CATALOG_VERSION}/manifest.json`};
   pin('catalog.json', {schemaVersion: 'operational-catalog-v1', catalogRef: ref,
     indexRoots: {catalogOrder: sha(encode(territoryOrder)), administrativeMembership: 'd'.repeat(64), previousParent: 'e'.repeat(64)},
     counts: {countries: 1, cells: 3, edges: 1, administrativeParents: 2, previousParents: 2}, countryOrder: ['KOR']});
-  pin('detail-index.json', {schemaVersion: 'operational-world-delivery-v2', ref, countries: [{countryId: 'KOR', cellCount: 3, metadata, detail}], edgeDetails: []});
+  pin('detail-index.json', {schemaVersion: 'operational-world-delivery-v2', ref, countries: [{countryId: 'KOR', cellCount: 3, metadata, detail}],
+    edgeDetails: [{shard: 'topology/000.json.gz', firstOrdinal: 1, count: 1, artifact: edge}]});
   const artifacts = [...assets].map(([file, bytes]) => ({path: file.slice(OPERATIONAL_CATALOG_PATHS.delivery.length + 1), sha256: sha(bytes), byteLength: bytes.length}));
   const index = pin('artifact-index.json', {schemaVersion: 'operational-world-delivery-v2', artifacts});
   assets.set(OPERATIONAL_CATALOG_RUNTIME_PATHS.current, encode({catalogVersion: OPERATIONAL_CATALOG_VERSION, root: OPERATIONAL_CATALOG_PATHS.delivery, index}));
@@ -53,6 +62,7 @@ describe('mixed operational catalog membership and seed lineage', () => {
     expect(catalog.previousMembership(id('7')).map(c => c.ordinal)).toEqual([1, 3]);
     expect(catalog.administrativeMembership('coarse:KOR:parent-2').map(c => c.ordinal)).toEqual([2]);
     expect(catalog.worldContract().territoryOrder).toEqual([id('1'), id('2'), id('3')]);
+    expect(catalog.sharedBoundary(1, 2)).toEqual({edgeOrdinal: 1, start: [0, 0], end: [0, 1]});
   });
 
   it('inherits owner/controller through the coarse previous parent while keeping each new ID', () => {

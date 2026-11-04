@@ -190,3 +190,6 @@ reports/simulation-territorial-issues-20261103/report.md text eol=lf
 # Shared workspace contracts keep the same bytes in every preparation checkout.
 docs/development/workspace-ownership-v1.md text eol=lf
 docs/development/workspace-layout-v1.md text eol=lf
+docs/development/verification-baseline-v1.md text eol=lf
+scripts/workspaces/audit-current-frontiers.cjs text eol=lf
+scripts/workspaces/audit-current-frontiers.node-test.cjs text eol=lf
