@@ -1,0 +1,308 @@
+# PROMPT 22 — 국가 adapter와 최신 기준선 기반 증분 후보 생성 일반화
+
+작성 기준은 2026-11-04의 현재 저장소다.
+
+이 문서는 전체 계획의 4번인 “국가 추가 경로의 고정 조건 일반화”를 구현하는 실행 프롬프트다. 프롬프트 20의 state·province 계약과 21의 작업 공간·검증·인계 체계를 재사용한다. 최종 산출물은 최신 활성 자료를 기준으로 대상국만 교체한 검증된 국가 후보와 통합용 증분 입력 묶음이다.
+
+프롬프트 작성 요청에는 이 문서만 작성한다. “22 실행”을 요청받으면 5절의 의존관계에 따라 22-01부터 22-09까지 구현·검증한다. “22-XX만 실행”은 해당 태스크와 검증된 선행 산출물을 대상으로 한다. “22번 다음 태스크”는 실제 완료 근거를 읽고 실행 가능한 첫 미완료 태스크 하나를 수행한다.
+
+문서의 존재와 구현 완료를 구별한다. 실행 과정의 공통 코드 합류와 작업트리 동기화에는 정상적인 로컬 Git 절차를 사용하고 기존 사용자 변경을 보존한다. 태스크 순서는 이 문서의 다이어그램에 포함한다.
+
+## 1. 목표와 완료 범위
+
+목표는 다음 다섯 가지다.
+
+1. 국가의 경계 형상을 생성하는 adapter를 등록하고 선택하는 공통 진입점을 만든다.
+2. 현재 활성 카탈로그와 그 실제 생성 입력을 검증해 기준선으로 고정하고, coarse·fine·residual을 포함한 현재 대상국의 선행 영토를 읽는다.
+3. 대상국의 후보만 교체하는 증분 입력을 만들고 비대상국의 영토·원본·계층·lineage와 기존 fine 국가를 보존한다.
+4. 국가·실행별 독립 출력, 실패·재시도·동시 생성과 오래된 기준선의 처리를 같은 경로로 제공한다.
+5. 후보의 독립 검증과 21의 인계 절차를 연결해 23의 전역 통합 담당자에게 넘긴다.
+
+22의 완료는 지정 국가의 자료와 지원되는 adapter를 연결하면 같은 후보 생성·검증·인계 경로를 사용할 수 있는 상태다. adapter가 지원하는 원본 프로필·작업 모드·한계를 명시하고 실제 검사한 범위를 보고한다.
+
+전체 계획의 5번은 23에서 수행한다. 공유 국경의 최종 정합, 전역 topology·ordinal·타일 조립, 중국 표시 자료 재연결, 최종 catalog·geography 생산과 활성 전환, 게임 보존·새 버전 부팅이 해당한다. 22는 이 단계에 필요한 후보·접경 영향·독립 증거와 입력 계약을 확정한다.
+
+전체 계획의 6번은 24에서 수행한다. 실제 새 국가를 선정해 원본 조사부터 후보 생성·최신 메인 합류·정상 플레이까지 확인한다. 22에서 사용하는 기존 국가 이름은 회귀 검사 대상이다.
+
+대상국이 지정되지 않은 “22 실행”은 공통 경로 구현과 기존 채택 자료·작은 합성 fixture 검증으로 진행한다. 기존 KOR·PRK·CHN의 실제 입력을 읽어 adapter 해석과 기준선 보존을 확인하고, 작은 합성 국가·원본·adapter로 생성 경로를 끝까지 검사한다. 합성 adapter는 테스트 registry에만 둔다. 실제 국가별 새 자료 채택과 지원 범위는 독립적으로 보고한다.
+
+실제 국가가 지정되면 prompts/COUNTRY_MICRO_BOUNDARY_GUIDE.txt의 원본·계층·시점·라이선스 조사부터 시작한다. 기존 채택 입력을 재사용하는 회귀 검증은 그 입력의 pin과 확인된 한계를 유지한다.
+
+## 2. 유지할 계약과 현재 제약
+
+- AGENTS.md와 현재 git status·브랜치·worktree를 확인한다. Next 관련 코드를 수정할 때는 설치된 Next 문서를 먼저 읽는다.
+- State의 stateId와 province의 기존 TerritoryId를 유지한다. 이름·별칭의 중복을 허용하고 ID로 객체와 membership을 구별한다. 후보 단계의 기존 localId와 최종 TerritoryId·전역 ordinal의 확정 단계를 구분한다.
+- sourceCountryId·공식 state 부모·현재 owner/controller는 각자의 의미를 유지한다. 생성 입력은 정적 지리·선행 관계를 사용하고 실제 사용자 게임의 점령 상태를 수집하지 않는다.
+- 부모 미확정 null, partial·unsupported, coarse·residual·source-free와 파생 표시 이름을 공통 계약대로 보존한다. 현재 셀 경계로 잘랐다는 사실이 공식 state 부모를 입증하지 않는다.
+- 현재 기준은 data/runtime/operational-catalog/current.json에서 읽는다. catalogVersion·geometryRoot·topologyRoot·renderArtifactRoot·manifestPath 전체와 실제 index·descriptor·provenance를 대조한다.
+- data/runtime/geography/current.json의 활성 metadataRef와 manifest pin도 묶어 읽는다. 단일국 후보의 자체 content identity와 활성 전체 metadataRef를 구별한다.
+- 현재 활성 fine 국가 집합과 원본·계층 pin은 실제 provenance·채택 입력에서 유도한다. KOR/PRK/CHN 목록이나 과거 국가·셀 개수를 공통 성공 조건으로 복사하지 않는다.
+- 기존 게임·checkpoint·서버·활성 포인터를 보존한다. 이번 실행의 쓰기는 국가·실행별 후보와 개발·검증 산출물에 한정한다.
+- 공통 registry·schema·설정의 변경과 최종 합류는 공통 담당자가 순차 소유한다. 국가 담당자는 자기 자료·adapter 전용 파일·출력과 증거를 소유한다.
+- 프롬프트 작성만 요청받은 세션에서는 구현·다운로드·후보 생성·작업트리 생성·서버 실행·완료 보고를 시작하지 않는다.
+- 실제 외부 AI·유료 API·원격 배포·push와 다음 프롬프트 자동 실행은 별도 요청에 따른다.
+
+현재 코드는 다음 제약을 가진다. 실행 시 실제 호출과 소비 파일을 다시 확인한다.
+
+| 현재 연결 | 확인할 제약과 재사용 지점 |
+| --- | --- |
+| scripts/geography/country-adapters.ts | 기존 셀의 이름·부모·원본 metadata adapter다. 22에서는 경계 형상을 생성하는 adapter의 등록·분기와 연결한다. |
+| scripts/prompt19-country-core.mjs | KOR/PRK enum과 coarseParents 전제, source-lock·feature schema가 있다. geometry·source trace·local topology 로직을 검토한다. |
+| scripts/prepare-prompt19-country.mjs | 역사적 handoff의 commonGenerator.files를 byte 검증하고 고정 coarse predecessor·원본·출력 경로를 요구한다. |
+| scripts/prompt19-country-files.mjs | KOR/PRK 출력 제한이 있다. 입력 scope·실제 경로·출력 부모와 symlink 검사 로직을 재사용할 수 있다. |
+| scripts/prepare-prompt19-joined-candidates.mjs | KOR/PRK 공동 처리와 baseline-v1·coarse-world-v1 복원을 전제로 한다. |
+| scripts/chn-2020/incremental-coordinator.mjs | CHN·원본 프로필·fine 목록·receipt·Python·출력 경로가 고정돼 있다. 현재 bundle의 대상국 교체와 seed 전이 로직을 재사용할 수 있다. |
+| 위 CHN coordinator의 neighborFeatures·edges | 비대상국 feature를 바꾸고 접촉 edge를 조립한 뒤 세계 topology PASS를 기록한다. 이 중 최종 공유 국경 조립은 23의 책임이다. |
+| scripts/prepare-prompt19-mixed-world.mjs | --check-input에서도 CHN 전용 증분 조건과 완성된 topology·coverage 증거를 요구한다. 전역 패키징·발행 경로다. |
+
+기존 생성기·원본이 어떤 현재·역사적 소비자에 pin돼 있는지 조사한다. 특히 기존 preparePrompt19Country는 고정 handoff의 생성기 bytes를 검증한다. 새 버전의 공통 진입점·등록 계층을 추가하고 검증된 geometry·validator를 재사용하는 방식을 우선한다. 기존 entry point를 바꿀 필요가 있으면 실제 호출자의 인자·출력·거부 조건과 버전 전환을 먼저 정한다. 역사적 source-lock이나 proof의 기대 hash를 새 코드 값으로 덮어쓰지 않는다.
+
+## 3. 입력·후보·증분 인계 계약
+
+22-02에서 현재 표현을 재사용해 최소 schema·함수 인터페이스·입출력 규칙을 확정한다. 아래 항목의 의미를 만족하는 구체적인 필드와 파일 경로를 선택한다. 새 CLI와 타입은 해당 태스크에서 구현하는 산출물이며 현재 구현된 명령으로 기록하지 않는다.
+
+### 3.1 Adapter와 기준선
+
+| 대상 | 필요한 정보와 규칙 |
+| --- | --- |
+| adapter 등록 | 기존 CountryId, adapter ID·버전, 채택 원본 프로필·시점, 입력 해석·후보 생성 함수, 필요한 코드·입력 pin, 지원 모드와 한계 |
+| 국가 선택 | 실제 기준선에 등록된 CountryId와 명시적으로 등록된 geometry adapter를 함께 검사. 미등록·중복 등록·다른 국가 자료를 거부 |
+| 최신 기준선 | 전체 catalogRef·활성 metadataRef, 두 pointer의 bytes, 실제 index·descriptor·provenance와 canonical 입력 bundle pin |
+| 현재 대상국 | 실제 target cell·형상·행정 소속·이전 부모·source-lock·계층·선행 seed 연결. coarse 전용 자료로 되돌려 읽지 않음 |
+| 실행 컨텍스트 | 독립 작업트리·국가·runId·검증된 입력 경로·지정 출력 경로·프로세스별 temp/cache, 기준선 snapshot |
+
+adapter는 전달받은 컨텍스트와 검증한 자료를 사용한다. registry import나 adapter 선택만으로 생성기·Python·네트워크·고정 receipt 쓰기가 시작되지 않게 한다. 실제 생성에 필요한 언어·패키지는 프로필의 실행 의존성으로 확인한다.
+
+특정 채택 배포본의 검증된 feature 수·국가별 전처리 정책은 해당 프로필에 둔다. 공통 코드의 국가 허용 조건이나 전 세계 고정 개수로 확장하지 않는다. 다른 자료·시점으로 프로필을 바꾸면 새 입력 pin과 검증 근거를 사용한다.
+
+### 3.2 국가 후보와 현재 선행 영토
+
+- 원본 sourceId·version·feature/component identity, 검증한 state 부모 또는 명시적 미확정 상태, 이름·별칭·원본 근거를 유지한다.
+- 후보 localId는 기존 정책을 재사용해 국가·원본·형상 등 실제 입력으로 결정한다. 이름·배열 순서·현재 ordinal로 identity를 만들지 않는다.
+- baselineCellIds와 동등한 선행 연결은 고정한 현재 대상국의 실제 셀만 가리킨다. coarse → fine, fine → fine, 여러 선행 영토의 결합을 같은 계약으로 표현한다.
+- 후보와 현재 셀의 검증된 면적 교차·분할 근거로 전체 선행 집합을 유도한다. 양의 면적 교차·면적 회계와 기존 geometry 수치 정책을 기록하고 독립 검증한다. 같은 나라의 공간적으로 무관한 셀이나 선 접촉·최근접·대표 ID만 근거로 넣은 연결은 거부한다.
+- 공식 state 부모, 현재 셀의 분할 경계, previousParentId와 seedParentIds의 역할을 구별한다. 원본 지역 하나가 후보 셀 여러 개에 연결되는 경우도 보존한다.
+- 후보의 선행 셀에서 이전 부모·seedParentIds까지 전이 연결을 빠짐없이 추적한다. 단일 대표 seed만 임의 선택해 나머지 연결을 버리지 않는다.
+- 기존 source·owner/controller 합의 검증은 작은 승계 fixture에서 재사용한다. 후보 생성 중 현재 사용자 게임을 읽거나 자동 이관하지 않는다.
+- 후보는 대상국 envelope의 섬·hole·해안·국경을 보존하고 중복·누락·초과 면적을 검사한다. source-free·미확정 영역은 원인·형상·면적·처리 정책을 기록한다.
+- 검증된 원본 정합과 게임용 보정은 국가 지침의 근거·ledger를 유지한다. geometry의 전체 면적 회계와 공식 행정 소속·범위의 완전성을 별도로 검증한다.
+- 국가 내부의 local topology·adjacency와 공유 국경의 최종 전역 연결 상태를 구분한다. 실제로 검증한 local 결과만 PASS로 기록한다.
+
+### 3.3 증분 입력과 23의 전역 통합 경계
+
+증분 입력은 다음 내용을 가진 통합 대기 자료로 정의한다.
+
+1. 고정한 최신 base의 전체 참조·pointer·canonical bundle·코드·원본 pin.
+2. 보존할 비대상국의 feature·record·부모·lineage·원본·계층·이름 자료 또는 이를 정확히 고정하는 참조와 보존 증거.
+3. 대상국 replacement 후보, 원본·state·선행 영토 연결, 후보 local topology와 독립 검증 결과.
+4. 대상국에 접하는 기존 edge·이웃 식별자와 접경 영향, 필요한 collinear-node·공유 국경 제안.
+5. 23에서 수행할 전역 topology·최종 ID/ordinal 연결·타일·CHN 표시·전체 metadata·활성 전환 검사 목록.
+
+비대상국의 기존 객체·형상·부모·원본·lineage는 보존한다. 필요한 이웃 node 제안은 별도 항목으로 제출하고 비대상국 원본을 이 단계에서 교체하지 않는다. 대상국에 접하던 옛 전역 edge는 base의 근거로 남기며 새 후보 local edge와 구별한다.
+
+새 전역 edge가 아직 완성되지 않은 경우 명시적인 integration-pending 상태를 사용한다. 기존 완결 세계 schema인 prompt19-joined-world-input-v1에 누락된 edge나 topology.pass:true를 넣어 기존 packager에 통과시키지 않는다. 22의 후보 전용 읽기 verifier와 완료 상태를 사용하고, 23에서 완성된 발행 입력을 만든다.
+
+localId와 최종 TerritoryId의 대응 및 전역 ordinal 확정은 실제 수행 단계에 기록한다. 구현 내부에서 기존 noder가 임시 catalog ID를 사용해도 이를 활성 영토 identity로 제출하지 않는다. 비대상국의 기존 최종 ID는 그대로 보존한다.
+
+### 3.4 출력·재시도·기준선 변경
+
+- 21의 국가·실행별 경로 규칙을 재사용한다. 기본 후보 경로는 data/derived/country-prep/<CountryId>/<runId>/candidate/와 같은 자기 소유 경로로 정한다.
+- 원본·source-lock·계층·code pin은 읽기 입력이며 출력과 분리한다. 실제 경로와 가장 가까운 기존 부모를 검사해 다른 국가·공통 runtime 경로로의 쓰기나 symlink 탈출을 거부한다.
+- 실행별 staging에서 파일을 완성하고 독립 검증한 뒤 완료 manifest를 마지막에 확정한다. 부분 생성·실패 디렉터리의 존재를 완료 증거로 사용하지 않는다.
+- 같은 출력에 재시도할 때는 완성 manifest·전체 artifact pin·기준선·코드가 모두 일치하는 경우에만 완료 결과를 재사용한다. 충돌·부분 생성은 명시적으로 거부하거나 새 runId로 이어간다. 다른 실행의 자료를 삭제하지 않는다.
+- 두 국가 또는 같은 국가의 두 실행은 별도 출력으로 병렬 수행한다. content identity가 같아도 미완성 자료를 완성 출력으로 수락하지 않는다.
+- 생성 시작과 완료 manifest 확정 직전에 pointer·소비 입력·코드 pin을 대조한다. 변경되면 최신 수락을 중단하고 stale·재검증 필요 결과와 실패 근거를 남긴다.
+- 완료 이후 메인이 바뀌어도 후보는 고정 base의 자료로 보존한다. 인계 시점의 최신 검사는 21의 절차로 다시 수행한다. 단순히 base/ref 문자열만 바꾸어 새 기준에 재사용하지 않는다.
+- 바뀌지 않은 원본·정규화·계층 자료는 pin을 확인해 재사용하고, 영향받은 후보·증분 연결·검증을 다시 수행한다. 새 공통 경로가 스스로 current를 발행하거나 실행 게임을 교체하지 않게 한다.
+
+## 4. 시작 전 확인과 참고 연결
+
+다음 파일은 실제 호출·입력·증거를 확인할 출발점이다. 전부 수정할 목록은 아니다.
+
+- prompts/PROMPT_20_STATE_PROVINCE_GEOGRAPHY_DATA_CONTRACT.txt
+- prompts/PROMPT_21_PARALLEL_WORKSPACES_AND_VERIFICATION_BASELINE.txt
+- prompts/COUNTRY_MICRO_BOUNDARY_GUIDE.txt
+- docs/geography/state-province-contract-v1.md, country-metadata-handoff-v1.md
+- docs/development/workspace-ownership-v1.md, workspace-layout-v1.md
+- docs/development/verification-baseline-v1.md, country-workspace-handoff-v1.md
+- reports/maintenance/prompt21-completion.md와 json
+- reports/maintenance/prompt21-review-20261104.md와 json
+- reports/province-independence-parallelism-20261103/report.md
+- reports/simulation-territorial-issues-20261103/report.md
+- scripts/prompt19-country-core.mjs, prompt19-country-files.mjs, prepare-prompt19-country.mjs
+- scripts/prompt19-country-candidate.node-test.mjs, prompt19-country-files.node-test.mjs
+- scripts/prepare-prompt19-joined-candidates.mjs, prepare-prompt19-mixed-world.mjs
+- scripts/chn-2020/incremental-coordinator.mjs, prepare-china.py
+- scripts/prompt14-catalog-core.mjs, prompt14-catalog-topology.mjs, prompt14-source-gate.mjs
+- scripts/geography/current-input.ts, country-adapters.ts
+- scripts/workspaces/run-verification.mjs, validate-country-handoff.cjs, audit-current-frontiers.cjs
+- src/lib/geography/country-metadata-input.ts, state-province-validation.ts
+- src/lib/world/operational-catalog.server.ts, operational-game.server.ts
+- 실제 활성 pointer가 연결하는 provenance·canonical bundle·source-lock·hierarchy·독립 proof
+
+프롬프트 21 후속 검증은 skip·todo를 성공으로 세던 runner를 수정했고 관련 Vitest 239개·별도 Node 23개와 두 작업 공간의 대표 동시 실행을 확인했다. 이 수는 이전 실행의 관측값이다. 현재 commit·코드·입력이 같으면 근거를 재사용하고 영향받은 범위만 재검사한다. 검사가 수집·실행됐는지와 skip/todo·실패·누락을 직접 확인한다.
+
+현재 로컬 공통 기준의 예는 1a311db이며 실행 상수가 아니다. 실제 최신 메인과 준비 브랜치를 확인한다. 필요한 공통 변경은 정상 로컬 커밋으로 고정해 국가 작업트리에 반영한다. byte pin이 있는 자료는 .gitattributes·LFS 실체와 checkout bytes를 확인하고 기존 원본·proof를 보존한다.
+
+## 5. 작업 소유권과 태스크 의존관계
+
+22-01·22-02는 공통 선행 작업이다. 공통 담당자가 schema·입출력 인터페이스·대표 fixture·파일 소유권을 고정하면 A·B·C를 병렬 진행한다.
+
+- A adapter·producer는 geometry registry, 국가별 입력 해석·후보 생성과 기존 호출 호환을 소유한다.
+- B baseline·증분은 최신 활성 입력 reader, 현재 선행 셀·전이 관계와 대상국 교체·비대상국 보존을 소유한다.
+- C 검증·인계는 독립 candidate verifier, 21 인계의 geometry 후보 연결과 23 입력 문서를 소유한다.
+- 공통 schema·공용 설정·registry 최종 합류와 전체 CLI 연결·검증은 한 공통 담당자가 조정한다.
+- 국가 원본 조사·계층·이름 준비는 독립 작업트리에서 병행할 수 있다. 새 형상 생성 경로의 실제 사용 가능 여부는 등록 adapter와 구현 완료 상태를 확인한다.
+
+```text
+                              22-01 현재 경로·기준선·pin 조사
+                                             ↓
+                              22-02 후보·adapter·증분 계약
+                                             │
+             ┌───────────────────────────────┼───────────────────────────────┐
+             ↓                               ↓                               ↓
+     [A adapter·producer]             [B baseline·증분]                  [C 검증·인계]
+   22-03 registry·선택 경로          22-05 최신 기준선 reader         22-07 독립 verifier·인계
+             ↓                               ↓                               │
+   22-04 후보 생성·기존 호환         22-06 대상국 교체·보존·stale                 │
+             │                               │                               │
+             └───────────────────────────────┼───────────────────────────────┘
+                                             ↓
+                              22-08 공통 CLI 합류·제한된 실증
+                                             ↓
+                              22-09 완료 기록·23 통합 인계
+```
+
+모든 입력 화살표가 선행 조건이다. 22-04는 22-03 이후, 22-06은 22-05 이후 진행한다. A·B·C는 22-02의 fixture와 인터페이스를 사용해 서로의 미완성 구현과 독립적으로 개발한다. 실제 자료·생성 결과 합류는 22-08에서 수행한다. 동일 파일 변경은 공통 담당자가 순차 반영한다.
+
+## 6. 태스크별 지시와 완료 조건
+
+### 22-01 — 현재 생성 경로와 기준선을 조사한다
+
+1. git status·현재 commit·작업트리·기존 20/21 검증 근거를 확인한다. 활성 두 참조와 채택 입력의 실제 존재·pin·LFS 실체를 읽는다.
+2. 현재 pointer → index·descriptor → provenance → 실제 canonical 입력 bundle과 proof를 추적한다. 과거 고정 receipt와 현재 활성 원본을 구별한다. 최신 입력을 확인하지 못하면 원인과 필요한 복구를 명시한다.
+3. KOR/PRK 공통 core·wrapper·경로 검사, CHN geometry·coordinator, 전역 packager의 국가·시점·개수·predecessor·출력 조건과 자동 쓰기를 표로 정리한다.
+4. 기존 함수·CLI·테스트·source-lock·handoff가 pin한 실제 코드의 소비자를 확인한다. 현재 runtime metadata와 역사적 생성 계약의 영향 범위를 구별한다.
+5. A·B·C의 재사용 지점, 지원할 실제 원본 프로필과 제한된 검증 계획을 정한다. 필요한 의존성 복구는 실제 실패한 대상에 한정한다.
+
+산출물은 reports/maintenance/prompt22-baseline.json이다. 기준선·입력·코드·현재 제약·기존 검증 재사용 여부를 기록한다. 이 단계에서 활성 카탈로그와 국가 자료를 다시 생성하지 않는다.
+
+완료 조건은 최신 활성 입력과 실제 생성 경로의 고정 조건을 추적하고, 새 공통 경로와 역사적 호환 경로의 수정 범위를 구별할 수 있는 것이다.
+
+### 22-02 — 공통 후보·adapter·증분 인계 계약을 확정한다
+
+1. 3절을 타입·런타임 schema와 작은 대표 fixture로 구체화한다. 기존 geometry·metadata·인계 타입을 재사용하고 표현이 다른 부분의 연결을 명시한다.
+2. registry의 등록·중복·미지원 처리, 순수 producer 인터페이스와 baseline snapshot reader·증분 assembler·독립 verifier의 함수 경계를 정한다.
+3. candidate localId·source/state·현재 predecessor·seed lineage, 비대상국 보존과 접경 영향·전역 통합 대기 상태를 확정한다. 후보 전용 입력과 완성 발행 입력의 수락 단계를 구별한다.
+4. 공통 CLI의 실제 경로·입력·출력·runId·읽기 검증 모드·실패 종료를 설계한다. 생성·검증·인계 각각의 성공 의미와 manifest 확정 시점을 정한다.
+5. 작은 coarse → fine, fine → fine, 다중 predecessor·같은 나라의 공간적으로 무관한 predecessor·부모 미확정·source-free·미등록 국가·stale fixture를 고정한다. 합성 fixture의 registry·source-lock·국가 identity는 테스트 안에 둔다.
+6. A·B·C의 파일 소유권과 공용 설정 반영 담당을 지정하고 공통 기준을 고정한다.
+
+산출물은 docs/development/country-candidate-contract-v1.md와 공통 schema·인터페이스·대표 fixture다. 새 경로는 이 태스크에서 현재 저장소 구조에 맞춰 정한다.
+
+완료 조건은 세 분기가 fixture 기반으로 독립 구현을 시작할 수 있고, 후보의 완료와 전역 통합 대기가 명확한 것이다.
+
+### 22-03 — Geometry adapter registry와 국가 선택 경로를 만든다
+
+1. 등록된 adapter를 기존 CountryId로 선택하는 공통 경로를 구현한다. 나라별 조건 분기를 공통 실행기에 계속 추가하는 방식을 정리한다.
+2. 등록 identity·지원 원본 프로필·버전·시나리오와 입력·실행 의존성·출력 능력을 검증한다. 미등록·중복·다른 국가 자료는 명시적인 오류로 거부한다.
+3. 현재 metadata adapter와 source/hierarchy 해석을 연결하되 geometry 생성의 역할·수락 의미를 유지한다. registry import는 읽기·선택만 수행한다.
+4. 원본별 국가 crosswalk·행정 단계·전처리·시점·라이선스 근거와 고정 feature 조건을 해당 adapter/profile에 연결한다.
+
+완료 조건은 실제 등록과 공통 선택 경로가 있고, 지원되지 않는 입력을 명확히 거부하며, 테스트 전용 새 adapter를 공통 국가 분기 수정 없이 선택할 수 있는 것이다.
+
+### 22-04 — 공통 후보 생성과 기존 adapter 호환을 연결한다
+
+1. 검증된 공통 geometry·source gate·local topology 로직을 재사용해 registry에서 선택한 producer를 호출한다. coarse 전용 부모 입력을 현재 대상국 predecessor 컨텍스트로 일반화한다.
+2. 원본 feature/component와 후보 localId, 공식 부모 또는 null, 이름 근거와 현재 선행 셀의 면적 교차·seed 전이 연결을 생성한다. 3.2의 source-free·residual와 실제 면적 회계를 처리한다.
+3. KOR·PRK·CHN의 실제 채택 입력과 계층·현재 셀을 읽는 adapter 연결을 확인한다. 재생성·검증된 기존 산출물 replay·입력 해석만 지원하는 모드는 각각 명시한다. replay-only 경로를 새 원본 생성의 실증으로 집계하지 않는다.
+4. 기존 preparePrompt19Country(countryId, root), KOR/PRK CLI·파일 검사와 CHN 전용 호출의 인자·출력·명시적 거부 조건을 보존한다. 새 공통 경로는 지정 입력·출력·프로세스별 임시 경로를 사용한다.
+5. 생성 입력·지원 의존성이 없으면 원인과 필요한 자료를 반환한다. 선택 과정의 숨은 Python 실행·기본 경로 생성·과거 receipt 재사용은 공통 실행 컨텍스트로 옮긴다.
+
+완료 조건은 지원 프로필의 source → 후보 경로가 실행 가능하고, 실제 입력의 해석·원본/부모 연결·한계와 기존 호출 호환을 증명하는 것이다. 실제 나라의 전국 재생성·신규 자료 채택 성공 여부는 실행한 범위대로 보고한다.
+
+### 22-05 — 최신 활성 기준선 reader를 만든다
+
+1. 현재 두 pointer와 실제 index·descriptor·provenance·metadata manifest를 읽어 전체 참조와 canonical 입력 bundle을 검증한다. 물리 파일·pin·schema·참조가 맞는지 확인한다.
+2. canonical producer geometry와 전달용·표시용 geometry를 구별한다. 간소화된 지도 형상이나 실행 게임 상태를 새 국가의 원본 기준으로 사용하지 않는다.
+3. 실제 대상국 셀·envelope·행정 부모·이전 부모·seed lineage와 비대상국 자료, 활성 fine 집합·source-lock·hierarchy를 snapshot으로 제공한다.
+4. 과거 coarse-world·특정 국가 receipt로 자동 fallback하지 않는다. 불일치·미지원 provenance 구조·없는 생성 입력은 진단과 함께 중단한다.
+
+완료 조건은 메인이나 다른 국가가 바뀌어도 그 시점 최신 활성 입력에서 일관된 snapshot을 얻고, 누락·stale·잘못된 기준선을 거부하는 것이다. 실제 파일 읽기는 오프라인 후보 준비에 한정한다.
+
+### 22-06 — 대상국 한정 교체와 비대상국 보존을 구현한다
+
+1. snapshot과 22-02 후보 인터페이스를 받아 현재 대상국 자료만 replacement로 연결한다. 비대상국 자료를 기존 coarse baseline에서 복원하지 않는다.
+2. 비대상국 ID·정확 geometry·record·행정 부모·이전 부모·seed·source-lock·hierarchy·이름 연결을 ID 기반으로 비교한다. 배열 순서·전역 ordinal 일치로 보존 여부를 판단하지 않는다.
+3. baseline fine 집합과 후보의 대상국 정밀도·원본 근거를 대조한다. 다른 fine 국가의 해상도·자료가 보존되는지 검사하고 대상국의 실제 fine·residual·미확정 상태를 정확히 기록한다.
+4. 3.3의 통합 대기 입력과 접경 영향을 만든다. 비대상국 noding 제안과 기존 target 접촉 edge의 교체 필요를 별도 인계한다. 23이 확인할 전역 불변 조건을 열거한다.
+5. snapshot 이후 pointer·소비 입력이 바뀌면 수락을 중단한다. 최신 snapshot에 원본을 재연결하고 영향받은 후보·보존 검사를 다시 실행하는 경로를 제공한다.
+
+완료 조건은 어느 등록 대상국을 처리하든 다른 나라를 보존하는 같은 증분 경로를 사용하고, 오래된 기준과 타국 변경을 검증에서 거부하는 것이다.
+
+### 22-07 — 독립 후보 검증과 geometry 인계를 연결한다
+
+1. 생성기의 pass 플래그와 독립적으로 pinned base·원본·후보 파일을 읽어 source·국가·부모·면적 교차 기반 predecessor 전집합과 seed lineage·ID 집합·geometry·local adjacency·면적 회계·비대상국 보존을 확인한다. 검증된 기존 공통 연산은 재사용한다.
+2. 검증이 필요한 모든 필수 항목을 명시한다. wrong-country·미등록 adapter·pin 변조·없는 입력·잘못된 선행 셀/seed·타국 수정·fine 국가 누락·stale·미완성 출력은 실패로 집계한다.
+3. 21의 capture/check와 인계 manifest를 재사용해 geometry 후보의 수락 단계를 최소 확장하거나 명시적인 후보 하위 계약을 연결한다. 기존 unassigned·source-preparation·country-metadata-preparation의 호출·성공 의미는 유지한다.
+4. geometry 후보 수락에는 실제 독립 verifier의 성공·대상국·전체 base ref·생성 코드/입출력 pin·접경 영향·후속 전역 검사를 요구한다. 현재 catalog 셀 전집합을 검사하는 metadata helper에 미래 후보 ID를 대신 제출하지 않는다.
+5. 23에 넘길 입력·validator·후속 재검증과 거부 조건을 문서화한다. packager가 요구하는 완성 입력은 전역 통합 후 생성한다.
+
+산출물은 후보 verifier·필요한 인계 연결과 docs/development/country-candidate-integration-handoff-v1.md다.
+
+완료 조건은 유효한 후보를 고정 base에 대한 통합 대기 자료로 수락하고, 위조·누락·stale·전역 미완료 상태의 잘못된 승격을 거부하는 것이다.
+
+### 22-08 — 공통 CLI를 합류하고 제한된 실증을 수행한다
+
+1. A·B·C를 같은 공통 기준에 합류하고 실제 CLI의 registry 선택 → 최신 snapshot → producer → 증분 입력 → 독립 verifier → 완료 manifest → 인계를 연결한다. 3.4의 staging·완료 marker·재시도·충돌 처리를 적용한다.
+2. 기존 채택 KOR·PRK·CHN 자료와 실제 활성 snapshot에서 adapter 입력 해석·원본/부모 연결·비대상국 보존을 확인한다. 지원되는 제한 재현·검증된 산출물 replay의 실제 모드를 명시한다. 고정 base가 다른 replay는 stale로 거부한다.
+3. 작은 합성 source·catalog·adapter로 같은 CLI의 생성부터 인계까지 실행한다. coarse → fine, fine → fine·다중 predecessor·부모 null·source-free와 정상·거부 조건을 확인한다. 같은 나라의 공간적으로 무관한 predecessor를 넣는 음성 사례도 검사한다. 성공한 identity replay 하나만으로 실제 target 교체를 검증했다고 보고하지 않는다.
+4. 서로 다른 테스트 대상 또는 같은 대상의 다른 runId 두 개로 후보를 동시에 생성·검증한다. 21의 실제 경로·캐시·OS temp 관측을 재사용해 자기 출력과 두 포인터·base·상대 출력 보존을 확인한다. 기본 성공 실험은 작은 후보 한 쌍의 동시 실행 1회다.
+5. 생성 중 기준선 변경, 이전 후보 제출, 최신 기준 재연결·재검증을 작은 fixture/연습 기준으로 확인한다. 실제 current 대신 테스트용 snapshot source를 사용하고 생산 reader와 검증 로직을 재사용한다. 원본 bytes 재사용과 새 후보·인계 pin 갱신을 구별한다.
+6. 출력 충돌·부분 생성·독립 verifier 실패를 주입해 완료 manifest와 성공 인계가 생기지 않는지 검사한다. 필수 검사 실패·실행 누락·skip·todo를 성공으로 처리하지 않는다.
+7. 아래 관련 검사를 수행한다. 초기 fixture 검사와 최종 합류 결과는 코드·입력이 같으면 근거를 연결해 재사용한다. 추가 실행은 발견 오류나 관련 변경의 재확인에 한정한다.
+
+| 검증 묶음 | 범위 |
+| --- | --- |
+| 공통 생성·인계 | 새 registry·producer·snapshot·증분 assembler·독립 verifier·출력 원자성·기존 인계 단계의 관련 검사 |
+| 기존 producer 호환 | 실제 소비자로 확인한 KOR/PRK 함수·CLI·파일/후보 Node 검사와 CHN 입력·proof 검증의 영향 범위 |
+| 현재 지리 계약 | 원본·부모·동적 기대값·동명 독립 ID·미확정 상태와 기존 실제 metadata 검증 |
+| 전선·게임 보존 | 기존 세 나라 실제 전선·undo/redo와 session 보존 검사. 소비 코드·입력이 같으면 21의 pin 대조 후 근거 재사용 |
+| 정적·바이트 검사 | 수정 관련 타입·lint·diff, 생성 코드·입력·완료 artifact의 pin과 필요한 checkout/LFS 실체 |
+
+Node test runner 파일은 node --test로 별도 실행한다. 21 runner의 Vitest 수집 범위에 새 경로를 명시하고 실제 수집·통과·실패·skip/todo 수를 읽는다. 과거 239개·23개 또는 기존 셀 수를 고정 목표로 삼지 않는다.
+
+후보 생성·검증 변경의 관련 검사로 범위를 확인한다. 런타임·빌드 설정을 실제로 바꾸면 필요한 build·API 검증을 독립 출력·포트로 추가한다. 여러 대국의 전체 geometry 재생성, 전역 타일과 브라우저 부팅은 23·24의 실행 범위에 연결한다.
+
+완료 조건은 실제 공통 생성·검증·인계 경로가 있고, 실제 입력 해석과 작은 합성 E2E·동시 실행·stale·실패 원자성이 통과하며, 실제 국가에서 검증한 기능과 남은 자료 한계가 구별되는 것이다.
+
+### 22-09 — 완료 근거와 23의 통합 입력을 인계한다
+
+reports/maintenance/prompt22-completion.md와 prompt22-completion.json에 실제 결과를 기록한다. 기존 20/21 보고서와 고정 proof는 보존한다. 별도 태스크 순서표는 만들지 않고 이 문서 5절을 참조한다.
+
+- 완료·미완료 태스크, 실제 공통 함수·CLI·schema·파일과 고정한 코드 commit.
+- registry의 등록 국가·원본 프로필·지원 모드와 실제 입력 해석·생성·replay·인계까지 검사한 범위.
+- 최신 전체 base 참조·pointer·canonical bundle·source·hierarchy·코드 pin과 대상국 predecessor·seed 연결.
+- 대상국 replacement와 비대상국·fine 국가 보존 증거, 미확정 상태·residual·source-free의 실제 처리와 한계.
+- 국가·실행별 출력, 완료 manifest·artifact pin, 실패·재시도·충돌·동시 실행·stale 처리 결과.
+- 기존 호출 호환, 역사적 pin 보존과 새 버전 경로, 실제 수집 검사·명령·시간·종료 코드와 근거 재사용.
+- 23에 넘길 후보·증분 입력·접경 영향·독립 proof, 최종 ID·topology·ordinal·타일·CHN 표시·metadata·게임 보존·활성 전환의 후속 검사.
+- 대상국 미지정 여부와 테스트 전용 합성 자료의 구분, 다음 실제 국가 작업에 필요한 원본·adapter 조건.
+
+완료 보고는 자기 자신이나 자신을 포함하는 commit의 hash를 내부에서 고정하려고 반복 갱신하지 않는다. 검증한 코드·입력 기준을 기록하고 최종 보고 commit은 최종 답변이나 로컬 실행 기록으로 연결한다.
+
+최종 답변에는 22에서 실제로 사용할 수 있는 국가별 후보 생성·검증·병렬 준비 범위, 지원 adapter와 실행 방법, 23의 통합 인계 경계를 짧게 설명한다. 23·24나 다음 국가 추가를 자동 시작하지 않는다.
+
+## 7. 최종 완료 체크
+
+- geometry adapter가 명시적으로 등록·선택되고 미등록·중복·다른 국가 자료가 거부된다.
+- 최신 활성 참조와 canonical 입력을 읽으며 coarse 전용·특정 국가 receipt fallback이 제거된 공통 경로가 있다.
+- 현재 대상국의 선행 셀·state·전이 seed 연결과 후보 localId를 정확히 추적한다.
+- 대상국 replacement와 비대상국 ID·형상·소속·lineage·원본·계층 및 활성 fine 국가를 보존하는 증거가 있다.
+- 국가 내부 후보 검증과 공유 국경·전역 통합 대기를 구별하는 증분 입력과 23 인계 계약이 있다.
+- 실제 입력 해석과 지원 기능, 작은 합성 생성 E2E·후보 동시 실행·stale·실패/재시도 검증을 완료했다.
+- 기존 호출·pin과 20/21 ID·품질·게임 보존 정책, 활성 포인터와 다른 작업 공간이 보존됐다.
+- 21의 인계 절차에 geometry 후보를 연결하고 독립 검증·코드/입출력 pin과 필수 후속 검사를 제공한다.
+- 미실행·실패·skip/todo·자료 부재와 실제 국가별 미검증 범위는 한계로 명시했다.
+
+완료 근거가 빠진 태스크는 구체적인 미완료 사유를 남긴다. 프롬프트 문서 작성과 “22 실행”의 구현·검증 완료를 구별한다.

@@ -199,3 +199,4 @@ scripts/workspaces/audit-current-frontiers.cjs text eol=lf
 scripts/workspaces/audit-current-frontiers.node-test.cjs text eol=lf
 reports/maintenance/prompt21-completion.md text eol=lf
 reports/maintenance/prompt21-review-20261104.md text eol=lf
+prompts/PROMPT_22_COUNTRY_ADAPTERS_AND_INCREMENTAL_CANDIDATES.txt text eol=lf
