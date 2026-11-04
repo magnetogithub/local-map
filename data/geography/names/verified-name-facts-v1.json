@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "geography-name-facts-v1",
+  "reviewedOn": "2026-11-03",
+  "contentPolicy": "Factual place labels and citations only. No articles, maps or photographs are copied. These facts do not establish geographic extent, administrative membership or exact 2020 boundaries.",
+  "facts": [
+    {
+      "id": "chongjin-korean-name",
+      "publisher": "Academy of Korean Studies, Encyclopedia of Korean Culture",
+      "url": "https://encykorea.aks.ac.kr/Article/E0056774",
+      "sourceDate": "2023-02-07",
+      "verifiedValues": ["청진시", "청진"],
+      "reviewMethod": "Read article title and definition. The Korean city name is paired with the pinned Chongjin City source in North Hamgyong; 청진 is the explicitly reviewed short form of 청진시.",
+      "limitation": "Names only. Historical sections and geographic descriptions are not adopted as current or 2020 geometry."
+    },
+    {
+      "id": "chongjin-english-name",
+      "publisher": "WFP, FAO and UNICEF",
+      "url": "https://cdn.wfp.org/wfp.org/publications/english_rfsa.pdf",
+      "sourceDate": "2011-03-24",
+      "verifiedValues": ["Chongjin City", "Chongjin"],
+      "reviewMethod": "Read Mission Details, printed page 5: the visited-city list places Chongjin City under North Hamgyong. Chongjin is the explicitly reviewed short form.",
+      "limitation": "Spelling evidence only. The report does not prove complete current game membership or exact scenario-date geography."
+    },
+    {
+      "id": "inner-mongolia-pinned-names",
+      "publisher": "Natural Earth",
+      "url": "https://github.com/nvkelso/natural-earth-vector/blob/f1890d9f152c896d250a77557a5751a93d494776/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "sourceDate": null,
+      "verifiedValues": ["Inner Mongolia", "Inner Mongol", "Inner Mongolia Autonomous Region", "내몽골 자치구", "내몽골", "Nei Mongol", "Nèiměnggǔ"],
+      "reviewMethod": "Explicit name-equivalence review for the existing CHN Inner Mongolia macro source. Read ne_id 1159312757 name, name_en, name_ko, name_alt and gn_name. 내몽골 is the reviewed short form of the source Korean label.",
+      "limitation": "The two source distributions use different identifier systems. This is a curated spelling crosswalk only; Natural Earth geometry or parent membership is not applied to fine cells.",
+      "localSource": {
+        "artifact": {"path": "data/raw/ne_10m_admin_1_states_provinces.geojson", "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c", "byteLength": 40726852},
+        "featureId": "1159312757",
+        "requiredFields": {"adm0_a3": "CHN", "name_en": "Inner Mongolia", "name_ko": "내몽골 자치구", "name_alt": "Nei Mongol|Nèiměnggǔ", "gn_name": "Inner Mongolia Autonomous Region"}
+      }
+    },
+    {
+      "id": "inner-mongolia-neimenggu-name",
+      "publisher": "Ministry of Commerce of the People's Republic of China, China Trade Remedy Information",
+      "url": "https://cacs.mofcom.gov.cn/cacscms/article/ckys?articleId=39597&type=1",
+      "sourceDate": "2008-06-05",
+      "verifiedValues": ["Neimenggu", "Inner Mongolia"],
+      "reviewMethod": "Read the English location spellings used together in the published company-address list.",
+      "limitation": "Alternate spelling evidence only; not a current administrative or boundary claim."
+    }
+  ]
+}

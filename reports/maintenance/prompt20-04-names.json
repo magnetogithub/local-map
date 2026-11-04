@@ -1,0 +1,841 @@
+{
+  "schemaVersion": "prompt20-04-names-handoff-v1",
+  "task": "20-04",
+  "status": "complete",
+  "auditDate": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "recordedAt": "2026-11-03T06:00:45.114Z",
+  "scope": "A static source-name/alias enrichment and offline output verification only.",
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+  },
+  "metadataRef": {
+    "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+    "schemaVersion": "geography-metadata-ref-v1"
+  },
+  "manifest": {
+    "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+    "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+    "byteLength": 1115
+  },
+  "metadata": {
+    "byteLength": 3357737,
+    "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/metadata.json.gz",
+    "sha256": "98926b07e58a3a345af92c3334a0ac81d58ec86560b9312c1b1a417246d99823"
+  },
+  "admission": {
+    "byteLength": 434595,
+    "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/admission.json.gz",
+    "sha256": "5f412fa4256ef22f3aa91b25e6ea721cdd0f8349789b1332caa6a122cc3b456b"
+  },
+  "generationReport": {
+    "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/generation-report.json",
+    "sha256": "3c343159a79a79ba31f9ddb76249ababafc9837edf40cc5a0ae183c1363665fe",
+    "byteLength": 93365
+  },
+  "predecessor": {
+    "report": {
+      "path": "reports/maintenance/prompt20-03-metadata.json",
+      "sha256": "ff6fb807829a9e5d8b670dd722574481c580b9c45f6587161afe402a8a959a72",
+      "byteLength": 12767
+    },
+    "metadataRef": {
+      "contentRoot": "1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "artifactsPreserved": true
+  },
+  "counts": {
+    "countries": 247,
+    "provinces": 8004,
+    "states": 4201,
+    "sourceRegions": 7399,
+    "fine": 3793,
+    "coarse": 4169,
+    "residual": 42,
+    "sourceLinked": 7935,
+    "sourceFree": 69,
+    "unassignedParents": 1436
+  },
+  "names": {
+    "status": "validated-static-names",
+    "aliasCount": 41600,
+    "recordsWithKoreanName": 12942,
+    "recordsWithEnglishName": 12925,
+    "curatedSourceIdentities": 2,
+    "originalNamesPreserved": true,
+    "allCandidatesRetained": true,
+    "runtimeLoaderOrApiVerification": false
+  },
+  "metricMeaning": "Alias and language counts are record occurrences across State/Province/SourceRegion, not unique place names or official unit totals.",
+  "validation": {
+    "independentCli": {
+      "manifest": {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+        "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+        "byteLength": 1115
+      },
+      "metadataRef": {
+        "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+        "schemaVersion": "geography-metadata-ref-v1"
+      },
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+        "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+        "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+        "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+      },
+      "status": "validated-metadata-only",
+      "counts": {
+        "countries": 247,
+        "provinces": 8004,
+        "states": 4201,
+        "sourceRegions": 7399,
+        "fine": 3793,
+        "coarse": 4169,
+        "residual": 42,
+        "sourceLinked": 7935,
+        "sourceFree": 69,
+        "unassignedParents": 1436
+      },
+      "checks": {
+        "exactCatalogProvinceSet": true,
+        "sourceCountryMatches": true,
+        "rawSourceAndParentJoins": true,
+        "knownSourceMembershipComplete": true,
+        "unknownParentsRemainNull": true,
+        "coarsePrecisionPreserved": true,
+        "noUnverifiedCompleteCoverage": true,
+        "commonSchemaAndContentRoot": true
+      },
+      "names": {
+        "status": "validated-static-names",
+        "aliasCount": 41600,
+        "recordsWithKoreanName": 12942,
+        "recordsWithEnglishName": 12925,
+        "curatedSourceIdentities": 2,
+        "originalNamesPreserved": true,
+        "allCandidatesRetained": true,
+        "runtimeLoaderOrApiVerification": false
+      },
+      "administrativeTruthClaim": false,
+      "outputDirectory": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf"
+    },
+    "command": "node --max-old-space-size=8192 scripts/geography/build-current-metadata.cjs --verify data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+    "tests": {
+      "passed": 39,
+      "failed": 0,
+      "command": "node node_modules/vitest/vitest.mjs run scripts/geography/metadata-builder.test.ts scripts/geography/name-enrichment.test.ts src/lib/geography/state-province-contract.test.ts"
+    },
+    "typeCheck": {
+      "status": "passed",
+      "command": "node node_modules/typescript/bin/tsc --noEmit -p scripts/geography/tsconfig.json"
+    },
+    "lint": {
+      "status": "passed",
+      "command": "node node_modules/eslint/bin/eslint.js scripts/geography"
+    }
+  },
+  "staticCases": {
+    "chongjin": {
+      "source": {
+        "artifact": {
+          "byteLength": 1694102,
+          "path": "data/raw/prompt19/PRK/geoBoundaries-PRK-ADM2.geojson",
+          "sha256": "4265ce501c4402a8bafdc27298c8462e41ed6f3170d50624503c3770b8ce91e9"
+        },
+        "sourceFeatureId": "82179303B21659587132529",
+        "sourceId": "geoboundaries-gbOpen-PRK-ADM2-82179303",
+        "sourceVersion": "geoBoundaries gbOpen PRK-ADM2-82179303 / revision 9469f09 / build 2023-12-12",
+        "temporalNotes": [
+          "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+        ],
+        "temporalStatus": "source-vintage-only"
+      },
+      "canonicalId": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+      "provinceIds": [
+        "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f"
+      ],
+      "queries": [
+        {
+          "query": "청진시",
+          "canonicalId": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+          "knownProvinceCount": 1,
+          "coverage": "partial"
+        },
+        {
+          "query": "Chongjin City",
+          "canonicalId": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+          "knownProvinceCount": 1,
+          "coverage": "partial"
+        },
+        {
+          "query": "Chongjin",
+          "canonicalId": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+          "knownProvinceCount": 1,
+          "coverage": "partial"
+        },
+        {
+          "query": "청진",
+          "canonicalId": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+          "knownProvinceCount": 1,
+          "coverage": "partial"
+        },
+        {
+          "query": "  CHONGJIN   CITY  ",
+          "canonicalId": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+          "knownProvinceCount": 1,
+          "coverage": "partial"
+        },
+        {
+          "query": "Ｃｈｏｎｇｊｉｎ Ｃｉｔｙ",
+          "canonicalId": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+          "knownProvinceCount": 1,
+          "coverage": "partial"
+        }
+      ],
+      "coverage": {
+        "evidence": [
+          {
+            "artifact": {
+              "byteLength": 1694102,
+              "path": "data/raw/prompt19/PRK/geoBoundaries-PRK-ADM2.geojson",
+              "sha256": "4265ce501c4402a8bafdc27298c8462e41ed6f3170d50624503c3770b8ce91e9"
+            },
+            "locator": "shapeID:82179303B21659587132529",
+            "method": "pinned-source-name"
+          },
+          {
+            "artifact": {
+              "byteLength": 169441215,
+              "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+              "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e"
+            },
+            "locator": "source:geoboundaries-gbOpen-PRK-ADM2-82179303:82179303B21659587132529",
+            "method": "exact-current-cell-source-link"
+          }
+        ],
+        "expectedProvinceCount": null,
+        "knownProvinceCount": 1,
+        "limitations": [
+          "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+        ],
+        "status": "partial"
+      },
+      "remainingLimitation": "All known pinned cell links were returned. Full original/official city geography and exact 2020 boundaries are not certified."
+    },
+    "innerMongolia": {
+      "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+      "source": {
+        "artifact": {
+          "byteLength": 17277078,
+          "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+          "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72"
+        },
+        "sourceFeatureId": "CHN-ADM1-3_0_0-B18",
+        "sourceId": "geoBoundaries-3_0_0-CHN-ADM1",
+        "sourceVersion": "geoBoundaries-3_0_0/CHN/ADM1",
+        "temporalNotes": [
+          "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+        ],
+        "temporalStatus": "source-vintage-only"
+      },
+      "provinceIds": [
+        "territory:catalog:04dfb57dffad8769d82357274b4f946fc7ff315d412909ceea99caaa5f934f8f",
+        "territory:catalog:05cbed86916eb965fcd66099c38e2fc8fd843fae40492682f0f1167542376e79",
+        "territory:catalog:0743aa0a47f51cb3b673f7de01f5d0ab3875fd601dd7a3b35bf1c0eea5d19fbb",
+        "territory:catalog:132cae7247baae426526d66860c1a651bcf08782ff9b70d71644cabe44a6a0f1",
+        "territory:catalog:1570b28dae0ecafc1d55201427ea7500006e7cbef8013c06464bca53819f1570",
+        "territory:catalog:17d11f9d53a372fe3e0a26cb62eafa577a46be19d1b2099432982f080c9a955a",
+        "territory:catalog:189cc02dbc968de81d107f7839a47eec156997bdfb1455f38b919f73ece74e78",
+        "territory:catalog:1aaa019d297f37a3724d9bf18d0331159a6f920e9cb9141edab9f81bf9d20e54",
+        "territory:catalog:1d785056debde111a44d98180f1649360221f0b4282a2761c29f1c286b7f9864",
+        "territory:catalog:1f5ee0c57a1a67e8e36254837f0a56fde0c27824bffb0d5f562d1daeebca6c27",
+        "territory:catalog:25439597603141191e4bc3a9fecaa1882c35c287dea123cfe23d1890dc0b8e08",
+        "territory:catalog:3199063322cc1c3131360c6cd1672a8904d5f98f1b4f1e2db2985ff45a4d8f6c",
+        "territory:catalog:38a7f54a7b66b9e2cb18d634017be68ef088b71fef6803a9b8d691b797021b06",
+        "territory:catalog:3caebdc2ec79ba7db2eba018245187107ae0d0b1c99cbb6ab3c8dffd68e10e88",
+        "territory:catalog:4656efddb18d1e2564229b10469a07289239a5046ae5313fefe151033e812267",
+        "territory:catalog:4d9d97e67a04ed85160cc1cd500330499b8ec6659cf6844c6b6c1ad2485a8d15",
+        "territory:catalog:4fdc6978f65fb51c065a6fc7fbabf58c906dd1df435ce53a8bc2db1d12161f93",
+        "territory:catalog:519b9805956e4bf143c1d19a59a3bcbcf58142e59211418f77e55fe16d4c3db7",
+        "territory:catalog:5282b906893b7352d45cbe24c33ce7f94854d5ebdadd8bd822406787bfa7dff8",
+        "territory:catalog:552645399ea3d2f1a7cd539e01c1c8a203a35fa642e55fcca2d69275a1334b92",
+        "territory:catalog:59583ee195581f72bda4cff9aeac26fa65cda061cbb3c0d01f1a5f4e8013188f",
+        "territory:catalog:5a561a3038870f526a79d9eaa7354425b5bdf29a0297fd7b80194ae21ec765db",
+        "territory:catalog:608bb10a0b6a57412bf88c9ed138b025966359fd6047c8265788ed3f26081e4c",
+        "territory:catalog:6199976e75c4dc15ad151ab9d220ef6c14eb2569baf0bf862158967ecf5e3339",
+        "territory:catalog:6d80b5ec31c9cd217fe8d086a690e27170faf0f84076c4f1d985ce02880511d3",
+        "territory:catalog:6e0ae069a578a92ace52142f5115f8323ed49ff9b0ed5b665a1093495e621345",
+        "territory:catalog:726eba8f69c45f4b1d181dfbebe62d6aa0514386d95f25bbafcdcc4691a526fb",
+        "territory:catalog:781bb964effc660f1df80e06538ebb6fed36dc6fa90d3befa34ad77548b267dd",
+        "territory:catalog:8f0bd750542a5ae83ae09a7faeeb373e8e4112a2a2df62393c3d02cc291982c0",
+        "territory:catalog:9428779be4a309338296af4367d8af58e98ee139096a1372ea92131d0a6a3245",
+        "territory:catalog:a8a635bf13ec0c1326ce95d516a433a8bddb112175d3e6c5e5c271de63734b4b",
+        "territory:catalog:a8fcee07fed6285c3c4a6c473d9e12fb9ea5543ba2d6bba1f392a3600e20a765",
+        "territory:catalog:b6420dd3d0fd830aa8237fd835169cc11cf6e75e77ea6b1b82bbf006968f2301",
+        "territory:catalog:b8fdd17da5e77dea82e39e9c2840f6d45517f1198cda9e7d006c2f580d6a7de5",
+        "territory:catalog:bc63dfda8f230f8535a62e82159d87d4e6b2c57862cd9539c585355e3f88dbb9",
+        "territory:catalog:bf5982f001c59877e5f37b50a56ce13102017c329cad370640848be16dface02",
+        "territory:catalog:c08c928b3f672b301531d1f9847dd4689b2ad9cfe314105e795d1b55832d199d",
+        "territory:catalog:cdc2dbfbc7b35cb5f5fb0fe522aff26444feedba43a986d11e039b1ddcada236",
+        "territory:catalog:d0fc927e7ded3dbcadcdb7b68e953dc239dccb43c84c82ec623d728288987f64",
+        "territory:catalog:d63056f2a4b59fb29742ee7659900900862f5005d93af31b409b43eeb810b1f4",
+        "territory:catalog:d67c28b7799ce5b0b089bb0354ed9b6b874605eee4b598ad5cd383007c9ed797",
+        "territory:catalog:dad61364b96648be45592fc39d57103223de15e8e4a990aeeea8d76781e67f45",
+        "territory:catalog:eb315252bf009ed0e96a5ad3041c837c5d845c33fe1c6eb5fe8b5ea65424381b",
+        "territory:catalog:f728b4c1e18765ec64fd35a5fe4031dff6c4df15d2ac8172e9972fe6cac8062d",
+        "territory:catalog:f90abe07efabfe2940ef6130e70ae36d37962c1cbaf4e4049f7377305c8eec09",
+        "territory:catalog:f91fcc8fe95629a374b7656b10a3afad75214f6064aa0e1dcffff73f904d7e57",
+        "territory:catalog:fd465f5ea08619cdb8bcf5c1982ad7435e0829f22188460f6044c15582b0435d",
+        "territory:catalog:fd7c2fb99b644a2f6ce320fa1812174c200c3090e3104675c84159f1987eef96"
+      ],
+      "queries": [
+        {
+          "query": "내몽골 자치구",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "Inner Mongolia",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "Inner Mongol",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "Inner Mongolia Autonomous Region",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "Nei Mongol",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "Neimenggu",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "Nèiměnggǔ",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "내몽골",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": " Nei   Mongol ",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        },
+        {
+          "query": "Ｉｎｎｅｒ Ｍｏｎｇｏｌｉａ",
+          "canonicalId": "fine-macro:CHN:macro:CHN:CN-15",
+          "knownProvinceCount": 48,
+          "coverage": "partial"
+        }
+      ],
+      "coverage": {
+        "evidence": [
+          {
+            "artifact": {
+              "byteLength": 17277078,
+              "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+              "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72"
+            },
+            "locator": "feature:CHN-ADM1-3_0_0-B18",
+            "method": "pinned-macro-name"
+          },
+          {
+            "artifact": {
+              "byteLength": 1142103,
+              "path": "data/source-locks/chn-2020/CHN-hierarchy.json",
+              "sha256": "072ddaf551d5aec7061d9f5301c213820d554f77daa5d489f654b123d15fcfc2"
+            },
+            "locator": "macroId:macro:CHN:CN-15",
+            "method": "verified-source-parent-crosswalk"
+          }
+        ],
+        "expectedProvinceCount": null,
+        "knownProvinceCount": 48,
+        "limitations": [
+          "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+        ],
+        "status": "partial"
+      },
+      "unchangedChinaUnassignedParents": 1374
+    },
+    "duplicateName": {
+      "query": "중구",
+      "candidateCount": 6,
+      "candidates": [
+        {
+          "kind": "source-region",
+          "id": "source-region:6a0a43d58d8d99c48aa43330e3cd211f16917725dfc1d68bee67efc9ee251ba7",
+          "sourceCountryId": "KOR",
+          "source": {
+            "artifact": {
+              "byteLength": 1203660,
+              "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+              "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+            },
+            "sourceFeatureId": "91817680B11201690622195",
+            "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+            "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+            "temporalNotes": [
+              "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+            ],
+            "temporalStatus": "source-vintage-only"
+          },
+          "provinceIds": [
+            "territory:catalog:0e3ba4c3bb0580ed6d4b51d30a6c091e72515186ea8a17b4e9a7917c32cc2259"
+          ],
+          "stateIds": [
+            "fine-macro:KOR:KOR:macro:citypopulation:22"
+          ],
+          "coverage": {
+            "evidence": [
+              {
+                "artifact": {
+                  "byteLength": 1203660,
+                  "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+                  "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+                },
+                "locator": "shapeID:91817680B11201690622195",
+                "method": "pinned-source-name"
+              },
+              {
+                "artifact": {
+                  "byteLength": 169441215,
+                  "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+                  "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e"
+                },
+                "locator": "source:geoboundaries-gbOpen-KOR-ADM2-2020:91817680B11201690622195",
+                "method": "exact-current-cell-source-link"
+              }
+            ],
+            "expectedProvinceCount": null,
+            "knownProvinceCount": 1,
+            "limitations": [
+              "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+            ],
+            "status": "partial"
+          }
+        },
+        {
+          "kind": "source-region",
+          "id": "source-region:7c00dd959c8ba22d1d04d5b99cfdad8fe1467a1e53b856455e8b82f9dca874f8",
+          "sourceCountryId": "KOR",
+          "source": {
+            "artifact": {
+              "byteLength": 1203660,
+              "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+              "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+            },
+            "sourceFeatureId": "91817680B6497324316239",
+            "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+            "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+            "temporalNotes": [
+              "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+            ],
+            "temporalStatus": "source-vintage-only"
+          },
+          "provinceIds": [
+            "territory:catalog:19b05db405cb150a917a89848605fe1e30b82d3577effa3e1999bb7a8e45c262",
+            "territory:catalog:32d1bc5731939b8353fa729835b97470949b0b8928b7f3f1c8078ef073d4a3d3"
+          ],
+          "stateIds": [
+            "fine-macro:KOR:KOR:macro:citypopulation:23"
+          ],
+          "coverage": {
+            "evidence": [
+              {
+                "artifact": {
+                  "byteLength": 1203660,
+                  "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+                  "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+                },
+                "locator": "shapeID:91817680B6497324316239",
+                "method": "pinned-source-name"
+              },
+              {
+                "artifact": {
+                  "byteLength": 169441215,
+                  "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+                  "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e"
+                },
+                "locator": "source:geoboundaries-gbOpen-KOR-ADM2-2020:91817680B6497324316239",
+                "method": "exact-current-cell-source-link"
+              }
+            ],
+            "expectedProvinceCount": null,
+            "knownProvinceCount": 2,
+            "limitations": [
+              "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+            ],
+            "status": "partial"
+          }
+        },
+        {
+          "kind": "source-region",
+          "id": "source-region:804d1d24616151ff02af068078d745a089c960a94c1939c7c0406f1fbd1807fa",
+          "sourceCountryId": "KOR",
+          "source": {
+            "artifact": {
+              "byteLength": 1203660,
+              "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+              "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+            },
+            "sourceFeatureId": "91817680B85909931268472",
+            "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+            "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+            "temporalNotes": [
+              "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+            ],
+            "temporalStatus": "source-vintage-only"
+          },
+          "provinceIds": [
+            "territory:catalog:b31b98f1374a4a878e75522b36fa3bc447dab6aa1218e931ee93e3a8a10d3503"
+          ],
+          "stateIds": [
+            "fine-macro:KOR:KOR:macro:citypopulation:21"
+          ],
+          "coverage": {
+            "evidence": [
+              {
+                "artifact": {
+                  "byteLength": 1203660,
+                  "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+                  "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+                },
+                "locator": "shapeID:91817680B85909931268472",
+                "method": "pinned-source-name"
+              },
+              {
+                "artifact": {
+                  "byteLength": 169441215,
+                  "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+                  "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e"
+                },
+                "locator": "source:geoboundaries-gbOpen-KOR-ADM2-2020:91817680B85909931268472",
+                "method": "exact-current-cell-source-link"
+              }
+            ],
+            "expectedProvinceCount": null,
+            "knownProvinceCount": 1,
+            "limitations": [
+              "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+            ],
+            "status": "partial"
+          }
+        },
+        {
+          "kind": "source-region",
+          "id": "source-region:ae5dec6dfcbdfdc0b56b96e089bd75845f8da0ba82f302ab2bd6e721d4eec771",
+          "sourceCountryId": "KOR",
+          "source": {
+            "artifact": {
+              "byteLength": 1203660,
+              "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+              "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+            },
+            "sourceFeatureId": "91817680B57927404517776",
+            "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+            "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+            "temporalNotes": [
+              "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+            ],
+            "temporalStatus": "source-vintage-only"
+          },
+          "provinceIds": [
+            "territory:catalog:190e4fec3139f0b4617d33ca0f02c86a26afaa4048607e3ddc18fafb0c6a6c2f"
+          ],
+          "stateIds": [
+            "fine-macro:KOR:KOR:macro:citypopulation:26"
+          ],
+          "coverage": {
+            "evidence": [
+              {
+                "artifact": {
+                  "byteLength": 1203660,
+                  "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+                  "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+                },
+                "locator": "shapeID:91817680B57927404517776",
+                "method": "pinned-source-name"
+              },
+              {
+                "artifact": {
+                  "byteLength": 169441215,
+                  "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+                  "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e"
+                },
+                "locator": "source:geoboundaries-gbOpen-KOR-ADM2-2020:91817680B57927404517776",
+                "method": "exact-current-cell-source-link"
+              }
+            ],
+            "expectedProvinceCount": null,
+            "knownProvinceCount": 1,
+            "limitations": [
+              "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+            ],
+            "status": "partial"
+          }
+        },
+        {
+          "kind": "source-region",
+          "id": "source-region:c331b251d2b675c22297f7b2b2a41485432d30b32596bc77d05e50101fd98d8e",
+          "sourceCountryId": "KOR",
+          "source": {
+            "artifact": {
+              "byteLength": 1203660,
+              "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+              "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+            },
+            "sourceFeatureId": "91817680B30301323398004",
+            "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+            "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+            "temporalNotes": [
+              "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+            ],
+            "temporalStatus": "source-vintage-only"
+          },
+          "provinceIds": [
+            "territory:catalog:17b2f5d3af620a4c4a2f5ec392adf5f3aaba8db1c7331516e063086ef1b701c3"
+          ],
+          "stateIds": [
+            "fine-macro:KOR:KOR:macro:citypopulation:25"
+          ],
+          "coverage": {
+            "evidence": [
+              {
+                "artifact": {
+                  "byteLength": 1203660,
+                  "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+                  "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+                },
+                "locator": "shapeID:91817680B30301323398004",
+                "method": "pinned-source-name"
+              },
+              {
+                "artifact": {
+                  "byteLength": 169441215,
+                  "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+                  "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e"
+                },
+                "locator": "source:geoboundaries-gbOpen-KOR-ADM2-2020:91817680B30301323398004",
+                "method": "exact-current-cell-source-link"
+              }
+            ],
+            "expectedProvinceCount": null,
+            "knownProvinceCount": 1,
+            "limitations": [
+              "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+            ],
+            "status": "partial"
+          }
+        },
+        {
+          "kind": "source-region",
+          "id": "source-region:cab8058f82a6bfbf3af0e66f8c80bbb70682edf3de21fb15fba775e80b1aa8cf",
+          "sourceCountryId": "KOR",
+          "source": {
+            "artifact": {
+              "byteLength": 1203660,
+              "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+              "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+            },
+            "sourceFeatureId": "91817680B29418542168397",
+            "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+            "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+            "temporalNotes": [
+              "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+            ],
+            "temporalStatus": "source-vintage-only"
+          },
+          "provinceIds": [
+            "territory:catalog:ed82fc0dd54e410b2aaf7dd115d66d694af6a11fbbd4bb7d5c3fe9d5cfd7758b"
+          ],
+          "stateIds": [
+            "fine-macro:KOR:KOR:macro:citypopulation:11"
+          ],
+          "coverage": {
+            "evidence": [
+              {
+                "artifact": {
+                  "byteLength": 1203660,
+                  "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+                  "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+                },
+                "locator": "shapeID:91817680B29418542168397",
+                "method": "pinned-source-name"
+              },
+              {
+                "artifact": {
+                  "byteLength": 169441215,
+                  "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+                  "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e"
+                },
+                "locator": "source:geoboundaries-gbOpen-KOR-ADM2-2020:91817680B29418542168397",
+                "method": "exact-current-cell-source-link"
+              }
+            ],
+            "expectedProvinceCount": null,
+            "knownProvinceCount": 1,
+            "limitations": [
+              "Complete known cell linkage is retained; complete original geographic coverage has not been independently admitted."
+            ],
+            "status": "partial"
+          }
+        }
+      ]
+    },
+    "fragmentedSource": {
+      "canonicalId": "source-region:0ffb1aa5aa184e23f0f94a17268cbac20843d159afdfc5a87adcd08563f32589",
+      "source": {
+        "artifact": {
+          "byteLength": 1203660,
+          "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+          "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8"
+        },
+        "sourceFeatureId": "91817680B59614790278386",
+        "sourceId": "geoboundaries-gbOpen-KOR-ADM2-2020",
+        "sourceVersion": "9469f09592ced973a3448cf66b6100b741b64c0d/KOR-ADM2-91817680/228-actual-features",
+        "temporalNotes": [
+          "Pinned source vintage; exact scenario-date administrative status is not certified. See source-lock and hierarchy evidence."
+        ],
+        "temporalStatus": "source-vintage-only"
+      },
+      "provinceIds": [
+        "territory:catalog:6b6645d7afa2facfbc95259048e3b418fde3268e4a1176fb190a09477214305b",
+        "territory:catalog:6ebcf3f559d53e5621e891876aa512a0618579c9342b4379ffed20e7508d5c0c",
+        "territory:catalog:73a2066e93737510efd21bca71e1938d02a3d70547c5083b073013e8d1672dc0"
+      ],
+      "queries": [
+        {
+          "query": "태안군",
+          "canonicalId": "source-region:0ffb1aa5aa184e23f0f94a17268cbac20843d159afdfc5a87adcd08563f32589",
+          "knownProvinceCount": 3,
+          "coverage": "partial"
+        },
+        {
+          "query": "Taean-gun",
+          "canonicalId": "source-region:0ffb1aa5aa184e23f0f94a17268cbac20843d159afdfc5a87adcd08563f32589",
+          "knownProvinceCount": 3,
+          "coverage": "partial"
+        }
+      ]
+    },
+    "spatialIntentsNotRegistered": [
+      "북한 북부",
+      "휴전선 인근",
+      "현재 전선"
+    ]
+  },
+  "preservation": {
+    "nonNameRecordProjectionSha256": "97257585f4dc4ed03c0157287a4e4bac57bd65c59e152fa5778316755ebfebe3",
+    "identicalTo20_03": true,
+    "sourceAndParentAdmissionIdenticalExceptMetadataRef": true,
+    "postMergeCatalogPointerUnchanged": true,
+    "common20_02FilesUnchanged": true,
+    "all1436UnassignedParentsRemainUnassigned": true,
+    "geometryOperations": 0,
+    "userGameAccess": 0,
+    "runtimeIndexOrApiEditsByThisTask": 0
+  },
+  "outputs": [
+    {
+      "path": "data/geography/names/verified-name-facts-v1.json",
+      "sha256": "fc3ffd5ca7683b86485b1a5423e76431de67939e34d1ed1d63b4ca4a7b40410f",
+      "byteLength": 3369
+    },
+    {
+      "path": "data/geography/names/source-name-overrides-v1.json",
+      "sha256": "0d479a4d7d9501e1329b22d8f14744638d57a12670463a10ac792a472ca1dee3",
+      "byteLength": 1788
+    },
+    {
+      "path": "scripts/geography/name-enrichment.ts",
+      "sha256": "170422e5c6360d860a61eaf71ed8a854072f6f9e2a70b5106cee2f8958c528be",
+      "byteLength": 6275
+    },
+    {
+      "path": "scripts/geography/name-enrichment.test.ts",
+      "sha256": "3468a611e6d533c722dcea384e6e2ace983cc525ad00b4d57cfef0cfb7fd14f3",
+      "byteLength": 7081
+    },
+    {
+      "path": "scripts/geography/verify-name-metadata.ts",
+      "sha256": "9bef4d87a2c65e6338ab0b9b992d858a322fc9ba25e70325235f52f038aa82dc",
+      "byteLength": 7697
+    },
+    {
+      "path": "scripts/geography/current-input.ts",
+      "sha256": "44b959fc1ee5fcc3895b7723bfa281c3f7e294f31c5fb26cbe28a3650dfe04ff",
+      "byteLength": 20147
+    },
+    {
+      "path": "scripts/geography/country-adapters.ts",
+      "sha256": "64d2ddee9a5eaec10a0277bff5c97d724636b379289d7aaba2305761940a6261",
+      "byteLength": 7305
+    },
+    {
+      "path": "scripts/geography/metadata-builder.ts",
+      "sha256": "cf84b42dc8c4a36803e46693b6f0e300abbbf703ff429639726259292bcf3f18",
+      "byteLength": 10482
+    },
+    {
+      "path": "scripts/geography/metadata-builder.test.ts",
+      "sha256": "7b2b0b559e26449c402f891eeda19144eeb3ac4e7909dc6e80496a80bd95a56e",
+      "byteLength": 10664
+    },
+    {
+      "path": "scripts/geography/verify-metadata.ts",
+      "sha256": "8a80c2e8e966a18b2078b0594af1f3346596365f6d9dbc288e03b6e85fca98ac",
+      "byteLength": 10374
+    },
+    {
+      "path": "docs/geography/source-names-and-aliases-v1.md",
+      "sha256": "69506411ac43fabdbbc6aa8e818e56f80606f6cfc8e2fbcf79b954f5c009e336",
+      "byteLength": 7212
+    }
+  ],
+  "generationCommand": "node --max-old-space-size=8192 scripts/geography/build-current-metadata.cjs",
+  "handoff20_08": {
+    "runtimeLoaderOrApiVerified": false,
+    "decode": "Verify stored gzip bytes, then decompress and validate the common envelope/ref.",
+    "required": [
+      "Select this metadataRef/manifest with the current full catalogRef",
+      "Check actual B loader/API/scripted-provider results for these static cases",
+      "Preserve partial/unsupported coverage and ambiguity in compact output",
+      "Retain one prepared metadata snapshot and existing action authorization/limits"
+    ]
+  },
+  "limitations": [
+    "All state/source-region coverage remains partial or unsupported; no unsupported complete claim.",
+    "Curated external facts establish spelling only, never membership or source polygon extent.",
+    "No production loader/API activation or external AI calls performed by this task."
+  ]
+}

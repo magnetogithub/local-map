@@ -24,6 +24,7 @@ import {presentationHistory, presentationHistorySchema, type PresentationHistory
 import {authorityMapColorSchema} from './simulation-state-v2';
 import {subdivisionReferenceSchema} from './subdivision-reference';
 import {assertPlayerActionsCanAdvance, isActivePlayerAction} from './queued-player-action';
+import {geographyContextSchema, type GeographyContext} from '../geography/state-province-read';
 
 export const SIMULATION_CONTEXT_LIMITS = Object.freeze({
   countries: 64,
@@ -97,6 +98,7 @@ export type SimulationContextV1 = Readonly<{
   countryMapColors?: readonly Readonly<{countryId: string; mapColor: string}>[];
   territorialControlAuthorities?: readonly TerritorialControlAuthority[];
   regionCatalog?: import("../world/world-geometry-catalog-ref").WorldGeometryCatalogRef;
+  geography?: GeographyContext;
   subdivisions: readonly Readonly<{
     catalogId: string;
     sourceVersion: string;
@@ -157,6 +159,7 @@ export const simulationContextSchema = z.strictObject({
   countryMapColors: z.array(z.strictObject({countryId: countryIdSchema, mapColor: authorityMapColorSchema})).max(SIMULATION_CONTEXT_LIMITS.countryDirectory).optional(),
   territorialControlAuthorities: z.array(territorialControlAuthoritySchema).max(8).optional(),
   regionCatalog: z.strictObject({catalogVersion:z.string().max(160),geometryRoot:z.string().regex(/^[a-f0-9]{64}$/),topologyRoot:z.string().regex(/^[a-f0-9]{64}$/),renderArtifactRoot:z.string().regex(/^[a-f0-9]{64}$/),manifestPath:z.string().max(256)}).optional(),
+  geography: geographyContextSchema.optional(),
   subdivisions: z.array(z.strictObject({
     ...subdivisionReferenceSchema.shape,
     parentCountryId: countryIdSchema,
@@ -176,6 +179,9 @@ export const simulationContextSchema = z.strictObject({
     })).max(256),
   }),
 }).superRefine((context, refinement) => {
+  if (context.geography && (!context.regionCatalog || canonicalStringify(context.geography.catalogRef) !== canonicalStringify(context.regionCatalog))) {
+    refinement.addIssue({code: 'custom', path: ['geography', 'catalogRef'], message: 'Geography must use the same full region catalog snapshot'});
+  }
   const territoryCount = context.territoryDirectory.reduce((total, entry) => total + entry.territoryIds.length, 0);
   if (territoryCount > SIMULATION_CONTEXT_LIMITS.territoryDirectory) {
     refinement.addIssue({code: "custom", path: ["territoryDirectory"], message: "Territory directory exceeds its total bound"});

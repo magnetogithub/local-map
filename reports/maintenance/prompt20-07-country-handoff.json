@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "prompt20-07-country-handoff-v1",
+  "task": "20-07",
+  "status": "complete",
+  "auditDate": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "recordedAt": "2026-11-03T05:23:58.059Z",
+  "scope": "Country producer preparation contract and independent shared-schema helper only",
+  "prerequisite": {
+    "task": "20-02",
+    "record": {
+      "path": "reports/maintenance/prompt20-02-contract.json",
+      "sha256": "d19cce3061f4deb2f6e25f13a546e5d2054148294bb13219728e16efa8934cdc",
+      "byteLength": 4600
+    },
+    "commonFilesUnchanged": [
+      {
+        "path": "src/lib/geography/state-province-contract.ts",
+        "sha256": "f350076106ced6e03ae880840e55666f20ee72a424d9d2ae8790e016fbcfd40f",
+        "byteLength": 9101,
+        "unchangedFrom20_02": true
+      },
+      {
+        "path": "src/lib/geography/state-province-validation.ts",
+        "sha256": "bef4d1013481236755ccf2b8a668a6d163409d363126cc995fbc4528fa2f7863",
+        "byteLength": 17426,
+        "unchangedFrom20_02": true
+      },
+      {
+        "path": "src/lib/geography/state-province-io.ts",
+        "sha256": "73fef37e8384ed2f4e2bac2fd7597f93b09a739dac2ca3c6527633b824249bab",
+        "byteLength": 9445,
+        "unchangedFrom20_02": true
+      },
+      {
+        "path": "src/lib/geography/state-province-contract.test.ts",
+        "sha256": "cafca3a2eee9c45e1b4e120c6f3cfc4ea16eed540a71703e3f972ec6d07d5f7a",
+        "byteLength": 12425,
+        "unchangedFrom20_02": true
+      },
+      {
+        "path": "src/lib/test-only/state-province-contract-fixture.ts",
+        "sha256": "632f8266556e8592d5784e8cbf9584b36128a915f1d638875ec06bb39cc24f05",
+        "byteLength": 9786,
+        "unchangedFrom20_02": true
+      },
+      {
+        "path": "docs/geography/state-province-contract-v1.md",
+        "sha256": "605c02826ce62454b1937d00601aba1b4d27988180cbca92649a313e944f05e1",
+        "byteLength": 23340,
+        "unchangedFrom20_02": true
+      }
+    ]
+  },
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+  },
+  "observedCounts": {
+    "countries": 247,
+    "cells": 8004,
+    "edges": 26272,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "catalogInputs": [
+    {
+      "path": "data/runtime/operational-catalog/current.json",
+      "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+      "byteLength": 251
+    },
+    {
+      "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/artifact-index.json",
+      "sha256": "184de11efa21ffaaaa80afdd0105e06716508eb170e75e0fe16596d24c9bb480",
+      "byteLength": 757545
+    },
+    {
+      "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/catalog.json",
+      "sha256": "6d6b02f6b4dd60e16507af5ca62bd1054e0dd4d0b7d70139b5d9a79d651b4a7d",
+      "byteLength": 2378
+    }
+  ],
+  "catalogChecks": {
+    "pointerUnchangedFromStart": true,
+    "artifactIndexMatchesPointerBytePin": true,
+    "descriptorMatchesArtifactIndexBytePin": true,
+    "fullCatalogRefMatches20_02": true,
+    "polygonsDecoded": false
+  },
+  "productionMetadataRef": null,
+  "productionMetadataSelection": "Not selected or published by 20-07",
+  "helper": {
+    "path": "src/lib/geography/country-metadata-input.ts",
+    "function": "validateCountryMetadataInput(sourceCountryId, value, context)",
+    "inputSchema": "Existing GeographyMetadata; one country and its exact registered province set",
+    "trustedContext": "Full pinned GeographyAdmissionContext with independently admitted source/parent/coverage evidence",
+    "successScope": "country-preparation",
+    "countryAllowlist": null,
+    "sourceCountryValidation": "Catalog sourceCountryId and country-scoped independent sourceMemberships/parentSources",
+    "mutationOrPublication": false
+  },
+  "fixture": {
+    "purpose": "fictional-contract-only; neither source-lock nor adopted/PASS country data",
+    "countries": [
+      "AAA",
+      "BBB"
+    ],
+    "provinces": 5,
+    "reusedFixture": "src/lib/test-only/state-province-contract-fixture.ts",
+    "productionArtifactsWritten": false,
+    "countryPreparationRef": "Each fictional country is separately sealed; these refs are not full-catalog metadata releases"
+  },
+  "outputs": [
+    {
+      "path": "docs/geography/country-metadata-handoff-v1.md",
+      "sha256": "50930eeffd28162e8be07c4c3c318c104138bb1c5f4c019542bb1cd93ed225c0",
+      "byteLength": 15423
+    },
+    {
+      "path": "src/lib/geography/country-metadata-input.ts",
+      "sha256": "864429f272bb579f32995ebf9c17df4ea5ec184580b0ddbd49a9ec098936a9f0",
+      "byteLength": 3222
+    },
+    {
+      "path": "src/lib/geography/country-metadata-input.test.ts",
+      "sha256": "ef735d327711a52ae6f4688cea368024cd78cb40231381f027c477bb850cede6",
+      "byteLength": 9480
+    },
+    {
+      "path": "src/lib/test-only/country-metadata-handoff-fixture.ts",
+      "sha256": "911de7f93ed9bde4c340b2cfb212e99db32fb7f79ee019962821cdbcb1ab2369",
+      "byteLength": 1129
+    }
+  ],
+  "validation": {
+    "tests": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/geography/country-metadata-input.test.ts src/lib/geography/state-province-contract.test.ts",
+      "passed": 48,
+      "failed": 0,
+      "countryHelperTests": 28,
+      "commonContractTests": 20
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js src/lib/geography/country-metadata-input.ts src/lib/geography/country-metadata-input.test.ts src/lib/test-only/country-metadata-handoff-fixture.ts",
+      "status": "passed",
+      "exitCode": 0
+    },
+    "scopedTypeCheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false --project .tmp/prompt20-07/tsconfig.json",
+      "status": "passed",
+      "exitCode": 0,
+      "configuration": "Extends root tsconfig; includes helper, dedicated test and fixture plus transitive shared imports"
+    },
+    "fullProjectTypeCheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "status": "failed-in-separate-concurrent-work",
+      "latestAttemptExitCode": 1,
+      "latestObservedDiagnostics": [
+        {
+          "path": "src/lib/geography/state-province-loader.server.test.ts:153",
+          "code": "TS2345",
+          "detail": "Country result passed to GeographyResult<never>"
+        },
+        {
+          "path": "src/lib/geography/state-province-loader.server.test.ts:153",
+          "code": "TS2339",
+          "detail": "counts does not exist on never"
+        },
+        {
+          "path": "src/lib/geography/state-province-loader.server.test.ts:254",
+          "code": "TS2345",
+          "detail": "string passed to Uint8Array parameter"
+        }
+      ],
+      "earlierAttempt": "Three TS2322 errors in separately added state-province-index.server.ts",
+      "action": "Did not edit B-owned files; verified 20-07 scope separately. Diagnostic state may change as other work continues."
+    },
+    "productionBuild": "Not run: no runtime/API/UI integration changed in 20-07",
+    "externalAIRequests": 0
+  },
+  "preserved": [
+    "Active catalog pointer and descriptor identities verified unchanged",
+    "All six existing 20-02 common contract/document/fixture/test files verified byte-identical",
+    "No writes to raw/source-locks, geometry/topology, catalog memberships, ID/ordinal/seed lineage, CHN presentation, saves or user games",
+    "Existing country generation and publication restrictions left intact"
+  ],
+  "handoff20_08": [
+    "Re-read latest current pointer and verify input byte pins and source-country crosswalks independently",
+    "Run helper for each producer input against the matching latest catalog context",
+    "Assemble all countries/provinces with A output, reseal full-catalog metadataRef and match global admission/manifest identities",
+    "Use B loader/API/model/prepared paths to validate actual production metadata and consumers",
+    "Rerun full project type check after the separately owned lookup work is complete"
+  ],
+  "notImplemented": [
+    "Actual next-country source collection, adoption or fine geometry generation",
+    "Generic country-addition CLI or removal of generator/publication restrictions",
+    "Production builder/loader/API wiring and latest catalog publication"
+  ],
+  "handoffDocument": "docs/geography/country-metadata-handoff-v1.md"
+}

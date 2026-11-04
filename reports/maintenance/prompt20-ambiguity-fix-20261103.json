@@ -1,0 +1,424 @@
+{
+  "schemaVersion": "prompt20-ambiguity-fix-v1",
+  "status": "verified",
+  "recordedAt": "2026-11-03T07:23:45.101Z",
+  "scope": "R1 only; explicit query kind guidance and canonical unfiltered name matches.",
+  "metadataRef": {
+    "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+    "schemaVersion": "geography-metadata-ref-v1"
+  },
+  "checks": {
+    "tests": {
+      "total": 41,
+      "passed": 41,
+      "failed": 0,
+      "files": 3
+    },
+    "typecheckExitCode": 0,
+    "lintExitCode": 0,
+    "productionBuild": {
+      "exitCode": 0,
+      "directory": ".next-prompt20-ambiguity-build",
+      "temporaryTsconfigIncludesRemoved": true
+    },
+    "protectedInputAndArtifactPins": {
+      "verified": 301,
+      "failed": 0
+    },
+    "productionHttp": {
+      "isolatedServer": true,
+      "externalAICalls": 0,
+      "cases": [
+        {
+          "query": "청진",
+          "country": "PRK",
+          "kind": "source-region",
+          "status": 200,
+          "ok": true,
+          "total": 1,
+          "ambiguous": false,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "source-region",
+              "id": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+              "name": "Chongjin City",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "Chongjin City",
+          "country": "PRK",
+          "kind": "source-region",
+          "status": 200,
+          "ok": true,
+          "total": 1,
+          "ambiguous": false,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "source-region",
+              "id": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+              "name": "Chongjin City",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "청진",
+          "country": "PRK",
+          "kind": null,
+          "status": 200,
+          "ok": true,
+          "total": 1,
+          "ambiguous": false,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "source-region",
+              "id": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+              "name": "Chongjin City",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "태안군",
+          "country": "KOR",
+          "kind": "source-region",
+          "status": 200,
+          "ok": true,
+          "total": 1,
+          "ambiguous": false,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "source-region",
+              "id": "source-region:0ffb1aa5aa184e23f0f94a17268cbac20843d159afdfc5a87adcd08563f32589",
+              "name": "Taean-gun",
+              "knownCells": 3,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "태안군",
+          "country": "KOR",
+          "kind": null,
+          "status": 200,
+          "ok": true,
+          "total": 1,
+          "ambiguous": false,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "source-region",
+              "id": "source-region:0ffb1aa5aa184e23f0f94a17268cbac20843d159afdfc5a87adcd08563f32589",
+              "name": "Taean-gun",
+              "knownCells": 3,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "중구",
+          "country": "KOR",
+          "kind": "source-region",
+          "status": 200,
+          "ok": true,
+          "total": 6,
+          "ambiguous": true,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "source-region",
+              "id": "source-region:6a0a43d58d8d99c48aa43330e3cd211f16917725dfc1d68bee67efc9ee251ba7",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:7c00dd959c8ba22d1d04d5b99cfdad8fe1467a1e53b856455e8b82f9dca874f8",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 2,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:804d1d24616151ff02af068078d745a089c960a94c1939c7c0406f1fbd1807fa",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:ae5dec6dfcbdfdc0b56b96e089bd75845f8da0ba82f302ab2bd6e721d4eec771",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:c331b251d2b675c22297f7b2b2a41485432d30b32596bc77d05e50101fd98d8e",
+              "name": "Jung-gu",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:cab8058f82a6bfbf3af0e66f8c80bbb70682edf3de21fb15fba775e80b1aa8cf",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "중구",
+          "country": "KOR",
+          "kind": null,
+          "status": 200,
+          "ok": true,
+          "total": 6,
+          "ambiguous": true,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "source-region",
+              "id": "source-region:6a0a43d58d8d99c48aa43330e3cd211f16917725dfc1d68bee67efc9ee251ba7",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:7c00dd959c8ba22d1d04d5b99cfdad8fe1467a1e53b856455e8b82f9dca874f8",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 2,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:804d1d24616151ff02af068078d745a089c960a94c1939c7c0406f1fbd1807fa",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:ae5dec6dfcbdfdc0b56b96e089bd75845f8da0ba82f302ab2bd6e721d4eec771",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:c331b251d2b675c22297f7b2b2a41485432d30b32596bc77d05e50101fd98d8e",
+              "name": "Jung-gu",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            },
+            {
+              "kind": "source-region",
+              "id": "source-region:cab8058f82a6bfbf3af0e66f8c80bbb70682edf3de21fb15fba775e80b1aa8cf",
+              "name": "Jung-gu [Central District]",
+              "knownCells": 1,
+              "coverage": "partial",
+              "parent": "verified",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "내몽골",
+          "country": "CHN",
+          "kind": "state",
+          "status": 200,
+          "ok": true,
+          "total": 1,
+          "ambiguous": false,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "state",
+              "id": "fine-macro:CHN:macro:CHN:CN-15",
+              "name": "Inner Mongolia",
+              "knownCells": 48,
+              "coverage": "partial",
+              "parent": "not-applicable",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "Inner Mongolia",
+          "country": "CHN",
+          "kind": "state",
+          "status": 200,
+          "ok": true,
+          "total": 1,
+          "ambiguous": false,
+          "truncated": false,
+          "items": [
+            {
+              "kind": "state",
+              "id": "fine-macro:CHN:macro:CHN:CN-15",
+              "name": "Inner Mongolia",
+              "knownCells": 48,
+              "coverage": "partial",
+              "parent": "not-applicable",
+              "materialization": "unsupported"
+            }
+          ]
+        },
+        {
+          "query": "북한 북부",
+          "country": "PRK",
+          "kind": null,
+          "status": 200,
+          "ok": true,
+          "total": 0,
+          "ambiguous": false,
+          "truncated": false,
+          "items": []
+        }
+      ],
+      "stale": {
+        "status": 409,
+        "body": {
+          "ok": false,
+          "status": "stale",
+          "diagnostics": [
+            {
+              "code": "GEOGRAPHY_METADATA",
+              "path": "registry",
+              "message": "Requested metadata is not the selected production snapshot",
+              "remedy": "pin-metadata"
+            }
+          ]
+        }
+      },
+      "badCountry": {
+        "status": 400,
+        "body": {
+          "ok": false,
+          "diagnostics": [
+            {
+              "code": "GEOGRAPHY_CATALOG",
+              "path": "search.sourceCountryId",
+              "message": "Unknown source country in the pinned snapshot",
+              "remedy": "rebuild-for-catalog"
+            }
+          ],
+          "countryIdSemantics": "source"
+        }
+      },
+      "missingRequiredNullable": {
+        "status": 400,
+        "ok": false
+      },
+      "legacyInnerMongolia": {
+        "status": 200,
+        "materializable": false,
+        "coverage": "partial"
+      },
+      "prepared": {
+        "status": 200,
+        "geography": {
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+            "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+            "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+            "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+          },
+          "metadataRef": {
+            "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+            "schemaVersion": "geography-metadata-ref-v1"
+          }
+        }
+      },
+      "readOnlyGame": {
+        "status": 200,
+        "revisionsUnchanged": true,
+        "canUndo": false
+      },
+      "assertionsPassed": true,
+      "status": "finished"
+    },
+    "externalAICalls": 0
+  },
+  "code": [
+    {
+      "path": "src/lib/geography/state-province-index.server.ts",
+      "sha256": "248e17b2b522d06acb01de8794d114748877c2a5896b7995f22bfaf5fbfffdda",
+      "byteLength": 12775
+    },
+    {
+      "path": "src/lib/geography/state-province-loader.server.test.ts",
+      "sha256": "ca55a385f4a9c719a2da794e77a63c337d2eca1e9b2fa32613e6802f382e2565",
+      "byteLength": 25928
+    },
+    {
+      "path": "src/lib/geography/state-province-consumer.test.ts",
+      "sha256": "dc7379d4af8b69e8e41f4eeadeba3b96c86a2e6b135af4c1bb81e47c51683d86",
+      "byteLength": 20041
+    },
+    {
+      "path": "src/lib/geography/production-geography.integration.test.ts",
+      "sha256": "950437bac4867f26314ec6e8a8645ccf37523e8deba5d44262a4c985ddcef863",
+      "byteLength": 20194
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-instruction.ts",
+      "sha256": "a99224388a6fb91766b0fa6546fc3e6fbe340131f6acfc61fbaf54c5a0bf6b30",
+      "byteLength": 14310
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-tools.ts",
+      "sha256": "59a79c10e026316e7ceec0ab9fe6bbf9f36a7ac09f7de6af9beaba9c1459f73b",
+      "byteLength": 15031
+    }
+  ],
+  "remainingReviewItems": [
+    "R2: live catalog tests use fixed counts/fine country list.",
+    "Existing catalog-version/session-preservation test conflict."
+  ]
+}

@@ -10,6 +10,7 @@ import {selectOperationalFrontier} from '../operational-frontier.server';
 import {createOperationalGameSession, type OperationalGameSession} from './operational-game-session';
 import type {OperationalGameStart, OperationalCountryPresentation} from '../operational-game-protocol';
 import currentOperationalCatalog from '../../../../data/runtime/operational-catalog/current.json';
+import type {GeographySnapshot} from '../../geography/state-province-io';
 import {captureOperationalGamePreservation, writeOperationalGameCheckpoint} from './operational-game-checkpoint';
 
 // Route bundles share the same local games, including across development module reloads.
@@ -17,6 +18,11 @@ type GameSessions = Map<string, {session: OperationalGameSession; touched: numbe
 type GamePool = {catalogKey: string; sessions: GameSessions; catalogPointer?: typeof currentOperationalCatalog; maintenanceLocked?: boolean};
 const host = globalThis as typeof globalThis & {__paxOperationalGames?: unknown; __paxOperationalGamesV19?: GameSessions;
   __paxOperationalGamePool?: GamePool; __paxOperationalGamePoolsV20?: Map<string, GamePool>};
+function assertSupportedGamePools() {
+  if ((host.__paxOperationalGamesV19?.size ?? 0) > 0 || host.__paxOperationalGames != null) throw Error('UNSUPPORTED_LEGACY_GAME_POOL_PRESENT');
+}
+// Refuse unsupported originals before installing any replacement pool, even without a previous pointer.
+assertSupportedGamePools();
 const catalogKey = currentOperationalCatalog.catalogVersion + ':' + currentOperationalCatalog.index.sha256;
 const pools = host.__paxOperationalGamePoolsV20 ??= new Map();
 const previousPool = host.__paxOperationalGamePool;
@@ -25,7 +31,7 @@ if (previousPool) {
   if (previousPool.catalogKey === catalogKey) previousPool.catalogPointer ??= currentOperationalCatalog;
 }
 function checkpointPools(selected: readonly GamePool[]) {
-  if ((host.__paxOperationalGamesV19?.size ?? 0) > 0 || host.__paxOperationalGames != null) throw Error('UNSUPPORTED_LEGACY_GAME_POOL_PRESENT');
+  assertSupportedGamePools();
   for (const pool of selected) for (const value of pool.sessions.values()) if (value.session.isBusy()) throw Error('GAME_CHECKPOINT_BUSY');
   const locks = selected.map(pool => pool.maintenanceLocked);selected.forEach(pool => {pool.maintenanceLocked = true;});
   try {
@@ -56,12 +62,12 @@ function countryPresentation() {
   });
   return presentation;
 }
-export function startOperationalGame(): OperationalGameStart {
+export function startOperationalGame(geography?: GeographySnapshot): OperationalGameStart {
   if (activePool.maintenanceLocked) throw Error('GAME_CHECKPOINT_LOCKED');
   const now = Date.now();
   for (const [id, value] of sessions) if (!value.session.isBusy() && now - value.touched > SESSION_LIFETIME) sessions.delete(id);
   if (sessions.size >= 8) throw Error('TOO_MANY_LOCAL_GAMES');
-  const game = createProductionOperationalGame(), catalog = loadOperationalCatalog(), regionIndex = loadCatalogRegionIndex(catalog.ref);
+  const game = createProductionOperationalGame(), catalog = loadOperationalCatalog(), regionIndex = loadCatalogRegionIndex(catalog.ref, geography);
   const session = createOperationalGameSession({seed: game.pair, catalog: game.catalog, regionIndex,
     frontier: (world, scope) => selectOperationalFrontier(catalog, world, scope, regionIndex), actionId: () => `action.${randomUUID()}`});
   const runs: [number, string, string | null, string | null][] = [];

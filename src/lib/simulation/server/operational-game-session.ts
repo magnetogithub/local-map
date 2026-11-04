@@ -13,6 +13,9 @@ import type {OperationalFrontierValidation} from '../operational-frontier-valida
 import type {OperationalControlCounts, OperationalGameCommand, OperationalGameSnapshot} from '../operational-game-protocol';
 import type {WorldStateV3} from '../../world/world-state-v3';
 import type {SimulationModelProvider, SimulationProviderRequest} from './simulation-provider';
+import type {GeographySnapshot} from '../../geography/state-province-io';
+import {geographySnapshotKey} from '../../geography/state-province-io';
+import {assertGeographyContextSnapshot} from '../../geography/state-province-read';
 
 /** One local game's authoritative pair/history. Provider failures publish no state. */
 export function createOperationalGameSession(input: {
@@ -21,13 +24,25 @@ export function createOperationalGameSession(input: {
   regionIndex: CatalogRegionIndex;
   frontier: OperationalFrontierValidation['resolve'];
   actionId: () => string;
+  /** Already-loaded server objects; manifest selection/async loading belongs to the caller. */
+  prepareGeography?: () => Readonly<{snapshot: GeographySnapshot; regionIndex: CatalogRegionIndex}> | undefined;
 }) {
   const runtime = createCatalogRuntime(input.seed, input.catalog);
   const key = (r: CatalogRuntimePair['revisions']) => `${r.worldRevision}:${r.simulationRevision}`;
   const versions = new Map([[key(input.seed.revisions), input.seed]]);
   const countCache = new WeakMap<WorldStateV3, OperationalControlCounts>();
   let busy = false, report: TurnReport | null = null;
-  let preparedContext: Readonly<{base: CatalogRuntimePair; targetDate: string; turnId: string; canonical: string}> | undefined;
+  let selectedGeography: Readonly<{snapshot: GeographySnapshot; regionIndex: CatalogRegionIndex}> | undefined;
+  const setPreparationGeography = (geography: NonNullable<typeof selectedGeography>) => {
+    if (busy) throw Error('TURN_IN_PROGRESS');
+    const catalogRef = runtime.getSnapshot().world.catalogRef, metadataRef = geography.snapshot.metadataRef;
+    assertGeographyContextSnapshot({catalogRef, metadataRef}, geography.snapshot);
+    assertGeographyContextSnapshot({catalogRef, metadataRef}, geography.regionIndex.geography?.snapshot);
+    // Retain an already prepared request until an explicit new prepare selects this version.
+    selectedGeography = Object.freeze({...geography});
+  };
+  let preparedContext: Readonly<{base: CatalogRuntimePair; targetDate: string; turnId: string; canonical: string;
+    metadataKey: string; geographySnapshot?: GeographySnapshot; regionIndex: CatalogRegionIndex}> | undefined;
   const remember = () => {
     const pair = runtime.getSnapshot(); versions.set(key(pair.revisions), pair);
     while (versions.size > 64) versions.delete(versions.keys().next().value!);
@@ -65,14 +80,23 @@ export function createOperationalGameSession(input: {
   };
   const expectedContext = (targetDate: string) => {
     const base = runtime.getSnapshot(), {world, simulation} = base;
-    if (preparedContext?.base === base && preparedContext.targetDate === targetDate) return preparedContext;
+    const geography = selectedGeography ?? input.prepareGeography?.() ?? (input.regionIndex.geography ? {snapshot: input.regionIndex.geography.snapshot, regionIndex: input.regionIndex} : undefined);
+    const regionIndex = geography?.regionIndex ?? input.regionIndex;
+    const metadataKey = geography ? geographySnapshotKey(world.catalogRef, geography.snapshot.metadataRef) : 'none';
+    if (geography) {
+      assertGeographyContextSnapshot({catalogRef: world.catalogRef, metadataRef: geography.snapshot.metadataRef}, geography.snapshot);
+      assertGeographyContextSnapshot({catalogRef: world.catalogRef, metadataRef: geography.snapshot.metadataRef}, regionIndex.geography?.snapshot);
+    }
+    if (preparedContext?.base === base && preparedContext.targetDate === targetDate && preparedContext.metadataKey === metadataKey) return preparedContext;
     preparedContext = undefined;
     targetDateForCustomInput(simulation.currentDate, targetDate);
-    const context = parseSimulationContextV1(buildSimulationContext({world, simulation, countrySearchProjection: createCountrySearchProjection(world),
-      subdivisionCatalog: {listCountry: id => input.regionIndex.listCountry(id).slice(0, 128).map(r => ({ref: r.ref, parentCountryId: r.parentCountryId, nameKo: r.nameKo, nameEn: r.nameEn, materializable: false})), inspect: () => null, materialize: () => null},
-      scenarioId: '2020-otl', scenarioStartDate: '2020-01-01', targetDate}));
+    const context = parseSimulationContextV1({...buildSimulationContext({world, simulation, countrySearchProjection: createCountrySearchProjection(world),
+      subdivisionCatalog: {listCountry: id => regionIndex.listCountry(id).slice(0, 128).map(r => ({ref: r.ref, parentCountryId: r.parentCountryId, nameKo: r.nameKo, nameEn: r.nameEn, materializable: false})), inspect: () => null, materialize: () => null},
+      scenarioId: '2020-otl', scenarioStartDate: '2020-01-01', targetDate}),
+      ...(geography ? {geography: {catalogRef: geography.snapshot.catalogRef, metadataRef: geography.snapshot.metadataRef}} : {})});
     // Keep one private value; returned/request contexts cannot mutate the expected comparison.
-    preparedContext = Object.freeze({base, targetDate, turnId: `turn.${simulation.turnNumber + 1}.${simulation.revision}`, canonical: canonicalStringify(context)});
+    preparedContext = Object.freeze({base, targetDate, turnId: `turn.${simulation.turnNumber + 1}.${simulation.revision}`, canonical: canonicalStringify(context),
+      metadataKey, geographySnapshot: geography?.snapshot, regionIndex});
     return preparedContext;
   };
   const assertRevisions = (expected: CatalogRuntimePair['revisions']) => {
@@ -106,7 +130,8 @@ export function createOperationalGameSession(input: {
     if (busy) throw Error('TURN_IN_PROGRESS');
     const base = runtime.getSnapshot();
     if (request.turnId !== `turn.${base.simulation.turnNumber + 1}.${base.simulation.revision}`) throw Error('STALE_STATE');
-    const submitted = canonicalStringify(request.context), expected = expectedContext(request.context.period.endDate);
+    const submitted = canonicalStringify(request.context), expected = preparedContext?.base === base && preparedContext.targetDate === request.context.period.endDate
+      ? preparedContext : expectedContext(request.context.period.endDate);
     if (expected.base !== base || expected.turnId !== request.turnId || runtime.getSnapshot() !== base || submitted !== expected.canonical) throw Error('STALE_STATE');
     return base.world;
   };
@@ -116,13 +141,15 @@ export function createOperationalGameSession(input: {
       resolveRequest(request);
       busy = true;
       const base = runtime.getSnapshot();
+      const prepared = preparedContext!;
       try {
         for await (const event of source.streamTurn({...request, operationalWorld: base.world,
+          geographySnapshot: prepared.geographySnapshot, preparedRegionIndex: prepared.regionIndex,
           operationalTerritorialAuthorities: base.simulation.territorialControlAuthorityOrder.map(id => base.simulation.territorialControlAuthoritiesById[id])}, signal)) {
           signal.throwIfAborted();
           if (event.type === 'resolution.ready') {
             if (runtime.getSnapshot() !== base) throw Error('STALE_STATE');
-            const plan = createCatalogTurnPlan({...base, turnId: request.turnId, resolution: event.resolution, catalog: input.catalog, regionIndex: input.regionIndex,
+            const plan = createCatalogTurnPlan({...base, turnId: request.turnId, resolution: event.resolution, catalog: input.catalog, regionIndex: prepared.regionIndex,
               frontier: {world: base.world, resolve: input.frontier}});
             const nextReport = createCommittedTurnReport(plan);
             runtime.commit(plan); report = nextReport;
@@ -133,6 +160,6 @@ export function createOperationalGameSession(input: {
       } finally {busy = false;}
     },
   });
-  return {runtime, snapshot, command, resolveRequest, provider, isBusy: () => busy};
+  return {runtime, snapshot, command, resolveRequest, provider, setPreparationGeography, isBusy: () => busy};
 }
 export type OperationalGameSession = ReturnType<typeof createOperationalGameSession>;

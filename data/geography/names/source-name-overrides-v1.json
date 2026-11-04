@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "geography-source-name-overrides-v1",
+  "entries": [
+    {
+      "sourceCountryId": "PRK",
+      "sourceId": "geoboundaries-gbOpen-PRK-ADM2-82179303",
+      "sourceFeatureId": "82179303B21659587132529",
+      "sourceVersion": "geoBoundaries gbOpen PRK-ADM2-82179303 / revision 9469f09 / build 2023-12-12",
+      "expectedSourceName": "Chongjin City",
+      "nameKo": {"value": "청진시", "factIds": ["chongjin-korean-name"]},
+      "nameEn": {"value": "Chongjin City", "factIds": ["chongjin-english-name"]},
+      "aliases": [
+        {"value": "청진", "language": "ko", "factIds": ["chongjin-korean-name"]},
+        {"value": "Chongjin", "language": "en", "factIds": ["chongjin-english-name"]}
+      ]
+    },
+    {
+      "sourceCountryId": "CHN",
+      "sourceId": "geoBoundaries-3_0_0-CHN-ADM1",
+      "sourceFeatureId": "CHN-ADM1-3_0_0-B18",
+      "sourceVersion": "geoBoundaries-3_0_0/CHN/ADM1",
+      "expectedSourceName": "Inner Mongolia",
+      "nameKo": {"value": "내몽골 자치구", "factIds": ["inner-mongolia-pinned-names"]},
+      "nameEn": {"value": "Inner Mongolia", "factIds": ["inner-mongolia-pinned-names"]},
+      "aliases": [
+        {"value": "내몽골", "language": "ko", "factIds": ["inner-mongolia-pinned-names"]},
+        {"value": "Inner Mongol", "language": "en", "factIds": ["inner-mongolia-pinned-names"]},
+        {"value": "Inner Mongolia Autonomous Region", "language": "en", "factIds": ["inner-mongolia-pinned-names"]},
+        {"value": "Nei Mongol", "language": "en", "factIds": ["inner-mongolia-pinned-names"]},
+        {"value": "Nèiměnggǔ", "language": "en", "factIds": ["inner-mongolia-pinned-names"]},
+        {"value": "Neimenggu", "language": "en", "factIds": ["inner-mongolia-neimenggu-name"]}
+      ]
+    }
+  ]
+}

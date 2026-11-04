@@ -1,0 +1,374 @@
+{
+  "schemaVersion": "prompt20-06-consumer-handoff-v1",
+  "task": "20-06",
+  "status": "complete",
+  "auditDate": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "recordedAt": "2026-11-03T05:43:21.420Z",
+  "scope": "Canonical geography API/model/prepared-context consumers with injected common fixture; production manifest activation deferred to 20-08",
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+  },
+  "observedCounts": {
+    "countries": 247,
+    "cells": 8004,
+    "edges": 26272,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "productionMetadataRef": null,
+  "fixture": {
+    "purpose": "fictional-contract-only",
+    "catalogRef": {
+      "catalogVersion": "synthetic-geography-v1",
+      "geometryRoot": "1111111111111111111111111111111111111111111111111111111111111111",
+      "topologyRoot": "2222222222222222222222222222222222222222222222222222222222222222",
+      "renderArtifactRoot": "3333333333333333333333333333333333333333333333333333333333333333",
+      "manifestPath": "/data/catalogs/synthetic-geography-v1/manifest.json"
+    },
+    "metadataRef": {
+      "schemaVersion": "geography-metadata-ref-v1",
+      "contentRoot": "7b5d471b396fef5c5264bbf89c51a84ea02e4617ec3c13bd22671591b172b56b"
+    },
+    "manifest": {
+      "path": "fixtures/geography/manifest.json",
+      "sha256": "01e8791b311d1c3b7f9282da7d9df5b9f6af4d482126ebeb7dcf251cf18f8f51",
+      "byteLength": 887
+    },
+    "states": 2,
+    "provinces": 5,
+    "sourceRegions": 3
+  },
+  "outputs": [
+    {
+      "path": "src/app/api/world/regions/route.ts",
+      "sha256": "9ed98006d8be414709ae18f8682998d20ce8b51f30a8251d9c3ff83790f4b474",
+      "byteLength": 153
+    },
+    {
+      "path": "src/lib/simulation/catalog-region.server.ts",
+      "sha256": "6e2bbb1231c0511b861a8f65588bc2f31e7994d3c2f8677e32801edf0052c672",
+      "byteLength": 5355
+    },
+    {
+      "path": "src/lib/simulation/catalog-region.ts",
+      "sha256": "57abdac7ab06c3c14d1077d5099c4f03b7d0b3178868981a1050af1a9ac81945",
+      "byteLength": 4978
+    },
+    {
+      "path": "src/lib/simulation/operational-region.server.ts",
+      "sha256": "9ddd33cb70b366973d05339de98d73d84c8c4f9d8920f9516fe25c5733c019c9",
+      "byteLength": 5681
+    },
+    {
+      "path": "src/lib/simulation/server/context-resolution-validator.ts",
+      "sha256": "63485ab6da9f6e2d96f8da9addbee30e69063d92f997be31c0411f325d4b1d14",
+      "byteLength": 23991
+    },
+    {
+      "path": "src/lib/simulation/server/openai-responses-provider.ts",
+      "sha256": "5d62d30f80a3c3a5fa1e4e5240931cf71c32cb17fe7d2f74527c1412b10b4657",
+      "byteLength": 16772
+    },
+    {
+      "path": "src/lib/simulation/server/operational-game-session.ts",
+      "sha256": "acf7807123050225bf54c2a33157423e797fb7484ad2a49a15fced05adb57431",
+      "byteLength": 11384
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-instruction.ts",
+      "sha256": "387844e55f876e05afdc779cc59e54101ef4387bbf99ed893744dff8ac8eb86e",
+      "byteLength": 13683
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-provider.ts",
+      "sha256": "a3c5f784c6dbab47ac87b93e3cf01916f9ea22f55c6a9e15515895efc0365620",
+      "byteLength": 2317
+    },
+    {
+      "path": "src/lib/simulation/server/simulation-tools.ts",
+      "sha256": "243465a6a9af949c41d27e43f04002015f839ece68fd66716f8411a64fabfbf4",
+      "byteLength": 14738
+    },
+    {
+      "path": "src/lib/simulation/simulation-context.ts",
+      "sha256": "8c02beb5d4b9ad18aeee746c5f2e05a9a481790bb5ab03b6db6d0cea4d49f7cd",
+      "byteLength": 19397
+    },
+    {
+      "path": "src/lib/geography/state-province-read.ts",
+      "sha256": "82322487c3b39337aedc9e3bd52099b21539ebdda91e4882b733eae785a1f909",
+      "byteLength": 5200
+    },
+    {
+      "path": "src/lib/geography/state-province-region.server.ts",
+      "sha256": "8e187363fb762d2e15ba1224b6c9d0f23fa4cf0de4cea063060e0d763cf3a04a",
+      "byteLength": 5366
+    },
+    {
+      "path": "src/lib/geography/state-province-consumer.test.ts",
+      "sha256": "d2a612d10afaa0b9900e3389f306589d828334887b78d7e1c0edec5701b5a8e5",
+      "byteLength": 19181
+    },
+    {
+      "path": "src/lib/simulation/server/region-route-handler.ts",
+      "sha256": "fa6498491de8a941ed8056d301ca00c6efd5daf3a24db2ffc88e020b2a2f8264",
+      "byteLength": 4292
+    },
+    {
+      "path": "docs/geography/state-province-consumers-v1.md",
+      "sha256": "f37aa0e47db6c9da11873f1116ce0ffba19f380b678b0a7d89f01276c286c3cf",
+      "byteLength": 8536
+    }
+  ],
+  "implemented": {
+    "sharedReadContract": "strict geographyReadRequestSchema and executeGeographyRead shared by HTTP and AI; required nullable fields",
+    "api": "POST /api/world/regions mode:'geography' with catalogRef, metadataRef and request; search/list/inspect/members",
+    "apiFactory": "createRegionPost({loadGeography,loadIndex}) with stale=409, unavailable=503, invalid=400, body cap=4096 bytes and no-store",
+    "modelTool": "read_geography only when a snapshot is pinned; strict schema and host validation; all evidence, kind, parent, coverage, materialization and pagination facts preserved",
+    "legacyAdapter": "attachGeographyRegionIndex exact parent/reference crosswalk, complete known membership comparison, explicit full catalog pin; no state/source/province ID inserted into subdivisionId",
+    "oldLookupCompatibility": "Original references retained, optional metadataRef for legacy HTTP; attached operational lookup reads canonical names/aliases and compact quality facts; unsupported regions are not executable legacy targets",
+    "prepared": "Base pair + targetDate + full geographySnapshotKey cache identity; one retained snapshot/index across model view, tools, validation and plan; updated prepare invalidates stale metadata context",
+    "hostOnlyObjects": [
+      "SimulationProviderRequest.geographySnapshot",
+      "SimulationProviderRequest.preparedRegionIndex"
+    ],
+    "immutableClassification": "sourceCountryId remains original geography after ownership changes; actor/owner/controller remain supplied-world state",
+    "actionSemantics": "No new effect schema, spatial resolver or authority policy. Existing current-frontier/revision/aggregate 512-cell/8-ref/atomic commit and undo/redo boundaries retained"
+  },
+  "validation": {
+    "uniqueTests": {
+      "passed": 92,
+      "failed": 1,
+      "newConsumerTestsPassed": 7,
+      "allTestsPassed": false
+    },
+    "suites": [
+      {
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/geography/state-province-loader.server.test.ts src/lib/simulation/server/provider-route.test.ts src/lib/simulation/server/operational-provider.test.ts src/lib/simulation/server/operational-game-version.test.ts src/lib/simulation/operational-region.test.ts",
+        "files": 5,
+        "passed": 58,
+        "failed": 1
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/geography/state-province-consumer.test.ts src/lib/simulation/server/operational-game-pool-preservation.test.ts src/lib/simulation/server/operational-game-allocation.test.ts src/lib/simulation/operational-territorial-runtime.test.ts src/lib/simulation/catalog-region-integration.test.ts",
+        "files": 5,
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/server/operational-game-checkpoint.test.ts src/lib/simulation/simulation-context-production.test.ts",
+        "files": 2,
+        "passed": 9,
+        "failed": 0
+      }
+    ],
+    "finalNewConsumerRerun": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/geography/state-province-consumer.test.ts",
+      "passed": 7,
+      "failed": 0,
+      "note": "After routing scripted provider through the real turn HTTP handler; duplicate tests excluded from unique total"
+    },
+    "unrelatedExistingFailure": {
+      "file": "src/lib/simulation/server/operational-game-version.test.ts",
+      "test": "invalidates sessions retained across a catalog change and rejects their IDs",
+      "error": "UNSUPPORTED_LEGACY_GAME_POOL_PRESENT",
+      "cause": "Old test expects deletion of retained/legacy sessions; current game server preserves pools and refuses an unsupported legacy pool before activation",
+      "evidence": "Both the failure test and operational-game.server.ts have zero diff from HEAD; failure is at unchanged module checkpoint activation, before session preparation",
+      "unchangedFiles": [
+        {
+          "path": "src/lib/simulation/server/operational-game.server.ts",
+          "sha256": "05b33b4edb8b15a48fd479746d9ad9f237d4d0dac7d9728bd52e79decd3e3c7c",
+          "byteLength": 8166
+        },
+        {
+          "path": "src/lib/simulation/server/operational-game-version.test.ts",
+          "sha256": "d72efa0d15b4e6af113a142be99be6e3f63b3e82215de3eadb2e4ee567417419",
+          "byteLength": 1769
+        }
+      ],
+      "handling": "No deletion, test weakening or unrelated server behavior change; current pool preservation, allocation and checkpoint suites passed"
+    },
+    "typeCheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "status": "passed"
+    },
+    "changedFileLint": {
+      "status": "passed",
+      "files": [
+        "src/app/api/world/regions/route.ts",
+        "src/lib/simulation/catalog-region.server.ts",
+        "src/lib/simulation/catalog-region.ts",
+        "src/lib/simulation/operational-region.server.ts",
+        "src/lib/simulation/server/context-resolution-validator.ts",
+        "src/lib/simulation/server/openai-responses-provider.ts",
+        "src/lib/simulation/server/operational-game-session.ts",
+        "src/lib/simulation/server/simulation-instruction.ts",
+        "src/lib/simulation/server/simulation-provider.ts",
+        "src/lib/simulation/server/simulation-tools.ts",
+        "src/lib/simulation/simulation-context.ts",
+        "src/lib/geography/state-province-read.ts",
+        "src/lib/geography/state-province-region.server.ts",
+        "src/lib/geography/state-province-consumer.test.ts",
+        "src/lib/simulation/server/region-route-handler.ts"
+      ]
+    },
+    "gitDiffCheck": "passed",
+    "productionBuild": {
+      "exitCode": 0,
+      "elapsedMs": 45058,
+      "distDir": ".next-prompt20-06-build",
+      "restored": [
+        "tsconfig.json",
+        "next-env.d.ts"
+      ],
+      "command": "next build --webpack",
+      "status": "passed",
+      "bundler": "webpack",
+      "defaultTurbopackTested": false,
+      "note": "Separate .next-prompt20-06-build; temporary tsconfig.json and next-env.d.ts generated edits verified and restored; active development server untouched"
+    },
+    "productionHttpSmoke": {
+      "status": "passed",
+      "base": "http://127.0.0.1:57407",
+      "providerCalls": 0,
+      "gameMutations": 0,
+      "checks": [
+        {
+          "check": "production catalog descriptor",
+          "status": "passed",
+          "counts": {
+            "countries": 247,
+            "cells": 8004,
+            "edges": 26272,
+            "administrativeParents": 4231,
+            "previousParents": 4231
+          },
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+            "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+            "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+            "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+          }
+        },
+        {
+          "check": "existing cell ID set",
+          "status": "passed",
+          "cells": 8004
+        },
+        {
+          "check": "existing read-only PRK region lookup and membership",
+          "status": "passed",
+          "members": 16
+        },
+        {
+          "check": "existing region route rejects stale catalog",
+          "status": "passed"
+        },
+        {
+          "check": "geography route explicitly unavailable before trusted production selection",
+          "status": "passed"
+        },
+        {
+          "check": "geography route rejects missing required nullable field",
+          "status": "passed"
+        },
+        {
+          "check": "production page HTTP",
+          "status": "passed"
+        }
+      ]
+    },
+    "externalAiCalls": 0
+  },
+  "preservation": {
+    "baselineArtifactsVerifiedUnchanged": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/artifact-index.json",
+        "sha256": "184de11efa21ffaaaa80afdd0105e06716508eb170e75e0fe16596d24c9bb480",
+        "byteLength": 757545
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/catalog.json",
+        "sha256": "6d6b02f6b4dd60e16507af5ca62bd1054e0dd4d0b7d70139b5d9a79d651b4a7d",
+        "byteLength": 2378
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/manifest.json",
+        "sha256": "388be8d964f4d7e1da3d577e8973a4e1ab264b74f2175300541b36b0647c9659",
+        "byteLength": 3152
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/detail-index.json",
+        "sha256": "838ec72661e1a6fb7751f1ace4102de94d6c80f59c2183d9e56cbce525790fd8",
+        "byteLength": 116141
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/provenance.json",
+        "sha256": "6cc9bc0e8dcbbea2c593c7f907c27546f4bd895eca969153279f2600edf1a597",
+        "byteLength": 6104447
+      }
+    ],
+    "indexRoots": {
+      "catalogOrder": "d8772b5ac4ce11cde74fe7b6cab947b5e5a0bf73ace6a661d340709d7d722344",
+      "administrativeMembership": "c1a8cb45da2ecaa55b5ea348dbc07c0e38e6f188808c249251bf18647b8c279e",
+      "previousParent": "9e9da194e2c11f5b8430d1091995b0bbff05ae4d8b426baece87d0eb538f270d"
+    },
+    "sharedContractAnd20_05OutputsVerifiedUnchanged": [
+      "src/lib/geography/state-province-contract.ts",
+      "src/lib/geography/state-province-validation.ts",
+      "src/lib/geography/state-province-io.ts",
+      "src/lib/geography/state-province-contract.test.ts",
+      "src/lib/test-only/state-province-contract-fixture.ts",
+      "docs/geography/state-province-contract-v1.md",
+      "src/lib/geography/state-province-loader.server.ts",
+      "src/lib/geography/state-province-index.server.ts",
+      "src/lib/geography/state-province-loader.server.test.ts",
+      "docs/geography/state-province-loader-v1.md"
+    ],
+    "catalogGeometryTopologyIdsMembershipSeedLineage": "No generation/writes; baseline descriptor/index/provenance preserved; existing ID delivery smoke passed",
+    "existingUserGames": "No existing live game read/write/reset/restart. Session/history tests used private fixtures and temporary test checkpoints",
+    "concurrentWork": "20-03 builder/data and 20-07 helper outputs left intact; no source/alias producer files edited"
+  },
+  "productionHandoff20_08": {
+    "currentlyObservedProducerMetadataRef": {
+      "contentRoot": "1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "currentlyObservedManifest": {
+      "path": "data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/manifest.json",
+      "sha256": "1a8db0d419a718f8c91eb2abf9ebe8aa92a723961356527ed6ebc2bbb28f8938",
+      "byteLength": 1115
+    },
+    "selectedByThisTask": false,
+    "transportRequirement": {
+      "encoding": "gzip",
+      "compressedMetadataAndAdmissionBytes": 3086457,
+      "decodeOrder": [
+        "verify stored gzip sha256/byteLength",
+        "gunzip with a decoded-size bound",
+        "UTF-8 JSON parse",
+        "validate common schema, catalogRef and metadataRef"
+      ]
+    },
+    "remaining": [
+      "Trusted production manifest selector and loader dependencies",
+      "Stored gzip byte verification plus decoded-size-bounded decompression before JSON admission",
+      "Production runtime tracing/asset packaging for selected metadata files",
+      "Actual 20-04 names/aliases, full production membership and API/scripted-provider tests",
+      "Supply already-loaded snapshot and attached index to operational game preparation; preserve in-progress prepared contexts"
+    ]
+  },
+  "handoffDocument": "docs/geography/state-province-consumers-v1.md",
+  "nextTaskBoundary": "20-08 only after 20-04, 20-06 and 20-07 prerequisites; no automatic follow-on execution"
+}

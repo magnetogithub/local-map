@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "prompt20-02-contract-handoff-v1",
+  "task": "20-02",
+  "status": "complete",
+  "auditDate": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "recordedAt": "2026-11-03T05:15:29.751Z",
+  "baseline": {
+    "path": "reports/maintenance/prompt20-baseline.json",
+    "sha256": "f96ab11754306f91e68591afb4b53152f3d24be14c6f0dabdbec418b4dca996f",
+    "byteLength": 331287
+  },
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+  },
+  "catalogPointerIdentity": {
+    "path": "data/runtime/operational-catalog/current.json",
+    "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+    "byteLength": 251
+  },
+  "observedCounts": {
+    "countries": 247,
+    "cells": 8004,
+    "edges": 26272,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "productionMetadataRef": null,
+  "fixture": {
+    "purpose": "fictional-contract-only",
+    "catalogRef": {
+      "catalogVersion": "synthetic-geography-v1",
+      "geometryRoot": "1111111111111111111111111111111111111111111111111111111111111111",
+      "topologyRoot": "2222222222222222222222222222222222222222222222222222222222222222",
+      "renderArtifactRoot": "3333333333333333333333333333333333333333333333333333333333333333",
+      "manifestPath": "/data/catalogs/synthetic-geography-v1/manifest.json"
+    },
+    "metadataRef": {
+      "schemaVersion": "geography-metadata-ref-v1",
+      "contentRoot": "7b5d471b396fef5c5264bbf89c51a84ea02e4617ec3c13bd22671591b172b56b"
+    },
+    "manifest": {
+      "path": "fixtures/geography/manifest.json",
+      "sha256": "01e8791b311d1c3b7f9282da7d9df5b9f6af4d482126ebeb7dcf251cf18f8f51",
+      "byteLength": 887
+    },
+    "states": 2,
+    "provinces": 5,
+    "sourceRegions": 3
+  },
+  "outputs": [
+    {
+      "path": "src/lib/geography/state-province-contract.ts",
+      "sha256": "f350076106ced6e03ae880840e55666f20ee72a424d9d2ae8790e016fbcfd40f",
+      "byteLength": 9101
+    },
+    {
+      "path": "src/lib/geography/state-province-validation.ts",
+      "sha256": "bef4d1013481236755ccf2b8a668a6d163409d363126cc995fbc4528fa2f7863",
+      "byteLength": 17426
+    },
+    {
+      "path": "src/lib/geography/state-province-io.ts",
+      "sha256": "73fef37e8384ed2f4e2bac2fd7597f93b09a739dac2ca3c6527633b824249bab",
+      "byteLength": 9445
+    },
+    {
+      "path": "src/lib/geography/state-province-contract.test.ts",
+      "sha256": "cafca3a2eee9c45e1b4e120c6f3cfc4ea16eed540a71703e3f972ec6d07d5f7a",
+      "byteLength": 12425
+    },
+    {
+      "path": "src/lib/test-only/state-province-contract-fixture.ts",
+      "sha256": "632f8266556e8592d5784e8cbf9584b36128a915f1d638875ec06bb39cc24f05",
+      "byteLength": 9786
+    },
+    {
+      "path": "docs/geography/state-province-contract-v1.md",
+      "sha256": "605c02826ce62454b1937d00601aba1b4d27988180cbca92649a313e944f05e1",
+      "byteLength": 23340
+    }
+  ],
+  "validation": {
+    "contractTests": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/geography/state-province-contract.test.ts",
+      "passed": 20,
+      "failed": 0
+    },
+    "typeCheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "status": "passed"
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js src/lib/geography src/lib/test-only/state-province-contract-fixture.ts",
+      "status": "passed"
+    },
+    "postMergePointerAndCellIds": "verified unchanged from 20-01",
+    "productionBuild": "not run: new shared contracts only; runtime/API integration belongs to later tasks"
+  },
+  "readyTasks": [
+    "20-03",
+    "20-05",
+    "20-07"
+  ],
+  "notImplemented": [
+    "production metadata builder and aliases",
+    "production manifest publication or metadata selector",
+    "runtime loader/search implementation",
+    "RegionRecord/API/model adapters and prepared-context integration",
+    "country input handoff helper"
+  ],
+  "preserved": [
+    "20-01 baseline",
+    "existing tracked files",
+    "active pointer and all geometry/topology/cell/edge IDs and seed lineage",
+    "CHN presentation data and user games"
+  ],
+  "handoffDocument": "docs/geography/state-province-contract-v1.md"
+}

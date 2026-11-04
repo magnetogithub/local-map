@@ -2,6 +2,8 @@ import type {SimulationContextV1} from "../simulation-context";
 import type {TurnResolutionV1} from "../turn-resolution";
 import type {OperationalWorldView} from '../../world/operational-catalog';
 import type {TerritorialControlAuthority} from '../simulation-state-v2';
+import type {GeographySnapshot} from '../../geography/state-province-io';
+import type {CatalogRegionIndex} from '../catalog-region';
 
 export type SimulationProviderFailureCode =
   | "AI_NOT_CONFIGURED"
@@ -31,6 +33,9 @@ export type SimulationProviderRequest = Readonly<{
   operationalWorld?: OperationalWorldView;
   /** Full current host scopes; model context may contain only clipped summaries. */
   operationalTerritorialAuthorities?: readonly TerritorialControlAuthority[];
+  /** Host-only prepared read objects. HTTP accepts only versioned geography references in context. */
+  geographySnapshot?: GeographySnapshot;
+  preparedRegionIndex?: CatalogRegionIndex;
 }>;
 
 export interface SimulationModelProvider {

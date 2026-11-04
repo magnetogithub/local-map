@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "prompt20-final-readiness-v1",
+  "verifiedAt": "2026-11-03T08:53:54.042Z",
+  "decision": "ready-for-prompt21-workspace-separation",
+  "applicationCodeChangedDuringReview": false,
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+  },
+  "metadataRef": {
+    "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+    "schemaVersion": "geography-metadata-ref-v1"
+  },
+  "items": {
+    "dynamicLiveExpectations": "verified in code, independent metadata validation and regression tests",
+    "idIndependence": "verified with same-name same-State cells, individual ID reads, validated occupation and atomic undo/redo",
+    "sessionPolicy": "all 9 catalog-version cases passed with checkpoint/pool-preservation regression coverage",
+    "finalEvidence": "latest completion links, code/input and build/smoke identities verified"
+  },
+  "checks": {
+    "tests": {
+      "total": 185,
+      "passed": 185,
+      "failed": 0,
+      "files": 20,
+      "evidence": ".tmp/prompt21-readiness-tests.json"
+    },
+    "rootTypecheckExitCode": 0,
+    "geographyTypecheckExitCode": 0,
+    "lintExitCode": 0,
+    "metadata": {
+      "manifest": {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+        "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+        "byteLength": 1115
+      },
+      "metadataRef": {
+        "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+        "schemaVersion": "geography-metadata-ref-v1"
+      },
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+        "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+        "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+        "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+      },
+      "status": "validated-metadata-only",
+      "counts": {
+        "countries": 247,
+        "provinces": 8004,
+        "states": 4201,
+        "sourceRegions": 7399,
+        "fine": 3793,
+        "coarse": 4169,
+        "residual": 42,
+        "sourceLinked": 7935,
+        "sourceFree": 69,
+        "unassignedParents": 1436
+      },
+      "checks": {
+        "exactCatalogProvinceSet": true,
+        "sourceCountryMatches": true,
+        "rawSourceAndParentJoins": true,
+        "knownSourceMembershipComplete": true,
+        "unknownParentsRemainNull": true,
+        "coarsePrecisionPreserved": true,
+        "noUnverifiedCompleteCoverage": true,
+        "commonSchemaAndContentRoot": true
+      },
+      "names": {
+        "status": "validated-static-names",
+        "aliasCount": 41600,
+        "recordsWithKoreanName": 12942,
+        "recordsWithEnglishName": 12925,
+        "curatedSourceIdentities": 2,
+        "originalNamesPreserved": true,
+        "allCandidatesRetained": true,
+        "runtimeLoaderOrApiVerification": false
+      },
+      "administrativeTruthClaim": false,
+      "outputDirectory": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf"
+    },
+    "artifactIdentity": {
+      "currentFiles": {
+        "total": 76,
+        "passed": 76,
+        "failures": []
+      },
+      "protectedInputs": {
+        "total": 298,
+        "passed": 298,
+        "failures": []
+      },
+      "metadata": {
+        "total": 3,
+        "passed": 3,
+        "failures": []
+      },
+      "buildAndSmoke": {
+        "total": 8,
+        "passed": 8,
+        "failures": []
+      },
+      "completionRecords": {
+        "total": 2,
+        "passed": 2,
+        "failures": []
+      }
+    },
+    "buildAndSmoke": {
+      "status": "reused-after-identity-verification",
+      "newBuildOrBrowserRun": false,
+      "priorEvidence": "reports/maintenance/prompt20-supplement-resume-20261103.json#/verification/buildAndSmoke"
+    },
+    "externalAICalls": 0
+  },
+  "handoff": {
+    "head": "15f6a5be4260ea411c5bfb2b4d445cc106aaf5bc",
+    "uncommittedBaseline": true,
+    "trackedModifiedEntries": 15,
+    "untrackedStatusEntries": 27,
+    "requirement": "Preserve the full current tracked and untracked Prompt 20 code/data/document baseline before creating Prompt 21 worktrees; a worktree created directly from the old HEAD will omit it.",
+    "prompt21Executed": false
+  },
+  "remainingDataLimits": [
+    "Unassigned state parents and partial/unsupported geographic coverage remain explicit supported contract states.",
+    "Country generation/publication generalization and full treaty/war-end execution are later tasks."
+  ]
+}

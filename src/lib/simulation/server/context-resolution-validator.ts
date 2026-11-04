@@ -11,6 +11,8 @@ import type {ScheduledConsequenceV1} from '../narrative-state';
 import {OPERATIONAL_CATALOG_VERSION} from '../../world/operational-catalog';
 import {validateOperationalFrontierEffects, type OperationalFrontierValidation} from '../operational-frontier-validation';
 import {MAX_ACTIVE_PLAYER_ACTIONS} from '../simulation-contract-primitives';
+import {assertGeographyContextSnapshot} from '../../geography/state-province-read';
+import type {GeographySnapshot} from '../../geography/state-province-io';
 
 export type ContextValidationResult = Readonly<{
   ok: boolean;
@@ -20,6 +22,7 @@ export type ContextValidationResult = Readonly<{
 
 export type ContextValidationOptions = Readonly<{
   regionIndex?: CatalogRegionIndex;
+  geographySnapshot?: GeographySnapshot;
   debugWorldEffectActionIds?: ReadonlySet<string>;
   frontier?: OperationalFrontierValidation;
   territorialControlAuthorities?: readonly TerritorialControlAuthority[];
@@ -37,6 +40,7 @@ export function validateResolutionAgainstContext(
 ): ContextValidationResult {
   let resolution: TurnResolutionV1;
   try {
+    assertGeographyContextSnapshot(context.geography, options.geographySnapshot ?? options.regionIndex?.geography?.snapshot);
     if(context.regionCatalog&&options.regionIndex?.catalogRef)assertWorldGeometryCatalogRefMatches(context.regionCatalog,options.regionIndex.catalogRef);
     const parsed = parseTurnResolutionV1(raw);
     const territorial = parsed.worldEffects.some(e => e.type === 'territory.occupy' || e.type === 'territory.liberate' || e.type === 'territory.transferOwnership');

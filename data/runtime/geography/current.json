@@ -1,0 +1,19 @@
+{
+    "schemaVersion":  "geography-registry-v1",
+    "catalogRef":  {
+                       "catalogVersion":  "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+                       "geometryRoot":  "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+                       "manifestPath":  "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+                       "renderArtifactRoot":  "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+                       "topologyRoot":  "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+                   },
+    "metadataRef":  {
+                        "contentRoot":  "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+                        "schemaVersion":  "geography-metadata-ref-v1"
+                    },
+    "manifest":  {
+                     "path":  "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+                     "sha256":  "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+                     "byteLength":  1115
+                 }
+}

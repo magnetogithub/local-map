@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import currentOperationalCatalog from './data/runtime/operational-catalog/current.json';
+import currentGeography from './data/runtime/geography/current.json';
 
 const seedCatalogVersion = "catalog-v1-73e30c25c9637d6376cb65afa82483c6";
 
@@ -8,6 +9,9 @@ const nextConfig: NextConfig = {
   // Dynamic checked reads are not inferred by tracing. Pin only the current runtime inputs.
   outputFileTracingIncludes: {"/*": [
     "data/runtime/operational-catalog/current.json",
+    "data/runtime/geography/current.json",
+    currentGeography.manifest.path,
+    `${currentGeography.manifest.path.slice(0, currentGeography.manifest.path.lastIndexOf('/'))}/*.json.gz`,
     `${currentOperationalCatalog.root}/**/*`,
     "data/source-locks/prompt14-derived-game-input-lock.json",
     "data/raw/ne_10m_admin_1_states_provinces.geojson",

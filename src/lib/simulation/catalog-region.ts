@@ -3,11 +3,12 @@ import {subdivisionReferenceSchema} from './world-effect';
 import type {TurnResolutionV1} from './turn-resolution';
 import {readCatalogTerritoryId,type WorldGeometryCatalogRef} from '../world/world-geometry-catalog-ref';
 import type {CatalogBorderLookup} from './catalog-border-lookup';
+import {geographySummarySchema, type GeographySnapshot, type GeographySummary} from '../geography/state-province-io';
 export type RegionReference=z.infer<typeof subdivisionReferenceSchema>;
-export type RegionRecord=Readonly<{ref:RegionReference;parentCountryId:string;nameKo:string;nameEn:string;aliases:readonly string[];territoryIds:readonly string[];provenanceIds:readonly string[]}>;
+export type RegionRecord=Readonly<{ref:RegionReference;parentCountryId:string;nameKo:string;nameEn:string;aliases:readonly string[];territoryIds:readonly string[];provenanceIds:readonly string[];geography?:GeographySummary}>;
 // Stored membership is complete. Action limits are enforced by resolve/effect planning.
-export const regionRecordSchema=z.strictObject({ref:subdivisionReferenceSchema,parentCountryId:z.string().min(1).max(160),nameKo:z.string().min(1).max(120),nameEn:z.string().min(1).max(120),aliases:z.array(z.string().max(120)).max(16),territoryIds:z.array(z.string().min(1)).min(1),provenanceIds:z.array(z.string().min(1)).min(1)});
-export type CatalogRegionIndex=Readonly<{catalogRef?:WorldGeometryCatalogRef;borderTerritories?:CatalogBorderLookup;records:readonly RegionRecord[];hasTerritory:(id:string)=>boolean;listCountry:(countryId:string)=>readonly RegionRecord[];lookup:(countryId:string,ref:RegionReference)=>RegionRecord;resolve:(countryId:string,ref:RegionReference,operation:string,cap?:number)=>RegionRecord;search:(countryId:string,query:string)=>readonly RegionRecord[]}>;
+export const regionRecordSchema=z.strictObject({ref:subdivisionReferenceSchema,parentCountryId:z.string().min(1).max(160),nameKo:z.string().min(1).max(120),nameEn:z.string().min(1).max(120),aliases:z.array(z.string().max(120)).max(16),territoryIds:z.array(z.string().min(1)).min(1),provenanceIds:z.array(z.string().min(1)).min(1),geography:geographySummarySchema.optional()});
+export type CatalogRegionIndex=Readonly<{catalogRef?:WorldGeometryCatalogRef;borderTerritories?:CatalogBorderLookup;geography?:Readonly<{snapshot:GeographySnapshot;legacyReference:(stateId:string)=>RegionReference|null;summary:(reference:RegionReference)=>GeographySummary|null}>;records:readonly RegionRecord[];hasTerritory:(id:string)=>boolean;listCountry:(countryId:string)=>readonly RegionRecord[];lookup:(countryId:string,ref:RegionReference)=>RegionRecord;resolve:(countryId:string,ref:RegionReference,operation:string,cap?:number)=>RegionRecord;search:(countryId:string,query:string)=>readonly RegionRecord[]}>;
 export const regionKey=(r:RegionReference)=>`${r.catalogId}/${r.sourceVersion}/${r.subdivisionId}`;
 export const regionOperation=z.enum(['occupy','liberate','transfer']);
 export function createCatalogRegionIndex(records:readonly RegionRecord[],territoryIds:readonly string[],catalogRef?:WorldGeometryCatalogRef):CatalogRegionIndex{

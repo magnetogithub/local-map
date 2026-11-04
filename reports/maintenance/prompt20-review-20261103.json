@@ -1,0 +1,499 @@
+{
+  "schemaVersion": "prompt20-independent-review-v1",
+  "reviewedAt": "2026-11-03T07:08:32.200Z",
+  "status": "follow-up-required",
+  "applicationCodeChanged": false,
+  "promptChanged": false,
+  "externalAICalls": 0,
+  "dependencyRepair": {
+    "command": "C:/Program Files/nodejs/npm.cmd ci --no-audit --no-fund",
+    "packagesAdded": 530,
+    "lockfileChanged": false
+  },
+  "tests": {
+    "files": 16,
+    "total": 157,
+    "passed": 156,
+    "failed": 1,
+    "failures": [
+      {
+        "file": "C:/Users/SSAFY/Desktop/gen/local-map/src/lib/simulation/server/operational-game-version.test.ts",
+        "title": "operational game catalog version isolation invalidates sessions retained across a catalog change and rejects their IDs",
+        "message": "Error: UNSUPPORTED_LEGACY_GAME_POOL_PRESENT\n    at checkpointPools (C:/Users/SSAFY/Desktop/gen/local-map/src/lib/simulation/server/operational-game.server.ts:29:99)\n    at C:/Users/SSAFY/Desktop/gen/local-map/src/lib/simulation/server/operational-game.server.ts:43:61\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at VitestModuleEvaluator._runInlinedModule (file:///C:/Users/SSAFY/Desktop/gen/local-map/node_modules/vitest/dist/module-evaluator.js:206:4)\n    at VitestModuleRunner.directRequest (file:///C:/Users/SSAFY/Desktop/gen/local-map/node_modules/vite/dist/node/module-runner.js:1268:59)\n    at VitestModuleRun"
+      }
+    ]
+  },
+  "typecheck": {
+    "rootExitCode": 0,
+    "geographyExitCode": 0
+  },
+  "lintExitCode": 0,
+  "whitespaceExitCode": 0,
+  "metadata": {
+    "manifest": {
+      "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+      "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+      "byteLength": 1115
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+    },
+    "status": "validated-metadata-only",
+    "counts": {
+      "countries": 247,
+      "provinces": 8004,
+      "states": 4201,
+      "sourceRegions": 7399,
+      "fine": 3793,
+      "coarse": 4169,
+      "residual": 42,
+      "sourceLinked": 7935,
+      "sourceFree": 69,
+      "unassignedParents": 1436
+    },
+    "checks": {
+      "exactCatalogProvinceSet": true,
+      "sourceCountryMatches": true,
+      "rawSourceAndParentJoins": true,
+      "knownSourceMembershipComplete": true,
+      "unknownParentsRemainNull": true,
+      "coarsePrecisionPreserved": true,
+      "noUnverifiedCompleteCoverage": true,
+      "commonSchemaAndContentRoot": true
+    },
+    "names": {
+      "status": "validated-static-names",
+      "aliasCount": 41600,
+      "recordsWithKoreanName": 12942,
+      "recordsWithEnglishName": 12925,
+      "curatedSourceIdentities": 2,
+      "originalNamesPreserved": true,
+      "allCandidatesRetained": true,
+      "runtimeLoaderOrApiVerification": false
+    },
+    "administrativeTruthClaim": false,
+    "outputDirectory": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf"
+  },
+  "preserved": {
+    "code": {
+      "total": 45,
+      "passed": 45,
+      "failures": []
+    },
+    "baseline": {
+      "total": 298,
+      "passed": 298,
+      "failures": []
+    },
+    "geography": {
+      "total": 3,
+      "passed": 3,
+      "failures": []
+    },
+    "build": {
+      "total": 12,
+      "passed": 12,
+      "failures": []
+    },
+    "smoke": {
+      "total": 3,
+      "passed": 3,
+      "failures": []
+    }
+  },
+  "productionHttp": {
+    "isolatedServer": true,
+    "externalAICalls": 0,
+    "cases": [
+      {
+        "query": "청진",
+        "country": "PRK",
+        "kind": "source-region",
+        "status": 200,
+        "ok": true,
+        "total": 1,
+        "ambiguous": false,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "source-region",
+            "id": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+            "name": "Chongjin City",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "Chongjin City",
+        "country": "PRK",
+        "kind": "source-region",
+        "status": 200,
+        "ok": true,
+        "total": 1,
+        "ambiguous": false,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "source-region",
+            "id": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+            "name": "Chongjin City",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "청진",
+        "country": "PRK",
+        "kind": null,
+        "status": 200,
+        "ok": true,
+        "total": 2,
+        "ambiguous": true,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "province",
+            "id": "territory:catalog:3272802ad27de1f7344a009a1ad333d20d67721a8ec769862f23c7f9b867975f",
+            "name": "Chongjin City",
+            "knownCells": 1,
+            "parent": "verified",
+            "materialization": "requires-validation"
+          },
+          {
+            "kind": "source-region",
+            "id": "source-region:147a2851f9dd5d42f41d02cd6680dcd9780063e8645ee1fbaf44e476d4a11377",
+            "name": "Chongjin City",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "태안군",
+        "country": "KOR",
+        "kind": "source-region",
+        "status": 200,
+        "ok": true,
+        "total": 1,
+        "ambiguous": false,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "source-region",
+            "id": "source-region:0ffb1aa5aa184e23f0f94a17268cbac20843d159afdfc5a87adcd08563f32589",
+            "name": "Taean-gun",
+            "knownCells": 3,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "태안군",
+        "country": "KOR",
+        "kind": null,
+        "status": 200,
+        "ok": true,
+        "total": 4,
+        "ambiguous": true,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "province",
+            "id": "territory:catalog:6b6645d7afa2facfbc95259048e3b418fde3268e4a1176fb190a09477214305b",
+            "name": "Taean-gun",
+            "knownCells": 1,
+            "parent": "verified",
+            "materialization": "requires-validation"
+          },
+          {
+            "kind": "province",
+            "id": "territory:catalog:6ebcf3f559d53e5621e891876aa512a0618579c9342b4379ffed20e7508d5c0c",
+            "name": "Taean-gun",
+            "knownCells": 1,
+            "parent": "verified",
+            "materialization": "requires-validation"
+          },
+          {
+            "kind": "province",
+            "id": "territory:catalog:73a2066e93737510efd21bca71e1938d02a3d70547c5083b073013e8d1672dc0",
+            "name": "Taean-gun",
+            "knownCells": 1,
+            "parent": "verified",
+            "materialization": "requires-validation"
+          },
+          {
+            "kind": "source-region",
+            "id": "source-region:0ffb1aa5aa184e23f0f94a17268cbac20843d159afdfc5a87adcd08563f32589",
+            "name": "Taean-gun",
+            "knownCells": 3,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "중구",
+        "country": "KOR",
+        "kind": "source-region",
+        "status": 200,
+        "ok": true,
+        "total": 6,
+        "ambiguous": true,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "source-region",
+            "id": "source-region:6a0a43d58d8d99c48aa43330e3cd211f16917725dfc1d68bee67efc9ee251ba7",
+            "name": "Jung-gu [Central District]",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          },
+          {
+            "kind": "source-region",
+            "id": "source-region:7c00dd959c8ba22d1d04d5b99cfdad8fe1467a1e53b856455e8b82f9dca874f8",
+            "name": "Jung-gu [Central District]",
+            "knownCells": 2,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          },
+          {
+            "kind": "source-region",
+            "id": "source-region:804d1d24616151ff02af068078d745a089c960a94c1939c7c0406f1fbd1807fa",
+            "name": "Jung-gu [Central District]",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          },
+          {
+            "kind": "source-region",
+            "id": "source-region:ae5dec6dfcbdfdc0b56b96e089bd75845f8da0ba82f302ab2bd6e721d4eec771",
+            "name": "Jung-gu [Central District]",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          },
+          {
+            "kind": "source-region",
+            "id": "source-region:c331b251d2b675c22297f7b2b2a41485432d30b32596bc77d05e50101fd98d8e",
+            "name": "Jung-gu",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          },
+          {
+            "kind": "source-region",
+            "id": "source-region:cab8058f82a6bfbf3af0e66f8c80bbb70682edf3de21fb15fba775e80b1aa8cf",
+            "name": "Jung-gu [Central District]",
+            "knownCells": 1,
+            "coverage": "partial",
+            "parent": "verified",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "내몽골",
+        "country": "CHN",
+        "kind": "state",
+        "status": 200,
+        "ok": true,
+        "total": 1,
+        "ambiguous": false,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "state",
+            "id": "fine-macro:CHN:macro:CHN:CN-15",
+            "name": "Inner Mongolia",
+            "knownCells": 48,
+            "coverage": "partial",
+            "parent": "not-applicable",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "Inner Mongolia",
+        "country": "CHN",
+        "kind": "state",
+        "status": 200,
+        "ok": true,
+        "total": 1,
+        "ambiguous": false,
+        "truncated": false,
+        "items": [
+          {
+            "kind": "state",
+            "id": "fine-macro:CHN:macro:CHN:CN-15",
+            "name": "Inner Mongolia",
+            "knownCells": 48,
+            "coverage": "partial",
+            "parent": "not-applicable",
+            "materialization": "unsupported"
+          }
+        ]
+      },
+      {
+        "query": "북한 북부",
+        "country": "PRK",
+        "kind": null,
+        "status": 200,
+        "ok": true,
+        "total": 0,
+        "ambiguous": false,
+        "truncated": false,
+        "items": []
+      }
+    ],
+    "stale": {
+      "status": 409,
+      "body": {
+        "ok": false,
+        "status": "stale",
+        "diagnostics": [
+          {
+            "code": "GEOGRAPHY_METADATA",
+            "path": "registry",
+            "message": "Requested metadata is not the selected production snapshot",
+            "remedy": "pin-metadata"
+          }
+        ]
+      }
+    },
+    "badCountry": {
+      "status": 400,
+      "body": {
+        "ok": false,
+        "diagnostics": [
+          {
+            "code": "GEOGRAPHY_CATALOG",
+            "path": "search.sourceCountryId",
+            "message": "Unknown source country in the pinned snapshot",
+            "remedy": "rebuild-for-catalog"
+          }
+        ],
+        "countryIdSemantics": "source"
+      }
+    },
+    "missingRequiredNullable": {
+      "status": 400,
+      "ok": false
+    },
+    "legacyInnerMongolia": {
+      "status": 200,
+      "materializable": false,
+      "coverage": "partial"
+    },
+    "prepared": {
+      "status": 200,
+      "geography": {
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+          "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+          "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+          "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+        },
+        "metadataRef": {
+          "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+          "schemaVersion": "geography-metadata-ref-v1"
+        }
+      }
+    },
+    "readOnlyGame": {
+      "status": 200,
+      "revisionsUnchanged": true,
+      "canUndo": false
+    },
+    "status": "finished"
+  },
+  "build": {
+    "status": "reused-identity-verified",
+    "reason": "Current 45 code/runtime and 12 build input/output identities match successful 20-08 build."
+  },
+  "ui": {
+    "status": "reused-identity-verified-and-screenshots-inspected",
+    "browserRerun": false,
+    "verifiedArtifacts": 3
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P2",
+      "title": "Unfiltered name search treats representations of the same source place as actual ambiguity",
+      "locations": [
+        "src/lib/geography/state-province-index.server.ts:110",
+        "src/lib/geography/state-province-index.server.ts:111"
+      ],
+      "reproducedViaProductionHttp": true,
+      "examples": [
+        {
+          "query": "청진",
+          "kind": null,
+          "totalMatches": 2,
+          "ambiguous": true
+        },
+        {
+          "query": "태안군",
+          "kind": null,
+          "totalMatches": 4,
+          "ambiguous": true
+        }
+      ],
+      "workaround": "Specify source-region/state/province; implement semantic ambiguity separately.",
+      "status": "resolved",
+      "resolution": {
+        "evidence": "reports/maintenance/prompt20-ambiguity-fix-20261103.json",
+        "recordedAt": "2026-11-03T07:23:45.101Z"
+      }
+    },
+    {
+      "id": "R2",
+      "priority": "P2",
+      "title": "Live-catalog integration/smoke checks pin current counts and three fine countries",
+      "locations": [
+        "src/lib/geography/production-geography.integration.test.ts:68",
+        "src/lib/geography/production-geography.integration.test.ts:71",
+        "scripts/geography/smoke-production-geography.mjs:34",
+        "scripts/geography/smoke-production-geography.mjs:63"
+      ],
+      "basis": "Static analysis; no additional country was generated or published.",
+      "remedy": "Derive expectations from the active catalog and independently pinned source inputs; isolate snapshot constants in frozen fixtures."
+    }
+  ],
+  "knownLimitations": [
+    "One existing catalog-version/session-deletion test remains failed.",
+    "All actual State/SourceRegion scopes are partial or unsupported; legacy regional action resolution is blocked for those scopes.",
+    "1436 province parents remain unassigned; identity/name lookup does not certify official geographic completeness.",
+    "No live GPT behavior evaluation; treaty/war-end execution and full spatial intent reasoning remain outside Prompt 20."
+  ],
+  "report": {
+    "path": "reports/maintenance/prompt20-review-20261103.md",
+    "sha256": "b761b7c8fd46ff39ed843d28f6c1220e07258277a251f7db607900bc608cade9"
+  }
+}

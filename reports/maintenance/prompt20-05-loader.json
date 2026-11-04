@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "prompt20-05-loader-handoff-v1",
+  "task": "20-05",
+  "status": "complete",
+  "auditDate": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "recordedAt": "2026-11-03T05:25:45.564Z",
+  "scope": "Version-pinned injectable loader, server search/list/inspect/membership and host reads; common fixture validation only",
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+  },
+  "observedCounts": {
+    "countries": 247,
+    "cells": 8004,
+    "edges": 26272,
+    "administrativeParents": 4231,
+    "previousParents": 4231
+  },
+  "productionMetadataRef": null,
+  "fixture": {
+    "purpose": "fictional-contract-only",
+    "catalogRef": {
+      "catalogVersion": "synthetic-geography-v1",
+      "geometryRoot": "1111111111111111111111111111111111111111111111111111111111111111",
+      "topologyRoot": "2222222222222222222222222222222222222222222222222222222222222222",
+      "renderArtifactRoot": "3333333333333333333333333333333333333333333333333333333333333333",
+      "manifestPath": "/data/catalogs/synthetic-geography-v1/manifest.json"
+    },
+    "metadataRef": {
+      "schemaVersion": "geography-metadata-ref-v1",
+      "contentRoot": "7b5d471b396fef5c5264bbf89c51a84ea02e4617ec3c13bd22671591b172b56b"
+    },
+    "manifest": {
+      "path": "fixtures/geography/manifest.json",
+      "sha256": "01e8791b311d1c3b7f9282da7d9df5b9f6af4d482126ebeb7dcf251cf18f8f51",
+      "byteLength": 887
+    },
+    "states": 2,
+    "provinces": 5,
+    "sourceRegions": 3,
+    "note": "Fictional AAA/BBB contract fixture only; not production geography or adopted country source evidence"
+  },
+  "outputs": [
+    {
+      "path": "src/lib/geography/state-province-loader.server.ts",
+      "sha256": "2d61301a5b5080dcd0f241a4a3341de4a3363c1d32d2c07b676bcce0c93abf29",
+      "byteLength": 6329
+    },
+    {
+      "path": "src/lib/geography/state-province-index.server.ts",
+      "sha256": "127743db61cd6dc2c94ac4fde3339c642fbc7d0728348b7bf8145b5b6d574ac7",
+      "byteLength": 10543
+    },
+    {
+      "path": "src/lib/geography/state-province-loader.server.test.ts",
+      "sha256": "a7292d893434801be5e4fb34b01f16812d172277cefbe7de3cb7ddeb486ad00b",
+      "byteLength": 21053
+    },
+    {
+      "path": "docs/geography/state-province-loader-v1.md",
+      "sha256": "88cf92058fc785e9b8da631eb2e19318304cb198e414014164c1046da9e9e959",
+      "byteLength": 8833
+    }
+  ],
+  "implementation": {
+    "loader": "createGeographyLoader(options) returns GeographyLoader(request, dependencies); loadGeographySnapshot uses production defaults",
+    "dependencies": [
+      "locateManifest",
+      "readArtifact",
+      "catalogView (metadata-only)"
+    ],
+    "admission": [
+      "manifest, metadata and admission artifact byte identities",
+      "strict schema and complete catalogRef",
+      "requested metadataRef and metadata contentRoot",
+      "shared semantic membership/parent/source/coverage validator"
+    ],
+    "unavailableOrStale": "Explicit diagnostics; no latest-version fallback or raw geometry loading",
+    "queries": [
+      "source-country summary",
+      "kind-qualified state/province/source-region ID inspect",
+      "normalized name and alias search",
+      "bounded list and membership pages",
+      "host full known membership"
+    ],
+    "paging": {
+      "maxPageSize": 128,
+      "fields": [
+        "totalMatches",
+        "offset",
+        "limit",
+        "truncated",
+        "ambiguous"
+      ],
+      "knownMembershipCompleteIsNotGeographicCoverage": true,
+      "hostKnownMembershipTestSize": 600
+    },
+    "cache": {
+      "maxEntriesPerDependencyScope": 4,
+      "ttlMsAfterSuccessfulAdmission": 300000,
+      "key": "Full catalogRef + metadataRef snapshot hash and selected manifest byte identity",
+      "inFlightAdmissionShared": true,
+      "dependencyScopesIsolated": true,
+      "failuresEvicted": true,
+      "registryAndSmallManifestCheckedPerLoad": true,
+      "retainedSnapshotsImmutable": true
+    },
+    "mutableWorld": "No owner/controller cache or source-country reinterpretation; callers use existing readOperationalCellState with a matching supplied world",
+    "materialization": "requires-validation or unsupported only; no authority grants or world writes"
+  },
+  "validation": {
+    "relatedTests": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/geography/state-province-contract.test.ts src/lib/geography/state-province-loader.server.test.ts src/lib/simulation/operational-region.test.ts src/lib/world/operational-catalog-runtime.test.ts",
+      "filesPassed": 4,
+      "testsPassed": 46,
+      "testsFailed": 0
+    },
+    "actionCapRegression": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/simulation/operational-territorial-runtime.test.ts -t 'aggregate 512-cell limit'",
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "note": "Existing direct, mixed-region and batch aggregate 512-cell cap remains enforced without truncation"
+    },
+    "typeCheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+      "status": "passed"
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js src/lib/geography/state-province-index.server.ts src/lib/geography/state-province-loader.server.ts src/lib/geography/state-province-loader.server.test.ts",
+      "status": "passed"
+    },
+    "gitDiffCheck": "passed",
+    "productionBuild": {
+      "exitCode": 0,
+      "elapsedMs": 46242,
+      "distDir": ".next-prompt20-05-build",
+      "restored": [
+        "tsconfig.json",
+        "next-env.d.ts"
+      ],
+      "command": "next build --webpack",
+      "status": "passed",
+      "bundler": "webpack",
+      "note": "Used existing PAX_BUILD_DIST_DIR isolation and established webpack build mode; default Turbopack build was not tested. Temporary tsconfig/next-env edits restored after verifying only expected generated changes."
+    },
+    "productionHttpSmoke": {
+      "status": "passed",
+      "base": "http://127.0.0.1:64896",
+      "providerCalls": 0,
+      "gameMutations": 0,
+      "checks": [
+        {
+          "check": "production catalog descriptor",
+          "status": "passed",
+          "counts": {
+            "countries": 247,
+            "cells": 8004,
+            "edges": 26272,
+            "administrativeParents": 4231,
+            "previousParents": 4231
+          },
+          "catalogRef": {
+            "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+            "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+            "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+            "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+            "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+          }
+        },
+        {
+          "check": "existing cell ID set",
+          "status": "passed",
+          "cells": 8004
+        },
+        {
+          "check": "existing read-only PRK region lookup and membership",
+          "status": "passed",
+          "members": 16
+        },
+        {
+          "check": "existing region route rejects stale catalog",
+          "status": "passed"
+        },
+        {
+          "check": "production page HTTP",
+          "status": "passed"
+        }
+      ],
+      "note": "Existing baseline catalog/cell/region routes and home page only; new geography API integration belongs to 20-06"
+    },
+    "externalAiCalls": 0
+  },
+  "preservation": {
+    "baselineArtifactsVerifiedUnchanged": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/artifact-index.json",
+        "sha256": "184de11efa21ffaaaa80afdd0105e06716508eb170e75e0fe16596d24c9bb480",
+        "byteLength": 757545
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/catalog.json",
+        "sha256": "6d6b02f6b4dd60e16507af5ca62bd1054e0dd4d0b7d70139b5d9a79d651b4a7d",
+        "byteLength": 2378
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/manifest.json",
+        "sha256": "388be8d964f4d7e1da3d577e8973a4e1ab264b74f2175300541b36b0647c9659",
+        "byteLength": 3152
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/detail-index.json",
+        "sha256": "838ec72661e1a6fb7751f1ace4102de94d6c80f59c2183d9e56cbce525790fd8",
+        "byteLength": 116141
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/provenance.json",
+        "sha256": "6cc9bc0e8dcbbea2c593c7f907c27546f4bd895eca969153279f2600edf1a597",
+        "byteLength": 6104447
+      }
+    ],
+    "shared20_02OutputsVerifiedUnchanged": [
+      "src/lib/geography/state-province-contract.ts",
+      "src/lib/geography/state-province-validation.ts",
+      "src/lib/geography/state-province-io.ts",
+      "src/lib/geography/state-province-contract.test.ts",
+      "src/lib/test-only/state-province-contract-fixture.ts",
+      "docs/geography/state-province-contract-v1.md"
+    ],
+    "catalogIndexRootsUnchanged": {
+      "catalogOrder": "d8772b5ac4ce11cde74fe7b6cab947b5e5a0bf73ace6a661d340709d7d722344",
+      "administrativeMembership": "c1a8cb45da2ecaa55b5ea348dbc07c0e38e6f188808c249251bf18647b8c279e",
+      "previousParent": "9e9da194e2c11f5b8430d1091995b0bbff05ae4d8b426baece87d0eb538f270d"
+    },
+    "trackedFileDiffAfterBuildRestoration": [],
+    "geometryTopologyAndLineage": "No generation or writes; pinned catalog/index/descriptor/provenance preserved and existing metadata-only runtime checks passed",
+    "userGames": "Not read or written by this implementation; smoke performed only catalog/page/region reads and no game/turn calls",
+    "concurrentWork": "Other untracked geography builder/country-handoff files observed and left intact"
+  },
+  "readyTasks": [
+    "20-06"
+  ],
+  "handoffDocument": "docs/geography/state-province-loader-v1.md",
+  "remaining": [
+    "20-06: existing region API/model adapters and prepared-context cache key/snapshot propagation",
+    "20-08: trusted production manifest selection and actual producer output injection",
+    "20-08: actual Korean/English place names, complete production ID set and coverage verification",
+    "No production metadataRef, registry publication, new country or geometry generated in 20-05"
+  ]
+}

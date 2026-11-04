@@ -1,0 +1,2731 @@
+{
+  "schemaVersion": "prompt20-supplement-resume-v1",
+  "status": "complete",
+  "recordedAt": "2026-11-03T08:39:39.547Z",
+  "scope": "Resume original Prompt 20 supplement, tighten the fine-country observation edge case, verify and record. No Prompt 21, next-country or additional runtime work.",
+  "prerequisite": {
+    "path": "reports/maintenance/prompt20-supplement-completion.json",
+    "sha256": "68ca09893b7612a4ee0ed421744ac87370d7dfbbbae273f23a453b2aa6d2243e",
+    "byteLength": 122692
+  },
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+  },
+  "metadataRef": {
+    "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+    "schemaVersion": "geography-metadata-ref-v1"
+  },
+  "observedCounts": {
+    "countries": 247,
+    "provinces": 8004,
+    "states": 4201,
+    "sourceRegions": 7399,
+    "fine": 3793,
+    "coarse": 4169,
+    "residual": 42,
+    "sourceLinked": 7935,
+    "sourceFree": 69,
+    "unassignedParents": 1436
+  },
+  "change": {
+    "description": "Observe both fine and residual cells when comparing actual fine country classification with independently adopted profiles.",
+    "files": [
+      {
+        "path": "src/lib/geography/production-geography.integration.test.ts",
+        "sha256": "ac2b95987de4827a25a2b2a0d796d17d825617d4c9635b743062b5848d13b690",
+        "byteLength": 21752
+      },
+      {
+        "path": "src/lib/geography/current-geography-expectations.test.ts",
+        "sha256": "3949e91a6ce169c82971f1192798069608e90a42faf5f671ada030fba871280f",
+        "byteLength": 5750
+      },
+      {
+        "path": "src/lib/test-only/current-geography-expectations.ts",
+        "sha256": "680121ca341456282a38416199283788095c4bca5c3796bfc8d58f48d9d7358e",
+        "byteLength": 5127
+      }
+    ],
+    "newRegression": "An adopted fine country whose current cells are all residual remains fine; reclassifying them as coarse still mismatches both independent country sets.",
+    "productionCodeChanged": false,
+    "geometryOrIdsChanged": false
+  },
+  "verification": {
+    "red": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/geography/current-geography-expectations.test.ts --reporter=default --reporter=json --outputFile=.tmp/prompt20-supplement-resume/red.json",
+      "exitCode": 1,
+      "total": 3,
+      "failed": 1,
+      "evidence": {
+        "path": ".tmp/prompt20-supplement-resume/red.json",
+        "sha256": "70957080697d51652040e0f59b11d89c0870b4e28871c6616111b18c55a317d0",
+        "byteLength": 3048
+      }
+    },
+    "tests": {
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/geography scripts/geography src/lib/simulation/catalog-region.test.ts src/lib/simulation/catalog-region-integration.test.ts src/lib/simulation/operational-region.test.ts src/lib/simulation/operational-territorial-runtime.test.ts src/lib/simulation/server --silent --reporter=default --reporter=json --outputFile=.tmp/prompt20-supplement-resume/tests.json",
+      "exitCode": 0,
+      "total": 185,
+      "passed": 185,
+      "failed": 0,
+      "files": [
+        {
+          "file": "scripts/geography/metadata-builder.test.ts",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "file": "scripts/geography/name-enrichment.test.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/country-metadata-input.test.ts",
+          "passed": 28,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/current-geography-expectations.test.ts",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/production-geography.integration.test.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/prompt20-name-release.snapshot.test.ts",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/state-province-consumer.test.ts",
+          "passed": 8,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/state-province-contract.test.ts",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/state-province-identity.test.ts",
+          "passed": 5,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/geography/state-province-loader.server.test.ts",
+          "passed": 25,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/catalog-region-integration.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/catalog-region.test.ts",
+          "passed": 1,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/operational-region.test.ts",
+          "passed": 2,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/operational-territorial-runtime.test.ts",
+          "passed": 7,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-allocation.test.ts",
+          "passed": 3,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-checkpoint.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-pool-preservation.test.ts",
+          "passed": 4,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/server/operational-game-version.test.ts",
+          "passed": 9,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/server/operational-provider.test.ts",
+          "passed": 12,
+          "failed": 0
+        },
+        {
+          "file": "src/lib/simulation/server/provider-route.test.ts",
+          "passed": 22,
+          "failed": 0
+        }
+      ],
+      "evidence": {
+        "path": ".tmp/prompt20-supplement-resume/tests.json",
+        "sha256": "018d803498bdda8dadd4d7feeb2c08934b9a4a19e3effb7946896f030216f0f8",
+        "byteLength": 75800
+      }
+    },
+    "types": {
+      "commands": [
+        "node node_modules/typescript/bin/tsc --noEmit --incremental false",
+        "node node_modules/typescript/bin/tsc --noEmit -p scripts/geography/tsconfig.json"
+      ],
+      "exitCode": 0
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js src/lib/geography/production-geography.integration.test.ts src/lib/geography/current-geography-expectations.test.ts src/lib/test-only/current-geography-expectations.ts",
+      "exitCode": 0
+    },
+    "metadata": {
+      "command": "node --max-old-space-size=8192 scripts/geography/build-current-metadata.cjs --verify data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+      "exitCode": 0,
+      "result": {
+        "manifest": {
+          "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+          "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+          "byteLength": 1115
+        },
+        "metadataRef": {
+          "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+          "schemaVersion": "geography-metadata-ref-v1"
+        },
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+          "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+          "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+          "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+        },
+        "status": "validated-metadata-only",
+        "counts": {
+          "countries": 247,
+          "provinces": 8004,
+          "states": 4201,
+          "sourceRegions": 7399,
+          "fine": 3793,
+          "coarse": 4169,
+          "residual": 42,
+          "sourceLinked": 7935,
+          "sourceFree": 69,
+          "unassignedParents": 1436
+        },
+        "checks": {
+          "exactCatalogProvinceSet": true,
+          "sourceCountryMatches": true,
+          "rawSourceAndParentJoins": true,
+          "knownSourceMembershipComplete": true,
+          "unknownParentsRemainNull": true,
+          "coarsePrecisionPreserved": true,
+          "noUnverifiedCompleteCoverage": true,
+          "commonSchemaAndContentRoot": true
+        },
+        "names": {
+          "status": "validated-static-names",
+          "aliasCount": 41600,
+          "recordsWithKoreanName": 12942,
+          "recordsWithEnglishName": 12925,
+          "curatedSourceIdentities": 2,
+          "originalNamesPreserved": true,
+          "allCandidatesRetained": true,
+          "runtimeLoaderOrApiVerification": false
+        },
+        "administrativeTruthClaim": false,
+        "outputDirectory": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf"
+      },
+      "evidence": {
+        "path": ".tmp/prompt20-supplement-resume/metadata-verification.json",
+        "sha256": "b0a206cc55a3fa49c450590f4bf16bd86e4a19a43357694b2077897e2fcbfbbe",
+        "byteLength": 2021
+      }
+    },
+    "buildAndSmoke": {
+      "status": "reused-passed",
+      "priorReport": "reports/maintenance/prompt20-supplement-completion.json",
+      "sameProductionRuntimeAndInputs": true,
+      "evidencePins": [
+        {
+          "path": ".tmp/prompt20-supplement/build.log",
+          "sha256": "2e31d3208fa72e18584cec0457bb255993843a6bbdc003836178e7ac242ff964",
+          "byteLength": 1554
+        },
+        {
+          "path": ".next-prompt20-supplement-build/BUILD_ID",
+          "sha256": "b5a332689ec99c07815bc86a16ff186b1d51987b3f1a536f1e34867c55f810eb",
+          "byteLength": 21
+        },
+        {
+          "path": ".next-prompt20-supplement-build/server/app/api/world/regions/route.js.nft.json",
+          "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+          "byteLength": 1369758
+        },
+        {
+          "path": ".next-prompt20-supplement-build/server/app/api/simulation/game/route.js.nft.json",
+          "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+          "byteLength": 1369758
+        },
+        {
+          "path": ".next-prompt20-supplement-build/server/app/api/simulation/turn/route.js.nft.json",
+          "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+          "byteLength": 1369758
+        },
+        {
+          "path": ".tmp/prompt20-supplement/smoke/evidence.json",
+          "sha256": "2241d546ce95c1ac5c3aaa843d6425b5b2fcfbc239c5241c3dadceab4c3346df",
+          "byteLength": 2273
+        },
+        {
+          "path": ".tmp/prompt20-supplement/smoke/setup.png",
+          "sha256": "aef26d08f9e7ac535cd9449415b58119642825f88685e0ce3fb3ac1060a02f01",
+          "byteLength": 319048
+        },
+        {
+          "path": ".tmp/prompt20-supplement/smoke/game-kor.png",
+          "sha256": "ba6d52ba9c8c64b58406d1d46ae96a838c776bb858d14aa90c5b0806c9aea5c7",
+          "byteLength": 418036
+        }
+      ]
+    },
+    "whitespace": {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    "externalAICalls": 0
+  },
+  "preservation": {
+    "pass": true,
+    "recordedAt": "2026-11-03T08:39:39.533Z",
+    "fileAudit": [
+      {
+        "path": "src/lib/geography/state-province-contract.ts",
+        "sha256": "f350076106ced6e03ae880840e55666f20ee72a424d9d2ae8790e016fbcfd40f",
+        "byteLength": 9101,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-validation.ts",
+        "sha256": "bef4d1013481236755ccf2b8a668a6d163409d363126cc995fbc4528fa2f7863",
+        "byteLength": 17426,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-io.ts",
+        "sha256": "73fef37e8384ed2f4e2bac2fd7597f93b09a739dac2ca3c6527633b824249bab",
+        "byteLength": 9445,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-contract.test.ts",
+        "sha256": "cafca3a2eee9c45e1b4e120c6f3cfc4ea16eed540a71703e3f972ec6d07d5f7a",
+        "byteLength": 12425,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/test-only/state-province-contract-fixture.ts",
+        "sha256": "632f8266556e8592d5784e8cbf9584b36128a915f1d638875ec06bb39cc24f05",
+        "byteLength": 9786,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "docs/geography/state-province-contract-v1.md",
+        "sha256": "b4a1288c8184d426f6717b09b26a49d6bccc0d567ec1886546e8da90e8ddc158",
+        "byteLength": 23649,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/build-current-metadata.cjs",
+        "sha256": "f5fead78faba6a8d010ca2053f19785f9ece1665af440504b725994b0cc1fdd7",
+        "byteLength": 1431,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/current-input.ts",
+        "sha256": "44b959fc1ee5fcc3895b7723bfa281c3f7e294f31c5fb26cbe28a3650dfe04ff",
+        "byteLength": 20147,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/country-adapters.ts",
+        "sha256": "64d2ddee9a5eaec10a0277bff5c97d724636b379289d7aaba2305761940a6261",
+        "byteLength": 7305,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/metadata-builder.ts",
+        "sha256": "cf84b42dc8c4a36803e46693b6f0e300abbbf703ff429639726259292bcf3f18",
+        "byteLength": 10482,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/verify-metadata.ts",
+        "sha256": "8a80c2e8e966a18b2078b0594af1f3346596365f6d9dbc288e03b6e85fca98ac",
+        "byteLength": 10374,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/metadata-builder.test.ts",
+        "sha256": "7b2b0b559e26449c402f891eeda19144eeb3ac4e7909dc6e80496a80bd95a56e",
+        "byteLength": 10664,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/tsconfig.json",
+        "sha256": "d63259261f6f9f699cb280501e8e0ff3b6a229aba27485dcf89594d5cedb90d4",
+        "byteLength": 146,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "docs/geography/current-metadata-builder-v1.md",
+        "sha256": "b08de5a7850c2550d8628f2c17cbc4799f44e46be9bc8bfa169492f953a670d7",
+        "byteLength": 9182,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "data/geography/names/verified-name-facts-v1.json",
+        "sha256": "fc3ffd5ca7683b86485b1a5423e76431de67939e34d1ed1d63b4ca4a7b40410f",
+        "byteLength": 3369,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "data/geography/names/source-name-overrides-v1.json",
+        "sha256": "0d479a4d7d9501e1329b22d8f14744638d57a12670463a10ac792a472ca1dee3",
+        "byteLength": 1788,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/name-enrichment.ts",
+        "sha256": "170422e5c6360d860a61eaf71ed8a854072f6f9e2a70b5106cee2f8958c528be",
+        "byteLength": 6275,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/name-enrichment.test.ts",
+        "sha256": "3468a611e6d533c722dcea384e6e2ace983cc525ad00b4d57cfef0cfb7fd14f3",
+        "byteLength": 7081,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/verify-name-metadata.ts",
+        "sha256": "9bef4d87a2c65e6338ab0b9b992d858a322fc9ba25e70325235f52f038aa82dc",
+        "byteLength": 7697,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "docs/geography/source-names-and-aliases-v1.md",
+        "sha256": "512f0296365b481a9a5a7286058c2757773c26efc5c0f363ccc75cfa448c0b7b",
+        "byteLength": 7359,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-loader.server.ts",
+        "sha256": "5c27a8382c6c868e5612a834419682714e1d04e87e8e675e97ded32a94e25a15",
+        "byteLength": 6742,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-index.server.ts",
+        "sha256": "248e17b2b522d06acb01de8794d114748877c2a5896b7995f22bfaf5fbfffdda",
+        "byteLength": 12775,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-loader.server.test.ts",
+        "sha256": "ca55a385f4a9c719a2da794e77a63c337d2eca1e9b2fa32613e6802f382e2565",
+        "byteLength": 25928,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "docs/geography/state-province-loader-v1.md",
+        "sha256": "09438729ddfbf48734596dbda07b21369e5826886b36c85dedfe0eec6a7e69a6",
+        "byteLength": 9870,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/app/api/world/regions/route.ts",
+        "sha256": "9ed98006d8be414709ae18f8682998d20ce8b51f30a8251d9c3ff83790f4b474",
+        "byteLength": 153,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/catalog-region.server.ts",
+        "sha256": "28943083ba43a3407c7e38225835b9066f459cc2fb986efb3c278f1e08877f19",
+        "byteLength": 5571,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/catalog-region.ts",
+        "sha256": "57abdac7ab06c3c14d1077d5099c4f03b7d0b3178868981a1050af1a9ac81945",
+        "byteLength": 4978,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/operational-region.server.ts",
+        "sha256": "9ddd33cb70b366973d05339de98d73d84c8c4f9d8920f9516fe25c5733c019c9",
+        "byteLength": 5681,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/server/context-resolution-validator.ts",
+        "sha256": "63485ab6da9f6e2d96f8da9addbee30e69063d92f997be31c0411f325d4b1d14",
+        "byteLength": 23991,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/server/openai-responses-provider.ts",
+        "sha256": "5d62d30f80a3c3a5fa1e4e5240931cf71c32cb17fe7d2f74527c1412b10b4657",
+        "byteLength": 16772,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/server/operational-game-session.ts",
+        "sha256": "98c2b46f275f4274589ee6b173db1a4304cec1a17511f6028bb678327973ad82",
+        "byteLength": 12139,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/server/simulation-instruction.ts",
+        "sha256": "a99224388a6fb91766b0fa6546fc3e6fbe340131f6acfc61fbaf54c5a0bf6b30",
+        "byteLength": 14310,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/server/simulation-provider.ts",
+        "sha256": "a3c5f784c6dbab47ac87b93e3cf01916f9ea22f55c6a9e15515895efc0365620",
+        "byteLength": 2317,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/server/simulation-tools.ts",
+        "sha256": "59a79c10e026316e7ceec0ab9fe6bbf9f36a7ac09f7de6af9beaba9c1459f73b",
+        "byteLength": 15031,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/simulation-context.ts",
+        "sha256": "8c02beb5d4b9ad18aeee746c5f2e05a9a481790bb5ab03b6db6d0cea4d49f7cd",
+        "byteLength": 19397,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-read.ts",
+        "sha256": "82322487c3b39337aedc9e3bd52099b21539ebdda91e4882b733eae785a1f909",
+        "byteLength": 5200,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-region.server.ts",
+        "sha256": "a4ea6b78100c91ac03279b1940f6ced41ac818fa55d95fbe4a9c2c2b09122e29",
+        "byteLength": 5064,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-consumer.test.ts",
+        "sha256": "dc7379d4af8b69e8e41f4eeadeba3b96c86a2e6b135af4c1bb81e47c51683d86",
+        "byteLength": 20041,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/simulation/server/region-route-handler.ts",
+        "sha256": "b3e0ff9f9e9e62916066f98b6ab5b41b2e87c57a46abe89c849d0d0105e3b913",
+        "byteLength": 4430,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "docs/geography/state-province-consumers-v1.md",
+        "sha256": "a3e1cce701de99a8c1e5c5723c72a500c75d1c083600686f6755be038de31963",
+        "byteLength": 9018,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "docs/geography/country-metadata-handoff-v1.md",
+        "sha256": "e5a9148f410e226ce918f9dbbcdba3148dea307b2a253061abe4fb1e6ad71f34",
+        "byteLength": 15836,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/country-metadata-input.ts",
+        "sha256": "864429f272bb579f32995ebf9c17df4ea5ec184580b0ddbd49a9ec098936a9f0",
+        "byteLength": 3222,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/country-metadata-input.test.ts",
+        "sha256": "ef735d327711a52ae6f4688cea368024cd78cb40231381f027c477bb850cede6",
+        "byteLength": 9480,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/test-only/country-metadata-handoff-fixture.ts",
+        "sha256": "911de7f93ed9bde4c340b2cfb212e99db32fb7f79ee019962821cdbcb1ab2369",
+        "byteLength": 1129,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "data/runtime/geography/current.json",
+        "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8",
+        "byteLength": 1218,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "next.config.ts",
+        "sha256": "df33a1a738e8708393b6d6ed6cc174c7042278553fd8aa9a877d9f8c5f6ede29",
+        "byteLength": 2575,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/production-geography.server.ts",
+        "sha256": "3822574f285c81a9e324cb14445ded8f5347fa829a8db92479523c52361f16d2",
+        "byteLength": 4302,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/production-geography.integration.test.ts",
+        "sha256": "ac2b95987de4827a25a2b2a0d796d17d825617d4c9635b743062b5848d13b690",
+        "byteLength": 21752,
+        "unchanged": false,
+        "allowedChange": true
+      },
+      {
+        "path": "src/lib/simulation/server/operational-game.server.ts",
+        "sha256": "885ab825417505644457954e2a5628b2449cf73b57d11b994b09077e477526dc",
+        "byteLength": 8482,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/app/api/simulation/game/route.ts",
+        "sha256": "e76e503535ee9a9ce4b5b78b20c8e2ff2f19fd26f84af2b32eec902dadbcad0f",
+        "byteLength": 2674,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "scripts/geography/smoke-production-geography.mjs",
+        "sha256": "3c0fe64b07ed2ad272906878bbbf1cb37d0e21dc5645d606f317b4e89bd7a568",
+        "byteLength": 8447,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "docs/geography/production-geography-integration-v1.md",
+        "sha256": "26ebfdb8d30a68fb3442045d708155481b11350d4f8f09343a1dc54d5e3d2795",
+        "byteLength": 5986,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "reports/maintenance/prompt20-completion.md",
+        "sha256": "536408fa0371eccc941a4b099f1ecc0b41f428681035964b625ce83ef89cdba4",
+        "byteLength": 9309,
+        "unchanged": false,
+        "allowedChange": true
+      },
+      {
+        "path": "src/lib/simulation/server/operational-game-version.test.ts",
+        "sha256": "34eda82e2ba537e1497e5bb0108ffc8171649962c67c218dec7b0176edfbca00",
+        "byteLength": 7106,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "reports/maintenance/prompt20-review-20261103.md",
+        "sha256": "b761b7c8fd46ff39ed843d28f6c1220e07258277a251f7db607900bc608cade9",
+        "byteLength": 13915,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "reports/maintenance/prompt20-review-20261103.json",
+        "sha256": "ebf8ad4065b2cb8ca8ba050869b8d580905b1511f73fded14385c2974f982aac",
+        "byteLength": 16534,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "reports/maintenance/prompt20-ambiguity-fix-20261103.json",
+        "sha256": "3992f0e1c7fd60e24e7953f206abae98ab0c3401025d9b0159ef04af153c43ea",
+        "byteLength": 13840,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "package.json",
+        "sha256": "4552c4a054cdac98adb99ddab27233113472c7b275316c572ddad68f75dd5dd0",
+        "byteLength": 1995,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "22908144c69e75dc1ae90633b58fe933c7b6d6629ec2e8a775156c32fb004d14",
+        "byteLength": 337285,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "tsconfig.json",
+        "sha256": "5ff57473858449e98053cd5aebf23fdaf8093cdbf6182fd3565604ce3e370c2e",
+        "byteLength": 1471,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/BUILD_ID",
+        "sha256": "521a220e60b37274889aa4b4aa3c766611c687cd157d138d288ca59405ba1bd2",
+        "byteLength": 21,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/build-manifest.json",
+        "sha256": "f34441f83bab2f2f306252bb1f6dcec4c51f13ed31f3602722d2c636f13dd5ea",
+        "byteLength": 510,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/server/app/api/world/regions/route.js",
+        "sha256": "daf372a95fa388b65463b19b5c4f37d50a164b1993c821486fa84967ca990be6",
+        "byteLength": 9715,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/server/app/api/world/regions/route.js.nft.json",
+        "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+        "byteLength": 1369758,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/server/app/api/simulation/game/route.js",
+        "sha256": "0f028eab1710c904351ffaaad8c0a3fa02ded3b33dfaf83d46b68133af70322b",
+        "byteLength": 9701,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/server/app/api/simulation/game/route.js.nft.json",
+        "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+        "byteLength": 1369758,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/server/app/api/simulation/turn/route.js",
+        "sha256": "23a4a7d8f57de880450bd6a4076434498ecfb318e3a457b3d45e72f3a5a4d2b7",
+        "byteLength": 62015,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-ambiguity-build/server/app/api/simulation/turn/route.js.nft.json",
+        "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+        "byteLength": 1369758,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/test-only/current-geography-expectations.ts",
+        "sha256": "680121ca341456282a38416199283788095c4bca5c3796bfc8d58f48d9d7358e",
+        "byteLength": 5127,
+        "unchanged": false,
+        "allowedChange": true
+      },
+      {
+        "path": "src/lib/geography/current-geography-expectations.test.ts",
+        "sha256": "3949e91a6ce169c82971f1192798069608e90a42faf5f671ada030fba871280f",
+        "byteLength": 5750,
+        "unchanged": false,
+        "allowedChange": true
+      },
+      {
+        "path": "src/lib/geography/prompt20-name-release.snapshot.test.ts",
+        "sha256": "5c630d5e9e09654e723ced2eb619e709b029005c9b57901b1eaa522336019dd7",
+        "byteLength": 2454,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "src/lib/geography/state-province-identity.test.ts",
+        "sha256": "6f058fd9901983351f689ab7218ec7fa3bf82989508d2a1075c0e4edcb7aea14",
+        "byteLength": 11568,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "reports/maintenance/prompt20-supplement-completion.md",
+        "sha256": "f6a35ad34d7c5eb471379be07032367fce2ba62df569b19cb7db01ab5a16dfee",
+        "byteLength": 8710,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": "reports/maintenance/prompt20-supplement-completion.json",
+        "sha256": "68ca09893b7612a4ee0ed421744ac87370d7dfbbbae273f23a453b2aa6d2243e",
+        "byteLength": 122692,
+        "unchanged": true,
+        "allowedChange": false
+      },
+      {
+        "path": ".next-prompt20-supplement-build/BUILD_ID",
+        "sha256": "b5a332689ec99c07815bc86a16ff186b1d51987b3f1a536f1e34867c55f810eb",
+        "byteLength": 21,
+        "unchanged": true,
+        "allowedChange": false
+      }
+    ],
+    "protectedInputs": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/artifact-index.json",
+        "sha256": "184de11efa21ffaaaa80afdd0105e06716508eb170e75e0fe16596d24c9bb480",
+        "byteLength": 757545,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/catalog.json",
+        "sha256": "6d6b02f6b4dd60e16507af5ca62bd1054e0dd4d0b7d70139b5d9a79d651b4a7d",
+        "byteLength": 2378,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/manifest.json",
+        "sha256": "388be8d964f4d7e1da3d577e8973a4e1ab264b74f2175300541b36b0647c9659",
+        "byteLength": 3152,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/detail-index.json",
+        "sha256": "838ec72661e1a6fb7751f1ace4102de94d6c80f59c2183d9e56cbce525790fd8",
+        "byteLength": 116141,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/parents.json.gz",
+        "sha256": "d155b4b3c016c92d7bf030aed2f0d007e804dd3e6ad8f907d024b96e08085653",
+        "byteLength": 319011,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/region-names.json.gz",
+        "sha256": "d2e9e8740956e698f67f5036e9442f6e1fa03ac509529d2208eddcb7d6d3e91d",
+        "byteLength": 1411454,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/provenance.json",
+        "sha256": "6cc9bc0e8dcbbea2c593c7f907c27546f4bd895eca969153279f2600edf1a597",
+        "byteLength": 6104447,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/manual-cell-merges/candidate-1765f115ec4568a24c7c/joined-world-input.json",
+        "sha256": "1765f115ec4568a24c7cac52c94fa65188e065eb53b890719274c8d1c113952e",
+        "byteLength": 169441215,
+        "unchanged": true
+      },
+      {
+        "path": "data/source-locks/prompt19/KOR-ADM2-2020.json",
+        "sha256": "9ca1908aaf24670f00dd6756bbab9594c2b52fba86715c2b33d7fb400df55e12",
+        "byteLength": 3371,
+        "unchanged": true
+      },
+      {
+        "path": "data/source-locks/prompt19/PRK.json",
+        "sha256": "7f84a7ef7596bfde4b0afde39d002e7129cdaebcc46e68fb7114a1fd3432527c",
+        "byteLength": 2504,
+        "unchanged": true
+      },
+      {
+        "path": "data/source-locks/chn-2020/CHN-093b45f9a696d17968a8.json",
+        "sha256": "093b45f9a696d17968a889dc9becf994c7a28b6d1143c6921f33f7bbe056dc13",
+        "byteLength": 2159,
+        "unchanged": true
+      },
+      {
+        "path": "data/source-locks/prompt19/KOR-macro-hierarchy.json",
+        "sha256": "afc73949fece273c09850a7b5612375f5e40ba8b3b4e04d129a5263b22f523f4",
+        "byteLength": 130991,
+        "unchanged": true
+      },
+      {
+        "path": "data/source-locks/prompt19/PRK-macro-hierarchy.json",
+        "sha256": "e8f3afeba4da1c58e13710c598fa09ca115be1d53c61e3ffdd6173ee339c6134",
+        "byteLength": 82983,
+        "unchanged": true
+      },
+      {
+        "path": "data/source-locks/chn-2020/CHN-hierarchy.json",
+        "sha256": "072ddaf551d5aec7061d9f5301c213820d554f77daa5d489f654b123d15fcfc2",
+        "byteLength": 1142103,
+        "unchanged": true
+      },
+      {
+        "path": "reports/maintenance/prompt19-C/fine-macro-2020-joined-world-input.json",
+        "sha256": "c9a98be75d28980c2c9390e2d29a7311c745e4625340e75fc3be014e305c3ea5",
+        "byteLength": 69665183,
+        "unchanged": true
+      },
+      {
+        "path": "reports/maintenance/prompt19-C/fine-macro-2020-joint-arrangement-cells.geojson",
+        "sha256": "1cbcae11efddd8ad68671c94659266f956464be5a92be1a702506c2bbb3fb15c",
+        "byteLength": 4839247,
+        "unchanged": true
+      },
+      {
+        "path": "reports/maintenance/prompt19-C/boundary-cleanup-2020-joined-world-input.json",
+        "sha256": "4c2590f560cb19d591b768bf0fa2b9230a69228bc1bc0b91fdb456c0ebe40e81",
+        "byteLength": 71324598,
+        "unchanged": true
+      },
+      {
+        "path": "reports/maintenance/prompt19-C/boundary-cleanup-2020-joint-arrangement-cells.geojson",
+        "sha256": "b54dda9d725d7e847917901f5834fe7843cf74acf03217ffb802d5f28730a16c",
+        "byteLength": 2023148,
+        "unchanged": true
+      },
+      {
+        "path": "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json",
+        "sha256": "ce438f6027baa0a0ff8831b224b32ceadd7377791604395d89b5a8b3d491aa3d",
+        "byteLength": 75275879,
+        "unchanged": true
+      },
+      {
+        "path": "reports/maintenance/prompt19-C/western-sector-2020-joint-arrangement-cells.geojson",
+        "sha256": "f57e3cfe226928c15c66278bd89db8f27ea7e8981d1d4accaf667b3849162ddf",
+        "byteLength": 2024769,
+        "unchanged": true
+      },
+      {
+        "path": "reports/maintenance/20261030-western-sector-independent-verification.json",
+        "sha256": "62be6912793b6137125f15b74f74f81b26a9db6c0890cdd4f01fb4c072081bb3",
+        "byteLength": 370222,
+        "unchanged": true
+      },
+      {
+        "path": "reports/chn-2020/baseline-runtime-pointer.json",
+        "sha256": "652a233e6b26397fdb32bc56781e2fbc6dcc67a1545774a7ed7d571a3e5ad8df",
+        "byteLength": 241,
+        "unchanged": true
+      },
+      {
+        "path": "reports/tianjin-detached-parcel-audit-20261103/merge-verification.json",
+        "sha256": "6d7768b4a5e237f8f77eed7e293f402a175cae7a88ee2b8528831febe77a0ad9",
+        "byteLength": 2176,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/chn-2020/candidate-df4f04ceeb9cecb0b5b3/joined-world-input.json",
+        "sha256": "df4f04ceeb9cecb0b5b3320f0e819c40064317f2f03dcc42f0a5746396f793d0",
+        "byteLength": 169444234,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/manual-cell-merges/baseline-5cefd603265f5a1c74b1/active-pointer.json",
+        "sha256": "5cefd603265f5a1c74b115c4086d5d7b51a56fe65f279bb72355ac3e2101337e",
+        "byteLength": 251,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/provenance.json",
+        "sha256": "8dfd4ed45ca5f65333f47d12b08e7396fc9a16df711aa60d4e9ad28799a513cd",
+        "byteLength": 6100740,
+        "unchanged": true
+      },
+      {
+        "path": "data/manual-map-corrections/tianjin-contained-cell-merge-20261103.json",
+        "sha256": "f117349bf50d1650270078a6d05c98ee993851443b3d5c7760b5ef20fcd8c7d7",
+        "byteLength": 985,
+        "unchanged": true
+      },
+      {
+        "path": "scripts/apply-contained-cell-merges.py",
+        "sha256": "783fad8e7c6bbd68d066a63c8b0e4fa261c31cac4670a7fd49842013e4dcfdf5",
+        "byteLength": 7228,
+        "unchanged": true
+      },
+      {
+        "path": "scripts/verify-contained-cell-merges.py",
+        "sha256": "441825394d7e1927f0e0de2dfaedcc778ecd5dae44d16eacd2ce66882f06536b",
+        "byteLength": 8263,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/normalized-boundaries.geojson",
+        "sha256": "2bd78b22bd1363ed20425ae1068626b46f7cf852431ccb9ce99f80daddc835e2",
+        "byteLength": 1064265,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/hierarchy-facts.json",
+        "sha256": "2daad2ff0c65acc11f2f3a43719431dcee1a9c4fd81876d9271beed6b9ec4da5",
+        "byteLength": 82878,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/representative-facts.json",
+        "sha256": "0225cac7e5772a69f74427df60d1a8ec1ef62473dcd3a77ae3628241ae1015f8",
+        "byteLength": 11591,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/temporal-facts.json",
+        "sha256": "f4282ac4f4f1da3a6827bc1ddd664b72c4c9281b1b525791ce2d5490cc603138",
+        "byteLength": 1754,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/source-inspection.json",
+        "sha256": "3fa769938b890168a08b0f4eb19790a87017f3f8adfc12a2d7e8546a40d39875",
+        "byteLength": 2605,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/verification.json",
+        "sha256": "486ae61bb2f78bc88bad0cec7cb2563d2e50b8b3c0141526fe372a2884a0dd1b",
+        "byteLength": 2557,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/hierarchy-citypopulation-2020-20261030/acquisition.json",
+        "sha256": "6155654b7f75f70dcba01e475dba5d79513c2c8882e693706502e33599a61f36",
+        "byteLength": 15469,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/source.geojson",
+        "sha256": "c367911b02f2cd7dcae6512087d84965131971de0c9def2fc5d0ed9a7392f2d8",
+        "byteLength": 1203660,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/PRK/normalized-adm2.geojson",
+        "sha256": "0cf590800aebb1967975ad55175f2f64da5c683eabbc1354b1645736ee52da99",
+        "byteLength": 1488933,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1.geojson",
+        "sha256": "f9aab34ec157591f4e3c573cc13b2dc390c9274f241768c7d7d98141a944368c",
+        "byteLength": 1219409,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoBoundaries-PRK-ADM1-metaData.json",
+        "sha256": "95d09c12b0a8079efdd35595e596b8204bc98fdd60f0273fb46501e03bc3737a",
+        "byteLength": 916,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/geoboundaries-api-ADM1.json",
+        "sha256": "fb88b17069d18be0b883bd828fad69e091153532ebc2754f7ad47b39d1abd606",
+        "byteLength": 1818,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/cc-by-3.0-igo.html",
+        "sha256": "289673667396de8b9ea265e2c7c019d00765772673eeb70d017d3f8461b524e3",
+        "byteLength": 35411,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/PRK/hierarchy-wfp-adm1-9469f095/acquisition.json",
+        "sha256": "86b9bac558af18a7673210d933b381daadcace1c6e1bcfe0001cbec508e30600",
+        "byteLength": 2409,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/prompt19/PRK/geoBoundaries-PRK-ADM2.geojson",
+        "sha256": "4265ce501c4402a8bafdc27298c8462e41ed6f3170d50624503c3770b8ce91e9",
+        "byteLength": 1694102,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/chn-2020/normalized-boundaries.geojson",
+        "sha256": "69fba4066901bd212b9c9696c91c6cc90a4c120ed89adf75cc07df11856e1697",
+        "byteLength": 77987491,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/chn-2020/references/gb3-CHN-ADM1.geojson",
+        "sha256": "1d1cdd59eae6da72950e4666da587ae125f09a94a02f8b89720d1c9240eb7d72",
+        "byteLength": 17277078,
+        "unchanged": true
+      },
+      {
+        "path": "reports/chn-2020/hierarchy-floating-exceptions.json",
+        "sha256": "aaf6ea97efe183af62d3f247a321cfa227ba99f6ecdf813c8f8e51367023f394",
+        "byteLength": 3678,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM3.geojson",
+        "sha256": "3cc71d6cd23e7dbb5646422b40dd92a7a74d8779f340eb9377158c961dec310e",
+        "byteLength": 88780624,
+        "unchanged": true
+      },
+      {
+        "path": "data/raw/ne_10m_admin_1_states_provinces.geojson",
+        "sha256": "2fb8789f2135d17c3ffac85a5e2e417dd74e5f6725bbe999f6721a50baa3678c",
+        "byteLength": 40726852,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ABW.json.gz",
+        "sha256": "7134618e5ce81fb99ecb73bbadd769ea233af885eda54194bcec7c10774c35c9",
+        "byteLength": 187,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/AFG.json.gz",
+        "sha256": "7556ed9cc728dcb636d70311a928439a6b6a3a48ada14090d6ea46f51c1ce4a9",
+        "byteLength": 1664,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/AGO.json.gz",
+        "sha256": "2b1db265dbc1d3f7367f07d664d0b703bad04ace28c695aa01445ddc95e1c6c2",
+        "byteLength": 967,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/AIA.json.gz",
+        "sha256": "15aa349efbdb9b152ba3e10d55c154cbcbfb8add58b1d2960225634758904434",
+        "byteLength": 833,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ALB.json.gz",
+        "sha256": "aa03bb8b5e780f27243ebc9eda50faf85eabc3e9f5e5a8ac8cd48bb707219547",
+        "byteLength": 702,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ALD.json.gz",
+        "sha256": "f7369ca3f7252add32638fb411b4248ae5d6d7230fef730e93d0a96904344fba",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/AND.json.gz",
+        "sha256": "8cc6640263b5d0264d948a51507390ae8c1d8e093721cff3b9a810ae7f47fcaa",
+        "byteLength": 482,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ARE.json.gz",
+        "sha256": "5caaae5f4952d8ce7266a287d5b6734d845de2393088f54e04434ac4c182ac66",
+        "byteLength": 568,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ARG.json.gz",
+        "sha256": "b856c7a2893aede374501eed4189a6bf5991d679322ee22063133c10a7522fb7",
+        "byteLength": 1226,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ARM.json.gz",
+        "sha256": "99176ffb167aa05ba20d9ffe9ba110ff92bc8e7f49d66b1fb3b278c7a09af88e",
+        "byteLength": 657,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ASM.json.gz",
+        "sha256": "de2778eedd044969375313dc25cde2c2baefa4da41a513b5cce3caec9a4281e7",
+        "byteLength": 386,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ATA.json.gz",
+        "sha256": "f77980918fcbaf83a82ba73c29b566ec88bcb3e9ff93798cf6c3be59c4bdceff",
+        "byteLength": 243,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ATC.json.gz",
+        "sha256": "0b96c0f33debf00ceea8a40f02ee56fa53e61ae46d1c5c0eda6b3783c698dc28",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ATF.json.gz",
+        "sha256": "36ef223e8a43f408328e4c5b11bd876dd1578026360040c915c735f0f261b4d8",
+        "byteLength": 342,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ATG.json.gz",
+        "sha256": "8c32735e855ba006ef3bda7c998590fca3b1e3b198b6df7311aeb682548d9cc1",
+        "byteLength": 521,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/AUS.json.gz",
+        "sha256": "079f29cda9e47c305953d9dfee59ff03f2f7e957c0c3ed798065eef85f90b0f6",
+        "byteLength": 659,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/AUT.json.gz",
+        "sha256": "9d173ee981c263847432c1b5ee5e0b635243c70cc41251a1c77018fb8de13ca6",
+        "byteLength": 571,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/AZE.json.gz",
+        "sha256": "9470141a80afbc595078befd76eefa81d97bdcd2cf5859930ba48383e8171bf8",
+        "byteLength": 3536,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BDI.json.gz",
+        "sha256": "e9a7ee8e316c43d8828a6e9049cba3701d4a04d6a2c16f2805f1af9cdeae9d6c",
+        "byteLength": 921,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BEL.json.gz",
+        "sha256": "e366a27e29b4d5ae8a508fa16ab7f6571ea56736ee7cb68ad43824254e1bc34a",
+        "byteLength": 652,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BEN.json.gz",
+        "sha256": "2e143a95a239c36b5ab45baa0b8e01689747bb678b7cc61cf53234e53ae6af5f",
+        "byteLength": 703,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BFA.json.gz",
+        "sha256": "e8b8e222ee0918518b821c9e520081689a909cd33638f41059fd5390875a5b0b",
+        "byteLength": 2136,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BGD.json.gz",
+        "sha256": "fdd0d15bdad53d66d9e07bc5ce812bd84dfbe9f47f18b98cf56c0c54980f605b",
+        "byteLength": 479,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BGR.json.gz",
+        "sha256": "beb87d753e0b1c0d2b379b365ef26050ec2b5d59c8dfc18e6309eac5bc6d496e",
+        "byteLength": 1400,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BHR.json.gz",
+        "sha256": "22f940ab2f1a73184665a5e731a698d7368b94382569786a6ed344612c85278d",
+        "byteLength": 385,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BHS.json.gz",
+        "sha256": "4e8503ec9d8c8c3cbb44b4a5f8e2ef102affbb3127dbc3ac900bfb6bf6b16064",
+        "byteLength": 1489,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BIH.json.gz",
+        "sha256": "be6f78c36f7c46f757f224b962ba118250eb1da73766f0e0491a5331615cebfd",
+        "byteLength": 964,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BLM.json.gz",
+        "sha256": "8b08add6da32afb039ce9c0f6c50ad47dd6f1310ade8ea8c8f6db38db5fa8655",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BLR.json.gz",
+        "sha256": "39010d2f85e6b98baa97042c51b7f9e09f4dfc442d9812b5a7ffabd5fcfe4137",
+        "byteLength": 478,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BLZ.json.gz",
+        "sha256": "fa63bffa22f34ea9cf0f02ec31608eb337262522eba4c2ff8ff4b4e0675287e6",
+        "byteLength": 431,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BMU.json.gz",
+        "sha256": "8debed5a418c9c729759842e884e8e0afb2acb924f0a7740d193f264acd7bb55",
+        "byteLength": 653,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BOL.json.gz",
+        "sha256": "bfc5cb0e5b452dc8da7bf6e8a29e2a2316755440bd4a13e6ff5b256dc957ba1e",
+        "byteLength": 569,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BRA.json.gz",
+        "sha256": "d5390ff147d10e6fd517b752b94044fb7669491121849a2aa8735cea0dfda8d6",
+        "byteLength": 1355,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BRB.json.gz",
+        "sha256": "e8d5ff5a67d8ddeb3388994d5de54975369e3211c175b14341454257151243fb",
+        "byteLength": 659,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BRN.json.gz",
+        "sha256": "1203f41069c92470dab2d6074918a548487c88e9da517ee887ef14bf2e93bdb1",
+        "byteLength": 340,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BTN.json.gz",
+        "sha256": "1cc95fc9705df6ddc7285965712ccb85217a3ca2110555f11737b04cb19030a2",
+        "byteLength": 1056,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/BWA.json.gz",
+        "sha256": "52d0d01bf86ea7845b6b5a8c9ef57b28363b78174c914f11828f7ed33ee7b3e4",
+        "byteLength": 832,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CAF.json.gz",
+        "sha256": "22d81f9abf9606e188271b2fb64ee029bf9ea3d1a20dc893f6f27d547682411e",
+        "byteLength": 915,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CAN.json.gz",
+        "sha256": "df41a7c5aaf0e93075d30d091d58f7a0d9e28435b5009b1e4d78353d9604a774",
+        "byteLength": 743,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CHE.json.gz",
+        "sha256": "08307e99401fe3826d8ca1ae1780318a3eb63b84df313c92d16449014656c4b7",
+        "byteLength": 1310,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CHL.json.gz",
+        "sha256": "640755f876d17e0716312824014ccc6f5c2c4722ee4c609e31bd63afbf2740c9",
+        "byteLength": 188,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CHN.json.gz",
+        "sha256": "5cc72b9793a2eb0b673be08321101f5d963871ee8f373c254b2685366e8c2473",
+        "byteLength": 138094,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CIV.json.gz",
+        "sha256": "9900745e15b6413e15c708342a64ae87c06fdacfa03e31b7a3fe5cad2bb0a3ee",
+        "byteLength": 1006,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CLP.json.gz",
+        "sha256": "df799783db8ddf30eafab45afa289fec795a38b4743126ff559ea108e0ebcee1",
+        "byteLength": 185,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CMR.json.gz",
+        "sha256": "33e1231083f598c4bce2092418eb098e0f5913dad2491315499613f8018fab23",
+        "byteLength": 614,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CNM.json.gz",
+        "sha256": "85e4a2d254e3cb324ec6befbe48272ee4b552d75a957c93fc9a585c9139d051f",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/COD.json.gz",
+        "sha256": "abcd0a1d0aad0cdcddc3302f90e4cfcc916c28b58d04f0a282b800ab02224f6b",
+        "byteLength": 659,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/COG.json.gz",
+        "sha256": "45fd799a469543ca192c253078cd63d0dd44899a47addaf5fdc12d2928c3b3a3",
+        "byteLength": 705,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/COK.json.gz",
+        "sha256": "ef75c9f8746f4c769d4b0a3a2eca8b7ba7a8576e277a7b528c34500ded206798",
+        "byteLength": 657,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/COL.json.gz",
+        "sha256": "9357bafef3ffa627b0e4101f28152e16e89d4ca86c7a6b42df0d046312570044",
+        "byteLength": 1668,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/COM.json.gz",
+        "sha256": "70746fc4ee793fb15acd4bcf5a23766d74825b0bd2430b5044c05b678994933b",
+        "byteLength": 290,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CPV.json.gz",
+        "sha256": "cd36a00b94194c2dcf2e88ad8eff9697050cfaa4c709ef507ea329ca6e986ab7",
+        "byteLength": 1133,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CRI.json.gz",
+        "sha256": "876607521403a2673059c89650ae154096d38d91a668dadbb9252a7cb1b2a2f0",
+        "byteLength": 478,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CSI.json.gz",
+        "sha256": "e62345e5e8226c9a51a1692a66d338c04574e7e33c43d7a8b415861a4b25898b",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CUB.json.gz",
+        "sha256": "0337f22e68b28bedee3c8af0da3c2e60916125a3880c608bbe03abbb587f184c",
+        "byteLength": 875,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CUW.json.gz",
+        "sha256": "b9af4fe65671a1999643336e083a62c72ce679e9d084a05c87be82c6e0b7ba11",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CYM.json.gz",
+        "sha256": "bd1446aedd24fee7156557a519f04c1254a3ae6cd39228f7763d63bc9d4b202a",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CYN.json.gz",
+        "sha256": "a8d0784d83224125ea536de664631e1d52eeae56a38555a68c5b2bbee4345a5a",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CYP.json.gz",
+        "sha256": "a2ed11df9cbd9543250fd133d2ac569e0ee3404d10afca33f73ef077f74e3c0d",
+        "byteLength": 189,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/CZE.json.gz",
+        "sha256": "1c3342d3ae5fb407a5990244137a2eda16bf90f7f54e169a31f5b283b588c829",
+        "byteLength": 784,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/DEU.json.gz",
+        "sha256": "bfbcc2af609b0d0573041aed1ba4ad0986153c26803b55d2289d73971506a2bb",
+        "byteLength": 875,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/DJI.json.gz",
+        "sha256": "f9023e6f0bf08e096d97a6ce77bfde3bccb373d26408808919f06c5b43f8aa52",
+        "byteLength": 430,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/DMA.json.gz",
+        "sha256": "f1172185d0821ae1856a4c7ee88691c287b32740dcfbbf657e454e23d6b849aa",
+        "byteLength": 615,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/DNK.json.gz",
+        "sha256": "ccd89d9f5ec8bbd356a31b4f83f228b4c4f75f8ebc898b4033c0a2e68a1489af",
+        "byteLength": 189,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/DOM.json.gz",
+        "sha256": "2ba58f7bbd8a669d63d4b26364a8cf38a609f1611feec1687d36975aacaa3de4",
+        "byteLength": 1574,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/DZA.json.gz",
+        "sha256": "d1bf0afd2ef71f39bda862faf81f0a3c58d9d2d996fd2e7e148fa6f5df76ef93",
+        "byteLength": 2255,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ECU.json.gz",
+        "sha256": "d0eb3814c149e327ea56ea7db7134635f1cab092a227abdaed2358aae77765ed",
+        "byteLength": 1230,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/EGY.json.gz",
+        "sha256": "576f1fde58156d2d023627b2cf305ec95881d75597e91b8668adc663b55920ac",
+        "byteLength": 1356,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ERI.json.gz",
+        "sha256": "3bfc28e44f6bee4ee43d7d29e723f28ab08498dd54c870104d1a7b4b9fbe3acb",
+        "byteLength": 430,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ESH.json.gz",
+        "sha256": "25b72c02bdbbc32fa526bd1a5518f66b0a5a96e8147384d03f71e2c188076f3b",
+        "byteLength": 188,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ESP.json.gz",
+        "sha256": "9bebdc053950a9981c77509015cff07db3c1ebf170a1440968c8a17274f9576f",
+        "byteLength": 2653,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/EST.json.gz",
+        "sha256": "3afe527e83fa06b3edd142e88c025927201c4d48abaca40fabd81f8f6b77afe5",
+        "byteLength": 835,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ETH.json.gz",
+        "sha256": "467802d000e810e5bff7c6332d875f6998f3330feda95960a9df8001734c2701",
+        "byteLength": 658,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/FIN.json.gz",
+        "sha256": "c71292061cb4f59e7fec27ec960ebc4cfcc96a6e718bbef3271dec22903cd595",
+        "byteLength": 968,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/FJI.json.gz",
+        "sha256": "47100fbba68eda63d45c258c1e8ea965632dbfee4894b6ac4c7318c6956ec7f2",
+        "byteLength": 387,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/FLK.json.gz",
+        "sha256": "b2dcce4da2033726739fa477c0374e3bfcd1f97b02dfb8eeacc01992b37f77d5",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/FRA.json.gz",
+        "sha256": "dda5e971eb6da545eaba758a96e32dd2d69a13dc9fe41afa2cf88c44f24a9fab",
+        "byteLength": 4580,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/FRO.json.gz",
+        "sha256": "05cbe8f5247ee026405386a152ab02b40b36e4866637e46bed20373dce359bd5",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/FSM.json.gz",
+        "sha256": "512e57a2438b92887581ef510a14ffe9a24d92d7544fc0c21c8e6bbb4b17cec2",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GAB.json.gz",
+        "sha256": "93ca4013d987d68323313425ca5faabf85b324112328409cb19cc47e1a1ad715",
+        "byteLength": 615,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GBR.json.gz",
+        "sha256": "cd14838d2f1d03a89fa422a33b2d78f1deab0ec5cd7ccba9a7ada7205f28b9e7",
+        "byteLength": 10504,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GEO.json.gz",
+        "sha256": "2be581e134733f39dbcc9a34abcdf9d97815d5a1972f00f07167ae9cc5eebdec",
+        "byteLength": 700,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GGY.json.gz",
+        "sha256": "3c6db19c06b3df5291e74ad388fd03b3a77bad7d46f1e0f0669bc323bfb072a1",
+        "byteLength": 243,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GHA.json.gz",
+        "sha256": "01203e58123921c8fcdc0c320c13afae9178cc4874a8554c497dce1a350727ca",
+        "byteLength": 612,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GIB.json.gz",
+        "sha256": "45fb31c1ccf17f6a9d3c6d03555db99be9100f28ae1d50e0cc624033512ea1c5",
+        "byteLength": 186,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GIN.json.gz",
+        "sha256": "8bfc6156c82660323375a7dc5af607734ef4323ca8e2f81e7f859cdff55dee70",
+        "byteLength": 1655,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GMB.json.gz",
+        "sha256": "3503a97314499187d7628e01ecff6b7c5f3481678ff504c9d83adaf3e5c945f6",
+        "byteLength": 435,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GNB.json.gz",
+        "sha256": "d7a557d9da3ba002b834e56c4230d2eeb1d5f9bf91e631d66dc7dad955497fc2",
+        "byteLength": 571,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GNQ.json.gz",
+        "sha256": "1ccf3ec12634a62ab29fc706deb0639f9b070f8e5b12193610e19dbe2d1ec2ef",
+        "byteLength": 479,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GRC.json.gz",
+        "sha256": "ce47dc1c9f2330a616221ecaba303b202e702bf1193c0e962f0d8347f3e1b5de",
+        "byteLength": 791,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GRD.json.gz",
+        "sha256": "1e8c90742a399beec51e4b87bc1b19b06819ac75717ee00bdeadf9faa20dbe5a",
+        "byteLength": 482,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GRL.json.gz",
+        "sha256": "2902d5b4177f5c99def1381503b11f9bbab1dfc6d58727076c518b8854b80e6e",
+        "byteLength": 477,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GTM.json.gz",
+        "sha256": "5df455960660577576563e4c01e58d9f7636fdc81a94d9f19c3f55676df509f6",
+        "byteLength": 1139,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GUM.json.gz",
+        "sha256": "01c09ec6aec6e30d0ea88bf9cf8eac05fbaf65a577f43a95c862447c4acb5650",
+        "byteLength": 187,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/GUY.json.gz",
+        "sha256": "6e0e21f4802d60c2972c44251a086997a9cb2b15a9f1ddc7667702b0bf9df3b6",
+        "byteLength": 611,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/HKG.json.gz",
+        "sha256": "18cb63fa57b79d5bb57019bea15c9d8dc6ab74557b150fa46ed706bced04e6e5",
+        "byteLength": 964,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/HMD.json.gz",
+        "sha256": "f5a733cc664825d232798a0882e7d3d65ab06284861c2607f1681e003692c057",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/HND.json.gz",
+        "sha256": "d040f97525d24caccaaa20afe3b69f82796e847b791c7332af46f384d23a0303",
+        "byteLength": 963,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/HRV.json.gz",
+        "sha256": "590741ec337669050507466d0b7f110a4dbc669a2864f7846f47551af93f9679",
+        "byteLength": 1101,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/HTI.json.gz",
+        "sha256": "0fb9d77eb4e05e8ab7c841d32bfcef45e0d5309372a7997204c6254392496495",
+        "byteLength": 616,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/HUN.json.gz",
+        "sha256": "7a2a6c75925208b1f8d6a96ae88f0176927c08698ed7c557c51031a5357b5f9b",
+        "byteLength": 2057,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IDN.json.gz",
+        "sha256": "ec50dc1d6e0efa7c48d82a227ba830d400467b6f2653dfb59f825d75d49cb2c6",
+        "byteLength": 1622,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IMN.json.gz",
+        "sha256": "1bcbce738d31eed421a2b826d4f3e625727bbb2be826b1c0414f27d64e3503d2",
+        "byteLength": 189,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IND.json.gz",
+        "sha256": "404b7e20d150207579a60c76845e8699995c25849857c460ddcd87498bd00c06",
+        "byteLength": 1792,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IOA.json.gz",
+        "sha256": "b678c3e0647f58b342c0721dc81dd3da9471014ad1d30e268da8e650e94d4906",
+        "byteLength": 240,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IOT.json.gz",
+        "sha256": "9db0edc30de42590f565b9dcdfa4a3020435c6e9896516abeb19830d0d150022",
+        "byteLength": 186,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IRL.json.gz",
+        "sha256": "5ed34bdb0e1784c7ebb31013841410a23c1bb184502d12d19064e52736d683c4",
+        "byteLength": 1656,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IRN.json.gz",
+        "sha256": "413be4de035d8475c6328f772238390e36c509bab930cb0244f7236fd8cd7133",
+        "byteLength": 1532,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/IRQ.json.gz",
+        "sha256": "f44aa15e81bb693f8d550915bc03d370f6cefba8863e0b2c00038d48010f22b7",
+        "byteLength": 972,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ISL.json.gz",
+        "sha256": "7dba1e93b185808b10ebb606623e1606da9832d8b4a68705be5e07c2dd4bd21a",
+        "byteLength": 568,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ISR.json.gz",
+        "sha256": "d82ef203ab89de6810707b25ab6a6dee2b1b8d8714e642c49b87e89295130d5b",
+        "byteLength": 433,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ITA.json.gz",
+        "sha256": "92589ba7d623903fc8ef55229027a2c6cc6f2441b0695d4f417c6fbd0fbc019e",
+        "byteLength": 4964,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/JAM.json.gz",
+        "sha256": "c823f5fe896e4832d35b9e9928b473cf30b869411687d00c6e8384aa192a94a7",
+        "byteLength": 786,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/JEY.json.gz",
+        "sha256": "42a6ee3c49c2f5520b507cfb801e9104cdcf41344c6a35eee7f1b05a7b315d36",
+        "byteLength": 188,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/JOR.json.gz",
+        "sha256": "5305e7e58d042b6b9b49f1e2d156594dc04342c9700f004984d47e69830fa7a6",
+        "byteLength": 699,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/JPN.json.gz",
+        "sha256": "6fb188ba5945c1a8faf1f07bf4958cf9a8f945454a59dafdbdd61e12a4197bdd",
+        "byteLength": 2222,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KAZ.json.gz",
+        "sha256": "02d5be0a9d4aa34b3fcd645ff0869147f851bb684ce422bd20bcc7aa2c1417ac",
+        "byteLength": 911,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KEN.json.gz",
+        "sha256": "157d2ca2c2dad1eeb95834e20b176659b2259cecfc1fff038bd5bf180595243a",
+        "byteLength": 524,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KGZ.json.gz",
+        "sha256": "9c3c296f830cbfbbf468db35d97493f2fe897d876e632e887ab551f996e428f5",
+        "byteLength": 527,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KHM.json.gz",
+        "sha256": "83981b3566559c23864e9fc76792ec1d2bdf92919989542fdd25e53452d29c1f",
+        "byteLength": 1228,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KIR.json.gz",
+        "sha256": "21324d02c321a96d020538aaade0a4ee25c30773b8db6bed8683f075bd2f1fb1",
+        "byteLength": 242,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KNA.json.gz",
+        "sha256": "6fe50749a025bb2358e1e69add5471bf5271c8d415929c41016ad59c2c0f51c9",
+        "byteLength": 792,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KOR.json.gz",
+        "sha256": "03fd61ee18ecb7fdcb7a4adaf0417e0baac0a665f2e211c8a0c9101f046cb657",
+        "byteLength": 13673,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/KWT.json.gz",
+        "sha256": "af6719db4a9c9f8eb0b895f088c04948ecfa11c297a189ed13eb3c129d3982ef",
+        "byteLength": 434,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LAO.json.gz",
+        "sha256": "51d0fff54113ae480b4d96947abca4e45e2575b2105e6b42a27eba7753f50ec4",
+        "byteLength": 918,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LBN.json.gz",
+        "sha256": "f32dbf3c722415a130670d8fd32eb71c2aaaf39521335b2e7990aac58d53c4e1",
+        "byteLength": 432,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LBR.json.gz",
+        "sha256": "b7d6916283948d3cb45b659790bbf8e9bf1572e519a9e47ed6d405de74d76a0f",
+        "byteLength": 836,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LBY.json.gz",
+        "sha256": "907ea9ab173fdebd7b1b148d46121c8dca6069ac212d7a3891de9b2ac2a14362",
+        "byteLength": 1135,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LCA.json.gz",
+        "sha256": "e4ff50df1889325b3a721182a00cd6e7e94bc3ed6ec2aa4dcfaec3245ec247d3",
+        "byteLength": 659,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LIE.json.gz",
+        "sha256": "26b32cffe53e1d0cec306e3f4ec804f931a88e54091c56dd4599aa935887776f",
+        "byteLength": 655,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LKA.json.gz",
+        "sha256": "3e879da3a2a8cd0cdc8cc231808bd7acfa06cf8cbc5e41c7c9ba4a5e14e40f58",
+        "byteLength": 1269,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LSO.json.gz",
+        "sha256": "4b731b6fb3e4a501881453f96c277877725f9d45bca0420e2cf3de7a17ccc92b",
+        "byteLength": 615,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LTU.json.gz",
+        "sha256": "08ac1b854ed2461dd6eb203230f00fb6651876755670f40627d2192b2e5742b2",
+        "byteLength": 610,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LUX.json.gz",
+        "sha256": "136611f51267b1e7ec7dec31907bc035808ccb2dc0929cb7b9bb3683e919a1f7",
+        "byteLength": 289,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/LVA.json.gz",
+        "sha256": "98c8589b43c66a53d9c2cd9a6f22a0eb02bfa7a74854aaa854297996604e71b5",
+        "byteLength": 5354,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MAC.json.gz",
+        "sha256": "a665ee8c7e2167bd250089e1837bf6aaef28ecef088e556dae2a5e394ffe577e",
+        "byteLength": 187,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MAF.json.gz",
+        "sha256": "9ccba871bc685a90e9a770c149303716f680c9effb93beb92e2d4aecd8992b37",
+        "byteLength": 189,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MAR.json.gz",
+        "sha256": "01f01e5886c437ea62e1e5916092b27fda93c711168899c7a797a1243d4dff4e",
+        "byteLength": 880,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MCO.json.gz",
+        "sha256": "7f696567479dfb5ff8bf2bda604cbeca546e2ac3b2016ea7113e70378a569b20",
+        "byteLength": 186,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MDA.json.gz",
+        "sha256": "a744d8f375ea35625ec65592ff732c8e727a85b0c11de7723003ff0932824b41",
+        "byteLength": 1921,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MDG.json.gz",
+        "sha256": "b60d1533293f93d03a2a40ec0ead0997c3cf9978736fca80685e454ec0e2c3cd",
+        "byteLength": 1141,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MDV.json.gz",
+        "sha256": "e4abf441dde20de48512f7026f2ddfb26819a544fd47d56dbe3cb081e2017b4a",
+        "byteLength": 1095,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MEX.json.gz",
+        "sha256": "7a8d6383fb60ad94fcc0cfdcafc85f75f3d3e9568d8d21451bac8b895a646e4d",
+        "byteLength": 1618,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MHL.json.gz",
+        "sha256": "171a647c73046d893ce0a353407367010a43601d08105d1fed6220c19900d3e9",
+        "byteLength": 243,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MKD.json.gz",
+        "sha256": "1a81a412023dda414dacb925837631c8185560544cc344b18a4d4f16bd2d50db",
+        "byteLength": 3823,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MLI.json.gz",
+        "sha256": "6784fb11692322f4c04ec6549b2598ffa32a846118e5902b6bd89d32f139272d",
+        "byteLength": 569,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MLT.json.gz",
+        "sha256": "4e5e1bc6d0438174a8fd567992051436f6aeecf42b35fbafe7ee4d4cd764e347",
+        "byteLength": 3141,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MMR.json.gz",
+        "sha256": "2d5a81d03edff135b417845c49b175476f16f265332c37fbf00aa3a305ce9d82",
+        "byteLength": 787,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MNE.json.gz",
+        "sha256": "3036fddfdb3e2e7f88920b6525039dbdf22b7e9703dc026227a4fc7dfc6cd705",
+        "byteLength": 1092,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MNG.json.gz",
+        "sha256": "244efb69635f7b65e583e3735b589a5aab4254702ea2d79e4394311e50e1881a",
+        "byteLength": 1138,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MNP.json.gz",
+        "sha256": "d6cbd69d493a9efecfbbdfd945365e3070bc6750c32d0fe519b1c0e2530575e8",
+        "byteLength": 341,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MOZ.json.gz",
+        "sha256": "e60710372ff0bd6e0b80728944240a8711738b6631b2fb205a5cd7858eb7b2cf",
+        "byteLength": 658,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MRT.json.gz",
+        "sha256": "5fddb7c7251c88ce16288b03f8c19e4dc90d68c36563ed3ba50f63b7a53daae4",
+        "byteLength": 748,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MSR.json.gz",
+        "sha256": "5388104ab1d83a3b4df42abcac8d756893e6c169bdf36c9627c2d134a77c1973",
+        "byteLength": 292,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MUS.json.gz",
+        "sha256": "4c524ba2e0d269a2ee84d8bfc7da821fe8fb2635940343a67ce33fd2dbb8f93c",
+        "byteLength": 881,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MWI.json.gz",
+        "sha256": "f8bdd5324649e253beaa6af7c660aef7dbe51e1dc005a0d49baced9814ef7b13",
+        "byteLength": 1401,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/MYS.json.gz",
+        "sha256": "7fe89a6c472cae776258c87231be342de7b1ae74ef790704e156aa5b04e0b46e",
+        "byteLength": 883,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NAM.json.gz",
+        "sha256": "213523290f2b896685f21e86cbebc384129d2007789a244923f20ab343a206df",
+        "byteLength": 743,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NCL.json.gz",
+        "sha256": "fd3c6698697d5ea2cd2eb47202efb55815a86dbde87b8fac2e8d7bde0fed26b6",
+        "byteLength": 341,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NER.json.gz",
+        "sha256": "9a74a158d0ebb9b343f4231f71d11b00062ee3d94b8d3a6ce1bdec1f64d69aec",
+        "byteLength": 522,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NFK.json.gz",
+        "sha256": "133874d81f4280877c6ce643a8844199c175d46405b1736d09fb7955eed23ed8",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NGA.json.gz",
+        "sha256": "5be91288e48307a65a8d2c1aa58edb66450813c6a94c05d972c2cfd6dce8f5cc",
+        "byteLength": 1773,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NIC.json.gz",
+        "sha256": "78d4ad47b2c14bcf385266318f5830c9602c60aa6afa12abec667b6a108d90e0",
+        "byteLength": 961,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NIU.json.gz",
+        "sha256": "ada93734560f06f624b92784f5514f017539c2a0eb344f53eafc15a6bcf7e3d0",
+        "byteLength": 187,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NLD.json.gz",
+        "sha256": "16048c58ede8193cdad7d9bedfc5970c1c66e98504d414972aa5dde44ccc4647",
+        "byteLength": 833,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NOR.json.gz",
+        "sha256": "07075b751222bbb75c3d39ad84fad394dc3ef5f4c32bcf52084cdaddf0bf62be",
+        "byteLength": 1093,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NPL.json.gz",
+        "sha256": "573387fb2b4dc9b5c578af1c83055f5eb248639328af82b91de9331f05023892",
+        "byteLength": 785,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NRU.json.gz",
+        "sha256": "a95dc191dd4e89c8426dc8d6d5bdd8de261bdfd48ce4f08374f5cfd497ef09bc",
+        "byteLength": 792,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/NZL.json.gz",
+        "sha256": "2b4db1272545db2836cecf6c732be2bbe42ba3268af7508c341591fa48137103",
+        "byteLength": 1223,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/OMN.json.gz",
+        "sha256": "52c4e111f08bd699cd5a7fcb734d7822366c28274536b5bb8c130232c90b3308",
+        "byteLength": 655,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PAK.json.gz",
+        "sha256": "682030d5d7afd3a84dea88d72e18e9485cee4b6aceff49c2c185fee4cab72890",
+        "byteLength": 522,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PAN.json.gz",
+        "sha256": "ac5c42938f2b6fb375bc01230360272022cdc8d7b28d3ccd8092d931afc5e6b7",
+        "byteLength": 189,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PCN.json.gz",
+        "sha256": "4d9ec3338e5f8a28e36f595958e31832552304307d85e99619879ef88fe094e4",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PER.json.gz",
+        "sha256": "44474ac1fc55b94828cc6b1a92040b69aa5bd56dec20b7f4c4b7334b70c65f9a",
+        "byteLength": 1309,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PGA.json.gz",
+        "sha256": "ced410d7101d4195480983b4f6436883dcb0aa0433cda4330f796a8994a8b5c6",
+        "byteLength": 241,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PHL.json.gz",
+        "sha256": "587f02fff662584adce25d1a075cf80cb345a47a5a99c29832ac246d98cc7139",
+        "byteLength": 187,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PLW.json.gz",
+        "sha256": "0eceeb92e2d70f73b98eb8774086a29d06042efbabfe3e76b9a174e8dc255152",
+        "byteLength": 880,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PNG.json.gz",
+        "sha256": "03bc5efb92a7a57fe73ea76947963d6b048eda8472c2d3be67b9421f4f3aa121",
+        "byteLength": 1046,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/POL.json.gz",
+        "sha256": "326535a2906e08ebd47fc4adfe50eeb3cf12b3178351239de95d1ead358e82c2",
+        "byteLength": 876,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PRI.json.gz",
+        "sha256": "0d9210097d2fbdaefd17612f11588abb50a08a1f59e533539000c754db476cbb",
+        "byteLength": 186,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PRK.json.gz",
+        "sha256": "22d16ba51f910a50c672064fc69430b672c344f2b5ee9fd55ea2b047abcce797",
+        "byteLength": 8163,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PRT.json.gz",
+        "sha256": "692aef735e43503fd7970bf25e7724eb99bcb687b84712fb92d70f1faf397a3d",
+        "byteLength": 1057,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PRY.json.gz",
+        "sha256": "3d2abd9792ed4a2c51be4ba262ee9a7f7cf32a483949a69f8bda22f889bab069",
+        "byteLength": 965,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PSX.json.gz",
+        "sha256": "1fa433043b9a2d6cd4333ce2429f74d58bb8a39b7c29f20d28518141a12f79ee",
+        "byteLength": 243,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/PYF.json.gz",
+        "sha256": "de9007ac4bd940109182fb9d8ab4c06e5b7f274a7176c2faad3ed99626798d3e",
+        "byteLength": 386,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/QAT.json.gz",
+        "sha256": "5e5dad42dba3c689267bb2f31ea12f62b6916a691002c3267343677fbfc36687",
+        "byteLength": 477,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ROU.json.gz",
+        "sha256": "2591845fc383418935f2e27035389d1be8e94b80dccb286094aa376118f4c624",
+        "byteLength": 1995,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/RUS.json.gz",
+        "sha256": "fc982a0f98948830ac9489dc2ce07370cab29964bda9084e693724afef1059ec",
+        "byteLength": 3905,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/RWA.json.gz",
+        "sha256": "f0795ad4641bcc5292b928110329248edc0d2717ed7226bb6e14d4f4a9298867",
+        "byteLength": 387,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SAU.json.gz",
+        "sha256": "e27be1c9fa831f3061ba507017da94be8535a4731280836e7045ca1aaf81ecfa",
+        "byteLength": 748,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SDN.json.gz",
+        "sha256": "20942781500b0ce1dc3cc9f51b6f48f49d68e487e604f8b877bfd0e0bf44a886",
+        "byteLength": 923,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SDS.json.gz",
+        "sha256": "d98dab1a5bc4995ca0deb7dc1e028ca68c9ac893654dff13768e39117feb88e3",
+        "byteLength": 614,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SEN.json.gz",
+        "sha256": "120b2d7ff754db7abf9ebed4eda750c8522c5bf33147be91618d7872190177e9",
+        "byteLength": 793,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SGP.json.gz",
+        "sha256": "20a0504264796416d028311aab1aa84e88c4cc7d6dd33d9e21eb8fdded5a432c",
+        "byteLength": 388,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SGS.json.gz",
+        "sha256": "fc0e2ebcb5dda322eb31e8e203b69d6d75274a40d312c6916275a7a90ae85035",
+        "byteLength": 188,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SHN.json.gz",
+        "sha256": "e94a12678e5a9cf8b96e29c598f7d892edb76527bb59a5490ed8c2d150203aad",
+        "byteLength": 291,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SLB.json.gz",
+        "sha256": "858339303e726df250589ee2e6814a280f4000375d1828719aa3f65131b9990a",
+        "byteLength": 613,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SLE.json.gz",
+        "sha256": "9a6cd14e349d6e4a6860ec6eba8e7a5e7bb3fd8e8f501d15f0ee69567f657a96",
+        "byteLength": 343,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SLV.json.gz",
+        "sha256": "46add779d457b9a296978cf9f0e12bc449fe4c93dacfd61a1efe54c2db582482",
+        "byteLength": 790,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SMR.json.gz",
+        "sha256": "7e8ce7da33d9a1669ec2618433301d21ac738456fb92bbedd58faf8557f43d1e",
+        "byteLength": 567,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SOL.json.gz",
+        "sha256": "6a1fdb9131a90c7affad8bd9e82b4da6cba342111564b7fc580e84f1186f4592",
+        "byteLength": 187,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SOM.json.gz",
+        "sha256": "310f9edac890f0353e5040ce20827ccf4c1d1d093587670055dc8caa2d6c4905",
+        "byteLength": 748,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SPM.json.gz",
+        "sha256": "ae06c8edb73e17d2eb3be4070e7082f55b1ffba455ca1a1751599e0d3d58e49c",
+        "byteLength": 243,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SRB.json.gz",
+        "sha256": "0385905a618c2c69a148983f60f425ca847224e43790f2864e7219c9d033d686",
+        "byteLength": 1269,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/STP.json.gz",
+        "sha256": "c1aea64a5f650ec0b8d1fa8939f1a0002b360af3a769908af454eb9b14b48411",
+        "byteLength": 243,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SUR.json.gz",
+        "sha256": "7edab15b1cd9d0dcbf0a1a2d240aed530df4833fe6a7084aac06ff91c47b659a",
+        "byteLength": 615,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SVK.json.gz",
+        "sha256": "aecfd230d56264dee6ba4b45c363bdfc243de93cbf99eedbf32aa15d5226eb32",
+        "byteLength": 526,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SVN.json.gz",
+        "sha256": "b6e1d389c9359b3cf11b696d68ae5dcffd470d65800d257267b4d2a1343ccc2f",
+        "byteLength": 192,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SWE.json.gz",
+        "sha256": "88924b95c0e2eb8da692fdb3c10c60427c5ef8e1a3c014993071e7579d34b9f7",
+        "byteLength": 1093,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SWZ.json.gz",
+        "sha256": "891e6cbe7028a509dd3091f8e7272b6cba4e615f2c57729f4a2bd85d9b94ba47",
+        "byteLength": 343,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SXM.json.gz",
+        "sha256": "655ad6f8596ce8722967e04d83e4239de28fb3dcca71e8de1f082d3c10711dd9",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SYC.json.gz",
+        "sha256": "e4441e8d043ff768b00a6eea8ba4e424c8579b9ea93d41ab0d347a856f086b5e",
+        "byteLength": 1317,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/SYR.json.gz",
+        "sha256": "b02b150eebc0a1f2a77e61f5343b2cc901ee18f6ea1b627e8266d0894fd677c7",
+        "byteLength": 835,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TCA.json.gz",
+        "sha256": "f5f71f69ea6e4052e93633b36b30d2e48111103611327637c42c5923ed27d79a",
+        "byteLength": 434,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TCD.json.gz",
+        "sha256": "3122a79e35cb8da2554421a5bab8328979dffaa3853df33aba2575e1563b7c9d",
+        "byteLength": 1141,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TGO.json.gz",
+        "sha256": "ab07aa2cbb84cf9f7fcd669e1fb1807ff6f6c7e4485340a107bcd9c2b9397a37",
+        "byteLength": 386,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/THA.json.gz",
+        "sha256": "5311faa7549b52034fe8bed45df77a81e5855f446d524ed20b68c9592ac70f9f",
+        "byteLength": 3520,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TJK.json.gz",
+        "sha256": "eee5099c67e5b7821607eb2d7184f3ec775ccfcfd3283e1cbef40c7d17607d25",
+        "byteLength": 387,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TKM.json.gz",
+        "sha256": "87203db6cff25d1aae070e6a0a8386402f87591b88ec72133c3e0eedba50d522",
+        "byteLength": 389,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TLS.json.gz",
+        "sha256": "f67d668c6e7ed8ac50e4116bb7ba4d0e198fa861a03820f637f9cd876675aa28",
+        "byteLength": 749,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TON.json.gz",
+        "sha256": "8547d170a01f6794fe4f4a918e5266f0bfcb7c1641b2c86b2e29d6fd275a033c",
+        "byteLength": 188,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TTO.json.gz",
+        "sha256": "d1d9af692baead556835a9f64c1fce231ae57664377436a68326d993e4163f2c",
+        "byteLength": 876,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TUN.json.gz",
+        "sha256": "29d31cadef50a3365e9df4c322d78e6ae237a20f2b5d3f564666eddb66492706",
+        "byteLength": 1181,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TUR.json.gz",
+        "sha256": "cf138dd8ef41d85ed4a90ac0c8f99644ffde9686cfcbe492044d2f23b5cf4f28",
+        "byteLength": 3701,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TUV.json.gz",
+        "sha256": "3b84ec26677287685d422a75a067f9037adf544db8135011b11a51f677d3d9a5",
+        "byteLength": 187,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TWN.json.gz",
+        "sha256": "74a92efb9a1af2a55832d3bd8f07f6e328c48be5947c713523e8ba5098be6806",
+        "byteLength": 1094,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/TZA.json.gz",
+        "sha256": "1526ab4b9e4b37fa3fddc481955942009f80bab8d39da70d6aee6ce57542ee4b",
+        "byteLength": 1485,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/UGA.json.gz",
+        "sha256": "51a6e2ab8b7df41edb9b4b691782bdf6c7aa004c95f95eec89729b89c8fb64bc",
+        "byteLength": 5048,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/UKR.json.gz",
+        "sha256": "95f037435b10619e8f0bcd37b4d6711f72fe8749de9ad83fb0a6fd90e7e0a4d2",
+        "byteLength": 1261,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/UMI.json.gz",
+        "sha256": "93d55621507f63226a2ea7a6a2cd9957614cf9560999644b87de97f48f093ed6",
+        "byteLength": 567,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/URY.json.gz",
+        "sha256": "f29045e498eed4cbca5dbe4728c716f060b4262785618a3d80f247fa1ef2c80b",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/USA.json.gz",
+        "sha256": "00c6048a7832c229f33a5748c3126111c6102958e6aee09dff2c3fb7ba6d031a",
+        "byteLength": 2437,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/UZB.json.gz",
+        "sha256": "eb927f045601d29edc0b873e53fee42e86b6103fcc5c20503b8b367bfda85573",
+        "byteLength": 790,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/VAT.json.gz",
+        "sha256": "25f18a4561e9b7cc99a606781167736d0d9bb3be8b9ff1eab4a59a38c17bbc02",
+        "byteLength": 190,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/VCT.json.gz",
+        "sha256": "db14d0960f1501df6ccbc172743162916b1ff27d5b726d1ae5589d3bbde2e734",
+        "byteLength": 433,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/VEN.json.gz",
+        "sha256": "d90796e5d857d933a50a35b364ec106157a330ed5b6418f0332452bed65dd410",
+        "byteLength": 1316,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/VGB.json.gz",
+        "sha256": "8f3017fe7abbdaae5a51ec3af7bd90c3efc28298200d4796a9e61ddf37222d1a",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/VIR.json.gz",
+        "sha256": "7be979255910de1cbf796f3223bba675ceb84e0f77f25deba63466018d3db854",
+        "byteLength": 293,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/VNM.json.gz",
+        "sha256": "35332a75f09953bebc6ee41bcf64940455a2675ddf87607343a8583383dc0678",
+        "byteLength": 2913,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/VUT.json.gz",
+        "sha256": "45fba865750b8a5f6f47cd6c925b1fc16813e280c5a45d6f1c906ca5ac224f95",
+        "byteLength": 433,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/WLF.json.gz",
+        "sha256": "cf837f73b1fcb873c7e399d1750062db0661bd22d3bc18f507bfe649e3301264",
+        "byteLength": 191,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/WSM.json.gz",
+        "sha256": "3cc337d082bf395c81560cffddffc0f71218c4ca0e919e1d867c588366a293e6",
+        "byteLength": 661,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/XKX.json.gz",
+        "sha256": "0af51695dc823e905edcb5f0c3902260a71e33bbb35d388718ef46fa5b52ebea",
+        "byteLength": 1492,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/YEM.json.gz",
+        "sha256": "81f86ddfb1ee2b2610b582fa6f77566a488cf661bbe590f52848fa226d461852",
+        "byteLength": 1102,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ZAF.json.gz",
+        "sha256": "0a2162afb16a35513957dcddb832721b08e5920aae324d889171b57cfbab2d3a",
+        "byteLength": 574,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ZMB.json.gz",
+        "sha256": "ed22a4bc1adca3c904f82899e30ec84adba708d77b2a787c04e231a8c89d615f",
+        "byteLength": 610,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/metadata/countries/ZWE.json.gz",
+        "sha256": "9b938ed61d679156c8f42a376ed8e37b651c8e56f9b30252ace76e3ef5645d87",
+        "byteLength": 614,
+        "unchanged": true
+      },
+      {
+        "path": "data/source-locks/prompt14-derived-game-input-lock.json",
+        "sha256": "c0fcc776e0e9abd25dfb2ccbfd7884101c3e8aa59f481a6c23bb8cc8bcb740a3",
+        "byteLength": 12870,
+        "unchanged": true
+      }
+    ],
+    "metadataArtifacts": [
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+        "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+        "byteLength": 1115,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/metadata.json.gz",
+        "sha256": "98926b07e58a3a345af92c3334a0ac81d58ec86560b9312c1b1a417246d99823",
+        "byteLength": 3357737,
+        "unchanged": true
+      },
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/admission.json.gz",
+        "sha256": "5f412fa4256ef22f3aa91b25e6ea721cdd0f8349789b1332caa6a122cc3b456b",
+        "byteLength": 434595,
+        "unchanged": true
+      }
+    ],
+    "reusedBuildAndSmokePins": [
+      {
+        "path": ".tmp/prompt20-supplement/build.log",
+        "sha256": "2e31d3208fa72e18584cec0457bb255993843a6bbdc003836178e7ac242ff964",
+        "byteLength": 1554
+      },
+      {
+        "path": ".next-prompt20-supplement-build/BUILD_ID",
+        "sha256": "b5a332689ec99c07815bc86a16ff186b1d51987b3f1a536f1e34867c55f810eb",
+        "byteLength": 21
+      },
+      {
+        "path": ".next-prompt20-supplement-build/server/app/api/world/regions/route.js.nft.json",
+        "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+        "byteLength": 1369758
+      },
+      {
+        "path": ".next-prompt20-supplement-build/server/app/api/simulation/game/route.js.nft.json",
+        "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+        "byteLength": 1369758
+      },
+      {
+        "path": ".next-prompt20-supplement-build/server/app/api/simulation/turn/route.js.nft.json",
+        "sha256": "5bc4fb03a742166738458db5ba96672961261ff25f2f9f04bf1ca138cf744566",
+        "byteLength": 1369758
+      },
+      {
+        "path": ".tmp/prompt20-supplement/smoke/evidence.json",
+        "sha256": "2241d546ce95c1ac5c3aaa843d6425b5b2fcfbc239c5241c3dadceab4c3346df",
+        "byteLength": 2273
+      },
+      {
+        "path": ".tmp/prompt20-supplement/smoke/setup.png",
+        "sha256": "aef26d08f9e7ac535cd9449415b58119642825f88685e0ce3fb3ac1060a02f01",
+        "byteLength": 319048
+      },
+      {
+        "path": ".tmp/prompt20-supplement/smoke/game-kor.png",
+        "sha256": "ba6d52ba9c8c64b58406d1d46ae96a838c776bb858d14aa90c5b0806c9aea5c7",
+        "byteLength": 418036
+      }
+    ],
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "productionCodeChanged": false
+  },
+  "originalSupplementRecordsPreserved": true,
+  "allFourOriginalItemsComplete": true,
+  "readiness": {
+    "prompt21WorkspaceSeparationReady": true,
+    "prompt21Executed": false,
+    "nextCountryStarted": false,
+    "uncommittedBaselineMustBeCarriedForward": true
+  },
+  "records": {
+    "completion": {
+      "path": "reports/maintenance/prompt20-supplement-resume-20261103.md",
+      "sha256": "c8c0dbbee14d63b1e26351c16de1b860563b48c1df4e899049b2fae0ef23ffdb",
+      "byteLength": 4644
+    },
+    "updatedIndex": {
+      "path": "reports/maintenance/prompt20-completion.md",
+      "sha256": "536408fa0371eccc941a4b099f1ecc0b41f428681035964b625ce83ef89cdba4",
+      "byteLength": 9309
+    }
+  }
+}

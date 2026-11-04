@@ -1,0 +1,331 @@
+{
+  "schemaVersion": "prompt20-03-metadata-handoff-v1",
+  "task": "20-03",
+  "status": "complete",
+  "auditDate": "2026-11-03",
+  "timezone": "Asia/Seoul",
+  "recordedAt": "2026-11-03T05:34:19.924Z",
+  "scope": "A producer and immutable offline metadata only; post-contained-cell-merge current catalog.",
+  "catalogRef": {
+    "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+    "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+    "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json",
+    "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+    "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2"
+  },
+  "metadataRef": {
+    "contentRoot": "1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1",
+    "schemaVersion": "geography-metadata-ref-v1"
+  },
+  "manifest": {
+    "path": "data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/manifest.json",
+    "sha256": "1a8db0d419a718f8c91eb2abf9ebe8aa92a723961356527ed6ebc2bbb28f8938",
+    "byteLength": 1115
+  },
+  "metadata": {
+    "byteLength": 2651863,
+    "path": "data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/metadata.json.gz",
+    "sha256": "36e6174ccfb8b61d25033465e48f4915b709d77ce5d9ad2b024964f83adc2986"
+  },
+  "admission": {
+    "byteLength": 434594,
+    "path": "data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/admission.json.gz",
+    "sha256": "1fc3127c8037e518b53838402b2135874b87bb3eb0fe38b4e2dd0ab89948da87"
+  },
+  "generationReport": {
+    "path": "data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/generation-report.json",
+    "sha256": "e70a9425bd5ab24ac4e17ffc0b60aa7cd54ccde87cd57a7aceab8dc0962ce008",
+    "byteLength": 93115
+  },
+  "counts": {
+    "countries": 247,
+    "provinces": 8004,
+    "states": 4201,
+    "sourceRegions": 7399,
+    "fine": 3793,
+    "coarse": 4169,
+    "residual": 42,
+    "sourceLinked": 7935,
+    "sourceFree": 69,
+    "unassignedParents": 1436
+  },
+  "countries": [
+    {
+      "counts": {
+        "coarse": 0,
+        "derivedDisplays": 7,
+        "fine": 3312,
+        "provinces": 3319,
+        "residual": 7,
+        "sourceNamed": 3312,
+        "sourceRegions": 2850,
+        "states": 31,
+        "unassignedParents": 1374
+      },
+      "nameSupport": "source-and-derived",
+      "officialSubdivisionCount": null,
+      "officialSubdivisionCountEvidence": [],
+      "parentSupport": "partial",
+      "sourceCountryId": "CHN",
+      "sourceFeatureCount": 2864,
+      "sourceFeatureCountEvidence": [
+        {
+          "artifact": {
+            "byteLength": 77987491,
+            "path": "data/raw/chn-2020/normalized-boundaries.geojson",
+            "sha256": "69fba4066901bd212b9c9696c91c6cc90a4c120ed89adf75cc07df11856e1697"
+          },
+          "locator": "features.length",
+          "method": "actual-fixed-source-feature-count"
+        }
+      ]
+    },
+    {
+      "counts": {
+        "coarse": 0,
+        "derivedDisplays": 33,
+        "fine": 289,
+        "provinces": 322,
+        "residual": 33,
+        "sourceNamed": 289,
+        "sourceRegions": 228,
+        "states": 17,
+        "unassignedParents": 33
+      },
+      "nameSupport": "source-and-derived",
+      "officialSubdivisionCount": null,
+      "officialSubdivisionCountEvidence": [],
+      "parentSupport": "partial",
+      "sourceCountryId": "KOR",
+      "sourceFeatureCount": 228,
+      "sourceFeatureCountEvidence": [
+        {
+          "artifact": {
+            "byteLength": 1064265,
+            "path": "data/raw/prompt19/KOR/geoboundaries-adm2-2020-9469f095/normalized-boundaries.geojson",
+            "sha256": "2bd78b22bd1363ed20425ae1068626b46f7cf852431ccb9ce99f80daddc835e2"
+          },
+          "locator": "features.length",
+          "method": "actual-fixed-source-feature-count"
+        }
+      ]
+    },
+    {
+      "counts": {
+        "coarse": 0,
+        "derivedDisplays": 2,
+        "fine": 192,
+        "provinces": 194,
+        "residual": 2,
+        "sourceNamed": 192,
+        "sourceRegions": 179,
+        "states": 11,
+        "unassignedParents": 2
+      },
+      "nameSupport": "source-and-derived",
+      "officialSubdivisionCount": null,
+      "officialSubdivisionCountEvidence": [],
+      "parentSupport": "partial",
+      "sourceCountryId": "PRK",
+      "sourceFeatureCount": 179,
+      "sourceFeatureCountEvidence": [
+        {
+          "artifact": {
+            "byteLength": 1488933,
+            "path": "data/raw/prompt19/PRK/normalized-adm2.geojson",
+            "sha256": "0cf590800aebb1967975ad55175f2f64da5c683eabbc1354b1645736ee52da99"
+          },
+          "locator": "features.length",
+          "method": "actual-fixed-source-feature-count"
+        }
+      ]
+    }
+  ],
+  "omittedOriginalSourceFeatures": [
+    {
+      "countryId": "CHN",
+      "meaning": "No current game cell has this original source identity. No new geometry or automatic incorporation.",
+      "sourceFeatureIds": [
+        "62558664B17954879858679",
+        "62558664B22080335511958",
+        "62558664B27015201610030",
+        "62558664B35044070765760",
+        "62558664B36300803449517",
+        "62558664B38801129228209",
+        "62558664B4543763669481",
+        "62558664B58086375250636",
+        "62558664B63835421457793",
+        "62558664B72696326018605",
+        "62558664B94582625753095",
+        "62558664B95701016910844",
+        "62558664B97877522843486",
+        "62558664B98275650601054"
+      ]
+    },
+    {
+      "countryId": "KOR",
+      "meaning": "No current game cell has this original source identity. No new geometry or automatic incorporation.",
+      "sourceFeatureIds": []
+    },
+    {
+      "countryId": "PRK",
+      "meaning": "No current game cell has this original source identity. No new geometry or automatic incorporation.",
+      "sourceFeatureIds": []
+    }
+  ],
+  "validation": {
+    "independentCliVerification": {
+      "manifest": {
+        "path": "data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/manifest.json",
+        "sha256": "1a8db0d419a718f8c91eb2abf9ebe8aa92a723961356527ed6ebc2bbb28f8938",
+        "byteLength": 1115
+      },
+      "metadataRef": {
+        "contentRoot": "1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1",
+        "schemaVersion": "geography-metadata-ref-v1"
+      },
+      "catalogRef": {
+        "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+        "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+        "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+        "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+        "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+      },
+      "status": "validated-metadata-only",
+      "counts": {
+        "countries": 247,
+        "provinces": 8004,
+        "states": 4201,
+        "sourceRegions": 7399,
+        "fine": 3793,
+        "coarse": 4169,
+        "residual": 42,
+        "sourceLinked": 7935,
+        "sourceFree": 69,
+        "unassignedParents": 1436
+      },
+      "checks": {
+        "exactCatalogProvinceSet": true,
+        "sourceCountryMatches": true,
+        "rawSourceAndParentJoins": true,
+        "knownSourceMembershipComplete": true,
+        "unknownParentsRemainNull": true,
+        "coarsePrecisionPreserved": true,
+        "noUnverifiedCompleteCoverage": true,
+        "commonSchemaAndContentRoot": true
+      },
+      "administrativeTruthClaim": false,
+      "outputDirectory": "data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1"
+    },
+    "command": "node --max-old-space-size=8192 scripts/geography/build-current-metadata.cjs --verify data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/manifest.json",
+    "determinism": {
+      "actualProducerRuns": 2,
+      "manifestSha256": "1a8db0d419a718f8c91eb2abf9ebe8aa92a723961356527ed6ebc2bbb28f8938",
+      "identicalMetadataRefAndCompressedArtifacts": true,
+      "existingImmutableOutputsReused": true
+    },
+    "tests": {
+      "command": "node node_modules/vitest/vitest.mjs run scripts/geography/metadata-builder.test.ts src/lib/geography/state-province-contract.test.ts",
+      "passed": 31,
+      "failed": 0
+    },
+    "typeCheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit -p scripts/geography/tsconfig.json",
+      "status": "passed"
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js scripts/geography",
+      "status": "passed"
+    },
+    "preservation": {
+      "postMergePointerUnchanged": true,
+      "common20_02FilesUnchanged": true,
+      "inputPinsRecheckedByProducerAndVerifier": true,
+      "geometryOperations": 0,
+      "userGameReads": 0,
+      "runtimeWrites": 0
+    }
+  },
+  "commands": {
+    "generate": "node --max-old-space-size=8192 scripts/geography/build-current-metadata.cjs",
+    "verify": "node --max-old-space-size=8192 scripts/geography/build-current-metadata.cjs --verify data/derived/geography/1c8112c193ee800d8fe989a3b9d69a1df9e2e3e9473da61839d664baaf65fed1/manifest.json"
+  },
+  "outputs": [
+    {
+      "path": "scripts/geography/build-current-metadata.cjs",
+      "sha256": "f5fead78faba6a8d010ca2053f19785f9ece1665af440504b725994b0cc1fdd7",
+      "byteLength": 1431
+    },
+    {
+      "path": "scripts/geography/current-input.ts",
+      "sha256": "d8dda9210d12cc9b21764fe65e595727a5722876d3f17affcb6735e60869191f",
+      "byteLength": 17310
+    },
+    {
+      "path": "scripts/geography/country-adapters.ts",
+      "sha256": "a3889eed32fe0d99bed3f7fccff42cd8b79fd0ba1217e88be37adb00c6bf4412",
+      "byteLength": 6757
+    },
+    {
+      "path": "scripts/geography/metadata-builder.ts",
+      "sha256": "6231c70d7c2f4f0b3282b4e8de5da40130bca4159abe12a0ac39755a87b099ad",
+      "byteLength": 9872
+    },
+    {
+      "path": "scripts/geography/verify-metadata.ts",
+      "sha256": "d0bb701ef257880fd2dc235398802592e975aab3e24fa58c9d47ef6cd9a351a8",
+      "byteLength": 10253
+    },
+    {
+      "path": "scripts/geography/metadata-builder.test.ts",
+      "sha256": "6c1423e8364fa8dd84a828cf1f957d58f3ada87c728d0430d3a6fc93bc090f81",
+      "byteLength": 10152
+    },
+    {
+      "path": "scripts/geography/tsconfig.json",
+      "sha256": "d63259261f6f9f699cb280501e8e0ff3b6a229aba27485dcf89594d5cedb90d4",
+      "byteLength": 146
+    },
+    {
+      "path": "docs/geography/current-metadata-builder-v1.md",
+      "sha256": "67afebfeb70621539ff0662faa1eebbd9c2a940cf77c8917671156c6df063b9a",
+      "byteLength": 9224
+    }
+  ],
+  "transport": {
+    "encoding": "gzip",
+    "compressedMetadataAndAdmissionBytes": 3086457,
+    "decodeOrder": [
+      "verify stored gzip sha256/byteLength",
+      "gunzip with a decoded-size bound",
+      "UTF-8 JSON parse",
+      "validate common schema, catalogRef and metadataRef"
+    ]
+  },
+  "handoff": {
+    "nextTask": "20-04",
+    "A": "Raw source names and complete known source groups are present. Evidence-backed alias enrichment remains 20-04.",
+    "B": "Current parallel 20-05 loader parses UTF-8 JSON only. Add verified-gzip decoding at the 20-08 integration boundary before selecting this production manifest; production loader/API checks were not performed by 20-03.",
+    "C": "Producer output uses the common v1 envelope and admission schema. Raw feature totals are distinct from current cells and official totals remain null.",
+    "activation": "No runtime metadata selector or current pointer changed."
+  },
+  "parallelWorkObserved": {
+    "records": [
+      "reports/maintenance/prompt20-05-loader.json",
+      "reports/maintenance/prompt20-07-country-handoff.json"
+    ],
+    "trackedPaths": [
+      "src/app/api/world/regions/route.ts",
+      "src/lib/simulation/catalog-region.server.ts",
+      "src/lib/simulation/catalog-region.ts",
+      "src/lib/simulation/operational-region.server.ts"
+    ],
+    "note": "These appeared during this task and were not edited or reverted by the A producer work."
+  },
+  "limitations": [
+    "All state/source-region coverage is partial or unsupported with expectedProvinceCount:null; no unverified complete target sets were emitted.",
+    "69 source-free cells use derived game labels; 1436 cells retain null state parents.",
+    "No source-exact geometry or scenario-date legal administrative truth is certified.",
+    "No production loader/API/browser/AI execution was performed by 20-03."
+  ]
+}

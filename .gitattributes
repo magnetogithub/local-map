@@ -129,3 +129,30 @@ data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/countries/CHN.g
 reports/chn-2020/independent-*.json filter=lfs diff=lfs merge=lfs -text
 reports/chn-2020/proofs/geometry-*.json filter=lfs diff=lfs merge=lfs -text
 reports/chn-render-lod-20261030/game-debug/archive/after-0fa7ab903c6cddeba90e2d5795a93a7684a192b2b34df095c2ab08901ddf128f.json filter=lfs diff=lfs merge=lfs -text
+
+# Prompt 20 metadata and recorded code identities retain exact checkout bytes.
+data/derived/geography/** -text whitespace=cr-at-eol
+data/geography/** -text whitespace=cr-at-eol
+data/runtime/geography/** -text whitespace=cr-at-eol
+docs/geography/** -text whitespace=cr-at-eol
+scripts/geography/** -text whitespace=cr-at-eol
+src/lib/geography/** -text whitespace=cr-at-eol
+reports/maintenance/prompt20* -text whitespace=cr-at-eol
+src/lib/test-only/country-metadata-handoff-fixture.ts -text whitespace=cr-at-eol
+src/lib/test-only/current-geography-expectations.ts -text whitespace=cr-at-eol
+src/lib/test-only/state-province-contract-fixture.ts -text whitespace=cr-at-eol
+src/app/api/simulation/game/route.ts -text whitespace=cr-at-eol
+src/app/api/world/regions/route.ts -text whitespace=cr-at-eol
+src/lib/simulation/catalog-region.server.ts -text whitespace=cr-at-eol
+src/lib/simulation/catalog-region.ts -text whitespace=cr-at-eol
+src/lib/simulation/operational-region.server.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/context-resolution-validator.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/openai-responses-provider.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/operational-game-session.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/operational-game-version.test.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/region-route-handler.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/simulation-instruction.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/simulation-provider.ts -text whitespace=cr-at-eol
+src/lib/simulation/server/simulation-tools.ts -text whitespace=cr-at-eol
+src/lib/simulation/simulation-context.ts -text whitespace=cr-at-eol
+prompts/PROMPT_21_PARALLEL_WORKSPACES_AND_VERIFICATION_BASELINE.txt text eol=lf

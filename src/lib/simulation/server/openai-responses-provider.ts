@@ -7,6 +7,9 @@ import type {OperationalFrontierRequest} from '../operational-frontier-contract'
 import type {CatalogRegionIndex} from '../catalog-region';
 import type {WorldGeometryCatalogRef} from '../../world/world-geometry-catalog-ref';
 import type {OperationalFrontierValidation} from '../operational-frontier-validation';
+import type {GeographySnapshot} from '../../geography/state-province-io';
+import {assertGeographyContextSnapshot} from '../../geography/state-province-read';
+import {loadRegionGeography, type RegionGeographyLoader} from '../../geography/state-province-region.server';
 import {serializeSimulationContext} from "../simulation-context";
 import {createModelSimulationContext} from './model-simulation-context';
 import {OpenAIResponsesError} from './openai-responses-error';
@@ -42,7 +45,8 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
     private readonly transport: OpenAIResponsesTransport,
     private readonly dependencies: Readonly<{
       loadOperationalCatalog?: () => OperationalFrontierCatalog;
-      loadRegionIndex?: (ref: WorldGeometryCatalogRef) => CatalogRegionIndex;
+      loadRegionIndex?: (ref: WorldGeometryCatalogRef, snapshot?: GeographySnapshot) => CatalogRegionIndex;
+      loadGeography?: RegionGeographyLoader;
     }> = {},
   ) {}
 
@@ -54,12 +58,21 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
     let regionIndex: CatalogRegionIndex | undefined;
     let frontier: OperationalFrontierValidation | undefined;
     let frontierLookup: ((raw: unknown) => OperationalFrontierSelection) | undefined;
+    let geographySnapshot = request.geographySnapshot;
     const issuedScopes: OperationalFrontierRequest[] = [];
     try {
+      if (request.context.geography && !geographySnapshot) {
+        const loaded = await (this.dependencies.loadGeography ?? loadRegionGeography)(request.context.geography);
+        if (loaded.status !== 'available') throw Error(`GEOGRAPHY_${loaded.status.toUpperCase()}`);
+        geographySnapshot = loaded.snapshot;
+      }
+      assertGeographyContextSnapshot(request.context.geography, geographySnapshot);
       if (request.context.regionCatalog) {
-        regionIndex = (this.dependencies.loadRegionIndex ?? loadCatalogRegionIndex)(request.context.regionCatalog);
+        if (geographySnapshot) assertWorldGeometryCatalogRefMatches(request.context.regionCatalog, geographySnapshot.catalogRef);
+        regionIndex = request.preparedRegionIndex ?? (this.dependencies.loadRegionIndex ?? loadCatalogRegionIndex)(request.context.regionCatalog, geographySnapshot);
         if (!regionIndex.catalogRef) throw Error('REGION_CATALOG_REQUIRED');
         assertWorldGeometryCatalogRefMatches(request.context.regionCatalog, regionIndex.catalogRef);
+        if (regionIndex.geography) assertGeographyContextSnapshot(request.context.geography, regionIndex.geography.snapshot);
       }
       if (operational) {
         const world = request.operationalWorld;
@@ -79,7 +92,7 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
       yield {type:'turn.failed',code:'INVALID_RESOLUTION',message:error instanceof Error?error.message:'CATALOG_LOOKUP_FAILED',retryable:false};
       return;
     }
-    const tools = createSimulationToolManifest({operational});
+    const tools = createSimulationToolManifest({operational, geography: !!geographySnapshot});
     const input: unknown[] = [{
       role: "user",
       content: [{
@@ -226,7 +239,7 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
           return;
         }
         if (call.name === "submit_turn_resolution") {
-          const result = validateResolutionAgainstContext(args, request.context, {debugWorldEffectActionIds,regionIndex,frontier,territorialControlAuthorities:request.operationalTerritorialAuthorities});
+          const result = validateResolutionAgainstContext(args, request.context, {debugWorldEffectActionIds,regionIndex,frontier,geographySnapshot,territorialControlAuthorities:request.operationalTerritorialAuthorities});
           if (result.ok && result.resolution) {
             console.info('Simulation resolution accepted',JSON.stringify({turnId:request.turnId,verifiedFrontierLookups:issuedScopes.length,
               territorialEffects:result.resolution.worldEffects.filter(effect=>effect.type==='territory.occupy'||effect.type==='territory.liberate'||effect.type==='territory.transferOwnership').length,
@@ -264,7 +277,7 @@ export class OpenAIResponsesSimulationProvider implements SimulationModelProvide
           return;
         }
         try {
-          const output = executeReadOnlySimulationTool(call.name, args, request.context,regionIndex,frontierLookup);
+          const output = executeReadOnlySimulationTool(call.name, args, request.context,regionIndex,frontierLookup,geographySnapshot);
           yield {type: "phase.changed", phase: "looking_up"};
           const failed=output!==null&&typeof output==='object'&&'ok' in output&&output.ok===false;
           const code=failed&&'code' in output&&typeof output.code==='string'?output.code:null;

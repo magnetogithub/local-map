@@ -2,6 +2,8 @@ import 'server-only';
 import type {OperationalCatalog} from '../world/operational-catalog.server';
 import {subdivisionReferenceSchema} from './world-effect';
 import {regionKey, regionOperation, type CatalogRegionIndex, type RegionRecord, type RegionReference} from './catalog-region';
+import type {GeographySnapshot} from '../geography/state-province-io';
+import {attachGeographyRegionIndex} from '../geography/state-province-region.server';
 
 // Localized names only; administrative membership comes exclusively from the pinned hierarchy.
 const prkLocalizedNames: Readonly<Record<string, string>> = {
@@ -11,7 +13,7 @@ const prkLocalizedNames: Readonly<Record<string, string>> = {
 };
 
 /** Complete source identities and memberships, independent of current owner/controller. */
-export function createOperationalRegionIndex(catalog: OperationalCatalog): CatalogRegionIndex {
+export function createOperationalRegionIndex(catalog: OperationalCatalog, geography?: GeographySnapshot): CatalogRegionIndex {
   const names = catalog.readRegionNames();
   const summaries = catalog.administrativeParents.map(parent => {
     const properties = parent.kind === 'administrative' && parent.sourceFeatureId ? names.get(parent.sourceFeatureId) : undefined;
@@ -44,7 +46,7 @@ export function createOperationalRegionIndex(catalog: OperationalCatalog): Catal
     return record;
   };
   let allRecords: readonly RegionRecord[] | undefined;
-  return Object.freeze({catalogRef: catalog.ref,
+  const index: CatalogRegionIndex = Object.freeze({catalogRef: catalog.ref,
     get records() {return allRecords ??= Object.freeze(summaries.map(s => lookup(s.parent.sourceCountryId, s.ref)));},
     hasTerritory: (id: string) => {
       try {catalog.cell(id); return true;} catch (error) {
@@ -69,4 +71,9 @@ export function createOperationalRegionIndex(catalog: OperationalCatalog): Catal
         .slice(0, 8).map(s => lookup(countryId, s.ref)));
     },
   });
+  return geography ? attachGeographyRegionIndex(index, geography, geography.metadata.states.map(state => {
+    const existing = summaries.find(summary => summary.parent.parentKey === state.catalogParentKey);
+    if (!existing) throw Error('GEOGRAPHY_STATE_CROSSWALK');
+    return {stateId: state.stateId, reference: existing.ref};
+  })) : index;
 }

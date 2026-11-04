@@ -6,6 +6,9 @@ import type {CatalogRegionIndex} from '../catalog-region';
 import {subdivisionReferenceSchema} from '../world-effect';
 import {OPERATIONAL_CATALOG_VERSION} from '../../world/operational-catalog';
 import type {OperationalFrontierSelection} from '../operational-frontier.server';
+import {geographyReadRequestSchema, geographyReadFunctionParameters, executeGeographyRead, assertGeographyContextSnapshot} from '../../geography/state-province-read';
+import {compactRegion} from '../../geography/state-province-region.server';
+import type {GeographySnapshot} from '../../geography/state-province-io';
 
 export type FunctionToolDefinition = Readonly<{
   type: "function";
@@ -33,9 +36,13 @@ export const READ_ONLY_SIMULATION_TOOL_NAMES = Object.freeze([
   "resolve_region",
   "find_border_territories",
   "find_frontier_territories",
+  "read_geography",
 ] as const);
 
-export const createSimulationToolManifest = (options: Readonly<{operational?: boolean}> = {}): readonly FunctionToolDefinition[] => Object.freeze([
+export const createSimulationToolManifest = (options: Readonly<{operational?: boolean; geography?: boolean}> = {}): readonly FunctionToolDefinition[] => Object.freeze([
+  ...(options.geography ? [{type: 'function' as const, name: 'read_geography', strict: true as const,
+    description: 'Read the pinned canonical state/province/source-region geography, including names omitted from context. For named-place search specify kind: state for broad administrative regions, source-region for cities/counties/districts, province for individual game cells. Use null only when the level is unknown; unfiltered search groups representations of the same source place before reporting ambiguity. sourceCountryId is original classification, never the current owner or actor. search needs query; list uses null query/reference; inspect/members need reference and null kind/query. All nullable fields are required. Pages are 1-128. Preserve ambiguity, truncation, parent/name evidence and geographic coverage; a complete page is not complete geography. This grants no authority and is not an action target or subdivision reference.',
+    parameters: geographyReadFunctionParameters()}] : []),
   options.operational ? {type:'function',name:'find_frontier_territories',description:'Select a small connected advance from the CURRENT authoritative controller frontier. Infer actor and target countries from the action and geography; a province is optional. near/limited/deeper use existing physical bounds. Direction locates a portion of the current frontier. The host supplies catalog and revision. Copy the ENTIRE effectTarget, including frontierScope, unchanged into the effect; never substitute regionRefs, select a subset or extend the returned IDs. This grants no authority.',strict:true,parameters:objectSchema({
     actorCountryId:stringId,targetCountryId:stringId,operation:{type:'string',enum:['occupy','liberate','transfer']},extent:{type:'string',enum:['near','limited','deeper']},
     direction:{anyOf:[{type:'string',enum:['north','south','east','west']},{type:'null'}]},
@@ -60,7 +67,8 @@ export const createSimulationToolManifest = (options: Readonly<{operational?: bo
 ]);
 
 const argumentSchemas = {
-  find_frontier_territories:z.strictObject({actorCountryId:z.string().min(1).max(160),targetCountryId:z.string().min(1).max(160),operation:z.enum(['occupy','liberate','transfer']),extent:z.enum(['near','limited','deeper']),direction:z.enum(['north','south','east','west']).nullish(),reference:subdivisionReferenceSchema.nullish(),regionQuery:z.string().trim().min(1).max(120).nullish(),cap:z.number().int().min(1).max(512)}),
+  find_frontier_territories:z.strictObject({actorCountryId:z.string().min(1).max(160),targetCountryId:z.string().min(1).max(160),operation:z.enum(['occupy','liberate','transfer']),extent:z.enum(['near','limited','deeper']),direction:z.enum(['north','south','east','west']).nullable(),reference:subdivisionReferenceSchema.nullable(),regionQuery:z.string().trim().min(1).max(120).nullable(),cap:z.number().int().min(1).max(512)}),
+  read_geography: geographyReadRequestSchema,
   find_border_territories:z.strictObject({countryId:z.string().min(1).max(160),neighborCountryId:z.string().min(1).max(160),cap:z.number().int().min(1).max(512)}),
   find_region:z.strictObject({countryId:z.string().min(1).max(160),query:z.string().min(1).max(120)}),
   resolve_region:z.strictObject({countryId:z.string().min(1).max(160),reference:subdivisionReferenceSchema,operation:z.enum(['occupy','liberate','transfer']),cap:z.number().int().min(1).max(512)}),
@@ -79,11 +87,18 @@ export function executeReadOnlySimulationTool(
   context: SimulationContextV1,
   regionIndex?:CatalogRegionIndex,
   frontierLookup?: (request: unknown) => OperationalFrontierSelection,
+  geographySnapshot?: GeographySnapshot,
 ): unknown {
   if (!(name in argumentSchemas)) throw new Error(`UNKNOWN_TOOL:${name}`);
   const toolName = name as ReadOnlyToolName;
   const args = argumentSchemas[toolName].parse(rawArguments) as Record<string, unknown>;
   switch (toolName) {
+    case 'read_geography': {
+      const snapshot = geographySnapshot ?? regionIndex?.geography?.snapshot;
+      if (!snapshot) return {ok: false, code: 'GEOGRAPHY_UNAVAILABLE'};
+      assertGeographyContextSnapshot(context.geography, snapshot);
+      return {...executeGeographyRead(snapshot, args), countryIdSemantics: 'source'};
+    }
     case 'find_frontier_territories': {
       if (!frontierLookup || !context.regionCatalog) return {ok:false,code:'FRONTIER_LOOKUP_UNAVAILABLE'};
       if (![args.actorCountryId,args.targetCountryId].every(id => context.countryDirectory.some(country => country.countryId === id))) return {ok:false,code:'INACTIVE_FRONTIER_COUNTRY'};
@@ -119,8 +134,9 @@ export function executeReadOnlySimulationTool(
     }
     case 'find_region':{
       if(!regionIndex)throw Error('REGION_RESOLVER_UNAVAILABLE');
-      const candidates=regionIndex.search(String(args.countryId),String(args.query)).map(({ref,parentCountryId,nameKo,nameEn})=>({ref,parentCountryId,nameKo,nameEn}));
-      return candidates.length===1?{ok:true,region:candidates[0]}:{ok:false,code:candidates.length?'AMBIGUOUS_REGION':'UNKNOWN_REGION',candidates};
+      const found=regionIndex.search(String(args.countryId),String(args.query));
+      const candidates=found.slice(0,8).map(compactRegion);
+      return found.length===1?{ok:true,region:candidates[0],countryIdSemantics:'source'}:{ok:false,code:found.length?'AMBIGUOUS_REGION':'UNKNOWN_REGION',candidates,totalMatches:found.length,truncated:found.length>8,ambiguous:found.length>1,countryIdSemantics:'source'};
     }
     case 'resolve_region':
       if(!regionIndex)throw Error('REGION_RESOLVER_UNAVAILABLE');
@@ -134,7 +150,7 @@ export function executeReadOnlySimulationTool(
     case "inspect_country_territories":
       return context.territoryDirectory.find((entry) => entry.countryId === args.countryId) ?? null;
     case "list_country_subdivisions":
-      if(regionIndex){const records=regionIndex.listCountry(String(args.countryId));return {regions:records.slice(0,128).map(({ref,parentCountryId,nameKo,nameEn})=>({ref,parentCountryId,nameKo,nameEn,materializable:true})),clipped:records.length>128};}
+      if(regionIndex){const records=regionIndex.listCountry(String(args.countryId));return {regions:records.slice(0,128).map(compactRegion),clipped:records.length>128,totalMatches:records.length,countryIdSemantics:'source'};}
       return context.subdivisions.filter((entry) => entry.parentCountryId === args.countryId);
     case "inspect_active_situation":
       return context.situations.find((entry) =>

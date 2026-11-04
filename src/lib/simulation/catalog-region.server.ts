@@ -9,6 +9,7 @@ import {loadOperationalCatalog} from '../world/operational-catalog.server';
 import {OPERATIONAL_CATALOG_VERSION} from '../world/operational-catalog';
 import {createOperationalRegionIndex} from './operational-region.server';
 import type {CatalogRegionIndex} from './catalog-region';
+import type {GeographySnapshot} from '../geography/state-province-io';
 const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
 export function prepareCatalogRegionIndex(root=process.cwd()){
   const read=(p:string)=>fs.readFileSync(path.join(root,p));
@@ -45,13 +46,20 @@ export function prepareCatalogRegionIndex(root=process.cwd()){
 }
 let approved:ReturnType<typeof prepareCatalogRegionIndex>|undefined;
 let operational:CatalogRegionIndex|undefined;
+const geographyIndexes = new WeakMap<GeographySnapshot, CatalogRegionIndex>();
 /** Omitted ref preserves the current game until the 16-02/16-08 atomic cutover. */
-export function loadCatalogRegionIndex(ref?:WorldGeometryCatalogRef):CatalogRegionIndex{
+export function loadCatalogRegionIndex(ref?:WorldGeometryCatalogRef,geography?:GeographySnapshot):CatalogRegionIndex{
   if(ref?.catalogVersion===OPERATIONAL_CATALOG_VERSION){
     const catalog=loadOperationalCatalog();catalog.assertRef(ref);
+    if(geography){
+      let index=geographyIndexes.get(geography);
+      if(!index){index=createOperationalRegionIndex(catalog,geography);geographyIndexes.set(geography,index);}
+      return index;
+    }
     return operational??=createOperationalRegionIndex(catalog);
   }
   const index=approved??=prepareCatalogRegionIndex();
+  if(geography)throw Error('GEOGRAPHY_LEGACY_CATALOG_UNSUPPORTED');
   if(ref)assertWorldGeometryCatalogRefMatches(ref,index.catalogRef!);
   return index;
 }
