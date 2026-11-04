@@ -105,3 +105,56 @@ node scripts/geography/build-current-metadata.cjs --verify $geographyRegistry.ma
 그 뒤 위 경로 계약을 적용하고 `.tmp/prompt21/workspace-layout.json`에 실제 root·branch·base·도구/lockfile identity, 자식 temp·해석된 cache·Next output·설치 상태·포트를 기록한다. 이 단계의 설정 성공과 21-07의 두 실제 검사 프로세스가 겹쳐 실행된 성공을 구별한다. 21-07은 입력·포인터 보존, 각자의 실제 쓰기 경로, 수집·종료·결과를 함께 확인해야 한다.
 
 **21-03에서는 작업트리·설치·빌드·국가 자료 생성·cache 복구·동시 검사를 실행하지 않았다.** 다음 담당자는 이 공통 규칙에 실제 재현 절차와 관측 결과를 덧붙여야 한다.
+
+## 21-04 실제 설정과 재현
+
+2026-11-04에 대상국 미지정 준비 공간을 생성했다. 실행 요약은 [21-04 기록](../../reports/maintenance/prompt21-workspace-setup.json), 개인 절대 경로·PID·설치 로그·실제 해석된 cache/temp는 각 작업트리의 `.tmp/prompt21/workspace-layout.json`을 본다.
+
+| 공간 | 실제 상대 경로·브랜치 | 준비 상태 |
+| --- | --- | --- |
+| 메인 | `.`, `main` | 기존 의존성과 실행 중인 다른 작업을 유지했다. |
+| 빈 국가 준비 공간 | `../local-map-worktrees/country-prep-20261104t011700z/`, `country-prep/20261104t011700z` | `countryId: null`, 독립 `node_modules` 설치 완료. 국가 원본 조사·추가 자료 생성은 하지 않았다. |
+
+처음 작업트리는 21-03 공통 커밋 `72325dfc547ef31178c78f49ebe45f94397d567e`에서 분기했다. 실행 도구 커밋 `7b34b284ed1f1135495ada69cfc3070df6f94ffd`와 이후 메인에 합류한 공통 변경은 깨끗한 준비 브랜치에서 `git merge --ff-only <공통 커밋>`으로 반영했다. 다른 작업자의 미커밋 fixture·인계 파일은 이번 커밋에 포함하지 않았다. 최종 실제 HEAD는 로컬 배치 기록과 완료 응답으로 연결한다.
+
+### 생성·LFS·독립 설치
+
+1. 경로가 허용 workspace 안인지, 폴더·branch 충돌이 없는지, B0/21-03 조상을 포함하는지 확인했다. 생성 전 가용 디스크는 약 85 GB였으며 checkout·설치·cache를 포함한 5 GiB 계획 여유보다 충분했다.
+2. `git -c core.longpaths=true worktree add -b <새 branch> <새 경로> <공통 커밋>`을 실행했다. `GIT_LFS_SKIP_SMUDGE=1`은 이 **자식 프로세스에만** 전달해 생성 중 자동 원격 다운로드를 피했다. 셸·전역 Git 설정은 변경하지 않았다.
+3. 준비 작업트리에서 `git -c core.longpaths=true lfs checkout`을 실제 실행하고 모든 LFS 결과의 SHA-256·크기를 검사했다. 42개 중 28개가 복원되고 14개가 포인터로 남아 실패로 판정했다. 종료 코드 0만으로 성공 처리하지 않았다.
+4. 실패한 14개의 기존 메인 실체 파일을 Git pointer OID·크기와 대조한 후, 바이너리 스트림을 `git lfs clean -- <실패한 경로>`에 전달했다. 저장 객체와 반환 pointer를 검증하고 local checkout을 다시 실행해 **42개 모두** 복원·검증했다. 원격 다운로드는 없었다. 역사적 `.lfs.txt` 영수증은 일반 blob으로 보존했다.
+5. lockfile 무결성으로 검증한 기존 npm 압축 파일을 읽어 준비 실행의 개인 `npm-cache/_cacache/content-v2/`에 복사했다. 530개 lock 항목이 가리키는 고유 archive 520개를 재사용했다. 원본 npm cache는 읽기 전용으로 사용했으며 `node_modules`를 복사하거나 연결하지 않았다.
+6. 준비 작업트리에서 설치된 Node와 그 옆 `node_modules/npm/bin/npm-cli.js`를 사용해 `ci --offline --no-audit --no-fund --cache <개인 설치 cache>`를 실행했다. 설치는 성공했고 lockfile bytes는 유지됐다. 빈 cache에서 offline 설치가 가능하다는 의미는 아니다. 다른 환경에서는 lockfile에 맞는 설치 원본부터 준비한다.
+
+이 생성·설치의 일회성 실행 로그와 사용한 로컬 보조 명령은 메인의 `.tmp/prompt21/21-04-20261104/`에 있다. 표준 Git/npm 명령 외의 setup 플랫폼은 추가하지 않았다. 이후 작업트리가 깨끗한 상태에서 새 공통 커밋을 반영할 때도 `--ff-only`를 우선하며, 준비 자료가 생기거나 분기 이력이 달라지면 C의 동기화 계약을 적용한다.
+
+### 실제 검증 실행 도구
+
+[run-verification.mjs](../../scripts/workspaces/run-verification.mjs)는 현재 작업트리 루트에서 실행한다. 고유 `workspaceKey`·`runId`를 받고 기존 실행 디렉터리 덮어쓰기를 거부한다. 자식 `TEMP/TMP/TMPDIR`·Next 출력 설정, 로그·JSON 결과, pointer 전후 hash를 실행별로 기록한다.
+
+Vitest 모드는 기존 두 inline 프로젝트·alias·수집 규칙을 유지하면서 root와 **각 프로젝트**의 `cacheDir`를 실행 루트로 지정한다. root override만으로는 inline 프로젝트 cache가 이동하지 않는 것을 실제 첫 검사에서 확인해 보완했다. 실행 중 reporter에서 해석된 경로를 기록하고, 경로 이탈·수집 누락·실패·비정상 종료·pointer 변경은 실패로 반환한다. metadata 모드는 기존 CLI의 `--verify`만 호출한다.
+
+아래 명령은 두 작업트리에서 같은 작은 country metadata 검사와 읽기 전용 metadata 검증을 순서대로 재현한다. runId는 매번 새 값을 쓴다.
+
+```powershell
+# 메인 저장소 루트
+$verificationRun = 'verify-' + [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssZ').ToLowerInvariant()
+node scripts/workspaces/run-verification.mjs --workspace-key main --run-id $verificationRun -- src/lib/geography/country-metadata-input.test.ts
+node scripts/workspaces/run-verification.mjs --workspace-key main --run-id ('metadata-' + $verificationRun) --mode metadata
+
+Push-Location '../local-map-worktrees/country-prep-20261104t011700z'
+try {
+  node scripts/workspaces/run-verification.mjs --workspace-key country-prep-20261104t011700z --run-id $verificationRun -- src/lib/geography/country-metadata-input.test.ts
+  node scripts/workspaces/run-verification.mjs --workspace-key country-prep-20261104t011700z --run-id ('metadata-' + $verificationRun) --mode metadata
+} finally { Pop-Location }
+```
+
+각 실행 디렉터리에는 `execution.json`, `results/observed-paths.json`, `results/vitest.json` 또는 `results/metadata.json`, `logs/`, `os-temp/`, `vite-cache/`가 생긴다. `observed-paths.json`은 실제 root/project cacheDir·`os.tmpdir()`·temp marker 작성 PID와 수집 결과를 담는다. metadata 하위 verifier PID도 기록한다. 전역 환경변수나 다른 작업트리 cache를 설정하지 않는다.
+
+### 확인한 범위와 21-07 인계
+
+- 메인과 준비 공간의 대표 검사 파일이 각각 28개 테스트를 수집·통과했고, root·node-tools·application의 해석된 cacheDir와 실제 child OS temp가 각자의 실행 루트 안에 있었다.
+- 두 공간에서 현재 활성 metadata의 기존 검증 CLI가 통과했다. 같은 lockfile·기존 producer code/input pin·전체 catalogRef·metadataRef를 유지했다.
+- 각 공간에 설치된 Next로 production config를 메모리에서 평가해 `PAX_BUILD_DIST_DIR`와 자식 temp를 확인했다. `.env`를 읽는 전체 `loadConfig`는 사용하지 않았다. **실제 Next build·dev 서버·출력 쓰기는 수행하지 않았다.**
+- 이번 두 검사 실행은 설정·독립 실행 확인이다. 시간 구간이 겹치는 두 대표 검사와 실제 cache/temp/result 작성 격리의 최종 증명은 21-07에서 같은 실행 도구로 수행한다. 기본 Vitest 결과 cache를 껐으므로 resolved 경로와 모든 실제 cache 쓰기 관측을 혼동하지 않는다.
+- 준비 공간의 기본 실행 명령은 검증 도구의 `vitest`·`metadata` 모드다. 앞 절에 분류한 전역 생성·활성화 명령은 준비 명령에서 계속 제외한다. 실제 국가 자료 준비는 국가 지정 후에 시작한다.

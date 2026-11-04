@@ -1,0 +1,692 @@
+{
+  "schemaVersion": "prompt21-workspace-setup-v1",
+  "task": {
+    "id": "21-04",
+    "status": "completed",
+    "countryId": null,
+    "completionBasis": "Dedicated branch/worktree, independent locked dependencies, actual common-input and representative verification in both workspaces, and effective child temp/cache/Next paths are recorded."
+  },
+  "observedAt": "2026-11-04T01:28:16.707Z",
+  "clientDate": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "baselines": {
+    "B0": "b0d0c32327ceba4b57e4bda01c895a4a898631f3",
+    "commonInterfaceCommit": "72325dfc547ef31178c78f49ebe45f94397d567e",
+    "runnerCommit": "7b34b284ed1f1135495ada69cfc3070df6f94ffd",
+    "createdAtCommit": "72325dfc547ef31178c78f49ebe45f94397d567e",
+    "recordSourceHeads": [
+      {
+        "space": "main",
+        "head": "939ae32d0dcc40d86d67bff3506be92f9cb12d5b"
+      },
+      {
+        "space": "preparation",
+        "head": "ae9fbc994b7ff7041df788bd0e7b679644fe2833"
+      }
+    ],
+    "finalSetupCommit": "The local docs/report commit is linked in the final response and both ignored layout records after normal fast-forward synchronization."
+  },
+  "workspace": {
+    "parent": "../local-map-worktrees/",
+    "path": "../local-map-worktrees/country-prep-20261104t011700z",
+    "branch": "country-prep/20261104t011700z",
+    "countryId": null,
+    "initialCollisionCheckPassed": true,
+    "allowedWorkspaceBoundaryChecked": true,
+    "creationExitCode": 0,
+    "registeredGitWorktrees": 2,
+    "sharedGitObjectsRefsAndLfsStore": true,
+    "filesAndBranchesSeparate": true
+  },
+  "storage": {
+    "availableBytesBefore": 85416206336,
+    "planningEstimateBytes": 5368709120,
+    "availableBytesAfter": 77300801536,
+    "noCleanupOfExistingInputs": true
+  },
+  "installation": {
+    "exitCode": 0,
+    "command": "node <installed npm-cli.js> ci --offline --no-audit --no-fund --cache <runRoot>/npm-cache",
+    "offline": true,
+    "networkDownloads": 0,
+    "verifiedUniqueArchivesCopiedToPrivateCache": 520,
+    "sourceCacheReadOnly": true,
+    "nodeModulesCopiedOrLinked": false,
+    "lockfileUnchanged": true,
+    "evidence": ".tmp/prompt21/21-04-20261104/install.json",
+    "details": "npm ci created a separate dependency directory from integrity-verified package archives; own cache and child-only OS temp."
+  },
+  "lfs": {
+    "userPolicy": "Repair only actual required restoration failures.",
+    "initialLocalCheckout": {
+      "checked": 42,
+      "materialized": 28,
+      "pointerFailures": 14,
+      "gitExitCode": 0
+    },
+    "repair": {
+      "trigger": "Actual registered-worktree local checkout left pointers for these exact files.",
+      "objects": 14,
+      "bytes": 726809196,
+      "downloads": 0,
+      "files": [
+        {
+          "path": "data/derived/chn-2020/candidate-df4f04ceeb9cecb0b5b3/joined-world-input.json",
+          "oid": "df4f04ceeb9cecb0b5b3320f0e819c40064317f2f03dcc42f0a5746396f793d0",
+          "byteLength": 169444234,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/derived/chn-2020/geometry-v12/geometry.json",
+          "oid": "ef33c6341da4125c34ac7c390816bff0cda339f9f12be1fcc81fb90761e0689e",
+          "byteLength": 123996651,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/derived/chn-2020/province-line-lod-6e0c718ffe8a5495750e/edges.geojson",
+          "oid": "df4100d7234c13ee5d11888dbd3c9a58f5b4e0802b71a4f1b22cee6036f09660",
+          "byteLength": 1077392,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/derived/prompt19/mixed-world-v2-95ea496a8aa66910a9a7/detail/countries/CHN.geojson.gz",
+          "oid": "b35dc18b1d7e683dbae042ba51f9ce13d34acca696c31d7c180603c9da818553",
+          "byteLength": 23664164,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/ADM3-source/CHN_ADM3.shp",
+          "oid": "6ea2903eb2777a6ca8b500723a591af0d45c2c9d317a4f79f000e204a46c5075",
+          "byteLength": 31784400,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/CHN_ADM3-source.zip",
+          "oid": "a313e1f2dfbc0c6c135420d667dcc625456706602dff79fbd6a58ed22f6791c8",
+          "byteLength": 24353877,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/gb3-CHN-ADM2.geojson",
+          "oid": "9f7457ffafe1ccaad7f27259b2c9b6b3773f173eb4082ddc85e12ac232bc872d",
+          "byteLength": 29217250,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/gb3-CHN-ADM3.geojson",
+          "oid": "fde51c1e70771302b0301fc64b2c5cab21badbeea892ad6119d684a1790bd2cf",
+          "byteLength": 33151588,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM1.geojson",
+          "oid": "3a00467a0db9b4136facb5f2f3d0edbfd96adb15651cfdf63991da9281030e85",
+          "byteLength": 270578,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "data/raw/chn-2020/references/geoBoundaries-CHN-ADM2.geojson",
+          "oid": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+          "byteLength": 7618692,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "reports/chn-2020/proofs/geometry-79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf.json",
+          "oid": "79534cd214bb417062d2565bd0aa02406aa788d26d71d48e1e8bb4da87e103cf",
+          "byteLength": 65964710,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "reports/maintenance/prompt19-C/boundary-cleanup-2020-joined-world-input.json",
+          "oid": "4c2590f560cb19d591b768bf0fa2b9230a69228bc1bc0b91fdb456c0ebe40e81",
+          "byteLength": 71324598,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "reports/maintenance/prompt19-C/fine-macro-2020-joined-world-input.json",
+          "oid": "c9a98be75d28980c2c9390e2d29a7311c745e4625340e75fc3be014e305c3ea5",
+          "byteLength": 69665183,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        },
+        {
+          "path": "reports/maintenance/prompt19-C/western-sector-2020-joined-world-input.json",
+          "oid": "ce438f6027baa0a0ff8831b224b32ceadd7377791604395d89b5a8b3d491aa3d",
+          "byteLength": 75275879,
+          "sourceAndCacheMatch": true,
+          "cleanPointerMatchesGit": true
+        }
+      ]
+    },
+    "finalLocalCheckout": {
+      "checked": 42,
+      "materialized": 42,
+      "failures": [],
+      "gitExitCode": 0
+    },
+    "intentionalPlainLfsReceiptPreserved": true,
+    "fullWorktreeMaterializationVerified": true
+  },
+  "spaces": [
+    {
+      "key": "main",
+      "root": ".",
+      "branch": "main",
+      "verifiedHead": "939ae32d0dcc40d86d67bff3506be92f9cb12d5b",
+      "dependencies": {
+        "independentDirectory": true,
+        "lockfile": {
+          "path": "package-lock.json",
+          "sha256": "22908144c69e75dc1ae90633b58fe933c7b6d6629ec2e8a775156c32fb004d14",
+          "byteLength": 337285
+        },
+        "directPackagesChecked": 27,
+        "installedVersionsMatchLockfile": true,
+        "packages": [
+          {
+            "name": "fontkit",
+            "installed": "2.0.4",
+            "locked": "2.0.4"
+          },
+          {
+            "name": "maplibre-gl",
+            "installed": "5.9.0",
+            "locked": "5.9.0"
+          },
+          {
+            "name": "next",
+            "installed": "16.3.0",
+            "locked": "16.3.0"
+          },
+          {
+            "name": "polygon-clipping",
+            "installed": "0.15.7",
+            "locked": "0.15.7"
+          },
+          {
+            "name": "react",
+            "installed": "19.2.8",
+            "locked": "19.2.8"
+          },
+          {
+            "name": "react-dom",
+            "installed": "19.2.8",
+            "locked": "19.2.8"
+          },
+          {
+            "name": "zod",
+            "installed": "4.4.3",
+            "locked": "4.4.3"
+          },
+          {
+            "name": "zustand",
+            "installed": "5.0.14",
+            "locked": "5.0.14"
+          },
+          {
+            "name": "@maplibre/vt-pbf",
+            "installed": "4.3.2",
+            "locked": "4.3.2"
+          },
+          {
+            "name": "@playwright/test",
+            "installed": "1.62.1",
+            "locked": "1.62.1"
+          },
+          {
+            "name": "@tailwindcss/postcss",
+            "installed": "4.3.3",
+            "locked": "4.3.3"
+          },
+          {
+            "name": "@testing-library/jest-dom",
+            "installed": "7.0.1",
+            "locked": "7.0.1"
+          },
+          {
+            "name": "@testing-library/react",
+            "installed": "16.3.2",
+            "locked": "16.3.2"
+          },
+          {
+            "name": "@testing-library/user-event",
+            "installed": "14.6.4",
+            "locked": "14.6.4"
+          },
+          {
+            "name": "@turf/boolean-valid",
+            "installed": "7.4.0",
+            "locked": "7.4.0"
+          },
+          {
+            "name": "@types/node",
+            "installed": "20.19.43",
+            "locked": "20.19.43"
+          },
+          {
+            "name": "@types/react",
+            "installed": "19.2.18",
+            "locked": "19.2.18"
+          },
+          {
+            "name": "@types/react-dom",
+            "installed": "19.2.4",
+            "locked": "19.2.4"
+          },
+          {
+            "name": "eslint",
+            "installed": "9.39.5",
+            "locked": "9.39.5"
+          },
+          {
+            "name": "eslint-config-next",
+            "installed": "16.3.0",
+            "locked": "16.3.0"
+          },
+          {
+            "name": "fast-check",
+            "installed": "4.10.2",
+            "locked": "4.10.2"
+          },
+          {
+            "name": "geojson-vt",
+            "installed": "4.0.3",
+            "locked": "4.0.3"
+          },
+          {
+            "name": "jsdom",
+            "installed": "30.0.1",
+            "locked": "30.0.1"
+          },
+          {
+            "name": "jsts",
+            "installed": "2.12.1",
+            "locked": "2.12.1"
+          },
+          {
+            "name": "tailwindcss",
+            "installed": "4.3.3",
+            "locked": "4.3.3"
+          },
+          {
+            "name": "typescript",
+            "installed": "5.9.3",
+            "locked": "5.9.3"
+          },
+          {
+            "name": "vitest",
+            "installed": "4.1.10",
+            "locked": "4.1.10"
+          }
+        ],
+        "moduleResolutionInsideOwnNodeModules": true
+      },
+      "adoptedInputPinsChecked": 307,
+      "vitest": {
+        "runRoot": ".tmp/prompt21/main/runner-fix1-20261104t011700z",
+        "total": 28,
+        "passed": 28,
+        "failed": 0,
+        "files": 1,
+        "exitCode": 0,
+        "pointersUnchanged": true,
+        "rootCacheDir": ".tmp/prompt21/main/runner-fix1-20261104t011700z/vite-cache/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "projectCacheDirs": [
+          {
+            "project": "node-tools",
+            "path": ".tmp/prompt21/main/runner-fix1-20261104t011700z/vite-cache/vitest/8af8f2d1121558fd8e45a1a86a70e26b7a3858c4"
+          },
+          {
+            "project": "application",
+            "path": ".tmp/prompt21/main/runner-fix1-20261104t011700z/vite-cache/vitest/d2005cc206ccbfdedf2be43a200cb050c538bdb5"
+          }
+        ],
+        "osTmpdir": ".tmp/prompt21/main/runner-fix1-20261104t011700z/os-temp",
+        "actualChildTempMarkerVerified": true
+      },
+      "metadata": {
+        "runRoot": ".tmp/prompt21/main/setup-metadata-20261104t011700z",
+        "exitCode": 0,
+        "status": "validated-metadata-only",
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+          "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+          "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+          "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+        },
+        "metadataRef": {
+          "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+          "schemaVersion": "geography-metadata-ref-v1"
+        }
+      },
+      "next": {
+        "runRoot": ".tmp/prompt21/main/next-config-20261104-v2",
+        "configuredDistDir": ".next-prompt21-main-next-config-20261104-v2",
+        "childTempInsideOwnRun": true,
+        "protectedPinsMatch": true,
+        "buildOrServerRun": false,
+        "note": "Actual config evaluated with its own installed Next; no full loadConfig/.env or output writer."
+      }
+    },
+    {
+      "key": "preparation",
+      "root": "../local-map-worktrees/country-prep-20261104t011700z",
+      "branch": "country-prep/20261104t011700z",
+      "verifiedHead": "ae9fbc994b7ff7041df788bd0e7b679644fe2833",
+      "dependencies": {
+        "independentDirectory": true,
+        "lockfile": {
+          "path": "package-lock.json",
+          "sha256": "22908144c69e75dc1ae90633b58fe933c7b6d6629ec2e8a775156c32fb004d14",
+          "byteLength": 337285
+        },
+        "directPackagesChecked": 27,
+        "installedVersionsMatchLockfile": true,
+        "packages": [
+          {
+            "name": "fontkit",
+            "installed": "2.0.4",
+            "locked": "2.0.4"
+          },
+          {
+            "name": "maplibre-gl",
+            "installed": "5.9.0",
+            "locked": "5.9.0"
+          },
+          {
+            "name": "next",
+            "installed": "16.3.0",
+            "locked": "16.3.0"
+          },
+          {
+            "name": "polygon-clipping",
+            "installed": "0.15.7",
+            "locked": "0.15.7"
+          },
+          {
+            "name": "react",
+            "installed": "19.2.8",
+            "locked": "19.2.8"
+          },
+          {
+            "name": "react-dom",
+            "installed": "19.2.8",
+            "locked": "19.2.8"
+          },
+          {
+            "name": "zod",
+            "installed": "4.4.3",
+            "locked": "4.4.3"
+          },
+          {
+            "name": "zustand",
+            "installed": "5.0.14",
+            "locked": "5.0.14"
+          },
+          {
+            "name": "@maplibre/vt-pbf",
+            "installed": "4.3.2",
+            "locked": "4.3.2"
+          },
+          {
+            "name": "@playwright/test",
+            "installed": "1.62.1",
+            "locked": "1.62.1"
+          },
+          {
+            "name": "@tailwindcss/postcss",
+            "installed": "4.3.3",
+            "locked": "4.3.3"
+          },
+          {
+            "name": "@testing-library/jest-dom",
+            "installed": "7.0.1",
+            "locked": "7.0.1"
+          },
+          {
+            "name": "@testing-library/react",
+            "installed": "16.3.2",
+            "locked": "16.3.2"
+          },
+          {
+            "name": "@testing-library/user-event",
+            "installed": "14.6.4",
+            "locked": "14.6.4"
+          },
+          {
+            "name": "@turf/boolean-valid",
+            "installed": "7.4.0",
+            "locked": "7.4.0"
+          },
+          {
+            "name": "@types/node",
+            "installed": "20.19.43",
+            "locked": "20.19.43"
+          },
+          {
+            "name": "@types/react",
+            "installed": "19.2.18",
+            "locked": "19.2.18"
+          },
+          {
+            "name": "@types/react-dom",
+            "installed": "19.2.4",
+            "locked": "19.2.4"
+          },
+          {
+            "name": "eslint",
+            "installed": "9.39.5",
+            "locked": "9.39.5"
+          },
+          {
+            "name": "eslint-config-next",
+            "installed": "16.3.0",
+            "locked": "16.3.0"
+          },
+          {
+            "name": "fast-check",
+            "installed": "4.10.2",
+            "locked": "4.10.2"
+          },
+          {
+            "name": "geojson-vt",
+            "installed": "4.0.3",
+            "locked": "4.0.3"
+          },
+          {
+            "name": "jsdom",
+            "installed": "30.0.1",
+            "locked": "30.0.1"
+          },
+          {
+            "name": "jsts",
+            "installed": "2.12.1",
+            "locked": "2.12.1"
+          },
+          {
+            "name": "tailwindcss",
+            "installed": "4.3.3",
+            "locked": "4.3.3"
+          },
+          {
+            "name": "typescript",
+            "installed": "5.9.3",
+            "locked": "5.9.3"
+          },
+          {
+            "name": "vitest",
+            "installed": "4.1.10",
+            "locked": "4.1.10"
+          }
+        ],
+        "moduleResolutionInsideOwnNodeModules": true
+      },
+      "adoptedInputPinsChecked": 307,
+      "vitest": {
+        "runRoot": ".tmp/prompt21/country-prep-20261104t011700z/setup-smoke-20261104t011700z",
+        "total": 28,
+        "passed": 28,
+        "failed": 0,
+        "files": 1,
+        "exitCode": 0,
+        "pointersUnchanged": true,
+        "rootCacheDir": ".tmp/prompt21/country-prep-20261104t011700z/setup-smoke-20261104t011700z/vite-cache/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "projectCacheDirs": [
+          {
+            "project": "node-tools",
+            "path": ".tmp/prompt21/country-prep-20261104t011700z/setup-smoke-20261104t011700z/vite-cache/vitest/8af8f2d1121558fd8e45a1a86a70e26b7a3858c4"
+          },
+          {
+            "project": "application",
+            "path": ".tmp/prompt21/country-prep-20261104t011700z/setup-smoke-20261104t011700z/vite-cache/vitest/d2005cc206ccbfdedf2be43a200cb050c538bdb5"
+          }
+        ],
+        "osTmpdir": ".tmp/prompt21/country-prep-20261104t011700z/setup-smoke-20261104t011700z/os-temp",
+        "actualChildTempMarkerVerified": true
+      },
+      "metadata": {
+        "runRoot": ".tmp/prompt21/country-prep-20261104t011700z/setup-metadata-20261104t011700z",
+        "exitCode": 0,
+        "status": "validated-metadata-only",
+        "catalogRef": {
+          "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+          "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+          "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+          "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+          "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+        },
+        "metadataRef": {
+          "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+          "schemaVersion": "geography-metadata-ref-v1"
+        }
+      },
+      "next": {
+        "runRoot": ".tmp/prompt21/country-prep-20261104t011700z/next-config-20261104t011700z",
+        "configuredDistDir": ".next-prompt21-country-prep-20261104t011700z-next-config-20261104t011700z",
+        "childTempInsideOwnRun": true,
+        "protectedPinsMatch": true,
+        "buildOrServerRun": false,
+        "note": "Actual config evaluated with its own installed Next; no full loadConfig/.env or output writer."
+      }
+    }
+  ],
+  "runner": {
+    "path": "scripts/workspaces/run-verification.mjs",
+    "sha256": "14274e5ae320411429434e987457cd7e14fff91fab1622e6dbe930ceffc0e2c9",
+    "byteLength": 9625,
+    "modes": [
+      "vitest",
+      "metadata"
+    ],
+    "uniqueRunDirectories": true,
+    "childOnlyEnvironment": [
+      "TEMP",
+      "TMP",
+      "TMPDIR",
+      "PAX_BUILD_DIST_DIR"
+    ],
+    "e2eOverridesRemovedInChildOnly": true,
+    "existingInlineProjectsAndAliasesPreserved": true,
+    "actualRootAndProjectCachePathsChecked": true,
+    "noResultCache": true,
+    "startupCorrection": "First main setup run collected/passed tests but the wrapper failed on access after Vitest closed, and project caches still used defaults. Reporter-time capture and per-project Vite cache overrides corrected both. Successful replacement run was verified in both spaces.",
+    "initialFailedSetupRun": ".tmp/prompt21/main/setup-smoke-20261104t011700z",
+    "syntaxAndTargetedEslintPassed": true
+  },
+  "preservation": {
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+    },
+    "metadataRef": {
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf",
+      "schemaVersion": "geography-metadata-ref-v1"
+    },
+    "activePointers": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251
+      },
+      {
+        "path": "data/runtime/geography/current.json",
+        "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8",
+        "byteLength": 1218
+      }
+    ],
+    "pointerWrites": 0,
+    "geometryTopologyCatalogRegeneration": false,
+    "idsOrdinalsMembershipOrSeedLineageChangedByTask": false,
+    "existingServersStopped": 0,
+    "newServersStarted": 0,
+    "nextBuildsRun": 0,
+    "countryResearchDownloadOrCandidateGeneration": false,
+    "gameCheckpointOrSecretContentsRead": false,
+    "externalAICalls": 0,
+    "remotePushOrDeployment": 0
+  },
+  "parallelChanges": {
+    "observed": true,
+    "taskScope": "Other work concurrently edited and committed fixture/verification and handoff files. Those files were preserved and not committed by this task.",
+    "committedCommonChangesFastForwarded": [
+      "0a4421d",
+      "ae9fbc9"
+    ],
+    "sharedAttributeRules": "Existing/additional B/C LF rules were preserved in the shared configuration; no B/C source changes were staged by task 21-04.",
+    "separateTaskCompletionNotClaimedHere": [
+      "21-05",
+      "21-06"
+    ]
+  },
+  "executablePreparationModes": [
+    "existing country metadata contract test through run-verification vitest",
+    "read-only current metadata --verify through run-verification metadata"
+  ],
+  "excludedPreparationCommands": [
+    "whole-world metadata generation",
+    "fixed KOR/PRK/CHN geometry/candidate generation without independent output support",
+    "joint/global topology packaging and active pointer publication"
+  ],
+  "localLayoutRecords": [
+    {
+      "workspace": ".",
+      "path": ".tmp/prompt21/workspace-layout.json"
+    },
+    {
+      "workspace": "../local-map-worktrees/country-prep-20261104t011700z",
+      "path": ".tmp/prompt21/workspace-layout.json"
+    }
+  ],
+  "localEvidence": [
+    ".tmp/prompt21/21-04-20261104/worktree-created.json",
+    ".tmp/prompt21/21-04-20261104/preflight/preflight.json",
+    ".tmp/prompt21/21-04-20261104/preflight/npm-cache-integrity.json",
+    ".tmp/prompt21/21-04-20261104/install.json",
+    ".tmp/prompt21/21-04-20261104/lfs-before.json",
+    ".tmp/prompt21/21-04-20261104/lfs-repair.json",
+    ".tmp/prompt21/21-04-20261104/lfs-after.json"
+  ],
+  "limits": [
+    "Representative tests were sequential; actual two-check concurrency/path writer isolation remains 21-07.",
+    "Next configured output was evaluated; no build/API/browser/server or actual Next output writer was run.",
+    "Resolved cacheDir and child temp marker are verified; result cache disabled, so this does not claim observation of every possible Vite/cache writer.",
+    "Full verification and country handoff/synchronization behavior are governed by their separate tasks; countryId remains null."
+  ],
+  "nextStep": "21-07 can use the same runner in both prepared spaces once required B/C evidence is ready; do not automatically start country addition."
+}
