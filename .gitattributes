@@ -156,3 +156,15 @@ src/lib/simulation/server/simulation-provider.ts -text whitespace=cr-at-eol
 src/lib/simulation/server/simulation-tools.ts -text whitespace=cr-at-eol
 src/lib/simulation/simulation-context.ts -text whitespace=cr-at-eol
 prompts/PROMPT_21_PARALLEL_WORKSPACES_AND_VERIFICATION_BASELINE.txt text eol=lf
+
+# Prompt 20 generator provenance pins these existing CRLF checkout bytes.
+# Keep them deterministic without changing stored LF blobs or recorded hashes.
+src/lib/world/canonical-serializer.ts text eol=crlf
+src/lib/world/country-id.ts text eol=crlf
+src/lib/world/domain-hash-root.ts text eol=crlf
+src/lib/world/immutable-readonly-set.ts text eol=crlf
+src/lib/world/sha256.ts text eol=crlf
+src/lib/world/territory-id.ts text eol=crlf
+src/lib/world/world-geometry-catalog-ref.ts text eol=crlf
+src/lib/world/world-v3-validation.ts text eol=crlf
+reports/maintenance/prompt21*.json -text whitespace=cr-at-eol
