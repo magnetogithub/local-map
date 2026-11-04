@@ -72,8 +72,10 @@ async function worker(inputFile) {
         if (resolved.some(config => !inside(cacheDir, config.cacheDir) || path.resolve(config.root) !== root)) throw Error('Resolved Vite root/cache escaped the run');
         const tests = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
         observation.counts = {total: tests.numTotalTests, passed: tests.numPassedTests, failed: tests.numFailedTests,
-          pending: tests.numPendingTests, files: tests.testResults.length};
-        if (!tests.success || tests.numTotalTests < 1 || tests.numFailedTests || tests.numFailedTestSuites || observation.unhandledErrors || observation.reason !== 'passed') throw Error('Tests failed, were not collected, or had unhandled errors');
+          pending: tests.numPendingTests, todo: tests.numTodoTests, files: tests.testResults.length};
+        const allTestsPassed = tests.numTotalTests > 0 && tests.numPassedTests === tests.numTotalTests
+          && !tests.numPendingTests && !tests.numTodoTests;
+        if (!tests.success || !allTestsPassed || tests.numFailedTests || tests.numFailedTestSuites || observation.unhandledErrors || observation.reason !== 'passed') throw Error('Tests failed, were skipped/todo, were not collected, or had unhandled errors');
       } finally {await ctx.close();}
     }
     observation.status = 'passed';
