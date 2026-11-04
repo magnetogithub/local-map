@@ -197,3 +197,4 @@ scripts/workspaces/validate-country-handoff.node-test.cjs text eol=lf
 docs/development/verification-baseline-v1.md text eol=lf
 scripts/workspaces/audit-current-frontiers.cjs text eol=lf
 scripts/workspaces/audit-current-frontiers.node-test.cjs text eol=lf
+reports/maintenance/prompt21-completion.md text eol=lf
