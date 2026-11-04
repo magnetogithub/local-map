@@ -1,0 +1,696 @@
+{
+  "schemaVersion": "prompt21-country-workspace-handoff-v1",
+  "task": {
+    "id": "21-06",
+    "status": "completed",
+    "countryId": null,
+    "completionBasis": "Workspace/version envelope and dependency-based revalidation procedure are documented and executable; explicit unassigned handoff accepted against actual active refs.",
+    "laterTasksExecuted": []
+  },
+  "observedAt": "2026-11-04T01:25:42.641Z",
+  "clientDate": "2026-11-04",
+  "timezone": "Asia/Seoul",
+  "git": {
+    "initialHead": "72325dfc547ef31178c78f49ebe45f94397d567e",
+    "implementationCommit": "ae9fbc994b7ff7041df788bd0e7b679644fe2833",
+    "concurrentCommitsObserved": [
+      {
+        "commit": "0a4421d",
+        "scope": "Parallel B fixture and verification baseline; preserved outside C edits."
+      },
+      {
+        "commit": "7b34b28",
+        "scope": "Parallel A verification runner; includes deterministic LF attributes for C files."
+      }
+    ],
+    "finalReportCommit": "Reported in the final response; not embedded in its own content."
+  },
+  "delivered": [
+    "docs/development/country-workspace-handoff-v1.md",
+    "scripts/workspaces/validate-country-handoff.cjs",
+    "scripts/workspaces/validate-country-handoff.node-test.cjs"
+  ],
+  "baseline": {
+    "schemaVersion": "country-workspace-baseline-v1",
+    "head": "ae9fbc994b7ff7041df788bd0e7b679644fe2833",
+    "contracts": {
+      "workspace": "country-workspace-handoff-v1",
+      "ownership": "workspace-ownership-v1",
+      "layout": "workspace-layout-v1",
+      "geography": "state-province-metadata-v1"
+    },
+    "catalogRef": {
+      "catalogVersion": "catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee",
+      "geometryRoot": "49e2b4ca3850f15b5158089636b3b95f05ef997f2792b40d4105f068a48cf7d5",
+      "topologyRoot": "b054d23bd63b1c5d17afb06ae0abb5b7332530bcddb9e93d7371f16364df86e2",
+      "renderArtifactRoot": "f209abaa4966270bd04e3294c75eace7a256b36e052a2a9e8a1f78376e5a0423",
+      "manifestPath": "/data/territory-catalog/catalog-v3-prompt19-incremental-CHN-eade6105593ceeb7beee/manifest.json"
+    },
+    "metadataRef": {
+      "schemaVersion": "geography-metadata-ref-v1",
+      "contentRoot": "d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf"
+    },
+    "countryIds": [
+      "ABW",
+      "AFG",
+      "AGO",
+      "AIA",
+      "ALB",
+      "ALD",
+      "AND",
+      "ARE",
+      "ARG",
+      "ARM",
+      "ASM",
+      "ATA",
+      "ATC",
+      "ATF",
+      "ATG",
+      "AUS",
+      "AUT",
+      "AZE",
+      "BDI",
+      "BEL",
+      "BEN",
+      "BFA",
+      "BGD",
+      "BGR",
+      "BHR",
+      "BHS",
+      "BIH",
+      "BLM",
+      "BLR",
+      "BLZ",
+      "BMU",
+      "BOL",
+      "BRA",
+      "BRB",
+      "BRN",
+      "BTN",
+      "BWA",
+      "CAF",
+      "CAN",
+      "CHE",
+      "CHL",
+      "CHN",
+      "CIV",
+      "CLP",
+      "CMR",
+      "CNM",
+      "COD",
+      "COG",
+      "COK",
+      "COL",
+      "COM",
+      "CPV",
+      "CRI",
+      "CSI",
+      "CUB",
+      "CUW",
+      "CYM",
+      "CYN",
+      "CYP",
+      "CZE",
+      "DEU",
+      "DJI",
+      "DMA",
+      "DNK",
+      "DOM",
+      "DZA",
+      "ECU",
+      "EGY",
+      "ERI",
+      "ESH",
+      "ESP",
+      "EST",
+      "ETH",
+      "FIN",
+      "FJI",
+      "FLK",
+      "FRA",
+      "FRO",
+      "FSM",
+      "GAB",
+      "GBR",
+      "GEO",
+      "GGY",
+      "GHA",
+      "GIB",
+      "GIN",
+      "GMB",
+      "GNB",
+      "GNQ",
+      "GRC",
+      "GRD",
+      "GRL",
+      "GTM",
+      "GUM",
+      "GUY",
+      "HKG",
+      "HMD",
+      "HND",
+      "HRV",
+      "HTI",
+      "HUN",
+      "IDN",
+      "IMN",
+      "IND",
+      "IOA",
+      "IOT",
+      "IRL",
+      "IRN",
+      "IRQ",
+      "ISL",
+      "ISR",
+      "ITA",
+      "JAM",
+      "JEY",
+      "JOR",
+      "JPN",
+      "KAZ",
+      "KEN",
+      "KGZ",
+      "KHM",
+      "KIR",
+      "KNA",
+      "KOR",
+      "KWT",
+      "LAO",
+      "LBN",
+      "LBR",
+      "LBY",
+      "LCA",
+      "LIE",
+      "LKA",
+      "LSO",
+      "LTU",
+      "LUX",
+      "LVA",
+      "MAC",
+      "MAF",
+      "MAR",
+      "MCO",
+      "MDA",
+      "MDG",
+      "MDV",
+      "MEX",
+      "MHL",
+      "MKD",
+      "MLI",
+      "MLT",
+      "MMR",
+      "MNE",
+      "MNG",
+      "MNP",
+      "MOZ",
+      "MRT",
+      "MSR",
+      "MUS",
+      "MWI",
+      "MYS",
+      "NAM",
+      "NCL",
+      "NER",
+      "NFK",
+      "NGA",
+      "NIC",
+      "NIU",
+      "NLD",
+      "NOR",
+      "NPL",
+      "NRU",
+      "NZL",
+      "OMN",
+      "PAK",
+      "PAN",
+      "PCN",
+      "PER",
+      "PGA",
+      "PHL",
+      "PLW",
+      "PNG",
+      "POL",
+      "PRI",
+      "PRK",
+      "PRT",
+      "PRY",
+      "PSX",
+      "PYF",
+      "QAT",
+      "ROU",
+      "RUS",
+      "RWA",
+      "SAU",
+      "SDN",
+      "SDS",
+      "SEN",
+      "SGP",
+      "SGS",
+      "SHN",
+      "SLB",
+      "SLE",
+      "SLV",
+      "SMR",
+      "SOL",
+      "SOM",
+      "SPM",
+      "SRB",
+      "STP",
+      "SUR",
+      "SVK",
+      "SVN",
+      "SWE",
+      "SWZ",
+      "SXM",
+      "SYC",
+      "SYR",
+      "TCA",
+      "TCD",
+      "TGO",
+      "THA",
+      "TJK",
+      "TKM",
+      "TLS",
+      "TON",
+      "TTO",
+      "TUN",
+      "TUR",
+      "TUV",
+      "TWN",
+      "TZA",
+      "UGA",
+      "UKR",
+      "UMI",
+      "URY",
+      "USA",
+      "UZB",
+      "VAT",
+      "VCT",
+      "VEN",
+      "VGB",
+      "VIR",
+      "VNM",
+      "VUT",
+      "WLF",
+      "WSM",
+      "XKX",
+      "YEM",
+      "ZAF",
+      "ZMB",
+      "ZWE"
+    ],
+    "dependencies": [
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/admission.json.gz",
+        "sha256": "5f412fa4256ef22f3aa91b25e6ea721cdd0f8349789b1332caa6a122cc3b456b",
+        "byteLength": 434595
+      },
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+        "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+        "byteLength": 1115
+      },
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/metadata.json.gz",
+        "sha256": "98926b07e58a3a345af92c3334a0ac81d58ec86560b9312c1b1a417246d99823",
+        "byteLength": 3357737
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/artifact-index.json",
+        "sha256": "184de11efa21ffaaaa80afdd0105e06716508eb170e75e0fe16596d24c9bb480",
+        "byteLength": 757545
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/catalog.json",
+        "sha256": "6d6b02f6b4dd60e16507af5ca62bd1054e0dd4d0b7d70139b5d9a79d651b4a7d",
+        "byteLength": 2378
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/manifest.json",
+        "sha256": "388be8d964f4d7e1da3d577e8973a4e1ab264b74f2175300541b36b0647c9659",
+        "byteLength": 3152
+      },
+      {
+        "path": "data/runtime/geography/current.json",
+        "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8",
+        "byteLength": 1218
+      },
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251
+      },
+      {
+        "path": "docs/development/country-workspace-handoff-v1.md",
+        "sha256": "ec135d57ea36283d43971256df92a0296390e8557bf75d5219b634ffefdaef74",
+        "byteLength": 16122
+      },
+      {
+        "path": "docs/development/workspace-layout-v1.md",
+        "sha256": "89881461bf3bf328319548598827b8528b9dab156ca8247f7abe6c9c6c25ca52",
+        "byteLength": 17526
+      },
+      {
+        "path": "docs/development/workspace-ownership-v1.md",
+        "sha256": "d868ba448aae67f2b9540be5f2e1b4f9183416ee99f9c95f18a210d7b3e06a2e",
+        "byteLength": 12765
+      },
+      {
+        "path": "docs/geography/country-metadata-handoff-v1.md",
+        "sha256": "e5a9148f410e226ce918f9dbbcdba3148dea307b2a253061abe4fb1e6ad71f34",
+        "byteLength": 15836
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "22908144c69e75dc1ae90633b58fe933c7b6d6629ec2e8a775156c32fb004d14",
+        "byteLength": 337285
+      },
+      {
+        "path": "package.json",
+        "sha256": "4552c4a054cdac98adb99ddab27233113472c7b275316c572ddad68f75dd5dd0",
+        "byteLength": 1995
+      },
+      {
+        "path": "scripts/workspaces/validate-country-handoff.cjs",
+        "sha256": "2fa412fe677ab012bac1170557f5db90bbae5ed2bb7cc2e78572e21fa6f589bb",
+        "byteLength": 18855
+      },
+      {
+        "path": "scripts/workspaces/validate-country-handoff.node-test.cjs",
+        "sha256": "2409e6e4c8013b393d56ac9eacc4cbb6e46fa3e3447a74bad90a605dd3d9f0da",
+        "byteLength": 14103
+      },
+      {
+        "path": "src/lib/geography/country-metadata-input.ts",
+        "sha256": "864429f272bb579f32995ebf9c17df4ea5ec184580b0ddbd49a9ec098936a9f0",
+        "byteLength": 3222
+      },
+      {
+        "path": "src/lib/geography/state-province-contract.ts",
+        "sha256": "f350076106ced6e03ae880840e55666f20ee72a424d9d2ae8790e016fbcfd40f",
+        "byteLength": 9101
+      },
+      {
+        "path": "src/lib/geography/state-province-io.ts",
+        "sha256": "73fef37e8384ed2f4e2bac2fd7597f93b09a739dac2ca3c6527633b824249bab",
+        "byteLength": 9445
+      },
+      {
+        "path": "src/lib/geography/state-province-validation.ts",
+        "sha256": "bef4d1013481236755ccf2b8a668a6d163409d363126cc995fbc4528fa2f7863",
+        "byteLength": 17426
+      },
+      {
+        "path": "src/lib/world/canonical-serializer.ts",
+        "sha256": "69f5e4b260c2a0a9d2399a05de4d19595eda6acff3500f49f486c87e004b118c",
+        "byteLength": 3084
+      },
+      {
+        "path": "src/lib/world/country-id.ts",
+        "sha256": "713c89fd047bdc44b7d9ca4b09b5a175bbf0bc813930321d001bbaa4427f7777",
+        "byteLength": 4925
+      },
+      {
+        "path": "src/lib/world/domain-hash-root.ts",
+        "sha256": "00e07ebbbe79abd87289f4d05355e4c19797cf22f962a0691a8678a006dfa1fc",
+        "byteLength": 2881
+      },
+      {
+        "path": "src/lib/world/immutable-readonly-set.ts",
+        "sha256": "3ca2fc0997c77e07cd246935f8f5e1a5e9ecc65db5af27b20f52642956bc1931",
+        "byteLength": 2650
+      },
+      {
+        "path": "src/lib/world/operational-catalog.ts",
+        "sha256": "d2ceb955d970cee7866b92cbbc913fa005144715cd903f7ae015d3f8e471db42",
+        "byteLength": 4214
+      },
+      {
+        "path": "src/lib/world/sha256.ts",
+        "sha256": "b73d8b736cd30637a7b0a6a689607fc358a0f47a1cad27bffe27e3868eec0df0",
+        "byteLength": 3612
+      },
+      {
+        "path": "src/lib/world/territory-entity-v3.ts",
+        "sha256": "98480e883aecf0bd4db69a904fe430b0257322f20c41dfa8e497904a3fd87fd4",
+        "byteLength": 1401
+      },
+      {
+        "path": "src/lib/world/territory-id.ts",
+        "sha256": "c545f9c2ec948a03ac76b25f366ec6c29299a03ff1863ac1b6e431a5d066e662",
+        "byteLength": 6371
+      },
+      {
+        "path": "src/lib/world/world-geometry-catalog-ref.ts",
+        "sha256": "4e69b24d6de50d089632f85c4dfe2fdc242a0fcac48e8181bb57b2f29f8bf5cc",
+        "byteLength": 3975
+      },
+      {
+        "path": "src/lib/world/world-v3-validation.ts",
+        "sha256": "bbf0690d2b03c86d39f9ade1ba7f560f75ad7bbca3a5371507209c858faa4c3a",
+        "byteLength": 4507
+      }
+    ]
+  },
+  "contract": {
+    "stages": [
+      "unassigned",
+      "source-preparation",
+      "country-metadata-preparation"
+    ],
+    "sharedGeographyContract": "docs/geography/country-metadata-handoff-v1.md",
+    "newGeographySchemaCopies": 0,
+    "scope": "Workspace envelope and actual byte pins. Metadata/source truth is independently reviewed with existing validators.",
+    "latestMainRule": "Compare actual consumed refs/contracts/dependency pins. Synchronize and rerun affected validation on related changes; preserve unchanged source bytes. Unrelated changes require a recorded impact review.",
+    "integrationRule": "Independent expectedCountryId and reviewed dependency inventory; latest checkout recheck; one integration owner applies countries sequentially.",
+    "sourceIdRule": "No future TerritoryId/provinceId allocation; source feature IDs retain their original namespace."
+  },
+  "actualUnassignedHandoff": {
+    "manifest": {
+      "path": ".tmp/prompt21/main/21-06-20261104/unassigned-manifest.json",
+      "sha256": "27081ef281162bdacb62c9b52f89879990bdb1f395002f930de466191775dfdb",
+      "byteLength": 22815
+    },
+    "result": {
+      "ok": true,
+      "verdict": "accepted-unassigned",
+      "head": "ae9fbc994b7ff7041df788bd0e7b679644fe2833",
+      "semanticValidation": "Envelope and byte evidence only; inspect/replay the shared country metadata validator for metadata semantics. No production admission or geometry validation."
+    },
+    "source": {
+      "status": "unresearched",
+      "publisher": null,
+      "directReference": null,
+      "asOf": null,
+      "license": null,
+      "sourceLock": null,
+      "hierarchyEvidence": []
+    },
+    "inputs": [],
+    "outputs": [],
+    "countryResearchAndMetadata": "not-run: no target country; no production success claimed"
+  },
+  "verification": {
+    "nodeTest": {
+      "command": "node --test scripts/workspaces/validate-country-handoff.node-test.cjs",
+      "cwd": ".",
+      "startedAt": "2026-11-04T01:24:21.967Z",
+      "finishedAt": "2026-11-04T01:24:51.715Z",
+      "exitCode": 0,
+      "summary": {
+        "tests": 12,
+        "pass": 12,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "artifacts": [
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/node-test.stdout.log",
+          "sha256": "65fbdb6c28bd4db2ae24ff07a018b16b902248ff193cdff4b8a4d6d5826fea47",
+          "byteLength": 1208
+        },
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/node-test.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byteLength": 0
+        }
+      ]
+    },
+    "eslint": {
+      "command": "node node_modules/eslint/bin/eslint.js scripts/workspaces/validate-country-handoff.cjs scripts/workspaces/validate-country-handoff.node-test.cjs",
+      "cwd": ".",
+      "startedAt": "2026-11-04T01:24:22.000Z",
+      "finishedAt": "2026-11-04T01:24:27.558Z",
+      "exitCode": 0,
+      "summary": {},
+      "artifacts": [
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/lint.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byteLength": 0
+        },
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/lint.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byteLength": 0
+        }
+      ]
+    },
+    "syntax": {
+      "commands": [
+        "node --check scripts/workspaces/validate-country-handoff.cjs",
+        "node --check scripts/workspaces/validate-country-handoff.node-test.cjs"
+      ],
+      "exitCode": 0
+    },
+    "actualCapture": {
+      "command": "node scripts/workspaces/validate-country-handoff.cjs capture --dependencies .tmp/prompt21/main/21-06-20261104/dependencies.json",
+      "cwd": ".",
+      "startedAt": "2026-11-04T01:24:15.191Z",
+      "finishedAt": "2026-11-04T01:24:16.235Z",
+      "exitCode": 0,
+      "summary": {},
+      "artifacts": [
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/capture-ready.stdout.log",
+          "sha256": "9c72ecaffa687138cbdc4d2d8ebb6a4a6c56d77cf87fc7d7e6bb28d2c26b38db",
+          "byteLength": 9361
+        },
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/capture-ready.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byteLength": 0
+        }
+      ]
+    },
+    "actualCheck": {
+      "command": "node scripts/workspaces/validate-country-handoff.cjs check --manifest .tmp/prompt21/main/21-06-20261104/unassigned-manifest.json --baseline .tmp/prompt21/main/21-06-20261104/logs/capture-ready.stdout.log --country null",
+      "cwd": ".",
+      "startedAt": "2026-11-04T01:25:28.034Z",
+      "finishedAt": "2026-11-04T01:25:28.989Z",
+      "exitCode": 0,
+      "summary": {},
+      "artifacts": [
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/handoff-check.stdout.log",
+          "sha256": "a433b68421696e93960abfd3e9771cefc9894a28c5d13377bb768ac9ecfd55f7",
+          "byteLength": 292
+        },
+        {
+          "path": ".tmp/prompt21/main/21-06-20261104/logs/handoff-check.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byteLength": 0
+        }
+      ]
+    },
+    "negativeCases": [
+      "stale full catalogRef/metadataRef/schema",
+      "changed or omitted consumed dependencies",
+      "dirty common validator",
+      "wrong independently assigned country",
+      "missing or changed evidence/input/output",
+      "failed/skipped/unexecuted country validation",
+      "path traversal and active-pointer/other-country ownership",
+      "missing source-lock/hierarchy consumed pins",
+      "stale integration snapshot"
+    ],
+    "positiveCases": [
+      "source envelope only, without production semantics",
+      "explicit null/unresearched",
+      "unrelated document commit after recorded impact review",
+      "BOM JSON and CLI exit status"
+    ],
+    "review": "Independent document and contract review; acceptance boundary findings addressed.",
+    "notRun": [
+      "Actual two-workspace concurrent tools and H1/B2/H2 synchronization experiment (21-07)",
+      "Country source research/download/normalization/candidate generation",
+      "Production metadata payload admission or publication",
+      "Full application Vitest suite, historical membership failures and KOR/PRK/CHN frontier audit in this C task",
+      "Root/scripts TypeScript, Next build/API/browser: application TypeScript and runtime/build configuration unchanged"
+    ],
+    "staticChecks": {
+      "relativeLinksChecked": 5,
+      "brokenLinks": [],
+      "utf8Lf": true,
+      "diffCheck": "passed"
+    }
+  },
+  "environment": {
+    "commitIdentity": "Default Git identity was absent; used the existing repository author identity via per-command -c flags; no persistent Git configuration changed.",
+    "initialDirtyCapture": {
+      "exitCode": 1,
+      "diagnostic": "HANDOFF_DIRTY_DEPENDENCY",
+      "reason": "Initial commit attempt lacked Git identity; capture correctly refused uncommitted consumed C files.",
+      "evidence": ".tmp/prompt21/main/21-06-20261104/capture.json"
+    }
+  },
+  "preservation": {
+    "activePointerWrites": 0,
+    "geometryTopologyIdsOrdinalsMembershipSeedLineageChanged": false,
+    "userGameOrSecretContentsRead": false,
+    "worktreesCreatedByC": 0,
+    "dependenciesInstalledByC": 0,
+    "serversStartedOrStoppedByC": 0,
+    "externalAICalls": 0,
+    "pushesOrDeployments": 0,
+    "protectedInputsUnchanged": true,
+    "protectedPins": [
+      {
+        "path": "data/runtime/operational-catalog/current.json",
+        "sha256": "8021847cf57984fe05a73ec0dd6842462127bb2e9a400af50dc2b8c1ff8d2609",
+        "byteLength": 251
+      },
+      {
+        "path": "data/runtime/geography/current.json",
+        "sha256": "c626f8dd1fab13bd23381b9e535509d724085c1141ac535c8281c1fd9af4cae8",
+        "byteLength": 1218
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/artifact-index.json",
+        "sha256": "184de11efa21ffaaaa80afdd0105e06716508eb170e75e0fe16596d24c9bb480",
+        "byteLength": 757545
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/catalog.json",
+        "sha256": "6d6b02f6b4dd60e16507af5ca62bd1054e0dd4d0b7d70139b5d9a79d651b4a7d",
+        "byteLength": 2378
+      },
+      {
+        "path": "data/derived/prompt19/mixed-world-v2-eade6105593ceeb7beee/manifest.json",
+        "sha256": "388be8d964f4d7e1da3d577e8973a4e1ab264b74f2175300541b36b0647c9659",
+        "byteLength": 3152
+      },
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/manifest.json",
+        "sha256": "211411c3194037103b1a175d298701be57329e868aaf62a752572384322b4910",
+        "byteLength": 1115
+      },
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/metadata.json.gz",
+        "sha256": "98926b07e58a3a345af92c3334a0ac81d58ec86560b9312c1b1a417246d99823",
+        "byteLength": 3357737
+      },
+      {
+        "path": "data/derived/geography/d10c6db6e6c56bc2c2c53ee26fb281a042b31d16592d45960814f90028158fbf/admission.json.gz",
+        "sha256": "5f412fa4256ef22f3aa91b25e6ea721cdd0f8349789b1332caa6a122cc3b456b",
+        "byteLength": 434595
+      }
+    ]
+  },
+  "next": {
+    "task": "21-07 after A/B/C readiness",
+    "action": "Reuse this capture/check procedure for synthetic H1/H2 and the actual related-main-change exercise; do not start new-country production."
+  },
+  "localEvidence": [
+    ".tmp/prompt21/main/21-06-20261104/before.json",
+    ".tmp/prompt21/main/21-06-20261104/dependencies.json",
+    ".tmp/prompt21/main/21-06-20261104/logs/capture-ready.stdout.log",
+    ".tmp/prompt21/main/21-06-20261104/unassigned-manifest.json",
+    ".tmp/prompt21/main/21-06-20261104/node-test.json",
+    ".tmp/prompt21/main/21-06-20261104/lint.json",
+    ".tmp/prompt21/main/21-06-20261104/handoff-check.json",
+    ".tmp/prompt21/main/21-06-20261104/static-checks.json"
+  ]
+}
